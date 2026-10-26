@@ -260,14 +260,6 @@ for mkt in ("1X2", "OU", "AH"):
 
 BINS = [(1.0, 1.5), (1.5, 2.0), (2.0, 2.5), (2.5, 3.0), (3.0, 4.0), (4.0, 6.0), (6.0, math.inf)]
 
-
-def bin_label(o):
-    for lo, hi in BINS:
-        if lo <= o < hi:
-            return f"[{lo:g},{hi:g})" if math.isfinite(hi) else f"[{lo:g}+)"
-    return "NA"
-
-
 print()
 print("=" * W)
 print("TABEL 2: ROI per LIGA di threshold terbaik per pasar")

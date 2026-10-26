@@ -1,6 +1,5 @@
 """Download CSV pertandingan + odds historis dari football-data.co.uk (divisi utama)."""
 import os
-import re
 import ssl
 import time
 import urllib.request

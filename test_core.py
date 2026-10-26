@@ -7,7 +7,6 @@ Dixon-Coles dasar, dan pembagi walk-forward anti-leakage.
 """
 
 import datetime
-import math
 import sys
 
 from football_etl import parse_date, norm3, blend3, blend2

@@ -7,15 +7,12 @@ Dipakai oleh semua modul model untuk load matches, fixtures, dan odds.
 
 import os
 import json
-import csv
-from datetime import datetime, date, timedelta
-from typing import List, Dict, Any, Optional, Tuple
+from datetime import date, timedelta
+from typing import List, Dict, Tuple
 from collections import defaultdict
 
 # Gunakan modul lokal yang sudah kita buat (tanpa fallback diam-diam).
 from football_etl import *
-
-import importlib.util
 
 # Singleton loader instances
 _loader_instance = None

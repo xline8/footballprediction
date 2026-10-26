@@ -17,7 +17,6 @@ di predictions_upcoming.csv. Jadi pasar lain (DC, DNB, O/U, BTS) konsisten
 dengan angka 1X2 yang sudah tayang di situs.
 """
 import csv
-import math
 import os
 import re
 import sys

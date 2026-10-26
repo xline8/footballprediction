@@ -22,7 +22,7 @@ Untuk value pick corner, perlu odds pasar.
 import csv
 import os
 import sys
-from datetime import datetime, date
+from datetime import date
 from collections import defaultdict
 
 import paths

@@ -14,7 +14,6 @@ Pathway B (Policy overlay, meta dikunci): filter dev_side > threshold (dan/atau
 from __future__ import annotations
 
 import os
-import sys
 from collections import defaultdict
 
 import numpy as np
@@ -22,7 +21,6 @@ import numpy as np
 from backtest_picks import _fair_probs, load_records, RECORDS
 from data_enrichment.utils import norm_team, to_float
 from experiment_feats import _walkforward
-from validation import eval_1x2
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 ENRICHED = os.path.join(BASE, "all_matches_enriched.csv")

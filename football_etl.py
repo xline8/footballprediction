@@ -9,11 +9,10 @@ import csv
 import json
 import os
 import pickle
-import hashlib
 import math
 from typing import Optional, List, Dict, Any
 from collections import defaultdict
-from datetime import datetime, date, timedelta
+from datetime import datetime, date
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(BASE, "all_matches_clean.csv")
@@ -213,10 +212,10 @@ def load_matches(path: str = None) -> List[Dict[str, Any]]:
     """Load semua match dari all_matches_clean.csv ke list of dict."""
     if path is None:
         path = DATA
-    
+
     if not os.path.exists(path):
         raise FileNotFoundError(f"File data tidak ditemukan: {path}")
-    
+
     records = []
     with open(path, encoding="utf-8", newline="") as f:
         reader = csv.DictReader(f)
@@ -283,7 +282,7 @@ def load_matches(path: str = None) -> List[Dict[str, Any]]:
             rec["hs"] = to_int(rec.get("HS"))
             rec["as_"] = to_int(rec.get("AS"))
             records.append(rec)
-    
+
     return records
 
 
@@ -315,7 +314,7 @@ def to_date(s) -> Optional[date]:
 # --- Cache Layer ---
 class MatchCache:
     """Cache layer untuk match data dan lookup indexes."""
-    
+
     def __init__(self, force_reload: bool = False):
         self._cache_file = os.path.join(BASE, ".cache", "matches.pkl")
         self._last_modified = 0
@@ -324,18 +323,18 @@ class MatchCache:
         self.by_team: Dict[str, List[int]] = defaultdict(list)
         self.by_date: Dict[date, List[int]] = defaultdict(list)
         self._load_or_build(force_reload)
-    
+
     def _load_or_build(self, force_reload: bool):
         try:
             current_mtime = os.path.getmtime(DATA)
         except OSError:
             current_mtime = 0
-        
+
         cache_exists = os.path.exists(self._cache_file)
-        
+
         if cache_exists and not force_reload:
             cache_mtime = os.path.getmtime(self._cache_file)
-            
+
             # Gunakan cache hanya jika data belum berubah
             if cache_mtime >= current_mtime:
                 try:
@@ -350,24 +349,24 @@ class MatchCache:
                 except Exception:
                     # Jika cache rusak, build ulang
                     pass
-        
+
         # Build dari awal
         self._build_indexes()
         self._save_cache()
-    
+
     def _build_indexes(self):
         self.matches = load_matches()
         self.by_div = defaultdict(list)
         self.by_team = defaultdict(list)
         self.by_date = defaultdict(list)
-        
+
         for i, m in enumerate(self.matches):
             self.by_div[m['div']].append(i)
             self.by_team[m['home']].append(i)
             self.by_team[m['away']].append(i)
             if m['date']:
                 self.by_date[m['date']].append(i)
-    
+
     def _save_cache(self):
         os.makedirs(os.path.dirname(self._cache_file), exist_ok=True)
         data = {
@@ -378,12 +377,12 @@ class MatchCache:
         }
         with open(self._cache_file, 'wb') as f:
             pickle.dump(data, f, protocol=pickle.HIGHEST_PROTOCOL)
-    
+
     def get_div_matches(self, div: str) -> List[Dict]:
         """Dapatkan semua match untuk divisi tertentu, terurut tanggal."""
         indices = self.by_div.get(div, [])
         return [self.matches[i] for i in sorted(indices, key=lambda j: self.matches[j]['date'])]
-    
+
     def get_team_history(self, team: str, cutoff: date) -> List[Dict]:
         """Dapatkan riwayat pertandingan tim hingga tanggal tertentu."""
         norm_team = normalize_name(team)
@@ -394,7 +393,7 @@ class MatchCache:
             if m['date'] and m['date'] < cutoff and m['ftr'] in ('H', 'D', 'A'):
                 history.append(m)
         return sorted(history, key=lambda x: x['date'])
-    
+
     def get_matches_in_date_range(self, div: str, start: date, end: date) -> List[Dict]:
         """Dapatkan semua match dalam range tanggal untuk divisi."""
         result = []
@@ -411,7 +410,7 @@ def load_fixtures(season_year: str = "2026") -> List[Dict]:
     """Load fixture dari xg_raw/{slug}_{year}_fixtures.json."""
     slug_map = {"E0": "EPL", "SP1": "La_liga", "D1": "Bundesliga",
                 "I1": "Serie_A", "F1": "Ligue_1"}
-    
+
     fixtures = []
     for div, slug in slug_map.items():
         path = os.path.join(XGRAW, f"{slug}_{season_year}_fixtures.json")
@@ -419,7 +418,7 @@ def load_fixtures(season_year: str = "2026") -> List[Dict]:
             continue
         with open(path, encoding="utf-8") as f:
             data = json.load(f)
-        
+
         # Load name mapping
         nmap = {}
         for map_file in ["map_full.json", "map_ext.json"]:
@@ -427,7 +426,7 @@ def load_fixtures(season_year: str = "2026") -> List[Dict]:
             if os.path.exists(mp):
                 with open(mp, encoding="utf-8") as f:
                     nmap.update(json.load(f))
-        
+
         for item in data:
             home = nmap.get(f"{div}|{item['h']['title']}")
             away = nmap.get(f"{div}|{item['a']['title']}")
@@ -441,7 +440,7 @@ def load_fixtures(season_year: str = "2026") -> List[Dict]:
                 "away": normalize_name(away),
                 "uid": item["id"]
             })
-    
+
     fixtures.sort(key=lambda x: (x['date'], x['div'], x['time']))
     return fixtures
 
@@ -452,10 +451,10 @@ def load_fd_odds(div: str, season: str = "2627") -> Dict[tuple, Dict]:
     """
     path = os.path.join(RAW_DIR, f"{div}_{season}.csv")
     odds_map = {}
-    
+
     if not os.path.exists(path):
         return odds_map
-    
+
     with open(path, encoding="utf-8", errors="replace") as f:
         for row in csv.DictReader(f):
             dt = parse_date(row.get("Date"))
@@ -465,7 +464,7 @@ def load_fd_odds(div: str, season: str = "2627") -> Dict[tuple, Dict]:
             key = (div, dt.isoformat(),
                    normalize_name(row.get("HomeTeam", "")),
                    normalize_name(row.get("AwayTeam", "")))
-            
+
             odds_map[key] = {
                 "b365": (
                     to_float(row.get("B365H")),
@@ -486,7 +485,7 @@ def load_fd_odds(div: str, season: str = "2627") -> Dict[tuple, Dict]:
                     to_float(row.get("B365<2.5"))
                 )
             }
-    
+
     return odds_map
 
 
@@ -494,7 +493,7 @@ def get_config(path: str = None) -> dict:
     """Load config dari v2_config.json atau gunakan default."""
     if path is None:
         path = os.path.join(BASE, "v2_config.json")
-    
+
     if os.path.exists(path):
         try:
             with open(path) as f:
@@ -587,18 +586,18 @@ MAXG = 10
 if __name__ == "__main__":
     # Test basic functionality
     print("Testing football_etl module...")
-    
+
     # Test cache
     cache = MatchCache(force_reload=True)
     print(f"Loaded {len(cache.matches)} matches")
     print(f"Divisions: {list(cache.by_div.keys())}")
-    
+
     # Test fixtures
     fixtures = load_fixtures("2026")
     print(f"Loaded {len(fixtures)} upcoming fixtures")
-    
+
     # Test config
     cfg = get_config()
     print(f"Config: {cfg}")
-    
+
     print("Done!")

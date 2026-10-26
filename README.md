@@ -1,64 +1,77 @@
-# Football prediction pipeline
+# Football 1X2 & Derivative Market Prediction
 
-Predicts match outcomes for the top five European leagues (EPL, La Liga, Bundesliga, Serie A, Ligue 1) and turns the probabilities into betting picks when the market price disagrees with the model.
+A quantitative research engine that predicts pre-match football outcomes for the
+top five European leagues (EPL, La Liga, Bundesliga, Serie A, Ligue 1) and prices
+derivative markets (Over/Under 2.5, BTTS) from a calibrated scoreline matrix.
 
-The engine is a **Dixon-Coles** model: a bivariate Poisson for home and away goals, with a `tau` correction for the low-score corners (0-0, 1-0, …) where the two scores stop being independent, plus a home-advantage term. Ratings decay with a half-life (default 270 days) over a rolling window of up to 4000 matches per division. A second model predicts corner markets from rolling shot statistics.
+The engine is built for research, not for chasing returns. It tests whether the
+B365 and Pinnacle markets hide exploitable value; the answer so far is no, and
+the code is structured to keep that conclusion honest.
 
-The models are validated the way they are used: **walk-forward**. Training always stops before the match being predicted, so no result from the future leaks into a rating or feature. Scoring uses proper rules: Brier, overall and per-class log loss, and a calibration table. On the last full run the DC model scored a Brier of 0.592 and a log loss of 0.993 across 8,908 predictions; draws are the weakest class, as they usually are (per-class log loss about 1.38).
+## Key achievements
 
-Picks come from blending model probabilities against market odds and taking bets where the edge is positive. A backtest cuts the strategy by market and odds bucket, and the ledger (`ledger/picks.jsonl`) records every pick with the odds that were actually available when it was made. `grade_picks.py` settles them against real results.
+- **Elite calibration.** The meta model reaches a walk-forward log loss of
+  **1.0013** and Brier 0.5986, near the information ceiling implied by the
+  market. A Dixon-Coles bivariate Poisson model, a feature model, and market
+  odds are stacked into a multinomial logistic meta-model.
+- **Strict discipline.** Every experiment runs leak-free walk-forward validation,
+  proper scoring metrics (log loss, Brier, per-class), and a dual gate: a log
+  loss safety check plus a fixed-threshold yield check with a bootstrap
+  significance test. A de-vigging bug that inflated a false +3.23% strategy was
+  found and fixed; a small-sample +6.7% policy was kept out because its bootstrap
+  p-value was 0.216. No live betting strategy is active without a significant,
+  stable backtest.
+- **Market efficiency finding.** The 1X2 and Over/Under 2.5 derivative markets
+  look efficient: soft books copy sharp lines, and after removing the margin no
+  tested rule produces a statistically significant positive ROI.
 
-## What it does
+## Core architecture
 
-| Stage | Result | Code |
-|---|---|---|
-| Fetch and clean data | `all_matches_clean.csv` plus caches | `prepare.py`, `clean.py`, `download.py` |
-| Fit/update Dixon-Coles per division | persisted model states in `.cache/models/` | `model_v2.py`, `model_state.py` |
-| Predict corner markets | `predictions_corners_upcoming.csv` | `model_corners_v3.py` |
-| Blend with market odds | `predictions_upcoming.csv` | `predict_upcoming_refactored.py` |
-| Value-bet filter | `best_picks.csv`; picks appended to `ledger/picks.jsonl` | `make_picks.py`, `best_picks.py` |
-| Grade settled picks | `ledger/graded.csv` | `grade_picks.py` |
+- **Dixon-Coles engine** (`model_v2.py`): a bivariate Poisson model with a
+  low-score dependency correction and decayed team ratings.
+- **Meta model** (`experiment_meta.py`, `backtest_picks.py`): stacks logits of
+  the DC model, the feature model, and market-implied probabilities with a
+  walk-forward multinomial logistic regression. It also consumes enriched sharp
+  signals (Pinnacle deviation, Pinnacle shin-fair probabilities, midweek flags).
+- **Data enrichment pipeline** (`data_enrichment/`): joins Pinnacle odds,
+  midweek/cup fatigue flags, and rolling xG differentials into
+  `all_matches_enriched.csv`, without touching the clean source data.
+- **Matrix pricing** (`matrix_pricer.py`): builds the bivariate Poisson
+  scoreline matrix and meta-calibrates it so the summed 1X2 marginals match the
+  meta model exactly. Over/Under and BTTS probabilities are derived from that
+  calibrated matrix.
+- **Decoupled policy engine**: betting decisions are filtered *after* the model
+  (edge thresholds, overlays, staking) so calibration stays intact. Candidate
+  policies must clear the dual gate before they can go live.
 
-Run everything with:
+## Live shadow tracker
+
+`run_daily_shadow.py` runs the production monitor as a daily cron-safe chain:
+generate predictions → filter and record picks → resolve and grade. Each step is
+isolated with try/except, so a failure in one stage never crashes the pipeline.
+It is deliberately strict: with no validated edge, it emits **0 picks** and
+records nothing to the ledger. When a strategy clears the gates, this is the
+component that goes to a real ledger without risking live money.
+
+## Reference
+
+[QUANT_RESEARCH_REPORT.md](QUANT_RESEARCH_REPORT.md) contains the full scientific
+summary: the modeling milestones, the de-vigging and small-sample lessons, and
+the market-efficiency evidence.
+
+## Getting started
+
+Run the end-to-end pipeline:
 
 ```
 python setup_cache.py
 python pipeline_orchestrator.py --run-all
 ```
 
-Individual pieces also run standalone: `python model_v2.py final` fits and prints the scoring report, `python backtest_value.py` reruns the value-bet backtest, and `python refresh_fixtures.py` pulls fresh fixtures.
+Individual pieces also run standalone: `python model_v2.py final` fits and prints
+the scoring report, `python backtest_value.py` reruns the value-bet backtest, and
+`python refresh_fixtures.py` pulls fresh fixtures.
 
-## Where the data comes from
-
-The project downloads or scrapes four sources; none is bundled or cached permanently beyond `raw/`, `xg_raw/`, and `ta/`.
-
-- **football-data.co.uk** — historical results and closing odds for all five leagues (`raw/{div}_2627.csv`, `all_matches.csv`). Downloaded by `download.py`.
-- **Understat** — seasonal fixtures and expected-goals (xG) data (`xg_raw/*.json`), pulled through Understat's `getLeagueData` endpoint by `refresh_fixtures.py`.
-- **TipsterArea** — live pre-match odds from several bookmakers, scraped by `ta_scrape.py` and turned into TA-model markets by `ta_model.py`.
-- **NowGoal** — odds snapshots captured by `nowgoal_extract.js` and ingested by `snapshot_to_db.py` into `raw/odds_timeseries.csv`.
-
-Scraping respects each source's structure; a failed fetch falls back to the last known snapshot instead of failing the whole pipeline.
-
-## Repo layout
-
-```
-pipeline_orchestrator.py   end-to-end runner
-football_etl.py            shared ETL and math primitives (pois, tau, norm, blend)
-model_v2.py                Dixon-Coles
-model_corners_v3.py        corner model
-model_state.py             per-division model persistence
-features.py                leak-free feature builder (Elo, rolling xG, rest days, H2H)
-validation.py              proper-scoring metrics
-paths.py                   central path constants
-raw/                       football-data downloads
-xg_raw/                    Understat fixtures / xG
-ta/                        TipsterArea aggregated data
-ledger/                    picks (picks.jsonl) and grading (graded.csv)
-test_core.py               smoke tests
-```
-
-## Tests
-
-```
-python test_core.py
-```
+Dependencies: `numpy` (see `requirements.txt`). The optional API server
+(`api_server.py`) and scrapers use `fastapi`, `uvicorn`, `pydantic`, `requests`,
+and `httpx`. `test_core.py` holds the smoke tests (`python test_core.py`).

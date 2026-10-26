@@ -5,8 +5,6 @@ from __future__ import annotations
 import logging
 import re
 import unicodedata
-from difflib import SequenceMatcher
-from typing import Iterable, Sequence
 
 LOGGER_NAME = "data_enrichment"
 _log = logging.getLogger(LOGGER_NAME)
@@ -55,21 +53,6 @@ def norm_team(name: str) -> str:
     return ALIASES.get(c, c)
 
 
-def lev_ratio(a: str, b: str) -> float:
-    return SequenceMatcher(None, a, b).ratio()
-
-
-def fuzzy_match(name: str, choices: Sequence[str], threshold: float = 0.86) -> str | None:
-    """Cari kandidat terdekat dgn Levenshtein ratio; None jika di bawah ambang."""
-    norm = norm_team(name)
-    best, best_r = None, 0.0
-    for ch in choices:
-        r = lev_ratio(norm, norm_team(ch))
-        if r > best_r:
-            best_r, best = r, ch
-    return best if best_r >= threshold else None
-
-
 def to_float(v: str | float | None) -> float | None:
     try:
         if v is None or v == "":
@@ -78,11 +61,3 @@ def to_float(v: str | float | None) -> float | None:
         return x if x == x else None
     except (TypeError, ValueError):
         return None
-
-
-def safe_key(date_iso: str, home: str, away: str) -> tuple[str, str, str]:
-    return (str(date_iso)[:10], norm_team(home), norm_team(away))
-
-
-def ensure_iter(x: Iterable) -> list:
-    return list(x)

@@ -9,9 +9,8 @@ Hipotesis 8.1–8.4 dibangun di atas papan klasemen incrementally (leak-free) +
 fatigue (rest/density). Runner memakai ef._walkforward utk fitur tambahan.
 """
 
-import os
 import sys
-from collections import defaultdict, deque
+from collections import defaultdict
 
 import numpy as np
 
@@ -128,7 +127,6 @@ def mot_index(s, team_pos):
 
 def hyp_features(hyp, fmap, smap):
     """Return (rec_key -> dict kolom fitur) utk hipotesis tertentu."""
-    import math
     rec = {}
     for k, s in smap.items():
         h = rec.setdefault(k, {})

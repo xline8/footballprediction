@@ -3,7 +3,6 @@ Output: all_matches_clean.csv + verifikasi ulang."""
 import os
 import csv
 from collections import defaultdict
-from datetime import datetime
 
 BASE = os.path.join(os.path.expanduser("~"), "football-data")
 SRC = os.path.join(BASE, "all_matches.csv")

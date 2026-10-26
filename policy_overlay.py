@@ -15,10 +15,7 @@ Evaluation: yield > -1.50% AND N >= 1000 AND yield > 0 di >=3 dari 2021-2025.
 """
 
 import os
-import sys
 from collections import defaultdict
-
-import numpy as np
 
 from backtest_picks import load_records, _fair_probs, RECORDS
 from experiment_motiv import build_maps, _sorted_matches
@@ -70,40 +67,6 @@ def desperation_exp(s, side):
     if tit <= 5.0:
         return 0.50
     return 0.0
-
-
-def build_expanded_maps():
-    """(cpmap, rmap). Catatan: dataset tidak memuat jadwal kompetisi Eropa
-    klub (div 'EC' adalah English National League, bukan Champions/Europa),
-    jadi proximity kontinental TIDAK tersedia -> cpmap kosong (feature 0).
-    Rivalitas diproksi sbg frekuensi pertemuan historis + pertemuan musim ini.
-    """
-    matches = _sorted_matches()
-    h2h_all = defaultdict(int)
-    h2h_season = defaultdict(int)
-    rmap = {}
-    for m in matches:
-        d = m["date"]
-        iso = d.isoformat()
-        h, a = m["home"], m["away"]
-        div = m.get("div")
-        season = m.get("season") or str(d.year)
-        fz = frozenset((h, a))
-        if div:
-            key = (div, iso, h, a)
-            cum = h2h_all[fz]
-            s = h2h_season[(div, season, fz)]
-            rmap[key] = min(1.0, (cum + s) / 3.0)
-        h2h_all[fz] += 1
-        h2h_season[(div, season, fz)] += 1
-    return {}, rmap
-
-
-def composite_exp(b, w):
-    """score ekspansi = w1*despo_exp + w2*fatigue + w3*cont + w4*riv."""
-    w1, w2, w3, w4 = w
-    f_norm = max(0.0, min(1.0, b["fatigue"] / 7.0))
-    return w1 * b["despo_exp"] + w2 * f_norm + w3 * b["cont"] + w4 * b["riv"]
 
 
 def candidates(records, fmap, smap, thr=THR, cpmap=None, rmap=None):

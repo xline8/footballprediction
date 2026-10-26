@@ -12,10 +12,10 @@ import os
 import pickle
 import json
 from datetime import datetime, date
-from typing import Optional, Tuple, Dict, Any
+from typing import Optional, Tuple, Dict
 from collections import defaultdict
 
-from paths import BASE, MODEL_CACHE
+from paths import MODEL_CACHE
 
 CACHE_DIR = MODEL_CACHE
 MAX_TRAIN = 4000

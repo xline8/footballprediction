@@ -12,9 +12,7 @@ train — jadi tidak ada yang bocor dari masa depan.
 Jalankan:  python model_features_1x2.py [--seasons 2024/25] [--selftest]
 """
 
-import math
 import sys
-from collections import defaultdict
 
 import numpy as np
 

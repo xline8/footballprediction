@@ -13,7 +13,6 @@ engine backtest. Target: log loss < 1.020 & Brier < 0.600.
 import json
 import os
 import sys
-from collections import defaultdict
 
 import numpy as np
 

@@ -7,18 +7,16 @@ import json
 import time
 import traceback
 from datetime import datetime, date, timedelta
-from typing import Dict, List, Any, Optional
 from collections import defaultdict
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE_DIR)
 
 from football_etl import (
-    MatchCache, get_config, load_fixtures, load_fd_odds,
-    normalize_name, to_float, to_int, pois, tau, MAXG, TOP5
+    get_config, load_fd_odds, TOP5
 )
 from data_loader import get_loader
-from model_state import ModelState, save_model_state, clear_model_cache
+from model_state import ModelState, save_model_state
 
 
 def log(msg: str, level: str = "INFO"):

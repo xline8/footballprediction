@@ -26,7 +26,6 @@ sys.path.insert(0, BASE_DIR)
 from football_etl import MatchCache
 from model_state import (ModelState, CACHE_DIR, clear_model_cache,
                           get_model_cache_info)
-from data_loader import get_loader
 
 CACHE_BASE = os.path.join(BASE_DIR, ".cache")
 

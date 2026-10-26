@@ -20,17 +20,16 @@ import json
 import csv
 from datetime import datetime, date
 from typing import List, Dict, Optional
-from pathlib import Path
 
 # Setup path
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE_DIR)
 
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
-from football_etl import MatchCache, get_config, load_fixtures, load_fd_odds, TOP5
+from football_etl import MatchCache, load_fd_odds, TOP5
 from data_loader import get_loader
 from model_state import ModelState
 

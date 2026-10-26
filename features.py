@@ -17,10 +17,10 @@ prediksi live tidak berubah. Lihat feature_analysis.py untuk perbandingan.
 import csv
 import os
 from collections import defaultdict, deque
-from datetime import date, datetime
+from datetime import date
 
 from football_etl import normalize_name, parse_date
-from paths import DATA_CLEAN, XGRAW
+from paths import XGRAW
 
 NORM_POINTS = {"H": 3, "D": 1, "A": 0}
 MAXG = 10

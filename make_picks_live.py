@@ -22,7 +22,6 @@ Output: append ke live_shadow_ledger.csv (CSS, actual_outcome/pnl default kosong
 
 import csv
 import os
-import sys
 
 import numpy as np
 

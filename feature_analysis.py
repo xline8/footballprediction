@@ -10,7 +10,6 @@ tentang keuntungan marjinal setelah model retun.
 Usage:  python feature_analysis.py [limit]
 """
 
-import math
 import sys
 
 import numpy as np
