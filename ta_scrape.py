@@ -35,6 +35,8 @@ except ImportError:
 
 from stealth import proxy_url, ua as stealth_ua
 
+from data_enrichment.utils import norm_team, to_float
+
 BASE = "https://tipsterarea.com"
 DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ta")
 RAW = os.path.join(DIR, "raw")
@@ -54,6 +56,8 @@ MKT_COLS = ["captured_at", "game_id", "market", "line", "selection", "bookmaker"
             "odds", "url"]
 RES_COLS = ["game_id", "date", "league", "home", "away", "score_h", "score_a",
             "status", "source_url", "updated_at"]
+CORNER_OUT_COLS = ("date", "home_team", "away_team", "corner_line",
+                   "odds_over", "odds_under")
 
 
 # ---------------------------------------------------------------- util
@@ -299,6 +303,8 @@ def parse_date_page(html, iso_date):
         away = pick(r'<span class="away"><span[^>]*>([^<]+)</span></span>')
         if not home or not away:
             continue
+        home = norm_team(home)
+        away = norm_team(away)
 
         sh = sa = ""
         sc = pick(r'<span class="score[^"]*">(.*?)</span>')
@@ -476,6 +482,51 @@ def save_markets(rows, captured):
     return len(fresh)
 
 
+def export_corner_odds(out_path=None):
+    """Ekspor snapshot pasar Corners O/U ke schema external_corner_odds.csv.
+
+    Kolom output: date, home_team, away_team, corner_line, odds_over,
+    odds_under (sesuai `fetch_corner_odds.parse_corner_odds_csv`).
+    Ambil odds terbaru per (date, home, away, line, selection); baris tanpa
+    odds_over/under dibiarkan kosong (graceful). Return (n_rows, path).
+    """
+    out_path = out_path or os.path.join(DIR, "external_corner_odds.csv")
+    fix = {r["game_id"]: r for r in _read(os.path.join(DIR, "fixtures.csv"))}
+    best = {}
+    snaps = _read(os.path.join(DIR, "odds_markets_snapshots.csv"))
+    for r in sorted(snaps, key=lambda x: x.get("captured_at", "")):
+        if "corner" not in (r.get("market") or "").lower():
+            continue
+        g = fix.get(r.get("game_id"))
+        if not g or not (g.get("date") and g.get("home") and g.get("away")):
+            continue
+        sel = (r.get("selection") or "").strip().lower()
+        if sel not in ("over", "under"):
+            continue
+        line = to_float(r.get("line"))
+        odds = to_float(r.get("odds"))
+        if line is None or odds is None:
+            continue
+        best[(g["date"], g["home"], g["away"], line, sel)] = odds
+    by_game = {}
+    for (d, h, a, line, sel), o in best.items():
+        by_game.setdefault((d, h, a, line), {})[sel] = o
+    rows = []
+    for (d, h, a, line), selmap in by_game.items():
+        rows.append({
+            "date": d, "home_team": h, "away_team": a,
+            "corner_line": line,
+            "odds_over": selmap.get("over"),
+            "odds_under": selmap.get("under"),
+        })
+    ensure_dirs()
+    with open(out_path, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=CORNER_OUT_COLS, extrasaction="ignore")
+        w.writeheader()
+        w.writerows(rows)
+    return len(rows), out_path
+
+
 # ---------------------------------------------------------------- main
 def iso(d):
     return d.strftime("%Y-%m-%d")
@@ -611,9 +662,12 @@ def main(argv):
     with_markets = "--markets" in argv
     only_matched = "--markets-matched" in argv
     market_ids = None
+    corner_out = None
     for a in argv[1:]:
         if re.match(r"^\d{4}-\d{2}-\d{2}$", a):
             days.append(datetime.strptime(a, "%Y-%m-%d").date())
+        elif a.startswith("--corner-export"):
+            corner_out = a.split("=", 1)[1] if "=" in a else None
     for a in argv[1:]:
         m = re.match(r"^--window=(-?\d+):(-?\d+)$", a)
         if m:
@@ -636,6 +690,9 @@ def main(argv):
                    market_ids=market_ids)
     print(f"selesai: {r['games']} laga, snapshot +{r['snapshots']}, "
           f"hasil +{r['results']}")
+    if corner_out is not None or "--corner-export" in argv:
+        n, path = export_corner_odds(corner_out)
+        print(f"corner export: {n} baris -> {path}")
     return 0
 
 

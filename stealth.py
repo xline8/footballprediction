@@ -67,15 +67,31 @@ def proxy_url() -> Optional[dict]:
     return None
 
 
+BACKOFF_BASE = 2.0
+BACKOFF_MAX = 30.0
+RETRYABLE = {408, 425, 429, 500, 502, 503, 504}
+
+
+def _retry_delay(headers: Optional[object], attempt: int) -> float:
+    """Delay retry: hormati `Retry-After`, else exponential backoff."""
+    ra = headers.get("Retry-After") if headers is not None else None
+    if ra is not None:
+        try:
+            return float(ra)
+        except ValueError:
+            pass
+    return min(BACKOFF_BASE * (2 ** attempt), BACKOFF_MAX)
+
+
 def urlopen_with_retry(url: str, tries: int = 4, timeout: int = 40,
                        extra_headers: Optional[dict] = None,
                        referer: Optional[str] = None) -> tuple[bytes, object]:
-    """GET urllib dgn rotasi UA, jitter antar-percobaan, dan backoff acak.
+    """GET urllib dgn rotasi UA, jitter, dan retry sadar-status.
 
-    Semantik sama seperti download.get lama: HTTPError (404 dst) langsung
-    dilempar tanpa retry; gangguan jaringan/reset di-retry hingga `tries`.
-    Return (bytes, headers-respon). Proxy env dipakai otomatis oleh
-    urllib.request.urlopen.
+    - 429 / 5xx -> retry + exponential backoff; hormati `Retry-After`.
+    - 403 / 404 / 4xx lain -> hard-stop (tidak di-retry).
+    - Gangguan jaringan/reset -> retry hingga `tries`.
+    Return (bytes, headers-respon). Proxy env dipakai otomatis urllib.
     """
     import ssl
     import urllib.error
@@ -94,10 +110,17 @@ def urlopen_with_retry(url: str, tries: int = 4, timeout: int = 40,
         try:
             with urllib.request.urlopen(req, timeout=timeout, context=ctx) as r:
                 return r.read(), r.headers
-        except urllib.error.HTTPError:
-            raise
+        except urllib.error.HTTPError as e:
+            code = e.code
+            if code not in RETRYABLE:
+                raise  # 403/404/dll permanen
+            delay = _retry_delay(getattr(e, "headers", None), i)
+            if delay > 0:
+                time.sleep(delay)
+            last = e
         except Exception as e:  # noqa: BLE001
             last = e
+            time.sleep(min(BACKOFF_BASE * (2 ** i), BACKOFF_MAX))
     assert last is not None
     raise last
 
@@ -114,6 +137,9 @@ def _selfcheck() -> None:
     assert time.time() - t0 < 1.0
     p = proxy_url()
     assert p is None or isinstance(p, dict)
+    assert 429 in RETRYABLE and 403 not in RETRYABLE
+    assert _retry_delay({"Retry-After": "5"}, 0) == 5.0
+    assert 0 < _retry_delay(None, 0) <= BACKOFF_BASE
     print(f"stealth self-check OK ({len(seen)} UA berbeda)")
 
 

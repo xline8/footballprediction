@@ -54,7 +54,8 @@ def fetch(lg, se):
 
 
 jobs = [(lg, se) for lg in LEAGUES for se in SEASONS]
-with concurrent.futures.ThreadPoolExecutor(max_workers=10) as ex:
+# ponytail: 3 pekerja — 10 tanpa delay riskan ban; naikkan bila perlu.
+with concurrent.futures.ThreadPoolExecutor(max_workers=3) as ex:
     res = list(ex.map(lambda t: fetch(*t), jobs))
 
 ok = sum(1 for _, _, s in res if s in ("ok", "cached"))
