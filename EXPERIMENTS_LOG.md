@@ -114,3 +114,22 @@ Baseline: meta 9-logit (LL 1.0017, Brier 0.5988), yield backtest shin-corrected 
 - **Namun yield membaik konsisten**: E1 −3.57%, E2 −3.36%, E3 −3.12% (thr .02), semuanya > baseline −3.77%, dan E3 di thr .05 mencapai **−1.45%** (n=2,875) — arah paling menjanjikan. Tidak di-keep karena gerbang LL ketat (dan best-thr dipilih post-hoc, berisiko noise).
 - **E4 tidak teruji**: tidak ada snapshot odds kedua, sehingga CLV (movement) tidak bisa dihitung. X koreksi data (closing odds) sebelum hipotesis ini dapat dieksekusi.
 - Kesimpulan: tidak ada fitur yang lolos keep per protokol. Yield tetap negatif; tidak ada strategi live yang aktif.
+
+---
+
+## Phase 8 — Dual-Gate Evaluation & Deep Motivation Science
+
+Baseline thr **0.05** (shin, flat): yield **−5.65%** (n=2,158). Gate: LL ≤ 1.00170 DAN yield > −3.77% dgn n ≥ 2,000 (thr pre-fixed .05, tanpa sweep).
+
+| # | hipotesis | fitur | LL | brier | yield (thr .05) | n | verdict |
+|---|---|---|---|---|---|---|---|
+| 8.1 | Desperation index + interaksi despo×nothing | despo_h/a, nothing_h/a, inter_h/a, rel, eur | 1.0021 ↑ | 0.5991 | −3.27% | 3,834 | ❌ LL degrade |
+| 8.2 | GD tie-breaker urgency | u_h/a, gd_h/a, rel | 1.0020 ↑ | 0.5990 | −5.23% | 3,127 | ❌ LL degrade + yield < bar |
+| 8.3 | DC × motivasi | dmot_main/h/a, mot_diff | 1.0018 ↑ | 0.5989 | −4.74% | 2,588 | ❌ LL degrade + yield < bar |
+| 8.4 | Rest-disadvantage × motivasi | rest_diff, despo, stack_h/a, mot_diff | 1.0021 ↑ | 0.5990 | −3.52% | 3,067 | ❌ LL degrade |
+
+### Temuan & rekomendasi
+- **Semua 4 gagal gerbang LL** (1.0018–1.0021 > 1.00170). Fitur motivasi/konteks menambah varians pada estimasi prob rata-rata (LL memburuk) namun **memperbaiki seleksi edge** (yield thr .05 naik dari −5.65% ke −3.27% s.d. −3.52% di 8.1/8.4).
+- Pola konsisten sejak Phase 7: meta model sudah pada plafon informasi pasar; fitur konteks tidak menurunkan LL global tapi memindahkan keputusan taruhan ke subset yang lebih menguntungkan. Gerbang LL ketat membuat fitur model hampir mustahil lolos.
+- **Rekomendasi jalur berikutnya**: alih-alih menambah fitur ke model prob (mengubah LL), terapkan motivasi sebagai **overlay pasca-model** pada keputusan/stake taruhan (model prob +; LL tidak berubah → gate LL lolos trivial, yield memanen kenaikan 8.1/8.4). Ini bukan "feature stack" per protokol, jadi tidak dieksekusi di sini.
+- Tidak ada strategi live aktif; `run_daily_shadow.py` tidak dijalankan karena tidak ada KEEP.
