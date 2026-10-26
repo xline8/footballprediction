@@ -21,7 +21,7 @@ from collections import defaultdict
 import numpy as np
 
 from backtest_picks import load_records, _fair_probs, RECORDS
-from experiment_motiv import build_maps
+from experiment_motiv import build_maps, _sorted_matches
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 THR = 0.05
@@ -48,7 +48,65 @@ def desperation(s, side):
     return 0.0
 
 
-def candidates(records, fmap, smap, thr=THR):
+def desperation_exp(s, side):
+    """Desperation ekspansi (Phase 10): + urgensi title/Eropa & points-gap."""
+    if not s or not s.get(f"late_{side}"):
+        return 0.0
+    rel = s[f"dist_releg_{side}"]
+    eur = s[f"dist_euro_{side}"]
+    tit = s[f"dist_title_{side}"]
+    if rel < 0.0:
+        return min(1.0, 0.6 + (-rel) / 6.0)
+    if rel <= 2.0:
+        return 0.45
+    if eur < 0.0:
+        return 0.85
+    if eur <= 2.0:
+        return 0.75
+    if eur <= 5.0:
+        return 0.55
+    if tit <= 2.0:
+        return 0.70
+    if tit <= 5.0:
+        return 0.50
+    return 0.0
+
+
+def build_expanded_maps():
+    """(cpmap, rmap). Catatan: dataset tidak memuat jadwal kompetisi Eropa
+    klub (div 'EC' adalah English National League, bukan Champions/Europa),
+    jadi proximity kontinental TIDAK tersedia -> cpmap kosong (feature 0).
+    Rivalitas diproksi sbg frekuensi pertemuan historis + pertemuan musim ini.
+    """
+    matches = _sorted_matches()
+    h2h_all = defaultdict(int)
+    h2h_season = defaultdict(int)
+    rmap = {}
+    for m in matches:
+        d = m["date"]
+        iso = d.isoformat()
+        h, a = m["home"], m["away"]
+        div = m.get("div")
+        season = m.get("season") or str(d.year)
+        fz = frozenset((h, a))
+        if div:
+            key = (div, iso, h, a)
+            cum = h2h_all[fz]
+            s = h2h_season[(div, season, fz)]
+            rmap[key] = min(1.0, (cum + s) / 3.0)
+        h2h_all[fz] += 1
+        h2h_season[(div, season, fz)] += 1
+    return {}, rmap
+
+
+def composite_exp(b, w):
+    """score ekspansi = w1*despo_exp + w2*fatigue + w3*cont + w4*riv."""
+    w1, w2, w3, w4 = w
+    f_norm = max(0.0, min(1.0, b["fatigue"] / 7.0))
+    return w1 * b["despo_exp"] + w2 * f_norm + w3 * b["cont"] + w4 * b["riv"]
+
+
+def candidates(records, fmap, smap, thr=THR, cpmap=None, rmap=None):
     """Generator bet kandidat (sebelum overlay) dgn skor konteks per sisi."""
     for idx, r in enumerate(records):
         o = r.get("o")
@@ -56,26 +114,34 @@ def candidates(records, fmap, smap, thr=THR):
             continue
         fair = _fair_probs(o, "shin")
         pm = (r["ph_meta"], r["pd_meta"], r["pa_meta"])
-        s = smap.get((r["div"], r["date"], r["home"], r["away"]))
-        f = fmap.get((r["div"], r["date"], r["home"], r["away"]), {})
+        key = (r["div"], r["date"], r["home"], r["away"])
+        s = smap.get(key)
+        f = fmap.get(key, {})
         dp_h, dp_a = desperation(s, "h"), desperation(s, "a")
+        dx_h, dx_a = desperation_exp(s, "h"), desperation_exp(s, "a")
         fat_h = float(f.get("rest_diff", 0.0))   # rest_h - rest_a
         fat_a = -fat_h
+        cont_h = float(cpmap.get(key, 0.0)) if cpmap else 0.0
+        riv_h = float(rmap.get(key, 0.0)) if rmap else 0.0
         year = r["date"][:4]
         for im in (0, 1, 2):
             edge = pm[im] - fair[im]
             if edge <= thr:
                 continue
             if im == 0:
-                dp, fat = dp_h, fat_h
+                dp, dx, fat = dp_h, dx_h, fat_h
+                cont, riv = cont_h, riv_h
             elif im == 2:
-                dp, fat = dp_a, fat_a
+                dp, dx, fat = dp_a, dx_a, fat_a
+                cont, riv = cont_h, riv_h
             else:
-                dp, fat = (dp_h + dp_a) / 2.0, 0.0
+                dp, dx, fat = (dp_h + dp_a) / 2.0, (dx_h + dx_a) / 2.0, 0.0
+                cont, riv = cont_h, riv_h
             od = o[im]
             win = im == r["yi"]
             yield {"idx": idx, "im": im, "od": od, "edge": edge,
-                   "despo": dp, "fatigue": fat, "year": year, "win": win,
+                   "despo": dp, "despo_exp": dx, "fatigue": fat,
+                   "cont": cont, "riv": riv, "year": year, "win": win,
                    "profit_flat": (od - 1.0) if win else -1.0}
 
 

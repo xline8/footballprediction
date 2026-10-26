@@ -156,3 +156,21 @@ Framework: `policy_overlay.py` (candidates + desperation index + composite = 0.6
 - Pola: overlay konteks memusatkan taruhan pada subset kecil (200–600 bet) dengan ROI positif-tapi-keras; tidak ada yang lolos N ≥ 1,000 + stabilitas sekaligus.
 - **Rekomendasi**: 9.4 adalah lead paling kuat sejauh ini. Untuk lolos N, kumpulkan lebih banyak data (ledger live) atau longgarkan thr edge; opsi lain: ekspansi definisi desperation supaya lebih banyak match ber-score non-nol (risiko dilusi).
 - Tidak ada policy yang di-keep → `make_picks_live.py` tidak diubah; flow shadow tetap 0 pick.
+
+---
+
+## Phase 10 — Statistical Significance Test & High-Context Expansion
+
+### Step 1 — Bootstrap significansi Policy 9.4 (`verify_significance.py`, 10,000 resample)
+- n bets = 553; ROI weighted = **+6.72%**; bootstrap mean +6.76%; CI95% [−9.48%, +23.44%]; **p-value = 0.2164** (vs H0 ROI≤0).
+- **TIDAK signifikan** (p > 0.05) → gate N≥1,000 tidak bisa dilonggarkan atas dasar statistik. CI lebar & pakan nol menunjukkan hasil sangat sensitif thd sedikit bet besar.
+
+### Step 2 — Ekspansi high-context pool (`policy_expand.py`)
+- **Proximity kontinental TIDAK tersedia**: div `EC` pada dataset ternyata English National League (Kasta-5 Inggris), bukan Champions/Europa/Conference. Tidak ada jadwal kompetisi klub Eropa → feature cont ≡ 0.
+- **Rivalitas (proksi h2h)**: menambah bobot w4 menaikkan N ke 747 tetapi **menghancurkan yield** (+2.8% → +0.3%): proksi h2h tidak prediktif, hanya dilusi.
+- **Desperation ekspansi (title/Eropa)**: menaikkan N ke ~562 (dari 553) dgn yield +5.18% (3/5 stable) — mirip 9.4 asli.
+- Tidak ada konfigurasi yang mencapai **N≥800 DAN yield>+4.5% DAN stable≥3/5**. Terbaik: base (0.6,0.4) N=562 +5.18% (N kurang); tambah w4 N=747 tapi yield ~0 (gagal).
+
+### Step 3 — Shadow tracking
+- Tak lolos karena Step 1 (p=0.216) maupun Step 2 (target N/yield tidak tercapai) → **tidak ada KEEP**, `make_picks_live.py` tidak diubah, live shadow tetap 0 pick.
+- Kesimpulan: 9.4 adalah lead terbaik, tapi N=553 terlalu kecil & tidak signifikan. Untuk membuktikan edge perlu lebih banyak data (akumulasi ledger live) atau definisi konteks yang benar-benar prediktif (bukan proksi frekuensi).
