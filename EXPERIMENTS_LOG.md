@@ -174,3 +174,32 @@ Framework: `policy_overlay.py` (candidates + desperation index + composite = 0.6
 ### Step 3 — Shadow tracking
 - Tak lolos karena Step 1 (p=0.216) maupun Step 2 (target N/yield tidak tercapai) → **tidak ada KEEP**, `make_picks_live.py` tidak diubah, live shadow tetap 0 pick.
 - Kesimpulan: 9.4 adalah lead terbaik, tapi N=553 terlalu kecil & tidak signifikan. Untuk membuktikan edge perlu lebih banyak data (akumulasi ledger live) atau definisi konteks yang benar-benar prediktif (bukan proksi frekuensi).
+
+---
+
+## Phase 11 — Exogenous Data Enrichment Pipeline (pivot ML → Data Engineering)
+
+Keputusan: dataset historis sudah jenuh oleh meta model (LL 1.0017). Beralih ke pengayaan data eksternal tanpa menyentuh `all_matches_clean.csv`.
+
+### Arsitektur (`data_enrichment/`)
+- `utils.py` — normalisasi nama tim (aliases top teams) + fuzzy matching (Levenshtein), parsing float aman, logging.
+- `fetch_xg.py` — fetcher understat (xG/xPTS) dgn timeout & fallback ke cache lokal `xg_matches.csv`.
+- `fetch_closing_odds.py` — ekstraksi Pinnacle (PSH/PSD/PSA) + Max/Avg dari CSV historis.
+- `synthesize_european.py` — heuristic jadwal padat: `midweek_cup_flag` bila tim punya laga lain dalam ±3 hari.
+- `enrich_pipeline.py` — left-join → `all_matches_enriched.csv` (mode `--full` / dry-run subset).
+
+### Hasil Dry-Run (EPL 2023/24, 380 match)
+| fitur | join | keterangan |
+|---|---|---|
+| Pinnacle/Max/Avg | 380/380 (100%) | kolom PS sudah ada di sumber |
+| xG | 240/380 (63%) | dari cache lokal |
+| midweek flag | 120/380 (32%) | konsisten dgn kalibrasi jendela |
+| rolling_xg_diff | 380/380 (100%) | leak-free, chronologis |
+
+### Hasil FULL (70,425 match)
+Pinnacle/Max/Avg 70,425/70,425; xG 9,074 (12.9%); midweek 21,342 (30.3%); rolling_xg_diff 70,066 (99.5%). Sumber `all_matches_clean.csv` utuh.
+
+### Blocker yang dicatat (→ TODO_AI.md)
+1. **understat** tidak dapat ditarik andal (struktur halaman/API berubah, berisiko CAPTCHA) → memakai cache lokal + mock bila gagal.
+2. **European fixture asli tidak tersedia**: div `EC` adalah English National League, bukan UCL/UEL/UECL → sintesis heuristic jadwal padat dipakai sbg proxy.
+3. **Odds movement murni tidak tersedia** (hanya 1 snapshot odds per match) → Pinnacle/Max/Avg diekstrak sbg proxy CLV lintas-bandar.

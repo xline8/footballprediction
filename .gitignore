@@ -18,6 +18,7 @@ value_bets.csv
 features_history.csv
 records_cache.jsonl
 live_shadow_ledger.csv
+all_matches_enriched.csv
 
 # OS
 Thumbs.db

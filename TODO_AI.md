@@ -18,6 +18,8 @@ Status legend: `[ ]` open · `[x]` done
 - [x] **T4 — Syntax/lint gate.** `python -m py_compile` on every module; if `ruff` present, run it. Fix anything that fails. *Rationale: cheapest regression net before any change lands.* (validated: all modules compile clean; test_core green)
 - [x] **T5 — Live shadow system (Phase 6).** `make_picks_live.py` + `live_shadow_ledger.csv` + `resolve_and_monitor.py` + `run_daily_shadow.py` built & committed. **PAUSED**: de-vigging shin di-fix (see EXPERIMENTS_LOG KOREKSI); pocket Phase 5 S1 +3.23% divalidasi (n=0). Filter sengaja menghasilkan 0 pick sampai strategi dengan edge benar divalidasi ulang.
 - [ ] **T6 — Cari ulang edge bernilai dgn shin benar.** Setelah fix, tidak ada pocket ROI positif yang stabil (terbaik top5 2.6-3.5 +1.88% tapi noise temporal). Lever berikutnya: model lebih tajam sebelum ekstraksi edge (fitur/kalibrasi), bukan tuning threshold/de-vigging.
+- [ ] **T7 — Data enrichment (Phase 11) selesai dibangun** (`data_enrichment/`, `all_matches_enriched.csv`). Blocker terbuka: (a) understat tidak andal → perlu API kunci/izin atau scrape stabil; (b) fixture Eropa asli (UCL/UEL/UECL) tidak ada → cari sumber jadwal kompetisi klub Eropa; (c) hanya 1 snapshot odds → cari closing/opening odds dua waktu untuk CLV sejati. Setelah (b)/(c) tersedia, build ulang fitur `midweek_fatigue_flag` & CLV dengan data nyata.
+- [ ] **T8 — Validasi fitur enriched terhadap pipeline prediksi.** Integrasikan kolom baru `all_matches_enriched.csv` (ps_*, midweek_flag, rolling_xg_diff) ke `records_cache` / meta model via walk-forward, uji gerbang LL & yield mng protokol Phase 7/8.
 
 ## Notes
 
