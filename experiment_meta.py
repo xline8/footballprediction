@@ -18,6 +18,7 @@ from collections import defaultdict
 import numpy as np
 
 import model_features_1x2 as mf
+from backtest_picks import _fair_probs
 from validation import eval_1x2
 
 BASE = os.path.dirname(os.path.abspath(__file__))
@@ -25,8 +26,8 @@ RECORDS = os.path.join(BASE, "records_cache.jsonl")
 
 
 def _load():
-    from backtest_picks import load_records
-    return load_records(RECORDS)
+    from experiment_enriched import load_enriched_records
+    return load_enriched_records()
 
 
 def _logit_clip(p):
@@ -34,9 +35,9 @@ def _logit_clip(p):
 
 
 def build_Xy(records):
-    """9 fitur dgn input logit (E5): logit(p_dc), logit(p_t3), logit(1/o)."""
+    """17 fitur (Phase 12 Pathway A): 9 logit asal + dev_H/D/A + ps_fair + midweek_h/a."""
     n = len(records)
-    X = np.full((n, 9), np.nan)
+    X = np.full((n, 17), np.nan)
     y = np.empty(n, dtype=np.int64)
     dates = [None] * n
     for i, r in enumerate(records):
@@ -48,6 +49,15 @@ def build_Xy(records):
         if o:
             for j in range(3):
                 X[i, 6 + j] = _logit_clip(1.0 / o[j])
+        ps = r.get("ps")
+        if o and ps and all(p is not None for p in ps):
+            dev = [o[j] / ps[j] for j in range(3)]
+            f = _fair_probs(tuple(ps), "shin")
+            for j in range(3):
+                X[i, 9 + j] = _logit_clip(dev[j])
+                X[i, 12 + j] = _logit_clip(f[j])
+        X[i, 15] = float(r.get("mw_h", 0))
+        X[i, 16] = float(r.get("mw_a", 0))
         y[i] = r["yi"]
         dates[i] = r["date"]
     return X, y, dates
@@ -85,8 +95,7 @@ def run():
 
 def augment_records(path=RECORDS):
     """Tambahkan kolom ph_meta/pd_meta/pa_meta ke records_cache (walk-forward)."""
-    from backtest_picks import load_records
-    records = load_records(path)
+    records = _load()
     X, y, dates = build_Xy(records)
     months = sorted({d[:7] for d in dates})
     pm = [None] * len(records)

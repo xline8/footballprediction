@@ -203,3 +203,55 @@ Pinnacle/Max/Avg 70,425/70,425; xG 9,074 (12.9%); midweek 21,342 (30.3%); rollin
 1. **understat** tidak dapat ditarik andal (struktur halaman/API berubah, berisiko CAPTCHA) → memakai cache lokal + mock bila gagal.
 2. **European fixture asli tidak tersedia**: div `EC` adalah English National League, bukan UCL/UEL/UECL → sintesis heuristic jadwal padat dipakai sbg proxy.
 3. **Odds movement murni tidak tersedia** (hanya 1 snapshot odds per match) → Pinnacle/Max/Avg diekstrak sbg proxy CLV lintas-bandar.
+
+---
+
+## Phase 12 — Sharp Book Consensus & Enriched Alpha Integration
+
+Integrasi `all_matches_enriched.csv` (PS Pinnacle, midweek flags, rolling_xg_diff)
+ke engine prediksi. Join: 51,420/68,763 rekaman punya PS (83.1%); sisanya
+di-imputasi fallback ke B365 (dev=1.0, netral).
+
+### Pathway A — ML injection ke meta model (KEEP ✅)
+Fitur meta diperluas 9 → 17: dev_H/D/A (B365/PS), ps_fair (PS de-vigged shin),
+midweek_h/a. Walk-forward bulanan, multinomial logistic.
+
+| metrik | baseline meta (9) | +sharp (17) |
+|---|---|---|
+| log loss | 1.0017 | **1.0013** |
+| brier | 0.5988 | **0.5986** |
+| macro-F1 | 0.3743 | **0.3768** |
+| accuracy | 0.5028 | **0.5035** |
+
+Gate LL < 1.00170: **1.001257 → OK**. Sharp info menurunkan LL (menembus
+plafon pasar sebelumnya). **KEEP → dipromosikan sbg baseline meta baru**:
+`experiment_meta` diubah ke 17 fitur, `records_cache.jsonl` di-hitung-ulang
+(66,379/68,763 meta probs) + kolom `ps`/`mw_h`/`rollxg` dipersistenkan.
+Koreksi bug: `augment_records` mula-mula memuat records p/ ps → kolom enriched
+semua-NaN → model meta 9 fitur (artefak); di-fix memakai join enriched.
+
+### Pathway B — Policy overlay sharp/soft (REVERT ❌)
+Meta dikunci; filter `dev_side > thr` (+/- midweek) pada bet ber-edge (shin).
+Gerbang: N ≥ 800 DAN bootstrap p < 0.05 (H0 ROI≤0).
+
+| dev> | mw | N | yield | pos(21-25) |
+|---|---|---|---|---|
+| 1.00 | 0 | 418 | −4.57% | 2/5 |
+| 1.00 | 1 | 89 | −22.47% | 0/5 |
+| 1.02 | 0 | 201 | −10.97% | 2/5 |
+| 1.02 | 1 | 43 | −35.19% | 0/5 |
+| 1.05 | 0 | 65 | −2.63% | 0/5 |
+| 1.05 | 1 | 15 | −25.67% | 0/5 |
+| 1.08 | 0 | 18 | +32.94% | 0/5 |
+| 1.08 | 1 | 5 | −100% | 0/5 |
+
+**Tidak ada konfigurasi mencapai N ≥ 800** (terbaik +32.9% pada n=18 = noise).
+Deviasi Pinnacle tanpa midweek justru menyaring ke subset kecil & rugi; dengan
+midweek N mengecil drastis. **REVERT → tidak ada overlay baru**, `make_picks_live.py`
+tetap 0 pick (tidak ada strategi live aktif).
+
+### Kesimpulan Phase 12
+- **Baseline meta baru dipromosikan**: LL 1.0013 (turun), Brier 0.5986. Model
+  prob lebih tajam → landasan lebih baik untuk ekstraksi edge ke depan.
+- **Tidak ada edge taruhan baru yang tervalidasi** (Pathway B gagal N & signifikanasi).
+  Yield global baseline baru menunggu konfirmasi backtest default.
