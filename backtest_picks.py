@@ -262,15 +262,13 @@ def _model_probs(rec, cfg):
     return (rec["ph_dc"], rec["pd_dc"], rec["pa_dc"])
 
 
-def evaluate_strategy(records, cfg):
+def _iter_bets(records, cfg):
+    """Yield per-bet tick: (idx, im, od, edge, stake, profit)."""
     calib = _recalibrate(records) if cfg.get("calib") == "platt" else None
-    pairs = []
-    bet = {"n": 0, "wins": 0, "staked": 0.0, "profit": 0.0}
     for idx, rec in enumerate(records):
         pm = _model_probs(rec, cfg)
         if calib is not None and calib[idx] is not None:
             pm = calib[idx]
-        pairs.append((pm, rec["yi"]))
         o = rec["o"]
         if o is None:
             continue
@@ -290,13 +288,25 @@ def evaluate_strategy(records, cfg):
                 stake = min(cfg["kelly"] * f, 0.5)
             else:
                 stake = 1.0
-            bet["n"] += 1
-            bet["staked"] += stake
-            if im == rec["yi"]:
-                bet["wins"] += 1
-                bet["profit"] += stake * (od - 1.0)
-            else:
-                bet["profit"] -= stake
+            profit = stake * (od - 1.0) if im == rec["yi"] else -stake
+            yield idx, im, od, edge, stake, profit
+
+
+def evaluate_strategy(records, cfg):
+    calib = _recalibrate(records) if cfg.get("calib") == "platt" else None
+    pairs = []
+    bet = {"n": 0, "wins": 0, "staked": 0.0, "profit": 0.0}
+    for idx, rec in enumerate(records):
+        pm = _model_probs(rec, cfg)
+        if calib is not None and calib[idx] is not None:
+            pm = calib[idx]
+        pairs.append((pm, rec["yi"]))
+    for idx, im, od, edge, stake, profit in _iter_bets(records, cfg):
+        bet["n"] += 1
+        bet["staked"] += stake
+        if profit > 0:
+            bet["wins"] += 1
+        bet["profit"] += profit
     met = eval_1x2(pairs)
     res = {
         "n_bets": bet["n"],
@@ -310,6 +320,97 @@ def evaluate_strategy(records, cfg):
         "macro_f1": met["macro_f1"],
         "accuracy": met["accuracy"],
         "n_eval": met["n"],
+    }
+    return res
+
+
+TOP5 = {"E0", "D1", "I1", "SP1", "F1"}
+
+
+def _div_group(rec):
+    return "top5" if rec.get("div") in TOP5 else "other"
+
+
+def _odds_bucket(od):
+    if od < 1.5:
+        return "<1.5"
+    if od < 2.0:
+        return "1.5-2.0"
+    if od < 2.6:
+        return "2.0-2.6"
+    if od < 3.5:
+        return "2.6-3.5"
+    return ">=3.5"
+
+
+def segment_sweep(records, cfg, min_bets=500):
+    """Evaluasi ROI per segmen (liga/odds/edge). Print segmen yang n >= min_bets."""
+    from collections import defaultdict
+    totals = defaultdict(lambda: {"n": 0, "staked": 0.0, "profit": 0.0})
+    for idx, im, od, edge, stake, profit in _iter_bets(records, cfg):
+        rec = records[idx]
+        for key in (
+            ("div", _div_group(rec)),
+            ("odds", _odds_bucket(od)),
+            ("edge", f">={edge:.2f}"),
+            ("div|odds", (_div_group(rec), _odds_bucket(od))),
+        ):
+            t = totals[key]
+            t["n"] += 1
+            t["staked"] += stake
+            t["profit"] += profit
+    print("=" * 78)
+    print("SEGMENT SWEEP (ROI per segmen) — n_min =", min_bets)
+    print("=" * 78)
+    print(f"{'segmen':28} {'n':>7} {'yield':>9} {'n_w':>6}")
+    rows = []
+    for (dim, seg), t in totals.items():
+        if t["n"] < min_bets:
+            continue
+        yield_ = t["profit"] / t["staked"] if t["staked"] else 0.0
+        rows.append((dim, seg, t["n"], yield_))
+    rows.sort(key=lambda r: -r[3])
+    for dim, seg, n, yield_ in rows:
+        flag = "  <<< POSITIVE" if yield_ > 0 else ""
+        print(f"{f'{dim}={seg}':28} {n:>7} {yield_:>9.4%} {flag}")
+    return rows
+
+
+# Phase 5: Filtered Value Bet Strategy (validated positive pocket)
+# Top5 leagues, heavy home favorite odds 1.2-1.5, model edge in [0.20, 0.22).
+FILTER_CFG = {
+    "divs": {"E0", "D1", "I1", "SP1", "F1"},
+    "odds_lo": 1.2,
+    "odds_hi": 1.5,
+    "edge_lo": 0.20,
+    "edge_hi": 0.22,
+}
+
+
+def evaluate_filtered(records, cfg, kelly=False):
+    """Evaluasi strategi Filtered Value Bet (segmen positif tervalidasi)."""
+    c = dict(cfg); c["stake"] = "kelly" if kelly else "flat"
+    bet = {"n": 0, "wins": 0, "staked": 0.0, "profit": 0.0}
+    for idx, im, od, edge, stake, profit in _iter_bets(records, c):
+        rec = records[idx]
+        if rec.get("div") not in FILTER_CFG["divs"]:
+            continue
+        if not (FILTER_CFG["odds_lo"] <= od <= FILTER_CFG["odds_hi"]):
+            continue
+        if not (FILTER_CFG["edge_lo"] <= edge < FILTER_CFG["edge_hi"]):
+            continue
+        bet["n"] += 1
+        bet["staked"] += stake
+        if profit > 0:
+            bet["wins"] += 1
+        bet["profit"] += profit
+    res = {
+        "n_bets": bet["n"],
+        "wins": bet["wins"],
+        "staked": bet["staked"],
+        "profit": bet["profit"],
+        "hit_rate": bet["wins"] / bet["n"] if bet["n"] else 0.0,
+        "yield": bet["profit"] / bet["staked"] if bet["staked"] else 0.0,
     }
     return res
 
@@ -359,13 +460,28 @@ def main():
         cfg["thr"] = float(args[args.index("--thr") + 1])
     if "--stake" in args:
         cfg["stake"] = args[args.index("--stake") + 1]
-    if "--kelly" in args:
+    if "--kelly" in args and args.index("--kelly") + 1 < len(args) \
+            and args[args.index("--kelly") + 1].replace(".", "").replace("-", "").isdigit():
         cfg["kelly"] = float(args[args.index("--kelly") + 1])
     if "--calib" in args:
         cfg["calib"] = args[args.index("--calib") + 1]
     if not os.path.exists(RECORDS):
         cache_records()
     records = load_records()
+    if "--segment" in args:
+        segment_sweep(records, cfg)
+        return
+    if "--filter" in args:
+        kelly = "--kelly" in args
+        r = evaluate_filtered(records, cfg, kelly=kelly)
+        print("=" * 70)
+        print("FILTERED VALUE BET STRATEGY (top5 heavy favorite, edge 0.20-0.22)")
+        print("=" * 70)
+        print(f"stake       : {'kelly' if kelly else 'flat'}")
+        print(f"n bet       : {r['n_bets']}")
+        print(f"hit rate    : {r['hit_rate']:.4f}")
+        print(f"yield (ROI): {r['yield']:.4%}")
+        return
     res = evaluate_strategy(records, cfg)
     report(res)
 

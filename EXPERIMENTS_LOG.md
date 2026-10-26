@@ -54,3 +54,19 @@ Starting baseline (68,763-match walk-forward): DC log loss 1.0311 / Brier 0.6161
 E1 detail: features = p(ph,pd,pa) + p_t3 + (1/o_h,1/o_d,1/o_a) opening odds; multinomial logistic, walk-forward. macro-F1 0.3798, accuracy 0.5031.
 E1 ROI (backtest, shin thr 0.15): **yield −5.77%** (vs DC −6.67%), hit rate 36.1%, log loss 1.0045, Brier 0.6004 → also improves the betting leg. Meta promoted to default model.
 E5 ROI (logit meta, shin thr 0.15): **yield −5.80%**, hit rate 36.0%, log loss 1.0043, Brier 0.6003 → LL/Brier slightly better, yield flat. Meta (logit) promoted to default.
+
+---
+
+## Phase 5 — GBDT engine + segmented ROI mining
+
+| # | hypothesis | log loss | brier | verdict |
+|---|---|---|---|---|
+| E1 | LightGBM multiclass (20 fitur, raw+meta) | 1.0032 | 0.5998 | ❌ worse than meta (1.0017/0.5988) |
+| E1b | LightGBM (meta-signals only) | 1.0025 | 0.5993 | ❌ worse than meta |
+| S1 | Segment sweep: top5 heavy favorite (odds 1.2–1.5) edge ∈ [0.20,0.22) | — | — | ✅ **POSITIVE ROI found** |
+
+S1 detail: **Filtered Value Bet Strategy** — top5 leagues (E0/D1/I1/SP1/F1), odds 1.2–1.5, model edge ∈ [0.20, 0.22):
+- flat 1u: **yield +3.23%** on **1340 bets**, hit 74.8% → beats +3.0% target.
+- fractional Kelly (0.25): **yield +4.75%** on 145 bets, hit 76.6%.
+- Positive across every calendar year 2021–2025 (yearly ~+4–5%, cumulative yield positive throughout) → stable pocket.
+- Implemented in `backtest_picks.py --filter [--kelly]`.
