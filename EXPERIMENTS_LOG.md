@@ -95,3 +95,22 @@ S1 detail: **Filtered Value Bet Strategy** — top5 leagues (E0/D1/I1/SP1/F1), o
 
 ⚠️ **DIVALIDASI (2026-10-26)** oleh fix de-vigging shin (lihat KOREKSI di atas):
 dgn shin benar, filter ini n=0 → hasil +3.23% adalah artefak bug. Jangan dipakai.
+
+---
+
+## Phase 7 — Deep Feature Science & Market Dynamics
+
+Baseline: meta 9-logit (LL 1.0017, Brier 0.5988), yield backtest shin-corrected thr 0.02 = **−3.77%** (n=17,093). Aturan: KEEP hanya jika LL < 1.0017 **DAN** yield > −3.77%.
+
+| # | hipotesis | fitur | LL | brier | yield (best thr) | n | verdict |
+|---|---|---|---|---|---|---|---|
+| E1 | Fatigue: rest diff + kepadatan jadwal 14/30 hari | rest_diff, dens14_diff, dens30_diff | 1.0018 ↑ | 0.5989 ↑ | −3.57% (thr .02) | 19,110 | ❌ LL tidak turun |
+| E2 | Overperformance xG (gf−xgh, ga−xga rolling 5) | opp_h/a, opc_h/a | 1.0018 ↑ | 0.5989 ↑ | −3.36% (thr .02) | 20,968 | ❌ LL tidak turun |
+| E3 | Motivasi: ppm tim + flag musim akhir | ppm_h/a, ppm_diff, late | 1.0017 ≈ (1.001656→1.001704) | 0.5988 ≈ | −3.12% (thr .02); best −1.45% (thr .05) | 2,875 | ❌ LL tidak turun |
+| E4 | CLV proxy (pergerakan odds) | — | — | — | — | — | ⛔ tidak dapat diuji: dataset hanya 1 snapshot odds (opening/closing tidak tersedia) |
+
+### Temuan
+- **Ketiga hipotesis (E1–E3) gagal gerbang LL** — meta model sudah berada dekat plafon informasi pasar (LL ~1.0017); fitur konteks tidak memperbaiki kalibrasi (LL datar/naik tipis).
+- **Namun yield membaik konsisten**: E1 −3.57%, E2 −3.36%, E3 −3.12% (thr .02), semuanya > baseline −3.77%, dan E3 di thr .05 mencapai **−1.45%** (n=2,875) — arah paling menjanjikan. Tidak di-keep karena gerbang LL ketat (dan best-thr dipilih post-hoc, berisiko noise).
+- **E4 tidak teruji**: tidak ada snapshot odds kedua, sehingga CLV (movement) tidak bisa dihitung. X koreksi data (closing odds) sebelum hipotesis ini dapat dieksekusi.
+- Kesimpulan: tidak ada fitur yang lolos keep per protokol. Yield tetap negatif; tidak ada strategi live yang aktif.
