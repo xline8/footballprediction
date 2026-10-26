@@ -133,3 +133,26 @@ Baseline thr **0.05** (shin, flat): yield **−5.65%** (n=2,158). Gate: LL ≤ 1
 - Pola konsisten sejak Phase 7: meta model sudah pada plafon informasi pasar; fitur konteks tidak menurunkan LL global tapi memindahkan keputusan taruhan ke subset yang lebih menguntungkan. Gerbang LL ketat membuat fitur model hampir mustahil lolos.
 - **Rekomendasi jalur berikutnya**: alih-alih menambah fitur ke model prob (mengubah LL), terapkan motivasi sebagai **overlay pasca-model** pada keputusan/stake taruhan (model prob +; LL tidak berubah → gate LL lolos trivial, yield memanen kenaikan 8.1/8.4). Ini bukan "feature stack" per protokol, jadi tidak dieksekusi di sini.
 - Tidak ada strategi live aktif; `run_daily_shadow.py` tidak dijalankan karena tidak ada KEEP.
+
+---
+
+## Phase 9 — Decoupled Betting Policy & Contextual Overlay Engine
+
+Arsitektur: **Probability Engine dikunci** (meta model, LL 1.0017 tidak berubah) → edge shin → **Policy Overlay pasca-model** (filter/stake). Evaluasi: yield > −1.50% DAN N ≥ 1,000 DAN yield > 0 di ≥3 dari 2021–2025. Dasar: thr 0.05, flat baseline yield −5.65% (n=2,158).
+
+Framework: `policy_overlay.py` (candidates + desperation index + composite = 0.6·despo + 0.4·fatigue_norm).
+
+| Policy | aturan | hasil terbaik | N | yield | stabil (≥3/5) | verdict |
+|---|---|---|---|---|---|---|
+| 9.1 | filter despo > θ | θ=0.3 | 169 | +12.7% | 1/5 | ❌ N & stabil |
+| 9.2 | filter rest gap ≥ 3 | gap=3 | 44 | +1.8% | 0/5 | ❌ N & stabil |
+| 9.3 | filter composite ≥ θ | θ=0.3 | 176 | +11.8% | 1/5 | ❌ N & stabil |
+| 9.4 | stake = 0.25·composite | θ=0 | **553** | **+6.7%** | **3/5** | ❌ N<1000 |
+| 9.4 floor | stake = 0.25·(f+(1−f)c) | f=0.3 | 2,158 | −4.4% | 2/5 | ❌ yield & stabil |
+
+### Temuan
+- **9.4 murni (dynamic contextual Kelly, tanpa floor) adalah satu-satunya konfigurasi dengan yield positif (+6.7%) DAN stabilitas temporal 3/5** — tetapi N=553 < 1,000, jadi gagal gerbang ukuran sampel.
+- Menambah floor stake (agar N=2,158) menghapus efeknya: yield kembali negatif (−4.4% s.d. −5.65%), stabil 1–2/5. Artinya keuntungan 9.4 datang justru dari **menghapus** bet berkonteks rendah (stake 0), bukan dari men-stake semuanya.
+- Pola: overlay konteks memusatkan taruhan pada subset kecil (200–600 bet) dengan ROI positif-tapi-keras; tidak ada yang lolos N ≥ 1,000 + stabilitas sekaligus.
+- **Rekomendasi**: 9.4 adalah lead paling kuat sejauh ini. Untuk lolos N, kumpulkan lebih banyak data (ledger live) atau longgarkan thr edge; opsi lain: ekspansi definisi desperation supaya lebih banyak match ber-score non-nol (risiko dilusi).
+- Tidak ada policy yang di-keep → `make_picks_live.py` tidak diubah; flow shadow tetap 0 pick.
