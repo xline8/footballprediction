@@ -33,11 +33,11 @@ try:
 except ImportError:
     _HAS_HTTPX = False
 
+from stealth import proxy_url, ua as stealth_ua
+
 BASE = "https://tipsterarea.com"
 DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ta")
 RAW = os.path.join(DIR, "raw")
-UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-      "(KHTML, like Gecko) Chrome/126.0 Safari/537.36")
 
 DELAY = 1.2          # detik antar-request (sopan ke server)
 TIMEOUT = 30
@@ -133,7 +133,8 @@ async def _async_fetch(client, url, cache_name=None, ttl=CACHE_TTL_DATE):
     if cached is not None:
         return cached, True
     try:
-        resp = await client.get(url, timeout=TIMEOUT, follow_redirects=True)
+        resp = await client.get(url, timeout=TIMEOUT, follow_redirects=True,
+                                headers={"User-Agent": stealth_ua()})
         text = resp.text
         if cache_name:
             _to_cache(cache_name, text)
@@ -153,7 +154,7 @@ def _http_get(url):
     for attempt in range(RETRIES):
         try:
             req = urllib.request.Request(url, headers={
-                "User-Agent": UA,
+                "User-Agent": stealth_ua(),
                 "Accept": "text/html,application/xhtml+xml",
                 "Accept-Language": "en-GB,en;q=0.9",
                 "Accept-Encoding": "gzip",
@@ -221,12 +222,15 @@ async def async_fetch_pages(urls_with_cache, ttl_map=None):
                 await asyncio.sleep(DELAY)
             results[idx] = (text, cached)
 
-    async with httpx.AsyncClient(headers={
-        "User-Agent": UA,
-        "Accept": "text/html,application/xhtml+xml",
-        "Accept-Language": "en-GB,en;q=0.9",
-        "Accept-Encoding": "gzip",
-    }) as client:
+    async with httpx.AsyncClient(
+        headers={
+            "User-Agent": stealth_ua(),
+            "Accept": "text/html,application/xhtml+xml",
+            "Accept-Language": "en-GB,en;q=0.9",
+            "Accept-Encoding": "gzip",
+        },
+        proxy=proxy_url(),
+    ) as client:
         tasks = []
         for i, (url, cache_name, ttl) in enumerate(urls_with_cache):
             ttl_val = ttl if ttl else ttl_map.get(i, CACHE_TTL_DATE)

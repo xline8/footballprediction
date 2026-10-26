@@ -12,6 +12,8 @@ from typing import Any
 
 import requests
 
+from stealth import jitter, ua
+
 from .utils import setup_logging, to_float, norm_team
 
 _log = setup_logging()
@@ -46,8 +48,9 @@ def fetch_understat_xg(league: str, season: str) -> list[dict[str, Any]]:
     url = f"https://understat.com/league/{lid}/{season}"
     _log.info("fetch understat: %s", url)
     try:
+        jitter(lo=0.8, hi=2.0)
         resp = requests.get(url, timeout=REQUEST_TIMEOUT,
-                            headers={"User-Agent": "Mozilla/5.0"})
+                            headers={"User-Agent": ua()})
         resp.raise_for_status()
     except Exception as e:  # noqa: BLE001
         raise FetchError(f"understat blocked: {e!r}") from e

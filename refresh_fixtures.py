@@ -14,8 +14,9 @@ import gzip
 import json
 import os
 import shutil
-import urllib.request
 from datetime import datetime
+
+from stealth import urlopen_with_retry
 
 PROJ = os.path.dirname(os.path.abspath(__file__))
 XG = os.path.join(PROJ, "xg_raw")
@@ -24,22 +25,17 @@ LEAGUES = {
     "Serie_A": "I1", "Ligue_1": "F1",
 }
 TODAY = datetime.now().date().isoformat()
-UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-      "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36")
 
 
 def fetch(slug):
     """Ambil datesData langsung dari API internal Understat (ditemukan 17 Okt:
     halaman HTML jadi shell tanpa data, tapi endpoint getLeagueData terbuka)."""
     url = f"https://understat.com/getLeagueData/{slug}/2026"
-    headers = {
-        "User-Agent": UA,
-        "Referer": f"https://understat.com/league/{slug}/2026",
-        "X-Requested-With": "XMLHttpRequest",
-        "Accept": "application/json",
-    }
-    req = urllib.request.Request(url, headers=headers)
-    raw = urllib.request.urlopen(req, timeout=45).read()
+    _, raw = urlopen_with_retry(
+        url, tries=3, timeout=45,
+        extra_headers={"X-Requested-With": "XMLHttpRequest",
+                       "Accept": "application/json"},
+        referer=f"https://understat.com/league/{slug}/2026")
     if raw[:2] == b"\x1f\x8b":  # server balas gzip walau Accept-Encoding tak diminta
         raw = gzip.decompress(raw)
     data = json.loads(raw.decode("utf-8"))
