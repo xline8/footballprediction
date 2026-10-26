@@ -49,6 +49,7 @@ Starting baseline (68,763-match walk-forward): DC log loss 1.0311 / Brier 0.6161
 | E3 | Meta + close odds (CLV) | 1.0063 | 0.6001 | ❌ worse than meta (ll/brier) |
 | E4 | Per-league (div) meta | 1.0070 | 0.6021 | ❌ worse than meta (ll/brier) |
 | E5 | Meta dgn input logit | **1.0017** | **0.5988** | ✅ KEEP (both improve) |
+| E6 | Elo decay (K ∝ 1/√play) | 1.0016 | 0.5988 | ❌ noise (≈E5), T3 worsened |
 
 E1 detail: features = p(ph,pd,pa) + p_t3 + (1/o_h,1/o_d,1/o_a) opening odds; multinomial logistic, walk-forward. macro-F1 0.3798, accuracy 0.5031.
 E1 ROI (backtest, shin thr 0.15): **yield −5.77%** (vs DC −6.67%), hit rate 36.1%, log loss 1.0045, Brier 0.6004 → also improves the betting leg. Meta promoted to default model.
