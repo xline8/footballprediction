@@ -45,6 +45,11 @@ Starting baseline (68,763-match walk-forward): DC log loss 1.0311 / Brier 0.6161
 | # | hypothesis | log loss | brier | verdict |
 |---|---|---|---|---|
 | E1 | Meta-logistic: DC+X3 + market-implied probs | **1.0019** | **0.5989** | ✅ KEEP (both targets hit) |
+| E2 | MLP 2-lapis (numpy, 20 fitur) | 1.0126 | 0.6050 | ❌ worse than meta (ll/brier) |
+| E3 | Meta + close odds (CLV) | 1.0063 | 0.6001 | ❌ worse than meta (ll/brier) |
+| E4 | Per-league (div) meta | 1.0070 | 0.6021 | ❌ worse than meta (ll/brier) |
+| E5 | Meta dgn input logit | **1.0017** | **0.5988** | ✅ KEEP (both improve) |
 
 E1 detail: features = p(ph,pd,pa) + p_t3 + (1/o_h,1/o_d,1/o_a) opening odds; multinomial logistic, walk-forward. macro-F1 0.3798, accuracy 0.5031.
 E1 ROI (backtest, shin thr 0.15): **yield −5.77%** (vs DC −6.67%), hit rate 36.1%, log loss 1.0045, Brier 0.6004 → also improves the betting leg. Meta promoted to default model.
+E5 ROI (logit meta, shin thr 0.15): **yield −5.80%**, hit rate 36.0%, log loss 1.0043, Brier 0.6003 → LL/Brier slightly better, yield flat. Meta (logit) promoted to default.

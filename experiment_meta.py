@@ -29,18 +29,25 @@ def _load():
     return load_records(RECORDS)
 
 
+def _logit_clip(p):
+    return np.log(np.clip(p, 1e-6, 1 - 1e-6) / (1 - np.clip(p, 1e-6, 1 - 1e-6)))
+
+
 def build_Xy(records):
+    """9 fitur dgn input logit (E5): logit(p_dc), logit(p_t3), logit(1/o)."""
     n = len(records)
     X = np.full((n, 9), np.nan)
     y = np.empty(n, dtype=np.int64)
     dates = [None] * n
     for i, r in enumerate(records):
-        X[i, 0] = r["ph_dc"]; X[i, 1] = r["pd_dc"]; X[i, 2] = r["pa_dc"]
-        X[i, 3] = r["ph_t3"]; X[i, 4] = r["pd_t3"]; X[i, 5] = r["pa_t3"]
+        X[i, 0] = _logit_clip(r["ph_dc"]); X[i, 1] = _logit_clip(r["pd_dc"])
+        X[i, 2] = _logit_clip(r["pa_dc"])
+        X[i, 3] = _logit_clip(r["ph_t3"]); X[i, 4] = _logit_clip(r["pd_t3"])
+        X[i, 5] = _logit_clip(r["pa_t3"])
         o = r["o"]
         if o:
             for j in range(3):
-                X[i, 6 + j] = 1.0 / o[j]
+                X[i, 6 + j] = _logit_clip(1.0 / o[j])
         y[i] = r["yi"]
         dates[i] = r["date"]
     return X, y, dates
