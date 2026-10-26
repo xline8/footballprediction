@@ -38,7 +38,7 @@ YIDX = {"H": 0, "D": 1, "A": 2}
 SIDES = (0, 1, 2)
 
 DEFAULT_CFG = {
-    "model": "dc",       # dc | t3 | blend
+    "model": "meta",     # meta | dc | t3 | blend  (E1 meta menang)
     "blend_w": 0.3,      # bobot T3 saat model=blend (0.3 = 0.7 DC + 0.3 T3)
     "devig": "shin",     # none | mult | shin  (E1: shin menang)
     "thr": 0.15,         # E4: sweep -> 0.15 terbaik
@@ -248,6 +248,10 @@ def _recalibrate(records):
 
 
 def _model_probs(rec, cfg):
+    if cfg["model"] == "meta":
+        return (rec.get("ph_meta") or rec["ph_dc"],
+                rec.get("pd_meta") or rec["pd_dc"],
+                rec.get("pa_meta") or rec["pa_dc"])
     if cfg["model"] == "t3":
         return (rec["ph_t3"], rec["pd_t3"], rec["pa_t3"])
     if cfg["model"] == "blend":

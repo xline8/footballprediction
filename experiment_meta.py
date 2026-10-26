@@ -10,6 +10,7 @@ Model: multinomial logistic regression (numpy), walk-forward bulanan, sama dgn
 engine backtest. Target: log loss < 1.020 & Brier < 0.600.
 """
 
+import json
 import os
 import sys
 from collections import defaultdict
@@ -75,5 +76,34 @@ def run():
     return em, ed, et
 
 
+def augment_records(path=RECORDS):
+    """Tambahkan kolom ph_meta/pd_meta/pa_meta ke records_cache (walk-forward)."""
+    from backtest_picks import load_records
+    records = load_records(path)
+    X, y, dates = build_Xy(records)
+    months = sorted({d[:7] for d in dates})
+    pm = [None] * len(records)
+    for m in months:
+        train = np.array([d < m + "-01" for d in dates])
+        test = np.array([d[:7] == m for d in dates])
+        if train.sum() < 1500 or test.sum() == 0:
+            continue
+        p = mf._fit_multinomial(X[train], y[train], X[test])
+        for row, k in zip(p, np.where(test)[0]):
+            pm[k] = tuple(row)
+    with open(path, "w", encoding="utf-8") as f:
+        for k, r in enumerate(records):
+            if pm[k] is not None:
+                r["ph_meta"], r["pd_meta"], r["pa_meta"] = pm[k]
+            else:
+                r["ph_meta"], r["pd_meta"], r["pa_meta"] = (r["ph_dc"], r["pd_dc"], r["pa_dc"])
+            f.write(json.dumps(r) + "\n")
+    n = sum(1 for k in range(len(records)) if pm[k] is not None)
+    print(f"augment meta probs: {n}/{len(records)}")
+
+
 if __name__ == "__main__":
-    run()
+    if "--augment" in sys.argv:
+        augment_records()
+    else:
+        run()
