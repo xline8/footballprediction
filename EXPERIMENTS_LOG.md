@@ -35,3 +35,15 @@ Goal: yield > 0 while not ruining log loss / Brier. Secondary: lower log loss.
 
 ### Kept (committed)
 - `backtest_picks.py` refactor into a configurable engine with `records_cache.jsonl`; default promoted to best config (thin, thr 0.15).
+
+---
+
+## Phase 4 — Core model R&D (target: log loss < 1.020, Brier < 0.600)
+
+Starting baseline (68,763-match walk-forward): DC log loss 1.0311 / Brier 0.6161; T3 feature log loss 1.0287 / Brier 0.6171.
+
+| # | hypothesis | log loss | brier | verdict |
+|---|---|---|---|---|
+| E1 | Meta-logistic: DC+X3 + market-implied probs | **1.0019** | **0.5989** | ✅ KEEP (both targets hit) |
+
+E1 detail: features = p(ph,pd,pa) + p_t3 + (1/o_h,1/o_d,1/o_a) opening odds; multinomial logistic, walk-forward. macro-F1 0.3798, accuracy 0.5031.

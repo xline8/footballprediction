@@ -1,0 +1,79 @@
+#!/usr/bin/env python3
+"""experiment_meta.py — fase 4 E1: meta-logistic di atas DC/T3 + market implied.
+
+Fitur per match (leak-free, semuanya diketahui sebelum kickoff):
+  - prob DC (ph_dc, pd_dc, pa_dc)
+  - prob T3 fitur (ph_t3, pd_t3, pa_t3)
+  - prob implied market (1/o(h), 1/o(d), 1/o(a)) dari B365 opening
+
+Model: multinomial logistic regression (numpy), walk-forward bulanan, sama dgn
+engine backtest. Target: log loss < 1.020 & Brier < 0.600.
+"""
+
+import os
+import sys
+from collections import defaultdict
+
+import numpy as np
+
+import model_features_1x2 as mf
+from validation import eval_1x2
+
+BASE = os.path.dirname(os.path.abspath(__file__))
+RECORDS = os.path.join(BASE, "records_cache.jsonl")
+
+
+def _load():
+    from backtest_picks import load_records
+    return load_records(RECORDS)
+
+
+def build_Xy(records):
+    n = len(records)
+    X = np.full((n, 9), np.nan)
+    y = np.empty(n, dtype=np.int64)
+    dates = [None] * n
+    for i, r in enumerate(records):
+        X[i, 0] = r["ph_dc"]; X[i, 1] = r["pd_dc"]; X[i, 2] = r["pa_dc"]
+        X[i, 3] = r["ph_t3"]; X[i, 4] = r["pd_t3"]; X[i, 5] = r["pa_t3"]
+        o = r["o"]
+        if o:
+            for j in range(3):
+                X[i, 6 + j] = 1.0 / o[j]
+        y[i] = r["yi"]
+        dates[i] = r["date"]
+    return X, y, dates
+
+
+def run():
+    records = _load()
+    X, y, dates = build_Xy(records)
+    months = sorted({d[:7] for d in dates})
+    pairs_meta, pairs_dc, pairs_t3 = [], [], []
+    for m in months:
+        train = np.array([d < m + "-01" for d in dates])
+        test = np.array([d[:7] == m for d in dates])
+        if train.sum() < 1500 or test.sum() == 0:
+            continue
+        p = mf._fit_multinomial(X[train], y[train], X[test])
+        for row, k in zip(p, np.where(test)[0]):
+            pairs_meta.append((tuple(row), int(y[k])))
+            pairs_dc.append(((records[k]["ph_dc"], records[k]["pd_dc"],
+                             records[k]["pa_dc"]), int(y[k])))
+            pairs_t3.append(((records[k]["ph_t3"], records[k]["pd_t3"],
+                             records[k]["pa_t3"]), int(y[k])))
+    em = eval_1x2(pairs_meta)
+    ed = eval_1x2(pairs_dc)
+    et = eval_1x2(pairs_t3)
+    print("=" * 66)
+    print("META-LOGISTIC (DC+T3+market implied) — walk-forward")
+    print("=" * 66)
+    print(f"n eval: {em['n']}")
+    print(f"{'metrik':10} {'meta':>9} {'DC':>9} {'T3':>9}")
+    for k in ("log_loss", "brier", "macro_f1", "accuracy"):
+        print(f"{k:10} {em[k]:>9.4f} {ed[k]:>9.4f} {et[k]:>9.4f}")
+    return em, ed, et
+
+
+if __name__ == "__main__":
+    run()
