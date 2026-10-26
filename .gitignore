@@ -16,6 +16,7 @@ predictions_*.csv
 best_picks*.csv
 value_bets.csv
 features_history.csv
+records_cache.jsonl
 
 # OS
 Thumbs.db

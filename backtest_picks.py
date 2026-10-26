@@ -1,17 +1,25 @@
 #!/usr/bin/env python3
-"""backtest_picks.py — backtest strategi value-bet 1X2: baseline DC vs T3 (fitur).
+"""backtest_picks.py — backtest value-bet 1X2 dengan mesin eksperimen yang dapat
+dikonfigurasi (model, de-vigging, threshold, staking).
 
-Mensimulasikan aturan yang SAMA dengan make_picks.py (signal = prob model murni,
-harga = odds opening/day-of, edge > thr) tetapi pada riwayat, sehingga kita bisa
-membandingkan profitabilitas model lama (Dixon-Coles) vs model baru (T3 fitur)
-di rel yang sama, walk-forward, tanpa bocor.
+Alur:
+1. `cache_records()` — jalankan walk-forward SEKALI (DC + T3), simpan prob &
+   odds per match ke `records_cache.jsonl`.
+2. `evaluate_strategy(records, cfg)` — simulasi bet (aturan sama dgn make_picks:
+   signal = prob model murni, harga = odds opening/day-of, edge > thr) utk satu
+   konfigurasi. Return yield/hit-rate + metrik log loss/Brier/macro-F1.
 
 Scope: pasar 1X2 (pasar utama make_picks). Corner/OU tidak disertakan di sini.
 
-Jalankan:  python backtest_picks.py [--thr 0.02] [--seasons 2023/24,2024/25]
+Jalankan:
+  python backtest_picks.py --cache-only        # bangun cache (sekali)
+  python backtest_picks.py --devig shin --thr 0.02
+  python backtest_picks.py --model blend --blend-w 0.3 --stake kelly --kelly 0.25
 """
 
 import csv
+import json
+import math
 import os
 import sys
 from datetime import datetime
@@ -20,14 +28,24 @@ import numpy as np
 
 import model_features_1x2 as mf
 from features import build_feature_rows
-from football_etl import load_fd_odds, norm3, normalize_name, parse_date, TOP5
+from football_etl import load_fd_odds, normalize_name, parse_date, TOP5
 from model_v2 import DC
 from validation import eval_1x2
 
 BASE = os.path.dirname(os.path.abspath(__file__))
-
+RECORDS = os.path.join(BASE, "records_cache.jsonl")
 YIDX = {"H": 0, "D": 1, "A": 2}
-SIDES = (("H", 0), ("D", 1), ("A", 2))
+SIDES = (0, 1, 2)
+
+DEFAULT_CFG = {
+    "model": "dc",       # dc | t3 | blend
+    "blend_w": 0.3,      # bobot T3 saat model=blend (0.3 = 0.7 DC + 0.3 T3)
+    "devig": "shin",     # none | mult | shin  (E1: shin menang)
+    "thr": 0.15,         # E4: sweep -> 0.15 terbaik
+    "stake": "flat",     # flat | kelly
+    "kelly": 0.25,
+    "calib": "none",     # none | platt
+}
 
 
 def _as_date(d):
@@ -39,7 +57,6 @@ def _as_date(d):
 
 
 def _load_hist_odds(path):
-    """Odds historis dari all_matches_clean.csv (B365 opening) antar-musim."""
     odds = {}
     if not os.path.exists(path):
         return odds
@@ -63,7 +80,6 @@ def _load_hist_odds(path):
 
 
 def _open_dec(o):
-    """Ambil harga desimal (h, d, a) dari opening (tuple atau dict)."""
     if isinstance(o, (tuple, list)) and len(o) >= 3:
         h, d, a = o[0], o[1], o[2]
     else:
@@ -79,47 +95,65 @@ def _open_dec(o):
     return (h, d, a)
 
 
-def backtest(seasons=None, thr=0.02):
+def _fair_probs(o, method):
+    """Prob market-implied de-vigged (jumlah = 1)."""
+    inv = tuple(1.0 / x for x in o)
+    S = sum(inv)
+    if method == "mult":
+        return tuple(p / S for p in inv)
+    if method == "shin":
+        # Shin (2003): harga z agar sum p_i = 1
+        def f(z):
+            tot = 0.0
+            for q in inv:
+                tot += (math.sqrt(z * z + 4 * (1 - z) * q * q / S) - z) / (2 * (1 - z))
+            return tot - 1.0
+        lo, hi = 0.0, 0.999
+        flo, fhi = f(lo), f(hi)
+        if flo * fhi > 0:
+            return tuple(p / S for p in inv)
+        for _ in range(60):
+            mid = (lo + hi) / 2.0
+            if f(mid) > 0:
+                hi = mid
+            else:
+                lo = mid
+        z = (lo + hi) / 2.0
+        out = []
+        for q in inv:
+            out.append((math.sqrt(z * z + 4 * (1 - z) * q * q / S) - z) / (2 * (1 - z)))
+        return tuple(out)
+    # none -> normalisasi implisit tetap dipakai di pemanggil via 1/o
+    return inv
+
+
+def cache_records(out_path=RECORDS):
     rows = build_feature_rows(limit=None)
-    if seasons:
-        rows = [r for r in rows if r.get("season") in seasons]
-
     X, y, dates = mf._rows_to_arrays(rows)
-    if len(rows) == 0:
-        raise RuntimeError("tidak ada baris fitur")
     months = sorted({d[:7] for d in dates})
-
-    # odds: historis (antar-musim) + live 2627 untuk match paling baru
     odds = _load_hist_odds(os.path.join(BASE, "all_matches_clean.csv"))
     for div in TOP5:
         for k, v in load_fd_odds(div, "2627").items():
             odds.setdefault(k, v.get("b365") or v.get("avg"))
 
-    st_base = {"n": 0, "wins": 0, "profit": 0.0}
-    st_t3 = {"n": 0, "wins": 0, "profit": 0.0}
-    pairs_base, pairs_t3 = [], []
-
+    rec = []
     for m in months:
         train = np.array([d < m + "-01" for d in dates])
         test = np.array([d[:7] == m for d in dates])
         if train.sum() < 1500 or test.sum() == 0:
             continue
-
         Xtr, ytr = X[train], y[train]
         Xte, yte = X[test], y[test]
         p3 = mf._fit_multinomial(Xtr, ytr, Xte)
-
         test_rows = [rows[i] for i in np.where(test)[0]]
         dc_cache = {}
         for idx, r in enumerate(test_rows):
             div, dstr = r["div"], r["date"]
-            # baseline DC: fit sekali per (divisi, bulan)
             if div not in dc_cache:
-                games = []
-                for rr in rows:
-                    if rr["div"] == div and rr["date"] < m + "-01" and rr["yh"] is not None:
-                        games.append((rr["home"], rr["away"], rr["yh"], rr["ya"],
-                                     _as_date(rr["date"])))
+                games = [g for g in (
+                    (rr["home"], rr["away"], rr["yh"], rr["ya"], _as_date(rr["date"]))
+                    for rr in rows if rr["div"] == div and rr["date"] < m + "-01"
+                    and rr["yh"] is not None)]
                 mdl = DC()
                 try:
                     mdl.fit(games[-4000:], _as_date(m + "-01"), 270.0)
@@ -134,64 +168,202 @@ def backtest(seasons=None, thr=0.02):
                 pr = mdl.probs(lh, la)
             except Exception:
                 continue
-            pbase = (pr["ph"], pr["pd"], pr["pa"])
             p3row = tuple(p3[idx])
-            yi = int(yte[idx])
-            pairs_base.append((pbase, yi))
-            pairs_t3.append((p3row, yi))
-
             o = odds.get((div, dstr, r["home"], r["away"]))
-            if o is None:
+            rec.append(dict(
+                div=div, date=dstr, season=r["season"],
+                home=r["home"], away=r["away"], yi=int(yte[idx]),
+                ph_dc=pr["ph"], pd_dc=pr["pd"], pa_dc=pr["pa"],
+                ph_t3=p3row[0], pd_t3=p3row[1], pa_t3=p3row[2],
+                o=_open_dec(o) if o else None,
+            ))
+    with open(out_path, "w", encoding="utf-8") as f:
+        for r in rec:
+            f.write(json.dumps(r) + "\n")
+    print(f"cache records: {len(rec)} -> {out_path}")
+    return len(rec)
+
+
+def load_records(path=RECORDS):
+    rec = []
+    with open(path, encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if line:
+                r = json.loads(line)
+                r["o"] = tuple(r["o"]) if r.get("o") else None
+                rec.append(r)
+    return rec
+
+
+def _logit(p):
+    p = np.clip(np.asarray(p, dtype=float), 1e-6, 1 - 1e-6)
+    return np.log(p / (1 - p))
+
+
+def _fit_logistic(F, t, iters=40):
+    """Logistic regression (intercept+d slope 1 kolom fitur) via Newton."""
+    Fb = np.column_stack([np.ones(len(t)), F])
+    w = np.zeros(Fb.shape[1])
+    for _ in range(iters):
+        z = Fb @ w
+        p = 1.0 / (1.0 + np.exp(-z))
+        g = Fb.T @ (p - t)
+        H = (Fb * (p * (1 - p))[:, None]).T @ Fb
+        try:
+            w -= np.linalg.solve(H + 1e-6 * np.eye(Fb.shape[1]), g)
+        except np.linalg.LinAlgError:
+            break
+    return w
+
+
+def _recalibrate(records):
+    """Walk-forward Platt recalibration per kelas (leak-free), pakai bulan lalu."""
+    from collections import defaultdict
+    groups = defaultdict(list)
+    for i, r in enumerate(records):
+        groups[r["date"][:7]].append(i)
+    out = [None] * len(records)
+    prior = []  # list of ((ph,pd,pa), yi)
+    for m in sorted(groups):
+        gi = groups[m]
+        if len(prior) >= 3000:
+            F = np.array([_logit((q[0], q[1], q[2])) for q, _ in prior])
+            y = np.array([yi for _, yi in prior])
+            W = []
+            for k in range(3):
+                W.append(_fit_logistic(F, (y == k).astype(float)))
+            Fg = np.array([_logit((records[i]["ph_dc"], records[i]["pd_dc"],
+                                   records[i]["pa_dc"])) for i in gi])
+            for j, i in enumerate(gi):
+                s = np.array([W[k][0] + Fg[j] @ W[k][1:] for k in range(3)])
+                s -= s.max()
+                e = np.exp(s)
+                out[i] = tuple(e / e.sum())
+        # tambahkan grup ini ke prior
+        for i in gi:
+            r = records[i]
+            prior.append(((r["ph_dc"], r["pd_dc"], r["pa_dc"]), r["yi"]))
+    return out
+
+
+def _model_probs(rec, cfg):
+    if cfg["model"] == "t3":
+        return (rec["ph_t3"], rec["pd_t3"], rec["pa_t3"])
+    if cfg["model"] == "blend":
+        w = cfg["blend_w"]
+        return (w * rec["ph_t3"] + (1 - w) * rec["ph_dc"],
+                w * rec["pd_t3"] + (1 - w) * rec["pd_dc"],
+                w * rec["pa_t3"] + (1 - w) * rec["pa_dc"])
+    return (rec["ph_dc"], rec["pd_dc"], rec["pa_dc"])
+
+
+def evaluate_strategy(records, cfg):
+    calib = _recalibrate(records) if cfg.get("calib") == "platt" else None
+    pairs = []
+    bet = {"n": 0, "wins": 0, "staked": 0.0, "profit": 0.0}
+    for idx, rec in enumerate(records):
+        pm = _model_probs(rec, cfg)
+        if calib is not None and calib[idx] is not None:
+            pm = calib[idx]
+        pairs.append((pm, rec["yi"]))
+        o = rec["o"]
+        if o is None:
+            continue
+        imp = [1.0 / x for x in o]
+        if cfg["devig"] in ("mult", "shin"):
+            fair = _fair_probs(o, cfg["devig"])
+            imp = list(fair)
+        for im in SIDES:
+            od = o[im]
+            edge = pm[im] - imp[im]
+            if edge <= cfg["thr"]:
                 continue
-            odec = _open_dec(o)
-            if odec is None:
-                continue
-            for side, im in SIDES:
-                od = odec[im]
-                imp = 1.0 / od
-                for st, pm in ((st_base, pbase[im]), (st_t3, p3row[im])):
-                    if pm - imp > thr:
-                        st["n"] += 1
-                        if im == yi:
-                            st["wins"] += 1
-                            st["profit"] += od - 1.0
-                        else:
-                            st["profit"] -= 1.0
+            if cfg["stake"] == "kelly":
+                f = (pm[im] * od - 1.0) / (od - 1.0)
+                if f <= 0:
+                    continue
+                stake = min(cfg["kelly"] * f, 0.5)
+            else:
+                stake = 1.0
+            bet["n"] += 1
+            bet["staked"] += stake
+            if im == rec["yi"]:
+                bet["wins"] += 1
+                bet["profit"] += stake * (od - 1.0)
+            else:
+                bet["profit"] -= stake
+    met = eval_1x2(pairs)
+    res = {
+        "n_bets": bet["n"],
+        "wins": bet["wins"],
+        "staked": bet["staked"],
+        "profit": bet["profit"],
+        "hit_rate": bet["wins"] / bet["n"] if bet["n"] else 0.0,
+        "yield": bet["profit"] / bet["staked"] if bet["staked"] else 0.0,
+        "log_loss": met["log_loss"],
+        "brier": met["brier"],
+        "macro_f1": met["macro_f1"],
+        "accuracy": met["accuracy"],
+        "n_eval": met["n"],
+    }
+    return res
 
-    em = eval_1x2(pairs_t3)
-    ep = eval_1x2(pairs_base)
-    return em, ep, st_base, st_t3
 
-
-def report(em, ep, st_base, st_t3):
+def report(res, baseline=None):
     print("=" * 70)
-    print("BACKTEST VALUE-BET 1X2 (walk-forward, model vs baseline)")
+    print("BACKTEST VALUE-BET 1X2 (config evaluasi)")
     print("=" * 70)
-    print(f"n uji (semua match): {em['n']}")
-    print()
-    print(f"{'metrik':12} {'T3 fitur':>10} {'DC baseline':>10}")
-    for k in ("brier", "log_loss", "macro_f1", "accuracy"):
-        print(f"{k:12} {em[k]:>10.4f} {ep[k]:>10.4f}")
-    print()
-    print(f"{'pasar bet':6} {'n bet':>6} {'hit rate':>9} {'yield':>8} {'profit':>8}")
-    for name, st in (("T3 fitur", st_t3), ("DC baseline", st_base)):
-        n = st["n"]
-        hit = st["wins"] / n if n else 0.0
-        yield_ = st["profit"] / n if n else 0.0
-        print(f"{name:6} {n:>6} {hit:>9.3f} {yield_:>8.3f} {st['profit']:>8.2f}")
+    print(f"n eval match : {res['n_eval']}")
+    print(f"n bet       : {res['n_bets']}")
+    print(f"staked      : {res['staked']:.1f}")
+    print(f"profit      : {res['profit']:.2f}")
+    print(f"hit rate    : {res['hit_rate']:.4f}")
+    print(f"yield (ROI): {res['yield']:.4%}")
+    print(f"log loss    : {res['log_loss']:.4f}")
+    print(f"brier       : {res['brier']:.4f}")
+    print(f"macro_f1    : {res['macro_f1']:.4f}")
+    print(f"accuracy    : {res['accuracy']:.4f}")
+    if baseline:
+        print("-" * 70)
+        print(f"baseline     : yield {baseline['yield']:.4%} | "
+              f"logloss {baseline['log_loss']:.4f} | "
+              f"brier {baseline['brier']:.4f} | "
+              f"F1 {baseline['macro_f1']:.4f}")
+        d_y = res["yield"] - baseline["yield"]
+        d_ll = res["log_loss"] - baseline["log_loss"]
+        verdict = "MENANG (yield naik)" if d_y > 0 and d_ll < 0.01 else (
+            "MENANG (yield naik, logloss sekadar)" if d_y > 0 else "KALAH")
+        print(f"delta yield  : {d_y:.4%} | delta logloss: {d_ll:+.4f}")
+        print(f"verdict      : {verdict}")
     print()
 
 
 def main():
-    thr = 0.02
-    seasons = None
+    cfg = dict(DEFAULT_CFG)
     args = sys.argv[1:]
+    if "--cache-only" in args:
+        cache_records()
+        return
+    if "--model" in args:
+        cfg["model"] = args[args.index("--model") + 1]
+    if "--blend-w" in args:
+        cfg["blend_w"] = float(args[args.index("--blend-w") + 1])
+    if "--devig" in args:
+        cfg["devig"] = args[args.index("--devig") + 1]
     if "--thr" in args:
-        thr = float(args[args.index("--thr") + 1])
-    if "--seasons" in args:
-        seasons = set(args[args.index("--seasons") + 1].split(","))
-    em, ep, st_base, st_t3 = backtest(seasons=seasons, thr=thr)
-    report(em, ep, st_base, st_t3)
+        cfg["thr"] = float(args[args.index("--thr") + 1])
+    if "--stake" in args:
+        cfg["stake"] = args[args.index("--stake") + 1]
+    if "--kelly" in args:
+        cfg["kelly"] = float(args[args.index("--kelly") + 1])
+    if "--calib" in args:
+        cfg["calib"] = args[args.index("--calib") + 1]
+    if not os.path.exists(RECORDS):
+        cache_records()
+    records = load_records()
+    res = evaluate_strategy(records, cfg)
+    report(res)
 
 
 if __name__ == "__main__":
