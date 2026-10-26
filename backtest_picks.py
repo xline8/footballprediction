@@ -176,6 +176,7 @@ def cache_records(out_path=RECORDS):
                 home=r["home"], away=r["away"], yi=int(yte[idx]),
                 ph_dc=pr["ph"], pd_dc=pr["pd"], pa_dc=pr["pa"],
                 ph_t3=p3row[0], pd_t3=p3row[1], pa_t3=p3row[2],
+                lam_h=lh, lam_a=la, rho=mdl.rho,
                 o=_open_dec(o) if o else None,
             ))
     with open(out_path, "w", encoding="utf-8") as f:

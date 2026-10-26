@@ -20,6 +20,7 @@ Status legend: `[ ]` open · `[x]` done
 - [ ] **T6 — Cari ulang edge bernilai dgn shin benar.** Setelah fix, tidak ada pocket ROI positif yang stabil (terbaik top5 2.6-3.5 +1.88% tapi noise temporal). Lever berikutnya: model lebih tajam sebelum ekstraksi edge (fitur/kalibrasi), bukan tuning threshold/de-vigging.
 - [ ] **T7 — Data enrichment (Phase 11) selesai dibangun** (`data_enrichment/`, `all_matches_enriched.csv`). Blocker terbuka: (a) understat tidak andal → perlu API kunci/izin atau scrape stabil; (b) fixture Eropa asli (UCL/UEL/UECL) tidak ada → cari sumber jadwal kompetisi klub Eropa; (c) hanya 1 snapshot odds → cari closing/opening odds dua waktu untuk CLV sejati. Setelah (b)/(c) tersedia, build ulang fitur `midweek_fatigue_flag` & CLV dengan data nyata.
 - [x] **T8 — Validasi fitur enriched terhadap pipeline prediksi.** Integrasikan kolom baru `all_matches_enriched.csv` (ps_*, midweek_flag, rolling_xg_diff) ke `records_cache` / meta model via walk-forward, uji gerbang LL & yield dgn protokol Phase 7/8. (validated: Phase 12 Pathway A KEEP — meta 17-fitur LL 1.0013 < 1.00170, dipromosikan sbg baseline; Pathway B gagal N≥800 → tanpa overlay live)
+- [ ] **T9 — Data blocker BTTS (Phase 13).** Odds historis Both Teams to Score TIDAK tersedia di `all_matches_enriched.csv`/`clean` (tidak ada kolom btts_yes/no). Backtest BTTS diskip; logika pricing (matrix_pricer) dipertahankan utk live shadow. Blocker: cari sumber odds BTTS historis (mis. football-data.co.uk kolom B365BTTS/B365NO) lalu ekstraksi ulang.
 
 ## Notes
 

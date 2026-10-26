@@ -255,3 +255,30 @@ tetap 0 pick (tidak ada strategi live aktif).
   prob lebih tajam → landasan lebih baik untuk ekstraksi edge ke depan.
 - **Tidak ada edge taruhan baru yang tervalidasi** (Pathway B gagal N & signifikanasi).
   Yield global baseline baru menunggu konfirmasi backtest default.
+
+---
+
+## Phase 13 — Derivative Market Expansion & Matrix Pricing
+
+Arsitektur: `matrix_pricer.py` membangun matriks bivariate Poisson DC
+(λ_h, λ_a, ρ dari records_cache) lalu **meta-calibrasi** — region Home/Draw/Away
+diskala proporsional agar sum 1X2 persis menyamai Meta Model 1.0012. Dari
+matriks diturunkan prob Over 2.5 / Under / BTTS. Self-check: marginal 1X2 == meta,
+over+under=1, btts pair=1.
+
+### Ketersediaan odds derivatif
+- **O/U 2.5**: ada (B365 54,766 match, Pinnacle 48,309) → bisa backtest.
+- **BTTS**: TIDAK ada kolom odds historis → data blocker, dicatat di TODO_AI.md;
+  logika pricing tetap ada di `matrix_pricer` untuk live shadow.
+
+### Backtest O/U 2.5 (B365, shin de-vigged 2-way, flat 1u, Over+Under)
+| thr | N | yield | hit | p_bootstrap |
+|---|---|---|---|---|
+| 0.02 | 35,412 | −5.66% | 50.2% | 1.0000 |
+| 0.05 | 22,193 | −5.98% | 50.0% | 1.0000 |
+| 0.08 | 12,479 | −6.19% | 49.8% | 1.0000 |
+
+**TIDAK ada edge**: hit ≈ 50% (base rate O/U) — model tidak menambah sinyal di
+atas pasar; yield ≈ −6% ≈ margin B365. p=1.0000 (gagal signifikansi total).
+**REVERT aturan taruhan**; **KEEP `matrix_pricer` sbg infrastruktur inti**.
+Tidak ada aktivasi live (shadow tetap 0 pick).
