@@ -1,0 +1,23 @@
+# Improvement Backlog (autonomous loop)
+
+Status legend: `[ ]` open · `[x]` done
+
+## Current state (baseline)
+
+- **Leakage control**: already enforced — walk-forward groups (`validation.walk_forward_groups`), strict `date < cutoff` in `run_wf`, state updated only post-match in `features.build_feature_rows`. Move on.
+- **Proper metrics**: `validation.eval_1x2` reports Brier, log loss, per-class log loss, accuracy. Missing **F1** (draw class is heavily imbalanced).
+- **Features**: `features.py` builds Elo / form / rolling-goal / rolling-xG / rest-day features, leak-free, but **not wired into any model** (experimental layer).
+- **Dependencies**: numpy only. No scipy, no sklearn. Any new model must be numpy-only.
+- **Freshness**: no guard for stale data/odds — pipeline silently runs on old snapshots.
+
+## Prioritized backlog
+
+- [x] **T1 — F1 scoring in validation.py.** Add per-class + macro F1 to `eval_1x2`; extend `test_core.py`. *Rationale: draws are the hard, imbalanced class; accuracy/LL alone hide it.* (validated: test_core.py hij, macro-F1==1.0 on perfect predictions)
+- [x] **T2 — Data freshness guard.** In `pipeline_orchestrator.step_check_data`, warn loudly when `all_matches_clean.csv` or the latest fixture snapshot is older than N days. Non-fatal (warning) so runs still proceed, but surfaced. *Rationale: stale data => confidently-wrong picks.* (validated: step_check_data runs, `freshness_warnings` returned, 70,425 matches loaded)
+- [x] **T3 — Numpy-only leak-free feature model.** New `model_features_1x2.py`: multinomial logistic regression over feature rows (`elo_diff`, form, rolling-goal/xG diff, rest days), trained walk-forward, evaluated against a constant-prior baseline on the same groups. Proves Elo/xG/form/rest carry signal. Does **not** change live betting outputs (kept gated). *Rationale: the one big unused asset is the feature layer.* (validated: selftest acc 1.000; walk-forward over 68,763 matches: brier 0.617 vs prior 0.651, log-loss 1.029 vs 1.076, macro-F1 0.354 vs 0.201)
+- [x] **T4 — Syntax/lint gate.** `python -m py_compile` on every module; if `ruff` present, run it. Fix anything that fails. *Rationale: cheapest regression net before any change lands.* (validated: all modules compile clean; test_core green)
+
+## Notes
+
+- The live DC/corner/value-bet path must keep producing identical outputs unless a task explicitly says a.
+- Each task ends with a runnable validation (test or CLI run) and the TODO row flipped to `[x]`.

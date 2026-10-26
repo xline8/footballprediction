@@ -46,6 +46,7 @@ def eval_1x2(pairs):
     brier = ll = acc = 0.0
     cls_ll = [0.0, 0.0, 0.0]
     cls_n = [0, 0, 0]
+    cm = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]  # [true][pred]
     for p, yi in pairs:
         n += 1
         brier += brier3(p, yi)
@@ -53,14 +54,30 @@ def eval_1x2(pairs):
         acc += accuracy3(p, yi)
         cls_ll[yi] += logloss3(p, yi)
         cls_n[yi] += 1
+        cm[yi][max(range(3), key=lambda k: p[k])] += 1
     if not n:
         return {"n": 0}
+
+    # F1 per-kelas + macro (kelas draw biasanya sangat imbalanced).
+    per_class_f1 = {}
+    for i, k in enumerate(("H", "D", "A")):
+        tp = cm[i][i]
+        fp = sum(cm[j][i] for j in range(3)) - tp
+        fn = sum(cm[i][j] for j in range(3)) - tp
+        prec = tp / (tp + fp) if (tp + fp) else 0.0
+        rec = tp / (tp + fn) if (tp + fn) else 0.0
+        per_class_f1[k] = (2 * prec * rec / (prec + rec)) if (prec + rec) else 0.0
+    macro_f1 = (sum(per_class_f1.values()) / 3.0
+                if per_class_f1 else float("nan"))
+
     return {
         "n": n,
         "brier": brier / n,
         "log_loss": ll / n,
         "accuracy": acc / n,
         "brier_benchmark": 0.6667,  # prediksi konstan (1/3,1/3,1/3)
+        "macro_f1": macro_f1,
+        "per_class_f1": per_class_f1,
         "per_class_log_loss": {
             k: (cls_ll[i] / cls_n[i] if cls_n[i] else float("nan"))
             for i, k in enumerate(("H", "D", "A"))

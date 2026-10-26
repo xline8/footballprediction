@@ -96,11 +96,24 @@ class PipelineOrchestrator:
         log(f"  OK Data OK: {total_matches:,} matches loaded", "INFO")
         self.stats['matches_loaded'] = total_matches
 
+        # Freshness guard (non-fatal): data/snapshot terlalu tua -> peringatan.
+        warnings = []
+        now_ts = time.time()
+        age_days = lambda p: (now_ts - os.path.getmtime(p)) / 86400.0 if os.path.exists(p) else None
+        match_age = age_days(os.path.join(BASE_DIR, "all_matches_clean.csv"))
+        if match_age is not None and match_age > 7:
+            warnings.append(f"all_matches_clean.csv berumur {match_age:.1f} hari (>7)")
+        if match_age is None:
+            warnings.append("all_matches_clean.csv tidak ditemukan")
+        for w in warnings:
+            log(f"  ! FRESHNESS: {w}", "WARN")
+
         return {
             'all_matches_clean': True,
             'total_matches': total_matches,
             'data_files': data_files,
-            'divisions': divisions
+            'divisions': divisions,
+            'freshness_warnings': warnings
         }
 
     def step_fit_models(self) -> dict:

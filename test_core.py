@@ -60,6 +60,9 @@ def test_scoring():
     check("eval n", sm["n"] == 3)
     check("eval brier >= 0", sm["brier"] >= 0.0)
     check("eval log_loss >= 0", sm["log_loss"] >= 0.0)
+    # semua prediksi = benar => F1 sempurna
+    check("eval macro_f1 sempurna", abs(sm["macro_f1"] - 1.0) < 1e-9)
+    check("eval per_class_f1 ada", set(sm["per_class_f1"]) == {"H", "D", "A"})
     cal = calibration_table([(0.8, 1), (0.7, 0), (0.9, 1)])
     check("calibration menghasilkan bin", len(cal) >= 1)
 
