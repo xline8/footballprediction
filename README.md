@@ -42,9 +42,11 @@ the code is structured to keep that conclusion honest.
   calibrated matrix.
 - **Corner model** (`model_corners_v3.py`): a Poisson model that predicts team
   corner counts and corner over/under lines from rolling shot statistics
-  (fitted parameters in `ta/corner_params.json`). The 1X2 market is proven
-  efficient, so corners are the most promising untested place to look for
-  exploitable value.
+  (fitted parameters in `ta/corner_params.json`). It is built and calibrated:
+  on walk-forward test seasons it beats the league base-rate on log loss,
+  Brier, MAE, and RMSE. It is **awaiting historical corner odds** for a final
+  ROI backtest — the ingestion scaffolding (`data_enrichment/fetch_corner_odds.py`)
+  is in place and keys off acquired data (API or external CSV).
 - **Decoupled policy engine**: betting decisions are filtered *after* the model
   (edge thresholds, overlays, staking) so calibration stays intact. Candidate
   policies must clear the dual gate before they can go live.
