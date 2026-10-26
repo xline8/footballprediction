@@ -102,11 +102,17 @@ def _rest_days(last_date, d):
     return (d - last_date).days if last_date else None
 
 
-def build_feature_rows(limit=None):
+def build_feature_rows(limit=None, pending=None):
     """Bangun baris fitur untuk semua match (terurut tanggal), anti-leakage.
 
+    Args:
+        limit: batasi jumlah match terakhir (untuk eksperimen kecil).
+        pending: list dict {div, date, home, away} untuk laga mendatang;
+            baris fiturnya dihitung dari state SETELAH seluruh riwayat
+            (bukan bocor, karena hasilnya belum ada) dan ditambahkan di akhir.
     Returns:
-        list of dict: fitur pra-match + hasil (yh, ya, ftr).
+        list of dict: fitur pra-match + hasil (yh, ya, ftr) untuk match,
+        dan tanpa hasil untuk laga pending.
     """
     xg = _load_xg_map()
     from football_etl import MatchCache
@@ -173,6 +179,30 @@ def build_feature_rows(limit=None):
             xg_form[away].append((xga, xga - xgh))
         last_date[home] = d
         last_date[away] = d
+
+    # Laga pending (mendatang): fitur dihitung dari state riwayat terkini.
+    if pending:
+        for p in pending:
+            d = p["date"]
+            if not isinstance(d, date):
+                d = parse_date(d)
+            if d is None:
+                continue
+            home, away = p["home"], p["away"]
+            fh, fa = _feats(home), _feats(away)
+            rows.append({
+                "div": p.get("div"), "date": d.isoformat(),
+                "season": p.get("season"), "home": home, "away": away,
+                "yh": None, "ya": None, "ftr": None,
+                "elo_h": fh["elo"], "elo_a": fa["elo"],
+                "elo_diff": fh["elo"] - fa["elo"],
+                "form_pts_h": fh["form_pts"], "form_pts_a": fa["form_pts"],
+                "goals_diff_h": fh["goals_diff_avg"],
+                "goals_diff_a": fa["goals_diff_avg"],
+                "xg_diff_h": fh["xg_diff_avg"], "xg_diff_a": fa["xg_diff_avg"],
+                "rest_h": fh["rest_days"], "rest_a": fa["rest_days"],
+                "n_played_h": fh["n_played"], "n_played_a": fa["n_played"],
+            })
 
     return rows
 

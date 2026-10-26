@@ -50,22 +50,18 @@ def _rows_to_arrays(rows):
     return X, y, dates
 
 
-def _fit_multinomial(Xtr, ytr, Xte, l2=1e-3, epochs=120, lr0=0.5):
-    """Multi-class logistic regression via gradient descent. numpy-only."""
+def _fit_params(Xtr, ytr, l2=1e-3, epochs=120, lr0=0.5):
+    """Fit multinomial logistic regression. Mengembalikan par. not model."""
     # imputasi + standarisasi HANYA dari train
     med = np.nanmedian(Xtr, axis=0)
     med = np.where(np.isnan(med), 0.0, med)
     Xtr = np.where(np.isnan(Xtr), med, Xtr)
-    Xte = np.where(np.isnan(Xte), med, Xte)
 
     mu = Xtr.mean(axis=0)
     sd = Xtr.std(axis=0)
     sd = np.where(sd < 1e-9, 1.0, sd)
     Xtr = (Xtr - mu) / sd
-    Xte = (Xte - mu) / sd
-
     Xtr = np.column_stack([np.ones(Xtr.shape[0]), Xtr])  # intercept
-    Xte = np.column_stack([np.ones(Xte.shape[0]), Xte])
 
     d = Xtr.shape[1]
     K = 3
@@ -76,19 +72,54 @@ def _fit_multinomial(Xtr, ytr, Xte, l2=1e-3, epochs=120, lr0=0.5):
         scores -= scores.max(axis=1, keepdims=True)
         exp = np.exp(scores)
         sm = exp / exp.sum(axis=1, keepdims=True)
-        loss = -np.log(sm[np.arange(tr), ytr] + 1e-12).mean()
         onehot = np.zeros((tr, K))
         onehot[np.arange(tr), ytr] = 1.0
         grad = Xtr.T @ (sm - onehot) / tr
         grad[1:, :] += 2.0 * l2 * W[1:, :]  # L2 non-intercept
         lr = lr0 * (0.8 ** (it // 30))
         W -= lr * grad
-        if it % 40 == 0:
-            pass  # (loss print opsional)
-    scores_te = Xte @ W
-    scores_te -= scores_te.max(axis=1, keepdims=True)
-    exp_te = np.exp(scores_te)
-    return exp_te / exp_te.sum(axis=1, keepdims=True)
+    return med, mu, sd, W
+
+
+def _softmax_scores(X, med, mu, sd, W):
+    """Terapkan model (med,mu,sd,W) pada baris baru; imputasi ts standarisasi dari train."""
+    X = np.where(np.isnan(X), med, X)
+    X = (X - mu) / sd
+    X = np.column_stack([np.ones(X.shape[0]), X])
+    s = X @ W
+    s -= s.max(axis=1, keepdims=True)
+    e = np.exp(s)
+    return e / e.sum(axis=1, keepdims=True)
+
+
+def _fit_multinomial(Xtr, ytr, Xte, l2=1e-3, epochs=120, lr0=0.5):
+    """Multi-class logistic regression via gradient descent. numpy-only."""
+    med, mu, sd, W = _fit_params(Xtr, ytr, l2, epochs, lr0)
+    return _softmax_scores(Xte, med, mu, sd, W)
+
+
+class FitModel:
+    """Predictor siap-pakai, dilatih pada seluruh riwayat (untuk prediksi live).
+
+    Tidak ada kebocoran dalam penggunaan produksi: seluruh data hingga hari ini
+    adalah masa lalu. Evaluasi yang membuktikan sinyal tetap memakai walk-forward.
+    """
+
+    def __init__(self, Xtr, ytr, l2=1e-3, epochs=120, lr0=0.5):
+        self.med, self.mu, self.sd, self.W = _fit_params(
+            Xtr, ytr, l2, epochs, lr0)
+
+    def predict(self, Xte) -> np.ndarray:
+        return _softmax_scores(Xte, self.med, self.mu, self.sd, self.W)
+
+    def predict_vector(self, vec: dict) -> tuple:
+        """vec: dict {nama_fitur: nilai} -> (ph, pd, pa)."""
+        row = np.full((1, len(FEATURES)), np.nan)
+        for j, f in enumerate(FEATURES):
+            v = vec.get(f)
+            if v is not None:
+                row[0, j] = float(v)
+        return tuple(self.predict(row)[0])
 
 
 def _month_key(date_iso):

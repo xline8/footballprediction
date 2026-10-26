@@ -11,6 +11,12 @@ venv/
 # Local Claude settings (not part of the project)
 .claude/
 
+# Model output artifacts (regenerable — pemakai menjalankan pipeline sendiri)
+predictions_*.csv
+best_picks*.csv
+value_bets.csv
+features_history.csv
+
 # OS
 Thumbs.db
 .DS_Store

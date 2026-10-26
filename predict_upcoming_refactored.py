@@ -28,6 +28,8 @@ from football_etl import (
 from data_loader import get_loader
 from model_state import ModelState
 from model_v2 import DC, norm3, norm2, blend3, blend2  # Reuse existing implementation
+from features import build_feature_rows
+import model_features_1x2 as mf  # shadow T3 (fitur), side-by-side
 
 
 def generate_predictions(force_refit: bool = False, output_file: str = None) -> dict:
@@ -62,6 +64,35 @@ def generate_predictions(force_refit: bool = False, output_file: str = None) -> 
     odds = _load_fd_odds(TODAY := datetime.now().date())
 
     print(f"  Loaded {len(fixtures)} fixtures, {len(odds)} odds entries")
+
+    # --- Shadow T3 (fitur): prediksi tambahan, TIDAK mengubah baseline ---
+    t3_map = {}
+    try:
+        pend = []
+        for fx in fixtures:
+            d = fx["date"]
+            if isinstance(d, str):
+                d = datetime.strptime(d[:10], "%Y-%m-%d").date()
+            elif hasattr(d, "date") and not isinstance(d, date):
+                d = d.date()
+            pend.append({"div": fx["div"], "date": d,
+                         "home": fx["home"], "away": fx["away"]})
+        hist_plus = build_feature_rows(limit=None, pending=pend)
+        pen = len(pend)
+        hist = hist_plus[:-pen] if pen else hist_plus
+        pend_rows = hist_plus[-pen:] if pen else []
+        Xh, yh, _ = mf._rows_to_arrays(hist)
+        if len(yh) >= 500:
+            model3 = mf.FitModel(Xh, yh)
+            for fx, pf in zip(pend, pend_rows):
+                px = model3.predict_vector(pf)
+                ds = fx["date"].isoformat() if isinstance(fx["date"], date) else str(fx["date"])
+                t3_map[(fx["div"], ds, fx["home"], fx["away"])] = px
+            print(f"  Shadow T3 siap untuk {len(t3_map)} fixtures")
+        else:
+            print("  ! Shadow T3 dilewati: data riwayat terlalu sedikit")
+    except Exception as e:
+        print(f"  ! Shadow T3 gagal (dilewati): {e}")
 
     # Process fixtures per division
     out_rows = []
@@ -120,12 +151,16 @@ def generate_predictions(force_refit: bool = False, output_file: str = None) -> 
                 pob = blend2(pr['over'], mou, WOU) if mou is not None else None
 
                 oH, oD, oA = o.get('B365H'), o.get('B365D'), o.get('B365A')
+                px = t3_map.get((div, date_str, fx["home"], fx["away"]))
                 out_rows.append({
                     "div": div, "date": date_str, "time": fx.get('time', ''),
                     "home": fx["home"], "away": fx["away"],
                     "lam_h": round(lh, 3), "lam_a": round(la, 3),
                     "ph_dc": round(pr['ph'], 4), "pd_dc": round(pr['pd'], 4),
                     "pa_dc": round(pr['pa'], 4),
+                    "ph_t3": None if px is None else round(px[0], 4),
+                    "pd_t3": None if px is None else round(px[1], 4),
+                    "pa_t3": None if px is None else round(px[2], 4),
                     "ph_bl": None if pb is None else round(pb[0], 4),
                     "pd_bl": None if pb is None else round(pb[1], 4),
                     "pa_bl": None if pb is None else round(pb[2], 4),
