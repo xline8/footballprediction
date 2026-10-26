@@ -282,3 +282,34 @@ over+under=1, btts pair=1.
 atas pasar; yield ≈ −6% ≈ margin B365. p=1.0000 (gagal signifikansi total).
 **REVERT aturan taruhan**; **KEEP `matrix_pricer` sbg infrastruktur inti**.
 Tidak ada aktivasi live (shadow tetap 0 pick).
+
+---
+
+## Phase 15 — Corners Model Integration & Alpha Validation
+
+Evaluasi `model_corners_v3.py` (Poisson corner, mu berbasis rolling shots,
+gamma*/r* di-fit di validasi 19/20–20/21). **Test** walk-forward 2021/22–2025/26,
+n=8,906.
+
+### Step 1 — Predictive calibration (murni, tanpa odds)
+| metrik | base-rate liga (CB) | shot-based (CS) |
+|---|---|---|
+| Log loss (NLL total corners) | 2.6169 | **2.6087** |
+| Brier Over 9.5 | 0.2483 | **0.2474** |
+| MAE total corners | 2.669 | **2.656** |
+| RMSE per liga (E0/D1/I1/SP1/F1) | 3.39/3.33/3.38/3.30/3.32 | **3.38/3.32/3.38/3.28/3.32** |
+
+CS mengalahkan CB pada SEMUA metrik & semua liga (konsisten, kecil). Bucket
+kalibrasi P(total>9.5): akt/pred 0.46/0.46, 0.55/0.54, 0.60/0.62 → cukup
+terkalibrasi. **Model punya sinyal nyata tapi kecil** (LL 2.61 — jauh dari
+ideal; model prob tetap berguna utk ranking/risk).
+
+### Step 2 — Backtest ROI
+**TIDAK dapat dieksekusi**: odds historis Corners tidak tersedia di
+`all_matches_enriched.csv` maupun `clean` (blocker T10). Wiring ke
+`backtest_picks.py` + de-vigging + sweep threshold ditunda sampai sumber odds
+ada. **Tidak ada aktivasi shadow** (Step 3/4 N/A).
+
+### Status
+KEEP `model_corners_v3.py` sbg infrastruktur; blocker T10 dicatat; tanpa alpha
+yang tervalidasi.
