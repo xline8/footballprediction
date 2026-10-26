@@ -1,0 +1,4 @@
+numpy==2.5.3
+
+# scipy opsional — hanya dibutuhkan untuk eksperimen statistik lanjutan.
+# scipy==1.14.1

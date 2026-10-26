@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Caches (rebuildable)
+.cache/
+
+# Local Claude settings (not part of the project)
+.claude/
+
+# OS
+Thumbs.db
+.DS_Store

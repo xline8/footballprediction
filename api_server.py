@@ -1,0 +1,395 @@
+#!/usr/bin/env python3
+"""api_server.py - REST API untuk pipeline prediksi sepakbola.
+
+Endpoints:
+  GET /api/status      - Pipeline status
+  GET /api/predictions - Upcoming match predictions
+  GET /api/picks       - Current picks
+  GET /api/models      - Model status per league
+  GET /api/odds        - Current odds data
+  GET /api/corners     - Corner predictions
+
+Usage:
+  python api_server.py
+  python api_server.py --port 8000
+"""
+
+import os
+import sys
+import json
+import csv
+from datetime import datetime, date
+from typing import List, Dict, Optional
+from pathlib import Path
+
+# Setup path
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, BASE_DIR)
+
+from fastapi import FastAPI, HTTPException, Query
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel
+
+from football_etl import MatchCache, get_config, load_fixtures, load_fd_odds, TOP5
+from data_loader import get_loader
+from model_state import ModelState
+
+app = FastAPI(title="Football Prediction API", version="2.0")
+loader = get_loader()
+cache = MatchCache()
+
+
+# --- Models ---
+class Prediction(BaseModel):
+    div: str
+    date: str
+    home: str
+    away: str
+    ph_dc: float
+    pd_dc: float
+    pa_dc: float
+    ph_bl: Optional[float] = None
+    pd_bl: Optional[float] = None
+    pa_bl: Optional[float] = None
+    p_over_dc: float
+    p_over_bl: Optional[float] = None
+    b365h: Optional[float] = None
+    b365d: Optional[float] = None
+    b365a: Optional[float] = None
+
+
+class Pick(BaseModel):
+    div: str
+    date: str
+    home: str
+    away: str
+    market: str
+    side: str
+    odds_open: float
+    edge: float
+    status: str
+
+
+class ModelStatus(BaseModel):
+    div: str
+    initialized: bool
+    last_fit: Optional[str] = None
+    n_teams: int
+    is_stale: bool
+
+
+# --- Helper Functions ---
+def load_predictions() -> List[Dict]:
+    """Load predictions from CSV."""
+    pred_file = os.path.join(BASE_DIR, "predictions_upcoming.csv")
+    if not os.path.exists(pred_file):
+        return []
+
+    with open(pred_file, 'r', encoding='utf-8') as f:
+        return list(csv.DictReader(f))
+
+
+def load_picks(status: str = None) -> List[Dict]:
+    """Load picks from ledger."""
+    picks_file = os.path.join(BASE_DIR, "ledger", "picks.jsonl")
+    if not os.path.exists(picks_file):
+        return []
+
+    with open(picks_file, 'r', encoding='utf-8') as f:
+        picks = [json.loads(line) for line in f if line.strip()]
+
+    if status:
+        picks = [p for p in picks if p.get('status') == status]
+
+    return picks
+
+
+def load_corner_predictions() -> List[Dict]:
+    """Load corner predictions from CSV."""
+    corner_file = os.path.join(BASE_DIR, "predictions_corners.csv")
+    if not os.path.exists(corner_file):
+        return []
+
+    with open(corner_file, 'r', encoding='utf-8') as f:
+        return list(csv.DictReader(f))
+
+
+def load_odds_data() -> List[Dict]:
+    """Load current odds from FD raw files."""
+    odds_data = []
+    today = datetime.now().date()
+
+    for div in TOP5:
+        odds_map = load_fd_odds(div, "2627")
+        for key, vals in odds_map.items():
+            # key = (div, date_iso, home, away)
+            try:
+                dt = datetime.strptime(key[1], "%Y-%m-%d").date()
+            except (ValueError, TypeError):
+                continue
+
+            entry = {
+                'div': key[0],
+                'date': key[1],
+                'home': key[2],
+                'away': key[3],
+            }
+
+            if vals.get('b365'):
+                entry['b365'] = {'h': vals['b365'][0], 'd': vals['b365'][1], 'a': vals['b365'][2]}
+            if vals.get('avg'):
+                entry['avg'] = {'h': vals['avg'][0], 'd': vals['avg'][1], 'a': vals['avg'][2]}
+            if vals.get('ou'):
+                entry['over_under'] = {'over': vals['ou'][0], 'under': vals['ou'][1]}
+
+            odds_data.append(entry)
+
+    return odds_data
+
+
+# --- Endpoints ---
+
+@app.get("/api/status")
+async def get_pipeline_status():
+    """Get overall pipeline status."""
+    status = {
+        'timestamp': datetime.now().isoformat(),
+        'data': {
+            'total_matches': len(cache.matches),
+            'divisions': list(cache.by_div.keys()),
+        },
+        'models': {},
+        'predictions': {
+            'exists': os.path.exists(os.path.join(BASE_DIR, 'predictions_upcoming.csv')),
+            'file_size_kb': round(os.path.getsize(os.path.join(BASE_DIR, 'predictions_upcoming.csv')) / 1024, 2)
+            if os.path.exists(os.path.join(BASE_DIR, 'predictions_upcoming.csv')) else 0
+        },
+        'picks': {},
+        'cache': {}
+    }
+
+    # Model status
+    for div in TOP5:
+        state = ModelState(div)
+        state.load()
+        status['models'][div] = {
+            'initialized': state._initialized,
+            'last_fit': state.last_fit_date.isoformat() if state.last_fit_date else None,
+            'n_teams': len(state.get_known_teams()),
+            'is_stale': state.is_stale(datetime.now().date())
+        }
+
+    # Picks count
+    picks_file = os.path.join(BASE_DIR, 'ledger', 'picks.jsonl')
+    if os.path.exists(picks_file):
+        with open(picks_file, 'r') as f:
+            picks = [json.loads(line) for line in f if line.strip()]
+        pending = sum(1 for p in picks if p.get('status') == 'pending')
+        graded = sum(1 for p in picks if p.get('status') in ('win', 'loss', 'push'))
+        status['picks'] = {'total': len(picks), 'pending': pending, 'graded': graded}
+    else:
+        status['picks'] = {'total': 0, 'pending': 0, 'graded': 0}
+
+    return JSONResponse(content=status)
+
+
+@app.get("/api/predictions", response_model=List[Prediction])
+async def get_predictions(
+    div: str = None,
+    date: str = None,
+    limit: int = 100
+):
+    """Get upcoming match predictions.
+
+    Parameters:
+      - div: Filter by division (E0, D1, I1, SP1, F1)
+      - date: Filter by date (YYYY-MM-DD)
+      - limit: Max results (default: 100)
+    """
+    rows = load_predictions()
+
+    if div:
+        rows = [r for r in rows if r['div'] == div]
+
+    if date:
+        rows = [r for r in rows if r['date'] == date]
+
+    # Convert to proper format
+    predictions = []
+    for r in rows[:limit]:
+        pred = {
+            'div': r['div'],
+            'date': r['date'],
+            'home': r['home'],
+            'away': r['away'],
+            'ph_dc': float(r['ph_dc']) if r.get('ph_dc') else None,
+            'pd_dc': float(r['pd_dc']) if r.get('pd_dc') else None,
+            'pa_dc': float(r['pa_dc']) if r.get('pa_dc') else None,
+            'ph_bl': float(r['ph_bl']) if r.get('ph_bl') else None,
+            'pd_bl': float(r['pd_bl']) if r.get('pd_bl') else None,
+            'pa_bl': float(r['pa_bl']) if r.get('pa_bl') else None,
+            'p_over_dc': float(r['p_over_dc']) if r.get('p_over_dc') else None,
+            'p_over_bl': float(r['p_over_bl']) if r.get('p_over_bl') else None,
+            'b365h': float(r['b365h']) if r.get('b365h') else None,
+            'b365d': float(r['b365d']) if r.get('b365d') else None,
+            'b365a': float(r['b365a']) if r.get('b365a') else None,
+        }
+        predictions.append(pred)
+
+    return JSONResponse(content=predictions)
+
+
+@app.get("/api/predictions/{div}/{date_str}")
+async def get_prediction_for_match(
+    div: str,
+    date_str: str,
+    home: str,
+    away: str
+):
+    """Get exact match prediction."""
+    rows = load_predictions()
+
+    for r in rows:
+        if r['div'] == div and str(r['date']) == str(date_str) and r['home'] == home and r['away'] == away:
+            return JSONResponse(content={
+                'div': r['div'],
+                'date': r['date'],
+                'home': r['home'],
+                'away': r['away'],
+                'ph_dc': float(r['ph_dc']) if r['ph_dc'] else None,
+                'pd_dc': float(r['pd_dc']) if r['pd_dc'] else None,
+                'pa_dc': float(r['pa_dc']) if r['pa_dc'] else None,
+                'ph_bl': float(r['ph_bl']) if r['ph_bl'] else None,
+                'pd_bl': float(r['pd_bl']) if r['pd_bl'] else None,
+                'pa_bl': float(r['pa_bl']) if r['pa_bl'] else None,
+                'b365h': float(r['b365h']) if r.get('b365h') else None,
+                'b365d': float(r['b365d']) if r.get('b365d') else None,
+                'b365a': float(r['b365a']) if r.get('b365a') else None,
+            })
+
+    raise HTTPException(status_code=404, detail="Match not found")
+
+
+@app.get("/api/picks", response_model=List[Pick])
+async def get_picks(
+    status: str = "pending",
+    limit: int = 100
+):
+    """Get current picks.
+
+    Parameters:
+      - status: Filter by status (pending, win, loss, push)
+      - limit: Max results
+    """
+    picks = load_picks(status=status)
+
+    result = []
+    for p in picks[:limit]:
+        result.append({
+            'div': p['div'],
+            'date': p['date'],
+            'home': p['home'],
+            'away': p['away'],
+            'market': p['market'],
+            'side': p['side'],
+            'odds_open': float(p['odds_open']) if p.get('odds_open') else None,
+            'edge': float(p['edge']) if p.get('edge') else None,
+            'status': p.get('status', 'pending')
+        })
+
+    return JSONResponse(content=result)
+
+
+@app.get("/api/models")
+async def get_models():
+    """Get model status for all TOP5 leagues."""
+    models = []
+    for div in TOP5:
+        state = ModelState(div)
+        state.load()
+        models.append({
+            'div': div,
+            'initialized': state._initialized,
+            'last_fit': state.last_fit_date.isoformat() if state.last_fit_date else None,
+            'n_teams': len(state.get_known_teams()),
+            'n_matches_trained': state.n_matches_trained,
+            'rho': state.rho,
+            'home_advantage': round(state.home_advantage, 4) if state.home_advantage else None,
+            'is_stale': state.is_stale(datetime.now().date())
+        })
+    return JSONResponse(content=models)
+
+
+@app.get("/api/models/{div}/teams")
+async def get_model_teams(div: str):
+    """Get team ratings for a specific division."""
+    if div not in TOP5:
+        raise HTTPException(status_code=404, detail=f"Division {div} not in TOP5")
+
+    state = ModelState(div)
+    if not state.load():
+        raise HTTPException(status_code=404, detail=f"No model state for {div}")
+
+    teams = []
+    for team in state.get_known_teams():
+        teams.append({
+            'team': team,
+            'attack': round(state.attack.get(team, 0), 4),
+            'defense': round(state.defense.get(team, 0), 4)
+        })
+
+    return JSONResponse(content={
+        'div': div,
+        'n_teams': len(teams),
+        'teams': teams
+    })
+
+
+@app.get("/api/odds")
+async def get_odds(div: str = None):
+    """Get current odds data.
+
+    Parameters:
+      - div: Filter by division (optional)
+    """
+    odds = load_odds_data()
+    if div:
+        odds = [o for o in odds if o['div'] == div]
+    return JSONResponse(content=odds)
+
+
+@app.get("/api/corners")
+async def get_corner_predictions(div: str = None, limit: int = 100):
+    """Get corner predictions."""
+    rows = load_corner_predictions()
+
+    if div:
+        rows = [r for r in rows if r['Div'] == div]
+
+    predictions = []
+    for r in rows[:limit]:
+        predictions.append({
+            'div': r.get('Div', ''),
+            'date': r.get('Date', ''),
+            'home': r.get('HomeTeam', ''),
+            'away': r.get('AwayTeam', ''),
+            'hc_pred': float(r.get('HC_pred', 0)) if r.get('HC_pred') else None,
+            'ac_pred': float(r.get('AC_pred', 0)) if r.get('AC_pred') else None,
+        })
+
+    return JSONResponse(content=predictions)
+
+
+@app.get("/api/health")
+async def health_check():
+    """Simple health check."""
+    return JSONResponse(content={
+        'status': 'healthy',
+        'timestamp': datetime.now().isoformat()
+    })
+
+
+# --- Main ---
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
