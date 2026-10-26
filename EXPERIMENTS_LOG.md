@@ -15,6 +15,28 @@ Rule: signal = pure model prob, edge = `p − 1/odds` > 0.02, flat 1u stake, 1X2
 
 Goal: yield > 0 while not ruining log loss / Brier. Secondary: lower log loss.
 
+## ⚠️ KOREKSI PENTING (2026-10-26) — de-vigging Shin di-fix
+
+Bug ditemukan di `_fair_probs` cabang shin: bisection terbalik → z≈0.999,
+prob fair **jumlah = ~0.52 (bukan 1.0)**, sehingga implied prob terlalu rendah dan
+edge terinflasi palsu. Fix: arah bisection dibalik → jumlah prob = 1.0 (tervalidasi
+2000 triple odds acak, dan konsisten dgn `mult`).
+
+**Dampak pada semua hasil berbasis shin (Phase 3/4/5):**
+- Pocket **Phase 5 S1 (+3.23% flat, 1340 bets) TIDAK bertahan**: dgn shin benar,
+  filter top5 favorit 1.2-1.5 edge [0.20,0.22) → **n=0** (edge sebesar itu hampir
+  tidak pernah terjadi pada favorit berat). Hasil sebelumnya adalah artefak bug.
+- Segmen positif terbaik setelah fix: top5 odds 2.6–3.5 = **+1.88%** (n=512), tapi
+  **tidak stabil temporal** (profit terpusat di sampel kecil 2017/2020/2021/2025;
+  2023–2026 negatif) → noise, bukan edge.
+- Yield global model meta (thr 0.02, shin fixing): **−3.77%** (n=17,093),
+  vs DC −9.01% (n=71,015). Model meta jelas lebih baik dari DC; yield global masih
+  negatif → odds B365 efisien.
+- Kesimpulan: **tidak ada pocket ROI positif yang tervalidasi** setelah koreksi.
+  Filter live (`make_picks_live.py`) sengaja dibiarkan menghasilkan **0 pick** agar
+  tidak mengirim uang pada edge phantom, sampai strategi dgn edge benar divalidasi
+  ulang.
+
 ## Progress
 
 | # | hypothesis | config | yield | log loss | brier | verdict |
@@ -70,3 +92,6 @@ S1 detail: **Filtered Value Bet Strategy** — top5 leagues (E0/D1/I1/SP1/F1), o
 - fractional Kelly (0.25): **yield +4.75%** on 145 bets, hit 76.6%.
 - Positive across every calendar year 2021–2025 (yearly ~+4–5%, cumulative yield positive throughout) → stable pocket.
 - Implemented in `backtest_picks.py --filter [--kelly]`.
+
+⚠️ **DIVALIDASI (2026-10-26)** oleh fix de-vigging shin (lihat KOREKSI di atas):
+dgn shin benar, filter ini n=0 → hasil +3.23% adalah artefak bug. Jangan dipakai.

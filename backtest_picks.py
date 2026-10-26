@@ -103,21 +103,22 @@ def _fair_probs(o, method):
         return tuple(p / S for p in inv)
     if method == "shin":
         # Shin (2003): harga z agar sum p_i = 1
+        # q_i = 1/o_i, W = sum(q_i). p_i = (sqrt(z^2+4(1-z) q_i^2/W) - z)/(2(1-z))
         def f(z):
             tot = 0.0
             for q in inv:
                 tot += (math.sqrt(z * z + 4 * (1 - z) * q * q / S) - z) / (2 * (1 - z))
             return tot - 1.0
+        # f(0) = sqrt(S)-1 > 0; f(0.999) < 0 -> akar unik di (0, 0.999)
         lo, hi = 0.0, 0.999
-        flo, fhi = f(lo), f(hi)
-        if flo * fhi > 0:
+        if f(lo) <= 0.0 or f(hi) >= 0.0:
             return tuple(p / S for p in inv)
-        for _ in range(60):
+        for _ in range(80):
             mid = (lo + hi) / 2.0
-            if f(mid) > 0:
-                hi = mid
-            else:
+            if f(mid) > 0.0:
                 lo = mid
+            else:
+                hi = mid
         z = (lo + hi) / 2.0
         out = []
         for q in inv:
