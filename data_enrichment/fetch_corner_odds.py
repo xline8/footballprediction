@@ -1,19 +1,17 @@
-"""fetch_corner_odds.py — ingestion scaffolding untuk odds Corners (Phase 16).
+"""fetch_corner_odds.py — ingestion odds Corners (Phase 16) + merge ke records.
 
-Proyek sementara terblokir oleh tidak adanya odds historis Corners (blocker
-T10). Modul ini menyiapkan pipa pemasukan data agar begitu sumber odds
-(API-Football / Sportmonks / dump CSV eksternal) tersedia, backtest Phase 15
-dapat langsung dieksekusi.
-
-Dua jalur:
+Modul ini adalah tujuan akhir pipa pemasukan odds Corner & BTTS:
   1. parse_corner_odds_csv — baca file eksternal `external_corner_odds.csv`
      (kolom: date, home_team, away_team, corner_line, odds_over, odds_under;
      optional `div`). Tangani baris kosong/NaN dgn to_float.
   2. merge_to_records — left-join ke records (records_cache.jsonl) memakai
      key (div, date, home_norm, away_norm), fallback (date, home_norm,
      away_norm) bila tidak ada div.
-+ MockCornerOddsClient — placeholder klien API (belum diimplementasikan
-hingga kunci API tersedia).
+
+Sumber data nyata kini via `api_football_client.ApiFootballClient`
+(API-Football v3) — menggantikan placeholder mock lama. Output pipa API
+(dry-run / fetch musiman) menghasilkan `external_corner_odds.csv`, yang
+langsung bisa diproses oleh parse_corner_odds_csv + merge_to_records.
 """
 
 from __future__ import annotations
@@ -71,23 +69,6 @@ def parse_corner_odds_csv(path: str | Path) -> tuple[list[CornerOddsRow], int]:
     return rows, skipped
 
 
-class MockCornerOddsClient:
-    """Placeholder klien API odds (API-Football / Sportmonks).
-
-    Ganti dengan implementasi nyata saat kunci API tersedia; pertahankan
-    signature supaya pemanggil tidak berubah.
-    """
-
-    def __init__(self, lines: Sequence[float] = (9.5, 10.5, 11.5)):
-        self.lines = list(lines)
-
-    def fetch_odds(self, league: Optional[str] = None) -> list[CornerOddsRow]:
-        """Mock: kembalikan sampel kecil; jangan dipakai untuk produksi."""
-        return [
-            CornerOddsRow(date="2026-04-15", home="manchester city",
-                          away="liverpool", line=9.5,
-                          odds_over=1.90, odds_under=1.90, div=league),
-        ]
 
 
 def _key(row: CornerOddsRow) -> tuple:

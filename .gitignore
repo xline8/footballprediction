@@ -19,6 +19,10 @@ venv/
 *.pkl
 *.joblib
 
+# API-Football raw cache + sample output (rebuildable)
+data_enrichment/raw/api_football_cache/
+data_enrichment/sample_api_odds.csv
+
 # Environment / secrets
 .env
 
