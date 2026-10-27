@@ -47,6 +47,15 @@ the code is structured to keep that conclusion honest.
   Brier, MAE, and RMSE. It is **awaiting historical corner odds** for a final
   ROI backtest — the ingestion scaffolding (`data_enrichment/fetch_corner_odds.py`)
   is in place and keys off acquired data (API or external CSV).
+- **Organic odds capture** (`daily_api_capture.py`): each day, pulls *today's*
+  top-5 league fixtures and their Corners Over/Under and Both Teams Score odds
+  from API-Football v3 (`data_enrichment/api_football_client.py`), dedupes, and
+  appends to `ta/external_corner_odds.csv` and `ta/external_btts_odds.csv`.
+  Over time this accumulates organic historical odds that feed the merge +
+  backtest path in `fetch_corner_odds.py`. Rate-limited to the free tier
+  (~15 requests/day, raw responses cached), so it is safe to run daily via cron
+  (see below). Note: on the free plan the API serves only current-day data, so
+  capture backfills forward from today rather than retroactively.
 - **Decoupled policy engine**: betting decisions are filtered *after* the model
   (edge thresholds, overlays, staking) so calibration stays intact. Candidate
   policies must clear the dual gate before they can go live.
@@ -78,6 +87,21 @@ python pipeline_orchestrator.py --run-all
 Individual pieces also run standalone: `python model_v2.py final` fits and prints
 the scoring report, `python backtest_value.py` reruns the value-bet backtest, and
 `python refresh_fixtures.py` pulls fresh fixtures.
+
+Collabor API capture runs daily (organic historical odds accumulation):
+
+```
+python daily_api_capture.py            # today's top-5 fixtures + odds
+python daily_api_capture.py 2026-10-24 # specific date (fixtures must exist)
+python daily_api_capture.py --selfcheck # offline dedup/append check
+```
+
+Requires `API_FOOTBALL_KEY` in the environment (or `.env`). Suggested cron line
+(UTC, after midnight — the API keys odds by date):
+
+```
+0 3 * * * cd /path/to/football-data && python daily_api_capture.py >> logs/api_capture.log 2>&1
+```
 
 Dependencies: `numpy` (see `requirements.txt`). The optional API server
 (`api_server.py`) and scrapers use `fastapi`, `uvicorn`, `pydantic`, `requests`,

@@ -23,6 +23,11 @@ venv/
 data_enrichment/raw/api_football_cache/
 data_enrichment/sample_api_odds.csv
 
+# Tooling / transient runtime artifacts
+.playwright-mcp/
+ta/session_cookies.json
+data_enrichment/raw/
+
 # Environment / secrets
 .env
 
