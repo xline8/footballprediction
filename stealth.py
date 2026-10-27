@@ -56,14 +56,17 @@ def jitter(lo: float = 1.2, hi: float = 3.0) -> None:
         time.sleep(random.uniform(lo, hi))
 
 
-def proxy_url() -> Optional[dict]:
-    """Dict {scheme: url} untuk httpx, dari STEALTH_PROXY/HTTPS_PROXY/
-    HTTP_PROXY. None bila tak ada."""
+def proxy_url() -> Optional[str]:
+    """String URL proxy untuk httpx (http://user:pass@host:port), dari
+    STEALTH_PROXY/HTTPS_PROXY/HTTP_PROXY. None bila tak ada.
+
+    httpx >= 0.27 menerima string tunggal untuk param `proxy`; dict
+    {scheme: url} memicu `'dict' object has no attribute 'url'`.
+    """
     for key in ("STEALTH_PROXY", "HTTPS_PROXY", "HTTP_PROXY"):
         v = os.environ.get(key)
         if v:
-            scheme = "https" if "https" in key.lower() else "http"
-            return {"https": v, "http": v}
+            return v
     return None
 
 
@@ -136,7 +139,7 @@ def _selfcheck() -> None:
     jitter(lo=0.001, hi=0.002)
     assert time.time() - t0 < 1.0
     p = proxy_url()
-    assert p is None or isinstance(p, dict)
+    assert p is None or isinstance(p, str)
     assert 429 in RETRYABLE and 403 not in RETRYABLE
     assert _retry_delay({"Retry-After": "5"}, 0) == 5.0
     assert 0 < _retry_delay(None, 0) <= BACKOFF_BASE
