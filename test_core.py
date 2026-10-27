@@ -84,6 +84,59 @@ def test_dc():
     check("DC over ~ [0,1]", 0.0 <= pr["over"] <= 1.0)
 
 
+def test_parse_date_page():
+    import ta_scrape as ts
+    html = (
+        '<span class="league-name"><span>England - Premier League</span></span>'
+        '<a class="game" href="/match/tottenham-coventry-950782" id="g_950782">'
+        '  <span class="time started">20:00</span>'
+        '  <span class="status play">HT</span>'
+        '  <span class="teams">'
+        '    <span class="home"><span>Tottenham Hotspur</span></span>'
+        '    <span class="score scsm play">1 - 0</span>'
+        '    <span class="away"><span>Coventry City</span></span>'
+        '  </span>'
+        '  <span class="odds">'
+        '    <span class="o1">1.54</span><span class="oX">4.67</span>'
+        '    <span class="o2">6.50</span>'
+        '  </span>'
+        '</a>'
+    )
+    games = ts.parse_date_page(html, "2026-10-20")
+    check("parse_date_page 1 laga", len(games) == 1)
+    g = games[0]
+    check("parse_date_page game_id", g["game_id"] == "950782")
+    check("parse_date_page norm home", g["home"] == "tottenham")
+    check("parse_date_page norm away", g["away"] == "coventry city")
+    check("parse_date_page o1", g["o1"] == "1.54")
+    check("parse_date_page status", g["status"] == "LIVE")
+
+
+def test_parse_match_page_corner():
+    import ta_scrape as ts
+    html = (
+        '<table class="odds">'
+        '<thead><tr><th class="odds-type">Corners Over/Under</th>'
+        '<th>Goals</th><th>Under</th><th>Over</th></tr></thead>'
+        '<tbody><tr>'
+        '<img class="bookie" alt="Pinnacle">'
+        '<td class="center">9.5</td>'
+        '<td class="odd">1.85</td>'
+        '<td class="odd">1.95</td>'
+        '</tr></tbody></table>'
+    )
+    rows = ts.parse_match_page(html, "950782", "https://tipsterarea.com/match/x")
+    check("parse_match_page 2 baris", len(rows) == 2)
+    by_sel = {r["selection"]: r for r in rows}
+    check("parse_match_page over ada", "Over" in by_sel)
+    check("parse_match_page under ada", "Under" in by_sel)
+    check("parse_match_page market", by_sel["Over"]["market"] == "Corners Over/Under")
+    check("parse_match_page line", by_sel["Over"]["line"] == "9.5")
+    check("parse_match_page odds over", by_sel["Over"]["odds"] == "1.95")
+    check("parse_match_page odds under", by_sel["Under"]["odds"] == "1.85")
+    check("parse_match_page bookmaker", by_sel["Over"]["bookmaker"] == "Pinnacle")
+
+
 def test_walk_forward_no_leakage():
     # matches sintetis singkat: 2 musim, 2 divisi
     dates = [datetime.date(2020, 1, 1), datetime.date(2020, 1, 20),
@@ -107,6 +160,8 @@ if __name__ == "__main__":
     test_blend()
     test_scoring()
     test_dc()
+    test_parse_date_page()
+    test_parse_match_page_corner()
     test_walk_forward_no_leakage()
     print()
     if FAILURES:

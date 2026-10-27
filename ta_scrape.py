@@ -20,6 +20,7 @@ import asyncio
 import csv
 import gzip
 import html
+import json
 import os
 import random
 import re
@@ -33,13 +34,15 @@ try:
 except ImportError:
     _HAS_HTTPX = False
 
-from stealth import proxy_url, ua as stealth_ua
+from stealth import (BACKOFF_BASE, BACKOFF_MAX, RETRYABLE, _retry_delay,
+                     proxy_url, ua as stealth_ua)
 
 from data_enrichment.utils import norm_team, to_float
 
 BASE = "https://tipsterarea.com"
 DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ta")
 RAW = os.path.join(DIR, "raw")
+COOKIE_FILE = os.path.join(DIR, "session_cookies.json")
 
 DELAY = 1.2          # detik antar-request (sopan ke server)
 TIMEOUT = 30
@@ -131,23 +134,68 @@ def _sync_fetch(url, cache_name=None, ttl=CACHE_TTL_DATE):
     return text, False
 
 
+def _load_cookie_jar():
+    """Muat cookie tersimpan -> httpx.Cookies (kosong bila file tak ada/rusak)."""
+    jar = httpx.Cookies()
+    try:
+        with open(COOKIE_FILE, encoding="utf-8") as f:
+            for c in json.load(f):
+                jar.set(c["name"], c["value"], domain=c.get("domain"),
+                        path=c.get("path", "/"))
+    except Exception:  # noqa: BLE001
+        pass
+    return jar
+
+
+def _save_cookie_jar(client):
+    """Simpan cookie dari sesi terakhir ke disk (lintas-run)."""
+    try:
+        entries = [{
+            "name": c.name, "value": c.value, "domain": c.domain,
+            "path": c.path, "secure": c.secure, "expires": c.expires,
+        } for c in client.cookies.jar]
+        with open(COOKIE_FILE, "w", encoding="utf-8") as f:
+            json.dump(entries, f)
+    except Exception as e:  # noqa: BLE001
+        print(f"  ! cookie save gagal: {e!r}", file=sys.stderr)
+
+
 async def _async_fetch(client, url, cache_name=None, ttl=CACHE_TTL_DATE):
-    """Async fetch: cek cache dulu, fetch bila perlu."""
+    """Async fetch: cek cache, retry sadar-status, jangan cache error page."""
     cached = _from_cache(cache_name, ttl)
     if cached is not None:
         return cached, True
-    try:
-        resp = await client.get(url, timeout=TIMEOUT, follow_redirects=True,
-                                headers={"User-Agent": stealth_ua()})
-        text = resp.text
-        if cache_name:
-            _to_cache(cache_name, text)
-        return text, False
-    except Exception as e:
-        cached = _from_cache(cache_name, ttl)
-        if cached is not None:
-            return cached, True
-        raise
+    last = None
+    for attempt in range(RETRIES):
+        try:
+            resp = await client.get(url, timeout=TIMEOUT, follow_redirects=True,
+                                    headers={"User-Agent": stealth_ua()})
+            code = resp.status_code
+            if code == 200:
+                text = resp.text
+                if cache_name:
+                    _to_cache(cache_name, text)
+                return text, False
+            if code in RETRYABLE:
+                last = resp
+                delay = _retry_delay(resp.headers, attempt)
+                if delay > 0:
+                    await asyncio.sleep(delay)
+                continue
+            resp.raise_for_status()  # 403/404/dll -> hard-stop
+        except asyncio.CancelledError:
+            raise
+        except Exception as e:
+            last = e
+            cached = _from_cache(cache_name, ttl)
+            if cached is not None:
+                return cached, True
+            if attempt < RETRIES - 1:
+                await asyncio.sleep(min(BACKOFF_BASE * (2 ** attempt),
+                                        BACKOFF_MAX))
+    if isinstance(last, httpx.Response):
+        last.raise_for_status()
+    raise RuntimeError(f"gagal ambil {url}: {last}")
 
 
 def _http_get(url):
@@ -220,12 +268,19 @@ async def async_fetch_pages(urls_with_cache, ttl_map=None):
 
     async def fetch_one(idx, url, cache_name, ttl):
         async with semaphore:
-            text, cached = await _async_fetch(client, url, cache_name, ttl)
+            try:
+                text, cached = await _async_fetch(client, url, cache_name, ttl)
+            except Exception as e:  # noqa: BLE001
+                # satu URL gagal tidak boleh membatalkan seluruh batch
+                print(f"  ! fetch gagal {url}: {e!r}", file=sys.stderr)
+                results[idx] = (None, True)
+                return
             # Delay sopan setelah request asli (bukan cache)
             if not cached:
                 await asyncio.sleep(DELAY)
             results[idx] = (text, cached)
 
+    jar = _load_cookie_jar()
     async with httpx.AsyncClient(
         headers={
             "User-Agent": stealth_ua(),
@@ -234,12 +289,14 @@ async def async_fetch_pages(urls_with_cache, ttl_map=None):
             "Accept-Encoding": "gzip",
         },
         proxy=proxy_url(),
+        cookies=jar,
     ) as client:
         tasks = []
         for i, (url, cache_name, ttl) in enumerate(urls_with_cache):
             ttl_val = ttl if ttl else ttl_map.get(i, CACHE_TTL_DATE)
             tasks.append(fetch_one(i, url, cache_name, ttl_val))
         await asyncio.gather(*tasks)
+        _save_cookie_jar(client)
 
     return results
 
@@ -639,7 +696,31 @@ def sync_dates(days, with_markets=False, market_ids=None, verbose=True):
         if verbose:
             print(f"  pasar lain: +{nrows} baris baru")
 
-    return {"snapshots": tot_snap, "results": tot_res, "games": len(all_games)}
+    return {"snapshots": tot_snap, "results": tot_res, "games": len(all_games),
+            "markets": nrows}
+
+
+RUN_LOG = os.path.join(DIR, "scrape_runs.csv")
+_RUN_LOG_COLS = ("ts", "games", "snapshots", "results", "markets", "corner_rows")
+
+
+def log_run_summary(r, corner_rows=0):
+    """Append satu baris ringkasan run ke scrape_runs.csv (audit cron)."""
+    try:
+        ensure_dirs()
+        new = not os.path.exists(RUN_LOG)
+        with open(RUN_LOG, "a", newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=_RUN_LOG_COLS, extrasaction="ignore")
+            if new:
+                w.writeheader()
+            w.writerow({
+                "ts": now_iso(), "games": r.get("games", 0),
+                "snapshots": r.get("snapshots", 0),
+                "results": r.get("results", 0),
+                "markets": r.get("markets", 0), "corner_rows": corner_rows,
+            })
+    except Exception as e:  # noqa: BLE001
+        print(f"  ! log run gagal: {e!r}", file=sys.stderr)
 
 
 def matched_ids():
@@ -693,6 +774,9 @@ def main(argv):
     if corner_out is not None or "--corner-export" in argv:
         n, path = export_corner_odds(corner_out)
         print(f"corner export: {n} baris -> {path}")
+    else:
+        n = 0
+    log_run_summary(r, corner_rows=n)
     return 0
 
 
