@@ -26,6 +26,7 @@ data_enrichment/sample_api_odds.csv
 # Tooling / transient runtime artifacts
 .playwright-mcp/
 ta/session_cookies.json
+ta/raw/
 data_enrichment/raw/
 
 # Environment / secrets
