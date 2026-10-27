@@ -27,3 +27,4 @@ Status legend: `[ ]` open · `[x]` done
 
 - The live DC/corner/value-bet path must keep producing identical outputs unless a task explicitly says a.
 - Each task ends with a runnable validation (test or CLI run) and the TODO row flipped to `[x]`.
+- **Operations**: run `weekly_refit.sh` weekly (Monday 04:00 WIB) for a full `--run-all` refit, keeping team-rating decay / parameters fresh.

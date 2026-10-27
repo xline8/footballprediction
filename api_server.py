@@ -104,8 +104,10 @@ def load_picks(status: str = None) -> List[Dict]:
 
 
 def load_corner_predictions() -> List[Dict]:
-    """Load corner predictions from CSV."""
-    corner_file = os.path.join(BASE_DIR, "predictions_corners.csv")
+    """Load corner predictions from CSV (prefer upcoming file)."""
+    corner_file = os.path.join(BASE_DIR, "predictions_corners_upcoming.csv")
+    if not os.path.exists(corner_file):
+        corner_file = os.path.join(BASE_DIR, "predictions_corners.csv")
     if not os.path.exists(corner_file):
         return []
 
@@ -357,23 +359,47 @@ async def get_odds(div: str = None):
     return JSONResponse(content=odds)
 
 
+def _f(v):
+    """Safe float parse; returns None for empty/invalid values."""
+    try:
+        if v is None or (isinstance(v, str) and not v.strip()):
+            return None
+        return float(v)
+    except (TypeError, ValueError):
+        return None
+
+
 @app.get("/api/corners")
 async def get_corner_predictions(div: str = None, limit: int = 100):
-    """Get corner predictions."""
+    """Get upcoming corner predictions.
+
+    Schema (predictions_corners_upcoming.csv):
+      div, date, home, away, rec_line, rec_side, recommendation, rec_prob,
+      p_gt_6.5 ... p_gt_11.5 (P(total corners > line))
+    """
     rows = load_corner_predictions()
 
     if div:
-        rows = [r for r in rows if r['Div'] == div]
+        rows = [r for r in rows if r.get('div') == div]
 
     predictions = []
     for r in rows[:limit]:
+        # dynamic over-probabilities: p_gt_9.5 -> prob_over["9.5"]
+        prob_over = {
+            k[len('p_gt_'):]: v
+            for k, v in r.items()
+            if k.startswith('p_gt_') and _f(v) is not None
+        }
         predictions.append({
-            'div': r.get('Div', ''),
-            'date': r.get('Date', ''),
-            'home': r.get('HomeTeam', ''),
-            'away': r.get('AwayTeam', ''),
-            'hc_pred': float(r.get('HC_pred', 0)) if r.get('HC_pred') else None,
-            'ac_pred': float(r.get('AC_pred', 0)) if r.get('AC_pred') else None,
+            'div': r.get('div', ''),
+            'date': r.get('date', ''),
+            'home': r.get('home', ''),
+            'away': r.get('away', ''),
+            'rec_line': _f(r.get('rec_line')),
+            'rec_side': r.get('rec_side', ''),
+            'recommendation': r.get('recommendation', ''),
+            'rec_prob': _f(r.get('rec_prob')),
+            'prob_over': prob_over,
         })
 
     return JSONResponse(content=predictions)

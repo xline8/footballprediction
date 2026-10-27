@@ -98,6 +98,14 @@ python jit_orchestrator.py --dry-run   # log window, skip API
 python jit_orchestrator.py --selfcheck # offline window-logic check
 ```
 
+Weekly refit runs every Monday at 04:00 WIB (Sunday 21:00 UTC) via
+`weekly_refit.sh` — the full `--run-all` pipeline — so team-rating decay and
+model parameters stay fresh:
+
+```
+0 21 * * 0 cd /path/to/football-data && ./weekly_refit.sh >> logs/weekly_refit.log 2>&1
+```
+
 Requires `API_FOOTBALL_KEY` in the environment (or `.env`) and the Understat
 fixture cache (`python refresh_fixtures.py`). Suggested cron line:
 
