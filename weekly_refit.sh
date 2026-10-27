@@ -12,8 +12,8 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 # Gunakan venv bila ada; else fallback ke python3/python.
-if [ -x "./venv/bin/python" ]; then
-    PYTHON="./venv/bin/python"
+if [ -x "./.venv/bin/python" ]; then
+    PYTHON="./.venv/bin/python"
 elif command -v python3 >/dev/null 2>&1; then
     PYTHON=python3
 else

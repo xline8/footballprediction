@@ -609,6 +609,7 @@ def sync_dates(days, with_markets=False, market_ids=None, verbose=True):
     """days: list objek date. Return ringkasan."""
     captured = now_iso()
     tot_snap = tot_res = 0
+    nrows = 0
     all_games = []
 
     # --- Phase 1: date pages (async if httpx available) ---
@@ -663,7 +664,6 @@ def sync_dates(days, with_markets=False, market_ids=None, verbose=True):
         if verbose:
             print(f"{len(pending)} perlu fetch, {skipped} fresh/lewat")
 
-        nrows = 0
         if pending:
             match_urls = [(g["url"], f"match-{gid}.html", CACHE_TTL_MATCH)
                           for gid, g in pending]
