@@ -80,7 +80,7 @@ class ApiFootballClient:
         self.host = host or os.environ.get("API_FOOTBALL_HOST", DEFAULT_HOST)
         self.base = BASE
         self.last_call = 0.0
-        self._markets_cache: Optional[dict[str, int]] = None
+        self._bets_cache: dict[str, Optional[list[dict]]] = {}
 
     # ---- transport --------------------------------------------------
     def _headers(self) -> dict[str, str]:
@@ -140,27 +140,42 @@ class ApiFootballClient:
         return data
 
     # ---- endpoints --------------------------------------------------
-    def fetch_markets(self, force_refresh: bool = False) -> dict[str, int]:
-        if self._markets_cache is not None and not force_refresh:
-            return self._markets_cache
-        data = self.get("odds/markets")
-        self._markets_cache = {
-            m["name"]: m["id"] for m in data.get("response", [])}
-        return self._markets_cache
+    def fetch_bets(self, search: Optional[str] = None,
+                   force_refresh: bool = False) -> list[dict]:
+        """GET /odds/bets[?search=...] -> [{id, name}, ...].
 
-    def resolve_market_ids(self) -> tuple[Optional[int], Optional[int]]:
-        """(id_corners_o_u, id_btts) — dicari dari nama pasar.
-
-        Best-effort: `/odds/markets` bisa kosong (mis. tier gratis); bila
-        tidak ketemu kembalikan None (pemanggil lalu fetch semua pasar dan
-        cocokkan nama di dalam payload odds).
+        Endpoint yang benar per dokumentasi v3 (`/odds/markets` TIDAK ada).
+        Dicache per kata kunci; `force_refresh` memaksa tarik ulang.
         """
-        markets = self.fetch_markets()
-        corner = next((mid for name, mid in markets.items()
-                       if "corner" in name.lower()
-                       and "over/under" in name.lower()), None)
-        btts = next((mid for name, mid in markets.items()
-                     if "both teams to score" in name.lower()), None)
+        key = f"bets:{search or '*'}"
+        if not force_refresh and self._bets_cache.get(key) is not None:
+            return self._bets_cache[key]
+        params = {"search": search} if search else None
+        data = self.get("odds/bets", params)
+        bets = list(data.get("response") or [])
+        self._bets_cache[key] = bets
+        return bets
+
+    def resolve_market_ids(self, force_refresh: bool = False
+                           ) -> tuple[Optional[int], Optional[int]]:
+        """Resolve bet id lewat /odds/bets?search= (cocokkan nama normalisasi).
+
+        Corner: search "corner" -> bet "Corners Over Under".
+        BTTS : search "both teams" -> bet "Both Teams Score".
+        """
+        corner = btts = None
+        tgt_c = _norm_market(CORNER_MARKET)
+        tgt_b = _norm_market(BTTS_MARKET)
+        for b in self.fetch_bets(search="corner",
+                                  force_refresh=force_refresh):
+            if _norm_market(b.get("name", "")) == tgt_c:
+                corner = b.get("id")
+                break
+        for b in self.fetch_bets(search="both teams",
+                                  force_refresh=force_refresh):
+            if _norm_market(b.get("name", "")) == tgt_b:
+                btts = b.get("id")
+                break
         return corner, btts
 
     def fetch_fixtures(self, *, league: Optional[int] = None,
@@ -181,7 +196,7 @@ class ApiFootballClient:
                         date: Optional[str] = None,
                         fixture: Optional[int] = None,
                         bookmaker: Optional[int] = None,
-                        market: Optional[int] = None,
+                        bet: Optional[int] = None,
                         page: int = 1) -> dict:
         params = {"page": page}
         if league is not None:
@@ -194,8 +209,8 @@ class ApiFootballClient:
             params["fixture"] = fixture
         if bookmaker is not None:
             params["bookmaker"] = bookmaker
-        if market is not None:
-            params["market"] = market
+        if bet is not None:
+            params["bet"] = bet
         return self.get("odds", params)
 
 
@@ -300,18 +315,17 @@ def dry_run(date: str, league: Optional[int] = None,
 
     print(f"resolve market ids ...")
     corner_mid, btts_mid = client.resolve_market_ids()
-    print(f"  Corners Over/Under market id : {corner_mid}")
-    print(f"  Both Teams To Score market id : {btts_mid}")
+    print(f"  Corners Over/Under bet id : {corner_mid}")
+    print(f"  Both Teams Score bet id    : {btts_mid}")
 
     print(f"fetch fixtures {date} (liga {league}, season {season}) ...")
     fix = client.fetch_fixtures(league=league, season=season, date=date)
     teams = fixtures_teams_map(fix)
     print(f"  {len(teams)} fixture dipetakan")
 
-    print(f"fetch odds page 1 ...")
-    # market=None -> ambil semua pasar satu halaman; parsing cocokkan nama.
+    print(f"fetch odds page 1 (bet={corner_mid or btts_mid}) ...")
     odds = client.fetch_odds_page(league=league, season=season, date=date,
-                                  market=corner_mid or btts_mid)
+                                  bet=corner_mid or btts_mid)
     corner_rows, btts_rows = parse_odds(odds, teams=teams)
     print(f"  parsed: {len(corner_rows)} rows corner, "
           f"{len(btts_rows)} rows BTTS")
