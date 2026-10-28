@@ -347,17 +347,14 @@ def predict_upcoming():
         for ln in LINES_UPCOMING:
             k = k_of(r_star, mu)
             probs[f"p_gt_{ln}"] = round(sum(pmf_k(mu, k)[int(ln) + 1:]), 4)
-        # Recommendation: kombinasi (line, side) berkeyakinan tertinggi di
-        # antara SEMUA line 6.5–11.5 (p_over vs 1-p_over).
-        rec_line, rec_side, rec_prob = None, None, -1.0
-        for ln in LINES_UPCOMING:
-            po = probs[f"p_gt_{ln}"]
-            pu = 1.0 - po
-            if po >= pu and po > rec_prob:
-                rec_line, rec_side, rec_prob = ln, "Over", po
-            elif pu > po and pu > rec_prob:
-                rec_line, rec_side, rec_prob = ln, "Under", pu
-        recommendation = f"{rec_side} {rec_line}" if rec_line is not None else "SKIP"
+        # Rekomendasi: garis fair dalam band 8.5–10.5 — pilih line (L) yang
+        # meminimalkan |(L+0.5) − mu_shots_cs|; side Over bila p_gt_L >= 0.5,
+        # selain itu Under; rec_prob = probabilitas sisi terpilih.
+        rec_line = min((8.5, 9.5, 10.5), key=lambda L: abs((L + 0.5) - mu))
+        p_l = probs[f"p_gt_{rec_line}"]
+        rec_side = "Over" if p_l >= 0.5 else "Under"
+        rec_prob = p_l if rec_side == "Over" else 1.0 - p_l
+        recommendation = f"{rec_side} {rec_line}"
         rows.append({
             "div": d, "date": fx["date"], "home": fx["home"], "away": fx["away"],
             "mu_shots_cs": round(mu, 2), "r_cs": round(r_star, 3),

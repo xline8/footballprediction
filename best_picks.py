@@ -61,7 +61,7 @@ def _load_corner_picks():
     for r in rows:
         if r["date"] < TODAY:
             continue  # hanya fixture yang akan datang
-        for ln in (6.5, 7.5, 8.5, 9.5, 10.5, 11.5):
+        for ln in CORNER_LINES:
             p_over = _num(r.get(f"p_gt_{ln}"))
             if p_over is None:
                 continue
@@ -232,7 +232,9 @@ def _top_pick_per_match(picks):
     return best
 
 GOAL_LINES = (1.5, 2.5, 3.5)
-CORNER_LINES = (6.5, 7.5, 8.5, 9.5, 10.5, 11.5)
+# Kandidat pick corner dibatasi ke band 8.5–10.5 (kolom p_gt_* di CSV
+# dan ladder prob_over di API tetap utuh — hanya kandidat yang dibatasi).
+CORNER_LINES = (8.5, 9.5, 10.5)
 
 
 def _norm_name(x):
