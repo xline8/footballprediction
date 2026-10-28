@@ -51,83 +51,98 @@ def _write_csv(path, rows, cols):
         w.writerows(rows)
 
 def _load_corner_picks():
-    """Load corner picks from predictions_corners_upcoming.csv (probabilistic).
+    """Load corner picks from corner predictions CSVs (probabilistic).
 
-    Generate picks for many lines: Over/Under 6.5 ... 11.5
-    Only pick if prob > 0.60 (Over) or prob < 0.40 (Under)
+    Sumber: predictions_corners_upcoming.csv (liga) dan
+    predictions_corners_cups.csv (piala EFL Cup/DFB Pokal).
+    Generate picks for lines 8.5/9.5/10.5.
+    Only pick if prob > 0.60 (Over) or prob < 0.40 (Under).
     """
-    rows = _read_csv(os.path.join(PROJ, "predictions_corners_upcoming.csv"))
+    sources = [
+        ("predictions_corners_upcoming.csv", ""),
+        ("predictions_corners_cups.csv", None),  # competition dibaca dari baris
+    ]
     picks = []
-    for r in rows:
-        if r["date"] < TODAY:
-            continue  # hanya fixture yang akan datang
-        for ln in CORNER_LINES:
-            p_over = _num(r.get(f"p_gt_{ln}"))
-            if p_over is None:
-                continue
-            p_under = 1.0 - p_over
-            if p_over > 0.60:
-                picks.append({
-                    "div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
-                    "market": "Corners", "line": str(ln), "side": "Over",
-                    "prob": round(p_over, 4), "ev": None, "source": "model",
-                    "tier": "best",
-                })
-            elif p_under > 0.60:
-                picks.append({
-                    "div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
-                    "market": "Corners", "line": str(ln), "side": "Under",
-                    "prob": round(p_under, 4), "ev": None, "source": "model",
-                    "tier": "best",
-                })
+    for fn, default_comp in sources:
+        rows = _read_csv(os.path.join(PROJ, fn))
+        for r in rows:
+            if r["date"] < TODAY:
+                continue  # hanya fixture yang akan datang
+            comp = r.get("competition") or default_comp or ""
+            for ln in CORNER_LINES:
+                p_over = _num(r.get(f"p_gt_{ln}"))
+                if p_over is None:
+                    continue
+                p_under = 1.0 - p_over
+                if p_over > 0.60:
+                    picks.append({
+                        "div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
+                        "market": "Corners", "line": str(ln), "side": "Over",
+                        "prob": round(p_over, 4), "ev": None, "source": "model",
+                        "tier": "best", "competition": comp,
+                    })
+                elif p_under > 0.60:
+                    picks.append({
+                        "div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
+                        "market": "Corners", "line": str(ln), "side": "Under",
+                        "prob": round(p_under, 4), "ev": None, "source": "model",
+                        "tier": "best", "competition": comp,
+                    })
     return picks
 
 def _load_dixon_coles_picks():
-    """Load picks from predictions_upcoming.csv (1X2, DC, BTTS).
+    """Load picks from goal prediction CSVs (1X2, DC, BTTS).
 
-    Ketatkan threshold:
+    Sumber: predictions_upcoming.csv (liga) dan predictions_cups_upcoming.csv
+    (piala). Ketatkan threshold:
     - 1X2: ph > 0.60 (atau pd/pa > 0.55)
     - DC: (ph+pd) > 0.65 dan ph < 0.75 (atau analog untuk X2/12)
     - BTTS: p_btts > 0.60
     """
-    rows = _read_csv(os.path.join(PROJ, "predictions_upcoming.csv"))
+    sources = [
+        ("predictions_upcoming.csv", ""),
+        ("predictions_cups_upcoming.csv", None),  # competition dibaca dari baris
+    ]
     picks = []
-    for r in rows:
-        if r["date"] < TODAY:
-            continue
-        ph = _num(r.get("ph_dc"))
-        pd = _num(r.get("pd_dc"))
-        pa = _num(r.get("pa_dc"))
-        pbtts = _num(r.get("p_btts"))
-        if not all((ph, pd, pa)):
-            continue
+    for fn, default_comp in sources:
+        rows = _read_csv(os.path.join(PROJ, fn))
+        for r in rows:
+            if r["date"] < TODAY:
+                continue
+            comp = r.get("competition") or default_comp or ""
+            ph = _num(r.get("ph_dc"))
+            pd = _num(r.get("pd_dc"))
+            pa = _num(r.get("pa_dc"))
+            pbtts = _num(r.get("p_btts"))
+            if not all((ph, pd, pa)):
+                continue
 
-        # 1X2 picks
-        if ph > 0.60:
-            picks.append({"div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
-                          "market": "1X2", "line": "", "side": "1", "prob": round(ph,4), "ev": None, "source": "model"})
-        elif pd > 0.55:
-            picks.append({"div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
-                          "market": "1X2", "line": "", "side": "X", "prob": round(pd,4), "ev": None, "source": "model"})
-        elif pa > 0.60:
-            picks.append({"div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
-                          "market": "1X2", "line": "", "side": "2", "prob": round(pa,4), "ev": None, "source": "model"})
+            # 1X2 picks
+            if ph > 0.60:
+                picks.append({"div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
+                              "market": "1X2", "line": "", "side": "1", "prob": round(ph,4), "ev": None, "source": "model", "competition": comp})
+            elif pd > 0.55:
+                picks.append({"div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
+                              "market": "1X2", "line": "", "side": "X", "prob": round(pd,4), "ev": None, "source": "model", "competition": comp})
+            elif pa > 0.60:
+                picks.append({"div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
+                              "market": "1X2", "line": "", "side": "2", "prob": round(pa,4), "ev": None, "source": "model", "competition": comp})
 
-        # DC picks
-        if (ph + pd) > 0.65 and ph < 0.75:
-            picks.append({"div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
-                          "market": "DC", "line": "", "side": "1X", "prob": round(ph + pd,4), "ev": None, "source": "model"})
-        if (pd + pa) > 0.65 and pa < 0.75:
-            picks.append({"div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
-                          "market": "DC", "line": "", "side": "X2", "prob": round(pd + pa,4), "ev": None, "source": "model"})
-        if (ph + pa) > 0.70:  # 12 tidak punya draw
-            picks.append({"div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
-                          "market": "DC", "line": "", "side": "12", "prob": round(ph + pa,4), "ev": None, "source": "model"})
+            # DC picks
+            if (ph + pd) > 0.65 and ph < 0.75:
+                picks.append({"div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
+                              "market": "DC", "line": "", "side": "1X", "prob": round(ph + pd,4), "ev": None, "source": "model", "competition": comp})
+            if (pd + pa) > 0.65 and pa < 0.75:
+                picks.append({"div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
+                              "market": "DC", "line": "", "side": "X2", "prob": round(pd + pa,4), "ev": None, "source": "model", "competition": comp})
+            if (ph + pa) > 0.70:  # 12 tidak punya draw
+                picks.append({"div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
+                              "market": "DC", "line": "", "side": "12", "prob": round(ph + pa,4), "ev": None, "source": "model", "competition": comp})
 
-        # BTTS picks
-        if pbtts and pbtts > 0.60:
-            picks.append({"div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
-                          "market": "BTS", "line": "", "side": "Yes", "prob": round(pbtts,4), "ev": None, "source": "model"})
+            # BTTS picks
+            if pbtts and pbtts > 0.60:
+                picks.append({"div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
+                              "market": "BTS", "line": "", "side": "Yes", "prob": round(pbtts,4), "ev": None, "source": "model", "competition": comp})
     return picks
 
 _LEAGUE_MAP = {
@@ -183,6 +198,7 @@ def _load_ta_picks():
             "prob": round(prob, 4),
             "ev": round(ev, 4),
             "source": "ta_model",
+            "competition": "",
         })
     return picks
 
@@ -280,7 +296,8 @@ def _scan_candidates(pred_row, corner_row):
     for c in cands:
         c.update({"ev": None, "source": "model", "tier": "fallback",
                   "div": pred_row["div"], "date": pred_row["date"],
-                  "home": pred_row["home"], "away": pred_row["away"]})
+                  "home": pred_row["home"], "away": pred_row["away"],
+                  "competition": pred_row.get("competition") or ""})
     return cands
 
 
@@ -338,7 +355,7 @@ def main():
     best = _top_pick_per_match(all_picks)
 
     cols = ["div", "date", "home", "away", "market", "line", "side",
-            "prob", "ev", "ev_model", "source", "tier"]
+            "prob", "ev", "ev_model", "source", "tier", "competition"]
     _write_csv(OUT, best, cols)
     _write_csv(os.path.join(PROJ, "best_picks_full.csv"), all_picks, cols)
 
@@ -354,11 +371,15 @@ def main():
     # --- best_picks_today.csv: TEPAT satu baris per laga terjadwal hari target.
     # Pick teraman = probabilitas tertinggi di antara gabungan kandidat best
     # (lolos threshold/EV) dan pemindaian lengkap _scan_candidates().
-    pred_rows = [r for r in _read_csv(os.path.join(PROJ, "predictions_upcoming.csv"))
-                 if (r.get("date") or "") == target]
+    # Cakupan: laga liga (predictions_upcoming.csv) + piala (predictions_cups_upcoming.csv).
+    pred_rows = []
+    for fn in ("predictions_upcoming.csv", "predictions_cups_upcoming.csv"):
+        pred_rows += [r for r in _read_csv(os.path.join(PROJ, fn))
+                      if (r.get("date") or "") == target]
     corner_by = {}
-    for r in _read_csv(os.path.join(PROJ, "predictions_corners_upcoming.csv")):
-        corner_by.setdefault((r["div"], r["date"], _norm_name(r["home"]), _norm_name(r["away"])), r)
+    for fn in ("predictions_corners_upcoming.csv", "predictions_corners_cups.csv"):
+        for r in _read_csv(os.path.join(PROJ, fn)):
+            corner_by.setdefault((r["div"], r["date"], _norm_name(r["home"]), _norm_name(r["away"])), r)
     best_group_by = defaultdict(list)
     for p in all_picks:
         best_group_by[(p["div"], p["date"], _norm_name(p["home"]), _norm_name(p["away"]))].append(p)
@@ -372,7 +393,8 @@ def main():
             today_rows.append({"div": r["div"], "date": r["date"], "home": r["home"],
                                "away": r["away"], "market": "", "line": "", "side": "",
                                "prob": None, "ev": None, "ev_model": None,
-                               "source": "model", "tier": "fallback"})
+                               "source": "model", "tier": "fallback",
+                               "competition": r.get("competition") or ""})
             continue
         _fill_ev_model(sel)
         today_rows.append({c: sel.get(c) for c in cols})
