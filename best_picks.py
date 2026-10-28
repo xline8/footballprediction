@@ -53,7 +53,7 @@ def _write_csv(path, rows, cols):
 def _load_corner_picks():
     """Load corner picks from predictions_corners_upcoming.csv (probabilistic).
 
-    Generate picks for multiple lines: Over/Under 8.5, 9.5, 10.5
+    Generate picks for many lines: Over/Under 6.5 ... 11.5
     Only pick if prob > 0.60 (Over) or prob < 0.40 (Under)
     """
     rows = _read_csv(os.path.join(PROJ, "predictions_corners_upcoming.csv"))
@@ -61,7 +61,7 @@ def _load_corner_picks():
     for r in rows:
         if r["date"] < TODAY:
             continue  # hanya fixture yang akan datang
-        for ln in (8.5, 9.5, 10.5):
+        for ln in (6.5, 7.5, 8.5, 9.5, 10.5, 11.5):
             p_over = _num(r.get(f"p_gt_{ln}"))
             if p_over is None:
                 continue
@@ -71,12 +71,14 @@ def _load_corner_picks():
                     "div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
                     "market": "Corners", "line": str(ln), "side": "Over",
                     "prob": round(p_over, 4), "ev": None, "source": "model",
+                    "tier": "best",
                 })
             elif p_under > 0.60:
                 picks.append({
                     "div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
                     "market": "Corners", "line": str(ln), "side": "Under",
                     "prob": round(p_under, 4), "ev": None, "source": "model",
+                    "tier": "best",
                 })
     return picks
 
@@ -229,50 +231,119 @@ def _top_pick_per_match(picks):
     best.sort(key=lambda x: (x["date"], x["div"], x["home"]))
     return best
 
+GOAL_LINES = (1.5, 2.5, 3.5)
+CORNER_LINES = (6.5, 7.5, 8.5, 9.5, 10.5, 11.5)
+
+
+def _norm_name(x):
+    try:
+        from football_etl import normalize_name as _n
+        return _n(x)
+    except ImportError:
+        return x
+
+
+def _fallback_candidate(pred_row, corner_row):
+    """Pick satu selection berprobabilitas tertinggi untuk laga tanpa best pick."""
+    cands = []
+    ph = _num(pred_row.get("ph_dc"))
+    pd = _num(pred_row.get("pd_dc"))
+    pa = _num(pred_row.get("pa_dc"))
+    if all(v is not None for v in (ph, pd, pa)):
+        for side, pr in (("1", ph), ("X", pd), ("2", pa)):
+            cands.append({"market": "1X2", "line": "", "side": side, "prob": pr})
+        for side, pr in (("1X", ph + pd), ("X2", pd + pa), ("12", ph + pa)):
+            cands.append({"market": "DC", "line": "", "side": side, "prob": pr})
+        for ln, col in ((1.5, "p_over15_dc"), (2.5, "p_over_dc"), (3.5, "p_over35_dc")):
+            po = _num(pred_row.get(col))
+            if po is None:
+                continue
+            cands.append({"market": "OU", "line": str(ln), "side": "Over", "prob": po})
+            cands.append({"market": "OU", "line": str(ln), "side": "Under", "prob": 1 - po})
+    pb = _num(pred_row.get("p_btts"))
+    if pb is not None:
+        cands.append({"market": "BTS", "line": "", "side": "Yes", "prob": pb})
+        cands.append({"market": "BTS", "line": "", "side": "No", "prob": 1 - pb})
+    if corner_row:
+        for ln in CORNER_LINES:
+            po = _num(corner_row.get(f"p_gt_{ln}"))
+            if po is None:
+                continue
+            cands.append({"market": "Corners", "line": str(ln), "side": "Over", "prob": po})
+            cands.append({"market": "Corners", "line": str(ln), "side": "Under", "prob": 1 - po})
+    if not cands:
+        return None
+    top = max(cands, key=lambda c: c["prob"])
+    top.update({"ev": None, "source": "model", "tier": "fallback",
+                "div": pred_row["div"], "date": pred_row["date"],
+                "home": pred_row["home"], "away": pred_row["away"]})
+    return top
+
+
 def main():
+    target = date.today().isoformat()
+    args = sys.argv[1:]
+    if "--date" in args:
+        i = args.index("--date")
+        if i + 1 < len(args):
+            target = args[i + 1]
+    print(f"target date: {target}")
+
     corner = _load_corner_picks()
     dc = _load_dixon_coles_picks()
     ta = _load_ta_picks()
 
     all_picks = corner + dc + ta
+    for p in all_picks:
+        p.setdefault("tier", "best")
     best = _top_pick_per_match(all_picks)
 
     cols = ["div", "date", "home", "away", "market", "line", "side",
-            "prob", "ev", "ev_model", "source"]
+            "prob", "ev", "ev_model", "source", "tier"]
     _write_csv(OUT, best, cols)
-
-    # Also write full picks (all markets) for reference
     _write_csv(os.path.join(PROJ, "best_picks_full.csv"), all_picks, cols)
 
     print(f"corner picks: {len(corner)} | DC picks: {len(dc)} | ta_model picks: {len(ta)}")
     print(f"-> {OUT} ({len(best)} top picks, 1 per match)")
     print(f"-> best_picks_full.csv ({len(all_picks)} all picks)")
 
-    # Show market distribution
     markets = {}
     for p in best:
-        m = p["market"]
-        markets[m] = markets.get(m, 0) + 1
+        markets[p["market"]] = markets.get(p["market"], 0) + 1
     print(f"  Top picks by market: {markets}")
 
-    # Validation: cek picks ada di predictions_upcoming.csv (gunakan normalized names)
-    sys.path.insert(0, PROJ)
-    try:
-        from football_etl import normalize_name as norm
-    except ImportError:
-        norm = lambda x: x
+    # --- best_picks_today.csv: TEPAT satu baris per laga terjadwal hari target
+    pred_rows = [r for r in _read_csv(os.path.join(PROJ, "predictions_upcoming.csv"))
+                 if (r.get("date") or "") == target]
+    corner_by = {}
+    for r in _read_csv(os.path.join(PROJ, "predictions_corners_upcoming.csv")):
+        corner_by.setdefault((r["div"], r["date"], _norm_name(r["home"]), _norm_name(r["away"])), r)
+    best_by = {}
+    for p in best:
+        best_by[(p["div"], p["date"], _norm_name(p["home"]), _norm_name(p["away"]))] = p
 
-    pred_rows = _read_csv(os.path.join(PROJ, "predictions_upcoming.csv"))
-    pred_keys = set()
+    today_rows = []
     for r in pred_rows:
-        pred_keys.add((r.get("div",""), r.get("date",""),
-                       norm(r.get("home","")), norm(r.get("away",""))))
-    bp_keys = set((p["div"], p["date"], norm(p["home"]), norm(p["away"])) for p in best)
-    missing = bp_keys - pred_keys
-    if missing:
-        print(f"  WARNING: {len(missing)} picks tidak ada di predictions_upcoming.csv")
-    else:
-        print(f"  OK: semua {len(bp_keys)} picks terverifikasi di predictions_upcoming.csv")
+        k = (r["div"], r["date"], _norm_name(r["home"]), _norm_name(r["away"]))
+        bp = best_by.get(k)
+        if bp is not None:
+            today_rows.append({c: bp.get(c) for c in cols})
+            continue
+        fb = _fallback_candidate(r, corner_by.get(k))
+        if fb is None:
+            today_rows.append({"div": r["div"], "date": r["date"], "home": r["home"],
+                               "away": r["away"], "market": "", "line": "", "side": "",
+                               "prob": None, "ev": None, "ev_model": None,
+                               "source": "model", "tier": "fallback"})
+            continue
+        today_rows.append({c: fb.get(c) for c in cols})
+
+    TODAY_OUT = os.path.join(PROJ, "best_picks_today.csv")
+    _write_csv(TODAY_OUT, today_rows, cols)
+    from collections import Counter
+    tiers = Counter(r["tier"] for r in today_rows)
+    print(f"-> {TODAY_OUT} ({len(today_rows)} baris, 1 per laga hari {target}; tier={dict(tiers)})")
+
 
 if __name__ == "__main__":
     main()
