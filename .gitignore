@@ -19,6 +19,9 @@ venv/
 *.pkl
 *.joblib
 
+# Runtime ledger state (picks/grades/summary — regenerated)
+ledger/
+
 # API-Football raw cache + sample output (rebuildable)
 data_enrichment/raw/api_football_cache/
 data_enrichment/sample_api_odds.csv
