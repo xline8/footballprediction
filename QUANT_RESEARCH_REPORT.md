@@ -80,3 +80,19 @@ strategy. Live shadow stays gated at 0 picks by design.
   `resolve_and_monitor.py` runs as a daily cron-safe chain (each step isolated
   by try/except). It is deliberately strict: with no validated edge, it emits
   0 picks and records nothing to the ledger.
+
+---
+
+## 5. Edge Band Re-validation (`experiment_edge_band.py`)
+
+The live-pick edge band (`edge ∈ [0.20, 0.22)` over Shin-fair home prob, odds
+`[1.20, 1.50]`) was re-validated on walk-forward meta probs (diag 2017/18–
+2022/23, confirm 2023/24–2025/26). **Verdict: UNVALIDATED.**
+
+- Edge distribution across 15.5k home-win candidates: mean −0.0023, std 0.0123,
+  max +0.0832. Fraction edge ≥ 0.05 is 0.14%; edge ≥ 0.10 is 0.
+- R1 (production band) fires **0 times** across all 68.8k records; no diagnostic
+  threshold reaches 100 picks, so no replacement threshold exists (REPLACE n/a).
+- The live path is decorative: the filter never triggers, so no edge is
+  exploited — consistent with 1X2 market efficiency. See
+  [EXPERIMENT_EDGE_BAND.md](EXPERIMENT_EDGE_BAND.md).
