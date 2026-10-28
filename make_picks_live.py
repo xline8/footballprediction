@@ -51,6 +51,12 @@ def _logit_clip(p):
 
 def _fit_meta():
     """Fit model meta (logit input) pada seluruh riwayat."""
+    if not os.path.exists(RECORDS):
+        print("! records_cache.jsonl belum ada — membangun otomatis ...")
+        from backtest_picks import cache_records
+        n = cache_records(RECORDS)
+        if not n or not os.path.exists(RECORDS):
+            raise RuntimeError("gagal membangun records_cache.jsonl")
     records = load_records(RECORDS)
     n = len(records)
     X = np.full((n, 9), np.nan)

@@ -18,6 +18,7 @@ def main():
     print("#" * 70)
     print("# LIVE SHADOW DAILY RUN")
     print("#" * 70)
+    failed = False
 
     try:
         from predict_upcoming_refactored import generate_predictions
@@ -25,20 +26,28 @@ def main():
         print(f"[1/3] predictions: {res.get('n_output_rows', 0)} rows "
               f"(status {res.get('status')})")
     except Exception as e:
-        print(f"[1/3] ! predictions gagal (dilewati): {e}")
+        failed = True
+        print(f"[1/3] FAILED predictions: {e!r}")
 
     try:
         import make_picks_live
         n = make_picks_live.main()
         print(f"[2/3] live picks baru: {n}")
     except Exception as e:
-        print(f"[2/3] ! make_picks_live gagal (dilewati): {e}")
+        failed = True
+        print(f"[2/3] FAILED make_picks_live: {e!r}")
 
     try:
         import resolve_and_monitor
         resolve_and_monitor.main()
     except Exception as e:
-        print(f"[3/3] ! resolve_and_monitor gagal (dilewati): {e}")
+        failed = True
+        print(f"[3/3] FAILED resolve_and_monitor: {e!r}")
+
+    if failed:
+        print("# LIVE SHADOW: ADA LANGKAH GAGAL")
+        sys.exit(1)
+    print("# LIVE SHADOW OK")
 
 
 if __name__ == "__main__":
