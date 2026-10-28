@@ -8,6 +8,18 @@ The engine is built for research, not for chasing returns. It tests whether the
 B365 and Pinnacle markets hide exploitable value; the answer so far is no, and
 the code is structured to keep that conclusion honest.
 
+## Contents
+
+- [Key achievements](#key-achievements)
+- [Quick start](#quick-start)
+- [How it works](#how-it-works)
+- [Live shadow tracker](#live-shadow-tracker)
+- [Cups: EFL Cup & DFB Pokal](#cups-efl-cup--dfb-pokal)
+- [Reference](#reference)
+- [Automation](#automation)
+- [Environment & dependencies](#environment--dependencies)
+- [Testing](#testing)
+
 ## Key achievements
 
 - **Elite calibration.** The meta model reaches a walk-forward log loss of
@@ -25,58 +37,7 @@ the code is structured to keep that conclusion honest.
   look efficient: soft books copy sharp lines, and after removing the margin no
   tested rule produces a statistically significant positive ROI.
 
-## Core architecture
-
-- **Dixon-Coles engine** (`model_v2.py`): a bivariate Poisson model with a
-  low-score dependency correction and decayed team ratings.
-- **Meta model** (`experiment_meta.py`, `backtest_picks.py`): stacks logits of
-  the DC model, the feature model, and market-implied probabilities with a
-  walk-forward multinomial logistic regression. It also consumes enriched sharp
-  signals (Pinnacle deviation, Pinnacle shin-fair probabilities, midweek flags).
-- **Data enrichment pipeline** (`data_enrichment/`): joins Pinnacle odds,
-  midweek/cup fatigue flags, and rolling xG differentials into
-  `all_matches_enriched.csv`, without touching the clean source data.
-- **Matrix pricing** (`matrix_pricer.py`): builds the bivariate Poisson
-  scoreline matrix and meta-calibrates it so the summed 1X2 marginals match the
-  meta model exactly. Over/Under and BTTS probabilities are derived from that
-  calibrated matrix.
-- **Corner model** (`model_corners_v3.py`): a Poisson model that predicts team
-  corner counts and corner over/under lines from rolling shot statistics
-  (fitted parameters in `ta/corner_params.json`). It is built and calibrated:
-  on walk-forward test seasons it beats the league base-rate on log loss,
-  Brier, MAE, and RMSE. It is **awaiting historical corner odds** for a final
-  ROI backtest — the ingestion scaffolding (`data_enrichment/fetch_corner_odds.py`)
-  is in place and keys off acquired data (API or external CSV).
-- **JIT hybrid capture** (`jit_orchestrator.py`): every 30 minutes it loads the
-  Understat fixture cache, keeps matches that start within the next 45 minutes,
-  scrapes the free source (TipsterArea) for 1X2 and O/U first, then calls
-  API-Football v3 only for the premium markets the scrape lacks — Corners
-  Over/Under (`bet=45`) and Both Teams Score (`bet=8`) — deduping and appending
-  to `ta/external_corner_odds.csv` and `ta/external_btts_odds.csv`. The API is
-  hit only for leagues with a match in the window, so daily quota stays near
-  zero until a match is close. Raw responses are cached; `--selfcheck` verifies
-  the window logic offline. On the free plan the API serves only current-day
-  data, so capture backfills forward from today rather than retroactively.
-- **Decoupled policy engine**: betting decisions are filtered *after* the model
-  (edge thresholds, overlays, staking) so calibration stays intact. Candidate
-  policies must clear the dual gate before they can go live.
-
-## Live shadow tracker
-
-`run_daily_shadow.py` runs the production monitor as a daily cron-safe chain:
-generate predictions → filter and record picks → resolve and grade. Each step is
-isolated with try/except, so a failure in one stage never crashes the pipeline.
-It is deliberately strict: with no validated edge, it emits **0 picks** and
-records nothing to the ledger. When a strategy clears the gates, this is the
-component that goes to a real ledger without risking live money.
-
-## Reference
-
-[QUANT_RESEARCH_REPORT.md](QUANT_RESEARCH_REPORT.md) contains the full scientific
-summary: the modeling milestones, the de-vigging and small-sample lessons, and
-the market-efficiency evidence.
-
-## Getting started
+## Quick start
 
 Run the end-to-end pipeline:
 
@@ -98,26 +59,35 @@ python jit_orchestrator.py --dry-run   # log window, skip API
 python jit_orchestrator.py --selfcheck # offline window-logic check
 ```
 
-Weekly refit runs every Monday at 04:00 WIB (Sunday 21:00 UTC) via
-`weekly_refit.sh` — the full `--run-all` pipeline — so team-rating decay and
-model parameters stay fresh:
+## How it works
+
+Main pipeline order (`pipeline_orchestrator.py`):
 
 ```
-0 21 * * 0 cd /path/to/football-data && ./weekly_refit.sh >> logs/weekly_refit.log 2>&1
+data → xg → model → corner_model → scoring → odds → ta_scrape → ta_model
+    → cups → picks → validation → status
 ```
 
-Requires `API_FOOTBALL_KEY` in the environment (or `.env`) and the Understat
-fixture cache (`python refresh_fixtures.py`). Suggested cron line:
+| Component | File | Role |
+|---|---|---|
+| Dixon-Coles engine | `model_v2.py` | bivariate Poisson model with low-score dependency correction and decayed team ratings. Fit mode `DC_FIT_MODE` (`goals` or `blend`; default `blend` = 0.5·goals + 0.5·xG where xG exists) |
+| Meta model | `experiment_meta.py`, `backtest_picks.py` | stacks logits of the DC model, the feature model, and market-implied probabilities with a walk-forward multinomial logistic regression; consumes sharp signals (Pinnacle deviation, shin-fair probabilities, midweek flags) |
+| Matrix pricing | `matrix_pricer.py` | builds the bivariate Poisson scoreline matrix and meta-calibrates it so summed 1X2 marginals match the meta model; O/U and BTTS derive from that matrix |
+| Corner model | `model_corners_v3.py` | Poisson model predicting team corner counts and corner O/U lines from rolling shot statistics (fitted parameters in `ta/corner_params.json`). Beats league base-rate on walk-forward log loss, Brier, MAE, RMSE; awaiting historical corner odds for a final ROI backtest (`data_enrichment/fetch_corner_odds.py` scaffolding in place) |
+| Data enrichment | `data_enrichment/` | joins Pinnacle odds, midweek/cup fatigue flags, and rolling xG differentials into `all_matches_enriched.csv`, without touching the clean source data |
+| JIT hybrid capture | `jit_orchestrator.py` | every 30 minutes loads the Understat fixture cache, keeps matches starting within 45 minutes, scrapes the free source (TipsterArea) for 1X2 and O/U first, then calls API-Football v3 only for premium markets the scrape lacks (Corners O/U, BTTS), deduping into `ta/external_corner_odds.csv` and `ta/external_btts_odds.csv`. API is hit only for leagues with a match in the window; raw responses cached; `--selfcheck` verifies window logic offline. On the free plan the API serves only current-day data, so capture backfills forward from today |
+| Policy engine | `backtest_picks.py` | filters betting decisions after the model (edge thresholds, overlays, staking) so calibration stays intact; candidate policies must clear the dual gate before going live |
 
-```
-*/30 * * * * cd /path/to/football-data && python jit_orchestrator.py >> logs/jit_capture.log 2>&1
-```
+## Live shadow tracker
 
-Dependencies: `numpy` (see `requirements.txt`). The optional API server
-(`api_server.py`) and scrapers use `fastapi`, `uvicorn`, `pydantic`, `requests`,
-and `httpx`. `test_core.py` holds the smoke tests (`python test_core.py`).
+`run_daily_shadow.py` runs the production monitor as a daily cron-safe chain:
+generate predictions → filter and record picks → resolve and grade. Each step is
+isolated with try/except, so a failure in one stage never crashes the pipeline.
+It is deliberately strict: with no validated edge, it emits **0 picks** and
+records nothing to the ledger. When a strategy clears the gates, this is the
+component that goes to a real ledger without risking live money.
 
-## Piala: EFL Cup & DFB Pokal
+## Cups: EFL Cup & DFB Pokal
 
 Prediksi piala (`predict_cups.py`) tidak memakai API-Football. Fixture dan odds
 diambil dari scrape tipsterarea (`ta/fixtures.csv`,
@@ -136,3 +106,50 @@ Hasil piala tidak masuk data latih liga, dan baris piala tidak dicampur ke
 `predictions_upcoming.csv` / `predictions_corners_upcoming.csv`. Output piala
 terpisah (`predictions_cups_upcoming.csv`, `predictions_corners_cups.csv`),
 dan grading piala diringkas per kompetisi di `ledger_summary.json`.
+
+## Reference
+
+[QUANT_RESEARCH_REPORT.md](QUANT_RESEARCH_REPORT.md) contains the full scientific
+summary: the modeling milestones, the de-vigging and small-sample lessons, and
+the market-efficiency evidence.
+
+[EXPERIMENT_XG_DC.md](EXPERIMENT_XG_DC.md) documents the xG-vs-goals Dixon-Coles
+fit experiment and the go-live gates (meta stack, derivatives, held-out seasons)
+behind the `blend` fit-mode default.
+
+## Automation
+
+Weekly refit runs every Monday at 04:00 WIB (Sunday 21:00 UTC) via
+`weekly_refit.sh` — the full `--run-all` pipeline — so team-rating decay and
+model parameters stay fresh:
+
+```
+0 21 * * 0 cd /path/to/football-data && ./weekly_refit.sh >> logs/weekly_refit.log 2>&1
+```
+
+JIT capture cron:
+
+```
+*/30 * * * * cd /path/to/football-data && python jit_orchestrator.py >> logs/jit_capture.log 2>&1
+```
+
+## Environment & dependencies
+
+Requires `API_FOOTBALL_KEY` in the environment (or `.env`). Optional overrides:
+`FOOTBALL_DC_FIT_MODE` (`goals`|`blend`, default `blend`).
+
+Dependencies: `numpy` (see `requirements.txt`). The optional API server
+(`api_server.py`) and scrapers use `fastapi`, `uvicorn`, `pydantic`, `requests`,
+and `httpx`.
+
+## Testing
+
+`test_core.py` holds the smoke tests:
+
+```
+python test_core.py
+```
+
+The xG cache is rebuilt from tracked Understat season dumps with
+`data_enrichment/build_xg_matches.py` (local, offline; missing season files are
+skipped without failing the pipeline).
