@@ -31,7 +31,7 @@ def fetch(slug):
     """Ambil datesData langsung dari API internal Understat (ditemukan 17 Okt:
     halaman HTML jadi shell tanpa data, tapi endpoint getLeagueData terbuka)."""
     url = f"https://understat.com/getLeagueData/{slug}/2026"
-    _, raw = urlopen_with_retry(
+    raw, _ = urlopen_with_retry(
         url, tries=3, timeout=45,
         extra_headers={"X-Requested-With": "XMLHttpRequest",
                        "Accept": "application/json"},
@@ -64,7 +64,7 @@ def main():
             allp = os.path.join(XG, f"{slug}_2026_all.json")
             with open(allp, encoding="utf-8") as f:
                 fresh = json.load(f)
-            src = f"fallback disk ({e.__class__.__name__})"
+            src = f"fallback disk ({e})"
         old_ids = {dkey(d) for d in old}
         new_ids = {dkey(d) for d in fresh}
         add = sorted(new_ids - old_ids)

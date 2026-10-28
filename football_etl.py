@@ -407,7 +407,8 @@ class MatchCache:
 
 # --- Fixture & Odds Loading ---
 def load_fixtures(season_year: str = "2026") -> List[Dict]:
-    """Load fixture dari xg_raw/{slug}_{year}_fixtures.json."""
+    """Load fixture dari xg_raw/{slug}_{year}_fixtures.json (hanya >= hari ini)."""
+    today = date.today()
     slug_map = {"E0": "EPL", "SP1": "La_liga", "D1": "Bundesliga",
                 "I1": "Serie_A", "F1": "Ligue_1"}
 
@@ -432,9 +433,12 @@ def load_fixtures(season_year: str = "2026") -> List[Dict]:
             away = nmap.get(f"{div}|{item['a']['title']}")
             if not home or not away:
                 continue
+            dt = datetime.strptime(item["datetime"], "%Y-%m-%d %H:%M:%S").date()
+            if dt < today:
+                continue  # jangan muat fixture yang sudah lewat
             fixtures.append({
                 "div": div,
-                "date": datetime.strptime(item["datetime"], "%Y-%m-%d %H:%M:%S").date(),
+                "date": dt,
                 "time": item["datetime"].split()[1][:5],
                 "home": normalize_name(home),
                 "away": normalize_name(away),

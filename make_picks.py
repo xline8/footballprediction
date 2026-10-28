@@ -13,7 +13,7 @@ import csv
 import hashlib
 import json
 import os
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 
 import paths
 
@@ -44,8 +44,11 @@ def main():
                     existing.add(json.loads(line)["pick_id"])
 
     created = []
+    today = date.today().isoformat()
     with open(PRED, encoding="utf-8") as f:
         for r in csv.DictReader(f):
+            if (r.get("date") or "") < today:
+                continue  # jangan buat pick utk pertandingan yang sudah dimainkan
             base = dict(div=r["div"], date=r["date"], time=r["time"],
                         home=r["home"], away=r["away"])
             cand = []
