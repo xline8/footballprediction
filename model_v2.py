@@ -18,7 +18,7 @@ from paths import BASE
 # Mode fit DC: "goals" (perilaku produksi lama) | "blend" (0.5*gol + 0.5*xG).
 # Overridable via env FOOTBALL_DC_FIT_MODE. Default "goals" sampai gate go-live
 # lulus (lihat go_live_gates.py); switch ke "blend" di commit final.
-DC_FIT_MODE = os.environ.get("FOOTBALL_DC_FIT_MODE", "goals")
+DC_FIT_MODE = os.environ.get("FOOTBALL_DC_FIT_MODE", "blend")
 
 DATA = os.path.join(BASE, "all_matches_clean.csv")
 CFG = os.path.join(BASE, "v2_config.json")
