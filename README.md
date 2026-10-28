@@ -116,3 +116,23 @@ fixture cache (`python refresh_fixtures.py`). Suggested cron line:
 Dependencies: `numpy` (see `requirements.txt`). The optional API server
 (`api_server.py`) and scrapers use `fastapi`, `uvicorn`, `pydantic`, `requests`,
 and `httpx`. `test_core.py` holds the smoke tests (`python test_core.py`).
+
+## Piala: EFL Cup & DFB Pokal
+
+Prediksi piala (`predict_cups.py`) tidak memakai API-Football. Fixture dan odds
+diambil dari scrape tipsterarea (`ta/fixtures.csv`,
+`ta/odds_1x2_snapshots.csv`); hasil untuk grading dibaca dari `ta/results.csv`.
+
+Tim dipetakan ke divisi liga asalnya (E0/E1/E2/E3 Inggris, D1/D2 Jerman).
+Laga lintas divisi memakai lambda home dari fit divisi tim kandang dan defense
+divisi tim tandang, diskalakan ke rata-rata gol divisi kandang. Ini
+penyederhanaan yang disadari; grading terpisah menunjukkan kualitasnya.
+
+Corner: base-rate corner divisi tim kandang (HC/AC, half-life 270) kali faktor
+relatif rolling shots 5 laga liga terakhir per tim. Bila salah satu tim punya
+<3 laga liga ber-data shots, corner dilewati; prediksi gol tetap jalan.
+
+Hasil piala tidak masuk data latih liga, dan baris piala tidak dicampur ke
+`predictions_upcoming.csv` / `predictions_corners_upcoming.csv`. Output piala
+terpisah (`predictions_cups_upcoming.csv`, `predictions_corners_cups.csv`),
+dan grading piala diringkas per kompetisi di `ledger_summary.json`.
