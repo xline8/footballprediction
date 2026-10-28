@@ -25,12 +25,18 @@ SLUG = {"E0": "EPL", "SP1": "La_liga", "D1": "Bundesliga",
         "I1": "Serie_A", "F1": "Ligue_1"}
 CLOSE_COLS = ("PSCH", "PSCD", "PSCA", "AvgC>2.5")
 
-with open(os.path.join(PROJ, "xg_raw", "map_full.json"), encoding="utf-8") as f:
-    NMAP = json.load(f)
+from football_etl import normalize_name
+
+NMAP = {}
+for _fn in ("map_full.json", "map_ext.json"):
+    _p = os.path.join(PROJ, "xg_raw", _fn)
+    if os.path.exists(_p):
+        with open(_p, encoding="utf-8") as f:
+            NMAP.update(json.load(f))
 fd2ug = {}
 for k, v in NMAP.items():
     div, ug = k.split("|", 1)
-    fd2ug.setdefault(div, {})[v] = ug
+    fd2ug.setdefault(div, {})[normalize_name(v)] = ug
 
 # hasil: {(div, date, home_ug, away_ug) -> (yh, ya)}
 results = {}
@@ -45,7 +51,7 @@ for div, slug in SLUG.items():
             continue
         date = d["datetime"][:10]
         results[(div, date, d["h"]["title"], d["a"]["title"])] = \
-            (d["goals"]["h"], d["goals"]["a"])
+            (int(d["goals"]["h"]), int(d["goals"]["a"]))
 
 # odds closing (ref): raw/{div}_2627.csv dd/mm/yyyy
 close_ref = {}
@@ -86,11 +92,16 @@ def settle(market, side, yh, ya, odds):
 
 
 new_grades = []
+unmapped = defaultdict(set)
 for pk in picks:
     if pk["pick_id"] in graded_ids:
         continue
     home_ug = fd2ug.get(pk["div"], {}).get(pk["home"])
     away_ug = fd2ug.get(pk["div"], {}).get(pk["away"])
+    if not home_ug:
+        unmapped[pk["div"]].add(f"home={pk['home']}")
+    if not away_ug:
+        unmapped[pk["div"]].add(f"away={pk['away']}")
     res = results.get((pk["div"], pk["date"], home_ug, away_ug)) if home_ug and away_ug else None
     if res is None:
         continue  # belum main / belum keluar hasilnya
@@ -139,6 +150,10 @@ with open(SUMMARY, "w", encoding="utf-8") as f:
     json.dump(summary, f, ensure_ascii=False, indent=2)
 
 print(f"graded baru: {len(new_grades)} | total graded: {len(all_grades)} | pending: {summary['n_pending']}")
+if unmapped:
+    print("!! nama tidak terpetakan ke Understat (per divisi):")
+    for div, names in sorted(unmapped.items()):
+        print(f"   {div}: {sorted(names)}")
 for m, a in summary["markets"].items():
     print(f"  {m}: n={a['n']} ROI={a['roi']*100 if a['roi'] is not None else 0:.2f}%" if a["roi"] is not None
           else f"  {m}: n={a['n']}")
