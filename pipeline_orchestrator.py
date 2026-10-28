@@ -74,6 +74,7 @@ class PipelineOrchestrator:
 
         try:
             results['data'] = self.step_check_data()
+            results['xg'] = self.step_build_xg()
             results['model'] = self.step_fit_models()
             results['corner_model'] = self.step_score_corners()
             results['scoring'] = self.step_score_upcoming()
@@ -141,6 +142,19 @@ class PipelineOrchestrator:
             'freshness_warnings': warnings
         }
 
+    def step_build_xg(self) -> dict:
+        """Bangun xg_raw/xg_matches.csv dari dump Understat terversi (lokal)."""
+        log("\n[Step xg] Membangun xg_matches.csv dari dump Understat...")
+        try:
+            from data_enrichment.build_xg_matches import build as build_xg
+            r = build_xg()
+            log(f"  OK xG matches: {r['n_rows']} rows", "INFO")
+            return {"status": "success", **r}
+        except Exception as e:
+            log(f"  X build_xg_matches gagal: {str(e)}", "ERROR")
+            traceback.print_exc()
+            return {"status": "failed", "error": str(e)}
+
     def step_fit_models(self) -> dict:
         """Fit atau update model untuk semua divisi TOP5."""
         log("\n[Step 2/6] Fitting/updating models...")
@@ -168,16 +182,21 @@ class PipelineOrchestrator:
                 needs_fit = True
                 if was_loaded and state.last_fit_date:
                     days_since_fit = (cutoff - state.last_fit_date).days
-                    needs_fit = days_since_fit > 7 or state.needs_fit(
+                    needs_fit = days_since_fit > 7 or state.mode_mismatch() or state.needs_fit(
                         [(m['home'], m['away'], m['yh'], m['ya'], m['date'])
                          for m in matches_with_scores[-100:]], cutoff
                     )
 
                 if needs_fit:
                     log(f"  Fitting {div} (cutoff: {cutoff})...", "INFO")
-                    from model_v2 import DC
+                    from model_v2 import DC, xg_key
+                    from features import _load_xg_map
+                    xg_map = _load_xg_map()
                     model = DC()
-                    history = [(m['home'], m['away'], m['yh'], m['ya'], m['date'])
+                    history = [(m['home'], m['away'], m['yh'], m['ya'],
+                                xg_map.get(xg_key(div, m['date'], m['home'], m['away']), (None, None))[0],
+                                xg_map.get(xg_key(div, m['date'], m['home'], m['away']), (None, None))[1],
+                                m['date'])
                               for m in matches_with_scores]
                     model.fit(history[-self.max_train:], cutoff, self.half_life)
                     state.update_from_model(model, cutoff, self.half_life)

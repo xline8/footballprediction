@@ -33,6 +33,7 @@ class ModelState:
         self.last_fit_date = None  # Tanggal terakhir model di-fit
         self.last_update = None    # Tanggal update terakhir (setelah incremental)
         self.half_life = 270.0     # Default dari config
+        self.dc_fit_mode = None    # mode fit DC yang menghasilkan state ("goals"/"blend")
 
         # Model parameters
         self.attack: Dict[str, float] = defaultdict(float)  # team -> attack strength
@@ -67,6 +68,7 @@ class ModelState:
             "last_fit_date": self.last_fit_date.isoformat() if self.last_fit_date else None,
             "last_update": self.last_update.isoformat() if self.last_update else None,
             "half_life": self.half_life,
+            "dc_fit_mode": self.dc_fit_mode,
             "attack": dict(self.attack),
             "defense": dict(self.defense),
             "home_advantage": self.home_advantage,
@@ -96,6 +98,7 @@ class ModelState:
             self.last_fit_date = self._parse_date(data.get("last_fit_date"))
             self.last_update = self._parse_date(data.get("last_update"))
             self.half_life = data.get("half_life", self.half_life)
+            self.dc_fit_mode = data.get("dc_fit_mode")
             self.attack = defaultdict(float, data.get("attack", {}))
             self.defense = defaultdict(float, data.get("defense", {}))
             self.home_advantage = data.get("home_advantage", self.home_advantage)
@@ -116,6 +119,11 @@ class ModelState:
         self.home_advantage = dc_model.h
         self.rho = dc_model.rho
         self.half_life = hl
+        try:
+            from model_v2 import DC_FIT_MODE
+            self.dc_fit_mode = DC_FIT_MODE
+        except Exception:
+            self.dc_fit_mode = None
         self.last_fit_date = fit_date
         self.last_update = datetime.now()
         self._initialized = True
@@ -195,6 +203,21 @@ class ModelState:
         if not self.last_fit_date:
             return True
         return abs((current_date - self.last_fit_date).days) > max_age_days
+
+    def mode_mismatch(self) -> bool:
+        """True bila mode fit DC yang tersimpan berbeda dari mode aktif.
+
+        State lama (mode tak tercatat) dianggap mismatch hanya saat mode aktif
+        'blend' — supaya flip default memaksa refit, tapi perilaku 'goals' lama
+        (state tanpa stamp) tidak berubah.
+        """
+        try:
+            from model_v2 import DC_FIT_MODE
+        except Exception:
+            return False
+        if self.dc_fit_mode == DC_FIT_MODE:
+            return False
+        return self.dc_fit_mode is not None or DC_FIT_MODE == "blend"
 
     def needs_fit(self, games_history: list, cutoff: date) -> bool:
         """Cek apakah perlu refit (tim baru atau window training berubah)."""

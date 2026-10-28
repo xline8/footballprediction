@@ -12,8 +12,13 @@ from collections import defaultdict
 from datetime import datetime
 
 # Konvensi kanonik untuk probabilitas & blending (lihat football_etl).
-from football_etl import pois, tau, norm3, norm2, blend3, blend2
+from football_etl import pois, tau, norm3, norm2, blend3, blend2, normalize_name
 from paths import BASE
+
+# Mode fit DC: "goals" (perilaku produksi lama) | "blend" (0.5*gol + 0.5*xG).
+# Overridable via env FOOTBALL_DC_FIT_MODE. Default "goals" sampai gate go-live
+# lulus (lihat go_live_gates.py); switch ke "blend" di commit final.
+DC_FIT_MODE = os.environ.get("FOOTBALL_DC_FIT_MODE", "goals")
 
 DATA = os.path.join(BASE, "all_matches_clean.csv")
 CFG = os.path.join(BASE, "v2_config.json")
@@ -45,6 +50,9 @@ def _ensure_loaded():
     if by_div is not None:
         return
     loaded = []
+    # xG per match (Understat) utk mode blend; None bila tak ada (=> gol).
+    from features import _load_xg_map
+    xg = _load_xg_map()
     with open(DATA, encoding="utf-8", newline="") as f:
         for r in csv.DictReader(f):
             if r["Div"] not in TOP5 or not r["Date"] or r["FTR"] not in ("H", "D", "A"):
@@ -52,10 +60,14 @@ def _ensure_loaded():
             yh, ya = num(r["FTHG"]), num(r["FTAG"])
             if yh is None or ya is None:
                 continue
+            k = (r["Div"], r["Date"], normalize_name(r["HomeTeam"]),
+                 normalize_name(r["AwayTeam"]))
+            xgh, xga = xg.get(k, (None, None))
             loaded.append({
                 "div": r["Div"], "date": datetime.strptime(r["Date"], "%Y-%m-%d").date(),
                 "season": r["Season"], "home": r["HomeTeam"], "away": r["AwayTeam"],
                 "yh": int(yh), "ya": int(ya), "ftr": r["FTR"],
+                "xgh": xgh, "xga": xga,
                 "close": (num(r["PSCH"]), num(r["PSCD"]), num(r["PSCA"])),
                 "avgc": (num(r["AvgCH"]), num(r["AvgCD"]), num(r["AvgCA"])),
                 "b365c": (num(r["B365CH"]), num(r["B365CD"]), num(r["B365CA"])),
@@ -104,6 +116,11 @@ def market_ah(m):
     return None
 
 
+def xg_key(div, date_iso, home, away):
+    """Kunci look-up xG: (div, yyyy-mm-dd, home_norm, away_norm)."""
+    return (div, str(date_iso)[:10], normalize_name(home), normalize_name(away))
+
+
 class DC:
     def __init__(self):
         self.a = defaultdict(float)
@@ -117,28 +134,46 @@ class DC:
 
     def fit(self, games, cutoff, hl):
         games = games[-MAX_TRAIN:]
+        mode = DC_FIT_MODE
+        # Nilai observasi per laga sesuai mode: blend bila xG tersedia,
+        # selain itu gol (fallback aman — produksi tak boleh drop match).
+        obs_vals = []
+        for g in games:
+            yh, ya = g[2], g[3]
+            if mode == "blend" and len(g) >= 7 \
+                    and g[4] is not None and g[5] is not None:
+                obs_vals.append((0.5 * yh + 0.5 * g[4],
+                                 0.5 * ya + 0.5 * g[5]))
+            else:
+                obs_vals.append((float(yh), float(ya)))
+        # Bakukan ke 5-tuple (hi, ai, yh, ya, dt); terima 5/7.
+        five = [(g[0], g[1], g[2], g[3],
+                 g[6] if len(g) >= 7 else g[4]) for g in games]
         for sweep in range(14):
             obs_att = defaultdict(float); exp_att = defaultdict(float)
             obs_def = defaultdict(float); exp_def = defaultdict(float)
             sh_obs = sh_exp = 0.0
-            for hi, ai, yh, ya, dt in games:
+            for i, (hi, ai, yh, ya, dt) in enumerate(five):
+                oh, oa = obs_vals[i]
                 w = 0.5 ** ((cutoff - dt).days / hl)
                 lh = math.exp(self.a[hi] + self.d[ai] + self.h)
                 la = math.exp(self.a[ai] + self.d[hi])
-                obs_att[hi] += w * yh; exp_att[hi] += w * lh
-                obs_att[ai] += w * ya; exp_att[ai] += w * la
-                obs_def[ai] += w * yh; exp_def[ai] += w * lh
-                obs_def[hi] += w * ya; exp_def[hi] += w * la
-                sh_obs += w * yh; sh_exp += w * lh
+                obs_att[hi] += w * oh; exp_att[hi] += w * lh
+                obs_att[ai] += w * oa; exp_att[ai] += w * la
+                obs_def[ai] += w * oh; exp_def[ai] += w * lh
+                obs_def[hi] += w * oa; exp_def[hi] += w * la
+                sh_obs += w * oh; sh_exp += w * lh
             for t in set(obs_att) | set(exp_att):
                 self.a[t] += 0.7 * math.log((obs_att[t] + 0.25) / (exp_att[t] + 0.25))
             for t in set(obs_def) | set(exp_def):
                 self.d[t] += 0.7 * math.log((obs_def[t] + 0.25) / (exp_def[t] + 0.25))
             self.h += 0.7 * math.log((sh_obs + 0.25) / (sh_exp + 0.25))
+        # Rho dipilih selalu pada FIT GOL (window latih sama) — sesuai eksperimen;
+        # untuk mode blend rho ini dipakai ulang (bukan dipilih dari "scoreline" xG).
         best_rho, best_ll = RHO_GRID[0], None
         for rho in RHO_GRID:
             ll = 0.0
-            for hi, ai, yh, ya, dt in games:
+            for hi, ai, yh, ya, dt in five:
                 if yh <= 1 or ya <= 1:
                     w = 0.5 ** ((cutoff - dt).days / hl)
                     lh = math.exp(self.a[hi] + self.d[ai] + self.h)
@@ -220,7 +255,8 @@ def run_wf(seasons, hl, freq, with_extra=False):
         while ptr[div] < len(lst) and matches[lst[ptr[div]]]["date"] < start:
             j = lst[ptr[div]]
             mm = matches[j]
-            games_hist[div].append((mm["home"], mm["away"], mm["yh"], mm["ya"], mm["date"]))
+            games_hist[div].append((mm["home"], mm["away"], mm["yh"], mm["ya"],
+                                    mm["xgh"], mm["xga"], mm["date"]))
             ptr[div] += 1
         model = models[div]
         if games_hist[div]:

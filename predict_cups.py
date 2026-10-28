@@ -34,7 +34,8 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE_DIR)
 
 from football_etl import normalize_name
-from model_v2 import DC
+from model_v2 import DC, xg_key
+from features import _load_xg_map
 
 CUP_LEAGUES = {"England - EFL Cup": "EFL Cup", "Germany - Cup Germany": "DFB Pokal"}
 DIVS = ("E0", "E1", "E2", "E3", "D1", "D2")
@@ -80,6 +81,7 @@ def _norm(x):
 # --- pemuatan all_matches (semua divisi yang dibutuhkan) ---
 def _load_matches():
     matches = []
+    xg_map = _load_xg_map()
     with open(DATA, encoding="utf-8", newline="") as f:
         for r in csv.DictReader(f):
             if r["Div"] not in DIVS or not r["Date"] or r["FTR"] not in ("H", "D", "A"):
@@ -89,12 +91,15 @@ def _load_matches():
             hc, ac = _num(r["HC"]), _num(r["AC"])
             if yh is None or ya is None:
                 continue
+            xgh, xga = xg_map.get(xg_key(r["Div"], r["Date"],
+                                         _norm(r["HomeTeam"]), _norm(r["AwayTeam"])),
+                                  (None, None))
             matches.append({
                 "div": r["Div"],
                 "date": datetime.strptime(r["Date"], "%Y-%m-%d").date(),
                 "season": r["Season"],
                 "home": _norm(r["HomeTeam"]), "away": _norm(r["AwayTeam"]),
-                "yh": int(yh), "ya": int(ya),
+                "yh": int(yh), "ya": int(ya), "xgh": xgh, "xga": xga,
                 "hs": int(hs) if hs is not None else None,
                 "as": int(as_) if as_ is not None else None,
                 "hc": int(hc) if hc is not None else None,
@@ -123,7 +128,8 @@ def _team_div_map(matches):
 
 
 def _division_games(matches, div):
-    return [(m["home"], m["away"], m["yh"], m["ya"], m["date"])
+    return [(m["home"], m["away"], m["yh"], m["ya"],
+             m["xgh"], m["xga"], m["date"])
             for m in matches if m["div"] == div]
 
 

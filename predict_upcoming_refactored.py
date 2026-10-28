@@ -26,8 +26,8 @@ from football_etl import (
 )
 from data_loader import get_loader
 from model_state import ModelState
-from model_v2 import DC, norm3, norm2, blend3, blend2  # Reuse existing implementation
-from features import build_feature_rows
+from model_v2 import DC, norm3, norm2, blend3, blend2, xg_key  # Reuse existing implementation
+from features import build_feature_rows, _load_xg_map
 import model_features_1x2 as mf  # shadow T3 (fitur), side-by-side
 
 
@@ -119,7 +119,11 @@ def generate_predictions(force_refit: bool = False, output_file: str = None) -> 
 
         # Get historical matches for this division before this fixture date
         hist_matches = loader.get_matches_by_div(div)
-        games = [(m['home'], m['away'], m['yh'], m['ya'], m['date'])
+        xg_map = _load_xg_map()
+        games = [(m['home'], m['away'], m['yh'], m['ya'],
+                  xg_map.get(xg_key(div, m['date'], m['home'], m['away']), (None, None))[0],
+                  xg_map.get(xg_key(div, m['date'], m['home'], m['away']), (None, None))[1],
+                  m['date'])
                 for m in hist_matches
                 if m.get('date') and m['date'] < start
                 and m.get('yh') is not None and m.get('ya') is not None
@@ -211,7 +215,7 @@ def _get_or_fit_model(loader, div: str, games: list, cutoff: date,
     state = ModelState(div)
     was_loaded = state.load()
 
-    needs_fit = force or not was_loaded or not state._initialized
+    needs_fit = force or not was_loaded or not state._initialized or state.mode_mismatch()
 
     if was_loaded and state.last_fit_date and not needs_fit:
         # Check if new games since last fit
