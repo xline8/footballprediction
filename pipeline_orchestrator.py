@@ -80,6 +80,7 @@ class PipelineOrchestrator:
             results['odds'] = self.step_integrate_odds()
             results['ta_scrape'] = self.scrape_live_odds()
             results['ta_model'] = self.step_ta_model()
+            results['cups'] = self.step_predict_cups()
             results['picks'] = self.step_generate_picks()
             results['validation'] = self.step_validation()
             results['status'] = 'completed'
@@ -425,6 +426,33 @@ class PipelineOrchestrator:
             return {'status': 'skip', 'reason': 'module_not_found'}
         except Exception as e:
             log(f"  X TA model build failed: {e}", "ERROR")
+            return {'status': 'failed', 'error': str(e)}
+
+    def step_predict_cups(self) -> dict:
+        """Predict EFL Cup / DFB Pokal fixtures (predict_cups.main in-process).
+
+        Membaca ta/fixtures.csv + ta/odds_1x2_snapshots.csv (mengambil hasil
+        scrape pasar piala) dan menulis predictions_cups_upcoming.csv /
+        predictions_corners_cups.csv. Tanpa fixture piala di window -> file
+        header-only (bukan gagal), jadi best_picks tidak pernah membaca baris
+        sisa dari babak piala lalu.
+        """
+        log("\n[Step cups] Predicting cup fixtures...")
+        try:
+            import predict_cups
+            rc = predict_cups.main()
+            if not isinstance(rc, dict):
+                return {'status': 'success', 'n_gol': 0, 'n_corner': 0}
+            n_gol = rc.get('n_gol', 0)
+            n_corner = rc.get('n_corner', 0)
+            log(f"  OK Cup predictions: {n_gol} gol, {n_corner} corner", "INFO")
+            return {'status': 'success', 'n_gol': n_gol, 'n_corner': n_corner}
+        except ImportError:
+            log("  ! predict_cups not available", "WARN")
+            return {'status': 'skip', 'reason': 'module_not_found'}
+        except Exception as e:
+            log(f"  X Cup prediction failed: {str(e)}", "ERROR")
+            traceback.print_exc()
             return {'status': 'failed', 'error': str(e)}
 
     def run_incremental(self, hours_back: int = 24) -> dict:
