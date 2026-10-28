@@ -10,8 +10,9 @@ Aturan:
     D1/D2) yang diprediksi; lainnya dicatat skipped.
   - Model gol: model_v2.DC di-fit per divisi dari all_matches_clean.csv.
     Laga lintas divisi: lambda home memakai attack home dari fit divisi tim
-    kandang vs defense away dari fit divisi tim tandang, diskalakan dengan
-    rata-rata gol liga divisi tim kandang; sebaliknya untuk away. Ini adalah
+    kandang vs defense away dari fit divisi tim tandang, sebaliknya untuk
+    away; total lambda kemudian di-anchor ke rata-rata total gol kedua
+    divisi. Ini adalah
     penyederhanaan yang disadari: kalibrasi lintas divisi tidak dimodelkan
     (grading terpisah akan menunjukkan kualitasnya).
   - Corner: rolling shots 5 laga liga terakhir per tim (divisi asal) +
@@ -58,7 +59,7 @@ OUT_CORNER = os.path.join(BASE_DIR, "predictions_corners_cups.csv")
 
 HALF_LIFE = 270.0
 MAX_TRAIN = 4000
-LINES = (8.5, 9.5, 10.5)
+LINES = (6.5, 7.5, 8.5, 9.5, 10.5, 11.5)
 CORNER_BAND = (8.5, 9.5, 10.5)
 
 
@@ -158,41 +159,50 @@ def _get_model(matches, div, cutoff):
 
 
 def cross_lambdas(matches, dh, da, home, away, cutoff):
-    """lambda lintas divisi, diskalakan dgn rata-rata gol liga divisi kandang."""
+    """lambda lintas divisi, diskalakan ke rata-rata total gol dua divisi."""
     mh = _get_model(matches, dh, cutoff)
     ma = _get_model(matches, da, cutoff)
     avg_h = _avg_cache[dh]
     avg_a = _avg_cache[da]
     lh_raw = math.exp(mh.a.get(home, 0.0) + ma.d.get(away, 0.0) + mh.h)
     la_raw = math.exp(ma.a.get(away, 0.0) + mh.d.get(home, 0.0))
-    # anchor ke level gol divisi kandang (penyederhanaan lintas divisi)
+    # Anchor total lambda ke RATA-RATA total gol kedua divisi (bukan
+    # jumlahnya): s = target_total / tot, target_total = (avg_h + avg_a) / 2.
     tot = lh_raw + la_raw
     if tot <= 0:
         s = 1.0
     else:
-        s = (avg_h + avg_a) / 2.0 / (tot / 2.0)
+        s = ((avg_h + avg_a) / 2.0) / tot
     return lh_raw * s, la_raw * s
 
 
 # --- corner (kode setara model_corners_v3, dibaca dari all_matches) ---
 def _rolling_shots(matches, team, cutoff):
-    """5 laga liga terakhir tim sebelum cutoff; daftar (hs, as_)."""
+    """5 laga liga terakhir tim sebelum cutoff, dari sudut pandang tim itu:
+    daftar (shots_tim_ini, shots_lawan). Laga tanpa data shots dilewati."""
     out = []
     for m in reversed(matches):
         if m["date"] >= cutoff:
             continue
         if m["home"] == team:
-            out.append((m["hs"], m["as"]))
+            own, opp = m["hs"], m["as"]
         elif m["away"] == team:
-            out.append((m["as"], m["hs"]))
+            own, opp = m["as"], m["hs"]
+        else:
+            continue
+        if own is None or opp is None:
+            continue
+        out.append((own, opp))
         if len(out) >= 5:
             break
     return out
 
 
 def _stats_window(matches, div, cutoff):
-    """Base-rate corner divisi (HC/AC), setara stats_window model_corners_v3."""
+    """Base-rate corner divisi (HC/AC) + L (rata-rata shots per tim per laga),
+    setara stats_window model_corners_v3."""
     gh = ga = gsum = nry = dmu = 0.0
+    ws = wsum_shots = 0.0
     for m in matches:
         if m["div"] != div or m["date"] >= cutoff:
             continue
@@ -204,21 +214,28 @@ def _stats_window(matches, div, cutoff):
         gsum += 2 * w
         nry += w * (hc + ac) ** 2
         dmu += w * (gh + ga)
+        if m["hs"] is not None and m["as"] is not None:
+            ws += w * (m["hs"] + m["as"])
+            wsum_shots += 2 * w
     if gsum <= 0 or dmu <= 0:
-        return 5.0, 5.0, 10.0, 1.18
+        return 5.0, 5.0, 10.0, 1.18, 12.0
     base_h = gh * 2 / gsum
     base_a = ga * 2 / gsum
     r_base = nry / dmu
-    return base_h, base_a, base_h + base_a, r_base
+    L = ws / wsum_shots if wsum_shots > 0 else 12.0
+    return base_h, base_a, base_h + base_a, r_base, L
 
 
 REL_LO, REL_HI = 0.6, 1.7
 
 
-def _rel_factor(shots, L):
-    if not shots:
+def _rel_factor(shots, idx, L):
+    """Faktor relatif satu arah (setara rel_factors model_corners_v3):
+    idx 0 = shots yang dibuat tim itu, idx 1 = shots yang dibiarkan,
+    dinormalisasi ke L = rata-rata shots per tim per laga di divisi acuan."""
+    if not shots or L is None or L <= 0:
         return 1.0
-    vals = [a + b for a, b in shots if a is not None and b is not None]
+    vals = [x[idx] for x in shots if x[0] is not None and x[1] is not None]
     if not vals:
         return 1.0
     avg = sum(vals) / len(vals)
@@ -227,13 +244,14 @@ def _rel_factor(shots, L):
 
 def corner_mu(matches, home, away, dh, da, cutoff):
     """mu corner laga (setara mu_cs model_corners_v3): base-rate divisi kandang
-    dikalikan faktor relatif shots kedua tim."""
-    bh, ba, bmu, r_base = _stats_window(matches, dh, cutoff)
-    L = 11.0
-    fhp = _rel_factor([(a, b) for a, b in _rolling_shots(matches, home, cutoff) if a is not None], L)
-    fhc = _rel_factor([(b, a) for a, b in _rolling_shots(matches, home, cutoff) if a is not None], L)
-    fap = _rel_factor([(a, b) for a, b in _rolling_shots(matches, away, cutoff) if a is not None], L)
-    fac = _rel_factor([(b, a) for a, b in _rolling_shots(matches, away, cutoff) if a is not None], L)
+    dikalikan faktor relatif shots kedua tim; L dari data divisi kandang."""
+    bh, ba, bmu, r_base, L = _stats_window(matches, dh, cutoff)
+    shots_h = _rolling_shots(matches, home, cutoff)
+    shots_a = _rolling_shots(matches, away, cutoff)
+    fhp = _rel_factor(shots_h, 0, L)
+    fhc = _rel_factor(shots_h, 1, L)
+    fap = _rel_factor(shots_a, 0, L)
+    fac = _rel_factor(shots_a, 1, L)
     gamma = _corner_gamma()
     return (bh * (fhp * fac) ** gamma + ba * (fap * fhc) ** gamma)
 
