@@ -115,6 +115,14 @@ def load_corner_predictions() -> List[Dict]:
         return list(csv.DictReader(f))
 
 
+def _sort_and_filter_upcoming(rows: List[Dict], day_key: str = "date") -> List[Dict]:
+    """Urutkan (date, div, home) dan saring date >= hari ini. Dipakai SEBELUM slicing."""
+    today = datetime.now().date().isoformat()
+    out = [r for r in rows if (r.get(day_key) or "") >= today]
+    out.sort(key=lambda r: (r.get(day_key, ""), r.get("div", ""), r.get("home", "")))
+    return out
+
+
 def load_odds_data() -> List[Dict]:
     """Load current odds from FD raw files."""
     odds_data = []
@@ -210,10 +218,12 @@ async def get_predictions(
     rows = load_predictions()
 
     if div:
-        rows = [r for r in rows if r['div'] == div]
+        rows = [r for r in rows if r.get('div') == div]
 
     if date:
-        rows = [r for r in rows if r['date'] == date]
+        rows = [r for r in rows if r.get('date') == date]
+    else:
+        rows = _sort_and_filter_upcoming(rows)
 
     # Convert to proper format
     predictions = []
@@ -283,6 +293,7 @@ async def get_picks(
       - limit: Max results
     """
     picks = load_picks(status=status)
+    picks = _sort_and_filter_upcoming(picks)
 
     result = []
     for p in picks[:limit]:
@@ -378,6 +389,7 @@ async def get_corner_predictions(div: str = None, limit: int = 100):
       p_gt_6.5 ... p_gt_11.5 (P(total corners > line))
     """
     rows = load_corner_predictions()
+    rows = _sort_and_filter_upcoming(rows)
 
     if div:
         rows = [r for r in rows if r.get('div') == div]
