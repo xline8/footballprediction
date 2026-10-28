@@ -18,6 +18,32 @@ from football_etl import (
 from data_loader import get_loader
 from model_state import ModelState, save_model_state
 
+CUP_LEAGUES = ("England - EFL Cup", "Germany - Cup Germany")
+
+
+def _cup_fixture_ids(days):
+    """game_id fixture piala (EFL Cup / DFB Pokal) dalam jendela tanggal.
+
+    Bila tidak ada fixture piala, return kosong (perilaku tanggal tanpa piala
+    tidak berubah). Dipakai untuk memastikan odds pasar piala tersedia.
+    """
+    try:
+        import csv
+        fpath = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                             "ta", "fixtures.csv")
+        lo, hi = min(days), max(days)
+        ids = []
+        with open(fpath, encoding="utf-8", newline="") as f:
+            for r in csv.DictReader(f):
+                if r.get("league") not in CUP_LEAGUES:
+                    continue
+                d = r.get("date", "")
+                if lo.isoformat() <= d <= hi.isoformat():
+                    ids.append(r["game_id"])
+        return ids
+    except Exception:
+        return []
+
 
 def log(msg: str, level: str = "INFO"):
     ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -443,6 +469,9 @@ class PipelineOrchestrator:
             # (fresness check di sync_dates membuat fetch ulang hanya bila >1.5 jam).
             # Run pertama (model_markets kosong) -> fetch semua laga di window.
             market_ids = matched_ids()
+            # Sertakan fixture piala (EFL Cup / DFB Pokal) supaya odds pasar
+            # (DC/O-U/BTTS/corner)- tersedia untuk laga piala.
+            market_ids = list(market_ids) + _cup_fixture_ids(days)
             result_m = sync_dates(days, with_markets=True,
                                   market_ids=market_ids or None, verbose=False)
             result["markets_snapshots"] = result_m.get("snapshots", 0)
