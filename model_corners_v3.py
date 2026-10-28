@@ -306,7 +306,7 @@ def predict_upcoming():
             if d.get("isResult"):
                 continue
             dt = datetime.strptime(d["datetime"], "%Y-%m-%d %H:%M:%S").date()
-            if dt <= today:
+            if dt < today:
                 continue
             # Map Understat team name -> FD name
             home = _understat_to_fd(div, d["h"]["title"])
@@ -347,19 +347,22 @@ def predict_upcoming():
         for ln in LINES_UPCOMING:
             k = k_of(r_star, mu)
             probs[f"p_gt_{ln}"] = round(sum(pmf_k(mu, k)[int(ln) + 1:]), 4)
-        # Recommendation: Over/Under 8.5 based on p_over_8.5
-        p85 = probs.get("p_gt_8.5", 0.5)
-        if p85 > 0.60:
-            rec_line, rec_side, recommendation = 8.5, "Over", "Over 8.5"
-        elif p85 < 0.40:
-            rec_line, rec_side, recommendation = 8.5, "Under", "Under 8.5"
-        else:
-            rec_line, rec_side, recommendation = 8.5, "Skip", "SKIP"
+        # Recommendation: kombinasi (line, side) berkeyakinan tertinggi di
+        # antara SEMUA line 6.5–11.5 (p_over vs 1-p_over).
+        rec_line, rec_side, rec_prob = None, None, -1.0
+        for ln in LINES_UPCOMING:
+            po = probs[f"p_gt_{ln}"]
+            pu = 1.0 - po
+            if po >= pu and po > rec_prob:
+                rec_line, rec_side, rec_prob = ln, "Over", po
+            elif pu > po and pu > rec_prob:
+                rec_line, rec_side, rec_prob = ln, "Under", pu
+        recommendation = f"{rec_side} {rec_line}" if rec_line is not None else "SKIP"
         rows.append({
             "div": d, "date": fx["date"], "home": fx["home"], "away": fx["away"],
             "mu_shots_cs": round(mu, 2), "r_cs": round(r_star, 3),
             "rec_line": rec_line, "rec_side": rec_side, "recommendation": recommendation,
-            "rec_prob": round(p85, 4),
+            "rec_prob": round(rec_prob, 4),
             **probs,
         })
 
