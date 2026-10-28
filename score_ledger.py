@@ -39,19 +39,30 @@ for k, v in NMAP.items():
     fd2ug.setdefault(div, {})[normalize_name(v)] = ug
 
 # hasil: {(div, date, home_ug, away_ug) -> (yh, ya)}
-results = {}
-for div, slug in SLUG.items():
-    p = os.path.join(PROJ, "xg_raw", f"{slug}_2026_all.json")
-    if not os.path.exists(p):
-        continue
-    with open(p, encoding="utf-8") as f:
+def _load_results(path):
+    out = {}
+    if not os.path.exists(path):
+        return out
+    with open(path, encoding="utf-8") as f:
         data = json.load(f)
     for d in data:
         if not d.get("isResult") or d.get("goals", {}).get("h") is None:
             continue
         date = d["datetime"][:10]
-        results[(div, date, d["h"]["title"], d["a"]["title"])] = \
+        out[(date, d["h"]["title"], d["a"]["title"])] = \
             (int(d["goals"]["h"]), int(d["goals"]["a"]))
+    return out
+
+
+results = {}
+for div, slug in SLUG.items():
+    stem = os.path.join(PROJ, "xg_raw", f"{slug}_2026")
+    merged = _load_results(stem + "_all.json")
+    # _fixtures.json di-refresh harian dan lebih segar (sampai 10-25);
+    # bila kunci sama, hasil fixtures menang.
+    merged.update(_load_results(stem + "_fixtures.json"))
+    for (date, h, a), g in merged.items():
+        results[(div, date, h, a)] = g
 
 # odds closing (ref): raw/{div}_2627.csv dd/mm/yyyy
 close_ref = {}
