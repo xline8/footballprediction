@@ -83,3 +83,53 @@ Namun ini **eksperimen** — switch produksi tidak diimplementasikan di tugas in
 Langkah lanjut yang disarankan sebelum go-live: validasi pada fold validasi
 (2019/20–2020/21) sebagai konfirmasi, dan periksa efeknya pada pasar turunan
 (O/U, BTTS) yang ikut bergeser karena lambda model berubah.
+
+---
+
+# Go-live gates (switch produksi ke B)
+
+`model_v2.py` kini punya flag `DC_FIT_MODE` (`goals`|`blend`, override env
+`FOOTBALL_DC_FIT_MODE`). Fit `blend` = observasi 0,5·gol + 0,5·xG bila xG
+tersedia (fallback gol bila tidak), rho selalu dipilih pada fit gol window yang
+sama. Tiga gate dijalankan sebelum default di-flip; SEMUA lulus.
+
+## Gate A — meta stack (blend vs goals)
+
+Bangun ulang `records_cache.jsonl` (produksi `cache_records`) kedua mode pada
+universe identik, refit meta 9-logit walk-forward bulanan, stacked 1X2 log loss.
+
+| mode | stacked LL | n |
+|---|---|---|
+| goals | 1.00166 | 68.763 |
+| blend | 1.00165 | 68.763 |
+
+PASS (blend ≤ goals).
+
+## Gate B — derivatif (G vs B, fold eksperimen 2021/22–2025/26)
+
+Harga O/U 2.5 & BTTS dari matriks scoreline varian masing-masing.
+
+| market | LL goals | LL blend | Δ | Brier goals | Brier blend | n |
+|---|---|---|---|---|---|---|
+| over 2.5 | 0.68370 | 0.67775 | −0.00595 | 0.24495 | 0.24237 | 8.889 |
+| BTTS | 0.69088 | 0.68464 | −0.00624 | 0.24823 | 0.24577 | 8.889 |
+
+PASS (kedua market membaik; tali degradasi > +0.002).
+
+## Gate C — held-out seasons (2017/18–2020/21)
+
+| mode | LL | n |
+|---|---|---|
+| goals | 1.02333 | 7.196 |
+| blend | 0.99300 | 7.196 |
+
+PASS (blend ≤ goals, Δ −0.03034).
+
+## Verdict
+
+Semua gate lulus → default `DC_FIT_MODE` di-flip ke `blend`. Verifikasi
+end-to-end: `test_core.py` lulus, pipeline `--run-all` exit 0, step cups 13/13,
+records cache direbuild di bawah blend (stamp `records_cache.meta.json` =
+`{"dc_fit_mode":"blend"}`).
+
+Runtime gates: ~983s (dua rebuild cache penuh). Runner: `go_live_gates.py`.
