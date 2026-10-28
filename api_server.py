@@ -51,7 +51,13 @@ class Prediction(BaseModel):
     pd_bl: Optional[float] = None
     pa_bl: Optional[float] = None
     p_over_dc: float
+    p_over15_dc: Optional[float] = None
+    p_over35_dc: Optional[float] = None
     p_over_bl: Optional[float] = None
+    p_dc_1x: Optional[float] = None
+    p_dc_x2: Optional[float] = None
+    p_dc_12: Optional[float] = None
+    p_btts: Optional[float] = None
     b365h: Optional[float] = None
     b365d: Optional[float] = None
     b365a: Optional[float] = None
@@ -240,7 +246,13 @@ async def get_predictions(
             'pd_bl': float(r['pd_bl']) if r.get('pd_bl') else None,
             'pa_bl': float(r['pa_bl']) if r.get('pa_bl') else None,
             'p_over_dc': float(r['p_over_dc']) if r.get('p_over_dc') else None,
+            'p_over15_dc': float(r['p_over15_dc']) if r.get('p_over15_dc') else None,
+            'p_over35_dc': float(r['p_over35_dc']) if r.get('p_over35_dc') else None,
             'p_over_bl': float(r['p_over_bl']) if r.get('p_over_bl') else None,
+            'p_dc_1x': float(r['p_dc_1x']) if r.get('p_dc_1x') else None,
+            'p_dc_x2': float(r['p_dc_x2']) if r.get('p_dc_x2') else None,
+            'p_dc_12': float(r['p_dc_12']) if r.get('p_dc_12') else None,
+            'p_btts': float(r['p_btts']) if r.get('p_btts') else None,
             'b365h': float(r['b365h']) if r.get('b365h') else None,
             'b365d': float(r['b365d']) if r.get('b365d') else None,
             'b365a': float(r['b365a']) if r.get('b365a') else None,

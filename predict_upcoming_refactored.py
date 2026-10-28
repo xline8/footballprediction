@@ -164,8 +164,13 @@ def generate_predictions(force_refit: bool = False, output_file: str = None) -> 
                     "pd_bl": None if pb is None else round(pb[1], 4),
                     "pa_bl": None if pb is None else round(pb[2], 4),
                     "p_over_dc": round(pr['over'], 4),
+                    "p_over15_dc": round(pr.get('over15', pr['over']), 4),
+                    "p_over35_dc": round(pr.get('over35', pr['over']), 4),
                     "p_over_bl": None if pob is None else round(pob, 4),
                     "p_btts": round(pr.get('btts', 0), 4),
+                    "p_dc_1x": round(pr['ph'] + pr['pd'], 4),
+                    "p_dc_x2": round(pr['pd'] + pr['pa'], 4),
+                    "p_dc_12": round(pr['ph'] + pr['pa'], 4),
                     "b365h": oH, "b365d": oD, "b365a": oA,
                     "b365o25": o.get('B365>2.5'),
                 })

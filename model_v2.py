@@ -158,11 +158,16 @@ class DC:
         pd = sum(m[x][x] for x in range(MAXG + 1)) / s
         p_over = sum(m[x][y] for x in range(MAXG + 1) for y in range(MAXG + 1)
                      if x + y > 2) / s
+        p_over15 = sum(m[x][y] for x in range(MAXG + 1) for y in range(MAXG + 1)
+                       if x + y > 1) / s
+        p_over35 = sum(m[x][y] for x in range(MAXG + 1) for y in range(MAXG + 1)
+                       if x + y > 3) / s
         p0h = sum(m[0][y] for y in range(MAXG + 1)) / s
         p0a = sum(m[x][0] for x in range(MAXG + 1)) / s
         p_btts = 1.0 - p0h - p0a + m[0][0] / s
         return {"ph": ph, "pd": pd, "pa": 1 - ph - pd,
-                "over": p_over, "btts": p_btts}
+                "over": p_over, "over15": p_over15, "over35": p_over35,
+                "btts": p_btts}
 
     def ah_probs(self, lh, la, line):
         m = [[pois(x, lh) * pois(y, la) * tau(x, y, lh, la, self.rho)
