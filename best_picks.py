@@ -190,8 +190,8 @@ def _top_pick_per_match(picks):
     """Select 1 best pick per match.
 
     Priority:
-    1. Picks with +EV (from ta_model with odds) — measurable value
-    2. Highest model probability
+    1. Highest model probability (Pick Teraman) — probabilitas tertinggi menang
+    2. EV as tie-breaker (info, bukan penentu utama)
     Only 1 pick per match — dedup by date+home+away
     """
     # Normalize names for key matching (corner CSV vs predictions may differ in case)
@@ -207,10 +207,10 @@ def _top_pick_per_match(picks):
 
     best = []
     for key, pg in by_match.items():
-        # Sort by: EV (highest first), then prob
+        # Sort by: prob (highest first), then EV
         pg_sorted = sorted(pg, key=lambda x: (
-            -(x.get('ev') or float('-inf')),
-            -(x.get('prob') or 0)
+            -(x.get('prob') or 0),
+            -(x.get('ev') or float('-inf'))
         ))
         top = pg_sorted[0]
 
@@ -245,8 +245,12 @@ def _norm_name(x):
         return x
 
 
-def _fallback_candidate(pred_row, corner_row):
-    """Pick satu selection berprobabilitas tertinggi untuk laga tanpa best pick."""
+def _scan_candidates(pred_row, corner_row):
+    """Seluruh seleksi dari pemindaian lengkap untuk satu laga (ev=None).
+
+    Mencakup 1X2 (3 sisi), DC (3 sisi), O/U gol 1.5/2.5/3.5 Over/Under,
+    BTTS Yes/No, dan corner line 8.5/9.5/10.5 Over/Under (jika baris corner ada).
+    """
     cands = []
     ph = _num(pred_row.get("ph_dc"))
     pd = _num(pred_row.get("pd_dc"))
@@ -273,13 +277,46 @@ def _fallback_candidate(pred_row, corner_row):
                 continue
             cands.append({"market": "Corners", "line": str(ln), "side": "Over", "prob": po})
             cands.append({"market": "Corners", "line": str(ln), "side": "Under", "prob": 1 - po})
+    for c in cands:
+        c.update({"ev": None, "source": "model", "tier": "fallback",
+                  "div": pred_row["div"], "date": pred_row["date"],
+                  "home": pred_row["home"], "away": pred_row["away"]})
+    return cands
+
+
+def _fallback_candidate(pred_row, corner_row):
+    """Pick satu selection berprobabilitas tertinggi untuk laga tanpa best pick."""
+    cands = _scan_candidates(pred_row, corner_row)
     if not cands:
         return None
-    top = max(cands, key=lambda c: c["prob"])
-    top.update({"ev": None, "source": "model", "tier": "fallback",
-                "div": pred_row["div"], "date": pred_row["date"],
-                "home": pred_row["home"], "away": pred_row["away"]})
-    return top
+    return max(cands, key=lambda c: c["prob"])
+
+
+def _select_safest(best_cands, scan_cands):
+    """Gabungkan kandidat best + pemindaian lengkap; pilih probabilitas tertinggi.
+
+    Tie-break: tier best lebih dulu, lalu EV lebih tinggi. Hasil membawa tier
+    sesuai asal seleksi (best vs fallback).
+    """
+    combined = list(best_cands) + list(scan_cands)
+    if not combined:
+        return None
+    key = lambda c: ((c.get('prob') or 0),
+                     1 if c.get('tier') == 'best' else 0,
+                     c.get('ev') or 0)
+    return max(combined, key=key)
+
+
+def _fill_ev_model(p):
+    """Isi ev_model untuk seleksi non-ta_model (sama seperti _top_pick_per_match)."""
+    if p.get('ev') is not None or p.get('ev_model') is not None:
+        return
+    prob = p.get('prob') or 0
+    if prob > 0:
+        fair = 1.0 / prob
+        p['ev_model'] = round(prob * (fair - 1.0) - (1.0 - prob), 4)
+    else:
+        p['ev_model'] = None
 
 
 def main():
@@ -314,31 +351,31 @@ def main():
         markets[p["market"]] = markets.get(p["market"], 0) + 1
     print(f"  Top picks by market: {markets}")
 
-    # --- best_picks_today.csv: TEPAT satu baris per laga terjadwal hari target
+    # --- best_picks_today.csv: TEPAT satu baris per laga terjadwal hari target.
+    # Pick teraman = probabilitas tertinggi di antara gabungan kandidat best
+    # (lolos threshold/EV) dan pemindaian lengkap _scan_candidates().
     pred_rows = [r for r in _read_csv(os.path.join(PROJ, "predictions_upcoming.csv"))
                  if (r.get("date") or "") == target]
     corner_by = {}
     for r in _read_csv(os.path.join(PROJ, "predictions_corners_upcoming.csv")):
         corner_by.setdefault((r["div"], r["date"], _norm_name(r["home"]), _norm_name(r["away"])), r)
-    best_by = {}
-    for p in best:
-        best_by[(p["div"], p["date"], _norm_name(p["home"]), _norm_name(p["away"]))] = p
+    best_group_by = defaultdict(list)
+    for p in all_picks:
+        best_group_by[(p["div"], p["date"], _norm_name(p["home"]), _norm_name(p["away"]))].append(p)
 
     today_rows = []
     for r in pred_rows:
         k = (r["div"], r["date"], _norm_name(r["home"]), _norm_name(r["away"]))
-        bp = best_by.get(k)
-        if bp is not None:
-            today_rows.append({c: bp.get(c) for c in cols})
-            continue
-        fb = _fallback_candidate(r, corner_by.get(k))
-        if fb is None:
+        sel = _select_safest(best_group_by.get(k, []),
+                             _scan_candidates(r, corner_by.get(k)))
+        if sel is None:
             today_rows.append({"div": r["div"], "date": r["date"], "home": r["home"],
                                "away": r["away"], "market": "", "line": "", "side": "",
                                "prob": None, "ev": None, "ev_model": None,
                                "source": "model", "tier": "fallback"})
             continue
-        today_rows.append({c: fb.get(c) for c in cols})
+        _fill_ev_model(sel)
+        today_rows.append({c: sel.get(c) for c in cols})
 
     TODAY_OUT = os.path.join(PROJ, "best_picks_today.csv")
     _write_csv(TODAY_OUT, today_rows, cols)
