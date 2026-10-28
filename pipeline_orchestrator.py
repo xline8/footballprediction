@@ -460,20 +460,35 @@ class PipelineOrchestrator:
             return {'status': 'failed', 'error': str(e)}
 
     def grade_completed_picks(self) -> dict:
-        """Grade picks that have completed."""
+        """Grade picks from ledger/picks.jsonl via score_ledger.py.
+
+        score_ledger.py membaca ledger/picks.jsonl (format ledger nyata) dan
+        menulis grades.jsonl + ledger_summary.json — pengganti grade_picks.py
+        yang membaca picks.csv/odds_timeseries.csv yang tidak pernah dibuat.
+        """
         try:
-            from grade_picks import main as grade_main
-            grade_main()
-            picks_file = os.path.join(BASE_DIR, "ledger", "graded.csv")
-            if os.path.exists(picks_file):
-                import csv
-                with open(picks_file, 'r') as f:
-                    graded = sum(1 for _ in f) - 1
-                log(f"  OK Graded picks: {graded} total", "INFO")
-                return {'status': 'success', 'graded_count': graded}
-            return {'status': 'success', 'graded_count': 0}
+            picks_file = os.path.join(BASE_DIR, "ledger", "picks.jsonl")
+            if not os.path.exists(picks_file):
+                log("  ! ledger/picks.jsonl belum ada — skip grading", "WARN")
+                return {'status': 'skip', 'reason': 'no_picks'}
+            import subprocess
+            result = subprocess.run(
+                [sys.executable, os.path.join(BASE_DIR, "score_ledger.py")],
+                capture_output=True, text=True, timeout=120
+            )
+            if result.returncode != 0:
+                msg = (result.stderr or result.stdout or "").strip()
+                log(f"  X Grading failed: {msg}", "ERROR")
+                return {'status': 'failed', 'error': msg or 'rc!=0'}
+            grades_file = os.path.join(BASE_DIR, "ledger", "grades.jsonl")
+            graded = 0
+            if os.path.exists(grades_file):
+                with open(grades_file, encoding="utf-8") as f:
+                    graded = sum(1 for l in f if l.strip())
+            log(f"  OK Graded picks: {graded} total", "INFO")
+            return {'status': 'success', 'graded_count': graded}
         except ImportError:
-            log("  ! grade_picks not available", "WARN")
+            log("  ! score_ledger not available", "WARN")
             return {'status': 'skip', 'reason': 'module_not_found'}
         except Exception as e:
             log(f"  X Grading failed: {str(e)}", "ERROR")

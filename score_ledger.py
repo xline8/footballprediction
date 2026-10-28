@@ -15,7 +15,8 @@ import os
 from collections import defaultdict
 from datetime import datetime, timezone
 
-PROJ = r"C:/Users/Arif Wicaksono/football-data"
+import paths
+PROJ = paths.BASE
 LEDGER = os.path.join(PROJ, "ledger")
 PICKS = os.path.join(LEDGER, "picks.jsonl")
 GRADES = os.path.join(LEDGER, "grades.jsonl")
@@ -113,8 +114,10 @@ if new_grades:
 
 # ------- ringkasan
 by_graded = {g["pick_id"]: g for g in new_grades}
-with open(GRADES, encoding="utf-8") as f:
-    all_grades = [json.loads(l) for l in f if l.strip()]
+all_grades = []
+if os.path.exists(GRADES):
+    with open(GRADES, encoding="utf-8") as f:
+        all_grades = [json.loads(l) for l in f if l.strip()]
 gmap = {g["pick_id"]: g for g in all_grades}
 agg = defaultdict(lambda: dict(n=0, prof=0.0))
 for pk in picks:
