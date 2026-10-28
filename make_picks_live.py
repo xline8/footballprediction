@@ -21,6 +21,7 @@ Output: append ke live_shadow_ledger.csv (CSS, actual_outcome/pnl default kosong
 """
 
 import csv
+import json
 import os
 
 import numpy as np
@@ -49,10 +50,30 @@ def _logit_clip(p):
     return np.log(np.clip(p, 1e-6, 1 - 1e-6) / (1 - np.clip(p, 1e-6, 1 - 1e-6)))
 
 
+def _records_mode():
+    """Mode fit DC yang distamp pada records_cache (sidecar), atau None."""
+    meta = os.path.splitext(RECORDS)[0] + ".meta.json"
+    if os.path.exists(meta):
+        try:
+            with open(meta, encoding="utf-8") as f:
+                return json.load(f).get("dc_fit_mode")
+        except Exception:
+            return None
+    return None
+
+
 def _fit_meta():
     """Fit model meta (logit input) pada seluruh riwayat."""
+    from model_v2 import DC_FIT_MODE
     if not os.path.exists(RECORDS):
         print("! records_cache.jsonl belum ada — membangun otomatis ...")
+        from backtest_picks import cache_records
+        n = cache_records(RECORDS)
+        if not n or not os.path.exists(RECORDS):
+            raise RuntimeError("gagal membangun records_cache.jsonl")
+    elif _records_mode() != DC_FIT_MODE:
+        print(f"! records_cache mode {_records_mode()} != aktif {DC_FIT_MODE} "
+              f"— membangun ulang ...")
         from backtest_picks import cache_records
         n = cache_records(RECORDS)
         if not n or not os.path.exists(RECORDS):

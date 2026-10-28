@@ -29,7 +29,9 @@ import numpy as np
 import model_features_1x2 as mf
 from features import build_feature_rows
 from football_etl import load_fd_odds, normalize_name, parse_date, TOP5
-from model_v2 import DC
+from model_v2 import DC, xg_key
+import model_v2
+from features import _load_xg_map
 from validation import eval_1x2
 
 BASE = os.path.dirname(os.path.abspath(__file__))
@@ -148,11 +150,15 @@ def cache_records(out_path=RECORDS):
         p3 = mf._fit_multinomial(Xtr, ytr, Xte)
         test_rows = [rows[i] for i in np.where(test)[0]]
         dc_cache = {}
+        xg_map = _load_xg_map()
         for idx, r in enumerate(test_rows):
             div, dstr = r["div"], r["date"]
             if div not in dc_cache:
                 games = [g for g in (
-                    (rr["home"], rr["away"], rr["yh"], rr["ya"], _as_date(rr["date"]))
+                    (rr["home"], rr["away"], rr["yh"], rr["ya"],
+                     xg_map.get(xg_key(div, rr["date"], rr["home"], rr["away"]), (None, None))[0],
+                     xg_map.get(xg_key(div, rr["date"], rr["home"], rr["away"]), (None, None))[1],
+                     _as_date(rr["date"]))
                     for rr in rows if rr["div"] == div and rr["date"] < m + "-01"
                     and rr["yh"] is not None)]
                 mdl = DC()
@@ -182,7 +188,11 @@ def cache_records(out_path=RECORDS):
     with open(out_path, "w", encoding="utf-8") as f:
         for r in rec:
             f.write(json.dumps(r) + "\n")
-    print(f"cache records: {len(rec)} -> {out_path}")
+    # Stamp mode fit DC yang menghasilkan cache; dipakai _fit_meta utk rebuild.
+    meta_path = os.path.splitext(out_path)[0] + ".meta.json"
+    with open(meta_path, "w", encoding="utf-8") as f:
+        json.dump({"dc_fit_mode": model_v2.DC_FIT_MODE}, f)
+    print(f"cache records: {len(rec)} -> {out_path} (mode={model_v2.DC_FIT_MODE})")
     return len(rec)
 
 
