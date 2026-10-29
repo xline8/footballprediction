@@ -10,7 +10,7 @@ Dipakai oleh pipeline_orchestrator.py atau standalone (cron).
 import os
 import sys
 import subprocess
-from datetime import date
+from datetime import date, timedelta
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE)
@@ -66,17 +66,32 @@ def main():
     try:
         import make_picks_live
         n = make_picks_live.main()
-        print(f"[5/6] live picks baru: {n}")
+        print(f"[5/7] live picks baru: {n}")
     except Exception as e:
         failed = True
-        print(f"[5/6] FAILED make_picks_live: {e!r}")
+        print(f"[5/7] FAILED make_picks_live: {e!r}")
+
+    # Sinkronisasi hasil tipsterarea untuk tanggal kemarin + H-2 secara eksplisit
+    # (sebelum grading). --fresh memaksa fetch jaring (cache halaman tanggal
+    # 20 menit dilewati) agar laga yang selesai larut ikut masuk. Kegagalan
+    # jaringan tidak menggagalkan pipeline — catat warning, lanjutkan.
+    try:
+        y = date.today() - timedelta(days=1)
+        y2 = date.today() - timedelta(days=2)
+        r = _run_py("ta_scrape.py", y.isoformat(), y2.isoformat(), "--fresh")
+        out = (r.stdout or r.stderr or "").strip()
+        print(f"[6/7] tipsterarea hasil sync: rc={r.returncode} | {out[-300:]}")
+        if r.returncode != 0:
+            print(f"[6/7] WARNING ta sync rc={r.returncode} (lanjut pipeline)")
+    except Exception as e:
+        print(f"[6/7] WARNING ta sync gagal: {e!r} (lanjut pipeline)")
 
     try:
         import resolve_and_monitor
         resolve_and_monitor.main()
     except Exception as e:
         failed = True
-        print(f"[6/6] FAILED resolve_and_monitor: {e!r}")
+        print(f"[7/7] FAILED resolve_and_monitor: {e!r}")
 
     if failed:
         print("# LIVE SHADOW: ADA LANGKAH GAGAL")

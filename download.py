@@ -1,11 +1,12 @@
 """Download CSV pertandingan + odds historis dari football-data.co.uk (divisi utama)."""
 import os
 import concurrent.futures
+import sys
+import urllib.error
 
 from stealth import urlopen_with_retry
 
 BASE = "https://www.football-data.co.uk/mmz4281/{season}/{league}.csv"
-SITE = "https://www.football-data.co.uk/"
 OUT = os.path.join(os.path.expanduser("~"), "football-data", "raw")
 LEAGUES = ["E0", "E1", "E2", "E3", "SC0", "SC1", "SC2", "SC3", "D1", "D2",
            "I1", "I2", "SP1", "SP2", "F1", "F2", "N1", "B1", "P1", "T1", "G1"]
@@ -19,26 +20,9 @@ def get(url, tries=4):
     return data
 
 
-# --- sanity check dulu: satu file yang pasti ada ---
-probe = get(BASE.format(season="2526", league="E0"))
-print(f"Probe E0_2526: {len(probe)} bytes, awal: {probe[:80]!r}")
-if probe[:120].lstrip().lower().startswith(b"<"):
-    raise SystemExit("Format balloon! Situs mengembalikan HTML, bukan CSV. Dibatalkan.")
-
-# --- kamus data (non-www, sesuai link asli di situs) ---
-notes = os.path.join(os.path.dirname(OUT), "notes.txt")
-try:
-    if not (os.path.exists(notes) and os.path.getsize(notes) > 5000):
-        with open(notes, "wb") as f:
-            f.write(get("https://football-data.co.uk/notes.txt"))
-    print("notes.txt: OK")
-except Exception as e:
-    print(f"notes.txt gagal: {e}")
-
-
-def fetch(lg, se):
+def fetch(lg, se, force=False):
     path = os.path.join(OUT, f"{lg}_{se}.csv")
-    if os.path.exists(path) and os.path.getsize(path) > 1000:
+    if not force and os.path.exists(path) and os.path.getsize(path) > 1000:
         return lg, se, "cached"
     try:
         data = get(BASE.format(season=se, league=lg), tries=3)
@@ -53,20 +37,37 @@ def fetch(lg, se):
     return lg, se, "ok"
 
 
-jobs = [(lg, se) for lg in LEAGUES for se in SEASONS]
-# ponytail: 3 pekerja — 10 tanpa delay riskan ban; naikkan bila perlu.
-with concurrent.futures.ThreadPoolExecutor(max_workers=3) as ex:
-    res = list(ex.map(lambda t: fetch(*t), jobs))
+def download(seasons=SEASONS, leagues=LEAGUES, force=False):
+    """Unduh CSV untuk daftar musim (default semua). Return dict ringkasan.
 
-ok = sum(1 for _, _, s in res if s in ("ok", "cached"))
-print(f"OK: {ok}/{len(jobs)} file")
-by = {}
-for lg, se, st in res:
-    if st not in ("ok", "cached"):
-        by.setdefault(st, []).append(f"{lg}_{se}")
-for st in sorted(by):
-    print(f"  {st}: {len(by[st])} -> {' '.join(by[st][:20])}"
-          f"{' ...' if len(by[st]) > 20 else ''}")
+    Dipakai pipeline untuk refresh hanya musim berjalan (mis. ["2627"]).
+    force=True: re-unduh walau file sudah ada (refresh mingguan; tanpa force,
+    file yang ada dianggap segar dan dilewati).
+    """
+    # sanity check dulu: satu file yang pasti ada
+    probe = get(BASE.format(season="2526", league="E0"), tries=2)
+    if probe[:120].lstrip().lower().startswith(b"<"):
+        raise RuntimeError("Format balloon! Situs mengembalikan HTML, bukan CSV. Dibatalkan.")
 
-total = sum(os.path.getsize(os.path.join(OUT, f)) for f in os.listdir(OUT))
-print(f"Total ukuran raw: {total / 1e6:.1f} MB | folder: {OUT}")
+    jobs = [(lg, se) for lg in leagues for se in seasons]
+    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as ex:
+        res = list(ex.map(lambda t: fetch(*t, force=force), jobs))
+
+    ok = sum(1 for _, _, s in res if s in ("ok", "cached"))
+    by = {s: [f"{lg}_{se}" for lg, se, st in res if st == s]
+          for s in {st for _, _, st in res}}
+    return {"ok": ok, "total": len(jobs), "by_status": by}
+
+
+if __name__ == "__main__":
+    seasons = sys.argv[1:] or SEASONS
+    r = download(seasons=seasons)
+    print(f"OK: {r['ok']}/{r['total']} file")
+    for st in sorted(r["by_status"]):
+        if st in ("ok", "cached"):
+            continue
+        files = r["by_status"][st]
+        print(f"  {st}: {len(files)} -> {' '.join(files[:20])}"
+              f"{' ...' if len(files) > 20 else ''}")
+    total = sum(os.path.getsize(os.path.join(OUT, f)) for f in os.listdir(OUT))
+    print(f"Total ukuran raw: {total / 1e6:.1f} MB | folder: {OUT}")

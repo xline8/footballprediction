@@ -19,6 +19,9 @@ venv/
 *.pkl
 *.joblib
 
+# Timestamped backups created by pipeline refresh (train data / xG dumps)
+*.bak-*
+
 # Runtime ledger state (picks/grades/summary — regenerated)
 ledger/
 records_cache.meta.json

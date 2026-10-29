@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """pipeline_orchestrator.py - Orchestrator untuk pipeline prediksi sepakbola."""
 
+import csv
 import os
+import shutil
 import sys
 import json
 import time
@@ -12,6 +14,7 @@ from collections import defaultdict
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE_DIR)
 
+import paths
 from football_etl import (
     get_config, load_fd_odds, TOP5
 )
@@ -19,6 +22,11 @@ from data_loader import get_loader
 from model_state import ModelState, save_model_state
 
 CUP_LEAGUES = ("England - EFL Cup", "Germany - Cup Germany")
+
+RECORDS = os.path.join(BASE_DIR, "records_cache.jsonl")
+XG_SLUGS = ("EPL", "La_liga", "Bundesliga", "Serie_A", "Ligue_1")
+# Refresh data latih hanya musim berjalan (2627). Override via env bila perlu.
+REFRESH_SEASON = os.environ.get("FOOTBALL_REFRESH_SEASON", "2627")
 
 
 def _cup_fixture_ids(days):
@@ -73,6 +81,7 @@ class PipelineOrchestrator:
         log("=" * 60, "INFO")
 
         try:
+            results['refresh'] = self.step_refresh_training_data()
             results['data'] = self.step_check_data()
             results['xg'] = self.step_build_xg()
             results['model'] = self.step_fit_models()
@@ -95,6 +104,180 @@ class PipelineOrchestrator:
         log(f"\nPipeline completed in {runtime:.1f}s", "INFO")
         log(f"Stats: {dict(self.stats)}", "INFO")
         return results
+
+    # ---- refresh data latih (football-data.co.uk + xG Understat) ----
+    def _cur_season_label(self) -> str:
+        y = datetime.now().year
+        return f"{y}/{str(y + 1)[-2:]}"
+
+    def _clean_stats(self, path):
+        """{total, max_date, cur_season} dari all_matches_clean.csv (atau None)."""
+        total = max_date = cur = 0
+        if not os.path.exists(path):
+            return {"total": 0, "max_date": None, "cur_season": 0}
+        seas = self._cur_season_label()
+        with open(path, encoding="utf-8", newline="") as f:
+            for r in csv.DictReader(f):
+                total += 1
+                d = (r.get("Date") or "")[:10]
+                if d and d > (max_date or ""):
+                    max_date = d
+                if r.get("Season") == seas:
+                    cur += 1
+        return {"total": total, "max_date": max_date, "cur_season": cur}
+
+    def _xg_year(self) -> str:
+        return f"20{REFRESH_SEASON[:2]}"
+
+    def _xg_dump_counts(self) -> dict:
+        out = {}
+        yr = self._xg_year()
+        for slug in XG_SLUGS:
+            p = os.path.join(paths.XGRAW, f"{slug}_{yr}.json")
+            if not os.path.exists(p):
+                out[slug] = -1
+                continue
+            try:
+                with open(p, encoding="utf-8") as f:
+                    out[slug] = len(json.load(f))
+            except Exception:
+                out[slug] = -1
+        return out
+
+    def _refresh_understat_seasons(self, ts) -> bool:
+        """Segarkan dump musim Understat ({League}_{yr}.json) via getLeagueData
+        (pola sama dgn refresh_fixtures.fetch). Return False bila ada yang gagal."""
+        from refresh_fixtures import fetch
+        ok = True
+        yr = self._xg_year()
+        for slug in XG_SLUGS:
+            p = os.path.join(paths.XGRAW, f"{slug}_{yr}.json")
+            try:
+                fresh = fetch(slug)
+            except Exception as e:
+                log(f"  ! understat {slug} fetch gagal: {e!r}", "WARN")
+                ok = False
+                continue
+            if not fresh:
+                log(f"  ! understat {slug} kosong", "WARN")
+                ok = False
+                continue
+            if os.path.exists(p):
+                shutil.copy2(p, f"{p}.bak-{ts}")
+            tmp = p + ".tmp"
+            with open(tmp, "w", encoding="utf-8") as f:
+                json.dump(fresh, f, ensure_ascii=False)
+            os.replace(tmp, p)
+            log(f"  OK understat {slug}: {len(fresh)} matches -> "
+                f"{os.path.basename(p)}", "INFO")
+        return ok
+
+    def _records_fingerprint(self) -> str:
+        st = self._clean_stats(paths.DATA_CLEAN)
+        return f"{st['total']}|{st['max_date']}|{st['cur_season']}"
+
+    def _rebuild_records_if_changed(self) -> bool:
+        """Rebuild records_cache bila data latih berubah (stamp data)."""
+        meta_path = os.path.splitext(RECORDS)[0] + ".meta.json"
+        fp = self._records_fingerprint()
+        stored = None
+        if os.path.exists(meta_path):
+            try:
+                with open(meta_path, encoding="utf-8") as f:
+                    stored = json.load(f).get("data_fingerprint")
+            except Exception:
+                stored = None
+        if stored == fp:
+            log("  records_cache segar (data tak berubah)", "INFO")
+            return False
+        log("  data latih berubah -> rebuild records_cache ...", "INFO")
+        from backtest_picks import cache_records
+        from model_v2 import DC_FIT_MODE
+        cache_records(RECORDS)
+        with open(meta_path, "w", encoding="utf-8") as f:
+            json.dump({"dc_fit_mode": DC_FIT_MODE, "data_fingerprint": fp}, f)
+        log("  records_cache direbuild (stamp data baru)", "INFO")
+        return True
+
+    def step_refresh_training_data(self) -> dict:
+        """Segarkan data latih sebelum fit (musim berjalan saja).
+
+        Uri: unduh CSV football-data.co.uk musim 2627 (21 divisi) ->
+        agregasi (prepare) -> bersihkan (clean) -> segarkan dump xG Understat.
+        Backup bertimestamp sebelum menimpa; validasi baris tidak menurun; bila
+        gagal -> rollback ke file lama dan laporkan. Tanpa API-Football.
+        """
+        log("\n[Step refresh] Refresh data latih (football-data + xG)...")
+        clean_path = paths.DATA_CLEAN
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        before = self._clean_stats(clean_path)
+        after = dict(before)
+        baks = []
+        if os.path.exists(clean_path):
+            bak = f"{clean_path}.bak-{ts}"
+            shutil.copy2(clean_path, bak)
+            baks.append(bak)
+
+        issues = []
+        dl = p = c = None
+        try:
+            from download import download
+            dl = download(seasons=[REFRESH_SEASON], force=True)
+            log(f"  OK football-data {REFRESH_SEASON}: "
+                f"{dl['ok']}/{dl['total']} file", "INFO")
+
+            from prepare import prepare
+            from clean import clean
+            p = prepare()
+            c = clean()
+            after = self._clean_stats(clean_path)
+
+            if after["total"] < before["total"]:
+                issues.append(f"total baris menurun {before['total']}->{after['total']}")
+            if after["cur_season"] < before["cur_season"]:
+                issues.append(f"baris musim berjalan menurun "
+                              f"{before['cur_season']}->{after['cur_season']}")
+
+            if not issues:
+                xg_before = self._xg_dump_counts()
+                ok_xg = self._refresh_understat_seasons(ts)
+                xg_after = self._xg_dump_counts()
+                if not ok_xg:
+                    issues.append("refresh understat gagal (sebagian/total)")
+                else:
+                    for slug in XG_SLUGS:
+                        if xg_after.get(slug, 0) < xg_before.get(slug, 0):
+                            issues.append(f"dump {slug} menurun "
+                                          f"{xg_before.get(slug)}->{xg_after.get(slug)}")
+        except Exception as e:
+            issues.append(f"exception: {e!r}")
+            traceback.print_exc()
+
+        if issues:
+            for bak in reversed(baks):
+                orig = bak.rsplit(".bak-", 1)[0]
+                try:
+                    shutil.copy2(bak, orig)
+                except Exception as e:
+                    log(f"  ! rollback {orig} gagal: {e!r}", "ERROR")
+            log(f"  X refresh data GAGAL & dirollback: {issues}", "ERROR")
+            return {"status": "failed", "issues": issues,
+                    "before": before, "after": after}
+
+        self.loader.reload_data()
+        log(f"  OK all_matches_clean.csv: {before['total']}->{after['total']} baris "
+            f"(musim {REFRESH_SEASON}: {before['cur_season']}->{after['cur_season']})",
+            "INFO")
+        log(f"      max date: {before['max_date']} -> {after['max_date']}", "INFO")
+
+        rebuilt = False
+        if after["cur_season"] > before["cur_season"] or \
+                after["max_date"] != before["max_date"]:
+            rebuilt = self._rebuild_records_if_changed()
+
+        return {"status": "success", "download": dl, "prepare": p, "clean": c,
+                "before": before, "after": after, "records_rebuilt": rebuilt}
 
     def step_check_data(self) -> dict:
         """Validasi semua data input tersedia."""
