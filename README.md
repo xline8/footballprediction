@@ -22,6 +22,7 @@ deterministic daily recommendations described further down.
 - [Daily recommendations (single bet + slips)](#daily-recommendations-single-bet--slips)
 - [Automation](#automation)
 - [Environment & dependencies](#environment--dependencies)
+- [Runtime data](#runtime-data)
 - [Credits](#credits)
 - [Testing](#testing)
 
@@ -257,6 +258,19 @@ football-data.co.uk, and Understat. Optional overrides:
 Dependencies: `numpy` (see `requirements.txt`). The optional API server
 (`api_server.py`) and scrapers use `fastapi`, `uvicorn`, `pydantic`,
 `requests`, and `httpx`.
+
+## Runtime data
+
+The repository carries code, the tracked Understat season dumps (`xg_raw/`),
+and documentation. Everything the pipeline generates is a per-machine
+runtime artifact and is gitignored: the ledger (`ledger/`), tipsterarea
+results and odds snapshots (`ta/*.csv`), the daily archive (`archive/`),
+the prediction and recommendation CSVs, and `.env`.
+
+Those files are not synced between machines, so two machines running the
+same code can hold different ledgers and different cup scoring-rate
+samples. When a number from one machine disagrees with a number from
+another, check which machine produced it before treating either as wrong.
 
 ## Credits
 
