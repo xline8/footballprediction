@@ -1,49 +1,69 @@
 #!/usr/bin/env python3
-"""slip_recommender.py — rekomendasi slip odds deterministik (±2.0).
+"""slip_recommender.py — rekomendasi harian deterministik dari odds 1xBet nyata.
 
-Membaca market_compare.csv (join odds tipsterarea + prob implied) dan
-menggabungkan dengan prob model (predictions_upcoming.csv /
-predictions_cups_upcoming.csv) untuk skor kualitas kaki.
+Tiga produk, semua di-scope ke TANGGAL LAPORAN (keputusan user 2026-10-29;
+perilaku lama yang mencari di seluruh jendela +4 hari dicabut):
 
-Aturan:
-  - Pasar: 1X2 / DC / OU / BTS (tanpa corner).
-  - Satu kaki per laga. Slip 2-4 kaki.
-  - Kualitas kaki: p_model >= 0.50 DAN o_1xbet >= 1.20.
-  - Total odds = produk o_1xbet; target di band 1.85-2.15 (target 2.0).
-  - Pilih slip joint probability tertinggi (produk p_model); tie-break
-    total EV (jumlah p_model*o - 1).
-  - Jika tidak ada kombinasi dalam band: output kombinasi terdekat ke 2.0,
-    diberi label in_band=false.
+  1. recommended_single.csv — single bet: leg tanggal itu dengan EV
+     tertinggi (p_model * o_1xbet - 1) di antara yang lolos lantai
+     p_model >= 0.45 dan o_1xbet >= 1.40; tie-break probabilitas, lalu odds.
+     Bila tak ada yang lolos, lantai longgar (0.40 / 1.30) dipakai dan baris
+     ditandai below_floor=true.
+  2. recommended_slip.csv — slip odds ±2: 2-4 leg dari tanggal itu,
+     p_model >= 0.50, o_1xbet >= 1.20, total odds di band 1.85-2.15, joint
+     probability tertinggi (tie-break total EV). Tanpa in-band: kombinasi
+     tanggal itu yang totalnya terdekat ke 2.0, in_band=false.
+  3. recommended_slip10.csv — slip odds ±10: 3-6 leg, p_model >= 0.35,
+     o_1xbet >= 1.30, total odds di band 9.0-11.0, joint tertinggi. Pool
+     mulai dari tanggal laporan; bila band tak tercapai, pool diperluas
+     hari demi hari (maks +4) — tiap leg membawa tanggalnya sendiri dan
+     ringkasan mencatat pool_expanded_to. Tanpa in-band: terdekat ke 10.0,
+     in_band=false.
 
-Output: recommended_slip.csv (baris per kaki + kolom agregat slip),
-diarsipkan harian oleh market_orchestration.archive_snapshots.
+Sumber leg: market_compare.csv (odds o_1xbet) di-join ke probabilitas model
+(predictions_upcoming.csv / predictions_cups_upcoming.csv). Pasar: 1X2 / DC /
+OU / BTS (tanpa corner — tidak ada odds-nya di market_compare). Satu leg per
+pertandingan di semua produk. Ketiga file diarsipkan harian oleh
+market_orchestration.archive_snapshots.
 
-Run: python slip_recommender.py
+Run: python slip_recommender.py [--date YYYY-MM-DD]
 """
 import csv
 import math
 import os
 import sys
 from collections import defaultdict
-from itertools import combinations
+from datetime import date, timedelta
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 MARKET_COMPARE = os.path.join(HERE, "market_compare.csv")
 PRED_LEAGUE = os.path.join(HERE, "predictions_upcoming.csv")
 PRED_CUP = os.path.join(HERE, "predictions_cups_upcoming.csv")
-OUT = os.path.join(HERE, "recommended_slip.csv")
-
-ODDS_LO, ODDS_HI = 1.85, 2.15
-TARGET = 2.0
-MIN_PMODEL = 0.50
-MIN_ODDS = 1.20
-MIN_LEGS, MAX_LEGS = 2, 4
+OUT_SLIP = os.path.join(HERE, "recommended_slip.csv")
+OUT_SINGLE = os.path.join(HERE, "recommended_single.csv")
+OUT_SLIP10 = os.path.join(HERE, "recommended_slip10.csv")
 
 MARKETS = ("1X2", "DC", "OU", "BTS")
+
+# Single bet
+SINGLE_MIN_PM, SINGLE_MIN_ODDS = 0.45, 1.40
+SINGLE_LOOSE_PM, SINGLE_LOOSE_ODDS = 0.40, 1.30
+# Slip odds ±2
+S2_MIN_PM, S2_MIN_ODDS = 0.50, 1.20
+S2_LO, S2_HI, S2_TARGET = 1.85, 2.15, 2.0
+S2_MIN_LEGS, S2_MAX_LEGS = 2, 4
+# Slip odds ±10
+S10_MIN_PM, S10_MIN_ODDS = 0.35, 1.30
+S10_LO, S10_HI, S10_TARGET = 9.0, 11.0, 10.0
+S10_MIN_LEGS, S10_MAX_LEGS = 3, 6
+S10_MAX_EXPAND_DAYS = 4
 
 SLIP_COLS = ["date", "home", "away", "competition", "market", "line",
              "selection", "o_1xbet", "p_model", "slip_total_odds",
              "slip_joint_prob", "slip_ev", "in_band"]
+SINGLE_COLS = ["date", "home", "away", "competition", "market", "line",
+               "selection", "o_1xbet", "p_model", "ev", "below_floor"]
+SLIP10_COLS = SLIP_COLS + ["pool_expanded_to"]
 
 
 def _read(path):
@@ -94,7 +114,8 @@ def _pm_for(market, line, sel, pr):
     return None
 
 
-def _candidates():
+def _candidates(min_pm, min_odds):
+    """Semua leg (dari market_compare + p_model) yang lolos lantai given."""
     preds = _load_preds()
     out = []
     for r in _read(MARKET_COMPARE):
@@ -102,7 +123,7 @@ def _candidates():
         if market not in MARKETS:
             continue
         o = _f(r.get("o_1xbet"))
-        if not o or o < MIN_ODDS:
+        if not o or o < min_odds:
             continue
         key = ((r.get("date") or ""), (r.get("home") or "").lower(),
                (r.get("away") or "").lower())
@@ -110,7 +131,7 @@ def _candidates():
         if not prows:
             continue
         pm = _pm_for(market, r.get("line"), r.get("selection"), prows[0])
-        if pm is None or pm < MIN_PMODEL:
+        if pm is None or pm < min_pm:
             continue
         out.append({
             "match": r.get("game_id") or key,
@@ -122,90 +143,190 @@ def _candidates():
     return out
 
 
-def _slip_stats(legs):
-    tot = math.prod(l["o"] for l in legs)
-    jp = math.prod(l["pm"] for l in legs)
-    ev = sum(l["pm"] * l["o"] for l in legs) - len(legs)
-    return tot, jp, ev
+def _search(by_match, min_legs, max_legs, lo, hi, target):
+    """Cari kombinasi (<= 1 leg per laga) terbaik.
 
+    Return (best_in_band, best_near), masing-masing (tot, jp, ev, legs) atau
+    None. best_in_band: joint prob tertinggi dengan tot di [lo, hi]
+    (tie-break total EV). best_near: |tot - target| terkecil di antara
+    kombinasi valid (tie-break joint prob). Pencarian DFS dengan pruning
+    produk odds: cabang berhenti bila produk melewati hi * 2.5.
+    """
+    keys = sorted(by_match, key=lambda k: (by_match[k][0]["date"],
+                                           by_match[k][0]["home"],
+                                           by_match[k][0]["away"]))
+    pools = [sorted(by_match[k],
+                    key=lambda l: (-l["pm"], -l["o"], l["market"],
+                                   l["line"], l["sel"]))
+             for k in keys]
+    cap = hi * 2.5
+    best_in = None
+    best_near = None
 
-def _better(a, b):
-    """a,b = (tot, jp, ev, in_band, legs). Preferensi: in_band dulu,
-    lalu joint prob, lalu total EV; kalau tak ada in_band, dekat ke target."""
-    a_in, b_in = a[3], b[3]
-    if a_in != b_in:
-        return a_in
-    jp_a, jp_b = a[1], b[1]
-    if abs(jp_a - jp_b) > 1e-9:
-        return jp_a > jp_b
-    ev_a, ev_b = a[2], b[2]
-    if abs(ev_a - ev_b) > 1e-9:
-        return ev_a > ev_b
-    if not a_in:  # keduanya out-of-band: dekat ke target menang
-        return abs(a[0] - TARGET) < abs(b[0] - TARGET)
-    return False
+    def consider(tot, jp, ev, legs):
+        nonlocal best_in, best_near
+        if len(legs) < min_legs:
+            return
+        if lo <= tot <= hi:
+            cur = (tot, jp, ev, list(legs))
+            if (best_in is None or jp > best_in[1] + 1e-9
+                    or (abs(jp - best_in[1]) <= 1e-9 and ev > best_in[2])):
+                best_in = cur
+        cur = (tot, jp, ev, list(legs))
+        if (best_near is None
+                or abs(tot - target) < abs(best_near[0] - target) - 1e-9
+                or (abs(abs(tot - target) - abs(best_near[0] - target)) <= 1e-9
+                    and jp > best_near[1])):
+            best_near = cur
 
-
-def recommend():
-    cands = _candidates()
-    by_match = defaultdict(list)
-    for c in cands:
-        by_match[c["match"]].append(c)
-    keys = list(by_match)
-    best = None  # (tot, jp, ev, in_band, legs)
-
-    def consider(legs):
-        nonlocal best
-        tot, jp, ev = _slip_stats(legs)
-        inb = ODDS_LO <= tot <= ODDS_HI
-        # salin list: `legs` akan di-pop oleh rekursi setelah return
-        cur = (tot, jp, ev, inb, list(legs))
-        if best is None or _better(cur, best):
-            best = cur
-
-    for size in range(MIN_LEGS, MAX_LEGS + 1):
-        for idxs in combinations(range(len(keys)), size):
-            # delegasikan pemilihan kaki per laga: ambil semua kombinasi kaki
-            pools = [by_match[keys[i]] for i in idxs]
-            if any(not p for p in pools):
+    def rec(i, tot, jp, ev, legs):
+        if len(legs) >= min_legs:
+            consider(tot, jp, ev, legs)
+        if i == len(pools) or len(legs) == max_legs:
+            return
+        rec(i + 1, tot, jp, ev, legs)  # lewati laga ini
+        for leg in pools[i]:
+            nt = tot * leg["o"]
+            if nt > cap:
                 continue
-            # rekursif ringan: produk kartesian per kombinasi laga
-            def rec(i, chosen):
-                if i == len(pools):
-                    consider(chosen)
-                    return
-                for leg in pools[i]:
-                    chosen.append(leg)
-                    rec(i + 1, chosen)
-                    chosen.pop()
-            rec(0, [])
+            legs.append(leg)
+            rec(i + 1, nt, jp * leg["pm"], ev + leg["pm"] * leg["o"] - 1.0,
+                legs)
+            legs.pop()
 
+    rec(0, 1.0, 1.0, 0.0, [])
+    return best_in, best_near
+
+
+def _by_match(cands, dates):
+    by = defaultdict(list)
+    for c in cands:
+        if c["date"] in dates:
+            by[c["match"]].append(c)
+    return by
+
+
+def _write_slip(path, cols, best, in_band, extra=None):
     rows = []
     if best is not None:
-        tot, jp, ev, inb, legs = best
+        tot, jp, ev, legs = best
         for l in legs:
-            rows.append({"date": l["date"], "home": l["home"],
-                         "away": l["away"], "competition": l["comp"],
-                         "market": l["market"], "line": l["line"],
-                         "selection": l["sel"], "o_1xbet": round(l["o"], 3),
-                         "p_model": round(l["pm"], 4),
-                         "slip_total_odds": round(tot, 3),
-                         "slip_joint_prob": round(jp, 4),
-                         "slip_ev": round(ev, 4),
-                         "in_band": "true" if inb else "false"})
-
-    with open(OUT, "w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=SLIP_COLS)
+            row = {"date": l["date"], "home": l["home"], "away": l["away"],
+                   "competition": l["comp"], "market": l["market"],
+                   "line": l["line"], "selection": l["sel"],
+                   "o_1xbet": round(l["o"], 3), "p_model": round(l["pm"], 4),
+                   "slip_total_odds": round(tot, 3),
+                   "slip_joint_prob": round(jp, 4), "slip_ev": round(ev, 4),
+                   "in_band": "true" if in_band else "false"}
+            if extra:
+                row.update(extra)
+            rows.append(row)
+    with open(path, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=cols)
         w.writeheader()
         w.writerows(rows)
+    return rows
 
-    summary = {"n_legs": len(rows), "total_odds": round(best[0], 3) if best else None,
-               "joint_prob": round(best[1], 4) if best else None,
-               "in_band": bool(best[3]) if best else False}
-    print(f"slip: {summary['n_legs']} kaki | total={summary['total_odds']} "
-          f"joint={summary['joint_prob']} in_band={summary['in_band']} -> {OUT}")
-    return summary
+
+def recommend_single(day):
+    """Produk 1: single bet tanggal `day` (ISO). Return ringkasan dict."""
+    pool = [c for c in _candidates(SINGLE_MIN_PM, SINGLE_MIN_ODDS)
+            if c["date"] == day]
+    below = False
+    if not pool:
+        pool = [c for c in _candidates(SINGLE_LOOSE_PM, SINGLE_LOOSE_ODDS)
+                if c["date"] == day]
+        below = True
+    rows = []
+    best = None
+    if pool:
+        best = max(pool, key=lambda c: (c["pm"] * c["o"] - 1.0, c["pm"],
+                                        c["o"]))
+        rows = [{"date": best["date"], "home": best["home"],
+                 "away": best["away"], "competition": best["comp"],
+                 "market": best["market"], "line": best["line"],
+                 "selection": best["sel"], "o_1xbet": round(best["o"], 3),
+                 "p_model": round(best["pm"], 4),
+                 "ev": round(best["pm"] * best["o"] - 1.0, 4),
+                 "below_floor": "true" if below else "false"}]
+    with open(OUT_SINGLE, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=SINGLE_COLS)
+        w.writeheader()
+        w.writerows(rows)
+    s = {"n_legs": len(rows),
+         "pick": (f"{best['home']} vs {best['away']}: {best['market']} "
+                  f"{best['line']} {best['sel']} @{best['o']:.2f}"
+                  if best else None),
+         "ev": rows[0]["ev"] if rows else None, "below_floor": below}
+    print(f"single {day}: {s['pick']} EV={s['ev']} "
+          f"below_floor={below} -> {OUT_SINGLE}")
+    return s
+
+
+def recommend_slip2(day):
+    """Produk 2: slip odds ±2, hanya laga tanggal `day`."""
+    by = _by_match(_candidates(S2_MIN_PM, S2_MIN_ODDS), {day})
+    best_in, best_near = _search(by, S2_MIN_LEGS, S2_MAX_LEGS,
+                                 S2_LO, S2_HI, S2_TARGET)
+    best, inb = (best_in, True) if best_in else (best_near, False)
+    rows = _write_slip(OUT_SLIP, SLIP_COLS, best, inb)
+    s = {"n_legs": len(rows),
+         "total_odds": round(best[0], 3) if best else None,
+         "joint_prob": round(best[1], 4) if best else None,
+         "in_band": bool(best and inb)}
+    print(f"slip2 {day}: {s['n_legs']} kaki | total={s['total_odds']} "
+          f"joint={s['joint_prob']} in_band={s['in_band']} -> {OUT_SLIP}")
+    return s
+
+
+def recommend_slip10(day):
+    """Produk 3: slip odds ±10; pool diperluas hari demi hari bila perlu."""
+    cands = _candidates(S10_MIN_PM, S10_MIN_ODDS)
+    base = date.fromisoformat(day)
+    best = None
+    inb = False
+    expanded_to = day
+    for k in range(S10_MAX_EXPAND_DAYS + 1):
+        upto = (base + timedelta(days=k)).isoformat()
+        dates = {(base + timedelta(days=j)).isoformat()
+                 for j in range(k + 1)}
+        by = _by_match(cands, dates)
+        b_in, b_near = _search(by, S10_MIN_LEGS, S10_MAX_LEGS,
+                               S10_LO, S10_HI, S10_TARGET)
+        expanded_to = upto
+        if b_in is not None:
+            best, inb = b_in, True
+            break
+        best = b_near  # kandidat terdekat sejauh ini; lanjut ekspansi
+    rows = _write_slip(OUT_SLIP10, SLIP10_COLS, best, inb,
+                       extra={"pool_expanded_to": expanded_to})
+    s = {"n_legs": len(rows),
+         "total_odds": round(best[0], 3) if best else None,
+         "joint_prob": round(best[1], 4) if best else None,
+         "in_band": bool(best and inb), "pool_expanded_to": expanded_to}
+    print(f"slip10 {day}: {s['n_legs']} kaki | total={s['total_odds']} "
+          f"joint={s['joint_prob']} in_band={s['in_band']} "
+          f"pool_expanded_to={expanded_to} -> {OUT_SLIP10}")
+    return s
+
+
+def recommend(day=None):
+    """Jalankan ketiga produk untuk `day` (default: hari ini)."""
+    day = day or date.today().isoformat()
+    out = {"date": day,
+           "single": recommend_single(day),
+           "slip2": recommend_slip2(day),
+           "slip10": recommend_slip10(day)}
+    # kunci kompatibilitas untuk pemanggil lama (run_daily_shadow):
+    out.update({"n_legs": out["slip2"]["n_legs"],
+                "total_odds": out["slip2"]["total_odds"],
+                "in_band": out["slip2"]["in_band"]})
+    return out
 
 
 if __name__ == "__main__":
-    sys.exit(0 if recommend().get("n_legs") else 1)
+    _day = None
+    if "--date" in sys.argv:
+        _day = sys.argv[sys.argv.index("--date") + 1]
+    _r = recommend(_day)
+    sys.exit(0 if _r["slip2"]["n_legs"] or _r["single"]["n_legs"] else 1)
