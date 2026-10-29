@@ -502,6 +502,16 @@ class PipelineOrchestrator:
             # Generate unified best_picks.csv (corner probs + DC + ta_model)
             import best_picks
             best_picks.main()
+
+            # Rutekan pick piala (best_picks ber-label kompetisi) ke ledger
+            # dgn competition=EFL Cup/DFB Pokal — biar grading per-kompetisi.
+            try:
+                import market_orchestration
+                n_cup = market_orchestration.sync_cup_picks_to_ledger()
+                if n_cup:
+                    log(f"  OK cup picks -> ledger: {n_cup} baru", "INFO")
+            except Exception as e:
+                log(f"  ! cup-ledger sync failed: {e!r}", "WARN")
             bp_file = os.path.join(BASE_DIR, "best_picks.csv")
             import csv as _csv
             n_bp = 0
