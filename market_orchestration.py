@@ -127,7 +127,46 @@ def _match_game_id(home, away, date_iso, league_hint=None):
         if hinted:
             pool = hinted
     if not pool:
-        return None
+        # Penyelamatan fuzzy: kunci eksak melewatkan varian nama
+        # (Nottm Forest vs Nottingham, Internazionale vs Inter Milan)
+        # — fixture-nya ADA di TA tapi tak pernah masuk pool, sehingga
+        # laga kehilangan data pasar + kelayakan slip (audit ronde 5:
+        # 5 dari 10 prediksi unmatched adalah kasus ini). Syarat ketat
+        # agar tidak menciptakan wrong-twin baru: satu sisi harus sama
+        # persis setelah norm (jangkar), sisi lain sim >= 0.85, dan
+        # skor gabungan (formula yang sama, penalti 0.1/hari) >= 0.80.
+        # Kandidat ber-hint liga didahulukan bila ada yang lolos.
+        by_id, _ = _load_fixtures()
+        d0 = _parsedate(date_iso)
+        if d0 is None:
+            return None
+        nh, na = norm(home), norm(away)
+        winners = []
+        for c in by_id.values():
+            cd = _parsedate(c.get("date"))
+            if cd is None or abs((cd - d0).days) > 1:
+                continue
+            ch, ca = norm(c.get("home") or ""), norm(c.get("away") or "")
+            if nh == ch:
+                other = sim(na, ca)
+            elif na == ca:
+                other = sim(nh, ch)
+            else:
+                continue
+            if other < 0.85:
+                continue
+            sc = sim(nh, ch) * sim(na, ca) - 0.1 * abs((cd - d0).days)
+            if sc >= 0.80:
+                winners.append((sc, c))
+        if not winners:
+            return None
+        if league_hint:
+            hinted = [(s, c) for s, c in winners
+                      if league_hint.lower() in (c.get("league") or "").lower()]
+            if hinted:
+                winners = hinted
+        winners.sort(key=lambda t: t[0], reverse=True)
+        return winners[0][1]["game_id"]
     if len(pool) == 1:
         return pool[0]["game_id"]
     # multi-kandidat: pilih paling mirip (tanggal + nama)
@@ -439,7 +478,11 @@ def sync_cup_picks_to_ledger():
             ).hexdigest()[:16]
             if pid in existing:
                 continue
-            gid = _match_game_id(home, away, d, CUP_LEAGUE[comp])
+            # game_id tersimpan (predict_cups -> best_picks) didahulukan:
+            # tebakan fuzzy _match_game_id bisa tertukar ke laga kembar.
+            # File arsip lama tidak punya kolomnya -> fallback fuzzy.
+            gid = (r.get("game_id") or "").strip() or \
+                _match_game_id(home, away, d, CUP_LEAGUE[comp])
             cap, state = _prematch_state(gid) if gid else (None, {})
             pr = _state_prices(state, market, line, side) if state else []
             odds = _median([o for o, _ in pr])

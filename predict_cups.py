@@ -348,7 +348,7 @@ def _corner_r_star():
 
 
 # --- output ---
-GOL_COLS = ["div", "date", "time", "home", "away", "competition",
+GOL_COLS = ["div", "date", "time", "home", "away", "game_id", "competition",
             "div_home", "div_away", "lam_h", "lam_a",
             "ph_dc", "pd_dc", "pa_dc",
             "p_over_dc", "p_over15_dc", "p_over35_dc", "p_btts",
@@ -356,7 +356,7 @@ GOL_COLS = ["div", "date", "time", "home", "away", "competition",
             "p_adv_h", "p_adv_a",
             "b365h", "b365d", "b365a"]
 
-CORNER_COLS = ["div", "date", "home", "away", "competition", "div_home", "div_away",
+CORNER_COLS = ["div", "date", "home", "away", "game_id", "competition", "div_home", "div_away",
                "mu_shots_cs", "r_cs", "rec_line", "rec_side", "recommendation",
                "rec_prob"] + [f"p_gt_{ln}" for ln in LINES]
 
@@ -471,7 +471,8 @@ def main():
         gol_rows.append({
             "div": hd if hd == ad else f"{hd}/{ad}",
             "date": fx["date"].isoformat(), "time": fx["time"],
-            "home": fx["home"], "away": fx["away"], "competition": fx["comp"],
+            "home": fx["home"], "away": fx["away"], "game_id": fx["game_id"],
+            "competition": fx["comp"],
             "div_home": hd, "div_away": ad,
             "lam_h": round(lh, 3), "lam_a": round(la, 3),
             "ph_dc": round(pr["ph"], 4), "pd_dc": round(pr["pd"], 4),
@@ -504,6 +505,7 @@ def main():
         row = {
             "div": hd if hd == ad else f"{hd}/{ad}",
             "date": fx["date"].isoformat(), "home": fx["home"], "away": fx["away"],
+            "game_id": fx["game_id"],
             "competition": fx["comp"], "div_home": hd, "div_away": ad,
             "mu_shots_cs": round(mu, 2), "r_cs": round(r_star, 3),
             "rec_line": rec_line, "rec_side": rec_side,
