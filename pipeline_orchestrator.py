@@ -500,6 +500,22 @@ class PipelineOrchestrator:
                     'file': corner_file
                 }
             else:
+                # File tidak dibuat sama sekali (mis. corner_params.json
+                # hilang sehingga script keluar rc=0 tanpa menulis).
+                # Bila prediksi liga ada, ini kegagalan diam yang bisa
+                # menghijaukan --run-all tanpa prediksi corner sama
+                # sekali — gagalkan, jangan skip.
+                pred_file = os.path.join(
+                    BASE_DIR, "predictions_upcoming.csv")
+                n_pred = 0
+                if os.path.exists(pred_file):
+                    import csv
+                    with open(pred_file, 'r') as f:
+                        n_pred = len(list(csv.DictReader(f)))
+                if n_pred > 0:
+                    log("  X No corner predictions file while league "
+                        "predictions exist", "ERROR")
+                    return {'status': 'failed', 'error': 'no_output'}
                 log("  ! No corner predictions file created", "WARN")
                 return {'status': 'skip', 'reason': 'no_output'}
         except ImportError:

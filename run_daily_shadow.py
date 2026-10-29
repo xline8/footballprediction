@@ -10,6 +10,7 @@ Dipakai oleh pipeline_orchestrator.py atau standalone (cron).
 import os
 import sys
 import subprocess
+import time
 from datetime import date, timedelta
 
 BASE = os.path.dirname(os.path.abspath(__file__))
@@ -41,6 +42,7 @@ def main():
         print(f"[1/6] FAILED predictions: {e!r}")
 
     try:
+        _t_corner = time.time()
         r = _run_py("model_corners_v3.py", "--predict")
         print(f"[2/6] corner predictions: rc={r.returncode} | {r.stdout.strip()[-300:]}")
         if r.returncode != 0:
@@ -59,6 +61,16 @@ def main():
                 failed = True
                 print("[2/6] FAILED corner predictions: file corner "
                       "kosong padahal prediksi liga ada")
+            else:
+                # Kesegaran: script bisa keluar rc=0 TANPA menulis
+                # (corner_params.json hilang / tak ada fixture) sehingga
+                # file basi lolos terus. Cermin cek orchestrator.
+                _cf = os.path.join(BASE, "predictions_corners_upcoming.csv")
+                if os.path.exists(_cf) and \
+                        os.path.getmtime(_cf) < _t_corner - 5:
+                    failed = True
+                    print("[2/6] FAILED corner predictions: file corner "
+                          "basi (tidak ditulis ulang oleh run ini)")
     except Exception as e:
         failed = True
         print(f"[2/6] FAILED corner predictions: {e!r}")

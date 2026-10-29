@@ -414,7 +414,7 @@ def sync_cup_picks_to_ledger():
                         rec.get("market") or "", rec.get("line") or ""))
     os.makedirs(LEDGER, exist_ok=True)
     new = []
-    n_edge = 0
+    edge_keys = set()
     for p in _cup_pick_file_sources():
         for r in _read_csv(p):
             comp = r.get("competition") or ""
@@ -450,7 +450,10 @@ def sync_cup_picks_to_ledger():
                 continue
             edge = pm - 1.0 / odds
             if edge < 0:
-                n_edge += 1
+                # Hitung per laga+pasar unik: tie yang sama muncul di
+                # file hari ini + salinan arsip, jadi penghitung per
+                # pertemuan menggelembungkan angka cetak.
+                edge_keys.add((d, home, away, market, line))
                 continue  # di bawah harga pasar — bukan pick uang
             new.append({
                 "pick_id": pid, "ts_created": datetime.utcnow().isoformat() + "Z",
@@ -464,8 +467,8 @@ def sync_cup_picks_to_ledger():
             })
             existing.add(pid)
             existing_matches.add(mkey)
-    if n_edge:
-        print(f"  cup picks dilewati (edge < 0): {n_edge}")
+    if edge_keys:
+        print(f"  cup picks dilewati (edge < 0): {len(edge_keys)}")
     if new:
         with open(PICKS, "a", encoding="utf-8") as f:
             for rec in new:
