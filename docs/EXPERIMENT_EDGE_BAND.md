@@ -1,42 +1,48 @@
-# EXPERIMENT_EDGE_BAND — re-validasi live-pick edge band
+# Experiment: Re-validating the Live-Pick Edge Band
 
-Eksperimen-and-verdict. **Produksi tidak diubah** (`make_picks_live.py` tetap
-memakai `EDGE_LO/EDGE_HI = 0.20/0.22`, `ODDS_LO/ODDS_HI = 1.20/1.50`).
+Experiment and verdict only. Production was not changed: `make_picks_live.py`
+still uses `EDGE_LO/EDGE_HI = 0.20/0.22` and `ODDS_LO/ODDS_HI = 1.20/1.50`.
 
-Menjawab: apakah band edge produksi memiliki edge nyata?
+**Question.** Does the production edge band correspond to a real edge?
 
-- **edge** = `p_meta(home) - p_fair_shin(home)` (opening odds B365)
-- home-win only, flat 1u, settle di `odds_open`
-- meta 9-logit walk-forward bulanan (leak-free), records `blend`
-- diagnostics 2017/18–2022/23 → grid; confirmation 2023/24–2025/26 → 2 rule
+Setup:
 
-## Hasil
+- Edge = `p_meta(home) − p_fair_shin(home)`, on B365 opening odds.
+- Home wins only, flat 1u stake, settled at `odds_open`.
+- Meta model: 9-logit, monthly walk-forward, leak-free; records mode `blend`.
+- Diagnostics on 2017/18–2022/23 produced a threshold grid; two rules were
+  then tested on the 2023/24–2025/26 confirmation window.
 
-| metrik | nilai |
+## Results
+
+| Metric | Value |
 |---|---|
-| kandidat home-win TOP5 | 15.494 |
-| distribusi edge (semua musim) | mean −0.0023, std 0.0123, max +0.0832 |
-| fraction edge ≥ 0.05 | 0.0014 (0,14%) |
-| fraction edge ≥ 0.10 | 0,0000 |
-| fraction edge ≥ 0.20 | 0,0000 |
+| Home-win candidates, top-5 leagues | 15,494 |
+| Edge distribution, all seasons | mean −0.0023, std 0.0123, max +0.0832 |
+| Fraction of candidates with edge ≥ 0.05 | 0.0014 (0.14%) |
+| Fraction with edge ≥ 0.10 | 0.0000 |
+| Fraction with edge ≥ 0.20 | 0.0000 |
 
-Landscape diagnostics (yield per-pick): setiap threshold ≥ 0.05 punya **< 100
-pick**; threshold ≥ 0.10 **0 pick**. Jadi tidak ada "best simple threshold" yang
-memenuhi kriteria (≥ 100 pick diagnostic) → T* tidak dievaluasi.
+In the diagnostics window, every threshold at or above 0.05 produced fewer
+than 100 picks, and thresholds at or above 0.10 produced none. No threshold
+met the pre-set criterion of at least 100 diagnostic picks, so no candidate
+replacement threshold (T*) was evaluated.
 
-## R1 (band produksi)
+## The production band (R1)
 
-- Frekuensi historis: **0 pick** di seluruh 68.763 records (semua musim).
-- Confirmation: n=0; yield n/a.
+- Historical frequency: **0 picks** across all 68,763 records, all seasons.
+- Confirmation window: n = 0, yield not applicable.
 
 ## Verdict
 
-**UNVALIDATED.** Band produksi `edge ∈ [0.20, 0.22)` hampir tidak pernah
-terjadi (max edge keseluruhan hanya +0.083). Jalur live bersifat dekoratif:
-filter tidak pernah memicu pick, sehingga tidak ada edge yang dieksploitasi —
-dan tidak ada yang perlu diganti (REPLACE tidak relevan, T* pun tidak ada).
+**UNVALIDATED.** The production band, edge in [0.20, 0.22), describes an
+event that effectively never occurs: the largest edge observed anywhere in
+the walk-forward history is +0.083. The live filter never fires, so it
+exploits no edge, and there is nothing to replace, since no alternative
+threshold qualifies either.
 
-Ini mengonfirmasi peringatan yang sudah tertulis di `make_picks_live.py`
-(2026-10-26): dengan de-vigging Shin yang benar, edge ≥ 0.20 pada favorit
-1.2–1.5 tidak pernah muncul. Hasil ini konsisten dengan temuan efisiensi pasar
-1X2 (tidak ada rule uji menghasilkan ROI positif signifikan).
+This confirms the warning recorded in `make_picks_live.py` on 2026-10-26:
+with correct Shin de-vigging, an edge of 0.20 or more on 1.2–1.5 favourites
+does not appear. The result is consistent with the project's broader 1X2
+market-efficiency finding: no tested rule produces a statistically
+significant positive ROI.
