@@ -30,25 +30,26 @@ LEDGER = os.path.join(PROJ, "ledger")
 PICKS = os.path.join(LEDGER, "picks.jsonl")
 GRADES = os.path.join(LEDGER, "grades.jsonl")
 SUMMARY = os.path.join(LEDGER, "ledger_summary.json")
-# --recompute-clv: backfill menimpa paksa field close/CLV (restatement
-# satu kali saat hierarki sumber berubah, mis. AvgC -> Pinnacle).
-RECOMPUTE_CLV = "--recompute-clv" in sys.argv
 SLUG = {"E0": "EPL", "SP1": "La_liga", "D1": "Bundesliga",
         "I1": "Serie_A", "F1": "Ligue_1"}
 
 from football_etl import normalize_name
 from backtest_picks import _fair_probs
 
-NMAP = {}
-for _fn in ("map_full.json", "map_ext.json"):
-    _p = os.path.join(PROJ, "xg_raw", _fn)
-    if os.path.exists(_p):
-        with open(_p, encoding="utf-8") as f:
-            NMAP.update(json.load(f))
-fd2ug = {}
-for k, v in NMAP.items():
-    div, ug = k.split("|", 1)
-    fd2ug.setdefault(div, {})[normalize_name(v)] = ug
+def _load_fd2ug():
+    """Peta nama FD -> nama Understat per divisi (dari xg_raw/map_*)."""
+    NMAP = {}
+    for _fn in ("map_full.json", "map_ext.json"):
+        _p = os.path.join(PROJ, "xg_raw", _fn)
+        if os.path.exists(_p):
+            with open(_p, encoding="utf-8") as f:
+                NMAP.update(json.load(f))
+    fd2ug = {}
+    for k, v in NMAP.items():
+        div, ug = k.split("|", 1)
+        fd2ug.setdefault(div, {})[normalize_name(v)] = ug
+    return fd2ug
+
 
 # hasil: {(div, date, home_ug, away_ug) -> (yh, ya)}
 def _load_results(path):
@@ -66,34 +67,42 @@ def _load_results(path):
     return out
 
 
-results = {}
-for div, slug in SLUG.items():
-    stem = os.path.join(PROJ, "xg_raw", f"{slug}_2026")
-    merged = _load_results(stem + "_all.json")
-    # _fixtures.json di-refresh harian dan lebih segar (sampai 10-25);
-    # bila kunci sama, hasil fixtures menang.
-    merged.update(_load_results(stem + "_fixtures.json"))
-    for (date, h, a), g in merged.items():
-        results[(div, date, h, a)] = g
+def _load_all_results():
+    """Hasil liga dari dump Understat (all + fixtures, fixtures menang)."""
+    results = {}
+    for div, slug in SLUG.items():
+        stem = os.path.join(PROJ, "xg_raw", f"{slug}_2026")
+        merged = _load_results(stem + "_all.json")
+        # _fixtures.json di-refresh harian dan lebih segar (sampai 10-25);
+        # bila kunci sama, hasil fixtures menang.
+        merged.update(_load_results(stem + "_fixtures.json"))
+        for (date, h, a), g in merged.items():
+            results[(div, date, h, a)] = g
+    return results
+
 
 # hasil piala dari ta/results.csv (FT): {(competition, date, home_norm, away_norm)}
 CUP_COMP = {"England - EFL Cup": "EFL Cup", "Germany - Cup Germany": "DFB Pokal"}
-cup_results = {}
-_res_path = os.path.join(PROJ, "ta", "results.csv")
-if os.path.exists(_res_path):
-    with open(_res_path, encoding="utf-8") as f:
-        for r in csv.DictReader(f):
-            if (r.get("status") or "").upper() != "FT":
-                continue
-            comp = CUP_COMP.get(r.get("league", ""))
-            if not comp:
-                continue
-            sh, sa = r.get("score_h"), r.get("score_a")
-            if sh is None or sa is None:
-                continue
-            cup_results[(comp, r["date"][:10],
-                         normalize_name(r["home"]), normalize_name(r["away"]))] = \
-                (int(sh), int(sa))
+def _load_cup_results():
+    """Hasil piala FT dari ta/results.csv."""
+    cup_results = {}
+    _res_path = os.path.join(PROJ, "ta", "results.csv")
+    if os.path.exists(_res_path):
+        with open(_res_path, encoding="utf-8") as f:
+            for r in csv.DictReader(f):
+                if (r.get("status") or "").upper() != "FT":
+                    continue
+                comp = CUP_COMP.get(r.get("league", ""))
+                if not comp:
+                    continue
+                sh, sa = r.get("score_h"), r.get("score_a")
+                if sh is None or sa is None:
+                    continue
+                cup_results[(comp, r["date"][:10],
+                             normalize_name(r["home"]), normalize_name(r["away"]))] = \
+                    (int(sh), int(sa))
+    return cup_results
+
 
 # ---------- closing odds (CLV source) ----------
 # Hierarki per pasar: Pinnacle close -> AvgC -> B365C (dari all_matches_clean.csv).
@@ -152,7 +161,7 @@ def _load_close_map():
     return m
 
 
-CLOSE_MAP = _load_close_map()
+CLOSE_MAP = {}  # diisi main() — impor modul tidak boleh membaca data
 
 # snack piala: snapshot terakhir sebelum kickoff per (home,away,date).
 # Prematch dijamin DUA lapis: status NS DAN captured_at < kickoff
@@ -196,7 +205,7 @@ def _load_cup_snapshots():
     return best
 
 
-CUP_SNAPS = _load_cup_snapshots()
+CUP_SNAPS = {}  # diisi main() — impor modul tidak boleh membaca data
 
 
 def _cup_close_proxy(pk):
@@ -264,19 +273,6 @@ def _grade_close_payload(pk):
     return o1x2, o25, clv_ev, clv_price
 
 
-if not os.path.exists(PICKS):
-    raise SystemExit("picks.jsonl belum ada")
-with open(PICKS, encoding="utf-8") as f:
-    picks = [json.loads(l) for l in f if l.strip()]
-picks_by_id = {p["pick_id"]: p for p in picks}
-graded_ids = set()
-if os.path.exists(GRADES):
-    with open(GRADES, encoding="utf-8") as f:
-        for l in f:
-            if l.strip():
-                graded_ids.add(json.loads(l)["pick_id"])
-
-
 def settle(market, side, yh, ya, odds, line=None):
     """Return (ret, won, push); ret = gross return as a multiple of stake.
 
@@ -326,21 +322,16 @@ def _ou_once(tot, side, ln, odds):
     return odds if won else 0.0
 
 
-new_grades = []
-unmapped = defaultdict(set)
-skipped_unknown = []
-
-
-def _settle_guarded(pk, yh, ya):
+def _settle_guarded(pk, yh, ya, skipped):
     """settle() dengan kesalahan per-pick ditelan: ValueError pasar/side
     asing dan KeyError pick cacat (field hilang) sama-sama melewatkan
-    pick itu (tetap pending) dan mencatatnya, BUKAN menggagalkan
-    seluruh run grading harian seperti raise telanjang sebelumnya."""
+    pick itu (tetap pending) dan mencatatnya ke daftar `skipped`,
+    BUKAN menggagalkan seluruh run grading harian."""
     try:
         return settle(pk["market"], pk["side"], yh, ya,
                       pk["odds_open"], pk.get("line"))
     except (ValueError, KeyError):
-        skipped_unknown.append(
+        skipped.append(
             (pk["pick_id"], pk.get("market"), pk.get("side")))
         return None
 
@@ -358,75 +349,14 @@ def _result_label(ret, odds, push):
     return "half_win" if ret > 1.0 else "half_loss"
 
 
-for pk in picks:
-    if pk["pick_id"] in graded_ids:
-        continue
-    comp = pk.get("competition") or ""
-    o1x2, o25, clv_ev, clv_price = _grade_close_payload(pk)
-    if comp in ("EFL Cup", "DFB Pokal"):
-        # pick piala: hasil dari ta/results.csv (samakan nama)
-        res = cup_results.get((comp, pk["date"],
-                               normalize_name(pk["home"]), normalize_name(pk["away"])))
-        if res is None:
-            unmapped[comp].add(f"{pk['home']} v {pk['away']}")
-            continue
-        yh, ya = res
-        sres = _settle_guarded(pk, yh, ya)
-        if sres is None:
-            continue
-        ret, won, push = sres
-        new_grades.append({
-            "pick_id": pk["pick_id"], "competition": comp,
-            "graded_ts": datetime.now(timezone.utc).isoformat(),
-            "result": _result_label(ret, pk["odds_open"], push),
-            "yh": yh, "ya": ya,
-            "ret_open": round(ret, 4),
-            "odds_close_1x2": o1x2, "odds_close_o25": o25,
-            "clv_ev": clv_ev, "clv_price": clv_price,
-        })
-        continue
-    home_ug = fd2ug.get(pk["div"], {}).get(pk["home"])
-    away_ug = fd2ug.get(pk["div"], {}).get(pk["away"])
-    if not home_ug:
-        unmapped[pk["div"]].add(f"home={pk['home']}")
-    if not away_ug:
-        unmapped[pk["div"]].add(f"away={pk['away']}")
-    res = results.get((pk["div"], pk["date"], home_ug, away_ug)) if home_ug and away_ug else None
-    if res is None:
-        continue  # belum main / belum keluar hasilnya
-    yh, ya = res
-    sres = _settle_guarded(pk, yh, ya)
-    if sres is None:
-        continue
-    ret, won, push = sres
-    new_grades.append({
-        "pick_id": pk["pick_id"], "competition": "",
-        "graded_ts": datetime.now(timezone.utc).isoformat(),
-        "result": _result_label(ret, pk["odds_open"], push),
-        "yh": yh, "ya": ya,
-        "ret_open": round(ret, 4),
-        "odds_close_1x2": o1x2, "odds_close_o25": o25,
-        "clv_ev": clv_ev, "clv_price": clv_price,
-    })
-
-if skipped_unknown:
-    print(f"! {len(skipped_unknown)} pick dilewati (pasar/side tak dikenal): "
-          f"{skipped_unknown}")
-
-if new_grades:
-    with open(GRADES, "a", encoding="utf-8") as f:
-        for g in new_grades:
-            f.write(json.dumps(g, ensure_ascii=False) + "\n")
-
-# ---------- backfill idempoten: isi odds_close/clv pada grade lama ----------
-def _backfill(grades):
+def _backfill(grades, picks_by_id, recompute_clv):
     out = []
     for g in grades:
         new = dict(g)
         pk = picks_by_id.get(g["pick_id"])
         if pk is not None:
             o1x2, o25, clv_ev, clv_price = _grade_close_payload(pk)
-            if RECOMPUTE_CLV:
+            if recompute_clv:
                 # Restatement paksa: timpa field close/CLV dari hierarki
                 # sumber saat ini. ret_open/result/yh/ya tidak disentuh —
                 # settlement adalah fakta historis, CLV adalah penilaian.
@@ -449,120 +379,215 @@ def _backfill(grades):
     return out
 
 
-# ------- ringkasan
-gmap = {}
-if os.path.exists(GRADES):
-    with open(GRADES, encoding="utf-8") as f:
-        all_grades = [json.loads(l) for l in f if l.strip()]
-    all_grades = _backfill(all_grades)
-    # Tulis atomik (tmp + replace): penulisan ulang penuh ini sekarang
-    # berjalan setiap hari (langkah [9b/9] rantai harian); penulisan
-    # langsung yang terpotong di tengah akan merusak riwayat grading.
-    _tmp = GRADES + ".tmp"
-    with open(_tmp, "w", encoding="utf-8") as f:
-        for g in all_grades:
-            f.write(json.dumps(g, ensure_ascii=False) + "\n")
-    os.replace(_tmp, GRADES)
-    gmap = {g["pick_id"]: g for g in all_grades}
-else:
-    all_grades = []
+def main():
+    """Jalankan grading satu kali (kontrak subprocess: kode keluar +
+    stdout + file ledger). Semua pemuatan data dan penulisan file
+    tinggal di sini — mengimpor modul ini tidak mengeksekusi apa pun,
+    sehingga settle/_clv bisa diuji sebagai fungsi murni."""
+    recompute_clv = "--recompute-clv" in sys.argv
+    global CLOSE_MAP, CUP_SNAPS
+    CLOSE_MAP = _load_close_map()
+    CUP_SNAPS = _load_cup_snapshots()
+    fd2ug = _load_fd2ug()
+    results = _load_all_results()
+    cup_results = _load_cup_results()
 
-agg = defaultdict(lambda: dict(n=0, prof=0.0, n_clv=0, s_ev=0.0,
-                               s_pr=0.0, beat=0))
-headline = dict(n=0, n_clv=0, s_ev=0.0, s_pr=0.0, beat=0)
-for pk in picks:
-    g = gmap.get(pk["pick_id"])
-    if not g:
-        continue
-    comp = pk.get("competition") or g.get("competition") or "league"
-    a = agg[(comp, pk["market"])]
-    a["n"] += 1
-    a["prof"] += g["ret_open"] - 1.0
-    headline["n"] += 1
-    ev, pr = g.get("clv_ev"), g.get("clv_price")
-    if ev is not None:
-        a["n_clv"] += 1
-        a["s_ev"] += ev
-        headline["n_clv"] += 1
-        headline["s_ev"] += ev
-    if pr is not None:
-        a["s_pr"] += pr
-        headline["s_pr"] += pr
-        if pr > 0:
-            a["beat"] += 1
-            headline["beat"] += 1
+    if not os.path.exists(PICKS):
+        raise SystemExit("picks.jsonl belum ada")
+    with open(PICKS, encoding="utf-8") as f:
+        picks = [json.loads(l) for l in f if l.strip()]
+    picks_by_id = {p["pick_id"]: p for p in picks}
+    graded_ids = set()
+    if os.path.exists(GRADES):
+        with open(GRADES, encoding="utf-8") as f:
+            for l in f:
+                if l.strip():
+                    graded_ids.add(json.loads(l)["pick_id"])
+
+    new_grades = []
+    unmapped = defaultdict(set)
+    skipped_unknown = []
+
+    for pk in picks:
+        if pk["pick_id"] in graded_ids:
+            continue
+        comp = pk.get("competition") or ""
+        o1x2, o25, clv_ev, clv_price = _grade_close_payload(pk)
+        if comp in ("EFL Cup", "DFB Pokal"):
+            # pick piala: hasil dari ta/results.csv (samakan nama)
+            res = cup_results.get((comp, pk["date"],
+                                   normalize_name(pk["home"]), normalize_name(pk["away"])))
+            if res is None:
+                unmapped[comp].add(f"{pk['home']} v {pk['away']}")
+                continue
+            yh, ya = res
+            sres = _settle_guarded(pk, yh, ya, skipped_unknown)
+            if sres is None:
+                continue
+            ret, won, push = sres
+            new_grades.append({
+                "pick_id": pk["pick_id"], "competition": comp,
+                "graded_ts": datetime.now(timezone.utc).isoformat(),
+                "result": _result_label(ret, pk["odds_open"], push),
+                "yh": yh, "ya": ya,
+                "ret_open": round(ret, 4),
+                "odds_close_1x2": o1x2, "odds_close_o25": o25,
+                "clv_ev": clv_ev, "clv_price": clv_price,
+            })
+            continue
+        home_ug = fd2ug.get(pk["div"], {}).get(pk["home"])
+        away_ug = fd2ug.get(pk["div"], {}).get(pk["away"])
+        if not home_ug:
+            unmapped[pk["div"]].add(f"home={pk['home']}")
+        if not away_ug:
+            unmapped[pk["div"]].add(f"away={pk['away']}")
+        res = results.get((pk["div"], pk["date"], home_ug, away_ug)) if home_ug and away_ug else None
+        if res is None:
+            continue  # belum main / belum keluar hasilnya
+        yh, ya = res
+        sres = _settle_guarded(pk, yh, ya, skipped_unknown)
+        if sres is None:
+            continue
+        ret, won, push = sres
+        new_grades.append({
+            "pick_id": pk["pick_id"], "competition": "",
+            "graded_ts": datetime.now(timezone.utc).isoformat(),
+            "result": _result_label(ret, pk["odds_open"], push),
+            "yh": yh, "ya": ya,
+            "ret_open": round(ret, 4),
+            "odds_close_1x2": o1x2, "odds_close_o25": o25,
+            "clv_ev": clv_ev, "clv_price": clv_price,
+        })
+
+    if skipped_unknown:
+        print(f"! {len(skipped_unknown)} pick dilewati (pasar/side tak dikenal): "
+              f"{skipped_unknown}")
+
+    if new_grades:
+        with open(GRADES, "a", encoding="utf-8") as f:
+            for g in new_grades:
+                f.write(json.dumps(g, ensure_ascii=False) + "\n")
+
+    # ---------- backfill idempoten: isi odds_close/clv pada grade lama ----------
+
+    # ------- ringkasan
+    gmap = {}
+    if os.path.exists(GRADES):
+        with open(GRADES, encoding="utf-8") as f:
+            all_grades = [json.loads(l) for l in f if l.strip()]
+        all_grades = _backfill(all_grades, picks_by_id, recompute_clv)
+        # Tulis atomik (tmp + replace): penulisan ulang penuh ini sekarang
+        # berjalan setiap hari (langkah [9b/9] rantai harian); penulisan
+        # langsung yang terpotong di tengah akan merusak riwayat grading.
+        _tmp = GRADES + ".tmp"
+        with open(_tmp, "w", encoding="utf-8") as f:
+            for g in all_grades:
+                f.write(json.dumps(g, ensure_ascii=False) + "\n")
+        os.replace(_tmp, GRADES)
+        gmap = {g["pick_id"]: g for g in all_grades}
+    else:
+        all_grades = []
+
+    agg = defaultdict(lambda: dict(n=0, prof=0.0, n_clv=0, s_ev=0.0,
+                                   s_pr=0.0, beat=0))
+    headline = dict(n=0, n_clv=0, s_ev=0.0, s_pr=0.0, beat=0)
+    for pk in picks:
+        g = gmap.get(pk["pick_id"])
+        if not g:
+            continue
+        comp = pk.get("competition") or g.get("competition") or "league"
+        a = agg[(comp, pk["market"])]
+        a["n"] += 1
+        a["prof"] += g["ret_open"] - 1.0
+        headline["n"] += 1
+        ev, pr = g.get("clv_ev"), g.get("clv_price")
+        if ev is not None:
+            a["n_clv"] += 1
+            a["s_ev"] += ev
+            headline["n_clv"] += 1
+            headline["s_ev"] += ev
+        if pr is not None:
+            a["s_pr"] += pr
+            headline["s_pr"] += pr
+            if pr > 0:
+                a["beat"] += 1
+                headline["beat"] += 1
 
 
-def clv_block(a):
-    n_clv = a["n_clv"]
-    return {
-        "n_clv": n_clv,
-        "clv_coverage": round(n_clv / a["n"], 4) if a["n"] else None,
-        "mean_clv_ev": round(a["s_ev"] / n_clv, 5) if n_clv else None,
-        "mean_clv_price": round(a["s_pr"] / n_clv, 5) if n_clv else None,
-        "beat_close_rate": round(a["beat"] / n_clv, 4) if n_clv else None,
+    def clv_block(a):
+        n_clv = a["n_clv"]
+        return {
+            "n_clv": n_clv,
+            "clv_coverage": round(n_clv / a["n"], 4) if a["n"] else None,
+            "mean_clv_ev": round(a["s_ev"] / n_clv, 5) if n_clv else None,
+            "mean_clv_price": round(a["s_pr"] / n_clv, 5) if n_clv else None,
+            "beat_close_rate": round(a["beat"] / n_clv, 4) if n_clv else None,
+        }
+
+
+    competitions = {}
+    for (comp, market), a in agg.items():
+        block = competitions.setdefault(comp, {})
+        block[market] = {"n": a["n"], "profit": round(a["prof"], 2),
+                         "roi": round(a["prof"] / a["n"], 4) if a["n"] else None,
+                         **clv_block(a)}
+
+    comp_summary = {}
+    for comp in ("league", "EFL Cup", "DFB Pokal"):
+        block = competitions.get(comp, {})
+        n = sum(b["n"] for b in block.values())
+        prof = sum(b["profit"] for b in block.values())
+        agg_c = dict(n=n, prof=prof, n_clv=sum(b["n_clv"] for b in block.values()),
+                     s_ev=sum(b["mean_clv_ev"] * b["n_clv"] for b in block.values() if b["mean_clv_ev"] is not None),
+                     s_pr=sum(b["mean_clv_price"] * b["n_clv"] for b in block.values() if b["mean_clv_price"] is not None),
+                     beat=sum(b["beat_close_rate"] * b["n_clv"] for b in block.values() if b["beat_close_rate"] is not None))
+        comp_summary[comp] = {
+            "n": n,
+            "profit": round(prof, 2),
+            "roi": round(prof / n, 4) if n else None,
+            "markets": block,
+            **clv_block(agg_c),
+        }
+    summary = {
+        "graded_ts": datetime.now(timezone.utc).isoformat(),
+        "n_picks": len(picks),
+        "n_graded": sum(1 for p in picks if p["pick_id"] in gmap),
+        "n_pending": sum(1 for p in picks if p["pick_id"] not in gmap),
+        "headline_clv": clv_block(headline),
+        "competitions": comp_summary,
+        "note": "Settle di odds_open saat pick lahir (flat 1 unit). odds_close & CLV "
+                "diisi dari all_matches_clean.csv kolom closing (hierarki Pinnacle -> "
+                "AvgC -> B365C); clv_ev = p_fair_close(taken) * odds_open - 1, "
+                "clv_price = odds_open / odds_close_taken - 1. CLV adalah metrik "
+                "kualitas; settle tetap di odds_open. Ringkasan per kompetisi: liga "
+                "gabungan (kunci 'league') + tiap piala.",
     }
+    with open(SUMMARY, "w", encoding="utf-8") as f:
+        json.dump(summary, f, ensure_ascii=False, indent=2)
+
+    print(f"graded baru: {len(new_grades)} | total graded: {len(all_grades)} | pending: {summary['n_pending']}")
+    if recompute_clv:
+        print(f"  CLV dihitung ulang paksa untuk {len(all_grades)} grade "
+              f"(hierarki sumber saat ini; ret_open/result tidak berubah)")
+    if unmapped:
+        print("!! tidak terpetakan:")
+        for comp, names in sorted(unmapped.items()):
+            print(f"   {comp}: {sorted(names)}")
+    for comp, c in summary["competitions"].items():
+        print(f"  [{comp}] n={c['n']} profit={c['profit']}")
+        for m, a in c["markets"].items():
+            roi = a["roi"]
+            print(f"     {m}: n={a['n']} ROI={roi*100 if roi is not None else 0:.2f}% "
+                  f"| CLV EV={a['mean_clv_ev']} PRICE={a['mean_clv_price']} "
+                  f"beat={a['beat_close_rate']} cov={a['clv_coverage']}")
+    print(f"  headline CLV: EV={summary['headline_clv']['mean_clv_ev']} "
+          f"PRICE={summary['headline_clv']['mean_clv_price']} "
+          f"beat={summary['headline_clv']['beat_close_rate']} "
+          f"n={summary['headline_clv']['n_clv']} "
+          f"cov={summary['headline_clv']['clv_coverage']}")
+    for g in new_grades[:5]:
+        print("  *", g["pick_id"], g.get("competition", ""), g["result"], "ret=", g["ret_open"])
 
 
-competitions = {}
-for (comp, market), a in agg.items():
-    block = competitions.setdefault(comp, {})
-    block[market] = {"n": a["n"], "profit": round(a["prof"], 2),
-                     "roi": round(a["prof"] / a["n"], 4) if a["n"] else None,
-                     **clv_block(a)}
-
-comp_summary = {}
-for comp in ("league", "EFL Cup", "DFB Pokal"):
-    block = competitions.get(comp, {})
-    n = sum(b["n"] for b in block.values())
-    prof = sum(b["profit"] for b in block.values())
-    agg_c = dict(n=n, prof=prof, n_clv=sum(b["n_clv"] for b in block.values()),
-                 s_ev=sum(b["mean_clv_ev"] * b["n_clv"] for b in block.values() if b["mean_clv_ev"] is not None),
-                 s_pr=sum(b["mean_clv_price"] * b["n_clv"] for b in block.values() if b["mean_clv_price"] is not None),
-                 beat=sum(b["beat_close_rate"] * b["n_clv"] for b in block.values() if b["beat_close_rate"] is not None))
-    comp_summary[comp] = {
-        "n": n,
-        "profit": round(prof, 2),
-        "roi": round(prof / n, 4) if n else None,
-        "markets": block,
-        **clv_block(agg_c),
-    }
-summary = {
-    "graded_ts": datetime.now(timezone.utc).isoformat(),
-    "n_picks": len(picks),
-    "n_graded": sum(1 for p in picks if p["pick_id"] in gmap),
-    "n_pending": sum(1 for p in picks if p["pick_id"] not in gmap),
-    "headline_clv": clv_block(headline),
-    "competitions": comp_summary,
-    "note": "Settle di odds_open saat pick lahir (flat 1 unit). odds_close & CLV "
-            "diisi dari all_matches_clean.csv kolom closing (hierarki Pinnacle -> "
-            "AvgC -> B365C); clv_ev = p_fair_close(taken) * odds_open - 1, "
-            "clv_price = odds_open / odds_close_taken - 1. CLV adalah metrik "
-            "kualitas; settle tetap di odds_open. Ringkasan per kompetisi: liga "
-            "gabungan (kunci 'league') + tiap piala.",
-}
-with open(SUMMARY, "w", encoding="utf-8") as f:
-    json.dump(summary, f, ensure_ascii=False, indent=2)
-
-print(f"graded baru: {len(new_grades)} | total graded: {len(all_grades)} | pending: {summary['n_pending']}")
-if RECOMPUTE_CLV:
-    print(f"  CLV dihitung ulang paksa untuk {len(all_grades)} grade "
-          f"(hierarki sumber saat ini; ret_open/result tidak berubah)")
-if unmapped:
-    print("!! tidak terpetakan:")
-    for comp, names in sorted(unmapped.items()):
-        print(f"   {comp}: {sorted(names)}")
-for comp, c in summary["competitions"].items():
-    print(f"  [{comp}] n={c['n']} profit={c['profit']}")
-    for m, a in c["markets"].items():
-        roi = a["roi"]
-        print(f"     {m}: n={a['n']} ROI={roi*100 if roi is not None else 0:.2f}% "
-              f"| CLV EV={a['mean_clv_ev']} PRICE={a['mean_clv_price']} "
-              f"beat={a['beat_close_rate']} cov={a['clv_coverage']}")
-print(f"  headline CLV: EV={summary['headline_clv']['mean_clv_ev']} "
-      f"PRICE={summary['headline_clv']['mean_clv_price']} "
-      f"beat={summary['headline_clv']['beat_close_rate']} "
-      f"n={summary['headline_clv']['n_clv']} "
-      f"cov={summary['headline_clv']['clv_coverage']}")
-for g in new_grades[:5]:
-    print("  *", g["pick_id"], g.get("competition", ""), g["result"], "ret=", g["ret_open"])
+if __name__ == "__main__":
+    main()

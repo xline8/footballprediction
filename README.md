@@ -335,7 +335,8 @@ different part of the pipeline:
 Unit tests for the core math (Shin de-vigging, Dixon-Coles probabilities,
 cup advance probabilities, the slip search, push-market fair odds) and for
 the recommendation settlement rules (1X2, double chance, over/under, BTTS,
-corners, and slip units) live in `tests/test_units.py`. They use fixed inputs and need no data files, so
+corners, and slip units) and the money ledger's settle rules (including
+quarter-line halves) live in `tests/test_units.py`. They use fixed inputs and need no data files, so
 GitHub Actions runs them, plus a byte-compile of all sources, on every push
 and pull request:
 
