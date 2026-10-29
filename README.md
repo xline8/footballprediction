@@ -155,19 +155,21 @@ edge-band reason given there. The daily recommendations further down are a
 separate, deterministic product built from model probabilities and real
 1xBet prices; they are not policy-engine picks and carry no edge claim.
 
-`grade_recommendations.py` (step 8c/9) grades the daily recommendation
-products — safest picks, single, and the two slips — from each archived
-date. Legs settle on the 90-minute FT score from `ta/results.csv` (no
-API-Football); cup ties that advance via extra time or penalties still lose
-on the 90-minute score. Slip units are settled as one bet (a push leg drops
-out; one losing leg loses the unit; pending legs keep the unit pending). It
-appends to `ledger/daily_pick_grades.jsonl` and rewrites
-`ledger/calibration_summary.json` (overall, per product, per market, and per
-probability-band hit rate vs declared model probability, plus a Brier score
-for the safest picks). Corner picks would use `HC`/`AC` from
-`all_matches_clean.csv`; cup corners are not graded because tipsterarea has
-no actual corner source, and they are excluded from all calibration stats.
-Both outputs are gitignored runtime state.
+Step 8c grades the daily products themselves. `grade_recommendations.py`
+reads each archived date's safest picks, single, and slips from
+`archive/<date>/` and settles every leg on the 90-minute score in
+`ta/results.csv`. League corner picks settle on the HC/AC counts in
+`all_matches_clean.csv` once those are published. A slip is graded as a
+unit: one losing leg loses it, a push leg drops out, and a pending leg
+keeps the unit pending. Cup corner picks are not graded, because
+tipsterarea publishes no corner counts, and they stay out of the
+statistics. Grades append to `ledger/daily_pick_grades.jsonl`;
+`ledger/calibration_summary.json` accumulates hit rate against stated
+probability overall, per product, per market, and per probability band,
+plus a Brier score for the safest picks. Both files are gitignored
+runtime state. This is the project's calibration history: it shows
+whether the probabilities the model prints match how often its picks
+actually land.
 
 ## Cups: EFL Cup & DFB Pokal
 
