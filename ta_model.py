@@ -569,9 +569,25 @@ def settle(bet, sh, sa):
     return "?"
 
 
+def _fd_date(s):
+    """Tanggal football-data (DD/MM/YYYY) -> ISO; None bila tak dikenal."""
+    s = (s or "").strip()
+    for fmt in ("%d/%m/%Y", "%Y-%m-%d"):
+        try:
+            return datetime.strptime(s, fmt).date().isoformat()
+        except ValueError:
+            continue
+    return None
+
+
 def _load_corner_counts():
     """Load actual corner counts from FD raw CSVs.
-    Returns dict (div, date, home, away) -> (hc, ac).
+    Returns dict (iso_date, norm(home), norm(away)) -> (hc, ac).
+
+    Kunci harus sama persis dengan sisi bet di grade() (tanggal ISO +
+    nama ternormalisasi). Versi lama memakai tanggal mentah DD/MM/YYYY
+    dan nama mentah CSV, sehingga lookup tidak pernah cocok dan bet
+    corner dinilai dari skor gol.
     """
     out = {}
     raw_dir = os.path.join(HERE, "raw")
@@ -580,13 +596,13 @@ def _load_corner_counts():
         if not os.path.exists(path):
             continue
         for r in read_csv(path):
-            key = (div, r.get("Date", "").strip(),
-                   (r.get("HomeTeam") or "").strip(),
-                   (r.get("AwayTeam") or "").strip())
+            d = _fd_date(r.get("Date", ""))
             hc = to_int(r.get("HC"))
             ac = to_int(r.get("AC"))
-            if hc is not None and ac is not None:
-                out[key] = (hc, ac)
+            if d is None or hc is None or ac is None:
+                continue
+            out[(d, norm(r.get("HomeTeam") or ""),
+                 norm(r.get("AwayTeam") or ""))] = (hc, ac)
     return out
 
 
@@ -595,6 +611,7 @@ def grade():
     res = {r["game_id"]: r for r in read_csv(os.path.join(TA, "results.csv"))}
     corner_counts = _load_corner_counts()
     changed = 0
+    skipped_corners = 0
     now = datetime.now(timezone.utc).astimezone().strftime("%Y-%m-%dT%H:%M:%S%z")
     for b in bets:
         if b["status"] != "OPEN":
@@ -605,16 +622,28 @@ def grade():
         sh, sa = r["score_h"], r["score_a"]
         # For Corner market, use actual corner counts instead of scores
         if b["market"] == "Corners":
-            # Try to find fixture with corner data from FD raw
-            # Parse date from kickoff_utc
             dt = (b.get("kickoff_utc") or "")[:10]
-            ck = (b.get("league", "").replace(" - ", "|").split("|")[0], dt,
-                  b["home"], b["away"])
-            # Try matching via league prefix
-            for key, counts in corner_counts.items():
-                if key[1][:10] == dt and key[2] == b["home"] and key[3] == b["away"]:
-                    sh, sa = counts
-                    break
+            counts = corner_counts.get(
+                (dt, norm(b["home"]), norm(b["away"])))
+            if counts is None:
+                # Fallback fuzzy di tanggal yang sama (ambang produk sim
+                # 0.90, sama seperti pencocokan fixture di build()).
+                best, bs = None, 0.0
+                for (cd, ch, ca), cc in corner_counts.items():
+                    if cd != dt:
+                        continue
+                    sc = sim(norm(b["home"]), ch) * sim(norm(b["away"]), ca)
+                    if sc > bs:
+                        bs, best = sc, cc
+                if bs >= 0.90:
+                    counts = best
+            if counts is None:
+                # Tidak ada data corner aktual: biarkan OPEN. Menilai bet
+                # corner dari skor gol (perilaku lama) menghasilkan grade
+                # yang salah secara diam-diam.
+                skipped_corners += 1
+                continue
+            sh, sa = counts
         out = settle(b, sh, sa)
         price = fnum(b["price"], 1.0)
         if out == "win":
@@ -634,7 +663,9 @@ def grade():
         changed += 1
     write_csv(os.path.join(TA, "best_bets.csv"), BET_COLS, bets)
     print(f"dinilai: {changed} bet | sisa OPEN: "
-          f"{sum(1 for b in bets if b['status'] == 'OPEN')}")
+          f"{sum(1 for b in bets if b['status'] == 'OPEN')}"
+          + (f" | corner dilewati (tak ada data aktual): {skipped_corners}"
+             if skipped_corners else ""))
     return 0
 
 

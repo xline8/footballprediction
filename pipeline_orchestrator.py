@@ -100,6 +100,18 @@ class PipelineOrchestrator:
             results['status'] = 'failed'
             results['error'] = str(e)
 
+        # Kejujuran status (audit K4): langkah yang melaporkan 'failed'
+        # tidak boleh tertutup status 'completed'. Pemanggil (cron refit
+        # mingguan) membaca field ini dan exit code proses.
+        failed_steps = [k for k, v in results.items()
+                        if isinstance(v, dict) and v.get('status') == 'failed']
+        if failed_steps:
+            results['failed_steps'] = failed_steps
+            if results.get('status') == 'completed':
+                results['status'] = 'failed'
+            log(f"Pipeline finished with FAILED steps: {failed_steps}",
+                "ERROR")
+
         runtime = time.time() - self.start_time
         log(f"\nPipeline completed in {runtime:.1f}s", "INFO")
         log(f"Stats: {dict(self.stats)}", "INFO")
@@ -410,7 +422,14 @@ class PipelineOrchestrator:
         try:
             from predict_upcoming_refactored import generate_predictions
             results = generate_predictions()
-            n_preds = len(results.get('predictions', []))
+            inner = results.get('status')
+            if inner is not None and inner != 'success':
+                log(f"  X generate_predictions status {inner!r}", "ERROR")
+                return {'status': 'failed',
+                        'error': f'generate_predictions status {inner!r}',
+                        'results': results}
+            n_preds = results.get('n_output_rows',
+                                  len(results.get('predictions', [])))
             log(f"  OK Generated {n_preds} predictions", "INFO")
             self.stats['predictions_generated'] = n_preds
             return {'status': 'success', 'n_predictions': n_preds, 'results': results}
@@ -430,13 +449,22 @@ class PipelineOrchestrator:
 
         try:
             import subprocess
+            started = time.time()
             result = subprocess.run(
                 [sys.executable, os.path.join(BASE_DIR, "model_corners_v3.py"), "--predict"],
                 capture_output=True, text=True, timeout=120
             )
+            if result.returncode != 0:
+                log(f"  X Corner model rc={result.returncode}", "ERROR")
+                return {'status': 'failed', 'error': f'rc={result.returncode}',
+                        'stderr': (result.stderr or '')[-300:]}
 
             corner_file = os.path.join(BASE_DIR, "predictions_corners_upcoming.csv")
             if os.path.exists(corner_file):
+                if os.path.getmtime(corner_file) < started - 5:
+                    log("  X Corner predictions file is stale "
+                        "(not rewritten by this run)", "ERROR")
+                    return {'status': 'failed', 'error': 'stale_output'}
                 import csv
                 with open(corner_file, 'r') as f:
                     rows = list(csv.DictReader(f))
@@ -889,11 +917,12 @@ def main():
     if args.run_all:
         results = orchestrator.run_full_pipeline()
         print(json.dumps(results, indent=2, default=str))
-        return
+        sys.exit(1 if results.get('status') == 'failed' else 0)
 
     # Default: run all
     results = orchestrator.run_full_pipeline()
     print(json.dumps(results, indent=2, default=str))
+    sys.exit(1 if results.get('status') == 'failed' else 0)
 
 
 if __name__ == "__main__":

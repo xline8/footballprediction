@@ -237,14 +237,28 @@ if os.path.exists(GRADES):
                 graded_ids.add(json.loads(l)["pick_id"])
 
 
-def settle(market, side, yh, ya, odds):
+def settle(market, side, yh, ya, odds, line=None):
+    """Return (ret, won, push); ret = gross return as a multiple of stake.
+
+    OU is settled against the pick's own `line` when it carries one
+    (cup picks store theirs, e.g. 1.5); without a line the historical
+    default 2.5 applies (every league OU pick is 2.5). A total exactly
+    on an integer line is a push (ret 1.0). Before this fix every OU
+    pick was settled against a hardcoded 2.5 (audit K3).
+    """
     if market == "1X2":
         wk = "H" if yh > ya else ("A" if ya > yh else "D")
-        return (odds if side == wk else 0.0), (side == wk)
-    over = (yh + ya) > 2.5
-    return (odds if (side == "Over" and over) else
-            0.0 if side == "Over" else odds if not over else 0.0), \
-        (over if side == "Over" else not over)
+        return (odds if side == wk else 0.0), (side == wk), False
+    try:
+        ln = float(line) if line not in (None, "") else 2.5
+    except (TypeError, ValueError):
+        ln = 2.5
+    tot = yh + ya
+    if tot == ln:
+        return 1.0, False, True
+    over = tot > ln
+    won = over if side == "Over" else not over
+    return (odds if won else 0.0), won, False
 
 
 new_grades = []
@@ -262,11 +276,12 @@ for pk in picks:
             unmapped[comp].add(f"{pk['home']} v {pk['away']}")
             continue
         yh, ya = res
-        ret, won = settle(pk["market"], pk["side"], yh, ya, pk["odds_open"])
+        ret, won, push = settle(pk["market"], pk["side"], yh, ya,
+                                pk["odds_open"], pk.get("line"))
         new_grades.append({
             "pick_id": pk["pick_id"], "competition": comp,
             "graded_ts": datetime.now(timezone.utc).isoformat(),
-            "result": "win" if won else "loss",
+            "result": "push" if push else ("win" if won else "loss"),
             "yh": yh, "ya": ya,
             "ret_open": round(ret, 4),
             "odds_close_1x2": o1x2, "odds_close_o25": o25,
@@ -283,11 +298,12 @@ for pk in picks:
     if res is None:
         continue  # belum main / belum keluar hasilnya
     yh, ya = res
-    ret, won = settle(pk["market"], pk["side"], yh, ya, pk["odds_open"])
+    ret, won, push = settle(pk["market"], pk["side"], yh, ya,
+                            pk["odds_open"], pk.get("line"))
     new_grades.append({
         "pick_id": pk["pick_id"], "competition": "",
         "graded_ts": datetime.now(timezone.utc).isoformat(),
-        "result": "win" if won else "loss",
+        "result": "push" if push else ("win" if won else "loss"),
         "yh": yh, "ya": ya,
         "ret_open": round(ret, 4),
         "odds_close_1x2": o1x2, "odds_close_o25": o25,

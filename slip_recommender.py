@@ -58,6 +58,14 @@ S10_LO, S10_HI, S10_TARGET = 9.0, 11.0, 10.0
 S10_MIN_LEGS, S10_MAX_LEGS = 3, 6
 S10_MAX_EXPAND_DAYS = 4
 
+# Batas node DFS (audit K5): tanpa batas, pool besar (slate akhir pekan
+# atau ekspansi slip10) bisa membuat pencarian berjalan sangat lama dan
+# menggantung seluruh rantai harian yang memanggilnya in-process.
+# Anggaran ini jauh di atas kebutuhan pool nyata saat ini; bila habis,
+# pencarian berhenti dan mengembalikan kandidat terbaik yang sudah
+# ditemukan (degradasi yang deterministik, bukan hang).
+SEARCH_NODE_BUDGET = 200_000
+
 SLIP_COLS = ["date", "home", "away", "competition", "market", "line",
              "selection", "o_1xbet", "p_model", "slip_total_odds",
              "slip_joint_prob", "slip_ev", "in_band"]
@@ -162,6 +170,8 @@ def _search(by_match, min_legs, max_legs, lo, hi, target):
     cap = hi * 2.5
     best_in = None
     best_near = None
+    nodes = [0]
+    truncated = [False]
 
     def consider(tot, jp, ev, legs):
         nonlocal best_in, best_near
@@ -180,12 +190,20 @@ def _search(by_match, min_legs, max_legs, lo, hi, target):
             best_near = cur
 
     def rec(i, tot, jp, ev, legs):
+        if truncated[0]:
+            return
+        nodes[0] += 1
+        if nodes[0] > SEARCH_NODE_BUDGET:
+            truncated[0] = True
+            return
         if len(legs) >= min_legs:
             consider(tot, jp, ev, legs)
         if i == len(pools) or len(legs) == max_legs:
             return
         rec(i + 1, tot, jp, ev, legs)  # lewati laga ini
         for leg in pools[i]:
+            if truncated[0]:
+                return
             nt = tot * leg["o"]
             if nt > cap:
                 continue
@@ -195,6 +213,9 @@ def _search(by_match, min_legs, max_legs, lo, hi, target):
             legs.pop()
 
     rec(0, 1.0, 1.0, 0.0, [])
+    if truncated[0]:
+        print(f"  ! slip search mencapai batas node {SEARCH_NODE_BUDGET}; "
+              f"memakai kandidat terbaik yang sudah ditemukan")
     return best_in, best_near
 
 
