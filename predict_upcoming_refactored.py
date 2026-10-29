@@ -189,8 +189,19 @@ def generate_predictions(force_refit: bool = False, output_file: str = None) -> 
             w.writerows(out_rows)
 
     runtime = time.time() - t0
+    # Status jujur: versi lama selalu 'success' walau sebagian fixture
+    # gagal diam-diam (errors tidak pernah dibaca pemanggil) dan file
+    # output tidak ditimpa bila out_rows kosong, sehingga file basi
+    # terkonsumsi sebagai data segar. Run normal menghasilkan 0 errors,
+    # jadi 'partial' hanya muncul saat memang ada yang hilang.
+    if fixtures and not out_rows:
+        status = 'error'
+    elif errors:
+        status = 'partial'
+    else:
+        status = 'success'
     return {
-        'status': 'success',
+        'status': status,
         'predictions': out_rows,
         'n_fixtures': len(fixtures),
         'n_with_odds': n_with_odds,

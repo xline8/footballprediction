@@ -82,16 +82,21 @@ def summary(rows):
     staked = float(len(done))
     profit = sum(float(r["pnl_flat"]) for r in done)
     wins = sum(1 for r in done if r["actual_outcome"] == "H")
-    # kelly
-    k_staked = sum(float(r["pnl_kelly"]) for r in done if r["actual_outcome"] == "H") \
-        + sum(float(r["pnl_kelly"]) for r in done if r["actual_outcome"] != "H")
+    # kelly — dihitung HANYA dari baris ber-stake Kelly: win rate dari
+    # baris yang sama, yield = profit Kelly / total stake Kelly. Versi
+    # lama membagi wins semua baris dengan n Kelly (bisa > 1.0) dan
+    # mencetak yield sebagai profit flat / profit Kelly.
+    rows_k = [r for r in done if float(r["recommended_stake_kelly"] or 0) > 0]
+    n_k = len(rows_k)
+    k_staked = sum(float(r["recommended_stake_kelly"] or 0) for r in rows_k)
+    k_profit = sum(float(r["pnl_kelly"]) for r in rows_k)
+    k_wins = sum(1 for r in rows_k if r["actual_outcome"] == "H")
     print()
     print(f"{'metrik':14} {'Live flat':>12} {'Live kelly':>12} {'Hist flat':>10} {'Hist kelly':>10}")
-    n_k = len([r for r in done if float(r["recommended_stake_kelly"] or 0) > 0])
     print(f"{'n':14} {len(done):>12} {n_k:>12} {BENCH['flat']['n']:>10} {BENCH['kelly']['n']:>10}")
-    print(f"{'win rate':14} {wins/len(done):>12.3f} {wins/n_k if n_k else 0:>12.3f} "
+    print(f"{'win rate':14} {wins/len(done):>12.3f} {k_wins/n_k if n_k else 0:>12.3f} "
           f"{BENCH['flat']['win_rate']:>10.3f} {BENCH['kelly']['win_rate']:>10.3f}")
-    print(f"{'yield':14} {profit/staked:>12.4%} {profit/k_staked if k_staked else 0:>12.4%} "
+    print(f"{'yield':14} {profit/staked:>12.4%} {k_profit/k_staked if k_staked else 0:>12.4%} "
           f"{BENCH['flat']['yield']:>10.4%} {BENCH['kelly']['yield']:>10.4%}")
 
 

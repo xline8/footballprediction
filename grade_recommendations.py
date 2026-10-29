@@ -374,11 +374,16 @@ def _stats(final_legs):
     if n == 0:
         return {"n": 0, "mean_p": None, "hit_rate": None, "diff": None,
                 "push": push}
-    mean_p = sum(g["p_model"] for g in npush if g["p_model"] is not None) / n
+    with_p = [g for g in npush if g["p_model"] is not None]
+    mean_p = (sum(g["p_model"] for g in with_p) / len(with_p)) if with_p \
+        else None
     hit = sum(1 for g in npush if g["status"] == "hit")
     hr = hit / n
-    return {"n": n, "mean_p": round(mean_p, 4), "hit_rate": round(hr, 4),
-            "diff": round(hr - mean_p, 4), "push": push}
+    return {"n": n,
+            "mean_p": round(mean_p, 4) if mean_p is not None else None,
+            "hit_rate": round(hr, 4),
+            "diff": round(hr - mean_p, 4) if mean_p is not None else None,
+            "push": push}
 
 
 def _band(p):
@@ -411,10 +416,14 @@ def _build_summary(store):
         by_product[p] = entry
     summary["by_product"] = by_product
 
-    # by_market
+    # by_market — semua produser menulis "BTS"; versi lama mencari
+    # "BTTS" sehingga bucket-nya permanen n=0. Samakan keduanya ke BTS.
+    def _canon(m):
+        return "BTS" if m in ("BTS", "BTTS") else m
+
     by_market = {}
-    for mkt in ("1X2", "DC", "OU", "BTTS", "Corners"):
-        ml = [g for g in legs if g["market"] == mkt]
+    for mkt in ("1X2", "DC", "OU", "BTS", "Corners"):
+        ml = [g for g in legs if _canon(g["market"]) == mkt]
         by_market[mkt] = _stats(ml)
     summary["by_market"] = by_market
 
@@ -426,9 +435,11 @@ def _build_summary(store):
         by_band[b] = _stats(bl)
     summary["by_band"] = by_band
 
-    # Brier pick_teraman (leg final non-push)
+    # Brier pick_teraman (leg final non-push, wajib punya p_model —
+    # tanpa guard ini leg tanpa probabilitas membuat TypeError dan
+    # seluruh ringkasan gagal dibuat)
     pl = [g for g in legs if g["product"] == "pick_teraman"
-          and g["status"] != "push"]
+          and g["status"] != "push" and g["p_model"] is not None]
     if pl:
         brier = sum((g["p_model"] - (1 if g["status"] == "hit" else 0)) ** 2
                     for g in pl) / len(pl)

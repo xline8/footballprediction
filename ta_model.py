@@ -261,8 +261,22 @@ def to_int(x, d=None):
 
 # ------------------------------------------------------------ harga
 def price_index():
-    """(game_id, market, line, selection) -> list of (odds, bookmaker)."""
-    idx = {}
+    """(game_id, market, line, selection) -> list of (odds, bookmaker).
+
+    Hanya kutipan TERBARU per bandar yang disimpan. Versi lama menampung
+    semua snapshot sepanjang sejarah dan best_price mengambil maksimum
+    lintas waktu, sehingga bet dihargai pada odds yang mungkin sudah
+    tidak ditawarkan siapa pun (EV hantu, profit ter-grade terinflasi;
+    audit ulang 2026-10-29: 749 dari 19.145 kunci harga punya odds
+    terbaru != maksimum historis).
+    """
+    latest = {}
+
+    def put(key, bookie, odds, captured_at):
+        cur = latest.get((key, bookie))
+        if cur is None or captured_at >= cur[0]:
+            latest[(key, bookie)] = (captured_at, odds)
+
     for r in read_csv(os.path.join(TA, "odds_markets_snapshots.csv")):
         m = r["market"]
         line = r["line"] or ""
@@ -281,15 +295,18 @@ def price_index():
         o = fnum(r["odds"])
         if not o or o <= 1.0:
             continue
-        idx.setdefault((r["game_id"], m, line, r["selection"]), []).append(
-            (o, r["bookmaker"]))
+        put((r["game_id"], m, line, r["selection"]), r["bookmaker"], o,
+            r.get("captured_at") or "")
     # 1X2 dari halaman tanggal (harga umum, tanpa nama bandar)
     for r in read_csv(os.path.join(TA, "odds_1x2_snapshots.csv")):
         for sel, col in (("1", "o1"), ("X", "ox"), ("2", "o2")):
             o = fnum(r[col])
             if o and o > 1.0:
-                idx.setdefault((r["game_id"], "1X2", "", sel), []).append(
-                    (o, "market"))
+                put((r["game_id"], "1X2", "", sel), "market", o,
+                    r.get("captured_at") or "")
+    idx = {}
+    for (key, bookie), (_, o) in latest.items():
+        idx.setdefault(key, []).append((o, bookie))
     return idx
 
 

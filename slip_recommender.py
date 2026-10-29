@@ -173,10 +173,14 @@ def _search(by_match, min_legs, max_legs, lo, hi, target):
     nodes = [0]
     truncated = [False]
 
-    def consider(tot, jp, ev, legs):
+    def consider(tot, jp, legs):
         nonlocal best_in, best_near
         if len(legs) < min_legs:
             return
+        # EV gabungan slip: P(semua leg menang) * total odds - 1.
+        # Versi lama menjumlahkan EV per leg, yang bukan EV slip dan
+        # mengacaukan tie-break serta kolom slip_ev di output.
+        ev = jp * tot - 1.0
         if lo <= tot <= hi:
             cur = (tot, jp, ev, list(legs))
             if (best_in is None or jp > best_in[1] + 1e-9
@@ -189,7 +193,7 @@ def _search(by_match, min_legs, max_legs, lo, hi, target):
                     and jp > best_near[1])):
             best_near = cur
 
-    def rec(i, tot, jp, ev, legs):
+    def rec(i, tot, jp, legs):
         if truncated[0]:
             return
         nodes[0] += 1
@@ -197,10 +201,10 @@ def _search(by_match, min_legs, max_legs, lo, hi, target):
             truncated[0] = True
             return
         if len(legs) >= min_legs:
-            consider(tot, jp, ev, legs)
+            consider(tot, jp, legs)
         if i == len(pools) or len(legs) == max_legs:
             return
-        rec(i + 1, tot, jp, ev, legs)  # lewati laga ini
+        rec(i + 1, tot, jp, legs)  # lewati laga ini
         for leg in pools[i]:
             if truncated[0]:
                 return
@@ -208,11 +212,10 @@ def _search(by_match, min_legs, max_legs, lo, hi, target):
             if nt > cap:
                 continue
             legs.append(leg)
-            rec(i + 1, nt, jp * leg["pm"], ev + leg["pm"] * leg["o"] - 1.0,
-                legs)
+            rec(i + 1, nt, jp * leg["pm"], legs)
             legs.pop()
 
-    rec(0, 1.0, 1.0, 0.0, [])
+    rec(0, 1.0, 1.0, [])
     if truncated[0]:
         print(f"  ! slip search mencapai batas node {SEARCH_NODE_BUDGET}; "
               f"memakai kandidat terbaik yang sudah ditemukan")
