@@ -14,6 +14,8 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from backtest_picks import _fair_probs
+from grade_recommendations import (settle_1x2, settle_btts, settle_corner,
+                                   settle_dc, settle_ou, settle_slip_unit)
 from model_v2 import DC
 from predict_cups import p_adv
 from slip_recommender import _search
@@ -135,6 +137,85 @@ def test_fair_odds_with_push():
     # (1 - p_push) / p_win; a push refunds the stake.
     assert abs(fair_odds(0.6, 0.1) - 1.5) < 1e-12
     assert fair_odds(0.0, 0.5) == 999.0
+
+
+# ------------------------------------------------------------ settlement (grade)
+
+def test_settle_1x2_win_draw_lose():
+    assert settle_1x2(2, 1, "1") == "hit"     # home win
+    assert settle_1x2(2, 1, "X") == "lose"
+    assert settle_1x2(2, 1, "2") == "lose"
+    assert settle_1x2(1, 1, "X") == "hit"     # draw
+    assert settle_1x2(1, 1, "1") == "lose"
+    assert settle_1x2(1, 1, "2") == "lose"
+    assert settle_1x2(1, 2, "2") == "hit"     # away win
+    assert settle_1x2(1, 2, "1") == "lose"
+
+
+def test_settle_dc_three_sides():
+    assert settle_dc(2, 1, "1X") == "hit"
+    assert settle_dc(2, 1, "12") == "hit"
+    assert settle_dc(2, 1, "X2") == "lose"
+    assert settle_dc(1, 1, "1X") == "hit"     # draw: 1X & X2 hit
+    assert settle_dc(1, 1, "X2") == "hit"
+    assert settle_dc(1, 1, "12") == "lose"
+    assert settle_dc(0, 2, "X2") == "hit"
+    assert settle_dc(0, 2, "1X") == "lose"
+
+
+def test_settle_ou_with_push_on_round_line():
+    assert settle_ou(3, 2.5, "Over") == "hit"
+    assert settle_ou(3, 2.5, "Under") == "lose"
+    assert settle_ou(2, 2.5, "Under") == "hit"
+    # garis bulat: total == line -> push (kedua sisi)
+    assert settle_ou(3, 3.0, "Over") == "push"
+    assert settle_ou(3, 3.0, "Under") == "push"
+    assert settle_ou(4, 3.0, "Over") == "hit"
+
+
+def test_settle_btts_yes_no():
+    assert settle_btts(2, 1, "Yes") == "hit"
+    assert settle_btts(2, 1, "No") == "lose"
+    assert settle_btts(1, 0, "No") == "hit"
+    assert settle_btts(1, 0, "Yes") == "lose"
+    assert settle_btts(0, 0, "No") == "hit"
+
+
+def test_settle_corner_over_under_push():
+    assert settle_corner(11, 10.5, "Over") == "hit"
+    assert settle_corner(9, 10.5, "Under") == "hit"
+    assert settle_corner(10, 10.0, "Over") == "push"
+    assert settle_corner(10, 10.0, "Under") == "push"
+
+
+def test_settle_slip_unit_all_hit_is_hit():
+    assert settle_slip_unit(["hit", "hit", "hit"]) == "hit"
+
+
+def test_settle_slip_unit_one_lose_is_lose():
+    assert settle_slip_unit(["hit", "lose", "hit"]) == "lose"
+
+
+def test_settle_slip_unit_push_dropped_rest_hit():
+    assert settle_slip_unit(["hit", "push", "hit"]) == "hit"
+
+
+def test_settle_slip_unit_all_push_is_push():
+    assert settle_slip_unit(["push", "push"]) == "push"
+
+
+def test_settle_slip_unit_any_pending_is_pending():
+    assert settle_slip_unit(["hit", "pending", "push"]) == "pending"
+
+
+def test_settle_slip_unit_ungradeable_excluded():
+    assert settle_slip_unit(["hit", "ungradeable", "hit"]) == "hit"
+
+
+def test_cup_90min_draw_settles_as_ft():
+    # Piala: seri 90 menit -> home 1X2 lose, DC X2 hit (aturan 90 menit).
+    assert settle_1x2(1, 1, "1") == "lose"
+    assert settle_dc(1, 1, "X2") == "hit"
 
 
 if __name__ == "__main__":
