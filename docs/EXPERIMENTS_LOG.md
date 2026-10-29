@@ -1,315 +1,417 @@
-# EXPERIMENTS_LOG
+# Experiment Register
 
-Single source of truth for the keep-or-revert loop.
-Each experiment: hypothesize → implement → backtest → keep (commit) or revert (log failure).
+Record of the keep-or-revert experiment loop. Each experiment states a
+hypothesis, is implemented and backtested under leak-free walk-forward
+validation, and is then kept (committed) or reverted with the reason
+recorded here. Failed experiments stay in the register; they are the
+evidence behind what the production system does not do.
 
-## Current best baseline (RESET 2026-10-26)
+## Baseline at register reset (2026-10-26)
 
-Engine: `backtest_picks.py` (walk-forward, 68,763 test matches, historical B365 opening odds).
-Rule: signal = pure model prob, edge = `p − 1/odds` > 0.02, flat 1u stake, 1X2.
+Engine: `backtest_picks.py`, walk-forward over 68,763 test matches, at
+historical B365 opening odds. Rule: signal = model probability, edge =
+`p − 1/odds` > 0.02, flat 1u stake, 1X2.
 
-| model | yield | log loss | brier | macro-F1 | hit rate | n bets |
+| Model | Yield | Log loss | Brier | Macro-F1 | Hit rate | Bets |
 |---|---|---|---|---|---|---|
-| **DC (baseline)** | **−8.85%** | 1.0311 | 0.6161 | 0.3703 | 0.308 | 46,092 |
-| T3 feature | −10.40% | 1.0287 | 0.6171 | 0.3542 | 0.274 | 50,339 |
+| **Dixon-Coles (baseline)** | **−8.85%** | 1.0311 | 0.6161 | 0.3703 | 0.308 | 46,092 |
+| T3 feature model | −10.40% | 1.0287 | 0.6171 | 0.3542 | 0.274 | 50,339 |
 
-Goal: yield > 0 while not ruining log loss / Brier. Secondary: lower log loss.
+Objective: positive yield without degrading log loss or Brier. Secondary
+objective: lower log loss.
 
-## ⚠️ KOREKSI PENTING (2026-10-26) — de-vigging Shin di-fix
+## Correction (2026-10-26): the Shin de-vigging bug
 
-Bug ditemukan di `_fair_probs` cabang shin: bisection terbalik → z≈0.999,
-prob fair **jumlah = ~0.52 (bukan 1.0)**, sehingga implied prob terlalu rendah dan
-edge terinflasi palsu. Fix: arah bisection dibalik → jumlah prob = 1.0 (tervalidasi
-2000 triple odds acak, dan konsisten dgn `mult`).
+A bug was found in the Shin branch of `_fair_probs`: the bisection ran in
+the wrong direction, driving z to about 0.999. Fair probabilities summed
+to roughly 0.52 instead of 1.0, implied probabilities were understated,
+and computed edges were inflated. The fix reversed the bisection
+direction; the corrected probabilities sum to 1.0, validated on 2,000
+random odds triples and against the multiplicative method.
 
-**Dampak pada semua hasil berbasis shin (Phase 3/4/5):**
-- Pocket **Phase 5 S1 (+3.23% flat, 1340 bets) TIDAK bertahan**: dgn shin benar,
-  filter top5 favorit 1.2-1.5 edge [0.20,0.22) → **n=0** (edge sebesar itu hampir
-  tidak pernah terjadi pada favorit berat). Hasil sebelumnya adalah artefak bug.
-- Segmen positif terbaik setelah fix: top5 odds 2.6–3.5 = **+1.88%** (n=512), tapi
-  **tidak stabil temporal** (profit terpusat di sampel kecil 2017/2020/2021/2025;
-  2023–2026 negatif) → noise, bukan edge.
-- Yield global model meta (thr 0.02, shin fixing): **−3.77%** (n=17,093),
-  vs DC −9.01% (n=71,015). Model meta jelas lebih baik dari DC; yield global masih
-  negatif → odds B365 efisien.
-- Kesimpulan: **tidak ada pocket ROI positif yang tervalidasi** setelah koreksi.
-  Filter live (`make_picks_live.py`) sengaja dibiarkan menghasilkan **0 pick** agar
-  tidak mengirim uang pada edge phantom, sampai strategi dgn edge benar divalidasi
-  ulang.
+Consequences for every Shin-based result up to that point (Phases 3–5):
 
-## Progress
+- The Phase 5 S1 pocket (+3.23% flat, 1,340 bets) **did not survive**.
+  With correct Shin de-vigging, the top-5 favourites filter (odds 1.2–1.5,
+  edge in [0.20, 0.22)) produces n = 0: edges that large almost never occur
+  on heavy favourites. The earlier result was an artefact of the bug.
+- The best remaining positive segment, top-5 at odds 2.6–3.5, returned
+  +1.88% (n = 512) but was temporally unstable: profit concentrated in
+  small samples from 2017, 2020, 2021, and 2025, with 2023–2026 negative.
+  Noise, not edge.
+- Global meta-model yield after the fix: −3.77% (n = 17,093), against
+  Dixon-Coles at −9.01% (n = 71,015). The meta model is clearly the better
+  probability model; global yield is still negative, which is what B365
+  market efficiency predicts.
+- Conclusion: no validated positive-ROI pocket remained after the
+  correction. The live filter in `make_picks_live.py` was deliberately
+  left producing 0 picks rather than send money after a phantom edge,
+  pending a strategy with a genuinely re-validated edge.
 
-| # | hypothesis | config | yield | log loss | brier | verdict |
+## First pool: de-vigging and policy tuning (E1–E5)
+
+| # | Hypothesis | Config | Yield | Log loss | Brier | Verdict |
 |---|---|---|---|---|---|---|
-| E1 | De-vigging (Shin) | dc/shin/thr .02 | **−7.11%** | 1.0311 | 0.6161 | ✅ KEEP (vs −8.85) |
-| E1b | De-vigging (mult) | dc/mult | −8.50…−9.07% | 1.0311 | 0.6161 | ❌ worse than shin |
-| E2 | Ensemble blend DC+T3 | blend w .1/.2/.3/.5 + shin | −7.10…−7.17% | 1.020–1.025 | 0.611–0.614 | ❌ no yield gain |
-| E3 | Platt recalibration | platt + shin thr .05 | −6.82% | 1.0407 ↑ | 0.6221 ↑ | ❌ ruins logloss/brier |
-| E4 | Threshold sweep | shin thr .03/.05/.08/.10/.15/.20 | −6.93…−6.67% | 1.0311 | 0.6161 | ✅ KEEP thr .15 (−6.67%) |
-| E4b | Kelly staking | kelly .25 + shin | −8.39% | 1.0311 | 0.6161 | ❌ worse than flat |
-| E5 | Draw-specific / T3-at-high-thr | t3 + shin thr .05 | −7.09% | 1.0287 | 0.6171 | ❌ worse than dc |
+| E1 | Shin de-vigging | dc/shin/thr .02 | **−7.11%** | 1.0311 | 0.6161 | Keep (vs −8.85%) |
+| E1b | Multiplicative de-vigging | dc/mult | −8.50…−9.07% | 1.0311 | 0.6161 | Revert: worse than Shin |
+| E2 | Ensemble blend DC + T3 | blend w .1/.2/.3/.5 + shin | −7.10…−7.17% | 1.020–1.025 | 0.611–0.614 | Revert: no yield gain |
+| E3 | Platt recalibration | platt + shin thr .05 | −6.82% | 1.0407 | 0.6221 | Revert: degrades log loss and Brier |
+| E4 | Threshold sweep | shin thr .03/.05/.08/.10/.15/.20 | −6.93…−6.67% | 1.0311 | 0.6161 | Keep thr .15 (−6.67%) |
+| E4b | Kelly staking | kelly .25 + shin | −8.39% | 1.0311 | 0.6161 | Revert: worse than flat |
+| E5 | Draw-specific / T3 at high threshold | t3 + shin thr .05 | −7.09% | 1.0287 | 0.6171 | Revert: worse than DC |
 
-### Conclusion (after pool exhausted, 7 experiments)
+Conclusion, after the pool was exhausted (7 experiments):
 
-- Best achieved: **DC + Shin de-vigging + edge thr 0.15, flat 1u → yield −6.67%**, log loss 1.0311, Brier 0.6161, hit rate 0.338, 156,871 bets.
-- **No configuration reached positive ROI.** The B365 opening odds are efficient; after removing the overround the residual edge is negative. Calibration improves hit-rate but worsens log loss/Brier.
-- Recommendation: do **not** switch live bets to any of these. If pursued further, the lever is a genuinely sharper model (more informative features / better calibration *before* edge extraction), not threshold/staking/de-vigging tuning, which are exhausted here.
+- Best achieved: DC + Shin de-vigging + edge threshold 0.15, flat 1u,
+  yield −6.67%, log loss 1.0311, Brier 0.6161, hit rate 0.338, 156,871
+  bets.
+- No configuration reached positive ROI. B365 opening odds are efficient:
+  after the overround is removed, the residual edge is negative.
+  Recalibration improves hit rate and worsens log loss and Brier.
+- Recommendation recorded at the time: do not move any of these to live
+  betting. Further progress requires a sharper model (more informative
+  features, better calibration before edge extraction), not more
+  threshold, staking, or de-vigging tuning, which are exhausted here.
 
-### Kept (committed)
-- `backtest_picks.py` refactor into a configurable engine with `records_cache.jsonl`; default promoted to best config (thin, thr 0.15).
+Kept: `backtest_picks.py` refactored into a configurable engine with
+`records_cache.jsonl`; the default promoted to the best configuration
+(Shin, threshold 0.15).
 
----
+## Phase 4 — Core model R&D
 
-## Phase 4 — Core model R&D (target: log loss < 1.020, Brier < 0.600)
+Target: log loss below 1.020 and Brier below 0.600. Starting baseline on
+the 68,763-match walk-forward: DC log loss 1.0311 / Brier 0.6161; T3
+feature model 1.0287 / 0.6171.
 
-Starting baseline (68,763-match walk-forward): DC log loss 1.0311 / Brier 0.6161; T3 feature log loss 1.0287 / Brier 0.6171.
-
-| # | hypothesis | log loss | brier | verdict |
+| # | Hypothesis | Log loss | Brier | Verdict |
 |---|---|---|---|---|
-| E1 | Meta-logistic: DC+X3 + market-implied probs | **1.0019** | **0.5989** | ✅ KEEP (both targets hit) |
-| E2 | MLP 2-lapis (numpy, 20 fitur) | 1.0126 | 0.6050 | ❌ worse than meta (ll/brier) |
-| E3 | Meta + close odds (CLV) | 1.0063 | 0.6001 | ❌ worse than meta (ll/brier) |
-| E4 | Per-league (div) meta | 1.0070 | 0.6021 | ❌ worse than meta (ll/brier) |
-| E5 | Meta dgn input logit | **1.0017** | **0.5988** | ✅ KEEP (both improve) |
-| E6 | Elo decay (K ∝ 1/√play) | 1.0016 | 0.5988 | ❌ noise (≈E5), T3 worsened |
+| E1 | Meta-logistic on DC + T3 + market-implied probabilities | **1.0019** | **0.5989** | Keep: both targets hit |
+| E2 | Two-layer MLP (numpy, 20 features) | 1.0126 | 0.6050 | Revert: worse than meta |
+| E3 | Meta + closing odds (CLV features) | 1.0063 | 0.6001 | Revert: worse than meta |
+| E4 | Per-league meta models | 1.0070 | 0.6021 | Revert: worse than meta |
+| E5 | Meta on logit inputs | **1.0017** | **0.5988** | Keep: both improve |
+| E6 | Elo decay (K proportional to 1/√play) | 1.0016 | 0.5988 | Revert: noise (about E5), T3 worsened |
 
-E1 detail: features = p(ph,pd,pa) + p_t3 + (1/o_h,1/o_d,1/o_a) opening odds; multinomial logistic, walk-forward. macro-F1 0.3798, accuracy 0.5031.
-E1 ROI (backtest, shin thr 0.15): **yield −5.77%** (vs DC −6.67%), hit rate 36.1%, log loss 1.0045, Brier 0.6004 → also improves the betting leg. Meta promoted to default model.
-E5 ROI (logit meta, shin thr 0.15): **yield −5.80%**, hit rate 36.0%, log loss 1.0043, Brier 0.6003 → LL/Brier slightly better, yield flat. Meta (logit) promoted to default.
+E1 detail: features = DC probabilities (ph, pd, pa) + T3 probabilities +
+inverse opening odds; multinomial logistic regression, walk-forward.
+Macro-F1 0.3798, accuracy 0.5031. Betting leg at Shin threshold 0.15:
+yield −5.77% (vs DC −6.67%), hit rate 36.1%, log loss 1.0045, Brier
+0.6004. The meta model also improved the betting leg and was promoted to
+the default model.
 
----
+E5 detail: yield −5.80%, hit rate 36.0%, log loss 1.0043, Brier 0.6003.
+Log loss and Brier slightly better than E1, yield flat. The logit-input
+meta model was promoted to default.
 
-## Phase 5 — GBDT engine + segmented ROI mining
+## Phase 5 — GBDT engine and segmented ROI mining
 
-| # | hypothesis | log loss | brier | verdict |
+| # | Hypothesis | Log loss | Brier | Verdict |
 |---|---|---|---|---|
-| E1 | LightGBM multiclass (20 fitur, raw+meta) | 1.0032 | 0.5998 | ❌ worse than meta (1.0017/0.5988) |
-| E1b | LightGBM (meta-signals only) | 1.0025 | 0.5993 | ❌ worse than meta |
-| S1 | Segment sweep: top5 heavy favorite (odds 1.2–1.5) edge ∈ [0.20,0.22) | — | — | ✅ **POSITIVE ROI found** |
+| E1 | LightGBM multiclass (20 features, raw + meta) | 1.0032 | 0.5998 | Revert: worse than meta (1.0017 / 0.5988) |
+| E1b | LightGBM (meta signals only) | 1.0025 | 0.5993 | Revert: worse than meta |
+| S1 | Segment sweep: top-5 heavy favourites (odds 1.2–1.5), edge in [0.20, 0.22) | — | — | Positive ROI found, later invalidated |
 
-S1 detail: **Filtered Value Bet Strategy** — top5 leagues (E0/D1/I1/SP1/F1), odds 1.2–1.5, model edge ∈ [0.20, 0.22):
-- flat 1u: **yield +3.23%** on **1340 bets**, hit 74.8% → beats +3.0% target.
-- fractional Kelly (0.25): **yield +4.75%** on 145 bets, hit 76.6%.
-- Positive across every calendar year 2021–2025 (yearly ~+4–5%, cumulative yield positive throughout) → stable pocket.
-- Implemented in `backtest_picks.py --filter [--kelly]`.
+S1 detail, as recorded at the time: top-5 leagues (E0/D1/I1/SP1/F1), odds
+1.2–1.5, model edge in [0.20, 0.22). Flat 1u returned +3.23% on 1,340 bets
+at a 74.8% hit rate; fractional Kelly (0.25) returned +4.75% on 145 bets
+at 76.6%. It was positive in every calendar year 2021–2025 and was
+implemented in `backtest_picks.py --filter [--kelly]`.
 
-⚠️ **DIVALIDASI (2026-10-26)** oleh fix de-vigging shin (lihat KOREKSI di atas):
-dgn shin benar, filter ini n=0 → hasil +3.23% adalah artefak bug. Jangan dipakai.
+Invalidation (2026-10-26): under the corrected Shin de-vigging described
+above, this filter selects n = 0. The +3.23% was an artefact of the bug
+and must not be used.
 
----
+## Phase 7 — Feature science and market dynamics
 
-## Phase 7 — Deep Feature Science & Market Dynamics
+Baseline: 9-logit meta model, log loss 1.0017, Brier 0.5988; backtest
+yield at threshold 0.02 with corrected Shin: −3.77% (n = 17,093). Keep
+rule: log loss below 1.0017 **and** yield above −3.77%.
 
-Baseline: meta 9-logit (LL 1.0017, Brier 0.5988), yield backtest shin-corrected thr 0.02 = **−3.77%** (n=17,093). Aturan: KEEP hanya jika LL < 1.0017 **DAN** yield > −3.77%.
-
-| # | hipotesis | fitur | LL | brier | yield (best thr) | n | verdict |
+| # | Hypothesis | Features | Log loss | Brier | Yield (best thr) | n | Verdict |
 |---|---|---|---|---|---|---|---|
-| E1 | Fatigue: rest diff + kepadatan jadwal 14/30 hari | rest_diff, dens14_diff, dens30_diff | 1.0018 ↑ | 0.5989 ↑ | −3.57% (thr .02) | 19,110 | ❌ LL tidak turun |
-| E2 | Overperformance xG (gf−xgh, ga−xga rolling 5) | opp_h/a, opc_h/a | 1.0018 ↑ | 0.5989 ↑ | −3.36% (thr .02) | 20,968 | ❌ LL tidak turun |
-| E3 | Motivasi: ppm tim + flag musim akhir | ppm_h/a, ppm_diff, late | 1.0017 ≈ (1.001656→1.001704) | 0.5988 ≈ | −3.12% (thr .02); best −1.45% (thr .05) | 2,875 | ❌ LL tidak turun |
-| E4 | CLV proxy (pergerakan odds) | — | — | — | — | — | ⛔ tidak dapat diuji: dataset hanya 1 snapshot odds (opening/closing tidak tersedia) |
+| E1 | Fatigue: rest differential and schedule density over 14/30 days | rest_diff, dens14_diff, dens30_diff | 1.0018 | 0.5989 | −3.57% (thr .02) | 19,110 | Revert: log loss did not fall |
+| E2 | xG overperformance (rolling 5: goals for/against vs xG) | opp_h/a, opc_h/a | 1.0018 | 0.5989 | −3.36% (thr .02) | 20,968 | Revert: log loss did not fall |
+| E3 | Motivation: points per match and late-season flags | ppm_h/a, ppm_diff, late | 1.0017 (1.001656 → 1.001704) | 0.5988 | −3.12% (thr .02); best −1.45% (thr .05) | 2,875 | Revert: log loss did not fall |
+| E4 | CLV proxy from odds movement | — | — | — | — | — | Not testable: the dataset holds a single odds snapshot per match |
 
-### Temuan
-- **Ketiga hipotesis (E1–E3) gagal gerbang LL** — meta model sudah berada dekat plafon informasi pasar (LL ~1.0017); fitur konteks tidak memperbaiki kalibrasi (LL datar/naik tipis).
-- **Namun yield membaik konsisten**: E1 −3.57%, E2 −3.36%, E3 −3.12% (thr .02), semuanya > baseline −3.77%, dan E3 di thr .05 mencapai **−1.45%** (n=2,875) — arah paling menjanjikan. Tidak di-keep karena gerbang LL ketat (dan best-thr dipilih post-hoc, berisiko noise).
-- **E4 tidak teruji**: tidak ada snapshot odds kedua, sehingga CLV (movement) tidak bisa dihitung. X koreksi data (closing odds) sebelum hipotesis ini dapat dieksekusi.
-- Kesimpulan: tidak ada fitur yang lolos keep per protokol. Yield tetap negatif; tidak ada strategi live yang aktif.
+Findings:
 
----
+- All three testable hypotheses failed the log-loss gate. The meta model
+  already sits near the market's information ceiling (log loss about
+  1.0017); context features did not improve calibration.
+- Yield nevertheless improved in all three: −3.57%, −3.36%, −3.12% at
+  threshold 0.02, each better than the −3.77% baseline, and E3 reached
+  −1.45% at threshold 0.05 (n = 2,875), the most promising direction.
+  None was kept: the log-loss gate is strict, and E3's best threshold was
+  selected post hoc, which risks fitting noise.
+- E4 could not be executed. With no second odds snapshot, odds movement
+  (CLV) cannot be computed. The data gap had to be closed first.
+- Conclusion: no feature passed the keep protocol. Yield stayed negative
+  and no live strategy was activated.
 
-## Phase 8 — Dual-Gate Evaluation & Deep Motivation Science
+## Phase 8 — Dual-gate evaluation and motivation features
 
-Baseline thr **0.05** (shin, flat): yield **−5.65%** (n=2,158). Gate: LL ≤ 1.00170 DAN yield > −3.77% dgn n ≥ 2,000 (thr pre-fixed .05, tanpa sweep).
+Baseline at pre-fixed threshold 0.05 (Shin, flat): yield −5.65%
+(n = 2,158). Gate: log loss at most 1.00170 **and** yield above −3.77%
+with n at least 2,000. No threshold sweep.
 
-| # | hipotesis | fitur | LL | brier | yield (thr .05) | n | verdict |
+| # | Hypothesis | Features | Log loss | Brier | Yield (thr .05) | n | Verdict |
 |---|---|---|---|---|---|---|---|
-| 8.1 | Desperation index + interaksi despo×nothing | despo_h/a, nothing_h/a, inter_h/a, rel, eur | 1.0021 ↑ | 0.5991 | −3.27% | 3,834 | ❌ LL degrade |
-| 8.2 | GD tie-breaker urgency | u_h/a, gd_h/a, rel | 1.0020 ↑ | 0.5990 | −5.23% | 3,127 | ❌ LL degrade + yield < bar |
-| 8.3 | DC × motivasi | dmot_main/h/a, mot_diff | 1.0018 ↑ | 0.5989 | −4.74% | 2,588 | ❌ LL degrade + yield < bar |
-| 8.4 | Rest-disadvantage × motivasi | rest_diff, despo, stack_h/a, mot_diff | 1.0021 ↑ | 0.5990 | −3.52% | 3,067 | ❌ LL degrade |
+| 8.1 | Desperation index and desperation × nothing-to-play-for interaction | despo_h/a, nothing_h/a, inter_h/a, rel, eur | 1.0021 | 0.5991 | −3.27% | 3,834 | Revert: log loss degraded |
+| 8.2 | Goal-difference tie-break urgency | u_h/a, gd_h/a, rel | 1.0020 | 0.5990 | −5.23% | 3,127 | Revert: log loss degraded, yield below bar |
+| 8.3 | Dixon-Coles × motivation | dmot_main/h/a, mot_diff | 1.0018 | 0.5989 | −4.74% | 2,588 | Revert: log loss degraded, yield below bar |
+| 8.4 | Rest disadvantage × motivation | rest_diff, despo, stack_h/a, mot_diff | 1.0021 | 0.5990 | −3.52% | 3,067 | Revert: log loss degraded |
 
-### Temuan & rekomendasi
-- **Semua 4 gagal gerbang LL** (1.0018–1.0021 > 1.00170). Fitur motivasi/konteks menambah varians pada estimasi prob rata-rata (LL memburuk) namun **memperbaiki seleksi edge** (yield thr .05 naik dari −5.65% ke −3.27% s.d. −3.52% di 8.1/8.4).
-- Pola konsisten sejak Phase 7: meta model sudah pada plafon informasi pasar; fitur konteks tidak menurunkan LL global tapi memindahkan keputusan taruhan ke subset yang lebih menguntungkan. Gerbang LL ketat membuat fitur model hampir mustahil lolos.
-- **Rekomendasi jalur berikutnya**: alih-alih menambah fitur ke model prob (mengubah LL), terapkan motivasi sebagai **overlay pasca-model** pada keputusan/stake taruhan (model prob +; LL tidak berubah → gate LL lolos trivial, yield memanen kenaikan 8.1/8.4). Ini bukan "feature stack" per protokol, jadi tidak dieksekusi di sini.
-- Tidak ada strategi live aktif; `run_daily_shadow.py` tidak dijalankan karena tidak ada KEEP.
+Findings and the recommendation recorded at the time:
 
----
+- All four failed the log-loss gate (1.0018–1.0021 against a 1.00170 cap).
+  Motivation and context features add variance to the average probability
+  estimate, which worsens log loss, while improving bet selection: yield
+  at threshold 0.05 rose from −5.65% to between −3.27% and −3.52% in 8.1
+  and 8.4.
+- The pattern is consistent with Phase 7. The meta model sits at the
+  market's information ceiling; context features cannot lower global log
+  loss but do move betting decisions toward more profitable subsets. A
+  strict log-loss gate makes model features almost impossible to admit.
+- Recommended next path: apply motivation as a post-model overlay on the
+  betting decision and stake, leaving model probabilities (and therefore
+  log loss) unchanged, so the gate passes trivially while the yield gain
+  is harvested. That is a policy change rather than a feature change, and
+  it was taken up in Phase 9.
+- No live strategy was activated. `run_daily_shadow.py` was not run,
+  because nothing was kept.
 
-## Phase 9 — Decoupled Betting Policy & Contextual Overlay Engine
+## Phase 9 — Decoupled betting policy and contextual overlay
 
-Arsitektur: **Probability Engine dikunci** (meta model, LL 1.0017 tidak berubah) → edge shin → **Policy Overlay pasca-model** (filter/stake). Evaluasi: yield > −1.50% DAN N ≥ 1,000 DAN yield > 0 di ≥3 dari 2021–2025. Dasar: thr 0.05, flat baseline yield −5.65% (n=2,158).
+Architecture: the probability engine is locked (meta model, log loss
+1.0017 unchanged); Shin edge is computed on its output; a policy overlay
+then filters or stakes bets. Evaluation: yield above −1.50%, n at least
+1,000, and positive yield in at least 3 of 2021–2025. Reference point:
+threshold 0.05 flat baseline of −5.65% (n = 2,158).
 
-Framework: `policy_overlay.py` (candidates + desperation index + composite = 0.6·despo + 0.4·fatigue_norm).
+Framework: `policy_overlay.py` (candidates, desperation index, composite
+= 0.6·desperation + 0.4·fatigue_norm).
 
-| Policy | aturan | hasil terbaik | N | yield | stabil (≥3/5) | verdict |
+| Policy | Rule | Best setting | N | Yield | Stable (≥ 3/5 years) | Verdict |
 |---|---|---|---|---|---|---|
-| 9.1 | filter despo > θ | θ=0.3 | 169 | +12.7% | 1/5 | ❌ N & stabil |
-| 9.2 | filter rest gap ≥ 3 | gap=3 | 44 | +1.8% | 0/5 | ❌ N & stabil |
-| 9.3 | filter composite ≥ θ | θ=0.3 | 176 | +11.8% | 1/5 | ❌ N & stabil |
-| 9.4 | stake = 0.25·composite | θ=0 | **553** | **+6.7%** | **3/5** | ❌ N<1000 |
-| 9.4 floor | stake = 0.25·(f+(1−f)c) | f=0.3 | 2,158 | −4.4% | 2/5 | ❌ yield & stabil |
+| 9.1 | Filter desperation > θ | θ = 0.3 | 169 | +12.7% | 1/5 | Revert: N and stability |
+| 9.2 | Filter rest gap ≥ 3 | gap = 3 | 44 | +1.8% | 0/5 | Revert: N and stability |
+| 9.3 | Filter composite ≥ θ | θ = 0.3 | 176 | +11.8% | 1/5 | Revert: N and stability |
+| 9.4 | Stake = 0.25 · composite | θ = 0 | **553** | **+6.7%** | **3/5** | Revert: N < 1,000 |
+| 9.4 floor | Stake = 0.25 · (f + (1−f)·c) | f = 0.3 | 2,158 | −4.4% | 2/5 | Revert: yield and stability |
 
-### Temuan
-- **9.4 murni (dynamic contextual Kelly, tanpa floor) adalah satu-satunya konfigurasi dengan yield positif (+6.7%) DAN stabilitas temporal 3/5** — tetapi N=553 < 1,000, jadi gagal gerbang ukuran sampel.
-- Menambah floor stake (agar N=2,158) menghapus efeknya: yield kembali negatif (−4.4% s.d. −5.65%), stabil 1–2/5. Artinya keuntungan 9.4 datang justru dari **menghapus** bet berkonteks rendah (stake 0), bukan dari men-stake semuanya.
-- Pola: overlay konteks memusatkan taruhan pada subset kecil (200–600 bet) dengan ROI positif-tapi-keras; tidak ada yang lolos N ≥ 1,000 + stabilitas sekaligus.
-- **Rekomendasi**: 9.4 adalah lead paling kuat sejauh ini. Untuk lolos N, kumpulkan lebih banyak data (ledger live) atau longgarkan thr edge; opsi lain: ekspansi definisi desperation supaya lebih banyak match ber-score non-nol (risiko dilusi).
-- Tidak ada policy yang di-keep → `make_picks_live.py` tidak diubah; flow shadow tetap 0 pick.
+Findings:
 
----
+- Policy 9.4 in its pure form (dynamic contextual Kelly staking, no floor)
+  was the only configuration with both positive yield (+6.7%) and 3/5
+  temporal stability. It failed on sample size: N = 553 against a 1,000
+  minimum.
+- Adding a stake floor to restore N = 2,158 removed the effect entirely
+  (yield back to −4.4%, against a −5.65% baseline at best). The gain in
+  9.4 comes from zero-staking low-context bets, not from staking
+  everything more cleverly.
+- Context overlays concentrate betting into small subsets (roughly
+  200–600 bets) with positive but noisy ROI. Nothing passed the combined
+  size and stability gates.
+- Recommendation recorded at the time: 9.4 is the strongest lead in the
+  register. Passing the size gate needs either more data (a live ledger),
+  a looser edge threshold, or a broader desperation definition, with the
+  dilution risk that carries.
+- No policy was kept. `make_picks_live.py` was unchanged and the shadow
+  flow stayed at 0 picks.
 
-## Phase 10 — Statistical Significance Test & High-Context Expansion
+## Phase 10 — Significance testing and high-context expansion
 
-### Step 1 — Bootstrap significansi Policy 9.4 (`verify_significance.py`, 10,000 resample)
-- n bets = 553; ROI weighted = **+6.72%**; bootstrap mean +6.76%; CI95% [−9.48%, +23.44%]; **p-value = 0.2164** (vs H0 ROI≤0).
-- **TIDAK signifikan** (p > 0.05) → gate N≥1,000 tidak bisa dilonggarkan atas dasar statistik. CI lebar & pakan nol menunjukkan hasil sangat sensitif thd sedikit bet besar.
+Step 1, bootstrap significance of Policy 9.4 (`verify_significance.py`,
+10,000 resamples): n = 553 bets; weighted ROI +6.72%; bootstrap mean
++6.76%; 95% CI [−9.48%, +23.44%]; **p = 0.2164** against H0 of ROI ≤ 0.
+Not significant. The size gate could not be relaxed on statistical
+grounds: the interval is wide and covers zero comfortably, so the result
+is sensitive to a few large bets.
 
-### Step 2 — Ekspansi high-context pool (`policy_expand.py`)
-- **Proximity kontinental TIDAK tersedia**: div `EC` pada dataset ternyata English National League (Kasta-5 Inggris), bukan Champions/Europa/Conference. Tidak ada jadwal kompetisi klub Eropa → feature cont ≡ 0.
-- **Rivalitas (proksi h2h)**: menambah bobot w4 menaikkan N ke 747 tetapi **menghancurkan yield** (+2.8% → +0.3%): proksi h2h tidak prediktif, hanya dilusi.
-- **Desperation ekspansi (title/Eropa)**: menaikkan N ke ~562 (dari 553) dgn yield +5.18% (3/5 stable) — mirip 9.4 asli.
-- Tidak ada konfigurasi yang mencapai **N≥800 DAN yield>+4.5% DAN stable≥3/5**. Terbaik: base (0.6,0.4) N=562 +5.18% (N kurang); tambah w4 N=747 tapi yield ~0 (gagal).
+Step 2, expanding the high-context pool (`policy_expand.py`):
 
-### Step 3 — Shadow tracking
-- Tak lolos karena Step 1 (p=0.216) maupun Step 2 (target N/yield tidak tercapai) → **tidak ada KEEP**, `make_picks_live.py` tidak diubah, live shadow tetap 0 pick.
-- Kesimpulan: 9.4 adalah lead terbaik, tapi N=553 terlalu kecil & tidak signifikan. Untuk membuktikan edge perlu lebih banyak data (akumulasi ledger live) atau definisi konteks yang benar-benar prediktif (bukan proksi frekuensi).
+- **Continental proximity was not available.** The `EC` division in the
+  dataset is the English National League (fifth tier), not the Champions
+  League, Europa League, or Conference League. No European club fixtures
+  exist in the data, so the continental feature is identically zero.
+- **Rivalry (head-to-head proxy):** adding weight w4 raised N to 747 and
+  destroyed the yield (+2.8% → +0.3%). The head-to-head proxy is not
+  predictive; it only dilutes.
+- **Desperation expansion (title and European places):** N rose to about
+  562 (from 553) with yield +5.18% and 3/5 stability, similar to the
+  original 9.4.
+- No configuration reached N ≥ 800 with yield above +4.5% and stability
+  of at least 3/5. The best compromises were the base weighting (0.6, 0.4)
+  at N = 562 and +5.18% (too small), and the w4 variant at N = 747 with
+  yield near zero (failed).
 
----
+Step 3, shadow tracking: blocked by both steps above. Nothing was kept,
+`make_picks_live.py` was unchanged, and live shadow stayed at 0 picks.
+Conclusion recorded at the time: 9.4 remains the best lead, but N = 553
+is too small and the effect is not significant. Proving an edge here
+needs more data (live ledger accumulation) or a context definition that
+is predictive rather than a frequency proxy.
 
-## Phase 11 — Exogenous Data Enrichment Pipeline (pivot ML → Data Engineering)
+## Phase 11 — Exogenous data enrichment pipeline
 
-Keputusan: dataset historis sudah jenuh oleh meta model (LL 1.0017). Beralih ke pengayaan data eksternal tanpa menyentuh `all_matches_clean.csv`.
+Decision: the historical dataset was saturated by the meta model (log
+loss 1.0017), so the work pivoted to data engineering. The enrichment
+layer was built without modifying `all_matches_clean.csv`.
 
-### Arsitektur (`data_enrichment/`)
-- `utils.py` — normalisasi nama tim (aliases top teams) + fuzzy matching (Levenshtein), parsing float aman, logging.
-- `fetch_xg.py` — fetcher understat (xG/xPTS) dgn timeout & fallback ke cache lokal `xg_matches.csv`.
-- `fetch_closing_odds.py` — ekstraksi Pinnacle (PSH/PSD/PSA) + Max/Avg dari CSV historis.
-- `synthesize_european.py` — heuristic jadwal padat: `midweek_cup_flag` bila tim punya laga lain dalam ±3 hari.
-- `enrich_pipeline.py` — left-join → `all_matches_enriched.csv` (mode `--full` / dry-run subset).
+Architecture (`data_enrichment/`):
 
-### Hasil Dry-Run (EPL 2023/24, 380 match)
-| fitur | join | keterangan |
+- `utils.py` — team-name normalisation (top-team aliases), fuzzy matching
+  (Levenshtein), safe float parsing, logging.
+- `fetch_xg.py` — Understat fetcher (xG, xPTS) with timeouts and a
+  fallback to the local `xg_matches.csv` cache.
+- `fetch_closing_odds.py` — extraction of Pinnacle (PSH/PSD/PSA) and
+  Max/Avg prices from the historical CSVs.
+- `synthesize_european.py` — a congested-schedule heuristic:
+  `midweek_cup_flag` when a team has another match within ±3 days.
+- `enrich_pipeline.py` — left join into `all_matches_enriched.csv`
+  (`--full`, or a dry-run subset).
+
+Dry run (EPL 2023/24, 380 matches):
+
+| Feature | Joined | Note |
 |---|---|---|
-| Pinnacle/Max/Avg | 380/380 (100%) | kolom PS sudah ada di sumber |
-| xG | 240/380 (63%) | dari cache lokal |
-| midweek flag | 120/380 (32%) | konsisten dgn kalibrasi jendela |
-| rolling_xg_diff | 380/380 (100%) | leak-free, chronologis |
+| Pinnacle / Max / Avg | 380/380 (100%) | PS columns already present in the source |
+| xG | 240/380 (63%) | from the local cache |
+| Midweek flag | 120/380 (32%) | consistent with the window calibration |
+| rolling_xg_diff | 380/380 (100%) | leak-free, chronological |
 
-### Hasil FULL (70,425 match)
-Pinnacle/Max/Avg 70,425/70,425; xG 9,074 (12.9%); midweek 21,342 (30.3%); rolling_xg_diff 70,066 (99.5%). Sumber `all_matches_clean.csv` utuh.
+Full run (70,425 matches): Pinnacle/Max/Avg 70,425/70,425; xG 9,074
+(12.9%); midweek flags 21,342 (30.3%); rolling_xg_diff 70,066 (99.5%).
+The `all_matches_clean.csv` source was left untouched.
 
-### Blocker yang dicatat (→ TODO_AI.md)
-1. **understat** tidak dapat ditarik andal (struktur halaman/API berubah, berisiko CAPTCHA) → memakai cache lokal + mock bila gagal.
-2. **European fixture asli tidak tersedia**: div `EC` adalah English National League, bukan UCL/UEL/UECL → sintesis heuristic jadwal padat dipakai sbg proxy.
-3. **Odds movement murni tidak tersedia** (hanya 1 snapshot odds per match) → Pinnacle/Max/Avg diekstrak sbg proxy CLV lintas-bandar.
+Blockers recorded:
 
----
+1. Understat could not be pulled reliably (page and API structure changes,
+   CAPTCHA risk), so the pipeline uses the local cache, with mock data
+   only as a last-resort fallback.
+2. Genuine European fixtures are unavailable: the `EC` division is the
+   English National League, not the UCL, UEL, or UECL. The
+   congested-schedule heuristic stands in as a proxy.
+3. Pure odds movement is unavailable (one odds snapshot per match), so
+   Pinnacle/Max/Avg prices were extracted as a cross-book CLV proxy.
 
-## Phase 12 — Sharp Book Consensus & Enriched Alpha Integration
+## Phase 12 — Sharp book consensus and enriched alpha
 
-Integrasi `all_matches_enriched.csv` (PS Pinnacle, midweek flags, rolling_xg_diff)
-ke engine prediksi. Join: 51,420/68,763 rekaman punya PS (83.1%); sisanya
-di-imputasi fallback ke B365 (dev=1.0, netral).
+The enriched data (`all_matches_enriched.csv`: Pinnacle prices, midweek
+flags, rolling_xg_diff) was integrated into the prediction engine. Join
+coverage: 51,420 of 68,763 records carry Pinnacle prices (83.1%); the rest
+were imputed with a neutral B365 fallback (deviation 1.0).
 
-### Pathway A — ML injection ke meta model (KEEP ✅)
-Fitur meta diperluas 9 → 17: dev_H/D/A (B365/PS), ps_fair (PS de-vigged shin),
-midweek_h/a. Walk-forward bulanan, multinomial logistic.
+### Pathway A — ML injection into the meta model (kept)
 
-| metrik | baseline meta (9) | +sharp (17) |
+Meta features expanded from 9 to 17: deviation of B365 from Pinnacle for
+home/draw/away, Pinnacle fair probabilities (Shin de-vigged), and midweek
+flags for both teams. Monthly walk-forward, multinomial logistic.
+
+| Metric | Meta baseline (9 features) | + sharp (17 features) |
 |---|---|---|
-| log loss | 1.0017 | **1.0013** |
-| brier | 0.5988 | **0.5986** |
-| macro-F1 | 0.3743 | **0.3768** |
-| accuracy | 0.5028 | **0.5035** |
+| Log loss | 1.0017 | **1.0013** |
+| Brier | 0.5988 | **0.5986** |
+| Macro-F1 | 0.3743 | **0.3768** |
+| Accuracy | 0.5028 | **0.5035** |
 
-Gate LL < 1.00170: **1.001257 → OK**. Sharp info menurunkan LL (menembus
-plafon pasar sebelumnya). **KEEP → dipromosikan sbg baseline meta baru**:
-`experiment_meta` diubah ke 17 fitur, `records_cache.jsonl` di-hitung-ulang
-(66,379/68,763 meta probs) + kolom `ps`/`mw_h`/`rollxg` dipersistenkan.
-Koreksi bug: `augment_records` mula-mula memuat records p/ ps → kolom enriched
-semua-NaN → model meta 9 fitur (artefak); di-fix memakai join enriched.
+The log-loss gate (below 1.00170) passed at 1.001257. Sharp-book
+information lowered log loss through the previous market ceiling, so the
+17-feature model was promoted to the new meta baseline: `experiment_meta`
+moved to 17 features, `records_cache.jsonl` was recomputed (66,379 of
+68,763 records carry meta probabilities), and the `ps`, `mw_h`, and
+`rollxg` columns were persisted. One bug was found and fixed on the way:
+an early version of `augment_records` loaded records without the
+enrichment join, which left the new columns all-NaN and silently trained
+a 9-feature model.
 
-### Pathway B — Policy overlay sharp/soft (REVERT ❌)
-Meta dikunci; filter `dev_side > thr` (+/- midweek) pada bet ber-edge (shin).
-Gerbang: N ≥ 800 DAN bootstrap p < 0.05 (H0 ROI≤0).
+### Pathway B — Sharp/soft policy overlay (reverted)
 
-| dev> | mw | N | yield | pos(21-25) |
+With the meta model locked, bets with a Shin edge were filtered on the
+Pinnacle deviation of the bet side, with and without midweek flags. Gate:
+N ≥ 800 and bootstrap p < 0.05 against H0 of ROI ≤ 0.
+
+| Deviation > | Midweek | N | Yield | Positive years (of 2021–2025) |
 |---|---|---|---|---|
-| 1.00 | 0 | 418 | −4.57% | 2/5 |
-| 1.00 | 1 | 89 | −22.47% | 0/5 |
-| 1.02 | 0 | 201 | −10.97% | 2/5 |
-| 1.02 | 1 | 43 | −35.19% | 0/5 |
-| 1.05 | 0 | 65 | −2.63% | 0/5 |
-| 1.05 | 1 | 15 | −25.67% | 0/5 |
-| 1.08 | 0 | 18 | +32.94% | 0/5 |
-| 1.08 | 1 | 5 | −100% | 0/5 |
+| 1.00 | no | 418 | −4.57% | 2/5 |
+| 1.00 | yes | 89 | −22.47% | 0/5 |
+| 1.02 | no | 201 | −10.97% | 2/5 |
+| 1.02 | yes | 43 | −35.19% | 0/5 |
+| 1.05 | no | 65 | −2.63% | 0/5 |
+| 1.05 | yes | 15 | −25.67% | 0/5 |
+| 1.08 | no | 18 | +32.94% | 0/5 |
+| 1.08 | yes | 5 | −100% | 0/5 |
 
-**Tidak ada konfigurasi mencapai N ≥ 800** (terbaik +32.9% pada n=18 = noise).
-Deviasi Pinnacle tanpa midweek justru menyaring ke subset kecil & rugi; dengan
-midweek N mengecil drastis. **REVERT → tidak ada overlay baru**, `make_picks_live.py`
-tetap 0 pick (tidak ada strategi live aktif).
+No configuration reached N ≥ 800; the best headline (+32.9% on n = 18) is
+noise. Filtering on Pinnacle deviation without midweek selects small,
+losing subsets, and adding midweek shrinks N drastically. The overlay was
+reverted, no new overlay was adopted, and `make_picks_live.py` stayed at
+0 picks.
 
-### Kesimpulan Phase 12
-- **Baseline meta baru dipromosikan**: LL 1.0013 (turun), Brier 0.5986. Model
-  prob lebih tajam → landasan lebih baik untuk ekstraksi edge ke depan.
-- **Tidak ada edge taruhan baru yang tervalidasi** (Pathway B gagal N & signifikanasi).
-  Yield global baseline baru menunggu konfirmasi backtest default.
+Phase conclusion: the sharper meta baseline (log loss 1.0013, Brier
+0.5986) gives a better foundation for future edge extraction, but no new
+betting edge was validated. The new baseline's global yield awaited
+confirmation from the default backtest.
 
----
+## Phase 13 — Derivative markets and matrix pricing
 
-## Phase 13 — Derivative Market Expansion & Matrix Pricing
+Architecture: `matrix_pricer.py` builds the bivariate Poisson Dixon-Coles
+scoreline matrix (λ_home, λ_away, ρ from `records_cache`), then
+meta-calibrates it: the Home, Draw, and Away regions are scaled
+proportionally so the summed 1X2 marginals match the meta model (log loss
+1.0012) exactly. Over 2.5, Under, and BTTS probabilities are derived from
+that matrix. Self-checks: 1X2 marginals equal the meta model, over + under
+= 1, BTTS pair = 1.
 
-Arsitektur: `matrix_pricer.py` membangun matriks bivariate Poisson DC
-(λ_h, λ_a, ρ dari records_cache) lalu **meta-calibrasi** — region Home/Draw/Away
-diskala proporsional agar sum 1X2 persis menyamai Meta Model 1.0012. Dari
-matriks diturunkan prob Over 2.5 / Under / BTTS. Self-check: marginal 1X2 == meta,
-over+under=1, btts pair=1.
+Derivative odds availability:
 
-### Ketersediaan odds derivatif
-- **O/U 2.5**: ada (B365 54,766 match, Pinnacle 48,309) → bisa backtest.
-- **BTTS**: TIDAK ada kolom odds historis → data blocker, dicatat di TODO_AI.md;
-  logika pricing tetap ada di `matrix_pricer` untuk live shadow.
+- **Over/Under 2.5:** available (B365 on 54,766 matches, Pinnacle on
+  48,309), so a backtest was possible.
+- **BTTS:** no historical odds column exists. Recorded as a data blocker;
+  the pricing logic remains in `matrix_pricer` for live shadow use.
 
-### Backtest O/U 2.5 (B365, shin de-vigged 2-way, flat 1u, Over+Under)
-| thr | N | yield | hit | p_bootstrap |
+Backtest, Over/Under 2.5 (B365, two-way Shin de-vig, flat 1u, both sides):
+
+| Threshold | N | Yield | Hit rate | Bootstrap p |
 |---|---|---|---|---|
 | 0.02 | 35,412 | −5.66% | 50.2% | 1.0000 |
 | 0.05 | 22,193 | −5.98% | 50.0% | 1.0000 |
 | 0.08 | 12,479 | −6.19% | 49.8% | 1.0000 |
 
-**TIDAK ada edge**: hit ≈ 50% (base rate O/U) — model tidak menambah sinyal di
-atas pasar; yield ≈ −6% ≈ margin B365. p=1.0000 (gagal signifikansi total).
-**REVERT aturan taruhan**; **KEEP `matrix_pricer` sbg infrastruktur inti**.
-Tidak ada aktivasi live (shadow tetap 0 pick).
+No edge: the hit rate sits at the Over/Under base rate (about 50%), so
+the model adds no signal over the market, and the yield is approximately
+the B365 margin (−6%). The betting rule was reverted. `matrix_pricer`
+was kept as core infrastructure. Nothing was activated live; shadow
+stayed at 0 picks.
 
----
+## Phase 15 — Corner model integration and alpha validation
 
-## Phase 15 — Corners Model Integration & Alpha Validation
+Evaluation of `model_corners_v3.py` (Poisson corner model, mean from
+rolling shots, gamma and r fitted on the 2019/20–2020/21 validation
+window). Walk-forward test 2021/22–2025/26, n = 8,906.
 
-Evaluasi `model_corners_v3.py` (Poisson corner, mu berbasis rolling shots,
-gamma*/r* di-fit di validasi 19/20–20/21). **Test** walk-forward 2021/22–2025/26,
-n=8,906.
+Step 1, predictive calibration (no odds involved):
 
-### Step 1 — Predictive calibration (murni, tanpa odds)
-| metrik | base-rate liga (CB) | shot-based (CS) |
+| Metric | League base rate | Shot-based model |
 |---|---|---|
-| Log loss (NLL total corners) | 2.6169 | **2.6087** |
-| Brier Over 9.5 | 0.2483 | **0.2474** |
-| MAE total corners | 2.669 | **2.656** |
-| RMSE per liga (E0/D1/I1/SP1/F1) | 3.39/3.33/3.38/3.30/3.32 | **3.38/3.32/3.38/3.28/3.32** |
+| Log loss (total corners NLL) | 2.6169 | **2.6087** |
+| Brier, Over 9.5 | 0.2483 | **0.2474** |
+| MAE, total corners | 2.669 | **2.656** |
+| RMSE by league (E0/D1/I1/SP1/F1) | 3.39/3.33/3.38/3.30/3.32 | **3.38/3.32/3.38/3.28/3.32** |
 
-CS mengalahkan CB pada SEMUA metrik & semua liga (konsisten, kecil). Bucket
-kalibrasi P(total>9.5): akt/pred 0.46/0.46, 0.55/0.54, 0.60/0.62 → cukup
-terkalibrasi. **Model punya sinyal nyata tapi kecil** (LL 2.61 — jauh dari
-ideal; model prob tetap berguna utk ranking/risk).
+The shot-based model beat the league base rate on every metric and in
+every league, consistently but by small margins. Calibration buckets for
+P(total > 9.5): actual/predicted 0.46/0.46, 0.55/0.54, 0.60/0.62, which is
+adequately calibrated. The model carries real but small signal (log loss
+2.61 is far from ideal); its probabilities remain useful for ranking and
+risk purposes.
 
-### Step 2 — Backtest ROI
-**TIDAK dapat dieksekusi**: odds historis Corners tidak tersedia di
-`all_matches_enriched.csv` maupun `clean` (blocker T10). Wiring ke
-`backtest_picks.py` + de-vigging + sweep threshold ditunda sampai sumber odds
-ada. **Tidak ada aktivasi shadow** (Step 3/4 N/A).
+Step 2, ROI backtest: **not executable**. Historical corner odds exist in
+neither `all_matches_enriched.csv` nor the clean dataset (blocker T10).
+Wiring into `backtest_picks.py`, de-vigging, and a threshold sweep were
+deferred until an odds source exists. Shadow activation steps were
+therefore not applicable.
 
-### Status
-KEEP `model_corners_v3.py` sbg infrastruktur; blocker T10 dicatat; tanpa alpha
-yang tervalidasi.
+Status: `model_corners_v3.py` kept as infrastructure. Blocker T10
+recorded. No validated corner alpha.
