@@ -11,8 +11,10 @@ Aturan:
   - Model gol: model_v2.DC di-fit per divisi dari all_matches_clean.csv.
     Laga lintas divisi: lambda home memakai attack home dari fit divisi tim
     kandang vs defense away dari fit divisi tim tandang, sebaliknya untuk
-    away; total lambda kemudian di-anchor ke rata-rata total gol kedua
-    divisi. Ini adalah
+    away. Total lambda di-anchor: default ke rata-rata total gol kedua
+    divisi; untuk piala, di-blend dengan laju gol piala terukur dari
+    ta/results.csv (penuh bila n FT >= 100, else 50/50). Rasio lambda
+    home:away dipertahankan. Ini adalah
     penyederhanaan yang disadari: kalibrasi lintas divisi tidak dimodelkan
     (grading terpisah akan menunjukkan kualitasnya).
   - Corner: rolling shots 5 laga liga terakhir per tim (divisi asal) +
@@ -54,6 +56,7 @@ DATA = os.path.join(BASE_DIR, "all_matches_clean.csv")
 FIX = os.path.join(BASE_DIR, "ta", "fixtures.csv")
 ODDS1x2 = os.path.join(BASE_DIR, "ta", "odds_1x2_snapshots.csv")
 PARAMS = os.path.join(BASE_DIR, "ta", "corner_params.json")
+RESULTS = os.path.join(BASE_DIR, "ta", "results.csv")
 OUT_GOL = os.path.join(BASE_DIR, "predictions_cups_upcoming.csv")
 OUT_CORNER = os.path.join(BASE_DIR, "predictions_corners_cups.csv")
 
@@ -61,6 +64,13 @@ HALF_LIFE = 270.0
 MAX_TRAIN = 4000
 LINES = (6.5, 7.5, 8.5, 9.5, 10.5, 11.5)
 CORNER_BAND = (8.5, 9.5, 10.5)
+
+# Konfigurasi anchor total gol piala (P3). Total lambda laga di-anchor ke
+# perpaduan total rating (rata-rata total gol kedua divisi) dengan laju gol
+# piala terukur dari ta/results.csv. Ketika n FT >= MIN_N_FULL, pakai laju
+# piala penuh; di bawahnya blend 50/50. Rasio lambda home:away tidak berubah
+# (kedua lambda diskalakan oleh faktor yang sama).
+CUP_CONF = {"min_n_full": 100, "blend_w": 0.5}
 
 
 def _num(x):
@@ -141,6 +151,33 @@ def _avg_total(matches, div):
     return sum(m["yh"] + m["ya"] for m in g) / len(g)
 
 
+_cup_rate_cache = None
+
+
+def _cup_goal_rate():
+    """Laju gol piala terukur per kompetisi dari ta/results.csv.
+
+    Return {comp: (avg_total_goals, n_ft)} untuk kompetisi yang punya
+    hasil FT. Di-cache per run.
+    """
+    global _cup_rate_cache
+    if _cup_rate_cache is None:
+        agg = {}
+        with open(RESULTS, encoding="utf-8", newline="") as f:
+            for r in csv.DictReader(f):
+                comp = CUP_LEAGUES.get(r.get("league", ""))
+                if not comp or r.get("status") != "FT":
+                    continue
+                try:
+                    sh, sa = int(r["score_h"]), int(r["score_a"])
+                except (TypeError, ValueError):
+                    continue
+                agg.setdefault(comp, []).append(sh + sa)
+        _cup_rate_cache = {c: (sum(v) / len(v), len(v))
+                           for c, v in agg.items()}
+    return _cup_rate_cache
+
+
 # --- model gol per divisi (cache per run) ---
 _model_cache = {}
 _avg_cache = {}
@@ -158,21 +195,35 @@ def _get_model(matches, div, cutoff):
     return dc
 
 
-def cross_lambdas(matches, dh, da, home, away, cutoff):
-    """lambda lintas divisi, diskalakan ke rata-rata total gol dua divisi."""
+def cross_lambdas(matches, dh, da, home, away, cutoff, cup_comp=None):
+    """lambda lintas divisi, diskalakan ke anchor total gol.
+
+    Anchor default = rata-rata total gol dua divisi. Jika cup_comp diberikan
+    (piala), anchor di-blend dengan laju gol piala terukur (lihat CUP_CONF).
+    Rasio lambda home:away dipertahankan (kedua lambda diskalakan oleh
+    faktor s yang sama).
+    """
     mh = _get_model(matches, dh, cutoff)
     ma = _get_model(matches, da, cutoff)
     avg_h = _avg_cache[dh]
     avg_a = _avg_cache[da]
     lh_raw = math.exp(mh.a.get(home, 0.0) + ma.d.get(away, 0.0) + mh.h)
     la_raw = math.exp(ma.a.get(away, 0.0) + mh.d.get(home, 0.0))
-    # Anchor total lambda ke RATA-RATA total gol kedua divisi (bukan
-    # jumlahnya): s = target_total / tot, target_total = (avg_h + avg_a) / 2.
     tot = lh_raw + la_raw
+    rating_total = (avg_h + avg_a) / 2.0
+    target = rating_total
+    if cup_comp:
+        rate, n = _cup_goal_rate().get(cup_comp, (None, 0))
+        if rate is not None:
+            if n >= CUP_CONF["min_n_full"]:
+                target = rate
+            else:
+                w = CUP_CONF["blend_w"]
+                target = w * rate + (1.0 - w) * rating_total
     if tot <= 0:
         s = 1.0
     else:
-        s = ((avg_h + avg_a) / 2.0) / tot
+        s = target / tot
     return lh_raw * s, la_raw * s
 
 
@@ -276,6 +327,7 @@ GOL_COLS = ["div", "date", "time", "home", "away", "competition",
             "ph_dc", "pd_dc", "pa_dc",
             "p_over_dc", "p_over15_dc", "p_over35_dc", "p_btts",
             "p_dc_1x", "p_dc_x2", "p_dc_12",
+            "p_adv_h", "p_adv_a",
             "b365h", "b365d", "b365a"]
 
 CORNER_COLS = ["div", "date", "home", "away", "competition", "div_home", "div_away",
@@ -296,6 +348,28 @@ def p_gt_frame(mu, r, ln):
     k = mu / (r - 1.0) if r > 1.02 else 1e9
     pmf = pmf_k(mu, k)
     return sum(pmf[int(ln) + 1:])
+
+
+def p_adv(ph, pd, pa, lh, la):
+    """Probabilitas lolos (advance) tie SATU leg dari probs 90 menit.
+
+    - ph/pd/pa = probabilitas 90 menit saat ini (kandang/seri/tandang).
+    - q_h = peluang kandang lolos bila 90 menit seri:
+        λ_ET = λ × 30/90, distribusi DC/Poisson sama; bila ET seri, adu
+        penalti berbobot kekuatan q_pens_h = ph/(ph+pa) (fallback 0.5).
+    - p_adv_h = ph + pd·q_h ; p_adv_a = pa + pd·(1−q_h).
+    Hanya bermakna untuk format satu leg (EFL Cup & DFB Pokal kini begitu);
+    format dua leg/replay -> kolom dikosongkan, bukan dipaksakan.
+    """
+    if lh <= 0 or la <= 0:
+        return None, None
+    dc = DC()
+    et = dc.probs(lh / 3.0, la / 3.0)
+    et_ph, et_pd = et["ph"], et["pd"]
+    denom = ph + pa
+    q_pens = ph / denom if denom > 0 else 0.5
+    q_h = et_ph + et_pd * q_pens
+    return ph + pd * q_h, pa + pd * (1.0 - q_h)
 
 
 def main():
@@ -340,7 +414,8 @@ def main():
 
         # gol
         try:
-            lh, la = cross_lambdas(matches, hd, ad, _norm(fx["home"]), _norm(fx["away"]), today)
+            lh, la = cross_lambdas(matches, hd, ad, _norm(fx["home"]), _norm(fx["away"]),
+                                   today, fx["comp"])
         except Exception as e:
             skipped.append((fx["comp"], fx["date"].isoformat(), fx["home"], fx["away"],
                             f"model gagal: {e}"))
@@ -351,6 +426,7 @@ def main():
         if lh > 0 and la > 0:
             pr = m.probs(lh, la)
         go = odds.get(fx["game_id"], (None, None, None))
+        padv_h, padv_a = p_adv(pr["ph"], pr["pd"], pr["pa"], lh, la)
         gol_rows.append({
             "div": hd if hd == ad else f"{hd}/{ad}",
             "date": fx["date"].isoformat(), "time": fx["time"],
@@ -366,6 +442,8 @@ def main():
             "p_dc_1x": round(pr["ph"] + pr["pd"], 4),
             "p_dc_x2": round(pr["pd"] + pr["pa"], 4),
             "p_dc_12": round(pr["ph"] + pr["pa"], 4),
+            "p_adv_h": round(padv_h, 4) if padv_h is not None else "",
+            "p_adv_a": round(padv_a, 4) if padv_a is not None else "",
             "b365h": go[0], "b365d": go[1], "b365a": go[2],
         })
 
