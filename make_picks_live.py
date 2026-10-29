@@ -23,6 +23,7 @@ Output: append ke live_shadow_ledger.csv (CSS, actual_outcome/pnl default kosong
 import csv
 import json
 import os
+from datetime import date
 
 import numpy as np
 
@@ -125,6 +126,14 @@ def _append(rows):
             w.writerow(r)
 
 
+def _pf(x):
+    """float aman: None untuk sel kosong/rusak (bukan exception)."""
+    try:
+        return float(x)
+    except (TypeError, ValueError):
+        return None
+
+
 def main():
     params, records = _fit_meta()
     if not os.path.exists(PRED):
@@ -137,6 +146,8 @@ def main():
             div = r.get("div", "")
             if div not in TOP5:
                 continue
+            if (r.get("date") or "") < date.today().isoformat():
+                continue  # laga lampau (file prediksi basi) — jangan buat pick
             try:
                 oh = float(r.get("b365h") or 0)
                 od_ = float(r.get("b365d") or 0)
@@ -148,12 +159,16 @@ def main():
             o = (oh, od_, oa)
             if min(o) <= 1.0:
                 continue
-            ph_dc = float(r["ph_dc"]); pd_dc = float(r["pd_dc"])
-            pa_dc = float(r["pa_dc"])
-            ph_t3 = r.get("ph_t3"); pd_t3 = r.get("pd_t3"); pa_t3 = r.get("pa_t3")
-            if None in (ph_t3, pd_t3, pa_t3):
+            # Parsing aman: versi lama float(r["ph_dc"]) tanpa guard dan
+            # pemeriksaan None tidak menangkap sel string kosong, jadi
+            # satu sel "" meruntuhkan seluruh run sebelum pick apa pun
+            # ditambahkan (audit ulang 2026-10-29).
+            ph_dc = _pf(r.get("ph_dc")); pd_dc = _pf(r.get("pd_dc"))
+            pa_dc = _pf(r.get("pa_dc"))
+            ph_t3 = _pf(r.get("ph_t3")); pd_t3 = _pf(r.get("pd_t3"))
+            pa_t3 = _pf(r.get("pa_t3"))
+            if None in (ph_dc, pd_dc, pa_dc, ph_t3, pd_t3, pa_t3):
                 continue
-            ph_t3, pd_t3, pa_t3 = float(ph_t3), float(pd_t3), float(pa_t3)
             pm = _meta_probs(params, ph_dc, pd_dc, pa_dc, ph_t3, pd_t3, pa_t3, o)
             fair = list(_fair_probs(o, "shin"))
             edge = pm[0] - fair[0]

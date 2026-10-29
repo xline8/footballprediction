@@ -222,9 +222,14 @@ def _load_grades():
 def _save_grades(store):
     os.makedirs(LEDGER, exist_ok=True)
     rows = sorted(store.values(), key=lambda g: _key(g))
-    with open(GRADES, "w", encoding="utf-8") as f:
+    # Tulis atomik (tmp + replace): file ini ditulis ulang PENUH setiap
+    # run; penulisan langsung bisa meninggalkan file terpotong bila
+    # proses mati di tengah (riwayat grading hilang / JSON rusak).
+    tmp = GRADES + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
         for g in rows:
             f.write(json.dumps(g, ensure_ascii=False) + "\n")
+    os.replace(tmp, GRADES)
     return rows
 
 

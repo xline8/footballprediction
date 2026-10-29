@@ -29,6 +29,10 @@ import paths
 
 PROJ = paths.BASE
 TODAY = date.today().isoformat()
+# Jangkar tanggal run: main() mengaturnya dari --date. Loader memakai
+# ini (bukan tanggal riil) sebagai lantai fixture, supaya run untuk
+# tanggal tertentu tidak diam-diam berjangkar ke hari ini.
+ANCHOR = TODAY
 
 OUT = os.path.join(PROJ, "best_picks.csv")
 
@@ -66,7 +70,7 @@ def _load_corner_picks():
     for fn, default_comp in sources:
         rows = _read_csv(os.path.join(PROJ, fn))
         for r in rows:
-            if r["date"] < TODAY:
+            if r["date"] < ANCHOR:
                 continue  # hanya fixture yang akan datang
             comp = r.get("competition") or default_comp or ""
             for ln in CORNER_LINES:
@@ -107,7 +111,7 @@ def _load_dixon_coles_picks():
     for fn, default_comp in sources:
         rows = _read_csv(os.path.join(PROJ, fn))
         for r in rows:
-            if r["date"] < TODAY:
+            if r["date"] < ANCHOR:
                 continue
             comp = r.get("competition") or default_comp or ""
             ph = _num(r.get("ph_dc"))
@@ -175,7 +179,7 @@ def _load_ta_picks():
         if status in ("SETTLED", "LOSE", "WIN", "PUSH"):
             continue
         kickoff = r.get("kickoff_utc", "")
-        if not kickoff or kickoff[:10] < TODAY:
+        if not kickoff or kickoff[:10] < ANCHOR:
             continue
         league = r.get("league", "").strip()
         div = _league_div(league)
@@ -337,12 +341,14 @@ def _fill_ev_model(p):
 
 
 def main():
+    global ANCHOR
     target = date.today().isoformat()
     args = sys.argv[1:]
     if "--date" in args:
         i = args.index("--date")
         if i + 1 < len(args):
             target = args[i + 1]
+    ANCHOR = target
     print(f"target date: {target}")
 
     corner = _load_corner_picks()

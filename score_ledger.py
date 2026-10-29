@@ -249,6 +249,11 @@ def settle(market, side, yh, ya, odds, line=None):
     if market == "1X2":
         wk = "H" if yh > ya else ("A" if ya > yh else "D")
         return (odds if side == wk else 0.0), (side == wk), False
+    if market != "OU":
+        # Guard: versi lama memperlakukan SEMUA pasar non-1X2 sebagai
+        # OU (side selain "Over" dinilai sebagai Under). Pick DC/BTS di
+        # masa depan harus gagal keras di sini, bukan ter-grade salah.
+        raise ValueError(f"settle: pasar tak dikenal {market!r}")
     try:
         ln = float(line) if line not in (None, "") else 2.5
     except (TypeError, ValueError):
@@ -343,9 +348,14 @@ if os.path.exists(GRADES):
     with open(GRADES, encoding="utf-8") as f:
         all_grades = [json.loads(l) for l in f if l.strip()]
     all_grades = _backfill(all_grades)
-    with open(GRADES, "w", encoding="utf-8") as f:
+    # Tulis atomik (tmp + replace): penulisan ulang penuh ini sekarang
+    # berjalan setiap hari (langkah [9b/9] rantai harian); penulisan
+    # langsung yang terpotong di tengah akan merusak riwayat grading.
+    _tmp = GRADES + ".tmp"
+    with open(_tmp, "w", encoding="utf-8") as f:
         for g in all_grades:
             f.write(json.dumps(g, ensure_ascii=False) + "\n")
+    os.replace(_tmp, GRADES)
     gmap = {g["pick_id"]: g for g in all_grades}
 else:
     all_grades = []

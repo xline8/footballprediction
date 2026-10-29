@@ -13,7 +13,7 @@ Aturan:
     kandang vs defense away dari fit divisi tim tandang, sebaliknya untuk
     away. Total lambda di-anchor: default ke rata-rata total gol kedua
     divisi; untuk piala, di-blend dengan laju gol piala terukur dari
-    ta/results.csv (penuh bila n FT >= 100, else 50/50). Rasio lambda
+    ta/results.csv (bobot ramp linear n/100, penuh bila n FT >= 100). Rasio lambda
     home:away dipertahankan. Ini adalah
     penyederhanaan yang disadari: kalibrasi lintas divisi tidak dimodelkan
     (grading terpisah akan menunjukkan kualitasnya).
@@ -70,7 +70,7 @@ CORNER_BAND = (8.5, 9.5, 10.5)
 # piala terukur dari ta/results.csv. Ketika n FT >= MIN_N_FULL, pakai laju
 # piala penuh; di bawahnya blend 50/50. Rasio lambda home:away tidak berubah
 # (kedua lambda diskalakan oleh faktor yang sama).
-CUP_CONF = {"min_n_full": 100, "blend_w": 0.5}
+CUP_CONF = {"min_n_full": 100}
 
 
 def _num(x):
@@ -205,6 +205,10 @@ def cross_lambdas(matches, dh, da, home, away, cutoff, cup_comp=None):
     """
     mh = _get_model(matches, dh, cutoff)
     ma = _get_model(matches, da, cutoff)
+    # rho hasil fit kedua divisi ikut dikembalikan: pemanggil dulu
+    # membuangnya dan menghitung probabilitas dengan DC() baru
+    # (rho default -0.07) apa pun hasil fit per divisinya.
+    rho = (mh.rho + ma.rho) / 2.0
     avg_h = _avg_cache[dh]
     avg_a = _avg_cache[da]
     lh_raw = math.exp(mh.a.get(home, 0.0) + ma.d.get(away, 0.0) + mh.h)
@@ -215,16 +219,16 @@ def cross_lambdas(matches, dh, da, home, away, cutoff, cup_comp=None):
     if cup_comp:
         rate, n = _cup_goal_rate().get(cup_comp, (None, 0))
         if rate is not None:
-            if n >= CUP_CONF["min_n_full"]:
-                target = rate
-            else:
-                w = CUP_CONF["blend_w"]
-                target = w * rate + (1.0 - w) * rating_total
+            # Bobot ramp linear w = n/min_n_full (penuh di n >= 100).
+            # Versi lama punya cliff di n=100: w melompat 0.5 -> 1.0
+            # dalam semalam dan menggeser semua lambda kompetisi itu.
+            w = min(1.0, n / CUP_CONF["min_n_full"])
+            target = w * rate + (1.0 - w) * rating_total
     if tot <= 0:
         s = 1.0
     else:
         s = target / tot
-    return lh_raw * s, la_raw * s
+    return lh_raw * s, la_raw * s, rho
 
 
 # --- corner (kode setara model_corners_v3, dibaca dari all_matches) ---
@@ -264,10 +268,12 @@ def _stats_window(matches, div, cutoff):
         ga += w * ac
         gsum += 2 * w
         nry += w * (hc + ac) ** 2
-        dmu += w * (gh + ga)
         if m["hs"] is not None and m["as"] is not None:
             ws += w * (m["hs"] + m["as"])
             wsum_shots += 2 * w
+    # Sama seperti model_corners_v3: dmu adalah total corner terbobot
+    # final, bukan akumulasi jumlah kumulatif berjalan (order-dependent).
+    dmu = gh + ga
     if gsum <= 0 or dmu <= 0:
         return 5.0, 5.0, 10.0, 1.18, 12.0
     base_h = gh * 2 / gsum
@@ -321,6 +327,26 @@ def _corner_gamma():
     return _gamma_cache
 
 
+_r_star_cache = None
+
+
+def _corner_r_star():
+    """Dispersi corner dari corner_params.json (kunci 'r').
+
+    Dulu main() memakai konstanta 1.1868 yang ter-hardcode — nilai
+    params saat konstanta itu ditulis — sehingga refit params tidak
+    pernah mengubah probabilitas corner piala.
+    """
+    global _r_star_cache
+    if _r_star_cache is None:
+        try:
+            with open(PARAMS) as f:
+                _r_star_cache = json.load(f).get("r", 1.1868)
+        except Exception:
+            _r_star_cache = 1.1868
+    return _r_star_cache
+
+
 # --- output ---
 GOL_COLS = ["div", "date", "time", "home", "away", "competition",
             "div_home", "div_away", "lam_h", "lam_a",
@@ -350,7 +376,7 @@ def p_gt_frame(mu, r, ln):
     return sum(pmf[int(ln) + 1:])
 
 
-def p_adv(ph, pd, pa, lh, la):
+def p_adv(ph, pd, pa, lh, la, rho=None):
     """Probabilitas lolos (advance) tie SATU leg dari probs 90 menit.
 
     - ph/pd/pa = probabilitas 90 menit saat ini (kandang/seri/tandang).
@@ -364,6 +390,8 @@ def p_adv(ph, pd, pa, lh, la):
     if lh <= 0 or la <= 0:
         return None, None
     dc = DC()
+    if rho is not None:
+        dc.rho = rho
     et = dc.probs(lh / 3.0, la / 3.0)
     et_ph, et_pd = et["ph"], et["pd"]
     denom = ph + pa
@@ -395,13 +423,17 @@ def main():
             })
     fixtures.sort(key=lambda x: (x["date"], x["home"]))
 
-    # odds 1X2 terbaru per game_id
+    # odds 1X2 TERBARU per game_id — file bersifat append-only dan
+    # versi lama mengambil baris PERTAMA per game (snapshot tertua).
     odds = {}
+    odds_cap = {}
     with open(ODDS1x2, encoding="utf-8", newline="") as f:
         for r in csv.DictReader(f):
             gid = r["game_id"]
-            if gid not in odds:
+            cap = r.get("captured_at") or ""
+            if gid not in odds or cap >= odds_cap[gid]:
                 odds[gid] = (r.get("o1"), r.get("ox"), r.get("o2"))
+                odds_cap[gid] = cap
 
     gol_rows, corner_rows, skipped = [], [], []
     for fx in fixtures:
@@ -414,19 +446,20 @@ def main():
 
         # gol
         try:
-            lh, la = cross_lambdas(matches, hd, ad, _norm(fx["home"]), _norm(fx["away"]),
-                                   today, fx["comp"])
+            lh, la, rho = cross_lambdas(matches, hd, ad, _norm(fx["home"]), _norm(fx["away"]),
+                                        today, fx["comp"])
         except Exception as e:
             skipped.append((fx["comp"], fx["date"].isoformat(), fx["home"], fx["away"],
                             f"model gagal: {e}"))
             continue
         m = DC()
+        m.rho = rho
         pr = {"ph": 0.0, "pd": 0.0, "pa": 0.0, "over": 0.0,
               "over15": 0.0, "over35": 0.0, "btts": 0.0}
         if lh > 0 and la > 0:
             pr = m.probs(lh, la)
         go = odds.get(fx["game_id"], (None, None, None))
-        padv_h, padv_a = p_adv(pr["ph"], pr["pd"], pr["pa"], lh, la)
+        padv_h, padv_a = p_adv(pr["ph"], pr["pd"], pr["pa"], lh, la, rho=rho)
         gol_rows.append({
             "div": hd if hd == ad else f"{hd}/{ad}",
             "date": fx["date"].isoformat(), "time": fx["time"],
@@ -455,7 +488,7 @@ def main():
                             "data corner kurang (<3 laga liga terakhir)"))
             continue
         mu = corner_mu(matches, _norm(fx["home"]), _norm(fx["away"]), hd, ad, today)
-        r_star = 1.1868
+        r_star = _corner_r_star()
         rec_line = min(CORNER_BAND, key=lambda L: abs((L + 0.5) - mu))
         p_l = p_gt_frame(mu, r_star, rec_line)
         rec_side = "Over" if p_l >= 0.5 else "Under"

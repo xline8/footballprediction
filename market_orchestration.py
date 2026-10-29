@@ -346,8 +346,12 @@ def archive_snapshots(target_date=None):
         src = os.path.join(HERE, fn)
         if os.path.exists(src):
             out = os.path.join(dest, fn)
-            with open(src, "rb") as fi, open(out, "wb") as fo:
+            # Salin atomik (tmp + replace) — grading membaca arsip ini;
+            # salinan terpotong karena crash akan terbaca diam-diam.
+            tmp = out + ".tmp"
+            with open(src, "rb") as fi, open(tmp, "wb") as fo:
                 fo.write(fi.read())
+            os.replace(tmp, out)
             copied.append(fn)
     return {"date": d.isoformat(), "archived": copied}
 

@@ -640,19 +640,37 @@ def grade():
         # For Corner market, use actual corner counts instead of scores
         if b["market"] == "Corners":
             dt = (b.get("kickoff_utc") or "")[:10]
-            counts = corner_counts.get(
-                (dt, norm(b["home"]), norm(b["away"])))
+            # kickoff_utc dibangun dari tanggal PREDIKSI + jam fixture,
+            # sedangkan fixture yang cocok di build() boleh bergeser
+            # ±1 hari — cari di tiga tanggal (audit ulang: K2-G1).
+            cand_dates = {dt}
+            try:
+                d0 = datetime.strptime(dt, "%Y-%m-%d").date()
+                cand_dates |= {(d0 + timedelta(days=k)).isoformat()
+                               for k in (-1, 1)}
+            except ValueError:
+                pass
+            counts = None
+            for cd in sorted(cand_dates):
+                counts = corner_counts.get(
+                    (cd, norm(b["home"]), norm(b["away"])))
+                if counts is not None:
+                    break
             if counts is None:
-                # Fallback fuzzy di tanggal yang sama (ambang produk sim
-                # 0.90, sama seperti pencocokan fixture di build()).
-                best, bs = None, 0.0
+                # Fallback fuzzy di tanggal kandidat (ambang produk sim
+                # 0.90, sama seperti pencocokan fixture di build()),
+                # plus margin di atas kandidat kedua supaya dua laga
+                # bernama mirip di tanggal berdekatan tidak tertukar.
+                best, bs, second = None, 0.0, 0.0
                 for (cd, ch, ca), cc in corner_counts.items():
-                    if cd != dt:
+                    if cd not in cand_dates:
                         continue
                     sc = sim(norm(b["home"]), ch) * sim(norm(b["away"]), ca)
                     if sc > bs:
-                        bs, best = sc, cc
-                if bs >= 0.90:
+                        second, bs, best = bs, sc, cc
+                    elif sc > second:
+                        second = sc
+                if bs >= 0.90 and bs - second >= 0.02:
                     counts = best
             if counts is None:
                 # Tidak ada data corner aktual: biarkan OPEN. Menilai bet

@@ -18,7 +18,7 @@ import os
 import sys
 import json
 import csv
-from datetime import datetime, date
+from datetime import datetime, date, timezone
 from typing import List, Dict, Optional
 
 # Setup path
@@ -95,13 +95,36 @@ def load_predictions() -> List[Dict]:
 
 
 def load_picks(status: str = None) -> List[Dict]:
-    """Load picks from ledger."""
+    """Load picks from ledger.
+
+    Status efektif pick berasal dari ledger/grades.jsonl: baris
+    picks.jsonl tidak pernah di-status ulang (selamanya 'pending'),
+    jadi versi lama membuat ?status=win/loss selalu kosong. Bila pick
+    punya grade, statusnya = hasil grade (win/loss/push).
+    """
     picks_file = os.path.join(BASE_DIR, "ledger", "picks.jsonl")
     if not os.path.exists(picks_file):
         return []
 
     with open(picks_file, 'r', encoding='utf-8') as f:
         picks = [json.loads(line) for line in f if line.strip()]
+
+    grades = {}
+    grades_file = os.path.join(BASE_DIR, "ledger", "grades.jsonl")
+    if os.path.exists(grades_file):
+        with open(grades_file, 'r', encoding='utf-8') as f:
+            for line in f:
+                if line.strip():
+                    g = json.loads(line)
+                    grades[g["pick_id"]] = g
+
+    for p in picks:
+        g = grades.get(p.get("pick_id"))
+        if g:
+            p["status"] = g.get("result", p.get("status", "pending"))
+            p["ret_open"] = g.get("ret_open")
+        else:
+            p["status"] = "pending"
 
     if status:
         picks = [p for p in picks if p.get('status') == status]
@@ -122,9 +145,31 @@ def load_corner_predictions() -> List[Dict]:
 
 
 def _sort_and_filter_upcoming(rows: List[Dict], day_key: str = "date") -> List[Dict]:
-    """Urutkan (date, div, home) dan saring date >= hari ini. Dipakai SEBELUM slicing."""
-    today = datetime.now().date().isoformat()
-    out = [r for r in rows if (r.get(day_key) or "") >= today]
+    """Urutkan (date, div, home) dan saring hanya yang belum kickoff.
+
+    Tanggal/jam di file prediksi adalah UTC, sedangkan versi lama
+    membandingkan tanggal file dengan tanggal LOKAL server (WIB):
+    laga yang kickoff 00:00-07:00 WIB (tanggal UTC = kemarin) hilang
+    dari API. Sekarang kickoff (date+time, UTC) dibandingkan dengan
+    sekarang (UTC); baris tanpa jam jatuh ke perbandingan tanggal UTC.
+    """
+    now = datetime.now(timezone.utc)
+    today_utc = now.date().isoformat()
+
+    def keep(r):
+        d = r.get(day_key) or ""
+        t = (r.get("time") or "").strip()
+        if d and t:
+            try:
+                hh, mm = t.split(":")[:2]
+                ko = datetime.fromisoformat(d).replace(
+                    hour=int(hh), minute=int(mm), tzinfo=timezone.utc)
+                return ko >= now
+            except (ValueError, TypeError):
+                pass
+        return d >= today_utc
+
+    out = [r for r in rows if keep(r)]
     out.sort(key=lambda r: (r.get(day_key, ""), r.get("div", ""), r.get("home", "")))
     return out
 
@@ -142,6 +187,10 @@ def load_odds_data() -> List[Dict]:
                 dt = datetime.strptime(key[1], "%Y-%m-%d").date()
             except (ValueError, TypeError):
                 continue
+            if dt < today:
+                continue  # hanya odds laga mendatang (variabel today
+                # versi lama dihitung tapi tidak pernah dipakai, sehingga
+                # endpoint mengembalikan satu musim penuh)
 
             entry = {
                 'div': key[0],
@@ -199,9 +248,17 @@ async def get_pipeline_status():
     if os.path.exists(picks_file):
         with open(picks_file, 'r') as f:
             picks = [json.loads(line) for line in f if line.strip()]
-        pending = sum(1 for p in picks if p.get('status') == 'pending')
-        graded = sum(1 for p in picks if p.get('status') in ('win', 'loss', 'push'))
-        status['picks'] = {'total': len(picks), 'pending': pending, 'graded': graded}
+        # Jumlah ter-grade dibaca dari grades.jsonl (status di
+        # picks.jsonl sendiri tidak pernah berubah dari 'pending',
+        # jadi hitungan lama selalu graded=0).
+        graded = 0
+        grades_file = os.path.join(BASE_DIR, "ledger", "grades.jsonl")
+        if os.path.exists(grades_file):
+            with open(grades_file, 'r', encoding='utf-8') as f:
+                graded = sum(1 for line in f if line.strip())
+        status['picks'] = {'total': len(picks),
+                           'pending': len(picks) - graded,
+                           'graded': graded}
     else:
         status['picks'] = {'total': 0, 'pending': 0, 'graded': 0}
 
@@ -305,7 +362,13 @@ async def get_picks(
       - limit: Max results
     """
     picks = load_picks(status=status)
-    picks = _sort_and_filter_upcoming(picks)
+    if status == "pending":
+        picks = _sort_and_filter_upcoming(picks)
+    else:
+        # Pick ter-grade menurut definisi bertanggal lampau — filter
+        # upcoming akan mengosongkan hasilnya. Tampilkan terbaru dulu.
+        picks.sort(key=lambda r: (r.get("date", ""), r.get("div", ""),
+                                  r.get("home", "")), reverse=True)
 
     result = []
     for p in picks[:limit]:

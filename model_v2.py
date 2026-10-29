@@ -208,15 +208,42 @@ class DC:
         m = [[pois(x, lh) * pois(y, la) * tau(x, y, lh, la, self.rho)
               for y in range(MAXG + 1)] for x in range(MAXG + 1)]
         s = sum(sum(row) for row in m)
-        win = push = 0.0
+        win = push = loss = 0.0
+        comps = _ah_components(line)
         for x in range(MAXG + 1):
             for y in range(MAXG + 1):
-                v = x - y + line
-                if v > 0:
-                    win += m[x][y]
-                elif v == 0:
-                    push += m[x][y]
-        return win / s, push / s, 1 - win / s - push / s
+                # Garis seperempat terbelah dua garis: payoff rata-rata
+                # menentukan embernya (1=win, 0.5=push/setengah, 0=loss).
+                # Versi lama menilai garis seperempat sebagai satu garis
+                # penuh, jadi massa setengah-menang/setengah-push selalu
+                # terhitung win/loss penuh (audit ulang 2026-10-29).
+                pay = sum(_ah_payoff(x - y + c) for c in comps) / len(comps)
+                w = m[x][y] / s
+                if pay == 1.0:
+                    win += w
+                elif pay == 0.0:
+                    loss += w
+                else:
+                    push += w
+        return win, push, loss
+
+
+def _ah_components(line):
+    """Komponen garis AH: garis seperempat (x.25/x.75) terbelah menjadi
+    dua garis tetangga (line-0.25 dan line+0.25); garis lain tetap satu."""
+    q = line * 4
+    if abs(q - round(q)) < 1e-9 and int(round(q)) % 2 == 1:
+        return (line - 0.25, line + 0.25)
+    return (line,)
+
+
+def _ah_payoff(v):
+    """Payoff satu garis dari selisih yang sudah digeser: 1/0.5/0."""
+    if v > 0:
+        return 1.0
+    if v == 0:
+        return 0.5
+    return 0.0
 
 
 def brier3(p, yi):
@@ -429,15 +456,19 @@ def main_final():
         bt += (r["pr"]["btts"] - yb) ** 2
         bh += yb
         if r["ahh"] is not None and r.get("pw") is not None:
-            diff = r["yh"] - r["ya"] + r["ahh"]
-            if diff != 0:
-                yc = 1.0 if diff > 0 else 0.0
-                zh = r["pw"] / max(r["pw"] + (1 - r["pw"] - r["pp"]), EPS)
-                ah["ahm"] += (zh - yc) ** 2
-                ah["nah"] += 1
-                if r["mkt_ah"] is not None:
-                    ah["ahmm"] += (r["mkt_ah"] - yc) ** 2
-                    ah["nahm"] += 1
+            # Skor terhadap PAYOFF aktual (1/0.5/0, garis seperempat
+            # terbelah dua) dan payoff harapan model pw + 0.5*pp.
+            # Versi lama menilai hasil garis seperempat sebagai
+            # win/loss penuh dan membuang baris push dari penilaian.
+            comps = _ah_components(r["ahh"])
+            yc = sum(_ah_payoff(r["yh"] - r["ya"] + c)
+                     for c in comps) / len(comps)
+            zh = r["pw"] + 0.5 * r["pp"]
+            ah["ahm"] += (zh - yc) ** 2
+            ah["nah"] += 1
+            if r["mkt_ah"] is not None:
+                ah["ahmm"] += (r["mkt_ah"] - yc) ** 2
+                ah["nahm"] += 1
         out_rows.append({
             "div": r["div"], "date": r["date"], "season": r["season"],
             "home": r["home"], "away": r["away"], "ftr": r["ftr"],
