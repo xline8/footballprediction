@@ -259,6 +259,15 @@ def to_int(x, d=None):
         return d
 
 
+def _cap_key(s):
+    """Kunci urut captured_at berbasis waktu parsed (perbandingan
+    string mentah salah urutan lintas offset +0000/+0700)."""
+    try:
+        return datetime.strptime(s or "", "%Y-%m-%dT%H:%M:%S%z")
+    except (ValueError, TypeError):
+        return datetime.min.replace(tzinfo=timezone.utc)
+
+
 # ------------------------------------------------------------ harga
 def price_index():
     """(game_id, market, line, selection) -> list of (odds, bookmaker).
@@ -269,13 +278,31 @@ def price_index():
     tidak ditawarkan siapa pun (EV hantu, profit ter-grade terinflasi;
     audit ulang 2026-10-29: 749 dari 19.145 kunci harga punya odds
     terbaru != maksimum historis).
+
+    Dua disiplin audit ronde 3: perbandingan 'terbaru' memakai waktu
+    parsed (bukan string — salah urutan lintas offset), dan kutipan
+    pada/setelah kickoff fixture dibuang (harga in-play bukan harga
+    prematch; build() versi lama bisa menghargai bet dari snapshot
+    pasca-kickoff pada run ulang malam hari).
     """
+    kickoff = {}
+    for fr in read_csv(os.path.join(TA, "fixtures.csv")):
+        try:
+            kickoff[fr["game_id"]] = datetime.strptime(
+                f'{fr["date"]} {fr["time"]}', "%Y-%m-%d %H:%M"
+            ).replace(tzinfo=timezone.utc)
+        except (KeyError, TypeError, ValueError):
+            continue
     latest = {}
 
     def put(key, bookie, odds, captured_at):
+        ck = _cap_key(captured_at)
+        ko = kickoff.get(key[0])
+        if ko is not None and ck >= ko:
+            return  # in-play / pasca-kickoff: bukan harga prematch
         cur = latest.get((key, bookie))
-        if cur is None or captured_at >= cur[0]:
-            latest[(key, bookie)] = (captured_at, odds)
+        if cur is None or ck >= cur[0]:
+            latest[(key, bookie)] = (ck, odds)
 
     for r in read_csv(os.path.join(TA, "odds_markets_snapshots.csv")):
         m = r["market"]
@@ -449,6 +476,17 @@ def build():
                 continue
             g = best
         gid = g["game_id"]
+        # Disiplin kickoff: jangan buat bet untuk laga yang sudah
+        # mulai (mis. run ulang malam hari) — bet semacam itu
+        # terkontaminasi look-ahead di catatan performa ta_model.
+        try:
+            ko = datetime.strptime(f'{g["date"]} {g["time"]}',
+                                   "%Y-%m-%d %H:%M").replace(
+                                       tzinfo=timezone.utc)
+            if ko <= datetime.now(timezone.utc):
+                continue
+        except (KeyError, TypeError, ValueError):
+            pass
         matched += 1
 
         lh, la = fnum(p["lam_h"]), fnum(p["lam_a"])

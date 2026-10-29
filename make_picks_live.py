@@ -51,16 +51,40 @@ def _logit_clip(p):
     return np.log(np.clip(p, 1e-6, 1 - 1e-6) / (1 - np.clip(p, 1e-6, 1 - 1e-6)))
 
 
-def _records_mode():
-    """Mode fit DC yang distamp pada records_cache (sidecar), atau None."""
+def _records_meta():
+    """Sidecar records_cache (.meta.json) sebagai dict, atau {}."""
     meta = os.path.splitext(RECORDS)[0] + ".meta.json"
     if os.path.exists(meta):
         try:
             with open(meta, encoding="utf-8") as f:
-                return json.load(f).get("dc_fit_mode")
+                return json.load(f)
         except Exception:
-            return None
-    return None
+            return {}
+    return {}
+
+
+def _records_mode():
+    """Mode fit DC yang distamp pada records_cache (sidecar), atau None."""
+    return _records_meta().get("dc_fit_mode")
+
+
+def _data_stamp():
+    """Stamp kesegaran all_matches_clean.csv (mtime_ns:ukuran)."""
+    try:
+        st = os.stat(os.path.join(BASE, "all_matches_clean.csv"))
+        return f"{st.st_mtime_ns}:{st.st_size}"
+    except OSError:
+        return None
+
+
+def _records_stale():
+    """True bila cache dibangun dari mode DC lain ATAU dari data latih
+    yang sudah di-refresh sejak cache dibuat."""
+    m = _records_meta()
+    from model_v2 import DC_FIT_MODE
+    if m.get("dc_fit_mode") != DC_FIT_MODE:
+        return True
+    return m.get("data_stamp") != _data_stamp()
 
 
 def _fit_meta():
@@ -72,8 +96,9 @@ def _fit_meta():
         n = cache_records(RECORDS)
         if not n or not os.path.exists(RECORDS):
             raise RuntimeError("gagal membangun records_cache.jsonl")
-    elif _records_mode() != DC_FIT_MODE:
-        print(f"! records_cache mode {_records_mode()} != aktif {DC_FIT_MODE} "
+    elif _records_stale():
+        print(f"! records_cache basi (mode {_records_mode()} vs aktif "
+              f"{DC_FIT_MODE}, atau data latih sudah di-refresh) "
               f"— membangun ulang ...")
         from backtest_picks import cache_records
         n = cache_records(RECORDS)

@@ -224,18 +224,27 @@ def _http_get(url):
 
 
 # ---------------------------------------------------------------- market completeness
+def _cap_key(s):
+    """Kunci urut captured_at berbasis waktu parsed (string mentah
+    salah urutan lintas offset +0000/+0700)."""
+    try:
+        return datetime.strptime(s or "", "%Y-%m-%dT%H:%M:%S%z")
+    except (ValueError, TypeError):
+        return datetime.min.replace(tzinfo=timezone.utc)
+
+
 def market_last_snapshot_time(game_id):
     """Waktu snapshot pasar terakhir per game_id (atau None)."""
     path = os.path.join(DIR, "odds_markets_snapshots.csv")
     if not os.path.exists(path):
         return None
-    latest = {}
+    best_ts, best_key = None, None
     for r in _read(path):
         if r["game_id"] == game_id:
             ts = r.get("captured_at", "")
-            if ts and (latest.get(game_id) is None or ts > latest[game_id]):
-                latest[game_id] = ts
-    return latest.get(game_id)
+            if ts and (best_key is None or _cap_key(ts) > best_key):
+                best_ts, best_key = ts, _cap_key(ts)
+    return best_ts
 
 
 def market_needs_refresh(game_id, refresh_hours=1.5):
@@ -257,10 +266,15 @@ async def async_fetch_pages(urls_with_cache, ttl_map=None):
     Returns list of (text, from_cache) aligned to input order.
     """
     if not _HAS_HTTPX:
-        # Fallback: sync sequential
-        return [(_sync_fetch(u, c, ttl_map.get(i, CACHE_TTL_DATE) if ttl_map else CACHE_TTL_DATE)[0],
-                 _sync_cache_check(c, ttl_map.get(i, CACHE_TTL_DATE) if ttl_map else CACHE_TTL_DATE))
-                for i, (u, c, _) in enumerate(urls_with_cache)]
+        # Fallback: sync sequential. ttl per-tuple dihormati sama
+        # seperti jalur async (versi lama mengabaikannya dan selalu
+        # memakai ttl_map/default — --fresh bisa kalah di sini).
+        out = []
+        for i, (u, c, t) in enumerate(urls_with_cache):
+            ttl = t if t is not None else (
+                ttl_map.get(i, CACHE_TTL_DATE) if ttl_map else CACHE_TTL_DATE)
+            out.append((_sync_fetch(u, c, ttl)[0], _sync_cache_check(c, ttl)))
+        return out
 
     results = [None] * len(urls_with_cache)
     semaphore = asyncio.Semaphore(MAX_CONCURRENCY)
@@ -377,10 +391,11 @@ def parse_date_page(html, iso_date):
         for k in ("o1", "oX", "o2"):
             o[k] = pick(r'<span class="%s[^"]*">([\d.]+)</span>' % k)
         if not o["o1"]:
-            # Layout tabel lama: tiga <td class="odd"> berurutan = 1, X, 2.
-            # Versi lama memanggil pick() tiga kali dengan pola identik
-            # dari awal blok, sehingga ketiganya berisi odds PERTAMA.
-            tds = re.findall(r'<td class="odd">([\d.]+)</td>', block)
+            # Layout tabel lama: tiga sel harga berurutan = 1, X, 2
+            # (class "odd" beserta variannya). Versi lama memanggil
+            # pick() tiga kali dengan pola identik dari awal blok,
+            # sehingga ketiganya berisi odds PERTAMA.
+            tds = re.findall(r'<td class="odd[^"]*">([\d.]+)</td>', block)
             if len(tds) >= 3:
                 o["o1"], o["oX"], o["o2"] = tds[0], tds[1], tds[2]
 
@@ -443,29 +458,37 @@ def parse_match_page(html, game_id, url):
                 line = _txt(lc.group(1))
                 if not re.match(r"^[\d.]+$", line):
                     line = ""
-            odds = [_txt(x) for x in
-                    re.findall(r'<td class="odd">([^<]*)</td>', tr)]
-            odds = [o for o in odds if re.match(r"^\d+(\.\d+)?$", o)]
+            # Sel harga: class SELALU diawali "odd" tetapi punya varian
+            # ("odd bold", "odd odd-up", "odd odd-down", "odd noodd").
+            # Regex lama menuntut class persis "odd" sehingga 17,9%
+            # harga numerik di halaman cache terlewat — dan sel yang
+            # terlewat menggeser pemetaan harga->label (akar anomali
+            # harga seri yang terbaca sebagai harga kandang). Sel
+            # placeholder "odd noodd" ("-") ikut ditangkap supaya
+            # POSISINYA tetap dihitung; nilainya non-numerik sehingga
+            # seleksi itu dilewati tanpa menggeser seleksi lain.
+            cells = [_txt(x) for x in
+                     re.findall(r'<td class="odd[^"]*">([^<]*)</td>', tr)]
             # Over/Under: header [Goals][Under][Over] tapi kolom harga hanya 2,
             # karena "Goals" menunjuk ke kolom garis (td.center).
             labs = list(labels)
-            if len(odds) == len(labs) - 1 and labs and \
+            if len(cells) == len(labs) - 1 and labs and \
                     labs[0].lower() in ("goals", "line", "total", "handicap"):
                 labs = labs[1:]
-            if len(odds) != len(labs):
-                # Jumlah harga != jumlah label (mis. satu sel kosong
-                # karena pasar disuspensi bandar): pemetaan posisional
-                # tidak bisa dipercaya — harga berikutnya akan bergeser
-                # satu label. Lewati baris ini daripada menyimpan odds
-                # yang menempel ke pilihan yang salah.
+            if len(cells) != len(labs):
+                # Jumlah sel != jumlah label: pemetaan posisional tidak
+                # bisa dipercaya — harga berikutnya akan bergeser satu
+                # label. Lewati baris ini daripada menyimpan odds yang
+                # menempel ke pilihan yang salah.
                 continue
             for i, lab in enumerate(labs):
-                if i >= len(odds):
-                    break
+                val = cells[i]
+                if not re.match(r"^\d+(\.\d+)?$", val):
+                    continue  # placeholder/suspensi: hanya seleksi ini
                 out.append({
                     "game_id": game_id, "market": market, "line": line,
                     "selection": lab, "bookmaker": book,
-                    "odds": odds[i], "url": url,
+                    "odds": val, "url": url,
                 })
     return out
 
@@ -605,13 +628,14 @@ def sync_dates(days, with_markets=False, market_ids=None, verbose=True, fresh=Fa
             date_htmls[iso_d] = (html, cached)
             games = parse_date_page(html, iso_d)
             if not games:
-                # 0 laga dari halaman yang berhasil diambil hampir pasti
-                # berarti markup berubah / halaman blokir, bukan hari
-                # tanpa pertandingan. Versi lama melaporkan sukses
-                # diam-diam (audit ulang 2026-10-29).
+                # 0 laga tercatat apa adanya di empty_dates. Untuk
+                # tanggal +3/+4 hari ini NORMAL (TipsterArea menyajikan
+                # halaman stub sebelum jadwal terbit); untuk tanggal
+                # lampau/hari ini, ini sinyal markup berubah / blokir.
+                # Versi lama melaporkan sukses diam-diam (audit 2026-10-29).
                 empty_dates.append(iso_d)
-                print(f"  ! {iso_d}: 0 laga terparse — periksa markup/"
-                      f"blokir halaman tanggal", file=sys.stderr)
+                print(f"  ! {iso_d}: 0 laga terparse (stub masa depan "
+                      f"atau markup berubah/blokir)", file=sys.stderr)
             snap, res = save_date_page(games, captured)
             tot_snap += snap
             tot_res += res

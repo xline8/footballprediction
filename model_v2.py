@@ -68,7 +68,12 @@ def _ensure_loaded():
                 "season": r["Season"], "home": r["HomeTeam"], "away": r["AwayTeam"],
                 "yh": int(yh), "ya": int(ya), "ftr": r["FTR"],
                 "xgh": xgh, "xga": xga,
-                "close": (num(r["PSCH"]), num(r["PSCD"]), num(r["PSCA"])),
+                # football-data mengganti nama kolom Pinnacle PSC* ->
+                # PPC* di file 2627; tanpa fallback ini "close" diam-
+                # diam selalu jatuh ke AvgC semusim penuh (audit r3).
+                "close": (num(r.get("PPCH") or r.get("PSCH")),
+                          num(r.get("PPCD") or r.get("PSCD")),
+                          num(r.get("PPCA") or r.get("PSCA"))),
                 "avgc": (num(r["AvgCH"]), num(r["AvgCD"]), num(r["AvgCA"])),
                 "b365c": (num(r["B365CH"]), num(r["B365CD"]), num(r["B365CA"])),
                 "open": (num(r["AvgH"]), num(r["AvgD"]), num(r["AvgA"])),

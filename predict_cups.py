@@ -31,7 +31,7 @@ import csv
 import json
 import math
 from collections import defaultdict, deque
-from datetime import datetime, date
+from datetime import datetime, date, timezone
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE_DIR)
@@ -425,12 +425,20 @@ def main():
 
     # odds 1X2 TERBARU per game_id — file bersifat append-only dan
     # versi lama mengambil baris PERTAMA per game (snapshot tertua).
+    # Perbandingan memakai waktu parsed: string mentah salah urutan
+    # lintas offset (28 laga memilih baris basi — audit ronde 3).
+    def _capdt(s):
+        try:
+            return datetime.strptime(s or "", "%Y-%m-%dT%H:%M:%S%z")
+        except (ValueError, TypeError):
+            return datetime.min.replace(tzinfo=timezone.utc)
+
     odds = {}
     odds_cap = {}
     with open(ODDS1x2, encoding="utf-8", newline="") as f:
         for r in csv.DictReader(f):
             gid = r["game_id"]
-            cap = r.get("captured_at") or ""
+            cap = _capdt(r.get("captured_at"))
             if gid not in odds or cap >= odds_cap[gid]:
                 odds[gid] = (r.get("o1"), r.get("ox"), r.get("o2"))
                 odds_cap[gid] = cap

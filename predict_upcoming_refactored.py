@@ -284,7 +284,8 @@ def _load_fixtures_from_raw() -> List[Dict]:
     """Load fixtures from xg_raw JSON files (fallback)."""
     FIX_MAP = {"E0": "EPL", "SP1": "La_liga", "D1": "Bundesliga",
                "I1": "Serie_A", "F1": "Ligue_1"}
-    TODAY = datetime.now().date()
+    from datetime import timezone as _tz
+    TODAY = datetime.now(_tz.utc).date()
 
     # Load name mapping
     nmap_path = os.path.join(BASE_DIR, "xg_raw", "map_full.json")
@@ -309,6 +310,11 @@ def _load_fixtures_from_raw() -> List[Dict]:
                 away = nmap.get(f"{div}|{d['a']['title']}")
                 if not home or not away:
                     continue
+                # Samakan dengan jalur utama: nama ternormalisasi.
+                # Nilai map mentah ("Man City", "M'gladbach") membuat
+                # lookup odds FD meleset total dan kolom B365 kosong
+                # diam-diam bila fallback ini aktif (audit ronde 3).
+                home, away = normalize_name(home), normalize_name(away)
                 fixtures.append(dict(
                     div=div, uid=d["id"], date=dt.date().isoformat(),
                     time=dt.strftime("%H:%M"), home=home, away=away

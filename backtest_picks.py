@@ -188,10 +188,19 @@ def cache_records(out_path=RECORDS):
     with open(out_path, "w", encoding="utf-8") as f:
         for r in rec:
             f.write(json.dumps(r) + "\n")
-    # Stamp mode fit DC yang menghasilkan cache; dipakai _fit_meta utk rebuild.
+    # Stamp mode fit DC + kesegaran data latih yang menghasilkan cache;
+    # dipakai _fit_meta utk rebuild. Tanpa stamp data, cache bertahan
+    # melewati refresh data mingguan dan model meta diam-diam ter-fit
+    # pada data basi (audit ronde 3).
+    try:
+        st = os.stat(os.path.join(BASE, "all_matches_clean.csv"))
+        data_stamp = f"{st.st_mtime_ns}:{st.st_size}"
+    except OSError:
+        data_stamp = None
     meta_path = os.path.splitext(out_path)[0] + ".meta.json"
     with open(meta_path, "w", encoding="utf-8") as f:
-        json.dump({"dc_fit_mode": model_v2.DC_FIT_MODE}, f)
+        json.dump({"dc_fit_mode": model_v2.DC_FIT_MODE,
+                   "data_stamp": data_stamp}, f)
     print(f"cache records: {len(rec)} -> {out_path} (mode={model_v2.DC_FIT_MODE})")
     return len(rec)
 

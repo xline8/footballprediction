@@ -70,6 +70,15 @@ def _write_csv(path, cols, rows):
     os.replace(tmp, path)
 
 
+def _capdt(s):
+    """Parse captured_at untuk perbandingan 'terbaru' (string mentah
+    salah urutan lintas offset +0000/+0700)."""
+    try:
+        return datetime.strptime(s or "", "%Y-%m-%dT%H:%M:%S%z")
+    except (ValueError, TypeError):
+        return datetime.min.replace(tzinfo=timezone.utc)
+
+
 def _fnum(x):
     try:
         v = float(x)
@@ -230,12 +239,13 @@ def _prematch_state(game_id):
         key = (market, str(r.get("line") or ""), sel, r.get("bookmaker") or "")
         cap = r.get("captured_at") or ""
         cur = latest.get(key)
-        if cur is None or cap > cur[0]:
+        if cur is None or _capdt(cap) > _capdt(cur[0]):
             latest[key] = (cap, o)
     state = {}
     for (market, line, sel, bk), (cap, o) in latest.items():
         state.setdefault((market, line, sel), []).append((o, bk))
-    cap = max(r.get("captured_at") or "" for r in rows)
+    cap = max((r.get("captured_at") or "" for r in rows),
+              key=_capdt, default="")
     return cap, state
 
 

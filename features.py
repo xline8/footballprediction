@@ -44,7 +44,11 @@ class Elo:
     def update(self, home, away, hg, ag):
         ra, rb = self.rating[home], self.rating[away]
         eh = self.expected(ra + self.HOME_ADV, rb)
-        ea = self.expected(rb, ra - self.HOME_ADV)
+        # Ekspektasi tandang = komplemen kandang (dengan keunggulan
+        # kandang yang sama). Rumus lama menghitungnya dari
+        # ra - HOME_ADV sehingga eh + ea != 1 dan total rating
+        # terdeflasi K*(1 - eh - ea) di SETIAP laga (audit ronde 3).
+        ea = 1.0 - eh
         sh = 1.0 if hg > ag else (0.5 if hg == ag else 0.0)
         sa = 1.0 - sh
         self.rating[home] = ra + self.K * (sh - eh)

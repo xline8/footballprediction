@@ -92,7 +92,11 @@ if os.path.exists(_res_path):
 
 # ---------- closing odds (CLV source) ----------
 # Hierarki per pasar: Pinnacle close -> AvgC -> B365C (dari all_matches_clean.csv).
-CLOSE_1X2 = (("PSCH", "PSCD", "PSCA"),
+# Pinnacle memakai PPC* di baris musim 2627 dan PSC* di musim lama —
+# kedua ejaan masuk rantai (audit ronde 3: tanpa PPC*, CLV musim ini
+# diam-diam selalu bersumber AvgC).
+CLOSE_1X2 = (("PPCH", "PPCD", "PPCA"),
+              ("PSCH", "PSCD", "PSCA"),
               ("AvgCH", "AvgCD", "AvgCA"),
               ("B365CH", "B365CD", "B365CA"))
 CLOSE_OU = (("PC>2.5", "PC<2.5"),

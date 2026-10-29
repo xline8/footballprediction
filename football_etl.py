@@ -12,7 +12,7 @@ import pickle
 import math
 from typing import Optional, List, Dict, Any
 from collections import defaultdict
-from datetime import datetime, date
+from datetime import datetime, date, timezone
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(BASE, "all_matches_clean.csv")
@@ -237,10 +237,11 @@ def load_matches(path: str = None) -> List[Dict[str, Any]]:
             rec["hc"] = to_int(rec.get("HC"))
             rec["ac"] = to_int(rec.get("AC"))
             # Odds
+            # Pinnacle closing: PPC* di file 2627, PSC* di musim lama.
             rec["ps_close"] = (
-                to_float(rec.get("PSCH")),
-                to_float(rec.get("PSCD")),
-                to_float(rec.get("PSCA"))
+                to_float(rec.get("PPCH") or rec.get("PSCH")),
+                to_float(rec.get("PPCD") or rec.get("PSCD")),
+                to_float(rec.get("PPCA") or rec.get("PSCA"))
             )
             rec["avg_close"] = (
                 to_float(rec.get("AvgCH")),
@@ -314,6 +315,24 @@ def to_date(s) -> Optional[date]:
 
 
 # --- Cache Layer ---
+# Versi format cache matches.pkl — naikkan bila normalizer nama atau
+# bentuk record berubah. Penerimaan cache menuntut versi ini DAN sidik
+# data (mtime+ukuran CSV sumber) yang cocok; versi lama hanya
+# membandingkan mtime pickle vs CSV, sehingga pickle yang dibangun
+# kode usang (mis. sebelum perbaikan alias Gladbach) tetap dipakai
+# diam-diam, dan restore CSV .bak bermtime lama bisa dikalahkan oleh
+# pickle dari data yang ditolak (audit ronde 3).
+CACHE_FORMAT = "v2"
+
+
+def _data_stamp():
+    try:
+        st = os.stat(DATA)
+        return (st.st_mtime_ns, st.st_size)
+    except OSError:
+        return (0, 0)
+
+
 class MatchCache:
     """Cache layer untuk match data dan lookup indexes."""
 
@@ -327,30 +346,24 @@ class MatchCache:
         self._load_or_build(force_reload)
 
     def _load_or_build(self, force_reload: bool):
-        try:
-            current_mtime = os.path.getmtime(DATA)
-        except OSError:
-            current_mtime = 0
-
+        stamp = _data_stamp()
         cache_exists = os.path.exists(self._cache_file)
 
         if cache_exists and not force_reload:
-            cache_mtime = os.path.getmtime(self._cache_file)
-
-            # Gunakan cache hanya jika data belum berubah
-            if cache_mtime >= current_mtime:
-                try:
-                    with open(self._cache_file, 'rb') as f:
-                        data = pickle.load(f)
+            try:
+                with open(self._cache_file, 'rb') as f:
+                    data = pickle.load(f)
+                if data.get('format') == CACHE_FORMAT and \
+                        tuple(data.get('data_stamp') or ()) == stamp:
                     self.matches = data['matches']
                     self.by_div = data['by_div']
                     self.by_team = data['by_team']
                     self.by_date = data['by_date']
-                    self._last_modified = cache_mtime
+                    self._last_modified = os.path.getmtime(self._cache_file)
                     return
-                except Exception:
-                    # Jika cache rusak, build ulang
-                    pass
+            except Exception:
+                # Cache rusak / format lama: build ulang di bawah.
+                pass
 
         # Build dari awal
         self._build_indexes()
@@ -372,6 +385,8 @@ class MatchCache:
     def _save_cache(self):
         os.makedirs(os.path.dirname(self._cache_file), exist_ok=True)
         data = {
+            'format': CACHE_FORMAT,
+            'data_stamp': _data_stamp(),
             'matches': self.matches,
             'by_div': dict(self.by_div),
             'by_team': dict(self.by_team),
@@ -383,7 +398,10 @@ class MatchCache:
     def get_div_matches(self, div: str) -> List[Dict]:
         """Dapatkan semua match untuk divisi tertentu, terurut tanggal."""
         indices = self.by_div.get(div, [])
-        return [self.matches[i] for i in sorted(indices, key=lambda j: self.matches[j]['date'])]
+        # Baris ber-Date tak terparse (date None) tidak boleh meruntuhkan
+        # pengurutan — dan dengan itu seluruh generate_predictions.
+        return [self.matches[i] for i in sorted(
+            indices, key=lambda j: self.matches[j]['date'] or date.min)]
 
     def get_team_history(self, team: str, cutoff: date) -> List[Dict]:
         """Dapatkan riwayat pertandingan tim hingga tanggal tertentu."""
@@ -410,7 +428,10 @@ class MatchCache:
 # --- Fixture & Odds Loading ---
 def load_fixtures(season_year: str = "2026") -> List[Dict]:
     """Load fixture dari xg_raw/{slug}_{year}_fixtures.json (hanya >= hari ini)."""
-    today = date.today()
+    # Datetime fixture Understat adalah UTC; membandingkannya dengan
+    # tanggal LOKAL membuang fixture dini hari WIB (00:00-07:00) dari
+    # prediksi pada run tengah malam (audit ronde 3). Pakai tanggal UTC.
+    today = datetime.now(timezone.utc).date()
     slug_map = {"E0": "EPL", "SP1": "La_liga", "D1": "Bundesliga",
                 "I1": "Serie_A", "F1": "Ligue_1"}
 
