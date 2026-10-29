@@ -89,23 +89,37 @@ component that goes to a real ledger without risking live money.
 
 ## Cups: EFL Cup & DFB Pokal
 
-Prediksi piala (`predict_cups.py`) tidak memakai API-Football. Fixture dan odds
-diambil dari scrape tipsterarea (`ta/fixtures.csv`,
-`ta/odds_1x2_snapshots.csv`); hasil untuk grading dibaca dari `ta/results.csv`.
+`predict_cups.py` predicts EFL Cup and DFB Pokal ties without API-Football.
+Fixtures come from the tipsterarea scrape (`ta/fixtures.csv`), market odds
+from tipsterarea match-page snapshots (summarised in `market_compare.csv`),
+and results for grading from `ta/results.csv`.
 
-Tim dipetakan ke divisi liga asalnya (E0/E1/E2/E3 Inggris, D1/D2 Jerman).
-Laga lintas divisi memakai lambda home dari fit divisi tim kandang dan defense
-divisi tim tandang, diskalakan ke rata-rata gol divisi kandang. Ini
-penyederhanaan yang disadari; grading terpisah menunjukkan kualitasnya.
+Each team is mapped to its league division (E0–E3 in England, D1–D2 in
+Germany), and a tie is only predicted when both teams map. Goal lambdas come
+from the two divisions' league fits. The tie's total is then rescaled to the
+competition's own measured scoring rate, taken from scraped cup results, at
+full weight once 100 or more finished ties are on file and half weight below
+that. The rescale keeps the home:away split from the league fits. This is a
+known simplification. The model has no cup-specific team ratings, and the
+per-competition grading shows what that costs.
 
-Corner: base-rate corner divisi tim kandang (HC/AC, half-life 270) kali faktor
-relatif rolling shots 5 laga liga terakhir per tim. Bila salah satu tim punya
-<3 laga liga ber-data shots, corner dilewati; prediksi gol tetap jalan.
+Single-leg ties also get advance probabilities in the `p_adv_h` and
+`p_adv_a` columns, the chance of going through when a level score can be
+settled by extra time (lambdas scaled to 30 minutes) and penalties weighted
+by the two teams' 90-minute win probabilities. Both columns stay empty for
+two-legged ties.
 
-Hasil piala tidak masuk data latih liga, dan baris piala tidak dicampur ke
-`predictions_upcoming.csv` / `predictions_corners_upcoming.csv`. Output piala
-terpisah (`predictions_cups_upcoming.csv`, `predictions_corners_cups.csv`),
-dan grading piala diringkas per kompetisi di `ledger_summary.json`.
+Corners use the home team's division corner base rate (HC/AC, half-life 270)
+times each team's relative rolling shots factor over its last 5 league
+matches. If either team has fewer than 3 league matches with shots data,
+corners are skipped for that tie and the goal prediction still runs. Cup
+corners are not graded, because no available results source records cup
+corner counts.
+
+Cup results never enter league training data, and cup rows never mix into
+`predictions_upcoming.csv` or `predictions_corners_upcoming.csv`. Predictions
+live in `predictions_cups_upcoming.csv` and `predictions_corners_cups.csv`,
+and cup picks are graded per competition in `ledger_summary.json`.
 
 ## Reference
 
