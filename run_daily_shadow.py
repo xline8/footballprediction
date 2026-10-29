@@ -111,6 +111,16 @@ def main():
     except Exception as e:
         print(f"[8/9] WARNING market_compare gagal: {e!r} (lanjut pipeline)")
 
+    # [8b/9] Rekomendasi slip odds deterministik (dari market_compare.csv).
+    # Kegagalan tidak menggagalkan pipeline; slip diarsipkan di langkah 9.
+    try:
+        import slip_recommender
+        rc = slip_recommender.recommend()
+        print(f"[8b/9] slip: {rc['n_legs']} kaki, total {rc['total_odds']}, "
+              f"in_band={rc['in_band']}")
+    except Exception as e:
+        print(f"[8b/9] WARNING slip gagal: {e!r} (lanjut pipeline)")
+
     # [9/9] Arsip snapshot harian (dengan market_compare) + rutekan pick piala
     # ke ledger/picks.jsonl (kompetisi) sebelum grading terpisah.
     try:
