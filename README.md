@@ -1,6 +1,12 @@
 # Football 1X2 & Derivative Market Prediction
 
 [![Tests](https://github.com/xline8/footballprediction/actions/workflows/tests.yml/badge.svg)](https://github.com/xline8/footballprediction/actions/workflows/tests.yml)
+[![Python 3.12](https://img.shields.io/badge/python-3.12-3776AB?logo=python&logoColor=white)](https://www.python.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
+[![License](https://img.shields.io/github/license/xline8/footballprediction)](https://github.com/xline8/footballprediction/blob/main/LICENSE)
+[![Release](https://img.shields.io/github/v/release/xline8/footballprediction)](https://github.com/xline8/footballprediction/releases)
+[![Model: Dixon-Coles + xG blend](https://img.shields.io/badge/model-Dixon--Coles%20%2B%20xG%20blend-555555)](#how-it-works)
+[![Markets: 1X2, O/U, BTTS, corners](https://img.shields.io/badge/markets-1X2%20%C2%B7%20O%2FU%20%C2%B7%20BTTS%20%C2%B7%20corners-555555)](#daily-recommendations-single-bet--slips)
 
 A quantitative research engine that predicts pre-match football outcomes for
 the top five European leagues (EPL, La Liga, Bundesliga, Serie A, Ligue 1),
