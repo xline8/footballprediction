@@ -301,7 +301,8 @@ def build_market_compare(date_from=None, n_days=5):
 ARCHIVE_FILES = ["predictions_upcoming.csv", "predictions_corners_upcoming.csv",
                  "predictions_cups_upcoming.csv", "predictions_corners_cups.csv",
                  "best_picks_today.csv", "market_compare.csv",
-                 "recommended_slip.csv"]
+                 "recommended_single.csv", "recommended_slip.csv",
+                 "recommended_slip10.csv"]
 
 
 def archive_snapshots(target_date=None):

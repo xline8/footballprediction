@@ -117,6 +117,31 @@ the market-efficiency evidence.
 fit experiment and the go-live gates (meta stack, derivatives, held-out seasons)
 behind the `blend` fit-mode default.
 
+## Daily recommendations (single bet + slips)
+
+`slip_recommender.py` builds three deterministic recommendation files per
+report date from real 1xBet odds in `market_compare.csv` joined to model
+probabilities (markets 1X2 / DC / OU / BTS; one leg per match). All three are
+produced in the daily shadow run (step 8b) and archived daily.
+
+- **`recommended_single.csv`** — the day's single bet: highest EV
+  (`p_model * o_1xbet - 1`) among legs with `p_model >= 0.45` and
+  `o_1xbet >= 1.40` (tie-break: probability, then odds). Columns add `ev` and
+  `below_floor` (true only when the relaxed 0.40 / 1.30 floor had to be used).
+- **`recommended_slip.csv`** — slip with total odds in the 1.85–2.15 band
+  (target 2.0): 2–4 legs from the report date only, `p_model >= 0.50`,
+  `o_1xbet >= 1.20`, highest joint probability (tie-break total EV). Without
+  an in-band combo, the closest-to-2.0 combo of that date is emitted with
+  `in_band=false`. Columns: one row per leg plus `slip_total_odds`,
+  `slip_joint_prob`, `slip_ev`, `in_band`.
+- **`recommended_slip10.csv`** — slip with total odds in the 9.0–11.0 band
+  (target 10.0): 3–6 legs, `p_model >= 0.35`, `o_1xbet >= 1.30`, highest
+  joint probability. The pool starts at the report date and expands day by
+  day (max +4) only until an in-band combo exists; every leg row carries its
+  own match date and the extra column `pool_expanded_to` records how far the
+  pool reached. Without an in-band combo, the closest-to-10.0 combo is
+  emitted with `in_band=false`.
+
 ## Automation
 
 Weekly refit runs every Monday at 04:00 WIB (Sunday 21:00 UTC) via
