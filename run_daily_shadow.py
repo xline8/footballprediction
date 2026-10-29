@@ -86,12 +86,48 @@ def main():
     except Exception as e:
         print(f"[6/7] WARNING ta sync gagal: {e!r} (lanjut pipeline)")
 
+    # [7/9] Market odds sync: semua fixture model (liga TOP5 + piala), window
+    # hari ini..+4, urut kickoff terdekat. Throttle market_needs_refresh diurus
+    # sync_dates (~1.5 jam); hanya fetch yang perlu. Gagal jaringan = warning,
+    # tidak menggagalkan pipeline. parse_match_page/schema tidak diubah.
+    try:
+        from market_orchestration import model_fixture_ids
+        from ta_scrape import sync_dates
+        days_mkt = [date.today() + timedelta(days=k) for k in range(5)]
+        mkt_ids = model_fixture_ids(days_mkt)
+        r = sync_dates(sorted(set(days_mkt)), with_markets=True,
+                       market_ids=mkt_ids or None, verbose=False)
+        print(f"[7/9] market odds sync: {len(mkt_ids)} fixture model, "
+              f"+{r.get('markets', 0)} harga baru")
+    except Exception as e:
+        print(f"[7/9] WARNING market sync gagal: {e!r} (lanjut pipeline)")
+
+    # [8/9] Join odds pasar ke prediksi -> market_compare.csv (1xbet + median +
+    # prob implied ternormalisasi). Kegagalan tidak menggagalkan pipeline.
+    try:
+        import market_orchestration
+        rc = market_orchestration.build_market_compare()
+        print(f"[8/9] market_compare: {rc['fixtures']} fixture, {rc['rows']} baris")
+    except Exception as e:
+        print(f"[8/9] WARNING market_compare gagal: {e!r} (lanjut pipeline)")
+
+    # [9/9] Arsip snapshot harian (dengan market_compare) + rutekan pick piala
+    # ke ledger/picks.jsonl (kompetisi) sebelum grading terpisah.
+    try:
+        from market_orchestration import archive_snapshots, sync_cup_picks_to_ledger
+        ar = archive_snapshots()
+        n_cup = sync_cup_picks_to_ledger()
+        print(f"[9/9] archive {ar['date']}: {len(ar['archived'])} file | "
+              f"cup picks -> ledger: {n_cup} baru")
+    except Exception as e:
+        print(f"[9/9] WARNING archive/cup-ledger gagal: {e!r} (lanjut pipeline)")
+
     try:
         import resolve_and_monitor
         resolve_and_monitor.main()
     except Exception as e:
         failed = True
-        print(f"[7/7] FAILED resolve_and_monitor: {e!r}")
+        print(f"[10/9] FAILED resolve_and_monitor: {e!r}")
 
     if failed:
         print("# LIVE SHADOW: ADA LANGKAH GAGAL")

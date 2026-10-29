@@ -26,6 +26,9 @@ venv/
 ledger/
 records_cache.meta.json
 
+# Arsip snapshot harian (runtime artifact, bukan source)
+archive/
+
 # API-Football raw cache + sample output (rebuildable)
 data_enrichment/raw/api_football_cache/
 data_enrichment/sample_api_odds.csv
