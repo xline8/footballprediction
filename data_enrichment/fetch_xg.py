@@ -80,8 +80,23 @@ def build_xg_map(fetch_remote: bool = False) -> dict[tuple[str, str, str], tuple
         _log.info("xG memakai cache lokal (%d match)", len(out))
         return out
     merged = dict(out)
-    # Kunci merge memakai normalizer peta lokal (lihat di bawah).
+    # Kunci merge harus meniru pipeline peta lokal persis: nama
+    # Understat -> nama FD lewat map_full/map_ext, BARU normalize_name
+    # (features._load_xg_map). Normalisasi nama mentah melewatkan hop
+    # peta itu dan melewatkan ~10% pasangan (Nottm Forest, Koln,
+    # Hamburg) yang hanya bisa diselesaikan peta.
     from football_etl import normalize_name
+    import json as _json
+    import os as _os
+    _xgraw = _os.path.join(
+        _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))),
+        "xg_raw")
+    _nmap = {}
+    for _fn in ("map_full.json", "map_ext.json"):
+        _p = _os.path.join(_xgraw, _fn)
+        if _os.path.exists(_p):
+            with open(_p, encoding="utf-8") as _f:
+                _nmap.update(_json.load(_f))
     for league, div in UNDERSTAT_LEAGUES.items():
         for season in ("2023", "2024"):
             try:
@@ -92,13 +107,11 @@ def build_xg_map(fetch_remote: bool = False) -> dict[tuple[str, str, str], tuple
             if not rows:
                 continue
             for r in rows:
-                # Kunci merge HARUS memakai normalizer yang sama dengan
-                # peta lokal (football_etl.normalize_name lewat
-                # features._load_xg_map); norm_team utils punya aturan
-                # alias berbeda sehingga baris remote tidak pernah
-                # bertemu kunci lokalnya.
-                key = (div, str(r["date"])[:10], normalize_name(r["home"]),
-                       normalize_name(r["away"]))
+                _fd_h = _nmap.get(f"{div}|{r['home']}")
+                _fd_a = _nmap.get(f"{div}|{r['away']}")
+                key = (div, str(r["date"])[:10],
+                       normalize_name(_fd_h) if _fd_h else normalize_name(r["home"]),
+                       normalize_name(_fd_a) if _fd_a else normalize_name(r["away"]))
                 xgh, xga = to_float(r.get("xg_home")), to_float(r.get("xg_away"))
                 if xgh is not None and xga is not None:
                     merged[key] = (xgh, xga)
