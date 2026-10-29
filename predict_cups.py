@@ -276,6 +276,7 @@ GOL_COLS = ["div", "date", "time", "home", "away", "competition",
             "ph_dc", "pd_dc", "pa_dc",
             "p_over_dc", "p_over15_dc", "p_over35_dc", "p_btts",
             "p_dc_1x", "p_dc_x2", "p_dc_12",
+            "p_adv_h", "p_adv_a",
             "b365h", "b365d", "b365a"]
 
 CORNER_COLS = ["div", "date", "home", "away", "competition", "div_home", "div_away",
@@ -296,6 +297,28 @@ def p_gt_frame(mu, r, ln):
     k = mu / (r - 1.0) if r > 1.02 else 1e9
     pmf = pmf_k(mu, k)
     return sum(pmf[int(ln) + 1:])
+
+
+def p_adv(ph, pd, pa, lh, la):
+    """Probabilitas lolos (advance) tie SATU leg dari probs 90 menit.
+
+    - ph/pd/pa = probabilitas 90 menit saat ini (kandang/seri/tandang).
+    - q_h = peluang kandang lolos bila 90 menit seri:
+        λ_ET = λ × 30/90, distribusi DC/Poisson sama; bila ET seri, adu
+        penalti berbobot kekuatan q_pens_h = ph/(ph+pa) (fallback 0.5).
+    - p_adv_h = ph + pd·q_h ; p_adv_a = pa + pd·(1−q_h).
+    Hanya bermakna untuk format satu leg (EFL Cup & DFB Pokal kini begitu);
+    format dua leg/replay -> kolom dikosongkan, bukan dipaksakan.
+    """
+    if lh <= 0 or la <= 0:
+        return None, None
+    dc = DC()
+    et = dc.probs(lh / 3.0, la / 3.0)
+    et_ph, et_pd = et["ph"], et["pd"]
+    denom = ph + pa
+    q_pens = ph / denom if denom > 0 else 0.5
+    q_h = et_ph + et_pd * q_pens
+    return ph + pd * q_h, pa + pd * (1.0 - q_h)
 
 
 def main():
@@ -351,6 +374,7 @@ def main():
         if lh > 0 and la > 0:
             pr = m.probs(lh, la)
         go = odds.get(fx["game_id"], (None, None, None))
+        padv_h, padv_a = p_adv(pr["ph"], pr["pd"], pr["pa"], lh, la)
         gol_rows.append({
             "div": hd if hd == ad else f"{hd}/{ad}",
             "date": fx["date"].isoformat(), "time": fx["time"],
@@ -366,6 +390,8 @@ def main():
             "p_dc_1x": round(pr["ph"] + pr["pd"], 4),
             "p_dc_x2": round(pr["pd"] + pr["pa"], 4),
             "p_dc_12": round(pr["ph"] + pr["pa"], 4),
+            "p_adv_h": round(padv_h, 4) if padv_h is not None else "",
+            "p_adv_a": round(padv_a, 4) if padv_a is not None else "",
             "b365h": go[0], "b365d": go[1], "b365a": go[2],
         })
 
