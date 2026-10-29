@@ -68,7 +68,12 @@ def _ensure_loaded():
                 "season": r["Season"], "home": r["HomeTeam"], "away": r["AwayTeam"],
                 "yh": int(yh), "ya": int(ya), "ftr": r["FTR"],
                 "xgh": xgh, "xga": xga,
-                "close": (num(r["PSCH"]), num(r["PSCD"]), num(r["PSCA"])),
+                # football-data mengganti nama kolom Pinnacle PSC* ->
+                # PPC* di file 2627; tanpa fallback ini "close" diam-
+                # diam selalu jatuh ke AvgC semusim penuh (audit r3).
+                "close": (num(r.get("PPCH") or r.get("PSCH")),
+                          num(r.get("PPCD") or r.get("PSCD")),
+                          num(r.get("PPCA") or r.get("PSCA"))),
                 "avgc": (num(r["AvgCH"]), num(r["AvgCD"]), num(r["AvgCA"])),
                 "b365c": (num(r["B365CH"]), num(r["B365CD"]), num(r["B365CA"])),
                 "open": (num(r["AvgH"]), num(r["AvgD"]), num(r["AvgA"])),
@@ -209,6 +214,7 @@ class DC:
               for y in range(MAXG + 1)] for x in range(MAXG + 1)]
         s = sum(sum(row) for row in m)
         win = push = loss = 0.0
+        exp_pay = 0.0
         comps = _ah_components(line)
         for x in range(MAXG + 1):
             for y in range(MAXG + 1):
@@ -219,13 +225,18 @@ class DC:
                 # terhitung win/loss penuh (audit ulang 2026-10-29).
                 pay = sum(_ah_payoff(x - y + c) for c in comps) / len(comps)
                 w = m[x][y] / s
+                exp_pay += w * pay
                 if pay == 1.0:
                     win += w
                 elif pay == 0.0:
                     loss += w
                 else:
                     push += w
-        return win, push, loss
+        # Nilai ke-4: payoff harapan EKSAK. Tripel (win, push, loss)
+        # tidak bisa mewakilinya untuk garis seperempat — massa payoff
+        # 0.25/0.75 terbenam di ember 'push', sehingga pw + 0.5*pp
+        # meleset ~0.25 * P(setengah) (~0.066 di garis -0.25).
+        return win, push, loss, exp_pay
 
 
 def _ah_components(line):
@@ -305,9 +316,10 @@ def run_wf(seasons, hl, freq, with_extra=False):
                 row["mkt_ou_o"] = opening_ou(mm)
                 row["mkt_ah"] = market_ah(mm)
                 if mm["ahh"] is not None:
-                    row["pw"], row["pp"], _ = model.ah_probs(lh, la, mm["ahh"])
+                    row["pw"], row["pp"], _, row["pe"] = \
+                        model.ah_probs(lh, la, mm["ahh"])
                 else:
-                    row["pw"] = row["pp"] = None
+                    row["pw"] = row["pp"] = row["pe"] = None
             rows.append(row)
     print(f"  [wf seasons={sorted(seasons)} hl={hl} freq={freq}] "
           f"fits={nfits} pred={len(rows):,} waktu={time.time()-t0:.0f}s")
@@ -457,13 +469,16 @@ def main_final():
         bh += yb
         if r["ahh"] is not None and r.get("pw") is not None:
             # Skor terhadap PAYOFF aktual (1/0.5/0, garis seperempat
-            # terbelah dua) dan payoff harapan model pw + 0.5*pp.
+            # terbelah dua) dan payoff harapan model EKSAK (r["pe"]
+            # dari ah_probs; pw + 0.5*pp hanya aproksimasi yang
+            # meleset di garis seperempat).
             # Versi lama menilai hasil garis seperempat sebagai
             # win/loss penuh dan membuang baris push dari penilaian.
             comps = _ah_components(r["ahh"])
             yc = sum(_ah_payoff(r["yh"] - r["ya"] + c)
                      for c in comps) / len(comps)
-            zh = r["pw"] + 0.5 * r["pp"]
+            zh = r["pe"] if r.get("pe") is not None \
+                else r["pw"] + 0.5 * r["pp"]
             ah["ahm"] += (zh - yc) ** 2
             ah["nah"] += 1
             if r["mkt_ah"] is not None:

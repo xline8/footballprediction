@@ -61,11 +61,16 @@ def resolve(rows, rmap):
 
 
 def _write(rows):
-    with open(LEDGER, "w", newline="", encoding="utf-8") as f:
+    # Tulis atomik (tmp + replace): file ini satu-satunya salinan
+    # ledger live shadow — crash di tengah penulisan ulang versi lama
+    # (open "w" polos) memotongnya jadi kosong.
+    tmp = LEDGER + ".tmp"
+    with open(tmp, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=FIELDS)
         w.writeheader()
         for r in rows:
             w.writerow(r)
+    os.replace(tmp, LEDGER)
 
 
 def summary(rows):

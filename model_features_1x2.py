@@ -135,9 +135,6 @@ def evaluate(seasons=None):
 
     # bulan uji (terurut)
     months = sorted({_month_key(d) for d in dates})
-    # baseline prior = proporsi kelas dari seluruh data (sebagai pembanding)
-    prior = np.bincount(y, minlength=3).astype(float)
-    prior /= prior.sum()
 
     pairs_model, pairs_prior = [], []
     for i, m in enumerate(months):
@@ -147,6 +144,11 @@ def evaluate(seasons=None):
             continue
         Xtr, ytr = X[train_mask], y[train_mask]
         Xte, yte = X[test_mask], y[test_mask]
+        # Baseline prior dihitung dari baris LATIH bulan itu saja.
+        # Versi lama memakai proporsi kelas seluruh data termasuk
+        # bulan uji — baseline-nya mengintip masa depan (audit r3).
+        prior = np.bincount(ytr, minlength=3).astype(float)
+        prior /= prior.sum()
         p_model = _fit_multinomial(Xtr, ytr, Xte)
         for p, yi in zip(p_model, yte):
             pairs_model.append((tuple(p), int(yi)))

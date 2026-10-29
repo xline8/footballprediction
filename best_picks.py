@@ -121,16 +121,20 @@ def _load_dixon_coles_picks():
             if not all((ph, pd, pa)):
                 continue
 
-            # 1X2 picks
+            # 1X2 picks — ev_model = EV terhadap harga B365 di baris
+            # prediksi (satu-satunya harga pasar yang tersedia di sini);
+            # tanpa harga, ev_model None (lihat _fill_ev_model).
+            _o = {"1": _num(r.get("b365h")), "X": _num(r.get("b365d")),
+                  "2": _num(r.get("b365a"))}
             if ph > 0.60:
                 picks.append({"div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
-                              "market": "1X2", "line": "", "side": "1", "prob": round(ph,4), "ev": None, "source": "model", "competition": comp})
+                              "market": "1X2", "line": "", "side": "1", "prob": round(ph,4), "ev": None, "ev_model": round(ph * _o["1"] - 1, 4) if _o["1"] else None, "source": "model", "competition": comp})
             elif pd > 0.55:
                 picks.append({"div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
-                              "market": "1X2", "line": "", "side": "X", "prob": round(pd,4), "ev": None, "source": "model", "competition": comp})
+                              "market": "1X2", "line": "", "side": "X", "prob": round(pd,4), "ev": None, "ev_model": round(pd * _o["X"] - 1, 4) if _o["X"] else None, "source": "model", "competition": comp})
             elif pa > 0.60:
                 picks.append({"div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
-                              "market": "1X2", "line": "", "side": "2", "prob": round(pa,4), "ev": None, "source": "model", "competition": comp})
+                              "market": "1X2", "line": "", "side": "2", "prob": round(pa,4), "ev": None, "ev_model": round(pa * _o["2"] - 1, 4) if _o["2"] else None, "source": "model", "competition": comp})
 
             # DC picks
             if (ph + pd) > 0.65 and ph < 0.75:
@@ -235,16 +239,13 @@ def _top_pick_per_match(picks):
         top = pg_sorted[0]
 
         # Calculate ev_model for non-ta_model picks
-        # ev_model = p_model * (fair_odds - 1) - (1 - p_model)
-        # Using typical odds range as estimate
-        if top.get('ev') is None:
-            prob = top.get('prob') or 0
-            if prob > 0:
-                # Estimate: assume fair odds ~ 1/prob
-                fair_odds = 1.0 / prob
-                top['ev_model'] = round(prob * (fair_odds - 1.0) - (1.0 - prob), 4)
-            else:
-                top['ev_model'] = None
+        # ev_model hanya boleh berasal dari harga pasar nyata (diisi
+        # loader untuk 1X2 dan OU 2.5 Over dari kolom B365 baris
+        # prediksi). Rumus lama — prob*(1/prob - 1) - (1 - prob) —
+        # identik 0 untuk semua prob, sehingga kolom ini selalu
+        # tercetak 0.0 dan tidak menyampaikan apa pun (audit ronde 3).
+        if top.get('ev') is None and top.get('ev_model') is None:
+            top['ev_model'] = None
 
         best.append(top)
 
@@ -276,15 +277,20 @@ def _scan_candidates(pred_row, corner_row):
     pd = _num(pred_row.get("pd_dc"))
     pa = _num(pred_row.get("pa_dc"))
     if all(v is not None for v in (ph, pd, pa)):
+        _o = {"1": _num(pred_row.get("b365h")), "X": _num(pred_row.get("b365d")),
+              "2": _num(pred_row.get("b365a"))}
         for side, pr in (("1", ph), ("X", pd), ("2", pa)):
-            cands.append({"market": "1X2", "line": "", "side": side, "prob": pr})
+            cands.append({"market": "1X2", "line": "", "side": side, "prob": pr,
+                          "ev_model": round(pr * _o[side] - 1, 4) if _o[side] else None})
         for side, pr in (("1X", ph + pd), ("X2", pd + pa), ("12", ph + pa)):
             cands.append({"market": "DC", "line": "", "side": side, "prob": pr})
+        _o25 = _num(pred_row.get("b365o25"))
         for ln, col in ((1.5, "p_over15_dc"), (2.5, "p_over_dc"), (3.5, "p_over35_dc")):
             po = _num(pred_row.get(col))
             if po is None:
                 continue
-            cands.append({"market": "OU", "line": str(ln), "side": "Over", "prob": po})
+            cands.append({"market": "OU", "line": str(ln), "side": "Over", "prob": po,
+                          "ev_model": round(po * _o25 - 1, 4) if (ln == 2.5 and _o25) else None})
             cands.append({"market": "OU", "line": str(ln), "side": "Under", "prob": 1 - po})
     pb = _num(pred_row.get("p_btts"))
     if pb is not None:
@@ -329,15 +335,16 @@ def _select_safest(best_cands, scan_cands):
 
 
 def _fill_ev_model(p):
-    """Isi ev_model untuk seleksi non-ta_model (sama seperti _top_pick_per_match)."""
+    """Pastikan kunci ev_model ada; JANGAN mengarang nilainya.
+
+    ev_model yang sah diisi loader dari harga pasar nyata (B365 untuk
+    1X2 / OU 2.5 Over). Untuk seleksi tanpa harga (DC, BTS, corner,
+    OU garis lain) nilainya None — kolom kosong di CSV berarti 'tidak
+    tersedia', bukan 0.0 karangan rumus tautologi lama.
+    """
     if p.get('ev') is not None or p.get('ev_model') is not None:
         return
-    prob = p.get('prob') or 0
-    if prob > 0:
-        fair = 1.0 / prob
-        p['ev_model'] = round(prob * (fair - 1.0) - (1.0 - prob), 4)
-    else:
-        p['ev_model'] = None
+    p['ev_model'] = None
 
 
 def main():

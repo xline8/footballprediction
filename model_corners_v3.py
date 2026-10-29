@@ -287,6 +287,14 @@ def predict_upcoming():
     with open(PARAMS_OUT) as f:
         params = json.load(f)
     gamma, r_star = params["gamma"], params["r"]
+    # Kesegaran parameter terlihat, bukan diam-diam basi selamanya:
+    # file ini hanya ditulis refit manual model_corners_v3.
+    try:
+        age = (datetime.now() - datetime.fromtimestamp(
+            os.path.getmtime(PARAMS_OUT))).days
+        print(f"  corner params: {PARAMS_OUT} (umur {age} hari)")
+    except OSError:
+        pass
 
     # Load historical matches for training window + rolling shots
     hist = sorted(matches, key=lambda m: m["date"])
@@ -296,8 +304,12 @@ def predict_upcoming():
     games_hist = defaultdict(list)
     ptr = {d: 0 for d in TOP5}
 
-    # Load upcoming fixtures from Understat
-    today = datetime.now().date()
+    # Load upcoming fixtures from Understat. Datetime fixture UTC —
+    # bandingkan dengan tanggal UTC (pola yang sama seperti
+    # football_etl.load_fixtures; tanggal lokal membuang fixture
+    # dini hari WIB pada run tengah malam).
+    from datetime import timezone as _tz
+    today = datetime.now(_tz.utc).date()
     upcoming = []
     for div, slug in FIX_MAP.items():
         p = os.path.join(BASE, "xg_raw", f"{slug}_2026_fixtures.json")

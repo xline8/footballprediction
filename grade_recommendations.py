@@ -26,7 +26,7 @@ import json
 import os
 import sys
 from collections import defaultdict
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ARCHIVE = os.path.join(HERE, "archive")
@@ -312,7 +312,7 @@ def _grade_leg(product, row, res_idx, cor_idx):
 
 
 # ---------------------------------------------------------------- per-arsip
-def _grade_archive(archive_date, store, res_idx, cor_idx, now):
+def _grade_archive(archive_date, store, res_idx, cor_idx, now, seen=None):
     d = os.path.join(ARCHIVE, archive_date)
     if not os.path.isdir(d):
         return 0
@@ -331,6 +331,8 @@ def _grade_archive(archive_date, store, res_idx, cor_idx, now):
             g = _grade_leg(product, row, res_idx, cor_idx)
             leg_grades.append(g)
             k = _key(g)
+            if seen is not None:
+                seen.add(k)
             old = store.get(k)
             # update bila baru, atau bila baru final dan (dulu pending / beda).
             # Jangan downgrade final -> pending. Gagal final yg sama -> skip.
@@ -375,6 +377,16 @@ def _grade_archive(archive_date, store, res_idx, cor_idx, now):
                 "|".join(map(str, _key(g))) for g in leg_grades))
             unit_g["selection"] = "unit:" + hashlib.md5(
                 leg_sig.encode()).hexdigest()[:12]
+            # Tanggal kunci unit = tanggal leg TERPAwal slip itu sendiri
+            # (isi), BUKAN tanggal arsip. Fix PR #23 hanya memindahkan
+            # hash isi ke field selection, tapi _key() tetap diawali
+            # tanggal arsip — audit ronde 3 membuktikan lewat simulasi
+            # bahwa slip yang sama di dua tanggal arsip tetap menjadi
+            # dua unit. Dengan tanggal dari isi, kuncinya kini identik
+            # lintas tanggal arsip.
+            if leg_grades:
+                unit_g["date"] = min(g["date"] for g in leg_grades)
+            uk = _key(unit_g)
             # Migrasi: buang unit skema lama (selection kosong) untuk
             # produk + tanggal arsip ini agar tidak jadi pending yatim.
             for k in [k for k, v in store.items()
@@ -382,7 +394,15 @@ def _grade_archive(archive_date, store, res_idx, cor_idx, now):
                       and v["date"] == archive_date and not v["selection"]]:
                 del store[k]
                 changed += 1
-            uk = _key(unit_g)
+            # Migrasi: buang duplikat sig yang sama di kunci tanggal
+            # arsip lain (sisa skema tanggal-arsip dari PR #23).
+            for k in [k for k, v in store.items()
+                      if v["level"] == "unit" and v["product"] == product
+                      and v["selection"] == unit_g["selection"] and k != uk]:
+                del store[k]
+                changed += 1
+            if seen is not None:
+                seen.add(uk)
             uold = store.get(uk)
             if uold is None or (
                     unit_g["status"] != "pending"
@@ -503,15 +523,35 @@ def main(argv=None):
         return 1
     dates = sorted(d for d in os.listdir(ARCHIVE) if os.path.isdir(os.path.join(ARCHIVE, d)))
     total_changed = 0
+    seen = set()
     for archive_date in dates:
-        changed = _grade_archive(archive_date, store, res_idx, cor_idx, now)
+        changed = _grade_archive(archive_date, store, res_idx, cor_idx,
+                                 now, seen)
         total_changed += changed
+    # Pangkas yatim: baris PENDING yang kuncinya tidak lagi dihasilkan
+    # arsip mana pun (seleksi rekomendasi tergantikan sebelum sempat
+    # ter-grade) menggantung sebagai pending abadi tanpa pemangkasan
+    # ini. Hanya pending berumur > 1 hari yang dipangkas; baris final
+    # adalah riwayat kalibrasi dan tidak pernah dibuang.
+    cutoff = (datetime.now(timezone.utc).date()
+              - timedelta(days=1)).isoformat()
+    orphans = [k for k, g in store.items()
+               if k not in seen and g["status"] == "pending"
+               and g["date"] < cutoff]
+    for k in orphans:
+        del store[k]
+    if orphans:
+        print(f"[grade] baris yatim dipangkas: {len(orphans)}")
     _save_grades(store)
 
     summary = _build_summary(store)
     os.makedirs(LEDGER, exist_ok=True)
-    with open(SUMMARY, "w", encoding="utf-8") as f:
+    # Atomik: laporan pagi mem-parse file ini; salinan terpotong
+    # merusak bacaan hari itu.
+    tmp = SUMMARY + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
         json.dump(summary, f, ensure_ascii=False, indent=2)
+    os.replace(tmp, SUMMARY)
 
     st = defaultdict(int)
     for g in store.values():

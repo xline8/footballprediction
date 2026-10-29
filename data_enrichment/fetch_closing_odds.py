@@ -21,9 +21,12 @@ _log = setup_logging()
 # (model_v2 / football_etl: PSC*/AvgC*/B365C* = closing). Versi lama
 # membaca kolom OPENING (PSH/MaxH/AvgH) dan melabelinya closing,
 # sehingga setiap pembacaan CLV dari file enriched terbalik.
-COL_PS_H, COL_PS_D, COL_PS_A = "PSCH", "PSCD", "PSCA"
+COL_PS_H, COL_PS_D, COL_PS_A = "PPCH", "PPCD", "PPCA"
 COL_MX_H, COL_AV_H = "MaxCH", "AvgCH"
+# football-data mengganti nama kolom Pinnacle PSC* -> PPC* di file
+# 2627; baris musim lama hanya punya PSC*. Ambil per baris: PPC dulu.
 COL_PSH = ("PSCH", "PSCD", "PSCA")
+COL_PP = ("PPCH", "PPCD", "PPCA")
 COL_MX = ("MaxCH", "MaxCD", "MaxCA")
 COL_AV = ("AvgCH", "AvgCD", "AvgCA")
 
@@ -43,7 +46,8 @@ def extract_closing_odds(csv_path: str) -> dict[tuple[str, str, str], dict[str, 
                 continue
             key = (div, date_iso, norm_team(home), norm_team(away))
             out[key] = {
-                "ps": tuple(to_float(r.get(c)) for c in COL_PSH),
+                "ps": tuple(to_float(r.get(pp) or r.get(ps))
+                            for pp, ps in zip(COL_PP, COL_PSH)),
                 "mx": tuple(to_float(r.get(c)) for c in COL_MX),
                 "av": tuple(to_float(r.get(c)) for c in COL_AV),
             }

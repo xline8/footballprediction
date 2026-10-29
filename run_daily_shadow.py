@@ -45,6 +45,20 @@ def main():
         print(f"[2/6] corner predictions: rc={r.returncode} | {r.stdout.strip()[-300:]}")
         if r.returncode != 0:
             failed = True
+        else:
+            # rc=0 dengan file corner KOSONG padahal ada prediksi liga
+            # adalah kegagalan diam (lolos terus di versi lama).
+            def _nrows(fn):
+                p = os.path.join(BASE, fn)
+                if not os.path.exists(p):
+                    return 0
+                with open(p, encoding="utf-8") as f:
+                    return max(0, sum(1 for _ in f) - 1)
+            if _nrows("predictions_upcoming.csv") > 0 and \
+                    _nrows("predictions_corners_upcoming.csv") == 0:
+                failed = True
+                print("[2/6] FAILED corner predictions: file corner "
+                      "kosong padahal prediksi liga ada")
     except Exception as e:
         failed = True
         print(f"[2/6] FAILED corner predictions: {e!r}")
@@ -54,6 +68,10 @@ def main():
         rc = predict_cups.main()
         print(f"[3/6] cup predictions: {rc.get('n_gol', 0)} gol, "
               f"{rc.get('n_corner', 0)} corner")
+        if rc.get('status') == 'failed':
+            failed = True
+            print("[3/6] FAILED cup predictions: fixture piala ada "
+                  "tapi nol prediksi gol terpetakan")
     except Exception as e:
         failed = True
         print(f"[3/6] FAILED cup predictions: {e!r}")
@@ -71,6 +89,9 @@ def main():
         import make_picks_live
         n = make_picks_live.main()
         print(f"[5/7] live picks baru: {n}")
+        if n is None:
+            failed = True
+            print("[5/7] FAILED make_picks_live: file prediksi hilang")
     except Exception as e:
         failed = True
         print(f"[5/7] FAILED make_picks_live: {e!r}")
@@ -106,7 +127,10 @@ def main():
         r = sync_dates(sorted(set(days_mkt)), with_markets=True,
                        market_ids=mkt_ids or None, verbose=False)
         print(f"[7/9] market odds sync: {len(mkt_ids)} fixture model, "
-              f"+{r.get('markets', 0)} harga baru")
+              f"+{r.get('markets', 0)} harga baru, "
+              f"{len(r.get('unresolved_market_ids') or [])} id pasar tak "
+              f"terpetakan, tanggal kosong: "
+              f"{r.get('empty_dates') or []}")
     except Exception as e:
         failed = True
         print(f"[7/9] FAILED market sync: {e!r} "
@@ -117,7 +141,9 @@ def main():
     try:
         import market_orchestration
         rc = market_orchestration.build_market_compare()
-        print(f"[8/9] market_compare: {rc['fixtures']} fixture, {rc['rows']} baris")
+        print(f"[8/9] market_compare: {rc['fixtures']} fixture, "
+              f"{rc['rows']} baris, {rc.get('unmatched', 0)} prediksi "
+              f"tanpa fixture TA")
     except Exception as e:
         failed = True
         print(f"[8/9] FAILED market_compare: {e!r} "
@@ -135,6 +161,12 @@ def main():
               f"in_band={rc['slip2']['in_band']} | slip10: "
               f"{rc['slip10']['n_legs']} kaki, total "
               f"{rc['slip10']['total_odds']}, in_band={rc['slip10']['in_band']}")
+        _tr = [nm for nm in ("slip2", "slip10")
+               if rc[nm].get("search_truncated")]
+        if _tr:
+            print(f"[8b/9] PERINGATAN: pencarian {'/'.join(_tr)} "
+                  f"terpotong batas node — hasil kandidat terbaik "
+                  f"sebagian, bukan optimum terbukti")
     except Exception as e:
         failed = True
         print(f"[8b/9] FAILED rekomendasi: {e!r} "

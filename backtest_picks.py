@@ -188,10 +188,19 @@ def cache_records(out_path=RECORDS):
     with open(out_path, "w", encoding="utf-8") as f:
         for r in rec:
             f.write(json.dumps(r) + "\n")
-    # Stamp mode fit DC yang menghasilkan cache; dipakai _fit_meta utk rebuild.
+    # Stamp mode fit DC + kesegaran data latih yang menghasilkan cache;
+    # dipakai _fit_meta utk rebuild. Tanpa stamp data, cache bertahan
+    # melewati refresh data mingguan dan model meta diam-diam ter-fit
+    # pada data basi (audit ronde 3).
+    try:
+        st = os.stat(os.path.join(BASE, "all_matches_clean.csv"))
+        data_stamp = f"{st.st_mtime_ns}:{st.st_size}"
+    except OSError:
+        data_stamp = None
     meta_path = os.path.splitext(out_path)[0] + ".meta.json"
     with open(meta_path, "w", encoding="utf-8") as f:
-        json.dump({"dc_fit_mode": model_v2.DC_FIT_MODE}, f)
+        json.dump({"dc_fit_mode": model_v2.DC_FIT_MODE,
+                   "data_stamp": data_stamp}, f)
     print(f"cache records: {len(rec)} -> {out_path} (mode={model_v2.DC_FIT_MODE})")
     return len(rec)
 
@@ -261,9 +270,16 @@ def _recalibrate(records):
 
 def _model_probs(rec, cfg):
     if cfg["model"] == "meta":
-        return (rec.get("ph_meta") or rec["ph_dc"],
-                rec.get("pd_meta") or rec["pd_dc"],
-                rec.get("pa_meta") or rec["pa_dc"])
+        # "meta" harus berarti model meta yang sebenarnya: ph_meta bila
+        # cache sudah diperkaya experiment_meta, selain itu ph_t3 —
+        # output multinomial walk-forward yang ditulis cache_records
+        # memang model meta itu. Versi lama jatuh per-komponen ke
+        # ph_dc, dan records_cache tidak pernah memuat ph_meta, jadi
+        # backtest default berlabel 'meta' diam-diam mengukur DC murni
+        # (audit ronde 3).
+        if rec.get("ph_meta"):
+            return (rec["ph_meta"], rec["pd_meta"], rec["pa_meta"])
+        return (rec["ph_t3"], rec["pd_t3"], rec["pa_t3"])
     if cfg["model"] == "t3":
         return (rec["ph_t3"], rec["pd_t3"], rec["pa_t3"])
     if cfg["model"] == "blend":

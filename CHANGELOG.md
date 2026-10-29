@@ -78,6 +78,51 @@ Keep a Changelog, and the project uses semantic versioning.
   `utd` short forms are fixed, `best_picks --date` anchors its
   loaders on the requested date, and the ledger/grade/archive file
   rewrites are atomic.
+- A third audit pass fixed the scraper's price alignment at the
+  root: the match-page parser only captured cells whose class was
+  exactly `odd`, missing about 18% of numeric prices (bold and
+  moved-price variants) and letting surviving prices shift onto the
+  wrong selections. Cells are now captured by class prefix, and
+  no-odds placeholders hold their position instead of shifting the
+  row. Replaying the cached pages recovers roughly 9% more priced
+  rows than the guarded parser, all correctly aligned. The slip
+  unit key entry above also needed completion: the unit's key date
+  now comes from the slip's own legs, not the archive date, so the
+  same physical slip can no longer be counted twice.
+- Cup picks entering the money ledger are translated from the
+  `1`/`X`/`2` side vocabulary to the ledger's `H`/`D`/`A` (the
+  first 1X2 cup pick would previously have been graded an automatic
+  loss), must clear a non-negative edge floor, and are deduplicated
+  per match and market instead of per selection. `score_ledger`
+  settles quarter Over/Under lines as split stakes, no longer
+  grades an Over/Under pick's CLV against the 2.5 closing pair when
+  the pick carries another line, and skips a pick with an unknown
+  market instead of aborting the whole grading run.
+- football-data renamed its Pinnacle columns from `PS*` to `PP*`
+  in the 2026-27 files; every closing-odds reader now tries `PP*`
+  first. Without this the current season's Pinnacle closing prices
+  were silently empty and the "Pinnacle-first" benchmarks and CLV
+  chain quietly ran on average prices instead.
+- Reported numbers that were not what they claimed: `best_picks`'
+  `ev_model` was identically zero by construction and is now
+  computed from the Bet365 prices in the prediction rows (left
+  empty where no price exists), and the backtester's default
+  `meta` model silently graded pure Dixon-Coles probabilities and
+  now resolves to the actual meta model. The Asian-handicap
+  evaluation scores against the exact expected payoff instead of
+  the `pw + 0.5*pp` approximation, and the feature Elo is zero-sum.
+- Freshness and time discipline: the records cache carries a
+  training-data stamp and is rebuilt after a data refresh, the
+  match cache requires a format version plus the source file's
+  stamp, `ta_model` ignores quotes captured at or after kickoff
+  and never creates bets for matches that already started,
+  "latest quote" comparisons parse timestamps instead of comparing
+  strings across mixed UTC offsets, and fixture date filters
+  compare against the UTC date. Remaining full-file rewrites
+  (shadow ledger, calibration summary, recommendation files) are
+  atomic, orphaned pending calibration rows are pruned, and the
+  orchestrator's `--predict-only`/`--update-data` modes exit
+  non-zero on failure like the other modes.
 
 ### Removed
 
