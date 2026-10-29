@@ -24,6 +24,8 @@ Per-rule: n, seasons covered, hit rate, yield/ROI, paired bootstrap 95% CI
 per-pick profit (10k), mean CLV (Shin de-vig pada close odds).
 Verdict: VALIDATED / REPLACE / UNVALIDATED.
 """
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))
 
 import csv
 import os
@@ -36,7 +38,7 @@ from backtest_picks import _fair_probs, load_records
 from football_etl import TOP5, normalize_name
 import paths
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RECORDS = os.path.join(BASE, "records_cache.jsonl")
 
 # parameter produksi (MIRROR make_picks_live.py — jangan diubah)

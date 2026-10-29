@@ -9,6 +9,8 @@ tentang keuntungan marjinal setelah model retun.
 
 Usage:  python feature_analysis.py [limit]
 """
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))
 
 import sys
 

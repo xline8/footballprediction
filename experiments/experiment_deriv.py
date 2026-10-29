@@ -11,6 +11,8 @@ di-backtest (lihat TODO_AI.md). Logika pricing BTTS tetap ada di matrix_pricer.
 """
 
 from __future__ import annotations
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))
 
 import csv
 import os
@@ -22,7 +24,7 @@ from backtest_picks import load_records, RECORDS, _fair_probs
 from data_enrichment.utils import norm_team, to_float
 from matrix_pricer import price
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CLEAN = os.path.join(BASE, "all_matches_clean.csv")
 ENRICHED = os.path.join(BASE, "all_matches_enriched.csv")
 N_BOOT = 10_000

@@ -8,6 +8,8 @@ Dual-Gate (pre-fixed thr = 0.05, shin, flat):
 Hipotesis 8.1–8.4 dibangun di atas papan klasemen incrementally (leak-free) +
 fatigue (rest/density). Runner memakai ef._walkforward utk fitur tambahan.
 """
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))
 
 import sys
 from collections import defaultdict

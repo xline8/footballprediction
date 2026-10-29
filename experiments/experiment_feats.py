@@ -7,6 +7,8 @@ engine backtest_picks.evaluate_strategy). KEEP jika LL<1.0017 DAN yield>-3.77%.
 
 Pemakaian:  python experiment_feats.py <hyp>  (hyp: e1|e2|e3|e4)
 """
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))
 
 import os
 import sys
@@ -19,7 +21,7 @@ from validation import eval_1x2
 from backtest_picks import load_records, evaluate_strategy, RECORDS
 from football_etl import MatchCache
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CFG = {"model": "meta", "devig": "shin", "thr": 0.02,
        "stake": "flat", "kelly": 0.25}
 

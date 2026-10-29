@@ -19,6 +19,8 @@ Jika ada gate gagal: biarkan default "goals", laporkan angka. Hanya flip saat
 semua lulus.
 """
 from __future__ import annotations
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))
 
 import json
 import math
@@ -30,7 +32,7 @@ from datetime import datetime
 
 import numpy as np
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, BASE)
 
 import model_features_1x2 as mf

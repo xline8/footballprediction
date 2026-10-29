@@ -9,6 +9,8 @@ Fitur per match (leak-free, semuanya diketahui sebelum kickoff):
 Model: multinomial logistic regression (numpy), walk-forward bulanan, sama dgn
 engine backtest. Target: log loss < 1.020 & Brier < 0.600.
 """
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))
 
 import json
 import os
@@ -20,7 +22,7 @@ import model_features_1x2 as mf
 from backtest_picks import _fair_probs
 from validation import eval_1x2
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RECORDS = os.path.join(BASE, "records_cache.jsonl")
 
 

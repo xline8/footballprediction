@@ -123,7 +123,7 @@ flowchart LR
 | Component | File | Role |
 |---|---|---|
 | Dixon-Coles engine | `model_v2.py` | bivariate Poisson model with low-score dependency correction and decayed team ratings. Fit mode `DC_FIT_MODE` (`goals` or `blend`; default `blend` = 0.5·goals + 0.5·xG where xG exists) |
-| Meta model | `experiment_meta.py`, `backtest_picks.py` | stacks logits of the DC model, the feature model, and market-implied probabilities with a walk-forward multinomial logistic regression; consumes sharp signals (Pinnacle deviation, shin-fair probabilities, midweek flags) |
+| Meta model | `experiments/experiment_meta.py`, `backtest_picks.py` | stacks logits of the DC model, the feature model, and market-implied probabilities with a walk-forward multinomial logistic regression; consumes sharp signals (Pinnacle deviation, shin-fair probabilities, midweek flags) |
 | Matrix pricing | `matrix_pricer.py` | builds the bivariate Poisson scoreline matrix and meta-calibrates it so summed 1X2 marginals match the meta model; O/U and BTTS derive from that matrix |
 | Corner model | `model_corners_v3.py` | Poisson model predicting team corner counts and corner O/U lines from rolling shot statistics (fitted parameters in `ta/corner_params.json`). Beats league base-rate on walk-forward log loss, Brier, MAE, RMSE. Walk-forward calibration against actual corner counts is documented under Measured results; a corner ROI backtest still waits on the near-kickoff odds that JIT capture is accumulating |
 | Data enrichment | `data_enrichment/` | joins Pinnacle odds, midweek/cup fatigue flags, and rolling xG differentials into `all_matches_enriched.csv`, without touching the clean source data |
@@ -204,10 +204,12 @@ edge-band experiment and its UNVALIDATED verdict: the 0.20–0.22 band never
 fires in walk-forward history, which is why the live policy engine emits no
 picks.
 
-[EXPERIMENTS_LOG.md](docs/EXPERIMENTS_LOG.md) is the running lab notebook
-for the keep-or-revert experiment loop. Point-in-time working documents
-(audits, per-feature verification reports, backlog lists) are not kept in
-the tree; they stay readable in git history.
+[EXPERIMENTS_LOG.md](docs/EXPERIMENTS_LOG.md) is the experiment register
+for the keep-or-revert loop. The scripts behind these documents live in
+[experiments](experiments/); they are research code, not part of the daily
+pipeline. Point-in-time working documents (audits, per-feature verification
+reports, backlog lists) are not kept in the tree; they stay readable in git
+history.
 
 ## Daily recommendations (single bet + slips)
 
