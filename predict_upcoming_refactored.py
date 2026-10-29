@@ -189,8 +189,19 @@ def generate_predictions(force_refit: bool = False, output_file: str = None) -> 
             w.writerows(out_rows)
 
     runtime = time.time() - t0
+    # Status jujur: versi lama selalu 'success' walau sebagian fixture
+    # gagal diam-diam (errors tidak pernah dibaca pemanggil) dan file
+    # output tidak ditimpa bila out_rows kosong, sehingga file basi
+    # terkonsumsi sebagai data segar. Run normal menghasilkan 0 errors,
+    # jadi 'partial' hanya muncul saat memang ada yang hilang.
+    if fixtures and not out_rows:
+        status = 'error'
+    elif errors:
+        status = 'partial'
+    else:
+        status = 'success'
     return {
-        'status': 'success',
+        'status': status,
         'predictions': out_rows,
         'n_fixtures': len(fixtures),
         'n_with_odds': n_with_odds,
@@ -216,6 +227,16 @@ def _get_or_fit_model(loader, div: str, games: list, cutoff: date,
     was_loaded = state.load()
 
     needs_fit = force or not was_loaded or not state._initialized or state.mode_mismatch()
+    if was_loaded and state.half_life is not None:
+        # State yang di-fit dengan half-life berbeda dari konfigurasi
+        # aktif tidak boleh dipakai diam-diam (pola yang sama seperti
+        # mode_mismatch untuk DC_FIT_MODE, tapi dulu hanya mode yang
+        # diperiksa — audit ulang 2026-10-29).
+        try:
+            if abs(float(state.half_life) - float(hl)) > 1e-9:
+                needs_fit = True
+        except (TypeError, ValueError):
+            pass
 
     if was_loaded and state.last_fit_date and not needs_fit:
         # Check if new games since last fit
@@ -247,8 +268,13 @@ def _get_or_fit_model(loader, div: str, games: list, cutoff: date,
 def _model_from_state(state: ModelState) -> DC:
     """Reconstruct DC model from persisted state."""
     model = DC()
-    model.a = dict(state.attack)
-    model.d = dict(state.defense)
+    # defaultdict, BUKAN dict biasa: DC._lam mengindeks dengan [] dan
+    # tim yang absen dari state (mis. tim promosi sebelum refit mingguan)
+    # dulu melempar KeyError yang tertelan per-fixture sehingga baris
+    # prediksinya hilang diam-diam. Rating netral 0.0 adalah semantik
+    # yang sama seperti jalur fit segar (DC.a/DC.d memang defaultdict).
+    model.a = defaultdict(float, state.attack)
+    model.d = defaultdict(float, state.defense)
     model.h = state.home_advantage
     model.rho = state.rho
     return model

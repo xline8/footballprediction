@@ -22,7 +22,7 @@ import json
 import os
 import re
 import sys
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 TA = os.path.join(HERE, "ta")
@@ -185,6 +185,37 @@ def _prematch_state(game_id):
             if r.get("game_id") == game_id]
     if not rows:
         return None, {}
+    # Filter pra-kickoff (audit ulang 2026-10-29): docstring fungsi ini
+    # selalu mengklaim "snapshot sebelum kickoff", tapi versi lama tidak
+    # pernah membandingkan captured_at dengan kickoff — ~39% baris
+    # snapshot tertangkap setelah kickoff (harga live) dan bisa menjadi
+    # "odds prematch" di market_compare maupun odds_open pick piala di
+    # ledger. Tanggal/jam fixture di ta/fixtures.csv adalah UTC;
+    # captured_at membawa offset eksplisit, jadi keduanya bisa
+    # dibandingkan sebagai datetime aware. Bila kickoff tak bisa
+    # ditentukan, perilaku lama dipertahankan untuk laga itu.
+    by_id, _ = _load_fixtures()
+    fx = by_id.get(game_id) or {}
+    kickoff = None
+    try:
+        kd = _parsedate(fx.get("date"))
+        kt = (fx.get("time") or "").strip()
+        if kd and kt:
+            hh, mnt = kt.split(":")[:2]
+            kickoff = datetime(kd.year, kd.month, kd.day, int(hh),
+                               int(mnt), tzinfo=timezone.utc)
+    except (ValueError, AttributeError):
+        kickoff = None
+    if kickoff is not None:
+        def _pre(cap_str):
+            try:
+                return datetime.strptime(
+                    cap_str, "%Y-%m-%dT%H:%M:%S%z") < kickoff
+            except (ValueError, TypeError):
+                return True
+        rows = [r for r in rows if _pre(r.get("captured_at") or "")]
+        if not rows:
+            return None, {}
     latest = {}
     for r in rows:
         market = MARKET_CANON.get(r.get("market") or "")
@@ -315,8 +346,12 @@ def archive_snapshots(target_date=None):
         src = os.path.join(HERE, fn)
         if os.path.exists(src):
             out = os.path.join(dest, fn)
-            with open(src, "rb") as fi, open(out, "wb") as fo:
+            # Salin atomik (tmp + replace) — grading membaca arsip ini;
+            # salinan terpotong karena crash akan terbaca diam-diam.
+            tmp = out + ".tmp"
+            with open(src, "rb") as fi, open(tmp, "wb") as fo:
                 fo.write(fi.read())
+            os.replace(tmp, out)
             copied.append(fn)
     return {"date": d.isoformat(), "archived": copied}
 

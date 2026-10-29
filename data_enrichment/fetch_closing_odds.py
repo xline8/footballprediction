@@ -17,11 +17,15 @@ from .utils import setup_logging, to_float, norm_team
 
 _log = setup_logging()
 
-COL_PS_H, COL_PS_D, COL_PS_A = "PSH", "PSD", "PSA"
-COL_MX_H, COL_AV_H = "MaxH", "AvgH"
-COL_PSH = ("PSH", "PSD", "PSA")
-COL_MX = ("MaxH", "MaxD", "MaxA")
-COL_AV = ("AvgH", "AvgD", "AvgA")
+# Kolom CLOSING football-data.co.uk (akhiran C), sesuai konvensi repo
+# (model_v2 / football_etl: PSC*/AvgC*/B365C* = closing). Versi lama
+# membaca kolom OPENING (PSH/MaxH/AvgH) dan melabelinya closing,
+# sehingga setiap pembacaan CLV dari file enriched terbalik.
+COL_PS_H, COL_PS_D, COL_PS_A = "PSCH", "PSCD", "PSCA"
+COL_MX_H, COL_AV_H = "MaxCH", "AvgCH"
+COL_PSH = ("PSCH", "PSCD", "PSCA")
+COL_MX = ("MaxCH", "MaxCD", "MaxCA")
+COL_AV = ("AvgCH", "AvgCD", "AvgCA")
 
 
 def extract_closing_odds(csv_path: str) -> dict[tuple[str, str, str], dict[str, Any]]:

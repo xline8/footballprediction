@@ -293,7 +293,11 @@ async def async_fetch_pages(urls_with_cache, ttl_map=None):
     ) as client:
         tasks = []
         for i, (url, cache_name, ttl) in enumerate(urls_with_cache):
-            ttl_val = ttl if ttl else ttl_map.get(i, CACHE_TTL_DATE)
+            # ttl=0 berarti "selalu segar" (--fresh) dan TIDAK boleh
+            # gugur ke default hanya karena 0 itu falsy (bug lama:
+            # sync --fresh di dalam jendela cache 20 menit diam-diam
+            # memakai halaman basi). None = pakai ttl_map/default.
+            ttl_val = ttl if ttl is not None else ttl_map.get(i, CACHE_TTL_DATE)
             tasks.append(fetch_one(i, url, cache_name, ttl_val))
         await asyncio.gather(*tasks)
         _save_cookie_jar(client)
@@ -373,9 +377,12 @@ def parse_date_page(html, iso_date):
         for k in ("o1", "oX", "o2"):
             o[k] = pick(r'<span class="%s[^"]*">([\d.]+)</span>' % k)
         if not o["o1"]:
-            o["o1"] = pick(r'<td class="odd">([\d.]+)</td>')
-            o["oX"] = pick(r'<td class="odd">([\d.]+)</td>')
-            o["o2"] = pick(r'<td class="odd">([\d.]+)</td>')
+            # Layout tabel lama: tiga <td class="odd"> berurutan = 1, X, 2.
+            # Versi lama memanggil pick() tiga kali dengan pola identik
+            # dari awal blok, sehingga ketiganya berisi odds PERTAMA.
+            tds = re.findall(r'<td class="odd">([\d.]+)</td>', block)
+            if len(tds) >= 3:
+                o["o1"], o["oX"], o["o2"] = tds[0], tds[1], tds[2]
 
         # status: halaman lampau tidak punya <span class="status">, tapi ada skor
         st = status_txt.strip().upper()
@@ -445,6 +452,13 @@ def parse_match_page(html, game_id, url):
             if len(odds) == len(labs) - 1 and labs and \
                     labs[0].lower() in ("goals", "line", "total", "handicap"):
                 labs = labs[1:]
+            if len(odds) != len(labs):
+                # Jumlah harga != jumlah label (mis. satu sel kosong
+                # karena pasar disuspensi bandar): pemetaan posisional
+                # tidak bisa dipercaya — harga berikutnya akan bergeser
+                # satu label. Lewati baris ini daripada menyimpan odds
+                # yang menempel ke pilihan yang salah.
+                continue
             for i, lab in enumerate(labs):
                 if i >= len(odds):
                     break
@@ -584,11 +598,20 @@ def sync_dates(days, with_markets=False, market_ids=None, verbose=True, fresh=Fa
         results = [(r[0], r[1]) for r in results]
 
     date_htmls = {}  # iso_date -> (html, cached)
+    empty_dates = []
     for d, (html, cached) in zip(days, results):
         iso_d = iso(d)
         try:
             date_htmls[iso_d] = (html, cached)
             games = parse_date_page(html, iso_d)
+            if not games:
+                # 0 laga dari halaman yang berhasil diambil hampir pasti
+                # berarti markup berubah / halaman blokir, bukan hari
+                # tanpa pertandingan. Versi lama melaporkan sukses
+                # diam-diam (audit ulang 2026-10-29).
+                empty_dates.append(iso_d)
+                print(f"  ! {iso_d}: 0 laga terparse — periksa markup/"
+                      f"blokir halaman tanggal", file=sys.stderr)
             snap, res = save_date_page(games, captured)
             tot_snap += snap
             tot_res += res
@@ -612,9 +635,11 @@ def sync_dates(days, with_markets=False, market_ids=None, verbose=True, fresh=Fa
 
         pending = []
         skipped = 0
+        unresolved = 0
         for gid in candidate_ids:
             g = byid.get(gid)
             if not g:
+                unresolved += 1
                 continue
             if not market_needs_refresh(gid, refresh_hours=1.5):
                 skipped += 1
@@ -657,7 +682,8 @@ def sync_dates(days, with_markets=False, market_ids=None, verbose=True, fresh=Fa
             print(f"  pasar lain: +{nrows} baris baru")
 
     return {"snapshots": tot_snap, "results": tot_res, "games": len(all_games),
-            "markets": nrows}
+            "markets": nrows, "empty_dates": empty_dates,
+            "unresolved_market_ids": unresolved if with_markets else 0}
 
 
 RUN_LOG = os.path.join(DIR, "scrape_runs.csv")
@@ -731,6 +757,11 @@ def main(argv):
     print(f"selesai: {r['games']} laga, snapshot +{r['snapshots']}, "
           f"hasil +{r['results']}")
     log_run_summary(r, corner_rows=0)
+    if r["games"] == 0 and r.get("empty_dates"):
+        print("GAGAL: semua halaman tanggal terparse 0 laga — "
+              "kemungkinan markup berubah atau akses diblokir",
+              file=sys.stderr)
+        return 1
     return 0
 
 

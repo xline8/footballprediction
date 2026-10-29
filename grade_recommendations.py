@@ -21,6 +21,7 @@ final saat hasil terbit. Kegagalan langkah ini tidak menggagalkan pipeline.
 Run: python grade_recommendations.py
 """
 import csv
+import hashlib
 import json
 import os
 import sys
@@ -221,9 +222,14 @@ def _load_grades():
 def _save_grades(store):
     os.makedirs(LEDGER, exist_ok=True)
     rows = sorted(store.values(), key=lambda g: _key(g))
-    with open(GRADES, "w", encoding="utf-8") as f:
+    # Tulis atomik (tmp + replace): file ini ditulis ulang PENUH setiap
+    # run; penulisan langsung bisa meninggalkan file terpotong bila
+    # proses mati di tengah (riwayat grading hilang / JSON rusak).
+    tmp = GRADES + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
         for g in rows:
             f.write(json.dumps(g, ensure_ascii=False) + "\n")
+    os.replace(tmp, GRADES)
     return rows
 
 
@@ -320,8 +326,10 @@ def _grade_archive(archive_date, store, res_idx, cor_idx, now):
             continue
         # grade legs
         leg_statuses = []
+        leg_grades = []
         for row in rows:
             g = _grade_leg(product, row, res_idx, cor_idx)
+            leg_grades.append(g)
             k = _key(g)
             old = store.get(k)
             # update bila baru, atau bila baru final dan (dulu pending / beda).
@@ -356,6 +364,24 @@ def _grade_archive(archive_date, store, res_idx, cor_idx, now):
             tot = _f(rows[0].get("slip_total_odds"))
             unit_g["p_model"] = jp
             unit_g["odds"] = tot
+            # Identitas unit = ISI slip (gabungan kunci leg-nya), bukan
+            # tanggal arsip. Dulu unit dikunci per tanggal arsip, jadi
+            # file rekomendasi basi yang terarsip ulang di tanggal lain
+            # (rantai harian tetap mengarsipkan walau langkah produksi
+            # gagal) menghasilkan unit kedua untuk slip fisik yang sama
+            # dan statistik unit di ringkasan terhitung ganda. Kunci leg
+            # sendiri sudah berbasis isi (tanggal laga/pasar/pilihan).
+            leg_sig = ";".join(sorted(
+                "|".join(map(str, _key(g))) for g in leg_grades))
+            unit_g["selection"] = "unit:" + hashlib.md5(
+                leg_sig.encode()).hexdigest()[:12]
+            # Migrasi: buang unit skema lama (selection kosong) untuk
+            # produk + tanggal arsip ini agar tidak jadi pending yatim.
+            for k in [k for k, v in store.items()
+                      if v["level"] == "unit" and v["product"] == product
+                      and v["date"] == archive_date and not v["selection"]]:
+                del store[k]
+                changed += 1
             uk = _key(unit_g)
             uold = store.get(uk)
             if uold is None or (
@@ -374,11 +400,16 @@ def _stats(final_legs):
     if n == 0:
         return {"n": 0, "mean_p": None, "hit_rate": None, "diff": None,
                 "push": push}
-    mean_p = sum(g["p_model"] for g in npush if g["p_model"] is not None) / n
+    with_p = [g for g in npush if g["p_model"] is not None]
+    mean_p = (sum(g["p_model"] for g in with_p) / len(with_p)) if with_p \
+        else None
     hit = sum(1 for g in npush if g["status"] == "hit")
     hr = hit / n
-    return {"n": n, "mean_p": round(mean_p, 4), "hit_rate": round(hr, 4),
-            "diff": round(hr - mean_p, 4), "push": push}
+    return {"n": n,
+            "mean_p": round(mean_p, 4) if mean_p is not None else None,
+            "hit_rate": round(hr, 4),
+            "diff": round(hr - mean_p, 4) if mean_p is not None else None,
+            "push": push}
 
 
 def _band(p):
@@ -411,10 +442,14 @@ def _build_summary(store):
         by_product[p] = entry
     summary["by_product"] = by_product
 
-    # by_market
+    # by_market — semua produser menulis "BTS"; versi lama mencari
+    # "BTTS" sehingga bucket-nya permanen n=0. Samakan keduanya ke BTS.
+    def _canon(m):
+        return "BTS" if m in ("BTS", "BTTS") else m
+
     by_market = {}
-    for mkt in ("1X2", "DC", "OU", "BTTS", "Corners"):
-        ml = [g for g in legs if g["market"] == mkt]
+    for mkt in ("1X2", "DC", "OU", "BTS", "Corners"):
+        ml = [g for g in legs if _canon(g["market"]) == mkt]
         by_market[mkt] = _stats(ml)
     summary["by_market"] = by_market
 
@@ -426,9 +461,11 @@ def _build_summary(store):
         by_band[b] = _stats(bl)
     summary["by_band"] = by_band
 
-    # Brier pick_teraman (leg final non-push)
+    # Brier pick_teraman (leg final non-push, wajib punya p_model —
+    # tanpa guard ini leg tanpa probabilitas membuat TypeError dan
+    # seluruh ringkasan gagal dibuat)
     pl = [g for g in legs if g["product"] == "pick_teraman"
-          and g["status"] != "push"]
+          and g["status"] != "push" and g["p_model"] is not None]
     if pl:
         brier = sum((g["p_model"] - (1 if g["status"] == "hit" else 0)) ** 2
                     for g in pl) / len(pl)

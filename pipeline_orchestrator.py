@@ -413,6 +413,13 @@ class PipelineOrchestrator:
                 log(f"  X {div}: Failed to fit - {str(e)}", "ERROR")
                 results[div] = {'status': 'failed', 'error': str(e)}
 
+        # Rollup top-level: agregasi run_full_pipeline (audit K4) hanya
+        # membaca status di level atas dict langkah; tanpa ini kegagalan
+        # fit satu divisi tidak terlihat dan run tetap 'completed'
+        # (lubang yang ditemukan audit ulang 2026-10-29).
+        results['status'] = 'failed' if any(
+            isinstance(v, dict) and v.get('status') == 'failed'
+            for v in results.values()) else 'success'
         return results
 
     def step_score_upcoming(self) -> dict:
@@ -714,6 +721,17 @@ class PipelineOrchestrator:
             results['status'] = 'failed'
             results['error'] = str(e)
 
+        # Agregasi kejujuran yang sama seperti run_full_pipeline:
+        # langkah berstatus 'failed' menggagalkan status run.
+        failed_steps = [k for k, v in results.items()
+                        if isinstance(v, dict) and v.get('status') == 'failed']
+        if failed_steps:
+            results['failed_steps'] = failed_steps
+            if results.get('status') == 'completed':
+                results['status'] = 'failed'
+            log(f"Incremental run finished with FAILED steps: "
+                f"{failed_steps}", "ERROR")
+
         runtime = time.time() - self.start_time
         log(f"\nIncremental run completed in {runtime:.1f}s", "INFO")
         return results
@@ -912,7 +930,7 @@ def main():
     if args.incremental:
         results = orchestrator.run_incremental()
         print(json.dumps(results, indent=2, default=str))
-        return
+        sys.exit(1 if results.get('status') == 'failed' else 0)
 
     if args.run_all:
         results = orchestrator.run_full_pipeline()

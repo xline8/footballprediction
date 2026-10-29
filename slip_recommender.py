@@ -151,7 +151,7 @@ def _candidates(min_pm, min_odds):
     return out
 
 
-def _search(by_match, min_legs, max_legs, lo, hi, target):
+def _search(by_match, min_legs, max_legs, lo, hi, target, stats=None):
     """Cari kombinasi (<= 1 leg per laga) terbaik.
 
     Return (best_in_band, best_near), masing-masing (tot, jp, ev, legs) atau
@@ -173,10 +173,14 @@ def _search(by_match, min_legs, max_legs, lo, hi, target):
     nodes = [0]
     truncated = [False]
 
-    def consider(tot, jp, ev, legs):
+    def consider(tot, jp, legs):
         nonlocal best_in, best_near
         if len(legs) < min_legs:
             return
+        # EV gabungan slip: P(semua leg menang) * total odds - 1.
+        # Versi lama menjumlahkan EV per leg, yang bukan EV slip dan
+        # mengacaukan tie-break serta kolom slip_ev di output.
+        ev = jp * tot - 1.0
         if lo <= tot <= hi:
             cur = (tot, jp, ev, list(legs))
             if (best_in is None or jp > best_in[1] + 1e-9
@@ -189,7 +193,7 @@ def _search(by_match, min_legs, max_legs, lo, hi, target):
                     and jp > best_near[1])):
             best_near = cur
 
-    def rec(i, tot, jp, ev, legs):
+    def rec(i, tot, jp, legs):
         if truncated[0]:
             return
         nodes[0] += 1
@@ -197,10 +201,10 @@ def _search(by_match, min_legs, max_legs, lo, hi, target):
             truncated[0] = True
             return
         if len(legs) >= min_legs:
-            consider(tot, jp, ev, legs)
+            consider(tot, jp, legs)
         if i == len(pools) or len(legs) == max_legs:
             return
-        rec(i + 1, tot, jp, ev, legs)  # lewati laga ini
+        rec(i + 1, tot, jp, legs)  # lewati laga ini
         for leg in pools[i]:
             if truncated[0]:
                 return
@@ -208,14 +212,16 @@ def _search(by_match, min_legs, max_legs, lo, hi, target):
             if nt > cap:
                 continue
             legs.append(leg)
-            rec(i + 1, nt, jp * leg["pm"], ev + leg["pm"] * leg["o"] - 1.0,
-                legs)
+            rec(i + 1, nt, jp * leg["pm"], legs)
             legs.pop()
 
-    rec(0, 1.0, 1.0, 0.0, [])
+    rec(0, 1.0, 1.0, [])
     if truncated[0]:
         print(f"  ! slip search mencapai batas node {SEARCH_NODE_BUDGET}; "
               f"memakai kandidat terbaik yang sudah ditemukan")
+    if stats is not None:
+        stats["nodes"] = nodes[0]
+        stats["truncated"] = truncated[0]
     return best_in, best_near
 
 
@@ -287,14 +293,16 @@ def recommend_single(day):
 def recommend_slip2(day):
     """Produk 2: slip odds ±2, hanya laga tanggal `day`."""
     by = _by_match(_candidates(S2_MIN_PM, S2_MIN_ODDS), {day})
+    stats = {}
     best_in, best_near = _search(by, S2_MIN_LEGS, S2_MAX_LEGS,
-                                 S2_LO, S2_HI, S2_TARGET)
+                                 S2_LO, S2_HI, S2_TARGET, stats=stats)
     best, inb = (best_in, True) if best_in else (best_near, False)
     rows = _write_slip(OUT_SLIP, SLIP_COLS, best, inb)
     s = {"n_legs": len(rows),
          "total_odds": round(best[0], 3) if best else None,
          "joint_prob": round(best[1], 4) if best else None,
-         "in_band": bool(best and inb)}
+         "in_band": bool(best and inb),
+         "search_truncated": bool(stats.get("truncated"))}
     print(f"slip2 {day}: {s['n_legs']} kaki | total={s['total_odds']} "
           f"joint={s['joint_prob']} in_band={s['in_band']} -> {OUT_SLIP}")
     return s
@@ -307,24 +315,34 @@ def recommend_slip10(day):
     best = None
     inb = False
     expanded_to = day
+    any_truncated = False
     for k in range(S10_MAX_EXPAND_DAYS + 1):
         upto = (base + timedelta(days=k)).isoformat()
         dates = {(base + timedelta(days=j)).isoformat()
                  for j in range(k + 1)}
         by = _by_match(cands, dates)
+        stats = {}
         b_in, b_near = _search(by, S10_MIN_LEGS, S10_MAX_LEGS,
-                               S10_LO, S10_HI, S10_TARGET)
+                               S10_LO, S10_HI, S10_TARGET, stats=stats)
+        any_truncated = any_truncated or bool(stats.get("truncated"))
         expanded_to = upto
         if b_in is not None:
             best, inb = b_in, True
             break
-        best = b_near  # kandidat terdekat sejauh ini; lanjut ekspansi
+        # Simpan kandidat terdekat sejauh ini. Tanpa pemotongan, pool
+        # yang membesar tidak pernah menghasilkan near yang lebih buruk;
+        # DENGAN pemotongan itu bisa terjadi, jadi tahap berikutnya hanya
+        # menggantikan bila jaraknya ke target tidak lebih besar.
+        if b_near is not None and (best is None or abs(b_near[0] - S10_TARGET)
+                                   <= abs(best[0] - S10_TARGET)):
+            best = b_near
     rows = _write_slip(OUT_SLIP10, SLIP10_COLS, best, inb,
                        extra={"pool_expanded_to": expanded_to})
     s = {"n_legs": len(rows),
          "total_odds": round(best[0], 3) if best else None,
          "joint_prob": round(best[1], 4) if best else None,
-         "in_band": bool(best and inb), "pool_expanded_to": expanded_to}
+         "in_band": bool(best and inb), "pool_expanded_to": expanded_to,
+         "search_truncated": any_truncated}
     print(f"slip10 {day}: {s['n_legs']} kaki | total={s['total_odds']} "
           f"joint={s['joint_prob']} in_band={s['in_band']} "
           f"pool_expanded_to={expanded_to} -> {OUT_SLIP10}")

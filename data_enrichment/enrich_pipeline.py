@@ -43,6 +43,36 @@ def _as_date(v):
         return None
 
 
+_ETL_NORM = None
+
+
+def _etl_norm(name):
+    """Nama kanonik football_etl.normalize_name.
+
+    Peta xG lokal (features._load_xg_map, dipakai build_xg_map) dikunci
+    dengan normalizer INI, sedangkan join di file ini dulu memakai
+    utils.norm_team untuk semua peta. Dua ruang nama itu berbeda tepat
+    di klub beralias ("manchester united" vs "man united", "bayern
+    munich" vs "bayern munchen", dst), jadi xG klub-klub tersebut tidak
+    pernah cocok dan kolomnya kosong. Join odds/midweek tetap memakai
+    norm_team karena produsernya memang memakai itu.
+    """
+    global _ETL_NORM
+    if _ETL_NORM is None:
+        try:
+            from football_etl import normalize_name
+        except ImportError:
+            sys.path.insert(0, BASE_DIR)
+            from football_etl import normalize_name
+        _ETL_NORM = normalize_name
+    return _ETL_NORM(name or "")
+
+
+def _xg_key(r, d):
+    return (r.get("Div"), d.isoformat(),
+            _etl_norm(r.get("HomeTeam")), _etl_norm(r.get("AwayTeam")))
+
+
 def load_rows(csv_path: str) -> list[dict]:
     with open(csv_path, newline="", encoding="utf-8") as f:
         return list(csv.DictReader(f))
@@ -58,7 +88,7 @@ def rolling_xg_diffs(rows, xg_map):
         d = _as_date(r["Date"])
         h, a = norm_team(r.get("HomeTeam")), norm_team(r.get("AwayTeam"))
         key = (r.get("Div"), d.isoformat(), h, a)
-        xg = xg_map.get(key)
+        xg = xg_map.get(_xg_key(r, d))
         rh = float(sum(deq[h])) / len(deq[h]) if deq[h] else None
         ra = float(sum(deq[a])) / len(deq[a]) if deq[a] else None
         out[(r.get("Div"), d.isoformat(), h, a)] = (
@@ -97,7 +127,7 @@ def enrich(rows, xg_map, odds_map, midweek_map, roll_map):
         mw = midweek_map.get(key, (0, 0))
         r["midweek_home_flag"], r["midweek_away_flag"] = mw
         n_mw += (1 if (mw[0] or mw[1]) else 0)
-        xg = xg_map.get(key)
+        xg = xg_map.get(_xg_key(r, d))
         if xg:
             r["xg_home"], r["xg_away"] = xg
             n_xg += 1

@@ -147,6 +147,10 @@ def main():
         import grade_recommendations
         rc = grade_recommendations.main()
         print(f"[8c/9] grading rekomendasi: rc={rc}")
+        if rc != 0:
+            failed = True
+            print("[8c/9] FAILED grading rekomendasi: rc != 0 "
+                  "(run ditandai gagal)")
     except Exception as e:
         failed = True
         print(f"[8c/9] FAILED grading rekomendasi: {e!r} "
