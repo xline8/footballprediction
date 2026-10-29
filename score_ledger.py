@@ -19,15 +19,20 @@
 import csv
 import json
 import os
+import sys
 from collections import defaultdict
 from datetime import datetime, timezone
 
 import paths
+from ta_scrape import _cap_key as _capdt  # helper kanonis (lihat ta_scrape)
 PROJ = paths.BASE
 LEDGER = os.path.join(PROJ, "ledger")
 PICKS = os.path.join(LEDGER, "picks.jsonl")
 GRADES = os.path.join(LEDGER, "grades.jsonl")
 SUMMARY = os.path.join(LEDGER, "ledger_summary.json")
+# --recompute-clv: backfill menimpa paksa field close/CLV (restatement
+# satu kali saat hierarki sumber berubah, mis. AvgC -> Pinnacle).
+RECOMPUTE_CLV = "--recompute-clv" in sys.argv
 SLUG = {"E0": "EPL", "SP1": "La_liga", "D1": "Bundesliga",
         "I1": "Serie_A", "F1": "Ligue_1"}
 
@@ -111,14 +116,7 @@ def _num(x):
         return None
 
 
-def _capdt(s):
-    """Parse captured_at menjadi datetime aware untuk perbandingan
-    'terbaru'. Perbandingan string mentah salah urutan lintas offset
-    (+0000 vs +0700); yang tak terparse dianggap paling lama."""
-    try:
-        return datetime.strptime(s or "", "%Y-%m-%dT%H:%M:%S%z")
-    except (ValueError, TypeError):
-        return datetime.min.replace(tzinfo=timezone.utc)
+
 
 
 def _load_close_map():
@@ -156,8 +154,23 @@ def _load_close_map():
 
 CLOSE_MAP = _load_close_map()
 
-# snack piala: snapshot terakhir sebelum kickoff (status NS) per (home,away,date)
+# snack piala: snapshot terakhir sebelum kickoff per (home,away,date).
+# Prematch dijamin DUA lapis: status NS DAN captured_at < kickoff
+# (fixtures.csv, waktu UTC) bila kickoff dikenal — status NS saja
+# tidak membuktikan snapshot diambil sebelum laga mulai.
 def _load_cup_snapshots():
+    kickoff = {}
+    fp = os.path.join(PROJ, "ta", "fixtures.csv")
+    if os.path.exists(fp):
+        with open(fp, encoding="utf-8", newline="") as f:
+            for r in csv.DictReader(f):
+                gid = (r.get("game_id") or "").strip()
+                d = (r.get("date") or "")[:10]
+                t = (r.get("time") or "")[:5]
+                if gid and d and t:
+                    ko = _capdt(f"{d}T{t}:00+0000")
+                    if ko.year > 2000:  # parse gagal -> datetime.min
+                        kickoff[gid] = ko
     best = {}
     p = os.path.join(PROJ, "ta", "odds_1x2_snapshots.csv")
     if not os.path.exists(p):
@@ -172,8 +185,11 @@ def _load_cup_snapshots():
             o1, ox, o2 = _num(r.get("o1")), _num(r.get("ox")), _num(r.get("o2"))
             if not dt or not h or not a or not (o1 and ox and o2):
                 continue
-            key = (h, a, dt[:10])
             cap = r.get("captured_at") or ""
+            ko = kickoff.get((r.get("game_id") or "").strip())
+            if ko is not None and _capdt(cap) >= ko:
+                continue  # tertangkap sesudah kickoff: bukan prematch
+            key = (h, a, dt[:10])
             cur = best.get(key)
             if cur is None or _capdt(cap) > _capdt(cur[0]):
                 best[key] = (cap, o1, ox, o2)
@@ -271,6 +287,10 @@ def settle(market, side, yh, ya, odds, line=None):
     pick was settled against a hardcoded 2.5 (audit K3).
     """
     if market == "1X2":
+        if side not in ("H", "D", "A"):
+            # Side kosakata asing (mis. "1"/"X"/"2" yang belum
+            # diterjemahkan) harus gagal keras, bukan kalah diam-diam.
+            raise ValueError(f"settle 1X2: side tak dikenal {side!r}")
         wk = "H" if yh > ya else ("A" if ya > yh else "D")
         return (odds if side == wk else 0.0), (side == wk), False
     if market != "OU":
@@ -312,16 +332,30 @@ skipped_unknown = []
 
 
 def _settle_guarded(pk, yh, ya):
-    """settle() dengan ValueError pasar/side asing ditelan per-pick:
-    pick itu dilewati (tetap pending) dan dicatat, BUKAN menggagalkan
+    """settle() dengan kesalahan per-pick ditelan: ValueError pasar/side
+    asing dan KeyError pick cacat (field hilang) sama-sama melewatkan
+    pick itu (tetap pending) dan mencatatnya, BUKAN menggagalkan
     seluruh run grading harian seperti raise telanjang sebelumnya."""
     try:
         return settle(pk["market"], pk["side"], yh, ya,
                       pk["odds_open"], pk.get("line"))
-    except ValueError:
+    except (ValueError, KeyError):
         skipped_unknown.append(
             (pk["pick_id"], pk.get("market"), pk.get("side")))
         return None
+
+
+def _result_label(ret, odds, push):
+    """Label hasil dari ret. Garis seperempat menghasilkan ret pecahan
+    di antara nilai utuh (half_win/half_loss); label polos win/loss
+    akan menyesatkan konsumen yang menghitung dari `result` saja."""
+    if push:
+        return "push"
+    if ret >= odds:
+        return "win"
+    if ret <= 0.0:
+        return "loss"
+    return "half_win" if ret > 1.0 else "half_loss"
 
 
 for pk in picks:
@@ -344,7 +378,7 @@ for pk in picks:
         new_grades.append({
             "pick_id": pk["pick_id"], "competition": comp,
             "graded_ts": datetime.now(timezone.utc).isoformat(),
-            "result": "push" if push else ("win" if won else "loss"),
+            "result": _result_label(ret, pk["odds_open"], push),
             "yh": yh, "ya": ya,
             "ret_open": round(ret, 4),
             "odds_close_1x2": o1x2, "odds_close_o25": o25,
@@ -368,7 +402,7 @@ for pk in picks:
     new_grades.append({
         "pick_id": pk["pick_id"], "competition": "",
         "graded_ts": datetime.now(timezone.utc).isoformat(),
-        "result": "push" if push else ("win" if won else "loss"),
+        "result": _result_label(ret, pk["odds_open"], push),
         "yh": yh, "ya": ya,
         "ret_open": round(ret, 4),
         "odds_close_1x2": o1x2, "odds_close_o25": o25,
@@ -392,16 +426,25 @@ def _backfill(grades):
         pk = picks_by_id.get(g["pick_id"])
         if pk is not None:
             o1x2, o25, clv_ev, clv_price = _grade_close_payload(pk)
-            # hanya timpa saat nilai sekarang null (idempoten, tidak sentuh ret/result)
-            cur1 = new.get("odds_close_1x2")
-            if not cur1 or all(v is None for v in cur1):
+            if RECOMPUTE_CLV:
+                # Restatement paksa: timpa field close/CLV dari hierarki
+                # sumber saat ini. ret_open/result/yh/ya tidak disentuh —
+                # settlement adalah fakta historis, CLV adalah penilaian.
                 new["odds_close_1x2"] = o1x2
-            if new.get("odds_close_o25") is None:
                 new["odds_close_o25"] = o25
-            if new.get("clv_ev") is None:
                 new["clv_ev"] = clv_ev
-            if new.get("clv_price") is None:
                 new["clv_price"] = clv_price
+            else:
+                # hanya timpa saat nilai sekarang null (idempoten)
+                cur1 = new.get("odds_close_1x2")
+                if not cur1 or all(v is None for v in cur1):
+                    new["odds_close_1x2"] = o1x2
+                if new.get("odds_close_o25") is None:
+                    new["odds_close_o25"] = o25
+                if new.get("clv_ev") is None:
+                    new["clv_ev"] = clv_ev
+                if new.get("clv_price") is None:
+                    new["clv_price"] = clv_price
         out.append(new)
     return out
 
@@ -486,7 +529,9 @@ for comp in ("league", "EFL Cup", "DFB Pokal"):
     }
 summary = {
     "graded_ts": datetime.now(timezone.utc).isoformat(),
-    "n_picks": len(picks), "n_graded": len(all_grades), "n_pending": len(picks) - len(all_grades),
+    "n_picks": len(picks),
+    "n_graded": sum(1 for p in picks if p["pick_id"] in gmap),
+    "n_pending": sum(1 for p in picks if p["pick_id"] not in gmap),
     "headline_clv": clv_block(headline),
     "competitions": comp_summary,
     "note": "Settle di odds_open saat pick lahir (flat 1 unit). odds_close & CLV "
@@ -500,6 +545,9 @@ with open(SUMMARY, "w", encoding="utf-8") as f:
     json.dump(summary, f, ensure_ascii=False, indent=2)
 
 print(f"graded baru: {len(new_grades)} | total graded: {len(all_grades)} | pending: {summary['n_pending']}")
+if RECOMPUTE_CLV:
+    print(f"  CLV dihitung ulang paksa untuk {len(all_grades)} grade "
+          f"(hierarki sumber saat ini; ret_open/result tidak berubah)")
 if unmapped:
     print("!! tidak terpetakan:")
     for comp, names in sorted(unmapped.items()):
