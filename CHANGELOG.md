@@ -7,6 +7,24 @@ Keep a Changelog, and the project uses semantic versioning.
 
 ### Fixed
 
+- A fourth audit pass closed the gaps the third one left. The
+  historical CLV headline now matches the Pinnacle-first hierarchy it
+  always claimed: `score_ledger --recompute-clv` restates the stored
+  close/CLV fields (settlement untouched), moving the 358-grade
+  headline from the average-close figures (EV -0.0597, beat-close
+  57.5%) to Pinnacle-true ones (EV -0.0773, beat-close 53.6%).
+  `backtest_value` resolves Pinnacle closing columns per row (PP*
+  first), so the current season is no longer silently excluded from
+  value backtests. `/api/status` serves its data section from a
+  TTL-cached match cache instead of blocking ~2s per call.
+  `grade_recommendations` refreshes pending rows when an archive is
+  regenerated and only prunes a pending leg once its match has a
+  result, so a postponed match cannot be pruned on archive loss.
+  Smaller items: `settle` validates 1X2 sides and labels quarter-line
+  half outcomes, the cup close proxy requires snapshots before
+  kickoff (not just an NS flag), the shadow checks corner-file
+  freshness like the orchestrator does, and `best_picks` writes its
+  CSVs atomically.
 - `score_ledger` settled every Over/Under pick against a hardcoded
   2.5 line; picks that carry their own line (cup picks, e.g. OU 1.5)
   are now settled against it, with an exact integer line graded as a
