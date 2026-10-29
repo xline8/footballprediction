@@ -87,14 +87,14 @@ def _load_corner_picks():
                         "div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
                         "market": "Corners", "line": str(ln), "side": "Over",
                         "prob": round(p_over, 4), "ev": None, "source": "model",
-                        "tier": "best", "competition": comp,
+                        "tier": "best", "game_id": r.get("game_id") or "", "competition": comp,
                     })
                 elif p_under > 0.60:
                     picks.append({
                         "div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
                         "market": "Corners", "line": str(ln), "side": "Under",
                         "prob": round(p_under, 4), "ev": None, "source": "model",
-                        "tier": "best", "competition": comp,
+                        "tier": "best", "game_id": r.get("game_id") or "", "competition": comp,
                     })
     return picks
 
@@ -132,29 +132,29 @@ def _load_dixon_coles_picks():
                   "2": _num(r.get("b365a"))}
             if ph > 0.60:
                 picks.append({"div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
-                              "market": "1X2", "line": "", "side": "1", "prob": round(ph,4), "ev": None, "ev_model": round(ph * _o["1"] - 1, 4) if _o["1"] else None, "source": "model", "competition": comp})
+                              "market": "1X2", "line": "", "side": "1", "prob": round(ph,4), "ev": None, "ev_model": round(ph * _o["1"] - 1, 4) if _o["1"] else None, "source": "model", "game_id": r.get("game_id") or "", "competition": comp})
             elif pd > 0.55:
                 picks.append({"div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
-                              "market": "1X2", "line": "", "side": "X", "prob": round(pd,4), "ev": None, "ev_model": round(pd * _o["X"] - 1, 4) if _o["X"] else None, "source": "model", "competition": comp})
+                              "market": "1X2", "line": "", "side": "X", "prob": round(pd,4), "ev": None, "ev_model": round(pd * _o["X"] - 1, 4) if _o["X"] else None, "source": "model", "game_id": r.get("game_id") or "", "competition": comp})
             elif pa > 0.60:
                 picks.append({"div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
-                              "market": "1X2", "line": "", "side": "2", "prob": round(pa,4), "ev": None, "ev_model": round(pa * _o["2"] - 1, 4) if _o["2"] else None, "source": "model", "competition": comp})
+                              "market": "1X2", "line": "", "side": "2", "prob": round(pa,4), "ev": None, "ev_model": round(pa * _o["2"] - 1, 4) if _o["2"] else None, "source": "model", "game_id": r.get("game_id") or "", "competition": comp})
 
             # DC picks
             if (ph + pd) > 0.65 and ph < 0.75:
                 picks.append({"div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
-                              "market": "DC", "line": "", "side": "1X", "prob": round(ph + pd,4), "ev": None, "source": "model", "competition": comp})
+                              "market": "DC", "line": "", "side": "1X", "prob": round(ph + pd,4), "ev": None, "source": "model", "game_id": r.get("game_id") or "", "competition": comp})
             if (pd + pa) > 0.65 and pa < 0.75:
                 picks.append({"div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
-                              "market": "DC", "line": "", "side": "X2", "prob": round(pd + pa,4), "ev": None, "source": "model", "competition": comp})
+                              "market": "DC", "line": "", "side": "X2", "prob": round(pd + pa,4), "ev": None, "source": "model", "game_id": r.get("game_id") or "", "competition": comp})
             if (ph + pa) > 0.70:  # 12 tidak punya draw
                 picks.append({"div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
-                              "market": "DC", "line": "", "side": "12", "prob": round(ph + pa,4), "ev": None, "source": "model", "competition": comp})
+                              "market": "DC", "line": "", "side": "12", "prob": round(ph + pa,4), "ev": None, "source": "model", "game_id": r.get("game_id") or "", "competition": comp})
 
             # BTTS picks
             if pbtts and pbtts > 0.60:
                 picks.append({"div": r["div"], "date": r["date"], "home": r["home"], "away": r["away"],
-                              "market": "BTS", "line": "", "side": "Yes", "prob": round(pbtts,4), "ev": None, "source": "model", "competition": comp})
+                              "market": "BTS", "line": "", "side": "Yes", "prob": round(pbtts,4), "ev": None, "source": "model", "game_id": r.get("game_id") or "", "competition": comp})
     return picks
 
 _LEAGUE_MAP = {
@@ -372,7 +372,8 @@ def main():
     best = _top_pick_per_match(all_picks)
 
     cols = ["div", "date", "home", "away", "market", "line", "side",
-            "prob", "ev", "ev_model", "source", "tier", "competition"]
+            "prob", "ev", "ev_model", "source", "tier", "competition",
+            "game_id"]
     _write_csv(OUT, best, cols)
     _write_csv(os.path.join(PROJ, "best_picks_full.csv"), all_picks, cols)
 
@@ -411,10 +412,16 @@ def main():
                                "away": r["away"], "market": "", "line": "", "side": "",
                                "prob": None, "ev": None, "ev_model": None,
                                "source": "model", "tier": "fallback",
-                               "competition": r.get("competition") or ""})
+                               "competition": r.get("competition") or "",
+                               "game_id": r.get("game_id") or ""})
             continue
         _fill_ev_model(sel)
-        today_rows.append({c: sel.get(c) for c in cols})
+        _row = {c: sel.get(c) for c in cols}
+        # game_id TA datang dari baris prediksi piala itu sendiri
+        # (predict_cups membawanya dari ta/fixtures.csv); baris liga
+        # tidak punya id TA sehingga kolomnya kosong.
+        _row["game_id"] = r.get("game_id") or sel.get("game_id") or ""
+        today_rows.append(_row)
 
     TODAY_OUT = os.path.join(PROJ, "best_picks_today.csv")
     _write_csv(TODAY_OUT, today_rows, cols)

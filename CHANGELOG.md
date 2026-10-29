@@ -7,6 +7,25 @@ Keep a Changelog, and the project uses semantic versioning.
 
 ### Fixed
 
+- A fifth audit pass verified the fourth round's fixes and closed the
+  last two items the audit series had deliberately left open. Cup
+  picks now carry the TipsterArea `game_id` from `predict_cups`
+  through `best_picks_today.csv` into the ledger sync, which prefers
+  the stored id over its fuzzy fixture guess (archived files fall back
+  to the guess), and the fixture matcher rescues name variants its
+  exact-key index used to miss entirely — one side identical after
+  normalization, the other at similarity 0.85 or better — recovering
+  fixtures such as Nottingham Forest and Internazionale that silently
+  lost market data. `score_ledger` runs its pipeline inside `main()`
+  instead of at import time, so its settle rules are unit-testable
+  (three tests added; importing the module writes nothing and no
+  longer raises `SystemExit` without a ledger), with subprocess
+  output proven byte-identical on the real ledger. Smaller fixes: the
+  shadow prints `failed_dates` next to `empty_dates` and surfaces
+  partial results-sync failures from stderr, and `fetch_xg`'s dormant
+  remote merge joins on the same name pipeline as the local map
+  (158/158 mapped pairs, up from 142). The experiments README now
+  notes that its scripts predate the Pinnacle column rename.
 - A fourth audit pass closed the gaps the third one left. The
   historical CLV headline now matches the Pinnacle-first hierarchy it
   always claimed: `score_ledger --recompute-clv` restates the stored

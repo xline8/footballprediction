@@ -116,8 +116,16 @@ def main():
         y = date.today() - timedelta(days=1)
         y2 = date.today() - timedelta(days=2)
         r = _run_py("ta_scrape.py", y.isoformat(), y2.isoformat(), "--fresh")
-        out = (r.stdout or r.stderr or "").strip()
-        print(f"[6/7] tipsterarea hasil sync: rc={r.returncode} | {out[-300:]}")
+        out = (r.stdout or "").strip()
+        err = (r.stderr or "").strip()
+        shown = out[-300:] if out else err[-300:]
+        # Kegagalan parsial (satu tanggal gagal, tanggal lain berhasil)
+        # membuat CLI keluar 0 dan peringatannya hanya ada di stderr —
+        # tampilkan ekornya bila memuat penanda gagal, agar tanggal yang
+        # hilang tidak senyap (audit ronde 5).
+        if err and ("gagal" in err or "GAGAL" in err) and err not in shown:
+            shown += f" | stderr: {err[-200:]}"
+        print(f"[6/7] tipsterarea hasil sync: rc={r.returncode} | {shown}")
         if r.returncode != 0:
             failed = True
             print(f"[6/7] FAILED ta sync rc={r.returncode} "
@@ -142,7 +150,8 @@ def main():
               f"+{r.get('markets', 0)} harga baru, "
               f"{r.get('unresolved_market_ids') or 0} id pasar tak "
               f"terpetakan, tanggal kosong: "
-              f"{r.get('empty_dates') or []}")
+              f"{r.get('empty_dates') or []}, tanggal gagal: "
+              f"{r.get('failed_dates') or []}")
     except Exception as e:
         failed = True
         print(f"[7/9] FAILED market sync: {e!r} "

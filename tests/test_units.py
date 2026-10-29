@@ -18,6 +18,7 @@ from grade_recommendations import (settle_1x2, settle_btts, settle_corner,
                                    settle_dc, settle_ou, settle_slip_unit)
 from model_v2 import DC
 from predict_cups import p_adv
+from score_ledger import settle as ledger_settle, _result_label
 from slip_recommender import _search
 from ta_model import fair_odds
 
@@ -216,6 +217,38 @@ def test_cup_90min_draw_settles_as_ft():
     # Piala: seri 90 menit -> home 1X2 lose, DC X2 hit (aturan 90 menit).
     assert settle_1x2(1, 1, "1") == "lose"
     assert settle_dc(1, 1, "X2") == "hit"
+
+
+# ------------------------------------------- score_ledger settle (impor
+# modul ini aman sejak refactor main(): tidak ada eksekusi saat impor)
+
+def test_ledger_settle_1x2_and_foreign_side():
+    ret, won, push = ledger_settle("1X2", "H", 2, 1, 2.25)
+    assert won and not push and abs(ret - 2.25) < TOL
+    ret, won, push = ledger_settle("1X2", "A", 2, 1, 2.25)
+    assert not won and ret == 0.0
+    try:
+        ledger_settle("1X2", "1", 2, 1, 2.0)
+        raise AssertionError("side asing harus raise ValueError")
+    except ValueError:
+        pass
+
+
+def test_ledger_settle_ou_quarter_lines_split():
+    ret, _, _ = ledger_settle("OU", "Over", 1, 1, 2.0, line="2.25")
+    assert abs(ret - 0.5) < TOL  # total 2: setengah kalah
+    ret, _, _ = ledger_settle("OU", "Over", 2, 1, 2.0, line="2.75")
+    assert abs(ret - 1.5) < TOL  # total 3: setengah menang
+    ret, _, push = ledger_settle("OU", "Over", 1, 1, 1.9, line="2.0")
+    assert push and ret == 1.0
+
+
+def test_ledger_result_label_halves():
+    assert _result_label(2.0, 2.0, False) == "win"
+    assert _result_label(0.0, 2.0, False) == "loss"
+    assert _result_label(1.5, 2.0, False) == "half_win"
+    assert _result_label(0.5, 2.0, False) == "half_loss"
+    assert _result_label(1.0, 2.0, True) == "push"
 
 
 if __name__ == "__main__":
