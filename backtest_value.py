@@ -89,6 +89,15 @@ with open(RAW, newline="", encoding="utf-8-sig") as fh:
             continue
         n_rawmatched += 1
         vals = {c: fnum(row.get(c)) for c in RAW_COLS}
+        # football-data mengganti nama kolom Pinnacle closing PS*->PP*
+        # mulai file musim 2627; resolusi per baris PP-dulu agar musim
+        # berjalan tidak diam-diam kehilangan odds closing-nya (file ini
+        # terlewat dari sapuan PP* audit ronde 3).
+        for _pp, _ps in (("PPCH", "PSCH"), ("PPCD", "PSCD"),
+                         ("PPCA", "PSCA")):
+            _v = fnum(row.get(_pp))
+            if _v is not None:
+                vals[_ps] = _v
         if k not in oddsmap:
             oddsmap[k] = vals
         else:  # duplikat: simpan baris dgn odds paling lengkap

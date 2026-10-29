@@ -18,6 +18,7 @@ import os
 import sys
 import json
 import csv
+import time
 from datetime import datetime, date, timezone
 from typing import List, Dict, Optional
 
@@ -35,7 +36,22 @@ from model_state import ModelState
 
 app = FastAPI(title="Football Prediction API", version="2.0")
 loader = get_loader()
-cache = MatchCache()
+
+# /api/status memakai MatchCache bersama dengan TTL: konstruksi penuh
+# memakan ~2 detik (pickle ~105 MB), jadi instans segar per panggilan
+# (fix ronde 3 untuk singleton yang membeku) memblok event loop di
+# setiap request. TTL 120 detik cukup segar untuk status, dan murah.
+_STATUS_TTL = 120.0
+_status_cache = {"obj": None, "ts": 0.0}
+
+
+def _fresh_cache():
+    now = time.time()
+    if _status_cache["obj"] is None \
+            or now - _status_cache["ts"] > _STATUS_TTL:
+        _status_cache["obj"] = MatchCache()
+        _status_cache["ts"] = now
+    return _status_cache["obj"]
 
 
 # --- Models ---
@@ -216,11 +232,9 @@ def load_odds_data() -> List[Dict]:
 @app.get("/api/status")
 async def get_pipeline_status():
     """Get overall pipeline status."""
-    # MatchCache segar per panggilan: singleton modul membeku pada
-    # keadaan saat import sehingga bagian 'data' tidak pernah berubah
-    # setelah server start. Dengan penerimaan cache berbasis stamp,
-    # instans baru memakai pickle yang sama bila data belum berubah.
-    fresh = MatchCache()
+    # MatchCache lewat TTL bersama (_fresh_cache): segar tanpa
+    # membayar konstruksi ~2 detik di setiap panggilan.
+    fresh = _fresh_cache()
     status = {
         'timestamp': datetime.now().isoformat(),
         'data': {
@@ -234,7 +248,7 @@ async def get_pipeline_status():
             if os.path.exists(os.path.join(BASE_DIR, 'predictions_upcoming.csv')) else 0
         },
         'picks': {},
-        'cache': {}
+        'cache': {'status_ttl_s': _STATUS_TTL}
     }
 
     # Model status

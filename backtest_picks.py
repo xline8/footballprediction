@@ -278,7 +278,9 @@ def _model_probs(rec, cfg):
         # backtest default berlabel 'meta' diam-diam mengukur DC murni
         # (audit ronde 3).
         if rec.get("ph_meta"):
-            return (rec["ph_meta"], rec["pd_meta"], rec["pa_meta"])
+            return (rec["ph_meta"],
+                    rec.get("pd_meta") or rec["pd_t3"],
+                    rec.get("pa_meta") or rec["pa_t3"])
         return (rec["ph_t3"], rec["pd_t3"], rec["pa_t3"])
     if cfg["model"] == "t3":
         return (rec["ph_t3"], rec["pd_t3"], rec["pa_t3"])

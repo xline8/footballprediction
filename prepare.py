@@ -140,7 +140,7 @@ def prepare():
     print(f"kolom BTTS ternyata ada? -> {btts_cols if btts_cols else 'TIDAK ADA (sesuai dugaan)'}")
 
     fill = []
-    for c in ["HST", "HC", "Referee", "AHh", "AvgCH", "B365CH", "PSCH", "FTHG"]:
+    for c in ["HST", "HC", "Referee", "AHh", "AvgCH", "B365CH", "PSCH", "PPCH", "FTHG"]:
         k = sum(1 for r in final if r.get(c, "")) / max(len(final), 1)
         fill.append(f"{c} {k * 100:.0f}%")
     print("kelengkapan kolom kunci:", " | ".join(fill))

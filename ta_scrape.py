@@ -123,12 +123,27 @@ def _to_cache(cache_name, text):
         f.write(text)
 
 
+def _date_page_ok(cache_name, text):
+    """Validasi konten halaman TANGGAL: body harus memuat penanda blok
+    laga. TipsterArea bisa mengembalikan HTTP 200 berisi halaman
+    blokir/stub tanpa satu pun blok laga (kejadian 2026-10-28: fetch
+    --fresh 'berhasil' tapi 0 laga) — tanpa pemeriksaan ini body
+    semacam itu di-cache menimpa salinan bagus dan dianggap sukses.
+    Hanya berlaku untuk cache halaman tanggal (date-*)."""
+    if not cache_name or not cache_name.startswith("date-"):
+        return True
+    return bool(text) and '<a class="game"' in text
+
+
 def _sync_fetch(url, cache_name=None, ttl=CACHE_TTL_DATE):
     """Sync fetch (fallback jika httpx tidak tersedia)."""
     cached = _from_cache(cache_name, ttl)
-    if cached is not None:
+    if cached is not None and _date_page_ok(cache_name, cached):
         return cached, True
     text = _http_get(url)
+    if not _date_page_ok(cache_name, text):
+        raise RuntimeError(
+            f"halaman tanggal tanpa blok laga (blokir/stub?): {url}")
     if cache_name:
         _to_cache(cache_name, text)
     return text, False
@@ -163,7 +178,7 @@ def _save_cookie_jar(client):
 async def _async_fetch(client, url, cache_name=None, ttl=CACHE_TTL_DATE):
     """Async fetch: cek cache, retry sadar-status, jangan cache error page."""
     cached = _from_cache(cache_name, ttl)
-    if cached is not None:
+    if cached is not None and _date_page_ok(cache_name, cached):
         return cached, True
     last = None
     for attempt in range(RETRIES):
@@ -173,6 +188,17 @@ async def _async_fetch(client, url, cache_name=None, ttl=CACHE_TTL_DATE):
             code = resp.status_code
             if code == 200:
                 text = resp.text
+                if not _date_page_ok(cache_name, text):
+                    # 200 tapi tanpa blok laga = halaman blokir/stub:
+                    # JANGAN di-cache (menimpa salinan bagus) dan
+                    # perlakukan sebagai percobaan gagal (retry, lalu
+                    # RuntimeError seperti kegagalan jaringan).
+                    last = RuntimeError(
+                        f"halaman tanggal tanpa blok laga: {url}")
+                    if attempt < RETRIES - 1:
+                        await asyncio.sleep(min(BACKOFF_BASE * (2 ** attempt),
+                                                BACKOFF_MAX))
+                    continue
                 if cache_name:
                     _to_cache(cache_name, text)
                 return text, False
@@ -188,7 +214,7 @@ async def _async_fetch(client, url, cache_name=None, ttl=CACHE_TTL_DATE):
         except Exception as e:
             last = e
             cached = _from_cache(cache_name, ttl)
-            if cached is not None:
+            if cached is not None and _date_page_ok(cache_name, cached):
                 return cached, True
             if attempt < RETRIES - 1:
                 await asyncio.sleep(min(BACKOFF_BASE * (2 ** attempt),
@@ -616,14 +642,34 @@ def sync_dates(days, with_markets=False, market_ids=None, verbose=True, fresh=Fa
     if _HAS_HTTPX:
         results = asyncio.run(async_fetch_pages(date_urls))
     else:
-        results = [((_sync_fetch(u, c, ttl), ))[0]
-                   for u, c, ttl in date_urls]
-        results = [(r[0], r[1]) for r in results]
+        # Fallback sync: kegagalan per-tanggal ditelan menjadi
+        # (None, True) — sama seperti fetch_one di jalur async.
+        # Versi lama membiarkan exception merambat keluar dari
+        # comprehension dan meruntuhkan seluruh sync (audit r4).
+        results = []
+        for u, c, ttl in date_urls:
+            try:
+                results.append(_sync_fetch(u, c, ttl))
+            except Exception as e:  # noqa: BLE001
+                print(f"  ! fetch gagal {u}: {e!r}", file=sys.stderr)
+                results.append((None, True))
 
     date_htmls = {}  # iso_date -> (html, cached)
     empty_dates = []
+    failed_dates = []
     for d, (html, cached) in zip(days, results):
         iso_d = iso(d)
+        if html is None:
+            # Fetch gagal total untuk tanggal ini (jaringan/validasi).
+            # Catat sebagai tanggal GAGAL — versi lama membiarkannya
+            # jatuh ke TypeError parse yang tertelan except di bawah,
+            # sehingga run yang SEMUA tanggalnya gagal tetap terlihat
+            # sukses (games=0, empty_dates=[]) di exit code CLI.
+            failed_dates.append(iso_d)
+            date_htmls[iso_d] = (None, True)
+            print(f"  ! {iso_d}: fetch gagal (tak ada halaman)",
+                  file=sys.stderr)
+            continue
         try:
             date_htmls[iso_d] = (html, cached)
             games = parse_date_page(html, iso_d)
@@ -646,6 +692,7 @@ def sync_dates(days, with_markets=False, market_ids=None, verbose=True, fresh=Fa
                       f"snapshot+{snap:3d}  hasil+{res:2d}  ({tag})")
         except Exception as e:
             print(f"  ! {iso_d}: {e}", file=sys.stderr)
+            failed_dates.append(iso_d)
             date_htmls[iso_d] = (None, True)
 
     # --- Phase 2: market pages (hanya yang perlu, async) ---
@@ -707,6 +754,7 @@ def sync_dates(days, with_markets=False, market_ids=None, verbose=True, fresh=Fa
 
     return {"snapshots": tot_snap, "results": tot_res, "games": len(all_games),
             "markets": nrows, "empty_dates": empty_dates,
+            "failed_dates": failed_dates,
             "unresolved_market_ids": unresolved if with_markets else 0}
 
 
@@ -781,9 +829,10 @@ def main(argv):
     print(f"selesai: {r['games']} laga, snapshot +{r['snapshots']}, "
           f"hasil +{r['results']}")
     log_run_summary(r, corner_rows=0)
-    if r["games"] == 0 and r.get("empty_dates"):
-        print("GAGAL: semua halaman tanggal terparse 0 laga — "
-              "kemungkinan markup berubah atau akses diblokir",
+    if r["games"] == 0 and (r.get("empty_dates") or r.get("failed_dates")):
+        print("GAGAL: semua halaman tanggal menghasilkan 0 laga "
+              "(kosong atau fetch gagal) — kemungkinan markup berubah, "
+              "akses diblokir, atau jaringan mati",
               file=sys.stderr)
         return 1
     return 0

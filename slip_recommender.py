@@ -215,6 +215,8 @@ def _search(by_match, min_legs, max_legs, lo, hi, target, stats=None):
             rec(i + 1, nt, jp * leg["pm"], legs)
             legs.pop()
 
+    nodes_pass1 = None
+    trunc_budget = SEARCH_NODE_BUDGET
     rec(0, 1.0, 1.0, [])
     if best_near is None and not truncated[0]:
         # Semua kombinasi valid melewati cap produk (hi * 2.5), jadi
@@ -223,6 +225,8 @@ def _search(by_match, min_legs, max_legs, lo, hi, target, stats=None):
         # kosong padahal kombinasi terdekat tersedia. Ulangi tanpa cap
         # dengan anggaran node kecil, khusus mencari best_near
         # (best_in tidak bisa muncul di sini: tot > cap > hi).
+        nodes_pass1 = nodes[0]
+        trunc_budget = 50_000
         nodes[0] = 0
 
         def rec2(i, tot, jp, legs):
@@ -246,10 +250,13 @@ def _search(by_match, min_legs, max_legs, lo, hi, target, stats=None):
 
         rec2(0, 1.0, 1.0, [])
     if truncated[0]:
-        print(f"  ! slip search mencapai batas node {SEARCH_NODE_BUDGET}; "
+        # Anggaran yang benar-benar mengikat: pass 2 punya batas 50k
+        # sendiri; mencetak SEARCH_NODE_BUDGET (batas pass 1) di sini
+        # menyesatkan bila pass 2 yang terpotong.
+        print(f"  ! slip search mencapai batas node {trunc_budget}; "
               f"memakai kandidat terbaik yang sudah ditemukan")
     if stats is not None:
-        stats["nodes"] = nodes[0]
+        stats["nodes"] = nodes[0] + (nodes_pass1 or 0)
         stats["truncated"] = truncated[0]
     return best_in, best_near
 

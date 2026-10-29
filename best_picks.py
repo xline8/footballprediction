@@ -49,10 +49,14 @@ def _read_csv(path):
         return list(csv.DictReader(f))
 
 def _write_csv(path, rows, cols):
-    with open(path, "w", newline="", encoding="utf-8") as f:
+    # Atomik (tmp + replace): file ini dibaca laporan pagi dan langkah
+    # arsip di rantai yang sama; salinan terpotong tidak boleh terbaca.
+    tmp = path + ".tmp"
+    with open(tmp, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=cols)
         w.writeheader()
         w.writerows(rows)
+    os.replace(tmp, path)
 
 def _load_corner_picks():
     """Load corner picks from corner predictions CSVs (probabilistic).

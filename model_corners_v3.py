@@ -105,6 +105,10 @@ def stats_window(games, cutoff):
     # w * (wh + wa) di dalam loop memakai jumlah kumulatif berjalan,
     # sehingga r_base bergantung pada urutan games dan bukan estimator
     # yang dimaksud (audit ulang 2026-10-29).
+    if wsum == 0:
+        # Jendela kosong (divisi tanpa histori di backtest): kembalikan
+        # nol daripada ZeroDivisionError.
+        return 0.0, 0.0, 0.0, 0.0, 0.0
     dmu = wh + wa
     base_h = wh * 2 / wsum
     base_a = wa * 2 / wsum
