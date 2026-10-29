@@ -128,7 +128,7 @@ def main():
                        market_ids=mkt_ids or None, verbose=False)
         print(f"[7/9] market odds sync: {len(mkt_ids)} fixture model, "
               f"+{r.get('markets', 0)} harga baru, "
-              f"{len(r.get('unresolved_market_ids') or [])} id pasar tak "
+              f"{r.get('unresolved_market_ids') or 0} id pasar tak "
               f"terpetakan, tanggal kosong: "
               f"{r.get('empty_dates') or []}")
     except Exception as e:
