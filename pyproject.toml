@@ -1,8 +1,34 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "football-data"
-version = "0.1.0"
+version = "1.0.0"
 description = "Pipeline prediksi hasil pertandingan sepakbola (1X2 / O/U / AH / corner)."
+readme = "README.md"
+license = { text = "MIT" }
 requires-python = ">=3.11"
+dependencies = [
+    "numpy==2.5.4",
+]
+
+[project.optional-dependencies]
+server = [
+    "fastapi==0.162.0",
+    "uvicorn==0.54.0",
+    "pydantic==2.14.1",
+    "requests==2.34.2",
+    "httpx==0.28.1",
+]
+dev = [
+    "pytest>=8",
+]
+
+# The project is a set of top-level scripts, not an importable package;
+# keep setuptools from trying to discover packages that do not exist.
+[tool.setuptools]
+packages = []
 
 [tool.ruff]
 line-length = 100
