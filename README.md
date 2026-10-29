@@ -1,5 +1,7 @@
 # Football 1X2 & Derivative Market Prediction
 
+[![Tests](https://github.com/xline8/footballprediction/actions/workflows/tests.yml/badge.svg)](https://github.com/xline8/footballprediction/actions/workflows/tests.yml)
+
 A quantitative research engine that predicts pre-match football outcomes for
 the top five European leagues (EPL, La Liga, Bundesliga, Serie A, Ligue 1),
 plus EFL Cup and DFB Pokal ties, and prices derivative markets (Over/Under
@@ -307,7 +309,19 @@ part of the pipeline:
 
 ## Testing
 
-`test_core.py` holds the smoke tests:
+Unit tests for the core math (Shin de-vigging, Dixon-Coles probabilities,
+cup advance probabilities, the slip search, push-market fair odds) live in
+`tests/test_units.py`. They use fixed inputs and need no data files, so
+GitHub Actions runs them, plus a byte-compile of all sources, on every push
+and pull request:
+
+```
+python -m pytest tests/ -q
+```
+
+`test_core.py` holds the data-dependent smoke tests. It needs the generated
+data files, which are gitignored, so it runs in the full local environment
+rather than in CI:
 
 ```
 python test_core.py
