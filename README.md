@@ -204,9 +204,10 @@ edge-band experiment and its UNVALIDATED verdict: the 0.20–0.22 band never
 fires in walk-forward history, which is why the live policy engine emits no
 picks.
 
-The remaining research and verification documents (data audit, experiments
-log, per-feature verification reports, working TODO list) live in
-[docs/](docs/).
+[EXPERIMENTS_LOG.md](docs/EXPERIMENTS_LOG.md) is the running lab notebook
+for the keep-or-revert experiment loop. Point-in-time working documents
+(audits, per-feature verification reports, backlog lists) are not kept in
+the tree; they stay readable in git history.
 
 ## Daily recommendations (single bet + slips)
 
