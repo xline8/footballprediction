@@ -605,15 +605,20 @@ def await_wrap(coro):
     return asyncio.run(coro)
 
 
-def sync_dates(days, with_markets=False, market_ids=None, verbose=True):
-    """days: list objek date. Return ringkasan."""
+def sync_dates(days, with_markets=False, market_ids=None, verbose=True, fresh=False):
+    """days: list objek date. Return ringkasan.
+
+    fresh=True: paksa fetch jaring untuk halaman tanggal (ttl=0) — dipakai
+    sinkronisasi tanggal lampau yang status FT-nya belum lengkap.
+    """
     captured = now_iso()
     tot_snap = tot_res = 0
     nrows = 0
     all_games = []
 
     # --- Phase 1: date pages (async if httpx available) ---
-    date_urls = [(f"{BASE}/matches/{ta_date(d)}", f"date-{iso(d)}.html", CACHE_TTL_DATE)
+    date_ttl = 0 if fresh else CACHE_TTL_DATE
+    date_urls = [(f"{BASE}/matches/{ta_date(d)}", f"date-{iso(d)}.html", date_ttl)
                  for d in days]
 
     if _HAS_HTTPX:
@@ -742,6 +747,7 @@ def main(argv):
     days = []
     with_markets = "--markets" in argv
     only_matched = "--markets-matched" in argv
+    fresh = "--fresh" in argv
     market_ids = None
     corner_out = None
     for a in argv[1:]:
@@ -766,9 +772,10 @@ def main(argv):
 
     print(f"tipsterarea sync: {len(days)} tanggal "
           f"({iso(min(days))} .. {iso(max(days))})"
+          + (" [FRESH]" if fresh else "")
           + (f", pasar lain untuk {len(market_ids)} laga model" if market_ids else ""))
     r = sync_dates(sorted(set(days)), with_markets=with_markets,
-                   market_ids=market_ids)
+                   market_ids=market_ids, fresh=fresh)
     print(f"selesai: {r['games']} laga, snapshot +{r['snapshots']}, "
           f"hasil +{r['results']}")
     if corner_out is not None or "--corner-export" in argv:

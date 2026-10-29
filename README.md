@@ -123,6 +123,27 @@ Weekly refit runs every Monday at 04:00 WIB (Sunday 21:00 UTC) via
 `weekly_refit.sh` — the full `--run-all` pipeline — so team-rating decay and
 model parameters stay fresh:
 
+**Training-data refresh (`step_refresh_training_data`).** Before refitting,
+the pipeline refreshes league training data (no API-Football — histories come
+from football-data.co.uk + Understat only):
+
+- Re-downloads **current-season only** football-data.co.uk CSVs (21 divisions,
+  season `2627`, override via `FOOTBALL_REFRESH_SEASON`), then rebuilds
+  `all_matches_clean.csv` via `prepare.py` + `clean.py`.
+- Refreshes Understat season dumps (`xg_raw/{League}_{year}.json`) via
+  `getLeagueData` (same fetcher as `refresh_fixtures.py`), so `build_xg_matches`
+  picks up the latest xG.
+- Backs up `all_matches_clean.csv` and xG dumps to timestamped `.bak-*` before
+  overwriting; validates total rows and current-season rows never decrease
+  (rollback + explicit failure if they do), then rebuilds `records_cache` with
+  a data-freshness stamp when the data changed.
+
+**Daily results sync (`run_daily_shadow.py`).** The daily live-shadow chain now
+explicitly syncs tipsterarea results for yesterday + H-2 before grading, using
+`ta_scrape.py <date> --fresh` (forces a network fetch past the 20-min date-page
+cache so late-finishing games land in `ta/results.csv`; network failure is a
+warning, not a pipeline failure).
+
 ```
 0 21 * * 0 cd /path/to/football-data && ./weekly_refit.sh >> logs/weekly_refit.log 2>&1
 ```

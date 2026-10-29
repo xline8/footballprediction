@@ -262,6 +262,13 @@ class MatchLoader:
             'period_end': cutoff.isoformat()
         }
 
+    def reload_data(self, force: bool = True):
+        """Muat ulang cache matches setelah data latih direfresh (lihat
+        pipeline_orchestrator.step_refresh_training_data)."""
+        self.cache = MatchCache(force_reload=force)
+        self._fixtures_cache.clear()
+        self._odds_cache.clear()
+
     def invalidate_fixture_cache(self, season: str = None):
         """Hapus cache fixtures (dipanggil saat ada update jadwal)."""
         if season:
