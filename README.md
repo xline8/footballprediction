@@ -22,6 +22,7 @@ deterministic daily recommendations described further down.
 - [Daily recommendations (single bet + slips)](#daily-recommendations-single-bet--slips)
 - [Automation](#automation)
 - [Environment & dependencies](#environment--dependencies)
+- [Credits](#credits)
 - [Testing](#testing)
 
 ## Measured results
@@ -256,6 +257,30 @@ football-data.co.uk, and Understat. Optional overrides:
 Dependencies: `numpy` (see `requirements.txt`). The optional API server
 (`api_server.py`) and scrapers use `fastapi`, `uvicorn`, `pydantic`,
 `requests`, and `httpx`.
+
+## Credits
+
+Match data comes from four external sources, and each one feeds a different
+part of the pipeline:
+
+- **football-data.co.uk** — historical league results and odds for all 21
+  divisions, including the Pinnacle, market-average, and Bet365 closing
+  prices behind the CLV numbers. Its CSVs also carry the HC/AC corner counts
+  used to grade the corner model. The weekly refresh rebuilds them into
+  `all_matches_clean.csv`.
+- **Understat** — expected-goals data, kept as season dumps in `xg_raw/` and
+  rebuilt into the xG match cache that the `blend` Dixon-Coles fit consumes.
+  Its fixture list also sets the window for JIT capture.
+- **TipsterArea** — fixtures and full-time results for grading, scraped by
+  `ta_scrape.py`. Its match pages carry the multi-bookmaker odds snapshots
+  behind `market_compare.csv`. The 1xBet prices in the daily recommendations
+  come from those pages; the project has no direct 1xBet feed. Cup fixtures
+  and cup results come from here too.
+- **API-Football** — near-kickoff odds for the two markets the scrape does
+  not carry, corners (bet 45) and BTTS (bet 8). JIT capture calls it only
+  for matches starting within 45 minutes and stores the results in
+  `ta/external_corner_odds.csv` and `ta/external_btts_odds.csv`. Nothing
+  else in the project calls this API.
 
 ## Testing
 
