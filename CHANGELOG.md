@@ -3,6 +3,19 @@
 All notable changes to this project are recorded here. The format follows
 Keep a Changelog, and the project uses semantic versioning.
 
+## [Unreleased]
+
+### Removed
+
+- JIT capture and the API-Football integration (`jit_orchestrator.py`,
+  `daily_api_capture.py`, `data_enrichment/api_football_client.py`,
+  `data_enrichment/fetch_corner_odds.py`, and the `--corner-export` path
+  in `ta_scrape.py`). The capture existed to collect near-kickoff corner
+  and BTTS odds, but the API plan in use has no access to the current
+  season, so it never produced a single row; every market the project
+  actually prices already comes from tipsterarea. The corner model stays
+  and is still graded on calibration against actual corner counts.
+
 ## [1.0.0] - 2026-10-29
 
 First tagged release: the research engine running as a daily production
