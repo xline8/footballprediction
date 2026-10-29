@@ -23,7 +23,7 @@ from __future__ import annotations
 import json
 import sys
 from collections import defaultdict
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from daily_api_capture import (
@@ -58,7 +58,20 @@ def _parse_dt(s: str) -> datetime:
 
 
 def _local_naive(d: datetime) -> datetime:
-    return d.astimezone().replace(tzinfo=None) if d.tzinfo is not None else d
+    # Understat fixture datetimes are UTC but carry no tz suffix, so a naive
+    # value is UTC by definition here — never local time. Aware values are
+    # converted as-is. (Treating naive UTC as local shifted the JIT window
+    # by the local offset, +7h on this host, so captures fired hours early.)
+    if d.tzinfo is None:
+        d = d.replace(tzinfo=timezone.utc)
+    return d.astimezone().replace(tzinfo=None)
+
+
+def _utc_instant(d: datetime) -> datetime:
+    """The aware UTC instant of a parsed fixture datetime (naive = UTC)."""
+    if d.tzinfo is None:
+        return d.replace(tzinfo=timezone.utc)
+    return d.astimezone(timezone.utc)
 
 
 def load_understat_fixtures() -> list[dict]:
@@ -86,12 +99,17 @@ def in_window(fixtures: list[dict], now: datetime | None = None,
     out = []
     for f in fixtures:
         try:
-            k = _local_naive(_parse_dt(f["dt"]))
+            parsed = _parse_dt(f["dt"])
         except ValueError:
             continue
+        k = _local_naive(parsed)
         if now <= k <= cutoff:
             g = dict(f)
             g["kickoff"] = k
+            # API-Football groups fixtures by their UTC date; for matches
+            # that kick off after local midnight this differs from the
+            # local date, so attribution must use the UTC date.
+            g["date_utc"] = _utc_instant(parsed).date().isoformat()
             out.append(g)
     return out
 
@@ -112,7 +130,7 @@ def api_capture(matches: list[dict], client: ApiFootballClient | None = None,
         lid = LEAGUES.get(m["div"])
         if not lid:
             continue
-        date = m["kickoff"].date().isoformat()
+        date = m.get("date_utc") or m["kickoff"].date().isoformat()
         groups[(lid, season_for_date(date), date)].append((m["home"], m["away"]))
 
     total_c = total_b = 0
@@ -173,16 +191,26 @@ def run(matches: list[dict], dry: bool = False) -> tuple[int, int]:
 
 
 def selfcheck() -> int:
-    """Offline: validasi logika window (tanpa jaringan/API)."""
+    """Offline: validasi logika window (tanpa jaringan/API).
+
+    Fixture strings are built the way Understat emits them — UTC, no tz
+    suffix — from instants relative to local now, so the check exercises
+    the production timezone semantics, not local-naive ones.
+    """
     now = datetime.now().replace(microsecond=0)
+
+    def utc_str(local_naive: datetime) -> str:
+        aware_local = local_naive.astimezone()
+        return aware_local.astimezone(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+
     fx = [
-        {"dt": now.isoformat(), "home": "arsenal", "away": "chelsea",
+        {"dt": utc_str(now), "home": "arsenal", "away": "chelsea",
          "div": "E0"},                                            # in window
-        {"dt": (now + timedelta(minutes=10)).isoformat(),
+        {"dt": utc_str(now + timedelta(minutes=10)),
          "home": "barcelona", "away": "real madrid", "div": "SP1"},  # in window
-        {"dt": (now + timedelta(hours=3)).isoformat(),
+        {"dt": utc_str(now + timedelta(hours=3)),
          "home": "a", "away": "b", "div": "D1"},                  # outside
-        {"dt": (now - timedelta(minutes=5)).isoformat(),
+        {"dt": utc_str(now - timedelta(minutes=5)),
          "home": "c", "away": "d", "div": "I1"},                  # past
         {"dt": "bukan-datetime", "home": "e", "away": "f",
          "div": "F1"},                                            # invalid
