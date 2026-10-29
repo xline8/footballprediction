@@ -13,6 +13,8 @@ Policies:
 
 Evaluation: yield > -1.50% AND N >= 1000 AND yield > 0 di >=3 dari 2021-2025.
 """
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))
 
 import os
 from collections import defaultdict
@@ -20,7 +22,7 @@ from collections import defaultdict
 from backtest_picks import load_records, _fair_probs, RECORDS
 from experiment_motiv import build_maps, _sorted_matches
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 THR = 0.05
 YLD_BAR = -0.0150
 MIN_N = 1000

@@ -22,6 +22,8 @@ Adoption gate terhadap G:
 Model produksi (model_v2.py) TIDAK diubah. Hanya eksperimen.
 """
 from __future__ import annotations
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))
 
 import csv
 import math
@@ -33,7 +35,7 @@ from datetime import datetime
 
 import numpy as np
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, BASE)
 
 from football_etl import normalize_name

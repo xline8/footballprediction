@@ -15,6 +15,8 @@ terpenuhi, model TIDAK diubah — cukup lapor.
 
 Run: python experiment_eval_corners.py
 """
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))
 import math
 import sys
 from collections import defaultdict
