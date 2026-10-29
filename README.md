@@ -76,12 +76,14 @@ prints the scoring report, `python backtest_value.py` reruns the value-bet
 backtest, and `python refresh_fixtures.py` pulls fresh fixtures.
 
 The optional API server serves the current predictions, picks, odds, and
-corners on `127.0.0.1:8000`:
+corners on port 8000:
 
 ```
-bash install_service.sh   # systemd unit (Restart=always), or:
-bash start_server.sh      # run it in the foreground
+python api_server.py
 ```
+
+The live deployment runs it under a systemd unit with Restart=always.
+That unit is kept with the deployment and is not part of this repository.
 
 JIT hybrid capture runs every 30 minutes (organic odds accumulation for
 closing-line value):
@@ -307,7 +309,8 @@ Dependencies: `numpy` (see `requirements.txt`). The optional API server
 
 The repository carries code, the tracked Understat season dumps (`xg_raw/`),
 and documentation. Everything the pipeline generates is a per-machine
-runtime artifact and is gitignored: the ledger (`ledger/`), tipsterarea
+runtime artifact and is gitignored: the ledger (`ledger/`, including the
+daily calibration grades and summary), tipsterarea
 results and odds snapshots (`ta/*.csv`), the daily archive (`archive/`),
 the prediction and recommendation CSVs, and `.env`.
 
@@ -343,8 +346,9 @@ part of the pipeline:
 ## Testing
 
 Unit tests for the core math (Shin de-vigging, Dixon-Coles probabilities,
-cup advance probabilities, the slip search, push-market fair odds) live in
-`tests/test_units.py`. They use fixed inputs and need no data files, so
+cup advance probabilities, the slip search, push-market fair odds) and for
+the recommendation settlement rules (1X2, double chance, over/under, BTTS,
+corners, and slip units) live in `tests/test_units.py`. They use fixed inputs and need no data files, so
 GitHub Actions runs them, plus a byte-compile of all sources, on every push
 and pull request:
 
