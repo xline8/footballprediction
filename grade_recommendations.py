@@ -375,6 +375,16 @@ def _grade_archive(archive_date, store, res_idx, cor_idx, now):
                 "|".join(map(str, _key(g))) for g in leg_grades))
             unit_g["selection"] = "unit:" + hashlib.md5(
                 leg_sig.encode()).hexdigest()[:12]
+            # Tanggal kunci unit = tanggal leg TERPAwal slip itu sendiri
+            # (isi), BUKAN tanggal arsip. Fix PR #23 hanya memindahkan
+            # hash isi ke field selection, tapi _key() tetap diawali
+            # tanggal arsip — audit ronde 3 membuktikan lewat simulasi
+            # bahwa slip yang sama di dua tanggal arsip tetap menjadi
+            # dua unit. Dengan tanggal dari isi, kuncinya kini identik
+            # lintas tanggal arsip.
+            if leg_grades:
+                unit_g["date"] = min(g["date"] for g in leg_grades)
+            uk = _key(unit_g)
             # Migrasi: buang unit skema lama (selection kosong) untuk
             # produk + tanggal arsip ini agar tidak jadi pending yatim.
             for k in [k for k, v in store.items()
@@ -382,7 +392,13 @@ def _grade_archive(archive_date, store, res_idx, cor_idx, now):
                       and v["date"] == archive_date and not v["selection"]]:
                 del store[k]
                 changed += 1
-            uk = _key(unit_g)
+            # Migrasi: buang duplikat sig yang sama di kunci tanggal
+            # arsip lain (sisa skema tanggal-arsip dari PR #23).
+            for k in [k for k, v in store.items()
+                      if v["level"] == "unit" and v["product"] == product
+                      and v["selection"] == unit_g["selection"] and k != uk]:
+                del store[k]
+                changed += 1
             uold = store.get(uk)
             if uold is None or (
                     unit_g["status"] != "pending"

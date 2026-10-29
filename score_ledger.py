@@ -107,6 +107,16 @@ def _num(x):
         return None
 
 
+def _capdt(s):
+    """Parse captured_at menjadi datetime aware untuk perbandingan
+    'terbaru'. Perbandingan string mentah salah urutan lintas offset
+    (+0000 vs +0700); yang tak terparse dianggap paling lama."""
+    try:
+        return datetime.strptime(s or "", "%Y-%m-%dT%H:%M:%S%z")
+    except (ValueError, TypeError):
+        return datetime.min.replace(tzinfo=timezone.utc)
+
+
 def _load_close_map():
     """{(div, date_iso, home_norm, away_norm) -> (o_1x2, o_ou)}."""
     m = {}
@@ -161,7 +171,7 @@ def _load_cup_snapshots():
             key = (h, a, dt[:10])
             cap = r.get("captured_at") or ""
             cur = best.get(key)
-            if cur is None or cap > cur[0]:
+            if cur is None or _capdt(cap) > _capdt(cur[0]):
                 best[key] = (cap, o1, ox, o2)
     return best
 
@@ -193,6 +203,16 @@ def _clv(pk, o, ou):
         pf, c_taken = fair[idx], o[idx]
     elif market == "OU":
         if ou is None:
+            return None, None, None
+        # Pasangan closing `ou` selalu garis 2.5 (satu-satunya yang
+        # disediakan football-data). Pick bergaris lain tidak boleh
+        # dinilai CLV-nya terhadap garis 2.5 — kembalikan None.
+        try:
+            plf = float(pk.get("line")) if pk.get("line") not in (None, "") \
+                else 2.5
+        except (TypeError, ValueError):
+            plf = 2.5
+        if plf != 2.5:
             return None, None, None
         fair = _fair_probs(ou, "shin")
         if side == "Over":
@@ -254,20 +274,52 @@ def settle(market, side, yh, ya, odds, line=None):
         # OU (side selain "Over" dinilai sebagai Under). Pick DC/BTS di
         # masa depan harus gagal keras di sini, bukan ter-grade salah.
         raise ValueError(f"settle: pasar tak dikenal {market!r}")
+    if side not in ("Over", "Under"):
+        raise ValueError(f"settle OU: side tak dikenal {side!r}")
     try:
         ln = float(line) if line not in (None, "") else 2.5
     except (TypeError, ValueError):
         ln = 2.5
     tot = yh + ya
+    q = ln * 4
+    if abs(q - round(q)) < 1e-9 and int(round(q)) % 2 == 1:
+        # Garis seperempat (2.25/2.75): stake terbelah ke dua garis
+        # tetangga; return = rata-rata keduanya (audit ronde 3 —
+        # versi lama menilainya sebagai garis utuh).
+        ret = (_ou_once(tot, side, ln - 0.25, odds)
+               + _ou_once(tot, side, ln + 0.25, odds)) / 2.0
+        return ret, ret > 1.0, ret == 1.0
+    ret = _ou_once(tot, side, ln, odds)
+    return ret, ret > 1.0, ret == 1.0
+
+
+def _ou_once(tot, side, ln, odds):
+    """Return satu garis OU utuh/setengah: odds menang, 1.0 push, 0 kalah."""
     if tot == ln:
-        return 1.0, False, True
+        return 1.0
     over = tot > ln
     won = over if side == "Over" else not over
-    return (odds if won else 0.0), won, False
+    return odds if won else 0.0
 
 
 new_grades = []
 unmapped = defaultdict(set)
+skipped_unknown = []
+
+
+def _settle_guarded(pk, yh, ya):
+    """settle() dengan ValueError pasar/side asing ditelan per-pick:
+    pick itu dilewati (tetap pending) dan dicatat, BUKAN menggagalkan
+    seluruh run grading harian seperti raise telanjang sebelumnya."""
+    try:
+        return settle(pk["market"], pk["side"], yh, ya,
+                      pk["odds_open"], pk.get("line"))
+    except ValueError:
+        skipped_unknown.append(
+            (pk["pick_id"], pk.get("market"), pk.get("side")))
+        return None
+
+
 for pk in picks:
     if pk["pick_id"] in graded_ids:
         continue
@@ -281,8 +333,10 @@ for pk in picks:
             unmapped[comp].add(f"{pk['home']} v {pk['away']}")
             continue
         yh, ya = res
-        ret, won, push = settle(pk["market"], pk["side"], yh, ya,
-                                pk["odds_open"], pk.get("line"))
+        sres = _settle_guarded(pk, yh, ya)
+        if sres is None:
+            continue
+        ret, won, push = sres
         new_grades.append({
             "pick_id": pk["pick_id"], "competition": comp,
             "graded_ts": datetime.now(timezone.utc).isoformat(),
@@ -303,8 +357,10 @@ for pk in picks:
     if res is None:
         continue  # belum main / belum keluar hasilnya
     yh, ya = res
-    ret, won, push = settle(pk["market"], pk["side"], yh, ya,
-                            pk["odds_open"], pk.get("line"))
+    sres = _settle_guarded(pk, yh, ya)
+    if sres is None:
+        continue
+    ret, won, push = sres
     new_grades.append({
         "pick_id": pk["pick_id"], "competition": "",
         "graded_ts": datetime.now(timezone.utc).isoformat(),
@@ -314,6 +370,10 @@ for pk in picks:
         "odds_close_1x2": o1x2, "odds_close_o25": o25,
         "clv_ev": clv_ev, "clv_price": clv_price,
     })
+
+if skipped_unknown:
+    print(f"! {len(skipped_unknown)} pick dilewati (pasar/side tak dikenal): "
+          f"{skipped_unknown}")
 
 if new_grades:
     with open(GRADES, "a", encoding="utf-8") as f:

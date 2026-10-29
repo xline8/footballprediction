@@ -369,15 +369,37 @@ def _cup_pick_file_sources():
 
 
 def sync_cup_picks_to_ledger():
-    """Masukkan pick piala ke picks.jsonl (competition=EFL Cup/DFB Pokal)."""
+    """Masukkan pick piala ke picks.jsonl (competition=EFL Cup/DFB Pokal).
+
+    Tiga disiplin yang ditambahkan audit ronde 3 (2026-10-29):
+    - Side 1X2 diterjemahkan dari kosakata best_picks ("1"/"X"/"2") ke
+      kosakata ledger ("H"/"D"/"A") SEBELUM disimpan — settle() dan
+      _clv() score_ledger hanya mengenal H/D/A, jadi pick 1X2 piala
+      dulu akan ter-grade kalah otomatis apa pun hasilnya. Penentuan
+      harga tetap memakai side asli (state pasar TA memakai "1" dst).
+    - Lantai edge: pick dengan edge < 0 tidak masuk ledger UANG
+      (tetap ter-grade kalibrasinya lewat arsip best_picks). Dulu
+      edge dihitung tapi tidak pernah diuji (pick Everton masuk
+      dengan edge -0.0362).
+    - Dedup per LAGA+pasar+garis, bukan per seleksi: satu stake per
+      tie per pasar — seleksi teraman yang berubah antar-run tidak
+      lagi menggandakan stake untuk laga yang sama.
+    """
     existing = set()
+    existing_matches = set()
     if os.path.exists(PICKS):
         with open(PICKS, encoding="utf-8") as f:
             for line in f:
                 if line.strip():
-                    existing.add(json.loads(line)["pick_id"])
+                    rec = json.loads(line)
+                    existing.add(rec["pick_id"])
+                    existing_matches.add((
+                        rec.get("competition") or "", rec.get("date") or "",
+                        rec.get("home") or "", rec.get("away") or "",
+                        rec.get("market") or "", rec.get("line") or ""))
     os.makedirs(LEDGER, exist_ok=True)
     new = []
+    n_edge = 0
     for p in _cup_pick_file_sources():
         for r in _read_csv(p):
             comp = r.get("competition") or ""
@@ -392,8 +414,13 @@ def sync_cup_picks_to_ledger():
             home, away = r.get("home") or "", r.get("away") or ""
             if not (d and home and away and side):
                 continue
+            side_t = {"1": "H", "X": "D", "2": "A"}.get(side, side) \
+                if market == "1X2" else side
+            mkey = (comp, d, home, away, market, line)
+            if mkey in existing_matches:
+                continue  # laga+pasar ini sudah punya stake di ledger
             pid = hashlib.md5(
-                f"{comp}|{d}|{home}|{away}|{market}|{line}|{side}".encode()
+                f"{comp}|{d}|{home}|{away}|{market}|{line}|{side_t}".encode()
             ).hexdigest()[:16]
             if pid in existing:
                 continue
@@ -406,17 +433,24 @@ def sync_cup_picks_to_ledger():
             pm = _fnum(r.get("prob"))
             if pm is None:
                 continue
+            edge = pm - 1.0 / odds
+            if edge < 0:
+                n_edge += 1
+                continue  # di bawah harga pasar — bukan pick uang
             new.append({
                 "pick_id": pid, "ts_created": datetime.utcnow().isoformat() + "Z",
                 "model": "cup-proxy", "thr": 0.0, "status": "pending",
-                "market": market, "side": side, "line": line,
+                "market": market, "side": side_t, "line": line,
                 "p_model": round(pm, 4), "odds_open": round(odds, 4),
                 "p_imp_open": round(1.0 / odds, 4),
-                "edge": round(pm - 1.0 / odds, 4),
+                "edge": round(edge, 4),
                 "competition": comp, "div": r.get("div") or "", "date": d,
                 "home": home, "away": away,
             })
             existing.add(pid)
+            existing_matches.add(mkey)
+    if n_edge:
+        print(f"  cup picks dilewati (edge < 0): {n_edge}")
     if new:
         with open(PICKS, "a", encoding="utf-8") as f:
             for rec in new:

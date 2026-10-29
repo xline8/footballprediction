@@ -261,9 +261,16 @@ def _recalibrate(records):
 
 def _model_probs(rec, cfg):
     if cfg["model"] == "meta":
-        return (rec.get("ph_meta") or rec["ph_dc"],
-                rec.get("pd_meta") or rec["pd_dc"],
-                rec.get("pa_meta") or rec["pa_dc"])
+        # "meta" harus berarti model meta yang sebenarnya: ph_meta bila
+        # cache sudah diperkaya experiment_meta, selain itu ph_t3 —
+        # output multinomial walk-forward yang ditulis cache_records
+        # memang model meta itu. Versi lama jatuh per-komponen ke
+        # ph_dc, dan records_cache tidak pernah memuat ph_meta, jadi
+        # backtest default berlabel 'meta' diam-diam mengukur DC murni
+        # (audit ronde 3).
+        if rec.get("ph_meta"):
+            return (rec["ph_meta"], rec["pd_meta"], rec["pa_meta"])
+        return (rec["ph_t3"], rec["pd_t3"], rec["pa_t3"])
     if cfg["model"] == "t3":
         return (rec["ph_t3"], rec["pd_t3"], rec["pa_t3"])
     if cfg["model"] == "blend":
