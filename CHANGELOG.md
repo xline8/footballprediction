@@ -5,6 +5,29 @@ Keep a Changelog, and the project uses semantic versioning.
 
 ## [Unreleased]
 
+### Fixed
+
+- `score_ledger` settled every Over/Under pick against a hardcoded
+  2.5 line; picks that carry their own line (cup picks, e.g. OU 1.5)
+  are now settled against it, with an exact integer line graded as a
+  push.
+- `ta_model` corner grading never matched its actual-count lookup
+  (raw DD/MM/YYYY dates and raw team names against ISO dates and
+  normalized names), so corner bets were settled against goal totals.
+  Keys now agree on both sides, and a corner bet with no matching
+  actual counts stays open instead of being graded on goals.
+- Failure honesty in the runners: `run_daily_shadow` now flags any
+  failed step (including market sync, recommendations, grading, and
+  archive) in its exit code instead of always ending in success, and
+  grades the money ledger (`score_ledger`) daily — previously only a
+  manual incremental run did. `pipeline_orchestrator` propagates
+  failed steps into the run status and process exit code, and its
+  prediction and corner steps verify the inner status / output
+  freshness instead of reporting success over stale files.
+- The slip search in `slip_recommender` is bounded by a node budget;
+  oversized pools now return the best candidate found so far instead
+  of running unbounded inside the daily chain.
+
 ### Removed
 
 - JIT capture and the API-Football integration (`jit_orchestrator.py`,
