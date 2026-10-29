@@ -21,6 +21,7 @@ final saat hasil terbit. Kegagalan langkah ini tidak menggagalkan pipeline.
 Run: python grade_recommendations.py
 """
 import csv
+import hashlib
 import json
 import os
 import sys
@@ -320,8 +321,10 @@ def _grade_archive(archive_date, store, res_idx, cor_idx, now):
             continue
         # grade legs
         leg_statuses = []
+        leg_grades = []
         for row in rows:
             g = _grade_leg(product, row, res_idx, cor_idx)
+            leg_grades.append(g)
             k = _key(g)
             old = store.get(k)
             # update bila baru, atau bila baru final dan (dulu pending / beda).
@@ -356,6 +359,24 @@ def _grade_archive(archive_date, store, res_idx, cor_idx, now):
             tot = _f(rows[0].get("slip_total_odds"))
             unit_g["p_model"] = jp
             unit_g["odds"] = tot
+            # Identitas unit = ISI slip (gabungan kunci leg-nya), bukan
+            # tanggal arsip. Dulu unit dikunci per tanggal arsip, jadi
+            # file rekomendasi basi yang terarsip ulang di tanggal lain
+            # (rantai harian tetap mengarsipkan walau langkah produksi
+            # gagal) menghasilkan unit kedua untuk slip fisik yang sama
+            # dan statistik unit di ringkasan terhitung ganda. Kunci leg
+            # sendiri sudah berbasis isi (tanggal laga/pasar/pilihan).
+            leg_sig = ";".join(sorted(
+                "|".join(map(str, _key(g))) for g in leg_grades))
+            unit_g["selection"] = "unit:" + hashlib.md5(
+                leg_sig.encode()).hexdigest()[:12]
+            # Migrasi: buang unit skema lama (selection kosong) untuk
+            # produk + tanggal arsip ini agar tidak jadi pending yatim.
+            for k in [k for k, v in store.items()
+                      if v["level"] == "unit" and v["product"] == product
+                      and v["date"] == archive_date and not v["selection"]]:
+                del store[k]
+                changed += 1
             uk = _key(unit_g)
             uold = store.get(uk)
             if uold is None or (

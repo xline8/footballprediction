@@ -126,6 +126,12 @@ class ModelState:
             self.dc_fit_mode = None
         self.last_fit_date = fit_date
         self.last_update = datetime.now()
+        # updated_at WAJIB diset di sini: save() menolak menyimpan bila
+        # updated_at kosong, dan versi lama tidak pernah mengisinya di
+        # jalur ini — refit dari jalur prediksi (staleness/mode flip)
+        # terbuang diam-diam dan run berikutnya me-refit ulang dari
+        # state basi yang sama (audit ulang 2026-10-29).
+        self.updated_at = datetime.now().isoformat()
         self._initialized = True
         self._team_list = set(self.attack.keys()) | set(self.defense.keys())
 
