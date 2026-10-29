@@ -80,6 +80,8 @@ def build_xg_map(fetch_remote: bool = False) -> dict[tuple[str, str, str], tuple
         _log.info("xG memakai cache lokal (%d match)", len(out))
         return out
     merged = dict(out)
+    # Kunci merge memakai normalizer peta lokal (lihat di bawah).
+    from football_etl import normalize_name
     for league, div in UNDERSTAT_LEAGUES.items():
         for season in ("2023", "2024"):
             try:
@@ -90,8 +92,13 @@ def build_xg_map(fetch_remote: bool = False) -> dict[tuple[str, str, str], tuple
             if not rows:
                 continue
             for r in rows:
-                key = (div, str(r["date"])[:10], norm_team(r["home"]),
-                       norm_team(r["away"]))
+                # Kunci merge HARUS memakai normalizer yang sama dengan
+                # peta lokal (football_etl.normalize_name lewat
+                # features._load_xg_map); norm_team utils punya aturan
+                # alias berbeda sehingga baris remote tidak pernah
+                # bertemu kunci lokalnya.
+                key = (div, str(r["date"])[:10], normalize_name(r["home"]),
+                       normalize_name(r["away"]))
                 xgh, xga = to_float(r.get("xg_home")), to_float(r.get("xg_away"))
                 if xgh is not None and xga is not None:
                     merged[key] = (xgh, xga)

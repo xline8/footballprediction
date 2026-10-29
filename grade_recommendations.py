@@ -334,11 +334,15 @@ def _grade_archive(archive_date, store, res_idx, cor_idx, now, seen=None):
             if seen is not None:
                 seen.add(k)
             old = store.get(k)
-            # update bila baru, atau bila baru final dan (dulu pending / beda).
-            # Jangan downgrade final -> pending. Gagal final yg sama -> skip.
+            # Tulis bila: baru; berubah DAN (yang baru final — termasuk
+            # finalisasi dari pending — atau yang lama masih pending).
+            # Pending yang di-regenerasi arsip dengan harga/p_model
+            # terkoreksi ikut segar; final tidak pernah di-downgrade
+            # menjadi pending.
             if old is None or (
-                    g["status"] != "pending"
-                    and (old["status"] == "pending" or not _same(old, g))):
+                    not _same(old, g)
+                    and (g["status"] != "pending"
+                         or old["status"] == "pending")):
                 g["graded_at"] = g["graded_at"] or now
                 store[k] = g
                 changed += 1
@@ -405,8 +409,9 @@ def _grade_archive(archive_date, store, res_idx, cor_idx, now, seen=None):
                 seen.add(uk)
             uold = store.get(uk)
             if uold is None or (
-                    unit_g["status"] != "pending"
-                    and (uold["status"] == "pending" or not _same(uold, unit_g))):
+                    not _same(uold, unit_g)
+                    and (unit_g["status"] != "pending"
+                         or uold["status"] == "pending")):
                 store[uk] = unit_g
                 changed += 1
     return changed
@@ -533,11 +538,29 @@ def main(argv=None):
     # ter-grade) menggantung sebagai pending abadi tanpa pemangkasan
     # ini. Hanya pending berumur > 1 hari yang dipangkas; baris final
     # adalah riwayat kalibrasi dan tidak pernah dibuang.
+    # Syarat tambahan (audit ronde 4): pemangkasan versi lama percaya
+    # penuh pada kelengkapan arsip — laga yang DITUNDA yang arsipnya
+    # hilang/tergenerasi ulang akan ikut terbuang padahal belum main.
+    # Kini leg hanya dipangkas bila laganya SUDAH punya hasil (memang
+    # yatim), dan semua baris punya jalan keluar usia 14 hari.
     cutoff = (datetime.now(timezone.utc).date()
               - timedelta(days=1)).isoformat()
+    ancient = (datetime.now(timezone.utc).date()
+               - timedelta(days=14)).isoformat()
+
+    def _played(g):
+        if g["level"] != "leg" or not g["home"]:
+            return False
+        try:
+            return _match_result(res_idx, g["date"], g["home"],
+                                 g["away"], g["competition"]) is not None
+        except Exception:
+            return False
+
     orphans = [k for k, g in store.items()
                if k not in seen and g["status"] == "pending"
-               and g["date"] < cutoff]
+               and g["date"] < cutoff
+               and (g["date"] < ancient or _played(g))]
     for k in orphans:
         del store[k]
     if orphans:

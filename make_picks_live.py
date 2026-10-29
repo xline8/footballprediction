@@ -23,7 +23,7 @@ Output: append ke live_shadow_ledger.csv (CSS, actual_outcome/pnl default kosong
 import csv
 import json
 import os
-from datetime import date
+from datetime import date, datetime, timezone
 
 import numpy as np
 
@@ -174,7 +174,10 @@ def main():
             div = r.get("div", "")
             if div not in TOP5:
                 continue
-            if (r.get("date") or "") < date.today().isoformat():
+            # Tanggal file prediksi adalah UTC; membandingkannya ke
+            # tanggal LOKAL bisa membuang laga yang belum kickoff pada
+            # run manual dini hari (00:00-07:00 WIB).
+            if (r.get("date") or "") < datetime.now(timezone.utc).date().isoformat():
                 continue  # laga lampau (file prediksi basi) — jangan buat pick
             try:
                 oh = float(r.get("b365h") or 0)
