@@ -99,6 +99,24 @@ refresh training data → check data → build xG → fit models → score upcom
 → predict cups → status
 ```
 
+How the pieces connect:
+
+```mermaid
+flowchart LR
+    FD[football-data.co.uk] --> HIST[all_matches_clean.csv]
+    UG[Understat xG] --> HIST
+    HIST --> FIT[Dixon-Coles + meta model]
+    FIT --> PRED[predictions + corners]
+    TA[TipsterArea] --> RES[results for grading]
+    TA --> MC[market_compare.csv]
+    RES --> LEDGER[ledger + CLV]
+    PRED --> LEDGER
+    MC --> REC[single bet + slips]
+    PRED --> API[API server :8000]
+    JIT[JIT capture] --> EXT[near-kickoff corner / BTTS odds]
+    AF[API-Football] --> JIT
+```
+
 | Component | File | Role |
 |---|---|---|
 | Dixon-Coles engine | `model_v2.py` | bivariate Poisson model with low-score dependency correction and decayed team ratings. Fit mode `DC_FIT_MODE` (`goals` or `blend`; default `blend` = 0.5·goals + 0.5·xG where xG exists) |
@@ -170,17 +188,22 @@ and cup picks are graded per competition in `ledger_summary.json`.
 
 ## Reference
 
-[QUANT_RESEARCH_REPORT.md](QUANT_RESEARCH_REPORT.md) contains the full
+[QUANT_RESEARCH_REPORT.md](docs/QUANT_RESEARCH_REPORT.md) contains the full
 scientific summary: the modeling milestones, the de-vigging and small-sample
 lessons, and the market-efficiency evidence.
 
-[EXPERIMENT_XG_DC.md](EXPERIMENT_XG_DC.md) documents the xG-vs-goals
+[EXPERIMENT_XG_DC.md](docs/EXPERIMENT_XG_DC.md) documents the xG-vs-goals
 Dixon-Coles fit experiment and the go-live gates (meta stack, derivatives,
 held-out seasons) behind the `blend` fit-mode default.
 
-[EXPERIMENT_EDGE_BAND.md](EXPERIMENT_EDGE_BAND.md) documents the edge-band
-experiment and its UNVALIDATED verdict: the 0.20–0.22 band never fires in
-walk-forward history, which is why the live policy engine emits no picks.
+[EXPERIMENT_EDGE_BAND.md](docs/EXPERIMENT_EDGE_BAND.md) documents the
+edge-band experiment and its UNVALIDATED verdict: the 0.20–0.22 band never
+fires in walk-forward history, which is why the live policy engine emits no
+picks.
+
+The remaining research and verification documents (data audit, experiments
+log, per-feature verification reports, working TODO list) live in
+[docs/](docs/).
 
 ## Daily recommendations (single bet + slips)
 
@@ -293,3 +316,7 @@ python test_core.py
 The xG cache is rebuilt from tracked Understat season dumps with
 `data_enrichment/build_xg_matches.py` (local, offline; missing season files
 are skipped without failing the pipeline).
+
+## License
+
+MIT. See [LICENSE](LICENSE).
