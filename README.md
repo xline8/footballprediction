@@ -91,15 +91,6 @@ python api_server.py
 The live deployment runs it under a systemd unit with Restart=always.
 That unit is kept with the deployment and is not part of this repository.
 
-JIT hybrid capture runs every 30 minutes (organic odds accumulation for
-closing-line value):
-
-```
-python jit_orchestrator.py             # live run
-python jit_orchestrator.py --dry-run   # log window, skip API
-python jit_orchestrator.py --selfcheck # offline window-logic check
-```
-
 ## How it works
 
 Main pipeline order (`pipeline_orchestrator.py --run-all`):
@@ -124,8 +115,6 @@ flowchart LR
     PRED --> LEDGER
     MC --> REC[single bet + slips]
     PRED --> API[API server :8000]
-    JIT[JIT capture] --> EXT[near-kickoff corner / BTTS odds]
-    AF[API-Football] --> JIT
 ```
 
 | Component | File | Role |
@@ -133,10 +122,9 @@ flowchart LR
 | Dixon-Coles engine | `model_v2.py` | bivariate Poisson model with low-score dependency correction and decayed team ratings. Fit mode `DC_FIT_MODE` (`goals` or `blend`; default `blend` = 0.5·goals + 0.5·xG where xG exists) |
 | Meta model | `experiments/experiment_meta.py`, `backtest_picks.py` | stacks logits of the DC model, the feature model, and market-implied probabilities with a walk-forward multinomial logistic regression; consumes sharp signals (Pinnacle deviation, shin-fair probabilities, midweek flags) |
 | Matrix pricing | `matrix_pricer.py` | builds the bivariate Poisson scoreline matrix and meta-calibrates it so summed 1X2 marginals match the meta model; O/U and BTTS derive from that matrix |
-| Corner model | `model_corners_v3.py` | Poisson model predicting team corner counts and corner O/U lines from rolling shot statistics (fitted parameters in `ta/corner_params.json`). Beats league base-rate on walk-forward log loss, Brier, MAE, RMSE. Walk-forward calibration against actual corner counts is documented under Measured results; a corner ROI backtest still waits on the near-kickoff odds that JIT capture is accumulating |
+| Corner model | `model_corners_v3.py` | Poisson model predicting team corner counts and corner O/U lines from rolling shot statistics (fitted parameters in `ta/corner_params.json`). Beats league base-rate on walk-forward log loss, Brier, MAE, RMSE. Walk-forward calibration against actual corner counts is documented under Measured results. No bookmaker corner-odds feed is connected, so the corner model is assessed on calibration against actual counts, not on price value |
 | Data enrichment | `data_enrichment/` | joins Pinnacle odds, midweek/cup fatigue flags, and rolling xG differentials into `all_matches_enriched.csv`, without touching the clean source data |
 | Market orchestration | `market_orchestration.py` | syncs tipsterarea match-page odds for every model fixture in the today..+4 window during the daily run, then builds `market_compare.csv`: per fixture and market, the 1xBet price, the cross-bookmaker median, a normalised implied probability, and the bookmaker count. Also writes the daily archive and routes cup picks into the ledger |
-| JIT hybrid capture | `jit_orchestrator.py` | every 30 minutes loads the Understat fixture cache, keeps matches starting within 45 minutes, scrapes the free source (TipsterArea) for 1X2 and O/U first, then calls API-Football v3 only for premium markets the scrape lacks (Corners O/U, BTTS), deduping into `ta/external_corner_odds.csv` and `ta/external_btts_odds.csv`. API is hit only for leagues with a match in the window; raw responses cached; `--selfcheck` verifies window logic offline. On the free plan the API serves only current-day data, so capture backfills forward from today |
 | Policy engine | `backtest_picks.py` | filters betting decisions after the model (edge thresholds, overlays, staking) so calibration stays intact; candidate policies must clear the dual gate before going live |
 
 ## Live shadow tracker
@@ -296,14 +284,13 @@ through its own scheduler):
 
 ```
 0 21 * * 0 cd /path/to/football-data && ./weekly_refit.sh >> logs/weekly_refit.log 2>&1
-*/30 * * * * cd /path/to/football-data && python jit_orchestrator.py >> logs/jit_capture.log 2>&1
 ```
 
 ## Environment & dependencies
 
-`API_FOOTBALL_KEY` goes in `.env` (gitignored). Only JIT capture uses it:
-results, training data, and market odds all come from tipsterarea,
-football-data.co.uk, and Understat. Optional overrides:
+No API keys are required: results, training data, and market odds all
+come from tipsterarea, football-data.co.uk, and Understat. Optional
+overrides:
 `FOOTBALL_DC_FIT_MODE` (`goals`|`blend`, default `blend`) and
 `FOOTBALL_REFRESH_SEASON` (default `2627`).
 
@@ -327,8 +314,8 @@ another, check which machine produced it before treating either as wrong.
 
 ## Credits
 
-Match data comes from four external sources, and each one feeds a different
-part of the pipeline:
+Match data comes from three external sources, and each one feeds a
+different part of the pipeline:
 
 - **football-data.co.uk** — historical league results and odds for all 21
   divisions, including the Pinnacle, market-average, and Bet365 closing
@@ -337,17 +324,11 @@ part of the pipeline:
   `all_matches_clean.csv`.
 - **Understat** — expected-goals data, kept as season dumps in `xg_raw/` and
   rebuilt into the xG match cache that the `blend` Dixon-Coles fit consumes.
-  Its fixture list also sets the window for JIT capture.
 - **TipsterArea** — fixtures and full-time results for grading, scraped by
   `ta_scrape.py`. Its match pages carry the multi-bookmaker odds snapshots
   behind `market_compare.csv`. The 1xBet prices in the daily recommendations
   come from those pages; the project has no direct 1xBet feed. Cup fixtures
   and cup results come from here too.
-- **API-Football** — near-kickoff odds for the two markets the scrape does
-  not carry, corners (bet 45) and BTTS (bet 8). JIT capture calls it only
-  for matches starting within 45 minutes and stores the results in
-  `ta/external_corner_odds.csv` and `ta/external_btts_odds.csv`. Nothing
-  else in the project calls this API.
 
 ## Testing
 
