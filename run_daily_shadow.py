@@ -32,6 +32,10 @@ def main():
         res = generate_predictions()
         print(f"[1/6] predictions: {res.get('n_output_rows', 0)} rows "
               f"(status {res.get('status')})")
+        if res.get('status') != 'success':
+            failed = True
+            print(f"[1/6] FAILED predictions: status internal "
+                  f"{res.get('status')!r}; file prediksi lama tetap di disk")
     except Exception as e:
         failed = True
         print(f"[1/6] FAILED predictions: {e!r}")
@@ -82,9 +86,13 @@ def main():
         out = (r.stdout or r.stderr or "").strip()
         print(f"[6/7] tipsterarea hasil sync: rc={r.returncode} | {out[-300:]}")
         if r.returncode != 0:
-            print(f"[6/7] WARNING ta sync rc={r.returncode} (lanjut pipeline)")
+            failed = True
+            print(f"[6/7] FAILED ta sync rc={r.returncode} "
+                  f"(lanjut pipeline, tapi run ditandai gagal)")
     except Exception as e:
-        print(f"[6/7] WARNING ta sync gagal: {e!r} (lanjut pipeline)")
+        failed = True
+        print(f"[6/7] FAILED ta sync: {e!r} "
+              f"(lanjut pipeline, tapi run ditandai gagal)")
 
     # [7/9] Market odds sync: semua fixture model (liga TOP5 + piala), window
     # hari ini..+4, urut kickoff terdekat. Throttle market_needs_refresh diurus
@@ -100,7 +108,9 @@ def main():
         print(f"[7/9] market odds sync: {len(mkt_ids)} fixture model, "
               f"+{r.get('markets', 0)} harga baru")
     except Exception as e:
-        print(f"[7/9] WARNING market sync gagal: {e!r} (lanjut pipeline)")
+        failed = True
+        print(f"[7/9] FAILED market sync: {e!r} "
+              f"(lanjut pipeline, tapi run ditandai gagal)")
 
     # [8/9] Join odds pasar ke prediksi -> market_compare.csv (1xbet + median +
     # prob implied ternormalisasi). Kegagalan tidak menggagalkan pipeline.
@@ -109,7 +119,9 @@ def main():
         rc = market_orchestration.build_market_compare()
         print(f"[8/9] market_compare: {rc['fixtures']} fixture, {rc['rows']} baris")
     except Exception as e:
-        print(f"[8/9] WARNING market_compare gagal: {e!r} (lanjut pipeline)")
+        failed = True
+        print(f"[8/9] FAILED market_compare: {e!r} "
+              f"(lanjut pipeline, tapi run ditandai gagal)")
 
     # [8b/9] Rekomendasi harian deterministik (dari market_compare.csv):
     # single bet + slip odds ±2 + slip odds ±10, semua untuk tanggal laporan.
@@ -124,7 +136,9 @@ def main():
               f"{rc['slip10']['n_legs']} kaki, total "
               f"{rc['slip10']['total_odds']}, in_band={rc['slip10']['in_band']}")
     except Exception as e:
-        print(f"[8b/9] WARNING rekomendasi gagal: {e!r} (lanjut pipeline)")
+        failed = True
+        print(f"[8b/9] FAILED rekomendasi: {e!r} "
+              f"(lanjut pipeline, tapi run ditandai gagal)")
 
     # [8c/9] Grading harian produk rekomendasi (pick teraman/single/slip2/
     # slip10) dari arsip <= kemarin -> histori kalibrasi. Bisa hasil-nya belum
@@ -134,7 +148,9 @@ def main():
         rc = grade_recommendations.main()
         print(f"[8c/9] grading rekomendasi: rc={rc}")
     except Exception as e:
-        print(f"[8c/9] WARNING grading rekomendasi gagal: {e!r} (lanjut pipeline)")
+        failed = True
+        print(f"[8c/9] FAILED grading rekomendasi: {e!r} "
+              f"(lanjut pipeline, tapi run ditandai gagal)")
 
     # [9/9] Arsip snapshot harian (dengan market_compare) + rutekan pick piala
     # ke ledger/picks.jsonl (kompetisi) sebelum grading terpisah.
@@ -145,7 +161,27 @@ def main():
         print(f"[9/9] archive {ar['date']}: {len(ar['archived'])} file | "
               f"cup picks -> ledger: {n_cup} baru")
     except Exception as e:
-        print(f"[9/9] WARNING archive/cup-ledger gagal: {e!r} (lanjut pipeline)")
+        failed = True
+        print(f"[9/9] FAILED archive/cup-ledger: {e!r} "
+              f"(lanjut pipeline, tapi run ditandai gagal)")
+
+    # [9b/9] Grading ledger uang (score_ledger): nilai ledger/picks.jsonl
+    # (liga + piala) dari hasil yang sudah tersinkron di langkah-langkah
+    # atas. Dulu grading ini hanya tercapai lewat run manual
+    # pipeline_orchestrator --incremental, jadi ROI/CLV bisa basi
+    # diam-diam sementara laporan harian tampil sukses (audit K4).
+    # score_ledger mengeksekusi saat diimpor, jadi dijalankan sebagai
+    # subprocess.
+    try:
+        r = _run_py("score_ledger.py")
+        out = (r.stdout or r.stderr or "").strip()
+        print(f"[9b/9] score_ledger: rc={r.returncode} | {out[-300:]}")
+        if r.returncode != 0:
+            failed = True
+            print("[9b/9] FAILED score_ledger (run ditandai gagal)")
+    except Exception as e:
+        failed = True
+        print(f"[9b/9] FAILED score_ledger: {e!r}")
 
     try:
         import resolve_and_monitor
