@@ -155,6 +155,20 @@ edge-band reason given there. The daily recommendations further down are a
 separate, deterministic product built from model probabilities and real
 1xBet prices; they are not policy-engine picks and carry no edge claim.
 
+`grade_recommendations.py` (step 8c/9) grades the daily recommendation
+products — safest picks, single, and the two slips — from each archived
+date. Legs settle on the 90-minute FT score from `ta/results.csv` (no
+API-Football); cup ties that advance via extra time or penalties still lose
+on the 90-minute score. Slip units are settled as one bet (a push leg drops
+out; one losing leg loses the unit; pending legs keep the unit pending). It
+appends to `ledger/daily_pick_grades.jsonl` and rewrites
+`ledger/calibration_summary.json` (overall, per product, per market, and per
+probability-band hit rate vs declared model probability, plus a Brier score
+for the safest picks). Corner picks would use `HC`/`AC` from
+`all_matches_clean.csv`; cup corners are not graded because tipsterarea has
+no actual corner source, and they are excluded from all calibration stats.
+Both outputs are gitignored runtime state.
+
 ## Cups: EFL Cup & DFB Pokal
 
 `predict_cups.py` predicts EFL Cup and DFB Pokal ties without API-Football.

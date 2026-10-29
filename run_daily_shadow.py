@@ -126,6 +126,16 @@ def main():
     except Exception as e:
         print(f"[8b/9] WARNING rekomendasi gagal: {e!r} (lanjut pipeline)")
 
+    # [8c/9] Grading harian produk rekomendasi (pick teraman/single/slip2/
+    # slip10) dari arsip <= kemarin -> histori kalibrasi. Bisa hasil-nya belum
+    # tersedia -> pending, dinilai run berikutnya. Gagal tidak menggagalkan.
+    try:
+        import grade_recommendations
+        rc = grade_recommendations.main()
+        print(f"[8c/9] grading rekomendasi: rc={rc}")
+    except Exception as e:
+        print(f"[8c/9] WARNING grading rekomendasi gagal: {e!r} (lanjut pipeline)")
+
     # [9/9] Arsip snapshot harian (dengan market_compare) + rutekan pick piala
     # ke ledger/picks.jsonl (kompetisi) sebelum grading terpisah.
     try:
