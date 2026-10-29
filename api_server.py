@@ -216,11 +216,16 @@ def load_odds_data() -> List[Dict]:
 @app.get("/api/status")
 async def get_pipeline_status():
     """Get overall pipeline status."""
+    # MatchCache segar per panggilan: singleton modul membeku pada
+    # keadaan saat import sehingga bagian 'data' tidak pernah berubah
+    # setelah server start. Dengan penerimaan cache berbasis stamp,
+    # instans baru memakai pickle yang sama bila data belum berubah.
+    fresh = MatchCache()
     status = {
         'timestamp': datetime.now().isoformat(),
         'data': {
-            'total_matches': len(cache.matches),
-            'divisions': list(cache.by_div.keys()),
+            'total_matches': len(fresh.matches),
+            'divisions': list(fresh.by_div.keys()),
         },
         'models': {},
         'predictions': {
@@ -250,12 +255,21 @@ async def get_pipeline_status():
             picks = [json.loads(line) for line in f if line.strip()]
         # Jumlah ter-grade dibaca dari grades.jsonl (status di
         # picks.jsonl sendiri tidak pernah berubah dari 'pending',
-        # jadi hitungan lama selalu graded=0).
+        # jadi hitungan lama selalu graded=0). Hitung ID grade yang
+        # BENAR-BENAR ada di picks — menghitung baris mentah rusak
+        # diam-diam bila suatu saat ada grade yatim/duplikat.
+        pick_ids = {p["pick_id"] for p in picks}
         graded = 0
         grades_file = os.path.join(BASE_DIR, "ledger", "grades.jsonl")
         if os.path.exists(grades_file):
+            seen = set()
             with open(grades_file, 'r', encoding='utf-8') as f:
-                graded = sum(1 for line in f if line.strip())
+                for line in f:
+                    if line.strip():
+                        gid = json.loads(line).get("pick_id")
+                        if gid in pick_ids:
+                            seen.add(gid)
+            graded = len(seen)
         status['picks'] = {'total': len(picks),
                            'pending': len(picks) - graded,
                            'graded': graded}

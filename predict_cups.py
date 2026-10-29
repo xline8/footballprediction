@@ -527,7 +527,13 @@ def main():
     print(f"skipped: {len(skipped)}")
     for s in skipped:
         print("   -", s[0], s[1], f"{s[2]} v {s[3]}", "|", s[4])
-    return {"n_gol": len(gol_rows), "n_corner": len(corner_rows), "skipped": skipped}
+    # Status jujur untuk rantai harian: fixture piala ADA tapi nol
+    # prediksi gol = anomali (semua tie gagal dipetakan), bukan hari
+    # tanpa piala. Hari tanpa fixture piala tetap 'success'.
+    status = "failed" if (fixtures and not gol_rows) else "success"
+    return {"n_gol": len(gol_rows), "n_corner": len(corner_rows),
+            "skipped": skipped, "n_fixtures": len(fixtures),
+            "status": status}
 
 
 if __name__ == "__main__":

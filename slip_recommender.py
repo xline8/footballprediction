@@ -216,6 +216,35 @@ def _search(by_match, min_legs, max_legs, lo, hi, target, stats=None):
             legs.pop()
 
     rec(0, 1.0, 1.0, [])
+    if best_near is None and not truncated[0]:
+        # Semua kombinasi valid melewati cap produk (hi * 2.5), jadi
+        # fallback terdekat ikut kosong — contoh nyata: dua laga @2.4
+        # untuk slip2 (produk 5.76 > cap 5.375) menghasilkan file
+        # kosong padahal kombinasi terdekat tersedia. Ulangi tanpa cap
+        # dengan anggaran node kecil, khusus mencari best_near
+        # (best_in tidak bisa muncul di sini: tot > cap > hi).
+        nodes[0] = 0
+
+        def rec2(i, tot, jp, legs):
+            if truncated[0]:
+                return
+            nodes[0] += 1
+            if nodes[0] > 50_000:
+                truncated[0] = True
+                return
+            if len(legs) >= min_legs:
+                consider(tot, jp, legs)
+            if i == len(pools) or len(legs) == max_legs:
+                return
+            rec2(i + 1, tot, jp, legs)
+            for leg in pools[i]:
+                if truncated[0]:
+                    return
+                legs.append(leg)
+                rec2(i + 1, tot * leg["o"], jp * leg["pm"], legs)
+                legs.pop()
+
+        rec2(0, 1.0, 1.0, [])
     if truncated[0]:
         print(f"  ! slip search mencapai batas node {SEARCH_NODE_BUDGET}; "
               f"memakai kandidat terbaik yang sudah ditemukan")
@@ -248,10 +277,14 @@ def _write_slip(path, cols, best, in_band, extra=None):
             if extra:
                 row.update(extra)
             rows.append(row)
-    with open(path, "w", newline="", encoding="utf-8") as f:
+    # Tulis atomik: file rekomendasi dibaca grader + arsip; penulisan
+    # terpotong tidak boleh terbaca sebagai slip kosong.
+    tmp = path + ".tmp"
+    with open(tmp, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=cols)
         w.writeheader()
         w.writerows(rows)
+    os.replace(tmp, path)
     return rows
 
 
@@ -276,10 +309,12 @@ def recommend_single(day):
                  "p_model": round(best["pm"], 4),
                  "ev": round(best["pm"] * best["o"] - 1.0, 4),
                  "below_floor": "true" if below else "false"}]
-    with open(OUT_SINGLE, "w", newline="", encoding="utf-8") as f:
+    tmp = OUT_SINGLE + ".tmp"
+    with open(tmp, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=SINGLE_COLS)
         w.writeheader()
         w.writerows(rows)
+    os.replace(tmp, OUT_SINGLE)
     s = {"n_legs": len(rows),
          "pick": (f"{best['home']} vs {best['away']}: {best['market']} "
                   f"{best['line']} {best['sel']} @{best['o']:.2f}"

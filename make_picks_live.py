@@ -160,10 +160,13 @@ def _pf(x):
 
 
 def main():
-    params, records = _fit_meta()
     if not os.path.exists(PRED):
+        # None = file hilang (rantai harus menandai gagal). Versi lama
+        # mengembalikan 0 yang tak bisa dibedakan dari '0 pick baru
+        # yang sah' oleh pemanggil (audit ronde 3).
         print("! predictions_upcoming.csv tidak ada. Jalankan predict_upcoming dulu.")
-        return 0
+        return None
+    params, records = _fit_meta()
     existing = _load_pending_ids()
     new = []
     with open(PRED, newline="", encoding="utf-8") as f:

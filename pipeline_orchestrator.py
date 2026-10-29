@@ -103,8 +103,12 @@ class PipelineOrchestrator:
         # Kejujuran status (audit K4): langkah yang melaporkan 'failed'
         # tidak boleh tertutup status 'completed'. Pemanggil (cron refit
         # mingguan) membaca field ini dan exit code proses.
+        # 'partial' (mis. fallback legacy step_score_upcoming) juga
+        # kegagalan untuk agregasi — rantai harian menolak status
+        # selain 'success' dengan cara yang sama (audit ronde 3).
         failed_steps = [k for k, v in results.items()
-                        if isinstance(v, dict) and v.get('status') == 'failed']
+                        if isinstance(v, dict)
+                        and v.get('status') in ('failed', 'partial')]
         if failed_steps:
             results['failed_steps'] = failed_steps
             if results.get('status') == 'completed':
@@ -475,6 +479,19 @@ class PipelineOrchestrator:
                 import csv
                 with open(corner_file, 'r') as f:
                     rows = list(csv.DictReader(f))
+                if not rows:
+                    # File segar tapi KOSONG padahal prediksi liga ada =
+                    # kegagalan diam (lolos sebagai sukses di versi lama).
+                    pred_file = os.path.join(
+                        BASE_DIR, "predictions_upcoming.csv")
+                    n_pred = 0
+                    if os.path.exists(pred_file):
+                        with open(pred_file, 'r') as f:
+                            n_pred = len(list(csv.DictReader(f)))
+                    if n_pred > 0:
+                        log("  X Corner predictions empty while league "
+                            "predictions exist", "ERROR")
+                        return {'status': 'failed', 'error': 'empty_output'}
                 log(f"  OK Corner predictions: {len(rows)} rows", "INFO")
                 self.stats['corner_predictions'] = len(rows)
                 return {
@@ -723,8 +740,12 @@ class PipelineOrchestrator:
 
         # Agregasi kejujuran yang sama seperti run_full_pipeline:
         # langkah berstatus 'failed' menggagalkan status run.
+        # 'partial' (mis. fallback legacy step_score_upcoming) juga
+        # kegagalan untuk agregasi — rantai harian menolak status
+        # selain 'success' dengan cara yang sama (audit ronde 3).
         failed_steps = [k for k, v in results.items()
-                        if isinstance(v, dict) and v.get('status') == 'failed']
+                        if isinstance(v, dict)
+                        and v.get('status') in ('failed', 'partial')]
         if failed_steps:
             results['failed_steps'] = failed_steps
             if results.get('status') == 'completed':
@@ -919,12 +940,19 @@ def main():
     if args.predict_only:
         results = orchestrator.step_score_upcoming()
         print(json.dumps(results, indent=2, default=str))
+        if results.get('status') in ('failed', 'partial'):
+            sys.exit(1)
         return
 
     if args.update_data:
-        results = orchestrator.step_check_data()
-        results.update(orchestrator.step_fit_models())
+        check = orchestrator.step_check_data()
+        results = dict(check)
+        fit = orchestrator.step_fit_models()
+        results.update(fit)
         print(json.dumps(results, indent=2, default=str))
+        if check.get('status') == 'failed' or \
+                fit.get('status') == 'failed':
+            sys.exit(1)
         return
 
     if args.incremental:

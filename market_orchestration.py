@@ -302,6 +302,7 @@ def build_market_compare(date_from=None, n_days=5):
         ("predictions_cups_upcoming.csv", "competition", "div"),
     ]
     n_fix = 0
+    n_unmatched = 0
     for fn, comp_col, div_col in sources:
         for r in _read_csv(os.path.join(HERE, fn)):
             d = _parsedate(r.get("date"))
@@ -312,6 +313,10 @@ def build_market_compare(date_from=None, n_days=5):
             gid = _match_game_id(r.get("home", ""), r.get("away", ""),
                                  r.get("date", ""), hint)
             if not gid:
+                # Prediksi tanpa fixture TA (mis. jadwal belum terbit
+                # di TipsterArea): dulu hilang diam-diam; kini terhitung
+                # dan dilaporkan rantai harian.
+                n_unmatched += 1
                 continue
             n_fix += 1
             cap, state = _prematch_state(gid)
@@ -335,7 +340,7 @@ def build_market_compare(date_from=None, n_days=5):
                         })
     _write_csv(os.path.join(HERE, "market_compare.csv"),
                MARKET_COMPARE_COLS, out)
-    return {"fixtures": n_fix, "rows": len(out)}
+    return {"fixtures": n_fix, "rows": len(out), "unmatched": n_unmatched}
 
 
 # ---------------------------------------------------------------- archive
