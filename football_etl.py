@@ -432,6 +432,11 @@ def load_fixtures(season_year: str = "2026") -> List[Dict]:
     # tanggal LOKAL membuang fixture dini hari WIB (00:00-07:00) dari
     # prediksi pada run tengah malam (audit ronde 3). Pakai tanggal UTC.
     today = datetime.now(timezone.utc).date()
+    # Produk prediksi bersifat prematch: fixture yang sudah selesai
+    # (isResult) atau yang kickoff-nya sudah tercapai pada tanggal UTC
+    # yang sama tidak boleh masuk prediksi/rekomendasi — filter tanggal
+    # saja meloloskannya pada rerun siang/malam (audit GPT 2026-10-31, A).
+    now_utc = datetime.now(timezone.utc).replace(tzinfo=None)
     slug_map = {"E0": "EPL", "SP1": "La_liga", "D1": "Bundesliga",
                 "I1": "Serie_A", "F1": "Ligue_1"}
 
@@ -456,7 +461,12 @@ def load_fixtures(season_year: str = "2026") -> List[Dict]:
             away = nmap.get(f"{div}|{item['a']['title']}")
             if not home or not away:
                 continue
-            dt = datetime.strptime(item["datetime"], "%Y-%m-%d %H:%M:%S").date()
+            if item.get("isResult"):
+                continue  # laga sudah selesai — bukan fixture prematch
+            dt_full = datetime.strptime(item["datetime"], "%Y-%m-%d %H:%M:%S")
+            if dt_full <= now_utc:
+                continue  # kickoff sudah tercapai (UTC)
+            dt = dt_full.date()
             if dt < today:
                 continue  # jangan muat fixture yang sudah lewat
             fixtures.append({
