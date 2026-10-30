@@ -176,7 +176,7 @@ def _load_ta_picks():
 
     Filter:
     - Status pending/open (selain SETTLED)
-    - Kickoff date >= today
+    - Kickoff >= tanggal jangkar, dan belum lewat dari sekarang
     - EV > 0 (hanya picks yang menguntungkan)
     - div bisa dipetakan
 
@@ -204,6 +204,19 @@ def _load_ta_picks():
         kickoff = r.get("kickoff_utc", "")
         if not kickoff or kickoff[:10] < ANCHOR:
             continue
+        # Jangkar datetime penuh (audit ronde 13): filter tanggal saja
+        # membiarkan bet laga yang sudah kickoff di hari yang sama
+        # masuk peringkat (kasus Le Havre–PSG: kickoff 18:00 UTC,
+        # run malam — tanggal sama, laga sudah berjalan, tetap jadi
+        # top pick laga itu). Jam kickoff tersimpan naif UTC.
+        try:
+            ko = datetime.fromisoformat(kickoff)
+            if ko.tzinfo is None:
+                ko = ko.replace(tzinfo=timezone.utc)
+            if ko <= datetime.now(timezone.utc):
+                continue
+        except ValueError:
+            pass
         league = r.get("league", "").strip()
         div = _league_div(league)
         if not div:
