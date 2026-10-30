@@ -637,11 +637,35 @@ class PipelineOrchestrator:
             'freshness_warnings': warnings
         }
 
+    @staticmethod
+    def _restore_xg_snap(xg_out, snap):
+        """Pulihkan xg_matches.csv dari snapshot pra-build (bila ada)."""
+        if not snap:
+            return
+        try:
+            if os.path.exists(snap):
+                shutil.copy2(snap, xg_out)
+                os.remove(snap)
+                log("  ! xg_matches.csv dipulihkan dari snapshot "
+                    "(hasil build terdegradasi ditolak)", "WARN")
+        except OSError:
+            pass
+
     def step_build_xg(self) -> dict:
         """Bangun xg_raw/xg_matches.csv dari dump Understat terversi (lokal)."""
         log("\n[Step xg] Membangun xg_matches.csv dari dump Understat...")
+        xg_out = os.path.join(paths.XGRAW, "xg_matches.csv")
+        snap = None
         try:
             from data_enrichment.build_xg_matches import build as build_xg
+            # build() menulis ulang xg_matches.csv SEBELUM langkah ini
+            # sempat menilai hasilnya, jadi status partial/failed saja
+            # tidak melindungi artefaknya: rantai harian tetap akan
+            # mengonsumsi file terdegradasi itu. Snapshot dulu;
+            # pulihkan bila hasil build terdegradasi (audit ronde 8).
+            if os.path.exists(xg_out):
+                snap = xg_out + ".bak-snap"
+                shutil.copy2(xg_out, snap)
             r = build_xg()
             # build() melewati dump yang hilang/rusak dengan senyap
             # (daftar 'missing' di return dict-nya tidak pernah dibaca
@@ -659,16 +683,23 @@ class PipelineOrchestrator:
             if zero_divs or cur_missing:
                 log(f"  X build_xg_matches: divisi kosong {zero_divs}, "
                     f"dump musim berjalan rusak {cur_missing}", "ERROR")
+                self._restore_xg_snap(xg_out, snap)
                 return {"status": "failed" if not r.get("n_rows") else "partial",
                         **r, "zero_divs": zero_divs}
             if missing:
                 log(f"  ! build_xg_matches: {len(missing)} dump historis "
                     f"dilewati: {[nm for nm, _ in missing]}", "WARN")
             log(f"  OK xG matches: {r['n_rows']} rows", "INFO")
+            if snap:
+                try:
+                    os.remove(snap)
+                except OSError:
+                    pass
             return {"status": "success", **r}
         except Exception as e:
             log(f"  X build_xg_matches gagal: {str(e)}", "ERROR")
             traceback.print_exc()
+            self._restore_xg_snap(xg_out, snap)
             return {"status": "failed", "error": str(e)}
 
     def step_fit_models(self) -> dict:
