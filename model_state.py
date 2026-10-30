@@ -172,6 +172,7 @@ class ModelState:
             self.defense[opp] += k_factor * ((goals_against - exp_goals[0]) / max(exp_goals[0], 0.1))
 
         self.last_update = datetime.now()
+        self.updated_at = datetime.now().isoformat()
         self.n_matches_trained += 1
         self._prediction_cache.clear()  # Clear prediction cache
 
