@@ -29,7 +29,6 @@ market_orchestration.archive_snapshots.
 Run: python slip_recommender.py [--date YYYY-MM-DD]
 """
 import csv
-import math
 import os
 import sys
 from collections import defaultdict
@@ -65,9 +64,11 @@ S10_MAX_EXPAND_DAYS = 4
 # yang deterministik, bukan hang), dan flag truncated kini persisten
 # di CSV produk. Ukuran anggaran dari pengukuran audit ronde 12
 # (B12-2): pencarian branch-and-bound membuktikan optimum slate
-# 23 laga/189 leg (slip10) dalam ~3,5 juta node (~5 detik); 4 juta
-# memberi ruang di atasnya tanpa membuka risiko hang.
-SEARCH_NODE_BUDGET = 4_000_000
+# 23 laga/189 leg (slip10) dalam ~3,5 juta node (~5 detik) — audit
+# ronde 13 mengukur itu sebagai ~89% dari anggaran 4 juta, jadi
+# anggaran digandakan di ronde 13 sebagai ruang kepala untuk slate
+# yang lebih besar; kasus terburuk tetap terbatas (~10 detik).
+SEARCH_NODE_BUDGET = 8_000_000
 
 SLIP_COLS = ["date", "home", "away", "competition", "market", "line",
              "selection", "o_1xbet", "p_model", "slip_total_odds",
@@ -179,9 +180,12 @@ def _search(by_match, min_legs, max_legs, lo, hi, target, stats=None):
     """
     import math as _math
 
+    def _eff1(l):
+        return (_math.log(max(l["pm"], 1e-9))
+                / _math.log(max(l["o"], 1.01)))
+
     def _eff(legs):
-        return max(_math.log(max(l["pm"], 1e-9))
-                   / _math.log(max(l["o"], 1.01)) for l in legs)
+        return max(_eff1(l) for l in legs)
 
     keys = sorted(by_match, key=lambda k: (-_eff(by_match[k]),
                                            by_match[k][0]["date"],
@@ -249,9 +253,7 @@ def _search(by_match, min_legs, max_legs, lo, hi, target, stats=None):
 
     best_in = None
     for seed in (_greedy(lambda c: max(c, key=lambda l: l["pm"])),
-                 _greedy(lambda c: max(
-                     c, key=lambda l: _math.log(max(l["pm"], 1e-9))
-                     / _math.log(max(l["o"], 1.01))))):
+                 _greedy(lambda c: max(c, key=_eff1))):
         if seed is not None and (best_in is None or seed[1] > best_in[1]):
             best_in = seed
 

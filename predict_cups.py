@@ -400,6 +400,26 @@ def p_adv(ph, pd, pa, lh, la, rho=None):
     return ph + pd * q_h, pa + pd * (1.0 - q_h)
 
 
+def _fixture_still_open(d, t, now_utc):
+    """True bila fixture NS belum kickoff pada now_utc (naif UTC).
+
+    Jam TA diperlakukan sebagai UTC, konsisten dengan disiplin
+    kickoff ta_model. Jam kosong/rusak mempertahankan perilaku
+    tanggal-saja (fixture dipertahankan). Predikat ini diekstrak dari
+    main (audit ronde 12, D12-10) di ronde 13 supaya teruji unit —
+    logika filter prematch sudah menghasilkan temuan di dua ronde
+    audit berurutan tanpa satu pun tes.
+    """
+    t = (t or "").strip()
+    if not t:
+        return True
+    try:
+        ko = datetime.combine(d, datetime.strptime(t, "%H:%M").time())
+    except ValueError:
+        return True
+    return ko > now_utc
+
+
 def main():
     matches = _load_matches()
     teamdiv = _team_div_map(matches)
@@ -424,18 +444,8 @@ def main():
             # D12-10: status NS saja tidak cukup pada rerun siang —
             # laga yang kickoff-nya sudah lewat (status belum sempat
             # berubah di fixtures.csv) tidak boleh diprediksi lagi.
-            # Jam TA diperlakukan sebagai UTC, konsisten dengan
-            # disiplin kickoff ta_model; jam kosong mempertahankan
-            # perilaku tanggal-saja.
-            t = (r.get("time") or "").strip()
-            if t:
-                try:
-                    ko = datetime.combine(
-                        d, datetime.strptime(t, "%H:%M").time())
-                    if ko <= now_utc:
-                        continue
-                except ValueError:
-                    pass
+            if not _fixture_still_open(d, r.get("time"), now_utc):
+                continue
             fixtures.append({
                 "league": league, "comp": CUP_LEAGUES[league],
                 "date": d, "time": r.get("time", ""),

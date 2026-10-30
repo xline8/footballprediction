@@ -22,7 +22,7 @@ Untuk value pick corner, perlu odds pasar.
 import csv
 import os
 import sys
-from datetime import date, datetime, timezone
+from datetime import datetime, timezone
 from collections import defaultdict
 
 import paths
@@ -176,7 +176,7 @@ def _load_ta_picks():
 
     Filter:
     - Status pending/open (selain SETTLED)
-    - Kickoff date >= today
+    - Kickoff >= tanggal jangkar, dan belum lewat dari sekarang
     - EV > 0 (hanya picks yang menguntungkan)
     - div bisa dipetakan
 
@@ -190,12 +190,26 @@ def _load_ta_picks():
     p_shrunk adalah angka yang sama yang dipakai ta_model sendiri
     untuk gerbang EV-nya, jadi peringkat konsisten dengan keputusan
     sumbernya. Bila p_market tidak ada, p_model dipakai apa adanya.
+
+    Nilai p_model/p_market/EV yang dipakai adalah nilai dari
+    model_markets.csv TERKINI (audit ronde 13), bukan nilai yang
+    tersimpan di baris bet: baris bet adalah catatan posisi untuk
+    grading, dan bet yang berhenti menjadi pemenang harian tidak
+    diterbitkan ulang oleh build, jadi nilai tersimpannya bisa
+    berumur berhari-hari (termasuk warisan build pra-pagar
+    kalibrasi). Bila seleksi tidak ada di model_markets terkini
+    (tidak ada harga berjalan), nilai tersimpan dipakai sebagai
+    fallback — tidak ada sumber yang lebih segar untuk seleksi itu.
     """
     try:
         from ta_model import SHRINK as _SHRINK
     except Exception:
         _SHRINK = 0.5
     rows = _read_csv(os.path.join(PROJ, "ta", "best_bets.csv"))
+    mm = {}
+    for m in _read_csv(os.path.join(PROJ, "ta", "model_markets.csv")):
+        mm[(m.get("game_id", ""), m.get("market", ""), m.get("line", ""),
+            m.get("selection", ""))] = m
     picks = []
     for r in rows:
         status = (r.get("status") or "").upper()
@@ -204,17 +218,37 @@ def _load_ta_picks():
         kickoff = r.get("kickoff_utc", "")
         if not kickoff or kickoff[:10] < ANCHOR:
             continue
+        # Jangkar datetime penuh (audit ronde 13): filter tanggal saja
+        # membiarkan bet laga yang sudah kickoff di hari yang sama
+        # masuk peringkat (kasus Le Havre–PSG: kickoff 18:00 UTC,
+        # run malam — tanggal sama, laga sudah berjalan, tetap jadi
+        # top pick laga itu). Jam kickoff tersimpan naif UTC.
+        try:
+            ko = datetime.fromisoformat(kickoff)
+            if ko.tzinfo is None:
+                ko = ko.replace(tzinfo=timezone.utc)
+            if ko <= datetime.now(timezone.utc):
+                continue
+        except ValueError:
+            pass
         league = r.get("league", "").strip()
         div = _league_div(league)
         if not div:
             continue
-        ev = _num(r.get("edge_pp") or r.get("ev"))
+        cur = mm.get((r.get("game_id", ""), r.get("market", ""),
+                      r.get("line", ""), r.get("selection", "")))
+        if cur is not None:
+            ev = _num(cur.get("ev_shrunk"))
+            prob = _num(cur.get("p_model"))
+            p_mkt = _num(cur.get("p_market"))
+        else:
+            ev = _num(r.get("edge_pp") or r.get("ev"))
+            prob = _num(r.get("p_model"))
+            p_mkt = _num(r.get("p_market"))
         if not ev or ev <= 0:
             continue
-        prob = _num(r.get("p_model"))
         if prob is None:
             continue
-        p_mkt = _num(r.get("p_market"))
         if p_mkt is not None:
             prob = (1 - _SHRINK) * prob + _SHRINK * p_mkt
         picks.append({

@@ -132,7 +132,7 @@ flowchart LR
 
 ## Live shadow tracker
 
-`run_daily_shadow.py` is the daily production chain: fifteen numbered
+`run_daily_shadow.py` is the daily production chain: sixteen numbered
 steps, each isolated with try/except. Two of them gate the rest. The
 fixture step checks freshness itself: it refreshes from Understat when
 the stalest league fixture file is over 12 hours old, marks the run
@@ -141,11 +141,15 @@ fallback (that content is stale even though the rewritten file is
 new), and refuses to predict at all when fixtures remain over 48
 hours old. The prediction step regenerates league predictions; when
 it fails or returns a partial status, every prediction consumer —
-safest picks, live picks, market sync and compare, recommendations,
-the daily archive — is skipped rather than run on yesterday's files,
-and the run exits 1. The remaining steps sync tipsterarea results and
-grade TA bets, predict corners and cups, sync market odds and build
-`market_compare.csv`, build the three daily recommendations, grade
+live picks, market sync and compare, the TA build, safest picks,
+recommendations, the daily archive — is skipped rather than run on
+yesterday's files, and the run exits 1. The remaining steps predict
+corners and cups, sync tipsterarea results and grade TA bets, sync
+market odds and build `market_compare.csv`, rebuild the TipsterArea
+model markets and bets daily (`ta_model.build()`; still-open bets are
+repriced from the day's candidates, and the safest-pick ranking reads
+the current build's probabilities rather than the stored bet rows),
+build the safest picks and the three daily recommendations, grade
 them, archive the day's outputs under `archive/<date>/`, route cup
 picks into their per-competition ledger buckets, grade the money
 ledger (`score_ledger.py`, including CLV from closing odds), and
@@ -236,7 +240,7 @@ history.
 `slip_recommender.py` builds three deterministic recommendation files per
 report date from real 1xBet odds in `market_compare.csv` joined to model
 probabilities (markets 1X2 / DC / OU / BTS; one leg per match). All three are
-produced in the daily shadow run (step 8b) and archived daily.
+produced in the daily shadow run (step 12) and archived daily.
 
 - **`recommended_single.csv`** — the day's single bet: highest EV
   (`p_model * o_1xbet - 1`) among legs with `p_model >= 0.45` and

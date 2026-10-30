@@ -442,6 +442,73 @@ def _load_corner_probs():
     return out
 
 
+def _merge_bets(old, winners, fixtures, captured):
+    """Gabungkan kandidat bet terbaik per laga ke baris best_bets lama.
+
+    Bet baru ditambahkan. Bet yang sudah ada dan masih OPEN diperbarui
+    harga/probabilitas/EV-nya dari kandidat hari ini (audit ronde 13):
+    build dulu melewatkan bet_id yang sudah ada, jadi baris membeku
+    dengan harga dan p_model saat pertama dibuat — termasuk baris
+    warisan build pra-perbaikan pagar kalibrasi — sementara best_picks
+    mengonsumsinya setiap hari. Yang dinilai grade() akhirnya adalah
+    nilai pra-kickoff terakhir, konsisten dengan pandangan closing
+    file ini. Bet yang sudah settle tidak pernah diubah: itu riwayat.
+    Return (baris gabungan, n_baru, n_diperbarui).
+    """
+    merged = dict(old)
+    n_new = n_ref = 0
+    for r in sorted(winners, key=lambda x: -x["ev_shrunk"]):
+        bid = f'{r["game_id"]}|{r["market"]}|{r["line"]}|{r["selection"]}'
+        cur = merged.get(bid)
+        if cur is not None and (cur.get("status") or "").upper() != "OPEN":
+            continue
+        g = fixtures[r["game_id"]]
+        row = {
+            "bet_id": bid, "created_at": captured, "game_id": r["game_id"],
+            "kickoff_utc": f'{r["date"]}T{g["time"]}', "league": g["league"],
+            "home": r["home"], "away": r["away"], "market": r["market"],
+            "line": r["line"], "selection": r["selection"],
+            "bookmaker": r["book_best"], "price": r["odds_best"],
+            "p_model": r["p_model"], "p_market": r["p_market"],
+            "ev": r["ev_shrunk"], "tier": r["tier"], "status": "OPEN",
+            "score": "", "result": "", "profit": "", "graded_at": "",
+        }
+        if cur is None:
+            merged[bid] = row
+            n_new += 1
+        else:
+            for f_ in ("bookmaker", "price", "p_model", "p_market",
+                       "ev", "tier", "kickoff_utc"):
+                cur[f_] = row[f_]
+            n_ref += 1
+    return list(merged.values()), n_new, n_ref
+
+
+def _purge_bogus(rows, issued_ids):
+    """Buang baris OPEN yang harga x peluang pasarnya mustahil
+    (> 1,02) — sisa data korup/salah label dari build lama.
+
+    Dua pengecualian (audit-diri ronde 13): baris yang diterbitkan
+    atau diperbarui build SAAT INI dikecualikan — kandidatnya lolos
+    saringan build hari ini, jadi produk di atas ambang di sana
+    adalah ketidaksepakatan model-pasar yang sah, bukan korupsi;
+    tanpa pengecualian ini purge di build berikutnya membuang baris
+    yang build sebelumnya terbitkan sendiri, lalu build yang sama
+    menerbitkannya lagi (churn abadi, dan baris bisa lenyap sebelum
+    sempat dinilai). Baris settle tidak pernah dibuang: itu riwayat
+    grading. Return (baris tersisa, n_dibuang).
+    """
+    kept, n = [], 0
+    for r in rows:
+        if (r["bet_id"] not in issued_ids
+                and (r.get("status") or "").upper() == "OPEN"
+                and fnum(r.get("price")) * fnum(r.get("p_market")) > 1.02):
+            n += 1
+            continue
+        kept.append(r)
+    return kept, n
+
+
 def build():
     preds = read_csv(PRED)
     fixtures = {r["game_id"]: r for r in read_csv(os.path.join(TA, "fixtures.csv"))}
@@ -461,7 +528,7 @@ def build():
     captured = datetime.now(timezone.utc).astimezone().strftime("%Y-%m-%dT%H:%M:%S%z")
     corner_probs = _load_corner_probs()
 
-    mk_rows, bet_rows = [], []
+    mk_rows = []
     matched = 0
     unmatched = []
     calib_fallbacks = []
@@ -570,43 +637,24 @@ def build():
             per_game[r["game_id"]] = r
 
     old = {r["bet_id"]: r for r in read_csv(os.path.join(TA, "best_bets.csv"))}
-    # buang bet lama yang harganya mustahil (harga x peluang pasar > 1)
-    bogus = [k for k, r in old.items()
-             if fnum(r.get("price")) * fnum(r.get("p_market")) > 1.02]
-    for k in bogus:
-        old.pop(k, None)
+    rows, n_new, n_ref = _merge_bets(old, per_game.values(), fixtures,
+                                     captured)
+    # Buang bet lama yang harganya mustahil (harga x peluang pasar
+    # > 1) SETELAH penggabungan, dengan pengecualian untuk bet yang
+    # build ini terbitkan/perbarui (_purge_bogus).
+    issued = {f'{r["game_id"]}|{r["market"]}|{r["line"]}|{r["selection"]}'
+              for r in per_game.values()}
+    rows, bogus = _purge_bogus(rows, issued)
     if bogus:
-        print(f"bet mustahil dibuang: {len(bogus)}")
-        write_csv(os.path.join(TA, "best_bets.csv"), BET_COLS, list(old.values()))
-    for r in sorted(per_game.values(), key=lambda x: -x["ev_shrunk"]):
-        bid = f'{r["game_id"]}|{r["market"]}|{r["line"]}|{r["selection"]}'
-        if bid in old:
-            continue
-        g = fixtures[r["game_id"]]
-        bet_rows.append({
-            "bet_id": bid, "created_at": captured, "game_id": r["game_id"],
-            "kickoff_utc": f'{r["date"]}T{g["time"]}', "league": g["league"],
-            "home": r["home"], "away": r["away"], "market": r["market"],
-            "line": r["line"], "selection": r["selection"],
-            "bookmaker": r["book_best"], "price": r["odds_best"],
-            "p_model": r["p_model"], "p_market": r["p_market"],
-            "ev": r["ev_shrunk"], "tier": r["tier"], "status": "OPEN",
-            "score": "", "result": "", "profit": "", "graded_at": "",
-        })
-    if bet_rows:
-        cols = BET_COLS
-        with open(os.path.join(TA, "best_bets.csv"), "a", newline="",
-                  encoding="utf-8") as f:
-            new = not old
-            w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
-            if new:
-                w.writeheader()
-            w.writerows(bet_rows)
+        print(f"bet mustahil dibuang: {bogus}")
+    if n_new or n_ref or bogus:
+        write_csv(os.path.join(TA, "best_bets.csv"), BET_COLS, rows)
     elif not os.path.exists(os.path.join(TA, "best_bets.csv")):
         write_csv(os.path.join(TA, "best_bets.csv"), BET_COLS, [])
 
     print(f"laga cocok: {matched}/{len(preds)} | baris pasar: {len(mk_rows)} | "
-          f"bet baru: {len(bet_rows)} | tak cocok: {len(unmatched)}")
+          f"bet baru: {n_new} | bet diperbarui: {n_ref} | "
+          f"tak cocok: {len(unmatched)}")
     if unmatched and "--verbose" in sys.argv:
         for u in unmatched[:15]:
             print("   tak cocok:", u)
