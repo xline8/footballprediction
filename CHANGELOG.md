@@ -54,7 +54,17 @@ Keep a Changelog, and the project uses semantic versioning.
   date (`result_date`). Unbounded, a leg whose match was cancelled
   could have settled against the pair's next meeting months later;
   exposure was zero (no pending picks, no fallback-graded legs).
-- Regression tests for the fixes themselves (65 -> 74): a 23-match
+- Two defects the fix round introduced were caught by its own
+  verification loop and fixed before merge: the prematch-predicate
+  extraction in the corner loader dropped a variable binding the
+  next line still used (the unit suite stayed green — the loader is
+  file-driven; the live shadow run failed the step and exposed it),
+  and the bogus-price purge would have deleted rows the previous
+  build itself issued whenever the model's probability disagrees
+  enough with the market (price x p_market > 1.02) — the purge now
+  runs after the merge, exempts rows the current build issued or
+  refreshed, and never touches settled rows.
+- Regression tests for the fixes themselves (65 -> 75): a 23-match
   slip pool pinning the branch-and-bound optimum against an
   independent enumeration (the round 12 property test's 6-match
   pool could not fail on the original truncation defect), shadow
