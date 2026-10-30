@@ -1163,7 +1163,9 @@ def test_by_teams_index_sorted_by_date():
 def test_match_result_postponed_fallback():
     # C12-4: leg laga tunda ketemu hasilnya di tanggal main baru —
     # tanggal setelah pick yang PALING AWAL (bukan pertemuan putaran
-    # kedua), dan tidak pernah dari tanggal sebelum pick.
+    # kedua), dan tidak pernah dari tanggal sebelum pick. Ronde 13:
+    # return kini menyertakan tanggal hasil yang cocok, dan
+    # pemindaian dibatasi 45 hari.
     from grade_recommendations import _match_result, norm
 
     idx = {
@@ -1175,7 +1177,408 @@ def test_match_result_postponed_fallback():
                         "England - Premier League")],
     }
     got = _match_result(idx, "2026-10-28", "Arsenal", "Chelsea", "")
-    assert got == (2, 1), got
+    assert got == (2, 1, "2026-11-05"), got
+    # Batas 45 hari: pertemuan 79 hari sesudah pick (putaran kedua)
+    # TIDAK boleh menilai leg yang laganya dibatalkan.
+    idx_far = {
+        "2027-01-15": [(norm("Arsenal"), norm("Chelsea"), 1, 0,
+                        "England - Premier League")],
+    }
+    assert _match_result(idx_far, "2026-10-28", "Arsenal",
+                         "Chelsea", "") is None
+    # Tepat di batas (45 hari) masih termasuk.
+    idx_edge = {
+        "2026-12-12": [(norm("Arsenal"), norm("Chelsea"), 4, 2,
+                        "England - Premier League")],
+    }
+    assert _match_result(idx_edge, "2026-10-28", "Arsenal",
+                         "Chelsea", "") == (4, 2, "2026-12-12")
+
+
+def test_postponed_lookup_bounded():
+    # Ronde 13: fallback laga tunda score_ledger memakai helper yang
+    # sama-sama dibatasi 45 hari dan mengambil tanggal paling awal
+    # setelah pick.
+    from score_ledger import _postponed_lookup
+
+    entries = [("2026-11-07", (2, 1)), ("2026-11-27", (0, 0)),
+               ("2027-02-15", (3, 3))]
+    assert _postponed_lookup(entries, "2026-10-28") == (2, 1)
+    # Semua kandidat di luar jendela -> None (bukan putaran kedua).
+    assert _postponed_lookup([("2027-02-15", (3, 3))],
+                             "2026-10-28") is None
+    # Tanggal pick sendiri dan sebelumnya tidak pernah dipakai.
+    assert _postponed_lookup([("2026-10-28", (9, 9)),
+                              ("2026-10-20", (8, 8))],
+                             "2026-10-28") is None
+    assert _postponed_lookup([], "2026-10-28") is None
+    assert _postponed_lookup(None, "2026-10-28") is None
+
+
+def test_missing_archive_dates():
+    # C12-3/ronde 13: perhitungan tanggal arsip hilang diekstrak murni
+    # dan nama folder non-tanggal disaring — satu folder asing tidak
+    # boleh mematikan peringatan secara diam-diam.
+    from datetime import date
+
+    from grade_recommendations import (_is_date_name,
+                                       _missing_archive_dates)
+
+    assert _is_date_name("2026-10-31")
+    assert not _is_date_name("notes")
+    assert not _is_date_name("2026-13-01")
+    assert _missing_archive_dates([], date(2026, 11, 2)) == []
+    assert _missing_archive_dates(
+        ["2026-10-29", "2026-10-31"], date(2026, 11, 2)) == ["2026-10-30"]
+    # Folder terakhir di masa depan tidak memperluas rentang lampau
+    # kemarin.
+    assert _missing_archive_dates(
+        ["2026-10-29", "2026-10-30"], date(2026, 10, 31)) == []
+
+
+def test_merge_bets_refreshes_open_rows_only():
+    # Ronde 13 (MEDIUM siklus hidup best_bets): bet_id yang terbit
+    # lagi memperbarui baris OPEN-nya; baris settle tidak berubah;
+    # bet baru ditambahkan.
+    from ta_model import _merge_bets
+
+    def winner(gid, pm, price, ev):
+        return {"game_id": gid, "date": "2026-11-05", "home": "H",
+                "away": "A", "market": "OU", "line": "2.5",
+                "selection": "Over", "book_best": "book",
+                "odds_best": price, "p_model": pm, "p_market": 0.40,
+                "ev_shrunk": ev, "tier": "aman"}
+
+    old = {
+        "1|OU|2.5|Over": {"bet_id": "1|OU|2.5|Over", "status": "OPEN",
+                          "created_at": "T0", "price": 9.99,
+                          "p_model": 0.1111, "p_market": 0.40,
+                          "ev": 0.01, "tier": "lama", "bookmaker": "x"},
+        "2|OU|2.5|Over": {"bet_id": "2|OU|2.5|Over", "status": "SETTLED",
+                          "created_at": "T0", "price": 2.50,
+                          "p_model": 0.5000, "p_market": 0.40,
+                          "ev": 0.05, "tier": "lama", "bookmaker": "x"},
+    }
+    fixtures = {g: {"time": "20:00", "league": "L"} for g in "123"}
+    rows, n_new, n_ref = _merge_bets(
+        old, [winner("1", 0.61, 2.10, 0.20), winner("2", 0.62, 2.20, 0.30),
+              winner("3", 0.63, 2.30, 0.40)], fixtures, "T1")
+    assert (n_new, n_ref) == (1, 1), (n_new, n_ref)
+    by_id = {r["bet_id"]: r for r in rows}
+    r1 = by_id["1|OU|2.5|Over"]
+    assert r1["p_model"] == 0.61 and r1["price"] == 2.10, r1
+    assert r1["created_at"] == "T0", r1  # tanggal buat dipertahankan
+    r2 = by_id["2|OU|2.5|Over"]
+    assert r2["p_model"] == 0.5000 and r2["price"] == 2.50, r2
+    assert by_id["3|OU|2.5|Over"]["status"] == "OPEN"
+
+
+def test_best_picks_ta_loader_skips_started_matches():
+    # Ronde 13: loader TA best_picks berjangkar datetime penuh —
+    # bet laga yang sudah kickoff hari ini tidak boleh masuk
+    # peringkat (kasus Le Havre–PSG: tanggal sama, laga berjalan).
+    # Nilai peringkat (prob/EV) diambil dari model_markets TERKINI,
+    # bukan dari baris bet tersimpan: baris bet di bawah sengaja
+    # membawa p_model basi 0,99 — yang boleh lolos hanya nilai
+    # berjalan 0,60/0,50. Bet tanpa baris pasar berjalan jatuh ke
+    # nilai tersimpan (di sini EV tersimpan 0 -> tetap tersaring).
+    import csv
+    import tempfile
+    from datetime import datetime, timedelta, timezone
+
+    import best_picks as bp
+
+    now = datetime.now(timezone.utc)
+
+    def row(gid, kickoff, status="OPEN", ev="9.99"):
+        return {"game_id": gid, "status": status, "kickoff_utc": kickoff,
+                "league": "Spain - Primera Division", "home": "A",
+                "away": "B", "market": "OU", "line": "2.5",
+                "selection": "Over", "ev": ev, "p_model": "0.99",
+                "p_market": "0.01"}
+
+    def mrow(gid, pm="0.60", pmkt="0.50", ev="0.10"):
+        return {"game_id": gid, "market": "OU", "line": "2.5",
+                "selection": "Over", "p_model": pm, "p_market": pmkt,
+                "ev_shrunk": ev}
+
+    fmt = "%Y-%m-%dT%H:%M"
+    rows = [
+        row("1", (now - timedelta(hours=1)).strftime(fmt)),  # sudah mulai
+        row("2", (now + timedelta(hours=3)).strftime(fmt)),  # lolos
+        row("3", (now + timedelta(hours=5)).strftime(fmt), status="SETTLED"),
+        row("4", (now + timedelta(hours=6)).strftime(fmt), ev="0"),
+    ]
+    mrows = [mrow("1"), mrow("2"), mrow("3")]
+    with tempfile.TemporaryDirectory() as td:
+        os.makedirs(os.path.join(td, "ta"))
+        with open(os.path.join(td, "ta", "best_bets.csv"), "w",
+                  newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
+            w.writeheader()
+            w.writerows(rows)
+        with open(os.path.join(td, "ta", "model_markets.csv"), "w",
+                  newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=list(mrows[0].keys()))
+            w.writeheader()
+            w.writerows(mrows)
+        old_proj, old_anchor = bp.PROJ, bp.ANCHOR
+        bp.PROJ = td
+        bp.ANCHOR = now.date().isoformat()
+        try:
+            picks = bp._load_ta_picks()
+        finally:
+            bp.PROJ, bp.ANCHOR = old_proj, old_anchor
+    assert len(picks) == 1, picks
+    assert picks[0]["source"] == "ta_model"
+    assert picks[0]["prob"] == 0.55, picks  # tersusut 0.5*0.60+0.5*0.50
+    assert picks[0]["ev"] == 0.10, picks    # EV berjalan, bukan 9,99 basi
+
+
+def test_prematch_kickoff_predicates():
+    # D12-10/ronde 13: predikat filter prematch piala + corner liga
+    # diekstrak dari loader supaya teruji unit (wilayah kode ini
+    # menghasilkan temuan di dua ronde audit berurutan).
+    from datetime import date, datetime
+
+    from model_corners_v3 import _kickoff_in_future
+    from predict_cups import _fixture_still_open
+
+    now = datetime(2026, 10, 31, 19, 0)
+    d = date(2026, 10, 31)
+    assert _fixture_still_open(d, "20:00", now) is True
+    assert _fixture_still_open(d, "18:00", now) is False
+    assert _fixture_still_open(d, "19:00", now) is False  # tepat kickoff
+    assert _fixture_still_open(d, "", now) is True        # jam kosong
+    assert _fixture_still_open(d, "xx", now) is True      # jam rusak
+    assert _fixture_still_open(d, None, now) is True
+
+    assert _kickoff_in_future("2026-10-31 20:00:00", now) is True
+    assert _kickoff_in_future("2026-10-31 18:00:00", now) is False
+    assert _kickoff_in_future("2026-10-31 19:00:00", now) is False
+
+
+def test_slip_search_large_pool_matches_brute_force():
+    # Ronde 13 (MEDIUM celah tes): tes properti B12-2 yang lama memakai
+    # pool 6 laga — DFS lama pun mengembalikan optimum di pool sekecil
+    # itu, jadi tesnya tidak bisa gagal oleh cacat pemotongan aslinya.
+    # Tes ini memakai kelas ukuran slate yang mematahkan DFS lama
+    # (23 laga / 142 leg; slate riil 2026-10-31: 23 laga / 136 leg,
+    # DFS lama terpotong di 200 ribu node dengan joint 0,6061 vs
+    # optimum 0,6350) dan menambatkan: (1) optimum branch-and-bound ==
+    # enumerasi independen yang hanya memakai pruning legalitas pita,
+    # (2) pencarian selesai TIDAK terpotong dengan node jauh di bawah
+    # anggaran lama 200 ribu.
+    import random
+
+    from slip_recommender import _search
+
+    rng = random.Random(20261031)
+    by_match = {}
+    for mi in range(23):
+        legs = []
+        for _k in range(rng.randint(5, 7)):
+            o = round(rng.uniform(1.25, 3.10), 2)
+            pm = round(rng.uniform(0.45, 0.88), 3)
+            legs.append(_leg(f"M{mi}", "2026-10-31", o, pm))
+        by_match[f"M{mi}"] = legs
+
+    stats = {}
+    best_in, _near = _search(by_match, 2, 4, 1.85, 2.15, 2.0, stats)
+    assert best_in is not None
+    assert stats["truncated"] is False, stats
+    assert stats["nodes"] < 200_000, stats
+
+    keys = list(by_match)
+    ref = [None]
+
+    def rec(i, tot, jp, nlegs):
+        if tot > 2.15:
+            return
+        if nlegs >= 2 and tot >= 1.85:
+            if ref[0] is None or jp > ref[0]:
+                ref[0] = jp
+        if i == len(keys) or nlegs == 4:
+            return
+        rec(i + 1, tot, jp, nlegs)
+        for l in by_match[keys[i]]:
+            rec(i + 1, tot * l["o"], jp * l["pm"], nlegs + 1)
+
+    rec(0, 1.0, 1.0, 0)
+    assert ref[0] is not None
+    assert abs(best_in[1] - ref[0]) < 1e-9, (best_in[1], ref[0])
+
+
+def _shadow_env(pred_status):
+    """Stub semua langkah run_daily_shadow untuk tes gerbang.
+
+    Mengembalikan (modul shadow, daftar panggilan tercatat, restore).
+    Pola stub sys.modules yang sama dengan _refresh_env.
+    """
+    import types
+
+    import run_daily_shadow as sh
+
+    calls = []
+
+    def rec(name):
+        def f(*a, **k):
+            calls.append(name)
+        return f
+
+    saved = {}
+
+    def stub(name, **attrs):
+        saved[name] = sys.modules.get(name)
+        m = types.ModuleType(name)
+        for k, v in attrs.items():
+            setattr(m, k, v)
+        sys.modules[name] = m
+
+    stub("predict_upcoming_refactored",
+         generate_predictions=lambda: calls.append("pred") or
+         {"status": pred_status, "n_output_rows": 10})
+    stub("predict_cups",
+         main=lambda: {"n_gol": 0, "n_corner": 0, "status": "ok"})
+    stub("make_picks_live", main=lambda: calls.append("picks") or 0)
+    stub("ta_model", grade=rec("ta_grade"),
+         build=lambda: calls.append("ta_build") or 0)
+    stub("ta_scrape", sync_dates=lambda *a, **k: {"markets": 0})
+    stub("market_orchestration",
+         model_fixture_ids=lambda days: calls.append("mkt_ids") or [],
+         build_market_compare=lambda: calls.append("mkt_cmp") or
+         {"fixtures": 0, "rows": 0},
+         archive_snapshots=lambda: calls.append("archive") or
+         {"date": "2026-10-31", "archived": []},
+         sync_cup_picks_to_ledger=lambda: calls.append("cup_ledger") or 0)
+    stub("slip_recommender",
+         recommend=lambda: calls.append("recommend") or {
+             "single": {"pick": "x", "ev": 0},
+             "slip2": {"n_legs": 0, "total_odds": 0, "in_band": False},
+             "slip10": {"n_legs": 0, "total_odds": 0, "in_band": False}})
+    stub("grade_recommendations", main=lambda: calls.append("grade") or 0)
+    stub("resolve_and_monitor", main=rec("resolve"))
+
+    orig_run_py = sh._run_py
+    orig_age = sh._fixtures_age_h
+
+    class _R:
+        returncode = 0
+        stdout = "ok"
+        stderr = ""
+
+    def fake_run_py(script, *args):
+        calls.append(f"py:{script}")
+        return _R()
+
+    sh._run_py = fake_run_py
+    sh._fixtures_age_h = lambda: 1.0
+    # Pemeriksaan kesegaran file corner membandingkan mtime dengan
+    # waktu mulai langkah: buat file corner terlihat baru ditulis.
+    orig_getmtime = os.path.getmtime
+
+    def fake_getmtime(p):
+        if str(p).endswith("predictions_corners_upcoming.csv"):
+            import time as _t
+            return _t.time()
+        return orig_getmtime(p)
+
+    os.path.getmtime = fake_getmtime
+
+    def restore():
+        sh._run_py = orig_run_py
+        sh._fixtures_age_h = orig_age
+        os.path.getmtime = orig_getmtime
+        for name, mod in saved.items():
+            if mod is None:
+                sys.modules.pop(name, None)
+            else:
+                sys.modules[name] = mod
+
+    return sh, calls, restore
+
+
+def _run_shadow(sh):
+    import contextlib
+    import io
+
+    buf = io.StringIO()
+    code = None
+    with contextlib.redirect_stdout(buf):
+        try:
+            sh.main()
+        except SystemExit as e:
+            code = e.code
+    return code, buf.getvalue()
+
+
+def test_shadow_gate_skips_consumers_when_predictions_fail():
+    # Gerbang pred_ok (audit GPT B) tidak pernah punya tes integrasi:
+    # sandbox PR #32 manual dan hilang. Prediksi gagal -> semua
+    # konsumen prediksi dilewati, arsip tidak dibuat, run keluar 1;
+    # langkah independen prediksi (corner/piala/grading TA/rute
+    # piala/score_ledger/resolve) tetap jalan.
+    sh, calls, restore = _shadow_env("error")
+    try:
+        code, _out = _run_shadow(sh)
+    finally:
+        restore()
+    assert code == 1, code
+    for skipped in ("picks", "py:best_picks.py", "mkt_ids", "mkt_cmp",
+                    "ta_build", "recommend", "archive"):
+        assert skipped not in calls, (skipped, calls)
+    for ran in ("py:model_corners_v3.py", "ta_grade", "py:ta_scrape.py",
+                "cup_ledger", "py:score_ledger.py", "resolve"):
+        assert ran in calls, (ran, calls)
+
+
+def test_shadow_gate_runs_all_consumers_on_success():
+    # Jalur sukses: semua konsumen jalan, termasuk build ta_model
+    # harian (langkah baru ronde 13) SEBELUM best_picks.
+    sh, calls, restore = _shadow_env("success")
+    try:
+        code, _out = _run_shadow(sh)
+    finally:
+        restore()
+    assert code is None, code
+    for ran in ("pred", "picks", "mkt_cmp", "ta_build",
+                "py:best_picks.py", "recommend", "archive", "grade"):
+        assert ran in calls, (ran, calls)
+    assert calls.index("ta_build") < calls.index("py:best_picks.py"), calls
+
+
+def test_shadow_fallback_flagged_when_refresh_raises_mid_loop():
+    # Ronde 13: refresh mati di tengah loop sesudah satu liga ditulis
+    # dari fallback disk -> run tetap ditandai gagal dan liga disebut,
+    # walau jalur sukses A12-2 tidak tercapai. Sumber per liga dibaca
+    # dari refresh_fixtures.LAST_SOURCES.
+    import types
+
+    sh, calls, restore = _shadow_env("success")
+    try:
+        rf = types.ModuleType("refresh_fixtures")
+
+        def _boom():
+            raise RuntimeError("jaringan mati di tengah loop")
+
+        rf.main = _boom
+        rf.LAST_SOURCES = {"E0": "fallback disk (boom)"}
+        saved_rf = sys.modules.get("refresh_fixtures")
+        sys.modules["refresh_fixtures"] = rf
+        ages = iter([20.0, 20.0])
+        sh._fixtures_age_h = lambda: next(ages, 20.0)
+        try:
+            code, out = _run_shadow(sh)
+        finally:
+            if saved_rf is None:
+                sys.modules.pop("refresh_fixtures", None)
+            else:
+                sys.modules["refresh_fixtures"] = saved_rf
+    finally:
+        restore()
+    assert code == 1, code
+    assert "pred" in calls, calls  # prediksi tetap jalan (umur <= 48j)
+    assert "E0" in out and "fallback" in out, out[-2000:]
 
 
 def test_corner_stats_window_golden():
@@ -1225,8 +1628,17 @@ def test_corner_cups_parity_golden():
           M(date(2026, 1, 12), "Liverpool", "Arsenal", 6, 5, 13, 12),
           M(date(2026, 1, 19), "Chelsea", "Liverpool", 4, 6, 10, 14),
           M(date(2026, 1, 26), "Arsenal", "Liverpool", 8, 4, 16, 11)]
-    mu = pc.corner_mu(ms, "Arsenal", "Chelsea", "E0", "E0",
-                      date(2026, 2, 1))
+    # Golden dihitung pada gamma 0,15: pin eksplisit (ronde 13) —
+    # tanpa pin, refit corner_params.json yang ter-commit akan
+    # menggeser golden tanpa perubahan rumus apa pun dan kegagalannya
+    # terlihat seperti regresi rumus.
+    saved_gamma = pc._gamma_cache
+    pc._gamma_cache = 0.15
+    try:
+        mu = pc.corner_mu(ms, "Arsenal", "Chelsea", "E0", "E0",
+                          date(2026, 2, 1))
+    finally:
+        pc._gamma_cache = saved_gamma
     assert abs(mu - 10.768281) < 1e-5, mu
 
 
