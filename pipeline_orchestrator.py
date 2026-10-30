@@ -9,7 +9,7 @@ import sys
 import json
 import time
 import traceback
-from datetime import datetime, date, timedelta
+from datetime import datetime, date, timedelta, timezone
 from collections import defaultdict
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -81,19 +81,44 @@ class PipelineOrchestrator:
         log("Starting Full Pipeline", "INFO")
         log("=" * 60, "INFO")
 
+        # Urutan + gerbang dependensi (audit ronde 7, MEDIUM): dulu
+        # kegagalan satu langkah TIDAK mengisolasi langkah berikutnya —
+        # refresh yang gagal (dan dirollback) tetap diikuti fit/scoring
+        # yang menimpa state & prediksi, jadi artefak di disk tampak
+        # segar dan satu-satunya jejak kegagalan adalah status akhir.
+        # Kini langkah yang hulunya 'failed'/'partial' dilewati dan
+        # dicatat 'skipped'. Corner berjalan SETELAH scoring agar guard
+        # file kosong/basinya membaca predictions_upcoming.csv run ini,
+        # bukan run sebelumnya. Langkah TA (scrape/model) independen
+        # dari data latih dan selalu jalan; validation selalu jalan
+        # (murni pelaporan).
+        steps = [
+            ("refresh", self.step_refresh_training_data, ()),
+            ("data", self.step_check_data, ()),
+            ("xg", self.step_build_xg, ("refresh",)),
+            ("model", self.step_fit_models, ("refresh",)),
+            ("scoring", self.step_score_upcoming, ("refresh", "xg", "model")),
+            ("corner_model", self.step_score_corners, ("refresh",)),
+            ("odds", self.step_integrate_odds, ("scoring",)),
+            ("ta_scrape", self.scrape_live_odds, ()),
+            ("ta_model", self.step_ta_model, ()),
+            ("cups", self.step_predict_cups, ("refresh",)),
+            ("picks", self.step_generate_picks, ("scoring", "cups")),
+            ("validation", self.step_validation, ()),
+        ]
         try:
-            results['refresh'] = self.step_refresh_training_data()
-            results['data'] = self.step_check_data()
-            results['xg'] = self.step_build_xg()
-            results['model'] = self.step_fit_models()
-            results['corner_model'] = self.step_score_corners()
-            results['scoring'] = self.step_score_upcoming()
-            results['odds'] = self.step_integrate_odds()
-            results['ta_scrape'] = self.scrape_live_odds()
-            results['ta_model'] = self.step_ta_model()
-            results['cups'] = self.step_predict_cups()
-            results['picks'] = self.step_generate_picks()
-            results['validation'] = self.step_validation()
+            for name, fn, blocked_by in steps:
+                bad = [b for b in blocked_by
+                       if isinstance(results.get(b), dict)
+                       and results[b].get('status') in ('failed', 'partial')]
+                if bad:
+                    log(f"  ! {name} dilewati: langkah hulu gagal: {bad}",
+                        "WARN")
+                    results[name] = {
+                        'status': 'skipped',
+                        'reason': f"upstream_failed:{','.join(bad)}"}
+                    continue
+                results[name] = fn()
             results['status'] = 'completed'
         except Exception as e:
             log(f"Pipeline failed: {str(e)}", "ERROR")
@@ -110,6 +135,13 @@ class PipelineOrchestrator:
         failed_steps = [k for k, v in results.items()
                         if isinstance(v, dict)
                         and v.get('status') in ('failed', 'partial')]
+        # 'skipped' karena modul hilang (ImportError) adalah kegagalan
+        # nyata, bukan skip sukarela — ikut gagalkan run. Skip karena
+        # upstream gagal tidak dobel-hitung: hulunya sudah tercatat.
+        failed_steps += [k for k, v in results.items()
+                         if isinstance(v, dict)
+                         and v.get('status') == 'skip'
+                         and v.get('reason') == 'module_not_found']
         if failed_steps:
             results['failed_steps'] = failed_steps
             if results.get('status') == 'completed':
@@ -117,22 +149,50 @@ class PipelineOrchestrator:
             log(f"Pipeline finished with FAILED steps: {failed_steps}",
                 "ERROR")
 
+        # Jejak run lengkap terakhir untuk /api/status: is_stale model
+        # tidak bisa membedakan refit mingguan yang gagal dari fit
+        # harian yang sehat (fit harian menulis ulang updated_at), jadi
+        # keberhasilan --run-all dicatat eksplisit di file ini
+        # (audit ronde 7).
+        try:
+            rec = {"finished_at": datetime.now(timezone.utc).isoformat(),
+                   "status": results.get('status'),
+                   "failed_steps": results.get('failed_steps', [])}
+            tmp = os.path.join(BASE_DIR, "last_full_pipeline.json.tmp")
+            with open(tmp, "w", encoding="utf-8") as f:
+                json.dump(rec, f)
+            os.replace(tmp, os.path.join(BASE_DIR, "last_full_pipeline.json"))
+        except Exception:
+            pass
+
         runtime = time.time() - self.start_time
         log(f"\nPipeline completed in {runtime:.1f}s", "INFO")
         log(f"Stats: {dict(self.stats)}", "INFO")
         return results
 
     # ---- refresh data latih (football-data.co.uk + xG Understat) ----
-    def _cur_season_label(self) -> str:
-        y = datetime.now().year
+    @staticmethod
+    def _cur_season_label(on=None) -> str:
+        """Label musim berjalan ("2026/27"): musim mulai Juli.
+
+        Versi lama memakai tahun kalender mentah, jadi mulai 1 Januari
+        labelnya melompat ke musim berikutnya (vakum: 0 baris) dan cek
+        susut musim-berjalan berhenti bekerja di tengah musim
+        (audit ronde 7).
+        """
+        d = on or datetime.now().date()
+        y = d.year if d.month >= 7 else d.year - 1
         return f"{y}/{str(y + 1)[-2:]}"
 
-    def _clean_stats(self, path):
-        """{total, max_date, cur_season} dari all_matches_clean.csv (atau None)."""
+    @staticmethod
+    def _clean_stats(path):
+        """{total, max_date, cur_season, div_counts} dari all_matches_clean.csv."""
         total = max_date = cur = 0
+        div_counts = {}
         if not os.path.exists(path):
-            return {"total": 0, "max_date": None, "cur_season": 0}
-        seas = self._cur_season_label()
+            return {"total": 0, "max_date": None, "cur_season": 0,
+                    "div_counts": {}}
+        seas = PipelineOrchestrator._cur_season_label()
         with open(path, encoding="utf-8", newline="") as f:
             for r in csv.DictReader(f):
                 total += 1
@@ -141,7 +201,10 @@ class PipelineOrchestrator:
                     max_date = d
                 if r.get("Season") == seas:
                     cur += 1
-        return {"total": total, "max_date": max_date, "cur_season": cur}
+                dv = r.get("Div") or "?"
+                div_counts[dv] = div_counts.get(dv, 0) + 1
+        return {"total": total, "max_date": max_date, "cur_season": cur,
+                "div_counts": div_counts}
 
     def _xg_year(self) -> str:
         return f"20{REFRESH_SEASON[:2]}"
@@ -191,7 +254,15 @@ class PipelineOrchestrator:
 
     def _records_fingerprint(self) -> str:
         st = self._clean_stats(paths.DATA_CLEAN)
-        return f"{st['total']}|{st['max_date']}|{st['cur_season']}"
+        try:
+            size = os.path.getsize(paths.DATA_CLEAN)
+        except OSError:
+            size = -1
+        # Ukuran file ikut: perubahan isi yang tidak mengubah jumlah
+        # baris / tanggal maks / hitungan musim (mis. skor terkoreksi)
+        # sebelumnya tidak terlihat fingerprint sama sekali
+        # (audit ronde 7).
+        return f"{st['total']}|{st['max_date']}|{st['cur_season']}|{size}"
 
     def _rebuild_records_if_changed(self) -> bool:
         """Rebuild records_cache bila data latih berubah (stamp data)."""
@@ -231,6 +302,35 @@ class PipelineOrchestrator:
         log("  records_cache direbuild (stamp data baru)", "INFO")
         return True
 
+    def _rotate_clean_backups(self, clean_path):
+        """Simpan 3 backup file bersih terbaru. Tanpa ini setiap refit
+        menambah ~33 MB .bak tanpa batas (~1,7 GB/tahun)."""
+        try:
+            _baks = sorted(glob.glob(clean_path + ".bak-*"))
+            for _old in _baks[:-3]:
+                os.remove(_old)
+        except Exception:
+            pass
+
+    def _discard_run_backups(self, transient_baks, ts):
+        """Buang backup transien milik run ini (raw, all_matches.csv,
+        dump xG): asuransi rollback-nya sudah terpakai — entah
+        ter-restore (jalur gagal) atau tak lagi dibutuhkan (sukses).
+        Backup file bersih generasional tidak ikut dibuang; ia diatur
+        _rotate_clean_backups."""
+        for bak in transient_baks:
+            try:
+                os.remove(bak)
+            except OSError:
+                pass
+        yr = self._xg_year()
+        for slug in XG_SLUGS:
+            bak = os.path.join(paths.XGRAW, f"{slug}_{yr}.json") + f".bak-{ts}"
+            try:
+                os.remove(bak)
+            except OSError:
+                pass
+
     def step_refresh_training_data(self) -> dict:
         """Segarkan data latih sebelum fit (musim berjalan saja).
 
@@ -245,11 +345,30 @@ class PipelineOrchestrator:
 
         before = self._clean_stats(clean_path)
         after = dict(before)
+        # Backup SEMUA file yang akan ditimpa langkah ini, bukan hanya
+        # file bersih: rollback lama hanya memulihkan
+        # all_matches_clean.csv, sementara unduhan raw, all_matches.csv
+        # (output prepare) dan dump xG tertinggal dalam keadaan
+        # baru/campuran sambil log mengklaim "dirollback"
+        # (audit ronde 7, MEDIUM). Backup file bersih bersifat
+        # generasional (dirotasi, simpan 3); sisanya transien — dipakai
+        # untuk rollback run ini lalu dibuang.
         baks = []
-        if os.path.exists(clean_path):
-            bak = f"{clean_path}.bak-{ts}"
-            shutil.copy2(clean_path, bak)
-            baks.append(bak)
+        transient_baks = []
+
+        def _backup(path, transient=False):
+            if os.path.exists(path):
+                bak = f"{path}.bak-{ts}"
+                shutil.copy2(path, bak)
+                baks.append(bak)
+                if transient:
+                    transient_baks.append(bak)
+
+        _backup(clean_path)
+        _backup(paths.DATA_RAW, transient=True)
+        for rp in sorted(glob.glob(os.path.join(
+                paths.RAW_DIR, f"*_{REFRESH_SEASON}.csv"))):
+            _backup(rp, transient=True)
 
         issues = []
         dl = p = c = None
@@ -267,17 +386,28 @@ class PipelineOrchestrator:
                 issues.append(f"unduhan football-data tidak lengkap: "
                               f"{dl['ok']}/{dl['total']} file")
 
-            from prepare import prepare
-            from clean import clean
-            p = prepare()
-            c = clean()
-            after = self._clean_stats(clean_path)
+            # Unduhan tidak lengkap = berhenti di sini: menjalankan
+            # prepare/clean di atas raw campuran hanya membuang kerja
+            # dan menimpa artefak sebelum rollback (audit ronde 7).
+            if not issues:
+                from prepare import prepare
+                from clean import clean
+                p = prepare()
+                c = clean()
+                after = self._clean_stats(clean_path)
 
-            if after["total"] < before["total"]:
-                issues.append(f"total baris menurun {before['total']}->{after['total']}")
-            if after["cur_season"] < before["cur_season"]:
-                issues.append(f"baris musim berjalan menurun "
-                              f"{before['cur_season']}->{after['cur_season']}")
+                if after["total"] < before["total"]:
+                    issues.append(f"total baris menurun {before['total']}->{after['total']}")
+                if after["cur_season"] < before["cur_season"]:
+                    issues.append(f"baris musim berjalan menurun "
+                                  f"{before['cur_season']}->{after['cur_season']}")
+                # Cek susut PER DIVISI: cek agregat di atas menutupi
+                # satu divisi yang menyusut/basi bila divisi lain
+                # tumbuh (audit ronde 7).
+                for dv, n0 in sorted(before["div_counts"].items()):
+                    n1 = after["div_counts"].get(dv, 0)
+                    if n1 < n0:
+                        issues.append(f"baris divisi {dv} menurun {n0}->{n1}")
 
             if not issues:
                 xg_before = self._xg_dump_counts()
@@ -301,28 +431,41 @@ class PipelineOrchestrator:
                     shutil.copy2(bak, orig)
                 except Exception as e:
                     log(f"  ! rollback {orig} gagal: {e!r}", "ERROR")
+            # Dump xG: _refresh_understat_seasons membuat
+            # {dump}.bak-{ts} sebelum menimpa tiap slug — pulihkan
+            # dari sana (dulu backup ini tidak pernah dipakai sama
+            # sekali, jadi dump tertinggal campuran baru/lama).
+            yr = self._xg_year()
+            for slug in XG_SLUGS:
+                dump = os.path.join(paths.XGRAW, f"{slug}_{yr}.json")
+                bak = f"{dump}.bak-{ts}"
+                if os.path.exists(bak):
+                    try:
+                        shutil.copy2(bak, dump)
+                    except Exception as e:
+                        log(f"  ! rollback {dump} gagal: {e!r}", "ERROR")
+            self._discard_run_backups(transient_baks, ts)
+            # Rotasi juga di jalur gagal: dulu hanya jalur sukses yang
+            # merotasi, jadi refit yang gagal beruntun menumpuk backup
+            # file bersih tanpa batas (audit ronde 7).
+            self._rotate_clean_backups(clean_path)
             log(f"  X refresh data GAGAL & dirollback: {issues}", "ERROR")
             return {"status": "failed", "issues": issues,
                     "before": before, "after": after}
 
-        # Rotasi backup: simpan 3 terbaru. Tanpa ini setiap refit
-        # menambah ~33 MB .bak tanpa batas (~1,7 GB/tahun).
-        try:
-            _baks = sorted(glob.glob(clean_path + ".bak-*"))
-            for _old in _baks[:-3]:
-                os.remove(_old)
-        except Exception:
-            pass
+        self._discard_run_backups(transient_baks, ts)
+        self._rotate_clean_backups(clean_path)
         self.loader.reload_data()
         log(f"  OK all_matches_clean.csv: {before['total']}->{after['total']} baris "
             f"(musim {REFRESH_SEASON}: {before['cur_season']}->{after['cur_season']})",
             "INFO")
         log(f"      max date: {before['max_date']} -> {after['max_date']}", "INFO")
 
-        rebuilt = False
-        if after["cur_season"] > before["cur_season"] or \
-                after["max_date"] != before["max_date"]:
-            rebuilt = self._rebuild_records_if_changed()
+        # _rebuild_records_if_changed no-op sendiri bila fingerprint
+        # sama, jadi panggil selalu: gerbang lama (musim naik / tanggal
+        # berubah) melewatkan perubahan isi yang kini ditangkap
+        # fingerprint (audit ronde 7).
+        rebuilt = self._rebuild_records_if_changed()
 
         return {"status": "success", "download": dl, "prepare": p, "clean": c,
                 "before": before, "after": after, "records_rebuilt": rebuilt}
@@ -379,6 +522,27 @@ class PipelineOrchestrator:
         try:
             from data_enrichment.build_xg_matches import build as build_xg
             r = build_xg()
+            # build() melewati dump yang hilang/rusak dengan senyap
+            # (daftar 'missing' di return dict-nya tidak pernah dibaca
+            # siapa pun) — satu liga hilang total dari xg_matches dulu
+            # tetap "success" dan blend jatuh ke goals-only diam-diam
+            # (audit ronde 7). Dump musim berjalan yang rusak atau
+            # divisi TOP5 yang kosong = partial (gagal untuk agregasi);
+            # dump historis yang rusak hanya dicatat.
+            missing = r.get("missing") or []
+            zero_divs = [d for d, n in (r.get("per_league") or {}).items()
+                         if not n]
+            yr = self._xg_year()
+            cur_missing = [nm for nm, _ in missing
+                           if nm.endswith(f"_{yr}.json")]
+            if zero_divs or cur_missing:
+                log(f"  X build_xg_matches: divisi kosong {zero_divs}, "
+                    f"dump musim berjalan rusak {cur_missing}", "ERROR")
+                return {"status": "failed" if not r.get("n_rows") else "partial",
+                        **r, "zero_divs": zero_divs}
+            if missing:
+                log(f"  ! build_xg_matches: {len(missing)} dump historis "
+                    f"dilewati: {[nm for nm, _ in missing]}", "WARN")
             log(f"  OK xG matches: {r['n_rows']} rows", "INFO")
             return {"status": "success", **r}
         except Exception as e:
@@ -391,6 +555,7 @@ class PipelineOrchestrator:
         log("\n[Step 2/6] Fitting/updating models...")
         results = {}
         today = datetime.now().date()
+        xg_map = None  # dimuat sekali, hanya bila ada divisi yang fit
 
         for div in TOP5:
             try:
@@ -421,8 +586,13 @@ class PipelineOrchestrator:
                 if needs_fit:
                     log(f"  Fitting {div} (cutoff: {cutoff})...", "INFO")
                     from model_v2 import DC, xg_key
-                    from features import _load_xg_map
-                    xg_map = _load_xg_map()
+                    if xg_map is None:
+                        # Dulu _load_xg_map() dipanggil di dalam loop
+                        # per divisi (parse CSV 18k baris sampai 5x);
+                        # pola yang sama yang di-hoist dari
+                        # predict_upcoming di ronde 6 (audit ronde 7).
+                        from features import _load_xg_map
+                        xg_map = _load_xg_map()
                     model = DC()
                     history = [(m['home'], m['away'], m['yh'], m['ya'],
                                 xg_map.get(xg_key(div, m['date'], m['home'], m['away']), (None, None))[0],
@@ -564,12 +734,13 @@ class PipelineOrchestrator:
     def step_integrate_odds(self) -> dict:
         """Integrate live odds from multiple sources."""
         log("\n[Step 4/6] Integrating odds...")
-        results = {'sources': {}, 'games_updated': 0}
+        results = {'sources': {}, 'games_updated': 0, 'errors': {}}
 
         pred_file = os.path.join(BASE_DIR, "predictions_upcoming.csv")
         if not os.path.exists(pred_file):
             log("  ! No predictions file found", "WARN")
-            return {'status': 'skip', 'reason': 'no_predictions'}
+            return {'status': 'skip', 'reason': 'no_predictions',
+                    'sources': {}, 'games_updated': 0, 'errors': {}}
 
         fd_odds_updated = 0
         for div in TOP5:
@@ -580,10 +751,22 @@ class PipelineOrchestrator:
                     fd_odds_updated += len(odds_map)
                     log(f"  OK {div}: Loaded {len(odds_map)} FD odds entries", "INFO")
             except Exception as e:
+                # Dulu kegagalan per divisi hanya log ERROR dan dict
+                # hasil tidak punya kunci 'status' sama sekali, jadi
+                # agregasi run tidak pernah melihatnya (audit ronde 7).
+                # Map kosong BUKAN error (gap file fixtures FD yang
+                # sudah dikenal) — hanya exception yang dihitung.
+                results['errors'][div] = str(e)
                 log(f"  X {div}: FD odds load failed - {str(e)}", "ERROR")
 
         results['games_updated'] = fd_odds_updated
         self.stats['odds_loaded'] = fd_odds_updated
+        if len(results['errors']) == len(TOP5):
+            results['status'] = 'failed'
+        elif results['errors']:
+            results['status'] = 'partial'
+        else:
+            results['status'] = 'success'
         log(f"  OK Odds integrated from {len(results['sources'])} sources", "INFO")
         return results
 
@@ -729,6 +912,15 @@ class PipelineOrchestrator:
             import ta_model
             rc = ta_model.build()
             if rc == 0:
+                # Nilai bet OPEN yang laganya sudah selesai. grade()
+                # ada sejak lama tapi tidak dipanggil rantai mana pun,
+                # jadi bet menumpuk tak dinilai (audit ronde 7).
+                # Idempoten; kegagalannya warning saja (pembukuan,
+                # bukan pembangunan pasar).
+                try:
+                    ta_model.grade()
+                except Exception as e:
+                    log(f"  ! TA bet grading gagal: {e!r}", "WARN")
                 log("  OK TA model markets built", "INFO")
                 return {'status': 'success'}
             log(f"  ! TA model build rc={rc}", "WARN")
