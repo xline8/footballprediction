@@ -123,7 +123,7 @@ def main():
         # membuat CLI keluar 0 dan peringatannya hanya ada di stderr —
         # tampilkan ekornya bila memuat penanda gagal, agar tanggal yang
         # hilang tidak senyap (audit ronde 5).
-        if err and ("gagal" in err or "GAGAL" in err) and err not in shown:
+        if out and err and ("gagal" in err or "GAGAL" in err):
             shown += f" | stderr: {err[-200:]}"
         print(f"[6/7] tipsterarea hasil sync: rc={r.returncode} | {shown}")
         if r.returncode != 0:
@@ -227,8 +227,9 @@ def main():
     # atas. Dulu grading ini hanya tercapai lewat run manual
     # pipeline_orchestrator --incremental, jadi ROI/CLV bisa basi
     # diam-diam sementara laporan harian tampil sukses (audit K4).
-    # score_ledger mengeksekusi saat diimpor, jadi dijalankan sebagai
-    # subprocess.
+    # score_ledger dijalankan sebagai subprocess untuk isolasi:
+    # kegagalannya terbaca dari rc dan tidak bisa menjatuhkan rantai.
+    # (Impornya sendiri sudah tanpa efek samping sejak PR #26.)
     try:
         r = _run_py("score_ledger.py")
         out = (r.stdout or r.stderr or "").strip()

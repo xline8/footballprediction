@@ -2,6 +2,7 @@
 """pipeline_orchestrator.py - Orchestrator untuk pipeline prediksi sepakbola."""
 
 import csv
+import glob
 import os
 import shutil
 import sys
@@ -210,8 +211,23 @@ class PipelineOrchestrator:
         from backtest_picks import cache_records
         from model_v2 import DC_FIT_MODE
         cache_records(RECORDS)
+        # Skema meta SATU: cache_records menulis {dc_fit_mode, data_stamp}
+        # (dibaca make_picks_live._records_stale); fingerprint langkah ini
+        # DITAMBAHKAN ke dict yang sama, bukan menimpanya. Menimpa seperti
+        # sebelumnya menghapus data_stamp, sehingga [5/7] harian selalu
+        # menganggap records basi dan membangunnya ulang sekali lagi
+        # setiap minggu aktif (audit ronde 6, M2).
+        meta = {}
+        if os.path.exists(meta_path):
+            try:
+                with open(meta_path, encoding="utf-8") as f:
+                    meta = json.load(f)
+            except Exception:
+                meta = {}
+        meta["dc_fit_mode"] = DC_FIT_MODE
+        meta["data_fingerprint"] = fp
         with open(meta_path, "w", encoding="utf-8") as f:
-            json.dump({"dc_fit_mode": DC_FIT_MODE, "data_fingerprint": fp}, f)
+            json.dump(meta, f)
         log("  records_cache direbuild (stamp data baru)", "INFO")
         return True
 
@@ -240,8 +256,16 @@ class PipelineOrchestrator:
         try:
             from download import download
             dl = download(seasons=[REFRESH_SEASON], force=True)
-            log(f"  OK football-data {REFRESH_SEASON}: "
+            log(f"  football-data {REFRESH_SEASON}: "
                 f"{dl['ok']}/{dl['total']} file", "INFO")
+            if dl["ok"] < dl["total"]:
+                # download() tidak pernah raise per-file: file yang gagal
+                # tetap versi lama di disk, jadi tanpa cek ini refit bisa
+                # "sukses" di atas data basi seminggu — validasi susut di
+                # bawah tidak menangkapnya karena jumlah baris data basi
+                # sama (audit ronde 6, M1).
+                issues.append(f"unduhan football-data tidak lengkap: "
+                              f"{dl['ok']}/{dl['total']} file")
 
             from prepare import prepare
             from clean import clean
@@ -281,6 +305,14 @@ class PipelineOrchestrator:
             return {"status": "failed", "issues": issues,
                     "before": before, "after": after}
 
+        # Rotasi backup: simpan 3 terbaru. Tanpa ini setiap refit
+        # menambah ~33 MB .bak tanpa batas (~1,7 GB/tahun).
+        try:
+            _baks = sorted(glob.glob(clean_path + ".bak-*"))
+            for _old in _baks[:-3]:
+                os.remove(_old)
+        except Exception:
+            pass
         self.loader.reload_data()
         log(f"  OK all_matches_clean.csv: {before['total']}->{after['total']} baris "
             f"(musim {REFRESH_SEASON}: {before['cur_season']}->{after['cur_season']})",

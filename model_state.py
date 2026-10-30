@@ -125,6 +125,13 @@ class ModelState:
         except Exception:
             self.dc_fit_mode = None
         self.last_fit_date = fit_date
+        # Jumlah laga latih dari fit batch (DC.fit mencatatnya sejak
+        # audit ronde 6); sebelumnya field ini hanya bertambah lewat
+        # jalur online update_with_result yang tak dipakai batch,
+        # sehingga /api/models selalu menampilkan 0.
+        _n = getattr(dc_model, "n_trained", None)
+        if _n:
+            self.n_matches_trained = _n
         self.last_update = datetime.now()
         # updated_at WAJIB diset di sini: save() menolak menyimpan bila
         # updated_at kosong, dan versi lama tidak pernah mengisinya di
@@ -204,11 +211,21 @@ class ModelState:
         except (ValueError, TypeError):
             return None
 
-    def is_stale(self, current_date: date, max_age_days: int = 7) -> bool:
-        """Cek apakah model sudah terlalu usang."""
-        if not self.last_fit_date:
+    def is_stale(self, current_date: date, max_age_days: int = 10) -> bool:
+        """Cek apakah model sudah terlalu usang.
+
+        Basisnya updated_at (kapan state ini benar-benar ditulis oleh
+        fit terakhir), BUKAN last_fit_date: field itu memuat horizon
+        fit (mis. akhir musim), jadi perbandingan lama menyatakan
+        model basi secara permanen sepanjang musim (audit ronde 6).
+        Ambang 10 hari memberi ruang di atas cadence refit mingguan.
+        """
+        if not self.updated_at:
             return True
-        return abs((current_date - self.last_fit_date).days) > max_age_days
+        upd = self._parse_date(str(self.updated_at)[:10])
+        if upd is None:
+            return True
+        return (current_date - upd).days > max_age_days
 
     def mode_mismatch(self) -> bool:
         """True bila mode fit DC yang tersimpan berbeda dari mode aktif.
