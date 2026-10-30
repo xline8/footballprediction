@@ -23,7 +23,7 @@ import json
 import os
 import sys
 from collections import defaultdict
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 
 import paths
 from ta_scrape import _cap_key as _capdt  # helper kanonis (lihat ta_scrape)
@@ -84,6 +84,28 @@ def _by_teams_index(keyed):
     for v in idx.values():
         v.sort()
     return idx
+
+
+def _postponed_lookup(entries, pick_date, max_days=45):
+    """Skor laga tunda dari indeks _by_teams_index: tanggal main
+    paling awal SETELAH tanggal pick, dibatasi max_days hari
+    (audit ronde 13). Tanpa batas, pick dari laga yang DIBATALKAN
+    (tidak pernah dimainkan) bisa dinilai dari pertemuan putaran
+    kedua berbulan-bulan kemudian; 45 hari menampung penjadwalan
+    ulang yang realistis. entries terurut tanggal menaik.
+    Return skor atau None."""
+    try:
+        limit = (date.fromisoformat(pick_date)
+                 + timedelta(days=max_days)).isoformat()
+    except (TypeError, ValueError):
+        limit = None
+    for d, sc in entries or []:
+        if d <= pick_date:
+            continue
+        if limit is not None and d > limit:
+            break
+        return sc
+    return None
 
 def _load_fd2ug():
     """Peta nama FD -> nama Understat per divisi (dari xg_raw/map_*)."""
@@ -511,13 +533,12 @@ def main():
             if res is None:
                 # Laga tunda (C12-4): hasil ada di tanggal main yang
                 # baru, bukan tanggal pick — cari pasangan tim yang
-                # sama di tanggal paling awal setelah tanggal pick.
-                for d, sc in cup_by_teams.get(
-                        (comp, _ta_key_name(pk["home"]),
-                         _ta_key_name(pk["away"])), []):
-                    if d > pk["date"]:
-                        res = sc
-                        break
+                # sama di tanggal paling awal setelah tanggal pick,
+                # dibatasi 45 hari (ronde 13).
+                res = _postponed_lookup(
+                    cup_by_teams.get((comp, _ta_key_name(pk["home"]),
+                                      _ta_key_name(pk["away"])), []),
+                    pk["date"])
             if res is None:
                 unmapped[comp].add(f"{pk['home']} v {pk['away']}")
                 continue
@@ -554,20 +575,18 @@ def main():
                 n_ta_filled += 1
         if res is None and home_ug and away_ug:
             # Laga tunda (C12-4): coba tanggal main baru, Understat
-            # dulu lalu TipsterArea, paling awal setelah tanggal pick.
-            for d, sc in ug_by_teams.get(
-                    (pk["div"], home_ug, away_ug), []):
-                if d > pk["date"]:
-                    res = sc
-                    break
+            # dulu lalu TipsterArea, paling awal setelah tanggal pick,
+            # dibatasi 45 hari (ronde 13).
+            res = _postponed_lookup(
+                ug_by_teams.get((pk["div"], home_ug, away_ug), []),
+                pk["date"])
             if res is None:
-                for d, sc in ta_by_teams.get(
-                        (pk["div"], _ta_key_name(home_ug),
-                         _ta_key_name(away_ug)), []):
-                    if d > pk["date"]:
-                        res = sc
-                        n_ta_filled += 1
-                        break
+                res = _postponed_lookup(
+                    ta_by_teams.get((pk["div"], _ta_key_name(home_ug),
+                                     _ta_key_name(away_ug)), []),
+                    pk["date"])
+                if res is not None:
+                    n_ta_filled += 1
         if res is None:
             continue  # belum main / belum keluar hasilnya
         yh, ya = res
@@ -607,7 +626,7 @@ def main():
             all_grades = [json.loads(l) for l in f if l.strip()]
         all_grades = _backfill(all_grades, picks_by_id, recompute_clv)
         # Tulis atomik (tmp + replace): penulisan ulang penuh ini sekarang
-        # berjalan setiap hari (langkah [9b/9] rantai harian); penulisan
+        # berjalan setiap hari (langkah [15/16] rantai harian); penulisan
         # langsung yang terpotong di tengah akan merusak riwayat grading.
         _tmp = GRADES + ".tmp"
         with open(_tmp, "w", encoding="utf-8") as f:

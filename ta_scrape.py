@@ -37,7 +37,7 @@ except ImportError:
 from stealth import (BACKOFF_BASE, BACKOFF_MAX, RETRYABLE, _retry_delay,
                      proxy_url, ua as stealth_ua)
 
-from data_enrichment.utils import norm_team, to_float
+from data_enrichment.utils import norm_team
 
 BASE = "https://tipsterarea.com"
 DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ta")
@@ -678,6 +678,7 @@ def sync_dates(days, with_markets=False, market_ids=None, verbose=True, fresh=Fa
     date_htmls = {}  # iso_date -> (html, cached)
     empty_dates = []
     failed_dates = []
+    today_iso = datetime.now(timezone.utc).date().isoformat()
     for d, (html, cached) in zip(days, results):
         iso_d = iso(d)
         if html is None:
@@ -686,6 +687,20 @@ def sync_dates(days, with_markets=False, market_ids=None, verbose=True, fresh=Fa
             # jatuh ke TypeError parse yang tertelan except di bawah,
             # sehingga run yang SEMUA tanggalnya gagal tetap terlihat
             # sukses (games=0, empty_dates=[]) di exit code CLI.
+            # Pengecualian (audit ronde 13): tanggal MASA DEPAN yang
+            # halamannya stub (jadwal belum terbit di TipsterArea)
+            # gagal validasi blok laga persis seperti halaman blokir,
+            # jadi fetch-segarnya mendarat di sini sementara salinan
+            # cache-nya terparse 0 laga -> empty_dates. Untuk tanggal
+            # yang belum tiba keduanya berarti sama — belum ada
+            # apa-apa untuk disinkronkan — jadi klasifikasikan KOSONG,
+            # bukan gagal; tanggal hari ini/lampau tetap GAGAL keras.
+            if iso_d > today_iso:
+                empty_dates.append(iso_d)
+                date_htmls[iso_d] = (None, True)
+                print(f"  ! {iso_d}: belum terbit di TipsterArea "
+                      f"(stub masa depan)", file=sys.stderr)
+                continue
             failed_dates.append(iso_d)
             date_htmls[iso_d] = (None, True)
             print(f"  ! {iso_d}: fetch gagal (tak ada halaman)",

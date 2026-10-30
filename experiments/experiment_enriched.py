@@ -1,6 +1,13 @@
 #!/usr/bin/env python3
 """experiment_enriched.py — Phase 12: Sharp vs Soft book integration.
 
+STATUS (audit round 13): frozen input. This experiment reads
+all_matches_enriched.csv, whose producer (data_enrichment/
+enrich_pipeline.py) was deleted in PR #33; the CSV is git-tracked so
+the experiment still runs, but its input can never be regenerated.
+Treat any rerun as a replay against a frozen snapshot, not as new
+evidence.
+
 Sumber: `all_matches_enriched.csv` (Pinnacle PS, midweek_flags, rolling_xg_diff)
 di-join ke records_cache. Imputasi: PS hilang -> fallback ke B365 (dev=1.0);
 rolling_xg_diff hilang -> Fallback rolling_goal_diff / 0.

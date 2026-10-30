@@ -49,6 +49,15 @@ def dkey(d):
     return (d["datetime"], d["h"]["title"], d["a"]["title"])
 
 
+# Sumber per liga dari run main() terakhir, diperbarui liga demi liga
+# SELAMA loop berjalan. Bila main() mati di tengah loop (pengecualian
+# sesudah sebagian liga ditulis), nilai kembali tidak pernah sampai ke
+# pemanggil — tapi liga yang sempat selesai, termasuk yang ditulis
+# dari fallback disk, tetap terbaca di sini (audit ronde 13: jalur
+# pengecualian shadow [1/16]).
+LAST_SOURCES = {}
+
+
 def main():
     """Segarkan semua liga; kembalikan {div: sumber} per liga.
 
@@ -63,6 +72,7 @@ def main():
     os.makedirs(bdir, exist_ok=True)
     total_add, total_del = [], []
     sources = {}
+    LAST_SOURCES.clear()
     for slug, div in LEAGUES.items():
         path = os.path.join(XG, f"{slug}_2026_fixtures.json")
         with open(path, encoding="utf-8") as f:
@@ -100,15 +110,23 @@ def main():
         total_add += [(div,) + d for d in add_fut]
         total_del += [(div,) + d for d in drop_fut]
         sources[div] = src
+        LAST_SOURCES[div] = src
         print(f"[{div:>3}] {src}: {len(old)}->" f"{len(fresh)} rows | baru>=H: {len(add_fut)} "
               f"| hilang>=H: {len(drop_fut)} | backup: {os.path.basename(bpath)}")
     print(f"TOTAL fixture >= {TODAY}: +{len(total_add)} / -{len(total_del)}")
-    return sources
     for d in total_add[:10]:
         print("  +", d[0], d[1][:10], d[2], "v", d[3])
     for d in total_del[:10]:
         print("  -", d[0], d[1][:10], d[2], "v", d[3])
+    return sources
 
 
 if __name__ == "__main__":
-    main()
+    _srcs = main()
+    if any(str(s).startswith("fallback") for s in _srcs.values()):
+        # Run mandiri harus terlihat gagal bila ada liga yang hanya
+        # tersegar dari konten beku (audit ronde 13) — pemanggil
+        # in-process membaca peta sumbernya langsung.
+        print("PERINGATAN: sebagian liga disegarkan dari fallback "
+              "disk (konten beku), bukan dari Understat")
+        raise SystemExit(1)

@@ -153,12 +153,15 @@ def _result_index():
     return idx
 
 
+POSTPONE_MAX_DAYS = 45
+
+
 def _match_result(idx, match_date, home, away, comp):
     """Cari skor FT untuk (tanggal, home, away).
 
     Skor = kemiripan nama (sim) kedua tim; hint kompetisi piala memberi
     dorongan kecil untuk memisahkan laga liga vs piala di tanggal sama.
-    None bila tidak ada kandidat meyakinkan.
+    Return (skor_home, skor_away, tanggal_hasil) atau None.
 
     Fallback laga tunda (audit ronde 12, C12-4): lookup utama
     berjangkar tanggal pick, jadi laga yang digeser ke tanggal lain
@@ -167,6 +170,14 @@ def _match_result(idx, match_date, home, away, comp):
     dengan kandidat meyakinkan yang dipakai — pasangan tim yang sama
     bertemu lagi di putaran kedua, jadi mengambil yang paling akhir
     akan menilai leg dengan laga yang salah.
+
+    Pemindaian dibatasi POSTPONE_MAX_DAYS hari (audit ronde 13): tanpa
+    batas, leg dari laga yang DIBATALKAN (tidak pernah dimainkan)
+    akan settle dari pertemuan berikutnya pasangan yang sama —
+    berbulan-bulan kemudian, mungkin di kompetisi lain — dan grade
+    final tidak pernah ditulis ulang. Tanggal hasil yang cocok kini
+    dikembalikan dan dicatat di baris grade (result_date) supaya
+    penilaian tunda selalu bisa diaudit sesudahnya.
     """
     nh, na = norm(home), norm(away)
     hint = CUP_LEAGUE.get(comp or "")
@@ -183,13 +194,20 @@ def _match_result(idx, match_date, home, away, comp):
 
     got = _best_on(idx.get(match_date))
     if got is not None:
-        return got
+        return got[0], got[1], match_date
+    try:
+        limit = (date.fromisoformat(match_date)
+                 + timedelta(days=POSTPONE_MAX_DAYS)).isoformat()
+    except (TypeError, ValueError):
+        limit = None
     for d in sorted(idx):
         if d <= match_date:
             continue
+        if limit is not None and d > limit:
+            break
         got = _best_on(idx[d])
         if got is not None:
-            return got
+            return got[0], got[1], d
     return None
 
 
@@ -275,7 +293,8 @@ def _grade_leg(product, row, res_idx, cor_idx):
          "home": home, "away": away, "competition": comp,
          "market": market, "line": line, "selection": sel,
          "p_model": p_model, "odds": odds, "tier": tier,
-         "status": "pending", "score": "", "reason": "", "graded_at": ""}
+         "status": "pending", "score": "", "reason": "", "graded_at": "",
+         "result_date": ""}
 
     mkt = market.lower()
     if mkt in ("corners", "corner", "corner total"):
@@ -306,7 +325,8 @@ def _grade_leg(product, row, res_idx, cor_idx):
         g["status"] = "pending"
         g["reason"] = "no_result_yet"
         return g
-    sh, sa = res
+    sh, sa, rdate = res
+    g["result_date"] = rdate
     if mkt in ("1x2", "1 x 2"):
         st = settle_1x2(sh, sa, sel)
     elif mkt == "dc":
@@ -545,6 +565,36 @@ def _build_summary(store):
     return summary
 
 
+def _is_date_name(name):
+    """Nama folder arsip yang sah adalah tanggal ISO (audit ronde 13):
+    folder non-tanggal di archive/ dulu bisa membuat fromisoformat di
+    peringatan C12-3 melempar ValueError yang tertelan dan mematikan
+    seluruh pemeriksaan secara diam-diam."""
+    try:
+        date.fromisoformat(name)
+        return True
+    except (TypeError, ValueError):
+        return False
+
+
+def _missing_archive_dates(dates, today):
+    """Tanggal tanpa folder arsip di rentang [arsip pertama,
+    min(arsip terakhir, kemarin)] — dasar peringatan C12-3. dates
+    terurut menaik dan semuanya nama tanggal yang sah."""
+    if not dates:
+        return []
+    first = date.fromisoformat(dates[0])
+    last = min(date.fromisoformat(dates[-1]), today - timedelta(days=1))
+    have = set(dates)
+    missing = []
+    d = first
+    while d <= last:
+        if d.isoformat() not in have:
+            missing.append(d.isoformat())
+        d += timedelta(days=1)
+    return missing
+
+
 # ---------------------------------------------------------------- main
 def main(argv=None):
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
@@ -556,30 +606,23 @@ def main(argv=None):
     if not os.path.isdir(ARCHIVE):
         print("  ! tidak ada folder arsip")
         return 1
-    dates = sorted(d for d in os.listdir(ARCHIVE) if os.path.isdir(os.path.join(ARCHIVE, d)))
+    dates = sorted(d for d in os.listdir(ARCHIVE)
+                   if os.path.isdir(os.path.join(ARCHIVE, d))
+                   and _is_date_name(d))
     # C12-3: tanggal yang hilang di tengah rentang arsip tidak boleh
     # lenyap diam-diam — folder yang tidak ada berarti rekomendasi
     # hari itu tidak akan pernah masuk riwayat kalibrasi (mis. arsip
     # gagal sementara prediksinya sukses). Peringatkan secara eksplisit.
     if dates:
-        from datetime import date as _date, timedelta as _td
-        try:
-            first = _date.fromisoformat(dates[0])
-            last = min(_date.fromisoformat(dates[-1]),
-                       datetime.now(timezone.utc).date() - _td(days=1))
-            have = set(dates)
-            missing = []
-            d = first
-            while d <= last:
-                if d.isoformat() not in have:
-                    missing.append(d.isoformat())
-                d += _td(days=1)
-            if missing:
-                print(f"  ! PERINGATAN: {len(missing)} tanggal tanpa "
-                      f"folder arsip di rentang {dates[0]}.."
-                      f"{last.isoformat()}: {', '.join(missing)}")
-        except ValueError:
-            pass
+        missing = _missing_archive_dates(
+            dates, datetime.now(timezone.utc).date())
+        if missing:
+            last = min(dates[-1],
+                       (datetime.now(timezone.utc).date()
+                        - timedelta(days=1)).isoformat())
+            print(f"  ! PERINGATAN: {len(missing)} tanggal tanpa "
+                  f"folder arsip di rentang {dates[0]}.."
+                  f"{last}: {', '.join(missing)}")
     total_changed = 0
     seen = set()
     for archive_date in dates:
