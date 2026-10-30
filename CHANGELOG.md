@@ -33,6 +33,47 @@ Keep a Changelog, and the project uses semantic versioning.
 
 ### Fixed
 
+- Audit round 13 (self-audit of the round 12 fixes; no high-severity
+  findings — every round 12 fix re-verified substantively). The one
+  medium item was the `best_bets` lifecycle: `ta_model.build()` ran
+  only in the weekly refit, while `best_picks` consumed the file
+  daily, so stored rows ranked for up to a week with probabilities,
+  EV and prices frozen at creation — including three legacy rows
+  from the pre-guard build still presenting 0.13–0.16 above the DC
+  probability. The build is now a daily shadow step (the chain grows
+  to sixteen steps, renumbered), still-open bets that are re-issued
+  are repriced from the day's candidates (settled rows are never
+  rewritten), the safest-pick ranking reads probabilities and EV
+  from the current `model_markets.csv` instead of the stored bet
+  rows, and the TA loader anchors on the full kickoff datetime — a
+  same-day match that had already kicked off (Le Havre–PSG) was the
+  sole top pick for its match in `best_picks.csv` under the old
+  date-only anchor.
+- Postponed-match grading fallbacks are bounded to 45 days in both
+  graders, and recommendation grades now record the matched result
+  date (`result_date`). Unbounded, a leg whose match was cancelled
+  could have settled against the pair's next meeting months later;
+  exposure was zero (no pending picks, no fallback-graded legs).
+- Regression tests for the fixes themselves (65 -> 74): a 23-match
+  slip pool pinning the branch-and-bound optimum against an
+  independent enumeration (the round 12 property test's 6-match
+  pool could not fail on the original truncation defect), shadow
+  gating integration tests (previously only a manual sandbox
+  check), the postponed-fallback wiring, the prematch kickoff
+  predicates, and the archive missing-date warning (whose folder
+  list is now filtered to ISO date names — a stray folder could
+  silently disable it). The corner parity golden pins its gamma.
+- Minor: `refresh_fixtures` prints its +/- fixture listing again
+  (the round 12 return statement sat in front of it) and its
+  standalone CLI exits non-zero when a league came from the frozen
+  fallback; the shadow's fixture exception path now also flags
+  leagues written from fallback before a mid-refresh failure
+  (`LAST_SOURCES`); a not-yet-published future date page is
+  classified empty rather than failed in the TipsterArea sync; the
+  slip search node budget is doubled to 8M (the production slip-10
+  search measured ~89% of 4M on a 23-match slate); stale step
+  references and dead imports cleaned up.
+
 - An external audit (GPT, verified line by line against the code)
   found nine defects, all fixed here. The fixture loader now drops
   matches that are already results or whose UTC kickoff has passed,
