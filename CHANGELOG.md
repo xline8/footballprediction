@@ -33,6 +33,33 @@ Keep a Changelog, and the project uses semantic versioning.
 
 ### Fixed
 
+- Audit round 14 (self-audit of the round 13 fixes; no high- or
+  medium-severity findings). Five low items, all fixed here. The
+  bogus-price purge's exemption protected a row only on days it was
+  re-issued, so a still-open bet above the threshold that stopped
+  winning would have been purged before kickoff and never graded;
+  the exemption now covers open rows whose kickoff is in the future
+  or within a two-day results-lag grace past it. The daily shadow
+  ignored `ta_model.build()`'s return code (an empty
+  `ta/fixtures.csv` failed silently while the step printed success);
+  it now fails the run, matching the orchestrator. Daily archive
+  snapshots are write-once per file: a same-day rerun after kickoff
+  previously overwrote the prematch snapshot with post-kickoff
+  outputs, orphaning that match's recommendation legs, which were
+  then pruned unsettled (three Le Havre–PSG legs were lost this way
+  and have been re-graded from the verified result); a header-only
+  archived file may still be overwritten by a source with data rows,
+  so a degraded first run can be repaired. `best_picks` now anchors
+  every source on the full kickoff datetime, not just the TA loader
+  — a pick for Lille v Lens was written two minutes after kickoff
+  (probabilities were prematch; the exposure was presentational) —
+  and a started match's row in `best_picks_today.csv` is the empty
+  row. A stdlib `symtable` sweep over the thirteen daily-chain
+  modules now guards the undefined-name class that the round 13
+  corner-loader defect belonged to, and the
+  `experiments/experiment_enriched.py` header no longer claims its
+  input CSV is git-tracked (it is an untracked local artifact).
+  Tests 75 -> 80.
 - Audit round 13 (self-audit of the round 12 fixes; no high-severity
   findings — every round 12 fix re-verified substantively). The one
   medium item was the `best_bets` lifecycle: `ta_model.build()` ran

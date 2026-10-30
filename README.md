@@ -148,7 +148,9 @@ corners and cups, sync tipsterarea results and grade TA bets, sync
 market odds and build `market_compare.csv`, rebuild the TipsterArea
 model markets and bets daily (`ta_model.build()`; still-open bets are
 repriced from the day's candidates, and the safest-pick ranking reads
-the current build's probabilities rather than the stored bet rows),
+the current build's probabilities rather than the stored bet rows —
+the stored values remain only as a fallback for selections with no
+current market row),
 build the safest picks and the three daily recommendations, grade
 them, archive the day's outputs under `archive/<date>/`, route cup
 picks into their per-competition ledger buckets, grade the money
