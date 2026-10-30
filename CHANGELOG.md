@@ -33,6 +33,31 @@ Keep a Changelog, and the project uses semantic versioning.
 
 ### Fixed
 
+- An external audit (GPT, verified line by line against the code)
+  found nine defects, all fixed here. The fixture loader now drops
+  matches that are already results or whose UTC kickoff has passed,
+  so a midday rerun can no longer predict or recommend played
+  matches. The daily shadow gates every consumer of the league
+  predictions on a successful predictions step and no longer
+  archives stale artifacts into the new date folder that later
+  grading runs read; it also refreshes league fixtures itself when
+  the stalest file is over 12 hours old and refuses to predict on
+  fixtures over 48 hours old. `ModelState` stamps a content
+  fingerprint of its training data (goals + xG) and treats a
+  mismatch as a refit trigger, so corrected scores or backfilled xG
+  cannot leave a silently stale cached model. The training-data
+  refresh now reads `clean()`'s violation count: any residual
+  violation is a pre-commit failure on the existing rollback path
+  instead of a printed warning on data that gets committed anyway.
+  The TipsterArea parser preserves the raw status text (`status_raw`
+  column) that the AET/PEN-to-FT canonicalization used to discard.
+  League grading fills results the Understat dumps do not have yet
+  from the synced TipsterArea results. A T3 failure is reported in
+  the predictions result (`t3_status`) instead of vanishing into a
+  print while the run reports success. Documentation for the T3 and
+  meta components now matches the production path (nine-logit
+  recipe), and the stale `DC_FIT_MODE` comment in `model_v2.py` is
+  corrected.
 - A ninth audit round verified PR #29 (the soft-partial gating
   matrix exercised end to end, the shrink-ordering change proven
   rollback-safe at byte level, the newly matched fixture's market
