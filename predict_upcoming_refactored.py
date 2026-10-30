@@ -110,6 +110,11 @@ def generate_predictions(force_refit: bool = False, output_file: str = None) -> 
             yy, mm = int(d[:4]), int(d[5:7])
         groups[(fx["div"], yy, mm)].append(fx)
 
+    # Map xG + riwayat per divisi dimuat SEKALI di luar loop grup:
+    # sebelumnya _load_xg_map() mem-parse ulang ~18k baris CSV untuk
+    # setiap grup (divisi x bulan) — ~40x kerja redundan per run.
+    xg_map = _load_xg_map()
+    _hist_by_div = {}
     for (div, yy, mm), fxs in sorted(groups.items()):
         start_d = min(x["date"] for x in fxs)
         if hasattr(start_d, 'isoformat'):
@@ -118,8 +123,8 @@ def generate_predictions(force_refit: bool = False, output_file: str = None) -> 
             start = datetime.strptime(start_d, "%Y-%m-%d").date()
 
         # Get historical matches for this division before this fixture date
-        hist_matches = loader.get_matches_by_div(div)
-        xg_map = _load_xg_map()
+        hist_matches = _hist_by_div.setdefault(
+            div, loader.get_matches_by_div(div))
         games = [(m['home'], m['away'], m['yh'], m['ya'],
                   xg_map.get(xg_key(div, m['date'], m['home'], m['away']), (None, None))[0],
                   xg_map.get(xg_key(div, m['date'], m['home'], m['away']), (None, None))[1],

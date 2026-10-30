@@ -139,6 +139,7 @@ class DC:
 
     def fit(self, games, cutoff, hl):
         games = games[-MAX_TRAIN:]
+        self.n_trained = len(games)
         mode = DC_FIT_MODE
         # Nilai observasi per laga sesuai mode: blend bila xG tersedia,
         # selain itu gol (fallback aman — produksi tak boleh drop match).
