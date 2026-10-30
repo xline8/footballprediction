@@ -120,7 +120,7 @@ flowchart LR
 | Component | File | Role |
 |---|---|---|
 | Dixon-Coles engine | `model_v2.py` | bivariate Poisson model with low-score dependency correction and decayed team ratings. Fit mode `DC_FIT_MODE` (`goals` or `blend`; default `blend` = 0.5·goals + 0.5·xG where xG exists) |
-| Meta model | `experiments/experiment_meta.py`, `backtest_picks.py` | stacks logits of the DC model, the feature model, and market-implied probabilities with a walk-forward multinomial logistic regression; consumes sharp signals (Pinnacle deviation, shin-fair probabilities, midweek flags) |
+| Meta model | `make_picks_live.py`, `backtest_picks.py` | walk-forward multinomial logistic stack of exactly nine logits: the Dixon-Coles 1X2 probabilities, the T3 feature-model probabilities, and logit(1/opening odds) per outcome. Fitted monthly on past records only; the same recipe is kept in `experiments/go_live_gates.py` |
 | Matrix pricing | `matrix_pricer.py` | builds the bivariate Poisson scoreline matrix and meta-calibrates it so summed 1X2 marginals match the meta model; O/U and BTTS derive from that matrix |
 | Corner model | `model_corners_v3.py` | Poisson model predicting team corner counts and corner O/U lines from rolling shot statistics (fitted parameters in `ta/corner_params.json`). Beats league base-rate on walk-forward log loss, Brier, MAE, RMSE. Walk-forward calibration against actual corner counts is documented under Measured results. No bookmaker corner-odds feed is connected, so the corner model is assessed on calibration against actual counts, not on price value |
 | Data enrichment | `data_enrichment/` | joins Pinnacle odds, midweek/cup fatigue flags, and rolling xG differentials into `all_matches_enriched.csv`, without touching the clean source data |

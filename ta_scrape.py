@@ -58,7 +58,7 @@ SNAP_COLS = ["captured_at", "game_id", "date", "home", "away", "o1", "ox", "o2",
 MKT_COLS = ["captured_at", "game_id", "market", "line", "selection", "bookmaker",
             "odds", "url"]
 RES_COLS = ["game_id", "date", "league", "home", "away", "score_h", "score_a",
-            "status", "source_url", "updated_at"]
+            "status", "source_url", "updated_at", "status_raw"]
 CORNER_OUT_COLS = ("date", "home_team", "away_team", "corner_line",
                    "odds_over", "odds_under")
 
@@ -440,6 +440,14 @@ def parse_date_page(html, iso_date):
             "game_id": gid, "date": iso_date, "time": ttime,
             "league": league, "country": country,
             "home": home, "away": away, "status": status,
+            # Status mentah dipertahankan (audit GPT 2026-10-31, E):
+            # kanonisasi AET/PEN -> FT dulu membuang satu-satunya bukti
+            # apakah skor yang tersimpan skor 90 menit atau pasca-ET.
+            # Settlement tetap memakai skor tersimpan (bukti arsip EFL:
+            # laga adu penalti tersimpan sebagai skor seri regulasi),
+            # tapi kemunculan AET/PEN pertama kini bisa diaudit dari
+            # kolom ini, bukan hilang.
+            "status_raw": st,
             "score_h": sh, "score_a": sa,
             "o1": o["o1"], "ox": o["oX"], "o2": o["o2"],
             "url": BASE + href,
@@ -573,6 +581,7 @@ def save_date_page(games, captured):
                     "score_h": g["score_h"], "score_a": g["score_a"],
                     "status": "FT", "source_url": g["url"],
                     "updated_at": captured,
+                    "status_raw": g.get("status_raw", ""),
                 }
                 changed += 1
     if changed:

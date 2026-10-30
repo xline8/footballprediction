@@ -502,6 +502,18 @@ class PipelineOrchestrator:
                 from clean import clean
                 p = prepare()
                 c = clean()
+                # Hasil validasi clean() dulu tidak dibaca siapa pun
+                # (audit GPT 2026-10-31, D): pelanggaran sisa —
+                # termasuk sel gol yang tidak terparse — hanya
+                # tercetak, sementara data cacat tetap ter-commit dan
+                # backup transien dibuang. Sekarang pelanggaran adalah
+                # issue pra-commit dan mengikuti jalur rollback yang
+                # sama. Baseline data saat ini memang 0 pelanggaran,
+                # jadi nilai bukan-nol berarti sumber mengirim sel rusak.
+                if c.get("violations"):
+                    issues.append(
+                        f"clean violations: {c['violations']} pelanggaran "
+                        f"sisa pada data bersih baru")
                 after = self._clean_stats(clean_path)
 
                 if after["total"] < before["total"]:
@@ -771,7 +783,7 @@ class PipelineOrchestrator:
                 needs_fit = True
                 if was_loaded and state.last_fit_date:
                     days_since_fit = (cutoff - state.last_fit_date).days
-                    needs_fit = days_since_fit > 7 or state.mode_mismatch() or state.needs_fit(
+                    needs_fit = days_since_fit > 7 or state.mode_mismatch() or state.data_stale() or state.needs_fit(
                         [(m['home'], m['away'], m['yh'], m['ya'], m['date'])
                          for m in matches_with_scores[-100:]], cutoff
                     )

@@ -698,6 +698,202 @@ def test_fit_models_rollup_zero_divisions_fails():
         po.ModelState = old_state
 
 
+def test_load_fixtures_drops_results_and_started_matches():
+    # Loader liga hanya boleh memuat fixture prematch (audit GPT
+    # 2026-10-31, A): laga selesai (isResult) dan laga yang kickoff
+    # UTC-nya sudah tercapai pada tanggal yang sama harus gugur.
+    import json
+    import tempfile
+    from datetime import datetime, timedelta, timezone
+
+    import football_etl
+
+    now = datetime.now(timezone.utc).replace(tzinfo=None)
+    fmt = "%Y-%m-%d %H:%M:%S"
+
+    def item(dt, is_result, hid):
+        return {"id": hid, "datetime": dt.strftime(fmt),
+                "isResult": is_result,
+                "h": {"title": "Arsenal"}, "a": {"title": "Chelsea"}}
+
+    items = [
+        item(now + timedelta(days=2), False, 1),   # masa depan: lolos
+        item(now + timedelta(days=2), True, 2),    # sudah selesai: gugur
+        item(now - timedelta(hours=1), False, 3),  # kickoff lewat: gugur
+        item(now - timedelta(days=1), False, 4),   # kemarin: gugur
+    ]
+    with tempfile.TemporaryDirectory() as td:
+        with open(os.path.join(td, "EPL_2026_fixtures.json"), "w",
+                  encoding="utf-8") as f:
+            json.dump(items, f)
+        with open(os.path.join(td, "map_full.json"), "w",
+                  encoding="utf-8") as f:
+            json.dump({"E0|Arsenal": "Arsenal", "E0|Chelsea": "Chelsea"}, f)
+        old = football_etl.XGRAW
+        football_etl.XGRAW = td
+        try:
+            fx = football_etl.load_fixtures("2026")
+        finally:
+            football_etl.XGRAW = old
+    assert [x["uid"] for x in fx] == [1], fx
+
+
+def test_model_state_data_fingerprint_gate():
+    # State yang di-fit atas data yang kemudian berubah (koreksi skor /
+    # xG) harus dianggap basi lewat fingerprint (audit GPT, C).
+    import tempfile
+
+    import model_state
+
+    with tempfile.TemporaryDirectory() as td:
+        old = model_state.CACHE_DIR
+        model_state.CACHE_DIR = td
+        try:
+            st = model_state.ModelState("E0")
+            st._initialized = True
+            for _t in ("Arsenal", "Chelsea"):
+                st.attack[_t] = 1.0
+                st.defense[_t] = 1.0
+            st.data_fp = model_state.current_data_fingerprint()
+            assert st.data_stale() is False
+            assert st.needs_fit([("Arsenal", "Chelsea")], None) is False
+            st.data_fp = "fingerprint-lama"
+            assert st.data_stale() is True
+            assert st.needs_fit([("Arsenal", "Chelsea")], None) is True
+            # roundtrip save/load mempertahankan cap fingerprint
+            st.data_fp = model_state.current_data_fingerprint()
+            st.updated_at = "2026-10-31T00:00:00"
+            st.save()
+            st2 = model_state.ModelState("E0")
+            assert st2.load() is True
+            assert st2.data_fp == st.data_fp
+        finally:
+            model_state.CACHE_DIR = old
+
+
+def test_refresh_clean_violations_block_commit():
+    # violations dari clean() adalah gerbang pra-commit (audit GPT, D):
+    # data cacat -> langkah gagal dan file bersih lama dipulihkan,
+    # bukan ter-commit.
+    import tempfile
+
+    hdr = "Date,Div,Season\n"
+    before = hdr + "2026-08-01,E0,2026/27\n"
+    grown = before + "2026-08-02,E0,2026/27\n"
+    with tempfile.TemporaryDirectory() as td:
+        orch, paths, restore = _refresh_env(td)
+        try:
+            with open(paths.DATA_CLEAN, "w", encoding="utf-8") as f:
+                f.write(before)
+            with open(paths.DATA_RAW, "w", encoding="utf-8") as f:
+                f.write("ALL-OLD")
+            with open(os.path.join(paths.RAW_DIR, "E0_2627.csv"), "w",
+                      encoding="utf-8") as f:
+                f.write("RAW-OLD")
+            import pipeline_orchestrator as po
+            for slug in po.XG_SLUGS:
+                with open(os.path.join(paths.XGRAW, f"{slug}_2026.json"),
+                          "w", encoding="utf-8") as f:
+                    f.write("[1, 2]")
+
+            def _clean():
+                with open(paths.DATA_CLEAN, "w", encoding="utf-8") as f:
+                    f.write(grown)
+                return {"rows": 2, "violations": 2}
+
+            sys.modules["clean"].clean = _clean
+            r = orch.step_refresh_training_data()
+            assert r["status"] == "failed", r
+            assert not r.get("committed"), r
+            with open(paths.DATA_CLEAN, encoding="utf-8") as f:
+                assert f.read() == before  # rollback, bukan commit
+        finally:
+            restore()
+
+
+def test_ta_parse_keeps_raw_status():
+    # Status mentah AET/PEN dipertahankan walau status kanonis tetap FT
+    # (audit GPT, E) — bukti untuk audit settlement 90 menit berikutnya.
+    import ta_scrape
+
+    html = ('<span class="league-name"><span>England - EFL Cup</span>'
+            '<a class="game" href="/match/alpha-beta-123456">'
+            '<span class="time notime started">20:00</span>'
+            '<span class="status play">AET</span>'
+            '<span class="teams">'
+            '<span class="home"><span>Alpha</span></span>'
+            '<span class="score scsm play">2 - 1</span>'
+            '<span class="away"><span>Beta</span></span>'
+            '</span>'
+            '<span class="odds"><span class="o1">2.10</span>'
+            '<span class="oX">3.20</span><span class="o2">3.40</span></span>'
+            '</a>')
+    games = ta_scrape.parse_date_page(html, "2026-10-28")
+    assert len(games) == 1, games
+    assert games[0]["status"] == "FT"
+    assert games[0]["status_raw"] == "AET"
+    assert (games[0]["score_h"], games[0]["score_a"]) == ("2", "1")
+
+
+def test_score_ledger_ta_league_results_fill():
+    # Hasil liga TipsterArea dimuat untuk mengisi kekosongan dump
+    # Understat (audit GPT, F): hanya liga TOP5 dan hanya status FT.
+    import tempfile
+
+    import score_ledger
+
+    with tempfile.TemporaryDirectory() as td:
+        os.makedirs(os.path.join(td, "ta"))
+        with open(os.path.join(td, "ta", "results.csv"), "w",
+                  encoding="utf-8") as f:
+            f.write("game_id,date,league,home,away,score_h,score_a,"
+                    "status,source_url,updated_at\n")
+            f.write("1,2026-10-29,Italy - Serie A,Fiorentina,Atalanta,"
+                    "2,2,FT,http://x,2026-10-30\n")
+            f.write("2,2026-10-29,Italy - Serie B,Modena,Bari,"
+                    "1,0,FT,http://x,2026-10-30\n")
+            f.write("3,2026-10-29,England - Premier League,Arsenal,"
+                    "Chelsea,,,NS,http://x,2026-10-30\n")
+        old = score_ledger.PROJ
+        score_ledger.PROJ = td
+        try:
+            out = score_ledger._load_ta_league_results()
+        finally:
+            score_ledger.PROJ = old
+    from football_etl import normalize_name
+    key = ("I1", "2026-10-29", normalize_name("Fiorentina"),
+           normalize_name("Atalanta"))
+    assert out == {key: (2, 2)}, out
+
+
+def test_shadow_fixture_age_thresholds():
+    # Umur fixture dinilai dari file liga paling basi (audit GPT, G).
+    import tempfile
+    import time as _time
+
+    import run_daily_shadow as rds
+
+    with tempfile.TemporaryDirectory() as td:
+        xg = os.path.join(td, "xg_raw")
+        os.makedirs(xg)
+        for slug in rds.FIXTURE_SLUGS:
+            p = os.path.join(xg, f"{slug}_2026_fixtures.json")
+            with open(p, "w", encoding="utf-8") as f:
+                f.write("[]")
+        old = rds.BASE
+        rds.BASE = td
+        try:
+            assert rds._fixtures_age_h() < 0.1
+            stale = os.path.join(xg, "EPL_2026_fixtures.json")
+            old_t = _time.time() - 72 * 3600
+            os.utime(stale, (old_t, old_t))
+            assert rds._fixtures_age_h() > 71
+            os.remove(os.path.join(xg, "Ligue_1_2026_fixtures.json"))
+            assert rds._fixtures_age_h() == float("inf")
+        finally:
+            rds.BASE = old
+
+
 if __name__ == "__main__":
     fns = [v for k, v in sorted(globals().items())
            if k.startswith("test_") and callable(v)]

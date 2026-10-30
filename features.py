@@ -10,8 +10,10 @@ Fitur yang disediakan:
 - Rata-rata xG for/against (rolling, jika xG tersedia)
 - Hari istirahat sejak laga terakhir (fatigue / schedule density)
 
-Ini lapisan eksperimental: belum dihubungkan ke jalur taruhan agar perilaku
-prediksi live tidak berubah. Lihat feature_analysis.py untuk perbandingan.
+Komponen produksi: build_feature_rows dipakai jalur serving
+(predict_upcoming_refactored) untuk menghitung baris fitur fixture
+mendatang, yang diprediksi model T3 dan diteruskan ke stack meta.
+Lihat feature_analysis.py untuk perbandingan.
 """
 
 import csv

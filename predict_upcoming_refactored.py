@@ -64,8 +64,13 @@ def generate_predictions(force_refit: bool = False, output_file: str = None) -> 
 
     print(f"  Loaded {len(fixtures)} fixtures, {len(odds)} odds entries")
 
-    # --- Shadow T3 (fitur): prediksi tambahan, TIDAK mengubah baseline ---
+    # --- T3 (fitur): kolomnya disajikan di predictions_upcoming.csv dan
+    # wajib bagi stack meta di make_picks_live. Kegagalannya dulu ditelan
+    # diam-diam sehingga status tetap 'success' (audit GPT 2026-10-31, H):
+    # sekarang status T3 dilaporkan eksplisit ke pemanggil.
     t3_map = {}
+    t3_status = "ok"
+    t3_error = None
     try:
         pend = []
         for fx in fixtures:
@@ -87,11 +92,14 @@ def generate_predictions(force_refit: bool = False, output_file: str = None) -> 
                 px = model3.predict_vector(pf)
                 ds = fx["date"].isoformat() if isinstance(fx["date"], date) else str(fx["date"])
                 t3_map[(fx["div"], ds, fx["home"], fx["away"])] = px
-            print(f"  Shadow T3 siap untuk {len(t3_map)} fixtures")
+            print(f"  T3 siap untuk {len(t3_map)} fixtures")
         else:
-            print("  ! Shadow T3 dilewati: data riwayat terlalu sedikit")
+            t3_status = "skipped"
+            print("  ! T3 dilewati: data riwayat terlalu sedikit")
     except Exception as e:
-        print(f"  ! Shadow T3 gagal (dilewati): {e}")
+        t3_status = "failed"
+        t3_error = repr(e)
+        print(f"  ! T3 GAGAL (kolom T3 kosong, status dilaporkan): {e}")
 
     # Process fixtures per division
     out_rows = []
@@ -207,6 +215,8 @@ def generate_predictions(force_refit: bool = False, output_file: str = None) -> 
         status = 'success'
     return {
         'status': status,
+        't3_status': t3_status,
+        't3_error': t3_error,
         'predictions': out_rows,
         'n_fixtures': len(fixtures),
         'n_with_odds': n_with_odds,
@@ -242,6 +252,12 @@ def _get_or_fit_model(loader, div: str, games: list, cutoff: date,
                 needs_fit = True
         except (TypeError, ValueError):
             pass
+
+    if was_loaded and state.data_stale():
+        # Data gol/xG berubah sejak state di-fit (koreksi skor, xG
+        # terisi belakangan): cache tidak boleh dipakai diam-diam
+        # (audit GPT 2026-10-31, C).
+        needs_fit = True
 
     if was_loaded and state.last_fit_date and not needs_fit:
         # Check if new games since last fit
@@ -291,6 +307,9 @@ def _load_fixtures_from_raw() -> List[Dict]:
                "I1": "Serie_A", "F1": "Ligue_1"}
     from datetime import timezone as _tz
     TODAY = datetime.now(_tz.utc).date()
+    # Samakan disiplin prematch loader utama (audit GPT 2026-10-31, A):
+    # fallback tidak boleh menghidupkan lagi laga selesai/sudah kickoff.
+    NOW_UTC = datetime.now(_tz.utc).replace(tzinfo=None)
 
     # Load name mapping
     nmap_path = os.path.join(BASE_DIR, "xg_raw", "map_full.json")
@@ -308,7 +327,11 @@ def _load_fixtures_from_raw() -> List[Dict]:
             data = json.load(f)
         for d in data:
             try:
+                if d.get("isResult"):
+                    continue
                 dt = datetime.strptime(d["datetime"], "%Y-%m-%d %H:%M:%S")
+                if dt <= NOW_UTC:
+                    continue
                 if dt.date() < TODAY:
                     continue
                 home = nmap.get(f"{div}|{d['h']['title']}")
