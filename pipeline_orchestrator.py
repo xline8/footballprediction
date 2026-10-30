@@ -29,6 +29,16 @@ XG_SLUGS = ("EPL", "La_liga", "Bundesliga", "Serie_A", "Ligue_1")
 # Refresh data latih hanya musim berjalan (2627). Override via env bila perlu.
 REFRESH_SEASON = os.environ.get("FOOTBALL_REFRESH_SEASON", "2627")
 
+# Langkah yang status 'partial'-nya LUNAK: tidak memblokir langkah
+# hilir dan tidak menggagalkan run, tapi tetap dicatat di
+# partial_steps + last_full_pipeline.json (audit ronde 8). Alasannya:
+# degradasi sebagian di kedua langkah ini meninggalkan artefak lama
+# yang masih sah — model: state divisi yang gagal fit tetap versi
+# sebelumnya (divisi lain segar); odds: sumber football-data memang
+# kosong di produksi, jadi exception di satu divisi tidak mengubah
+# output apa pun. Partial dari langkah LAIN (xg, scoring) tetap keras.
+SOFT_PARTIAL_STEPS = {"model", "odds"}
+
 
 def _cup_fixture_ids(days):
     """game_id fixture piala (EFL Cup / DFB Pokal) dalam jendela tanggal.
@@ -106,20 +116,26 @@ class PipelineOrchestrator:
             ("picks", self.step_generate_picks, ("scoring", "cups")),
             ("validation", self.step_validation, ()),
         ]
+        current = None
         try:
             for name, fn, blocked_by in steps:
                 # 'skipped' karena upstream gagal ikut memblokir:
                 # tanpa ini rantai skip berhenti di langkah pertama
                 # dan langkah hilir tetap mengonsumsi artefak basi.
-                def _blocks(v):
+                # 'partial' hanya memblokir dari langkah non-lunak
+                # (SOFT_PARTIAL_STEPS).
+                def _blocks(step_name, v):
                     if not isinstance(v, dict):
                         return False
-                    if v.get('status') in ('failed', 'partial'):
+                    if v.get('status') == 'failed':
                         return True
+                    if v.get('status') == 'partial':
+                        return step_name not in SOFT_PARTIAL_STEPS
                     return (v.get('status') == 'skipped'
                             and str(v.get('reason', '')).startswith(
                                 'upstream_failed'))
-                bad = [b for b in blocked_by if _blocks(results.get(b))]
+                bad = [b for b in blocked_by
+                       if _blocks(b, results.get(b))]
                 if bad:
                     log(f"  ! {name} dilewati: langkah hulu gagal: {bad}",
                         "WARN")
@@ -127,13 +143,21 @@ class PipelineOrchestrator:
                         'status': 'skipped',
                         'reason': f"upstream_failed:{','.join(bad)}"}
                     continue
+                current = name
                 results[name] = fn()
+                current = None
             results['status'] = 'completed'
         except Exception as e:
             log(f"Pipeline failed: {str(e)}", "ERROR")
             traceback.print_exc()
             results['status'] = 'failed'
             results['error'] = str(e)
+            if current:
+                # Langkah yang melempar tidak pernah tercatat di
+                # results, jadi agregasi di bawah tidak melihatnya dan
+                # last_full_pipeline.json menunjukkan failed_steps
+                # kosong untuk run yang jelas gagal (audit ronde 8).
+                results['error_step'] = current
 
         # Kejujuran status (audit K4): langkah yang melaporkan 'failed'
         # tidak boleh tertutup status 'completed'. Pemanggil (cron refit
@@ -143,7 +167,9 @@ class PipelineOrchestrator:
         # selain 'success' dengan cara yang sama (audit ronde 3).
         failed_steps = [k for k, v in results.items()
                         if isinstance(v, dict)
-                        and v.get('status') in ('failed', 'partial')]
+                        and (v.get('status') == 'failed'
+                             or (v.get('status') == 'partial'
+                                 and k not in SOFT_PARTIAL_STEPS))]
         # 'skipped' karena modul hilang (ImportError) adalah kegagalan
         # nyata, bukan skip sukarela — ikut gagalkan run. Skip karena
         # upstream gagal tidak dobel-hitung: hulunya sudah tercatat.
@@ -151,6 +177,20 @@ class PipelineOrchestrator:
                          if isinstance(v, dict)
                          and v.get('status') == 'skip'
                          and v.get('reason') == 'module_not_found']
+        # Langkah yang melempar exception (error_step) juga gagal,
+        # walau dict hasilnya tidak pernah terbentuk.
+        if (results.get('error_step')
+                and results['error_step'] not in failed_steps):
+            failed_steps.append(results['error_step'])
+        # Partial lunak: tercatat dan terlihat, tidak menggagalkan.
+        partial_steps = [k for k, v in results.items()
+                         if isinstance(v, dict)
+                         and v.get('status') == 'partial'
+                         and k in SOFT_PARTIAL_STEPS]
+        if partial_steps:
+            results['partial_steps'] = partial_steps
+            log(f"Pipeline finished with PARTIAL steps: "
+                f"{partial_steps}", "WARN")
         if failed_steps:
             results['failed_steps'] = failed_steps
             if results.get('status') == 'completed':
@@ -167,6 +207,11 @@ class PipelineOrchestrator:
             rec = {"finished_at": datetime.now(timezone.utc).isoformat(),
                    "status": results.get('status'),
                    "failed_steps": results.get('failed_steps', [])}
+            if results.get('partial_steps'):
+                rec["partial_steps"] = results['partial_steps']
+            if results.get('error'):
+                rec["error"] = results['error']
+                rec["error_step"] = results.get('error_step')
             tmp = os.path.join(BASE_DIR, "last_full_pipeline.json.tmp")
             with open(tmp, "w", encoding="utf-8") as f:
                 json.dump(rec, f)
@@ -632,9 +677,20 @@ class PipelineOrchestrator:
         # membaca status di level atas dict langkah; tanpa ini kegagalan
         # fit satu divisi tidak terlihat dan run tetap 'completed'
         # (lubang yang ditemukan audit ulang 2026-10-29).
-        results['status'] = 'failed' if any(
-            isinstance(v, dict) and v.get('status') == 'failed'
-            for v in results.values()) else 'success'
+        # Sebagian divisi gagal = 'partial', bukan 'failed': state
+        # divisi yang gagal tidak pernah ditimpa (save hanya terjadi
+        # setelah fit sukses), jadi versi lamanya tetap sah untuk
+        # scoring, dan gerbang memperlakukan partial model sebagai
+        # lunak (audit ronde 8). Semua divisi gagal tetap 'failed'.
+        _div_statuses = [v.get('status') for v in results.values()
+                         if isinstance(v, dict)]
+        _n_failed = _div_statuses.count('failed')
+        if _n_failed and _n_failed == len(_div_statuses):
+            results['status'] = 'failed'
+        elif _n_failed:
+            results['status'] = 'partial'
+        else:
+            results['status'] = 'success'
         return results
 
     def step_score_upcoming(self) -> dict:
@@ -958,6 +1014,19 @@ class PipelineOrchestrator:
                 return {'status': 'success', 'n_gol': 0, 'n_corner': 0}
             n_gol = rc.get('n_gol', 0)
             n_corner = rc.get('n_corner', 0)
+            if rc.get('status') == 'failed':
+                # predict_cups melaporkan gagal (fixture piala ada
+                # tapi nol yang terpetakan ke model liga) — status itu
+                # dulu dibuang di sini dan langkah selalu 'success',
+                # jadi gerbang cups->picks di jalur --run-all tak
+                # pernah bisa trip untuk mode kegagalan ini; rantai
+                # harian sudah memeriksanya dengan benar (ronde 8).
+                log(f"  X Cup predictions GAGAL: fixture ada, "
+                    f"0 terpetakan (n_fixtures={rc.get('n_fixtures')})",
+                    "ERROR")
+                return {'status': 'failed', 'n_gol': n_gol,
+                        'n_corner': n_corner,
+                        'n_fixtures': rc.get('n_fixtures', 0)}
             log(f"  OK Cup predictions: {n_gol} gol, {n_corner} corner", "INFO")
             return {'status': 'success', 'n_gol': n_gol, 'n_corner': n_corner}
         except ImportError:
