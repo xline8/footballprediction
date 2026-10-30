@@ -1273,6 +1273,29 @@ def test_merge_bets_refreshes_open_rows_only():
     assert by_id["3|OU|2.5|Over"]["status"] == "OPEN"
 
 
+def test_purge_bogus_spares_issued_and_settled_rows():
+    # Audit-diri ronde 13: purge harga mustahil tidak boleh membuang
+    # baris yang build saat ini terbitkan sendiri (produk > 1,02 di
+    # sana = ketidaksepakatan model-pasar yang sah; membuangnya
+    # membuat build berikutnya menerbitkan ulang — churn abadi) dan
+    # tidak boleh menyentuh riwayat settle.
+    from ta_model import _purge_bogus
+
+    def row(bid, status, price, pmkt):
+        return {"bet_id": bid, "status": status, "price": price,
+                "p_market": pmkt}
+
+    rows = [
+        row("a", "OPEN", 4.50, 0.24),     # 1,08: korup, bukan terbitan kini
+        row("b", "OPEN", 4.50, 0.24),     # 1,08 tapi diterbitkan build ini
+        row("c", "SETTLED", 4.50, 0.24),  # riwayat: tak pernah dibuang
+        row("d", "OPEN", 2.00, 0.40),     # 0,80: wajar
+    ]
+    kept, n = _purge_bogus(rows, {"b"})
+    assert n == 1, n
+    assert [r["bet_id"] for r in kept] == ["b", "c", "d"], kept
+
+
 def test_best_picks_ta_loader_skips_started_matches():
     # Ronde 13: loader TA best_picks berjangkar datetime penuh —
     # bet laga yang sudah kickoff hari ini tidak boleh masuk

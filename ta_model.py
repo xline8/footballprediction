@@ -484,6 +484,31 @@ def _merge_bets(old, winners, fixtures, captured):
     return list(merged.values()), n_new, n_ref
 
 
+def _purge_bogus(rows, issued_ids):
+    """Buang baris OPEN yang harga x peluang pasarnya mustahil
+    (> 1,02) — sisa data korup/salah label dari build lama.
+
+    Dua pengecualian (audit-diri ronde 13): baris yang diterbitkan
+    atau diperbarui build SAAT INI dikecualikan — kandidatnya lolos
+    saringan build hari ini, jadi produk di atas ambang di sana
+    adalah ketidaksepakatan model-pasar yang sah, bukan korupsi;
+    tanpa pengecualian ini purge di build berikutnya membuang baris
+    yang build sebelumnya terbitkan sendiri, lalu build yang sama
+    menerbitkannya lagi (churn abadi, dan baris bisa lenyap sebelum
+    sempat dinilai). Baris settle tidak pernah dibuang: itu riwayat
+    grading. Return (baris tersisa, n_dibuang).
+    """
+    kept, n = [], 0
+    for r in rows:
+        if (r["bet_id"] not in issued_ids
+                and (r.get("status") or "").upper() == "OPEN"
+                and fnum(r.get("price")) * fnum(r.get("p_market")) > 1.02):
+            n += 1
+            continue
+        kept.append(r)
+    return kept, n
+
+
 def build():
     preds = read_csv(PRED)
     fixtures = {r["game_id"]: r for r in read_csv(os.path.join(TA, "fixtures.csv"))}
@@ -612,15 +637,16 @@ def build():
             per_game[r["game_id"]] = r
 
     old = {r["bet_id"]: r for r in read_csv(os.path.join(TA, "best_bets.csv"))}
-    # buang bet lama yang harganya mustahil (harga x peluang pasar > 1)
-    bogus = [k for k, r in old.items()
-             if fnum(r.get("price")) * fnum(r.get("p_market")) > 1.02]
-    for k in bogus:
-        old.pop(k, None)
-    if bogus:
-        print(f"bet mustahil dibuang: {len(bogus)}")
     rows, n_new, n_ref = _merge_bets(old, per_game.values(), fixtures,
                                      captured)
+    # Buang bet lama yang harganya mustahil (harga x peluang pasar
+    # > 1) SETELAH penggabungan, dengan pengecualian untuk bet yang
+    # build ini terbitkan/perbarui (_purge_bogus).
+    issued = {f'{r["game_id"]}|{r["market"]}|{r["line"]}|{r["selection"]}'
+              for r in per_game.values()}
+    rows, bogus = _purge_bogus(rows, issued)
+    if bogus:
+        print(f"bet mustahil dibuang: {bogus}")
     if n_new or n_ref or bogus:
         write_csv(os.path.join(TA, "best_bets.csv"), BET_COLS, rows)
     elif not os.path.exists(os.path.join(TA, "best_bets.csv")):
