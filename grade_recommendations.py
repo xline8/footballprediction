@@ -159,20 +159,38 @@ def _match_result(idx, match_date, home, away, comp):
     Skor = kemiripan nama (sim) kedua tim; hint kompetisi piala memberi
     dorongan kecil untuk memisahkan laga liga vs piala di tanggal sama.
     None bila tidak ada kandidat meyakinkan.
+
+    Fallback laga tunda (audit ronde 12, C12-4): lookup utama
+    berjangkar tanggal pick, jadi laga yang digeser ke tanggal lain
+    tidak akan pernah ter-grade. Bila tanggal persis gagal, tanggal
+    SETELAH tanggal pick dipindai menaik dan tanggal paling awal
+    dengan kandidat meyakinkan yang dipakai — pasangan tim yang sama
+    bertemu lagi di putaran kedua, jadi mengambil yang paling akhir
+    akan menilai leg dengan laga yang salah.
     """
-    cands = idx.get(match_date)
-    if not cands:
-        return None
     nh, na = norm(home), norm(away)
     hint = CUP_LEAGUE.get(comp or "")
-    best, bs = None, 0.0
-    for rh, ra, sh, sa, lge in cands:
-        sc = sim(nh, rh) * sim(na, ra)
-        if hint and lge == hint:
-            sc += 0.05
-        if sc > bs:
-            bs, best = sc, (sh, sa)
-    return best if bs >= 0.75 else None
+
+    def _best_on(cands):
+        best, bs = None, 0.0
+        for rh, ra, sh, sa, lge in cands or []:
+            sc = sim(nh, rh) * sim(na, ra)
+            if hint and lge == hint:
+                sc += 0.05
+            if sc > bs:
+                bs, best = sc, (sh, sa)
+        return best if bs >= 0.75 else None
+
+    got = _best_on(idx.get(match_date))
+    if got is not None:
+        return got
+    for d in sorted(idx):
+        if d <= match_date:
+            continue
+        got = _best_on(idx[d])
+        if got is not None:
+            return got
+    return None
 
 
 def _corner_actuals_index():
@@ -539,6 +557,29 @@ def main(argv=None):
         print("  ! tidak ada folder arsip")
         return 1
     dates = sorted(d for d in os.listdir(ARCHIVE) if os.path.isdir(os.path.join(ARCHIVE, d)))
+    # C12-3: tanggal yang hilang di tengah rentang arsip tidak boleh
+    # lenyap diam-diam — folder yang tidak ada berarti rekomendasi
+    # hari itu tidak akan pernah masuk riwayat kalibrasi (mis. arsip
+    # gagal sementara prediksinya sukses). Peringatkan secara eksplisit.
+    if dates:
+        from datetime import date as _date, timedelta as _td
+        try:
+            first = _date.fromisoformat(dates[0])
+            last = min(_date.fromisoformat(dates[-1]),
+                       datetime.now(timezone.utc).date() - _td(days=1))
+            have = set(dates)
+            missing = []
+            d = first
+            while d <= last:
+                if d.isoformat() not in have:
+                    missing.append(d.isoformat())
+                d += _td(days=1)
+            if missing:
+                print(f"  ! PERINGATAN: {len(missing)} tanggal tanpa "
+                      f"folder arsip di rentang {dates[0]}.."
+                      f"{last.isoformat()}: {', '.join(missing)}")
+        except ValueError:
+            pass
     total_changed = 0
     seen = set()
     for archive_date in dates:

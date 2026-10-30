@@ -58,6 +58,45 @@ Keep a Changelog, and the project uses semantic versioning.
   meta components now matches the production path (nine-logit
   recipe), and the stale `DC_FIT_MODE` comment in `model_v2.py` is
   corrected.
+- A twelfth audit round re-audited the fixes above and the model and
+  grading paths around them, and fixed what it found — including one
+  high defect the previous round's own fix had introduced. The
+  `ModelState` data fingerprint hashed `xg_matches.csv` at the
+  project root, a file the fit never reads, so its xG component was
+  permanently "absent" and xG-only revisions never invalidated the
+  cached models; it now hashes the file the fit actually consumes
+  (`xg_raw/xg_matches.csv`). `ta_model.calibrate()` could end
+  further from its 1X2 target than the raw Dixon-Coles matrix,
+  inflating derivative probabilities on strong favourites
+  (Barcelona vs Alaves: BTS Yes 0.90 against the raw matrix's 0.55,
+  at 7.8 expected goals against 3.8); calibration now falls back to
+  the raw matrix whenever it does not improve the 1X2 fit, and
+  `best_picks` ranks TA rows by the shrunk probability instead of
+  raw `p_model`. The slip search is an exact branch-and-bound for
+  the in-band optimum (the old DFS exhausted its node budget on
+  large slates and returned a prefix candidate, 0.606 against the
+  0.635 optimum on the 2026-10-31 slate); `search_truncated` is now
+  a column of both slip CSVs. Fixture fallback content is surfaced:
+  `refresh_fixtures` reports its per-league source and the shadow
+  fails the run when a league was served from the frozen on-disk
+  dump instead of letting the fresh file mtime defeat the staleness
+  gate. The market sync step is gated on prediction success like
+  the other consumers. TipsterArea result matching folds systematic
+  club-name variants (Cologne/Koln, Internazionale/Inter Milan,
+  Stade Rennais/Rennais, ...), lifting the league fill coverage
+  from 333 to 394 of 397 results with zero score disagreements, and
+  postponed matches are graded via an earliest-played-date fallback
+  in both graders. `status_raw` is also persisted in `fixtures.csv`
+  and a newly filled value rewrites the results row. The corner and
+  cup loaders apply the same kickoff-time prematch filter as the
+  league loader, `/api/status` reports the prediction file's age,
+  and shadow step labels use a single [n/15] scheme. README figures
+  are corrected to the current ledger (mean CLV EV −0.0773,
+  beat-close 53.6%, stored-probability Brier 0.5766 / RPS 0.1956),
+  and the five experiment files that had no recorded outcome gain a
+  STATUS header. First unit tests cover the corner model, the
+  cups/league corner parity surface, feature-row leakage, and the
+  T3 model's train-only imputation statistics (65 tests).
 - A ninth audit round verified PR #29 (the soft-partial gating
   matrix exercised end to end, the shrink-ordering change proven
   rollback-safe at byte level, the newly matched fixture's market
@@ -312,6 +351,12 @@ Keep a Changelog, and the project uses semantic versioning.
 
 ### Removed
 
+- The legacy exogenous-enrichment cluster (`enrich_pipeline.py`,
+  `data_enrichment/fetch_xg.py`, `data_enrichment/fetch_closing_odds.py`,
+  `data_enrichment/synthesize_european.py`): no production module
+  imported it and its output file was read only by experiments.
+  `data_enrichment/utils.py` and `build_xg_matches.py` are live and
+  remain.
 - JIT capture and the API-Football integration (`jit_orchestrator.py`,
   `daily_api_capture.py`, `data_enrichment/api_football_client.py`,
   `data_enrichment/fetch_corner_odds.py`, and the `--corner-export` path

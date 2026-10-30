@@ -58,17 +58,20 @@ S10_LO, S10_HI, S10_TARGET = 9.0, 11.0, 10.0
 S10_MIN_LEGS, S10_MAX_LEGS = 3, 6
 S10_MAX_EXPAND_DAYS = 4
 
-# Batas node DFS (audit K5): tanpa batas, pool besar (slate akhir pekan
-# atau ekspansi slip10) bisa membuat pencarian berjalan sangat lama dan
-# menggantung seluruh rantai harian yang memanggilnya in-process.
-# Anggaran ini jauh di atas kebutuhan pool nyata saat ini; bila habis,
-# pencarian berhenti dan mengembalikan kandidat terbaik yang sudah
-# ditemukan (degradasi yang deterministik, bukan hang).
-SEARCH_NODE_BUDGET = 200_000
+# Batas node pencarian (audit K5): tanpa batas, pool besar bisa membuat
+# pencarian berjalan sangat lama dan menggantung seluruh rantai harian
+# yang memanggilnya in-process. Bila anggaran habis, pencarian berhenti
+# dan mengembalikan kandidat terbaik yang sudah ditemukan (degradasi
+# yang deterministik, bukan hang), dan flag truncated kini persisten
+# di CSV produk. Ukuran anggaran dari pengukuran audit ronde 12
+# (B12-2): pencarian branch-and-bound membuktikan optimum slate
+# 23 laga/189 leg (slip10) dalam ~3,5 juta node (~5 detik); 4 juta
+# memberi ruang di atasnya tanpa membuka risiko hang.
+SEARCH_NODE_BUDGET = 4_000_000
 
 SLIP_COLS = ["date", "home", "away", "competition", "market", "line",
              "selection", "o_1xbet", "p_model", "slip_total_odds",
-             "slip_joint_prob", "slip_ev", "in_band"]
+             "slip_joint_prob", "slip_ev", "in_band", "search_truncated"]
 SINGLE_COLS = ["date", "home", "away", "competition", "market", "line",
                "selection", "o_1xbet", "p_model", "ev", "below_floor"]
 SLIP10_COLS = SLIP_COLS + ["pool_expanded_to"]
@@ -154,38 +157,176 @@ def _candidates(min_pm, min_odds):
 def _search(by_match, min_legs, max_legs, lo, hi, target, stats=None):
     """Cari kombinasi (<= 1 leg per laga) terbaik.
 
-    Return (best_in_band, best_near), masing-masing (tot, jp, ev, legs) atau
-    None. best_in_band: joint prob tertinggi dengan tot di [lo, hi]
-    (tie-break total EV). best_near: |tot - target| terkecil di antara
-    kombinasi valid (tie-break joint prob). Pencarian DFS dengan pruning
-    produk odds: cabang berhenti bila produk melewati hi * 2.5.
+    Return (best_in_band, best_near), masing-masing (tot, jp, ev, legs)
+    atau None. best_in_band: joint prob tertinggi dengan tot di
+    [lo, hi] (tie-break total EV). best_near: |tot - target| terkecil
+    di antara kombinasi valid (tie-break joint prob); hanya dihitung
+    bila tidak ada kandidat in-band.
+
+    Dua fase (audit ronde 12, B12-2). Fase A mencari optimum in-band
+    secara eksak dengan branch-and-bound: laga diurutkan menurut
+    efisiensi leg terbaiknya (log p / log odds), incumbent awal dari
+    dua lintasan greedy, dan cabang dipangkas bila batas atas joint
+    dari sisa laga (produk pm maksimum per laga) tidak bisa mengalahkan
+    incumbent — pemangkasan admisibel, jadi hasil fase A yang tidak
+    terpotong adalah optimum menyeluruh, bukan aproksimasi. DFS lama
+    tanpa batas atas menghabiskan anggaran 200 ribu node di awalan
+    ruang pada slate 23 laga dan berhenti di joint 0,6061 padahal
+    optimumnya 0,6350. Fase B adalah pencarian fallback lama persis
+    (DFS dengan cap produk hi * 2.5 + pass-2 tanpa cap) untuk
+    best_near, dan hanya berjalan bila fase A tidak menemukan
+    kandidat in-band.
     """
-    keys = sorted(by_match, key=lambda k: (by_match[k][0]["date"],
+    import math as _math
+
+    def _eff(legs):
+        return max(_math.log(max(l["pm"], 1e-9))
+                   / _math.log(max(l["o"], 1.01)) for l in legs)
+
+    keys = sorted(by_match, key=lambda k: (-_eff(by_match[k]),
+                                           by_match[k][0]["date"],
                                            by_match[k][0]["home"],
                                            by_match[k][0]["away"]))
     pools = [sorted(by_match[k],
                     key=lambda l: (-l["pm"], -l["o"], l["market"],
                                    l["line"], l["sel"]))
              for k in keys]
-    cap = hi * 2.5
-    best_in = None
-    best_near = None
+    n = len(pools)
+    # Batas admisibel per posisi i (suffix laga i..n-1): untuk joint,
+    # pengali maksimum dari sisa slot leg adalah produk pm maksimum
+    # per laga yang TERBESAR (mengambil semua sisa laga justru
+    # mengecilkan joint karena pm < 1 — batas versi pertama yang
+    # memakai produk semua laga memangkas seluruh pohon di akar).
+    # Untuk odds berlaku sebaliknya: produk odds maksimum/minimum per
+    # laga menurut jumlah leg yang diambil/diwajibkan.
+    desc_pm = [[] for _ in range(n + 1)]
+    desc_odds = [[] for _ in range(n + 1)]
+    asc_odds = [[] for _ in range(n + 1)]
+    for i in range(n - 1, -1, -1):
+        desc_pm[i] = sorted(desc_pm[i + 1]
+                            + [max(l["pm"] for l in pools[i])],
+                            reverse=True)
+        desc_odds[i] = sorted(desc_odds[i + 1]
+                              + [max(l["o"] for l in pools[i])],
+                              reverse=True)
+        asc_odds[i] = sorted(asc_odds[i + 1]
+                             + [min(l["o"] for l in pools[i])])
+
+    def _jp_mult(i, legs_len):
+        """Pengali joint maksimum yang masih bisa dicapai dari posisi i."""
+        need = max(0, min_legs - legs_len)
+        r = max_legs - legs_len
+        ms = desc_pm[i]
+        best = 1.0 if need == 0 else 0.0
+        prod = 1.0
+        for t in range(1, r + 1):
+            if t - 1 >= len(ms):
+                break
+            prod *= ms[t - 1]
+            if t >= need:
+                best = max(best, prod)
+        return best
+
     nodes = [0]
     truncated = [False]
 
-    def consider(tot, jp, legs):
-        nonlocal best_in, best_near
-        if len(legs) < min_legs:
+    # ---- incumbent greedy untuk branch-and-bound ----
+    def _greedy(pick):
+        tot, jp, legs = 1.0, 1.0, []
+        for pool in pools:
+            if len(legs) == max_legs:
+                break
+            cands = [l for l in pool if tot * l["o"] <= hi]
+            if not cands:
+                continue
+            leg = pick(cands)
+            tot *= leg["o"]
+            jp *= leg["pm"]
+            legs.append(leg)
+        if len(legs) >= min_legs and lo <= tot <= hi:
+            return (tot, jp, jp * tot - 1.0, legs)
+        return None
+
+    best_in = None
+    for seed in (_greedy(lambda c: max(c, key=lambda l: l["pm"])),
+                 _greedy(lambda c: max(
+                     c, key=lambda l: _math.log(max(l["pm"], 1e-9))
+                     / _math.log(max(l["o"], 1.01))))):
+        if seed is not None and (best_in is None or seed[1] > best_in[1]):
+            best_in = seed
+
+    # ---- fase A: branch-and-bound in-band ----
+    def rec_a(i, tot, jp, legs):
+        nonlocal best_in
+        if truncated[0]:
             return
-        # EV gabungan slip: P(semua leg menang) * total odds - 1.
-        # Versi lama menjumlahkan EV per leg, yang bukan EV slip dan
-        # mengacaukan tie-break serta kolom slip_ev di output.
-        ev = jp * tot - 1.0
-        if lo <= tot <= hi:
-            cur = (tot, jp, ev, list(legs))
+        nodes[0] += 1
+        if nodes[0] > SEARCH_NODE_BUDGET:
+            truncated[0] = True
+            return
+        if len(legs) >= min_legs and lo <= tot <= hi:
+            ev = jp * tot - 1.0
             if (best_in is None or jp > best_in[1] + 1e-9
                     or (abs(jp - best_in[1]) <= 1e-9 and ev > best_in[2])):
-                best_in = cur
+                best_in = (tot, jp, ev, list(legs))
+        if i == n or len(legs) == max_legs or tot > hi:
+            return
+        if len(legs) + (n - i) < min_legs:
+            return
+        if (best_in is not None
+                and jp * _jp_mult(i, len(legs)) <= best_in[1] + 1e-12):
+            return
+        # Jangkauan odds: total maksimum dari sisa slot tidak mencapai
+        # pita -> cabang mati; total minimum (bila leg tambahan wajib)
+        # sudah melewati pita -> cabang mati juga.
+        r = max_legs - len(legs)
+        mx = tot
+        for t in range(min(r, len(desc_odds[i]))):
+            mx *= desc_odds[i][t]
+        if mx < lo:
+            return
+        need = max(0, min_legs - len(legs))
+        if need:
+            mn = tot
+            for t in range(min(need, len(asc_odds[i]))):
+                mn *= asc_odds[i][t]
+            if mn > hi:
+                return
+        rec_a(i + 1, tot, jp, legs)  # lewati laga ini
+        for leg in pools[i]:
+            if truncated[0]:
+                return
+            nt = tot * leg["o"]
+            if nt > hi:
+                continue
+            legs.append(leg)
+            rec_a(i + 1, nt, jp * leg["pm"], legs)
+            legs.pop()
+
+    rec_a(0, 1.0, 1.0, [])
+    band_truncated = truncated[0]
+    nodes_a = nodes[0]
+    if best_in is not None:
+        if band_truncated:
+            print(f"  ! slip search (fase pita) mencapai batas node "
+                  f"{SEARCH_NODE_BUDGET}; memakai kandidat terbaik "
+                  f"yang sudah ditemukan")
+        if stats is not None:
+            stats["nodes"] = nodes_a
+            stats["truncated"] = band_truncated
+        return best_in, None
+
+    # ---- fase B: fallback terdekat ke target (perilaku lama) ----
+    cap = hi * 2.5
+    best_near = None
+    nodes[0] = 0
+    truncated[0] = False
+
+    def consider(tot, jp, legs):
+        nonlocal best_near
+        if len(legs) < min_legs:
+            return
+        ev = jp * tot - 1.0
         cur = (tot, jp, ev, list(legs))
         if (best_near is None
                 or abs(tot - target) < abs(best_near[0] - target) - 1e-9
@@ -202,7 +343,7 @@ def _search(by_match, min_legs, max_legs, lo, hi, target, stats=None):
             return
         if len(legs) >= min_legs:
             consider(tot, jp, legs)
-        if i == len(pools) or len(legs) == max_legs:
+        if i == n or len(legs) == max_legs:
             return
         rec(i + 1, tot, jp, legs)  # lewati laga ini
         for leg in pools[i]:
@@ -223,8 +364,7 @@ def _search(by_match, min_legs, max_legs, lo, hi, target, stats=None):
         # fallback terdekat ikut kosong — contoh nyata: dua laga @2.4
         # untuk slip2 (produk 5.76 > cap 5.375) menghasilkan file
         # kosong padahal kombinasi terdekat tersedia. Ulangi tanpa cap
-        # dengan anggaran node kecil, khusus mencari best_near
-        # (best_in tidak bisa muncul di sini: tot > cap > hi).
+        # dengan anggaran node kecil, khusus mencari best_near.
         nodes_pass1 = nodes[0]
         trunc_budget = 50_000
         nodes[0] = 0
@@ -238,7 +378,7 @@ def _search(by_match, min_legs, max_legs, lo, hi, target, stats=None):
                 return
             if len(legs) >= min_legs:
                 consider(tot, jp, legs)
-            if i == len(pools) or len(legs) == max_legs:
+            if i == n or len(legs) == max_legs:
                 return
             rec2(i + 1, tot, jp, legs)
             for leg in pools[i]:
@@ -250,15 +390,12 @@ def _search(by_match, min_legs, max_legs, lo, hi, target, stats=None):
 
         rec2(0, 1.0, 1.0, [])
     if truncated[0]:
-        # Anggaran yang benar-benar mengikat: pass 2 punya batas 50k
-        # sendiri; mencetak SEARCH_NODE_BUDGET (batas pass 1) di sini
-        # menyesatkan bila pass 2 yang terpotong.
         print(f"  ! slip search mencapai batas node {trunc_budget}; "
               f"memakai kandidat terbaik yang sudah ditemukan")
     if stats is not None:
-        stats["nodes"] = nodes[0] + (nodes_pass1 or 0)
-        stats["truncated"] = truncated[0]
-    return best_in, best_near
+        stats["nodes"] = nodes_a + nodes[0] + (nodes_pass1 or 0)
+        stats["truncated"] = band_truncated or truncated[0]
+    return None, best_near
 
 
 def _by_match(cands, dates):
@@ -339,7 +476,11 @@ def recommend_slip2(day):
     best_in, best_near = _search(by, S2_MIN_LEGS, S2_MAX_LEGS,
                                  S2_LO, S2_HI, S2_TARGET, stats=stats)
     best, inb = (best_in, True) if best_in else (best_near, False)
-    rows = _write_slip(OUT_SLIP, SLIP_COLS, best, inb)
+    # Flag kualitas pencarian persisten di produk (B12-2): slip dari
+    # pencarian terpotong harus bisa dibedakan grader/pembaca dari
+    # slip optimum terbukti.
+    rows = _write_slip(OUT_SLIP, SLIP_COLS, best, inb, extra={
+        "search_truncated": str(bool(stats.get("truncated"))).lower()})
     s = {"n_legs": len(rows),
          "total_odds": round(best[0], 3) if best else None,
          "joint_prob": round(best[1], 4) if best else None,
@@ -379,7 +520,8 @@ def recommend_slip10(day):
                                    <= abs(best[0] - S10_TARGET)):
             best = b_near
     rows = _write_slip(OUT_SLIP10, SLIP10_COLS, best, inb,
-                       extra={"pool_expanded_to": expanded_to})
+                       extra={"pool_expanded_to": expanded_to,
+                              "search_truncated": str(any_truncated).lower()})
     s = {"n_legs": len(rows),
          "total_odds": round(best[0], 3) if best else None,
          "joint_prob": round(best[1], 4) if best else None,

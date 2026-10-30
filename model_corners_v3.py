@@ -332,9 +332,13 @@ def predict_upcoming():
         for d in data:
             if d.get("isResult"):
                 continue
-            dt = datetime.strptime(d["datetime"], "%Y-%m-%d %H:%M:%S").date()
-            if dt < today:
+            # D12-10: bandingkan datetime penuh (UTC naif), bukan
+            # tanggal saja — rerun sesudah kickoff di hari yang sama
+            # dulu tetap memprediksi laga yang sudah berjalan.
+            dtf = datetime.strptime(d["datetime"], "%Y-%m-%d %H:%M:%S")
+            if dtf <= datetime.now(_tz.utc).replace(tzinfo=None):
                 continue
+            dt = dtf.date()
             # Map Understat team name -> FD name
             home = _understat_to_fd(div, d["h"]["title"])
             away = _understat_to_fd(div, d["a"]["title"])

@@ -894,6 +894,408 @@ def test_shadow_fixture_age_thresholds():
             rds.BASE = old
 
 
+def test_fingerprint_paths_point_at_consumed_files():
+    # A12-1: cap fingerprint PR #32 menunjuk xg_matches.csv di root
+    # proyek — file yang tidak pernah dibaca fit — sehingga komponen
+    # xG permanen "absent". Tes ini mengunci path ke lokasi yang
+    # benar-benar dikonsumsi: gol di root, xG di folder XGRAW (lokasi
+    # yang sama yang dibaca features.py).
+    import model_state
+    from paths import BASE as _BASE, XGRAW as _XGRAW
+
+    by_label = dict(model_state._FP_FILES)
+    assert by_label["all_matches_clean.csv"] == os.path.join(
+        _BASE, "all_matches_clean.csv")
+    assert by_label["xg_matches.csv"] == os.path.join(
+        _XGRAW, "xg_matches.csv")
+    # Bila file xG nyata ada di mesin ini, komponennya tidak boleh
+    # "absent" — inilah persis kegagalan yang lolos di PR #32.
+    if os.path.exists(by_label["xg_matches.csv"]):
+        fp = model_state.current_data_fingerprint()
+        assert "xg_matches.csv:absent" not in fp, fp
+
+
+def test_fingerprint_flips_on_xg_only_change():
+    # Revisi xG-saja (tanpa perubahan gol) harus membatalkan cache:
+    # fingerprint berubah dan data_stale() menyala.
+    import tempfile
+
+    import model_state
+
+    with tempfile.TemporaryDirectory() as td:
+        goals = os.path.join(td, "all_matches_clean.csv")
+        xg = os.path.join(td, "xg_matches.csv")
+        with open(goals, "w", encoding="utf-8") as f:
+            f.write("date,home\n2026-01-01,A\n")
+        with open(xg, "w", encoding="utf-8") as f:
+            f.write("key,xg\nm1,1.20\n")
+        old_files, old_memo = model_state._FP_FILES, model_state._fp_memo
+        model_state._FP_FILES = (
+            ("all_matches_clean.csv", goals), ("xg_matches.csv", xg))
+        model_state._fp_memo = {}
+        try:
+            fp1 = model_state.current_data_fingerprint()
+            st = model_state.ModelState("E0")
+            st.data_fp = fp1
+            assert not st.data_stale()
+            with open(xg, "w", encoding="utf-8") as f:
+                f.write("key,xg\nm1,1.85\n")
+            fp2 = model_state.current_data_fingerprint()
+            assert fp2 != fp1
+            assert st.data_stale()
+        finally:
+            model_state._FP_FILES, model_state._fp_memo = old_files, old_memo
+
+
+def test_calibrate_falls_back_when_worse_than_raw():
+    # B12-1: laga favorit kuat (Barcelona vs Alaves, angka audit ronde
+    # 12). Matriks mentah di lambda DC sudah cocok dengan target dalam
+    # 0,003; kalibrasi lama berakhir di total gol 7,81 dan BTS Yes
+    # 0,8968. Pagar harus memakai matriks mentah dan menandainya.
+    import ta_model as tm
+
+    m, fell_back = tm.calibrate(2.957, 0.851, 0.7952, 0.1303, 0.0745)
+    assert fell_back is True
+    bts = tm.market_probs(m, "BTS")["Yes"][0]
+    assert bts < 0.60, bts
+    ph, pd, pa = tm.outcomes(m)
+    assert max(abs(ph - 0.7952), abs(pd - 0.1303), abs(pa - 0.0745)) < 0.005
+
+
+def test_calibrate_keeps_converged_result():
+    # Laga seimbang: kalibrasi yang konvergen ke target tidak boleh
+    # diganggu pagar.
+    import ta_model as tm
+
+    m, fell_back = tm.calibrate(1.60, 1.10, 0.50, 0.27, 0.23)
+    assert fell_back is False
+    ph, pd, pa = tm.outcomes(m)
+    assert max(abs(ph - 0.50), abs(pd - 0.27), abs(pa - 0.23)) < 0.005
+
+
+def test_ta_picks_ranked_by_shrunk_probability():
+    # B12-4: peringkat pick ta_model memakai p_shrunk (campuran
+    # p_model/p_market menurut SHRINK ta_model), bukan p_model mentah.
+    import csv
+    import tempfile
+
+    import best_picks as bp
+
+    with tempfile.TemporaryDirectory() as td:
+        os.makedirs(os.path.join(td, "ta"))
+        with open(os.path.join(td, "ta", "best_bets.csv"), "w",
+                  newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=[
+                "bet_id", "created_at", "game_id", "kickoff_utc",
+                "league", "home", "away", "market", "line", "selection",
+                "bookmaker", "price", "p_model", "p_market", "ev",
+                "tier", "status", "score", "result", "profit",
+                "graded_at"])
+            w.writeheader()
+            w.writerow({
+                "bet_id": "t1", "created_at": "", "game_id": "1",
+                "kickoff_utc": "2099-01-01T20:00:00+00:00",
+                "league": "Spain - La Liga", "home": "Barcelona",
+                "away": "Alaves", "market": "BTS", "line": "",
+                "selection": "Yes", "bookmaker": "x", "price": "2.85",
+                "p_model": "0.90", "p_market": "0.50", "ev": "0.30",
+                "tier": "aman", "status": "OPEN", "score": "",
+                "result": "", "profit": "", "graded_at": ""})
+        old_proj, old_anchor = bp.PROJ, bp.ANCHOR
+        bp.PROJ, bp.ANCHOR = td, "2000-01-01"
+        try:
+            picks = bp._load_ta_picks()
+        finally:
+            bp.PROJ, bp.ANCHOR = old_proj, old_anchor
+    assert len(picks) == 1, picks
+    # SHRINK = 0.5: 0.5*0.90 + 0.5*0.50 = 0.70, bukan 0.90 mentah.
+    assert picks[0]["prob"] == 0.70, picks[0]
+
+
+def test_refresh_returns_per_league_source():
+    # A12-2: pemanggil harus bisa membedakan konten segar dari
+    # fallback disk — main() mengembalikan {div: sumber}.
+    import tempfile
+
+    import refresh_fixtures as rf
+
+    with tempfile.TemporaryDirectory() as td:
+        for slug in rf.LEAGUES:
+            with open(os.path.join(td, f"{slug}_2026_fixtures.json"),
+                      "w", encoding="utf-8") as f:
+                f.write("[]")
+            with open(os.path.join(td, f"{slug}_2026_all.json"),
+                      "w", encoding="utf-8") as f:
+                f.write("[]")
+
+        def fake_fetch(slug):
+            if slug == "EPL":
+                return [{"datetime": "2099-01-01 20:00:00",
+                         "h": {"title": "A"}, "a": {"title": "B"}}]
+            raise RuntimeError("sumber mati (stub tes)")
+
+        old_xg, old_fetch = rf.XG, rf.fetch
+        rf.XG, rf.fetch = td, fake_fetch
+        try:
+            srcs = rf.main()
+        finally:
+            rf.XG, rf.fetch = old_xg, old_fetch
+    assert srcs["E0"] == "understat.com", srcs
+    for div in ("SP1", "D1", "I1", "F1"):
+        assert srcs[div].startswith("fallback disk"), srcs
+
+
+def test_save_date_page_persists_status_raw():
+    # C12-2 + A12-5: status_raw tersimpan di fixtures.csv DAN
+    # results.csv; pengisian status_raw belakangan (skor sama)
+    # tetap memicu tulis ulang baris hasil.
+    import csv as _csv
+    import tempfile
+
+    import ta_scrape
+
+    game = {"game_id": "991", "date": "2026-10-30", "time": "20:00",
+            "league": "Germany - DFB Pokal", "country": "Germany",
+            "home": "A", "away": "B", "status": "FT", "score_h": "1",
+            "score_a": "1", "o1": "", "ox": "", "o2": "",
+            "url": "u", "status_raw": ""}
+    with tempfile.TemporaryDirectory() as td:
+        old_dir = ta_scrape.DIR
+        ta_scrape.DIR = td
+        try:
+            ta_scrape.save_date_page([dict(game)], "2026-10-30T00:00:00")
+            g2 = dict(game, status_raw="AET")
+            ta_scrape.save_date_page([g2], "2026-10-30T01:00:00")
+            with open(os.path.join(td, "results.csv"),
+                      newline="", encoding="utf-8") as f:
+                res = list(_csv.DictReader(f))
+            with open(os.path.join(td, "fixtures.csv"),
+                      newline="", encoding="utf-8") as f:
+                fix = list(_csv.DictReader(f))
+        finally:
+            ta_scrape.DIR = old_dir
+    assert res[0]["status_raw"] == "AET", res
+    assert fix[0]["status_raw"] == "AET", fix
+
+
+def test_slip_search_matches_brute_force():
+    # B12-2: fase pita branch-and-bound harus mengembalikan optimum
+    # menyeluruh yang sama dengan enumerasi brute force (bukan
+    # kandidat awalan ruang seperti DFS lama yang terpotong).
+    import itertools
+    import random
+
+    from slip_recommender import _search
+
+    rng = random.Random(20261031)
+    for _trial in range(6):
+        by_match = {}
+        for mi in range(6):
+            legs = []
+            for _k in range(3):
+                o = round(rng.uniform(1.2, 2.6), 2)
+                pm = round(rng.uniform(0.35, 0.85), 3)
+                legs.append(_leg(f"M{mi}", "2026-10-31", o, pm))
+            by_match[f"M{mi}"] = legs
+        best_in, _ = _search(by_match, 2, 4, 1.85, 2.15, 2.0)
+        pools = list(by_match.values())
+        brute = None
+        for r in range(2, 5):
+            for combo in itertools.combinations(range(len(pools)), r):
+                for legs in itertools.product(*[pools[i] for i in combo]):
+                    tot = jp = 1.0
+                    for l in legs:
+                        tot *= l["o"]
+                        jp *= l["pm"]
+                    if 1.85 <= tot <= 2.15 and (brute is None or jp > brute):
+                        brute = jp
+        if brute is None:
+            assert best_in is None
+        else:
+            assert best_in is not None
+            assert abs(best_in[1] - brute) < 1e-9, (best_in[1], brute)
+
+
+def test_slip_csv_carries_search_truncated():
+    # B12-2: flag kualitas pencarian persisten sebagai kolom produk.
+    import csv
+    import tempfile
+
+    import slip_recommender as sr
+
+    best = (2.0, 0.5, 0.0, [_leg("A", "2026-10-31", 2.0, 0.5)])
+    with tempfile.TemporaryDirectory() as td:
+        p = os.path.join(td, "slip.csv")
+        sr._write_slip(p, sr.SLIP_COLS, best, True,
+                       extra={"search_truncated": "true"})
+        with open(p, newline="", encoding="utf-8") as f:
+            rows = list(csv.DictReader(f))
+    assert rows and rows[0]["search_truncated"] == "true", rows
+
+
+def test_ta_key_name_folds_alias_variants():
+    # C12-1: ejaan Understat dan TipsterArea untuk klub yang sama
+    # harus bertemu di kunci yang sama.
+    from score_ledger import _ta_key_name
+
+    assert _ta_key_name("FC Cologne") == _ta_key_name("FC Koln")
+    assert _ta_key_name("Internazionale") == _ta_key_name("Inter Milan")
+    assert _ta_key_name("Stade Rennais") == _ta_key_name("Rennais")
+    assert _ta_key_name("Nottingham Forest") == _ta_key_name("Nottingham")
+    assert _ta_key_name("RasenBallsport Leipzig") == \
+        _ta_key_name("RB Leipzig")
+    # Klub berbeda tidak boleh terlipat jadi satu.
+    assert _ta_key_name("FC Cologne") != _ta_key_name("RB Leipzig")
+
+
+def test_by_teams_index_sorted_by_date():
+    # C12-4: indeks fallback laga tunda terurut tanggal menaik.
+    from score_ledger import _by_teams_index
+
+    keyed = {("E0", "2026-03-01", "a", "b"): (1, 0),
+             ("E0", "2026-01-15", "a", "b"): (2, 2),
+             ("E0", "2026-02-01", "a", "c"): (0, 1)}
+    idx = _by_teams_index(keyed)
+    assert idx[("E0", "a", "b")] == [("2026-01-15", (2, 2)),
+                                     ("2026-03-01", (1, 0))]
+
+
+def test_match_result_postponed_fallback():
+    # C12-4: leg laga tunda ketemu hasilnya di tanggal main baru —
+    # tanggal setelah pick yang PALING AWAL (bukan pertemuan putaran
+    # kedua), dan tidak pernah dari tanggal sebelum pick.
+    from grade_recommendations import _match_result, norm
+
+    idx = {
+        "2026-11-20": [(norm("Arsenal"), norm("Chelsea"), 3, 0,
+                        "England - Premier League")],
+        "2026-11-05": [(norm("Arsenal"), norm("Chelsea"), 2, 1,
+                        "England - Premier League")],
+        "2026-10-01": [(norm("Arsenal"), norm("Chelsea"), 9, 9,
+                        "England - Premier League")],
+    }
+    got = _match_result(idx, "2026-10-28", "Arsenal", "Chelsea", "")
+    assert got == (2, 1), got
+
+
+def test_corner_stats_window_golden():
+    # D12-1: fungsi corner yang tersaji tidak pernah tersentuh tes.
+    # Nilai golden dihitung dari implementasi saat ini pada histori
+    # sintetis tetap — perubahan rumus apa pun harus menabrak tes ini
+    # secara sadar.
+    from datetime import date
+
+    import model_corners_v3 as mc
+
+    games = [("A", "B", 6, 4, 12, 9, date(2026, 1, 28)),
+             ("C", "A", 5, 5, 10, 11, date(2026, 1, 21)),
+             ("B", "C", 7, 3, 14, 8, date(2026, 1, 10))]
+    bh, ba, bmu, r_base, L = mc.stats_window(games, date(2026, 1, 31))
+    assert abs(bh - 5.990688) < 1e-5, bh
+    assert abs(ba - 4.009312) < 1e-5, ba
+    assert abs(L - 10.662552) < 1e-5, L
+    # Jendela kosong: nol, bukan ZeroDivisionError.
+    assert mc.stats_window([], date(2026, 1, 31)) == (0.0,) * 5
+    mu = mc.mu_cs({"base_h": 5.2, "base_a": 4.6, "fhp": 1.1,
+                   "fhc": 0.9, "fap": 1.05, "fac": 0.95}, 0.15)
+    assert abs(mu - 9.795578) < 1e-5, mu
+    pmf = mc.pmf_k(10.4, 8.0)
+    assert abs(sum(pmf) - 1.0) < 1e-9
+    assert abs(sum(pmf[10:]) - 0.525424) < 1e-5
+
+
+def test_corner_cups_parity_golden():
+    # D12-2/B12-3: logika corner piala adalah duplikat logika liga —
+    # kunci fungsi bersama (pmf_k identik byte-for-byte hasilnya) dan
+    # mu piala pada histori sintetis tetap, supaya drift salah satu
+    # sisi tertangkap.
+    from datetime import date
+
+    import model_corners_v3 as mc
+    import predict_cups as pc
+
+    assert pc.pmf_k(10.4, 8.0) == mc.pmf_k(10.4, 8.0)
+    assert pc.pmf_k(9.1, 5.5) == mc.pmf_k(9.1, 5.5)
+
+    def M(d, h, a, hc, ac, hs, asx):
+        return {"div": "E0", "date": d, "home": h, "away": a,
+                "hc": hc, "ac": ac, "hs": hs, "as": asx}
+
+    ms = [M(date(2026, 1, 5), "Arsenal", "Chelsea", 7, 3, 15, 9),
+          M(date(2026, 1, 12), "Liverpool", "Arsenal", 6, 5, 13, 12),
+          M(date(2026, 1, 19), "Chelsea", "Liverpool", 4, 6, 10, 14),
+          M(date(2026, 1, 26), "Arsenal", "Liverpool", 8, 4, 16, 11)]
+    mu = pc.corner_mu(ms, "Arsenal", "Chelsea", "E0", "E0",
+                      date(2026, 2, 1))
+    assert abs(mu - 10.768281) < 1e-5, mu
+
+
+def test_feature_rows_do_not_leak_own_result():
+    # D12-3: baris fitur sebuah laga tidak boleh bergantung pada
+    # hasil laga itu sendiri. Bangun dua kali dengan skor laga kedua
+    # yang berbeda — fitur pra-laga untuk laga kedua harus identik.
+    from datetime import date
+
+    import football_etl
+    import features
+
+    def M(d, h, a, yh, ya, ftr):
+        return {"div": "E0", "date": d, "season": "2026", "home": h,
+                "away": a, "yh": yh, "ya": ya, "ftr": ftr}
+
+    m1 = M(date(2026, 1, 1), "Arsenal", "Chelsea", 3, 0, "H")
+
+    class FakeCache:
+        def __init__(self, matches):
+            self.matches = matches
+
+    old = football_etl.MatchCache
+    try:
+        football_etl.MatchCache = lambda: FakeCache(
+            [m1, M(date(2026, 1, 8), "Chelsea", "Arsenal", 0, 1, "A")])
+        rows_a = features.build_feature_rows()
+        football_etl.MatchCache = lambda: FakeCache(
+            [m1, M(date(2026, 1, 8), "Chelsea", "Arsenal", 5, 0, "H")])
+        rows_b = features.build_feature_rows()
+    finally:
+        football_etl.MatchCache = old
+    feat_keys = ("elo_h", "elo_a", "elo_diff", "form_pts_h",
+                 "form_pts_a", "goals_diff_h", "goals_diff_a",
+                 "rest_h", "rest_a", "n_played_h", "n_played_a")
+    ra, rb = rows_a[1], rows_b[1]
+    for k in feat_keys:
+        assert ra[k] == rb[k], (k, ra[k], rb[k])
+    # Dan nilainya memang hanya mencerminkan laga pertama:
+    # Chelsea kalah tandang -> 0 poin form, selisih gol -3, 1 laga.
+    assert ra["form_pts_h"] == 0.0
+    assert ra["goals_diff_h"] == -3.0
+    assert ra["n_played_h"] == 1
+
+
+def test_fitmodel_stats_come_from_train_only():
+    # D12-4: imputasi/standarisasi T3 dihitung HANYA dari data latih
+    # (termasuk penanganan NaN-nya) dan tidak berubah saat prediksi.
+    import numpy as np
+
+    from model_features_1x2 import FitModel
+
+    Xtr = np.array([[1.0, 10.0], [3.0, np.nan], [5.0, 30.0],
+                    [7.0, 40.0]])
+    ytr = np.array([0, 1, 2, 0])
+    m = FitModel(Xtr, ytr, epochs=2)
+    assert np.allclose(m.med, [4.0, 30.0])          # median train
+    imputed = np.array([[1.0, 10.0], [3.0, 30.0], [5.0, 30.0],
+                        [7.0, 40.0]])
+    assert np.allclose(m.mu, imputed.mean(axis=0))  # mean sesudah imputasi
+    assert np.allclose(m.sd, imputed.std(axis=0))
+    mu0, med0, sd0 = m.mu.copy(), m.med.copy(), m.sd.copy()
+    p = m.predict(np.array([[100.0, -50.0]]))
+    assert abs(float(p.sum()) - 1.0) < 1e-9
+    assert np.array_equal(m.mu, mu0)
+    assert np.array_equal(m.med, med0)
+    assert np.array_equal(m.sd, sd0)
+
+
 if __name__ == "__main__":
     fns = [v for k, v in sorted(globals().items())
            if k.startswith("test_") and callable(v)]

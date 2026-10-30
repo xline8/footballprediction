@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 """feature_analysis.py — evaluasi awal fitur (eksperimental).
 
+STATUS (audit round 12): exploratory screen only. The univariate
+ranking here informed the feature set that now lives in
+features.py / model_features_1x2.py; it carries no verdict on
+marginal value after the meta model, and no production change is
+pending from it.
+
 Menjalankan fitur anti-leakage (features.build_feature_rows) dan melaporkan
 kekuatan prediktif univariat tiap fitur terhadap outcome (home-win & total gol)
 menggunakan korelasi point-biserial / Pearson. Ini membantu memprioritaskan

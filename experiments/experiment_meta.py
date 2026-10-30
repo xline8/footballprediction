@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 """experiment_meta.py — fase 4 E1: meta-logistic di atas DC/T3 + market implied.
 
+STATUS (audit round 12): recipe adopted. This prototype's design —
+a multinomial logistic stack over DC, T3, and market-implied
+logits — is the production meta recipe (nine logits, walk-forward,
+in backtest_picks.py / make_picks_live.py). Kept as the design
+record; production changes belong to the live modules, not here.
+
 Fitur per match (leak-free, semuanya diketahui sebelum kickoff):
   - prob DC (ph_dc, pd_dc, pa_dc)
   - prob T3 fitur (ph_t3, pd_t3, pa_t3)

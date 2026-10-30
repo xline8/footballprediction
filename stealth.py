@@ -1,6 +1,6 @@
 """stealth.py — lapisan anti-bot bersama: rotasi User-Agent, jitter acak,
 dan dukungan proxy dari lingkungan. Dipakai oleh download.py,
-refresh_fixtures.py, fetch_xg.py, dan ta_scrape.py.
+refresh_fixtures.py, dan ta_scrape.py.
 
 Prinsip: satu sumber kebenaran untuk header HTTP dan tidur antar-request,
 supaya semua scraper punya jejak yang sopan dan tidak seragam.
