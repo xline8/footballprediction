@@ -4,9 +4,15 @@ import os
 import csv
 from collections import defaultdict
 
-BASE = os.path.join(os.path.expanduser("~"), "football-data")
-SRC = os.path.join(BASE, "all_matches.csv")
-DST = os.path.join(BASE, "all_matches_clean.csv")
+# Direktori dari paths (sumber kebenaran tunggal), pola yang sama
+# dengan download.py: hardcode ~/football-data hanya sama dengan
+# lokasi proyek berkat symlink deployment (audit ronde 9).
+try:
+    from paths import BASE, DATA_CLEAN as DST, DATA_RAW as SRC
+except Exception:
+    BASE = os.path.join(os.path.expanduser("~"), "football-data")
+    SRC = os.path.join(BASE, "all_matches.csv")
+    DST = os.path.join(BASE, "all_matches_clean.csv")
 
 def num(x):
     try:

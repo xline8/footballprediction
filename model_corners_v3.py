@@ -19,11 +19,18 @@ import time
 from collections import defaultdict, deque
 from datetime import datetime
 
-BASE = os.path.join(os.path.expanduser("~"), "football-data")
-DATA = os.path.join(BASE, "all_matches_clean.csv")
+# Direktori dari paths (sumber kebenaran tunggal), pola yang sama
+# dengan download.py: hardcode ~/football-data hanya sama dengan
+# lokasi proyek berkat symlink deployment (audit ronde 9).
+try:
+    from paths import BASE, DATA_CLEAN as DATA, TA_DIR
+    PARAMS_OUT = os.path.join(TA_DIR, "corner_params.json")
+except Exception:
+    BASE = os.path.join(os.path.expanduser("~"), "football-data")
+    DATA = os.path.join(BASE, "all_matches_clean.csv")
+    PARAMS_OUT = os.path.join(BASE, "ta", "corner_params.json")
 OUT = os.path.join(BASE, "predictions_corners_shots.csv")
 UPCOMING_OUT = os.path.join(BASE, "predictions_corners_upcoming.csv")
-PARAMS_OUT = os.path.join(BASE, "ta", "corner_params.json")
 FIX_MAP = {"E0": "EPL", "SP1": "La_liga", "D1": "Bundesliga",
            "I1": "Serie_A", "F1": "Ligue_1"}
 TOP5 = ["E0", "D1", "I1", "SP1", "F1"]
