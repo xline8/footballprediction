@@ -1078,6 +1078,61 @@ def test_save_date_page_persists_status_raw():
     assert fix[0]["status_raw"] == "AET", fix
 
 
+def test_slip_search_matches_brute_force():
+    # B12-2: fase pita branch-and-bound harus mengembalikan optimum
+    # menyeluruh yang sama dengan enumerasi brute force (bukan
+    # kandidat awalan ruang seperti DFS lama yang terpotong).
+    import itertools
+    import random
+
+    from slip_recommender import _search
+
+    rng = random.Random(20261031)
+    for _trial in range(6):
+        by_match = {}
+        for mi in range(6):
+            legs = []
+            for _k in range(3):
+                o = round(rng.uniform(1.2, 2.6), 2)
+                pm = round(rng.uniform(0.35, 0.85), 3)
+                legs.append(_leg(f"M{mi}", "2026-10-31", o, pm))
+            by_match[f"M{mi}"] = legs
+        best_in, _ = _search(by_match, 2, 4, 1.85, 2.15, 2.0)
+        pools = list(by_match.values())
+        brute = None
+        for r in range(2, 5):
+            for combo in itertools.combinations(range(len(pools)), r):
+                for legs in itertools.product(*[pools[i] for i in combo]):
+                    tot = jp = 1.0
+                    for l in legs:
+                        tot *= l["o"]
+                        jp *= l["pm"]
+                    if 1.85 <= tot <= 2.15 and (brute is None or jp > brute):
+                        brute = jp
+        if brute is None:
+            assert best_in is None
+        else:
+            assert best_in is not None
+            assert abs(best_in[1] - brute) < 1e-9, (best_in[1], brute)
+
+
+def test_slip_csv_carries_search_truncated():
+    # B12-2: flag kualitas pencarian persisten sebagai kolom produk.
+    import csv
+    import tempfile
+
+    import slip_recommender as sr
+
+    best = (2.0, 0.5, 0.0, [_leg("A", "2026-10-31", 2.0, 0.5)])
+    with tempfile.TemporaryDirectory() as td:
+        p = os.path.join(td, "slip.csv")
+        sr._write_slip(p, sr.SLIP_COLS, best, True,
+                       extra={"search_truncated": "true"})
+        with open(p, newline="", encoding="utf-8") as f:
+            rows = list(csv.DictReader(f))
+    assert rows and rows[0]["search_truncated"] == "true", rows
+
+
 if __name__ == "__main__":
     fns = [v for k, v in sorted(globals().items())
            if k.startswith("test_") and callable(v)]
