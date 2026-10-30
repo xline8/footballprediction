@@ -334,7 +334,7 @@ MARKET_COMPARE_COLS = ["div", "date", "home", "away", "game_id", "competition",
 
 def build_market_compare(date_from=None, n_days=5):
     """Tulis market_compare.csv utk fixture model upcoming (window dekat)."""
-    today = date_from or date.today()
+    today = date_from or datetime.now(timezone.utc).date()
     lo = today
     hi = today + timedelta(days=n_days - 1)
     out = []
@@ -394,7 +394,7 @@ ARCHIVE_FILES = ["predictions_upcoming.csv", "predictions_corners_upcoming.csv",
 
 def archive_snapshots(target_date=None):
     """Salin output harian ke archive/<date>/. Idempoten per tanggal."""
-    d = target_date or date.today()
+    d = target_date or datetime.now(timezone.utc).date()
     dest = os.path.join(ARCHIVE, d.isoformat())
     os.makedirs(dest, exist_ok=True)
     copied = []

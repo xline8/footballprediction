@@ -456,6 +456,18 @@ def _build_summary(store):
 
     summary = {"overall": _stats(legs)}
 
+    # overall menghitung LEG per produk: seleksi yang sama bisa muncul
+    # di dua produk (mis. single yang juga menjadi leg slip2) dan
+    # terhitung dua kali. overall_unique men-dedup per seleksi agar
+    # ukuran sampel uniknya terbaca di samping angka leg
+    # (audit ronde 7).
+    _uniq = {}
+    for g in legs:
+        k = (g.get("date"), g.get("home"), g.get("away"),
+             g.get("market"), g.get("line"), g.get("selection"))
+        _uniq.setdefault(k, g)
+    summary["overall_unique"] = _stats(list(_uniq.values()))
+
     # by_product
     by_product = {}
     for p in ("pick_teraman", "single", "slip2", "slip10"):

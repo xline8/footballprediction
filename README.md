@@ -264,16 +264,25 @@ from football-data.co.uk + Understat only):
 - Refreshes Understat season dumps (`xg_raw/{League}_{year}.json`) via
   `getLeagueData` (same fetcher as `refresh_fixtures.py`), so `build_xg_matches`
   picks up the latest xG.
-- Backs up `all_matches_clean.csv` and xG dumps to timestamped `.bak-*` before
-  overwriting; validates total rows and current-season rows never decrease
-  (rollback + explicit failure if they do), then rebuilds `records_cache` with
-  a data-freshness stamp when the data changed.
+- Fails before rebuilding anything when the download is incomplete
+  (any of the 21 files), instead of reporting success on stale data.
+- Backs up everything the refresh overwrites — `all_matches_clean.csv`,
+  `all_matches.csv`, the raw season CSVs, and the xG dumps — to timestamped
+  `.bak-*` files, and rolls all of it back on failure. Validation checks
+  that total rows, current-season rows, and per-division rows never
+  decrease, then `records_cache` is rebuilt when the data fingerprint
+  (row counts, latest date, season count, file size) changes.
+- Records the run outcome in `last_full_pipeline.json`, exposed by
+  `/api/status` as `last_full_pipeline`. Per-model `is_stale` tracks the
+  last fit of any kind (daily fits included), so it cannot by itself
+  show whether the weekly refit succeeded.
 
 **Daily run.** `run_daily_shadow.py` executes the chain described under
 Live shadow tracker, including the results sync with
 `ta_scrape.py <date> --fresh`, which forces a network fetch past the 20-min
 date-page cache (a network failure there is a warning, not a pipeline
-failure).
+failure). Each run tees its output to `logs/shadow-<date>.log` and grades
+open TipsterArea bets from the freshly synced results.
 
 **Watchdog.** A check every 10 minutes curls `/api/health`; if the API is
 down it restarts the systemd service, reinstalling the unit first when the

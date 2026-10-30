@@ -7,6 +7,35 @@ Keep a Changelog, and the project uses semantic versioning.
 
 ### Fixed
 
+- A seventh audit round verified PR #27 (the incomplete-download gate
+  and the records-meta merge both reproduced in isolation, and the
+  day's recommendation files recomputed exactly) and fixed what it
+  found, mostly about failure honesty in the full pipeline. The
+  training refresh now backs up and rolls back everything it
+  overwrites — raw season CSVs, `all_matches.csv`, and the Understat
+  dumps, not just `all_matches_clean.csv` — stops before `prepare` /
+  `clean` when the download is incomplete, checks row counts per
+  division instead of only in aggregate, and rotates backups on the
+  failure path too. `run_full_pipeline` skips steps whose upstreams
+  failed instead of letting them overwrite state and predictions on
+  stale inputs, counts module-missing skips as failures, runs the
+  corner step after scoring so its staleness guard reads the current
+  run's predictions, and records each run's outcome in
+  `last_full_pipeline.json`, which `/api/status` exposes. The records
+  meta merge moved into `cache_records` itself, so the daily
+  `make_picks_live` rebuild path can no longer wipe the fingerprint
+  and trigger an extra rebuild. The daily shadow tees its output to
+  `logs/shadow-<date>.log` and finally calls `ta_model.grade()`, which
+  no chain had ever invoked, leaving TipsterArea bets ungraded for
+  weeks. Remaining local-date anchors on UTC-dated fixtures (slip
+  recommender, best picks, market compare/archive defaults, the odds
+  endpoint) now use the UTC date, the season label is month-aware
+  instead of raw calendar year, the safest-pick tie-break treats a
+  missing `ev_model` as worse than a negative one, the build-xG step
+  surfaces corrupt dumps, the odds step returns a real status, and
+  the calibration summary adds `overall_unique` (final legs
+  deduplicated per selection) beside the per-product leg count.
+  Seven unit tests added.
 - A sixth audit round verified PR #26 (the fixture rescue survived a
   full-file stress test: four independent computations over all 1,349
   predictions, zero changed assignments, every rescued row a genuine

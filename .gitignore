@@ -25,6 +25,8 @@ venv/
 # Runtime ledger state (picks/grades/summary — regenerated)
 ledger/
 records_cache.meta.json
+last_full_pipeline.json
+logs/
 
 # Arsip snapshot harian (runtime artifact, bukan source)
 archive/

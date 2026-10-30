@@ -11,10 +11,49 @@ import os
 import sys
 import subprocess
 import time
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta, timezone
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE)
+
+
+def _today():
+    """Tanggal acuan run: UTC, sama dengan tanggal fixture di seluruh
+    pipeline. date.today() lokal bisa berbeda sehari dari tanggal UTC
+    fixture (audit ronde 7)."""
+    return datetime.now(timezone.utc).date()
+
+
+class _Tee:
+    """Duplikasi stdout ke file log: output shadow dulu hanya hidup di
+    stdout pemanggil (cron), jadi klaim per langkah (mis. failed_dates
+    di [7/9]) tidak bisa diverifikasi ulang dari disk (audit ronde 7)."""
+
+    def __init__(self, *streams):
+        self.streams = streams
+
+    def write(self, s):
+        for st in self.streams:
+            try:
+                st.write(s)
+            except Exception:
+                pass
+        # Flush semua stream selain stdout asli: tanpa ini log di
+        # disk kosong sampai buffer penuh / proses selesai, padahal
+        # gunanya justru dibaca saat run masih berjalan.
+        for st in self.streams[1:]:
+            try:
+                st.flush()
+            except Exception:
+                pass
+        return len(s)
+
+    def flush(self):
+        for st in self.streams:
+            try:
+                st.flush()
+            except Exception:
+                pass
 
 
 def _run_py(script, *args):
@@ -89,7 +128,7 @@ def main():
         print(f"[3/6] FAILED cup predictions: {e!r}")
 
     try:
-        r = _run_py("best_picks.py", "--date", date.today().isoformat())
+        r = _run_py("best_picks.py", "--date", _today().isoformat())
         print(f"[4/6] best_picks: rc={r.returncode} | {r.stdout.strip()[-400:]}")
         if r.returncode != 0:
             failed = True
@@ -113,18 +152,24 @@ def main():
     # 20 menit dilewati) agar laga yang selesai larut ikut masuk. Kegagalan
     # jaringan tidak menggagalkan pipeline — catat warning, lanjutkan.
     try:
-        y = date.today() - timedelta(days=1)
-        y2 = date.today() - timedelta(days=2)
+        y = _today() - timedelta(days=1)
+        y2 = _today() - timedelta(days=2)
         r = _run_py("ta_scrape.py", y.isoformat(), y2.isoformat(), "--fresh")
         out = (r.stdout or "").strip()
         err = (r.stderr or "").strip()
         shown = out[-300:] if out else err[-300:]
         # Kegagalan parsial (satu tanggal gagal, tanggal lain berhasil)
         # membuat CLI keluar 0 dan peringatannya hanya ada di stderr —
-        # tampilkan ekornya bila memuat penanda gagal, agar tanggal yang
-        # hilang tidak senyap (audit ronde 5).
-        if out and err and ("gagal" in err or "GAGAL" in err):
-            shown += f" | stderr: {err[-200:]}"
+        # tampilkan konteks penanda gagalnya agar tanggal yang hilang
+        # tidak senyap (audit ronde 5). Konteks di sekitar penanda,
+        # bukan ekor: penanda yang >300 karakter dari akhir stderr
+        # dulu lolos dari potongan ekor (audit ronde 7).
+        if err and "gagal" not in shown and "GAGAL" not in shown:
+            _i = err.find("gagal")
+            if _i < 0:
+                _i = err.find("GAGAL")
+            if _i >= 0:
+                shown += f" | stderr: ...{err[max(0, _i - 40):_i + 160]}"
         print(f"[6/7] tipsterarea hasil sync: rc={r.returncode} | {shown}")
         if r.returncode != 0:
             failed = True
@@ -135,6 +180,19 @@ def main():
         print(f"[6/7] FAILED ta sync: {e!r} "
               f"(lanjut pipeline, tapi run ditandai gagal)")
 
+    # [6b/7] Grading bet TA (ta/best_bets.csv) dari results.csv yang
+    # baru tersinkron di [6/7]. grade() ada sejak lama tapi tidak
+    # pernah dipanggil rantai mana pun, jadi bet OPEN menumpuk tak
+    # dinilai berminggu-minggu (audit ronde 7). Idempoten; bet corner
+    # tanpa data aktual dibiarkan OPEN oleh grade() sendiri.
+    # Kegagalan = warning (pembukuan, bukan data).
+    try:
+        import ta_model
+        ta_model.grade()
+        print("[6b/7] ta bet grading: selesai")
+    except Exception as e:
+        print(f"[6b/7] WARNING ta bet grading gagal: {e!r}")
+
     # [7/9] Market odds sync: semua fixture model (liga TOP5 + piala), window
     # hari ini..+4, urut kickoff terdekat. Throttle market_needs_refresh diurus
     # sync_dates (~1.5 jam); hanya fetch yang perlu. Gagal jaringan = warning,
@@ -142,7 +200,7 @@ def main():
     try:
         from market_orchestration import model_fixture_ids
         from ta_scrape import sync_dates
-        days_mkt = [date.today() + timedelta(days=k) for k in range(5)]
+        days_mkt = [_today() + timedelta(days=k) for k in range(5)]
         mkt_ids = model_fixture_ids(days_mkt)
         r = sync_dates(sorted(set(days_mkt)), with_markets=True,
                        market_ids=mkt_ids or None, verbose=False)
@@ -255,4 +313,20 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    _real_stdout = sys.stdout
+    _logf = None
+    try:
+        _logs = os.path.join(BASE, "logs")
+        os.makedirs(_logs, exist_ok=True)
+        _logf = open(os.path.join(
+            _logs, f"shadow-{_today().isoformat()}.log"),
+            "a", encoding="utf-8")
+        sys.stdout = _Tee(_real_stdout, _logf)
+    except Exception:
+        pass
+    try:
+        main()
+    finally:
+        sys.stdout = _real_stdout
+        if _logf is not None:
+            _logf.close()

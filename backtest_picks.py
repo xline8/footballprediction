@@ -130,6 +130,31 @@ def _fair_probs(o, method):
     return inv
 
 
+def _write_records_meta(out_path, data_stamp):
+    """Tulis sidecar meta records_cache dengan MERGE, bukan timpa.
+
+    File meta dimiliki bersama: cache_records menulis dc_fit_mode +
+    data_stamp, sedangkan pipeline_orchestrator menambahkan
+    data_fingerprint ke dict yang sama. Menimpa seluruh file di sini
+    menghapus fingerprint setiap kali jalur make_picks_live membangun
+    ulang records (ia memanggil cache_records langsung), sehingga
+    rebuild orchestrator berikutnya terpicu lagi — residu ping-pong
+    M2 yang tersisa setelah ronde 6 (audit ronde 7).
+    """
+    meta_path = os.path.splitext(out_path)[0] + ".meta.json"
+    meta = {}
+    if os.path.exists(meta_path):
+        try:
+            with open(meta_path, encoding="utf-8") as f:
+                meta = json.load(f)
+        except Exception:
+            meta = {}
+    meta.update({"dc_fit_mode": model_v2.DC_FIT_MODE,
+                 "data_stamp": data_stamp})
+    with open(meta_path, "w", encoding="utf-8") as f:
+        json.dump(meta, f)
+
+
 def cache_records(out_path=RECORDS):
     rows = build_feature_rows(limit=None)
     X, y, dates = mf._rows_to_arrays(rows)
@@ -197,10 +222,7 @@ def cache_records(out_path=RECORDS):
         data_stamp = f"{st.st_mtime_ns}:{st.st_size}"
     except OSError:
         data_stamp = None
-    meta_path = os.path.splitext(out_path)[0] + ".meta.json"
-    with open(meta_path, "w", encoding="utf-8") as f:
-        json.dump({"dc_fit_mode": model_v2.DC_FIT_MODE,
-                   "data_stamp": data_stamp}, f)
+    _write_records_meta(out_path, data_stamp)
     print(f"cache records: {len(rec)} -> {out_path} (mode={model_v2.DC_FIT_MODE})")
     return len(rec)
 

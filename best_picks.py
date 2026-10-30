@@ -22,13 +22,13 @@ Untuk value pick corner, perlu odds pasar.
 import csv
 import os
 import sys
-from datetime import date
+from datetime import date, datetime, timezone
 from collections import defaultdict
 
 import paths
 
 PROJ = paths.BASE
-TODAY = date.today().isoformat()
+TODAY = datetime.now(timezone.utc).date().isoformat()
 # Jangkar tanggal run: main() mengaturnya dari --date. Loader memakai
 # ini (bukan tanggal riil) sebagai lantai fixture, supaya run untuk
 # tanggal tertentu tidak diam-diam berjangkar ke hari ini.
@@ -331,6 +331,11 @@ def _select_safest(best_cands, scan_cands):
     tanpa unsur ev_model seri probabilitas antar-kandidat model
     diselesaikan oleh urutan gabungan, bukan nilai (audit ronde 6).
     Hasil membawa tier sesuai asal seleksi (best vs fallback).
+
+    ev_model None (seleksi tanpa harga) diperlakukan sebagai -inf,
+    bukan 0: pemetaan lama membuat "tidak ada informasi harga"
+    mengalahkan kandidat yang benar-benar terharga dengan EV negatif
+    pada seri probabilitas (audit ronde 7).
     """
     combined = list(best_cands) + list(scan_cands)
     if not combined:
@@ -338,7 +343,8 @@ def _select_safest(best_cands, scan_cands):
     key = lambda c: ((c.get('prob') or 0),
                      1 if c.get('tier') == 'best' else 0,
                      c.get('ev') or 0,
-                     c.get('ev_model') or 0)
+                     c['ev_model'] if c.get('ev_model') is not None
+                     else float('-inf'))
     return max(combined, key=key)
 
 
@@ -357,7 +363,7 @@ def _fill_ev_model(p):
 
 def main():
     global ANCHOR
-    target = date.today().isoformat()
+    target = datetime.now(timezone.utc).date().isoformat()
     args = sys.argv[1:]
     if "--date" in args:
         i = args.index("--date")

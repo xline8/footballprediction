@@ -33,7 +33,7 @@ import math
 import os
 import sys
 from collections import defaultdict
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 MARKET_COMPARE = os.path.join(HERE, "market_compare.csv")
@@ -392,8 +392,9 @@ def recommend_slip10(day):
 
 
 def recommend(day=None):
-    """Jalankan ketiga produk untuk `day` (default: hari ini)."""
-    day = day or date.today().isoformat()
+    """Jalankan ketiga produk untuk `day` (default: hari ini, UTC —
+    tanggal fixture di seluruh pipeline adalah UTC; audit ronde 7)."""
+    day = day or datetime.now(timezone.utc).date().isoformat()
     out = {"date": day,
            "single": recommend_single(day),
            "slip2": recommend_slip2(day),

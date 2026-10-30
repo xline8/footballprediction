@@ -251,6 +251,150 @@ def test_ledger_result_label_halves():
     assert _result_label(1.0, 2.0, True) == "push"
 
 
+# ------------------------------------------------- audit ronde 7
+
+def test_cur_season_label_is_month_aware():
+    from datetime import date as _date
+
+    from pipeline_orchestrator import PipelineOrchestrator
+    f = PipelineOrchestrator._cur_season_label
+    assert f(_date(2026, 10, 30)) == "2026/27"
+    assert f(_date(2027, 1, 15)) == "2026/27"   # versi lama: "2027/28"
+    assert f(_date(2027, 6, 30)) == "2026/27"
+    assert f(_date(2027, 7, 1)) == "2027/28"
+
+
+def test_clean_stats_counts_per_division():
+    import tempfile
+
+    from pipeline_orchestrator import PipelineOrchestrator
+    rows = [
+        "Div,Season,Date,HomeTeam,AwayTeam",
+        "E0,2026/27,2026-10-01,A,B",
+        "E0,2026/27,2026-10-02,C,D",
+        "D1,2025/26,2025-09-01,E,F",
+    ]
+    with tempfile.NamedTemporaryFile(
+            "w", suffix=".csv", delete=False) as fh:
+        fh.write("\n".join(rows) + "\n")
+        path = fh.name
+    st = PipelineOrchestrator._clean_stats(path)
+    assert st["total"] == 3 and st["max_date"] == "2026-10-02"
+    assert st["div_counts"] == {"E0": 2, "D1": 1}
+
+
+def test_records_meta_write_merges_existing_keys():
+    import json
+    import tempfile
+
+    from backtest_picks import _write_records_meta
+    with tempfile.TemporaryDirectory() as td:
+        out = os.path.join(td, "records_cache.jsonl")
+        meta_path = os.path.join(td, "records_cache.meta.json")
+        with open(meta_path, "w", encoding="utf-8") as f:
+            json.dump({"data_fingerprint": "65899|2026-10-26|1816|1"}, f)
+        _write_records_meta(out, "999:42")
+        with open(meta_path, encoding="utf-8") as f:
+            meta = json.load(f)
+    assert meta["data_fingerprint"] == "65899|2026-10-26|1816|1"
+    assert meta["data_stamp"] == "999:42"
+    assert meta["dc_fit_mode"]
+
+
+def test_select_safest_priced_negative_ev_beats_unpriced():
+    from best_picks import _select_safest
+    priced = {"prob": 0.5, "tier": "fallback", "ev": None,
+              "ev_model": -0.30, "tag": "priced"}
+    unpriced = {"prob": 0.5, "tier": "fallback", "ev": None,
+                "ev_model": None, "tag": "unpriced"}
+    # Seri probabilitas: kandidat terharga (EV negatif nyata) menang
+    # atas kandidat tanpa harga — None bukan 0.
+    assert _select_safest([], [unpriced, priced])["tag"] == "priced"
+    # Probabilitas tetap raja di atas semua tie-break.
+    likelier = {"prob": 0.6, "tier": "fallback", "ev": None,
+                "ev_model": None, "tag": "likelier"}
+    assert _select_safest([], [priced, likelier])["tag"] == "likelier"
+
+
+def _stub_orchestrator(statuses):
+    from collections import defaultdict
+
+    import pipeline_orchestrator as po
+    orch = po.PipelineOrchestrator.__new__(po.PipelineOrchestrator)
+    orch.stats = defaultdict(int)
+    orch.verbose = False
+    names = ["step_refresh_training_data", "step_check_data",
+             "step_build_xg", "step_fit_models", "step_score_upcoming",
+             "step_score_corners", "step_integrate_odds",
+             "scrape_live_odds", "step_ta_model", "step_predict_cups",
+             "step_generate_picks", "step_validation"]
+    for nm in names:
+        st = statuses.get(nm, {"status": "success"})
+        setattr(orch, nm, (lambda st: lambda: dict(st))(st))
+    return orch, po
+
+
+def test_pipeline_gates_dependents_on_failed_refresh():
+    import tempfile
+
+    orch, po = _stub_orchestrator(
+        {"step_refresh_training_data": {"status": "failed"}})
+    with tempfile.TemporaryDirectory() as td:
+        old = po.BASE_DIR
+        po.BASE_DIR = td
+        try:
+            res = orch.run_full_pipeline()
+        finally:
+            po.BASE_DIR = old
+        with open(os.path.join(td, "last_full_pipeline.json"),
+                  encoding="utf-8") as f:
+            import json
+            rec = json.load(f)
+    assert res["status"] == "failed"
+    assert res["xg"]["status"] == "skipped"
+    assert res["scoring"]["status"] == "skipped"
+    assert res["picks"]["status"] == "skipped"
+    assert res["ta_model"]["status"] == "success"  # TA independen
+    assert rec["status"] == "failed" and rec["failed_steps"] == ["refresh"]
+
+
+def test_pipeline_gates_scoring_on_partial_xg_only():
+    orch, po = _stub_orchestrator(
+        {"step_build_xg": {"status": "partial"}})
+    import tempfile
+    with tempfile.TemporaryDirectory() as td:
+        old = po.BASE_DIR
+        po.BASE_DIR = td
+        try:
+            res = orch.run_full_pipeline()
+        finally:
+            po.BASE_DIR = old
+    assert res["scoring"]["status"] == "skipped"
+    assert res["model"]["status"] == "success"       # fit tak butuh xg step
+    assert res["corner_model"]["status"] == "success"
+    assert res["picks"]["status"] == "skipped"       # rantai skip menular
+    assert res["status"] == "failed"                  # partial = gagal
+
+
+def test_calibration_overall_unique_dedupes_selections():
+    from grade_recommendations import _build_summary
+
+    def leg(product, market, sel, p, status="hit"):
+        return {"status": status, "level": "leg", "product": product,
+                "market": market, "selection": sel, "p_model": p,
+                "date": "2026-10-29", "home": "fiorentina",
+                "away": "atalanta", "line": "", "reason": ""}
+
+    store = {
+        "a": leg("single", "DC", "X2", 0.6845),
+        "b": leg("slip2", "DC", "X2", 0.6845),   # seleksi sama, produk lain
+        "c": leg("pick_teraman", "OU", "Over", 0.8088),
+    }
+    s = _build_summary(store)
+    assert s["overall"]["n"] == 3
+    assert s["overall_unique"]["n"] == 2
+
+
 if __name__ == "__main__":
     fns = [v for k, v in sorted(globals().items())
            if k.startswith("test_") and callable(v)]
