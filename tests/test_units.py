@@ -1353,9 +1353,9 @@ def test_prematch_kickoff_predicates():
     assert _fixture_still_open(d, "xx", now) is True      # jam rusak
     assert _fixture_still_open(d, None, now) is True
 
-    assert _kickoff_in_future("2026-10-31 20:00:00", now) is True
-    assert _kickoff_in_future("2026-10-31 18:00:00", now) is False
-    assert _kickoff_in_future("2026-10-31 19:00:00", now) is False
+    assert _kickoff_in_future(datetime(2026, 10, 31, 20, 0), now) is True
+    assert _kickoff_in_future(datetime(2026, 10, 31, 18, 0), now) is False
+    assert _kickoff_in_future(datetime(2026, 10, 31, 19, 0), now) is False
 
 
 def test_slip_search_large_pool_matches_brute_force():

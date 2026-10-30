@@ -165,13 +165,12 @@ def run_wf(seasons):
     return rows
 
 
-def _kickoff_in_future(dtf_str, now_naive):
-    """True bila datetime fixture Understat (UTC naif) masih di masa
-    depan terhadap now_naive. Predikat filter prematch loader
-    (audit ronde 12, D12-10), diekstrak di ronde 13 supaya teruji
-    unit. Format rusak melempar ValueError, sama seperti kode inline
-    sebelumnya (loader membiarkannya merambat)."""
-    return datetime.strptime(dtf_str, "%Y-%m-%d %H:%M:%S") > now_naive
+def _kickoff_in_future(dtf, now_naive):
+    """True bila datetime fixture Understat (UTC naif, sudah
+    ter-parse) masih di masa depan terhadap now_naive. Predikat
+    filter prematch loader (audit ronde 12, D12-10), diekstrak di
+    ronde 13 supaya teruji unit."""
+    return dtf > now_naive
 
 
 def pmf_k(mu, k):
@@ -344,9 +343,9 @@ def predict_upcoming():
             # D12-10: bandingkan datetime penuh (UTC naif), bukan
             # tanggal saja — rerun sesudah kickoff di hari yang sama
             # dulu tetap memprediksi laga yang sudah berjalan.
+            dtf = datetime.strptime(d["datetime"], "%Y-%m-%d %H:%M:%S")
             if not _kickoff_in_future(
-                    d["datetime"],
-                    datetime.now(_tz.utc).replace(tzinfo=None)):
+                    dtf, datetime.now(_tz.utc).replace(tzinfo=None)):
                 continue
             dt = dtf.date()
             # Map Understat team name -> FD name
