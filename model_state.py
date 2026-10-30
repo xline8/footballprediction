@@ -16,25 +16,33 @@ from datetime import datetime, date
 from typing import Optional, Tuple, Dict
 from collections import defaultdict
 
-from paths import MODEL_CACHE, BASE as PROJ_BASE
+from paths import MODEL_CACHE, BASE as PROJ_BASE, XGRAW
 
 CACHE_DIR = MODEL_CACHE
 MAX_TRAIN = 4000
 RHO_GRID = (0.0, -0.05, -0.10, -0.15)
 
-# File data yang dikonsumsi fit DC: gol (all_matches_clean.csv) dan xG
-# (xg_matches.csv). State model dulu tidak mencatat versi data ini,
-# jadi koreksi skor atau xG yang terisi belakangan tidak pernah
-# membatalkan cache (audit GPT 2026-10-31, C).
-_FP_FILES = ("all_matches_clean.csv", "xg_matches.csv")
+# File data yang dikonsumsi fit DC: gol (all_matches_clean.csv di root
+# proyek) dan xG. File xG yang benar-benar dibaca fit adalah
+# xg_raw/xg_matches.csv — features.py membacanya dari sana dan
+# data_enrichment/build_xg_matches.py menulisnya di sana. Versi pertama
+# cap ini (PR #32) menunjuk xg_matches.csv di root, file yang tidak
+# pernah ada, sehingga komponen xG permanen "absent" dan revisi
+# xG-saja tidak pernah membatalkan cache (audit ronde 12, A12-1).
+# Path dinyatakan sebagai (label, path absolut) supaya tes bisa
+# memastikan setiap path benar-benar ter-resolve ke file yang
+# dikonsumsi, bukan sekadar nama yang mirip.
+_FP_FILES = (
+    ("all_matches_clean.csv", os.path.join(PROJ_BASE, "all_matches_clean.csv")),
+    ("xg_matches.csv", os.path.join(XGRAW, "xg_matches.csv")),
+)
 _fp_memo: Dict[str, Tuple[Tuple[int, int], str]] = {}
 
 
 def current_data_fingerprint() -> str:
     """Hash konten file data latih; dimemo per (mtime, size) per file."""
     parts = []
-    for name in _FP_FILES:
-        p = os.path.join(PROJ_BASE, name)
+    for name, p in _FP_FILES:
         try:
             st = os.stat(p)
             key = (st.st_mtime_ns, st.st_size)

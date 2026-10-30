@@ -894,6 +894,59 @@ def test_shadow_fixture_age_thresholds():
             rds.BASE = old
 
 
+def test_fingerprint_paths_point_at_consumed_files():
+    # A12-1: cap fingerprint PR #32 menunjuk xg_matches.csv di root
+    # proyek — file yang tidak pernah dibaca fit — sehingga komponen
+    # xG permanen "absent". Tes ini mengunci path ke lokasi yang
+    # benar-benar dikonsumsi: gol di root, xG di folder XGRAW (lokasi
+    # yang sama yang dibaca features.py).
+    import model_state
+    from paths import BASE as _BASE, XGRAW as _XGRAW
+
+    by_label = dict(model_state._FP_FILES)
+    assert by_label["all_matches_clean.csv"] == os.path.join(
+        _BASE, "all_matches_clean.csv")
+    assert by_label["xg_matches.csv"] == os.path.join(
+        _XGRAW, "xg_matches.csv")
+    # Bila file xG nyata ada di mesin ini, komponennya tidak boleh
+    # "absent" — inilah persis kegagalan yang lolos di PR #32.
+    if os.path.exists(by_label["xg_matches.csv"]):
+        fp = model_state.current_data_fingerprint()
+        assert "xg_matches.csv:absent" not in fp, fp
+
+
+def test_fingerprint_flips_on_xg_only_change():
+    # Revisi xG-saja (tanpa perubahan gol) harus membatalkan cache:
+    # fingerprint berubah dan data_stale() menyala.
+    import tempfile
+
+    import model_state
+
+    with tempfile.TemporaryDirectory() as td:
+        goals = os.path.join(td, "all_matches_clean.csv")
+        xg = os.path.join(td, "xg_matches.csv")
+        with open(goals, "w", encoding="utf-8") as f:
+            f.write("date,home\n2026-01-01,A\n")
+        with open(xg, "w", encoding="utf-8") as f:
+            f.write("key,xg\nm1,1.20\n")
+        old_files, old_memo = model_state._FP_FILES, model_state._fp_memo
+        model_state._FP_FILES = (
+            ("all_matches_clean.csv", goals), ("xg_matches.csv", xg))
+        model_state._fp_memo = {}
+        try:
+            fp1 = model_state.current_data_fingerprint()
+            st = model_state.ModelState("E0")
+            st.data_fp = fp1
+            assert not st.data_stale()
+            with open(xg, "w", encoding="utf-8") as f:
+                f.write("key,xg\nm1,1.85\n")
+            fp2 = model_state.current_data_fingerprint()
+            assert fp2 != fp1
+            assert st.data_stale()
+        finally:
+            model_state._FP_FILES, model_state._fp_memo = old_files, old_memo
+
+
 if __name__ == "__main__":
     fns = [v for k, v in sorted(globals().items())
            if k.startswith("test_") and callable(v)]
