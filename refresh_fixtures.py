@@ -75,6 +75,14 @@ def main():
         ts = datetime.now().strftime("%Y%m%d_%H%M")
         bpath = os.path.join(bdir, f"{slug}_2026_fixtures_{ts}.json")
         shutil.copy2(path, bpath)
+        # rotasi: simpan 4 backup terbaru per liga
+        _old = sorted(f for f in os.listdir(bdir)
+                      if f.startswith(f"{slug}_2026_fixtures_"))
+        for _f in _old[:-4]:
+            try:
+                os.remove(os.path.join(bdir, _f))
+            except OSError:
+                pass
         tmp = path + ".tmp"
         with open(tmp, "w", encoding="utf-8") as f:
             json.dump(fresh, f, ensure_ascii=False)
