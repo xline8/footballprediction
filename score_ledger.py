@@ -38,6 +38,53 @@ SLUG = {"E0": "EPL", "SP1": "La_liga", "D1": "Bundesliga",
 from football_etl import normalize_name
 from backtest_picks import _fair_probs
 
+# Varian nama klub yang berada di luar jangkauan lipatan normalize_name
+# (audit ronde 12, C12-1): nama Understat ternormalisasi -> bentuk
+# kanonis TipsterArea. Dipakai di KEDUA sisi kunci hasil TA (muat dan
+# cari), jadi pasangan yang sama selalu bertemu. Daftar ini diturunkan
+# dari join empiris hasil UG vs TA per (divisi, tanggal, skor) —
+# 397 hasil UG <= 2026-10-27, nol ketidaksepakatan skor di kunci yang
+# cocok — bukan tebakan: cologne/koln, Internazionale/Inter Milan,
+# Stade Rennais/rennais dst. memang klub yang sama dengan ejaan
+# berbeda di dua sumber.
+_TA_ALIAS = {
+    "cologne": "koln",
+    "rasenballsport leipzig": "rb leipzig",
+    "nottingham forest": "nottingham",
+    "internazionale": "inter milan",
+    "alaves": "deportivo alaves",
+    "athletic": "athletic bilbao",
+    "olympique lyonnais": "lyonnais",
+    "stade rennais": "rennais",
+    "hamburger sv": "hamburger",
+    "vfb stuttgart": "stuttgart",
+}
+
+
+def _ta_key_name(name):
+    """Nama kunci untuk pencocokan hasil TipsterArea (normalize + alias)."""
+    n = normalize_name(name)
+    return _TA_ALIAS.get(n, n)
+
+
+def _by_teams_index(keyed):
+    """{(scope, date, home, away): skor} -> {(scope, home, away):
+    [(date, skor), ...] terurut tanggal menaik}.
+
+    Untuk fallback laga tunda (C12-4): lookup utama berjangkar
+    tanggal pick, jadi laga yang digeser tidak akan pernah ketemu
+    hasilnya. Fallback mencari tanggal main paling awal SETELAH
+    tanggal pick untuk pasangan tim yang sama (hasil tidak mungkin
+    mendahului pick-nya, dan pasangan yang sama bertemu lagi di
+    putaran kedua sehingga yang paling awal yang benar).
+    """
+    idx = {}
+    for (scope, d, h, a), sc in keyed.items():
+        idx.setdefault((scope, h, a), []).append((d, sc))
+    for v in idx.values():
+        v.sort()
+    return idx
+
 def _load_fd2ug():
     """Peta nama FD -> nama Understat per divisi (dari xg_raw/map_*)."""
     NMAP = {}
@@ -113,7 +160,7 @@ def _load_ta_league_results():
                 if sh in (None, "") or sa in (None, ""):
                     continue
                 out[(div, r["date"][:10],
-                     normalize_name(r["home"]), normalize_name(r["away"]))] = \
+                     _ta_key_name(r["home"]), _ta_key_name(r["away"]))] = \
                     (int(sh), int(sa))
     return out
 
@@ -136,7 +183,7 @@ def _load_cup_results():
                 if sh is None or sa is None:
                     continue
                 cup_results[(comp, r["date"][:10],
-                             normalize_name(r["home"]), normalize_name(r["away"]))] = \
+                             _ta_key_name(r["home"]), _ta_key_name(r["away"]))] = \
                     (int(sh), int(sa))
     return cup_results
 
@@ -430,6 +477,11 @@ def main():
     ta_results = _load_ta_league_results()
     cup_results = _load_cup_results()
 
+    # Indeks per pasangan tim untuk fallback laga tunda (C12-4).
+    ug_by_teams = _by_teams_index(results)
+    ta_by_teams = _by_teams_index(ta_results)
+    cup_by_teams = _by_teams_index(cup_results)
+
     if not os.path.exists(PICKS):
         raise SystemExit("picks.jsonl belum ada")
     with open(PICKS, encoding="utf-8") as f:
@@ -455,7 +507,17 @@ def main():
         if comp in ("EFL Cup", "DFB Pokal"):
             # pick piala: hasil dari ta/results.csv (samakan nama)
             res = cup_results.get((comp, pk["date"],
-                                   normalize_name(pk["home"]), normalize_name(pk["away"])))
+                                   _ta_key_name(pk["home"]), _ta_key_name(pk["away"])))
+            if res is None:
+                # Laga tunda (C12-4): hasil ada di tanggal main yang
+                # baru, bukan tanggal pick — cari pasangan tim yang
+                # sama di tanggal paling awal setelah tanggal pick.
+                for d, sc in cup_by_teams.get(
+                        (comp, _ta_key_name(pk["home"]),
+                         _ta_key_name(pk["away"])), []):
+                    if d > pk["date"]:
+                        res = sc
+                        break
             if res is None:
                 unmapped[comp].add(f"{pk['home']} v {pk['away']}")
                 continue
@@ -486,10 +548,26 @@ def main():
             # memuat hasil ini, tapi chain harian sudah menyinkronkan
             # skor finalnya ke ta/results.csv.
             res = ta_results.get((pk["div"], pk["date"],
-                                  normalize_name(home_ug),
-                                  normalize_name(away_ug)))
+                                  _ta_key_name(home_ug),
+                                  _ta_key_name(away_ug)))
             if res is not None:
                 n_ta_filled += 1
+        if res is None and home_ug and away_ug:
+            # Laga tunda (C12-4): coba tanggal main baru, Understat
+            # dulu lalu TipsterArea, paling awal setelah tanggal pick.
+            for d, sc in ug_by_teams.get(
+                    (pk["div"], home_ug, away_ug), []):
+                if d > pk["date"]:
+                    res = sc
+                    break
+            if res is None:
+                for d, sc in ta_by_teams.get(
+                        (pk["div"], _ta_key_name(home_ug),
+                         _ta_key_name(away_ug)), []):
+                    if d > pk["date"]:
+                        res = sc
+                        n_ta_filled += 1
+                        break
         if res is None:
             continue  # belum main / belum keluar hasilnya
         yh, ya = res

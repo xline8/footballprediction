@@ -1133,6 +1133,51 @@ def test_slip_csv_carries_search_truncated():
     assert rows and rows[0]["search_truncated"] == "true", rows
 
 
+def test_ta_key_name_folds_alias_variants():
+    # C12-1: ejaan Understat dan TipsterArea untuk klub yang sama
+    # harus bertemu di kunci yang sama.
+    from score_ledger import _ta_key_name
+
+    assert _ta_key_name("FC Cologne") == _ta_key_name("FC Koln")
+    assert _ta_key_name("Internazionale") == _ta_key_name("Inter Milan")
+    assert _ta_key_name("Stade Rennais") == _ta_key_name("Rennais")
+    assert _ta_key_name("Nottingham Forest") == _ta_key_name("Nottingham")
+    assert _ta_key_name("RasenBallsport Leipzig") == \
+        _ta_key_name("RB Leipzig")
+    # Klub berbeda tidak boleh terlipat jadi satu.
+    assert _ta_key_name("FC Cologne") != _ta_key_name("RB Leipzig")
+
+
+def test_by_teams_index_sorted_by_date():
+    # C12-4: indeks fallback laga tunda terurut tanggal menaik.
+    from score_ledger import _by_teams_index
+
+    keyed = {("E0", "2026-03-01", "a", "b"): (1, 0),
+             ("E0", "2026-01-15", "a", "b"): (2, 2),
+             ("E0", "2026-02-01", "a", "c"): (0, 1)}
+    idx = _by_teams_index(keyed)
+    assert idx[("E0", "a", "b")] == [("2026-01-15", (2, 2)),
+                                     ("2026-03-01", (1, 0))]
+
+
+def test_match_result_postponed_fallback():
+    # C12-4: leg laga tunda ketemu hasilnya di tanggal main baru —
+    # tanggal setelah pick yang PALING AWAL (bukan pertemuan putaran
+    # kedua), dan tidak pernah dari tanggal sebelum pick.
+    from grade_recommendations import _match_result, norm
+
+    idx = {
+        "2026-11-20": [(norm("Arsenal"), norm("Chelsea"), 3, 0,
+                        "England - Premier League")],
+        "2026-11-05": [(norm("Arsenal"), norm("Chelsea"), 2, 1,
+                        "England - Premier League")],
+        "2026-10-01": [(norm("Arsenal"), norm("Chelsea"), 9, 9,
+                        "England - Premier League")],
+    }
+    got = _match_result(idx, "2026-10-28", "Arsenal", "Chelsea", "")
+    assert got == (2, 1), got
+
+
 if __name__ == "__main__":
     fns = [v for k, v in sorted(globals().items())
            if k.startswith("test_") and callable(v)]
