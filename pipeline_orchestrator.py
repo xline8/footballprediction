@@ -384,6 +384,17 @@ class PipelineOrchestrator:
                 os.remove(bak)
             except OSError:
                 pass
+        # Sapu sisa .bak dump xG dari run LAMA: discard di atas hanya
+        # tahu nama milik run ini, jadi backup peninggalan kode lama
+        # (yang membuat .bak tapi tidak pernah membuangnya) tertinggal
+        # selamanya. Discard berjalan setelah restore run ini selesai,
+        # jadi .bak yang tersisa hanya milik run yang sudah tuntas —
+        # tidak ada konsumennya (audit ronde 8).
+        for stale in glob.glob(os.path.join(paths.XGRAW, "*.json.bak-*")):
+            try:
+                os.remove(stale)
+            except OSError:
+                pass
 
     def step_refresh_training_data(self) -> dict:
         """Segarkan data latih sebelum fit (musim berjalan saja).
@@ -395,10 +406,11 @@ class PipelineOrchestrator:
         """
         log("\n[Step refresh] Refresh data latih (football-data + xG)...")
         clean_path = paths.DATA_CLEAN
-        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        # Resolusi mikrodetik: stempel 1 detik membuat dua refresh
+        # dalam detik yang sama berbagi nama backup, menggabungkan dua
+        # generasi backup jadi satu nama (audit ronde 8).
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
 
-        before = self._clean_stats(clean_path)
-        after = dict(before)
         # Backup SEMUA file yang akan ditimpa langkah ini, bukan hanya
         # file bersih: rollback lama hanya memulihkan
         # all_matches_clean.csv, sementara unduhan raw, all_matches.csv
@@ -409,24 +421,50 @@ class PipelineOrchestrator:
         # untuk rollback run ini lalu dibuang.
         baks = []
         transient_baks = []
+        existed = {}  # path -> ada sebelum run ini (untuk rollback)
+
+        def _note(path):
+            if path not in existed:
+                existed[path] = os.path.exists(path)
 
         def _backup(path, transient=False):
-            if os.path.exists(path):
+            _note(path)
+            if existed[path]:
                 bak = f"{path}.bak-{ts}"
                 shutil.copy2(path, bak)
                 baks.append(bak)
                 if transient:
                     transient_baks.append(bak)
 
-        _backup(clean_path)
-        _backup(paths.DATA_RAW, transient=True)
-        for rp in sorted(glob.glob(os.path.join(
-                paths.RAW_DIR, f"*_{REFRESH_SEASON}.csv"))):
-            _backup(rp, transient=True)
-
         issues = []
+        shrink_issues = []
         dl = p = c = None
+        before = {"total": 0, "max_date": 0, "cur_season": 0,
+                  "div_counts": {}}
+        after = dict(before)
+        # Koreksi sah football-data (fixture duplikat dihapus, hasil
+        # dianulir) menyusutkan satu divisi dan akan menggagalkan
+        # SETIAP refresh berikutnya — rollback memulihkan file lama
+        # dan susut yang sama terdeteksi lagi minggu depan. Penerimaan
+        # manual satu kali: REFRESH_ACCEPT_SHRINK=1 memperlakukan isu
+        # susut sebagai peringatan untuk run itu saja (audit ronde 8).
+        accept_shrink = os.environ.get("REFRESH_ACCEPT_SHRINK") == "1"
         try:
+            # Statistik awal + semua backup DI DALAM try: dulu di luar,
+            # jadi error filesystem saat backup lolos dari langkah ini
+            # dan membatalkan seluruh run_full_pipeline — termasuk
+            # langkah TA yang independen — tanpa rollback (ronde 8).
+            before = self._clean_stats(clean_path)
+            after = dict(before)
+            _backup(clean_path)
+            _backup(paths.DATA_RAW, transient=True)
+            for rp in sorted(glob.glob(os.path.join(
+                    paths.RAW_DIR, f"*_{REFRESH_SEASON}.csv"))):
+                _backup(rp, transient=True)
+            _yr = self._xg_year()
+            for slug in XG_SLUGS:
+                _note(os.path.join(paths.XGRAW, f"{slug}_{_yr}.json"))
+
             from download import download
             dl = download(seasons=[REFRESH_SEASON], force=True)
             log(f"  football-data {REFRESH_SEASON}: "
@@ -451,17 +489,20 @@ class PipelineOrchestrator:
                 after = self._clean_stats(clean_path)
 
                 if after["total"] < before["total"]:
-                    issues.append(f"total baris menurun {before['total']}->{after['total']}")
+                    shrink_issues.append(
+                        f"total baris menurun {before['total']}->{after['total']}")
                 if after["cur_season"] < before["cur_season"]:
-                    issues.append(f"baris musim berjalan menurun "
-                                  f"{before['cur_season']}->{after['cur_season']}")
+                    shrink_issues.append(
+                        f"baris musim berjalan menurun "
+                        f"{before['cur_season']}->{after['cur_season']}")
                 # Cek susut PER DIVISI: cek agregat di atas menutupi
                 # satu divisi yang menyusut/basi bila divisi lain
                 # tumbuh (audit ronde 7).
                 for dv, n0 in sorted(before["div_counts"].items()):
                     n1 = after["div_counts"].get(dv, 0)
                     if n1 < n0:
-                        issues.append(f"baris divisi {dv} menurun {n0}->{n1}")
+                        shrink_issues.append(
+                            f"baris divisi {dv} menurun {n0}->{n1}")
 
             if not issues:
                 xg_before = self._xg_dump_counts()
@@ -472,11 +513,18 @@ class PipelineOrchestrator:
                 else:
                     for slug in XG_SLUGS:
                         if xg_after.get(slug, 0) < xg_before.get(slug, 0):
-                            issues.append(f"dump {slug} menurun "
-                                          f"{xg_before.get(slug)}->{xg_after.get(slug)}")
+                            shrink_issues.append(
+                                f"dump {slug} menurun "
+                                f"{xg_before.get(slug)}->{xg_after.get(slug)}")
         except Exception as e:
             issues.append(f"exception: {e!r}")
             traceback.print_exc()
+
+        if shrink_issues and accept_shrink:
+            log(f"  ! susut data DITERIMA manual "
+                f"(REFRESH_ACCEPT_SHRINK=1): {shrink_issues}", "WARN")
+            shrink_issues = []
+        issues += shrink_issues
 
         if issues:
             for bak in reversed(baks):
@@ -498,6 +546,25 @@ class PipelineOrchestrator:
                         shutil.copy2(bak, dump)
                     except Exception as e:
                         log(f"  ! rollback {dump} gagal: {e!r}", "ERROR")
+            # File yang TIDAK ada sebelum run tidak punya backup untuk
+            # dipulihkan — hapus versi buatan run ini (file bersih /
+            # all_matches.csv / dump xG baru), jangan tinggalkan sambil
+            # log mengklaim rollback (audit ronde 8).
+            for path, was in existed.items():
+                if not was and os.path.exists(path):
+                    try:
+                        os.remove(path)
+                    except OSError:
+                        pass
+            # File raw musim berjalan yang baru dibuat unduhan run ini
+            # (tidak ada di glob awal) juga buatan run ini.
+            for rp in glob.glob(os.path.join(
+                    paths.RAW_DIR, f"*_{REFRESH_SEASON}.csv")):
+                if rp not in existed and os.path.exists(rp):
+                    try:
+                        os.remove(rp)
+                    except OSError:
+                        pass
             self._discard_run_backups(transient_baks, ts)
             # Rotasi juga di jalur gagal: dulu hanya jalur sukses yang
             # merotasi, jadi refit yang gagal beruntun menumpuk backup
