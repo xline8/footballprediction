@@ -63,7 +63,20 @@ def calibrate(lh, la, th, td, ta, outer=12, inner=26):
     (S) mengatur rasio menang kandang vs tandang. Diselesaikan bergantian
     dengan bisection, jadi bentuk sebaran gol tetap Poisson (versi lama
     men-skala sel diagonal berulang kali sehingga P(Under 1.5) meledak).
+
+    Mengembalikan (matriks, fell_back). Pagar (audit ronde 12, B12-1):
+    pada laga favorit kuat, pd hampir datar terhadap total gol sehingga
+    pencocokan pd bersifat ill-posed — bisection pernah berakhir di
+    total gol 7,81 untuk laga yang lambda DC-nya berjumlah 3,81
+    (Barcelona vs Alaves), menggelembungkan turunan (BTS Yes 0,90 vs
+    0,55 matriks mentah) padahal matriks mentah di lambda DC sudah
+    cocok dengan target dalam 0,003. Bila error 1X2 hasil kalibrasi
+    tidak lebih baik dari matriks mentah, matriks mentah dipakai dan
+    fell_back=True supaya pemanggil bisa menandai laga itu.
     """
+    raw = raw_matrix(lh, la)
+    rh, rd, ra = outcomes(raw)
+    raw_err = max(abs(rh - th), abs(rd - td), abs(ra - ta))
     T = max(lh + la, 0.12)
     S = max(min(lh - la, T - 0.06), -T + 0.06)
     ratio_t = th / (th + ta) if (th + ta) > 1e-9 else 0.5
@@ -96,7 +109,12 @@ def calibrate(lh, la, th, td, ta, outer=12, inner=26):
         ph, pd, pa = at(T, S)
         if abs(ph - th) < 2e-3 and abs(pd - td) < 2e-3 and abs(pa - ta) < 2e-3:
             break
-    return raw_matrix(max(0.03, (T + S) / 2), max(0.03, (T - S) / 2))
+    m = raw_matrix(max(0.03, (T + S) / 2), max(0.03, (T - S) / 2))
+    fh, fd, fa = outcomes(m)
+    fin_err = max(abs(fh - th), abs(fd - td), abs(fa - ta))
+    if fin_err > raw_err:
+        return raw, True
+    return m, False
 
 
 # ------------------------------------------------------------ pasar
@@ -446,6 +464,7 @@ def build():
     mk_rows, bet_rows = [], []
     matched = 0
     unmatched = []
+    calib_fallbacks = []
     for p in preds:
         k = (norm(p["home"]), norm(p["away"]))
         # kandidat: laga di tanggal sama atau sehari sebelum/sesudah
@@ -493,7 +512,9 @@ def build():
         th, td, ta = fnum(p["ph_dc"]), fnum(p["pd_dc"]), fnum(p["pa_dc"])
         if not all((lh, la, th, td, ta)):
             continue
-        m = calibrate(lh, la, th, td, ta)
+        m, fell_back = calibrate(lh, la, th, td, ta)
+        if fell_back:
+            calib_fallbacks.append(f'{p["date"]} {p["home"]} v {p["away"]}')
 
         cp = None
         if (p.get("div", ""), p["date"], p["home"], p["away"]) in corner_probs:
@@ -528,6 +549,10 @@ def build():
                     "captured_at": captured,
                 })
 
+    if calib_fallbacks:
+        print(f"  ! kalibrasi kalah dari matriks mentah di "
+              f"{len(calib_fallbacks)} laga; matriks DC mentah dipakai: "
+              + "; ".join(calib_fallbacks))
     write_csv(os.path.join(TA, "model_markets.csv"), MK_COLS, mk_rows)
 
     # satu bet terbaik per laga: EV setelah penyusutan, harus lolos semua saringan

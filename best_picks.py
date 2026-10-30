@@ -179,7 +179,22 @@ def _load_ta_picks():
     - Kickoff date >= today
     - EV > 0 (hanya picks yang menguntungkan)
     - div bisa dipetakan
+
+    Probabilitas yang dipakai untuk peringkat adalah probabilitas
+    TERSUSUT ke pasar (p_shrunk ta_model: campuran p_model dengan
+    p_market menurut SHRINK), bukan p_model mentah (audit ronde 12,
+    B12-4). p_model ta_model berasal dari matriks yang dikalibrasi
+    sendiri dan bisa menyimpang jauh dari probabilitas DC untuk
+    seleksi yang sama; mencampurnya mentah ke peringkat Pick Teraman
+    membuat satu baris ta yang menyimpang mengalahkan kandidat DC.
+    p_shrunk adalah angka yang sama yang dipakai ta_model sendiri
+    untuk gerbang EV-nya, jadi peringkat konsisten dengan keputusan
+    sumbernya. Bila p_market tidak ada, p_model dipakai apa adanya.
     """
+    try:
+        from ta_model import SHRINK as _SHRINK
+    except Exception:
+        _SHRINK = 0.5
     rows = _read_csv(os.path.join(PROJ, "ta", "best_bets.csv"))
     picks = []
     for r in rows:
@@ -199,6 +214,9 @@ def _load_ta_picks():
         prob = _num(r.get("p_model"))
         if prob is None:
             continue
+        p_mkt = _num(r.get("p_market"))
+        if p_mkt is not None:
+            prob = (1 - _SHRINK) * prob + _SHRINK * p_mkt
         picks.append({
             "div": div,
             "date": kickoff[:10],

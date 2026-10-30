@@ -947,6 +947,71 @@ def test_fingerprint_flips_on_xg_only_change():
             model_state._FP_FILES, model_state._fp_memo = old_files, old_memo
 
 
+def test_calibrate_falls_back_when_worse_than_raw():
+    # B12-1: laga favorit kuat (Barcelona vs Alaves, angka audit ronde
+    # 12). Matriks mentah di lambda DC sudah cocok dengan target dalam
+    # 0,003; kalibrasi lama berakhir di total gol 7,81 dan BTS Yes
+    # 0,8968. Pagar harus memakai matriks mentah dan menandainya.
+    import ta_model as tm
+
+    m, fell_back = tm.calibrate(2.957, 0.851, 0.7952, 0.1303, 0.0745)
+    assert fell_back is True
+    bts = tm.market_probs(m, "BTS")["Yes"][0]
+    assert bts < 0.60, bts
+    ph, pd, pa = tm.outcomes(m)
+    assert max(abs(ph - 0.7952), abs(pd - 0.1303), abs(pa - 0.0745)) < 0.005
+
+
+def test_calibrate_keeps_converged_result():
+    # Laga seimbang: kalibrasi yang konvergen ke target tidak boleh
+    # diganggu pagar.
+    import ta_model as tm
+
+    m, fell_back = tm.calibrate(1.60, 1.10, 0.50, 0.27, 0.23)
+    assert fell_back is False
+    ph, pd, pa = tm.outcomes(m)
+    assert max(abs(ph - 0.50), abs(pd - 0.27), abs(pa - 0.23)) < 0.005
+
+
+def test_ta_picks_ranked_by_shrunk_probability():
+    # B12-4: peringkat pick ta_model memakai p_shrunk (campuran
+    # p_model/p_market menurut SHRINK ta_model), bukan p_model mentah.
+    import csv
+    import tempfile
+
+    import best_picks as bp
+
+    with tempfile.TemporaryDirectory() as td:
+        os.makedirs(os.path.join(td, "ta"))
+        with open(os.path.join(td, "ta", "best_bets.csv"), "w",
+                  newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=[
+                "bet_id", "created_at", "game_id", "kickoff_utc",
+                "league", "home", "away", "market", "line", "selection",
+                "bookmaker", "price", "p_model", "p_market", "ev",
+                "tier", "status", "score", "result", "profit",
+                "graded_at"])
+            w.writeheader()
+            w.writerow({
+                "bet_id": "t1", "created_at": "", "game_id": "1",
+                "kickoff_utc": "2099-01-01T20:00:00+00:00",
+                "league": "Spain - La Liga", "home": "Barcelona",
+                "away": "Alaves", "market": "BTS", "line": "",
+                "selection": "Yes", "bookmaker": "x", "price": "2.85",
+                "p_model": "0.90", "p_market": "0.50", "ev": "0.30",
+                "tier": "aman", "status": "OPEN", "score": "",
+                "result": "", "profit": "", "graded_at": ""})
+        old_proj, old_anchor = bp.PROJ, bp.ANCHOR
+        bp.PROJ, bp.ANCHOR = td, "2000-01-01"
+        try:
+            picks = bp._load_ta_picks()
+        finally:
+            bp.PROJ, bp.ANCHOR = old_proj, old_anchor
+    assert len(picks) == 1, picks
+    # SHRINK = 0.5: 0.5*0.90 + 0.5*0.50 = 0.70, bukan 0.90 mentah.
+    assert picks[0]["prob"] == 0.70, picks[0]
+
+
 if __name__ == "__main__":
     fns = [v for k, v in sorted(globals().items())
            if k.startswith("test_") and callable(v)]
