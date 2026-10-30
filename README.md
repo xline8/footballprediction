@@ -36,18 +36,21 @@ deterministic daily recommendations described further down.
 
 ## Measured results
 
-- **Calibration.** The meta model reaches a walk-forward log loss of 1.0013
-  and Brier 0.5986, near the information ceiling implied by the market. A
-  Dixon-Coles bivariate Poisson model, a feature model, and market odds are
-  stacked into a multinomial logistic meta-model.
+- **Calibration.** On the stored walk-forward probabilities (records
+  schema v2), the meta stack scores a pooled Brier of 0.5766 and RPS of
+  0.1956 across the top five leagues — level with the opening market
+  (0.5764 / 0.1955). On 9,946 matches shared with FiveThirtyEight's SPI
+  (January 2018 – June 2023), it scores log loss 0.9740 against SPI's
+  0.9821. A Dixon-Coles bivariate Poisson model, a feature model, and
+  market odds are stacked into a multinomial logistic meta-model.
 - **xG blend fit.** Fitting Dixon-Coles on a 0.5 goals + 0.5 xG target beat
   goals-only out of sample (log loss 0.98624 vs 0.99304, walk-forward
   2021/22–2025/26, n = 8,889) and passed all three go-live gates, so `blend`
   is the production default. See EXPERIMENT_XG_DC.md.
 - **Graded ledger.** 358 historical league picks are graded in
   `ledger/ledger_summary.json`: ROI −5.79% at opening odds, mean CLV EV
-  −0.0597 against closing odds (Pinnacle, then AvgC, then B365C), beat-close
-  rate 57.5%, CLV coverage 100%. The model often takes a better price than
+  −0.0773 against closing odds (Pinnacle, then AvgC, then B365C), beat-close
+  rate 53.6%, CLV coverage 100%. The model often takes a better price than
   the close and still loses money. CLV, not settlement ROI, is the headline
   metric.
 - **The live-pick edge band does not exist.** The policy engine only fires
@@ -121,28 +124,32 @@ flowchart LR
 |---|---|---|
 | Dixon-Coles engine | `model_v2.py` | bivariate Poisson model with low-score dependency correction and decayed team ratings. Fit mode `DC_FIT_MODE` (`goals` or `blend`; default `blend` = 0.5·goals + 0.5·xG where xG exists) |
 | Meta model | `make_picks_live.py`, `backtest_picks.py` | walk-forward multinomial logistic stack of exactly nine logits: the Dixon-Coles 1X2 probabilities, the T3 feature-model probabilities, and logit(1/opening odds) per outcome. Fitted monthly on past records only; the same recipe is kept in `experiments/go_live_gates.py` |
-| Matrix pricing | `matrix_pricer.py` | builds the bivariate Poisson scoreline matrix and meta-calibrates it so summed 1X2 marginals match the meta model; O/U and BTTS derive from that matrix |
+| Matrix pricing | `matrix_pricer.py` | builds the bivariate Poisson scoreline matrix and meta-calibrates it so summed 1X2 marginals match the meta model. Experiment-only: the daily O/U and BTTS probabilities come from the Dixon-Coles model (`model_v2.py`), not from this matrix |
 | Corner model | `model_corners_v3.py` | Poisson model predicting team corner counts and corner O/U lines from rolling shot statistics (fitted parameters in `ta/corner_params.json`). Beats league base-rate on walk-forward log loss, Brier, MAE, RMSE. Walk-forward calibration against actual corner counts is documented under Measured results. No bookmaker corner-odds feed is connected, so the corner model is assessed on calibration against actual counts, not on price value |
-| Data enrichment | `data_enrichment/` | joins Pinnacle odds, midweek/cup fatigue flags, and rolling xG differentials into `all_matches_enriched.csv`, without touching the clean source data |
+| xG dataset | `data_enrichment/build_xg_matches.py` | builds `xg_raw/xg_matches.csv` (per-match xG keyed to the clean match data) from the raw Understat dumps; consumed by the blend fit and the feature model. The legacy exogenous-enrichment pipeline that once sat beside it (Pinnacle closing odds, fatigue flags, rolling xG differentials into `all_matches_enriched.csv`) was removed in the round-12 cleanup: nothing in production read its output |
 | Market orchestration | `market_orchestration.py` | syncs tipsterarea match-page odds for every model fixture in the today..+4 window during the daily run, then builds `market_compare.csv`: per fixture and market, the 1xBet price, the cross-bookmaker median, a normalised implied probability, and the bookmaker count. Also writes the daily archive and routes cup picks into the ledger |
 | Policy engine | `backtest_picks.py` | filters betting decisions after the model (edge thresholds, overlays, staking) so calibration stays intact; candidate policies must clear the dual gate before going live |
 
 ## Live shadow tracker
 
-`run_daily_shadow.py` is the daily production chain. Each of its nine steps
-is isolated with try/except, so one failing step warns and the rest still
-run:
-
-1. Sync tipsterarea results for yesterday and H-2 with `--fresh`, so
-   late-finishing matches reach `ta/results.csv`.
-2. Grade the ledger (`score_ledger.py`), including CLV from closing odds.
-3. Regenerate league and cup predictions, corner predictions, and the
-   per-match safest picks (`best_picks_today.csv`).
-4. Sync market odds for all model fixtures (step 7/9), build
-   `market_compare.csv` (8/9), and build the three daily recommendations
-   (8b/9).
-5. Archive the day's nine output files under `archive/<date>/` and route
-   cup picks into their per-competition ledger buckets (9/9).
+`run_daily_shadow.py` is the daily production chain: fifteen numbered
+steps, each isolated with try/except. Two of them gate the rest. The
+fixture step checks freshness itself: it refreshes from Understat when
+the stalest league fixture file is over 12 hours old, marks the run
+failed when any league had to be served from the frozen on-disk
+fallback (that content is stale even though the rewritten file is
+new), and refuses to predict at all when fixtures remain over 48
+hours old. The prediction step regenerates league predictions; when
+it fails or returns a partial status, every prediction consumer —
+safest picks, live picks, market sync and compare, recommendations,
+the daily archive — is skipped rather than run on yesterday's files,
+and the run exits 1. The remaining steps sync tipsterarea results and
+grade TA bets, predict corners and cups, sync market odds and build
+`market_compare.csv`, build the three daily recommendations, grade
+them, archive the day's outputs under `archive/<date>/`, route cup
+picks into their per-competition ledger buckets, grade the money
+ledger (`score_ledger.py`, including CLV from closing odds), and
+resolve and monitor picks.
 
 The ledger grades two different things, and the README keeps them separate
 on purpose. Historical and shadow picks carry the ROI and CLV numbers under
@@ -151,7 +158,8 @@ edge-band reason given there. The daily recommendations further down are a
 separate, deterministic product built from model probabilities and real
 1xBet prices; they are not policy-engine picks and carry no edge claim.
 
-Step 8c grades the daily products themselves. `grade_recommendations.py`
+The recommendation-grading step grades the daily products themselves.
+`grade_recommendations.py`
 reads each archived date's safest picks, single, and slips from
 `archive/<date>/` and settles every leg on the 90-minute score in
 `ta/results.csv`. League corner picks settle on the HC/AC counts in

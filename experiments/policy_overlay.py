@@ -1,6 +1,13 @@
 #!/usr/bin/env python3
 """policy_overlay.py — Phase 9: Decoupled Betting Policy engine.
 
+STATUS (audit round 12): all policies reverted. Every overlay
+configuration failed the combined sample-size and temporal-
+stability gates in the Phase 9 evaluation (see
+docs/EXPERIMENTS_LOG.md); none is part of the production policy
+path. Kept as the experiment record — do not re-propose these
+overlays without a new pre-registered gate.
+
 Probability Engine (locked): meta model probs (LL 1.0017), edge = shin fair.
 Market Value Engine: edge = p - fair_shin > thr (0.05 default).
 Contextual Policy Overlay: filter / stake modifier SETELAH prob dihitung.

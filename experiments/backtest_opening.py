@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 """backtest_opening.py — AUDIT HARGA OPENING untuk story jujur backtest.
 
+STATUS (audit round 12): one-off audit, no production change
+resulted. The operative opening-vs-closing evidence is the graded
+ledger's CLV (ledger/ledger_summary.json) and the edge-band
+experiment (EXPERIMENT_EDGE_BAND.md), not this script.
+
 Pertanyaan: kalau pool value-bet DIPILIH dan DIBAYAR di harga OPENING
 (sebelum pasar hargakan info), apakah "edge" yang sama tetap terlihat —
 dan berapa sisanya ketika bet yang sama disettle di harga CLOSING?

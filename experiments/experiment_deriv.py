@@ -1,13 +1,21 @@
 #!/usr/bin/env python3
 """experiment_deriv.py — Phase 13: derivative market backtest (O/U 2.5).
 
+STATUS (audit round 12): superseded. Derivative probabilities are now
+measured directly on the stored served probabilities
+(experiments/experiment_deriv_calib.py, records schema v2): the DC
+derivatives under-predict goals on pooled history, the bias is
+era-varying, and all three static recalibration candidates were
+rejected by their pre-registered gate. Do not re-propose a static
+derivative recalibration from this file.
+
 Dari matriks DC terkalibrasi-meta (matrix_pricer) kita dapatkan prob over 2.5
 per match, lalu dibandingkan dgn odds B365 (de-vigged shin 2-way). Edge =
 p_model - p_fair. Bet pada Over bila edge>thr, Under bila (1-p)>thr. Flat 1u.
 Validasi: yield + bootstrap p (H0 ROI<=0).
 
 BTTS: odds historis tidak tersedia di dataset -> dicatat sbg blocker, tidak
-di-backtest (lihat TODO_AI.md). Logika pricing BTTS tetap ada di matrix_pricer.
+di-backtest. Logika pricing BTTS tetap ada di matrix_pricer.
 """
 
 from __future__ import annotations
