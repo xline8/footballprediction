@@ -478,7 +478,7 @@ def _merge_bets(old, winners, fixtures, captured):
             n_new += 1
         else:
             for f_ in ("bookmaker", "price", "p_model", "p_market",
-                       "ev", "tier"):
+                       "ev", "tier", "kickoff_utc"):
                 cur[f_] = row[f_]
             n_ref += 1
     return list(merged.values()), n_new, n_ref

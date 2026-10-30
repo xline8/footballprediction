@@ -1252,10 +1252,12 @@ def test_merge_bets_refreshes_open_rows_only():
     old = {
         "1|OU|2.5|Over": {"bet_id": "1|OU|2.5|Over", "status": "OPEN",
                           "created_at": "T0", "price": 9.99,
+                          "kickoff_utc": "2026-11-01T18:00",
                           "p_model": 0.1111, "p_market": 0.40,
                           "ev": 0.01, "tier": "lama", "bookmaker": "x"},
         "2|OU|2.5|Over": {"bet_id": "2|OU|2.5|Over", "status": "SETTLED",
                           "created_at": "T0", "price": 2.50,
+                          "kickoff_utc": "2026-11-01T18:00",
                           "p_model": 0.5000, "p_market": 0.40,
                           "ev": 0.05, "tier": "lama", "bookmaker": "x"},
     }
@@ -1268,8 +1270,11 @@ def test_merge_bets_refreshes_open_rows_only():
     r1 = by_id["1|OU|2.5|Over"]
     assert r1["p_model"] == 0.61 and r1["price"] == 2.10, r1
     assert r1["created_at"] == "T0", r1  # tanggal buat dipertahankan
+    # L13-3: kickoff ikut diperbarui (laga bisa saja ditunda)
+    assert r1["kickoff_utc"] == "2026-11-05T20:00", r1
     r2 = by_id["2|OU|2.5|Over"]
     assert r2["p_model"] == 0.5000 and r2["price"] == 2.50, r2
+    assert r2["kickoff_utc"] == "2026-11-01T18:00", r2
     assert by_id["3|OU|2.5|Over"]["status"] == "OPEN"
 
 
