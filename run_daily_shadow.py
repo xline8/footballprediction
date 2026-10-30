@@ -38,6 +38,14 @@ class _Tee:
                 st.write(s)
             except Exception:
                 pass
+        # Flush semua stream selain stdout asli: tanpa ini log di
+        # disk kosong sampai buffer penuh / proses selesai, padahal
+        # gunanya justru dibaca saat run masih berjalan.
+        for st in self.streams[1:]:
+            try:
+                st.flush()
+            except Exception:
+                pass
         return len(s)
 
     def flush(self):
