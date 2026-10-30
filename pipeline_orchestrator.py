@@ -436,6 +436,25 @@ class PipelineOrchestrator:
                 if transient:
                     transient_baks.append(bak)
 
+        # Catat keberadaan SEMUA file yang bisa disentuh run ini
+        # SEBELUM try: loop hapus rollback memakai `existed` untuk
+        # mengenali file buatan run, jadi catatannya harus lengkap
+        # sejak awal. Dulu catatan diisi bertahap di dalam try —
+        # sesudah _clean_stats dan backup yang berurutan — sehingga
+        # kegagalan sebelum/selama fase backup membuat file raw yang
+        # sudah ada tampak seperti buatan run dan ikut terhapus oleh
+        # rollback, dalam run yang tidak menimpa apa pun (audit
+        # ronde 9, MEDIUM). _note hanya memanggil os.path.exists,
+        # yang tidak bisa raise.
+        _note(clean_path)
+        _note(paths.DATA_RAW)
+        for rp in sorted(glob.glob(os.path.join(
+                paths.RAW_DIR, f"*_{REFRESH_SEASON}.csv"))):
+            _note(rp)
+        _yr0 = self._xg_year()
+        for slug in XG_SLUGS:
+            _note(os.path.join(paths.XGRAW, f"{slug}_{_yr0}.json"))
+
         issues = []
         shrink_issues = []
         dl = p = c = None
@@ -461,9 +480,6 @@ class PipelineOrchestrator:
             for rp in sorted(glob.glob(os.path.join(
                     paths.RAW_DIR, f"*_{REFRESH_SEASON}.csv"))):
                 _backup(rp, transient=True)
-            _yr = self._xg_year()
-            for slug in XG_SLUGS:
-                _note(os.path.join(paths.XGRAW, f"{slug}_{_yr}.json"))
 
             from download import download
             dl = download(seasons=[REFRESH_SEASON], force=True)
@@ -576,17 +592,42 @@ class PipelineOrchestrator:
 
         self._discard_run_backups(transient_baks, ts)
         self._rotate_clean_backups(clean_path)
-        self.loader.reload_data()
-        log(f"  OK all_matches_clean.csv: {before['total']}->{after['total']} baris "
-            f"(musim {REFRESH_SEASON}: {before['cur_season']}->{after['cur_season']})",
-            "INFO")
-        log(f"      max date: {before['max_date']} -> {after['max_date']}", "INFO")
+        # Kerja pasca-commit (reload loader + rebuild records) dulu
+        # tanpa guard: exception di sana lolos dari langkah ini
+        # SETELAH data baru ter-commit dan backup transien dibuang,
+        # jadi run tercatat gagal lewat jalur error_step dengan data
+        # yang sebenarnya sudah segar, dan langkah independen ikut
+        # terbatalkan. Kini kegagalan pasca menjadi hasil langkah
+        # yang jujur — failed dengan committed=True — sehingga hilir
+        # tergerbang rapi dan langkah independen tetap jalan
+        # (audit ronde 9).
+        post_issues = []
+        try:
+            self.loader.reload_data()
+        except Exception as e:
+            post_issues.append(f"reload loader gagal: {e!r}")
+            traceback.print_exc()
+        rebuilt = False
+        if not post_issues:
+            log(f"  OK all_matches_clean.csv: {before['total']}->{after['total']} baris "
+                f"(musim {REFRESH_SEASON}: {before['cur_season']}->{after['cur_season']})",
+                "INFO")
+            log(f"      max date: {before['max_date']} -> {after['max_date']}", "INFO")
 
-        # _rebuild_records_if_changed no-op sendiri bila fingerprint
-        # sama, jadi panggil selalu: gerbang lama (musim naik / tanggal
-        # berubah) melewatkan perubahan isi yang kini ditangkap
-        # fingerprint (audit ronde 7).
-        rebuilt = self._rebuild_records_if_changed()
+            # _rebuild_records_if_changed no-op sendiri bila fingerprint
+            # sama, jadi panggil selalu: gerbang lama (musim naik / tanggal
+            # berubah) melewatkan perubahan isi yang kini ditangkap
+            # fingerprint (audit ronde 7).
+            try:
+                rebuilt = self._rebuild_records_if_changed()
+            except Exception as e:
+                post_issues.append(f"rebuild records gagal: {e!r}")
+                traceback.print_exc()
+        if post_issues:
+            log(f"  X refresh ter-commit tapi pasca-langkah gagal: "
+                f"{post_issues}", "ERROR")
+            return {"status": "failed", "issues": post_issues,
+                    "before": before, "after": after, "committed": True}
 
         return {"status": "success", "download": dl, "prepare": p, "clean": c,
                 "before": before, "after": after, "records_rebuilt": rebuilt}
@@ -783,7 +824,13 @@ class PipelineOrchestrator:
         _div_statuses = [v.get('status') for v in results.values()
                          if isinstance(v, dict)]
         _n_failed = _div_statuses.count('failed')
-        if _n_failed and _n_failed == len(_div_statuses):
+        if not _div_statuses:
+            # Tak ada divisi yang masuk hitungan (semua <100 laga
+            # ber-skor, jadi di-skip sebelum tercatat): langkah ini
+            # tidak memfit dan tidak membaca cache apa pun — label
+            # 'success' di sini tidak jujur (audit ronde 9).
+            results['status'] = 'failed'
+        elif _n_failed and _n_failed == len(_div_statuses):
             results['status'] = 'failed'
         elif _n_failed:
             results['status'] = 'partial'
@@ -1154,14 +1201,24 @@ class PipelineOrchestrator:
             results['status'] = 'failed'
             results['error'] = str(e)
 
-        # Agregasi kejujuran yang sama seperti run_full_pipeline:
-        # langkah berstatus 'failed' menggagalkan status run.
-        # 'partial' (mis. fallback legacy step_score_upcoming) juga
-        # kegagalan untuk agregasi — rantai harian menolak status
-        # selain 'success' dengan cara yang sama (audit ronde 3).
+        # Agregasi kejujuran yang sama seperti run_full_pipeline,
+        # termasuk aturan partial lunaknya (SOFT_PARTIAL_STEPS):
+        # kedua agregasi tadinya bisa berbeda diam-diam untuk status
+        # yang sama (audit ronde 9). Set langkah jalur incremental
+        # saat ini tidak memuat langkah lunak mana pun, jadi
+        # penyelarasan ini tidak mengubah perilaku hari ini — hanya
+        # mencegah divergensi bila langkah lunak ditambahkan ke sini.
         failed_steps = [k for k, v in results.items()
                         if isinstance(v, dict)
-                        and v.get('status') in ('failed', 'partial')]
+                        and (v.get('status') == 'failed'
+                             or (v.get('status') == 'partial'
+                                 and k not in SOFT_PARTIAL_STEPS))]
+        partial_steps = [k for k, v in results.items()
+                         if isinstance(v, dict)
+                         and v.get('status') == 'partial'
+                         and k in SOFT_PARTIAL_STEPS]
+        if partial_steps:
+            results['partial_steps'] = partial_steps
         if failed_steps:
             results['failed_steps'] = failed_steps
             if results.get('status') == 'completed':
