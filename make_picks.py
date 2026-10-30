@@ -44,7 +44,7 @@ def main():
                     existing.add(json.loads(line)["pick_id"])
 
     created = []
-    today = date.today().isoformat()
+    today = datetime.now(timezone.utc).date().isoformat()
     with open(PRED, encoding="utf-8") as f:
         for r in csv.DictReader(f):
             if (r.get("date") or "") < today:
