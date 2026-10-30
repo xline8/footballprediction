@@ -326,15 +326,19 @@ def _fallback_candidate(pred_row, corner_row):
 def _select_safest(best_cands, scan_cands):
     """Gabungkan kandidat best + pemindaian lengkap; pilih probabilitas tertinggi.
 
-    Tie-break: tier best lebih dulu, lalu EV lebih tinggi. Hasil membawa tier
-    sesuai asal seleksi (best vs fallback).
+    Tie-break: tier best lebih dulu, lalu EV (ta_model) lebih tinggi,
+    lalu ev_model lebih tinggi. Kandidat model membawa ev=None, jadi
+    tanpa unsur ev_model seri probabilitas antar-kandidat model
+    diselesaikan oleh urutan gabungan, bukan nilai (audit ronde 6).
+    Hasil membawa tier sesuai asal seleksi (best vs fallback).
     """
     combined = list(best_cands) + list(scan_cands)
     if not combined:
         return None
     key = lambda c: ((c.get('prob') or 0),
                      1 if c.get('tier') == 'best' else 0,
-                     c.get('ev') or 0)
+                     c.get('ev') or 0,
+                     c.get('ev_model') or 0)
     return max(combined, key=key)
 
 

@@ -205,8 +205,10 @@ def model_fixture_ids(days, date_from=None):
             if not d or not (lo <= d <= hi):
                 continue
             hint = _fixture_league_hint(r.get("div", ""), r.get("competition", ""))
-            gid = _match_game_id(r.get("home", ""), r.get("away", ""),
-                                 r.get("date", ""), hint)
+            # Baris piala membawa game_id TA-nya sendiri (predict_cups):
+            # dahulukan id tersimpan, fuzzy hanya untuk baris liga.
+            gid = (r.get("game_id") or "").strip() or _match_game_id(
+                r.get("home", ""), r.get("away", ""), r.get("date", ""), hint)
             if gid and gid not in seen:
                 seen.add(gid)
                 ids.append(gid)
@@ -349,8 +351,8 @@ def build_market_compare(date_from=None, n_days=5):
                 continue
             comp = r.get(comp_col) if comp_col else ""
             hint = _fixture_league_hint(r.get("div", ""), comp)
-            gid = _match_game_id(r.get("home", ""), r.get("away", ""),
-                                 r.get("date", ""), hint)
+            gid = (r.get("game_id") or "").strip() or _match_game_id(
+                r.get("home", ""), r.get("away", ""), r.get("date", ""), hint)
             if not gid:
                 # Prediksi tanpa fixture TA (mis. jadwal belum terbit
                 # di TipsterArea): dulu hilang diam-diam; kini terhitung

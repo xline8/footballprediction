@@ -403,7 +403,12 @@ def p_adv(ph, pd, pa, lh, la, rho=None):
 def main():
     matches = _load_matches()
     teamdiv = _team_div_map(matches)
-    today = date.today()
+    # Tanggal fixture TA adalah tanggal UTC: pakai tanggal UTC seperti
+    # football_etl.load_fixtures di jalur liga. Tanggal lokal (WIB)
+    # membuang laga malam-UTC dari set prediksi pada run pagi sesudah
+    # tengah malam lokal, dan membuat jendela form bergeser setengah
+    # hari dari basis tanggal fixture (audit ronde 6).
+    today = datetime.now(timezone.utc).date()
 
     # muat fixtures piala
     fixtures = []
