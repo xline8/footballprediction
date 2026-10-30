@@ -34,7 +34,7 @@ from football_etl import MatchCache, load_fd_odds, TOP5
 from data_loader import get_loader
 from model_state import ModelState
 
-app = FastAPI(title="Football Prediction API", version="2.0")
+app = FastAPI(title="Football Prediction API", version="1.0.0")
 loader = get_loader()
 
 # /api/status memakai MatchCache bersama dengan TTL: konstruksi penuh
@@ -247,7 +247,13 @@ async def get_pipeline_status():
         'predictions': {
             'exists': os.path.exists(os.path.join(BASE_DIR, 'predictions_upcoming.csv')),
             'file_size_kb': round(os.path.getsize(os.path.join(BASE_DIR, 'predictions_upcoming.csv')) / 1024, 2)
-            if os.path.exists(os.path.join(BASE_DIR, 'predictions_upcoming.csv')) else 0
+            if os.path.exists(os.path.join(BASE_DIR, 'predictions_upcoming.csv')) else 0,
+            # A12-4: umur file prediksi harus terlihat — endpoint
+            # menyajikan file apa adanya, jadi sesudah run yang
+            # gagal/sebagian, basi adalah satu-satunya sinyal bahwa
+            # yang tersaji bukan produk run terakhir.
+            'age_hours': round((time.time() - os.path.getmtime(os.path.join(BASE_DIR, 'predictions_upcoming.csv'))) / 3600, 2)
+            if os.path.exists(os.path.join(BASE_DIR, 'predictions_upcoming.csv')) else None
         },
         'picks': {},
         'cache': {'status_ttl_s': _STATUS_TTL}

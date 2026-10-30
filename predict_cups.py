@@ -409,6 +409,7 @@ def main():
     # tengah malam lokal, dan membuat jendela form bergeser setengah
     # hari dari basis tanggal fixture (audit ronde 6).
     today = datetime.now(timezone.utc).date()
+    now_utc = datetime.now(timezone.utc).replace(tzinfo=None)
 
     # muat fixtures piala
     fixtures = []
@@ -420,6 +421,21 @@ def main():
             d = datetime.strptime(r["date"], "%Y-%m-%d").date()
             if d < today:
                 continue
+            # D12-10: status NS saja tidak cukup pada rerun siang —
+            # laga yang kickoff-nya sudah lewat (status belum sempat
+            # berubah di fixtures.csv) tidak boleh diprediksi lagi.
+            # Jam TA diperlakukan sebagai UTC, konsisten dengan
+            # disiplin kickoff ta_model; jam kosong mempertahankan
+            # perilaku tanggal-saja.
+            t = (r.get("time") or "").strip()
+            if t:
+                try:
+                    ko = datetime.combine(
+                        d, datetime.strptime(t, "%H:%M").time())
+                    if ko <= now_utc:
+                        continue
+                except ValueError:
+                    pass
             fixtures.append({
                 "league": league, "comp": CUP_LEAGUES[league],
                 "date": d, "time": r.get("time", ""),
