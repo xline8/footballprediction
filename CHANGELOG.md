@@ -7,6 +7,25 @@ Keep a Changelog, and the project uses semantic versioning.
 
 ### Fixed
 
+- A sixth audit round verified PR #26 (the fixture rescue survived a
+  full-file stress test: four independent computations over all 1,349
+  predictions, zero changed assignments, every rescued row a genuine
+  name variant) and fixed what it found, most of it around the weekly
+  refit. The training refresh now fails and rolls back when the
+  football-data download is incomplete instead of reporting success
+  on stale data, and the records-cache metadata has a single schema:
+  the orchestrator merges its fingerprint into the meta that
+  `cache_records` writes instead of overwriting it and erasing the
+  `data_stamp` the daily chain checks, which had caused a second full
+  records rebuild every active week. Backups from the refresh are
+  rotated (newest 3). Cup fixtures are selected on the UTC date like
+  the league path, the market-sync and market-compare paths prefer a
+  cup row's stored `game_id`, the safest-pick tie-break falls through
+  to `ev_model` for model candidates, `ModelState.is_stale` measures
+  from `updated_at` instead of the fit horizon (and `n_matches_trained`
+  is recorded for batch fits), the xG map is loaded once per
+  prediction run instead of once per division-month group, and
+  `weekly_refit.sh` is executable.
 - A fifth audit pass verified the fourth round's fixes and closed the
   last two items the audit series had deliberately left open. Cup
   picks now carry the TipsterArea `game_id` from `predict_cups`
