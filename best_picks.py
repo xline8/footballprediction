@@ -36,6 +36,31 @@ ANCHOR = TODAY
 
 OUT = os.path.join(PROJ, "best_picks.csv")
 
+
+def _kickoff_started(date_str, time_str, now):
+    """True bila kickoff fixture (tanggal + jam, UTC) sudah lewat
+    terhadap now (naif UTC). Jam kosong/rusak -> False (fixture
+    dipertahankan, konvensi yang sama dengan predikat prematch
+    predict_cups). Loader DC dan jalur best_picks_today memakai ini
+    (audit ronde 14, B14-1): filter tanggal saja membiarkan laga
+    yang sudah kickoff di hari yang sama tersaji sebagai pick —
+    kasus Lille v Lens tertulis 2 menit sesudah kickoff. Loader TA
+    sudah punya jangkar datetime sendiri sejak ronde 13; file corner
+    tidak memuat kolom jam, jadi untuk pick corner penyaringan
+    terjadi per laga di main() lewat kunci laga yang sudah mulai.
+    """
+    t = (time_str or "").strip()
+    if not t:
+        return False
+    try:
+        ko = datetime.fromisoformat(f"{date_str}T{t}")
+    except (TypeError, ValueError):
+        return False
+    if ko.tzinfo is not None:
+        ko = ko.astimezone(timezone.utc).replace(tzinfo=None)
+    return ko <= now
+
+
 def _num(x):
     try:
         return float(x)
@@ -70,12 +95,16 @@ def _load_corner_picks():
         ("predictions_corners_upcoming.csv", ""),
         ("predictions_corners_cups.csv", None),  # competition dibaca dari baris
     ]
+    now = datetime.now(timezone.utc).replace(tzinfo=None)
     picks = []
     for fn, default_comp in sources:
         rows = _read_csv(os.path.join(PROJ, fn))
         for r in rows:
             if r["date"] < ANCHOR:
                 continue  # hanya fixture yang akan datang
+            if _kickoff_started(r["date"], r.get("time"), now):
+                continue  # B14-1 (file corner liga belum memuat jam;
+                # saringan per laga di main() yang menutupnya)
             comp = r.get("competition") or default_comp or ""
             for ln in CORNER_LINES:
                 p_over = _num(r.get(f"p_gt_{ln}"))
@@ -111,12 +140,15 @@ def _load_dixon_coles_picks():
         ("predictions_upcoming.csv", ""),
         ("predictions_cups_upcoming.csv", None),  # competition dibaca dari baris
     ]
+    now = datetime.now(timezone.utc).replace(tzinfo=None)
     picks = []
     for fn, default_comp in sources:
         rows = _read_csv(os.path.join(PROJ, fn))
         for r in rows:
             if r["date"] < ANCHOR:
                 continue
+            if _kickoff_started(r["date"], r.get("time"), now):
+                continue  # B14-1: laga sudah kickoff, jangan sajikan
             comp = r.get("competition") or default_comp or ""
             ph = _num(r.get("ph_dc"))
             pd = _num(r.get("pd_dc"))
@@ -428,7 +460,20 @@ def main():
     dc = _load_dixon_coles_picks()
     ta = _load_ta_picks()
 
-    all_picks = corner + dc + ta
+    # B14-1: buang pick dari sumber mana pun untuk laga yang sudah
+    # kickoff. File prediksi memuat jam kickoff; file corner tidak,
+    # jadi pick corner hanya bisa disaring per kunci laga di sini.
+    now = datetime.now(timezone.utc).replace(tzinfo=None)
+    started_keys = set()
+    for fn in ("predictions_upcoming.csv", "predictions_cups_upcoming.csv"):
+        for r in _read_csv(os.path.join(PROJ, fn)):
+            if _kickoff_started(r.get("date") or "", r.get("time"), now):
+                started_keys.add((r["div"], r["date"],
+                                  _norm_name(r["home"]),
+                                  _norm_name(r["away"])))
+    all_picks = [p for p in corner + dc + ta
+                 if (p["div"], p["date"], _norm_name(p["home"]),
+                     _norm_name(p["away"])) not in started_keys]
     for p in all_picks:
         p.setdefault("tier", "best")
     best = _top_pick_per_match(all_picks)
@@ -467,8 +512,11 @@ def main():
     today_rows = []
     for r in pred_rows:
         k = (r["div"], r["date"], _norm_name(r["home"]), _norm_name(r["away"]))
-        sel = _select_safest(best_group_by.get(k, []),
-                             _scan_candidates(r, corner_by.get(k)))
+        if _kickoff_started(r["date"], r.get("time"), now):
+            sel = None  # B14-1: sudah kickoff -> baris kosong, tanpa pick
+        else:
+            sel = _select_safest(best_group_by.get(k, []),
+                                 _scan_candidates(r, corner_by.get(k)))
         if sel is None:
             today_rows.append({"div": r["div"], "date": r["date"], "home": r["home"],
                                "away": r["away"], "market": "", "line": "", "side": "",

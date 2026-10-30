@@ -1278,6 +1278,72 @@ def test_merge_bets_refreshes_open_rows_only():
     assert by_id["3|OU|2.5|Over"]["status"] == "OPEN"
 
 
+def test_kickoff_started_predicate():
+    # B14-1: predikat jangkar datetime best_picks.
+    from datetime import datetime
+
+    from best_picks import _kickoff_started
+
+    now = datetime(2026, 10, 30, 20, 7)
+    assert _kickoff_started("2026-10-30", "20:05", now) is True
+    assert _kickoff_started("2026-10-30", "20:07", now) is True  # tepat kini
+    assert _kickoff_started("2026-10-30", "20:09", now) is False
+    assert _kickoff_started("2026-10-30", "", now) is False      # tanpa jam
+    assert _kickoff_started("2026-10-30", "xx", now) is False    # jam rusak
+    assert _kickoff_started("2026-10-31", "00:05", now) is False
+
+
+def test_best_picks_main_skips_started_matches():
+    # B14-1 integrasi: main() tidak menyajikan pick untuk laga yang
+    # sudah kickoff — baik di best_picks.csv (loader DC) maupun di
+    # best_picks_today.csv (jalur pindai); baris hari ini untuk laga
+    # itu kosong, kontrak satu baris per laga tetap terjaga.
+    import shutil
+    import tempfile
+    from datetime import datetime, timedelta, timezone
+
+    import best_picks as bp
+
+    now = datetime.now(timezone.utc)
+    today = now.date().isoformat()
+    # Jepit jam agar tak menyeberang tengah malam UTC (jendela lemah
+    # yang sama dengan tes loader TA ronde 13).
+    started = ("00:00" if now.hour < 3
+               else (now - timedelta(hours=2)).strftime("%H:%M"))
+    future = ("23:59" if now.hour >= 22
+              else (now + timedelta(hours=2)).strftime("%H:%M"))
+    hdr = ("div,date,time,home,away,lam_h,lam_a,ph_dc,pd_dc,pa_dc,"
+           "p_over_dc,p_over15_dc,p_over35_dc,p_btts,p_dc_1x,p_dc_x2,"
+           "p_dc_12,b365h,b365d,b365a\n")
+    row = ("E0,{d},{t},{h},Rival,1.5,1.0,0.70,0.20,0.10,0.60,0.85,"
+           "0.30,0.40,0.90,0.30,0.80,2.0,3.5,5.0\n")
+    td = tempfile.mkdtemp()
+    saved = (bp.PROJ, bp.OUT, bp.ANCHOR)
+    try:
+        bp.PROJ = td
+        bp.OUT = os.path.join(td, "best_picks.csv")
+        with open(os.path.join(td, "predictions_upcoming.csv"), "w") as f:
+            f.write(hdr)
+            f.write(row.format(d=today, t=started, h="Started FC"))
+            f.write(row.format(d=today, t=future, h="Future FC"))
+        argv = sys.argv
+        sys.argv = ["best_picks.py", "--date", today]
+        try:
+            bp.main()
+        finally:
+            sys.argv = argv
+        tops = bp._read_csv(os.path.join(td, "best_picks.csv"))
+        assert [r["home"] for r in tops] == ["Future FC"], tops
+        today_rows = bp._read_csv(os.path.join(td, "best_picks_today.csv"))
+        assert len(today_rows) == 2, today_rows
+        by_home = {r["home"]: r for r in today_rows}
+        assert by_home["Started FC"]["market"] == "", by_home["Started FC"]
+        assert by_home["Future FC"]["market"] != "", by_home["Future FC"]
+    finally:
+        bp.PROJ, bp.OUT, bp.ANCHOR = saved
+        shutil.rmtree(td, ignore_errors=True)
+
+
 def test_archive_snapshots_write_once():
     # C14-1: arsip adalah snapshot pra-kickoff untuk grading; rerun
     # pasca-kickoff tidak boleh menimpanya (leg laga yang sudah main
