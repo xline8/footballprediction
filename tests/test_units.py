@@ -1284,21 +1284,33 @@ def test_purge_bogus_spares_issued_and_settled_rows():
     # sana = ketidaksepakatan model-pasar yang sah; membuangnya
     # membuat build berikutnya menerbitkan ulang — churn abadi) dan
     # tidak boleh menyentuh riwayat settle.
+    from datetime import datetime
+
     from ta_model import _purge_bogus
 
-    def row(bid, status, price, pmkt):
+    def row(bid, status, price, pmkt, ko):
         return {"bet_id": bid, "status": status, "price": price,
-                "p_market": pmkt}
+                "p_market": pmkt, "kickoff_utc": ko}
 
+    now = datetime(2026, 10, 31, 12, 0)
     rows = [
-        row("a", "OPEN", 4.50, 0.24),     # 1,08: korup, bukan terbitan kini
-        row("b", "OPEN", 4.50, 0.24),     # 1,08 tapi diterbitkan build ini
-        row("c", "SETTLED", 4.50, 0.24),  # riwayat: tak pernah dibuang
-        row("d", "OPEN", 2.00, 0.40),     # 0,80: wajar
+        # 1,08, kickoff lewat, bukan terbitan kini: korup -> dibuang
+        row("a", "OPEN", 4.50, 0.24, "2026-10-30T20:00"),
+        # 1,08 tapi diterbitkan build ini -> disimpan
+        row("b", "OPEN", 4.50, 0.24, "2026-10-30T20:00"),
+        # riwayat settle -> tak pernah dibuang
+        row("c", "SETTLED", 4.50, 0.24, "2026-10-30T20:00"),
+        # 0,80: wajar
+        row("d", "OPEN", 2.00, 0.40, "2026-10-30T20:00"),
+        # A14-1: 1,08, berhenti diterbitkan ulang, tapi kickoff masih
+        # di masa depan -> posisi masih bisa dinilai, disimpan
+        row("e", "OPEN", 4.50, 0.24, "2026-11-05T20:00"),
+        # kickoff tak ter-parse -> tanpa pengecualian, dibuang
+        row("f", "OPEN", 4.50, 0.24, ""),
     ]
-    kept, n = _purge_bogus(rows, {"b"})
-    assert n == 1, n
-    assert [r["bet_id"] for r in kept] == ["b", "c", "d"], kept
+    kept, n = _purge_bogus(rows, {"b"}, now)
+    assert n == 2, n
+    assert [r["bet_id"] for r in kept] == ["b", "c", "d", "e"], kept
 
 
 def test_best_picks_ta_loader_skips_started_matches():
@@ -1573,6 +1585,22 @@ def test_shadow_gate_runs_all_consumers_on_success():
                 "py:best_picks.py", "recommend", "archive", "grade"):
         assert ran in calls, (ran, calls)
     assert calls.index("ta_build") < calls.index("py:best_picks.py"), calls
+
+
+def test_shadow_ta_build_rc_failure_marks_run_failed():
+    # A14-2: build() mengembalikan 1 (ta/fixtures.csv kosong) tanpa
+    # menulis model_markets — shadow harus menandai run gagal, bukan
+    # mencetak selesai. Pipeline tetap lanjut (best_picks memakai
+    # file terakhir yang ada), sesuai desain langkahnya.
+    sh, calls, restore = _shadow_env("success")
+    try:
+        sys.modules["ta_model"].build = lambda: 1
+        code, out = _run_shadow(sh)
+    finally:
+        restore()
+    assert code == 1, code
+    assert "[10/16] FAILED ta_model build" in out, out
+    assert "py:best_picks.py" in calls, calls
 
 
 def test_shadow_fallback_flagged_when_refresh_raises_mid_loop():

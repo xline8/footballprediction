@@ -362,7 +362,14 @@ def main():
         if not pred_ok:
             raise _SkipStep("prediksi liga tidak sukses pada run ini")
         import ta_model
-        ta_model.build()
+        if ta_model.build():
+            # build() mengembalikan 1 tanpa menulis model_markets
+            # bila ta/fixtures.csv kosong (A14-2): tanpa pemeriksaan
+            # ini langkah tercatat selesai dan best_picks memeringkat
+            # dari file build sebelumnya. Orchestrator memeriksa rc
+            # yang sama; samakan di sini.
+            raise RuntimeError("ta_model.build() rc != 0 "
+                               "(ta/fixtures.csv kosong?)")
         print("[10/16] ta_model build: selesai")
     except _SkipStep as e:
         print(f"[10/16] DILEWATI ta_model build: {e}")
