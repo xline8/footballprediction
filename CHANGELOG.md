@@ -5,6 +5,32 @@ Keep a Changelog, and the project uses semantic versioning.
 
 ## [Unreleased]
 
+### Added
+
+- Records cache schema v2: every walk-forward record now also
+  stores the probabilities the system actually serves — the monthly
+  walk-forward meta stack (`ph_meta`/`pd_meta`/`pa_meta`, the exact
+  recipe the go-live gates score) and the Dixon-Coles derivative
+  probabilities (`p_over_dc`, `p_btts`) — plus the actual goals
+  (`fthg`/`ftag`). Schema 1 caches are treated as stale and rebuilt
+  once. Before this, the cache stored only the DC and T3 components,
+  so the served stack had never been proper-scored directly and
+  backtests labelled "meta" silently measured T3.
+- Two experiments from the eleventh audit round.
+  `experiments/experiment_deriv_calib.py` re-measures the served
+  derivative bias (O/U 2.5 under-predicts goals by 2.2 points pooled
+  TOP5, BTTS by 2.8) and tests three pre-registered recalibration
+  candidates on a held-out era split — all three are rejected: the
+  bias is era-varying and recent-era Brier does not improve, so no
+  static derivative recalibration layer is adopted.
+  `experiments/experiment_spi_benchmark.py` scores the stored meta
+  probabilities against FiveThirtyEight's SPI on 9,946 identical
+  matches (2018-01 to 2023-06, 100% of the in-window records joined
+  and score-verified): the project's stack leads SPI on Brier, log
+  loss and RPS overall and in all five divisions, with the caveat
+  that the meta stack consumes opening market probabilities as
+  features while SPI did not.
+
 ### Fixed
 
 - A ninth audit round verified PR #29 (the soft-partial gating

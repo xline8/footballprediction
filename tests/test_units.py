@@ -301,6 +301,44 @@ def test_records_meta_write_merges_existing_keys():
     assert meta["dc_fit_mode"]
 
 
+def test_records_meta_write_stamps_schema():
+    import json
+    import tempfile
+
+    from backtest_picks import RECORDS_SCHEMA, _write_records_meta
+    with tempfile.TemporaryDirectory() as td:
+        out = os.path.join(td, "records_cache.jsonl")
+        _write_records_meta(out, "1:1")
+        with open(os.path.join(td, "records_cache.meta.json"),
+                  encoding="utf-8") as f:
+            meta = json.load(f)
+    assert meta["records_schema"] == RECORDS_SCHEMA == 2
+
+
+def test_meta_walkforward_fills_later_months_only():
+    from backtest_picks import _add_meta_walkforward
+
+    def rec(date, yi):
+        return {"div": "E0", "date": date, "yi": yi,
+                "ph_dc": 0.45, "pd_dc": 0.28, "pa_dc": 0.27,
+                "ph_t3": 0.44, "pd_t3": 0.29, "pa_t3": 0.27,
+                "o": [2.2, 3.4, 3.6]}
+
+    recs = ([rec("2024-01-0%d" % (i + 1), i % 3) for i in range(6)]
+            + [rec("2024-02-0%d" % (i + 1), (i + 1) % 3) for i in range(6)]
+            + [rec("2024-03-0%d" % (i + 1), (i + 2) % 3) for i in range(6)])
+    filled = _add_meta_walkforward(recs, min_train=5)
+    # Bulan pertama tidak punya riwayat latih: tidak terisi. Dua bulan
+    # berikutnya terisi penuh dan probabilitasnya ternormalisasi.
+    assert filled == 12
+    assert all("ph_meta" not in r for r in recs[:6])
+    for r in recs[6:]:
+        s = r["ph_meta"] + r["pd_meta"] + r["pa_meta"]
+        assert abs(s - 1.0) < 1e-6
+        assert all(0.0 < r[k] < 1.0 for k in
+                   ("ph_meta", "pd_meta", "pa_meta"))
+
+
 def test_select_safest_priced_negative_ev_beats_unpriced():
     from best_picks import _select_safest
     priced = {"prob": 0.5, "tier": "fallback", "ev": None,

@@ -78,11 +78,15 @@ def _data_stamp():
 
 
 def _records_stale():
-    """True bila cache dibangun dari mode DC lain ATAU dari data latih
-    yang sudah di-refresh sejak cache dibuat."""
+    """True bila cache dibangun dari mode DC lain, dari skema records
+    yang lebih lama, ATAU dari data latih yang sudah di-refresh sejak
+    cache dibuat."""
     m = _records_meta()
     from model_v2 import DC_FIT_MODE
+    from backtest_picks import RECORDS_SCHEMA
     if m.get("dc_fit_mode") != DC_FIT_MODE:
+        return True
+    if m.get("records_schema") != RECORDS_SCHEMA:
         return True
     return m.get("data_stamp") != _data_stamp()
 
