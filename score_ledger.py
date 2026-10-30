@@ -2,7 +2,9 @@
 """score_ledger.py — grade picks pending dgn hasil aktual; append grades.jsonl.
 
 - Hasil dibaca dari xg_raw/{SLUG}_2026_all.json (Understat, hasil + fixture),
-  nama tim dipetakan balik FD->UG via map_full.json.
+  nama tim dipetakan balik FD->UG via map_full.json. Hasil yang belum
+  ada di dump Understat diisi dari ta/results.csv (TipsterArea, FT)
+  yang disinkronkan chain harian (audit GPT 2026-10-31, F).
 - Settle memakai odds_open yang TERSIMPAN saat pick dibuat (jujur: harga yang
   memang bisa diambil ketika pick lahir) — bukan harga closing belakangan.
 - CLV (closing line value): metrik kualitas headline. odds_close diisi dari
@@ -79,6 +81,41 @@ def _load_all_results():
         for (date, h, a), g in merged.items():
             results[(div, date, h, a)] = g
     return results
+
+
+# hasil liga dari ta/results.csv (FT): {(div, date, home_norm, away_norm)}
+# Chain harian menyinkronkan file ini, tapi grading liga dulu hanya
+# membaca dump Understat yang bisa tertinggal beberapa hari — pick
+# tertahan pending padahal skor finalnya sudah ada (audit GPT
+# 2026-10-31, F). TA hanya MENGISI kunci yang belum ada di sumber
+# Understat (Understat menang bila keduanya ada), dengan pencocokan
+# (divisi, tanggal, nama ternormalisasi) yang sama seperti jalur piala.
+TA_LEAGUE = {"England - Premier League": "E0",
+             "Spain - Primera Division": "SP1",
+             "Germany - Bundesliga": "D1",
+             "Italy - Serie A": "I1",
+             "France - Ligue 1": "F1"}
+
+
+def _load_ta_league_results():
+    """Hasil liga FT dari ta/results.csv."""
+    out = {}
+    _res_path = os.path.join(PROJ, "ta", "results.csv")
+    if os.path.exists(_res_path):
+        with open(_res_path, encoding="utf-8") as f:
+            for r in csv.DictReader(f):
+                if (r.get("status") or "").upper() != "FT":
+                    continue
+                div = TA_LEAGUE.get(r.get("league", ""))
+                if not div:
+                    continue
+                sh, sa = r.get("score_h"), r.get("score_a")
+                if sh in (None, "") or sa in (None, ""):
+                    continue
+                out[(div, r["date"][:10],
+                     normalize_name(r["home"]), normalize_name(r["away"]))] = \
+                    (int(sh), int(sa))
+    return out
 
 
 # hasil piala dari ta/results.csv (FT): {(competition, date, home_norm, away_norm)}
@@ -390,6 +427,7 @@ def main():
     CUP_SNAPS = _load_cup_snapshots()
     fd2ug = _load_fd2ug()
     results = _load_all_results()
+    ta_results = _load_ta_league_results()
     cup_results = _load_cup_results()
 
     if not os.path.exists(PICKS):
@@ -407,6 +445,7 @@ def main():
     new_grades = []
     unmapped = defaultdict(set)
     skipped_unknown = []
+    n_ta_filled = 0
 
     for pk in picks:
         if pk["pick_id"] in graded_ids:
@@ -442,6 +481,15 @@ def main():
         if not away_ug:
             unmapped[pk["div"]].add(f"away={pk['away']}")
         res = results.get((pk["div"], pk["date"], home_ug, away_ug)) if home_ug and away_ug else None
+        if res is None and home_ug and away_ug:
+            # Fallback TipsterArea (audit GPT F): dump Understat belum
+            # memuat hasil ini, tapi chain harian sudah menyinkronkan
+            # skor finalnya ke ta/results.csv.
+            res = ta_results.get((pk["div"], pk["date"],
+                                  normalize_name(home_ug),
+                                  normalize_name(away_ug)))
+            if res is not None:
+                n_ta_filled += 1
         if res is None:
             continue  # belum main / belum keluar hasilnya
         yh, ya = res
@@ -458,6 +506,10 @@ def main():
             "odds_close_1x2": o1x2, "odds_close_o25": o25,
             "clv_ev": clv_ev, "clv_price": clv_price,
         })
+
+    if n_ta_filled:
+        print(f"hasil liga dari TipsterArea dipakai untuk {n_ta_filled} "
+              f"pick (dump Understat belum memuatnya)")
 
     if skipped_unknown:
         print(f"! {len(skipped_unknown)} pick dilewati (pasar/side tak dikenal): "
