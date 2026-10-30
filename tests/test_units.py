@@ -511,6 +511,155 @@ def test_download_out_is_paths_raw_dir():
     assert download.OUT == paths.RAW_DIR
 
 
+def _refresh_env(td):
+    """Arahkan paths ke tmp + stub modul refresh; kembalikan
+    (orchestrator, restore). Untuk tes step_refresh_training_data
+    tanpa menyentuh data asli."""
+    import types
+
+    import pipeline_orchestrator as po
+    import paths
+
+    raw_dir = os.path.join(td, "raw")
+    xg_dir = os.path.join(td, "xg_raw")
+    os.makedirs(raw_dir)
+    os.makedirs(xg_dir)
+    saved = {k: getattr(paths, k)
+             for k in ("DATA_CLEAN", "DATA_RAW", "RAW_DIR", "XGRAW")}
+    paths.RAW_DIR = raw_dir
+    paths.XGRAW = xg_dir
+    paths.DATA_RAW = os.path.join(td, "all_matches.csv")
+    paths.DATA_CLEAN = os.path.join(td, "all_matches_clean.csv")
+
+    stubs = {}
+    for name in ("download", "prepare", "clean", "refresh_fixtures"):
+        stubs[name] = sys.modules.get(name)
+    dl = types.ModuleType("download")
+    dl.download = lambda seasons, force: {"ok": 21, "total": 21}
+    pp = types.ModuleType("prepare")
+    pp.prepare = lambda: {}
+    cc = types.ModuleType("clean")
+    cc.clean = lambda: {}
+    rf = types.ModuleType("refresh_fixtures")
+    rf.fetch = lambda slug: [1, 2, 3]
+    sys.modules.update({"download": dl, "prepare": pp, "clean": cc,
+                        "refresh_fixtures": rf})
+
+    orch = po.PipelineOrchestrator.__new__(po.PipelineOrchestrator)
+    orch._rebuild_records_if_changed = lambda: False
+
+    def restore():
+        for k, v in saved.items():
+            setattr(paths, k, v)
+        for name, mod in stubs.items():
+            if mod is None:
+                sys.modules.pop(name, None)
+            else:
+                sys.modules[name] = mod
+
+    return orch, paths, restore
+
+
+def test_refresh_rollback_keeps_raw_files_when_stats_fail():
+    # Kegagalan SEBELUM fase backup selesai (di sini _clean_stats
+    # raise karena path file bersih berupa direktori) tidak boleh
+    # membuat rollback menghapus file raw yang sudah ada: catatan
+    # `existed` kini diisi lengkap sebelum try (audit ronde 9).
+    import tempfile
+    import types
+
+    with tempfile.TemporaryDirectory() as td:
+        orch, paths, restore = _refresh_env(td)
+        try:
+            os.makedirs(paths.DATA_CLEAN)  # direktori -> stats raise
+            raws = {}
+            for nm in ("E0_2627.csv", "D1_2627.csv"):
+                p = os.path.join(paths.RAW_DIR, nm)
+                with open(p, "w", encoding="utf-8") as f:
+                    f.write(f"RAW-{nm}")
+                raws[p] = f"RAW-{nm}"
+            r = orch.step_refresh_training_data()
+            assert r["status"] == "failed"
+            for p, content in raws.items():
+                assert os.path.exists(p), f"{p} terhapus rollback"
+                with open(p, encoding="utf-8") as f:
+                    assert f.read() == content
+        finally:
+            restore()
+
+
+def test_refresh_post_commit_failure_is_a_step_result():
+    # reload_data raise SETELAH data ter-commit: langkah harus
+    # mengembalikan failed dengan committed=True, bukan melempar
+    # exception keluar langkah (audit ronde 9).
+    import tempfile
+    import types
+
+    hdr = "Date,Div,Season\n"
+    before = hdr + "2026-08-01,E0,2026/27\n"
+    grown = before + "2026-08-02,E0,2026/27\n"
+    with tempfile.TemporaryDirectory() as td:
+        orch, paths, restore = _refresh_env(td)
+        try:
+            with open(paths.DATA_CLEAN, "w", encoding="utf-8") as f:
+                f.write(before)
+            with open(paths.DATA_RAW, "w", encoding="utf-8") as f:
+                f.write("ALL-OLD")
+            for nm in ("E0_2627.csv",):
+                with open(os.path.join(paths.RAW_DIR, nm), "w",
+                          encoding="utf-8") as f:
+                    f.write("RAW-OLD")
+            import pipeline_orchestrator as po
+            for slug in po.XG_SLUGS:
+                with open(os.path.join(paths.XGRAW, f"{slug}_2026.json"),
+                          "w", encoding="utf-8") as f:
+                    f.write("[1, 2]")
+
+            def _clean():
+                with open(paths.DATA_CLEAN, "w", encoding="utf-8") as f:
+                    f.write(grown)
+                return {}
+
+            sys.modules["clean"].clean = _clean
+
+            def boom():
+                raise RuntimeError("loader rusak")
+
+            orch.loader = types.SimpleNamespace(reload_data=boom)
+            r = orch.step_refresh_training_data()
+            assert r["status"] == "failed" and r["committed"] is True
+            with open(paths.DATA_CLEAN, encoding="utf-8") as f:
+                assert f.read() == grown  # data memang ter-commit
+        finally:
+            restore()
+
+
+def test_fit_models_rollup_zero_divisions_fails():
+    import types
+    from collections import defaultdict
+
+    import pipeline_orchestrator as po
+
+    class FakeState:
+        def __init__(self, div):
+            pass
+
+        def load(self):
+            return True
+
+    old_state = po.ModelState
+    po.ModelState = FakeState
+    try:
+        orch = po.PipelineOrchestrator.__new__(po.PipelineOrchestrator)
+        orch.loader = types.SimpleNamespace(
+            get_matches_by_div=lambda div: [])
+        orch.stats = defaultdict(int)
+        r = orch.step_fit_models()
+        assert r["status"] == "failed"
+    finally:
+        po.ModelState = old_state
+
+
 if __name__ == "__main__":
     fns = [v for k, v in sorted(globals().items())
            if k.startswith("test_") and callable(v)]
