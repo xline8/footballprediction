@@ -7,6 +7,32 @@ Keep a Changelog, and the project uses semantic versioning.
 
 ### Fixed
 
+- An eighth audit round verified PR #28 end to end (the full rollback
+  reproduced in a stubbed sandbox, the 9 newly graded TipsterArea bets
+  re-settled independently, the calibration summary recomputed
+  digit-for-digit, CI green) and fixed the low-severity residue, most
+  of it about signal honesty. The cup step now honors the failure
+  status `predict_cups` returns, so the weekly cups-to-picks gate can
+  trip; a step that raises an exception is named in `failed_steps`
+  and in `last_full_pipeline.json` instead of leaving the list empty;
+  and a `partial` from the model or odds step no longer blocks
+  dependents or fails the run — it is recorded as `partial_steps`
+  (the model step now reports `partial` when only some divisions fail
+  to fit, since the failed divisions keep their previous valid
+  state). Backup and stat calls in the training refresh moved inside
+  its error handling, rollback deletes files the failed run itself
+  created, backup timestamps carry microseconds so same-second runs
+  cannot share a backup name, and leftover xG dump backups from older
+  runs are swept. A legitimate football-data correction that shrinks
+  one division can be accepted once with `REFRESH_ACCEPT_SHRINK=1`
+  instead of failing every weekly refresh forever. The build-xG step
+  snapshots `xg_matches.csv` and restores it when a build comes back
+  degraded, `download.py` takes its output directory from
+  `paths.RAW_DIR` instead of a second hardcoded copy, and the fixture
+  matcher accepts an exact-name pair at ±2 days when the candidate is
+  unique (a 2-day date disagreement between the Understat dump and
+  TipsterArea had left Lorient vs Brest permanently unmatched); the
+  fuzzy rescue stays at ±1 day. Five unit tests added.
 - A seventh audit round verified PR #27 (the incomplete-download gate
   and the records-meta merge both reproduced in isolation, and the
   day's recommendation files recomputed exactly) and fixed what it

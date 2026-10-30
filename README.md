@@ -268,14 +268,22 @@ from football-data.co.uk + Understat only):
   (any of the 21 files), instead of reporting success on stale data.
 - Backs up everything the refresh overwrites — `all_matches_clean.csv`,
   `all_matches.csv`, the raw season CSVs, and the xG dumps — to timestamped
-  `.bak-*` files, and rolls all of it back on failure. Validation checks
+  `.bak-*` files, and rolls all of it back on failure (including deleting
+  files the failed run itself created). Validation checks
   that total rows, current-season rows, and per-division rows never
   decrease, then `records_cache` is rebuilt when the data fingerprint
-  (row counts, latest date, season count, file size) changes.
+  (row counts, latest date, season count, file size) changes. A decrease
+  caused by a legitimate football-data correction can be accepted once
+  by running the refit with `REFRESH_ACCEPT_SHRINK=1`; without it the
+  same decrease keeps failing every week by design.
 - Records the run outcome in `last_full_pipeline.json`, exposed by
   `/api/status` as `last_full_pipeline`. Per-model `is_stale` tracks the
   last fit of any kind (daily fits included), so it cannot by itself
-  show whether the weekly refit succeeded.
+  show whether the weekly refit succeeded. A `partial` result from the
+  model or odds step is recorded there as `partial_steps` without
+  failing the run: the divisions that failed to fit keep their previous
+  (valid) state, and the football-data odds source is empty in
+  production, so neither changes the run's output.
 
 **Daily run.** `run_daily_shadow.py` executes the chain described under
 Live shadow tracker, including the results sync with
