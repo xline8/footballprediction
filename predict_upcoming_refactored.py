@@ -253,6 +253,12 @@ def _get_or_fit_model(loader, div: str, games: list, cutoff: date,
         except (TypeError, ValueError):
             pass
 
+    if was_loaded and state.data_stale():
+        # Data gol/xG berubah sejak state di-fit (koreksi skor, xG
+        # terisi belakangan): cache tidak boleh dipakai diam-diam
+        # (audit GPT 2026-10-31, C).
+        needs_fit = True
+
     if was_loaded and state.last_fit_date and not needs_fit:
         # Check if new games since last fit
         days_since_fit = abs((cutoff - state.last_fit_date).days)

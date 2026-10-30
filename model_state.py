@@ -8,6 +8,7 @@ Mendukung:
 - Version control (timestamp, last fit date)
 """
 
+import hashlib
 import os
 import pickle
 import json
@@ -15,11 +16,42 @@ from datetime import datetime, date
 from typing import Optional, Tuple, Dict
 from collections import defaultdict
 
-from paths import MODEL_CACHE
+from paths import MODEL_CACHE, BASE as PROJ_BASE
 
 CACHE_DIR = MODEL_CACHE
 MAX_TRAIN = 4000
 RHO_GRID = (0.0, -0.05, -0.10, -0.15)
+
+# File data yang dikonsumsi fit DC: gol (all_matches_clean.csv) dan xG
+# (xg_matches.csv). State model dulu tidak mencatat versi data ini,
+# jadi koreksi skor atau xG yang terisi belakangan tidak pernah
+# membatalkan cache (audit GPT 2026-10-31, C).
+_FP_FILES = ("all_matches_clean.csv", "xg_matches.csv")
+_fp_memo: Dict[str, Tuple[Tuple[int, int], str]] = {}
+
+
+def current_data_fingerprint() -> str:
+    """Hash konten file data latih; dimemo per (mtime, size) per file."""
+    parts = []
+    for name in _FP_FILES:
+        p = os.path.join(PROJ_BASE, name)
+        try:
+            st = os.stat(p)
+            key = (st.st_mtime_ns, st.st_size)
+        except OSError:
+            parts.append(f"{name}:absent")
+            continue
+        memo = _fp_memo.get(p)
+        if memo and memo[0] == key:
+            parts.append(f"{name}:{memo[1]}")
+            continue
+        h = hashlib.sha256()
+        with open(p, "rb") as f:
+            for chunk in iter(lambda: f.read(1 << 20), b""):
+                h.update(chunk)
+        _fp_memo[p] = (key, h.hexdigest())
+        parts.append(f"{name}:{h.hexdigest()}")
+    return "|".join(parts)
 
 
 class ModelState:
@@ -34,6 +66,7 @@ class ModelState:
         self.last_update = None    # Tanggal update terakhir (setelah incremental)
         self.half_life = 270.0     # Default dari config
         self.dc_fit_mode = None    # mode fit DC yang menghasilkan state ("goals"/"blend")
+        self.data_fp = None        # fingerprint data latih saat state di-fit
 
         # Model parameters
         self.attack: Dict[str, float] = defaultdict(float)  # team -> attack strength
@@ -69,6 +102,7 @@ class ModelState:
             "last_update": self.last_update.isoformat() if self.last_update else None,
             "half_life": self.half_life,
             "dc_fit_mode": self.dc_fit_mode,
+            "data_fp": self.data_fp,
             "attack": dict(self.attack),
             "defense": dict(self.defense),
             "home_advantage": self.home_advantage,
@@ -99,6 +133,7 @@ class ModelState:
             self.last_update = self._parse_date(data.get("last_update"))
             self.half_life = data.get("half_life", self.half_life)
             self.dc_fit_mode = data.get("dc_fit_mode")
+            self.data_fp = data.get("data_fp")
             self.attack = defaultdict(float, data.get("attack", {}))
             self.defense = defaultdict(float, data.get("defense", {}))
             self.home_advantage = data.get("home_advantage", self.home_advantage)
@@ -125,6 +160,9 @@ class ModelState:
         except Exception:
             self.dc_fit_mode = None
         self.last_fit_date = fit_date
+        # Cap fingerprint data yang baru saja dikonsumsi fit ini —
+        # perubahan data berikutnya terdeteksi data_stale().
+        self.data_fp = current_data_fingerprint()
         # Jumlah laga latih dari fit batch (DC.fit mencatatnya sejak
         # audit ronde 6); sebelumnya field ini hanya bertambah lewat
         # jalur online update_with_result yang tak dipakai batch,
@@ -243,9 +281,16 @@ class ModelState:
             return False
         return self.dc_fit_mode is not None or DC_FIT_MODE == "blend"
 
+    def data_stale(self) -> bool:
+        """True bila data latih berubah sejak state ini di-fit (atau
+        state lama belum punya cap fingerprint sama sekali)."""
+        return self.data_fp != current_data_fingerprint()
+
     def needs_fit(self, games_history: list, cutoff: date) -> bool:
         """Cek apakah perlu refit (tim baru atau window training berubah)."""
         if not self._initialized:
+            return True
+        if self.data_stale():
             return True
 
         known_teams = self.get_known_teams()
