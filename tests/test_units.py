@@ -1278,6 +1278,63 @@ def test_merge_bets_refreshes_open_rows_only():
     assert by_id["3|OU|2.5|Over"]["status"] == "OPEN"
 
 
+def _undefined_names(path):
+    """Nama yang dirujuk di dalam fungsi/kelas tetapi tidak terikat
+    di mana pun: bukan lokal/parameter/impor di lingkupnya, bukan
+    nama bebas (closure), bukan terikat di level modul, bukan
+    builtin. Inilah kelas bug H13-1 (NameError dtf di loader corner):
+    nama yatim yang hanya meledak saat jalur file-driven dijalankan,
+    tak terlihat oleh tes yang hanya menguji predikatnya."""
+    import builtins
+    import symtable
+
+    with open(path, encoding="utf-8") as f:
+        code = f.read()
+    top = symtable.symtable(code, path, "exec")
+    module_bound = {s.get_name() for s in top.get_symbols()
+                    if s.is_assigned() or s.is_imported()
+                    or s.is_namespace()}
+    builtin_names = set(dir(builtins)) | {
+        "__file__", "__name__", "__doc__", "__package__", "__loader__",
+        "__spec__", "__builtins__", "__annotations__", "__cached__"}
+    bad = []
+
+    def walk(table):
+        for child in table.get_children():
+            if child.get_type() in ("function", "class"):
+                for s in child.get_symbols():
+                    if not s.is_referenced():
+                        continue
+                    if (s.is_assigned() or s.is_parameter()
+                            or s.is_imported() or s.is_free()):
+                        continue
+                    name = s.get_name()
+                    if name in module_bound or name in builtin_names:
+                        continue
+                    bad.append(f"{child.get_name()}:{name}")
+            walk(child)
+
+    walk(top)
+    return bad
+
+
+def test_no_undefined_names_in_chain_modules():
+    # D14-2: sapuan symtable stdlib untuk modul-modul rantai harian —
+    # jaring murah bagi kelas bug nama-yatim yang lolos dari seluruh
+    # suite di ronde 13 (mutasi H13-1 yang dibuat ulang terdeteksi
+    # persis sebagai predict_upcoming:dtf saat audit ronde 14).
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    mods = ["run_daily_shadow.py", "ta_model.py", "best_picks.py",
+            "grade_recommendations.py", "score_ledger.py",
+            "slip_recommender.py", "model_corners_v3.py",
+            "predict_cups.py", "refresh_fixtures.py", "ta_scrape.py",
+            "market_orchestration.py", "make_picks_live.py",
+            "predict_upcoming_refactored.py"]
+    for m in mods:
+        bad = _undefined_names(os.path.join(root, m))
+        assert not bad, (m, bad)
+
+
 def test_kickoff_started_predicate():
     # B14-1: predikat jangkar datetime best_picks.
     from datetime import datetime
