@@ -193,7 +193,9 @@ def _sort_and_filter_upcoming(rows: List[Dict], day_key: str = "date") -> List[D
 def load_odds_data() -> List[Dict]:
     """Load current odds from FD raw files."""
     odds_data = []
-    today = datetime.now().date()
+    # Tanggal fixture di seluruh pipeline adalah UTC; tanggal lokal
+    # proses bisa berbeda sehari (audit ronde 7).
+    today = datetime.now(timezone.utc).date()
 
     for div in TOP5:
         odds_map = load_fd_odds(div, "2627")
@@ -250,6 +252,20 @@ async def get_pipeline_status():
         'picks': {},
         'cache': {'status_ttl_s': _STATUS_TTL}
     }
+
+    # Jejak run --run-all terakhir (ditulis pipeline_orchestrator):
+    # keberhasilan refit mingguan terbaca di sini. is_stale per model
+    # tidak bisa menunjukkan itu — fit harian menulis ulang updated_at
+    # setiap hari (audit ronde 7).
+    lfp = os.path.join(BASE_DIR, 'last_full_pipeline.json')
+    if os.path.exists(lfp):
+        try:
+            with open(lfp, 'r') as f:
+                status['last_full_pipeline'] = json.load(f)
+        except Exception:
+            status['last_full_pipeline'] = None
+    else:
+        status['last_full_pipeline'] = None
 
     # Model status
     for div in TOP5:
