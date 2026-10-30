@@ -15,9 +15,9 @@ from datetime import datetime
 from football_etl import pois, tau, norm3, norm2, blend3, blend2, normalize_name
 from paths import BASE
 
-# Mode fit DC: "goals" (perilaku produksi lama) | "blend" (0.5*gol + 0.5*xG).
-# Overridable via env FOOTBALL_DC_FIT_MODE. Default "goals" sampai gate go-live
-# lulus (lihat go_live_gates.py); switch ke "blend" di commit final.
+# Mode fit DC: "goals" (gol saja) | "blend" (0.5*gol + 0.5*xG).
+# Overridable via env FOOTBALL_DC_FIT_MODE. Default "blend": gate
+# go-live lulus dan mode ini produksi sejak 2026-10-28.
 DC_FIT_MODE = os.environ.get("FOOTBALL_DC_FIT_MODE", "blend")
 
 DATA = os.path.join(BASE, "all_matches_clean.csv")

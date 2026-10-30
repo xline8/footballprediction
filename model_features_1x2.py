@@ -5,8 +5,11 @@ Mengambil baris fitur dari features.build_feature_rows (Elo, form, rolling gol/x
 hari istirahat). Melatih multinomial logistic regression (softmax) dengan L2 dan
 mengevaluasinya walk-forward (expansion window) melawan baseline prior konstan.
 
-Ini lapisan eksperimental: TIDAK mengubah output prediksi live. Melatih hanya
-pada match yang tanggalnya < bulan uji, dan imputasi/standarisasi juga hanya dari
+Komponen produksi, bukan lagi eksperimental: kolom T3 dari model ini
+ditulis ke predictions_upcoming.csv oleh predict_upcoming_refactored dan
+menjadi tiga dari sembilan fitur stack meta di make_picks_live._fit_meta
+(baris tanpa T3 dilewati jalur meta). Melatih hanya pada match yang
+tanggalnya < bulan uji, dan imputasi/standarisasi juga hanya dari
 train — jadi tidak ada yang bocor dari masa depan.
 
 Jalankan:  python model_features_1x2.py [--seasons 2024/25] [--selftest]
