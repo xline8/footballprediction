@@ -103,8 +103,8 @@ def _load_corner_picks():
             if r["date"] < ANCHOR:
                 continue  # hanya fixture yang akan datang
             if _kickoff_started(r["date"], r.get("time"), now):
-                continue  # B14-1 (file corner liga belum memuat jam;
-                # saringan per laga di main() yang menutupnya)
+                continue  # B14-1 (file corner liga maupun piala belum
+                # memuat jam; saringan per laga di main() menutupnya)
             comp = r.get("competition") or default_comp or ""
             for ln in CORNER_LINES:
                 p_over = _num(r.get(f"p_gt_{ln}"))

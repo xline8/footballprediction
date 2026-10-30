@@ -1383,6 +1383,20 @@ def test_best_picks_main_skips_started_matches():
             f.write(hdr)
             f.write(row.format(d=today, t=started, h="Started FC"))
             f.write(row.format(d=today, t=future, h="Future FC"))
+        # Baris corner untuk kedua laga (L-3 audit-diri): pick corner
+        # hanya dilindungi filter terpusat started_keys di main() —
+        # file corner tak punya kolom jam — jadi jalur itu harus ikut
+        # teruji, bukan hanya loader DC.
+        chdr = ("div,date,home,away,mu_shots_cs,r_cs,rec_line,rec_side,"
+                "recommendation,rec_prob,p_gt_6.5,p_gt_7.5,p_gt_8.5,"
+                "p_gt_9.5,p_gt_10.5,p_gt_11.5\n")
+        crow = ("E0,{d},{h},Rival,10.0,2.5,8.5,Over,x,0.70,0.90,0.80,"
+                "0.70,0.50,0.40,0.30\n")
+        with open(os.path.join(td, "predictions_corners_upcoming.csv"),
+                  "w") as f:
+            f.write(chdr)
+            f.write(crow.format(d=today, h="Started FC"))
+            f.write(crow.format(d=today, h="Future FC"))
         argv = sys.argv
         sys.argv = ["best_picks.py", "--date", today]
         try:
@@ -1391,6 +1405,10 @@ def test_best_picks_main_skips_started_matches():
             sys.argv = argv
         tops = bp._read_csv(os.path.join(td, "best_picks.csv"))
         assert [r["home"] for r in tops] == ["Future FC"], tops
+        full = bp._read_csv(os.path.join(td, "best_picks_full.csv"))
+        assert all(r["home"] != "Started FC" for r in full), full
+        assert any(r["home"] == "Future FC" and r["market"] == "Corners"
+                   for r in full), full
         today_rows = bp._read_csv(os.path.join(td, "best_picks_today.csv"))
         assert len(today_rows) == 2, today_rows
         by_home = {r["home"]: r for r in today_rows}
@@ -1419,9 +1437,9 @@ def test_archive_snapshots_write_once():
         os.makedirs(src)
         f1, f2 = mo.ARCHIVE_FILES[0], mo.ARCHIVE_FILES[1]
         with open(os.path.join(src, f1), "w") as f:
-            f.write("prematch")
+            f.write("h\nprematch\n")
         with open(os.path.join(src, f2), "w") as f:
-            f.write("v1")
+            f.write("h\nv1\n")
         saved = (mo.HERE, mo.ARCHIVE)
         mo.HERE, mo.ARCHIVE = src, arc
         try:
@@ -1429,14 +1447,25 @@ def test_archive_snapshots_write_once():
             assert sorted(r1["archived"]) == sorted([f1, f2]), r1
             # sumber berubah (output pasca-kickoff) + satu file hilang
             with open(os.path.join(src, f1), "w") as f:
-                f.write("postkickoff")
+                f.write("h\npostkickoff\n")
             dest = os.path.join(arc, "2026-10-30")
             os.remove(os.path.join(dest, f2))
             r2 = mo.archive_snapshots(target_date=date(2026, 10, 30))
             assert r2["archived"] == [f2], r2      # hanya yang hilang
             assert r2["kept"] == [f1], r2
             with open(os.path.join(dest, f1)) as f:
-                assert f.read() == "prematch"     # tak tertimpa
+                assert f.read() == "h\nprematch\n"  # tak tertimpa
+            # L-2: arsip berisi header saja (run pertama terdegradasi)
+            # boleh diperbaiki sumber yang punya baris data
+            with open(os.path.join(dest, f2), "w") as f:
+                f.write("h\n")
+            with open(os.path.join(src, f2), "w") as f:
+                f.write("h\nv2\n")
+            r3 = mo.archive_snapshots(target_date=date(2026, 10, 30))
+            assert r3["archived"] == [f2], r3
+            assert r3["kept"] == [f1], r3
+            with open(os.path.join(dest, f2)) as f:
+                assert f.read() == "h\nv2\n"
         finally:
             mo.HERE, mo.ARCHIVE = saved
     finally:
@@ -1459,23 +1488,27 @@ def test_purge_bogus_spares_issued_and_settled_rows():
 
     now = datetime(2026, 10, 31, 12, 0)
     rows = [
-        # 1,08, kickoff lewat, bukan terbitan kini: korup -> dibuang
-        row("a", "OPEN", 4.50, 0.24, "2026-10-30T20:00"),
+        # 1,08, kickoff lewat > 2 hari, bukan terbitan kini: dibuang
+        row("a", "OPEN", 4.50, 0.24, "2026-10-28T20:00"),
         # 1,08 tapi diterbitkan build ini -> disimpan
-        row("b", "OPEN", 4.50, 0.24, "2026-10-30T20:00"),
+        row("b", "OPEN", 4.50, 0.24, "2026-10-28T20:00"),
         # riwayat settle -> tak pernah dibuang
-        row("c", "SETTLED", 4.50, 0.24, "2026-10-30T20:00"),
+        row("c", "SETTLED", 4.50, 0.24, "2026-10-28T20:00"),
         # 0,80: wajar
-        row("d", "OPEN", 2.00, 0.40, "2026-10-30T20:00"),
+        row("d", "OPEN", 2.00, 0.40, "2026-10-28T20:00"),
         # A14-1: 1,08, berhenti diterbitkan ulang, tapi kickoff masih
         # di masa depan -> posisi masih bisa dinilai, disimpan
         row("e", "OPEN", 4.50, 0.24, "2026-11-05T20:00"),
         # kickoff tak ter-parse -> tanpa pengecualian, dibuang
         row("f", "OPEN", 4.50, 0.24, ""),
+        # L-1 audit-diri: kickoff baru lewat 16 jam — hasil mungkin
+        # belum tersinkron, grading belum sempat terjadi -> tenggang
+        # 2 hari menyimpannya
+        row("g", "OPEN", 4.50, 0.24, "2026-10-30T20:00"),
     ]
     kept, n = _purge_bogus(rows, {"b"}, now)
     assert n == 2, n
-    assert [r["bet_id"] for r in kept] == ["b", "c", "d", "e"], kept
+    assert [r["bet_id"] for r in kept] == ["b", "c", "d", "e", "g"], kept
 
 
 def test_best_picks_ta_loader_skips_started_matches():

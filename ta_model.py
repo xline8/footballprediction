@@ -506,21 +506,26 @@ def _purge_bogus(rows, issued_ids, now):
     purge di build berikutnya membuang baris yang build sebelumnya
     terbitkan sendiri, lalu build yang sama menerbitkannya lagi
     (churn abadi). (2) Baris OPEN yang kickoff-nya masih di masa
-    depan (audit ronde 14, A14-1): baris yang berhenti diterbitkan
+    depan ATAU baru lewat dalam tenggang hasil 2 hari (audit ronde
+    14, A14-1 + audit-diri L-1): baris yang berhenti diterbitkan
     ulang — snapshot odds ke-throttle, EV turun, kalah lomba per
     laga — tadinya ter-purge sebelum kickoff dan tak pernah
-    ter-grade; posisi yang masih bisa dinilai tidak boleh lenyap.
+    ter-grade; dan grading sendiri baru bisa terjadi sesudah
+    sinkronisasi hasil pasca-kickoff, jadi perlindungan harus
+    melampaui kickoff-nya, bukan berhenti tepat di sana. Posisi
+    yang masih bisa dinilai tidak boleh lenyap.
     (3) Baris settle tidak pernah dibuang: itu riwayat grading.
     Kickoff yang tak ter-parse tidak memberi pengecualian (2) —
     baris semacam itu memang kelas korup yang dibersihkan purge.
     Return (baris tersisa, n_dibuang).
     """
     kept, n = [], 0
+    grace = now - timedelta(days=2)
     for r in rows:
         ko = _kickoff_utc(r)
         if (r["bet_id"] not in issued_ids
                 and (r.get("status") or "").upper() == "OPEN"
-                and not (ko is not None and ko > now)
+                and not (ko is not None and ko > grace)
                 and fnum(r.get("price")) * fnum(r.get("p_market")) > 1.02):
             n += 1
             continue
