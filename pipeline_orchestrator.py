@@ -108,9 +108,18 @@ class PipelineOrchestrator:
         ]
         try:
             for name, fn, blocked_by in steps:
-                bad = [b for b in blocked_by
-                       if isinstance(results.get(b), dict)
-                       and results[b].get('status') in ('failed', 'partial')]
+                # 'skipped' karena upstream gagal ikut memblokir:
+                # tanpa ini rantai skip berhenti di langkah pertama
+                # dan langkah hilir tetap mengonsumsi artefak basi.
+                def _blocks(v):
+                    if not isinstance(v, dict):
+                        return False
+                    if v.get('status') in ('failed', 'partial'):
+                        return True
+                    return (v.get('status') == 'skipped'
+                            and str(v.get('reason', '')).startswith(
+                                'upstream_failed'))
+                bad = [b for b in blocked_by if _blocks(results.get(b))]
                 if bad:
                     log(f"  ! {name} dilewati: langkah hulu gagal: {bad}",
                         "WARN")
