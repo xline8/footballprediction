@@ -395,6 +395,122 @@ def test_calibration_overall_unique_dedupes_selections():
     assert s["overall_unique"]["n"] == 2
 
 
+def test_pipeline_soft_partial_model_and_odds():
+    import json
+    import tempfile
+
+    orch, po = _stub_orchestrator(
+        {"step_fit_models": {"status": "partial"},
+         "step_integrate_odds": {"status": "partial"}})
+    with tempfile.TemporaryDirectory() as td:
+        old = po.BASE_DIR
+        po.BASE_DIR = td
+        try:
+            res = orch.run_full_pipeline()
+        finally:
+            po.BASE_DIR = old
+        with open(os.path.join(td, "last_full_pipeline.json"),
+                  encoding="utf-8") as f:
+            rec = json.load(f)
+    # Partial lunak: scoring/picks tetap jalan, run tidak gagal,
+    # tapi partial-nya tercatat di hasil dan di file status.
+    assert res["scoring"]["status"] == "success"
+    assert res["picks"]["status"] == "success"
+    assert res["status"] == "completed"
+    assert sorted(res["partial_steps"]) == ["model", "odds"]
+    assert rec["failed_steps"] == []
+    assert sorted(rec["partial_steps"]) == ["model", "odds"]
+
+
+def test_pipeline_exception_step_is_named():
+    import json
+    import tempfile
+
+    orch, po = _stub_orchestrator({})
+
+    def boom():
+        raise RuntimeError("data hilang")
+
+    orch.step_check_data = boom
+    with tempfile.TemporaryDirectory() as td:
+        old = po.BASE_DIR
+        po.BASE_DIR = td
+        try:
+            res = orch.run_full_pipeline()
+        finally:
+            po.BASE_DIR = old
+        with open(os.path.join(td, "last_full_pipeline.json"),
+                  encoding="utf-8") as f:
+            rec = json.load(f)
+    assert res["status"] == "failed"
+    assert res["error_step"] == "data"
+    assert rec["failed_steps"] == ["data"]
+    assert rec["error_step"] == "data" and "data hilang" in rec["error"]
+
+
+def test_cups_step_honors_inner_failed_status():
+    import types
+
+    import pipeline_orchestrator as po
+
+    fake = types.ModuleType("predict_cups")
+    fake.main = lambda: {"status": "failed", "n_gol": 0, "n_corner": 0,
+                         "n_fixtures": 3}
+    old = sys.modules.get("predict_cups")
+    sys.modules["predict_cups"] = fake
+    try:
+        orch = po.PipelineOrchestrator.__new__(po.PipelineOrchestrator)
+        r = orch.step_predict_cups()
+        assert r["status"] == "failed" and r["n_fixtures"] == 3
+        fake.main = lambda: {"status": "success", "n_gol": 2,
+                             "n_corner": 2, "n_fixtures": 1}
+        r = orch.step_predict_cups()
+        assert r["status"] == "success" and r["n_gol"] == 2
+    finally:
+        if old is None:
+            sys.modules.pop("predict_cups", None)
+        else:
+            sys.modules["predict_cups"] = old
+
+
+def test_match_game_id_exact_names_two_day_window_unique_only():
+    import tempfile
+
+    import market_orchestration as mo
+
+    hdr = "game_id,home,away,date,league\n"
+    with tempfile.TemporaryDirectory() as td:
+        old = mo.TA
+        mo.TA = td
+        try:
+            with open(os.path.join(td, "fixtures.csv"), "w",
+                      encoding="utf-8") as f:
+                f.write(hdr + "111,Lorient,Brest,2026-11-02,"
+                              "France - Ligue 1\n")
+            # ±1 hari: perilaku lama.
+            assert mo._match_game_id("Lorient", "Brest",
+                                     "2026-11-01") == "111"
+            # ±2 hari, nama eksak kedua sisi, kandidat unik: terjodohkan.
+            assert mo._match_game_id("Lorient", "Brest",
+                                     "2026-10-31") == "111"
+            # Kandidat kedua dalam ±2 hari -> ambigu -> tidak menebak.
+            with open(os.path.join(td, "fixtures.csv"), "a",
+                      encoding="utf-8") as f:
+                f.write("112,Lorient,Brest,2026-10-29,"
+                        "France - Ligue 1\n")
+            assert mo._match_game_id("Lorient", "Brest",
+                                     "2026-10-31") is None
+        finally:
+            mo.TA = old
+
+
+def test_download_out_is_paths_raw_dir():
+    import download
+    import paths
+
+    assert download.OUT == paths.RAW_DIR
+
+
 if __name__ == "__main__":
     fns = [v for k, v in sorted(globals().items())
            if k.startswith("test_") and callable(v)]

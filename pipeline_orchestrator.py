@@ -29,6 +29,16 @@ XG_SLUGS = ("EPL", "La_liga", "Bundesliga", "Serie_A", "Ligue_1")
 # Refresh data latih hanya musim berjalan (2627). Override via env bila perlu.
 REFRESH_SEASON = os.environ.get("FOOTBALL_REFRESH_SEASON", "2627")
 
+# Langkah yang status 'partial'-nya LUNAK: tidak memblokir langkah
+# hilir dan tidak menggagalkan run, tapi tetap dicatat di
+# partial_steps + last_full_pipeline.json (audit ronde 8). Alasannya:
+# degradasi sebagian di kedua langkah ini meninggalkan artefak lama
+# yang masih sah — model: state divisi yang gagal fit tetap versi
+# sebelumnya (divisi lain segar); odds: sumber football-data memang
+# kosong di produksi, jadi exception di satu divisi tidak mengubah
+# output apa pun. Partial dari langkah LAIN (xg, scoring) tetap keras.
+SOFT_PARTIAL_STEPS = {"model", "odds"}
+
 
 def _cup_fixture_ids(days):
     """game_id fixture piala (EFL Cup / DFB Pokal) dalam jendela tanggal.
@@ -106,20 +116,26 @@ class PipelineOrchestrator:
             ("picks", self.step_generate_picks, ("scoring", "cups")),
             ("validation", self.step_validation, ()),
         ]
+        current = None
         try:
             for name, fn, blocked_by in steps:
                 # 'skipped' karena upstream gagal ikut memblokir:
                 # tanpa ini rantai skip berhenti di langkah pertama
                 # dan langkah hilir tetap mengonsumsi artefak basi.
-                def _blocks(v):
+                # 'partial' hanya memblokir dari langkah non-lunak
+                # (SOFT_PARTIAL_STEPS).
+                def _blocks(step_name, v):
                     if not isinstance(v, dict):
                         return False
-                    if v.get('status') in ('failed', 'partial'):
+                    if v.get('status') == 'failed':
                         return True
+                    if v.get('status') == 'partial':
+                        return step_name not in SOFT_PARTIAL_STEPS
                     return (v.get('status') == 'skipped'
                             and str(v.get('reason', '')).startswith(
                                 'upstream_failed'))
-                bad = [b for b in blocked_by if _blocks(results.get(b))]
+                bad = [b for b in blocked_by
+                       if _blocks(b, results.get(b))]
                 if bad:
                     log(f"  ! {name} dilewati: langkah hulu gagal: {bad}",
                         "WARN")
@@ -127,13 +143,21 @@ class PipelineOrchestrator:
                         'status': 'skipped',
                         'reason': f"upstream_failed:{','.join(bad)}"}
                     continue
+                current = name
                 results[name] = fn()
+                current = None
             results['status'] = 'completed'
         except Exception as e:
             log(f"Pipeline failed: {str(e)}", "ERROR")
             traceback.print_exc()
             results['status'] = 'failed'
             results['error'] = str(e)
+            if current:
+                # Langkah yang melempar tidak pernah tercatat di
+                # results, jadi agregasi di bawah tidak melihatnya dan
+                # last_full_pipeline.json menunjukkan failed_steps
+                # kosong untuk run yang jelas gagal (audit ronde 8).
+                results['error_step'] = current
 
         # Kejujuran status (audit K4): langkah yang melaporkan 'failed'
         # tidak boleh tertutup status 'completed'. Pemanggil (cron refit
@@ -143,7 +167,9 @@ class PipelineOrchestrator:
         # selain 'success' dengan cara yang sama (audit ronde 3).
         failed_steps = [k for k, v in results.items()
                         if isinstance(v, dict)
-                        and v.get('status') in ('failed', 'partial')]
+                        and (v.get('status') == 'failed'
+                             or (v.get('status') == 'partial'
+                                 and k not in SOFT_PARTIAL_STEPS))]
         # 'skipped' karena modul hilang (ImportError) adalah kegagalan
         # nyata, bukan skip sukarela — ikut gagalkan run. Skip karena
         # upstream gagal tidak dobel-hitung: hulunya sudah tercatat.
@@ -151,6 +177,20 @@ class PipelineOrchestrator:
                          if isinstance(v, dict)
                          and v.get('status') == 'skip'
                          and v.get('reason') == 'module_not_found']
+        # Langkah yang melempar exception (error_step) juga gagal,
+        # walau dict hasilnya tidak pernah terbentuk.
+        if (results.get('error_step')
+                and results['error_step'] not in failed_steps):
+            failed_steps.append(results['error_step'])
+        # Partial lunak: tercatat dan terlihat, tidak menggagalkan.
+        partial_steps = [k for k, v in results.items()
+                         if isinstance(v, dict)
+                         and v.get('status') == 'partial'
+                         and k in SOFT_PARTIAL_STEPS]
+        if partial_steps:
+            results['partial_steps'] = partial_steps
+            log(f"Pipeline finished with PARTIAL steps: "
+                f"{partial_steps}", "WARN")
         if failed_steps:
             results['failed_steps'] = failed_steps
             if results.get('status') == 'completed':
@@ -167,6 +207,11 @@ class PipelineOrchestrator:
             rec = {"finished_at": datetime.now(timezone.utc).isoformat(),
                    "status": results.get('status'),
                    "failed_steps": results.get('failed_steps', [])}
+            if results.get('partial_steps'):
+                rec["partial_steps"] = results['partial_steps']
+            if results.get('error'):
+                rec["error"] = results['error']
+                rec["error_step"] = results.get('error_step')
             tmp = os.path.join(BASE_DIR, "last_full_pipeline.json.tmp")
             with open(tmp, "w", encoding="utf-8") as f:
                 json.dump(rec, f)
@@ -339,6 +384,17 @@ class PipelineOrchestrator:
                 os.remove(bak)
             except OSError:
                 pass
+        # Sapu sisa .bak dump xG dari run LAMA: discard di atas hanya
+        # tahu nama milik run ini, jadi backup peninggalan kode lama
+        # (yang membuat .bak tapi tidak pernah membuangnya) tertinggal
+        # selamanya. Discard berjalan setelah restore run ini selesai,
+        # jadi .bak yang tersisa hanya milik run yang sudah tuntas —
+        # tidak ada konsumennya (audit ronde 8).
+        for stale in glob.glob(os.path.join(paths.XGRAW, "*.json.bak-*")):
+            try:
+                os.remove(stale)
+            except OSError:
+                pass
 
     def step_refresh_training_data(self) -> dict:
         """Segarkan data latih sebelum fit (musim berjalan saja).
@@ -350,10 +406,11 @@ class PipelineOrchestrator:
         """
         log("\n[Step refresh] Refresh data latih (football-data + xG)...")
         clean_path = paths.DATA_CLEAN
-        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        # Resolusi mikrodetik: stempel 1 detik membuat dua refresh
+        # dalam detik yang sama berbagi nama backup, menggabungkan dua
+        # generasi backup jadi satu nama (audit ronde 8).
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
 
-        before = self._clean_stats(clean_path)
-        after = dict(before)
         # Backup SEMUA file yang akan ditimpa langkah ini, bukan hanya
         # file bersih: rollback lama hanya memulihkan
         # all_matches_clean.csv, sementara unduhan raw, all_matches.csv
@@ -364,24 +421,50 @@ class PipelineOrchestrator:
         # untuk rollback run ini lalu dibuang.
         baks = []
         transient_baks = []
+        existed = {}  # path -> ada sebelum run ini (untuk rollback)
+
+        def _note(path):
+            if path not in existed:
+                existed[path] = os.path.exists(path)
 
         def _backup(path, transient=False):
-            if os.path.exists(path):
+            _note(path)
+            if existed[path]:
                 bak = f"{path}.bak-{ts}"
                 shutil.copy2(path, bak)
                 baks.append(bak)
                 if transient:
                     transient_baks.append(bak)
 
-        _backup(clean_path)
-        _backup(paths.DATA_RAW, transient=True)
-        for rp in sorted(glob.glob(os.path.join(
-                paths.RAW_DIR, f"*_{REFRESH_SEASON}.csv"))):
-            _backup(rp, transient=True)
-
         issues = []
+        shrink_issues = []
         dl = p = c = None
+        before = {"total": 0, "max_date": 0, "cur_season": 0,
+                  "div_counts": {}}
+        after = dict(before)
+        # Koreksi sah football-data (fixture duplikat dihapus, hasil
+        # dianulir) menyusutkan satu divisi dan akan menggagalkan
+        # SETIAP refresh berikutnya — rollback memulihkan file lama
+        # dan susut yang sama terdeteksi lagi minggu depan. Penerimaan
+        # manual satu kali: REFRESH_ACCEPT_SHRINK=1 memperlakukan isu
+        # susut sebagai peringatan untuk run itu saja (audit ronde 8).
+        accept_shrink = os.environ.get("REFRESH_ACCEPT_SHRINK") == "1"
         try:
+            # Statistik awal + semua backup DI DALAM try: dulu di luar,
+            # jadi error filesystem saat backup lolos dari langkah ini
+            # dan membatalkan seluruh run_full_pipeline — termasuk
+            # langkah TA yang independen — tanpa rollback (ronde 8).
+            before = self._clean_stats(clean_path)
+            after = dict(before)
+            _backup(clean_path)
+            _backup(paths.DATA_RAW, transient=True)
+            for rp in sorted(glob.glob(os.path.join(
+                    paths.RAW_DIR, f"*_{REFRESH_SEASON}.csv"))):
+                _backup(rp, transient=True)
+            _yr = self._xg_year()
+            for slug in XG_SLUGS:
+                _note(os.path.join(paths.XGRAW, f"{slug}_{_yr}.json"))
+
             from download import download
             dl = download(seasons=[REFRESH_SEASON], force=True)
             log(f"  football-data {REFRESH_SEASON}: "
@@ -406,17 +489,20 @@ class PipelineOrchestrator:
                 after = self._clean_stats(clean_path)
 
                 if after["total"] < before["total"]:
-                    issues.append(f"total baris menurun {before['total']}->{after['total']}")
+                    shrink_issues.append(
+                        f"total baris menurun {before['total']}->{after['total']}")
                 if after["cur_season"] < before["cur_season"]:
-                    issues.append(f"baris musim berjalan menurun "
-                                  f"{before['cur_season']}->{after['cur_season']}")
+                    shrink_issues.append(
+                        f"baris musim berjalan menurun "
+                        f"{before['cur_season']}->{after['cur_season']}")
                 # Cek susut PER DIVISI: cek agregat di atas menutupi
                 # satu divisi yang menyusut/basi bila divisi lain
                 # tumbuh (audit ronde 7).
                 for dv, n0 in sorted(before["div_counts"].items()):
                     n1 = after["div_counts"].get(dv, 0)
                     if n1 < n0:
-                        issues.append(f"baris divisi {dv} menurun {n0}->{n1}")
+                        shrink_issues.append(
+                            f"baris divisi {dv} menurun {n0}->{n1}")
 
             if not issues:
                 xg_before = self._xg_dump_counts()
@@ -427,11 +513,18 @@ class PipelineOrchestrator:
                 else:
                     for slug in XG_SLUGS:
                         if xg_after.get(slug, 0) < xg_before.get(slug, 0):
-                            issues.append(f"dump {slug} menurun "
-                                          f"{xg_before.get(slug)}->{xg_after.get(slug)}")
+                            shrink_issues.append(
+                                f"dump {slug} menurun "
+                                f"{xg_before.get(slug)}->{xg_after.get(slug)}")
         except Exception as e:
             issues.append(f"exception: {e!r}")
             traceback.print_exc()
+
+        if shrink_issues and accept_shrink:
+            log(f"  ! susut data DITERIMA manual "
+                f"(REFRESH_ACCEPT_SHRINK=1): {shrink_issues}", "WARN")
+            shrink_issues = []
+        issues += shrink_issues
 
         if issues:
             for bak in reversed(baks):
@@ -453,6 +546,25 @@ class PipelineOrchestrator:
                         shutil.copy2(bak, dump)
                     except Exception as e:
                         log(f"  ! rollback {dump} gagal: {e!r}", "ERROR")
+            # File yang TIDAK ada sebelum run tidak punya backup untuk
+            # dipulihkan — hapus versi buatan run ini (file bersih /
+            # all_matches.csv / dump xG baru), jangan tinggalkan sambil
+            # log mengklaim rollback (audit ronde 8).
+            for path, was in existed.items():
+                if not was and os.path.exists(path):
+                    try:
+                        os.remove(path)
+                    except OSError:
+                        pass
+            # File raw musim berjalan yang baru dibuat unduhan run ini
+            # (tidak ada di glob awal) juga buatan run ini.
+            for rp in glob.glob(os.path.join(
+                    paths.RAW_DIR, f"*_{REFRESH_SEASON}.csv")):
+                if rp not in existed and os.path.exists(rp):
+                    try:
+                        os.remove(rp)
+                    except OSError:
+                        pass
             self._discard_run_backups(transient_baks, ts)
             # Rotasi juga di jalur gagal: dulu hanya jalur sukses yang
             # merotasi, jadi refit yang gagal beruntun menumpuk backup
@@ -525,11 +637,35 @@ class PipelineOrchestrator:
             'freshness_warnings': warnings
         }
 
+    @staticmethod
+    def _restore_xg_snap(xg_out, snap):
+        """Pulihkan xg_matches.csv dari snapshot pra-build (bila ada)."""
+        if not snap:
+            return
+        try:
+            if os.path.exists(snap):
+                shutil.copy2(snap, xg_out)
+                os.remove(snap)
+                log("  ! xg_matches.csv dipulihkan dari snapshot "
+                    "(hasil build terdegradasi ditolak)", "WARN")
+        except OSError:
+            pass
+
     def step_build_xg(self) -> dict:
         """Bangun xg_raw/xg_matches.csv dari dump Understat terversi (lokal)."""
         log("\n[Step xg] Membangun xg_matches.csv dari dump Understat...")
+        xg_out = os.path.join(paths.XGRAW, "xg_matches.csv")
+        snap = None
         try:
             from data_enrichment.build_xg_matches import build as build_xg
+            # build() menulis ulang xg_matches.csv SEBELUM langkah ini
+            # sempat menilai hasilnya, jadi status partial/failed saja
+            # tidak melindungi artefaknya: rantai harian tetap akan
+            # mengonsumsi file terdegradasi itu. Snapshot dulu;
+            # pulihkan bila hasil build terdegradasi (audit ronde 8).
+            if os.path.exists(xg_out):
+                snap = xg_out + ".bak-snap"
+                shutil.copy2(xg_out, snap)
             r = build_xg()
             # build() melewati dump yang hilang/rusak dengan senyap
             # (daftar 'missing' di return dict-nya tidak pernah dibaca
@@ -547,16 +683,23 @@ class PipelineOrchestrator:
             if zero_divs or cur_missing:
                 log(f"  X build_xg_matches: divisi kosong {zero_divs}, "
                     f"dump musim berjalan rusak {cur_missing}", "ERROR")
+                self._restore_xg_snap(xg_out, snap)
                 return {"status": "failed" if not r.get("n_rows") else "partial",
                         **r, "zero_divs": zero_divs}
             if missing:
                 log(f"  ! build_xg_matches: {len(missing)} dump historis "
                     f"dilewati: {[nm for nm, _ in missing]}", "WARN")
             log(f"  OK xG matches: {r['n_rows']} rows", "INFO")
+            if snap:
+                try:
+                    os.remove(snap)
+                except OSError:
+                    pass
             return {"status": "success", **r}
         except Exception as e:
             log(f"  X build_xg_matches gagal: {str(e)}", "ERROR")
             traceback.print_exc()
+            self._restore_xg_snap(xg_out, snap)
             return {"status": "failed", "error": str(e)}
 
     def step_fit_models(self) -> dict:
@@ -632,9 +775,20 @@ class PipelineOrchestrator:
         # membaca status di level atas dict langkah; tanpa ini kegagalan
         # fit satu divisi tidak terlihat dan run tetap 'completed'
         # (lubang yang ditemukan audit ulang 2026-10-29).
-        results['status'] = 'failed' if any(
-            isinstance(v, dict) and v.get('status') == 'failed'
-            for v in results.values()) else 'success'
+        # Sebagian divisi gagal = 'partial', bukan 'failed': state
+        # divisi yang gagal tidak pernah ditimpa (save hanya terjadi
+        # setelah fit sukses), jadi versi lamanya tetap sah untuk
+        # scoring, dan gerbang memperlakukan partial model sebagai
+        # lunak (audit ronde 8). Semua divisi gagal tetap 'failed'.
+        _div_statuses = [v.get('status') for v in results.values()
+                         if isinstance(v, dict)]
+        _n_failed = _div_statuses.count('failed')
+        if _n_failed and _n_failed == len(_div_statuses):
+            results['status'] = 'failed'
+        elif _n_failed:
+            results['status'] = 'partial'
+        else:
+            results['status'] = 'success'
         return results
 
     def step_score_upcoming(self) -> dict:
@@ -958,6 +1112,19 @@ class PipelineOrchestrator:
                 return {'status': 'success', 'n_gol': 0, 'n_corner': 0}
             n_gol = rc.get('n_gol', 0)
             n_corner = rc.get('n_corner', 0)
+            if rc.get('status') == 'failed':
+                # predict_cups melaporkan gagal (fixture piala ada
+                # tapi nol yang terpetakan ke model liga) — status itu
+                # dulu dibuang di sini dan langkah selalu 'success',
+                # jadi gerbang cups->picks di jalur --run-all tak
+                # pernah bisa trip untuk mode kegagalan ini; rantai
+                # harian sudah memeriksanya dengan benar (ronde 8).
+                log(f"  X Cup predictions GAGAL: fixture ada, "
+                    f"0 terpetakan (n_fixtures={rc.get('n_fixtures')})",
+                    "ERROR")
+                return {'status': 'failed', 'n_gol': n_gol,
+                        'n_corner': n_corner,
+                        'n_fixtures': rc.get('n_fixtures', 0)}
             log(f"  OK Cup predictions: {n_gol} gol, {n_corner} corner", "INFO")
             return {'status': 'success', 'n_gol': n_gol, 'n_corner': n_corner}
         except ImportError:

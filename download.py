@@ -7,7 +7,16 @@ import urllib.error
 from stealth import urlopen_with_retry
 
 BASE = "https://www.football-data.co.uk/mmz4281/{season}/{league}.csv"
-OUT = os.path.join(os.path.expanduser("~"), "football-data", "raw")
+# Direktori output dari paths (sumber kebenaran tunggal): dulu
+# hardcoded ~/football-data/raw, yang hanya sama dengan paths.RAW_DIR
+# berkat symlink deployment — tanpa symlink itu, backup/rollback
+# refresh memindai direktori lain dari yang ditulis unduhan
+# (audit ronde 8). Fallback mempertahankan perilaku lama bila
+# download.py dipakai di luar pohon proyek.
+try:
+    from paths import RAW_DIR as OUT
+except Exception:
+    OUT = os.path.join(os.path.expanduser("~"), "football-data", "raw")
 LEAGUES = ["E0", "E1", "E2", "E3", "SC0", "SC1", "SC2", "SC3", "D1", "D2",
            "I1", "I2", "SP1", "SP2", "F1", "F2", "N1", "B1", "P1", "T1", "G1"]
 SEASONS = ["1718", "1819", "1920", "2021", "2122", "2223", "2324", "2425", "2526", "2627"]

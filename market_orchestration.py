@@ -127,6 +127,24 @@ def _match_game_id(home, away, date_iso, league_hint=None):
         if hinted:
             pool = hinted
     if not pool:
+        # Jendela ±2 hari, HANYA untuk kunci nama eksak di kedua sisi
+        # (idx dibangun dari pasangan nama ternormalisasi yang sama —
+        # jangkar terkuat) dan hanya bila kandidatnya unik setelah
+        # filter hint liga. Kasus nyata: Lorient vs Brest — model
+        # 31 Okt (dump Understat) vs TA 2 Nov — selisih 2 hari sehingga
+        # tak pernah terjodohkan dan laga kehilangan data pasarnya
+        # (audit ronde 8). Penyelamatan fuzzy di bawah tetap ±1 hari:
+        # varian nama pada jarak 2 hari terlalu berisiko wrong-twin.
+        wide = [c for c in cands if _parsedate(c.get("date")) and
+                abs((_parsedate(c["date"]) - _parsedate(date_iso)).days) <= 2]
+        if league_hint:
+            hinted_w = [c for c in wide
+                        if league_hint.lower() in (c.get("league") or "").lower()]
+            if hinted_w:
+                wide = hinted_w
+        if len(wide) == 1:
+            return wide[0]["game_id"]
+    if not pool:
         # Penyelamatan fuzzy: kunci eksak melewatkan varian nama
         # (Nottm Forest vs Nottingham, Internazionale vs Inter Milan)
         # — fixture-nya ADA di TA tapi tak pernah masuk pool, sehingga
