@@ -36,6 +36,12 @@ from validation import eval_1x2
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 RECORDS = os.path.join(BASE, "records_cache.jsonl")
+# Skema isi records: v2 menambahkan probabilitas yang benar-benar
+# disajikan (ph_meta walk-forward + turunan DC p_over_dc/p_btts) dan
+# gol aktual (fthg/ftag) ke setiap record. Cache berskema lebih lama
+# dianggap basi oleh make_picks_live._records_stale dan dibangun ulang
+# sekali, walau data latih tidak berubah (audit ronde 11).
+RECORDS_SCHEMA = 2
 YIDX = {"H": 0, "D": 1, "A": 2}
 SIDES = (0, 1, 2)
 
@@ -150,9 +156,57 @@ def _write_records_meta(out_path, data_stamp):
         except Exception:
             meta = {}
     meta.update({"dc_fit_mode": model_v2.DC_FIT_MODE,
-                 "data_stamp": data_stamp})
+                 "data_stamp": data_stamp,
+                 "records_schema": RECORDS_SCHEMA})
     with open(meta_path, "w", encoding="utf-8") as f:
         json.dump(meta, f)
+
+
+def _add_meta_walkforward(rec, min_train=1500):
+    """Isi ph_meta/pd_meta/pa_meta tiap record dengan stack meta
+    walk-forward bulanan (9 logit: DC + T3 + implied mentah dari odds
+    pembuka; fit mf._fit_params pada record bulan-bulan sebelumnya).
+
+    Resepnya sama persis dengan yang dinilai gerbang go-live
+    (experiments/go_live_gates._records_meta_stack) dan yang selama ini
+    direproduksi manual setiap audit, karena records lama hanya
+    menyimpan komponen DC/T3 — probabilitas meta yang benar-benar
+    dipakai mesin pick tidak pernah tersimpan, sehingga backtest
+    berlabel 'meta' diam-diam mengukur T3 (lihat _model_probs).
+    Record pada bulan-bulan awal (train < min_train) tidak mendapat
+    field meta; konsumen jatuh ke fallback seperti sebelumnya.
+    """
+    n = len(rec)
+    if n == 0:
+        return 0
+    X = np.full((n, 9), np.nan)
+    y = np.empty(n, dtype=int)
+    dates = []
+    for i, r in enumerate(rec):
+        X[i, 0] = _logit(r["ph_dc"]); X[i, 1] = _logit(r["pd_dc"])
+        X[i, 2] = _logit(r["pa_dc"])
+        X[i, 3] = _logit(r["ph_t3"]); X[i, 4] = _logit(r["pd_t3"])
+        X[i, 5] = _logit(r["pa_t3"])
+        o = r.get("o")
+        if o:
+            for j in range(3):
+                X[i, 6 + j] = _logit(1.0 / o[j])
+        y[i] = r["yi"]
+        dates.append(r["date"])
+    filled = 0
+    for m in sorted({d[:7] for d in dates}):
+        tr = np.array([d < m + "-01" for d in dates])
+        te = np.array([d[:7] == m for d in dates])
+        if tr.sum() < min_train or te.sum() == 0:
+            continue
+        params = mf._fit_params(X[tr], y[tr])
+        preds = mf._softmax_scores(X[te], *params)
+        for row, k in zip(preds, np.where(te)[0]):
+            rec[k]["ph_meta"] = float(row[0])
+            rec[k]["pd_meta"] = float(row[1])
+            rec[k]["pa_meta"] = float(row[2])
+            filled += 1
+    return filled
 
 
 def cache_records(out_path=RECORDS):
@@ -209,10 +263,19 @@ def cache_records(out_path=RECORDS):
                 ph_t3=p3row[0], pd_t3=p3row[1], pa_t3=p3row[2],
                 lam_h=lh, lam_a=la, rho=mdl.rho,
                 o=_open_dec(o) if o else None,
+                # Skema v2: gol aktual + probabilitas turunan persis
+                # seperti yang dihitung jalur prediksi dari matriks DC
+                # yang sama (model_v2.DC.probs), supaya pasar turunan
+                # bisa di-score tanpa join ulang (audit ronde 11).
+                fthg=None if r["yh"] is None else int(r["yh"]),
+                ftag=None if r["ya"] is None else int(r["ya"]),
+                p_over_dc=pr["over"], p_btts=pr["btts"],
             ))
+    n_meta = _add_meta_walkforward(rec)
     with open(out_path, "w", encoding="utf-8") as f:
         for r in rec:
             f.write(json.dumps(r) + "\n")
+    print(f"  meta walk-forward terisi: {n_meta}/{len(rec)} record")
     # Stamp mode fit DC + kesegaran data latih yang menghasilkan cache;
     # dipakai _fit_meta utk rebuild. Tanpa stamp data, cache bertahan
     # melewati refresh data mingguan dan model meta diam-diam ter-fit
@@ -292,13 +355,12 @@ def _recalibrate(records):
 
 def _model_probs(rec, cfg):
     if cfg["model"] == "meta":
-        # "meta" harus berarti model meta yang sebenarnya: ph_meta bila
-        # cache sudah diperkaya experiment_meta, selain itu ph_t3 —
-        # output multinomial walk-forward yang ditulis cache_records
-        # memang model meta itu. Versi lama jatuh per-komponen ke
-        # ph_dc, dan records_cache tidak pernah memuat ph_meta, jadi
-        # backtest default berlabel 'meta' diam-diam mengukur DC murni
-        # (audit ronde 3).
+        # "meta" harus berarti model meta yang sebenarnya: ph_meta
+        # walk-forward yang kini ditulis cache_records sendiri (skema
+        # v2), selain itu ph_t3 — output multinomial walk-forward.
+        # Versi lama jatuh per-komponen ke ph_dc, dan records_cache
+        # tidak pernah memuat ph_meta, jadi backtest default berlabel
+        # 'meta' diam-diam mengukur DC murni (audit ronde 3).
         if rec.get("ph_meta"):
             return (rec["ph_meta"],
                     rec.get("pd_meta") or rec["pd_t3"],
