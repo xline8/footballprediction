@@ -5,8 +5,14 @@ import re
 from collections import Counter, defaultdict
 from datetime import datetime
 
-RAW = os.path.join(os.path.expanduser("~"), "football-data", "raw")
-OUTD = os.path.join(os.path.expanduser("~"), "football-data")
+# Direktori dari paths (sumber kebenaran tunggal), pola yang sama
+# dengan download.py: hardcode ~/football-data hanya sama dengan
+# lokasi proyek berkat symlink deployment (audit ronde 9).
+try:
+    from paths import BASE as OUTD, RAW_DIR as RAW
+except Exception:
+    OUTD = os.path.join(os.path.expanduser("~"), "football-data")
+    RAW = os.path.join(OUTD, "raw")
 
 FRONT = ["Div", "Season", "Date", "Time", "HomeTeam", "AwayTeam",
          "FTHG", "FTAG", "FTR", "HTHG", "HTAG", "HTR",

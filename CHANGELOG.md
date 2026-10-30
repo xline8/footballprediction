@@ -7,6 +7,30 @@ Keep a Changelog, and the project uses semantic versioning.
 
 ### Fixed
 
+- A ninth audit round verified PR #29 (the soft-partial gating
+  matrix exercised end to end, the shrink-ordering change proven
+  rollback-safe at byte level, the newly matched fixture's market
+  rows reconciled snapshot-for-snapshot) and fixed what it found,
+  including one medium defect the previous round's own fix had
+  introduced. The refresh rollback's created-file deletion could
+  remove pre-existing raw season CSVs: it told run-created files
+  from old ones via an existence map that was only filled
+  incrementally inside the step's error handling, after the initial
+  stats call and the ordered backups, so a failure before or during
+  the backup phase left later files unrecorded and the rollback
+  deleted them — every raw file when the stats call itself raised,
+  in a run that had overwritten nothing. The map is now completed
+  before the step's fallible work begins. The refresh's post-commit
+  work (loader reload, records rebuild) is guarded: an exception
+  there previously escaped after the new data was committed and the
+  backups discarded, and now returns a failed step result marked
+  `committed` instead. The model-fit rollup reports failure when
+  zero divisions entered it, the incremental run's aggregation
+  applies the same soft-partial rule as the full pipeline, and
+  `prepare.py`, `clean.py`, and `model_corners_v3.py` take their
+  directories from `paths` like `download.py` does (each keeps its
+  hardcoded path as an out-of-tree fallback). Three unit tests
+  added.
 - An eighth audit round verified PR #28 end to end (the full rollback
   reproduced in a stubbed sandbox, the 9 newly graded TipsterArea bets
   re-settled independently, the calibration summary recomputed
