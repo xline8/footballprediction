@@ -52,7 +52,8 @@ CACHE_TTL_DATE = 60 * 20    # 20 menit cache HTML untuk halaman tanggal
 CACHE_TTL_MATCH = 60 * 30   # 30 menit cache HTML untuk halaman laga
 
 FIX_COLS = ["game_id", "date", "time", "league", "country", "home", "away",
-            "status", "score_h", "score_a", "url", "first_seen", "last_seen"]
+            "status", "score_h", "score_a", "url", "first_seen", "last_seen",
+            "status_raw"]
 SNAP_COLS = ["captured_at", "game_id", "date", "home", "away", "o1", "ox", "o2",
              "status", "score_h", "score_a"]
 MKT_COLS = ["captured_at", "game_id", "market", "line", "selection", "bookmaker",
@@ -536,9 +537,15 @@ def save_date_page(games, captured):
     for g in games:
         old = frows.get(g["game_id"])
         if old:
+            # status_raw ikut disimpan di fixtures (audit ronde 12,
+            # C12-2): halaman arsip tanggal lampau tidak memuat span
+            # status, jadi satu-satunya peluang menangkap teks status
+            # mentah (AET/PEN) adalah halaman hari berjalan saat laga
+            # masih terlihat di fixtures.
             old.update({k: g[k] for k in ("date", "time", "league", "country",
                                           "home", "away", "status",
-                                          "score_h", "score_a", "url")})
+                                          "score_h", "score_a", "url",
+                                          "status_raw")})
             old["last_seen"] = captured
         else:
             g2 = dict(g)
@@ -573,8 +580,13 @@ def save_date_page(games, captured):
     for g in games:
         if g["status"] == "FT" and g["score_h"] != "":
             cur = res.get(g["game_id"])
+            # A12-5: status_raw yang baru terisi juga memicu tulis
+            # ulang — tanpa ini, baris yang sudah ada dengan skor sama
+            # tidak pernah menerima status_raw yang tertangkap belakangan.
             if (not cur or cur["score_h"] != g["score_h"]
-                    or cur["score_a"] != g["score_a"] or cur["status"] != "FT"):
+                    or cur["score_a"] != g["score_a"] or cur["status"] != "FT"
+                    or (g.get("status_raw")
+                        and cur.get("status_raw", "") != g["status_raw"])):
                 res[g["game_id"]] = {
                     "game_id": g["game_id"], "date": g["date"],
                     "league": g["league"], "home": g["home"], "away": g["away"],

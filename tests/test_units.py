@@ -1012,6 +1012,72 @@ def test_ta_picks_ranked_by_shrunk_probability():
     assert picks[0]["prob"] == 0.70, picks[0]
 
 
+def test_refresh_returns_per_league_source():
+    # A12-2: pemanggil harus bisa membedakan konten segar dari
+    # fallback disk — main() mengembalikan {div: sumber}.
+    import tempfile
+
+    import refresh_fixtures as rf
+
+    with tempfile.TemporaryDirectory() as td:
+        for slug in rf.LEAGUES:
+            with open(os.path.join(td, f"{slug}_2026_fixtures.json"),
+                      "w", encoding="utf-8") as f:
+                f.write("[]")
+            with open(os.path.join(td, f"{slug}_2026_all.json"),
+                      "w", encoding="utf-8") as f:
+                f.write("[]")
+
+        def fake_fetch(slug):
+            if slug == "EPL":
+                return [{"datetime": "2099-01-01 20:00:00",
+                         "h": {"title": "A"}, "a": {"title": "B"}}]
+            raise RuntimeError("sumber mati (stub tes)")
+
+        old_xg, old_fetch = rf.XG, rf.fetch
+        rf.XG, rf.fetch = td, fake_fetch
+        try:
+            srcs = rf.main()
+        finally:
+            rf.XG, rf.fetch = old_xg, old_fetch
+    assert srcs["E0"] == "understat.com", srcs
+    for div in ("SP1", "D1", "I1", "F1"):
+        assert srcs[div].startswith("fallback disk"), srcs
+
+
+def test_save_date_page_persists_status_raw():
+    # C12-2 + A12-5: status_raw tersimpan di fixtures.csv DAN
+    # results.csv; pengisian status_raw belakangan (skor sama)
+    # tetap memicu tulis ulang baris hasil.
+    import csv as _csv
+    import tempfile
+
+    import ta_scrape
+
+    game = {"game_id": "991", "date": "2026-10-30", "time": "20:00",
+            "league": "Germany - DFB Pokal", "country": "Germany",
+            "home": "A", "away": "B", "status": "FT", "score_h": "1",
+            "score_a": "1", "o1": "", "ox": "", "o2": "",
+            "url": "u", "status_raw": ""}
+    with tempfile.TemporaryDirectory() as td:
+        old_dir = ta_scrape.DIR
+        ta_scrape.DIR = td
+        try:
+            ta_scrape.save_date_page([dict(game)], "2026-10-30T00:00:00")
+            g2 = dict(game, status_raw="AET")
+            ta_scrape.save_date_page([g2], "2026-10-30T01:00:00")
+            with open(os.path.join(td, "results.csv"),
+                      newline="", encoding="utf-8") as f:
+                res = list(_csv.DictReader(f))
+            with open(os.path.join(td, "fixtures.csv"),
+                      newline="", encoding="utf-8") as f:
+                fix = list(_csv.DictReader(f))
+        finally:
+            ta_scrape.DIR = old_dir
+    assert res[0]["status_raw"] == "AET", res
+    assert fix[0]["status_raw"] == "AET", fix
+
+
 if __name__ == "__main__":
     fns = [v for k, v in sorted(globals().items())
            if k.startswith("test_") and callable(v)]

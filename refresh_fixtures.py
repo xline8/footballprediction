@@ -50,9 +50,19 @@ def dkey(d):
 
 
 def main():
+    """Segarkan semua liga; kembalikan {div: sumber} per liga.
+
+    Sumber "understat.com" berarti konten segar; "fallback disk (...)"
+    berarti fetch gagal dan file ditulis ulang dari dump
+    {slug}_2026_all.json di disk — kontennya bisa berumur beberapa
+    hari walau mtime file fixture baru. Pemanggil yang menilai
+    kesegaran dari mtime saja akan tertipu (audit ronde 12, A12-2),
+    jadi status sumber dikembalikan secara eksplisit.
+    """
     bdir = os.path.join(XG, "backup_fixtures")
     os.makedirs(bdir, exist_ok=True)
     total_add, total_del = [], []
+    sources = {}
     for slug, div in LEAGUES.items():
         path = os.path.join(XG, f"{slug}_2026_fixtures.json")
         with open(path, encoding="utf-8") as f:
@@ -89,9 +99,11 @@ def main():
         os.replace(tmp, path)
         total_add += [(div,) + d for d in add_fut]
         total_del += [(div,) + d for d in drop_fut]
+        sources[div] = src
         print(f"[{div:>3}] {src}: {len(old)}->" f"{len(fresh)} rows | baru>=H: {len(add_fut)} "
               f"| hilang>=H: {len(drop_fut)} | backup: {os.path.basename(bpath)}")
     print(f"TOTAL fixture >= {TODAY}: +{len(total_add)} / -{len(total_del)}")
+    return sources
     for d in total_add[:10]:
         print("  +", d[0], d[1][:10], d[2], "v", d[3])
     for d in total_del[:10]:
