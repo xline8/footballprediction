@@ -312,6 +312,12 @@ Keep a Changelog, and the project uses semantic versioning.
 
 ### Removed
 
+- The legacy exogenous-enrichment cluster (`enrich_pipeline.py`,
+  `data_enrichment/fetch_xg.py`, `data_enrichment/fetch_closing_odds.py`,
+  `data_enrichment/synthesize_european.py`): no production module
+  imported it and its output file was read only by experiments.
+  `data_enrichment/utils.py` and `build_xg_matches.py` are live and
+  remain.
 - JIT capture and the API-Football integration (`jit_orchestrator.py`,
   `daily_api_capture.py`, `data_enrichment/api_football_client.py`,
   `data_enrichment/fetch_corner_odds.py`, and the `--corner-export` path

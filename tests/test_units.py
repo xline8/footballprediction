@@ -1178,6 +1178,124 @@ def test_match_result_postponed_fallback():
     assert got == (2, 1), got
 
 
+def test_corner_stats_window_golden():
+    # D12-1: fungsi corner yang tersaji tidak pernah tersentuh tes.
+    # Nilai golden dihitung dari implementasi saat ini pada histori
+    # sintetis tetap — perubahan rumus apa pun harus menabrak tes ini
+    # secara sadar.
+    from datetime import date
+
+    import model_corners_v3 as mc
+
+    games = [("A", "B", 6, 4, 12, 9, date(2026, 1, 28)),
+             ("C", "A", 5, 5, 10, 11, date(2026, 1, 21)),
+             ("B", "C", 7, 3, 14, 8, date(2026, 1, 10))]
+    bh, ba, bmu, r_base, L = mc.stats_window(games, date(2026, 1, 31))
+    assert abs(bh - 5.990688) < 1e-5, bh
+    assert abs(ba - 4.009312) < 1e-5, ba
+    assert abs(L - 10.662552) < 1e-5, L
+    # Jendela kosong: nol, bukan ZeroDivisionError.
+    assert mc.stats_window([], date(2026, 1, 31)) == (0.0,) * 5
+    mu = mc.mu_cs({"base_h": 5.2, "base_a": 4.6, "fhp": 1.1,
+                   "fhc": 0.9, "fap": 1.05, "fac": 0.95}, 0.15)
+    assert abs(mu - 9.795578) < 1e-5, mu
+    pmf = mc.pmf_k(10.4, 8.0)
+    assert abs(sum(pmf) - 1.0) < 1e-9
+    assert abs(sum(pmf[10:]) - 0.525424) < 1e-5
+
+
+def test_corner_cups_parity_golden():
+    # D12-2/B12-3: logika corner piala adalah duplikat logika liga —
+    # kunci fungsi bersama (pmf_k identik byte-for-byte hasilnya) dan
+    # mu piala pada histori sintetis tetap, supaya drift salah satu
+    # sisi tertangkap.
+    from datetime import date
+
+    import model_corners_v3 as mc
+    import predict_cups as pc
+
+    assert pc.pmf_k(10.4, 8.0) == mc.pmf_k(10.4, 8.0)
+    assert pc.pmf_k(9.1, 5.5) == mc.pmf_k(9.1, 5.5)
+
+    def M(d, h, a, hc, ac, hs, asx):
+        return {"div": "E0", "date": d, "home": h, "away": a,
+                "hc": hc, "ac": ac, "hs": hs, "as": asx}
+
+    ms = [M(date(2026, 1, 5), "Arsenal", "Chelsea", 7, 3, 15, 9),
+          M(date(2026, 1, 12), "Liverpool", "Arsenal", 6, 5, 13, 12),
+          M(date(2026, 1, 19), "Chelsea", "Liverpool", 4, 6, 10, 14),
+          M(date(2026, 1, 26), "Arsenal", "Liverpool", 8, 4, 16, 11)]
+    mu = pc.corner_mu(ms, "Arsenal", "Chelsea", "E0", "E0",
+                      date(2026, 2, 1))
+    assert abs(mu - 10.768281) < 1e-5, mu
+
+
+def test_feature_rows_do_not_leak_own_result():
+    # D12-3: baris fitur sebuah laga tidak boleh bergantung pada
+    # hasil laga itu sendiri. Bangun dua kali dengan skor laga kedua
+    # yang berbeda — fitur pra-laga untuk laga kedua harus identik.
+    from datetime import date
+
+    import football_etl
+    import features
+
+    def M(d, h, a, yh, ya, ftr):
+        return {"div": "E0", "date": d, "season": "2026", "home": h,
+                "away": a, "yh": yh, "ya": ya, "ftr": ftr}
+
+    m1 = M(date(2026, 1, 1), "Arsenal", "Chelsea", 3, 0, "H")
+
+    class FakeCache:
+        def __init__(self, matches):
+            self.matches = matches
+
+    old = football_etl.MatchCache
+    try:
+        football_etl.MatchCache = lambda: FakeCache(
+            [m1, M(date(2026, 1, 8), "Chelsea", "Arsenal", 0, 1, "A")])
+        rows_a = features.build_feature_rows()
+        football_etl.MatchCache = lambda: FakeCache(
+            [m1, M(date(2026, 1, 8), "Chelsea", "Arsenal", 5, 0, "H")])
+        rows_b = features.build_feature_rows()
+    finally:
+        football_etl.MatchCache = old
+    feat_keys = ("elo_h", "elo_a", "elo_diff", "form_pts_h",
+                 "form_pts_a", "goals_diff_h", "goals_diff_a",
+                 "rest_h", "rest_a", "n_played_h", "n_played_a")
+    ra, rb = rows_a[1], rows_b[1]
+    for k in feat_keys:
+        assert ra[k] == rb[k], (k, ra[k], rb[k])
+    # Dan nilainya memang hanya mencerminkan laga pertama:
+    # Chelsea kalah tandang -> 0 poin form, selisih gol -3, 1 laga.
+    assert ra["form_pts_h"] == 0.0
+    assert ra["goals_diff_h"] == -3.0
+    assert ra["n_played_h"] == 1
+
+
+def test_fitmodel_stats_come_from_train_only():
+    # D12-4: imputasi/standarisasi T3 dihitung HANYA dari data latih
+    # (termasuk penanganan NaN-nya) dan tidak berubah saat prediksi.
+    import numpy as np
+
+    from model_features_1x2 import FitModel
+
+    Xtr = np.array([[1.0, 10.0], [3.0, np.nan], [5.0, 30.0],
+                    [7.0, 40.0]])
+    ytr = np.array([0, 1, 2, 0])
+    m = FitModel(Xtr, ytr, epochs=2)
+    assert np.allclose(m.med, [4.0, 30.0])          # median train
+    imputed = np.array([[1.0, 10.0], [3.0, 30.0], [5.0, 30.0],
+                        [7.0, 40.0]])
+    assert np.allclose(m.mu, imputed.mean(axis=0))  # mean sesudah imputasi
+    assert np.allclose(m.sd, imputed.std(axis=0))
+    mu0, med0, sd0 = m.mu.copy(), m.med.copy(), m.sd.copy()
+    p = m.predict(np.array([[100.0, -50.0]]))
+    assert abs(float(p.sum()) - 1.0) < 1e-9
+    assert np.array_equal(m.mu, mu0)
+    assert np.array_equal(m.med, med0)
+    assert np.array_equal(m.sd, sd0)
+
+
 if __name__ == "__main__":
     fns = [v for k, v in sorted(globals().items())
            if k.startswith("test_") and callable(v)]
