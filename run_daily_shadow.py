@@ -447,7 +447,8 @@ def main():
             raise _SkipStep("prediksi liga tidak sukses pada run ini")
         from market_orchestration import archive_snapshots
         ar = archive_snapshots()
-        print(f"[14/16] archive {ar['date']}: {len(ar['archived'])} file")
+        print(f"[14/16] archive {ar['date']}: {len(ar['archived'])} file"
+              f" (+{len(ar.get('kept', []))} sudah ada, write-once)")
     except _SkipStep as e:
         print(f"[14/16] DILEWATI archive: {e}")
     except Exception as e:

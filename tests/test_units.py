@@ -1278,6 +1278,48 @@ def test_merge_bets_refreshes_open_rows_only():
     assert by_id["3|OU|2.5|Over"]["status"] == "OPEN"
 
 
+def test_archive_snapshots_write_once():
+    # C14-1: arsip adalah snapshot pra-kickoff untuk grading; rerun
+    # pasca-kickoff tidak boleh menimpanya (leg laga yang sudah main
+    # lenyap dari snapshot -> tak ter-generate -> ter-pangkas yatim
+    # tanpa dinilai). File yang hilang tetap dilengkapi.
+    import shutil
+    import tempfile
+    from datetime import date
+
+    import market_orchestration as mo
+
+    td = tempfile.mkdtemp()
+    try:
+        src = os.path.join(td, "src")
+        arc = os.path.join(td, "archive")
+        os.makedirs(src)
+        f1, f2 = mo.ARCHIVE_FILES[0], mo.ARCHIVE_FILES[1]
+        with open(os.path.join(src, f1), "w") as f:
+            f.write("prematch")
+        with open(os.path.join(src, f2), "w") as f:
+            f.write("v1")
+        saved = (mo.HERE, mo.ARCHIVE)
+        mo.HERE, mo.ARCHIVE = src, arc
+        try:
+            r1 = mo.archive_snapshots(target_date=date(2026, 10, 30))
+            assert sorted(r1["archived"]) == sorted([f1, f2]), r1
+            # sumber berubah (output pasca-kickoff) + satu file hilang
+            with open(os.path.join(src, f1), "w") as f:
+                f.write("postkickoff")
+            dest = os.path.join(arc, "2026-10-30")
+            os.remove(os.path.join(dest, f2))
+            r2 = mo.archive_snapshots(target_date=date(2026, 10, 30))
+            assert r2["archived"] == [f2], r2      # hanya yang hilang
+            assert r2["kept"] == [f1], r2
+            with open(os.path.join(dest, f1)) as f:
+                assert f.read() == "prematch"     # tak tertimpa
+        finally:
+            mo.HERE, mo.ARCHIVE = saved
+    finally:
+        shutil.rmtree(td, ignore_errors=True)
+
+
 def test_purge_bogus_spares_issued_and_settled_rows():
     # Audit-diri ronde 13: purge harga mustahil tidak boleh membuang
     # baris yang build saat ini terbitkan sendiri (produk > 1,02 di

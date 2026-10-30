@@ -10,7 +10,7 @@ Pekerjaan:
      market_compare.csv. Per pasar/garis/pilihan: odds 1xbet + median antar
      bandar + prob implied ternormalisasi (proporsional, konvensi ta_model).
      Snapshot lenkap -> kolom kosong, tidak difabrikasi.
-  3. archive_snapshots(date): salin output harian ke archive/<date>/ (idempoten).
+  3. archive_snapshots(date): salin output harian ke archive/<date>/ (write-once per file).
   4. sync_cup_picks_to_ledger(): rutekan pick piala (best_picks_today,
      ber-label kompetisi) ke ledger/picks.jsonl dgn competition=EFL Cup/DFB
      Pokal, odds_open = snapshot ta terakhir sebelum kickoff. Hanya pasar yang
@@ -411,15 +411,29 @@ ARCHIVE_FILES = ["predictions_upcoming.csv", "predictions_corners_upcoming.csv",
 
 
 def archive_snapshots(target_date=None):
-    """Salin output harian ke archive/<date>/. Idempoten per tanggal."""
+    """Salin output harian ke archive/<date>/, write-once per file.
+
+    Arsip adalah snapshot pra-kickoff hari itu — bahan grading
+    rekomendasi. Rerun di hari yang sama SETELAH kickoff dulu
+    menimpa snapshot pagi dengan output pasca-kickoff yang tak lagi
+    memuat laga yang sudah main; leg rekomendasi laga itu lalu tak
+    pernah ter-generate ulang oleh grader dan akhirnya ter-pangkas
+    sebagai yatim tanpa pernah dinilai (audit ronde 14, C14-1:
+    3 leg Le Havre–PSG). Kini file yang sudah ada di arsip tidak
+    ditimpa; hanya file yang hilang yang disalin, jadi run pertama
+    yang parsial tetap bisa dilengkapi run berikutnya.
+    """
     d = target_date or datetime.now(timezone.utc).date()
     dest = os.path.join(ARCHIVE, d.isoformat())
     os.makedirs(dest, exist_ok=True)
-    copied = []
+    copied, kept = [], []
     for fn in ARCHIVE_FILES:
         src = os.path.join(HERE, fn)
         if os.path.exists(src):
             out = os.path.join(dest, fn)
+            if os.path.exists(out):
+                kept.append(fn)
+                continue
             # Salin atomik (tmp + replace) — grading membaca arsip ini;
             # salinan terpotong karena crash akan terbaca diam-diam.
             tmp = out + ".tmp"
@@ -427,7 +441,7 @@ def archive_snapshots(target_date=None):
                 fo.write(fi.read())
             os.replace(tmp, out)
             copied.append(fn)
-    return {"date": d.isoformat(), "archived": copied}
+    return {"date": d.isoformat(), "archived": copied, "kept": kept}
 
 
 # ---------------------------------------------------------------- cup picks -> ledger
