@@ -1552,6 +1552,10 @@ def test_archive_snapshots_write_once():
             assert r3["kept"] == [f1], r3
             with open(os.path.join(dest, f2)) as f:
                 assert f.read() == "h\nv2\n"
+        finally:
+            mo.HERE, mo.ARCHIVE = saved
+    finally:
+        shutil.rmtree(td, ignore_errors=True)
 
 
 def test_archive_skips_wrong_generation_and_blank_rows():
@@ -1623,10 +1627,6 @@ def test_archive_skips_wrong_generation_and_blank_rows():
         assert "best_picks_today.csv" in r["skipped"], r
         assert not os.path.exists(
             os.path.join(dest, "best_picks_today.csv"))
-    finally:
-        shutil.rmtree(td, ignore_errors=True)
-        finally:
-            mo.HERE, mo.ARCHIVE = saved
     finally:
         shutil.rmtree(td, ignore_errors=True)
 
