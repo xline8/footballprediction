@@ -380,15 +380,16 @@ async def get_prediction_for_match(
     rows = load_predictions()
 
     for r in rows:
-        if r['div'] == div and str(r['date']) == str(date_str) and r['home'] == home and r['away'] == away:
+        if (r.get('div') == div and str(r.get('date')) == str(date_str)
+                and r.get('home') == home and r.get('away') == away):
             return JSONResponse(content={
-                'div': r['div'],
-                'date': r['date'],
-                'home': r['home'],
-                'away': r['away'],
-                'ph_dc': float(r['ph_dc']) if r['ph_dc'] else None,
-                'pd_dc': float(r['pd_dc']) if r['pd_dc'] else None,
-                'pa_dc': float(r['pa_dc']) if r['pa_dc'] else None,
+                'div': r.get('div'),
+                'date': r.get('date'),
+                'home': r.get('home'),
+                'away': r.get('away'),
+                'ph_dc': float(r['ph_dc']) if r.get('ph_dc') else None,
+                'pd_dc': float(r['pd_dc']) if r.get('pd_dc') else None,
+                'pa_dc': float(r['pa_dc']) if r.get('pa_dc') else None,
                 'ph_bl': float(r['ph_bl']) if r.get('ph_bl') else None,
                 'pd_bl': float(r['pd_bl']) if r.get('pd_bl') else None,
                 'pa_bl': float(r['pa_bl']) if r.get('pa_bl') else None,
