@@ -81,8 +81,9 @@ current machine's ledger.
 
 You do not need to know how to code to run the standard prediction process.
 It needs an internet connection because it updates football fixtures and
-market data. The first run can take a while; keep the window open until it
-says it has finished.
+market data. On a new clone, the first run downloads historical match data
+and creates `all_matches_clean.csv`. It can take longer than later runs; keep
+the window open until it says it has finished.
 
 ### Windows — easiest option
 
@@ -179,10 +180,10 @@ python football_cli.py --about    # project credits and data sources
 
 ### Optional: open the local API
 
-After a successful pipeline run, start the local API with:
+After menu item 1 finishes successfully, start the local API with:
 
 ```bash
-python api_server.py
+python football_cli.py --api
 ```
 
 Keep that terminal open, then visit `http://127.0.0.1:8000` in a browser.

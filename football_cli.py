@@ -19,6 +19,9 @@ from typing import Sequence
 
 
 BASE_DIR = Path(__file__).resolve().parent
+COMBINED_DATA = BASE_DIR / "all_matches.csv"
+TRAINING_DATA = BASE_DIR / "all_matches_clean.csv"
+PREDICTIONS = BASE_DIR / "predictions_upcoming.csv"
 OUTPUT_FILES = (
     ("Match predictions", "predictions_upcoming.csv"),
     ("Best picks", "best_picks.csv"),
@@ -100,6 +103,15 @@ def output_summary() -> list[str]:
     return rows
 
 
+def has_training_data() -> bool:
+    """Return whether the cleaned training file contains at least one match."""
+    try:
+        with TRAINING_DATA.open(encoding="utf-8", newline="") as handle:
+            return next(csv.DictReader(handle), None) is not None
+    except (OSError, UnicodeError, csv.Error):
+        return False
+
+
 def show_status() -> None:
     print(Style.title("\nPROJECT STATUS"))
     print(f"Project folder: {BASE_DIR}")
@@ -140,8 +152,60 @@ def run_command(label: str, arguments: Sequence[str]) -> bool:
     return False
 
 
+def ensure_training_data() -> bool:
+    """Create the training dataset when the project is run for the first time."""
+    if has_training_data():
+        return True
+
+    if not COMBINED_DATA.exists():
+        print(Style.warning(
+            "\nInitial training data is missing. Downloading match history before "
+            "the first run."
+        ))
+        if not run_command("Downloading historical match data", ("download.py",)):
+            return False
+    else:
+        print(Style.warning(
+            "\nThe combined match dataset exists, but the cleaned dataset is missing."
+        ))
+    if not run_command("Building the combined match dataset", ("prepare.py",)):
+        return False
+    if not run_command("Cleaning the match dataset", ("clean.py",)):
+        return False
+    if has_training_data():
+        return True
+
+    print(Style.error(
+        "[ERROR] The initial data setup did not create a usable "
+        "all_matches_clean.csv. Check the network connection and try again."
+    ))
+    return False
+
+
+def run_daily_update() -> bool:
+    if not ensure_training_data():
+        return False
+    return run_command("Daily update", ("run_daily_shadow.py",))
+
+
+def run_local_api() -> bool:
+    if not has_training_data():
+        print(Style.warning(
+            "Training data is missing. Run menu item 1 before starting the API."
+        ))
+        return False
+    if not PREDICTIONS.exists():
+        print(Style.warning(
+            "Predictions are missing. Run menu item 1 before starting the API."
+        ))
+        return False
+    return run_command("Local API", ("api_server.py",))
+
+
 def run_full_pipeline() -> bool:
     """Build the cache, then run the complete production pipeline."""
+    if not ensure_training_data():
+        return False
     if not run_command("Preparing the data cache", ("setup_cache.py",)):
         return False
     return run_command("Updating data and generating predictions", (
@@ -231,7 +295,7 @@ def interactive_menu() -> int:
             wait_for_enter()
         elif choice == "2":
             if confirm("Run the daily update now?"):
-                run_command("Daily update", ("run_daily_shadow.py",))
+                run_daily_update()
             wait_for_enter()
         elif choice == "3":
             show_status()
@@ -241,7 +305,7 @@ def interactive_menu() -> int:
             wait_for_enter()
         elif choice == "5":
             print("Press Ctrl+C to stop the API and return to the menu.")
-            run_command("Local API", ("api_server.py",))
+            run_local_api()
             wait_for_enter()
         elif choice == "6":
             show_about_and_credits()
@@ -269,12 +333,12 @@ def main() -> int:
     if args.run_all:
         return 0 if run_full_pipeline() else 1
     if args.daily:
-        return 0 if run_command("Daily update", ("run_daily_shadow.py",)) else 1
+        return 0 if run_daily_update() else 1
     if args.status:
         show_status()
         return 0
     if args.api:
-        return 0 if run_command("Local API", ("api_server.py",)) else 1
+        return 0 if run_local_api() else 1
     if args.about:
         show_about_and_credits()
         return 0
