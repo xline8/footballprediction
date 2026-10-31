@@ -1664,10 +1664,22 @@ def test_purge_bogus_spares_issued_and_settled_rows():
         # belum tersinkron, grading belum sempat terjadi -> tenggang
         # 2 hari menyimpannya
         row("g", "OPEN", 4.50, 0.24, "2026-10-30T20:00"),
+        # F1 ronde 15: price non-numerik -> korup, dibuang (dulu
+        # TypeError dan build mati)
+        row("h", "OPEN", "", 0.24, "2026-11-05T20:00"),
+        # F2 ronde 15: kickoff jauh di masa depan (> 14 hari) tidak
+        # memberi pengecualian tenggang -> dibuang
+        row("i", "OPEN", 4.50, 0.24, "2027-06-01T20:00"),
+        # D15-1 ronde 15: tambat tenggang PERSIS 2 hari — 47 jam
+        # yang lalu masih di dalam tenggang (disimpan), 49 jam
+        # sudah di luar (dibuang). Apitan lama hanya 16 vs 64 jam,
+        # sehingga regresi tenggang ke 1 hari lolos tak tertangkap.
+        row("j", "OPEN", 4.50, 0.24, "2026-10-29T13:00"),
+        row("k", "OPEN", 4.50, 0.24, "2026-10-29T11:00"),
     ]
     kept, n = _purge_bogus(rows, {"b"}, now)
-    assert n == 2, n
-    assert [r["bet_id"] for r in kept] == ["b", "c", "d", "e", "g"], kept
+    assert n == 5, n
+    assert [r["bet_id"] for r in kept] == ["b", "c", "d", "e", "g", "j"], kept
 
 
 def test_best_picks_ta_loader_skips_started_matches():
