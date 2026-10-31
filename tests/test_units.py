@@ -1901,6 +1901,52 @@ def test_ledger_counts_reconciles_and_tolerates_corruption():
             "total": 0, "pending": 0, "graded": 0}
 
 
+def test_corner_probs_freshness_gate():
+    # Residu ronde 17: _load_corner_probs membaca file corner
+    # tanpa cek kesegaran; peringatan orchestrator di PR #39
+    # tidak menjangkau rantai harian yang memanggil build()
+    # langsung. Kini gerbangnya di konsumen ini sendiri — satu
+    # muara kedua rantai: file >36 jam diabaikan (pasar corner
+    # kosong) dengan peringatan, pasar lain tak tersentuh.
+    import contextlib
+    import io
+    import tempfile
+    import time as _time
+
+    import ta_model
+
+    old_here = ta_model.HERE
+    with tempfile.TemporaryDirectory() as td:
+        ta_model.HERE = td
+        try:
+            path = os.path.join(td, "predictions_corners_upcoming.csv")
+            with open(path, "w", newline="") as f:
+                f.write("div,date,home,away,p_gt_6.5,p_gt_7.5,p_gt_8.5,"
+                        "p_gt_9.5,p_gt_10.5,p_gt_11.5\n"
+                        "D1,2027-01-10,alpha,beta,0.9,0.8,0.7,0.6,0.5,0.4\n")
+            # segar: probabilitas termuat seperti biasa
+            probs = ta_model._load_corner_probs()
+            key = ("D1", "2027-01-10", "alpha", "beta")
+            assert key in probs and probs[key][9.5] == 0.6, probs
+            # basi (48 jam): diabaikan total + ada peringatan
+            old = _time.time() - 48 * 3600
+            os.utime(path, (old, old))
+            buf = io.StringIO()
+            with contextlib.redirect_stdout(buf):
+                probs = ta_model._load_corner_probs()
+            assert probs == {}, probs
+            assert "basi" in buf.getvalue(), buf.getvalue()
+            # tepat di bawah ambang (35 jam): tetap termuat
+            recent = _time.time() - 35 * 3600
+            os.utime(path, (recent, recent))
+            assert key in ta_model._load_corner_probs()
+            # file tidak ada: kosong, tanpa error (perilaku lama)
+            os.remove(path)
+            assert ta_model._load_corner_probs() == {}
+        finally:
+            ta_model.HERE = old_here
+
+
 def test_ta_model_step_warns_when_corners_not_refreshed():
     # Ronde 17 (M-1 lanjutan): peringatan kesegaran corner di
     # step_ta_model orchestrator. ta_model distub total supaya tes
@@ -1958,8 +2004,13 @@ def test_atomic_writes_preserve_mode_and_original():
         mc._atomic_text_write(p, lambda f: f.write("NEW\n"))
         with open(p) as f:
             assert f.read() == "NEW\n"
-        assert _stat.S_IMODE(os.stat(p).st_mode) == 0o664, oct(
-            _stat.S_IMODE(os.stat(p).st_mode))
+        # Windows tidak punya mode POSIX (chmod di sana hanya
+        # mengatur bit read-only; stat melaporkan 0666), jadi
+        # asersi mode persis hanya berlaku di POSIX. CI repo
+        # berjalan di Ubuntu.
+        if os.name != "nt":
+            assert _stat.S_IMODE(os.stat(p).st_mode) == 0o664, oct(
+                _stat.S_IMODE(os.stat(p).st_mode))
         # writer meledak di tengah: file asli utuh, nol temp tersisa
         def bad_writer(f):
             f.write("SEBAGIAN")
@@ -1977,7 +2028,8 @@ def test_atomic_writes_preserve_mode_and_original():
         # file baru (belum ada target): mode default 0644, bukan 0600
         p2 = os.path.join(td, "baru.csv")
         mc._atomic_text_write(p2, lambda f: f.write("X\n"))
-        assert _stat.S_IMODE(os.stat(p2).st_mode) == 0o644
+        if os.name != "nt":
+            assert _stat.S_IMODE(os.stat(p2).st_mode) == 0o644
         # ModelState.save: roundtrip + mode default di direktori tmp
         old_dir = ms.CACHE_DIR
         ms.CACHE_DIR = td
@@ -1986,7 +2038,8 @@ def test_atomic_writes_preserve_mode_and_original():
             st.save(force=True)  # instance segar belum punya updated_at
             fp = os.path.join(td, "model_E0.pkl")
             assert os.path.exists(fp), os.listdir(td)
-            assert _stat.S_IMODE(os.stat(fp).st_mode) == 0o644
+            if os.name != "nt":
+                assert _stat.S_IMODE(os.stat(fp).st_mode) == 0o644
             assert ms.ModelState("E0").load() is True
         finally:
             ms.CACHE_DIR = old_dir

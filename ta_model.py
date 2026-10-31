@@ -429,6 +429,13 @@ def tier_of(p_cond):
     return "agresif"
 
 
+# File corner ditulis ulang pada setiap run (rantai harian maupun
+# full-pipeline), beberapa menit sebelum build ini membacanya.
+# Batas 36 jam berarti minimal satu siklus harian penuh terlewat:
+# file setua itu bukan lagi produk run semasa.
+CORNER_MAX_AGE_H = 36.0
+
+
 def _load_corner_probs():
     """Load corner probabilities for upcoming fixtures.
     Returns dict (div, date, home, away) -> {line: p_over}.
@@ -436,6 +443,19 @@ def _load_corner_probs():
     path = os.path.join(HERE, "predictions_corners_upcoming.csv")
     out = {}
     if not os.path.exists(path):
+        return out
+    age_h = (datetime.now(timezone.utc).timestamp()
+             - os.path.getmtime(path)) / 3600.0
+    if age_h > CORNER_MAX_AGE_H:
+        # Gerbang kesegaran di sisi konsumen (residu audit ronde
+        # 17): abaikan HANYA probabilitas corner dan beri tahu di
+        # log. Pasar DC/OU/BTTS dibangun dari matriks ta_model
+        # sendiri dan tidak boleh ikut gagal gara-gara input
+        # bantu ini. Penempatan di sini menjangkau kedua rantai
+        # (harian memanggil build() langsung, bukan lewat
+        # orchestrator) karena keduanya bermuara ke fungsi ini.
+        print(f"  ! file corner basi ({age_h:.0f} jam > "
+              f"{CORNER_MAX_AGE_H:.0f} jam) -- pasar corner dilewati")
         return out
     for r in read_csv(path):
         # p_gt_8.5 etc are P(total corners > line)

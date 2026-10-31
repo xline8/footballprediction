@@ -33,6 +33,23 @@ Keep a Changelog, and the project uses semantic versioning.
 
 ### Fixed
 
+- Round 17 residual: the TA model now refuses stale corner
+  probabilities at the consumer. `_load_corner_probs` previously
+  read `predictions_corners_upcoming.csv` with no freshness
+  check, and the round-17 warning lives in the full-pipeline
+  orchestrator step, which the daily shadow chain never passes
+  through (it calls the TA build directly). The loader is the
+  one chokepoint both chains funnel through, so the gate sits
+  there: a corner file older than 36 hours — a full daily cycle
+  missed; every chain rewrites it minutes before the build — is
+  ignored with a log warning, dropping only the corner markets.
+  The other markets are built from the TA model's own matrix and
+  are deliberately not gated on this auxiliary input. The
+  round-17 atomic-write mode tests are also platform-tolerant
+  now: their exact POSIX mode assertions (0664/0644) fail on
+  Windows, where `chmod` only toggles the read-only bit and
+  `stat` reports 0666; the strict assertions run on POSIX only,
+  the functional ones everywhere.
 - Audit round 17 (audit of the PR #38 changes below). One medium:
   PR #38 made the full-pipeline corner step depend on league
   scoring on the stated premise that corners consume
