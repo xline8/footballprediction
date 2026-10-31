@@ -1,7 +1,7 @@
 # Football 1X2 & Derivative Market Prediction
 
 [![Tests](https://github.com/xline8/footballprediction/actions/workflows/tests.yml/badge.svg)](https://github.com/xline8/footballprediction/actions/workflows/tests.yml)
-[![Python 3.12](https://img.shields.io/badge/python-3.12-3776AB?logo=python&logoColor=white)](https://www.python.org)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-3776AB?logo=python&logoColor=white)](https://www.python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![License](https://img.shields.io/github/license/xline8/footballprediction)](https://github.com/xline8/footballprediction/blob/main/LICENSE)
 [![Release](https://img.shields.io/github/v/release/xline8/footballprediction)](https://github.com/xline8/footballprediction/releases)
@@ -36,6 +36,11 @@ deterministic daily recommendations described further down.
 
 ## Measured results
 
+The figures in this section are recorded research results, not a live
+scoreboard. Daily runs update a machine-local ledger, so its totals can differ
+between installations. Check `ledger/ledger_summary.json` after a run for the
+current machine's ledger.
+
 - **Calibration.** On the stored walk-forward probabilities (records
   schema v2), the meta stack scores a pooled Brier of 0.5766 and RPS of
   0.1956 across the top five leagues — level with the opening market
@@ -47,7 +52,8 @@ deterministic daily recommendations described further down.
   goals-only out of sample (log loss 0.98624 vs 0.99304, walk-forward
   2021/22–2025/26, n = 8,889) and passed all three go-live gates, so `blend`
   is the production default. See EXPERIMENT_XG_DC.md.
-- **Graded ledger.** 358 historical league picks are graded in
+- **Graded ledger snapshot.** The recorded study graded 358 historical league
+  picks in
   `ledger/ledger_summary.json`: ROI −5.79% at opening odds, mean CLV EV
   −0.0773 against closing odds (Pinnacle, then AvgC, then B365C), beat-close
   rate 53.6%, CLV coverage 100%. The model often takes a better price than
@@ -73,35 +79,129 @@ deterministic daily recommendations described further down.
 
 ## Quick start
 
-Run the end-to-end pipeline:
+You do not need to know how to code to run the standard prediction process.
+It needs an internet connection because it updates football fixtures and
+market data. The first run can take a while; keep the window open until it
+says it has finished.
 
+### Windows — easiest option
+
+1. Install **Python 3.11 or newer** from [python.org](https://www.python.org/downloads/).
+   During installation, tick **“Add Python to PATH.”**
+2. Open this project folder in File Explorer.
+3. Double-click **[`start.bat`](start.bat)**.
+4. Choose **1. Update data and generate all predictions**.
+5. Wait for the message **“finished”**. Do not close the black window while it
+   is working.
+
+That is all. The script automatically creates its own Python environment and
+installs the required packages, then opens the **Control Center**. From the
+numbered menu you can update predictions, check the result files, open a CSV
+in your spreadsheet app, or start the local API. Double-click the same file
+again whenever you want fresh results.
+
+Open these files with Excel, LibreOffice, or another spreadsheet app:
+
+- `predictions_upcoming.csv` — upcoming match probabilities.
+- `best_picks.csv` — the strongest model selections.
+- `recommended_single.csv`, `recommended_slip.csv`, and
+  `recommended_slip10.csv` — daily recommendation outputs, when available.
+
+If Windows says that Python is missing, install it using step 1 and run
+`start.bat` again. If the script stops, copy the last error message and ask
+for help with it.
+
+### Linux / VPS
+
+Open a terminal, then run the following commands one at a time. Replace the
+GitHub address below with your fork if you use one; skip the first two lines
+when the project folder already exists.
+
+```bash
+git clone https://github.com/xline8/footballprediction.git football-data
+cd football-data
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python football_cli.py
 ```
-python setup_cache.py
-python pipeline_orchestrator.py --run-all
+
+On Ubuntu 24.04+ or another distribution that provides Python 3.11+, install
+Python and Git first:
+
+```bash
+sudo apt update
+sudo apt install -y git python3 python3-venv python3-pip
 ```
+
+For later runs, open a terminal in the project folder and use only:
+
+```bash
+source .venv/bin/activate
+python football_cli.py
+```
+
+Run `python3 --version` after installation. It must report Python 3.11 or
+newer.
+
+### macOS
+
+1. Open **Terminal** (press `Command + Space`, type “Terminal”, then press
+   Enter).
+2. Install Python 3.11 or newer from [python.org](https://www.python.org/downloads/macos/),
+   if `python3 --version` does not show version 3.11 or later.
+3. In Terminal, move into the project folder. For example, if it is in
+   Downloads: `cd ~/Downloads/football-data`.
+4. Copy and paste these commands, one line at a time:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python football_cli.py
+```
+
+For future runs on macOS, use the same three commands shown for later Linux
+runs. To leave the Python environment at any time, type `deactivate`.
+
+### Terminal commands for VPS / automation
+
+Running `python football_cli.py` opens the friendly numbered menu. For a
+scheduled task or script, use one of these non-interactive commands instead:
+
+```bash
+python football_cli.py --run-all  # cache + complete pipeline
+python football_cli.py --daily    # daily live-shadow update
+python football_cli.py --status   # show output status only
+python football_cli.py --api      # start local API
+python football_cli.py --about    # project credits and data sources
+```
+
+### Optional: open the local API
+
+After a successful pipeline run, start the local API with:
+
+```bash
+python api_server.py
+```
+
+Keep that terminal open, then visit `http://127.0.0.1:8000` in a browser.
+The API serves the current predictions, picks, odds, and corners. The live
+deployment runs it under a systemd unit with Restart=always; that unit is
+kept with the deployment and is not part of this repository.
 
 Individual pieces also run standalone: `python model_v2.py final` fits and
 prints the scoring report, `python backtest_value.py` reruns the value-bet
 backtest, and `python refresh_fixtures.py` pulls fresh fixtures.
-
-The optional API server serves the current predictions, picks, odds, and
-corners on port 8000:
-
-```
-python api_server.py
-```
-
-The live deployment runs it under a systemd unit with Restart=always.
-That unit is kept with the deployment and is not part of this repository.
 
 ## How it works
 
 Main pipeline order (`pipeline_orchestrator.py --run-all`):
 
 ```
-refresh training data → check data → build xG → fit models → score upcoming
-→ score corners → integrate odds → generate picks → validation → ta_model
-→ predict cups → status
+refresh training data -> check data -> build xG -> fit models -> score upcoming
+-> score corners -> integrate odds -> scrape TipsterArea -> build TA model
+-> predict cups -> generate picks -> validation
 ```
 
 How the pieces connect:
@@ -330,9 +430,10 @@ overrides:
 `FOOTBALL_DC_FIT_MODE` (`goals`|`blend`, default `blend`) and
 `FOOTBALL_REFRESH_SEASON` (default `2627`).
 
-Dependencies: `numpy` (see `requirements.txt`). The optional API server
-(`api_server.py`) and scrapers use `fastapi`, `uvicorn`, `pydantic`,
-`requests`, and `httpx`.
+`requirements.txt` installs every package used by the normal local run:
+`numpy`, `fastapi`, `uvicorn`, `pydantic`, `requests`, and `httpx`.
+`pyproject.toml` keeps `numpy` as the minimal package dependency because this
+repository runs primarily as top-level scripts.
 
 ## Runtime data
 
@@ -349,6 +450,9 @@ samples. When a number from one machine disagrees with a number from
 another, check which machine produced it before treating either as wrong.
 
 ## Credits
+
+Football Prediction is maintained by Arif Wicaksono Komarudin
+([@xline8](https://github.com/xline8)).
 
 Match data comes from three external sources, and each one feeds a
 different part of the pipeline:
