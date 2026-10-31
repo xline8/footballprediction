@@ -20,7 +20,6 @@ import csv
 import hashlib
 import json
 import os
-import re
 import sys
 from datetime import date, datetime, timedelta, timezone
 
@@ -411,13 +410,54 @@ ARCHIVE_FILES = ["predictions_upcoming.csv", "predictions_corners_upcoming.csv",
 
 
 def _has_data_rows(path):
-    """True bila file punya >= 2 baris (header + minimal satu baris
-    data). Baca dibatasi dua baris pertama."""
+    """True bila file CSV punya minimal satu baris data: baris
+    sesudah header yang memiliki sel tak-kosong. Audit ronde 15
+    (F5): versi lama menghitung baris FISIK, jadi header + satu
+    baris kosong/whitespace liar terhitung "berdata" dan file yang
+    substantif kosong itu membeku dari pengecualian repair L-2."""
     try:
-        with open(path, "rb") as f:
-            return sum(1 for _ in zip(range(2), f)) >= 2
-    except OSError:
+        with open(path, newline="", encoding="utf-8") as f:
+            rdr = csv.reader(f)
+            next(rdr, None)
+            return any(any(cell.strip() for cell in row) for row in rdr)
+    except (OSError, UnicodeDecodeError):
+        # UnicodeDecodeError: file korup non-UTF-8 diperlakukan
+        # sebagai tak-berdata, bukan meledakkan langkah arsip
+        # (audit-diri ronde 15, L3).
         return False
+
+
+PRODUCT_DATE_FILES = ("best_picks_today.csv", "recommended_single.csv",
+                      "recommended_slip.csv", "recommended_slip10.csv")
+
+
+def _product_date_mismatch(path, folder_iso):
+    """True bila file produk rekomendasi di `path` jelas BUKAN
+    generasi folder arsip `folder_iso` (audit ronde 15, C15-2).
+
+    Arsip 2026-10-30 memuat recommended_slip10.csv yang seluruh
+    leg-nya bertanggal 2026-10-31 — slip hari BERIKUTNYA, terarsip
+    ke folder yang salah oleh run sore untuk pratinjau. Write-once
+    lalu membekukan generasi yang salah itu. Tiga file produk lain
+    (best_picks_today, single, slip2) menurut konstruksinya hanya
+    memuat baris bertanggal laporan itu sendiri; slip10 boleh
+    melebar ke hari berikutnya (pool_expanded_to) tetapi tidak
+    boleh MULAI sesudah tanggal folder. File tanpa baris data atau
+    tanpa tanggal yang bisa dibaca tidak dinilai di sini (jalur
+    header-only L-2 yang memutuskan).
+    """
+    try:
+        with open(path, newline="", encoding="utf-8") as f:
+            rows = list(csv.DictReader(f))
+    except (OSError, UnicodeDecodeError):
+        return False
+    dates = sorted((r.get("date") or "").strip() for r in rows)
+    dates = [d for d in dates if d]
+    if not dates:
+        return False
+    if os.path.basename(path) == "recommended_slip10.csv":
+        return dates[0] > folder_iso
+    return any(d != folder_iso for d in dates)
 
 
 def archive_snapshots(target_date=None):
@@ -444,7 +484,7 @@ def archive_snapshots(target_date=None):
     d = target_date or datetime.now(timezone.utc).date()
     dest = os.path.join(ARCHIVE, d.isoformat())
     os.makedirs(dest, exist_ok=True)
-    copied, kept = [], []
+    copied, kept, skipped = [], [], []
     for fn in ARCHIVE_FILES:
         src = os.path.join(HERE, fn)
         if os.path.exists(src):
@@ -453,6 +493,14 @@ def archive_snapshots(target_date=None):
                     not _has_data_rows(out) and _has_data_rows(src)):
                 kept.append(fn)
                 continue
+            # Penjaga generasi (audit ronde 15, C15-2): file produk
+            # yang jelas milik tanggal lain tidak diarsipkan ke
+            # folder ini — write-once akan membekukan generasi yang
+            # salah dan grader (dulu) kehilangan leg karenanya.
+            if fn in PRODUCT_DATE_FILES and _product_date_mismatch(
+                    src, d.isoformat()):
+                skipped.append(fn)
+                continue
             # Salin atomik (tmp + replace) — grading membaca arsip ini;
             # salinan terpotong karena crash akan terbaca diam-diam.
             tmp = out + ".tmp"
@@ -460,7 +508,8 @@ def archive_snapshots(target_date=None):
                 fo.write(fi.read())
             os.replace(tmp, out)
             copied.append(fn)
-    return {"date": d.isoformat(), "archived": copied, "kept": kept}
+    return {"date": d.isoformat(), "archived": copied, "kept": kept,
+            "skipped": skipped}
 
 
 # ---------------------------------------------------------------- cup picks -> ledger
@@ -581,6 +630,8 @@ def main(argv):
         r = archive_snapshots()
         print(f"archive {r['date']}: {r['archived']} "
               f"(+{len(r['kept'])} sudah ada, write-once)")
+        if r.get("skipped"):
+            print(f"  ! dilewati (generasi tanggal lain): {r['skipped']}")
         return 0
     if "--cup-ledger" in argv:
         n = sync_cup_picks_to_ledger()

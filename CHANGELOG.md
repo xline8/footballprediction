@@ -33,6 +33,41 @@ Keep a Changelog, and the project uses semantic versioning.
 
 ### Fixed
 
+- Audit round 15 (self-audit of the round 14 fixes). One high: the
+  recommendation grader only settled keys regenerated from archive
+  files, so pending rows whose archive was damaged (2026-10-30: an
+  empty slip file, a slip10 file holding the next day's legs) were
+  never re-graded and would have been pruned unsettled on the next
+  run — 13 played legs (Elversberg, Lille, Villarreal). The grader
+  now re-grades orphaned pending rows directly from its store
+  before pruning: legs through the same settlement path as archive
+  grading, and slip units by recovering their membership exactly
+  (a unit's identity is the content hash of its legs). On this
+  machine the fixed grader settled those 13 legs (9 hits, 4
+  losses) plus all 6 orphaned units of that date, and calibration
+  history is whole again (n = 27 legs). Archive snapshots now also
+  refuse product files that clearly belong to another date, so a
+  wrong-generation file is no longer frozen in by write-once. The
+  bogus-price purge no longer crashes on non-numeric prices (the
+  corrupt-row class it exists to remove killed `ta_model.build()`
+  with a TypeError), and its grace exemption is capped 14 days
+  ahead so a corrupt far-future kickoff is not purge-immune. The
+  archive data-row check counts non-empty cells instead of
+  physical lines, and the undefined-name sweep now covers
+  `resolve_and_monitor.py` and carries a positive control.
+  Verification of this round also exposed a latent matcher defect,
+  fixed here: `sim()`'s containment rule length-checked only one
+  token, so the one-letter token `b` (reserve-team suffixes such
+  as Auckland B) counted as contained in `augsburg`, `freiburg`,
+  `borussia` and `paderborn`, scoring 0.88 per side; four
+  not-yet-played legs were settled from an unrelated New Zealand
+  match on the same date. Containment now requires both tokens to
+  be at least five characters, result matching additionally
+  requires each side's similarity to be at least 0.80, and the
+  four false grades were reverted to pending (an audit of every
+  other settled leg showed a winning similarity product of 1.000
+  against its true match). The unit suite grows from 80 to 86
+  tests, including an end-to-end `ta_model.build()` sandbox test.
 - Audit round 14 (self-audit of the round 13 fixes; no high- or
   medium-severity findings). Five low items, all fixed here. The
   bogus-price purge's exemption protected a row only on days it was

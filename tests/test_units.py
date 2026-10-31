@@ -1195,6 +1195,46 @@ def test_match_result_postponed_fallback():
                          "Chelsea", "") == (4, 2, "2026-12-12")
 
 
+def test_sim_containment_and_match_result_foreign_trap():
+    # Ronde 15 (temuan saat verifikasi live): sim() memberi 0,88
+    # untuk pasangan tak berhubungan karena token "b" (tim cadangan)
+    # terkandung di nama lain — "augsburg" vs "wellington phoenix b".
+    # Grader lalu menilai leg Bundesliga dari laga Selandia Baru
+    # bertanggal sama (produk 0,774 >= ambang 0,75). Dua lapis fix:
+    # containment menuntut kedua token >= 5 huruf, dan _match_result
+    # menuntut sim per sisi >= 0,80.
+    from grade_recommendations import _match_result, norm
+    from ta_model import sim
+
+    assert sim(norm("augsburg"), norm("wellington phoenix b")) < 0.5
+    assert sim(norm("freiburg"), norm("auckland b")) < 0.5
+    # containment yang sah tetap bekerja
+    assert sim(norm("gladbach"), norm("monchengladbach")) >= 0.88
+    assert sim(norm("inter"), norm("internazionale")) >= 0.88
+
+    idx_trap = {"2026-10-31": [
+        (norm("wellington phoenix b"), norm("auckland b"), 3, 2,
+         "New Zealand - National League")]}
+    assert _match_result(idx_trap, "2026-10-31", "augsburg",
+                         "freiburg", "") is None
+    idx_true = {"2026-10-31": [
+        (norm("wellington phoenix b"), norm("auckland b"), 3, 2,
+         "New Zealand - National League"),
+        (norm("augsburg"), norm("freiburg"), 2, 1,
+         "Germany - Bundesliga")]}
+    assert _match_result(idx_true, "2026-10-31", "augsburg",
+                         "freiburg", "") == (2, 1, "2026-10-31")
+    # Lantai per sisi menambat secara independen: sim satu sisi
+    # 0,78 (produk 0,78 >= 0,75) tetap ditolak karena sisi itu
+    # di bawah 0,80 — pasangan timpang bukan laga yang sama.
+    assert 0.70 < sim(norm("city rangers"),
+                      norm("city wanderers")) < 0.80
+    idx_weak = {"2026-10-31": [
+        (norm("city wanderers"), norm("omega"), 2, 0, "X League")]}
+    assert _match_result(idx_weak, "2026-10-31", "city rangers",
+                         "omega", "") is None
+
+
 def test_postponed_lookup_bounded():
     # Ronde 13: fallback laga tunda score_ledger memakai helper yang
     # sama-sama dibatasi 45 hari dan mengambil tanggal paling awal
@@ -1234,6 +1274,150 @@ def test_missing_archive_dates():
     # kemarin.
     assert _missing_archive_dates(
         ["2026-10-29", "2026-10-30"], date(2026, 10, 31)) == []
+
+
+def test_regrade_orphans_settles_store_only_rows():
+    # C15-1: leg/unit pending yang tidak ter-regenerasi arsip mana pun
+    # (arsip rusak/tergenerasi ulang) harus dinilai dari store sebelum
+    # prune sempat menghapusnya — kasus nyata: 13 leg 2026-10-30
+    # (Elversberg/Lille/Villarreal) yang laganya sudah FT.
+    import hashlib
+
+    import grade_recommendations as gr
+
+    def leg(product, home, away, market, line, sel, p, odds,
+            date="2026-10-30", tier=""):
+        g = {"date": date, "product": product, "level": "leg",
+             "home": home, "away": away, "competition": "",
+             "market": market, "line": line, "selection": sel,
+             "p_model": p, "odds": odds, "tier": tier,
+             "status": "pending", "score": "", "reason": "no_result_yet",
+             "graded_at": "2026-10-30T01:00:00+00:00", "result_date": ""}
+        return gr._key(g), g
+
+    store = {}
+    # 1: leg yatim, hasil ada (4-1, OU 2.5 Over -> hit)
+    k1, g1 = leg("slip2", "elversberg", "mainz 05", "OU", "2.5",
+                 "Over", 0.7422, 1.47)
+    store[k1] = g1
+    # 2: leg yatim, laga belum main -> tetap pending
+    k2, g2 = leg("single", "future fc", "later united", "OU", "2.5",
+                 "Over", 0.60, 1.90, date="2026-11-05")
+    store[k2] = g2
+    # 3: leg yang MASIH dihasilkan arsip (ada di seen) -> bukan urusan
+    # proses ulang store; dibiarkan pending di sini
+    k3, g3 = leg("slip2", "elversberg", "mainz 05", "DC", "",
+                 "12", 0.7817, 1.27)
+    store[k3] = g3
+    # 4: leg corner yatim (pick_teraman), aktual HC/AC sudah ada:
+    # total 11 vs Over 9.5 -> hit
+    k4, g4 = leg("pick_teraman", "corner fc", "wing united", "Corners",
+                 "9.5", "Over", 0.61, None)
+    store[k4] = g4
+    # 5: unit slip2 yatim dari dua leg yatim (satu hit, satu lose)
+    k5a, g5a = leg("slip2", "alpha", "beta", "OU", "2.5", "Over",
+                   0.70, 1.50)
+    k5b, g5b = leg("slip2", "gamma", "delta", "1X2", "", "1",
+                   0.60, 1.80)
+    store[k5a] = g5a
+    store[k5b] = g5b
+    sig = ";".join(sorted("|".join(map(str, gr._key(g)))
+                          for g in (g5a, g5b)))
+    unit = {"date": "2026-10-30", "product": "slip2", "level": "unit",
+            "home": "", "away": "", "competition": "", "market": "",
+            "line": "",
+            "selection": "unit:" + hashlib.md5(sig.encode()).hexdigest()[:12],
+            "p_model": 0.42, "odds": 2.70, "tier": "",
+            "status": "pending", "score": "", "reason": "legs_pending",
+            "graded_at": "2026-10-30T01:00:00+00:00"}
+    ku = gr._key(unit)
+    store[ku] = unit
+    # 6: unit yatim tanpa kecocokan hash -> tetap pending
+    unit6 = dict(unit)
+    unit6["selection"] = "unit:000000000000"
+    unit6["p_model"] = 0.50
+    k6 = gr._key(unit6)
+    store[k6] = unit6
+
+    res_idx = {"2026-10-30": [
+        (gr.norm("elversberg"), gr.norm("mainz 05"), 4, 1, "x"),
+        (gr.norm("alpha"), gr.norm("beta"), 3, 1, "x"),
+        (gr.norm("gamma"), gr.norm("delta"), 0, 2, "x"),
+    ]}
+    cor_idx = {("2026-10-30", gr.norm("corner fc"),
+                gr.norm("wing united")): 11}
+    now = "2026-10-31T02:00:00+00:00"
+    changed = gr._regrade_orphans(store, {k3}, res_idx, cor_idx, now)
+
+    assert store[k1]["status"] == "hit", store[k1]
+    assert store[k1]["score"] == "4-1"
+    assert store[k1]["result_date"] == "2026-10-30"
+    assert store[k2]["status"] == "pending"
+    assert store[k3]["status"] == "pending"  # seen: tidak disentuh
+    assert store[k4]["status"] == "hit" and store[k4]["score"] == "11"
+    assert store[k5a]["status"] == "hit"
+    assert store[k5b]["status"] == "lose"
+    assert store[ku]["status"] == "lose", store[ku]  # satu leg kalah
+    assert store[k6]["status"] == "pending"
+    assert changed == 5, changed  # k1, k4, k5a, k5b, unit
+
+
+def test_archive_unit_recovered_by_regrade():
+    # L4 audit-diri ronde 15: format sig unit ditulis di DUA fungsi
+    # (_grade_archive yang memproduksi, _regrade_orphans yang
+    # memulihkan) — tes ini menambat keduanya bersama: unit yang
+    # diproduksi jalur arsip harus bisa dipulihkan jalur store,
+    # kalau tidak pemulihan akan gagal senyap selamanya. Sekalian
+    # menambat jendela L1: satu leg jatuh di tanggal unit + 4 hari
+    # (ekspansi penuh S10_MAX_EXPAND_DAYS).
+    import csv
+    import shutil
+    import tempfile
+
+    import grade_recommendations as gr
+
+    td = tempfile.mkdtemp()
+    saved = gr.ARCHIVE
+    try:
+        arc = os.path.join(td, "archive", "2026-10-30")
+        os.makedirs(arc)
+        with open(os.path.join(arc, "recommended_slip10.csv"), "w",
+                  newline="") as f:
+            w = csv.writer(f)
+            w.writerow(["date", "home", "away", "competition",
+                        "market", "line", "selection", "o_1xbet",
+                        "p_model", "slip_total_odds",
+                        "slip_joint_prob"])
+            w.writerow(["2026-10-30", "alpha", "beta", "", "OU",
+                        "2.5", "Over", 1.50, 0.70, 3.99, 0.2503])
+            w.writerow(["2026-10-31", "gamma", "delta", "", "DC",
+                        "", "1X", 1.40, 0.65, 3.99, 0.2503])
+            w.writerow(["2026-11-03", "epsilon", "zeta", "", "1X2",
+                        "", "1", 1.90, 0.55, 3.99, 0.2503])
+        gr.ARCHIVE = os.path.join(td, "archive")
+        store = {}
+        now = "2026-10-30T12:00:00+00:00"
+        # run 1: hasil belum ada -> leg + unit pending
+        gr._grade_archive("2026-10-30", store, {}, {}, now, set())
+        units = [g for g in store.values() if g["level"] == "unit"]
+        assert len(store) == 4 and len(units) == 1, store
+        assert all(g["status"] == "pending" for g in store.values())
+        # run 2: arsip "rusak" (seen kosong), hasil sudah ada ->
+        # proses ulang store memulihkan leg DAN unit produksi arsip
+        res_idx = {
+            "2026-10-30": [(gr.norm("alpha"), gr.norm("beta"),
+                            3, 1, "x")],
+            "2026-10-31": [(gr.norm("gamma"), gr.norm("delta"),
+                            1, 1, "x")],
+            "2026-11-03": [(gr.norm("epsilon"), gr.norm("zeta"),
+                            2, 0, "x")],
+        }
+        changed = gr._regrade_orphans(store, set(), res_idx, {}, now)
+        assert changed == 4, changed
+        assert all(g["status"] == "hit" for g in store.values()), store
+    finally:
+        gr.ARCHIVE = saved
+        shutil.rmtree(td, ignore_errors=True)
 
 
 def test_merge_bets_refreshes_open_rows_only():
@@ -1329,10 +1513,37 @@ def test_no_undefined_names_in_chain_modules():
             "slip_recommender.py", "model_corners_v3.py",
             "predict_cups.py", "refresh_fixtures.py", "ta_scrape.py",
             "market_orchestration.py", "make_picks_live.py",
-            "predict_upcoming_refactored.py"]
+            "predict_upcoming_refactored.py",
+            # F8 ronde 15: modul langkah [16/16] sendiri tadinya
+            # terlewat dari daftar ini.
+            "resolve_and_monitor.py"]
     for m in mods:
         bad = _undefined_names(os.path.join(root, m))
         assert not bad, (m, bad)
+
+
+def test_undefined_names_helper_detects_orphans():
+    # D15-2: sweep tanpa positive control bisa hijau vakum — bila
+    # helper-nya rusak senyap (API symtable berubah, bug walk), tes
+    # rantai di atas lolos dengan daftar kosong. Paksa helper
+    # membuktikan ia MENANGKAP nama yatim yang diketahui, dan tidak
+    # menandai kode yang bersih.
+    import shutil
+    import tempfile
+
+    td = tempfile.mkdtemp()
+    try:
+        bad = os.path.join(td, "bad.py")
+        with open(bad, "w") as f:
+            f.write("def loader():\n    return dtf + 1\n")
+        assert _undefined_names(bad) == ["loader:dtf"]
+        good = os.path.join(td, "good.py")
+        with open(good, "w") as f:
+            f.write("import os\n\ndef ok():\n    x = os.sep\n"
+                    "    return x\n")
+        assert _undefined_names(good) == []
+    finally:
+        shutil.rmtree(td, ignore_errors=True)
 
 
 def test_kickoff_started_predicate():
@@ -1472,6 +1683,95 @@ def test_archive_snapshots_write_once():
         shutil.rmtree(td, ignore_errors=True)
 
 
+def test_archive_skips_wrong_generation_and_blank_rows():
+    # Ronde 15. F5: "berdata" dinilai dari sel, bukan baris fisik —
+    # header + baris kosong BUKAN data, jadi tetap bisa di-repair.
+    # C15-2: file produk generasi tanggal lain tidak diarsipkan ke
+    # folder ini (arsip 2026-10-30 nyata memuat slip10 berisi leg
+    # 2026-10-31).
+    import shutil
+    import tempfile
+    from datetime import date
+
+    import market_orchestration as mo
+
+    # _has_data_rows langsung
+    td0 = tempfile.mkdtemp()
+    try:
+        p = os.path.join(td0, "x.csv")
+        with open(p, "w") as f:
+            f.write("h\n\n")
+        assert mo._has_data_rows(p) is False
+        with open(p, "w") as f:
+            f.write("h\n   \n")
+        assert mo._has_data_rows(p) is False
+        with open(p, "w") as f:
+            f.write("")
+        assert mo._has_data_rows(p) is False
+        with open(p, "w") as f:
+            f.write("h\ndata\n")
+        assert mo._has_data_rows(p) is True
+    finally:
+        shutil.rmtree(td0, ignore_errors=True)
+
+    td = tempfile.mkdtemp()
+    try:
+        src = os.path.join(td, "src")
+        arc = os.path.join(td, "archive")
+        os.makedirs(src)
+        dest = os.path.join(arc, "2026-10-30")
+        os.makedirs(dest)
+        f_pred = mo.ARCHIVE_FILES[0]  # predictions_upcoming.csv
+        # dest berisi header + baris kosong -> bukan data -> repair
+        with open(os.path.join(dest, f_pred), "w") as f:
+            f.write("h\n\n")
+        with open(os.path.join(src, f_pred), "w") as f:
+            f.write("h\nreal\n")
+        # slip10 generasi BESOK: semua leg 2026-10-31 -> dilewati
+        with open(os.path.join(src, "recommended_slip10.csv"), "w") as f:
+            f.write("date,home\n2026-10-31,besok fc\n")
+        # slip2 tanggal cocok -> diarsipkan
+        with open(os.path.join(src, "recommended_slip.csv"), "w") as f:
+            f.write("date,home\n2026-10-30,hari ini fc\n")
+        # best_picks_today bercampur tanggal lain -> dilewati
+        with open(os.path.join(src, "best_picks_today.csv"), "w") as f:
+            f.write("date,home\n2026-10-30,a\n2026-10-31,b\n")
+        saved = (mo.HERE, mo.ARCHIVE)
+        mo.HERE, mo.ARCHIVE = src, arc
+        try:
+            r = mo.archive_snapshots(target_date=date(2026, 10, 30))
+        finally:
+            mo.HERE, mo.ARCHIVE = saved
+        assert f_pred in r["archived"], r
+        with open(os.path.join(dest, f_pred)) as f:
+            assert f.read() == "h\nreal\n"
+        assert "recommended_slip10.csv" in r["skipped"], r
+        assert not os.path.exists(
+            os.path.join(dest, "recommended_slip10.csv"))
+        assert "recommended_slip.csv" in r["archived"], r
+        assert "best_picks_today.csv" in r["skipped"], r
+        assert not os.path.exists(
+            os.path.join(dest, "best_picks_today.csv"))
+        # L5 audit-diri ronde 15: sisi TERIMA penjaga — slip10
+        # ekspansi yang sah (leg di tanggal folder + hari
+        # berikutnya) harus tetap diarsipkan.
+        with open(os.path.join(src, "recommended_slip10.csv"),
+                  "w") as f:
+            f.write("date,home\n2026-10-31,hari ini fc\n"
+                    "2026-11-01,besok fc\n")
+        saved = (mo.HERE, mo.ARCHIVE)
+        mo.HERE, mo.ARCHIVE = src, arc
+        try:
+            r2 = mo.archive_snapshots(target_date=date(2026, 10, 31))
+        finally:
+            mo.HERE, mo.ARCHIVE = saved
+        assert "recommended_slip10.csv" in r2["archived"], r2
+        assert os.path.exists(os.path.join(
+            arc, "2026-10-31", "recommended_slip10.csv"))
+    finally:
+        shutil.rmtree(td, ignore_errors=True)
+
+
 def test_purge_bogus_spares_issued_and_settled_rows():
     # Audit-diri ronde 13: purge harga mustahil tidak boleh membuang
     # baris yang build saat ini terbitkan sendiri (produk > 1,02 di
@@ -1505,10 +1805,82 @@ def test_purge_bogus_spares_issued_and_settled_rows():
         # belum tersinkron, grading belum sempat terjadi -> tenggang
         # 2 hari menyimpannya
         row("g", "OPEN", 4.50, 0.24, "2026-10-30T20:00"),
+        # F1 ronde 15: price non-numerik -> korup, dibuang (dulu
+        # TypeError dan build mati)
+        row("h", "OPEN", "", 0.24, "2026-11-05T20:00"),
+        # F2 ronde 15: kickoff jauh di masa depan (> 14 hari) tidak
+        # memberi pengecualian tenggang -> dibuang
+        row("i", "OPEN", 4.50, 0.24, "2027-06-01T20:00"),
+        # D15-1 ronde 15: tambat tenggang PERSIS 2 hari — 47 jam
+        # yang lalu masih di dalam tenggang (disimpan), 49 jam
+        # sudah di luar (dibuang). Apitan lama hanya 16 vs 64 jam,
+        # sehingga regresi tenggang ke 1 hari lolos tak tertangkap.
+        row("j", "OPEN", 4.50, 0.24, "2026-10-29T13:00"),
+        row("k", "OPEN", 4.50, 0.24, "2026-10-29T11:00"),
+        # L5 audit-diri ronde 15: tambat batas horizon PERSIS —
+        # tepat now+14 hari masih terlindungi, semenit sesudahnya
+        # tidak.
+        row("l", "OPEN", 4.50, 0.24, "2026-11-14T12:00"),
+        row("m", "OPEN", 4.50, 0.24, "2026-11-14T12:01"),
     ]
     kept, n = _purge_bogus(rows, {"b"}, now)
-    assert n == 2, n
-    assert [r["bet_id"] for r in kept] == ["b", "c", "d", "e", "g"], kept
+    assert n == 6, n
+    assert [r["bet_id"] for r in kept] == ["b", "c", "d", "e", "g",
+                                           "j", "l"], kept
+
+
+def test_build_end_to_end_sandbox():
+    # Titik buta teratas grup D ronde 15: build() tidak pernah
+    # dipanggil suite — hanya unit-unitnya. Sandbox TA/PRED temporer:
+    # (1) fixtures kosong -> rc 1 dan model_markets tidak ditulis;
+    # (2) best_bets lama berisi baris OPEN korup non-numerik ->
+    # build TIDAK crash (F1 di jalur nyata) dan baris korup
+    # ter-purge dari file hasil, baris sehat bertahan.
+    import csv
+    import shutil
+    import tempfile
+
+    import ta_model as tm
+
+    td = tempfile.mkdtemp()
+    saved = (tm.TA, tm.PRED)
+    try:
+        ta = os.path.join(td, "ta")
+        os.makedirs(ta)
+        pred = os.path.join(td, "preds.csv")
+        tm.TA, tm.PRED = ta, pred
+        with open(os.path.join(ta, "fixtures.csv"), "w") as f:
+            f.write("game_id,date,time,home,away,league\n")
+        with open(pred, "w") as f:
+            f.write("div,date,home,away,lam_h,lam_a,ph_dc,pd_dc,pa_dc\n")
+        assert tm.build() == 1
+        assert not os.path.exists(os.path.join(ta, "model_markets.csv"))
+
+        with open(os.path.join(ta, "fixtures.csv"), "w") as f:
+            f.write("game_id,date,time,home,away,league\n")
+            f.write("999,2027-06-01,20:00,Alpha,Beta,Test League\n")
+        with open(pred, "w") as f:
+            f.write("div,date,home,away,lam_h,lam_a,ph_dc,pd_dc,pa_dc\n")
+            f.write("E0,2027-06-01,Alpha,Beta,1.5,1.0,0.45,0.28,0.27\n")
+        base = {c: "" for c in tm.BET_COLS}
+        with open(os.path.join(ta, "best_bets.csv"), "w",
+                  newline="") as f:
+            w = csv.DictWriter(f, fieldnames=tm.BET_COLS)
+            w.writeheader()
+            w.writerow(dict(base, bet_id="1|OU|2.5|Over",
+                            game_id="1", status="OPEN", price="",
+                            p_market="",
+                            kickoff_utc="2027-06-01T20:00"))
+            w.writerow(dict(base, bet_id="2|OU|2.5|Over",
+                            game_id="2", status="OPEN", price="2.00",
+                            p_market="0.40",
+                            kickoff_utc="2027-06-01T20:00"))
+        assert tm.build() == 0
+        rows = tm.read_csv(os.path.join(ta, "best_bets.csv"))
+        assert [r["bet_id"] for r in rows] == ["2|OU|2.5|Over"], rows
+    finally:
+        tm.TA, tm.PRED = saved
+        shutil.rmtree(td, ignore_errors=True)
 
 
 def test_best_picks_ta_loader_skips_started_matches():

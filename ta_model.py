@@ -234,9 +234,15 @@ def sim(a, b):
         score += best
     score = score / max(len(ta), 1) if ta else 0.0
     # token yang terkandung di nama lain: gladbach ~ monchengladbach
+    # Audit ronde 15: panjang token KEDUA sisi wajib >= 5. Versi lama
+    # hanya memeriksa sisi t, jadi token satu huruf "b" (sufiks tim
+    # cadangan: "auckland b", "wellington phoenix b") terkandung di
+    # "augsburg"/"freiburg"/"borussia"/"paderborn" dan memberi sim
+    # 0,88 untuk pasangan yang sama sekali tak berhubungan — grader
+    # rekomendasi sempat menilai 4 leg dari laga Selandia Baru itu.
     for t in ta:
         for u in tb:
-            if len(t) >= 5 and (t in u or u in t):
+            if len(t) >= 5 and len(u) >= 5 and (t in u or u in t):
                 score = max(score, 0.88)
     import difflib
     full = difflib.SequenceMatcher(None, a, b).ratio()
@@ -518,15 +524,35 @@ def _purge_bogus(rows, issued_ids, now):
     Kickoff yang tak ter-parse tidak memberi pengecualian (2) —
     baris semacam itu memang kelas korup yang dibersihkan purge.
     Return (baris tersisa, n_dibuang).
+
+    Audit ronde 15: (F1) price/p_market non-numerik dulu membuat
+    perkalian di syarat purge melempar TypeError dan build mati di
+    tengah — baris korup non-numerik kini dianggap mustahil dan
+    dibuang (pengecualian terbitan/settle di atas tetap berlaku).
+    (F2) pengecualian (2) kini juga dibatasi ke depan: kickoff
+    lebih dari 14 hari di masa depan tidak memberi perlindungan —
+    tenggang mempercayai kickoff_utc baris itu sendiri, jadi
+    kickoff korup yang jauh (mis. tahun 9999) tadinya kebal purge
+    selamanya; build hanya menerbitkan bet untuk jendela fixture
+    beberapa hari, jadi 14 hari adalah batas yang longgar.
     """
     kept, n = [], 0
     grace = now - timedelta(days=2)
+    horizon = now + timedelta(days=14)
     for r in rows:
-        ko = _kickoff_utc(r)
-        if (r["bet_id"] not in issued_ids
-                and (r.get("status") or "").upper() == "OPEN"
-                and not (ko is not None and ko > grace)
-                and fnum(r.get("price")) * fnum(r.get("p_market")) > 1.02):
+        if (r["bet_id"] in issued_ids
+                or (r.get("status") or "").upper() != "OPEN"):
+            kept.append(r)
+            continue
+        price, pmkt = fnum(r.get("price")), fnum(r.get("p_market"))
+        if price is None or pmkt is None:
+            bogus = True
+        elif price * pmkt > 1.02:
+            ko = _kickoff_utc(r)
+            bogus = not (ko is not None and grace < ko <= horizon)
+        else:
+            bogus = False
+        if bogus:
             n += 1
             continue
         kept.append(r)
