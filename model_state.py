@@ -12,6 +12,7 @@ import hashlib
 import os
 import pickle
 import json
+import tempfile
 from datetime import datetime, date
 from typing import Optional, Tuple, Dict
 from collections import defaultdict
@@ -121,8 +122,22 @@ class ModelState:
             "initialized": self._initialized
         }
 
-        with open(filepath, 'wb') as f:
-            pickle.dump(data, f, protocol=pickle.HIGHEST_PROTOCOL)
+        # Publish the complete pickle in one rename so readers never observe
+        # a truncated state while it is being written.
+        fd, tmp_path = tempfile.mkstemp(
+            prefix=f".model_{self.div}.", suffix=".tmp", dir=CACHE_DIR)
+        try:
+            with os.fdopen(fd, 'wb') as f:
+                pickle.dump(data, f, protocol=pickle.HIGHEST_PROTOCOL)
+                f.flush()
+                os.fsync(f.fileno())
+            os.replace(tmp_path, filepath)
+        finally:
+            if os.path.exists(tmp_path):
+                try:
+                    os.remove(tmp_path)
+                except OSError:
+                    pass
 
     def load(self) -> bool:
         """Load state model dari file. Return True jika berhasil."""

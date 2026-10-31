@@ -69,6 +69,37 @@ def log(msg: str, level: str = "INFO"):
     print(f"[{ts}] [{level}] {msg}")
 
 
+def _ledger_counts(base_dir: str) -> dict:
+    """Return effective ledger counts using grades.jsonl as source of truth."""
+    picks_file = os.path.join(base_dir, "ledger", "picks.jsonl")
+    if not os.path.exists(picks_file):
+        return {"total": 0, "pending": 0, "graded": 0}
+
+    picks = []
+    with open(picks_file, encoding="utf-8") as f:
+        for line in f:
+            if line.strip():
+                picks.append(json.loads(line))
+
+    pick_ids = {p.get("pick_id") for p in picks if p.get("pick_id")}
+    graded_ids = set()
+    grades_file = os.path.join(base_dir, "ledger", "grades.jsonl")
+    if os.path.exists(grades_file):
+        with open(grades_file, encoding="utf-8") as f:
+            for line in f:
+                if not line.strip():
+                    continue
+                gid = json.loads(line).get("pick_id")
+                if gid in pick_ids:
+                    graded_ids.add(gid)
+
+    return {
+        "total": len(picks),
+        "pending": len(pick_ids - graded_ids),
+        "graded": len(graded_ids),
+    }
+
+
 class PipelineOrchestrator:
     """Orchestrator utama untuk pipeline prediksi sepakbola."""
 
@@ -108,7 +139,9 @@ class PipelineOrchestrator:
             ("xg", self.step_build_xg, ("refresh",)),
             ("model", self.step_fit_models, ("refresh",)),
             ("scoring", self.step_score_upcoming, ("refresh", "xg", "model")),
-            ("corner_model", self.step_score_corners, ("refresh",)),
+            # Corners consume predictions_upcoming.csv; never run them from
+            # the previous run when league scoring failed.
+            ("corner_model", self.step_score_corners, ("refresh", "scoring")),
             ("odds", self.step_integrate_odds, ("scoring",)),
             ("ta_scrape", self.scrape_live_odds, ()),
             ("ta_model", self.step_ta_model, ()),
@@ -1036,15 +1069,15 @@ class PipelineOrchestrator:
             # Count picks from ledger
             picks_file = os.path.join(BASE_DIR, "ledger", "picks.jsonl")
             if os.path.exists(picks_file):
-                with open(picks_file, 'r') as f:
-                    picks = [json.loads(line) for line in f if line.strip()]
-                pending = sum(1 for p in picks if p.get('status') == 'pending')
-                log(f"  OK Ledger: {len(picks)} total picks ({pending} pending)", "INFO")
-                self.stats['picks_generated'] = pending
+                counts = _ledger_counts(BASE_DIR)
+                log(f"  OK Ledger: {counts['total']} total picks "
+                    f"({counts['pending']} pending, {counts['graded']} graded)", "INFO")
+                self.stats['picks_generated'] = counts['pending']
                 return {
                     'status': 'success',
-                    'n_total_picks': len(picks),
-                    'n_pending': pending
+                    'n_total_picks': counts['total'],
+                    'n_pending': counts['pending'],
+                    'n_graded': counts['graded']
                 }
             else:
                 log("  ! No picks file found", "WARN")
@@ -1065,7 +1098,6 @@ class PipelineOrchestrator:
         pred_file = os.path.join(BASE_DIR, "predictions_upcoming.csv")
         if os.path.exists(pred_file):
             try:
-                import csv
                 with open(pred_file, 'r') as f:
                     reader = csv.DictReader(f)
                     rows = list(reader)
@@ -1107,12 +1139,10 @@ class PipelineOrchestrator:
         picks_file = os.path.join(BASE_DIR, "ledger", "picks.jsonl")
         if os.path.exists(picks_file):
             try:
-                with open(picks_file, 'r') as f:
-                    picks = [json.loads(line) for line in f if line.strip()]
-                pending = sum(1 for p in picks if p.get('status') == 'pending')
-                graded = sum(1 for p in picks if p.get('status') in ('win', 'loss', 'push'))
-                results['validations']['ledger'] = {'total': len(picks), 'pending': pending, 'graded': graded}
-                log(f"  OK Ledger: {len(picks)} total picks ({pending} pending, {graded} graded)", "INFO")
+                counts = _ledger_counts(BASE_DIR)
+                results['validations']['ledger'] = counts
+                log(f"  OK Ledger: {counts['total']} total picks "
+                    f"({counts['pending']} pending, {counts['graded']} graded)", "INFO")
             except Exception as e:
                 log(f"  X Ledger validation failed: {str(e)}", "ERROR")
                 results['issues'].append(f"Ledger validation error: {str(e)}")
@@ -1361,12 +1391,13 @@ class PipelineOrchestrator:
         }
 
         picks_file = os.path.join(BASE_DIR, "ledger", "picks.jsonl")
-        picks_graded_file = os.path.join(BASE_DIR, "ledger", "graded.csv")
+        counts = _ledger_counts(BASE_DIR)
         status['picks'] = {
             'picks_file': os.path.exists(picks_file),
-            'graded_file': os.path.exists(picks_graded_file),
-            'picks_count': sum(1 for _ in open(picks_file)) if os.path.exists(picks_file) else 0,
-            'graded_count': sum(1 for _ in open(picks_graded_file)) - 1 if os.path.exists(picks_graded_file) else 0
+            'graded_file': os.path.exists(os.path.join(BASE_DIR, "ledger", "grades.jsonl")),
+            'picks_count': counts['total'],
+            'pending_count': counts['pending'],
+            'graded_count': counts['graded']
         }
 
         status['cache'] = self._get_cache_info()

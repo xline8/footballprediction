@@ -310,11 +310,16 @@ class MatchLoader:
         div_summary = {}
         for div in self.cache.by_div:
             div_matches = self.cache.get_div_matches(div)
+            teams = {
+                team
+                for m in div_matches
+                for team in (m.get('home'), m.get('away'))
+                if team
+            }
             div_summary[div] = {
                 'n_matches': len(div_matches),
                 'seasons': sorted(set(m.get('season', '') for m in div_matches)),
-                'teams': len(self.cache.get_team_history('', max_date or date.today())
-                           ) if div_matches else 0
+                'teams': len(teams)
             }
         summary['per_division'] = div_summary
 

@@ -14,6 +14,7 @@ import sys
 import csv
 import json
 import time
+import tempfile
 from datetime import datetime, date
 from collections import defaultdict
 from typing import Dict, List, Tuple, Optional
@@ -196,10 +197,26 @@ def generate_predictions(force_refit: bool = False, output_file: str = None) -> 
 
     # Write output
     if out_rows:
-        with open(output_file, "w", newline="", encoding="utf-8") as f:
-            w = csv.DictWriter(f, fieldnames=list(out_rows[0].keys()))
-            w.writeheader()
-            w.writerows(out_rows)
+        # Publish only a complete CSV; API readers can run concurrently with
+        # the pipeline.
+        out_dir = os.path.dirname(os.path.abspath(output_file))
+        fd, tmp_path = tempfile.mkstemp(
+            prefix=f".{os.path.basename(output_file)}.", suffix=".tmp",
+            dir=out_dir)
+        try:
+            with os.fdopen(fd, "w", newline="", encoding="utf-8") as f:
+                w = csv.DictWriter(f, fieldnames=list(out_rows[0].keys()))
+                w.writeheader()
+                w.writerows(out_rows)
+                f.flush()
+                os.fsync(f.fileno())
+            os.replace(tmp_path, output_file)
+        finally:
+            if os.path.exists(tmp_path):
+                try:
+                    os.remove(tmp_path)
+                except OSError:
+                    pass
 
     runtime = time.time() - t0
     # Status jujur: versi lama selalu 'success' walau sebagian fixture
