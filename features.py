@@ -22,10 +22,12 @@ from collections import defaultdict, deque
 from datetime import date
 
 from football_etl import normalize_name, parse_date
-from paths import XGRAW
+from paths import DATA_CLEAN, XGRAW
 
 NORM_POINTS = {"H": 3, "D": 1, "A": 0}
 MAXG = 10
+TOP5 = {"E0", "D1", "I1", "SP1", "F1"}
+_XG_MAP_CACHE = {}
 
 
 # ------------------------------------------------------------------ Elo ----
@@ -60,34 +62,97 @@ class Elo:
 
 
 # ------------------------------------------------------------- muat xG ---
-def _load_xg_map():
-    """(div, date_iso, home_norm, away_norm) -> (xgh, xga)."""
+def _load_xg_maps():
+    """Load xG values and their provenance.
+
+    ``FOOTBALL_XG_SOURCE`` controls precedence:
+    ``understat`` (default), ``native`` (football-data HxG/AxG only), or
+    ``native_priority`` (native values override Understat, with Understat as
+    fallback).  Keeping the default unchanged makes the experiment opt-in.
+    """
+    source_mode = os.environ.get("FOOTBALL_XG_SOURCE", "understat").lower()
+    if source_mode not in {"understat", "native", "native_priority"}:
+        raise ValueError(
+            "FOOTBALL_XG_SOURCE must be understat, native, or native_priority")
+
+    def stamp(path):
+        try:
+            st = os.stat(path)
+            return (st.st_mtime_ns, st.st_size)
+        except OSError:
+            return (0, 0)
+
+    cache_key = (source_mode, tuple(stamp(p) for p in (
+        DATA_CLEAN if source_mode in {"native", "native_priority"} else "",
+        os.path.join(XGRAW, "xg_matches.csv"),
+        os.path.join(XGRAW, "map_full.json"),
+        os.path.join(XGRAW, "map_ext.json"),
+    )))
+    if cache_key in _XG_MAP_CACHE:
+        return _XG_MAP_CACHE[cache_key]
+
     nmap = {}
     for fn in ("map_full.json", "map_ext.json"):
         p = os.path.join(XGRAW, fn)
         if os.path.exists(p):
             with open(p, encoding="utf-8") as f:
                 nmap.update(json_load(f))
-    out = {}
+    understat = {}
     p = os.path.join(XGRAW, "xg_matches.csv")
-    if not os.path.exists(p):
-        return out
-    with open(p, encoding="utf-8") as f:
-        for r in csv.DictReader(f):
-            d = parse_date(r.get("datetime"))
-            if d is None:
-                continue
-            home = nmap.get(f"{r.get('div')}|{r.get('home')}")
-            away = nmap.get(f"{r.get('div')}|{r.get('away')}")
-            if not home or not away:
-                continue
-            xgh = to_float(r.get("xgh"))
-            xga = to_float(r.get("xga"))
-            if xgh is None or xga is None:
-                continue
-            out[(r.get("div"), d.isoformat(),
-                 normalize_name(home), normalize_name(away))] = (xgh, xga)
-    return out
+    if os.path.exists(p):
+        with open(p, encoding="utf-8") as f:
+            for r in csv.DictReader(f):
+                d = parse_date(r.get("datetime"))
+                if d is None:
+                    continue
+                home = nmap.get(f"{r.get('div')}|{r.get('home')}")
+                away = nmap.get(f"{r.get('div')}|{r.get('away')}")
+                if not home or not away:
+                    continue
+                xgh = to_float(r.get("xgh"))
+                xga = to_float(r.get("xga"))
+                if xgh is None or xga is None:
+                    continue
+                understat[(r.get("div"), d.isoformat(),
+                           normalize_name(home), normalize_name(away))] = (xgh, xga)
+
+    native = {}
+    if source_mode in {"native", "native_priority"} and os.path.exists(DATA_CLEAN):
+        with open(DATA_CLEAN, encoding="utf-8", newline="") as f:
+            for r in csv.DictReader(f):
+                if r.get("Div") not in TOP5 or not r.get("Date"):
+                    continue
+                xgh = to_float(r.get("HxG"))
+                xga = to_float(r.get("AxG"))
+                home = normalize_name(r.get("HomeTeam"))
+                away = normalize_name(r.get("AwayTeam"))
+                if xgh is None or xga is None or not home or not away:
+                    continue
+                native[(r["Div"], r["Date"], home, away)] = (xgh, xga)
+
+    if source_mode == "native":
+        out = dict(native)
+        sources = {k: "native" for k in out}
+    elif source_mode == "native_priority":
+        out = dict(understat)
+        sources = {k: "understat" for k in out}
+        out.update(native)
+        sources.update({k: "native" for k in native})
+    else:
+        out = dict(understat)
+        sources = {k: "understat" for k in out}
+    _XG_MAP_CACHE[cache_key] = (out, sources)
+    return out, sources
+
+
+def _load_xg_map():
+    """(div, date_iso, home_norm, away_norm) -> (xgh, xga)."""
+    return _load_xg_maps()[0]
+
+
+def _load_xg_source_map():
+    """Return xG provenance using the same source-selection policy."""
+    return _load_xg_maps()[1]
 
 
 def json_load(f):
@@ -120,7 +185,7 @@ def build_feature_rows(limit=None, pending=None):
         list of dict: fitur pra-match + hasil (yh, ya, ftr) untuk match,
         dan tanpa hasil untuk laga pending.
     """
-    xg = _load_xg_map()
+    xg, xg_sources = _load_xg_maps()
     from football_etl import MatchCache
     cache = MatchCache()
     matches = sorted(
@@ -134,6 +199,8 @@ def build_feature_rows(limit=None, pending=None):
     elo = Elo()
     form = defaultdict(lambda: deque(maxlen=5))
     xg_form = defaultdict(lambda: deque(maxlen=5))  # (xgh, xga) per team
+    xg_missing = defaultdict(lambda: deque(maxlen=5))
+    xg_source_form = defaultdict(lambda: deque(maxlen=5))
     goals_form = defaultdict(lambda: deque(maxlen=5))  # (gf, ga) per team
     last_date = {}
 
@@ -152,6 +219,10 @@ def build_feature_rows(limit=None, pending=None):
                 "form_n": len(f),
                 "goals_diff_avg": (sum(dd for _, dd in g) / len(g)) if g else None,
                 "xg_diff_avg": (sum(xd for _, xd in x) / len(x)) if x else None,
+                "xg_missing": (sum(xg_missing[team]) / len(xg_missing[team]))
+                if xg_missing[team] else 1.0,
+                "xg_source": next((s for s in reversed(xg_source_form[team])
+                                    if s != "missing"), "missing"),
                 "rest_days": _rest_days(last_date.get(team), d),
                 "elo": elo.rating[team],
                 "n_played": elo.played[team],
@@ -168,6 +239,8 @@ def build_feature_rows(limit=None, pending=None):
             "goals_diff_h": fh["goals_diff_avg"],
             "goals_diff_a": fa["goals_diff_avg"],
             "xg_diff_h": fh["xg_diff_avg"], "xg_diff_a": fa["xg_diff_avg"],
+            "xg_missing_h": fh["xg_missing"], "xg_missing_a": fa["xg_missing"],
+            "xg_source_h": fh["xg_source"], "xg_source_a": fa["xg_source"],
             "rest_h": fh["rest_days"], "rest_a": fa["rest_days"],
             "n_played_h": fh["n_played"], "n_played_a": fa["n_played"],
         })
@@ -183,6 +256,16 @@ def build_feature_rows(limit=None, pending=None):
             xgh, xga = xg[xk]
             xg_form[home].append((xgh, xgh - xga))
             xg_form[away].append((xga, xga - xgh))
+            source = xg_sources.get(xk, "unknown")
+            xg_missing[home].append(0.0)
+            xg_missing[away].append(0.0)
+            xg_source_form[home].append(source)
+            xg_source_form[away].append(source)
+        else:
+            xg_missing[home].append(1.0)
+            xg_missing[away].append(1.0)
+            xg_source_form[home].append("missing")
+            xg_source_form[away].append("missing")
         last_date[home] = d
         last_date[away] = d
 
@@ -206,6 +289,8 @@ def build_feature_rows(limit=None, pending=None):
                 "goals_diff_h": fh["goals_diff_avg"],
                 "goals_diff_a": fa["goals_diff_avg"],
                 "xg_diff_h": fh["xg_diff_avg"], "xg_diff_a": fa["xg_diff_avg"],
+                "xg_missing_h": fh["xg_missing"], "xg_missing_a": fa["xg_missing"],
+                "xg_source_h": fh["xg_source"], "xg_source_a": fa["xg_source"],
                 "rest_h": fh["rest_days"], "rest_a": fa["rest_days"],
                 "n_played_h": fh["n_played"], "n_played_a": fa["n_played"],
             })

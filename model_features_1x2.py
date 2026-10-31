@@ -16,6 +16,7 @@ Jalankan:  python model_features_1x2.py [--seasons 2024/25] [--selftest]
 """
 
 import sys
+import os
 
 import numpy as np
 
@@ -25,7 +26,7 @@ from validation import eval_1x2
 YIDX = {"H": 0, "D": 1, "A": 2}
 CLASSES = ("H", "D", "A")
 
-FEATURES = [
+BASE_FEATURES = [
     "elo_diff",
     "form_pts_h", "form_pts_a",
     "goals_diff_h", "goals_diff_a",
@@ -33,6 +34,11 @@ FEATURES = [
     "rest_h", "rest_a",
     "n_played_h", "n_played_a",
 ]
+XG_AWARE_FEATURES = BASE_FEATURES + ["xg_missing_h", "xg_missing_a"]
+FEATURE_MODE = os.environ.get("FOOTBALL_T3_FEATURES", "base").lower()
+if FEATURE_MODE not in {"base", "xg_aware"}:
+    raise ValueError("FOOTBALL_T3_FEATURES must be base or xg_aware")
+FEATURES = XG_AWARE_FEATURES if FEATURE_MODE == "xg_aware" else BASE_FEATURES
 
 
 def _rows_to_arrays(rows):

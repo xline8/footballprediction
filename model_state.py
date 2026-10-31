@@ -42,7 +42,7 @@ _fp_memo: Dict[str, Tuple[Tuple[int, int], str]] = {}
 
 def current_data_fingerprint() -> str:
     """Hash konten file data latih; dimemo per (mtime, size) per file."""
-    parts = []
+    parts = ["xg_source:" + os.environ.get("FOOTBALL_XG_SOURCE", "understat")]
     for name, p in _FP_FILES:
         try:
             st = os.stat(p)
