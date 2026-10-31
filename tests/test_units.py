@@ -1709,6 +1709,60 @@ def test_purge_bogus_spares_issued_and_settled_rows():
     assert [r["bet_id"] for r in kept] == ["b", "c", "d", "e", "g", "j"], kept
 
 
+def test_build_end_to_end_sandbox():
+    # Titik buta teratas grup D ronde 15: build() tidak pernah
+    # dipanggil suite — hanya unit-unitnya. Sandbox TA/PRED temporer:
+    # (1) fixtures kosong -> rc 1 dan model_markets tidak ditulis;
+    # (2) best_bets lama berisi baris OPEN korup non-numerik ->
+    # build TIDAK crash (F1 di jalur nyata) dan baris korup
+    # ter-purge dari file hasil, baris sehat bertahan.
+    import csv
+    import shutil
+    import tempfile
+
+    import ta_model as tm
+
+    td = tempfile.mkdtemp()
+    saved = (tm.TA, tm.PRED)
+    try:
+        ta = os.path.join(td, "ta")
+        os.makedirs(ta)
+        pred = os.path.join(td, "preds.csv")
+        tm.TA, tm.PRED = ta, pred
+        with open(os.path.join(ta, "fixtures.csv"), "w") as f:
+            f.write("game_id,date,time,home,away,league\n")
+        with open(pred, "w") as f:
+            f.write("div,date,home,away,lam_h,lam_a,ph_dc,pd_dc,pa_dc\n")
+        assert tm.build() == 1
+        assert not os.path.exists(os.path.join(ta, "model_markets.csv"))
+
+        with open(os.path.join(ta, "fixtures.csv"), "w") as f:
+            f.write("game_id,date,time,home,away,league\n")
+            f.write("999,2027-06-01,20:00,Alpha,Beta,Test League\n")
+        with open(pred, "w") as f:
+            f.write("div,date,home,away,lam_h,lam_a,ph_dc,pd_dc,pa_dc\n")
+            f.write("E0,2027-06-01,Alpha,Beta,1.5,1.0,0.45,0.28,0.27\n")
+        base = {c: "" for c in tm.BET_COLS}
+        with open(os.path.join(ta, "best_bets.csv"), "w",
+                  newline="") as f:
+            w = csv.DictWriter(f, fieldnames=tm.BET_COLS)
+            w.writeheader()
+            w.writerow(dict(base, bet_id="1|OU|2.5|Over",
+                            game_id="1", status="OPEN", price="",
+                            p_market="",
+                            kickoff_utc="2027-06-01T20:00"))
+            w.writerow(dict(base, bet_id="2|OU|2.5|Over",
+                            game_id="2", status="OPEN", price="2.00",
+                            p_market="0.40",
+                            kickoff_utc="2027-06-01T20:00"))
+        assert tm.build() == 0
+        rows = tm.read_csv(os.path.join(ta, "best_bets.csv"))
+        assert [r["bet_id"] for r in rows] == ["2|OU|2.5|Over"], rows
+    finally:
+        tm.TA, tm.PRED = saved
+        shutil.rmtree(td, ignore_errors=True)
+
+
 def test_best_picks_ta_loader_skips_started_matches():
     # Ronde 13: loader TA best_picks berjangkar datetime penuh —
     # bet laga yang sudah kickoff hari ini tidak boleh masuk
