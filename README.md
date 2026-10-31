@@ -127,7 +127,7 @@ flowchart LR
 | Matrix pricing | `matrix_pricer.py` | builds the bivariate Poisson scoreline matrix and meta-calibrates it so summed 1X2 marginals match the meta model. Experiment-only: the daily O/U and BTTS probabilities come from the Dixon-Coles model (`model_v2.py`), not from this matrix |
 | Corner model | `model_corners_v3.py` | Poisson model predicting team corner counts and corner O/U lines from rolling shot statistics (fitted parameters in `ta/corner_params.json`). Beats league base-rate on walk-forward log loss, Brier, MAE, RMSE. Walk-forward calibration against actual corner counts is documented under Measured results. No bookmaker corner-odds feed is connected, so the corner model is assessed on calibration against actual counts, not on price value |
 | xG dataset | `data_enrichment/build_xg_matches.py` | builds `xg_raw/xg_matches.csv` (per-match xG keyed to the clean match data) from the raw Understat dumps; consumed by the blend fit and the feature model. The legacy exogenous-enrichment pipeline that once sat beside it (Pinnacle closing odds, fatigue flags, rolling xG differentials into `all_matches_enriched.csv`) was removed in the round-12 cleanup: nothing in production read its output |
-| Market orchestration | `market_orchestration.py` | syncs tipsterarea match-page odds for every model fixture in the today..+4 window during the daily run, then builds `market_compare.csv`: per fixture and market, the 1xBet price, the cross-bookmaker median, a normalised implied probability, and the bookmaker count. Also writes the daily archive and routes cup picks into the ledger |
+| Market orchestration | `market_orchestration.py` | syncs tipsterarea match-page odds for every model fixture in the today..+4 window during the daily run, then builds `market_compare.csv`: per fixture and market, the 1xBet price, the cross-bookmaker median, a normalised implied probability, and the bookmaker count. Also writes the daily archive — write-once per file, and a product file whose rows belong to another date's generation is refused and reported instead of freezing the wrong day's picks — and routes cup picks into the ledger |
 | Policy engine | `backtest_picks.py` | filters betting decisions after the model (edge thresholds, overlays, staking) so calibration stays intact; candidate policies must clear the dual gate before going live |
 
 ## Live shadow tracker
@@ -168,7 +168,12 @@ The recommendation-grading step grades the daily products themselves.
 `grade_recommendations.py`
 reads each archived date's safest picks, single, and slips from
 `archive/<date>/` and settles every leg on the 90-minute score in
-`ta/results.csv`. League corner picks settle on the HC/AC counts in
+`ta/results.csv`. Before anything is pruned, rows that the current
+archives no longer regenerate (for example from an archive folder
+damaged after issue) are re-graded directly from the store, and an
+orphaned slip's legs are recovered exactly from the content hash
+that names the unit, so an issued selection is settled rather than
+silently deleted. League corner picks settle on the HC/AC counts in
 `all_matches_clean.csv` once those are published. A slip is graded as a
 unit: one losing leg loses it, a push leg drops out, and a pending leg
 keeps the unit pending. Cup corner picks are not graded, because

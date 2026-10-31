@@ -21,7 +21,7 @@ import hashlib
 import json
 import os
 import sys
-from datetime import date, datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 TA = os.path.join(HERE, "ta")
