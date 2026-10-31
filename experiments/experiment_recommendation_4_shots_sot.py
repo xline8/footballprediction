@@ -213,7 +213,9 @@ def _metrics(pairs):
             "accuracy": acc / max(n, 1)}
 
 
-def main():
+def evaluate(seasons=None):
+    """Return baseline/challenger metrics for the requested seasons."""
+    seasons = set(seasons or (VAL_SEASONS | TEST_SEASONS))
     rows = _feature_rows()
     y = np.array([{ "H": 0, "D": 1, "A": 2}[r["ftr"]] for r in rows], dtype=int)
     Xb = _matrix(rows, "base")
@@ -224,8 +226,7 @@ def main():
         test = np.array([r["date"][:7] == month for r in rows])
         if train.sum() < 1500 or not test.any():
             continue
-        eval_seasons = VAL_SEASONS | TEST_SEASONS
-        eval_mask = np.array([r["season"] in eval_seasons for r in rows])
+        eval_mask = np.array([r["season"] in seasons for r in rows])
         test &= eval_mask
         if not test.any():
             continue
@@ -244,9 +245,17 @@ def main():
         pe = mf._fit_multinomial(Xext[train], y[train], Xext[test])
         for p, yi in zip(pe, y[test]):
             pairs["shots_sot"].append((tuple(p), int(yi)))
-    print(f"rows={len(rows):,} shot_labels={sum(r['xgh'] is not None for r in rows):,}")
-    for name, pair in pairs.items():
-        print(name, _metrics(pair))
+    result = {name: _metrics(pair) for name, pair in pairs.items()}
+    result["rows"] = len(rows)
+    result["shot_labels"] = sum(r["xgh"] is not None for r in rows)
+    return result
+
+
+def main():
+    result = evaluate()
+    print(f"rows={result['rows']:,} shot_labels={result['shot_labels']:,}")
+    for name in ("base", "shots_sot"):
+        print(name, result[name])
 
 
 if __name__ == "__main__":
