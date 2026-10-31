@@ -15,10 +15,16 @@ from datetime import datetime
 from football_etl import pois, tau, norm3, norm2, blend3, blend2, normalize_name
 from paths import BASE
 
-# Mode fit DC: "goals" (gol saja) | "blend" (0.5*gol + 0.5*xG).
+# Mode fit DC: "goals" (gol saja) | "blend" (gol + xG).
 # Overridable via env FOOTBALL_DC_FIT_MODE. Default "blend": gate
 # go-live lulus dan mode ini produksi sejak 2026-10-28.
 DC_FIT_MODE = os.environ.get("FOOTBALL_DC_FIT_MODE", "blend")
+try:
+    DC_XG_WEIGHT = float(os.environ.get("FOOTBALL_DC_XG_WEIGHT", "0.5"))
+except ValueError:
+    raise ValueError("FOOTBALL_DC_XG_WEIGHT must be numeric")
+if not 0.0 <= DC_XG_WEIGHT <= 1.0:
+    raise ValueError("FOOTBALL_DC_XG_WEIGHT must be between 0 and 1")
 
 DATA = os.path.join(BASE, "all_matches_clean.csv")
 CFG = os.path.join(BASE, "v2_config.json")
@@ -127,11 +133,14 @@ def xg_key(div, date_iso, home, away):
 
 
 class DC:
-    def __init__(self):
+    def __init__(self, xg_weight=None):
         self.a = defaultdict(float)
         self.d = defaultdict(float)
         self.h = 0.28
         self.rho = -0.07
+        self.xg_weight = DC_XG_WEIGHT if xg_weight is None else float(xg_weight)
+        if not 0.0 <= self.xg_weight <= 1.0:
+            raise ValueError("xg_weight must be between 0 and 1")
 
     def _lam(self, hi, ai):
         return (math.exp(self.a[hi] + self.d[ai] + self.h),
@@ -148,8 +157,9 @@ class DC:
             yh, ya = g[2], g[3]
             if mode == "blend" and len(g) >= 7 \
                     and g[4] is not None and g[5] is not None:
-                obs_vals.append((0.5 * yh + 0.5 * g[4],
-                                 0.5 * ya + 0.5 * g[5]))
+                w = self.xg_weight
+                obs_vals.append(((1.0 - w) * yh + w * g[4],
+                                 (1.0 - w) * ya + w * g[5]))
             else:
                 obs_vals.append((float(yh), float(ya)))
         # Bakukan ke 5-tuple (hi, ai, yh, ya, dt); terima 5/7.
@@ -265,11 +275,12 @@ def brier3(p, yi):
 YIDX = {"H": 0, "D": 1, "A": 2}
 
 
-def run_wf(seasons, hl, freq, with_extra=False):
+def run_wf(seasons, hl, freq, with_extra=False, xg_weights=None):
     """Walk-forward utk daftar musim. freq: 'm' bulanan | 'w' mingguan.
     with_extra: tambahkan AH & market cols (untuk final)."""
     _ensure_loaded()
-    models = {d: DC() for d in TOP5}
+    xg_weights = xg_weights or {}
+    models = {d: DC(xg_weights.get(d)) for d in TOP5}
     ptr = {d: 0 for d in TOP5}
     games_hist = {d: [] for d in TOP5}
     groups = defaultdict(list)
