@@ -204,12 +204,23 @@ def generate_predictions(force_refit: bool = False, output_file: str = None) -> 
             prefix=f".{os.path.basename(output_file)}.", suffix=".tmp",
             dir=out_dir)
         try:
-            with os.fdopen(fd, "w", newline="", encoding="utf-8") as f:
+            try:
+                f = os.fdopen(fd, "w", newline="", encoding="utf-8")
+            except Exception:
+                os.close(fd)
+                raise
+            with f:
                 w = csv.DictWriter(f, fieldnames=list(out_rows[0].keys()))
                 w.writeheader()
                 w.writerows(out_rows)
                 f.flush()
                 os.fsync(f.fileno())
+            # mkstemp files are 0600; keep the replaced file's mode
+            # (round 17, L-A1) instead of silently tightening it.
+            try:
+                os.chmod(tmp_path, os.stat(output_file).st_mode & 0o777)
+            except OSError:
+                os.chmod(tmp_path, 0o644)
             os.replace(tmp_path, output_file)
         finally:
             if os.path.exists(tmp_path):

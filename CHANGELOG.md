@@ -33,6 +33,49 @@ Keep a Changelog, and the project uses semantic versioning.
 
 ### Fixed
 
+- Audit round 17 (audit of the PR #38 changes below). One medium:
+  PR #38 made the full-pipeline corner step depend on league
+  scoring on the stated premise that corners consume
+  `predictions_upcoming.csv`. They do not — the corner model's
+  inputs are the cleaned match history, the fixture JSON and the
+  fitted corner parameters, all refresh products — so a full run
+  with scoring blocked would skip fresh corners whose inputs were
+  ready, while the actual stale-corner consumer (the TA model
+  step, which reads the corner file with no freshness check) was
+  not protected by the gate. The dependency is back to refresh
+  only, the premise is corrected in the step table and in the gate
+  test that had been flipped to lock it in, and the TA model step
+  now logs a warning when it builds on a corner file the current
+  run did not refresh. Lows: the atomic writers introduced by
+  PR #38 produced mode-0600 files (`mkstemp`), silently tightening
+  artifacts that had been 0660 — each writer now preserves the
+  replaced file's mode (0644 for a new file) and closes the
+  descriptor explicitly if `os.fdopen` itself raises; the ledger
+  counter crashed pipeline status on one corrupt JSON line and
+  could report a total that disagreed with pending plus graded
+  when a pick id was missing or duplicated — it now skips
+  unparseable lines and counts per row, so the three numbers
+  always reconcile (live counts unchanged); the API's exact-match
+  endpoint now reads all fields with `.get()`, not just the blend
+  columns, so a predictions CSV missing a whole column group no
+  longer surfaces as a 500. The previously untested PR #38
+  behaviours (ledger counting, atomic-write safety and modes,
+  endpoint tolerance, per-division team counts) are pinned by
+  tests.
+- PR #38 (pipeline artifact safety and reporting; entry recorded
+  retroactively — the change shipped without one). Match cache,
+  model state, league predictions and corner predictions are now
+  written atomically (temporary file, fsync, rename), so readers
+  never observe a half-written artifact. Pipeline status and the
+  pick statistics count ledger picks by joining `picks.jsonl`
+  against `grades.jsonl` on pick id instead of trusting the picks
+  file's status field, which is never updated after issue — the
+  old counting reported every historical pick as pending. The
+  data loader's per-division summary now reports the real number
+  of distinct teams (it previously always reported zero). The
+  corner API serialises per-line probabilities as numbers instead
+  of CSV strings, and the exact-match prediction endpoint tolerates
+  a predictions CSV without the blend columns.
 - Audit round 16 (self-audit of the round 15 fixes). One medium:
   the orphan-unit membership recovery added in round 15 enumerated
   every leg subset on every grading run — an unrecoverable unit in

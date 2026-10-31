@@ -127,10 +127,21 @@ class ModelState:
         fd, tmp_path = tempfile.mkstemp(
             prefix=f".model_{self.div}.", suffix=".tmp", dir=CACHE_DIR)
         try:
-            with os.fdopen(fd, 'wb') as f:
+            try:
+                f = os.fdopen(fd, 'wb')
+            except Exception:
+                os.close(fd)
+                raise
+            with f:
                 pickle.dump(data, f, protocol=pickle.HIGHEST_PROTOCOL)
                 f.flush()
                 os.fsync(f.fileno())
+            # mkstemp files are 0600; keep the replaced file's mode
+            # (round 17, L-A1) instead of silently tightening it.
+            try:
+                os.chmod(tmp_path, os.stat(filepath).st_mode & 0o777)
+            except OSError:
+                os.chmod(tmp_path, 0o644)
             os.replace(tmp_path, filepath)
         finally:
             if os.path.exists(tmp_path):
