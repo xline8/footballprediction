@@ -409,9 +409,12 @@ def test_pipeline_gates_scoring_on_partial_xg_only():
             po.BASE_DIR = old
     assert res["scoring"]["status"] == "skipped"
     assert res["model"]["status"] == "success"       # fit tak butuh xg step
-    # Corner model consumes league predictions, so it must also be skipped
-    # when the upstream scoring chain is blocked by partial XG.
-    assert res["corner_model"]["status"] == "skipped"
+    # Corner model TIDAK mengonsumsi output scoring liga — inputnya
+    # produk refresh (histori laga, fixture, params terfit) — jadi ia
+    # tetap jalan saat rantai scoring terblokir xG parsial. (PR #38
+    # sempat menggantungkannya ke scoring berdasar premis yang salah;
+    # audit ronde 17 mengembalikannya.)
+    assert res["corner_model"]["status"] == "success"
     assert res["picks"]["status"] == "skipped"       # rantai skip menular
     assert res["status"] == "failed"                  # partial = gagal
 
@@ -1852,6 +1855,177 @@ def test_archive_skips_wrong_generation_and_blank_rows():
             arc, "2026-10-31", "recommended_slip10.csv"))
     finally:
         shutil.rmtree(td, ignore_errors=True)
+
+
+def test_ledger_counts_reconciles_and_tolerates_corruption():
+    # D-L1 ronde 17: _ledger_counts (PR #38) tidak punya tes sama
+    # sekali, dan versi pertamanya (a) meledak pada baris JSON
+    # rusak di jalur status tanpa try, (b) totalnya bisa tak sama
+    # dengan pending+graded bila pick_id hilang/duplikat (L-A3/A4).
+    import json as _json
+    import tempfile
+
+    from pipeline_orchestrator import _ledger_counts
+
+    def write(base, picks, grades):
+        led = os.path.join(base, "ledger")
+        os.makedirs(led, exist_ok=True)
+        with open(os.path.join(led, "picks.jsonl"), "w") as f:
+            for p in picks:
+                f.write(p if isinstance(p, str) else _json.dumps(p) + "\n")
+        with open(os.path.join(led, "grades.jsonl"), "w") as f:
+            for g in grades:
+                f.write(g if isinstance(g, str) else _json.dumps(g) + "\n")
+
+    with tempfile.TemporaryDirectory() as td:
+        # kasus normal + grade yatim diabaikan
+        write(td,
+              [{"pick_id": "a"}, {"pick_id": "b"}, {"pick_id": "c"}],
+              [{"pick_id": "a", "result": "win"},
+               {"pick_id": "z", "result": "win"}])
+        assert _ledger_counts(td) == {"total": 3, "pending": 2, "graded": 1}
+        # baris rusak di kedua file dilewati, bukan meledak
+        write(td,
+              [{"pick_id": "a"}, "{rusak\n", "[1,2]\n", {"pick_id": "b"}],
+              ["{juga rusak\n", {"pick_id": "a", "result": "loss"}])
+        assert _ledger_counts(td) == {"total": 2, "pending": 1, "graded": 1}
+        # duplikat + tanpa ID: rekonsiliasi per baris tetap persis
+        write(td,
+              [{"pick_id": "a"}, {"pick_id": "a"}, {"noid": 1}],
+              [{"pick_id": "a", "result": "win"}])
+        c = _ledger_counts(td)
+        assert c == {"total": 3, "pending": 1, "graded": 2}, c
+        assert c["total"] == c["pending"] + c["graded"]
+        # tanpa file sama sekali
+        assert _ledger_counts(os.path.join(td, "kosong")) == {
+            "total": 0, "pending": 0, "graded": 0}
+
+
+def test_atomic_writes_preserve_mode_and_original():
+    # D-L1 ronde 17 + L-A1/L-A2: penulisan atomik PR #38 tidak
+    # teruji; hasil mkstemp selalu 0600 sehingga mode file lama
+    # (0660) hilang pada penulisan atomik pertama, dan fd hasil
+    # mkstemp bocor bila os.fdopen yang gagal.
+    import stat as _stat
+    import tempfile
+
+    import model_corners_v3 as mc
+    import model_state as ms
+
+    with tempfile.TemporaryDirectory() as td:
+        # helper corner: mode lama dipertahankan, isi terganti utuh
+        p = os.path.join(td, "out.csv")
+        with open(p, "w") as f:
+            f.write("OLD\n")
+        os.chmod(p, 0o664)
+        mc._atomic_text_write(p, lambda f: f.write("NEW\n"))
+        with open(p) as f:
+            assert f.read() == "NEW\n"
+        assert _stat.S_IMODE(os.stat(p).st_mode) == 0o664, oct(
+            _stat.S_IMODE(os.stat(p).st_mode))
+        # writer meledak di tengah: file asli utuh, nol temp tersisa
+        def bad_writer(f):
+            f.write("SEBAGIAN")
+            raise RuntimeError("mati di tengah")
+        with open(p, "w") as f:
+            f.write("UTUH\n")
+        try:
+            mc._atomic_text_write(p, bad_writer)
+            raise AssertionError("harus raise")
+        except RuntimeError:
+            pass
+        with open(p) as f:
+            assert f.read() == "UTUH\n"
+        assert [x for x in os.listdir(td) if x.endswith(".tmp")] == []
+        # file baru (belum ada target): mode default 0644, bukan 0600
+        p2 = os.path.join(td, "baru.csv")
+        mc._atomic_text_write(p2, lambda f: f.write("X\n"))
+        assert _stat.S_IMODE(os.stat(p2).st_mode) == 0o644
+        # ModelState.save: roundtrip + mode default di direktori tmp
+        old_dir = ms.CACHE_DIR
+        ms.CACHE_DIR = td
+        try:
+            st = ms.ModelState("E0")
+            st.save(force=True)  # instance segar belum punya updated_at
+            fp = os.path.join(td, "model_E0.pkl")
+            assert os.path.exists(fp), os.listdir(td)
+            assert _stat.S_IMODE(os.stat(fp).st_mode) == 0o644
+            assert ms.ModelState("E0").load() is True
+        finally:
+            ms.CACHE_DIR = old_dir
+
+
+def test_api_prediction_missing_columns_and_corner_floats():
+    # D-L1 ronde 17: dua perubahan api_server PR #38 (penjaga
+    # r.get kolom blend + prob_over float) masuk titik buta API
+    # yang memang nol tes. Endpoint dipanggil in-process dengan
+    # BASE_DIR diarahkan ke direktori tmp.
+    import asyncio
+    import json as _json
+    import tempfile
+
+    import api_server as api
+
+    old_base = api.BASE_DIR
+    with tempfile.TemporaryDirectory() as td:
+        api.BASE_DIR = td
+        try:
+            # CSV prediksi TANPA kolom blend/b365/ph_dc sama sekali:
+            # versi lama KeyError -> 500; kini semua None.
+            with open(os.path.join(td, "predictions_upcoming.csv"),
+                      "w", newline="") as f:
+                f.write("div,date,home,away,pd_dc,pa_dc\n"
+                        "D1,2027-01-10,alpha,beta,0.25,0.20\n")
+            resp = asyncio.run(api.get_prediction_for_match(
+                "D1", "2027-01-10", "alpha", "beta"))
+            body = _json.loads(resp.body)
+            assert body["ph_dc"] is None and body["pd_dc"] == 0.25, body
+            assert body["ph_bl"] is None and body["b365h"] is None, body
+            # corners: prob_over harus float, bukan string CSV
+            with open(os.path.join(td, "predictions_corners_upcoming.csv"),
+                      "w", newline="") as f:
+                f.write("div,date,home,away,mu_shots_cs,r_cs,rec_line,"
+                        "rec_side,recommendation,rec_prob,p_gt_9.5\n"
+                        "D1,2027-01-10,alpha,beta,10.1,0.3,9.5,over,"
+                        "Over 9.5,0.61,0.61\n")
+            resp = asyncio.run(api.get_corner_predictions())
+            body = _json.loads(resp.body)
+            assert body, "corner kosong"
+            po = body[0]["prob_over"]["9.5"]
+            assert isinstance(po, float) and po == 0.61, body[0]
+        finally:
+            api.BASE_DIR = old_base
+
+
+def test_data_summary_teams_per_division():
+    # D-L1 ronde 17: hitungan tim per divisi (fix data_loader PR
+    # #38; nilai lama selalu 0) tidak teruji. Cache palsu minimal.
+    import datetime as _dt
+
+    from data_loader import MatchLoader
+
+    class FakeCache:
+        def __init__(self):
+            self.matches = [
+                {"home": "a", "away": "b", "season": "2026/27",
+                 "date": _dt.date(2026, 9, 1)},
+                {"home": "b", "away": "c", "season": "2026/27",
+                 "date": _dt.date(2026, 9, 2)},
+                {"home": "x", "away": "y", "season": "2026/27",
+                 "date": _dt.date(2026, 9, 1)},
+            ]
+            self.by_div = {"E0": [0, 1], "D1": [2]}
+            self._cache_file = "/nonexistent/matches.pkl"
+
+        def get_div_matches(self, div):
+            return [self.matches[i] for i in self.by_div[div]]
+
+    loader = MatchLoader.__new__(MatchLoader)
+    loader.cache = FakeCache()
+    s = loader.get_data_summary()
+    assert s["per_division"]["E0"]["teams"] == 3, s["per_division"]
+    assert s["per_division"]["D1"]["teams"] == 2, s["per_division"]
+    assert s["per_division"]["E0"]["n_matches"] == 2
 
 
 def test_archive_helpers_tolerate_non_utf8():
