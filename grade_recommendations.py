@@ -529,19 +529,22 @@ def _find_unit_legs(unit, cand_keys, store):
     found = []
     budget = [500_000]
 
-    def dfs(start, chosen, odds_prod, p_prod):
+    def dfs(start, chosen, odds_prod, p_prod, size):
+        # Ukuran subset dijelajahi menaik (1..6) seperti enumerasi
+        # versi lama: DFS sedalam-dalamnya lebih dulu akan menghabiskan
+        # anggaran node pada subset berawalan kandidat awal sebelum
+        # sempat mencoba kombinasi kecil di akhir daftar.
         if found or budget[0] <= 0:
             return
         budget[0] -= 1
-        if chosen and (not filtered
-                       or (abs(odds_prod - u_odds) <= 0.02 * u_odds
-                           and abs(p_prod - u_p) <= 0.02 * u_p)):
-            sig = ";".join(sorted(key_str[lk] for lk in chosen))
-            if ("unit:" + hashlib.md5(sig.encode()).hexdigest()[:12]
-                    == target):
-                found.append(tuple(chosen))
-                return
-        if len(chosen) == 6:
+        if len(chosen) == size:
+            if (not filtered
+                    or (abs(odds_prod - u_odds) <= 0.02 * u_odds
+                        and abs(p_prod - u_p) <= 0.02 * u_p)):
+                sig = ";".join(sorted(key_str[lk] for lk in chosen))
+                if ("unit:" + hashlib.md5(sig.encode()).hexdigest()[:12]
+                        == target):
+                    found.append(tuple(chosen))
             return
         for i in range(start, len(items)):
             lk, lg = items[i]
@@ -552,12 +555,17 @@ def _find_unit_legs(unit, cand_keys, store):
                 if n_odds > u_odds * 1.02 or n_p < u_p * 0.98:
                     continue
             chosen.append(lk)
-            dfs(i + 1, chosen, n_odds, n_p)
+            dfs(i + 1, chosen, n_odds, n_p, size)
             chosen.pop()
             if found or budget[0] <= 0:
                 return
 
-    dfs(0, [], 1.0, 1.0)
+    for size in (1, 2, 3, 4, 5, 6):
+        if size > len(items):
+            break
+        dfs(0, [], 1.0, 1.0, size)
+        if found or budget[0] <= 0:
+            break
     return found[0] if found else None
 
 

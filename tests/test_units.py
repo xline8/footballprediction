@@ -1844,6 +1844,8 @@ def test_archive_helpers_tolerate_non_utf8():
     # (lipatan L3 ronde 15) tidak punya tambat tes — mutasi yang
     # membuangnya tetap hijau. File latin-1 harus diperlakukan
     # tak-berdata / tanpa vonis, bukan meledak.
+    import tempfile
+
     import market_orchestration as mo
 
     with tempfile.TemporaryDirectory() as td:
