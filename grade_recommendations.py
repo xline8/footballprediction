@@ -455,6 +455,108 @@ def _grade_archive(archive_date, store, res_idx, cor_idx, now, seen=None):
     return changed
 
 
+# ---------------------------------------------------------------- proses ulang store
+def _leg_row_from_store(g):
+    """Bangun baris produk dari baris leg tersimpan di store, untuk
+    dinilai ulang oleh _grade_leg (pemetaan kebalikan dari yang
+    ditulis _grade_archive)."""
+    row = {"date": g["date"], "home": g["home"], "away": g["away"],
+           "competition": g["competition"], "market": g["market"],
+           "line": g["line"]}
+    if g["product"] == "pick_teraman":
+        row["side"] = g["selection"]
+        row["prob"] = g["p_model"]
+        row["tier"] = g["tier"]
+    else:
+        row["selection"] = g["selection"]
+        row["p_model"] = g["p_model"]
+        row["o_1xbet"] = g["odds"]
+    return row
+
+
+def _regrade_orphans(store, seen, res_idx, cor_idx, now):
+    """Nilai baris PENDING yang tidak ter-regenerasi arsip mana pun
+    pada run ini, langsung dari store — dipanggil SEBELUM pemangkasan
+    yatim di main().
+
+    Audit ronde 15 (C15-1): grader murni digerakkan arsip, jadi leg
+    yang file arsipnya rusak/tergenerasi ulang (archive/2026-10-30:
+    slip kosong, slip10 berisi leg tanggal lain) tidak pernah dinilai
+    ulang — satu-satunya jalan keluarnya adalah prune, dan 13 leg
+    2026-10-30 yang laganya sudah FT nyaris terhapus tanpa grade
+    (mekanisme yang sama dengan yatim Le Havre ronde 14, yang saat
+    itu diselamatkan manual). Kini leg yatim dinilai dari indeks
+    hasil yang sama seperti jalur arsip; yang hasilnya belum ada
+    tetap pending dan tetap tunduk pada aturan prune yang sama.
+
+    Unit slip yatim: identitas unit adalah hash isi leg-legnya
+    (lihat _grade_archive), jadi keanggotaan unit bisa dipulihkan
+    secara eksak — subset leg store berproduk sama yang hash isinya
+    sama persis dengan sidik unit. Hanya kecocokan tunggal yang
+    dipakai; tanpa kecocokan, unit dibiarkan pending (prune usia
+    14 hari tetap menjadi jalan keluar terakhirnya).
+    Return jumlah baris yang berubah.
+    """
+    from itertools import combinations
+
+    changed = 0
+    # leg dulu: status leg menentukan status unit di bawah.
+    for k in sorted(store):
+        g = store[k]
+        if k in seen or g["status"] != "pending" or g["level"] != "leg":
+            continue
+        ng = _grade_leg(g["product"], _leg_row_from_store(g),
+                        res_idx, cor_idx)
+        if ng["status"] == "pending":
+            continue
+        ng["graded_at"] = ng["graded_at"] or now
+        if not _same(g, ng):
+            store[k] = ng
+            changed += 1
+
+    legs_by_product = defaultdict(list)
+    for k, g in store.items():
+        if g["level"] == "leg" and g["product"] in SLIP_PRODUCTS:
+            legs_by_product[g["product"]].append(k)
+    for k in sorted(store):
+        g = store[k]
+        if (k in seen or g["status"] != "pending"
+                or g["level"] != "unit"
+                or g["product"] not in SLIP_PRODUCTS
+                or not (g["selection"] or "").startswith("unit:")):
+            continue
+        try:
+            last = (date.fromisoformat(g["date"])
+                    + timedelta(days=3)).isoformat()
+        except (TypeError, ValueError):
+            continue
+        cands = sorted(lk for lk in legs_by_product[g["product"]]
+                       if g["date"] <= store[lk]["date"] <= last)
+        matches = []
+        for sz in (1, 2, 3, 4, 5, 6):
+            if sz > len(cands):
+                break
+            for combo in combinations(cands, sz):
+                sig = ";".join(sorted(
+                    "|".join(map(str, _key(store[lk]))) for lk in combo))
+                if ("unit:" + hashlib.md5(sig.encode()).hexdigest()[:12]
+                        == g["selection"]):
+                    matches.append(combo)
+        if len(matches) != 1:
+            continue
+        st = settle_slip_unit([store[lk]["status"] for lk in matches[0]])
+        if st == "pending":
+            continue
+        ng = dict(g)
+        ng["status"] = st
+        ng["reason"] = "no_actuals_source" if st == "ungradeable" else ""
+        ng["graded_at"] = now
+        if not _same(g, ng):
+            store[k] = ng
+            changed += 1
+    return changed
+
+
 # ---------------------------------------------------------------- ringkasan
 def _stats(final_legs):
     npush = [g for g in final_legs if g["status"] != "push"]
@@ -629,6 +731,15 @@ def main(argv=None):
         changed = _grade_archive(archive_date, store, res_idx, cor_idx,
                                  now, seen)
         total_changed += changed
+    # Proses ulang store (audit ronde 15, C15-1): leg/unit pending
+    # yang tidak dihasilkan arsip mana pun pada run ini dinilai
+    # langsung dari indeks hasil SEBELUM pemangkasan yatim di bawah
+    # sempat menghapusnya. Kerusakan arsip dengan demikian berhenti
+    # menjadi kehilangan histori kalibrasi.
+    regraded = _regrade_orphans(store, seen, res_idx, cor_idx, now)
+    if regraded:
+        print(f"[grade] yatim dinilai dari store: {regraded}")
+        total_changed += regraded
     # Pangkas yatim: baris PENDING yang kuncinya tidak lagi dihasilkan
     # arsip mana pun (seleksi rekomendasi tergantikan sebelum sempat
     # ter-grade) menggantung sebagai pending abadi tanpa pemangkasan

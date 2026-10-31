@@ -1236,6 +1236,92 @@ def test_missing_archive_dates():
         ["2026-10-29", "2026-10-30"], date(2026, 10, 31)) == []
 
 
+def test_regrade_orphans_settles_store_only_rows():
+    # C15-1: leg/unit pending yang tidak ter-regenerasi arsip mana pun
+    # (arsip rusak/tergenerasi ulang) harus dinilai dari store sebelum
+    # prune sempat menghapusnya — kasus nyata: 13 leg 2026-10-30
+    # (Elversberg/Lille/Villarreal) yang laganya sudah FT.
+    import hashlib
+
+    import grade_recommendations as gr
+
+    def leg(product, home, away, market, line, sel, p, odds,
+            date="2026-10-30", tier=""):
+        g = {"date": date, "product": product, "level": "leg",
+             "home": home, "away": away, "competition": "",
+             "market": market, "line": line, "selection": sel,
+             "p_model": p, "odds": odds, "tier": tier,
+             "status": "pending", "score": "", "reason": "no_result_yet",
+             "graded_at": "2026-10-30T01:00:00+00:00", "result_date": ""}
+        return gr._key(g), g
+
+    store = {}
+    # 1: leg yatim, hasil ada (4-1, OU 2.5 Over -> hit)
+    k1, g1 = leg("slip2", "elversberg", "mainz 05", "OU", "2.5",
+                 "Over", 0.7422, 1.47)
+    store[k1] = g1
+    # 2: leg yatim, laga belum main -> tetap pending
+    k2, g2 = leg("single", "future fc", "later united", "OU", "2.5",
+                 "Over", 0.60, 1.90, date="2026-11-05")
+    store[k2] = g2
+    # 3: leg yang MASIH dihasilkan arsip (ada di seen) -> bukan urusan
+    # proses ulang store; dibiarkan pending di sini
+    k3, g3 = leg("slip2", "elversberg", "mainz 05", "DC", "",
+                 "12", 0.7817, 1.27)
+    store[k3] = g3
+    # 4: leg corner yatim (pick_teraman), aktual HC/AC sudah ada:
+    # total 11 vs Over 9.5 -> hit
+    k4, g4 = leg("pick_teraman", "corner fc", "wing united", "Corners",
+                 "9.5", "Over", 0.61, None)
+    store[k4] = g4
+    # 5: unit slip2 yatim dari dua leg yatim (satu hit, satu lose)
+    k5a, g5a = leg("slip2", "alpha", "beta", "OU", "2.5", "Over",
+                   0.70, 1.50)
+    k5b, g5b = leg("slip2", "gamma", "delta", "1X2", "", "1",
+                   0.60, 1.80)
+    store[k5a] = g5a
+    store[k5b] = g5b
+    sig = ";".join(sorted("|".join(map(str, gr._key(g)))
+                          for g in (g5a, g5b)))
+    unit = {"date": "2026-10-30", "product": "slip2", "level": "unit",
+            "home": "", "away": "", "competition": "", "market": "",
+            "line": "",
+            "selection": "unit:" + hashlib.md5(sig.encode()).hexdigest()[:12],
+            "p_model": 0.42, "odds": 2.70, "tier": "",
+            "status": "pending", "score": "", "reason": "legs_pending",
+            "graded_at": "2026-10-30T01:00:00+00:00"}
+    ku = gr._key(unit)
+    store[ku] = unit
+    # 6: unit yatim tanpa kecocokan hash -> tetap pending
+    unit6 = dict(unit)
+    unit6["selection"] = "unit:000000000000"
+    unit6["p_model"] = 0.50
+    k6 = gr._key(unit6)
+    store[k6] = unit6
+
+    res_idx = {"2026-10-30": [
+        (gr.norm("elversberg"), gr.norm("mainz 05"), 4, 1, "x"),
+        (gr.norm("alpha"), gr.norm("beta"), 3, 1, "x"),
+        (gr.norm("gamma"), gr.norm("delta"), 0, 2, "x"),
+    ]}
+    cor_idx = {("2026-10-30", gr.norm("corner fc"),
+                gr.norm("wing united")): 11}
+    now = "2026-10-31T02:00:00+00:00"
+    changed = gr._regrade_orphans(store, {k3}, res_idx, cor_idx, now)
+
+    assert store[k1]["status"] == "hit", store[k1]
+    assert store[k1]["score"] == "4-1"
+    assert store[k1]["result_date"] == "2026-10-30"
+    assert store[k2]["status"] == "pending"
+    assert store[k3]["status"] == "pending"  # seen: tidak disentuh
+    assert store[k4]["status"] == "hit" and store[k4]["score"] == "11"
+    assert store[k5a]["status"] == "hit"
+    assert store[k5b]["status"] == "lose"
+    assert store[ku]["status"] == "lose", store[ku]  # satu leg kalah
+    assert store[k6]["status"] == "pending"
+    assert changed == 5, changed  # k1, k4, k5a, k5b, unit
+
+
 def test_merge_bets_refreshes_open_rows_only():
     # Ronde 13 (MEDIUM siklus hidup best_bets): bet_id yang terbit
     # lagi memperbarui baris OPEN-nya; baris settle tidak berubah;
