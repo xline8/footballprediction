@@ -486,6 +486,104 @@ def _leg_row_from_store(g):
     return row
 
 
+def _find_unit_legs(unit, cand_keys, store):
+    """Kembalikan tuple kunci leg penyusun `unit`, atau None.
+
+    Ukuran subset dibatasi 6 = batas generator (slip_recommender:
+    slip2 ≤ 4 leg, slip10 ≤ 6 leg); unit ber-leg lebih dari itu
+    hanya bisa lahir dari file korup dan memang tidak dicari.
+    Kecocokan hash pertama langsung dipakai — dua himpunan leg
+    berbeda yang berbagi sidik md5-48 yang sama bukan ambiguitas
+    realistis, dan versi enumerasi-penuh ronde 15 membayar biaya
+    kombinatoriknya di SETIAP run untuk unit yang tak bisa pulih
+    (audit ronde 16, A16-1: jendela 40 kandidat = 52,6 detik).
+
+    Biaya ditekan tanpa mengubah vonis (hash isi tetap penentu
+    akhir), lewat pencarian dua fase:
+    - Fase 1 (cepat): DFS menyaring produk odds dan produk
+      p_model terhadap angka unit tersimpan — produk odds hanya
+      naik (semua odds leg ≥ 1), produk p hanya turun (p ≤ 1),
+      jadi jalur di luar pita toleransi 2% tidak akan kembali
+      masuk. Ini menutup kasus normal segenerasi (selisih
+      pembulatan cetak < 0,5%).
+    - Fase 2 (eksak): hash murni tanpa saringan numerik, hanya
+      early-exit + anggaran node. WAJIB ada karena pita fase 1
+      bisa menolak subset sejati tepat di skenario penyelamatan
+      itu sendiri: unit arsip 2026-10-30 '518d' menyimpan leg
+      dari generasi file berbeda — p_model-nya cocok persis
+      (probabilitas model stabil antar-generasi) tetapi odds
+      pasarnya sudah bergerak 3,1% dari total unit tersimpan.
+      Vonis tidak pernah bergantung pada toleransi: fase 2
+      menemukan apa pun yang enumerasi lama temukan, selama
+      anggaran node cukup — dan anggaran 400 ribu panggilan DFS
+      menampung enumerasi penuh jendela sampai 25 kandidat
+      (terukur: 332 ribu panggilan untuk 245 ribu subset di
+      n=25; n=17 hanya 35 ribu panggilan) dengan biaya terburuk
+      sekitar satu detik per fase. Melewati anggaran, pencarian menyerah dan
+      unit tetap pending: degradasi terbatas pada jendela
+      raksasa berangka korup, bukan lagi 52 detik per run.
+    String kunci tiap leg kandidat dibangun sekali per fase,
+    bukan per kombinasi. Fase 1 dilewati bila angka unit atau
+    satu pun leg kandidat tidak lengkap.
+    """
+    target = unit["selection"]
+    items = [(lk, store[lk]) for lk in cand_keys]
+    key_str = {lk: "|".join(map(str, _key(lg))) for lk, lg in items}
+    u_odds, u_p = unit["odds"], unit["p_model"]
+    filtered = (u_odds is not None and u_p is not None and all(
+        lg["odds"] is not None and lg["odds"] >= 1.0
+        and lg["p_model"] is not None and 0.0 <= lg["p_model"] <= 1.0
+        for _, lg in items))
+    def search(use_filters, budget):
+        found = []
+
+        def dfs(start, chosen, odds_prod, p_prod, size):
+            # Ukuran subset dijelajahi menaik (1..6) seperti
+            # enumerasi versi lama: DFS sedalam-dalamnya lebih
+            # dulu akan menghabiskan anggaran node pada subset
+            # berawalan kandidat awal sebelum sempat mencoba
+            # kombinasi kecil di akhir daftar.
+            if found or budget[0] <= 0:
+                return
+            budget[0] -= 1
+            if len(chosen) == size:
+                if (not use_filters
+                        or (abs(odds_prod - u_odds) <= 0.02 * u_odds
+                            and abs(p_prod - u_p) <= 0.02 * u_p)):
+                    sig = ";".join(sorted(key_str[lk] for lk in chosen))
+                    if ("unit:" + hashlib.md5(sig.encode()).hexdigest()[:12]
+                            == target):
+                        found.append(tuple(chosen))
+                return
+            for i in range(start, len(items)):
+                lk, lg = items[i]
+                n_odds, n_p = odds_prod, p_prod
+                if use_filters:
+                    n_odds = odds_prod * lg["odds"]
+                    n_p = p_prod * lg["p_model"]
+                    if n_odds > u_odds * 1.02 or n_p < u_p * 0.98:
+                        continue
+                chosen.append(lk)
+                dfs(i + 1, chosen, n_odds, n_p, size)
+                chosen.pop()
+                if found or budget[0] <= 0:
+                    return
+
+        for size in (1, 2, 3, 4, 5, 6):
+            if size > len(items):
+                break
+            dfs(0, [], 1.0, 1.0, size)
+            if found or budget[0] <= 0:
+                break
+        return found[0] if found else None
+
+    if filtered:
+        hit = search(True, [400_000])
+        if hit is not None:
+            return hit
+    return search(False, [400_000])
+
+
 def _regrade_orphans(store, seen, res_idx, cor_idx, now):
     """Nilai baris PENDING yang tidak ter-regenerasi arsip mana pun
     pada run ini, langsung dari store — dipanggil SEBELUM pemangkasan
@@ -503,14 +601,12 @@ def _regrade_orphans(store, seen, res_idx, cor_idx, now):
 
     Unit slip yatim: identitas unit adalah hash isi leg-legnya
     (lihat _grade_archive), jadi keanggotaan unit bisa dipulihkan
-    secara eksak — subset leg store berproduk sama yang hash isinya
-    sama persis dengan sidik unit. Hanya kecocokan tunggal yang
-    dipakai; tanpa kecocokan, unit dibiarkan pending (prune usia
-    14 hari tetap menjadi jalan keluar terakhirnya).
+    secara eksak — subset leg store yang hash isinya sama persis
+    dengan sidik unit (pencariannya di _find_unit_legs). Tanpa
+    kecocokan, unit dibiarkan pending (prune usia 14 hari tetap
+    menjadi jalan keluar terakhirnya).
     Return jumlah baris yang berubah.
     """
-    from itertools import combinations
-
     changed = 0
     # leg dulu: status leg menentukan status unit di bawah.
     for k in sorted(store):
@@ -547,19 +643,10 @@ def _regrade_orphans(store, seen, res_idx, cor_idx, now):
             continue
         cands = sorted(lk for lk in legs_by_product[g["product"]]
                        if g["date"] <= store[lk]["date"] <= last)
-        matches = []
-        for sz in (1, 2, 3, 4, 5, 6):
-            if sz > len(cands):
-                break
-            for combo in combinations(cands, sz):
-                sig = ";".join(sorted(
-                    "|".join(map(str, _key(store[lk]))) for lk in combo))
-                if ("unit:" + hashlib.md5(sig.encode()).hexdigest()[:12]
-                        == g["selection"]):
-                    matches.append(combo)
-        if len(matches) != 1:
+        combo = _find_unit_legs(g, cands, store)
+        if combo is None:
             continue
-        st = settle_slip_unit([store[lk]["status"] for lk in matches[0]])
+        st = settle_slip_unit([store[lk]["status"] for lk in combo])
         if st == "pending":
             continue
         ng = dict(g)

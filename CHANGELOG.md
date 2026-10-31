@@ -33,6 +33,27 @@ Keep a Changelog, and the project uses semantic versioning.
 
 ### Fixed
 
+- Audit round 16 (self-audit of the round 15 fixes). One medium:
+  the orphan-unit membership recovery added in round 15 enumerated
+  every leg subset on every grading run — an unrecoverable unit in
+  a 40-candidate window cost 52.6 s, repaid at every run until the
+  14-day prune. The search is now two-phase: a depth-first pass
+  pruned by the unit's stored odds/probability products (the
+  fast path for same-generation rows), then an exact hash-only
+  pass bounded by a node budget, because the product band alone
+  would miss true subsets in precisely the damaged-archive case
+  the recovery exists for (a real 2026-10-30 unit's legs carry
+  odds 3.1% off its stored total after a market move between
+  generations). Verdicts never depend on the band: the new search
+  reproduces the old enumeration's outcome on every live-store
+  unit and on hundreds of randomised stores, and the worst case
+  is bounded under a second per phase instead of growing
+  combinatorially. The README grading paragraph now documents
+  this store-regrade pass and the archive's write-once /
+  wrong-generation rules, two dead `date` imports are removed,
+  and the non-UTF-8 archive reads and the shadow's skipped-file
+  warning are pinned by tests. Unit sizes above the generator's
+  own cap of six legs remain unrecoverable by design.
 - Audit round 15 (self-audit of the round 14 fixes). One high: the
   recommendation grader only settled keys regenerated from archive
   files, so pending rows whose archive was damaged (2026-10-30: an
