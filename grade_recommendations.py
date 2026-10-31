@@ -515,10 +515,11 @@ def _find_unit_legs(unit, cand_keys, store):
       pasarnya sudah bergerak 3,1% dari total unit tersimpan.
       Vonis tidak pernah bergantung pada toleransi: fase 2
       menemukan apa pun yang enumerasi lama temukan, selama
-      anggaran node cukup — dan anggaran 300 ribu node menampung
-      enumerasi penuh jendela sampai ±25 kandidat (17 kandidat
-      ≈ 33 ribu kombinasi, 25 kandidat ≈ 245 ribu) dengan biaya
-      terburuk di bawah satu detik. Melewati anggaran, pencarian menyerah dan
+      anggaran node cukup — dan anggaran 400 ribu panggilan DFS
+      menampung enumerasi penuh jendela sampai 25 kandidat
+      (terukur: 332 ribu panggilan untuk 245 ribu subset di
+      n=25; n=17 hanya 35 ribu panggilan) dengan biaya terburuk
+      sekitar satu detik per fase. Melewati anggaran, pencarian menyerah dan
       unit tetap pending: degradasi terbatas pada jendela
       raksasa berangka korup, bukan lagi 52 detik per run.
     String kunci tiap leg kandidat dibangun sekali per fase,
@@ -531,7 +532,7 @@ def _find_unit_legs(unit, cand_keys, store):
     u_odds, u_p = unit["odds"], unit["p_model"]
     filtered = (u_odds is not None and u_p is not None and all(
         lg["odds"] is not None and lg["odds"] >= 1.0
-        and lg["p_model"] is not None and lg["p_model"] <= 1.0
+        and lg["p_model"] is not None and 0.0 <= lg["p_model"] <= 1.0
         for _, lg in items))
     def search(use_filters, budget):
         found = []
@@ -577,10 +578,10 @@ def _find_unit_legs(unit, cand_keys, store):
         return found[0] if found else None
 
     if filtered:
-        hit = search(True, [300_000])
+        hit = search(True, [400_000])
         if hit is not None:
             return hit
-    return search(False, [300_000])
+    return search(False, [400_000])
 
 
 def _regrade_orphans(store, seen, res_idx, cor_idx, now):
