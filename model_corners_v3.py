@@ -43,10 +43,21 @@ def _atomic_text_write(path, writer, newline=""):
     fd, tmp_path = tempfile.mkstemp(
         prefix=f".{os.path.basename(path)}.", suffix=".tmp", dir=out_dir)
     try:
-        with os.fdopen(fd, "w", newline=newline, encoding="utf-8") as f:
+        try:
+            f = os.fdopen(fd, "w", newline=newline, encoding="utf-8")
+        except Exception:
+            os.close(fd)
+            raise
+        with f:
             writer(f)
             f.flush()
             os.fsync(f.fileno())
+        # mkstemp files are 0600; keep the replaced file's mode
+        # (round 17, L-A1) instead of silently tightening it.
+        try:
+            os.chmod(tmp_path, os.stat(path).st_mode & 0o777)
+        except OSError:
+            os.chmod(tmp_path, 0o644)
         os.replace(tmp_path, path)
     finally:
         if os.path.exists(tmp_path):
