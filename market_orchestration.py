@@ -420,7 +420,10 @@ def _has_data_rows(path):
             rdr = csv.reader(f)
             next(rdr, None)
             return any(any(cell.strip() for cell in row) for row in rdr)
-    except OSError:
+    except (OSError, UnicodeDecodeError):
+        # UnicodeDecodeError: file korup non-UTF-8 diperlakukan
+        # sebagai tak-berdata, bukan meledakkan langkah arsip
+        # (audit-diri ronde 15, L3).
         return False
 
 
@@ -446,7 +449,7 @@ def _product_date_mismatch(path, folder_iso):
     try:
         with open(path, newline="", encoding="utf-8") as f:
             rows = list(csv.DictReader(f))
-    except OSError:
+    except (OSError, UnicodeDecodeError):
         return False
     dates = sorted((r.get("date") or "").strip() for r in rows)
     dates = [d for d in dates if d]

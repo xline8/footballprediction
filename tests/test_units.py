@@ -1202,7 +1202,7 @@ def test_sim_containment_and_match_result_foreign_trap():
     # Grader lalu menilai leg Bundesliga dari laga Selandia Baru
     # bertanggal sama (produk 0,774 >= ambang 0,75). Dua lapis fix:
     # containment menuntut kedua token >= 5 huruf, dan _match_result
-    # menuntut sim per sisi >= 0,60.
+    # menuntut sim per sisi >= 0,80.
     from grade_recommendations import _match_result, norm
     from ta_model import sim
 
@@ -1360,6 +1360,64 @@ def test_regrade_orphans_settles_store_only_rows():
     assert store[ku]["status"] == "lose", store[ku]  # satu leg kalah
     assert store[k6]["status"] == "pending"
     assert changed == 5, changed  # k1, k4, k5a, k5b, unit
+
+
+def test_archive_unit_recovered_by_regrade():
+    # L4 audit-diri ronde 15: format sig unit ditulis di DUA fungsi
+    # (_grade_archive yang memproduksi, _regrade_orphans yang
+    # memulihkan) — tes ini menambat keduanya bersama: unit yang
+    # diproduksi jalur arsip harus bisa dipulihkan jalur store,
+    # kalau tidak pemulihan akan gagal senyap selamanya. Sekalian
+    # menambat jendela L1: satu leg jatuh di tanggal unit + 4 hari
+    # (ekspansi penuh S10_MAX_EXPAND_DAYS).
+    import csv
+    import shutil
+    import tempfile
+
+    import grade_recommendations as gr
+
+    td = tempfile.mkdtemp()
+    saved = gr.ARCHIVE
+    try:
+        arc = os.path.join(td, "archive", "2026-10-30")
+        os.makedirs(arc)
+        with open(os.path.join(arc, "recommended_slip10.csv"), "w",
+                  newline="") as f:
+            w = csv.writer(f)
+            w.writerow(["date", "home", "away", "competition",
+                        "market", "line", "selection", "o_1xbet",
+                        "p_model", "slip_total_odds",
+                        "slip_joint_prob"])
+            w.writerow(["2026-10-30", "alpha", "beta", "", "OU",
+                        "2.5", "Over", 1.50, 0.70, 3.99, 0.2503])
+            w.writerow(["2026-10-31", "gamma", "delta", "", "DC",
+                        "", "1X", 1.40, 0.65, 3.99, 0.2503])
+            w.writerow(["2026-11-03", "epsilon", "zeta", "", "1X2",
+                        "", "1", 1.90, 0.55, 3.99, 0.2503])
+        gr.ARCHIVE = os.path.join(td, "archive")
+        store = {}
+        now = "2026-10-30T12:00:00+00:00"
+        # run 1: hasil belum ada -> leg + unit pending
+        gr._grade_archive("2026-10-30", store, {}, {}, now, set())
+        units = [g for g in store.values() if g["level"] == "unit"]
+        assert len(store) == 4 and len(units) == 1, store
+        assert all(g["status"] == "pending" for g in store.values())
+        # run 2: arsip "rusak" (seen kosong), hasil sudah ada ->
+        # proses ulang store memulihkan leg DAN unit produksi arsip
+        res_idx = {
+            "2026-10-30": [(gr.norm("alpha"), gr.norm("beta"),
+                            3, 1, "x")],
+            "2026-10-31": [(gr.norm("gamma"), gr.norm("delta"),
+                            1, 1, "x")],
+            "2026-11-03": [(gr.norm("epsilon"), gr.norm("zeta"),
+                            2, 0, "x")],
+        }
+        changed = gr._regrade_orphans(store, set(), res_idx, {}, now)
+        assert changed == 4, changed
+        assert all(g["status"] == "hit" for g in store.values()), store
+    finally:
+        gr.ARCHIVE = saved
+        shutil.rmtree(td, ignore_errors=True)
 
 
 def test_merge_bets_refreshes_open_rows_only():
@@ -1694,6 +1752,22 @@ def test_archive_skips_wrong_generation_and_blank_rows():
         assert "best_picks_today.csv" in r["skipped"], r
         assert not os.path.exists(
             os.path.join(dest, "best_picks_today.csv"))
+        # L5 audit-diri ronde 15: sisi TERIMA penjaga — slip10
+        # ekspansi yang sah (leg di tanggal folder + hari
+        # berikutnya) harus tetap diarsipkan.
+        with open(os.path.join(src, "recommended_slip10.csv"),
+                  "w") as f:
+            f.write("date,home\n2026-10-31,hari ini fc\n"
+                    "2026-11-01,besok fc\n")
+        saved = (mo.HERE, mo.ARCHIVE)
+        mo.HERE, mo.ARCHIVE = src, arc
+        try:
+            r2 = mo.archive_snapshots(target_date=date(2026, 10, 31))
+        finally:
+            mo.HERE, mo.ARCHIVE = saved
+        assert "recommended_slip10.csv" in r2["archived"], r2
+        assert os.path.exists(os.path.join(
+            arc, "2026-10-31", "recommended_slip10.csv"))
     finally:
         shutil.rmtree(td, ignore_errors=True)
 
@@ -1743,10 +1817,16 @@ def test_purge_bogus_spares_issued_and_settled_rows():
         # sehingga regresi tenggang ke 1 hari lolos tak tertangkap.
         row("j", "OPEN", 4.50, 0.24, "2026-10-29T13:00"),
         row("k", "OPEN", 4.50, 0.24, "2026-10-29T11:00"),
+        # L5 audit-diri ronde 15: tambat batas horizon PERSIS —
+        # tepat now+14 hari masih terlindungi, semenit sesudahnya
+        # tidak.
+        row("l", "OPEN", 4.50, 0.24, "2026-11-14T12:00"),
+        row("m", "OPEN", 4.50, 0.24, "2026-11-14T12:01"),
     ]
     kept, n = _purge_bogus(rows, {"b"}, now)
-    assert n == 5, n
-    assert [r["bet_id"] for r in kept] == ["b", "c", "d", "e", "g", "j"], kept
+    assert n == 6, n
+    assert [r["bet_id"] for r in kept] == ["b", "c", "d", "e", "g",
+                                           "j", "l"], kept
 
 
 def test_build_end_to_end_sandbox():

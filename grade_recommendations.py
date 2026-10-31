@@ -538,8 +538,11 @@ def _regrade_orphans(store, seen, res_idx, cor_idx, now):
                 or not (g["selection"] or "").startswith("unit:")):
             continue
         try:
+            # Jendela harus menampung ekspansi pool slip10 yang sah:
+            # leg bisa jatuh sampai tanggal unit + S10_MAX_EXPAND_DAYS
+            # (4 hari, slip_recommender) — audit-diri ronde 15, L1.
             last = (date.fromisoformat(g["date"])
-                    + timedelta(days=3)).isoformat()
+                    + timedelta(days=4)).isoformat()
         except (TypeError, ValueError):
             continue
         cands = sorted(lk for lk in legs_by_product[g["product"]]
@@ -753,9 +756,15 @@ def main(argv=None):
         print(f"[grade] yatim dinilai dari store: {regraded}")
         total_changed += regraded
     # Pangkas yatim: baris PENDING yang kuncinya tidak lagi dihasilkan
-    # arsip mana pun (seleksi rekomendasi tergantikan sebelum sempat
-    # ter-grade) menggantung sebagai pending abadi tanpa pemangkasan
-    # ini. Hanya pending berumur > 1 hari yang dipangkas; baris final
+    # arsip mana pun menggantung sebagai pending abadi tanpa
+    # pemangkasan ini. Sejak ronde 15, _regrade_orphans di atas sudah
+    # menilai baris yatim yang laganya punya hasil — termasuk leg
+    # yang seleksinya tergantikan di hari yang sama (kebijakan lama
+    # memangkasnya sebagai "seleksi tergantikan"; kini histori
+    # kalibrasi menampung semua seleksi yang sempat diterbitkan).
+    # Yang tersisa untuk dipangkas di sini: baris yang hasilnya tak
+    # bisa ditemukan (laga batal/pindah di luar jendela) dan baris
+    # tua. Hanya pending berumur > 1 hari yang dipangkas; baris final
     # adalah riwayat kalibrasi dan tidak pernah dibuang.
     # Syarat tambahan (audit ronde 4): pemangkasan versi lama percaya
     # penuh pada kelengkapan arsip — laga yang DITUNDA yang arsipnya
