@@ -498,25 +498,32 @@ def _find_unit_legs(unit, cand_keys, store):
     kombinatoriknya di SETIAP run untuk unit yang tak bisa pulih
     (audit ronde 16, A16-1: jendela 40 kandidat = 52,6 detik).
 
-    Biaya ditekan dua cara tanpa mengubah vonis (hash isi tetap
-    penentu akhir):
-    - string kunci tiap leg kandidat dibangun sekali, bukan per
-      kombinasi;
-    - pencarian DFS menyaring produk odds dan produk p_model
-      terhadap angka unit tersimpan: produk odds hanya naik
-      (semua odds leg ≥ 1) dan produk p hanya turun (p ≤ 1),
-      jadi jalur yang keluar pita toleransi tidak akan pernah
-      kembali masuk. Subset sejati selalu di dalam pita — total
-      file adalah produk nilai tak-terbulatkan dari leg-leg yang
-      sama, selisih pembulatan cetak < 0,5% vs toleransi 2%.
-    Saringan dimatikan (hash murni + early-exit) bila angka unit
-    atau satu pun leg kandidat tidak lengkap, supaya jalur
-    korup/tak-lengkap tidak pernah kehilangan kecocokan sejati.
-    Anggaran node DFS membatasi kasus patologis yang lolos dari
-    kedua saringan (mis. 40 leg ber-odds dan ber-p identik):
-    melewatinya, pencarian menyerah dan unit tetap pending —
-    hasil akhirnya sama seperti tanpa kecocokan, hanya jauh
-    lebih cepat dari enumerasi penuh.
+    Biaya ditekan tanpa mengubah vonis (hash isi tetap penentu
+    akhir), lewat pencarian dua fase:
+    - Fase 1 (cepat): DFS menyaring produk odds dan produk
+      p_model terhadap angka unit tersimpan — produk odds hanya
+      naik (semua odds leg ≥ 1), produk p hanya turun (p ≤ 1),
+      jadi jalur di luar pita toleransi 2% tidak akan kembali
+      masuk. Ini menutup kasus normal segenerasi (selisih
+      pembulatan cetak < 0,5%).
+    - Fase 2 (eksak): hash murni tanpa saringan numerik, hanya
+      early-exit + anggaran node. WAJIB ada karena pita fase 1
+      bisa menolak subset sejati tepat di skenario penyelamatan
+      itu sendiri: unit arsip 2026-10-30 '518d' menyimpan leg
+      dari generasi file berbeda — p_model-nya cocok persis
+      (probabilitas model stabil antar-generasi) tetapi odds
+      pasarnya sudah bergerak 3,1% dari total unit tersimpan.
+      Vonis tidak pernah bergantung pada toleransi: fase 2
+      menemukan apa pun yang enumerasi lama temukan, selama
+      anggaran node cukup — dan anggaran 300 ribu node menampung
+      enumerasi penuh jendela sampai ±25 kandidat (17 kandidat
+      ≈ 33 ribu kombinasi, 25 kandidat ≈ 245 ribu) dengan biaya
+      terburuk di bawah satu detik. Melewati anggaran, pencarian menyerah dan
+      unit tetap pending: degradasi terbatas pada jendela
+      raksasa berangka korup, bukan lagi 52 detik per run.
+    String kunci tiap leg kandidat dibangun sekali per fase,
+    bukan per kombinasi. Fase 1 dilewati bila angka unit atau
+    satu pun leg kandidat tidak lengkap.
     """
     target = unit["selection"]
     items = [(lk, store[lk]) for lk in cand_keys]
@@ -526,47 +533,54 @@ def _find_unit_legs(unit, cand_keys, store):
         lg["odds"] is not None and lg["odds"] >= 1.0
         and lg["p_model"] is not None and lg["p_model"] <= 1.0
         for _, lg in items))
-    found = []
-    budget = [500_000]
+    def search(use_filters, budget):
+        found = []
 
-    def dfs(start, chosen, odds_prod, p_prod, size):
-        # Ukuran subset dijelajahi menaik (1..6) seperti enumerasi
-        # versi lama: DFS sedalam-dalamnya lebih dulu akan menghabiskan
-        # anggaran node pada subset berawalan kandidat awal sebelum
-        # sempat mencoba kombinasi kecil di akhir daftar.
-        if found or budget[0] <= 0:
-            return
-        budget[0] -= 1
-        if len(chosen) == size:
-            if (not filtered
-                    or (abs(odds_prod - u_odds) <= 0.02 * u_odds
-                        and abs(p_prod - u_p) <= 0.02 * u_p)):
-                sig = ";".join(sorted(key_str[lk] for lk in chosen))
-                if ("unit:" + hashlib.md5(sig.encode()).hexdigest()[:12]
-                        == target):
-                    found.append(tuple(chosen))
-            return
-        for i in range(start, len(items)):
-            lk, lg = items[i]
-            n_odds, n_p = odds_prod, p_prod
-            if filtered:
-                n_odds = odds_prod * lg["odds"]
-                n_p = p_prod * lg["p_model"]
-                if n_odds > u_odds * 1.02 or n_p < u_p * 0.98:
-                    continue
-            chosen.append(lk)
-            dfs(i + 1, chosen, n_odds, n_p, size)
-            chosen.pop()
+        def dfs(start, chosen, odds_prod, p_prod, size):
+            # Ukuran subset dijelajahi menaik (1..6) seperti
+            # enumerasi versi lama: DFS sedalam-dalamnya lebih
+            # dulu akan menghabiskan anggaran node pada subset
+            # berawalan kandidat awal sebelum sempat mencoba
+            # kombinasi kecil di akhir daftar.
             if found or budget[0] <= 0:
                 return
+            budget[0] -= 1
+            if len(chosen) == size:
+                if (not use_filters
+                        or (abs(odds_prod - u_odds) <= 0.02 * u_odds
+                            and abs(p_prod - u_p) <= 0.02 * u_p)):
+                    sig = ";".join(sorted(key_str[lk] for lk in chosen))
+                    if ("unit:" + hashlib.md5(sig.encode()).hexdigest()[:12]
+                            == target):
+                        found.append(tuple(chosen))
+                return
+            for i in range(start, len(items)):
+                lk, lg = items[i]
+                n_odds, n_p = odds_prod, p_prod
+                if use_filters:
+                    n_odds = odds_prod * lg["odds"]
+                    n_p = p_prod * lg["p_model"]
+                    if n_odds > u_odds * 1.02 or n_p < u_p * 0.98:
+                        continue
+                chosen.append(lk)
+                dfs(i + 1, chosen, n_odds, n_p, size)
+                chosen.pop()
+                if found or budget[0] <= 0:
+                    return
 
-    for size in (1, 2, 3, 4, 5, 6):
-        if size > len(items):
-            break
-        dfs(0, [], 1.0, 1.0, size)
-        if found or budget[0] <= 0:
-            break
-    return found[0] if found else None
+        for size in (1, 2, 3, 4, 5, 6):
+            if size > len(items):
+                break
+            dfs(0, [], 1.0, 1.0, size)
+            if found or budget[0] <= 0:
+                break
+        return found[0] if found else None
+
+    if filtered:
+        hit = search(True, [300_000])
+        if hit is not None:
+            return hit
+    return search(False, [300_000])
 
 
 def _regrade_orphans(store, seen, res_idx, cor_idx, now):

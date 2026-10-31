@@ -1738,7 +1738,17 @@ def test_unit_recovery_fast_in_dense_window():
         g["odds"], g["p_model"] = 1.80, 0.50
         ghost.append(g)
     u3 = unit_for(ghost)
-    for g in legs + [u1, u2, u3]:
+    # unit pulih-3 (drift antar-generasi, pola unit riil '518d'
+    # 2026-10-30): total unit dihitung dari odds leg ASLI, lalu
+    # odds leg di store digeser +5%/-4% (pasar bergerak antar-run)
+    # — di luar pita saringan 2%, jadi hanya fase eksak yang bisa
+    # memulihkannya. Kunci leg tidak memuat odds, sidik tetap sah.
+    for i in (20, 21):
+        legs[i]["status"] = "hit"
+    u4 = unit_for([legs[20], legs[21]])
+    legs[20]["odds"] = round(legs[20]["odds"] * 1.05, 3)
+    legs[21]["odds"] = round(legs[21]["odds"] * 0.96, 3)
+    for g in legs + [u1, u2, u3, u4]:
         store[_key(g)] = g
 
     t0 = _time.monotonic()
@@ -1747,6 +1757,7 @@ def test_unit_recovery_fast_in_dense_window():
     assert store[_key(u1)]["status"] == "hit", store[_key(u1)]
     assert store[_key(u2)]["status"] == "lose", store[_key(u2)]
     assert store[_key(u3)]["status"] == "pending", store[_key(u3)]
+    assert store[_key(u4)]["status"] == "hit", store[_key(u4)]
     assert elapsed < 2.0, f"pemulihan unit lambat: {elapsed:.2f} dtk"
 
 
