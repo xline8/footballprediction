@@ -1901,6 +1901,43 @@ def test_ledger_counts_reconciles_and_tolerates_corruption():
             "total": 0, "pending": 0, "graded": 0}
 
 
+def test_ta_model_step_warns_when_corners_not_refreshed():
+    # Ronde 17 (M-1 lanjutan): peringatan kesegaran corner di
+    # step_ta_model orchestrator. ta_model distub total supaya tes
+    # tidak menyentuh data nyata; log ditangkap via monkeypatch.
+    import types
+
+    import pipeline_orchestrator as po
+
+    stub = types.ModuleType("ta_model")
+    stub.build = lambda: 0
+    stub.grade = lambda: None
+    old_mod = sys.modules.get("ta_model")
+    old_log = po.log
+    msgs = []
+    po.log = lambda msg, level="INFO": msgs.append((level, msg))
+    sys.modules["ta_model"] = stub
+    try:
+        orch = po.PipelineOrchestrator.__new__(po.PipelineOrchestrator)
+        orch._run_results = {"corner_model": {"status": "skipped"}}
+        assert orch.step_ta_model()["status"] == "success"
+        assert any("TIDAK diperbarui" in m for _, m in msgs), msgs
+        msgs.clear()
+        orch._run_results = {"corner_model": {"status": "success"}}
+        assert orch.step_ta_model()["status"] == "success"
+        assert not any("TIDAK diperbarui" in m for _, m in msgs), msgs
+        # di luar run_all (tanpa _run_results): diam, tetap sukses
+        del orch._run_results
+        assert orch.step_ta_model()["status"] == "success"
+        assert not any("TIDAK diperbarui" in m for _, m in msgs), msgs
+    finally:
+        po.log = old_log
+        if old_mod is None:
+            sys.modules.pop("ta_model", None)
+        else:
+            sys.modules["ta_model"] = old_mod
+
+
 def test_atomic_writes_preserve_mode_and_original():
     # D-L1 ronde 17 + L-A1/L-A2: penulisan atomik PR #38 tidak
     # teruji; hasil mkstemp selalu 0600 sehingga mode file lama
