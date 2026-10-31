@@ -484,24 +484,48 @@ def _merge_bets(old, winners, fixtures, captured):
     return list(merged.values()), n_new, n_ref
 
 
-def _purge_bogus(rows, issued_ids):
+def _kickoff_utc(row):
+    """Parse kickoff_utc tersimpan (naif UTC) -> datetime atau None."""
+    try:
+        ko = datetime.fromisoformat((row.get("kickoff_utc") or "").strip())
+    except ValueError:
+        return None
+    if ko.tzinfo is not None:
+        ko = ko.astimezone(timezone.utc).replace(tzinfo=None)
+    return ko
+
+
+def _purge_bogus(rows, issued_ids, now):
     """Buang baris OPEN yang harga x peluang pasarnya mustahil
     (> 1,02) — sisa data korup/salah label dari build lama.
 
-    Dua pengecualian (audit-diri ronde 13): baris yang diterbitkan
-    atau diperbarui build SAAT INI dikecualikan — kandidatnya lolos
-    saringan build hari ini, jadi produk di atas ambang di sana
-    adalah ketidaksepakatan model-pasar yang sah, bukan korupsi;
-    tanpa pengecualian ini purge di build berikutnya membuang baris
-    yang build sebelumnya terbitkan sendiri, lalu build yang sama
-    menerbitkannya lagi (churn abadi, dan baris bisa lenyap sebelum
-    sempat dinilai). Baris settle tidak pernah dibuang: itu riwayat
-    grading. Return (baris tersisa, n_dibuang).
+    Tiga pengecualian: (1) baris yang diterbitkan atau diperbarui
+    build SAAT INI — kandidatnya lolos saringan build hari ini, jadi
+    produk di atas ambang di sana adalah ketidaksepakatan
+    model-pasar yang sah, bukan korupsi; tanpa pengecualian ini
+    purge di build berikutnya membuang baris yang build sebelumnya
+    terbitkan sendiri, lalu build yang sama menerbitkannya lagi
+    (churn abadi). (2) Baris OPEN yang kickoff-nya masih di masa
+    depan ATAU baru lewat dalam tenggang hasil 2 hari (audit ronde
+    14, A14-1 + audit-diri L-1): baris yang berhenti diterbitkan
+    ulang — snapshot odds ke-throttle, EV turun, kalah lomba per
+    laga — tadinya ter-purge sebelum kickoff dan tak pernah
+    ter-grade; dan grading sendiri baru bisa terjadi sesudah
+    sinkronisasi hasil pasca-kickoff, jadi perlindungan harus
+    melampaui kickoff-nya, bukan berhenti tepat di sana. Posisi
+    yang masih bisa dinilai tidak boleh lenyap.
+    (3) Baris settle tidak pernah dibuang: itu riwayat grading.
+    Kickoff yang tak ter-parse tidak memberi pengecualian (2) —
+    baris semacam itu memang kelas korup yang dibersihkan purge.
+    Return (baris tersisa, n_dibuang).
     """
     kept, n = [], 0
+    grace = now - timedelta(days=2)
     for r in rows:
+        ko = _kickoff_utc(r)
         if (r["bet_id"] not in issued_ids
                 and (r.get("status") or "").upper() == "OPEN"
+                and not (ko is not None and ko > grace)
                 and fnum(r.get("price")) * fnum(r.get("p_market")) > 1.02):
             n += 1
             continue
@@ -644,7 +668,8 @@ def build():
     # build ini terbitkan/perbarui (_purge_bogus).
     issued = {f'{r["game_id"]}|{r["market"]}|{r["line"]}|{r["selection"]}'
               for r in per_game.values()}
-    rows, bogus = _purge_bogus(rows, issued)
+    rows, bogus = _purge_bogus(
+        rows, issued, datetime.now(timezone.utc).replace(tzinfo=None))
     if bogus:
         print(f"bet mustahil dibuang: {bogus}")
     if n_new or n_ref or bogus:

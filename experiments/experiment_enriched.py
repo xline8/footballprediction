@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """experiment_enriched.py — Phase 12: Sharp vs Soft book integration.
 
-STATUS (audit round 13): frozen input. This experiment reads
-all_matches_enriched.csv, whose producer (data_enrichment/
-enrich_pipeline.py) was deleted in PR #33; the CSV is git-tracked so
-the experiment still runs, but its input can never be regenerated.
+STATUS (audit round 13, corrected round 14): frozen input. This
+experiment reads all_matches_enriched.csv, whose producer
+(data_enrichment/enrich_pipeline.py) was deleted in PR #33. The CSV
+is NOT git-tracked (it is matched by .gitignore's *.csv rule): it
+survives only as an untracked local artifact, so the experiment
+runs only on a machine that still has the file — never on a fresh
+clone — and its input can never be regenerated.
 Treat any rerun as a replay against a frozen snapshot, not as new
 evidence.
 

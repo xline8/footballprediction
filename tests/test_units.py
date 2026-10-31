@@ -1278,27 +1278,237 @@ def test_merge_bets_refreshes_open_rows_only():
     assert by_id["3|OU|2.5|Over"]["status"] == "OPEN"
 
 
+def _undefined_names(path):
+    """Nama yang dirujuk di dalam fungsi/kelas tetapi tidak terikat
+    di mana pun: bukan lokal/parameter/impor di lingkupnya, bukan
+    nama bebas (closure), bukan terikat di level modul, bukan
+    builtin. Inilah kelas bug H13-1 (NameError dtf di loader corner):
+    nama yatim yang hanya meledak saat jalur file-driven dijalankan,
+    tak terlihat oleh tes yang hanya menguji predikatnya."""
+    import builtins
+    import symtable
+
+    with open(path, encoding="utf-8") as f:
+        code = f.read()
+    top = symtable.symtable(code, path, "exec")
+    module_bound = {s.get_name() for s in top.get_symbols()
+                    if s.is_assigned() or s.is_imported()
+                    or s.is_namespace()}
+    builtin_names = set(dir(builtins)) | {
+        "__file__", "__name__", "__doc__", "__package__", "__loader__",
+        "__spec__", "__builtins__", "__annotations__", "__cached__"}
+    bad = []
+
+    def walk(table):
+        for child in table.get_children():
+            if child.get_type() in ("function", "class"):
+                for s in child.get_symbols():
+                    if not s.is_referenced():
+                        continue
+                    if (s.is_assigned() or s.is_parameter()
+                            or s.is_imported() or s.is_free()):
+                        continue
+                    name = s.get_name()
+                    if name in module_bound or name in builtin_names:
+                        continue
+                    bad.append(f"{child.get_name()}:{name}")
+            walk(child)
+
+    walk(top)
+    return bad
+
+
+def test_no_undefined_names_in_chain_modules():
+    # D14-2: sapuan symtable stdlib untuk modul-modul rantai harian —
+    # jaring murah bagi kelas bug nama-yatim yang lolos dari seluruh
+    # suite di ronde 13 (mutasi H13-1 yang dibuat ulang terdeteksi
+    # persis sebagai predict_upcoming:dtf saat audit ronde 14).
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    mods = ["run_daily_shadow.py", "ta_model.py", "best_picks.py",
+            "grade_recommendations.py", "score_ledger.py",
+            "slip_recommender.py", "model_corners_v3.py",
+            "predict_cups.py", "refresh_fixtures.py", "ta_scrape.py",
+            "market_orchestration.py", "make_picks_live.py",
+            "predict_upcoming_refactored.py"]
+    for m in mods:
+        bad = _undefined_names(os.path.join(root, m))
+        assert not bad, (m, bad)
+
+
+def test_kickoff_started_predicate():
+    # B14-1: predikat jangkar datetime best_picks.
+    from datetime import datetime
+
+    from best_picks import _kickoff_started
+
+    now = datetime(2026, 10, 30, 20, 7)
+    assert _kickoff_started("2026-10-30", "20:05", now) is True
+    assert _kickoff_started("2026-10-30", "20:07", now) is True  # tepat kini
+    assert _kickoff_started("2026-10-30", "20:09", now) is False
+    assert _kickoff_started("2026-10-30", "", now) is False      # tanpa jam
+    assert _kickoff_started("2026-10-30", "xx", now) is False    # jam rusak
+    assert _kickoff_started("2026-10-31", "00:05", now) is False
+
+
+def test_best_picks_main_skips_started_matches():
+    # B14-1 integrasi: main() tidak menyajikan pick untuk laga yang
+    # sudah kickoff — baik di best_picks.csv (loader DC) maupun di
+    # best_picks_today.csv (jalur pindai); baris hari ini untuk laga
+    # itu kosong, kontrak satu baris per laga tetap terjaga.
+    import shutil
+    import tempfile
+    from datetime import datetime, timedelta, timezone
+
+    import best_picks as bp
+
+    now = datetime.now(timezone.utc)
+    today = now.date().isoformat()
+    # Jepit jam agar tak menyeberang tengah malam UTC (jendela lemah
+    # yang sama dengan tes loader TA ronde 13).
+    started = ("00:00" if now.hour < 3
+               else (now - timedelta(hours=2)).strftime("%H:%M"))
+    future = ("23:59" if now.hour >= 22
+              else (now + timedelta(hours=2)).strftime("%H:%M"))
+    hdr = ("div,date,time,home,away,lam_h,lam_a,ph_dc,pd_dc,pa_dc,"
+           "p_over_dc,p_over15_dc,p_over35_dc,p_btts,p_dc_1x,p_dc_x2,"
+           "p_dc_12,b365h,b365d,b365a\n")
+    row = ("E0,{d},{t},{h},Rival,1.5,1.0,0.70,0.20,0.10,0.60,0.85,"
+           "0.30,0.40,0.90,0.30,0.80,2.0,3.5,5.0\n")
+    td = tempfile.mkdtemp()
+    saved = (bp.PROJ, bp.OUT, bp.ANCHOR)
+    try:
+        bp.PROJ = td
+        bp.OUT = os.path.join(td, "best_picks.csv")
+        with open(os.path.join(td, "predictions_upcoming.csv"), "w") as f:
+            f.write(hdr)
+            f.write(row.format(d=today, t=started, h="Started FC"))
+            f.write(row.format(d=today, t=future, h="Future FC"))
+        # Baris corner untuk kedua laga (L-3 audit-diri): pick corner
+        # hanya dilindungi filter terpusat started_keys di main() —
+        # file corner tak punya kolom jam — jadi jalur itu harus ikut
+        # teruji, bukan hanya loader DC.
+        chdr = ("div,date,home,away,mu_shots_cs,r_cs,rec_line,rec_side,"
+                "recommendation,rec_prob,p_gt_6.5,p_gt_7.5,p_gt_8.5,"
+                "p_gt_9.5,p_gt_10.5,p_gt_11.5\n")
+        crow = ("E0,{d},{h},Rival,10.0,2.5,8.5,Over,x,0.70,0.90,0.80,"
+                "0.70,0.50,0.40,0.30\n")
+        with open(os.path.join(td, "predictions_corners_upcoming.csv"),
+                  "w") as f:
+            f.write(chdr)
+            f.write(crow.format(d=today, h="Started FC"))
+            f.write(crow.format(d=today, h="Future FC"))
+        argv = sys.argv
+        sys.argv = ["best_picks.py", "--date", today]
+        try:
+            bp.main()
+        finally:
+            sys.argv = argv
+        tops = bp._read_csv(os.path.join(td, "best_picks.csv"))
+        assert [r["home"] for r in tops] == ["Future FC"], tops
+        full = bp._read_csv(os.path.join(td, "best_picks_full.csv"))
+        assert all(r["home"] != "Started FC" for r in full), full
+        assert any(r["home"] == "Future FC" and r["market"] == "Corners"
+                   for r in full), full
+        today_rows = bp._read_csv(os.path.join(td, "best_picks_today.csv"))
+        assert len(today_rows) == 2, today_rows
+        by_home = {r["home"]: r for r in today_rows}
+        assert by_home["Started FC"]["market"] == "", by_home["Started FC"]
+        assert by_home["Future FC"]["market"] != "", by_home["Future FC"]
+    finally:
+        bp.PROJ, bp.OUT, bp.ANCHOR = saved
+        shutil.rmtree(td, ignore_errors=True)
+
+
+def test_archive_snapshots_write_once():
+    # C14-1: arsip adalah snapshot pra-kickoff untuk grading; rerun
+    # pasca-kickoff tidak boleh menimpanya (leg laga yang sudah main
+    # lenyap dari snapshot -> tak ter-generate -> ter-pangkas yatim
+    # tanpa dinilai). File yang hilang tetap dilengkapi.
+    import shutil
+    import tempfile
+    from datetime import date
+
+    import market_orchestration as mo
+
+    td = tempfile.mkdtemp()
+    try:
+        src = os.path.join(td, "src")
+        arc = os.path.join(td, "archive")
+        os.makedirs(src)
+        f1, f2 = mo.ARCHIVE_FILES[0], mo.ARCHIVE_FILES[1]
+        with open(os.path.join(src, f1), "w") as f:
+            f.write("h\nprematch\n")
+        with open(os.path.join(src, f2), "w") as f:
+            f.write("h\nv1\n")
+        saved = (mo.HERE, mo.ARCHIVE)
+        mo.HERE, mo.ARCHIVE = src, arc
+        try:
+            r1 = mo.archive_snapshots(target_date=date(2026, 10, 30))
+            assert sorted(r1["archived"]) == sorted([f1, f2]), r1
+            # sumber berubah (output pasca-kickoff) + satu file hilang
+            with open(os.path.join(src, f1), "w") as f:
+                f.write("h\npostkickoff\n")
+            dest = os.path.join(arc, "2026-10-30")
+            os.remove(os.path.join(dest, f2))
+            r2 = mo.archive_snapshots(target_date=date(2026, 10, 30))
+            assert r2["archived"] == [f2], r2      # hanya yang hilang
+            assert r2["kept"] == [f1], r2
+            with open(os.path.join(dest, f1)) as f:
+                assert f.read() == "h\nprematch\n"  # tak tertimpa
+            # L-2: arsip berisi header saja (run pertama terdegradasi)
+            # boleh diperbaiki sumber yang punya baris data
+            with open(os.path.join(dest, f2), "w") as f:
+                f.write("h\n")
+            with open(os.path.join(src, f2), "w") as f:
+                f.write("h\nv2\n")
+            r3 = mo.archive_snapshots(target_date=date(2026, 10, 30))
+            assert r3["archived"] == [f2], r3
+            assert r3["kept"] == [f1], r3
+            with open(os.path.join(dest, f2)) as f:
+                assert f.read() == "h\nv2\n"
+        finally:
+            mo.HERE, mo.ARCHIVE = saved
+    finally:
+        shutil.rmtree(td, ignore_errors=True)
+
+
 def test_purge_bogus_spares_issued_and_settled_rows():
     # Audit-diri ronde 13: purge harga mustahil tidak boleh membuang
     # baris yang build saat ini terbitkan sendiri (produk > 1,02 di
     # sana = ketidaksepakatan model-pasar yang sah; membuangnya
     # membuat build berikutnya menerbitkan ulang — churn abadi) dan
     # tidak boleh menyentuh riwayat settle.
+    from datetime import datetime
+
     from ta_model import _purge_bogus
 
-    def row(bid, status, price, pmkt):
+    def row(bid, status, price, pmkt, ko):
         return {"bet_id": bid, "status": status, "price": price,
-                "p_market": pmkt}
+                "p_market": pmkt, "kickoff_utc": ko}
 
+    now = datetime(2026, 10, 31, 12, 0)
     rows = [
-        row("a", "OPEN", 4.50, 0.24),     # 1,08: korup, bukan terbitan kini
-        row("b", "OPEN", 4.50, 0.24),     # 1,08 tapi diterbitkan build ini
-        row("c", "SETTLED", 4.50, 0.24),  # riwayat: tak pernah dibuang
-        row("d", "OPEN", 2.00, 0.40),     # 0,80: wajar
+        # 1,08, kickoff lewat > 2 hari, bukan terbitan kini: dibuang
+        row("a", "OPEN", 4.50, 0.24, "2026-10-28T20:00"),
+        # 1,08 tapi diterbitkan build ini -> disimpan
+        row("b", "OPEN", 4.50, 0.24, "2026-10-28T20:00"),
+        # riwayat settle -> tak pernah dibuang
+        row("c", "SETTLED", 4.50, 0.24, "2026-10-28T20:00"),
+        # 0,80: wajar
+        row("d", "OPEN", 2.00, 0.40, "2026-10-28T20:00"),
+        # A14-1: 1,08, berhenti diterbitkan ulang, tapi kickoff masih
+        # di masa depan -> posisi masih bisa dinilai, disimpan
+        row("e", "OPEN", 4.50, 0.24, "2026-11-05T20:00"),
+        # kickoff tak ter-parse -> tanpa pengecualian, dibuang
+        row("f", "OPEN", 4.50, 0.24, ""),
+        # L-1 audit-diri: kickoff baru lewat 16 jam — hasil mungkin
+        # belum tersinkron, grading belum sempat terjadi -> tenggang
+        # 2 hari menyimpannya
+        row("g", "OPEN", 4.50, 0.24, "2026-10-30T20:00"),
     ]
-    kept, n = _purge_bogus(rows, {"b"})
-    assert n == 1, n
-    assert [r["bet_id"] for r in kept] == ["b", "c", "d"], kept
+    kept, n = _purge_bogus(rows, {"b"}, now)
+    assert n == 2, n
+    assert [r["bet_id"] for r in kept] == ["b", "c", "d", "e", "g"], kept
 
 
 def test_best_picks_ta_loader_skips_started_matches():
@@ -1573,6 +1783,22 @@ def test_shadow_gate_runs_all_consumers_on_success():
                 "py:best_picks.py", "recommend", "archive", "grade"):
         assert ran in calls, (ran, calls)
     assert calls.index("ta_build") < calls.index("py:best_picks.py"), calls
+
+
+def test_shadow_ta_build_rc_failure_marks_run_failed():
+    # A14-2: build() mengembalikan 1 (ta/fixtures.csv kosong) tanpa
+    # menulis model_markets — shadow harus menandai run gagal, bukan
+    # mencetak selesai. Pipeline tetap lanjut (best_picks memakai
+    # file terakhir yang ada), sesuai desain langkahnya.
+    sh, calls, restore = _shadow_env("success")
+    try:
+        sys.modules["ta_model"].build = lambda: 1
+        code, out = _run_shadow(sh)
+    finally:
+        restore()
+    assert code == 1, code
+    assert "[10/16] FAILED ta_model build" in out, out
+    assert "py:best_picks.py" in calls, calls
 
 
 def test_shadow_fallback_flagged_when_refresh_raises_mid_loop():

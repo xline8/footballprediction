@@ -10,7 +10,7 @@ Pekerjaan:
      market_compare.csv. Per pasar/garis/pilihan: odds 1xbet + median antar
      bandar + prob implied ternormalisasi (proporsional, konvensi ta_model).
      Snapshot lenkap -> kolom kosong, tidak difabrikasi.
-  3. archive_snapshots(date): salin output harian ke archive/<date>/ (idempoten).
+  3. archive_snapshots(date): salin output harian ke archive/<date>/ (write-once per file).
   4. sync_cup_picks_to_ledger(): rutekan pick piala (best_picks_today,
      ber-label kompetisi) ke ledger/picks.jsonl dgn competition=EFL Cup/DFB
      Pokal, odds_open = snapshot ta terakhir sebelum kickoff. Hanya pasar yang
@@ -410,16 +410,49 @@ ARCHIVE_FILES = ["predictions_upcoming.csv", "predictions_corners_upcoming.csv",
                  "recommended_slip10.csv"]
 
 
+def _has_data_rows(path):
+    """True bila file punya >= 2 baris (header + minimal satu baris
+    data). Baca dibatasi dua baris pertama."""
+    try:
+        with open(path, "rb") as f:
+            return sum(1 for _ in zip(range(2), f)) >= 2
+    except OSError:
+        return False
+
+
 def archive_snapshots(target_date=None):
-    """Salin output harian ke archive/<date>/. Idempoten per tanggal."""
+    """Salin output harian ke archive/<date>/, write-once per file.
+
+    Arsip adalah snapshot pra-kickoff hari itu — bahan grading
+    rekomendasi. Rerun di hari yang sama SETELAH kickoff dulu
+    menimpa snapshot pagi dengan output pasca-kickoff yang tak lagi
+    memuat laga yang sudah main; leg rekomendasi laga itu lalu tak
+    pernah ter-generate ulang oleh grader dan akhirnya ter-pangkas
+    sebagai yatim tanpa pernah dinilai (audit ronde 14, C14-1:
+    3 leg Le Havre–PSG). Kini file yang sudah ada di arsip tidak
+    ditimpa; hanya file yang hilang yang disalin, jadi run pertama
+    yang parsial tetap bisa dilengkapi run berikutnya.
+
+    Satu pengecualian (audit-diri ronde 14, L-2): file arsip yang
+    hanya berisi header — hasil run pertama yang terdegradasi
+    (rantai pasar gagal -> file produk kosong) — boleh ditimpa oleh
+    sumber yang punya baris data. Tanpa ini write-once membekukan
+    snapshot kosong dan run sehat berikutnya tak bisa memperbaikinya;
+    snapshot asli selalu punya baris data, jadi provenans pra-kickoff
+    tidak terancam oleh pengecualian ini.
+    """
     d = target_date or datetime.now(timezone.utc).date()
     dest = os.path.join(ARCHIVE, d.isoformat())
     os.makedirs(dest, exist_ok=True)
-    copied = []
+    copied, kept = [], []
     for fn in ARCHIVE_FILES:
         src = os.path.join(HERE, fn)
         if os.path.exists(src):
             out = os.path.join(dest, fn)
+            if os.path.exists(out) and not (
+                    not _has_data_rows(out) and _has_data_rows(src)):
+                kept.append(fn)
+                continue
             # Salin atomik (tmp + replace) — grading membaca arsip ini;
             # salinan terpotong karena crash akan terbaca diam-diam.
             tmp = out + ".tmp"
@@ -427,7 +460,7 @@ def archive_snapshots(target_date=None):
                 fo.write(fi.read())
             os.replace(tmp, out)
             copied.append(fn)
-    return {"date": d.isoformat(), "archived": copied}
+    return {"date": d.isoformat(), "archived": copied, "kept": kept}
 
 
 # ---------------------------------------------------------------- cup picks -> ledger
@@ -546,7 +579,8 @@ def main(argv):
         return 0
     if "--archive" in argv:
         r = archive_snapshots()
-        print(f"archive {r['date']}: {r['archived']}")
+        print(f"archive {r['date']}: {r['archived']} "
+              f"(+{len(r['kept'])} sudah ada, write-once)")
         return 0
     if "--cup-ledger" in argv:
         n = sync_cup_picks_to_ledger()
