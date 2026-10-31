@@ -491,6 +491,9 @@ def main():
     tinggal di sini — mengimpor modul ini tidak mengeksekusi apa pun,
     sehingga settle/_clv bisa diuji sebagai fungsi murni."""
     recompute_clv = "--recompute-clv" in sys.argv
+    if not os.path.exists(PICKS):
+        print("No ledger picks yet; nothing to grade.")
+        return 0
     global CLOSE_MAP, CUP_SNAPS
     CLOSE_MAP = _load_close_map()
     CUP_SNAPS = _load_cup_snapshots()
@@ -504,8 +507,6 @@ def main():
     ta_by_teams = _by_teams_index(ta_results)
     cup_by_teams = _by_teams_index(cup_results)
 
-    if not os.path.exists(PICKS):
-        raise SystemExit("picks.jsonl belum ada")
     with open(PICKS, encoding="utf-8") as f:
         picks = [json.loads(l) for l in f if l.strip()]
     picks_by_id = {p["pick_id"]: p for p in picks}

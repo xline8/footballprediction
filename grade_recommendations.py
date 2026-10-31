@@ -808,8 +808,8 @@ def main(argv=None):
 
     # proses semua tanggal arsip (dalam urutan naik); idempoten per kunci
     if not os.path.isdir(ARCHIVE):
-        print("  ! tidak ada folder arsip")
-        return 1
+        print("[grade] no archive directory yet; nothing to grade")
+        return 0
     dates = sorted(d for d in os.listdir(ARCHIVE)
                    if os.path.isdir(os.path.join(ARCHIVE, d))
                    and _is_date_name(d))
