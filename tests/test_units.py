@@ -1552,6 +1552,79 @@ def test_archive_snapshots_write_once():
             assert r3["kept"] == [f1], r3
             with open(os.path.join(dest, f2)) as f:
                 assert f.read() == "h\nv2\n"
+
+
+def test_archive_skips_wrong_generation_and_blank_rows():
+    # Ronde 15. F5: "berdata" dinilai dari sel, bukan baris fisik —
+    # header + baris kosong BUKAN data, jadi tetap bisa di-repair.
+    # C15-2: file produk generasi tanggal lain tidak diarsipkan ke
+    # folder ini (arsip 2026-10-30 nyata memuat slip10 berisi leg
+    # 2026-10-31).
+    import shutil
+    import tempfile
+    from datetime import date
+
+    import market_orchestration as mo
+
+    # _has_data_rows langsung
+    td0 = tempfile.mkdtemp()
+    try:
+        p = os.path.join(td0, "x.csv")
+        with open(p, "w") as f:
+            f.write("h\n\n")
+        assert mo._has_data_rows(p) is False
+        with open(p, "w") as f:
+            f.write("h\n   \n")
+        assert mo._has_data_rows(p) is False
+        with open(p, "w") as f:
+            f.write("")
+        assert mo._has_data_rows(p) is False
+        with open(p, "w") as f:
+            f.write("h\ndata\n")
+        assert mo._has_data_rows(p) is True
+    finally:
+        shutil.rmtree(td0, ignore_errors=True)
+
+    td = tempfile.mkdtemp()
+    try:
+        src = os.path.join(td, "src")
+        arc = os.path.join(td, "archive")
+        os.makedirs(src)
+        dest = os.path.join(arc, "2026-10-30")
+        os.makedirs(dest)
+        f_pred = mo.ARCHIVE_FILES[0]  # predictions_upcoming.csv
+        # dest berisi header + baris kosong -> bukan data -> repair
+        with open(os.path.join(dest, f_pred), "w") as f:
+            f.write("h\n\n")
+        with open(os.path.join(src, f_pred), "w") as f:
+            f.write("h\nreal\n")
+        # slip10 generasi BESOK: semua leg 2026-10-31 -> dilewati
+        with open(os.path.join(src, "recommended_slip10.csv"), "w") as f:
+            f.write("date,home\n2026-10-31,besok fc\n")
+        # slip2 tanggal cocok -> diarsipkan
+        with open(os.path.join(src, "recommended_slip.csv"), "w") as f:
+            f.write("date,home\n2026-10-30,hari ini fc\n")
+        # best_picks_today bercampur tanggal lain -> dilewati
+        with open(os.path.join(src, "best_picks_today.csv"), "w") as f:
+            f.write("date,home\n2026-10-30,a\n2026-10-31,b\n")
+        saved = (mo.HERE, mo.ARCHIVE)
+        mo.HERE, mo.ARCHIVE = src, arc
+        try:
+            r = mo.archive_snapshots(target_date=date(2026, 10, 30))
+        finally:
+            mo.HERE, mo.ARCHIVE = saved
+        assert f_pred in r["archived"], r
+        with open(os.path.join(dest, f_pred)) as f:
+            assert f.read() == "h\nreal\n"
+        assert "recommended_slip10.csv" in r["skipped"], r
+        assert not os.path.exists(
+            os.path.join(dest, "recommended_slip10.csv"))
+        assert "recommended_slip.csv" in r["archived"], r
+        assert "best_picks_today.csv" in r["skipped"], r
+        assert not os.path.exists(
+            os.path.join(dest, "best_picks_today.csv"))
+    finally:
+        shutil.rmtree(td, ignore_errors=True)
         finally:
             mo.HERE, mo.ARCHIVE = saved
     finally:

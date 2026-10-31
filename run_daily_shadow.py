@@ -449,6 +449,9 @@ def main():
         ar = archive_snapshots()
         print(f"[14/16] archive {ar['date']}: {len(ar['archived'])} file"
               f" (+{len(ar.get('kept', []))} sudah ada, write-once)")
+        if ar.get("skipped"):
+            print(f"[14/16] ! file dilewati (generasi tanggal lain): "
+                  f"{ar['skipped']}")
     except _SkipStep as e:
         print(f"[14/16] DILEWATI archive: {e}")
     except Exception as e:
