@@ -2000,8 +2000,25 @@ def test_api_prediction_missing_columns_and_corner_floats():
     import asyncio
     import json as _json
     import tempfile
+    import types
 
-    import api_server as api
+    # api_server memanggil get_loader() di level modul, yang
+    # membangun MatchCache dari all_matches_clean.csv — artefak
+    # runtime gitignored yang tidak ada di checkout bersih (CI
+    # merah di impor ini, bukan di asersinya). Stub data_loader
+    # selama impor lalu pulihkan; endpoint yang diuji membaca CSV
+    # dari BASE_DIR saja dan tidak menyentuh loader.
+    stub_dl = types.ModuleType("data_loader")
+    stub_dl.get_loader = lambda: None
+    old_dl = sys.modules.get("data_loader")
+    sys.modules["data_loader"] = stub_dl
+    try:
+        import api_server as api
+    finally:
+        if old_dl is None:
+            sys.modules.pop("data_loader", None)
+        else:
+            sys.modules["data_loader"] = old_dl
 
     old_base = api.BASE_DIR
     with tempfile.TemporaryDirectory() as td:
