@@ -339,8 +339,9 @@ class PipelineOrchestrator:
         # Skema meta SATU: cache_records menulis {dc_fit_mode, data_stamp}
         # (dibaca make_picks_live._records_stale); fingerprint langkah ini
         # DITAMBAHKAN ke dict yang sama, bukan menimpanya. Menimpa seperti
-        # sebelumnya menghapus data_stamp, sehingga [5/7] harian selalu
-        # menganggap records basi dan membangunnya ulang sekali lagi
+        # sebelumnya menghapus data_stamp, sehingga langkah
+        # make_picks_live harian selalu menganggap records basi dan
+        # membangunnya ulang sekali lagi
         # setiap minggu aktif (audit ronde 6, M2).
         meta = {}
         if os.path.exists(meta_path):

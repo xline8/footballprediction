@@ -1415,10 +1415,37 @@ def test_no_undefined_names_in_chain_modules():
             "slip_recommender.py", "model_corners_v3.py",
             "predict_cups.py", "refresh_fixtures.py", "ta_scrape.py",
             "market_orchestration.py", "make_picks_live.py",
-            "predict_upcoming_refactored.py"]
+            "predict_upcoming_refactored.py",
+            # F8 ronde 15: modul langkah [16/16] sendiri tadinya
+            # terlewat dari daftar ini.
+            "resolve_and_monitor.py"]
     for m in mods:
         bad = _undefined_names(os.path.join(root, m))
         assert not bad, (m, bad)
+
+
+def test_undefined_names_helper_detects_orphans():
+    # D15-2: sweep tanpa positive control bisa hijau vakum — bila
+    # helper-nya rusak senyap (API symtable berubah, bug walk), tes
+    # rantai di atas lolos dengan daftar kosong. Paksa helper
+    # membuktikan ia MENANGKAP nama yatim yang diketahui, dan tidak
+    # menandai kode yang bersih.
+    import shutil
+    import tempfile
+
+    td = tempfile.mkdtemp()
+    try:
+        bad = os.path.join(td, "bad.py")
+        with open(bad, "w") as f:
+            f.write("def loader():\n    return dtf + 1\n")
+        assert _undefined_names(bad) == ["loader:dtf"]
+        good = os.path.join(td, "good.py")
+        with open(good, "w") as f:
+            f.write("import os\n\ndef ok():\n    x = os.sep\n"
+                    "    return x\n")
+        assert _undefined_names(good) == []
+    finally:
+        shutil.rmtree(td, ignore_errors=True)
 
 
 def test_kickoff_started_predicate():
