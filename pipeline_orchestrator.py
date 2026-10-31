@@ -70,33 +70,44 @@ def log(msg: str, level: str = "INFO"):
 
 
 def _ledger_counts(base_dir: str) -> dict:
-    """Return effective ledger counts using grades.jsonl as source of truth."""
-    picks_file = os.path.join(base_dir, "ledger", "picks.jsonl")
-    if not os.path.exists(picks_file):
-        return {"total": 0, "pending": 0, "graded": 0}
+    """Return effective ledger counts using grades.jsonl as source of truth.
 
-    picks = []
-    with open(picks_file, encoding="utf-8") as f:
-        for line in f:
-            if line.strip():
-                picks.append(json.loads(line))
-
-    pick_ids = {p.get("pick_id") for p in picks if p.get("pick_id")}
-    graded_ids = set()
-    grades_file = os.path.join(base_dir, "ledger", "grades.jsonl")
-    if os.path.exists(grades_file):
-        with open(grades_file, encoding="utf-8") as f:
+    Counting is per pick ROW, so total == pending + graded holds
+    even when a pick_id is duplicated or missing (round 17,
+    L-A3): a row counts as graded when its pick_id has a grades
+    row, and id-less rows count as pending. Unparseable lines are
+    skipped (L-A4) — this is a reporting function; one corrupt
+    line must not take down pipeline status the way the strict
+    first version did.
+    """
+    def _rows(path):
+        out = []
+        if not os.path.exists(path):
+            return out
+        with open(path, encoding="utf-8") as f:
             for line in f:
                 if not line.strip():
                     continue
-                gid = json.loads(line).get("pick_id")
-                if gid in pick_ids:
-                    graded_ids.add(gid)
+                try:
+                    row = json.loads(line)
+                except ValueError:
+                    continue
+                if isinstance(row, dict):
+                    out.append(row)
+        return out
 
+    picks = _rows(os.path.join(base_dir, "ledger", "picks.jsonl"))
+    pick_ids = {p.get("pick_id") for p in picks if p.get("pick_id")}
+    graded_ids = set()
+    for g in _rows(os.path.join(base_dir, "ledger", "grades.jsonl")):
+        gid = g.get("pick_id")
+        if gid in pick_ids:
+            graded_ids.add(gid)
+    graded = sum(1 for p in picks if p.get("pick_id") in graded_ids)
     return {
         "total": len(picks),
-        "pending": len(pick_ids - graded_ids),
-        "graded": len(graded_ids),
+        "pending": len(picks) - graded,
+        "graded": graded,
     }
 
 
@@ -139,9 +150,12 @@ class PipelineOrchestrator:
             ("xg", self.step_build_xg, ("refresh",)),
             ("model", self.step_fit_models, ("refresh",)),
             ("scoring", self.step_score_upcoming, ("refresh", "xg", "model")),
-            # Corners consume predictions_upcoming.csv; never run them from
-            # the previous run when league scoring failed.
-            ("corner_model", self.step_score_corners, ("refresh", "scoring")),
+            # Corner inputs are refresh products (match history,
+            # fixture JSON, fitted params) — NOT league scoring
+            # output; the corner step verifies its own output
+            # freshness. Round 17 reverts the round-38 scoring
+            # dependency, whose stated premise was wrong.
+            ("corner_model", self.step_score_corners, ("refresh",)),
             ("odds", self.step_integrate_odds, ("scoring",)),
             ("ta_scrape", self.scrape_live_odds, ()),
             ("ta_model", self.step_ta_model, ()),
@@ -150,6 +164,7 @@ class PipelineOrchestrator:
             ("validation", self.step_validation, ()),
         ]
         current = None
+        self._run_results = results
         try:
             for name, fn, blocked_by in steps:
                 # 'skipped' karena upstream gagal ikut memblokir:
@@ -1161,6 +1176,15 @@ class PipelineOrchestrator:
     def step_ta_model(self) -> dict:
         """Build TA model markets & bets (uses scraped tipsterarea odds)."""
         log("\n[Step 12/6] Building TA model markets...")
+        # Kesegaran corner adalah urusan langkah corner sendiri:
+        # bila corner_model tidak sukses pada run ini, build di
+        # bawah membaca probabilitas corner run sebelumnya dari
+        # file — sah, tetapi harus terlihat di log, bukan diam.
+        corner_res = getattr(self, "_run_results", {}).get("corner_model")
+        if corner_res is not None and corner_res.get("status") != "success":
+            log("  ! Corner predictions TIDAK diperbarui run ini "
+                f"(corner_model: {corner_res.get('status')}) — ta_model "
+                "memakai file corner run sebelumnya", "WARN")
         try:
             import ta_model
             rc = ta_model.build()
