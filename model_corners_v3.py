@@ -16,6 +16,7 @@ import json
 import math
 import sys
 import time
+import tempfile
 from collections import defaultdict, deque
 from datetime import datetime
 
@@ -33,6 +34,26 @@ OUT = os.path.join(BASE, "predictions_corners_shots.csv")
 UPCOMING_OUT = os.path.join(BASE, "predictions_corners_upcoming.csv")
 FIX_MAP = {"E0": "EPL", "SP1": "La_liga", "D1": "Bundesliga",
            "I1": "Serie_A", "F1": "Ligue_1"}
+
+
+def _atomic_text_write(path, writer, newline=""):
+    """Write a text artifact fully before publishing it to readers."""
+    out_dir = os.path.dirname(os.path.abspath(path))
+    os.makedirs(out_dir, exist_ok=True)
+    fd, tmp_path = tempfile.mkstemp(
+        prefix=f".{os.path.basename(path)}.", suffix=".tmp", dir=out_dir)
+    try:
+        with os.fdopen(fd, "w", newline=newline, encoding="utf-8") as f:
+            writer(f)
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(tmp_path, path)
+    finally:
+        if os.path.exists(tmp_path):
+            try:
+                os.remove(tmp_path)
+            except OSError:
+                pass
 TOP5 = ["E0", "D1", "I1", "SP1", "F1"]
 VAL_SEASONS = {"2019/20", "2020/21"}
 TEST_SEASONS = {"2021/22", "2022/23", "2023/24", "2024/25", "2025/26"}
@@ -265,7 +286,7 @@ def _run_backtest():
         cs_txt = f"{s2/n2:5.2f}/{p2/n2:5.2f}" if n2 else "  -  "
         print(f"{key[0]:.1f}-{key[1]:.1f}    {n:6,d} | {cb_txt:>12s} | {cs_txt:>12s}")
 
-    with open(OUT, "w", newline="", encoding="utf-8") as f:
+    def write_backtest(f):
         wr = csv.writer(f)
         wr.writerow(["div", "date", "season", "home", "away", "hc", "ac", "y_total",
                      "mu_base_cb", "mu_shots_cs", "r_cb", "r_cs",
@@ -281,12 +302,13 @@ def _run_backtest():
                          round(r0["r_cb"], 3), round(rstar, 3), round(pcb, 4), round(pcs, 4)]
                         + [round(sum(pmf_k(mu, k_of(rstar, mu))[int(ln) + 1:]), 4)
                            for ln in LINES])
+    _atomic_text_write(OUT, write_backtest)
     print("\ntersimpan:", OUT)
 
     # --- simpan parameter yang sudah terfit — dipakai predict_upcoming() ---
-    os.makedirs(os.path.dirname(PARAMS_OUT), exist_ok=True)
-    with open(PARAMS_OUT, "w") as f:
-        json.dump({"gamma": gstar, "r": rstar, "hl": HL}, f)
+    _atomic_text_write(
+        PARAMS_OUT,
+        lambda f: json.dump({"gamma": gstar, "r": rstar, "hl": HL}, f))
     print("params disimpan:", PARAMS_OUT)
 
     return gstar, rstar
@@ -406,10 +428,12 @@ def predict_upcoming():
     cols = ["div", "date", "home", "away", "mu_shots_cs", "r_cs",
             "rec_line", "rec_side", "recommendation", "rec_prob"] + \
            [f"p_gt_{ln}" for ln in LINES_UPCOMING]
-    with open(UPCOMING_OUT, "w", newline="", encoding="utf-8") as f:
+    def write_upcoming(f):
         w = csv.DictWriter(f, fieldnames=cols)
         w.writeheader()
         w.writerows(rows)
+
+    _atomic_text_write(UPCOMING_OUT, write_upcoming)
     print(f"  {len(rows)} upcoming corner predictions -> {UPCOMING_OUT}")
     return len(rows)
 

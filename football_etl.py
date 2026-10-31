@@ -10,6 +10,7 @@ import json
 import os
 import pickle
 import math
+import tempfile
 from typing import Optional, List, Dict, Any
 from collections import defaultdict
 from datetime import datetime, date, timezone
@@ -392,8 +393,21 @@ class MatchCache:
             'by_team': dict(self.by_team),
             'by_date': dict(self.by_date)
         }
-        with open(self._cache_file, 'wb') as f:
-            pickle.dump(data, f, protocol=pickle.HIGHEST_PROTOCOL)
+        fd, tmp_path = tempfile.mkstemp(
+            prefix=".matches.", suffix=".tmp",
+            dir=os.path.dirname(self._cache_file))
+        try:
+            with os.fdopen(fd, 'wb') as f:
+                pickle.dump(data, f, protocol=pickle.HIGHEST_PROTOCOL)
+                f.flush()
+                os.fsync(f.fileno())
+            os.replace(tmp_path, self._cache_file)
+        finally:
+            if os.path.exists(tmp_path):
+                try:
+                    os.remove(tmp_path)
+                except OSError:
+                    pass
 
     def get_div_matches(self, div: str) -> List[Dict]:
         """Dapatkan semua match untuk divisi tertentu, terurut tanggal."""

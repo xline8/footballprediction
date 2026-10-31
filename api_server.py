@@ -389,9 +389,9 @@ async def get_prediction_for_match(
                 'ph_dc': float(r['ph_dc']) if r['ph_dc'] else None,
                 'pd_dc': float(r['pd_dc']) if r['pd_dc'] else None,
                 'pa_dc': float(r['pa_dc']) if r['pa_dc'] else None,
-                'ph_bl': float(r['ph_bl']) if r['ph_bl'] else None,
-                'pd_bl': float(r['pd_bl']) if r['pd_bl'] else None,
-                'pa_bl': float(r['pa_bl']) if r['pa_bl'] else None,
+                'ph_bl': float(r['ph_bl']) if r.get('ph_bl') else None,
+                'pd_bl': float(r['pd_bl']) if r.get('pd_bl') else None,
+                'pa_bl': float(r['pa_bl']) if r.get('pa_bl') else None,
                 'b365h': float(r['b365h']) if r.get('b365h') else None,
                 'b365d': float(r['b365d']) if r.get('b365d') else None,
                 'b365a': float(r['b365a']) if r.get('b365a') else None,
@@ -523,7 +523,7 @@ async def get_corner_predictions(div: str = None, limit: int = 100):
     for r in rows[:limit]:
         # dynamic over-probabilities: p_gt_9.5 -> prob_over["9.5"]
         prob_over = {
-            k[len('p_gt_'):]: v
+            k[len('p_gt_'):]: _f(v)
             for k, v in r.items()
             if k.startswith('p_gt_') and _f(v) is not None
         }

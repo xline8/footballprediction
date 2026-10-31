@@ -409,7 +409,9 @@ def test_pipeline_gates_scoring_on_partial_xg_only():
             po.BASE_DIR = old
     assert res["scoring"]["status"] == "skipped"
     assert res["model"]["status"] == "success"       # fit tak butuh xg step
-    assert res["corner_model"]["status"] == "success"
+    # Corner model consumes league predictions, so it must also be skipped
+    # when the upstream scoring chain is blocked by partial XG.
+    assert res["corner_model"]["status"] == "skipped"
     assert res["picks"]["status"] == "skipped"       # rantai skip menular
     assert res["status"] == "failed"                  # partial = gagal
 
