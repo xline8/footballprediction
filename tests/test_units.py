@@ -1195,6 +1195,46 @@ def test_match_result_postponed_fallback():
                          "Chelsea", "") == (4, 2, "2026-12-12")
 
 
+def test_sim_containment_and_match_result_foreign_trap():
+    # Ronde 15 (temuan saat verifikasi live): sim() memberi 0,88
+    # untuk pasangan tak berhubungan karena token "b" (tim cadangan)
+    # terkandung di nama lain — "augsburg" vs "wellington phoenix b".
+    # Grader lalu menilai leg Bundesliga dari laga Selandia Baru
+    # bertanggal sama (produk 0,774 >= ambang 0,75). Dua lapis fix:
+    # containment menuntut kedua token >= 5 huruf, dan _match_result
+    # menuntut sim per sisi >= 0,60.
+    from grade_recommendations import _match_result, norm
+    from ta_model import sim
+
+    assert sim(norm("augsburg"), norm("wellington phoenix b")) < 0.5
+    assert sim(norm("freiburg"), norm("auckland b")) < 0.5
+    # containment yang sah tetap bekerja
+    assert sim(norm("gladbach"), norm("monchengladbach")) >= 0.88
+    assert sim(norm("inter"), norm("internazionale")) >= 0.88
+
+    idx_trap = {"2026-10-31": [
+        (norm("wellington phoenix b"), norm("auckland b"), 3, 2,
+         "New Zealand - National League")]}
+    assert _match_result(idx_trap, "2026-10-31", "augsburg",
+                         "freiburg", "") is None
+    idx_true = {"2026-10-31": [
+        (norm("wellington phoenix b"), norm("auckland b"), 3, 2,
+         "New Zealand - National League"),
+        (norm("augsburg"), norm("freiburg"), 2, 1,
+         "Germany - Bundesliga")]}
+    assert _match_result(idx_true, "2026-10-31", "augsburg",
+                         "freiburg", "") == (2, 1, "2026-10-31")
+    # Lantai per sisi menambat secara independen: sim satu sisi
+    # 0,78 (produk 0,78 >= 0,75) tetap ditolak karena sisi itu
+    # di bawah 0,80 — pasangan timpang bukan laga yang sama.
+    assert 0.70 < sim(norm("city rangers"),
+                      norm("city wanderers")) < 0.80
+    idx_weak = {"2026-10-31": [
+        (norm("city wanderers"), norm("omega"), 2, 0, "X League")]}
+    assert _match_result(idx_weak, "2026-10-31", "city rangers",
+                         "omega", "") is None
+
+
 def test_postponed_lookup_bounded():
     # Ronde 13: fallback laga tunda score_ledger memakai helper yang
     # sama-sama dibatasi 45 hari dan mengambil tanggal paling awal

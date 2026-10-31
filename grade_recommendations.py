@@ -185,7 +185,19 @@ def _match_result(idx, match_date, home, away, comp):
     def _best_on(cands):
         best, bs = None, 0.0
         for rh, ra, sh, sa, lge in cands or []:
-            sc = sim(nh, rh) * sim(na, ra)
+            s_h, s_a = sim(nh, rh), sim(na, ra)
+            # Lantai per sisi (audit ronde 15): ambang produk 0,75
+            # bisa dicapai pasangan timpang (1,00 x 0,75, atau
+            # 0,72 + bonus piala) — satu sisi pasti, satu sisi
+            # meragukan. Pasangan sejati yang terukur di data
+            # produksi selalu >= 0,95 per sisi, jadi kedua sisi
+            # dituntut >= 0,80. Pemicunya: leg Bundesliga sempat
+            # dinilai dari laga Selandia Baru bertanggal sama
+            # (token "b" menggelembungkan sim; diperbaiki di
+            # ta_model.sim — lantai ini lapis keduanya).
+            if min(s_h, s_a) < 0.80:
+                continue
+            sc = s_h * s_a
             if hint and lge == hint:
                 sc += 0.05
             if sc > bs:

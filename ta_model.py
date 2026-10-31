@@ -234,9 +234,15 @@ def sim(a, b):
         score += best
     score = score / max(len(ta), 1) if ta else 0.0
     # token yang terkandung di nama lain: gladbach ~ monchengladbach
+    # Audit ronde 15: panjang token KEDUA sisi wajib >= 5. Versi lama
+    # hanya memeriksa sisi t, jadi token satu huruf "b" (sufiks tim
+    # cadangan: "auckland b", "wellington phoenix b") terkandung di
+    # "augsburg"/"freiburg"/"borussia"/"paderborn" dan memberi sim
+    # 0,88 untuk pasangan yang sama sekali tak berhubungan — grader
+    # rekomendasi sempat menilai 4 leg dari laga Selandia Baru itu.
     for t in ta:
         for u in tb:
-            if len(t) >= 5 and (t in u or u in t):
+            if len(t) >= 5 and len(u) >= 5 and (t in u or u in t):
                 score = max(score, 0.88)
     import difflib
     full = difflib.SequenceMatcher(None, a, b).ratio()
