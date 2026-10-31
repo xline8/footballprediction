@@ -1683,6 +1683,73 @@ def test_archive_snapshots_write_once():
         shutil.rmtree(td, ignore_errors=True)
 
 
+def test_unit_recovery_fast_in_dense_window():
+    # A16-1: pencarian subset versi enumerasi-penuh menghabiskan
+    # 52,6 dtk untuk SATU unit tak-pulih di jendela 40 kandidat,
+    # dibayar setiap run. Jendela padat yang sama kini harus
+    # selesai jauh di bawah 2 dtk, unit yang bisa pulih tetap
+    # pulih (termasuk lewat jalur hash-murni saat angka unit
+    # tidak lengkap), dan unit tak-pulih tetap pending.
+    import hashlib as _hl
+    import time as _time
+
+    from grade_recommendations import _key, _regrade_orphans
+
+    def leg(i, status="pending"):
+        return {"date": "2026-10-30", "product": "slip10",
+                "level": "leg", "home": f"team{i}", "away": f"opp{i}",
+                "competition": "", "market": "OU", "line": "2.5",
+                "selection": "Over", "p_model": 0.35 + 0.005 * i,
+                "odds": 1.31 + 0.037 * i, "tier": "",
+                "status": status, "score": "", "reason": "no_result_yet",
+                "graded_at": "", "result_date": ""}
+
+    def unit_for(members, odds_mult=1.0, p_mult=1.0, blank_numbers=False):
+        sig = ";".join(sorted("|".join(map(str, _key(m))) for m in members))
+        o = p = 1.0
+        for m in members:
+            o *= m["odds"]
+            p *= m["p_model"]
+        return {"date": "2026-10-30", "product": "slip10",
+                "level": "unit", "home": "", "away": "",
+                "competition": "", "market": "", "line": "",
+                "selection": "unit:" + _hl.md5(sig.encode()).hexdigest()[:12],
+                "p_model": None if blank_numbers else round(p * p_mult, 4),
+                "odds": None if blank_numbers else round(o * odds_mult, 3),
+                "tier": "", "status": "pending", "score": "",
+                "reason": "legs_pending", "graded_at": ""}
+
+    store = {}
+    legs = [leg(i) for i in range(40)]
+    # unit pulih-1: leg 10..12, sudah final -> settle dari status leg
+    for i in (10, 11, 12):
+        legs[i]["status"] = "hit"
+    u1 = unit_for([legs[10], legs[11], legs[12]])
+    # unit pulih-2: angka unit kosong -> jalur hash murni
+    for i in (30, 31):
+        legs[i]["status"] = "lose"
+    u2 = unit_for([legs[30], legs[31]], blank_numbers=True)
+    # unit tak-pulih: sidik untuk leg yang tidak ada di store
+    # (angka unit masuk akal: total ±5,8, joint ±0,125)
+    ghost = []
+    for j in range(3):
+        g = leg(900 + j)
+        g["home"], g["away"] = f"ghost{j}", f"phantom{j}"
+        g["odds"], g["p_model"] = 1.80, 0.50
+        ghost.append(g)
+    u3 = unit_for(ghost)
+    for g in legs + [u1, u2, u3]:
+        store[_key(g)] = g
+
+    t0 = _time.monotonic()
+    _regrade_orphans(store, set(), {}, {}, "2026-10-31T00:00:00+00:00")
+    elapsed = _time.monotonic() - t0
+    assert store[_key(u1)]["status"] == "hit", store[_key(u1)]
+    assert store[_key(u2)]["status"] == "lose", store[_key(u2)]
+    assert store[_key(u3)]["status"] == "pending", store[_key(u3)]
+    assert elapsed < 2.0, f"pemulihan unit lambat: {elapsed:.2f} dtk"
+
+
 def test_archive_skips_wrong_generation_and_blank_rows():
     # Ronde 15. F5: "berdata" dinilai dari sel, bukan baris fisik —
     # header + baris kosong BUKAN data, jadi tetap bisa di-repair.
@@ -1770,6 +1837,22 @@ def test_archive_skips_wrong_generation_and_blank_rows():
             arc, "2026-10-31", "recommended_slip10.csv"))
     finally:
         shutil.rmtree(td, ignore_errors=True)
+
+
+def test_archive_helpers_tolerate_non_utf8():
+    # D16-3: tangkapan UnicodeDecodeError di kedua pembaca arsip
+    # (lipatan L3 ronde 15) tidak punya tambat tes — mutasi yang
+    # membuangnya tetap hijau. File latin-1 harus diperlakukan
+    # tak-berdata / tanpa vonis, bukan meledak.
+    import market_orchestration as mo
+
+    with tempfile.TemporaryDirectory() as td:
+        p = os.path.join(td, "recommended_slip.csv")
+        with open(p, "wb") as f:
+            f.write("date,home,away\r\n2026-10-30,Montréal,Real\r\n"
+                    .encode("latin-1"))
+        assert mo._has_data_rows(p) is False
+        assert mo._product_date_mismatch(p, "2026-10-31") is False
 
 
 def test_purge_bogus_spares_issued_and_settled_rows():
@@ -2171,6 +2254,24 @@ def test_shadow_ta_build_rc_failure_marks_run_failed():
     assert code == 1, code
     assert "[10/16] FAILED ta_model build" in out, out
     assert "py:best_picks.py" in calls, calls
+
+
+def test_shadow_prints_archive_skipped():
+    # D16-4: cabang cetak file ter-skip di langkah [14/16] tidak
+    # dicakup tes mana pun (semua stub gerbang mengembalikan hasil
+    # arsip tanpa "skipped"). Ganti stub arsip sesudah _shadow_env
+    # dan asersi baris peringatannya muncul di output run.
+    sh, calls, restore = _shadow_env("success")
+    try:
+        sys.modules["market_orchestration"].archive_snapshots = (
+            lambda: {"date": "2026-10-31", "archived": [], "kept": [],
+                     "skipped": ["recommended_slip10.csv"]})
+        code, out = _run_shadow(sh)
+    finally:
+        restore()
+    assert code is None, code
+    assert "file dilewati (generasi tanggal lain)" in out, out
+    assert "recommended_slip10.csv" in out, out
 
 
 def test_shadow_fallback_flagged_when_refresh_raises_mid_loop():

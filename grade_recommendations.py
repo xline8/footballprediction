@@ -486,6 +486,81 @@ def _leg_row_from_store(g):
     return row
 
 
+def _find_unit_legs(unit, cand_keys, store):
+    """Kembalikan tuple kunci leg penyusun `unit`, atau None.
+
+    Ukuran subset dibatasi 6 = batas generator (slip_recommender:
+    slip2 ≤ 4 leg, slip10 ≤ 6 leg); unit ber-leg lebih dari itu
+    hanya bisa lahir dari file korup dan memang tidak dicari.
+    Kecocokan hash pertama langsung dipakai — dua himpunan leg
+    berbeda yang berbagi sidik md5-48 yang sama bukan ambiguitas
+    realistis, dan versi enumerasi-penuh ronde 15 membayar biaya
+    kombinatoriknya di SETIAP run untuk unit yang tak bisa pulih
+    (audit ronde 16, A16-1: jendela 40 kandidat = 52,6 detik).
+
+    Biaya ditekan dua cara tanpa mengubah vonis (hash isi tetap
+    penentu akhir):
+    - string kunci tiap leg kandidat dibangun sekali, bukan per
+      kombinasi;
+    - pencarian DFS menyaring produk odds dan produk p_model
+      terhadap angka unit tersimpan: produk odds hanya naik
+      (semua odds leg ≥ 1) dan produk p hanya turun (p ≤ 1),
+      jadi jalur yang keluar pita toleransi tidak akan pernah
+      kembali masuk. Subset sejati selalu di dalam pita — total
+      file adalah produk nilai tak-terbulatkan dari leg-leg yang
+      sama, selisih pembulatan cetak < 0,5% vs toleransi 2%.
+    Saringan dimatikan (hash murni + early-exit) bila angka unit
+    atau satu pun leg kandidat tidak lengkap, supaya jalur
+    korup/tak-lengkap tidak pernah kehilangan kecocokan sejati.
+    Anggaran node DFS membatasi kasus patologis yang lolos dari
+    kedua saringan (mis. 40 leg ber-odds dan ber-p identik):
+    melewatinya, pencarian menyerah dan unit tetap pending —
+    hasil akhirnya sama seperti tanpa kecocokan, hanya jauh
+    lebih cepat dari enumerasi penuh.
+    """
+    target = unit["selection"]
+    items = [(lk, store[lk]) for lk in cand_keys]
+    key_str = {lk: "|".join(map(str, _key(lg))) for lk, lg in items}
+    u_odds, u_p = unit["odds"], unit["p_model"]
+    filtered = (u_odds is not None and u_p is not None and all(
+        lg["odds"] is not None and lg["odds"] >= 1.0
+        and lg["p_model"] is not None and lg["p_model"] <= 1.0
+        for _, lg in items))
+    found = []
+    budget = [500_000]
+
+    def dfs(start, chosen, odds_prod, p_prod):
+        if found or budget[0] <= 0:
+            return
+        budget[0] -= 1
+        if chosen and (not filtered
+                       or (abs(odds_prod - u_odds) <= 0.02 * u_odds
+                           and abs(p_prod - u_p) <= 0.02 * u_p)):
+            sig = ";".join(sorted(key_str[lk] for lk in chosen))
+            if ("unit:" + hashlib.md5(sig.encode()).hexdigest()[:12]
+                    == target):
+                found.append(tuple(chosen))
+                return
+        if len(chosen) == 6:
+            return
+        for i in range(start, len(items)):
+            lk, lg = items[i]
+            n_odds, n_p = odds_prod, p_prod
+            if filtered:
+                n_odds = odds_prod * lg["odds"]
+                n_p = p_prod * lg["p_model"]
+                if n_odds > u_odds * 1.02 or n_p < u_p * 0.98:
+                    continue
+            chosen.append(lk)
+            dfs(i + 1, chosen, n_odds, n_p)
+            chosen.pop()
+            if found or budget[0] <= 0:
+                return
+
+    dfs(0, [], 1.0, 1.0)
+    return found[0] if found else None
+
+
 def _regrade_orphans(store, seen, res_idx, cor_idx, now):
     """Nilai baris PENDING yang tidak ter-regenerasi arsip mana pun
     pada run ini, langsung dari store — dipanggil SEBELUM pemangkasan
@@ -503,14 +578,12 @@ def _regrade_orphans(store, seen, res_idx, cor_idx, now):
 
     Unit slip yatim: identitas unit adalah hash isi leg-legnya
     (lihat _grade_archive), jadi keanggotaan unit bisa dipulihkan
-    secara eksak — subset leg store berproduk sama yang hash isinya
-    sama persis dengan sidik unit. Hanya kecocokan tunggal yang
-    dipakai; tanpa kecocokan, unit dibiarkan pending (prune usia
-    14 hari tetap menjadi jalan keluar terakhirnya).
+    secara eksak — subset leg store yang hash isinya sama persis
+    dengan sidik unit (pencariannya di _find_unit_legs). Tanpa
+    kecocokan, unit dibiarkan pending (prune usia 14 hari tetap
+    menjadi jalan keluar terakhirnya).
     Return jumlah baris yang berubah.
     """
-    from itertools import combinations
-
     changed = 0
     # leg dulu: status leg menentukan status unit di bawah.
     for k in sorted(store):
@@ -547,19 +620,10 @@ def _regrade_orphans(store, seen, res_idx, cor_idx, now):
             continue
         cands = sorted(lk for lk in legs_by_product[g["product"]]
                        if g["date"] <= store[lk]["date"] <= last)
-        matches = []
-        for sz in (1, 2, 3, 4, 5, 6):
-            if sz > len(cands):
-                break
-            for combo in combinations(cands, sz):
-                sig = ";".join(sorted(
-                    "|".join(map(str, _key(store[lk]))) for lk in combo))
-                if ("unit:" + hashlib.md5(sig.encode()).hexdigest()[:12]
-                        == g["selection"]):
-                    matches.append(combo)
-        if len(matches) != 1:
+        combo = _find_unit_legs(g, cands, store)
+        if combo is None:
             continue
-        st = settle_slip_unit([store[lk]["status"] for lk in matches[0]])
+        st = settle_slip_unit([store[lk]["status"] for lk in combo])
         if st == "pending":
             continue
         ng = dict(g)
