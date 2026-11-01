@@ -13,12 +13,14 @@ perilaku lama yang mencari di seluruh jendela +4 hari dicabut):
      p_model >= 0.50, o_1xbet >= 1.20, total odds di band 1.85-2.15, joint
      probability tertinggi (tie-break total EV). Tanpa in-band: kombinasi
      tanggal itu yang totalnya terdekat ke 2.0, in_band=false.
-  3. recommended_slip10.csv — slip odds ±10: 3-6 leg, p_model >= 0.35,
+  3. recommended_slip10.csv — slip odds ±10: 3-8 leg, p_model >= 0.65,
      o_1xbet >= 1.30, total odds di band 9.0-11.0, joint tertinggi. Pool
      mulai dari tanggal laporan; bila band tak tercapai, pool diperluas
      hari demi hari (maks +4) — tiap leg membawa tanggalnya sendiri dan
      ringkasan mencatat pool_expanded_to. Tanpa in-band: terdekat ke 10.0,
-     in_band=false.
+     in_band=false. Lantai 0.65 + maks 8 leg adalah keputusan user
+     2026-11-01 (leg selalu berprobabilitas tinggi, pita dicapai dengan
+     banyak laga; tanpa syarat EV — lihat komentar di konstanta S10).
 
 Sumber leg: market_compare.csv (odds o_1xbet) di-join ke probabilitas model
 (predictions_upcoming.csv / predictions_cups_upcoming.csv). Pasar: 1X2 / DC /
@@ -52,9 +54,18 @@ S2_MIN_PM, S2_MIN_ODDS = 0.50, 1.20
 S2_LO, S2_HI, S2_TARGET = 1.85, 2.15, 2.0
 S2_MIN_LEGS, S2_MAX_LEGS = 2, 4
 # Slip odds ±10
-S10_MIN_PM, S10_MIN_ODDS = 0.35, 1.30
+# Keputusan user 2026-11-01: setiap leg wajib berprobabilitas model
+# tinggi dan pita odds dicapai dengan MEMPERBANYAK laga, bukan dengan
+# leg lempar-koin — lantai lama 0.35 memaksa leg p 0,39-0,45 masuk demi
+# odds (4 slip pertama: 0 menang, leg hit 58%). Tanpa syarat EV/harga
+# fair: user secara eksplisit menerima risiko harga di bawah fair.
+# Backtest arsip 2026-10-29..11-01 pada lantai 0.65 / maks 8 leg: slip
+# terbit 4/4 hari (5-6 leg, leg minimum 0,68-0,76), joint tidak lebih
+# buruk dari logika lama (0,30/0,28/0,28/0,16 vs 0,18/0,30/0,30/0,17),
+# dan pencarian tidak lagi terpotong (pool menyempit).
+S10_MIN_PM, S10_MIN_ODDS = 0.65, 1.30
 S10_LO, S10_HI, S10_TARGET = 9.0, 11.0, 10.0
-S10_MIN_LEGS, S10_MAX_LEGS = 3, 6
+S10_MIN_LEGS, S10_MAX_LEGS = 3, 8
 S10_MAX_EXPAND_DAYS = 4
 
 # Batas node pencarian (audit K5): tanpa batas, pool besar bisa membuat

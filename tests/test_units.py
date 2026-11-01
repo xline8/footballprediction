@@ -1138,6 +1138,70 @@ def test_slip_csv_carries_search_truncated():
     assert rows and rows[0]["search_truncated"] == "true", rows
 
 
+def test_slip10_legs_all_high_probability():
+    # Keputusan user 2026-11-01: slip10 hanya boleh berisi leg
+    # berprobabilitas model >= 0.65; pita odds 9-11 dicapai dengan
+    # memperbanyak laga (maks 8), bukan leg lempar-koin. Fixture:
+    # 8 laga berisi leg DC 1X p=0.80 @1.45 (6 leg -> 9.29, in-band)
+    # plus dua umpan yang HARUS ditolak lantai baru: p=0.50 @4.50
+    # (di bawah lantai lama 0.35 pun joint-nya menggoda) dan p=0.60.
+    import csv
+    import tempfile
+
+    import slip_recommender as sr
+
+    day = "2026-11-01"
+    mc_cols = ["date", "home", "away", "competition", "market", "line",
+               "selection", "o_1xbet", "p_implied", "game_id"]
+    pr_cols = ["date", "home", "away", "p_dc_1x"]
+    with tempfile.TemporaryDirectory() as td:
+        mc = os.path.join(td, "market_compare.csv")
+        pr = os.path.join(td, "predictions_upcoming.csv")
+        pc = os.path.join(td, "predictions_cups_upcoming.csv")
+        out = os.path.join(td, "recommended_slip10.csv")
+        with open(mc, "w", newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=mc_cols)
+            w.writeheader()
+            for i in range(1, 9):
+                w.writerow({"date": day, "home": f"home{i}",
+                            "away": f"away{i}", "market": "DC",
+                            "selection": "1X", "o_1xbet": "1.45"})
+            w.writerow({"date": day, "home": "coinflip", "away": "trap",
+                        "market": "DC", "selection": "1X",
+                        "o_1xbet": "4.50"})
+            w.writerow({"date": day, "home": "almost", "away": "there",
+                        "market": "DC", "selection": "1X",
+                        "o_1xbet": "1.60"})
+        with open(pr, "w", newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=pr_cols)
+            w.writeheader()
+            for i in range(1, 9):
+                w.writerow({"date": day, "home": f"home{i}",
+                            "away": f"away{i}", "p_dc_1x": "0.80"})
+            w.writerow({"date": day, "home": "coinflip", "away": "trap",
+                        "p_dc_1x": "0.50"})
+            w.writerow({"date": day, "home": "almost", "away": "there",
+                        "p_dc_1x": "0.60"})
+        with open(pc, "w", newline="", encoding="utf-8") as f:
+            csv.DictWriter(f, fieldnames=pr_cols).writeheader()
+        saved = (sr.MARKET_COMPARE, sr.PRED_LEAGUE, sr.PRED_CUP,
+                 sr.OUT_SLIP10)
+        sr.MARKET_COMPARE, sr.PRED_LEAGUE, sr.PRED_CUP, sr.OUT_SLIP10 = \
+            mc, pr, pc, out
+        try:
+            s = sr.recommend_slip10(day)
+        finally:
+            (sr.MARKET_COMPARE, sr.PRED_LEAGUE, sr.PRED_CUP,
+             sr.OUT_SLIP10) = saved
+        with open(out, newline="", encoding="utf-8") as f:
+            rows = list(csv.DictReader(f))
+    assert s["in_band"] and s["n_legs"] == 6, s
+    assert rows and all(float(r["p_model"]) >= 0.65 for r in rows), rows
+    homes = {r["home"] for r in rows}
+    assert "coinflip" not in homes and "almost" not in homes, rows
+    assert 9.0 <= float(rows[0]["slip_total_odds"]) <= 11.0, rows
+
+
 def test_ta_key_name_folds_alias_variants():
     # C12-1: ejaan Understat dan TipsterArea untuk klub yang sama
     # harus bertemu di kunci yang sama.
