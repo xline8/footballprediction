@@ -1018,8 +1018,13 @@ def test_ta_picks_ranked_by_shrunk_probability():
 
 
 def test_refresh_returns_per_league_source():
-    # A12-2: pemanggil harus bisa membedakan konten segar dari
-    # fallback disk — main() mengembalikan {div: sumber}.
+    # A12-2 + rantai sumber 2026-11-02: pemanggil harus bisa
+    # membedakan konten segar dari fallback disk — main()
+    # mengembalikan {div: sumber}. Rantai sekarang: TipsterArea ->
+    # Understat -> disk, jadi E0 segar dari TA, SP1 segar dari
+    # Understat (TA stub gagal), sisanya fallback disk. Semantik
+    # A12-2 tidak berubah: hanya string sumber segar yang bertambah
+    # satu ("tipsterarea.com").
     import tempfile
 
     import refresh_fixtures as rf
@@ -1033,21 +1038,276 @@ def test_refresh_returns_per_league_source():
                       "w", encoding="utf-8") as f:
                 f.write("[]")
 
-        def fake_fetch(slug):
+        def fake_ta(slug, old, all_entries):
             if slug == "EPL":
+                return ([{"datetime": "2099-01-01 20:00:00",
+                          "h": {"title": "A"}, "a": {"title": "B"}}], [])
+            raise RuntimeError("TA mati (stub tes)")
+
+        def fake_fetch(slug):
+            if slug == "La_liga":
                 return [{"datetime": "2099-01-01 20:00:00",
                          "h": {"title": "A"}, "a": {"title": "B"}}]
             raise RuntimeError("sumber mati (stub tes)")
 
-        old_xg, old_fetch = rf.XG, rf.fetch
-        rf.XG, rf.fetch = td, fake_fetch
+        old_xg, old_fetch, old_ta = rf.XG, rf.fetch, rf.fetch_tipsterarea
+        rf.XG, rf.fetch, rf.fetch_tipsterarea = td, fake_fetch, fake_ta
         try:
             srcs = rf.main()
         finally:
-            rf.XG, rf.fetch = old_xg, old_fetch
-    assert srcs["E0"] == "understat.com", srcs
-    for div in ("SP1", "D1", "I1", "F1"):
+            rf.XG, rf.fetch, rf.fetch_tipsterarea = old_xg, old_fetch, old_ta
+    assert srcs["E0"] == "tipsterarea.com", srcs
+    assert srcs["SP1"] == "understat.com", srcs
+    for div in ("D1", "I1", "F1"):
         assert srcs[div].startswith("fallback disk"), srcs
+    assert "TA mati" in srcs["I1"] and "sumber mati" in srcs["I1"], srcs
+
+
+_TA_SAMPLE_HTML = """
+<span class="league-name"><span>Italy - Serie A</span></span>
+<a class="game" href="/match/atalanta-parma-serie-a-italy-999001" id="g_999001">
+  <span class="time notime">19:45</span>
+  <span class="teams">
+    <span class="home"><span>Atalanta</span></span>
+    <span class="away"><span>Parma</span></span>
+  </span>
+  <span class="odds"><span class="o1">1.50</span><span class="oX">4.00</span><span class="o2">6.00</span></span>
+</a>
+<a class="game" href="/match/inter-monza-serie-a-italy-999002" id="g_999002">
+  <span class="time notime started">18:00</span>
+  <span class="status play">FT</span>
+  <span class="teams">
+    <span class="home"><span>Inter</span></span>
+    <span class="score scsm play">2 - 0</span>
+    <span class="away"><span>Monza</span></span>
+  </span>
+</a>
+<span class="league-name"><span>Italy - Serie B</span></span>
+<a class="game" href="/match/modena-bari-serie-b-italy-999003" id="g_999003">
+  <span class="time notime">20:30</span>
+  <span class="teams">
+    <span class="home"><span>Modena</span></span>
+    <span class="away"><span>Bari</span></span>
+  </span>
+</a>
+"""
+
+
+def _fixture_entry(dt, home, away, hid="1", is_result=False):
+    return {"id": hid, "isResult": is_result,
+            "h": {"id": "1", "title": home, "short_title": "H"},
+            "a": {"id": "2", "title": away, "short_title": "A"},
+            "goals": {"h": None, "a": None}, "xG": {"h": None, "a": None},
+            "datetime": dt}
+
+
+def test_ta_entries_from_sample_date_page():
+    # Parser halaman tanggal TA -> entri fixture: hanya laga NS liga
+    # yang benar; laga FT dan liga lain gugur; template file lama
+    # dipertahankan (id sama), datetime+numbers diganti dari TA.
+    # "Parma" (TA) harus ketemu "Parma Calcio 1913" (title file).
+    from datetime import date
+
+    import refresh_fixtures as rf
+    import ta_scrape
+
+    games = ta_scrape.parse_date_page(_TA_SAMPLE_HTML, "2026-11-02")
+    old = [_fixture_entry("2026-11-01 14:00:00", "Atalanta",
+                          "Parma Calcio 1913", hid="31651"),
+           _fixture_entry("2026-08-22 16:30:00", "Inter", "Monza",
+                          hid="31560", is_result=True)]
+    old_games = rf._ta_window_games
+    rf._PAGE_CACHE.clear()
+    rf._ta_window_games = lambda today: ({"2026-11-02": games},
+                                         date(2026, 11, 2))
+    try:
+        entries, unmapped, horizon = rf._ta_entries(
+            "Serie_A", old, old, date(2026, 11, 2))
+    finally:
+        rf._ta_window_games = old_games
+        rf._PAGE_CACHE.clear()
+    assert horizon == date(2026, 11, 2), horizon
+    assert unmapped == [], unmapped
+    assert len(entries) == 1, entries
+    e = entries[0]
+    assert e["id"] == "31651", e
+    assert e["datetime"] == "2026-11-02 19:45:00", e
+    assert e["h"]["title"] == "Atalanta"
+    assert e["a"]["title"] == "Parma Calcio 1913"
+    assert e["isResult"] is False
+    assert e["numbers"]["hours"] == "02" and e["numbers"]["day"] == 3, e
+
+
+def test_merge_fixtures_window_rules():
+    # Aturan jendela merge: TA menang untuk pasangan yang sama
+    # (termasuk koreksi laga yang di file lama bertanggal SEBELUM
+    # jendela), entri dalam jendela tanpa konfirmasi TA dibuang,
+    # masa lalu + luar jendela dipertahankan.
+    from datetime import date
+
+    import refresh_fixtures as rf
+
+    old = [
+        _fixture_entry("2026-10-20 20:00:00", "Past", "Played",
+                       hid="p1", is_result=True),
+        _fixture_entry("2026-11-03 20:00:00", "Conf", "Irmed", hid="c1"),
+        _fixture_entry("2026-11-04 20:00:00", "Uncon", "Firmed", hid="u1"),
+        _fixture_entry("2026-12-01 20:00:00", "Far", "Future", hid="f1"),
+        _fixture_entry("2026-11-01 14:00:00", "Atalanta",
+                       "Parma Calcio 1913", hid="31651"),
+    ]
+    ta = [
+        _fixture_entry("2026-11-03 20:00:00", "Conf", "Irmed", hid="c1"),
+        _fixture_entry("2026-11-02 19:45:00", "Atalanta",
+                       "Parma Calcio 1913", hid="31651"),
+    ]
+    ta[0]["numbers"] = {"marker": "dari-ta"}
+    merged, dropped = rf.merge_fixtures(old, ta, date(2026, 11, 2))
+    keys = {(e["datetime"], e["h"]["title"], e["a"]["title"])
+            for e in merged}
+    assert keys == {
+        ("2026-10-20 20:00:00", "Past", "Played"),
+        ("2026-11-03 20:00:00", "Conf", "Irmed"),
+        ("2026-12-01 20:00:00", "Far", "Future"),
+        ("2026-11-02 19:45:00", "Atalanta", "Parma Calcio 1913"),
+    }, keys
+    assert dropped == 1, dropped  # hanya Uncon-Firmed yang dibuang
+    conf = [e for e in merged if e["h"]["title"] == "Conf"][0]
+    assert conf.get("numbers") == {"marker": "dari-ta"}, conf
+    pairs = [(e["h"]["title"], e["a"]["title"]) for e in merged]
+    assert len(pairs) == len(set(pairs)), pairs  # tak ada duplikat
+
+
+def test_ta_unmapped_names_and_pairs_are_skipped():
+    # Tim tak dikenal dan pasangan yang tak ada templatenya harus
+    # dilewati + dilaporkan, tidak ditebak masuk file.
+    from datetime import date
+
+    import refresh_fixtures as rf
+
+    def game(home, away, league="Italy - Serie A", time_="20:00"):
+        return {"game_id": "1", "date": "2026-11-02", "time": time_,
+                "league": league, "country": "Italy", "home": home,
+                "away": away, "status": "NS", "status_raw": "",
+                "score_h": "", "score_a": "", "o1": "", "ox": "",
+                "o2": "", "url": "u"}
+
+    old = [_fixture_entry("2026-11-01 14:00:00", "Atalanta",
+                          "Parma Calcio 1913", hid="31651"),
+           _fixture_entry("2026-08-22 16:30:00", "Inter", "Monza",
+                          hid="31560", is_result=True)]
+    games = [game("atalanta", "tim fiktif"),      # nama tak terpetakan
+             game("atalanta", "inter milan")]     # pasangan tak ada
+    old_games = rf._ta_window_games
+    rf._PAGE_CACHE.clear()
+    rf._ta_window_games = lambda today: ({"2026-11-02": games},
+                                         date(2026, 11, 2))
+    try:
+        entries, unmapped, _hz = rf._ta_entries("Serie_A", old, old,
+                                                date(2026, 11, 2))
+    finally:
+        rf._ta_window_games = old_games
+        rf._PAGE_CACHE.clear()
+    assert entries == [], entries
+    assert len(unmapped) == 2, unmapped
+    assert any("nama tak terpetakan" in u for u in unmapped), unmapped
+    assert any("pasangan tak ada" in u for u in unmapped), unmapped
+
+
+def test_ta_empty_window_fails_when_old_has_window_entries():
+    # Halaman TA kosong untuk satu liga tidak boleh menghapus jadwal
+    # liga itu: fetch_tipsterarea harus raise (rantai jatuh ke
+    # Understat/disk). Bila file lama memang tak punya entri
+    # jendela, hasil kosong sah.
+    from datetime import date
+
+    import refresh_fixtures as rf
+
+    old = [_fixture_entry("2026-11-03 20:00:00", "Atalanta",
+                          "Parma Calcio 1913", hid="31651")]
+    old_games = rf._ta_window_games
+    rf._PAGE_CACHE.clear()
+    rf._ta_window_games = lambda today: (
+        {"2026-11-02": [], "2026-11-03": []}, date(2026, 11, 3))
+    try:
+        try:
+            rf.fetch_tipsterarea("Serie_A", old, old, date(2026, 11, 2))
+        except RuntimeError:
+            pass
+        else:
+            raise AssertionError("harus raise bila TA kosong & "
+                                 "file lama punya entri jendela")
+        merged, unmapped = rf.fetch_tipsterarea(
+            "Serie_A", [], [], date(2026, 11, 2))
+        assert merged == [] and unmapped == []
+    finally:
+        rf._ta_window_games = old_games
+        rf._PAGE_CACHE.clear()
+
+
+def test_ta_window_stops_at_stub_horizon():
+    # Halaman stub (200 tanpa blok laga) = tanggal di luar horizon
+    # terbit TA: jendela efektif berhenti di hari sebelumnya, BUKAN
+    # kegagalan. Stub di hari ini = kegagalan; error jaringan =
+    # kegagalan. (Kejadian nyata 2026-11-02: TA baru menerbitkan
+    # s/d +3 hari; halaman +4/+5 stub 4,9 KB.)
+    from datetime import date
+
+    import refresh_fixtures as rf
+    import ta_scrape
+
+    stub = "<html><body>belum terbit</body></html>"
+    pages = {"02-11-2026": _TA_SAMPLE_HTML, "03-11-2026": _TA_SAMPLE_HTML,
+             "04-11-2026": stub}
+    old_fetch = ta_scrape.fetch
+    rf._PAGE_CACHE.clear()
+    try:
+        ta_scrape.fetch = lambda url, cache_name=None: (
+            pages[url.rsplit("date-", 1)[-1]], False)
+        games, horizon = rf._ta_window_games(date(2026, 11, 2))
+        assert horizon == date(2026, 11, 3), horizon
+        assert sorted(games) == ["2026-11-02", "2026-11-03"], games
+
+        ta_scrape.fetch = lambda url, cache_name=None: (stub, False)
+        rf._PAGE_CACHE.clear()
+        try:
+            rf._ta_window_games(date(2026, 11, 2))
+        except RuntimeError:
+            pass
+        else:
+            raise AssertionError("stub di hari ini harus raise")
+
+        def boom(url, cache_name=None):
+            raise RuntimeError("jaringan mati (stub tes)")
+
+        ta_scrape.fetch = boom
+        rf._PAGE_CACHE.clear()
+        try:
+            rf._ta_window_games(date(2026, 11, 2))
+        except RuntimeError:
+            pass
+        else:
+            raise AssertionError("kegagalan jaringan harus raise")
+    finally:
+        ta_scrape.fetch = old_fetch
+        rf._PAGE_CACHE.clear()
+
+
+def test_numbers_for_matches_real_fixture_entries():
+    # Blok numbers diturunkan dari tiga entri nyata file fixture
+    # (WIB = UTC+7 untuk komponen jam dinding, dateTime tetap UTC).
+    import refresh_fixtures as rf
+
+    n = rf._numbers_for("2026-11-02 20:00:00")  # Newcastle v Everton
+    assert n == {"dateTime": "2026-11-02T20:00:00.000Z", "year": 2026,
+                 "month": 11, "week": 45, "day": 3, "hours": "03",
+                 "minutes": "00"}, n
+    n = rf._numbers_for("2026-11-01 14:00:00")  # Atalanta v Parma (lama)
+    assert (n["week"], n["day"], n["hours"], n["minutes"]) == \
+        (44, 1, "21", "00"), n
+    n = rf._numbers_for("2026-10-31 19:45:00")  # Lorient v Brest (lama)
+    assert (n["month"], n["week"], n["day"], n["hours"], n["minutes"]) == \
+        (11, 44, 1, "02", "45"), n
 
 
 def test_save_date_page_persists_status_raw():

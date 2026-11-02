@@ -103,7 +103,8 @@ def main():
             print(f"[1/16] fixtures: segar ({age:.1f} jam), refresh dilewati")
         else:
             print(f"[1/16] fixtures: umur {age:.1f} jam > "
-                  f"{FIXTURE_FRESH_H:.0f} jam — refresh dari Understat")
+                  f"{FIXTURE_FRESH_H:.0f} jam — refresh jadwal "
+                  f"(TipsterArea/Understat)")
             import refresh_fixtures
             srcs = refresh_fixtures.main() or {}
             age = _fixtures_age_h()
@@ -120,7 +121,7 @@ def main():
                 failed = True
                 print(f"[1/16] FAILED fixtures: liga {', '.join(fb)} "
                       f"disegarkan dari fallback disk (konten beku), "
-                      f"bukan dari Understat — run ditandai gagal, "
+                      f"bukan dari sumber segar — run ditandai gagal, "
                       f"prediksi lanjut di jadwal terakhir")
         if age > FIXTURE_MAX_STALE_H:
             fixtures_ok = False
