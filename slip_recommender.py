@@ -1,18 +1,22 @@
 #!/usr/bin/env python3
 """slip_recommender.py — rekomendasi harian deterministik dari odds 1xBet nyata.
 
-Tiga produk, semua di-scope ke TANGGAL LAPORAN (keputusan user 2026-10-29;
-perilaku lama yang mencari di seluruh jendela +4 hari dicabut):
+Tiga produk. Single/slip2 berjangkar ke HARI PERTANDINGAN laporan:
+tanggal laporan itu sendiri bila ada kandidatnya, bila tidak tanggal
+kandidat terdekat sesudahnya (keputusan user 2026-11-03 — setiap
+laporan wajib membawa rekomendasi; ini mencabut kunci tanggal laporan
+2026-10-29 untuk kedua produk itu). Slip10 boleh memperluas pool
+hari demi hari seperti sebelumnya:
 
-  1. recommended_single.csv — single bet: leg tanggal itu dengan EV
+  1. recommended_single.csv — single bet: leg di hari jangkar dengan EV
      tertinggi (p_model * o_1xbet - 1) di antara yang lolos lantai
      p_model >= 0.45 dan o_1xbet >= 1.40; tie-break probabilitas, lalu odds.
      Bila tak ada yang lolos, lantai longgar (0.40 / 1.30) dipakai dan baris
      ditandai below_floor=true.
-  2. recommended_slip.csv — slip odds ±2: 2-4 leg dari tanggal itu,
+  2. recommended_slip.csv — slip odds ±2: 2-4 leg dari hari jangkar,
      p_model >= 0.50, o_1xbet >= 1.20, total odds di band 1.85-2.15, joint
      probability tertinggi (tie-break total EV). Tanpa in-band: kombinasi
-     tanggal itu yang totalnya terdekat ke 2.0, in_band=false.
+     hari jangkar yang totalnya terdekat ke 2.0, in_band=false.
   3. recommended_slip10.csv — slip odds ±10: 3-6 leg, p_model >= 0.35,
      o_1xbet >= 1.30, total odds di band 9.0-11.0, joint tertinggi. Pool
      mulai dari tanggal laporan; bila band tak tercapai, pool diperluas
@@ -434,14 +438,24 @@ def _write_slip(path, cols, best, in_band, extra=None):
     return rows
 
 
+def _anchor_day(day, cands):
+    """Hari pertandingan jangkar untuk produk tanggal-tunggal:
+    `day` bila ada kandidat di tanggal itu; bila tidak, tanggal
+    kandidat terdekat sesudahnya; None bila tak ada kandidat >= day."""
+    dates = sorted({c["date"] for c in cands if c["date"] >= day})
+    return dates[0] if dates else None
+
+
 def recommend_single(day):
-    """Produk 1: single bet tanggal `day` (ISO). Return ringkasan dict."""
-    pool = [c for c in _candidates(SINGLE_MIN_PM, SINGLE_MIN_ODDS)
-            if c["date"] == day]
+    """Produk 1: single bet hari jangkar `day` (ISO). Return ringkasan dict."""
+    strict = _candidates(SINGLE_MIN_PM, SINGLE_MIN_ODDS)
+    anchor = _anchor_day(day, strict)
+    pool = [c for c in strict if c["date"] == anchor] if anchor else []
     below = False
     if not pool:
-        pool = [c for c in _candidates(SINGLE_LOOSE_PM, SINGLE_LOOSE_ODDS)
-                if c["date"] == day]
+        loose = _candidates(SINGLE_LOOSE_PM, SINGLE_LOOSE_ODDS)
+        anchor = _anchor_day(day, loose)
+        pool = [c for c in loose if c["date"] == anchor] if anchor else []
         below = True
     rows = []
     best = None
@@ -465,15 +479,18 @@ def recommend_single(day):
          "pick": (f"{best['home']} vs {best['away']}: {best['market']} "
                   f"{best['line']} {best['sel']} @{best['o']:.2f}"
                   if best else None),
-         "ev": rows[0]["ev"] if rows else None, "below_floor": below}
-    print(f"single {day}: {s['pick']} EV={s['ev']} "
+         "ev": rows[0]["ev"] if rows else None, "below_floor": below,
+         "anchor_date": anchor}
+    print(f"single {day} (jangkar {anchor}): {s['pick']} EV={s['ev']} "
           f"below_floor={below} -> {OUT_SINGLE}")
     return s
 
 
 def recommend_slip2(day):
-    """Produk 2: slip odds ±2, hanya laga tanggal `day`."""
-    by = _by_match(_candidates(S2_MIN_PM, S2_MIN_ODDS), {day})
+    """Produk 2: slip odds ±2, hanya laga hari jangkar `day`."""
+    cands = _candidates(S2_MIN_PM, S2_MIN_ODDS)
+    anchor = _anchor_day(day, cands)
+    by = _by_match(cands, {anchor}) if anchor else {}
     stats = {}
     best_in, best_near = _search(by, S2_MIN_LEGS, S2_MAX_LEGS,
                                  S2_LO, S2_HI, S2_TARGET, stats=stats)
@@ -487,9 +504,11 @@ def recommend_slip2(day):
          "total_odds": round(best[0], 3) if best else None,
          "joint_prob": round(best[1], 4) if best else None,
          "in_band": bool(best and inb),
-         "search_truncated": bool(stats.get("truncated"))}
-    print(f"slip2 {day}: {s['n_legs']} kaki | total={s['total_odds']} "
-          f"joint={s['joint_prob']} in_band={s['in_band']} -> {OUT_SLIP}")
+         "search_truncated": bool(stats.get("truncated")),
+         "anchor_date": anchor}
+    print(f"slip2 {day} (jangkar {anchor}): {s['n_legs']} kaki | "
+          f"total={s['total_odds']} joint={s['joint_prob']} "
+          f"in_band={s['in_band']} -> {OUT_SLIP}")
     return s
 
 

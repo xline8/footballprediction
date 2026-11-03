@@ -1512,6 +1512,84 @@ def test_slip_csv_carries_search_truncated():
     assert rows and rows[0]["search_truncated"] == "true", rows
 
 
+def _slip_fixture(td, day, specs):
+    """Tulis market_compare + prediksi sintetis berisi leg DC 1X.
+
+    specs: list (home, away, p_dc_1x, o_1xbet). Mengembalikan dict
+    path untuk di-monkeypatch ke modul slip_recommender."""
+    import csv
+
+    mc = os.path.join(td, "market_compare.csv")
+    pr = os.path.join(td, "predictions_upcoming.csv")
+    pc = os.path.join(td, "predictions_cups_upcoming.csv")
+    with open(mc, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=["date", "home", "away",
+                                          "competition", "market", "line",
+                                          "selection", "o_1xbet",
+                                          "p_implied", "game_id"])
+        w.writeheader()
+        for home, away, _p, o in specs:
+            w.writerow({"date": day, "home": home, "away": away,
+                        "market": "DC", "selection": "1X",
+                        "o_1xbet": str(o)})
+    with open(pr, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=["date", "home", "away",
+                                          "p_dc_1x"])
+        w.writeheader()
+        for home, away, p, _o in specs:
+            w.writerow({"date": day, "home": home, "away": away,
+                        "p_dc_1x": str(p)})
+    with open(pc, "w", newline="", encoding="utf-8") as f:
+        csv.DictWriter(f, fieldnames=["date", "home", "away",
+                                      "p_dc_1x"]).writeheader()
+    return {"MARKET_COMPARE": mc, "PRED_LEAGUE": pr, "PRED_CUP": pc}
+
+
+def _run_product(sr, fn, day, paths, out_attr):
+    import csv
+    import tempfile
+
+    out = os.path.join(tempfile.mkdtemp(), "out.csv")
+    saved = {k: getattr(sr, k) for k in
+             ("MARKET_COMPARE", "PRED_LEAGUE", "PRED_CUP", out_attr)}
+    for k, v in paths.items():
+        setattr(sr, k, v)
+    setattr(sr, out_attr, out)
+    try:
+        s = fn(day)
+    finally:
+        for k, v in saved.items():
+            setattr(sr, k, v)
+    with open(out, newline="", encoding="utf-8") as f:
+        rows = list(csv.DictReader(f))
+    return s, rows
+
+
+def test_single_slip2_anchor_to_nearest_matchday():
+    # Keputusan user 2026-11-03: setiap laporan wajib membawa
+    # rekomendasi. Bila tanggal laporan tak punya laga, single dan
+    # slip2 berjangkar ke tanggal kandidat terdekat sesudahnya
+    # (hari pertandingan yang disajikan laporan), bukan kosong.
+    import tempfile
+
+    import slip_recommender as sr
+
+    day = "2026-11-01"       # tanggal laporan: tidak ada laga
+    matchday = "2026-11-04"  # hari pertandingan terdekat
+    specs = [(f"team{i}", f"opp{i}", 0.70, 1.45) for i in range(4)]
+    with tempfile.TemporaryDirectory() as td:
+        paths = _slip_fixture(td, matchday, specs)
+        s2, rows2 = _run_product(sr, sr.recommend_slip2, day, paths,
+                                 "OUT_SLIP")
+        s1, rows1 = _run_product(sr, sr.recommend_single, day, paths,
+                                 "OUT_SINGLE")
+    assert s2["anchor_date"] == matchday, s2
+    assert s2["in_band"] and s2["n_legs"] == 2, s2
+    assert rows2 and {r["date"] for r in rows2} == {matchday}, rows2
+    assert s1["anchor_date"] == matchday, s1
+    assert s1["n_legs"] == 1 and rows1[0]["date"] == matchday, (s1, rows1)
+
+
 def test_ta_key_name_folds_alias_variants():
     # C12-1: ejaan Understat dan TipsterArea untuk klub yang sama
     # harus bertemu di kunci yang sama.
