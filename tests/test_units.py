@@ -585,6 +585,7 @@ def _refresh_env(td):
     cc.clean = lambda: {}
     rf = types.ModuleType("refresh_fixtures")
     rf.fetch = lambda slug: [1, 2, 3]
+    rf.fetch_season = lambda slug, out_src=None: [1, 2, 3]
     sys.modules.update({"download": dl, "prepare": pp, "clean": cc,
                         "refresh_fixtures": rf})
 
@@ -1018,13 +1019,13 @@ def test_ta_picks_ranked_by_shrunk_probability():
 
 
 def test_refresh_returns_per_league_source():
-    # A12-2 + rantai sumber 2026-11-02: pemanggil harus bisa
+    # A12-2 + rantai sumber 2026-11-03: pemanggil harus bisa
     # membedakan konten segar dari fallback disk — main()
-    # mengembalikan {div: sumber}. Rantai sekarang: TipsterArea ->
-    # Understat -> disk, jadi E0 segar dari TA, SP1 segar dari
-    # Understat (TA stub gagal), sisanya fallback disk. Semantik
-    # A12-2 tidak berubah: hanya string sumber segar yang bertambah
-    # satu ("tipsterarea.com").
+    # mengembalikan {div: sumber}. Rantai sekarang: FotMob ->
+    # TipsterArea -> Understat -> disk. Stub FotMob mati total di
+    # tes ini, jadi E0 segar dari TA, SP1 segar dari Understat
+    # (TA stub gagal), sisanya fallback disk. Semantik A12-2 tidak
+    # berubah: hanya string sumber segar yang bertambah.
     import tempfile
 
     import refresh_fixtures as rf
@@ -1050,17 +1051,130 @@ def test_refresh_returns_per_league_source():
                          "h": {"title": "A"}, "a": {"title": "B"}}]
             raise RuntimeError("sumber mati (stub tes)")
 
+        def fake_fotmob(slug):
+            raise RuntimeError("FotMob mati (stub tes)")
+
         old_xg, old_fetch, old_ta = rf.XG, rf.fetch, rf.fetch_tipsterarea
+        old_fm = rf.fetch_fotmob
         rf.XG, rf.fetch, rf.fetch_tipsterarea = td, fake_fetch, fake_ta
+        rf.fetch_fotmob = fake_fotmob
         try:
             srcs = rf.main()
         finally:
             rf.XG, rf.fetch, rf.fetch_tipsterarea = old_xg, old_fetch, old_ta
+            rf.fetch_fotmob = old_fm
     assert srcs["E0"] == "tipsterarea.com", srcs
     assert srcs["SP1"] == "understat.com", srcs
     for div in ("D1", "I1", "F1"):
         assert srcs[div].startswith("fallback disk"), srcs
     assert "TA mati" in srcs["I1"] and "sumber mati" in srcs["I1"], srcs
+    assert "FotMob mati" in srcs["I1"], srcs
+
+
+def test_fetch_season_chain_prefers_fotmob():
+    # Rantai musim utk refit: FotMob dulu, Understat cadangan;
+    # label out_src harus menunjuk sumber yang benar-benar sukses.
+    import refresh_fixtures as rf
+
+    rows_fm = [{"datetime": "2099-01-01 20:00:00",
+                "h": {"title": "A"}, "a": {"title": "B"}}]
+    rows_us = [{"datetime": "2099-01-02 20:00:00",
+                "h": {"title": "C"}, "a": {"title": "D"}}]
+    old_fm, old_fetch = rf.fetch_fotmob, rf.fetch
+    try:
+        rf.fetch_fotmob = lambda slug: rows_fm
+        rf.fetch = lambda slug: rows_us
+        tag = [None]
+        assert rf.fetch_season("EPL", out_src=tag) is rows_fm
+        assert tag[0] == "fotmob.com", tag
+
+        def boom(slug):
+            raise RuntimeError("fotmob jatuh")
+
+        rf.fetch_fotmob = boom
+        tag = [None]
+        assert rf.fetch_season("EPL", out_src=tag) is rows_us
+        assert tag[0] == "understat.com", tag
+
+        rf.fetch = boom
+        try:
+            rf.fetch_season("EPL")
+        except RuntimeError as e:
+            assert "fotmob jatuh" in str(e), e  # error pertama diteruskan
+        else:
+            raise AssertionError("kedua sumber mati harus raise")
+    finally:
+        rf.fetch_fotmob, rf.fetch = old_fm, old_fetch
+
+
+def test_fotmob_client_constructs_under_proxy_env():
+    # Regresi bug VM 2026-11-03: httpx.Client polos crash mem-parse
+    # no_proxy (entri IPv6 berkurung -> Invalid port ':1]') sehingga
+    # fetch FotMob mati sebelum request apa pun. _make_client wajib
+    # lolos konstruksi di env seperti itu (proxy eksplisit stealth).
+    import fotmob_fixtures
+
+    keys = ("NO_PROXY", "no_proxy", "HTTPS_PROXY", "HTTP_PROXY")
+    saved = {k: os.environ.get(k) for k in keys}
+    os.environ["NO_PROXY"] = "localhost,[::1],[fd8b:4f84:7d32:99::1]"
+    os.environ["no_proxy"] = os.environ["NO_PROXY"]
+    os.environ["HTTPS_PROXY"] = "http://127.0.0.1:9"
+    os.environ["HTTP_PROXY"] = "http://127.0.0.1:9"
+    try:
+        client = fotmob_fixtures._make_client(5)
+        assert client is not None
+        client.close()
+    finally:
+        for k, v in saved.items():
+            if v is None:
+                os.environ.pop(k, None)
+            else:
+                os.environ[k] = v
+
+
+def test_main_fotmob_path_writes_season_dumps():
+    # Jalur FotMob di main(): selain file fixtures, dump musim
+    # {slug}_2026.json + {slug}_2026_all.json (stok refit) wajib ikut
+    # ditulis dari baris musim yang sama.
+    import json
+    import tempfile
+
+    import refresh_fixtures as rf
+
+    season = [{"datetime": "2099-01-01 20:00:00", "isResult": False,
+               "h": {"title": "A"}, "a": {"title": "B"},
+               "goals": {"h": None, "a": None},
+               "xG": {"h": None, "a": None}}]
+    with tempfile.TemporaryDirectory() as td:
+        for slug in rf.LEAGUES:
+            for suffix in ("_2026_fixtures.json", "_2026_all.json"):
+                with open(os.path.join(td, f"{slug}{suffix}"),
+                          "w", encoding="utf-8") as f:
+                    f.write("[]")
+        old_xg, old_fm = rf.XG, rf.fetch_fotmob
+        old_ta, old_fetch = rf.fetch_tipsterarea, rf.fetch
+        rf.XG, rf.fetch_fotmob = td, lambda slug: list(season)
+
+        def boom_ta(slug, old, all_entries):
+            raise RuntimeError("TA mati (stub tes)")
+
+        def boom_fetch(slug):
+            raise RuntimeError("Understat mati (stub tes)")
+
+        rf.fetch_tipsterarea, rf.fetch = boom_ta, boom_fetch
+        try:
+            srcs = rf.main()
+        finally:
+            rf.XG, rf.fetch_fotmob = old_xg, old_fm
+            rf.fetch_tipsterarea, rf.fetch = old_ta, old_fetch
+        assert all(s == "fotmob.com" for s in srcs.values()), srcs
+        for slug in rf.LEAGUES:
+            for suffix in ("_2026_fixtures.json", "_2026.json",
+                           "_2026_all.json"):
+                with open(os.path.join(td, f"{slug}{suffix}"),
+                          encoding="utf-8") as f:
+                    got = json.load(f)
+                assert got == season, (slug, suffix, got)
 
 
 _TA_SAMPLE_HTML = """

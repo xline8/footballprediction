@@ -327,21 +327,23 @@ class PipelineOrchestrator:
         return out
 
     def _refresh_understat_seasons(self, ts) -> bool:
-        """Segarkan dump musim Understat ({League}_{yr}.json) via getLeagueData
-        (pola sama dgn refresh_fixtures.fetch). Return False bila ada yang gagal."""
-        from refresh_fixtures import fetch
+        """Segarkan dump musim ({League}_{yr}.json) via rantai musim
+        refresh_fixtures.fetch_season (FotMob -> Understat; sejak
+        2026-11-03 sumber utamanya FotMob). Return False bila ada
+        yang gagal."""
+        from refresh_fixtures import fetch_season
         ok = True
         yr = self._xg_year()
         for slug in XG_SLUGS:
             p = os.path.join(paths.XGRAW, f"{slug}_{yr}.json")
             try:
-                fresh = fetch(slug)
+                fresh = fetch_season(slug)
             except Exception as e:
-                log(f"  ! understat {slug} fetch gagal: {e!r}", "WARN")
+                log(f"  ! season {slug} fetch gagal: {e!r}", "WARN")
                 ok = False
                 continue
             if not fresh:
-                log(f"  ! understat {slug} kosong", "WARN")
+                log(f"  ! season {slug} kosong", "WARN")
                 ok = False
                 continue
             if os.path.exists(p):
@@ -350,7 +352,7 @@ class PipelineOrchestrator:
             with open(tmp, "w", encoding="utf-8") as f:
                 json.dump(fresh, f, ensure_ascii=False)
             os.replace(tmp, p)
-            log(f"  OK understat {slug}: {len(fresh)} matches -> "
+            log(f"  OK season {slug}: {len(fresh)} matches -> "
                 f"{os.path.basename(p)}", "INFO")
         return ok
 

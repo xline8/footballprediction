@@ -1,7 +1,14 @@
 # -*- coding: utf-8 -*-
 """refresh_fixtures.py — segarkan jadwal liga (INPUT DATA SAJA).
 
-Rantai sumber per liga (sejak 2026-11-02; sebelumnya Understat saja):
+Rantai sumber per liga (sejak 2026-11-03; TA masuk 2026-11-02,
+sebelumnya Understat saja):
+0. FotMob (fotmob_fixtures.fetch) — dump musim UTUH (hasil + jadwal
+   semusim + xG per laga dari shotmap), skema identik dump Understat
+   sehingga semua konsumen bekerja tanpa perubahan. Bila sukses,
+   ketiga file dump ditulis ({slug}_2026_fixtures.json,
+   {slug}_2026.json, {slug}_2026_all.json) — satu-satunya sumber yang
+   juga menyegarkan stok hasil/xG untuk refit sejak Understat mati.
 1. TipsterArea — halaman tanggal /matches/date-DD-MM-YYYY untuk jendela
    hari ini s/d +5 hari (UTC; jam TA terbukti UTC). TA hanya menerbitkan
    jadwal beberapa hari ke depan (halaman di luar horizon terbit berupa
@@ -63,6 +70,36 @@ TA_LEAGUES = {
     "F1": "France - Ligue 1",
 }
 WINDOW_DAYS = 5  # jendela otoritas TA: hari ini s/d +5 (UTC)
+
+
+def fetch_fotmob(slug):
+    """Dump musim utuh dari FotMob (fotmob_fixtures.fetch).
+
+    Mengembalikan list laga skema Understat musim berjalan yang sudah
+    digabung ke dump lama (baris lama dipertahankan identik bila tak
+    ada informasi baru; laga selesai diperbarui dgn hasil + xG FotMob).
+    """
+    import fotmob_fixtures
+
+    return fotmob_fixtures.fetch(slug)
+
+
+def fetch_season(slug, out_src=None):
+    """Rantai dump musim utuh untuk pipeline_orchestrator (refit):
+    FotMob -> Understat. TA bukan sumber musim (jadwal saja, tanpa
+    hasil/xG) jadi tidak masuk rantai ini. out_src (list 1 elemen)
+    diisi nama sumber yang sukses bila diberikan."""
+    first = None
+    for name, fn in (("fotmob.com", fetch_fotmob),
+                     ("understat.com", fetch)):
+        try:
+            data = fn(slug)
+            if out_src is not None:
+                out_src[0] = name
+            return data
+        except Exception as e:  # noqa: BLE001
+            first = first or e
+    raise first
 
 
 def fetch(slug):
@@ -330,8 +367,8 @@ def fetch_tipsterarea(slug, old, all_entries, today=None):
 def main():
     """Segarkan semua liga; kembalikan {div: sumber} per liga.
 
-    Sumber "tipsterarea.com"/"understat.com" berarti konten segar;
-    "fallback disk (...)" berarti kedua sumber gagal dan file ditulis
+    Sumber "fotmob.com"/"tipsterarea.com"/"understat.com" berarti
+    konten segar; "fallback disk (...)" berarti semua sumber gagal dan file ditulis
     ulang dari dump {slug}_2026_all.json di disk — kontennya bisa
     berumur beberapa hari walau mtime file fixture baru. Pemanggil
     yang menilai kesegaran dari mtime saja akan tertipu (audit ronde
@@ -354,16 +391,29 @@ def main():
             with open(allp, encoding="utf-8") as f:
                 all_entries = json.load(f)
         unmapped = []
+        season_fresh = None
         try:
-            fresh, unmapped = fetch_tipsterarea(slug, old, all_entries)
-            src = "tipsterarea.com"
-        except Exception as ta_e:  # noqa: BLE001
+            fresh = fetch_fotmob(slug)
+            season_fresh = fresh
+            src = "fotmob.com"
+            import fotmob_fixtures
+            fails = (fotmob_fixtures.LAST_SOURCES.get("_fails")
+                     or {}).get(div)
+            if fails:
+                unmapped = [f"nama FotMob tak terpetakan: {f}"
+                            for f in fails]
+        except Exception as fm_e:  # noqa: BLE001
             try:
-                fresh = fetch(slug)
-                src = "understat.com"
-            except Exception as us_e:  # noqa: BLE001
-                fresh = all_entries if all_entries else old
-                src = f"fallback disk (TA: {ta_e}; Understat: {us_e})"
+                fresh, unmapped = fetch_tipsterarea(slug, old, all_entries)
+                src = "tipsterarea.com"
+            except Exception as ta_e:  # noqa: BLE001
+                try:
+                    fresh = fetch(slug)
+                    src = "understat.com"
+                except Exception as us_e:  # noqa: BLE001
+                    fresh = all_entries if all_entries else old
+                    src = (f"fallback disk (FotMob: {fm_e}; TA: {ta_e}; "
+                           f"Understat: {us_e})")
         LAST_UNMAPPED[div] = unmapped
         old_ids = {dkey(d) for d in old}
         new_ids = {dkey(d) for d in fresh}
@@ -387,6 +437,16 @@ def main():
         with open(tmp, "w", encoding="utf-8") as f:
             json.dump(fresh, f, ensure_ascii=False)
         os.replace(tmp, path)
+        if season_fresh is not None:
+            # Sumber musim utuh (FotMob): segarkan juga dump musim yang
+            # dibaca jalur refit ({slug}_2026.json + {slug}_2026_all.json)
+            # dari baris yang sama, supaya stok hasil/xG ikut maju.
+            for sname in (f"{slug}_2026.json", f"{slug}_2026_all.json"):
+                spath = os.path.join(XG, sname)
+                stmp = spath + ".tmp"
+                with open(stmp, "w", encoding="utf-8") as f:
+                    json.dump(season_fresh, f, ensure_ascii=False)
+                os.replace(stmp, spath)
         total_add += [(div,) + d for d in add_fut]
         total_del += [(div,) + d for d in drop_fut]
         sources[div] = src
@@ -394,7 +454,7 @@ def main():
         print(f"[{div:>3}] {src}: {len(old)}->" f"{len(fresh)} rows | baru>=H: {len(add_fut)} "
               f"| hilang>=H: {len(drop_fut)} | backup: {os.path.basename(bpath)}")
         for u in unmapped[:10]:
-            print(f"      dilewati (TA): {u}")
+            print(f"      dilewati: {u}")
         if len(unmapped) > 10:
             print(f"      ... dan {len(unmapped) - 10} laga TA lain dilewati")
     print(f"TOTAL fixture >= {TODAY}: +{len(total_add)} / -{len(total_del)}")
@@ -413,5 +473,5 @@ if __name__ == "__main__":
         # in-process membaca peta sumbernya langsung.
         print("PERINGATAN: sebagian liga disegarkan dari fallback "
               "disk (konten beku), bukan dari sumber segar "
-              "(TipsterArea/Understat)")
+              "(FotMob/TipsterArea/Understat)")
         raise SystemExit(1)
