@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
-"""refresh_fixtures.py — segarkan jadwal dari Understat (INPUT DATA SAJA).
+"""refresh_fixtures.py — segarkan jadwal (INPUT DATA SAJA).
 
-Kontrak:
-- Ambil halaman liga Understat (5 liga model), ekstrak `datesData` (JSON di <script>).
-- Tulis ulang xg_raw/{slug}_2026_fixtures.json dgn dump utuh (pipeline sendiri
-  memfilter tanggal >= TODAY). MODEL, config, hasil (xG) TIDAK disentuh.
+Sekarang: sumber utama FotMob (fotmob_fixtures.fetch — pengganti
+Understat yang sejak 31 Okt 2026 balasan 403 challenge); Understat
+masuk sebagai fallback bila kelak pulih. Hubungannya dengan disk:
+- Tulis xg_raw/{slug}_2026_fixtures.json, {slug}_2026.json,
+  {slug}_2026_all.json dgn dump musim utuh (pipeline sendiri memfilter
+  tanggal >= TODAY). MODEL, config, hasil (xG) TIDAK disentuh.
 - Backup lampau ditaruh di xg_raw/backup_fixtures/.
-- Bila fetch gagal: fallback ke {slug}_2026_all.json yang ada di disk (tercatat di laporan),
-  supaya pipeline tetap berjalan deterministik.
+- Bila fetch gagal: fallback ke {slug}_2026_all.json yang ada di disk
+  (tercatat di laporan), supaya pipeline tetap berjalan deterministik.
 Output: laporan diff per liga (baris baru/hilang di >= hari ini).
 """
 import gzip
@@ -27,9 +29,31 @@ LEAGUES = {
 TODAY = datetime.now().date().isoformat()
 
 
-def fetch(slug):
-    """Ambil datesData langsung dari API internal Understat (ditemukan 17 Okt:
-    halaman HTML jadi shell tanpa data, tapi endpoint getLeagueData terbuka)."""
+def fetch(slug, out_src=None):
+    """Ambil dump musim utuh utk slug (list laga schema Understat).
+
+    Urutan sumber: FotMob (fotmob_fixtures.fetch) -> Understat
+    getLeagueData (ditemukan 17 Okt; sejak 31 Okt balasan 403 —
+    dicoba lagi bila fotmob juga gagal, tergantung laporan main()).
+    Bila out_src (list 1 elemen) diberikan, diisi nama sumber yang
+    sukses ('fotmob.com'/'understat.com') supaya main() tidak salah
+    label kesegaran."""
+    import fotmob_fixtures
+
+    first = None
+    for name, fn in (("fotmob.com", fotmob_fixtures.fetch),
+                     ("understat.com", _understat_fetch)):
+        try:
+            data = fn(slug)
+            if out_src is not None:
+                out_src[0] = name
+            return data
+        except Exception as e:  # noqa: BLE001
+            first = first or e
+    raise first
+
+
+def _understat_fetch(slug):
     url = f"https://understat.com/getLeagueData/{slug}/2026"
     raw, _ = urlopen_with_retry(
         url, tries=3, timeout=45,
@@ -61,8 +85,8 @@ LAST_SOURCES = {}
 def main():
     """Segarkan semua liga; kembalikan {div: sumber} per liga.
 
-    Sumber "understat.com" berarti konten segar; "fallback disk (...)"
-    berarti fetch gagal dan file ditulis ulang dari dump
+    Sumber "fotmob.com"/"understat.com" berarti konten segar; "fallback
+    disk (...)" berarti fetch gagal dan file ditulis ulang dari dump
     {slug}_2026_all.json di disk — kontennya bisa berumur beberapa
     hari walau mtime file fixture baru. Pemanggil yang menilai
     kesegaran dari mtime saja akan tertipu (audit ronde 12, A12-2),
@@ -77,14 +101,18 @@ def main():
         path = os.path.join(XG, f"{slug}_2026_fixtures.json")
         with open(path, encoding="utf-8") as f:
             old = json.load(f)
-        src = "understat.com"
+        src = None
+        tag = [None]
         try:
-            fresh = fetch(slug)
+            fresh = fetch(slug, out_src=tag)
+            src = tag[0]
         except Exception as e:  # noqa: BLE001
             allp = os.path.join(XG, f"{slug}_2026_all.json")
             with open(allp, encoding="utf-8") as f:
                 fresh = json.load(f)
             src = f"fallback disk ({e})"
+        if not src:  # jaga-jaga: fetch lama tak mengisi tag
+            src = "understat.com"
         old_ids = {dkey(d) for d in old}
         new_ids = {dkey(d) for d in fresh}
         add = sorted(new_ids - old_ids)

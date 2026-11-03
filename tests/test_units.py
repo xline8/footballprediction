@@ -1033,8 +1033,10 @@ def test_refresh_returns_per_league_source():
                       "w", encoding="utf-8") as f:
                 f.write("[]")
 
-        def fake_fetch(slug):
+        def fake_fetch(slug, out_src=None):
             if slug == "EPL":
+                if out_src is not None:
+                    out_src[0] = "understat.com"
                 return [{"datetime": "2099-01-01 20:00:00",
                          "h": {"title": "A"}, "a": {"title": "B"}}]
             raise RuntimeError("sumber mati (stub tes)")
@@ -1048,6 +1050,37 @@ def test_refresh_returns_per_league_source():
     assert srcs["E0"] == "understat.com", srcs
     for div in ("SP1", "D1", "I1", "F1"):
         assert srcs[div].startswith("fallback disk"), srcs
+
+
+def test_refresh_source_tag_follows_actual_chain():
+    # Saat chain FotMob->Understat dipakai, label sumber harus
+    # mengikuti sumber yang benar-benar sukses (bukan selalu
+    # 'understat.com').
+    import tempfile
+
+    import refresh_fixtures as rf
+
+    with tempfile.TemporaryDirectory() as td:
+        for slug in rf.LEAGUES:
+            with open(os.path.join(td, f"{slug}_2026_fixtures.json"),
+                      "w", encoding="utf-8") as f:
+                f.write("[]")
+            with open(os.path.join(td, f"{slug}_2026_all.json"),
+                      "w", encoding="utf-8") as f:
+                f.write("[]")
+
+        def fake_fetch(slug, out_src=None):
+            if out_src is not None:
+                out_src[0] = "fotmob.com"
+            return []
+
+        old_xg, old_fetch = rf.XG, rf.fetch
+        rf.XG, rf.fetch = td, fake_fetch
+        try:
+            srcs = rf.main()
+        finally:
+            rf.XG, rf.fetch = old_xg, old_fetch
+    assert all(s == "fotmob.com" for s in srcs.values()), srcs
 
 
 def test_save_date_page_persists_status_raw():
