@@ -21,6 +21,9 @@ venv/
 # Exception: the SofaScore SOT halves dataset is a curated label source
 # (27,911 matches, 1H/2H splits) that cannot be regenerated locally.
 !data_enrichment/sot_sofascore/sofascore_sot_dataset.csv
+# Exception: cup FT actuals extracted from the FotMob store (117 rows,
+# grading-ready; the store JSONs themselves stay ignored).
+!data_enrichment/cup_actuals.csv
 # Exceptions: the combined SOT halves dataset and the FotMob fill outputs
 # (labels + remaining-gaps targeting list) — curated data, see
 # data_enrichment/HALVES_COVERAGE.md.

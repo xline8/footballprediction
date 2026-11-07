@@ -1,0 +1,27 @@
+{
+  "matched_in_report": 117,
+  "rows_written": 117,
+  "rows_with_score": 117,
+  "rows_with_corners": 117,
+  "missing_files": 0,
+  "ta_score_mismatches": [
+    {
+      "competition": "DFB Pokal",
+      "date": "2026-08-21",
+      "home": "waldhof mannheim",
+      "away": "kaiserslautern",
+      "fotmob_match_id": "5750700",
+      "ta_score": "0-0",
+      "fotmob_score": "0-1"
+    },
+    {
+      "competition": "DFB Pokal",
+      "date": "2026-08-24",
+      "home": "hallescher",
+      "away": "schalke 04",
+      "fotmob_match_id": "5750694",
+      "ta_score": "2-2",
+      "fotmob_score": "2-5"
+    }
+  ]
+}
