@@ -42,6 +42,10 @@ XG = os.path.join(PROJ, "xg_raw")
 
 NMAP_CACHE = os.path.join(XG, "fotmob_names.json")
 XG_CACHE = os.path.join(XG, "fotmob_xg.json")
+# Arsip lokal respons matchDetails penuh (gitignored; lihat
+# data_enrichment/FOTMOB_FULL_COVERAGE.md). Ditulis sebagai efek
+# samping oleh _fetch_xg — lihat _store_full_response.
+FULL_STORE = os.path.join(PROJ, "data_enrichment", "fotmob_full")
 API = "https://www.fotmob.com/api/data"
 
 # id liga internal FotMob (diverifikasi via api/data/matches, 3 Nov 2026).
@@ -237,7 +241,24 @@ def _shot_xg(md):
     return (f"{xgh:.6f}", f"{xga:.6f}")
 
 
-def _fetch_xg(mid, xg_cache):
+def _store_full_response(mid, md, div, season):
+    """Simpan respons matchDetails mentah ke arsip lokal
+    data_enrichment/fotmob_full/<div>/<musim-dash>/<mid>.json.
+
+    Efek samping MURNI: file yang sudah ada tidak ditimpa, dan
+    pemanggil membungkus fungsi ini agar kegagalannya tidak pernah
+    mengganggu aliran fixtures/xG."""
+    if not div or not season:
+        return
+    dest_dir = os.path.join(FULL_STORE, div, season.replace("/", "-"))
+    dest = os.path.join(dest_dir, f"{mid}.json")
+    if os.path.exists(dest):
+        return
+    os.makedirs(dest_dir, exist_ok=True)
+    _save_json(dest, md)
+
+
+def _fetch_xg(mid, xg_cache, div=None, season=None):
     """(xgh, xga) dari cache dulu, lalu GET matchDetails."""
     k = str(mid)
     if k in xg_cache:
@@ -246,6 +267,10 @@ def _fetch_xg(mid, xg_cache):
         md = _get(f"{API}/matchDetails", params={"matchId": k})
     except Exception:  # noqa: BLE001
         return None
+    try:
+        _store_full_response(k, md, div, season)
+    except Exception as exc:  # noqa: BLE001 — arsip tak boleh mematikan xG
+        print(f"[fotmob_full] simpan respons {k} gagal (diabaikan): {exc!r}")
     vals = _shot_xg(md)
     if vals:
         xg_cache[k] = list(vals)
@@ -449,7 +474,8 @@ def fetch(slug, backfill=False):
             if cached:
                 xg = {"h": cached[0], "a": cached[1]}
             if xg is None and (enriched < XG_MAX_ENRICH_PER_RUN or backfill):
-                vals = _fetch_xg(r["id"], xg_cache)
+                vals = _fetch_xg(r["id"], xg_cache, div=div,
+                                 season=f"{yr4}/{str(yr4 + 1)[-2:]}")
                 if vals:
                     xg = {"h": vals[0], "a": vals[1]}
                 enriched += 1
