@@ -33,9 +33,11 @@ from ta_model import norm, sim
 
 # ----- label pasar di snapshot vs kanonik -----
 MARKET_CANON = {
-    "Standard 1X2": "1X2", "Double Chance": "DC", "Draw No Bet": "DNB",
-    "Over/Under": "OU", "BTS": "BTS", "BTTS": "BTS",
-    "Both Teams To Score": "BTS",
+    "Standard 1X2": "1X2", "1X2": "1X2",
+    "Double Chance": "DC", "DC": "DC",
+    "Draw No Bet": "DNB", "DNB": "DNB",
+    "Over/Under": "OU", "OU": "OU",
+    "BTS": "BTS", "BTTS": "BTS", "Both Teams To Score": "BTS",
 }
 # grid pasar yang dilaporkan: market -> [(line, (pilihan,...))]
 MARKET_GRID = {
@@ -239,6 +241,12 @@ def model_fixture_ids(days, date_from=None):
 
 
 # ---------------------------------------------------------------- snapshots
+def _read_direct_xbet_rows():
+    """Baca snapshot direct 1xBet opsional tanpa mengubah TA snapshots."""
+    path = os.path.join(TA, "odds_1xbet_snapshots.csv")
+    return _read_csv(path)
+
+
 def _prematch_state(game_id):
     """Keadaan pra-laga paling segar per bandar utk game_id.
 
@@ -250,6 +258,8 @@ def _prematch_state(game_id):
     """
     rows = [r for r in _read_csv(os.path.join(TA, "odds_markets_snapshots.csv"))
             if r.get("game_id") == game_id]
+    direct = [r for r in _read_direct_xbet_rows() if r.get("game_id") == game_id]
+    rows.extend(direct)
     if not rows:
         return None, {}
     # Filter pra-kickoff (audit ulang 2026-10-29): docstring fungsi ini

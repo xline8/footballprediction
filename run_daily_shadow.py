@@ -318,6 +318,13 @@ def main():
         mkt_ids = model_fixture_ids(days_mkt)
         r = sync_dates(sorted(set(days_mkt)), with_markets=True,
                        market_ids=mkt_ids or None, verbose=False)
+        try:
+            import xbet_scrape
+            xbet = xbet_scrape.run_configured()
+            print(f"[8/16] direct 1xBet: {xbet.get('status')} "
+                  f"({xbet.get('snapshots', 0)} harga)")
+        except Exception as exc:
+            print(f"[8/16] WARNING direct 1xBet: {exc!r}")
         print(f"[8/16] market odds sync: {len(mkt_ids)} fixture model, "
               f"+{r.get('markets', 0)} harga baru, "
               f"{r.get('unresolved_market_ids') or 0} id pasar tak "

@@ -20,6 +20,7 @@ server = [
     "pydantic==2.14.1",
     "requests==2.34.2",
     "httpx==0.28.1",
+    "esprima==4.0.1",
 ]
 dev = [
     "pytest>=8",

@@ -1323,6 +1323,18 @@ class PipelineOrchestrator:
                                   market_ids=market_ids or None, verbose=False)
             result["markets_snapshots"] = result_m.get("snapshots", 0)
 
+            # Optional direct 1xBet source. It is disabled unless the
+            # operator supplies an explicit manifest and authorized proxies.
+            try:
+                import xbet_scrape
+                xbet = xbet_scrape.run_configured()
+                result["xbet"] = xbet
+                if xbet.get("status") not in {"disabled", "success"}:
+                    log(f"  ! Direct 1xBet: {xbet.get('status')}", "WARN")
+            except Exception as e:
+                result["xbet"] = {"status": "failed", "error": str(e)}
+                log(f"  ! Direct 1xBet gagal: {e}", "WARN")
+
             log(f"  OK Scraped {result.get('games', 0)} games "
                 f"({days[0]}..{days[-1]}), {result.get('snapshots', 0)} snapshots, "
                 f"{result.get('results', 0)} results"

@@ -18,6 +18,8 @@ venv/
 *.jsonl
 *.pkl
 *.joblib
+# SofaScore SOT dataset committed intentionally (training labels)
+!data_enrichment/sot_sofascore/sofascore_sot_dataset.csv
 
 # Timestamped backups created by pipeline refresh (train data / xG dumps)
 *.bak-*
