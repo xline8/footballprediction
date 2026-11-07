@@ -3002,7 +3002,7 @@ def test_shadow_ta_build_rc_failure_marks_run_failed():
     finally:
         restore()
     assert code == 1, code
-    assert "[10/16] FAILED ta_model build" in out, out
+    assert "[11/17] FAILED ta_model build" in out, out
     assert "py:best_picks.py" in calls, calls
 
 
