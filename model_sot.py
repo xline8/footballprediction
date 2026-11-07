@@ -1,29 +1,49 @@
 """Model tembakan ke gawang (shots on target / SOT) untuk fixture mendatang.
 
-Resep RAMPING hasil eksperimen experiments/sot_model (keputusan user
-2026-11-07): model rating dasar + perbaikan 1 (sinyal total tembakan) +
-perbaikan 6 (ensemble 50/50 dengan baseline naif trailing-10). Perbaikan
-2 (xG), 3 (negative binomial), 4 (koreksi per divisi) dan 5 (tuning
-decay/prior) SENGAJA tidak dipakai — ablasi v2 menunjukkan gabungan
-keenamnya (ALL) tidak lebih baik dari resep ramping ini.
+Resep hasil eksperimen experiments/sot_model v5 (keputusan user
+2026-11-07): resep ramping v3 (rating + sinyal total tembakan +
+ensemble naif 50/50) ditambah tiga perbaikan dari proposal eksternal
+yang lolos gerbang adopsi v5:
 
-Verifikasi resep (run_sot_v3.py, walk-forward 2023/24-2025/26, 21.461
+  R  — rating SOT diganti regresi Poisson log-linear GABUNGAN per
+       divisi: log(mu_kandang) = beta_kandang + A[home] + D[away],
+       log(mu_tandang) = beta_tandang + A[away] + D[home], dengan
+       ridge (lambda/2) * sum(A^2 + D^2), lambda = 100 (disetel HANYA
+       dari musim 2022/23). Refit malas per divisi: permintaan prediksi
+       pertama pada/setelah hari refit terjadwal me-refit divisi itu
+       dari laga-laga STRICTLY sebelum tanggal permintaan, bobot
+       sampel decay eksponensial 365 hari; refit berikutnya 7 hari
+       kemudian. Fallback rata-rata liga untuk baseline naif diambil
+       dari exp(beta) regresi ini.
+  BB — rasio on-target komponen total tembakan dihaluskan ala
+       Beta-Binomial: ratio = (S_sot + P * rho) / (S_shots + P),
+       P = 200 tembakan pseudo untuk kedua venue (disetel HANYA dari
+       2022/23), menggantikan prior lama K * mu_shots yang bergantung
+       venue (~104 kandang / ~88 tandang). Target shrink rho (rasio
+       liga ter-decay per venue) tidak berubah.
+  NB — probabilitas garis dihitung dari negative binomial dengan
+       ukuran r = 79.94 (estimasi method-of-moments dari residual
+       walk-forward model ramping musim 2019/20-2022/23), bukan
+       Poisson, untuk kedua total anggota ensemble.
+
+Verifikasi resep (run_sot_v5.py, walk-forward 2023/24-2025/26, 21.461
 laga, garis utama 9.5, log loss pooled — makin kecil makin baik):
-  base 0.6347 | +1 saja 0.6328 | +6 saja 0.6320 | ALL 0.6329 |
-  RAMPING (base+1+6) 0.6312, Brier 0.2201, calib err 0.4pp, MAE 2.45.
+  ramping 0.6312 | +R 0.6307 | +NB 0.6309 | +BB 0.6311 |
+  GABUNGAN (R+NB+BB) 0.6304, Brier 0.2198, calib err 0.2pp, MAE 2.44.
+Gerbang adopsi: gabungan mengalahkan ramping, kalibrasi tidak
+memburuk > 1.5pp, tidak ada divisi top-5 memburuk > 0.003.
 
-Mesin rating (disalin persis dari eksperimen agar angka produksi sama
-dengan yang terverifikasi):
-- Per divisi: rating serang/bertahan SOT per venue (kandang/tandang)
-  dari laju ter-decay eksponensial (half-life 365 hari), di-shrink ke
-  rata-rata liga ter-decay dengan prior K = 8 match-equivalents;
-  exp tim = mu * att * def; total SOT ~ Poisson(exp_home + exp_away).
-- Perbaikan 1: sistem rating kedua untuk TOTAL tembakan (HS/AS) dengan
-  mesin yang sama, plus rasio on-target trailing ter-shrink per tim per
-  venue; exp per tim = 0.5 * exp rating SOT + 0.5 * (exp total tembakan
-  x rasio on-target).
-- Perbaikan 6: probabilitas Over/Lebih final = 0.5 * P model +
-  0.5 * P baseline naif (rata-rata polos 10 laga terakhir per tim).
+Mesin-mesin pendukung (disalin dari eksperimen agar angka produksi
+sama dengan yang terverifikasi):
+- Komponen total tembakan: rating serang/bertahan TOTAL tembakan
+  (HS/AS) per venue dari laju ter-decay eksponensial (half-life 365
+  hari), di-shrink ke rata-rata liga ter-decay dengan prior K = 8
+  match-equivalents; exp tembakan tersirat SOT per tim = exp total
+  tembakan x rasio on-target (BB di atas); exp per tim final =
+  0.5 * exp regresi SOT + 0.5 * exp tersirat tembakan.
+- Ensemble: probabilitas final = 0.5 * P NB total model +
+  0.5 * P NB total baseline naif (rata-rata polos 10 laga terakhir
+  per tim).
 
 Mode:
   python model_sot.py --predict   # prediksi fixture mendatang
@@ -39,6 +59,8 @@ import tempfile
 from collections import defaultdict, deque
 from datetime import date, datetime, timezone
 
+import numpy as np
+
 # Direktori dari paths (sumber kebenaran tunggal), pola yang sama
 # dengan model_corners_v3.py.
 try:
@@ -50,10 +72,15 @@ UPCOMING_OUT = os.path.join(BASE, "predictions_sot_upcoming.csv")
 FIX_MAP = {"E0": "EPL", "SP1": "La_liga", "D1": "Bundesliga",
            "I1": "Serie_A", "F1": "Ligue_1"}
 
-HL = 365.0          # half-life decay rating (hari) — dibekukan dari eksperimen
-K_PRIOR = 8.0       # prior shrinkage (match-equivalents)
+HL = 365.0          # half-life decay (hari) — sistem tembakan + bobot regresi
+K_PRIOR = 8.0       # prior shrinkage sistem tembakan (match-equivalents)
 NAIVE_N = 10        # jendela baseline naif trailing
-ENS_W = 0.5         # bobot model rating dalam ensemble (sisanya naif)
+ENS_W = 0.5         # bobot model dalam ensemble (sisanya naif)
+RIDGE_LAM = 100.0   # ridge regresi gabungan (disetel 2022/23, eksperimen v5)
+BB_PRIOR = 200.0    # prior Beta-Binomial rasio on-target, tembakan pseudo (v5)
+NB_R = 79.94        # ukuran negative binomial (residual 2019/20-2022/23, v5)
+REFIT_DAYS = 7      # kadens refit regresi per divisi (hari tanggal laga)
+ETA_LO, ETA_HI = -6.0, 4.0   # penjaga exp() regresi, sama di fit & prediksi
 LINES = [6.5, 7.5, 8.5, 9.5, 10.5, 11.5]
 
 # fallback divisi tanpa histori statistik (hanya laga-laga pertama)
@@ -91,9 +118,11 @@ def _atomic_text_write(path, writer, newline=""):
 
 
 # ------------------------------------------------------- decayed ratings
-# Tiga kelas berikut disalin dari experiments/sot_model/run_sot_v2.py
+# Kelas Decayed/Ratings disalin dari experiments/sot_model/run_sot_v2.py
 # (yang mereproduksi run_sot_experiment.py) — jangan ubah rumusnya di
-# sini tanpa menjalankan ulang verifikasi eksperimennya.
+# sini tanpa menjalankan ulang verifikasi eksperimennya. Satu-satunya
+# perubahan yang disengaja: on_target_ratio memakai penghalusan
+# Beta-Binomial eksperimen v5 (lihat BB_PRIOR).
 class Decayed:
     __slots__ = ("s", "w", "last", "hl")
 
@@ -122,11 +151,11 @@ class Decayed:
 
 class Ratings:
     """Rating serang/bertahan terpisah venue untuk satu statistik
-    per-laga (SOT atau total tembakan): exp_home = mu_h * att_h(home) *
-    def_a(away) dengan rating = laju ter-shrink / mu dan laju
-    ter-shrink = (s + K*mu) / (w + K). Dengan track_ratio=True juga
-    melacak jumlah SOT ter-decay agar rasio on-target ter-shrink bisa
-    dibentuk (dipakai sistem total tembakan)."""
+    per-laga (di produksi hanya dipakai untuk TOTAL tembakan):
+    exp_home = mu_h * att_h(home) * def_a(away) dengan rating =
+    laju ter-shrink / mu dan laju ter-shrink = (s + K*mu) / (w + K).
+    Dengan track_ratio=True juga melacak jumlah SOT ter-decay agar
+    rasio on-target bisa dibentuk (dipakai sistem total tembakan)."""
 
     def __init__(self, hl, k, stat, track_ratio=False):
         self.hl, self.k, self.stat = hl, k, stat
@@ -178,8 +207,12 @@ class Ratings:
             self.lg_sot_h[div].add(day, sot_h)
             self.lg_sot_a[div].add(day, sot_a)
 
-    def on_target_ratio(self, div, team, venue, day, mu_shots):
-        """Rasio SOT/tembakan trailing ter-shrink tim di satu venue."""
+    def on_target_ratio(self, div, team, venue, day):
+        """Rasio SOT/tembakan trailing tim di satu venue, dihaluskan
+        ala Beta-Binomial (eksperimen v5): (S_sot + P * rho) /
+        (S_shots + P) dengan P = BB_PRIOR tembakan pseudo untuk
+        kedua venue; rho = rasio SOT/tembakan liga ter-decay di
+        venue itu."""
         if venue == "h":
             shots_stat = self.att_h[(div, team)]
             sot_stat = self.sot_h[(div, team)]
@@ -195,8 +228,141 @@ class Ratings:
         rho = lg_sot_s / lg_shot_s if lg_shot_s > 0 else fb_ratio
         s_shots, _ = shots_stat.value_at(day)
         s_sot, _ = sot_stat.value_at(day)
-        prior_shots = self.k * mu_shots
-        return (s_sot + prior_shots * rho) / (s_shots + prior_shots)
+        return (s_sot + BB_PRIOR * rho) / (s_shots + BB_PRIOR)
+
+
+# ------------------------------------------------- joint regression ratings
+# Disalin dari experiments/sot_model/run_sot_v5.py (RegressionStore)
+# dengan lambda tunggal RIDGE_LAM — jangan ubah tanpa verifikasi ulang.
+class RegressionStore:
+    """Rating SOT regresi Poisson log-linear gabungan per divisi.
+
+    Fit untuk refit di hari D: laga-laga divisi dengan day < D, bobot
+    sampel 0.5 ** ((D - day) / HL). Parameter per divisi:
+    theta = [beta_h, beta_a, A_1..A_T, D_1..D_T] atas indeks tim tetap
+    dari seluruh laga divisi di data (hanya pengindeksan — tim tanpa
+    laga sebelum D mempertahankan A = D = 0 lewat ridge). Refit malas:
+    permintaan prediksi pertama pada/setelah hari refit terjadwal
+    me-refit divisi itu dan menjadwalkan refit REFIT_DAYS hari
+    kemudian. Warm start membawa theta antar refit.
+    """
+
+    def __init__(self, matches, lambdas):
+        self.lambdas = list(lambdas)
+        self.divs = {}
+        by_div = {}
+        for m in matches:
+            by_div.setdefault(m["div"], []).append(m)
+        for div, ms in by_div.items():
+            teams = sorted({m["home"] for m in ms}
+                           | {m["away"] for m in ms})
+            tidx = {t: i for i, t in enumerate(teams)}
+            self.divs[div] = {
+                "teams": teams, "tidx": tidx, "T": len(teams),
+                "day": np.array([m["day"] for m in ms], dtype=float),
+                "hi": np.array([tidx[m["home"]] for m in ms]),
+                "ai": np.array([tidx[m["away"]] for m in ms]),
+                "yh": np.array([m["hst"] for m in ms], dtype=float),
+                "ya": np.array([m["ast"] for m in ms], dtype=float),
+                "theta": {}, "next_refit": None,
+            }
+
+    def _fit(self, dst, lam, refit_day):
+        day, hi, ai = dst["day"], dst["hi"], dst["ai"]
+        yh, ya, T = dst["yh"], dst["ya"], dst["T"]
+        cut = int(np.searchsorted(day, refit_day, side="left"))
+        P = 2 + 2 * T
+        theta = dst["theta"].get(lam)
+        if theta is None:
+            theta = np.zeros(P)
+            if cut > 0:
+                wm0 = 0.5 ** ((refit_day - day[:cut]) / HL)
+                theta[0] = math.log(max(np.average(yh[:cut], weights=wm0),
+                                        1e-3))
+                theta[1] = math.log(max(np.average(ya[:cut], weights=wm0),
+                                        1e-3))
+            else:
+                theta[0], theta[1] = math.log(4.5), math.log(3.5)
+            dst["theta"][lam] = theta
+        if cut == 0:
+            return
+        wm = 0.5 ** ((refit_day - day[:cut]) / HL)
+        y = np.concatenate([yh[:cut], ya[:cut]])
+        bcol = np.concatenate([np.zeros(cut, dtype=int),
+                               np.ones(cut, dtype=int)])
+        acol = np.concatenate([hi[:cut], ai[:cut]]) + 2
+        dcol = np.concatenate([ai[:cut], hi[:cut]]) + 2 + T
+        w = np.concatenate([wm, wm])
+        diag = np.arange(P)
+
+        def pll(th):
+            eta = np.clip(th[bcol] + th[acol] + th[dcol], ETA_LO, ETA_HI)
+            return float(np.sum(w * (y * eta - np.exp(eta)))
+                         - 0.5 * lam * np.sum(th[2:] ** 2))
+
+        cur = pll(theta)
+        for _ in range(60):
+            eta = np.clip(theta[bcol] + theta[acol] + theta[dcol],
+                          ETA_LO, ETA_HI)
+            mu = np.exp(eta)
+            r = w * (y - mu)
+            g = np.zeros(P)
+            np.add.at(g, bcol, r)
+            np.add.at(g, acol, r)
+            np.add.at(g, dcol, r)
+            g[2:] -= lam * theta[2:]
+            W = w * mu
+            H = np.zeros((P, P))
+            for cc, dd in ((bcol, bcol), (bcol, acol), (bcol, dcol),
+                           (acol, bcol), (acol, acol), (acol, dcol),
+                           (dcol, bcol), (dcol, acol), (dcol, dcol)):
+                np.add.at(H, (cc, dd), W)
+            H[diag[2:], diag[2:]] += lam
+            H[diag, diag] += 1e-10
+            try:
+                step = np.linalg.solve(H, g)
+            except np.linalg.LinAlgError:
+                break
+            t, improved = 1.0, False
+            for _ in range(25):
+                cand = theta + t * step
+                v = pll(cand)
+                if v >= cur - 1e-12:
+                    theta, cur = cand, v
+                    improved = True
+                    break
+                t *= 0.5
+            if not improved or np.max(np.abs(t * step)) < 1e-6:
+                break
+        dst["theta"][lam] = theta
+
+    def _ensure(self, div, day):
+        dst = self.divs.get(div)
+        if dst is None:
+            return None
+        if dst["next_refit"] is None or day >= dst["next_refit"]:
+            for lam in self.lambdas:
+                self._fit(dst, lam, day)
+            dst["next_refit"] = day + REFIT_DAYS
+        return dst
+
+    def predict(self, div, home, away, day, lam):
+        dst = self._ensure(div, day)
+        th = dst["theta"][lam]
+        T, tidx = dst["T"], dst["tidx"]
+        ih, ia = tidx.get(home), tidx.get(away)
+        a_h = th[2 + ih] if ih is not None else 0.0
+        d_h = th[2 + T + ih] if ih is not None else 0.0
+        a_a = th[2 + ia] if ia is not None else 0.0
+        d_a = th[2 + T + ia] if ia is not None else 0.0
+        eh = math.exp(min(max(th[0] + a_h + d_a, ETA_LO), ETA_HI))
+        ea = math.exp(min(max(th[1] + a_a + d_h, ETA_LO), ETA_HI))
+        return eh, ea
+
+    def league_mu(self, div, day, lam):
+        dst = self._ensure(div, day)
+        th = dst["theta"][lam]
+        return math.exp(th[0]), math.exp(th[1])
 
 
 class NaiveTracker:
@@ -221,13 +387,15 @@ class NaiveTracker:
         self.hist[(div, away)].append((ast, hst))
 
 
-def poisson_over(lam, line):
-    """P(X > line) untuk X ~ Poisson(lam); line berbentuk x.5."""
+def nb_over(lam, r, line):
+    """P(X > line) untuk X ~ NegBin(mean=lam, size=r):
+    Var = lam + lam^2/r (disalin dari run_sot_v2.py)."""
     k_max = int(math.floor(line))
-    term = math.exp(-lam)
+    q = lam / (r + lam)
+    term = (r / (r + lam)) ** r          # P(X = 0)
     cdf = term
     for k in range(1, k_max + 1):
-        term *= lam / k
+        term *= (k - 1 + r) / k * q
         cdf += term
     return min(max(1.0 - cdf, 0.0), 1.0)
 
@@ -255,42 +423,42 @@ def _load_history():
 
 
 def build_state():
-    """Bangun state rating dari seluruh histori (update sesudah laga,
-    tanpa prediksi — fixture mendatang semuanya sesudah histori)."""
-    sot = Ratings(HL, K_PRIOR, "sot")
+    """Bangun state dari seluruh histori: sistem total tembakan +
+    baseline naif diperbarui per laga (update sesudah laga, tanpa
+    prediksi); RegressionStore menyimpan array mentah per divisi dan
+    me-fit secara malas saat prediksi diminta."""
+    rows = _load_history()
     shots = Ratings(HL, K_PRIOR, "shots", track_ratio=True)
     naive = NaiveTracker()
-    for m in _load_history():
+    for m in rows:
         day, div = m["day"], m["div"]
-        sot.update(div, m["home"], m["away"], day, m["hst"], m["ast"])
         shots.update(div, m["home"], m["away"], day, m["hs"], m["as"],
                      sot_h=m["hst"], sot_a=m["ast"])
         naive.update(div, m["home"], m["away"], m["hst"], m["ast"])
-    return sot, shots, naive
+    reg = RegressionStore(rows, [RIDGE_LAM])
+    return reg, shots, naive
 
 
-def fixture_expectations(sot, shots, naive, div, home, away, day):
-    """(exp_h, exp_a, probs) resep ramping untuk satu fixture.
+def fixture_expectations(reg, shots, naive, div, home, away, day):
+    """(exp_h, exp_a, probs) resep v5 untuk satu fixture.
 
-    exp per tim = 0.5 * exp rating SOT + 0.5 * exp tersirat tembakan;
-    probs[line] = 0.5 * Poisson_over(exp_total) + 0.5 *
-    Poisson_over(total naif) untuk setiap garis di LINES.
-    Urutan panggilan state sama dengan pass evaluasi eksperimen."""
-    eh, ea = sot.predict(div, home, away, day)
+    exp per tim = 0.5 * exp regresi SOT + 0.5 * exp tersirat tembakan;
+    probs[line] = 0.5 * NB_over(exp_total) + 0.5 * NB_over(total naif)
+    dengan ukuran NB_R yang dibekukan."""
+    reh, rea = reg.predict(div, home, away, day, RIDGE_LAM)
     seh, sea = shots.predict(div, home, away, day)
-    mu_sh_h, mu_sh_a, _, _ = shots.league_mu(div, day)
-    imp_h = seh * shots.on_target_ratio(div, home, "h", day, mu_sh_h)
-    imp_a = sea * shots.on_target_ratio(div, away, "a", day, mu_sh_a)
-    exp_h = 0.5 * (eh + imp_h)
-    exp_a = 0.5 * (ea + imp_a)
+    imp_h = seh * shots.on_target_ratio(div, home, "h", day)
+    imp_a = sea * shots.on_target_ratio(div, away, "a", day)
+    exp_h = 0.5 * (reh + imp_h)
+    exp_a = 0.5 * (rea + imp_a)
     lam = exp_h + exp_a
 
-    mu_h, mu_a, _, _ = sot.league_mu(div, day)
+    mu_h, mu_a = reg.league_mu(div, day, RIDGE_LAM)
     nh, na = naive.predict(div, home, away, mu_h, mu_a)
     lam_n = nh + na
 
-    probs = {L: ENS_W * poisson_over(lam, L)
-             + (1.0 - ENS_W) * poisson_over(lam_n, L) for L in LINES}
+    probs = {L: ENS_W * nb_over(lam, NB_R, L)
+             + (1.0 - ENS_W) * nb_over(lam_n, NB_R, L) for L in LINES}
     return exp_h, exp_a, probs
 
 
@@ -334,7 +502,7 @@ def predict_upcoming():
     yang sama dengan model_corners_v3 --predict) dan memetakan nama tim
     ke nama football-data lewat map_full/map_ext.
     """
-    sot, shots, naive = build_state()
+    reg, shots, naive = build_state()
     nmap = _load_name_map()
 
     now_naive = datetime.now(timezone.utc).replace(tzinfo=None)
@@ -363,12 +531,13 @@ def predict_upcoming():
         print("  ! tidak ada fixture upcoming")
         return 0
 
-    # Urut kronologis: panggilan value_at menggerakkan jam decay state,
-    # jadi prediksi harus monoton naik tanggalnya.
+    # Urut kronologis: panggilan value_at menggerakkan jam decay state
+    # dan refit regresi terjadwal per tanggal, jadi prediksi harus
+    # monoton naik tanggalnya.
     rows = []
     for fx in sorted(upcoming, key=lambda x: (x["day"], x["div"], x["home"])):
         exp_h, exp_a, probs = fixture_expectations(
-            sot, shots, naive, fx["div"], fx["home"], fx["away"], fx["day"])
+            reg, shots, naive, fx["div"], fx["home"], fx["away"], fx["day"])
         rec_line, rec_side, rec_prob = _recommendation(probs)
         row = {
             "div": fx["div"], "date": fx["date"], "time": fx["time"],
@@ -401,7 +570,8 @@ def predict_upcoming():
 
 if __name__ == "__main__":
     # Validasi/backtest model ini hidup di experiments/sot_model
-    # (run_sot_experiment.py, run_sot_v2.py, run_sot_v3.py); modul
-    # produksi hanya memprediksi fixture mendatang.
+    # (run_sot_experiment.py, run_sot_v2.py, run_sot_v3.py,
+    # run_sot_v5.py); modul produksi hanya memprediksi fixture
+    # mendatang.
     print("=== predict upcoming SOT fixtures ===")
     predict_upcoming()

@@ -230,7 +230,7 @@ def main():
         print(f"[3/17] FAILED corner predictions: {e!r}")
 
     # [4/17] Prediksi tembakan ke gawang (SOT) untuk fixture mendatang
-    # (model_sot.py, resep ramping base+1+6 dari experiments/sot_model).
+    # (model_sot.py, resep v5 regresi+NB+BB dari experiments/sot_model).
     # Langkah mandiri seperti corner — membaca fixture + data bersih,
     # tidak tergerbang pred_ok — tapi produknya baru dan belum punya
     # konsumen hilir, jadi kegagalannya hanya WARNING dan tidak
