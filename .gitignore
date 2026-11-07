@@ -28,6 +28,11 @@ venv/
 !data_enrichment/sot_backfill/gap_labels.csv
 !data_enrichment/sot_backfill/crossval_labels.csv
 !data_enrichment/sot_backfill/remaining_gaps.csv
+# The FotMob full-response store (~7,500 matchDetails JSON, GB-scale) is
+# local-only bulk data — never commit it. Its index CSV is the committed
+# record of what the store holds (see FOTMOB_FULL_COVERAGE.md).
+data_enrichment/fotmob_full/
+!data_enrichment/fotmob_full_index.csv
 
 # Timestamped backups created by pipeline refresh (train data / xG dumps)
 *.bak-*
