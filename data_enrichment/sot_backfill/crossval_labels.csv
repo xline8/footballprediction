@@ -1,0 +1,131 @@
+div,season,date,home,away,fotmob_match_id,csv_sot_ft,delta_sot_ft,shot_count,sot_1h,sot_2h,sot_1h_h,sot_1h_a,sot_2h_h,sot_2h_a,sot_ft,blocked_on_target,shotmap_complete,label_source,quality
+SP1,2022/23,2022-08-13,Barcelona,Vallecano,3918009,8,0,25,3,5,2,1,4,1,8,6,True,shotmap,reconciled
+E0,2021/22,2021-08-14,Leicester,Wolverhampton,3609933,8,0,26,5,3,5,0,0,3,8,8,True,shotmap,reconciled
+E0,2026/27,2026-09-05,Nott'm Forest,Tottenham,5795444,2,0,23,1,1,1,0,1,0,2,7,True,shotmap,reconciled
+I1,2022/23,2023-01-04,Cremonese,Juventus,3919399,11,0,32,3,8,1,2,2,6,11,7,True,shotmap,reconciled
+I1,2025/26,2026-05-17,Udinese,Cremonese,4803407,6,0,17,5,1,1,4,1,0,6,3,True,shotmap,reconciled
+I1,2025/26,2026-05-17,Sassuolo,Lecce,4803406,12,0,26,7,5,3,4,3,2,12,4,True,shotmap,reconciled
+SP1,2020/21,2020-09-19,Getafe,Osasuna,3424051,4,0,16,2,2,0,2,1,1,4,3,True,shotmap,reconciled
+SP1,2020/21,2021-02-21,Huesca,Granada,3424272,11,0,24,6,5,4,2,2,3,11,2,True,shotmap,reconciled
+SP1,2020/21,2021-03-07,Sociedad,Levante,3424294,9,0,31,5,4,4,1,4,0,9,6,True,shotmap,reconciled
+SP1,2020/21,2020-10-18,Eibar,Osasuna,3424092,8,0,18,3,5,2,1,4,1,8,5,True,shotmap,reconciled
+SP1,2020/21,2021-02-08,Ath Madrid,Celta,3424250,4,0,16,2,2,1,1,1,1,4,7,True,shotmap,reconciled
+SP1,2020/21,2021-05-22,Eibar,Barcelona,3424409,6,0,24,4,2,3,1,0,2,6,8,True,shotmap,reconciled
+SP1,2020/21,2020-11-08,Getafe,Villarreal,3424120,10,0,22,6,4,2,4,3,1,10,8,True,shotmap,reconciled
+SP1,2020/21,2020-09-20,Granada,Alaves,3424052,6,0,15,2,4,1,1,2,2,6,4,True,shotmap,reconciled
+SP1,2021/22,2021-09-21,Levante,Celta,3629149,4,0,10,0,4,0,0,2,2,4,1,True,shotmap,reconciled
+SP1,2021/22,2021-09-23,Granada,Sociedad,3629147,13,0,30,4,9,1,3,1,8,13,11,True,shotmap,reconciled
+SP1,2021/22,2022-01-09,Vallecano,Betis,3629292,12,0,26,5,7,1,4,6,1,12,5,True,shotmap,reconciled
+SP1,2021/22,2022-02-06,Barcelona,Ath Madrid,3629315,8,0,19,5,3,3,2,1,2,8,2,True,shotmap,reconciled
+SP1,2021/22,2021-12-17,Celta,Espanol,3629266,8,0,18,2,6,1,1,4,2,8,1,True,shotmap,reconciled
+SP1,2021/22,2021-12-18,Sevilla,Ath Madrid,3629272,5,0,21,3,2,1,2,1,1,5,7,True,shotmap,reconciled
+SP1,2022/23,2023-03-04,Almeria,Villarreal,3918173,6,0,23,1,5,0,1,0,5,6,7,True,shotmap,reconciled
+SP1,2022/23,2022-10-01,Getafe,Valladolid,3917988,13,0,28,6,7,3,3,3,4,13,9,True,shotmap,reconciled
+SP1,2022/23,2023-04-22,Sociedad,Vallecano,3918237,3,0,15,0,3,0,0,1,2,3,4,True,shotmap,reconciled
+SP1,2023/24,2023-12-17,Las Palmas,Cadiz,4205510,7,0,20,3,4,2,1,0,4,7,3,True,shotmap,reconciled
+SP1,2023/24,2023-11-11,Osasuna,Las Palmas,4205471,4,0,17,1,3,1,0,2,1,4,5,True,shotmap,reconciled
+SP1,2023/24,2023-08-14,Cadiz,Alaves,4205352,5,0,22,4,1,3,1,0,1,5,6,True,shotmap,reconciled
+SP1,2024/25,2024-09-24,Real Madrid,Alaves,4506816,7,0,22,3,4,2,1,2,2,7,7,True,shotmap,reconciled
+SP1,2024/25,2025-01-18,Girona,Sevilla,4506945,10,0,21,6,4,3,3,1,3,10,4,True,shotmap,reconciled
+SP1,2024/25,2024-08-24,Osasuna,Mallorca,4506765,7,-1,25,4,2,3,1,2,0,6,8,True,shotmap,flagged
+SP1,2024/25,2024-10-26,Vallecano,Alaves,4506864,11,0,31,3,8,2,1,2,6,11,5,True,shotmap,reconciled
+SP1,2024/25,2024-08-19,Villarreal,Ath Madrid,4506749,8,-1,19,6,1,2,4,1,0,7,3,True,shotmap,flagged
+SP1,2024/25,2025-04-12,Leganes,Barcelona,4507060,4,0,19,1,3,1,0,0,3,4,3,True,shotmap,reconciled
+SP1,2024/25,2024-09-01,Osasuna,Celta,4506784,7,0,24,4,3,2,2,1,2,7,9,True,shotmap,reconciled
+SP1,2025/26,2025-12-21,Girona,Ath Madrid,4837276,8,0,23,4,4,1,3,1,3,8,8,True,shotmap,reconciled
+SP1,2025/26,2026-05-04,Sevilla,Sociedad,4837449,5,0,25,4,1,4,0,1,0,5,11,True,shotmap,reconciled
+SP1,2025/26,2025-10-04,Real Madrid,Villarreal,4837183,9,0,35,2,7,1,1,6,1,9,13,True,shotmap,reconciled
+SP1,2025/26,2025-09-14,Barcelona,Valencia,4837140,11,0,26,3,8,3,0,7,1,11,4,True,shotmap,reconciled
+SP1,2025/26,2025-11-02,Alaves,Espanol,4837210,6,0,31,5,1,4,1,0,1,6,13,True,shotmap,reconciled
+E0,2019/20,2019-08-11,Man United,Chelsea,3055747,12,0,0,5,7,2,3,3,4,12,,True,stats,reconciled
+E0,2019/20,2020-06-25,Chelsea,Man City,3056039,12,0,0,4,8,3,1,7,1,12,,True,stats,reconciled
+E0,2019/20,2020-01-18,Newcastle,Chelsea,3055963,6,0,0,1,5,0,1,2,3,6,,True,stats,reconciled
+E0,2020/21,2021-05-11,Southampton,Crystal Palace,3411667,10,0,24,6,4,3,3,3,1,10,9,True,shotmap,reconciled
+E0,2020/21,2021-04-20,Chelsea,Brighton,3411661,6,0,18,3,3,2,1,2,1,6,6,True,shotmap,reconciled
+E0,2020/21,2020-12-27,Wolverhampton,Tottenham,3411498,9,0,17,5,4,2,3,4,0,9,4,True,shotmap,reconciled
+E0,2020/21,2020-11-01,Aston Villa,Southampton,3411409,14,0,28,3,11,0,3,10,1,14,8,True,shotmap,reconciled
+E0,2020/21,2021-04-03,Arsenal,Liverpool,3411639,9,0,19,2,7,1,1,1,6,9,4,True,shotmap,reconciled
+E0,2020/21,2021-05-16,Tottenham,Wolverhampton,3411707,16,0,39,7,9,6,1,7,2,16,7,True,shotmap,reconciled
+E0,2021/22,2022-05-15,Watford,Leicester,3610292,12,0,26,5,7,2,3,3,4,12,0,True,shotmap,reconciled
+E0,2022/23,2022-08-30,Crystal Palace,Brentford,3900978,7,0,22,2,5,2,0,2,3,7,4,True,shotmap,reconciled
+E0,2021/22,2022-04-24,Liverpool,Everton,3610262,5,0,27,0,5,0,0,4,1,5,7,True,shotmap,reconciled
+E0,2022/23,2023-01-22,Leeds,Brentford,3901136,5,0,15,1,4,1,0,4,0,5,4,True,shotmap,reconciled
+E0,2021/22,2021-12-30,Man United,Burnley,3610128,9,0,29,5,4,4,1,2,2,9,6,True,shotmap,reconciled
+E0,2022/23,2022-10-22,Everton,Crystal Palace,3901054,8,0,18,5,3,3,2,3,0,8,5,True,shotmap,reconciled
+E0,2022/23,2023-05-14,Brentford,West Ham,3901284,14,0,28,9,5,7,2,3,2,14,5,True,shotmap,reconciled
+E0,2022/23,2023-04-04,Leeds,Nott'm Forest,3900996,7,0,34,4,3,3,1,3,0,7,17,True,shotmap,reconciled
+E0,2023/24,2023-09-23,Burnley,Man United,4193513,8,0,23,4,4,2,2,2,2,8,8,True,shotmap,reconciled
+E0,2022/23,2023-01-21,West Ham,Everton,3901141,6,0,16,3,3,3,0,1,2,6,5,True,shotmap,reconciled
+E0,2022/23,2023-05-20,Tottenham,Brentford,3901299,12,0,33,5,7,5,0,3,4,12,9,True,shotmap,reconciled
+E0,2023/24,2024-05-11,West Ham,Luton,4193899,9,0,28,2,7,1,1,7,0,9,9,True,shotmap,reconciled
+E0,2023/24,2023-09-03,Arsenal,Man United,4193490,7,0,27,2,5,1,1,4,1,7,15,True,shotmap,reconciled
+E0,2023/24,2023-11-11,Man United,Luton,4193577,8,0,25,4,4,1,3,3,1,8,7,True,shotmap,reconciled
+E0,2023/24,2023-12-02,Brentford,Luton,4193663,7,0,34,2,5,2,0,4,1,7,17,True,shotmap,reconciled
+E0,2024/25,2024-09-28,Nott'm Forest,Fulham,4506321,3,0,25,1,2,0,1,1,1,3,12,True,shotmap,reconciled
+E0,2024/25,2025-03-15,Ipswich,Nott'm Forest,4506358,10,0,22,4,6,0,4,4,2,10,3,True,shotmap,reconciled
+E0,2024/25,2025-05-03,Leicester,Southampton,4506569,6,0,22,4,2,3,1,1,1,6,11,True,shotmap,reconciled
+E0,2024/25,2025-03-08,Brentford,Aston Villa,4506343,7,0,25,3,4,1,2,2,2,7,12,True,shotmap,reconciled
+E0,2023/24,2023-10-28,Arsenal,Sheffield United,4193551,8,0,15,3,5,3,0,5,0,8,4,True,shotmap,reconciled
+E0,2026/27,2026-08-23,Man City,Bournemouth,5795370,10,0,18,5,5,2,3,4,1,10,3,True,shotmap,reconciled
+E0,2024/25,2024-12-01,Man United,Everton,4506418,7,0,19,4,3,3,1,2,1,7,7,True,shotmap,reconciled
+E0,2025/26,2025-10-05,Aston Villa,Burnley,4813437,9,0,20,3,6,2,1,5,1,9,5,True,shotmap,reconciled
+E0,2025/26,2026-03-14,Arsenal,Everton,4813665,10,0,34,4,6,2,2,5,1,10,13,True,shotmap,reconciled
+I1,2020/21,2021-04-17,Crotone,Udinese,3428884,10,-3,17,4,3,1,3,1,2,7,3,True,shotmap,flagged
+I1,2021/22,2022-05-06,Genoa,Juventus,3657354,10,0,30,2,8,1,1,5,3,10,6,True,shotmap,reconciled
+I1,2020/21,2021-02-28,Udinese,Fiorentina,3428980,5,0,17,3,2,2,1,1,1,5,5,True,shotmap,reconciled
+I1,2022/23,2022-09-01,Bologna,Salernitana,3919110,8,0,31,4,4,2,2,2,2,8,10,True,shotmap,reconciled
+I1,2021/22,2021-10-03,Atalanta,Milan,3657044,13,0,30,8,5,4,4,2,3,13,12,True,shotmap,reconciled
+I1,2022/23,2022-08-20,Udinese,Salernitana,3919098,8,0,32,5,3,2,3,0,3,8,11,True,shotmap,reconciled
+I1,2022/23,2022-09-10,Sampdoria,Milan,3919451,8,0,25,2,6,0,2,4,2,8,5,True,shotmap,reconciled
+I1,2022/23,2023-05-28,Lazio,Cremonese,3919384,13,0,24,7,6,5,2,3,3,13,2,True,shotmap,reconciled
+I1,2022/23,2022-08-14,Lazio,Bologna,3919074,9,0,21,5,4,3,2,3,1,9,3,True,shotmap,reconciled
+I1,2022/23,2023-02-04,Sassuolo,Atalanta,3919480,10,0,25,6,4,5,1,3,1,10,7,True,shotmap,reconciled
+I1,2022/23,2023-06-03,Cremonese,Salernitana,3919390,5,0,23,2,3,1,1,3,0,5,7,True,shotmap,reconciled
+I1,2022/23,2023-02-18,Sampdoria,Bologna,3919265,9,0,21,4,5,1,3,3,2,9,6,True,shotmap,reconciled
+I1,2022/23,2023-06-04,Udinese,Juventus,3919398,8,0,33,3,5,1,2,2,3,8,9,True,shotmap,reconciled
+I1,2023/24,2024-04-01,Sassuolo,Udinese,4230838,8,0,26,5,3,2,3,3,0,8,5,True,shotmap,reconciled
+I1,2022/23,2022-08-30,Roma,Monza,3919115,8,1,28,3,6,3,0,5,1,9,8,True,shotmap,flagged
+I1,2023/24,2024-01-07,Udinese,Lazio,4230722,4,0,20,1,3,0,1,2,1,4,6,True,shotmap,reconciled
+I1,2024/25,2024-10-05,Inter,Torino,4535354,13,0,36,5,8,3,2,5,3,13,9,True,shotmap,reconciled
+I1,2024/25,2024-09-16,Parma,Udinese,4535288,9,0,27,4,5,3,1,0,5,9,5,True,shotmap,reconciled
+I1,2024/25,2024-12-21,Lecce,Lazio,4535557,9,0,24,7,2,1,6,1,1,9,8,True,shotmap,reconciled
+I1,2025/26,2026-03-01,Cremonese,Milan,4803298,9,0,35,4,5,2,2,1,4,9,10,True,shotmap,reconciled
+I1,2025/26,2026-01-06,Pisa,Como,4803225,11,0,25,2,9,0,2,4,5,11,4,True,shotmap,reconciled
+I1,2024/25,2025-01-11,Udinese,Atalanta,4535318,5,0,16,3,2,2,1,1,1,5,6,True,shotmap,reconciled
+I1,2025/26,2026-01-10,Roma,Sassuolo,4803235,9,0,31,3,6,1,2,5,1,9,8,True,shotmap,reconciled
+I1,2024/25,2025-04-13,Fiorentina,Parma,4535514,6,0,16,2,4,0,2,3,1,6,4,True,shotmap,reconciled
+I1,2025/26,2025-10-28,Lecce,Napoli,4803125,5,0,21,1,4,0,1,2,2,5,8,True,shotmap,reconciled
+I1,2024/25,2024-10-19,Juventus,Lazio,4535365,4,0,19,1,3,0,1,3,0,4,4,True,shotmap,reconciled
+I1,2024/25,2024-12-14,Udinese,Napoli,4535551,7,0,25,5,2,3,2,0,2,7,5,True,shotmap,reconciled
+I1,2025/26,2026-02-08,Lecce,Udinese,4803276,6,0,22,2,4,1,1,4,0,6,7,True,shotmap,reconciled
+I1,2024/25,2025-02-01,Udinese,Venezia,4535349,8,0,27,2,6,1,1,4,2,8,5,True,shotmap,reconciled
+I1,2026/27,2026-10-18,Juventus,Lazio,5749705,5,0,18,2,3,1,1,1,2,5,4,True,shotmap,reconciled
+I1,2026/27,2026-09-20,Frosinone,Como,5749684,14,0,49,10,4,6,4,0,4,14,10,True,shotmap,reconciled
+D1,2020/21,2021-05-03,Mainz,Hertha,3399417,14,0,23,9,5,5,4,4,1,14,2,True,shotmap,reconciled
+D1,2020/21,2021-01-17,Ein Frankfurt,Schalke 04,3399295,12,0,21,6,6,5,1,6,0,12,2,True,shotmap,reconciled
+D1,2020/21,2020-12-16,Schalke 04,Freiburg,3399866,7,-2,21,1,4,1,0,1,3,5,7,True,shotmap,flagged
+D1,2020/21,2021-04-17,Freiburg,Schalke 04,3399415,10,0,17,5,5,5,0,3,2,10,3,True,shotmap,reconciled
+D1,2020/21,2020-12-19,M'gladbach,Hoffenheim,3399265,10,-1,31,2,7,1,1,3,4,9,5,True,shotmap,flagged
+D1,2021/22,2021-08-15,FC Koln,Hertha,3624341,10,0,24,6,4,2,4,3,1,10,5,True,shotmap,reconciled
+D1,2020/21,2021-01-08,M'gladbach,Bayern Munich,3399283,8,0,24,6,2,3,3,1,1,8,8,True,shotmap,reconciled
+D1,2020/21,2021-01-23,Hertha,Werder Bremen,3399313,15,0,25,7,8,5,2,5,3,15,2,True,shotmap,reconciled
+D1,2021/22,2021-08-22,Hoffenheim,Union Berlin,3624352,11,0,19,6,5,3,3,0,5,11,3,True,shotmap,reconciled
+D1,2022/23,2023-03-18,Augsburg,Schalke 04,3903767,8,0,23,4,4,2,2,1,3,8,3,True,shotmap,reconciled
+D1,2021/22,2021-11-06,Bochum,Hoffenheim,3624431,5,1,22,0,6,0,0,5,1,6,4,True,shotmap,flagged
+D1,2021/22,2021-12-19,Freiburg,Leverkusen,3624489,10,-1,22,7,2,4,3,1,1,9,3,True,shotmap,flagged
+D1,2022/23,2022-11-13,Freiburg,Union Berlin,3903671,7,0,11,5,2,5,0,0,2,7,1,True,shotmap,reconciled
+D1,2022/23,2022-11-11,M'gladbach,Dortmund,3903674,16,0,31,12,4,4,8,2,2,16,4,True,shotmap,reconciled
+D1,2023/24,2024-05-05,Ein Frankfurt,Leverkusen,4222364,11,1,26,6,6,2,4,3,3,12,7,True,shotmap,flagged
+D1,2022/23,2022-09-11,Freiburg,M'gladbach,3903591,13,-1,26,6,6,2,4,5,1,12,5,True,shotmap,flagged
+D1,2023/24,2024-04-21,Werder Bremen,Stuttgart,4222181,7,0,24,3,4,1,2,1,3,7,6,True,shotmap,reconciled
+D1,2023/24,2023-12-02,Stuttgart,Werder Bremen,4221975,9,0,31,5,4,5,0,1,3,9,10,True,shotmap,reconciled
+D1,2024/25,2024-08-24,Augsburg,Werder Bremen,4534545,9,-1,22,6,2,3,3,0,2,8,5,True,shotmap,flagged
+D1,2024/25,2024-10-19,Hoffenheim,Bochum,4534597,11,0,25,4,7,3,1,4,3,11,5,True,shotmap,reconciled
+D1,2024/25,2024-11-09,RB Leipzig,M'gladbach,4534622,8,1,26,7,2,3,4,2,0,9,9,True,shotmap,flagged
+D1,2025/26,2025-08-30,Stuttgart,M'gladbach,4829243,11,0,28,6,5,3,3,2,3,11,7,True,shotmap,reconciled
+D1,2025/26,2025-09-13,Mainz,RB Leipzig,4829334,5,0,32,5,0,2,3,0,0,5,10,True,shotmap,reconciled
+D1,2025/26,2026-05-16,Leverkusen,Hamburg,4829612,15,0,45,6,9,4,2,5,4,15,10,True,shotmap,reconciled
+D1,2025/26,2026-01-17,FC Koln,Mainz,4829470,13,0,30,6,7,1,5,5,2,13,6,True,shotmap,reconciled
+D1,2025/26,2025-10-18,Bayern Munich,Dortmund,4829369,8,0,23,5,3,5,0,2,1,8,6,True,shotmap,reconciled
+D1,2025/26,2026-02-21,Bayern Munich,Ein Frankfurt,4829513,14,0,33,6,8,5,1,6,2,14,7,True,shotmap,reconciled
+D1,2024/25,2025-03-02,Augsburg,Freiburg,4534752,8,0,20,3,5,3,0,2,3,8,3,True,shotmap,reconciled
