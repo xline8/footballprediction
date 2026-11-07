@@ -9,6 +9,12 @@ Mode:
 Output:
   predictions_corners_shots.csv         # backtest results
   predictions_corners_upcoming.csv      # upcoming fixtures predictions
+
+Adopsi 2026-11-07 (audit §2C C-1, experiments/corner_territorial):
+predict_upcoming() mengalikan mu_cs dengan pengali dominasi teritorial
+exp(beta_poss*z_poss + beta_bc*z_bc) dari fitur gudang FotMob —
+gerbang eksperimen PASS (margin tipis; rincian di blok territorial
+di bawah). Skema output upcoming TIDAK berubah.
 """
 import os
 import csv
@@ -229,6 +235,101 @@ def mu_cs(row, gamma):
             + row["base_a"] * (row["fap"] * row["fhc"]) ** gamma)
 
 
+# ------------------------------------------------- territorial multiplier
+# Adopsi eksperimen C-1 (experiments/corner_territorial, audit
+# 2026-11-07 §2C): mu *= clamp(exp(beta_poss*z_poss + beta_bc*z_bc),
+# 0.70, 1.43), dengan z = selisih dominasi teritorial trailing-10
+# (min 5 laga) per tim dari gudang FotMob (shot_lineup_features.csv),
+# kandang minus tandang, dihitung ketat dari laga sebelum tanggal
+# fixture. Beta di-fit HANYA di 2022/23+2023/24; test 2024/25+2025/26
+# pada set identik (n=3.433): LL@9.5 0.6855 -> 0.6841 (perbaikan
+# +0.00135 vs ambang gerbang 0.001 — PASS margin tipis), kedua musim
+# test membaik, kalibrasi -0.78pp -> -0.76pp.
+# Beta tinggal di corner_params.json (beta_poss/beta_bc). Fit ulang
+# beta adalah langkah refit TERSENDIRI memakai skrip eksperimen
+# (jendela fit-nya butuh fitur warehouse); _run_backtest() tidak
+# mem-fit beta, hanya mempertahankannya saat menulis ulang params.
+# Bila params/fitur tidak tersedia, pengali = 1.0 (perilaku
+# incumbent) — lapisan ini tidak boleh menggagalkan prediksi corner.
+TERR_MULT_LO, TERR_MULT_HI = 0.70, 1.43
+TERR_MIN_MATCHES = 5
+TERR_N = 10
+_terr_index = None
+
+
+def _num_or_none(x):
+    try:
+        return float(x)
+    except (TypeError, ValueError):
+        return None
+
+
+def _territorial_index():
+    """Indeks trailing warehouse {(div, nama ternormalisasi): [laga]} —
+    konstruksi persis experiments/corner_territorial: baris fitur
+    hanya masuk bila xg/sot/possession/big_chances lengkap."""
+    global _terr_index
+    if _terr_index is not None:
+        return _terr_index
+    from football_etl import normalize_name
+    idx = defaultdict(list)
+    path = os.path.join(BASE, "data_enrichment", "shot_lineup_features.csv")
+    with open(path, newline="", encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            div, date = row["div"], row["date"]
+            hn, an = normalize_name(row["home"]), normalize_name(row["away"])
+            for side, tn in (("h", hn), ("a", an)):
+                o = "a" if side == "h" else "h"
+                need = [_num_or_none(row.get(f"xg_{side}")),
+                        _num_or_none(row.get(f"xg_{o}")),
+                        _num_or_none(row.get(f"sot_{side}")),
+                        _num_or_none(row.get(f"possession_{side}")),
+                        _num_or_none(row.get(f"possession_{o}")),
+                        _num_or_none(row.get(f"big_chances_{side}")),
+                        _num_or_none(row.get(f"big_chances_{o}"))]
+                if any(v is None for v in need):
+                    continue
+                idx[(div, tn)].append({
+                    "date": date, "poss_f": need[3], "poss_a": need[4],
+                    "bc_f": need[5], "bc_a": need[6]})
+    for v in idx.values():
+        v.sort(key=lambda d: d["date"])
+    _terr_index = idx
+    return idx
+
+
+def _trailing_diff(idx, key, date, f_key, a_key):
+    rows = [d for d in idx.get(key, []) if d["date"] < date]
+    if len(rows) < TERR_MIN_MATCHES:
+        return None
+    rows = rows[-TERR_N:]
+    return sum(d[f_key] - d[a_key] for d in rows) / len(rows)
+
+
+def territorial_multiplier(params, div, home, away, date_iso):
+    """Pengali dominasi teritorial satu fixture; 1.0 bila beta tak
+    terpasang, z tak lengkap, atau indeks gagal dibangun."""
+    bp = params.get("beta_poss")
+    bb = params.get("beta_bc")
+    if bp is None or bb is None:
+        return 1.0
+    try:
+        from football_etl import normalize_name
+        idx = _territorial_index()
+        hn, an = normalize_name(home), normalize_name(away)
+        ph = _trailing_diff(idx, (div, hn), date_iso, "poss_f", "poss_a")
+        pa = _trailing_diff(idx, (div, an), date_iso, "poss_f", "poss_a")
+        bh = _trailing_diff(idx, (div, hn), date_iso, "bc_f", "bc_a")
+        ba = _trailing_diff(idx, (div, an), date_iso, "bc_f", "bc_a")
+        if None in (ph, pa, bh, ba):
+            return 1.0
+        return clamp(math.exp(bp * (ph - pa) + bb * (bh - ba)),
+                     TERR_MULT_LO, TERR_MULT_HI)
+    except Exception as e:
+        print(f"  ! territorial multiplier dilewati ({e!r}) — pengali 1.0")
+        return 1.0
+
+
 def _run_backtest():
     """Walk-forward validation + backtest output (original behavior)."""
     _ensure_loaded()
@@ -317,9 +418,18 @@ def _run_backtest():
     print("\ntersimpan:", OUT)
 
     # --- simpan parameter yang sudah terfit — dipakai predict_upcoming() ---
-    _atomic_text_write(
-        PARAMS_OUT,
-        lambda f: json.dump({"gamma": gstar, "r": rstar, "hl": HL}, f))
+    # Tulis ulang TANPA membuang kunci adopsi yang tidak di-fit di sini
+    # (beta_poss/beta_bc teritorial; fit-nya langkah tersendiri dari
+    # experiments/corner_territorial).
+    _params = {"gamma": gstar, "r": rstar, "hl": HL}
+    if os.path.exists(PARAMS_OUT):
+        try:
+            with open(PARAMS_OUT) as _f:
+                for _k, _v in json.load(_f).items():
+                    _params.setdefault(_k, _v)
+        except Exception:
+            pass
+    _atomic_text_write(PARAMS_OUT, lambda f: json.dump(_params, f))
     print("params disimpan:", PARAMS_OUT)
 
     return gstar, rstar
@@ -409,6 +519,7 @@ def predict_upcoming():
 
     LINES_UPCOMING = [6.5, 7.5, 8.5, 9.5, 10.5, 11.5]
     rows = []
+    n_terr = 0
     for fx in sorted(upcoming, key=lambda x: (x["div"], x["date"])):
         d = fx["div"]
         bh, ba, bmu, r_cb, L = base.get(d, (9.0, 9.0, 18.0, 1.18, 10.0))
@@ -416,6 +527,12 @@ def predict_upcoming():
         fhp, fhc, fap, fac = rel_factors(fx["home"], fx["away"], L, dq)
         mu = mu_cs({"base_h": bh, "base_a": ba, "fhp": fhp, "fhc": fhc,
                      "fap": fap, "fac": fac}, gamma)
+        # Pengali dominasi teritorial (adopsi C-1; 1.0 = incumbent).
+        mult = territorial_multiplier(params, d, fx["home"], fx["away"],
+                                      fx["date"])
+        if mult != 1.0:
+            n_terr += 1
+        mu = mu * mult
         probs = {}
         for ln in LINES_UPCOMING:
             k = k_of(r_star, mu)
@@ -436,6 +553,8 @@ def predict_upcoming():
             **probs,
         })
 
+    if params.get("beta_poss") is not None:
+        print(f"  territorial multiplier aktif pada {n_terr}/{len(rows)} fixture")
     cols = ["div", "date", "home", "away", "mu_shots_cs", "r_cs",
             "rec_line", "rec_side", "recommendation", "rec_prob"] + \
            [f"p_gt_{ln}" for ln in LINES_UPCOMING]
