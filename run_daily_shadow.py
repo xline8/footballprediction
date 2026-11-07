@@ -52,7 +52,7 @@ def _fixtures_age_h():
 class _Tee:
     """Duplikasi stdout ke file log: output shadow dulu hanya hidup di
     stdout pemanggil (cron), jadi klaim per langkah (mis. failed_dates
-    di [9/17]) tidak bisa diverifikasi ulang dari disk (audit ronde 7)."""
+    di [11/19]) tidak bisa diverifikasi ulang dari disk (audit ronde 7)."""
 
     def __init__(self, *streams):
         self.streams = streams
@@ -92,7 +92,7 @@ def main():
     print("#" * 70)
     failed = False
 
-    # [1/17] Kesegaran fixture liga (audit GPT 2026-10-31, G): refresh di
+    # [1/19] Kesegaran fixture liga (audit GPT 2026-10-31, G): refresh di
     # dalam chain bila file paling basi melewati ambang, dan jangan
     # jalankan prediksi sama sekali bila fixture tetap terlalu basi —
     # jadwal/postponement basi meracuni semua produk hilir.
@@ -100,15 +100,15 @@ def main():
     try:
         age = _fixtures_age_h()
         if age <= FIXTURE_FRESH_H:
-            print(f"[1/17] fixtures: segar ({age:.1f} jam), refresh dilewati")
+            print(f"[1/19] fixtures: segar ({age:.1f} jam), refresh dilewati")
         else:
-            print(f"[1/17] fixtures: umur {age:.1f} jam > "
+            print(f"[1/19] fixtures: umur {age:.1f} jam > "
                   f"{FIXTURE_FRESH_H:.0f} jam — refresh jadwal "
                   f"(TipsterArea/Understat)")
             import refresh_fixtures
             srcs = refresh_fixtures.main() or {}
             age = _fixtures_age_h()
-            print(f"[1/17] fixtures: umur sesudah refresh {age:.1f} jam")
+            print(f"[1/19] fixtures: umur sesudah refresh {age:.1f} jam")
             # A12-2: liga yang sumbernya fallback disk TIDAK segar —
             # kontennya dump beku yang mtime-nya baru ditulis ulang,
             # jadi cek umur di bawah tidak boleh membacanya sebagai
@@ -119,14 +119,14 @@ def main():
                         if str(s).startswith("fallback"))
             if fb:
                 failed = True
-                print(f"[1/17] FAILED fixtures: liga {', '.join(fb)} "
+                print(f"[1/19] FAILED fixtures: liga {', '.join(fb)} "
                       f"disegarkan dari fallback disk (konten beku), "
                       f"bukan dari sumber segar — run ditandai gagal, "
                       f"prediksi lanjut di jadwal terakhir")
         if age > FIXTURE_MAX_STALE_H:
             fixtures_ok = False
             failed = True
-            print(f"[1/17] FAILED fixtures: file fixture basi "
+            print(f"[1/19] FAILED fixtures: file fixture basi "
                   f"({age:.1f} jam > {FIXTURE_MAX_STALE_H:.0f} jam) dan "
                   f"refresh tidak memperbaikinya — prediksi dilewati")
     except Exception as e:
@@ -151,54 +151,54 @@ def main():
             fb = []
         if fb:
             failed = True
-            print(f"[1/17] FAILED fixtures: liga {', '.join(fb)} "
+            print(f"[1/19] FAILED fixtures: liga {', '.join(fb)} "
                   f"disegarkan dari fallback disk (konten beku) "
                   f"sebelum refresh gagal ({e!r}) — run ditandai "
                   f"gagal, prediksi lanjut di jadwal terakhir")
         if age > FIXTURE_MAX_STALE_H:
             fixtures_ok = False
             failed = True
-            print(f"[1/17] FAILED fixtures: refresh gagal ({e!r}) dan "
+            print(f"[1/19] FAILED fixtures: refresh gagal ({e!r}) dan "
                   f"file basi ({age:.1f} jam) — prediksi dilewati")
         elif not fb:
-            print(f"[1/17] WARNING fixtures: refresh gagal ({e!r}); "
+            print(f"[1/19] WARNING fixtures: refresh gagal ({e!r}); "
                   f"lanjut dengan file umur {age:.1f} jam")
 
     # pred_ok adalah gerbang konsumen prediksi (audit GPT 2026-10-31, B):
-    # dulu kegagalan/partial di [2/17] hanya menandai exit code, sementara
+    # dulu kegagalan/partial di [2/19] hanya menandai exit code, sementara
     # best_picks, make_picks_live, market_compare, recommender tetap
     # membaca file sukses run sebelumnya dan archive menyalinnya ke
     # folder tanggal baru — arsip basi itu lalu dinilai grading run
     # berikutnya seolah rekomendasi hari ini.
     pred_ok = False
     if not fixtures_ok:
-        print("[2/17] DILEWATI predictions: fixture tidak cukup segar")
+        print("[2/19] DILEWATI predictions: fixture tidak cukup segar")
     else:
         try:
             from predict_upcoming_refactored import generate_predictions
             res = generate_predictions()
-            print(f"[2/17] predictions: {res.get('n_output_rows', 0)} rows "
+            print(f"[2/19] predictions: {res.get('n_output_rows', 0)} rows "
                   f"(status {res.get('status')})")
             if res.get('t3_status') not in (None, 'ok'):
-                print(f"[2/17] PERINGATAN T3: status "
+                print(f"[2/19] PERINGATAN T3: status "
                       f"{res.get('t3_status')} ({res.get('t3_error')}) — "
                       f"kolom T3 kosong; jalur meta tidak dapat dibedakan "
                       f"dari nol sah tanpa baris ini (audit GPT H)")
             if res.get('status') != 'success':
                 failed = True
-                print(f"[2/17] FAILED predictions: status internal "
+                print(f"[2/19] FAILED predictions: status internal "
                       f"{res.get('status')!r}; konsumen prediksi dilewati, "
                       f"file lama tidak dikonsumsi/diarsipkan")
             else:
                 pred_ok = True
         except Exception as e:
             failed = True
-            print(f"[2/17] FAILED predictions: {e!r}")
+            print(f"[2/19] FAILED predictions: {e!r}")
 
     try:
         _t_corner = time.time()
         r = _run_py("model_corners_v3.py", "--predict")
-        print(f"[3/17] corner predictions: rc={r.returncode} | {r.stdout.strip()[-300:]}")
+        print(f"[3/19] corner predictions: rc={r.returncode} | {r.stdout.strip()[-300:]}")
         if r.returncode != 0:
             failed = True
         else:
@@ -213,7 +213,7 @@ def main():
             if _nrows("predictions_upcoming.csv") > 0 and \
                     _nrows("predictions_corners_upcoming.csv") == 0:
                 failed = True
-                print("[3/17] FAILED corner predictions: file corner "
+                print("[3/19] FAILED corner predictions: file corner "
                       "kosong padahal prediksi liga ada")
             else:
                 # Kesegaran: script bisa keluar rc=0 TANPA menulis
@@ -223,65 +223,109 @@ def main():
                 if os.path.exists(_cf) and \
                         os.path.getmtime(_cf) < _t_corner - 5:
                     failed = True
-                    print("[3/17] FAILED corner predictions: file corner "
+                    print("[3/19] FAILED corner predictions: file corner "
                           "basi (tidak ditulis ulang oleh run ini)")
     except Exception as e:
         failed = True
-        print(f"[3/17] FAILED corner predictions: {e!r}")
+        print(f"[3/19] FAILED corner predictions: {e!r}")
 
-    # [4/17] Prediksi tembakan ke gawang (SOT) untuk fixture mendatang
+    # [4/19] Prediksi tembakan ke gawang (SOT) untuk fixture mendatang
     # (model_sot.py, resep v5 regresi+NB+BB dari experiments/sot_model).
     # Langkah mandiri seperti corner — membaca fixture + data bersih,
     # tidak tergerbang pred_ok — tapi produknya baru dan belum punya
     # konsumen hilir, jadi kegagalannya hanya WARNING dan tidak
-    # menandai run gagal (pola langkah non-kritis seperti [8/17]).
+    # menandai run gagal (pola langkah non-kritis seperti [10/19]).
     try:
         _t_sot = time.time()
         r = _run_py("model_sot.py", "--predict")
-        print(f"[4/17] sot predictions: rc={r.returncode} | {r.stdout.strip()[-300:]}")
+        print(f"[4/19] sot predictions: rc={r.returncode} | {r.stdout.strip()[-300:]}")
         if r.returncode != 0:
-            print(f"[4/17] WARNING sot predictions: rc={r.returncode} "
+            print(f"[4/19] WARNING sot predictions: rc={r.returncode} "
                   f"(lanjut pipeline; run tidak ditandai gagal)")
         else:
             # rc=0 tanpa menulis ulang = file basi lolos diam-diam
-            # (cermin cek kesegaran corner di [3/17], tapi di sini
+            # (cermin cek kesegaran corner di [3/19], tapi di sini
             # hanya warning).
             _sf = os.path.join(BASE, "predictions_sot_upcoming.csv")
             if not os.path.exists(_sf) or \
                     os.path.getmtime(_sf) < _t_sot - 5:
-                print("[4/17] WARNING sot predictions: file SOT tidak "
+                print("[4/19] WARNING sot predictions: file SOT tidak "
                       "ditulis ulang oleh run ini")
     except Exception as e:
-        print(f"[4/17] WARNING sot predictions gagal: {e!r} "
+        print(f"[4/19] WARNING sot predictions gagal: {e!r} "
+              f"(lanjut pipeline; run tidak ditandai gagal)")
+
+    # [5/19] Prediksi total kartu kuning untuk fixture mendatang
+    # (model_cards.py, resep experiments/cards_model yang lolos gerbang
+    # audit §3C 2026-11-07). Langkah non-kritis seperti SOT [4/19]:
+    # kegagalannya hanya WARNING, tidak menandai run gagal.
+    try:
+        _t_cards = time.time()
+        r = _run_py("model_cards.py", "--predict")
+        print(f"[5/19] cards predictions: rc={r.returncode} | {r.stdout.strip()[-300:]}")
+        if r.returncode != 0:
+            print(f"[5/19] WARNING cards predictions: rc={r.returncode} "
+                  f"(lanjut pipeline; run tidak ditandai gagal)")
+        else:
+            _kf = os.path.join(BASE, "predictions_cards_upcoming.csv")
+            if not os.path.exists(_kf) or \
+                    os.path.getmtime(_kf) < _t_cards - 5:
+                print("[5/19] WARNING cards predictions: file kartu tidak "
+                      "ditulis ulang oleh run ini")
+    except Exception as e:
+        print(f"[5/19] WARNING cards predictions gagal: {e!r} "
+              f"(lanjut pipeline; run tidak ditandai gagal)")
+
+    # [6/19] Prediksi corner BABAK PERTAMA untuk fixture mendatang
+    # (model_corners_1h.py, resep experiments/half_corners yang lolos
+    # gerbang formal audit §2C C-2 2026-11-07 — margin atas baseline
+    # naif hanya 0.0001, praktis seri; lihat RESULTS.md eksperimen).
+    # Langkah non-kritis seperti SOT [4/19]: kegagalannya hanya
+    # WARNING, tidak menandai run gagal. Belum ada sumber odds 1H.
+    try:
+        _t_c1h = time.time()
+        r = _run_py("model_corners_1h.py")
+        print(f"[6/19] 1h-corner predictions: rc={r.returncode} | {r.stdout.strip()[-300:]}")
+        if r.returncode != 0:
+            print(f"[6/19] WARNING 1h-corner predictions: rc={r.returncode} "
+                  f"(lanjut pipeline; run tidak ditandai gagal)")
+        else:
+            _hf = os.path.join(BASE, "predictions_corners_1h_upcoming.csv")
+            if not os.path.exists(_hf) or \
+                    os.path.getmtime(_hf) < _t_c1h - 5:
+                print("[6/19] WARNING 1h-corner predictions: file corner 1H "
+                      "tidak ditulis ulang oleh run ini")
+    except Exception as e:
+        print(f"[6/19] WARNING 1h-corner predictions gagal: {e!r} "
               f"(lanjut pipeline; run tidak ditandai gagal)")
 
     try:
         import predict_cups
         rc = predict_cups.main()
-        print(f"[5/17] cup predictions: {rc.get('n_gol', 0)} gol, "
+        print(f"[7/19] cup predictions: {rc.get('n_gol', 0)} gol, "
               f"{rc.get('n_corner', 0)} corner")
         if rc.get('status') == 'failed':
             failed = True
-            print("[5/17] FAILED cup predictions: fixture piala ada "
+            print("[7/19] FAILED cup predictions: fixture piala ada "
                   "tapi nol prediksi gol terpetakan")
     except Exception as e:
         failed = True
-        print(f"[5/17] FAILED cup predictions: {e!r}")
+        print(f"[7/19] FAILED cup predictions: {e!r}")
 
     try:
         if not pred_ok:
             raise _SkipStep("prediksi liga tidak sukses pada run ini")
         import make_picks_live
         n = make_picks_live.main()
-        print(f"[6/17] live picks baru: {n}")
+        print(f"[8/19] live picks baru: {n}")
         if n is None:
             failed = True
-            print("[6/17] FAILED make_picks_live: file prediksi hilang")
+            print("[8/19] FAILED make_picks_live: file prediksi hilang")
     except _SkipStep as e:
-        print(f"[6/17] DILEWATI make_picks_live: {e}")
+        print(f"[8/19] DILEWATI make_picks_live: {e}")
     except Exception as e:
         failed = True
-        print(f"[6/17] FAILED make_picks_live: {e!r}")
+        print(f"[8/19] FAILED make_picks_live: {e!r}")
 
     # Sinkronisasi hasil tipsterarea untuk tanggal kemarin + H-2 secara eksplisit
     # (sebelum grading). --fresh memaksa fetch jaring (cache halaman tanggal
@@ -306,18 +350,18 @@ def main():
                 _i = err.find("GAGAL")
             if _i >= 0:
                 shown += f" | stderr: ...{err[max(0, _i - 40):_i + 160]}"
-        print(f"[7/17] tipsterarea hasil sync: rc={r.returncode} | {shown}")
+        print(f"[9/19] tipsterarea hasil sync: rc={r.returncode} | {shown}")
         if r.returncode != 0:
             failed = True
-            print(f"[7/17] FAILED ta sync rc={r.returncode} "
+            print(f"[9/19] FAILED ta sync rc={r.returncode} "
                   f"(lanjut pipeline, tapi run ditandai gagal)")
     except Exception as e:
         failed = True
-        print(f"[7/17] FAILED ta sync: {e!r} "
+        print(f"[9/19] FAILED ta sync: {e!r} "
               f"(lanjut pipeline, tapi run ditandai gagal)")
 
-    # [8/17] Grading bet TA (ta/best_bets.csv) dari results.csv yang
-    # baru tersinkron di [7/17]. grade() ada sejak lama tapi tidak
+    # [10/19] Grading bet TA (ta/best_bets.csv) dari results.csv yang
+    # baru tersinkron di [9/19]. grade() ada sejak lama tapi tidak
     # pernah dipanggil rantai mana pun, jadi bet OPEN menumpuk tak
     # dinilai berminggu-minggu (audit ronde 7). Idempoten; bet corner
     # tanpa data aktual dibiarkan OPEN oleh grade() sendiri.
@@ -325,11 +369,11 @@ def main():
     try:
         import ta_model
         ta_model.grade()
-        print("[8/17] ta bet grading: selesai")
+        print("[10/19] ta bet grading: selesai")
     except Exception as e:
-        print(f"[8/17] WARNING ta bet grading gagal: {e!r}")
+        print(f"[10/19] WARNING ta bet grading gagal: {e!r}")
 
-    # [9/17] Market odds sync: semua fixture model (liga TOP5 + piala), window
+    # [11/19] Market odds sync: semua fixture model (liga TOP5 + piala), window
     # hari ini..+4, urut kickoff terdekat. Throttle market_needs_refresh diurus
     # sync_dates (~1.5 jam); hanya fetch yang perlu. Gagal jaringan = warning,
     # tidak menggagalkan pipeline. parse_match_page/schema tidak diubah.
@@ -345,43 +389,43 @@ def main():
         mkt_ids = model_fixture_ids(days_mkt)
         r = sync_dates(sorted(set(days_mkt)), with_markets=True,
                        market_ids=mkt_ids or None, verbose=False)
-        print(f"[9/17] market odds sync: {len(mkt_ids)} fixture model, "
+        print(f"[11/19] market odds sync: {len(mkt_ids)} fixture model, "
               f"+{r.get('markets', 0)} harga baru, "
               f"{r.get('unresolved_market_ids') or 0} id pasar tak "
               f"terpetakan, tanggal kosong: "
               f"{r.get('empty_dates') or []}, tanggal gagal: "
               f"{r.get('failed_dates') or []}")
     except _SkipStep as e:
-        print(f"[9/17] DILEWATI market sync: {e}")
+        print(f"[11/19] DILEWATI market sync: {e}")
     except Exception as e:
         failed = True
-        print(f"[9/17] FAILED market sync: {e!r} "
+        print(f"[11/19] FAILED market sync: {e!r} "
               f"(lanjut pipeline, tapi run ditandai gagal)")
 
-    # [10/17] Join odds pasar ke prediksi -> market_compare.csv (1xbet + median +
+    # [12/19] Join odds pasar ke prediksi -> market_compare.csv (1xbet + median +
     # prob implied ternormalisasi). Kegagalan tidak menggagalkan pipeline.
     try:
         if not pred_ok:
             raise _SkipStep("prediksi liga tidak sukses pada run ini")
         import market_orchestration
         rc = market_orchestration.build_market_compare()
-        print(f"[10/17] market_compare: {rc['fixtures']} fixture, "
+        print(f"[12/19] market_compare: {rc['fixtures']} fixture, "
               f"{rc['rows']} baris, {rc.get('unmatched', 0)} prediksi "
               f"tanpa fixture TA")
     except _SkipStep as e:
-        print(f"[10/17] DILEWATI market_compare: {e}")
+        print(f"[12/19] DILEWATI market_compare: {e}")
     except Exception as e:
         failed = True
-        print(f"[10/17] FAILED market_compare: {e!r} "
+        print(f"[12/19] FAILED market_compare: {e!r} "
               f"(lanjut pipeline, tapi run ditandai gagal)")
 
-    # [11/17] Build bet TA (ta_model): model_markets.csv + best_bets.csv
+    # [13/19] Build bet TA (ta_model): model_markets.csv + best_bets.csv
     # dari prediksi hari ini dan snapshot harga yang baru disinkronkan
-    # di [9/17]. Dulu build hanya jalan di refit mingguan (--run-all)
+    # di [11/19]. Dulu build hanya jalan di refit mingguan (--run-all)
     # dan CLI, jadi baris best_bets membeku berhari-hari sementara
     # best_picks mengonsumsinya setiap hari (audit ronde 13). Bet OPEN
     # yang bet_id-nya terbit lagi diperbarui nilainya oleh build
-    # sendiri; grading bet lama sudah jalan di [8/17] sebelum baris
+    # sendiri; grading bet lama sudah jalan di [10/19] sebelum baris
     # baru ditambahkan. Tergerbang pred_ok seperti konsumen prediksi
     # lain. Kegagalan ditandai gagal; best_picks lanjut dengan file
     # terakhir yang ada.
@@ -397,39 +441,39 @@ def main():
             # yang sama; samakan di sini.
             raise RuntimeError("ta_model.build() rc != 0 "
                                "(ta/fixtures.csv kosong?)")
-        print("[11/17] ta_model build: selesai")
+        print("[13/19] ta_model build: selesai")
     except _SkipStep as e:
-        print(f"[11/17] DILEWATI ta_model build: {e}")
+        print(f"[13/19] DILEWATI ta_model build: {e}")
     except Exception as e:
         failed = True
-        print(f"[11/17] FAILED ta_model build: {e!r} "
+        print(f"[13/19] FAILED ta_model build: {e!r} "
               f"(lanjut pipeline, tapi run ditandai gagal)")
 
-    # [12/17] best_picks: peringkat Pick Teraman dari prediksi + bet TA.
-    # Sengaja SETELAH build [11/17] supaya baris ta_model yang dibaca
+    # [14/19] best_picks: peringkat Pick Teraman dari prediksi + bet TA.
+    # Sengaja SETELAH build [13/19] supaya baris ta_model yang dibaca
     # adalah hasil build hari ini, bukan build mingguan terakhir.
     try:
         if not pred_ok:
             raise _SkipStep("prediksi liga tidak sukses pada run ini")
         r = _run_py("best_picks.py", "--date", _today().isoformat())
-        print(f"[12/17] best_picks: rc={r.returncode} | {r.stdout.strip()[-400:]}")
+        print(f"[14/19] best_picks: rc={r.returncode} | {r.stdout.strip()[-400:]}")
         if r.returncode != 0:
             failed = True
     except _SkipStep as e:
-        print(f"[12/17] DILEWATI best_picks: {e}")
+        print(f"[14/19] DILEWATI best_picks: {e}")
     except Exception as e:
         failed = True
-        print(f"[12/17] FAILED best_picks: {e!r}")
+        print(f"[14/19] FAILED best_picks: {e!r}")
 
-    # [13/17] Rekomendasi harian deterministik (dari market_compare.csv):
+    # [15/19] Rekomendasi harian deterministik (dari market_compare.csv):
     # single bet + slip odds ±2 + slip odds ±10, semua untuk tanggal laporan.
-    # Kegagalan tidak menggagalkan pipeline; file diarsipkan di langkah 15.
+    # Kegagalan tidak menggagalkan pipeline; file diarsipkan di langkah 17.
     try:
         if not pred_ok:
             raise _SkipStep("prediksi liga tidak sukses pada run ini")
         import slip_recommender
         rc = slip_recommender.recommend()
-        print(f"[13/17] single: {rc['single']['pick']} "
+        print(f"[15/19] single: {rc['single']['pick']} "
               f"(EV {rc['single']['ev']}) | slip2: {rc['slip2']['n_legs']} "
               f"kaki, total {rc['slip2']['total_odds']}, "
               f"in_band={rc['slip2']['in_band']} | slip10: "
@@ -438,33 +482,33 @@ def main():
         _tr = [nm for nm in ("slip2", "slip10")
                if rc[nm].get("search_truncated")]
         if _tr:
-            print(f"[13/17] PERINGATAN: pencarian {'/'.join(_tr)} "
+            print(f"[15/19] PERINGATAN: pencarian {'/'.join(_tr)} "
                   f"terpotong batas node — hasil kandidat terbaik "
                   f"sebagian, bukan optimum terbukti")
     except _SkipStep as e:
-        print(f"[13/17] DILEWATI rekomendasi: {e}")
+        print(f"[15/19] DILEWATI rekomendasi: {e}")
     except Exception as e:
         failed = True
-        print(f"[13/17] FAILED rekomendasi: {e!r} "
+        print(f"[15/19] FAILED rekomendasi: {e!r} "
               f"(lanjut pipeline, tapi run ditandai gagal)")
 
-    # [14/17] Grading harian produk rekomendasi (pick teraman/single/slip2/
+    # [16/19] Grading harian produk rekomendasi (pick teraman/single/slip2/
     # slip10) dari arsip <= kemarin -> histori kalibrasi. Bisa hasil-nya belum
     # tersedia -> pending, dinilai run berikutnya. Gagal tidak menggagalkan.
     try:
         import grade_recommendations
         rc = grade_recommendations.main()
-        print(f"[14/17] grading rekomendasi: rc={rc}")
+        print(f"[16/19] grading rekomendasi: rc={rc}")
         if rc != 0:
             failed = True
-            print("[14/17] FAILED grading rekomendasi: rc != 0 "
+            print("[16/19] FAILED grading rekomendasi: rc != 0 "
                   "(run ditandai gagal)")
     except Exception as e:
         failed = True
-        print(f"[14/17] FAILED grading rekomendasi: {e!r} "
+        print(f"[16/19] FAILED grading rekomendasi: {e!r} "
               f"(lanjut pipeline, tapi run ditandai gagal)")
 
-    # [15/17] Arsip snapshot harian (dengan market_compare). Arsip adalah
+    # [17/19] Arsip snapshot harian (dengan market_compare). Arsip adalah
     # input grading hari-hari berikutnya, jadi file basi tidak boleh
     # tersalin ke folder tanggal baru (audit GPT 2026-10-31, B) —
     # langkah ini ter-gate pred_ok. Rute pick piala ke ledger terpisah:
@@ -474,28 +518,28 @@ def main():
             raise _SkipStep("prediksi liga tidak sukses pada run ini")
         from market_orchestration import archive_snapshots
         ar = archive_snapshots()
-        print(f"[15/17] archive {ar['date']}: {len(ar['archived'])} file"
+        print(f"[17/19] archive {ar['date']}: {len(ar['archived'])} file"
               f" (+{len(ar.get('kept', []))} sudah ada, write-once)")
         if ar.get("skipped"):
-            print(f"[15/17] ! file dilewati (generasi tanggal lain): "
+            print(f"[17/19] ! file dilewati (generasi tanggal lain): "
                   f"{ar['skipped']}")
     except _SkipStep as e:
-        print(f"[15/17] DILEWATI archive: {e}")
+        print(f"[17/19] DILEWATI archive: {e}")
     except Exception as e:
         failed = True
-        print(f"[15/17] FAILED archive: {e!r} "
+        print(f"[17/19] FAILED archive: {e!r} "
               f"(lanjut pipeline, tapi run ditandai gagal)")
 
     try:
         from market_orchestration import sync_cup_picks_to_ledger
         n_cup = sync_cup_picks_to_ledger()
-        print(f"[15/17] cup picks -> ledger: {n_cup} baru")
+        print(f"[17/19] cup picks -> ledger: {n_cup} baru")
     except Exception as e:
         failed = True
-        print(f"[15/17] FAILED cup-ledger: {e!r} "
+        print(f"[17/19] FAILED cup-ledger: {e!r} "
               f"(lanjut pipeline, tapi run ditandai gagal)")
 
-    # [16/17] Grading ledger uang (score_ledger): nilai ledger/picks.jsonl
+    # [18/19] Grading ledger uang (score_ledger): nilai ledger/picks.jsonl
     # (liga + piala) dari hasil yang sudah tersinkron di langkah-langkah
     # atas. Dulu grading ini hanya tercapai lewat run manual
     # pipeline_orchestrator --incremental, jadi ROI/CLV bisa basi
@@ -506,20 +550,20 @@ def main():
     try:
         r = _run_py("score_ledger.py")
         out = (r.stdout or r.stderr or "").strip()
-        print(f"[16/17] score_ledger: rc={r.returncode} | {out[-300:]}")
+        print(f"[18/19] score_ledger: rc={r.returncode} | {out[-300:]}")
         if r.returncode != 0:
             failed = True
-            print("[16/17] FAILED score_ledger (run ditandai gagal)")
+            print("[18/19] FAILED score_ledger (run ditandai gagal)")
     except Exception as e:
         failed = True
-        print(f"[16/17] FAILED score_ledger: {e!r}")
+        print(f"[18/19] FAILED score_ledger: {e!r}")
 
     try:
         import resolve_and_monitor
         resolve_and_monitor.main()
     except Exception as e:
         failed = True
-        print(f"[17/17] FAILED resolve_and_monitor: {e!r}")
+        print(f"[19/19] FAILED resolve_and_monitor: {e!r}")
 
     if failed:
         print("# LIVE SHADOW: ADA LANGKAH GAGAL")
