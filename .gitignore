@@ -18,6 +18,9 @@ venv/
 *.jsonl
 *.pkl
 *.joblib
+# Exception: the SofaScore SOT halves dataset is a curated label source
+# (27,911 matches, 1H/2H splits) that cannot be regenerated locally.
+!data_enrichment/sot_sofascore/sofascore_sot_dataset.csv
 
 # Timestamped backups created by pipeline refresh (train data / xG dumps)
 *.bak-*
