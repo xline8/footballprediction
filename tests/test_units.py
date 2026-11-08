@@ -2685,6 +2685,120 @@ def test_api_predictions_freshness_gate():
             assert len(rows) == 1 and rows[0]["home"] == "alpha", rows
         finally:
             api.BASE_DIR = old_base
+def _prediction_api_context():
+    from contextlib import contextmanager
+    import tempfile
+    import types
+
+    @contextmanager
+    def context():
+        stub_dl = types.ModuleType("data_loader")
+        stub_dl.get_loader = lambda: None
+        old_dl = sys.modules.get("data_loader")
+        sys.modules["data_loader"] = stub_dl
+        try:
+            import api_server as api
+        finally:
+            if old_dl is None:
+                sys.modules.pop("data_loader", None)
+            else:
+                sys.modules["data_loader"] = old_dl
+
+        old_base = api.BASE_DIR
+        with tempfile.TemporaryDirectory() as td:
+            api.BASE_DIR = td
+            try:
+                yield api, td
+            finally:
+                api.BASE_DIR = old_base
+
+    return context()
+
+
+def test_api_exact_prediction_derivative_values():
+    import asyncio
+    import csv
+    import json
+
+    values = dict(zip(
+        ("p_over_dc", "p_over15_dc", "p_over35_dc", "p_over_bl",
+         "p_dc_1x", "p_dc_x2", "p_dc_12", "p_btts"),
+        (0.52, 0.75, 0.28, 0.51, 0.80, 0.45, 0.75, 0.0)))
+    with _prediction_api_context() as (api, td):
+        row = dict(div="D1", date="2027-01-10", home="alpha", away="beta",
+                   **values)
+        path = os.path.join(td, "predictions_upcoming.csv")
+        for empty in (False, True):
+            with open(path, "w", newline="") as f:
+                writer = csv.DictWriter(f, fieldnames=row)
+                writer.writeheader()
+                writer.writerow(row if not empty else
+                                {k: "" if k in values else v
+                                 for k, v in row.items()})
+            resp = asyncio.run(api.get_prediction_for_match(
+                "D1", "2027-01-10", "alpha", "beta"))
+            assert resp.status_code == 200
+            body = json.loads(resp.body)
+            assert set(body) == {
+                "div", "date", "home", "away", "ph_dc", "pd_dc", "pa_dc",
+                "ph_bl", "pd_bl", "pa_bl", "b365h", "b365d", "b365a",
+                *values}, body
+            listed = json.loads(asyncio.run(api.get_predictions(
+                date="2027-01-10")).body)[0]
+            for key, value in values.items():
+                assert key in body, body
+                assert body[key] == (None if empty else value), body
+                assert body[key] == listed[key], (body, listed)
+                if not empty:
+                    assert isinstance(body[key], float), body
+
+
+def test_api_exact_prediction_derivative_columns_absent():
+    import asyncio
+    import json
+
+    with _prediction_api_context() as (api, td):
+        with open(os.path.join(td, "predictions_upcoming.csv"), "w") as f:
+            f.write("div,date,home,away\nD1,2027-01-10,alpha,beta\n")
+        resp = asyncio.run(api.get_prediction_for_match(
+            "D1", "2027-01-10", "alpha", "beta"))
+        assert resp.status_code == 200
+        body = json.loads(resp.body)
+        for key in ("p_over_dc", "p_over15_dc", "p_over35_dc", "p_over_bl",
+                    "p_dc_1x", "p_dc_x2", "p_dc_12", "p_btts"):
+            assert key in body and body[key] is None, body
+
+
+def test_api_predictions_missing_file_returns_503():
+    import asyncio
+    import json
+
+    with _prediction_api_context() as (api, td):
+        for endpoint, args in (
+                (api.get_predictions, ()),
+                (api.get_prediction_for_match,
+                 ("D1", "2027-01-10", "alpha", "beta"))):
+            try:
+                asyncio.run(endpoint(*args))
+            except api.HTTPException as exc:
+                assert exc.status_code == 503, exc
+                assert "predictions_upcoming.csv" in exc.detail, exc.detail
+                assert "tidak ada" in exc.detail, exc.detail
+            else:
+                raise AssertionError("Missing predictions file must return 503")
+
+        # A present file with no rows still means no matches.
+        with open(os.path.join(td, "predictions_upcoming.csv"), "w") as f:
+            f.write("div,date,home,away\n")
+        resp = asyncio.run(api.get_predictions())
+        assert resp.status_code == 200 and json.loads(resp.body) == []
+        try:
+            asyncio.run(api.get_prediction_for_match(
+                "D1", "2027-01-10", "alpha", "beta"))
+        except api.HTTPException as exc:
+            assert exc.status_code == 404, exc
+        else:
+            raise AssertionError("Absent match in a present file must return 404")
 
 
 def test_data_summary_teams_per_division():
