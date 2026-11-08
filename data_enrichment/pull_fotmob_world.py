@@ -196,13 +196,31 @@ def load_catalog(named_only: bool) -> list[dict]:
     return rows
 
 
+def get_planning(path: str, params: dict, delay: float) -> dict:
+    """get() with retries on transport errors: the local proxy
+    occasionally refuses bursts of planning connections, and a
+    silently half-fetched plan is worse than a slow one. Provider
+    stops (401/403/429, raised as RuntimeError) still propagate."""
+    import time
+    last: Exception | None = None
+    for attempt in range(3):
+        try:
+            return get(_thread_client(), path, params, delay)
+        except RuntimeError:
+            raise
+        except Exception as exc:
+            last = exc
+            time.sleep(2.0 * (attempt + 1) ** 2)
+    raise last  # type: ignore[misc]
+
+
 def league_season_params(row: dict, delay: float) -> list[str]:
     """Fresh allAvailableSeasons for one league, filtered to 2021+;
     falls back to the catalog's recorded list if the probe fails."""
     try:
-        payload = get(_thread_client(), "leagues",
-                      {"id": int(row["league_id"]), "ccode3": row["ccode"]},
-                      delay)
+        payload = get_planning("leagues",
+                               {"id": int(row["league_id"]),
+                                "ccode3": row["ccode"]}, delay)
         seasons = [str(s) for s in (payload.get("allAvailableSeasons")
                                     or [])]
         kept = [s for s in seasons
@@ -223,9 +241,10 @@ def plan_league(row: dict, delay: float) -> tuple[list[dict], dict]:
     groups: dict[str, dict] = {}
     for param in league_season_params(row, delay):
         try:
-            payload = get(_thread_client(), "leagues",
-                          {"id": int(row["league_id"]),
-                           "ccode3": row["ccode"], "season": param}, delay)
+            payload = get_planning("leagues",
+                                   {"id": int(row["league_id"]),
+                                    "ccode3": row["ccode"],
+                                    "season": param}, delay)
         except RuntimeError:
             raise
         except Exception as exc:
@@ -271,7 +290,7 @@ def plan_league(row: dict, delay: float) -> tuple[list[dict], dict]:
 
 
 def build_plan(rows: list[dict], delay: float,
-               workers: int = 8) -> tuple[list[dict], dict]:
+               workers: int = 4) -> tuple[list[dict], dict]:
     per_league: dict[int, tuple[list[dict], dict]] = {}
     with ThreadPoolExecutor(max_workers=workers) as pool:
         futures = {pool.submit(plan_league, row, delay): i
