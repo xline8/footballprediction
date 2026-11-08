@@ -11,8 +11,10 @@ tanpa histori kalibrasi produksi (audit Codex 2026-11-08, Minor 6):
 Sumber prediksi: snapshot arsip harian (archive/<tanggal>/, write-once).
 Satu baris nilai per (produk, laga): snapshot yang dipakai adalah yang
 TERAKHIR terarsip pada atau sebelum tanggal laga — prediksi pra-kickoff
-paling segar untuk laga itu. Baris yang sama tidak pernah dinilai dua
-kali dari dua tanggal arsip.
+paling segar untuk laga itu. Snapshot yang terarsip SESUDAH tanggal
+laga tidak pernah dipakai (bukan prediksi pra-kickoff; bocor waktu).
+Dedup antar-snapshot memakai kunci klub kanonik (alias-aware), jadi
+variasi ejaan nama tim antar-hari tidak menghitung satu laga dua kali.
 
 Sumber aktual:
   - SOT dan kartu: all_matches_clean.csv (football-data), kolom HST/AST
@@ -221,15 +223,21 @@ def _collect_predictions():
                 continue
             with open(path, newline="", encoding="utf-8") as f:
                 for r in csv.DictReader(f):
-                    key = (product, (r.get("date") or "")[:10],
-                           r.get("div", ""), r.get("home", ""),
-                           r.get("away", ""))
+                    fdate = (r.get("date") or "")[:10]
+                    if arch_date > fdate:
+                        # Snapshot terarsip sesudah tanggal laga bukan
+                        # prediksi pra-kickoff — jangan dinilai.
+                        continue
+                    # Kunci dedup kanonik: ejaan nama yang berbeda
+                    # antar-snapshot untuk laga yang sama tetap satu
+                    # baris nilai.
+                    key = (product, fdate, r.get("div", ""),
+                           _club_key(_clean(r.get("home", ""))),
+                           _club_key(_clean(r.get("away", ""))))
                     prev = chosen.get(key)
-                    # Snapshot pra-kickoff terakhir menang; snapshot yang
-                    # terarsip sesudah tanggal laga tidak menggantikan.
-                    if prev is None or (
-                            arch_date <= key[1]
-                            and arch_date >= prev["_archive"]):
+                    # Snapshot pra-kickoff terakhir menang (arch_date
+                    # <= tanggal laga sudah dijamin guard di atas).
+                    if prev is None or arch_date >= prev["_archive"]:
                         r = dict(r)
                         r["_archive"] = arch_date
                         chosen[key] = r
@@ -241,7 +249,8 @@ def _grade_all(today_iso):
     spine = _spine_index()
     labels = _labels_1h_index()
     store = {}
-    for (product, fdate, div, home, away), r in sorted(preds.items()):
+    for (product, fdate, div, _kh, _ka), r in sorted(preds.items()):
+        home, away = r.get("home", ""), r.get("away", "")
         line = _num(r.get("rec_line"))
         side = r.get("rec_side") or ""
         prob = _num(r.get("rec_prob"))
