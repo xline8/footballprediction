@@ -1,0 +1,6 @@
+div,date,home,away,market,line,side,prob,ev,ev_model,source,tier,competition,game_id
+D1,2026-11-06,hamburg,monchengladbach,OU,1.5,Over,0.7662,,,model,fallback,,
+E0,2026-11-06,everton,coventry,OU,3.5,Under,0.7845,,,model,fallback,,
+F1,2026-11-06,toulouse,strasbourg,OU,1.5,Over,0.7776,,,model,fallback,,
+I1,2026-11-06,venezia,udinese,OU,1.5,Over,0.7464,,,model,fallback,,
+SP1,2026-11-06,sevilla,alaves,OU,3.5,Under,0.7653,,,model,fallback,,

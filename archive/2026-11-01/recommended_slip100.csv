@@ -1,0 +1,13 @@
+date,home,away,competition,market,line,selection,o_1xbet,p_model,slip_total_odds,slip_joint_prob,slip_ev,in_band,search_truncated,pool_expanded_to
+2026-11-01,juventus,napoli,,OU,3.5,Under,1.33,0.8135,90.66,0.017,0.5382,true,false,2026-11-01
+2026-11-01,getafe,sevilla,,DC,,1X,1.58,0.684,90.66,0.017,0.5382,true,false,2026-11-01
+2026-11-01,frosinone,torino,,OU,2.5,Over,1.44,0.7366,90.66,0.017,0.5382,true,false,2026-11-01
+2026-11-01,union berlin,koln,,DC,,1X,1.58,0.6789,90.66,0.017,0.5382,true,false,2026-11-01
+2026-11-01,olympique lyonnais,angers,,OU,3.5,Under,1.56,0.677,90.66,0.017,0.5382,true,false,2026-11-01
+2026-11-01,strasbourg,auxerre,,OU,3.5,Under,1.55,0.6687,90.66,0.017,0.5382,true,false,2026-11-01
+2026-11-01,athletic bilbao,real sociedad,,OU,3.5,Under,1.46,0.6991,90.66,0.017,0.5382,true,false,2026-11-01
+2026-11-01,elche,valencia,,DC,,1X,1.43,0.7123,90.66,0.017,0.5382,true,false,2026-11-01
+2026-11-01,lazio,cagliari,,OU,3.5,Under,1.4,0.7246,90.66,0.017,0.5382,true,false,2026-11-01
+2026-11-01,liverpool,arsenal,,DC,,X2,1.42,0.7134,90.66,0.017,0.5382,true,false,2026-11-01
+2026-11-01,lecce,genoa,,DC,,12,1.41,0.7114,90.66,0.017,0.5382,true,false,2026-11-01
+2026-11-01,olympique marseille,toulouse,,DC,,1X,1.34,0.7355,90.66,0.017,0.5382,true,false,2026-11-01

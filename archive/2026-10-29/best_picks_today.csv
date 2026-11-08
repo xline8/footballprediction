@@ -1,0 +1,4 @@
+div,date,home,away,market,line,side,prob,ev,ev_model,source,tier,competition
+I1,2026-10-29,frosinone,lecce,OU,1.5,Over,0.8817,,,model,fallback,
+I1,2026-10-29,fiorentina,atalanta,OU,1.5,Over,0.8088,,,model,fallback,
+E0,2026-10-29,everton,newcastle,OU,1.5,Over,0.7992,,,model,fallback,EFL Cup

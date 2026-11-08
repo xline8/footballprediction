@@ -1,0 +1,81 @@
+{
+  "graded_ts": "2026-11-08T01:56:31.525145+00:00",
+  "n_picks": 359,
+  "n_graded": 359,
+  "n_pending": 0,
+  "headline_clv": {
+    "n_clv": 358,
+    "clv_coverage": 0.9972,
+    "mean_clv_ev": -0.0773,
+    "mean_clv_price": 0.02577,
+    "beat_close_rate": 0.5363
+  },
+  "competitions": {
+    "league": {
+      "n": 358,
+      "profit": -20.73,
+      "roi": -0.0579,
+      "markets": {
+        "1X2": {
+          "n": 310,
+          "profit": -19.08,
+          "roi": -0.0615,
+          "n_clv": 310,
+          "clv_coverage": 1.0,
+          "mean_clv_ev": -0.08661,
+          "mean_clv_price": 0.02287,
+          "beat_close_rate": 0.5129
+        },
+        "OU": {
+          "n": 48,
+          "profit": -1.65,
+          "roi": -0.0344,
+          "n_clv": 48,
+          "clv_coverage": 1.0,
+          "mean_clv_ev": -0.01713,
+          "mean_clv_price": 0.04447,
+          "beat_close_rate": 0.6875
+        }
+      },
+      "n_clv": 358,
+      "clv_coverage": 1.0,
+      "mean_clv_ev": -0.07729,
+      "mean_clv_price": 0.02577,
+      "beat_close_rate": 0.5363
+    },
+    "EFL Cup": {
+      "n": 1,
+      "profit": 0.22,
+      "roi": 0.22,
+      "markets": {
+        "OU": {
+          "n": 1,
+          "profit": 0.22,
+          "roi": 0.22,
+          "n_clv": 0,
+          "clv_coverage": 0.0,
+          "mean_clv_ev": null,
+          "mean_clv_price": null,
+          "beat_close_rate": null
+        }
+      },
+      "n_clv": 0,
+      "clv_coverage": 0.0,
+      "mean_clv_ev": null,
+      "mean_clv_price": null,
+      "beat_close_rate": null
+    },
+    "DFB Pokal": {
+      "n": 0,
+      "profit": 0,
+      "roi": null,
+      "markets": {},
+      "n_clv": 0,
+      "clv_coverage": null,
+      "mean_clv_ev": null,
+      "mean_clv_price": null,
+      "beat_close_rate": null
+    }
+  },
+  "note": "Settle di odds_open saat pick lahir (flat 1 unit). odds_close & CLV diisi dari all_matches_clean.csv kolom closing (hierarki Pinnacle -> AvgC -> B365C); clv_ev = p_fair_close(taken) * odds_open - 1, clv_price = odds_open / odds_close_taken - 1. CLV adalah metrik kualitas; settle tetap di odds_open. Ringkasan per kompetisi: liga gabungan (kunci 'league') + tiap piala."
+}

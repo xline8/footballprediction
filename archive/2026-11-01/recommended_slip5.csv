@@ -1,0 +1,5 @@
+date,home,away,competition,market,line,selection,o_1xbet,p_model,slip_total_odds,slip_joint_prob,slip_ev,in_band,search_truncated,pool_expanded_to
+2026-11-01,juventus,napoli,,OU,3.5,Under,1.33,0.8135,4.781,0.2783,0.3304,true,false,2026-11-01
+2026-11-01,getafe,sevilla,,DC,,1X,1.58,0.684,4.781,0.2783,0.3304,true,false,2026-11-01
+2026-11-01,frosinone,torino,,OU,2.5,Over,1.44,0.7366,4.781,0.2783,0.3304,true,false,2026-11-01
+2026-11-01,union berlin,koln,,DC,,1X,1.58,0.6789,4.781,0.2783,0.3304,true,false,2026-11-01

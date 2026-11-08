@@ -1,0 +1,191 @@
+{
+  "overall": {
+    "n": 170,
+    "mean_p": 0.7483,
+    "hit_rate": 0.6941,
+    "diff": -0.0542,
+    "push": 0
+  },
+  "overall_unique": {
+    "n": 131,
+    "mean_p": 0.7519,
+    "hit_rate": 0.7252,
+    "diff": -0.0267,
+    "push": 0
+  },
+  "by_product": {
+    "pick_teraman": {
+      "leg": {
+        "n": 70,
+        "mean_p": 0.8205,
+        "hit_rate": 0.8,
+        "diff": -0.0204,
+        "push": 0
+      }
+    },
+    "single": {
+      "leg": {
+        "n": 10,
+        "mean_p": 0.5671,
+        "hit_rate": 0.5,
+        "diff": -0.0671,
+        "push": 0
+      }
+    },
+    "slip2": {
+      "leg": {
+        "n": 17,
+        "mean_p": 0.7591,
+        "hit_rate": 0.5882,
+        "diff": -0.1708,
+        "push": 0
+      },
+      "unit": {
+        "n": 10,
+        "mean_p": 0.5716,
+        "hit_rate": 0.3,
+        "diff": -0.2716,
+        "push": 0
+      }
+    },
+    "slip5": {
+      "leg": {
+        "n": 16,
+        "mean_p": 0.7341,
+        "hit_rate": 0.625,
+        "diff": -0.1091,
+        "push": 0
+      },
+      "unit": {
+        "n": 4,
+        "mean_p": 0.2974,
+        "hit_rate": 0.0,
+        "diff": -0.2974,
+        "push": 0
+      }
+    },
+    "slip10": {
+      "leg": {
+        "n": 26,
+        "mean_p": 0.6611,
+        "hit_rate": 0.6154,
+        "diff": -0.0457,
+        "push": 0
+      },
+      "unit": {
+        "n": 8,
+        "mean_p": 0.2047,
+        "hit_rate": 0.0,
+        "diff": -0.2047,
+        "push": 0
+      }
+    },
+    "slip100": {
+      "leg": {
+        "n": 31,
+        "mean_p": 0.7186,
+        "hit_rate": 0.6774,
+        "diff": -0.0411,
+        "push": 0
+      },
+      "unit": {
+        "n": 3,
+        "mean_p": 0.0201,
+        "hit_rate": 0.0,
+        "diff": -0.0201,
+        "push": 0
+      }
+    }
+  },
+  "by_market": {
+    "1X2": {
+      "n": 6,
+      "mean_p": 0.5333,
+      "hit_rate": 0.3333,
+      "diff": -0.2,
+      "push": 0
+    },
+    "DC": {
+      "n": 43,
+      "mean_p": 0.7711,
+      "hit_rate": 0.814,
+      "diff": 0.0429,
+      "push": 0
+    },
+    "OU": {
+      "n": 120,
+      "mean_p": 0.7515,
+      "hit_rate": 0.6667,
+      "diff": -0.0848,
+      "push": 0
+    },
+    "BTS": {
+      "n": 1,
+      "mean_p": 0.6811,
+      "hit_rate": 1.0,
+      "diff": 0.3189,
+      "push": 0
+    },
+    "Corners": {
+      "n": 0,
+      "mean_p": null,
+      "hit_rate": null,
+      "diff": null,
+      "push": 0
+    }
+  },
+  "by_band": {
+    "0.50-0.60": {
+      "n": 8,
+      "mean_p": 0.5609,
+      "hit_rate": 0.375,
+      "diff": -0.1859,
+      "push": 0
+    },
+    "0.60-0.70": {
+      "n": 24,
+      "mean_p": 0.6662,
+      "hit_rate": 0.5833,
+      "diff": -0.0828,
+      "push": 0
+    },
+    "0.70-0.80": {
+      "n": 85,
+      "mean_p": 0.7525,
+      "hit_rate": 0.6824,
+      "diff": -0.0701,
+      "push": 0
+    },
+    "0.80-0.90": {
+      "n": 39,
+      "mean_p": 0.8369,
+      "hit_rate": 0.8205,
+      "diff": -0.0164,
+      "push": 0
+    },
+    "0.90-1.00": {
+      "n": 8,
+      "mean_p": 0.9194,
+      "hit_rate": 1.0,
+      "diff": 0.0806,
+      "push": 0
+    },
+    "<0.50": {
+      "n": 6,
+      "mean_p": 0.464,
+      "hit_rate": 0.5,
+      "diff": 0.036,
+      "push": 0
+    }
+  },
+  "brier_pick_teraman": 0.155,
+  "pending": {
+    "count": 0,
+    "reasons": {}
+  },
+  "ungradeable": {
+    "count": 0,
+    "reasons": {}
+  },
+  "updated_at": "2026-11-08T01:56:26+00:00"
+}

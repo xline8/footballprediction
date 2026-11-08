@@ -1,0 +1,2 @@
+div,date,home,away,competition,div_home,div_away,mu_shots_cs,r_cs,rec_line,rec_side,recommendation,rec_prob,p_gt_6.5,p_gt_7.5,p_gt_8.5,p_gt_9.5,p_gt_10.5,p_gt_11.5
+E0,2026-10-29,everton,newcastle,EFL Cup,E0,E0,10.22,1.187,9.5,Over,Over 9.5,0.5568,0.8615,0.7756,0.6712,0.5568,0.442,0.3357

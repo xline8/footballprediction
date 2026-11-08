@@ -1,0 +1,385 @@
+div,date,home,away,game_id,competition,market,line,selection,o_1xbet,o_median,p_implied,n_bookies,captured_at
+D1,2026-11-06,hamburg,monchengladbach,954082,,1X2,,1,2.49,2.4,0.3966,5,2026-11-05T01:55:05+0000
+D1,2026-11-06,hamburg,monchengladbach,954082,,1X2,,X,3.86,3.7,0.2573,5,2026-11-05T01:55:05+0000
+D1,2026-11-06,hamburg,monchengladbach,954082,,1X2,,2,2.83,2.75,0.3461,5,2026-11-05T01:55:05+0000
+D1,2026-11-06,hamburg,monchengladbach,954082,,DC,,1X,1.49,1.44,0.3265,5,2026-11-05T01:55:05+0000
+D1,2026-11-06,hamburg,monchengladbach,954082,,DC,,12,1.31,1.27,0.3702,5,2026-11-05T01:55:05+0000
+D1,2026-11-06,hamburg,monchengladbach,954082,,DC,,X2,1.6,1.55,0.3033,5,2026-11-05T01:55:05+0000
+D1,2026-11-06,hamburg,monchengladbach,954082,,DNB,,Dnb1,,1.74,0.5285,4,2026-11-05T01:55:05+0000
+D1,2026-11-06,hamburg,monchengladbach,954082,,DNB,,Dnb2,,1.95,0.4715,4,2026-11-05T01:55:05+0000
+D1,2026-11-06,hamburg,monchengladbach,954082,,OU,1.5,Over,1.19,1.18,0.7976,4,2026-11-05T01:55:05+0000
+D1,2026-11-06,hamburg,monchengladbach,954082,,OU,1.5,Under,4.55,4.65,0.2024,4,2026-11-05T01:55:05+0000
+D1,2026-11-06,hamburg,monchengladbach,954082,,OU,2.5,Over,1.69,1.57,0.6015,4,2026-11-05T01:55:05+0000
+D1,2026-11-06,hamburg,monchengladbach,954082,,OU,2.5,Under,2.36,2.37,0.3985,4,2026-11-05T01:55:05+0000
+D1,2026-11-06,hamburg,monchengladbach,954082,,OU,3.5,Over,2.55,2.5,0.3766,4,2026-11-05T01:55:05+0000
+D1,2026-11-06,hamburg,monchengladbach,954082,,OU,3.5,Under,1.52,1.51,0.6234,4,2026-11-05T01:55:05+0000
+D1,2026-11-06,hamburg,monchengladbach,954082,,BTS,,Yes,1.51,1.49,0.6266,5,2026-11-05T01:55:05+0000
+D1,2026-11-06,hamburg,monchengladbach,954082,,BTS,,No,2.42,2.5,0.3734,5,2026-11-05T01:55:05+0000
+D1,2026-11-07,borussia dortmund,elversberg,954229,,1X2,,1,,,,0,
+D1,2026-11-07,borussia dortmund,elversberg,954229,,1X2,,X,,,,0,
+D1,2026-11-07,borussia dortmund,elversberg,954229,,1X2,,2,,,,0,
+D1,2026-11-07,borussia dortmund,elversberg,954229,,DC,,1X,,,,0,
+D1,2026-11-07,borussia dortmund,elversberg,954229,,DC,,12,,,,0,
+D1,2026-11-07,borussia dortmund,elversberg,954229,,DC,,X2,,,,0,
+D1,2026-11-07,borussia dortmund,elversberg,954229,,DNB,,Dnb1,,,,0,
+D1,2026-11-07,borussia dortmund,elversberg,954229,,DNB,,Dnb2,,,,0,
+D1,2026-11-07,borussia dortmund,elversberg,954229,,OU,1.5,Over,,,,0,
+D1,2026-11-07,borussia dortmund,elversberg,954229,,OU,1.5,Under,,,,0,
+D1,2026-11-07,borussia dortmund,elversberg,954229,,OU,2.5,Over,,,,0,
+D1,2026-11-07,borussia dortmund,elversberg,954229,,OU,2.5,Under,,,,0,
+D1,2026-11-07,borussia dortmund,elversberg,954229,,OU,3.5,Over,,,,0,
+D1,2026-11-07,borussia dortmund,elversberg,954229,,OU,3.5,Under,,,,0,
+D1,2026-11-07,borussia dortmund,elversberg,954229,,BTS,,Yes,,,,0,
+D1,2026-11-07,borussia dortmund,elversberg,954229,,BTS,,No,,,,0,
+D1,2026-11-07,mainz 05,bayern munchen,954230,,1X2,,1,,,,0,
+D1,2026-11-07,mainz 05,bayern munchen,954230,,1X2,,X,,,,0,
+D1,2026-11-07,mainz 05,bayern munchen,954230,,1X2,,2,,,,0,
+D1,2026-11-07,mainz 05,bayern munchen,954230,,DC,,1X,,,,0,
+D1,2026-11-07,mainz 05,bayern munchen,954230,,DC,,12,,,,0,
+D1,2026-11-07,mainz 05,bayern munchen,954230,,DC,,X2,,,,0,
+D1,2026-11-07,mainz 05,bayern munchen,954230,,DNB,,Dnb1,,,,0,
+D1,2026-11-07,mainz 05,bayern munchen,954230,,DNB,,Dnb2,,,,0,
+D1,2026-11-07,mainz 05,bayern munchen,954230,,OU,1.5,Over,,,,0,
+D1,2026-11-07,mainz 05,bayern munchen,954230,,OU,1.5,Under,,,,0,
+D1,2026-11-07,mainz 05,bayern munchen,954230,,OU,2.5,Over,,,,0,
+D1,2026-11-07,mainz 05,bayern munchen,954230,,OU,2.5,Under,,,,0,
+D1,2026-11-07,mainz 05,bayern munchen,954230,,OU,3.5,Over,,,,0,
+D1,2026-11-07,mainz 05,bayern munchen,954230,,OU,3.5,Under,,,,0,
+D1,2026-11-07,mainz 05,bayern munchen,954230,,BTS,,Yes,,,,0,
+D1,2026-11-07,mainz 05,bayern munchen,954230,,BTS,,No,,,,0,
+D1,2026-11-07,paderborn,eintracht frankfurt,954231,,1X2,,1,,,,0,
+D1,2026-11-07,paderborn,eintracht frankfurt,954231,,1X2,,X,,,,0,
+D1,2026-11-07,paderborn,eintracht frankfurt,954231,,1X2,,2,,,,0,
+D1,2026-11-07,paderborn,eintracht frankfurt,954231,,DC,,1X,,,,0,
+D1,2026-11-07,paderborn,eintracht frankfurt,954231,,DC,,12,,,,0,
+D1,2026-11-07,paderborn,eintracht frankfurt,954231,,DC,,X2,,,,0,
+D1,2026-11-07,paderborn,eintracht frankfurt,954231,,DNB,,Dnb1,,,,0,
+D1,2026-11-07,paderborn,eintracht frankfurt,954231,,DNB,,Dnb2,,,,0,
+D1,2026-11-07,paderborn,eintracht frankfurt,954231,,OU,1.5,Over,,,,0,
+D1,2026-11-07,paderborn,eintracht frankfurt,954231,,OU,1.5,Under,,,,0,
+D1,2026-11-07,paderborn,eintracht frankfurt,954231,,OU,2.5,Over,,,,0,
+D1,2026-11-07,paderborn,eintracht frankfurt,954231,,OU,2.5,Under,,,,0,
+D1,2026-11-07,paderborn,eintracht frankfurt,954231,,OU,3.5,Over,,,,0,
+D1,2026-11-07,paderborn,eintracht frankfurt,954231,,OU,3.5,Under,,,,0,
+D1,2026-11-07,paderborn,eintracht frankfurt,954231,,BTS,,Yes,,,,0,
+D1,2026-11-07,paderborn,eintracht frankfurt,954231,,BTS,,No,,,,0,
+D1,2026-11-07,rb leipzig,augsburg,954232,,1X2,,1,,,,0,
+D1,2026-11-07,rb leipzig,augsburg,954232,,1X2,,X,,,,0,
+D1,2026-11-07,rb leipzig,augsburg,954232,,1X2,,2,,,,0,
+D1,2026-11-07,rb leipzig,augsburg,954232,,DC,,1X,,,,0,
+D1,2026-11-07,rb leipzig,augsburg,954232,,DC,,12,,,,0,
+D1,2026-11-07,rb leipzig,augsburg,954232,,DC,,X2,,,,0,
+D1,2026-11-07,rb leipzig,augsburg,954232,,DNB,,Dnb1,,,,0,
+D1,2026-11-07,rb leipzig,augsburg,954232,,DNB,,Dnb2,,,,0,
+D1,2026-11-07,rb leipzig,augsburg,954232,,OU,1.5,Over,,,,0,
+D1,2026-11-07,rb leipzig,augsburg,954232,,OU,1.5,Under,,,,0,
+D1,2026-11-07,rb leipzig,augsburg,954232,,OU,2.5,Over,,,,0,
+D1,2026-11-07,rb leipzig,augsburg,954232,,OU,2.5,Under,,,,0,
+D1,2026-11-07,rb leipzig,augsburg,954232,,OU,3.5,Over,,,,0,
+D1,2026-11-07,rb leipzig,augsburg,954232,,OU,3.5,Under,,,,0,
+D1,2026-11-07,rb leipzig,augsburg,954232,,BTS,,Yes,,,,0,
+D1,2026-11-07,rb leipzig,augsburg,954232,,BTS,,No,,,,0,
+D1,2026-11-07,stuttgart,werder bremen,954233,,1X2,,1,,,,0,
+D1,2026-11-07,stuttgart,werder bremen,954233,,1X2,,X,,,,0,
+D1,2026-11-07,stuttgart,werder bremen,954233,,1X2,,2,,,,0,
+D1,2026-11-07,stuttgart,werder bremen,954233,,DC,,1X,,,,0,
+D1,2026-11-07,stuttgart,werder bremen,954233,,DC,,12,,,,0,
+D1,2026-11-07,stuttgart,werder bremen,954233,,DC,,X2,,,,0,
+D1,2026-11-07,stuttgart,werder bremen,954233,,DNB,,Dnb1,,,,0,
+D1,2026-11-07,stuttgart,werder bremen,954233,,DNB,,Dnb2,,,,0,
+D1,2026-11-07,stuttgart,werder bremen,954233,,OU,1.5,Over,,,,0,
+D1,2026-11-07,stuttgart,werder bremen,954233,,OU,1.5,Under,,,,0,
+D1,2026-11-07,stuttgart,werder bremen,954233,,OU,2.5,Over,,,,0,
+D1,2026-11-07,stuttgart,werder bremen,954233,,OU,2.5,Under,,,,0,
+D1,2026-11-07,stuttgart,werder bremen,954233,,OU,3.5,Over,,,,0,
+D1,2026-11-07,stuttgart,werder bremen,954233,,OU,3.5,Under,,,,0,
+D1,2026-11-07,stuttgart,werder bremen,954233,,BTS,,Yes,,,,0,
+D1,2026-11-07,stuttgart,werder bremen,954233,,BTS,,No,,,,0,
+E0,2026-11-06,everton,coventry,954080,,1X2,,1,1.75,1.7,0.5597,5,2026-11-05T01:55:05+0000
+E0,2026-11-06,everton,coventry,954080,,1X2,,X,4.16,4.0,0.2379,5,2026-11-05T01:55:05+0000
+E0,2026-11-06,everton,coventry,954080,,1X2,,2,4.93,4.7,0.2024,5,2026-11-05T01:55:05+0000
+E0,2026-11-06,everton,coventry,954080,,DC,,1X,1.22,1.19,0.397,5,2026-11-05T01:55:05+0000
+E0,2026-11-06,everton,coventry,954080,,DC,,12,1.27,1.25,0.378,5,2026-11-05T01:55:05+0000
+E0,2026-11-06,everton,coventry,954080,,DC,,X2,2.21,2.1,0.225,5,2026-11-05T01:55:05+0000
+E0,2026-11-06,everton,coventry,954080,,DNB,,Dnb1,,1.265,0.7274,4,2026-11-05T01:55:05+0000
+E0,2026-11-06,everton,coventry,954080,,DNB,,Dnb2,,3.375,0.2726,4,2026-11-05T01:55:05+0000
+E0,2026-11-06,everton,coventry,954080,,OU,1.5,Over,1.22,1.215,0.7735,4,2026-11-05T01:55:05+0000
+E0,2026-11-06,everton,coventry,954080,,OU,1.5,Under,4.07,4.15,0.2265,4,2026-11-05T01:55:05+0000
+E0,2026-11-06,everton,coventry,954080,,OU,2.5,Over,1.81,1.705,0.5537,4,2026-11-05T01:55:05+0000
+E0,2026-11-06,everton,coventry,954080,,OU,2.5,Under,2.16,2.115,0.4463,4,2026-11-05T01:55:05+0000
+E0,2026-11-06,everton,coventry,954080,,OU,3.5,Over,2.9,2.825,0.3337,4,2026-11-05T01:55:05+0000
+E0,2026-11-06,everton,coventry,954080,,OU,3.5,Under,1.42,1.415,0.6663,4,2026-11-05T01:55:05+0000
+E0,2026-11-06,everton,coventry,954080,,BTS,,Yes,1.71,1.68,0.5532,5,2026-11-05T01:55:05+0000
+E0,2026-11-06,everton,coventry,954080,,BTS,,No,2.04,2.08,0.4468,5,2026-11-05T01:55:05+0000
+E0,2026-11-07,leeds united,tottenham,954221,,1X2,,1,,,,0,
+E0,2026-11-07,leeds united,tottenham,954221,,1X2,,X,,,,0,
+E0,2026-11-07,leeds united,tottenham,954221,,1X2,,2,,,,0,
+E0,2026-11-07,leeds united,tottenham,954221,,DC,,1X,,,,0,
+E0,2026-11-07,leeds united,tottenham,954221,,DC,,12,,,,0,
+E0,2026-11-07,leeds united,tottenham,954221,,DC,,X2,,,,0,
+E0,2026-11-07,leeds united,tottenham,954221,,DNB,,Dnb1,,,,0,
+E0,2026-11-07,leeds united,tottenham,954221,,DNB,,Dnb2,,,,0,
+E0,2026-11-07,leeds united,tottenham,954221,,OU,1.5,Over,,,,0,
+E0,2026-11-07,leeds united,tottenham,954221,,OU,1.5,Under,,,,0,
+E0,2026-11-07,leeds united,tottenham,954221,,OU,2.5,Over,,,,0,
+E0,2026-11-07,leeds united,tottenham,954221,,OU,2.5,Under,,,,0,
+E0,2026-11-07,leeds united,tottenham,954221,,OU,3.5,Over,,,,0,
+E0,2026-11-07,leeds united,tottenham,954221,,OU,3.5,Under,,,,0,
+E0,2026-11-07,leeds united,tottenham,954221,,BTS,,Yes,,,,0,
+E0,2026-11-07,leeds united,tottenham,954221,,BTS,,No,,,,0,
+E0,2026-11-07,arsenal,hull city,954222,,1X2,,1,,,,0,
+E0,2026-11-07,arsenal,hull city,954222,,1X2,,X,,,,0,
+E0,2026-11-07,arsenal,hull city,954222,,1X2,,2,,,,0,
+E0,2026-11-07,arsenal,hull city,954222,,DC,,1X,,,,0,
+E0,2026-11-07,arsenal,hull city,954222,,DC,,12,,,,0,
+E0,2026-11-07,arsenal,hull city,954222,,DC,,X2,,,,0,
+E0,2026-11-07,arsenal,hull city,954222,,DNB,,Dnb1,,,,0,
+E0,2026-11-07,arsenal,hull city,954222,,DNB,,Dnb2,,,,0,
+E0,2026-11-07,arsenal,hull city,954222,,OU,1.5,Over,,,,0,
+E0,2026-11-07,arsenal,hull city,954222,,OU,1.5,Under,,,,0,
+E0,2026-11-07,arsenal,hull city,954222,,OU,2.5,Over,,,,0,
+E0,2026-11-07,arsenal,hull city,954222,,OU,2.5,Under,,,,0,
+E0,2026-11-07,arsenal,hull city,954222,,OU,3.5,Over,,,,0,
+E0,2026-11-07,arsenal,hull city,954222,,OU,3.5,Under,,,,0,
+E0,2026-11-07,arsenal,hull city,954222,,BTS,,Yes,,,,0,
+E0,2026-11-07,arsenal,hull city,954222,,BTS,,No,,,,0,
+E0,2026-11-07,fulham,newcastle,954223,,1X2,,1,,,,0,
+E0,2026-11-07,fulham,newcastle,954223,,1X2,,X,,,,0,
+E0,2026-11-07,fulham,newcastle,954223,,1X2,,2,,,,0,
+E0,2026-11-07,fulham,newcastle,954223,,DC,,1X,,,,0,
+E0,2026-11-07,fulham,newcastle,954223,,DC,,12,,,,0,
+E0,2026-11-07,fulham,newcastle,954223,,DC,,X2,,,,0,
+E0,2026-11-07,fulham,newcastle,954223,,DNB,,Dnb1,,,,0,
+E0,2026-11-07,fulham,newcastle,954223,,DNB,,Dnb2,,,,0,
+E0,2026-11-07,fulham,newcastle,954223,,OU,1.5,Over,,,,0,
+E0,2026-11-07,fulham,newcastle,954223,,OU,1.5,Under,,,,0,
+E0,2026-11-07,fulham,newcastle,954223,,OU,2.5,Over,,,,0,
+E0,2026-11-07,fulham,newcastle,954223,,OU,2.5,Under,,,,0,
+E0,2026-11-07,fulham,newcastle,954223,,OU,3.5,Over,,,,0,
+E0,2026-11-07,fulham,newcastle,954223,,OU,3.5,Under,,,,0,
+E0,2026-11-07,fulham,newcastle,954223,,BTS,,Yes,,,,0,
+E0,2026-11-07,fulham,newcastle,954223,,BTS,,No,,,,0,
+E0,2026-11-07,nott m forest,man city,954224,,1X2,,1,,,,0,
+E0,2026-11-07,nott m forest,man city,954224,,1X2,,X,,,,0,
+E0,2026-11-07,nott m forest,man city,954224,,1X2,,2,,,,0,
+E0,2026-11-07,nott m forest,man city,954224,,DC,,1X,,,,0,
+E0,2026-11-07,nott m forest,man city,954224,,DC,,12,,,,0,
+E0,2026-11-07,nott m forest,man city,954224,,DC,,X2,,,,0,
+E0,2026-11-07,nott m forest,man city,954224,,DNB,,Dnb1,,,,0,
+E0,2026-11-07,nott m forest,man city,954224,,DNB,,Dnb2,,,,0,
+E0,2026-11-07,nott m forest,man city,954224,,OU,1.5,Over,,,,0,
+E0,2026-11-07,nott m forest,man city,954224,,OU,1.5,Under,,,,0,
+E0,2026-11-07,nott m forest,man city,954224,,OU,2.5,Over,,,,0,
+E0,2026-11-07,nott m forest,man city,954224,,OU,2.5,Under,,,,0,
+E0,2026-11-07,nott m forest,man city,954224,,OU,3.5,Over,,,,0,
+E0,2026-11-07,nott m forest,man city,954224,,OU,3.5,Under,,,,0,
+E0,2026-11-07,nott m forest,man city,954224,,BTS,,Yes,,,,0,
+E0,2026-11-07,nott m forest,man city,954224,,BTS,,No,,,,0,
+F1,2026-11-06,toulouse,strasbourg,954084,,1X2,,1,2.09,2.05,0.4613,5,2026-11-05T01:55:05+0000
+F1,2026-11-06,toulouse,strasbourg,954084,,1X2,,X,3.99,3.75,0.2522,5,2026-11-05T01:55:05+0000
+F1,2026-11-06,toulouse,strasbourg,954084,,1X2,,2,3.51,3.3,0.2866,5,2026-11-05T01:55:05+0000
+F1,2026-11-06,toulouse,strasbourg,954084,,DC,,1X,1.35,1.32,0.3558,5,2026-11-05T01:55:05+0000
+F1,2026-11-06,toulouse,strasbourg,954084,,DC,,12,1.29,1.26,0.3727,5,2026-11-05T01:55:05+0000
+F1,2026-11-06,toulouse,strasbourg,954084,,DC,,X2,1.83,1.73,0.2715,5,2026-11-05T01:55:05+0000
+F1,2026-11-06,toulouse,strasbourg,954084,,DNB,,Dnb1,,1.5,0.6154,4,2026-11-05T01:55:05+0000
+F1,2026-11-06,toulouse,strasbourg,954084,,DNB,,Dnb2,,2.4,0.3846,4,2026-11-05T01:55:05+0000
+F1,2026-11-06,toulouse,strasbourg,954084,,OU,1.5,Over,1.18,1.165,0.8079,4,2026-11-05T01:55:05+0000
+F1,2026-11-06,toulouse,strasbourg,954084,,OU,1.5,Under,4.71,4.9,0.1921,4,2026-11-05T01:55:05+0000
+F1,2026-11-06,toulouse,strasbourg,954084,,OU,2.5,Over,1.66,1.565,0.6018,4,2026-11-05T01:55:05+0000
+F1,2026-11-06,toulouse,strasbourg,954084,,OU,2.5,Under,2.42,2.365,0.3982,4,2026-11-05T01:55:05+0000
+F1,2026-11-06,toulouse,strasbourg,954084,,OU,3.5,Over,2.49,2.46,0.3835,4,2026-11-05T01:55:05+0000
+F1,2026-11-06,toulouse,strasbourg,954084,,OU,3.5,Under,1.54,1.53,0.6165,4,2026-11-05T01:55:05+0000
+F1,2026-11-06,toulouse,strasbourg,954084,,BTS,,Yes,1.51,1.5,0.6203,5,2026-11-05T01:55:05+0000
+F1,2026-11-06,toulouse,strasbourg,954084,,BTS,,No,2.42,2.45,0.3797,5,2026-11-05T01:55:05+0000
+F1,2026-11-07,auxerre,paris,954238,,1X2,,1,,,,0,
+F1,2026-11-07,auxerre,paris,954238,,1X2,,X,,,,0,
+F1,2026-11-07,auxerre,paris,954238,,1X2,,2,,,,0,
+F1,2026-11-07,auxerre,paris,954238,,DC,,1X,,,,0,
+F1,2026-11-07,auxerre,paris,954238,,DC,,12,,,,0,
+F1,2026-11-07,auxerre,paris,954238,,DC,,X2,,,,0,
+F1,2026-11-07,auxerre,paris,954238,,DNB,,Dnb1,,,,0,
+F1,2026-11-07,auxerre,paris,954238,,DNB,,Dnb2,,,,0,
+F1,2026-11-07,auxerre,paris,954238,,OU,1.5,Over,,,,0,
+F1,2026-11-07,auxerre,paris,954238,,OU,1.5,Under,,,,0,
+F1,2026-11-07,auxerre,paris,954238,,OU,2.5,Over,,,,0,
+F1,2026-11-07,auxerre,paris,954238,,OU,2.5,Under,,,,0,
+F1,2026-11-07,auxerre,paris,954238,,OU,3.5,Over,,,,0,
+F1,2026-11-07,auxerre,paris,954238,,OU,3.5,Under,,,,0,
+F1,2026-11-07,auxerre,paris,954238,,BTS,,Yes,,,,0,
+F1,2026-11-07,auxerre,paris,954238,,BTS,,No,,,,0,
+F1,2026-11-07,paris saint germain,troyes,954239,,1X2,,1,,,,0,
+F1,2026-11-07,paris saint germain,troyes,954239,,1X2,,X,,,,0,
+F1,2026-11-07,paris saint germain,troyes,954239,,1X2,,2,,,,0,
+F1,2026-11-07,paris saint germain,troyes,954239,,DC,,1X,,,,0,
+F1,2026-11-07,paris saint germain,troyes,954239,,DC,,12,,,,0,
+F1,2026-11-07,paris saint germain,troyes,954239,,DC,,X2,,,,0,
+F1,2026-11-07,paris saint germain,troyes,954239,,DNB,,Dnb1,,,,0,
+F1,2026-11-07,paris saint germain,troyes,954239,,DNB,,Dnb2,,,,0,
+F1,2026-11-07,paris saint germain,troyes,954239,,OU,1.5,Over,,,,0,
+F1,2026-11-07,paris saint germain,troyes,954239,,OU,1.5,Under,,,,0,
+F1,2026-11-07,paris saint germain,troyes,954239,,OU,2.5,Over,,,,0,
+F1,2026-11-07,paris saint germain,troyes,954239,,OU,2.5,Under,,,,0,
+F1,2026-11-07,paris saint germain,troyes,954239,,OU,3.5,Over,,,,0,
+F1,2026-11-07,paris saint germain,troyes,954239,,OU,3.5,Under,,,,0,
+F1,2026-11-07,paris saint germain,troyes,954239,,BTS,,Yes,,,,0,
+F1,2026-11-07,paris saint germain,troyes,954239,,BTS,,No,,,,0,
+I1,2026-11-06,venezia,udinese,954083,,1X2,,1,2.22,2.2,0.4293,5,2026-11-05T01:55:05+0000
+I1,2026-11-06,venezia,udinese,954083,,1X2,,X,3.79,3.55,0.266,5,2026-11-05T01:55:05+0000
+I1,2026-11-06,venezia,udinese,954083,,1X2,,2,3.32,3.1,0.3047,5,2026-11-05T01:55:05+0000
+I1,2026-11-06,venezia,udinese,954083,,DC,,1X,1.38,1.34,0.3504,5,2026-11-05T01:55:05+0000
+I1,2026-11-06,venezia,udinese,954083,,DC,,12,1.31,1.28,0.3668,5,2026-11-05T01:55:05+0000
+I1,2026-11-06,venezia,udinese,954083,,DC,,X2,1.74,1.66,0.2828,5,2026-11-05T01:55:05+0000
+I1,2026-11-06,venezia,udinese,954083,,DNB,,Dnb1,,1.565,0.5898,4,2026-11-05T01:55:05+0000
+I1,2026-11-06,venezia,udinese,954083,,DNB,,Dnb2,,2.25,0.4102,4,2026-11-05T01:55:05+0000
+I1,2026-11-06,venezia,udinese,954083,,OU,1.5,Over,1.22,1.205,0.7781,4,2026-11-05T01:55:05+0000
+I1,2026-11-06,venezia,udinese,954083,,OU,1.5,Under,4.15,4.225,0.2219,4,2026-11-05T01:55:05+0000
+I1,2026-11-06,venezia,udinese,954083,,OU,2.5,Over,1.76,1.67,0.5628,4,2026-11-05T01:55:05+0000
+I1,2026-11-06,venezia,udinese,954083,,OU,2.5,Under,2.24,2.15,0.4372,4,2026-11-05T01:55:05+0000
+I1,2026-11-06,venezia,udinese,954083,,OU,3.5,Over,2.69,2.695,0.3482,4,2026-11-05T01:55:05+0000
+I1,2026-11-06,venezia,udinese,954083,,OU,3.5,Under,1.47,1.44,0.6518,4,2026-11-05T01:55:05+0000
+I1,2026-11-06,venezia,udinese,954083,,BTS,,Yes,1.57,1.55,0.5953,5,2026-11-05T01:55:05+0000
+I1,2026-11-06,venezia,udinese,954083,,BTS,,No,2.28,2.28,0.4047,5,2026-11-05T01:55:05+0000
+I1,2026-11-07,cagliari,frosinone,954234,,1X2,,1,,,,0,
+I1,2026-11-07,cagliari,frosinone,954234,,1X2,,X,,,,0,
+I1,2026-11-07,cagliari,frosinone,954234,,1X2,,2,,,,0,
+I1,2026-11-07,cagliari,frosinone,954234,,DC,,1X,,,,0,
+I1,2026-11-07,cagliari,frosinone,954234,,DC,,12,,,,0,
+I1,2026-11-07,cagliari,frosinone,954234,,DC,,X2,,,,0,
+I1,2026-11-07,cagliari,frosinone,954234,,DNB,,Dnb1,,,,0,
+I1,2026-11-07,cagliari,frosinone,954234,,DNB,,Dnb2,,,,0,
+I1,2026-11-07,cagliari,frosinone,954234,,OU,1.5,Over,,,,0,
+I1,2026-11-07,cagliari,frosinone,954234,,OU,1.5,Under,,,,0,
+I1,2026-11-07,cagliari,frosinone,954234,,OU,2.5,Over,,,,0,
+I1,2026-11-07,cagliari,frosinone,954234,,OU,2.5,Under,,,,0,
+I1,2026-11-07,cagliari,frosinone,954234,,OU,3.5,Over,,,,0,
+I1,2026-11-07,cagliari,frosinone,954234,,OU,3.5,Under,,,,0,
+I1,2026-11-07,cagliari,frosinone,954234,,BTS,,Yes,,,,0,
+I1,2026-11-07,cagliari,frosinone,954234,,BTS,,No,,,,0,
+I1,2026-11-07,torino,lecce,954235,,1X2,,1,,,,0,
+I1,2026-11-07,torino,lecce,954235,,1X2,,X,,,,0,
+I1,2026-11-07,torino,lecce,954235,,1X2,,2,,,,0,
+I1,2026-11-07,torino,lecce,954235,,DC,,1X,,,,0,
+I1,2026-11-07,torino,lecce,954235,,DC,,12,,,,0,
+I1,2026-11-07,torino,lecce,954235,,DC,,X2,,,,0,
+I1,2026-11-07,torino,lecce,954235,,DNB,,Dnb1,,,,0,
+I1,2026-11-07,torino,lecce,954235,,DNB,,Dnb2,,,,0,
+I1,2026-11-07,torino,lecce,954235,,OU,1.5,Over,,,,0,
+I1,2026-11-07,torino,lecce,954235,,OU,1.5,Under,,,,0,
+I1,2026-11-07,torino,lecce,954235,,OU,2.5,Over,,,,0,
+I1,2026-11-07,torino,lecce,954235,,OU,2.5,Under,,,,0,
+I1,2026-11-07,torino,lecce,954235,,OU,3.5,Over,,,,0,
+I1,2026-11-07,torino,lecce,954235,,OU,3.5,Under,,,,0,
+I1,2026-11-07,torino,lecce,954235,,BTS,,Yes,,,,0,
+I1,2026-11-07,torino,lecce,954235,,BTS,,No,,,,0,
+I1,2026-11-07,parma,bologna,954236,,1X2,,1,,,,0,
+I1,2026-11-07,parma,bologna,954236,,1X2,,X,,,,0,
+I1,2026-11-07,parma,bologna,954236,,1X2,,2,,,,0,
+I1,2026-11-07,parma,bologna,954236,,DC,,1X,,,,0,
+I1,2026-11-07,parma,bologna,954236,,DC,,12,,,,0,
+I1,2026-11-07,parma,bologna,954236,,DC,,X2,,,,0,
+I1,2026-11-07,parma,bologna,954236,,DNB,,Dnb1,,,,0,
+I1,2026-11-07,parma,bologna,954236,,DNB,,Dnb2,,,,0,
+I1,2026-11-07,parma,bologna,954236,,OU,1.5,Over,,,,0,
+I1,2026-11-07,parma,bologna,954236,,OU,1.5,Under,,,,0,
+I1,2026-11-07,parma,bologna,954236,,OU,2.5,Over,,,,0,
+I1,2026-11-07,parma,bologna,954236,,OU,2.5,Under,,,,0,
+I1,2026-11-07,parma,bologna,954236,,OU,3.5,Over,,,,0,
+I1,2026-11-07,parma,bologna,954236,,OU,3.5,Under,,,,0,
+I1,2026-11-07,parma,bologna,954236,,BTS,,Yes,,,,0,
+I1,2026-11-07,parma,bologna,954236,,BTS,,No,,,,0,
+I1,2026-11-07,roma,sassuolo,954237,,1X2,,1,,,,0,
+I1,2026-11-07,roma,sassuolo,954237,,1X2,,X,,,,0,
+I1,2026-11-07,roma,sassuolo,954237,,1X2,,2,,,,0,
+I1,2026-11-07,roma,sassuolo,954237,,DC,,1X,,,,0,
+I1,2026-11-07,roma,sassuolo,954237,,DC,,12,,,,0,
+I1,2026-11-07,roma,sassuolo,954237,,DC,,X2,,,,0,
+I1,2026-11-07,roma,sassuolo,954237,,DNB,,Dnb1,,,,0,
+I1,2026-11-07,roma,sassuolo,954237,,DNB,,Dnb2,,,,0,
+I1,2026-11-07,roma,sassuolo,954237,,OU,1.5,Over,,,,0,
+I1,2026-11-07,roma,sassuolo,954237,,OU,1.5,Under,,,,0,
+I1,2026-11-07,roma,sassuolo,954237,,OU,2.5,Over,,,,0,
+I1,2026-11-07,roma,sassuolo,954237,,OU,2.5,Under,,,,0,
+I1,2026-11-07,roma,sassuolo,954237,,OU,3.5,Over,,,,0,
+I1,2026-11-07,roma,sassuolo,954237,,OU,3.5,Under,,,,0,
+I1,2026-11-07,roma,sassuolo,954237,,BTS,,Yes,,,,0,
+I1,2026-11-07,roma,sassuolo,954237,,BTS,,No,,,,0,
+SP1,2026-11-06,sevilla,alaves,954081,,1X2,,1,2.05,1.96,0.4867,5,2026-11-05T01:55:05+0000
+SP1,2026-11-06,sevilla,alaves,954081,,1X2,,X,3.49,3.4,0.2806,5,2026-11-05T01:55:05+0000
+SP1,2026-11-06,sevilla,alaves,954081,,1X2,,2,4.15,4.1,0.2327,5,2026-11-05T01:55:05+0000
+SP1,2026-11-06,sevilla,alaves,954081,,DC,,1X,1.27,1.23,0.3803,5,2026-11-05T01:55:05+0000
+SP1,2026-11-06,sevilla,alaves,954081,,DC,,12,1.35,1.3,0.3598,5,2026-11-05T01:55:05+0000
+SP1,2026-11-06,sevilla,alaves,954081,,DC,,X2,1.86,1.8,0.2599,5,2026-11-05T01:55:05+0000
+SP1,2026-11-06,sevilla,alaves,954081,,DNB,,Dnb1,,1.37,0.6695,4,2026-11-05T01:55:05+0000
+SP1,2026-11-06,sevilla,alaves,954081,,DNB,,Dnb2,,2.775,0.3305,4,2026-11-05T01:55:05+0000
+SP1,2026-11-06,sevilla,alaves,954081,,OU,1.5,Over,1.38,1.375,0.6791,4,2026-11-05T01:55:05+0000
+SP1,2026-11-06,sevilla,alaves,954081,,OU,1.5,Under,2.95,2.91,0.3209,4,2026-11-05T01:55:05+0000
+SP1,2026-11-06,sevilla,alaves,954081,,OU,2.5,Over,2.28,2.215,0.4306,4,2026-11-05T01:55:05+0000
+SP1,2026-11-06,sevilla,alaves,954081,,OU,2.5,Under,1.73,1.675,0.5694,4,2026-11-05T01:55:05+0000
+SP1,2026-11-06,sevilla,alaves,954081,,OU,3.5,Over,4.1,4.05,0.2322,4,2026-11-05T01:55:05+0000
+SP1,2026-11-06,sevilla,alaves,954081,,OU,3.5,Under,1.23,1.225,0.7678,4,2026-11-05T01:55:05+0000
+SP1,2026-11-06,sevilla,alaves,954081,,BTS,,Yes,1.93,1.93,0.4826,5,2026-11-05T01:55:05+0000
+SP1,2026-11-06,sevilla,alaves,954081,,BTS,,No,1.8,1.8,0.5174,5,2026-11-05T01:55:05+0000
+SP1,2026-11-07,malaga,racing santander,954225,,1X2,,1,,,,0,
+SP1,2026-11-07,malaga,racing santander,954225,,1X2,,X,,,,0,
+SP1,2026-11-07,malaga,racing santander,954225,,1X2,,2,,,,0,
+SP1,2026-11-07,malaga,racing santander,954225,,DC,,1X,,,,0,
+SP1,2026-11-07,malaga,racing santander,954225,,DC,,12,,,,0,
+SP1,2026-11-07,malaga,racing santander,954225,,DC,,X2,,,,0,
+SP1,2026-11-07,malaga,racing santander,954225,,DNB,,Dnb1,,,,0,
+SP1,2026-11-07,malaga,racing santander,954225,,DNB,,Dnb2,,,,0,
+SP1,2026-11-07,malaga,racing santander,954225,,OU,1.5,Over,,,,0,
+SP1,2026-11-07,malaga,racing santander,954225,,OU,1.5,Under,,,,0,
+SP1,2026-11-07,malaga,racing santander,954225,,OU,2.5,Over,,,,0,
+SP1,2026-11-07,malaga,racing santander,954225,,OU,2.5,Under,,,,0,
+SP1,2026-11-07,malaga,racing santander,954225,,OU,3.5,Over,,,,0,
+SP1,2026-11-07,malaga,racing santander,954225,,OU,3.5,Under,,,,0,
+SP1,2026-11-07,malaga,racing santander,954225,,BTS,,Yes,,,,0,
+SP1,2026-11-07,malaga,racing santander,954225,,BTS,,No,,,,0,
+SP1,2026-11-07,espanyol,la coruna,954226,,1X2,,1,,,,0,
+SP1,2026-11-07,espanyol,la coruna,954226,,1X2,,X,,,,0,
+SP1,2026-11-07,espanyol,la coruna,954226,,1X2,,2,,,,0,
+SP1,2026-11-07,espanyol,la coruna,954226,,DC,,1X,,,,0,
+SP1,2026-11-07,espanyol,la coruna,954226,,DC,,12,,,,0,
+SP1,2026-11-07,espanyol,la coruna,954226,,DC,,X2,,,,0,
+SP1,2026-11-07,espanyol,la coruna,954226,,DNB,,Dnb1,,,,0,
+SP1,2026-11-07,espanyol,la coruna,954226,,DNB,,Dnb2,,,,0,
+SP1,2026-11-07,espanyol,la coruna,954226,,OU,1.5,Over,,,,0,
+SP1,2026-11-07,espanyol,la coruna,954226,,OU,1.5,Under,,,,0,
+SP1,2026-11-07,espanyol,la coruna,954226,,OU,2.5,Over,,,,0,
+SP1,2026-11-07,espanyol,la coruna,954226,,OU,2.5,Under,,,,0,
+SP1,2026-11-07,espanyol,la coruna,954226,,OU,3.5,Over,,,,0,
+SP1,2026-11-07,espanyol,la coruna,954226,,OU,3.5,Under,,,,0,
+SP1,2026-11-07,espanyol,la coruna,954226,,BTS,,Yes,,,,0,
+SP1,2026-11-07,espanyol,la coruna,954226,,BTS,,No,,,,0,
+SP1,2026-11-07,osasuna,athletic bilbao,954227,,1X2,,1,,,,0,
+SP1,2026-11-07,osasuna,athletic bilbao,954227,,1X2,,X,,,,0,
+SP1,2026-11-07,osasuna,athletic bilbao,954227,,1X2,,2,,,,0,
+SP1,2026-11-07,osasuna,athletic bilbao,954227,,DC,,1X,,,,0,
+SP1,2026-11-07,osasuna,athletic bilbao,954227,,DC,,12,,,,0,
+SP1,2026-11-07,osasuna,athletic bilbao,954227,,DC,,X2,,,,0,
+SP1,2026-11-07,osasuna,athletic bilbao,954227,,DNB,,Dnb1,,,,0,
+SP1,2026-11-07,osasuna,athletic bilbao,954227,,DNB,,Dnb2,,,,0,
+SP1,2026-11-07,osasuna,athletic bilbao,954227,,OU,1.5,Over,,,,0,
+SP1,2026-11-07,osasuna,athletic bilbao,954227,,OU,1.5,Under,,,,0,
+SP1,2026-11-07,osasuna,athletic bilbao,954227,,OU,2.5,Over,,,,0,
+SP1,2026-11-07,osasuna,athletic bilbao,954227,,OU,2.5,Under,,,,0,
+SP1,2026-11-07,osasuna,athletic bilbao,954227,,OU,3.5,Over,,,,0,
+SP1,2026-11-07,osasuna,athletic bilbao,954227,,OU,3.5,Under,,,,0,
+SP1,2026-11-07,osasuna,athletic bilbao,954227,,BTS,,Yes,,,,0,
+SP1,2026-11-07,osasuna,athletic bilbao,954227,,BTS,,No,,,,0,
+SP1,2026-11-07,valencia,real madrid,954228,,1X2,,1,,,,0,
+SP1,2026-11-07,valencia,real madrid,954228,,1X2,,X,,,,0,
+SP1,2026-11-07,valencia,real madrid,954228,,1X2,,2,,,,0,
+SP1,2026-11-07,valencia,real madrid,954228,,DC,,1X,,,,0,
+SP1,2026-11-07,valencia,real madrid,954228,,DC,,12,,,,0,
+SP1,2026-11-07,valencia,real madrid,954228,,DC,,X2,,,,0,
+SP1,2026-11-07,valencia,real madrid,954228,,DNB,,Dnb1,,,,0,
+SP1,2026-11-07,valencia,real madrid,954228,,DNB,,Dnb2,,,,0,
+SP1,2026-11-07,valencia,real madrid,954228,,OU,1.5,Over,,,,0,
+SP1,2026-11-07,valencia,real madrid,954228,,OU,1.5,Under,,,,0,
+SP1,2026-11-07,valencia,real madrid,954228,,OU,2.5,Over,,,,0,
+SP1,2026-11-07,valencia,real madrid,954228,,OU,2.5,Under,,,,0,
+SP1,2026-11-07,valencia,real madrid,954228,,OU,3.5,Over,,,,0,
+SP1,2026-11-07,valencia,real madrid,954228,,OU,3.5,Under,,,,0,
+SP1,2026-11-07,valencia,real madrid,954228,,BTS,,Yes,,,,0,
+SP1,2026-11-07,valencia,real madrid,954228,,BTS,,No,,,,0,

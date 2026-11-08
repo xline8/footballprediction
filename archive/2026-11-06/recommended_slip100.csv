@@ -1,0 +1,14 @@
+date,home,away,competition,market,line,selection,o_1xbet,p_model,slip_total_odds,slip_joint_prob,slip_ev,in_band,search_truncated,pool_expanded_to
+2026-11-06,hamburg,monchengladbach,,OU,3.5,Under,1.52,0.7032,90.379,0.0128,0.1585,true,true,2026-11-07
+2026-11-06,toulouse,strasbourg,,OU,3.5,Under,1.55,0.6883,90.379,0.0128,0.1585,true,true,2026-11-07
+2026-11-07,auxerre,paris,,OU,3.5,Under,1.46,0.7235,90.379,0.0128,0.1585,true,true,2026-11-07
+2026-11-07,torino,lecce,,OU,3.5,Under,1.34,0.7607,90.379,0.0128,0.1585,true,true,2026-11-07
+2026-11-06,venezia,udinese,,OU,3.5,Under,1.42,0.72,90.379,0.0128,0.1585,true,true,2026-11-07
+2026-11-07,nott m forest,man city,,OU,3.5,Under,1.5,0.6825,90.379,0.0128,0.1585,true,true,2026-11-07
+2026-11-07,fulham,newcastle,,OU,3.5,Under,1.5,0.6814,90.379,0.0128,0.1585,true,true,2026-11-07
+2026-11-07,borussia dortmund,elversberg,,OU,2.5,Over,1.35,0.7514,90.379,0.0128,0.1585,true,true,2026-11-07
+2026-11-07,malaga,racing santander,,DC,,12,1.32,0.7527,90.379,0.0128,0.1585,true,true,2026-11-07
+2026-11-06,sevilla,alaves,,DC,,12,1.36,0.7173,90.379,0.0128,0.1585,true,true,2026-11-07
+2026-11-07,espanyol,la coruna,,DC,,12,1.36,0.715,90.379,0.0128,0.1585,true,true,2026-11-07
+2026-11-07,parma,bologna,,DC,,12,1.33,0.7274,90.379,0.0128,0.1585,true,true,2026-11-07
+2026-11-07,mainz 05,bayern munchen,,BTS,,Yes,1.4,0.6811,90.379,0.0128,0.1585,true,true,2026-11-07

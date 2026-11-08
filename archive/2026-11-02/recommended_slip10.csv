@@ -1,0 +1,6 @@
+date,home,away,competition,market,line,selection,o_1xbet,p_model,slip_total_odds,slip_joint_prob,slip_ev,in_band,search_truncated,pool_expanded_to
+2026-11-02,atalanta,parma,,OU,3.5,Under,1.54,0.7,5.853,0.1882,0.1018,false,false,2026-11-06
+2026-11-02,newcastle,everton,,OU,3.5,Under,1.46,0.699,5.853,0.1882,0.1018,false,false,2026-11-06
+2026-11-02,lorient,brest,,DC,,1X,1.44,0.6975,5.853,0.1882,0.1018,false,false,2026-11-06
+2026-11-02,la coruna,osasuna,,OU,1.5,Over,1.38,0.7289,5.853,0.1882,0.1018,false,false,2026-11-06
+2026-11-02,sassuolo,fiorentina,,DC,,12,1.31,0.7567,5.853,0.1882,0.1018,false,false,2026-11-06
