@@ -1,0 +1,34 @@
+# BE-FirstDivisionA (Belgium) — league config
+league: BE-FirstDivisionA
+country: Belgium
+fotmob_id: 40
+tier: 1
+warehouse: data_enrichment/fotmob_world/Belgium/First Division A
+data:
+  matches: league/BE-FirstDivisionA/data/be_matches.csv
+  team_matches: league/BE-FirstDivisionA/data/be_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]  # walk-forward, season-blocked
+virgin_primary: "2025/2026"        # complete season, n=313 — read ONCE per candidate
+virgin_confirmatory: "2026/2027"   # partial (99 played at pull); reserved, NOT read in this build
+halves_constants:                  # frozen, measured on the complete-splits era 2023/2024–2025/2026 (n≈937)
+  goals_1h_share: 0.458
+  sot_1h_share: 0.452
+  corners_1h_share: 0.471
+  total_shots_1h_share: 0.456
+  yellow_cards_1h_share: 0.317
+markets:
+  goals: G-BE        # DC reference; arms: Gate Zero, SHRINK (thin-data prior), X3 set-play
+  sot: S-BE          # v5 reference; arms: Gate Zero, RS ratio-shrink, X4 xG/shot (X6 dropped on reliability)
+  corners: C-BE      # corners_v3 reference; arms: Gate Zero (X9), X7 box touches; primary line 9.5
+  cards: K-BE        # cards reference; arms: Gate Zero, X8 referee; primary line 3.5
+  total_shots: T-BE  # shots family; arms: A v1 pattern, B v2 level layer, C E9 trailing-r; primary line 25.5
+notes:
+  - FORMAT: 2021/2022–2022/2023 = 18 teams, 34 regular rounds (306) + Play-offs 1 (12) + ECL group (12) = 330; 2023/2024 onward = 16 teams, 30 regular rounds (240) + Champions' (30) + Europe/ECL (30) + Relegation (12) groups + 1 ECL final = 313; play-off points are halved on entry. 2026/2027 returns to 18 teams with NO play-offs (partial, confirmatory only).
+  - PHASE RULE (frozen): all phases are ordinary rows in every fit; phase flagged in the CSV from general.leagueName; no phase feature anywhere. Point halving is standings arithmetic and does not touch per-match targets.
+  - Per-half stats are complete only from 2023/2024 (3.3% in 2021/2022, 20.3% in 2022/2023) — halves constants use the complete era only.
+  - Referee coverage: 41.2% in 2021/2022, 93–100% from 2022/2023 (~86% overall).
+  - Cards: stats feed is the unified source (exact stats-vs-events agreement 86.4%, stats lower in 11.5%, mean −0.10/match — the DK shape); event fallback for 1 stats-less match (4206400); 2 score-only matches (3604331 stub feed, 4449361 null feed) have all stats fields nulled and are excluded from count markets; the same 3 matches are the only xG-less ones.
+  - xGOT population rule breaks at 2024/2025 (only on-target shots populated before; ~99.7% from 2024/2025); X6 dropped on reliability anyway (era r=0.075).
+  - touches_opp_box coverage: 70–81% in 2021/2022–2023/2024, 100% from 2024/2025.
+  - Predictions-only: no BE odds/settlement source in-system.

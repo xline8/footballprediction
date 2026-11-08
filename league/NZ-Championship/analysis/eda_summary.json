@@ -1,0 +1,639 @@
+{
+  "n_matches": 221,
+  "seasons": [
+    "2022",
+    "2023",
+    "2024",
+    "2025",
+    "2026"
+  ],
+  "levels": {
+    "2022": {
+      "n": 38,
+      "score_n": 38,
+      "stats_n": 0,
+      "period_splits_n": 0,
+      "events_n": 0,
+      "referee_named": 0,
+      "shotmap_n": 0,
+      "xg_n": 0,
+      "plain_yellow_events_n": 0,
+      "has_extra_time_n": 0,
+      "goals_per_match": 3.9211,
+      "home_goals_per_match": 2.1316,
+      "away_goals_per_match": 1.7895,
+      "home_win_rate": 0.5,
+      "draw_rate": 0.1842,
+      "away_win_rate": 0.3158,
+      "ou2_5_over_rate": 0.6842,
+      "btts_rate": 0.6842,
+      "event_red_home": 0,
+      "event_red_away": 0,
+      "event_red_total": 0
+    },
+    "2023": {
+      "n": 46,
+      "score_n": 46,
+      "stats_n": 0,
+      "period_splits_n": 0,
+      "events_n": 45,
+      "referee_named": 0,
+      "shotmap_n": 0,
+      "xg_n": 0,
+      "plain_yellow_events_n": 0,
+      "has_extra_time_n": 0,
+      "goals_per_match": 4.1304,
+      "home_goals_per_match": 2.1087,
+      "away_goals_per_match": 2.0217,
+      "home_win_rate": 0.3913,
+      "draw_rate": 0.1522,
+      "away_win_rate": 0.4565,
+      "ou2_5_over_rate": 0.7391,
+      "btts_rate": 0.6957,
+      "event_red_home": 5,
+      "event_red_away": 4,
+      "event_red_total": 9
+    },
+    "2024": {
+      "n": 46,
+      "score_n": 46,
+      "stats_n": 0,
+      "period_splits_n": 0,
+      "events_n": 45,
+      "referee_named": 0,
+      "shotmap_n": 0,
+      "xg_n": 0,
+      "plain_yellow_events_n": 0,
+      "has_extra_time_n": 1,
+      "goals_per_match": 3.8043,
+      "home_goals_per_match": 1.9565,
+      "away_goals_per_match": 1.8478,
+      "home_win_rate": 0.3696,
+      "draw_rate": 0.1957,
+      "away_win_rate": 0.4348,
+      "ou2_5_over_rate": 0.7609,
+      "btts_rate": 0.6522,
+      "event_red_home": 6,
+      "event_red_away": 3,
+      "event_red_total": 9
+    },
+    "2025": {
+      "n": 56,
+      "score_n": 56,
+      "stats_n": 0,
+      "period_splits_n": 0,
+      "events_n": 54,
+      "referee_named": 0,
+      "shotmap_n": 0,
+      "xg_n": 0,
+      "plain_yellow_events_n": 0,
+      "has_extra_time_n": 1,
+      "goals_per_match": 3.4107,
+      "home_goals_per_match": 1.9643,
+      "away_goals_per_match": 1.4464,
+      "home_win_rate": 0.5357,
+      "draw_rate": 0.1429,
+      "away_win_rate": 0.3214,
+      "ou2_5_over_rate": 0.75,
+      "btts_rate": 0.5893,
+      "event_red_home": 5,
+      "event_red_away": 2,
+      "event_red_total": 7
+    },
+    "2026": {
+      "n": 35,
+      "score_n": 35,
+      "stats_n": 0,
+      "period_splits_n": 0,
+      "events_n": 34,
+      "referee_named": 0,
+      "shotmap_n": 0,
+      "xg_n": 0,
+      "plain_yellow_events_n": 0,
+      "has_extra_time_n": 0,
+      "goals_per_match": 3.6571,
+      "home_goals_per_match": 1.9714,
+      "away_goals_per_match": 1.6857,
+      "home_win_rate": 0.4286,
+      "draw_rate": 0.2,
+      "away_win_rate": 0.3714,
+      "ou2_5_over_rate": 0.6286,
+      "btts_rate": 0.5714,
+      "event_red_home": 5,
+      "event_red_away": 4,
+      "event_red_total": 9
+    }
+  },
+  "pooled_outcomes": {
+    "home_win_rate": 0.448,
+    "draw_rate": 0.1719,
+    "away_win_rate": 0.3801
+  },
+  "dev_over_rate_ou2_5": 0.75,
+  "dev_over_rate_ou2_5_by_season": {
+    "2023": 0.7391,
+    "2024": 0.7609
+  },
+  "phase_levels": {
+    "regular": {
+      "n": 217,
+      "goals_per_match": 3.788
+    },
+    "final": {
+      "n": 4,
+      "goals_per_match": 2.75
+    }
+  },
+  "f2": {
+    "goals_for": {
+      "r": 0.2293,
+      "n_teams": 10,
+      "min_matches": 20
+    },
+    "goals_against": {
+      "r": 0.257,
+      "n_teams": 10,
+      "min_matches": 20
+    },
+    "by_season": {
+      "2022": {
+        "goals_for": {
+          "r": 0.8056,
+          "n_teams": 6,
+          "min_matches": 8
+        },
+        "goals_against": {
+          "r": 0.4622,
+          "n_teams": 6,
+          "min_matches": 8
+        }
+      },
+      "2023": {
+        "goals_for": {
+          "r": 0.5294,
+          "n_teams": 10,
+          "min_matches": 8
+        },
+        "goals_against": {
+          "r": 0.228,
+          "n_teams": 10,
+          "min_matches": 8
+        }
+      },
+      "2024": {
+        "goals_for": {
+          "r": 0.1643,
+          "n_teams": 10,
+          "min_matches": 8
+        },
+        "goals_against": {
+          "r": 0.1059,
+          "n_teams": 10,
+          "min_matches": 8
+        }
+      },
+      "2025": {
+        "goals_for": {
+          "r": -0.0301,
+          "n_teams": 11,
+          "min_matches": 8
+        },
+        "goals_against": {
+          "r": 0.0839,
+          "n_teams": 11,
+          "min_matches": 8
+        }
+      },
+      "2026": {
+        "goals_for": {
+          "r": null,
+          "n_teams": 0,
+          "min_matches": 8
+        },
+        "goals_against": {
+          "r": null,
+          "n_teams": 0,
+          "min_matches": 8
+        }
+      }
+    },
+    "per_season_note": "Extremely noisy: 5v5 split halves at the >=8 threshold.",
+    "not_testable": [
+      "sot",
+      "corners",
+      "shots",
+      "cards"
+    ]
+  },
+  "f3": {
+    "n_matches_with_events_and_goals": 178,
+    "total_ft_goals": 684.0,
+    "total_1h_goals": 282.0,
+    "goals_1h_share": 0.4123,
+    "frozen_constant": 0.4123,
+    "constant_supported": true,
+    "by_season": {
+      "2023": {
+        "n": 45,
+        "share": 0.3684,
+        "observed_variance": 0.075101,
+        "binomial_noise_floor_mean": 0.086726
+      },
+      "2024": {
+        "n": 45,
+        "share": 0.4057,
+        "observed_variance": 0.097421,
+        "binomial_noise_floor_mean": 0.082711
+      },
+      "2025": {
+        "n": 54,
+        "share": 0.4503,
+        "observed_variance": 0.079047,
+        "binomial_noise_floor_mean": 0.090914
+      },
+      "2026": {
+        "n": 34,
+        "share": 0.4297,
+        "observed_variance": 0.092141,
+        "binomial_noise_floor_mean": 0.086546
+      }
+    },
+    "observed_variance": 0.084888,
+    "binomial_noise_floor_mean": 0.086947,
+    "variance_excess_over_noise": -0.002059,
+    "team_split_half": {
+      "r": 0.0159,
+      "n_teams": 6,
+      "min_matches": 20
+    }
+  },
+  "f4": {
+    "entrants": [
+      {
+        "season": "2022",
+        "team_id": "8523",
+        "team": "Auckland City FC",
+        "matches": 8,
+        "gf_per_match": 2.375,
+        "ga_per_match": 1.25,
+        "league_mean_goals_per_team_match": 1.9605,
+        "gf_deviation": 0.4145,
+        "ga_deviation": -0.7105,
+        "origin": "unassigned"
+      },
+      {
+        "season": "2022",
+        "team_id": "590837",
+        "team": "Wellington Phoenix B",
+        "matches": 8,
+        "gf_per_match": 1.625,
+        "ga_per_match": 1.625,
+        "league_mean_goals_per_team_match": 1.9605,
+        "gf_deviation": -0.3355,
+        "ga_deviation": -0.3355,
+        "origin": "unassigned"
+      },
+      {
+        "season": "2022",
+        "team_id": "613341",
+        "team": "Birkenhead United",
+        "matches": 7,
+        "gf_per_match": 2.1429,
+        "ga_per_match": 1.8571,
+        "league_mean_goals_per_team_match": 1.9605,
+        "gf_deviation": 0.1824,
+        "ga_deviation": -0.1034,
+        "origin": "unassigned"
+      },
+      {
+        "season": "2022",
+        "team_id": "613347",
+        "team": "Melville United",
+        "matches": 7,
+        "gf_per_match": 1.5714,
+        "ga_per_match": 2.2857,
+        "league_mean_goals_per_team_match": 1.9605,
+        "gf_deviation": -0.3891,
+        "ga_deviation": 0.3252,
+        "origin": "unassigned"
+      },
+      {
+        "season": "2022",
+        "team_id": "613355",
+        "team": "Miramar Rangers",
+        "matches": 5,
+        "gf_per_match": 0.8,
+        "ga_per_match": 2.8,
+        "league_mean_goals_per_team_match": 1.9605,
+        "gf_deviation": -1.1605,
+        "ga_deviation": 0.8395,
+        "origin": "unassigned"
+      },
+      {
+        "season": "2022",
+        "team_id": "613356",
+        "team": "Napier City Rovers",
+        "matches": 8,
+        "gf_per_match": 1.5,
+        "ga_per_match": 2.625,
+        "league_mean_goals_per_team_match": 1.9605,
+        "gf_deviation": -0.4605,
+        "ga_deviation": 0.6645,
+        "origin": "unassigned"
+      },
+      {
+        "season": "2022",
+        "team_id": "613370",
+        "team": "Wellington Olympic",
+        "matches": 10,
+        "gf_per_match": 3.2,
+        "ga_per_match": 1.1,
+        "league_mean_goals_per_team_match": 1.9605,
+        "gf_deviation": 1.2395,
+        "ga_deviation": -0.8605,
+        "origin": "unassigned"
+      },
+      {
+        "season": "2022",
+        "team_id": "613373",
+        "team": "Cashmere Technical",
+        "matches": 7,
+        "gf_per_match": 2.2857,
+        "ga_per_match": 2.5714,
+        "league_mean_goals_per_team_match": 1.9605,
+        "gf_deviation": 0.3252,
+        "ga_deviation": 0.6109,
+        "origin": "unassigned"
+      },
+      {
+        "season": "2022",
+        "team_id": "613381",
+        "team": "Christchurch United",
+        "matches": 8,
+        "gf_per_match": 1.875,
+        "ga_per_match": 2.625,
+        "league_mean_goals_per_team_match": 1.9605,
+        "gf_deviation": -0.0855,
+        "ga_deviation": 0.6645,
+        "origin": "unassigned"
+      },
+      {
+        "season": "2022",
+        "team_id": "1405563",
+        "team": "Auckland United FC",
+        "matches": 8,
+        "gf_per_match": 1.5,
+        "ga_per_match": 1.5,
+        "league_mean_goals_per_team_match": 1.9605,
+        "gf_deviation": -0.4605,
+        "ga_deviation": -0.4605,
+        "origin": "unassigned"
+      },
+      {
+        "season": "2023",
+        "team_id": "613344",
+        "team": "Eastern Suburbs",
+        "matches": 9,
+        "gf_per_match": 2.5556,
+        "ga_per_match": 1.2222,
+        "league_mean_goals_per_team_match": 2.0652,
+        "gf_deviation": 0.4904,
+        "ga_deviation": -0.843,
+        "origin": "unassigned"
+      },
+      {
+        "season": "2023",
+        "team_id": "613364",
+        "team": "Petone",
+        "matches": 9,
+        "gf_per_match": 0.6667,
+        "ga_per_match": 2.4444,
+        "league_mean_goals_per_team_match": 2.0652,
+        "gf_deviation": -1.3985,
+        "ga_deviation": 0.3792,
+        "origin": "unassigned"
+      },
+      {
+        "season": "2023",
+        "team_id": "1536634",
+        "team": "Manurewa",
+        "matches": 9,
+        "gf_per_match": 1.7778,
+        "ga_per_match": 2.2222,
+        "league_mean_goals_per_team_match": 2.0652,
+        "gf_deviation": -0.2874,
+        "ga_deviation": 0.157,
+        "origin": "unassigned"
+      },
+      {
+        "season": "2024",
+        "team_id": "613341",
+        "team": "Birkenhead United",
+        "matches": 10,
+        "gf_per_match": 2.4,
+        "ga_per_match": 1.7,
+        "league_mean_goals_per_team_match": 1.9022,
+        "gf_deviation": 0.4978,
+        "ga_deviation": -0.2022,
+        "origin": "unassigned"
+      },
+      {
+        "season": "2024",
+        "team_id": "613351",
+        "team": "Western Springs",
+        "matches": 9,
+        "gf_per_match": 2.7778,
+        "ga_per_match": 1.7778,
+        "league_mean_goals_per_team_match": 1.9022,
+        "gf_deviation": 0.8756,
+        "ga_deviation": -0.1244,
+        "origin": "unassigned"
+      },
+      {
+        "season": "2024",
+        "team_id": "613371",
+        "team": "Western Suburbs",
+        "matches": 9,
+        "gf_per_match": 1.0,
+        "ga_per_match": 3.1111,
+        "league_mean_goals_per_team_match": 1.9022,
+        "gf_deviation": -0.9022,
+        "ga_deviation": 1.2089,
+        "origin": "unassigned"
+      },
+      {
+        "season": "2024",
+        "team_id": "613378",
+        "team": "Coastal Spirit",
+        "matches": 9,
+        "gf_per_match": 2.0,
+        "ga_per_match": 2.2222,
+        "league_mean_goals_per_team_match": 1.9022,
+        "gf_deviation": 0.0978,
+        "ga_deviation": 0.32,
+        "origin": "unassigned"
+      },
+      {
+        "season": "2025",
+        "team_id": "613355",
+        "team": "Miramar Rangers",
+        "matches": 10,
+        "gf_per_match": 2.5,
+        "ga_per_match": 1.4,
+        "league_mean_goals_per_team_match": 1.7054,
+        "gf_deviation": 0.7946,
+        "ga_deviation": -0.3054,
+        "origin": "unassigned"
+      },
+      {
+        "season": "2025",
+        "team_id": "613381",
+        "team": "Christchurch United",
+        "matches": 10,
+        "gf_per_match": 1.6,
+        "ga_per_match": 1.9,
+        "league_mean_goals_per_team_match": 1.7054,
+        "gf_deviation": -0.1054,
+        "ga_deviation": 0.1946,
+        "origin": "unassigned"
+      },
+      {
+        "season": "2025",
+        "team_id": "1405563",
+        "team": "Auckland United FC",
+        "matches": 10,
+        "gf_per_match": 1.1,
+        "ga_per_match": 1.9,
+        "league_mean_goals_per_team_match": 1.7054,
+        "gf_deviation": -0.6054,
+        "ga_deviation": 0.1946,
+        "origin": "unassigned"
+      },
+      {
+        "season": "2025",
+        "team_id": "1814318",
+        "team": "Auckland FC B",
+        "matches": 10,
+        "gf_per_match": 1.7,
+        "ga_per_match": 1.0,
+        "league_mean_goals_per_team_match": 1.7054,
+        "gf_deviation": -0.0054,
+        "ga_deviation": -0.7054,
+        "origin": "unassigned"
+      },
+      {
+        "season": "2026",
+        "team_id": "613344",
+        "team": "Eastern Suburbs AFC",
+        "matches": 6,
+        "gf_per_match": 1.1667,
+        "ga_per_match": 2.1667,
+        "league_mean_goals_per_team_match": 1.8286,
+        "gf_deviation": -0.6619,
+        "ga_deviation": 0.3381,
+        "origin": "unassigned"
+      },
+      {
+        "season": "2026",
+        "team_id": "613356",
+        "team": "Napier City Rovers",
+        "matches": 6,
+        "gf_per_match": 2.1667,
+        "ga_per_match": 2.1667,
+        "league_mean_goals_per_team_match": 1.8286,
+        "gf_deviation": 0.3381,
+        "ga_deviation": 0.3381,
+        "origin": "unassigned"
+      },
+      {
+        "season": "2026",
+        "team_id": "613373",
+        "team": "Cashmere Technical",
+        "matches": 7,
+        "gf_per_match": 3.0,
+        "ga_per_match": 0.7143,
+        "league_mean_goals_per_team_match": 1.8286,
+        "gf_deviation": 1.1714,
+        "ga_deviation": -1.1143,
+        "origin": "unassigned"
+      },
+      {
+        "season": "2026",
+        "team_id": "613376",
+        "team": "Ferrymead Bays",
+        "matches": 7,
+        "gf_per_match": 0.5714,
+        "ga_per_match": 1.5714,
+        "league_mean_goals_per_team_match": 1.8286,
+        "gf_deviation": -1.2572,
+        "ga_deviation": -0.2572,
+        "origin": "unassigned"
+      }
+    ],
+    "no_origin_assignment": true
+  },
+  "f5_event_red_total_by_season": {
+    "2022": 0,
+    "2023": 9,
+    "2024": 9,
+    "2025": 7,
+    "2026": 9
+  },
+  "f6_referees_named": 0,
+  "team_id_count": 18,
+  "eventless_match_ids": [
+    "4024953",
+    "4024971",
+    "4024972",
+    "4024970",
+    "4024973",
+    "4024977",
+    "4024978",
+    "4024975",
+    "4024980",
+    "4024982",
+    "4024983",
+    "4024981",
+    "4024956",
+    "4024968",
+    "4024954",
+    "4024969",
+    "4024957",
+    "4024960",
+    "4024961",
+    "4024958",
+    "4024959",
+    "4024965",
+    "4024962",
+    "4024966",
+    "4024964",
+    "4024986",
+    "4024997",
+    "4024967",
+    "4024989",
+    "4024990",
+    "4024992",
+    "4024991",
+    "4024995",
+    "4024985",
+    "4024993",
+    "4024994",
+    "4024996",
+    "4070029",
+    "4326604",
+    "4638306",
+    "4970108",
+    "4970110",
+    "6255247"
+  ],
+  "extra_time_match_ids": [
+    "4679973",
+    "5087158"
+  ],
+  "name_variants": {
+    "613344": [
+      "Eastern Suburbs",
+      "Eastern Suburbs AFC"
+    ]
+  }
+}

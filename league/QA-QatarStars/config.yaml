@@ -1,0 +1,38 @@
+# QA-QatarStars (Qatar) — league config (Phase 2 freeze; completed Phase 6)
+league: QA-QatarStars
+country: Qatar
+fotmob_id: 535
+tier: 1
+warehouse: data_enrichment/Qatar/Qatar Stars League
+data:
+  matches: league/QA-QatarStars/data/qa_matches.csv
+  team_matches: league/QA-QatarStars/data/qa_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period:
+  goals: ["2022/2023", "2023/2024", "2024/2025"]   # scored; warm-up 2021/2022
+  stats_markets: []                  # NOT-BUILDABLE: no stats season exists in dev (<=2024/2025); stats era is 2025/2026+
+  cards: []                          # NOT-BUILDABLE: no cards target in dev under either source (stats from 2025/2026; event feed has zero plain Yellow events 2021/2022-2024/2025)
+virgin_primary: "2025/2026"          # COMPLETE season (132 matches) — read ONCE per dev-passing candidate (G-QA only)
+virgin_confirmatory: null           # 2026/2027 is in progress (54) and stays untouched
+halves_constants:                   # frozen from DEV-era data only (EDA F3)
+  goals_1h_share: 0.4385            # event times, dev era 2021/2022-2024/2025, n=1749 goals, 505 matches
+  yellow_cards_1h_share: null       # no period splits in dev (0 matches) — no constant
+  sot_1h_share: null                # no period splits in dev — no constant
+  corners_1h_share: null            # no period splits in dev — no constant
+  total_shots_1h_share: null        # no period splits in dev — no constant
+markets:
+  goals: G-QA        # DC goals-only (no xG in feed); arms: Gate Zero, ENTRANT (X2 adopted: dev entrant tilt GF -0.356 / GA +0.360, GA positive 4/4)
+  sot: S-QA          # NOT-BUILDABLE — no dev scored window (stats era 2025/2026+)
+  corners: C-QA      # NOT-BUILDABLE — no dev scored window (stats era 2025/2026+)
+  cards: K-QA        # NOT-BUILDABLE — no dev target (stats yellows from 2025/2026; event feed zero plain Yellows 2021/2022-2024/2025 and in virgin too); X8 referee absent in dev
+  total_shots: T-QA  # NOT-BUILDABLE — no dev scored window (stats era 2025/2026+)
+notes:
+  - Split seasons, 12 teams, 132 matches/season (double round robin, 22 rounds); single phase "regular" (leagueName "Qatar Stars League" in all 714 JSONs); 54 played in 2026/2027.
+  - Stats feed era break at 2025/2026: 0% in 2021/2022-2023/2024, 1 match in 2024/2025 (All only), 132/132 in 2025/2026, 54/54 in 2026/2027 (26.2% overall; the brief's 58.8% last-three-seasons figure is entirely 2025/2026-2026/2027). Splits internally consistent (All = FH+SH exact 132/132 in 2025/2026 for shots/corners/SOT, 130/132 for yellows).
+  - No xG and no shotmap in ANY season -> X1 blend falls back goals-only; X3/X4/X6 impossible by data absence.
+  - Event feed carries goals reliably (3 score mismatches in 714 matches, header wins) and cards only from 2026/2027 (Yellow 230); in dev and in the virgin season it carries Red/YellowRed only. Stats-vs-events yellows in 2025/2026 agree exactly in 25.8% of matches (mean stats-events +3.22/match — structural, events count reds/second yellows only).
+  - 27 matches have a wholly empty events payload; all are scoreless (0-0); their events-derived fields are missing, never zero.
+  - Team-name stability: 16 FotMob team ids over the corpus, 12 per season; every id carries exactly one spelling. All logic keyed by team id.
+  - Referees: named in 0 dev matches; 7 distinct in 2025/2026 (9/132), 13 in 2026/2027 — X8 dropped on dev absence.
+  - Predictions-only: no QA odds/settlement source in-system.
+  - Outcome (Phase 6): G-QA FAIL at the dev gate — Gate Zero 1X2 LL 1.0485 / RPS 0.2302 / OU2.5 LL 0.7275 vs naive trailing-10 1.0106 / 0.2253 / 0.6866 and climatology OU2.5 0.6469 (mean predicted over-rate 0.4996 vs actual 0.6641; single-home-intercept DC underfits away goals in this near-zero-home-advantage league); ENTRANT also fails (1.0431 / 0.2277 / 0.7239). Virgin 2025/2026 was NOT read; nothing ships. S/C/K/T not-buildable (see reports/*_QA_VERDICT.md).

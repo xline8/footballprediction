@@ -1,0 +1,36 @@
+# QA-SecondDivision (Qatar) — league config (Phase 2 freeze; build in progress)
+league: QA-SecondDivision
+country: Qatar
+fotmob_id: 11030
+tier: 2
+warehouse: data_enrichment/Qatar/Second Division
+data:
+  matches: league/QA-SecondDivision/data/qasd_matches.csv
+  team_matches: league/QA-SecondDivision/data/qasd_team_matches.csv
+seasons: ["2024/2025", "2025/2026", "2026/2027"]
+dev_protocol: "Goals: within-season walk-forward over 2024/2025 (warm-up rounds 1-7, scored rounds 8-14, n=28). S/C/T/K: within-season walk-forward over 2025/2026 (warm-up rounds 1-7, scored rounds 8-14, n=28); fit history also 2024/2025 stats-era rounds 6-14 (38)."
+virgin_primary: "2025/2026"  # goals only: complete season (56)
+virgin_stats: "2026/2027"  # S/C/T/K: partial n=29, TRANSITIONAL
+virgin_confirmatory: "2026/2027"  # goals confirmatory (untouched); S/C/T/K season-end re-read
+halves_constants:  # frozen from DEV-era data only (EDA F3)
+  goals_1h_share: 0.4589  # event times, G dev 2024/2025, n=146 goals, 51 matches; true SD 0.0
+  sot_1h_share: 0.4194  # splits, S/C/T/K dev 2025/2026, n=484 SOT; true SD 0.0
+  corners_1h_share: 0.4495  # splits, 2025/2026, n=545 corners; true SD 0.010
+  total_shots_1h_share: 0.4456  # splits, 2025/2026, n=1295 shots; true SD 0.0
+  yellow_cards_1h_share: 0.3151  # event times (unified Yellow+YellowRed), 2025/2026, n=292; true SD 0.089
+markets:
+  goals: G-QASD  # DC goals-only (no xG in feed); arms: Gate Zero, ENTRANT (X2, QA-QatarStars frozen offsets)
+  sot: S-QASD  # model_sot v5 reference; arms: Gate Zero, RS (BB prior 200 -> 20000)
+  corners: C-QASD  # model_corners_v3 reference; arms: Gate Zero (X9), X7 dropped (no touches_opp_box)
+  cards: K-QASD  # event-unified yellows (Yellow+YellowRed); arms: Gate Zero only
+  total_shots: T-QASD  # shots family A/B/C
+notes:
+  - Thin league: 141 matches total. 8 teams in each complete season (double round robin, 14 rounds x 4 = 56); 11 teams in 2026/2027 (5 matches/round, one bye; round 5 short one match, presumably postponed).
+  - Stats era starts mid-2024/2025: rounds 1-5 essentially stat-less (0,1,0,0,1 matches with stats), rounds 6-14 full (38). No xG, no shotmap (0 shots in every shotmap payload), no touches_opp_box in ANY season. big_chance / shots_inside_box / shots_outside_box keys exist but are 0/0 in every match (degenerate).
+  - Splits internally consistent: All = FirstHalf + SecondHalf exactly in 123/123 stats matches for shots/corners/SOT/yellows.
+  - Stats yellows undercount event-unified yellows one-directionally (pooled pre-virgin 71 exact / 23 low / 0 high, mean -0.40) -> K target is event-unified.
+  - Referees: named in 0 matches in 2024/2025 and 2025/2026, 1 in 2026/2027 -> X8 dropped.
+  - Home advantage near-absent like the parent league: 2024/2025 home 1.446 vs away 1.161; 2025/2026 home 1.429 vs away 1.589 (away outscores home); 2026/2027 home 1.310 vs away 1.448.
+  - leagueName quirk: 10 matches in 2025/2026 (all Lusail SC, rounds 5-14) and 8 in 2026/2027 (rounds 5-6) carry leagueName "Second Division" instead of "Qatar Stars League 2" -- naming quirk, single phase "regular" throughout.
+  - Team turnover is high: 1 entrant in 2025/2026 (Al-Khor, relegated from the Stars League); 4 first-season teams in 2026/2027 (Al-Gharafa II, Al-Rayyan II, Al-Shamal II reserve sides + Umm Salal). No within-league mover history exists before the G virgin, so the ENTRANT arm rests on the QA-QatarStars warehouse priors.
+  - Predictions-only: no QA-SD odds/settlement source in-system.

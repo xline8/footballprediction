@@ -1,0 +1,44 @@
+# AU-Championship (Australia Championship) — league config
+league: AU-Championship
+country: Australia
+fotmob_id: 8938
+tier: 2
+warehouse: data_enrichment/fotmob_world/Australia/Australia Championship
+data:
+  matches: league/AU-Championship/data/au_championship_matches.csv  # gitignored; regenerate via data/build_data.py
+seasons: ["2025", "2026"]
+# Format (frozen, from payloads): 16 clubs in 4 groups of 4, double
+# round-robin (6 rounds, 12 matches/group); top 2 per group to a
+# 7-match final stage (4 QF + 2 SF + 1 final). 2025 complete (55:
+# 48 group + 7 final, 2025-10-10..2025-12-06); champion South
+# Melbourne (2-0 vs Marconi Stallions, 2025-12-06). 2026 TRANSITIONAL
+# (32 group matches, rounds 1-4 of 6, 2026-10-15..2026-11-08;
+# rounds 5-6 + final stage not in the warehouse).
+# WARNING — parent id 8938 is a CONTAINER, not one league: the index
+# holds 1,333 rows, of which 1,246 are nine separate state NPL
+# competitions (NSW, Victorian, Queensland, Northern NSW, Southern,
+# Western, Tasmania Premier League, Capital, Northern + their
+# playoffs) that share the parent id and never play each other.
+# ONLY the 87 "Australian Championship" rows are this league.
+# A pooled 1,333-match model would be invalid (see
+# analysis/DATA_UNDERSTANDING.md). State scores are also ~50%
+# unrecorded (finished=False, recorded 0-0).
+dev_period: []       # NO dev window: one complete season (2025) can only be the training window; season-blocked walk-forward has zero evaluation seasons
+seed_period: ["2025"]  # the single complete season; training window only, never an evaluation season
+virgin: "2026"       # NOT READ for evaluation: transitional (rounds 1-4 of 6, n=32); calibration SE ~8.6pp vs the 1pp clean-PASS threshold
+excluded: []         # no Championship match excluded: 87/87 finished, scores cross-checked index vs header.teams
+# Feasibility verdict (2026-11-10): 0 PASS / 0 FAIL / 5 NOT BUILDABLE.
+# See prereg/PREREG_AU_CHAMPIONSHIP.md and reports/LEAGUE_VERDICT.md.
+# No engine built, no predictions issued.
+halves_constants: {}  # none frozen: no period splits in any payload (stats null 87/87)
+markets:
+  goals: G-AUCH        # NOT BUILDABLE — one complete season; no dev evaluation season; virgin SE ~8.6pp
+  sot: S-AUCH          # NOT BUILDABLE — no SOT target in any payload (stats null, shotmap empty)
+  corners: C-AUCH      # NOT BUILDABLE — no corners target in any payload
+  cards: K-AUCH        # NOT BUILDABLE — no yellow-card target; red-card fields only (12/1,333 with >=1 red)
+  total_shots: T-AUCH  # NOT BUILDABLE — no total-shots target in any payload
+notes:
+  - Format change 2025 -> 2026: drawn group matches go to a shootout (2026: 8/8 draws, no ET; 2025: 0/12 group draws, only the QF shootout after ET). The stored score stays the drawn score; the shootout decides a bonus point, not the 1X2 result.
+  - 2025 QF APIA Leichhardt FC 1-1 Marconi Stallions went to ET + penalties (Marconi advanced); its stored 1-1 may include ET goals — flagged, never repaired.
+  - Team turnover is high by design (qualification via state leagues): 12/16 clubs retained 2025 -> 2026; 4 new each season. No club is an A-League club (0 overlap with AU-ALeague's 13 teams), so no X2 cross-tier prior from the sibling exists.
+  - Revisit condition: earliest gateable build is dev = 2025+2026 (once 2026 completes) with virgin = 2027; a multi-season dev needs 2025-2027 + 2028 virgin. Needs a new prereg; nothing is scheduled.

@@ -1,0 +1,123 @@
+# Batch 07 clear code bugs
+
+Read-only source inspection; no gate executed. Dormant-path findings do not change the authoritative verdict classifications.
+
+- **J3** — `league/J3/engine/goals/g_j3.py:300` — Isolation leak at load: main(--dev) calls unfiltered read_matches on J3_FILE before the dev-mode return; read_matches lines 37–60 parses 2025 sealed scores (and reserve rows), contrary to verdict claim that only virgin mode touches 2025; dev fits do filter earlier seasons.
+- **J3** — `league/J3/engine/goals/g_j3.py:313` — Bypassed dev-death check: after the dev-only return, virgin mode evaluates both arms without checking their failed dev gate; PREREG_G_J3 §7 says a dev-dead arm cannot ship (the verdict does correctly keep both dead).
+- **J2** — `league/J2/engine/goals/g_j2.py:268` — Dormant gate bypass: run_virgin loads/scores both arms without inspecting persisted dev metrics; CLI all also calls it after run_dev unconditionally, although both arms failed dev; verdict states this mode was not run.
+- **IT-SerieB** — `league/IT-SerieB/engine/goals/run_g_itb.py:20` — Dormant gate bypass: virgin-predict directly calls virgin_metrics((args.arm,), args.arm), bypassing the Gate Zero dev guard in virgin-metrics; harness.virgin_metrics also has no dev guard, so a dev-dead arm can read/export sealed 2025/26.
+- **IT-SerieC** — `league/IT-SerieC/engine/goals/run_g_itc.py:24` — Dormant gate bypass: virgin-predict calls virgin_metrics directly in the else branch without the dev guard used by virgin-metrics; harness.virgin_metrics has no guard and can score/export the dev-dead arm.
+- **KR-KLeague1** — `league/KR-KLeague1/engine/goals/run_g_kr.py:20` — Dormant gate bypass: virgin-predict directly calls unguarded virgin_metrics, avoiding the failed-dev check in the virgin-metrics branch and allowing sealed 2025 to be scored/exported despite the candidate FAIL.
+- **KZ-PremierLeague** — `league/KZ-PremierLeague/engine/goals/run_g_kz.py:19` — Missing dev check: both virgin CLI modes call virgin_metrics without reading dev_pass; harness line 141 immediately loads sealed 2026, although PREREG_G_KZ permits only dev-passing arms (current arms did pass).
+- **J1** — `league/J1/engine/goals/harness.py:91` — Dead-arm check bypass: virgin_metrics defaults to all three arms and immediately loads/scores sealed 2026 with no dev filter; run_g_j1.py forwards directly; X2/X3 failed all dev legs but are evaluated anyway, contrary to PREREG_G_J1 §operative reading.
+- **J1** — `league/J1/engine/cards/harness.py:106` — Wrong best baseline in verdict writer: best_base considers only metrics[base], omitting naive; actual best sealed naive LL is 0.6807, so generated Gate Zero LL status is wrong; authoritative human verdict correctly records FAIL.
+- **J1** — `league/J1/engine/cards/harness.py:111` — Wrong provisional calibration formula in verdict writer: abs(diff)<=.01 or abs(diff)<=se omits the 1pp boundary allowance; prereg requires abs(diff)<=.01+se; current cards outcome unchanged and human verdict applies the correct rule.
+- **J1** — `league/J1/engine/corners/run_c_j1.py:28` — Missing gate clause: leg1 checks LL only against best_baseline, omitting the prereg-required LL<=Gate Zero comparison for X7; current arms tie, so the accepted verdict is unaffected.
+- **KR-KLeague1** — `league/KR-KLeague1/engine/sot/run_s_kr.py:11` — Wrong primary line: dev guard reads ll_8.5; harness lines 76–86 and 122–129 also gate/calibrate at 8.5, whereas config, PREREG_S_KR and authoritative verdict freeze 7.5; outer guard also checks only league baseline rather than both.
+- **KR-KLeague1** — `league/KR-KLeague1/engine/sot/harness.py:132` — Copied foreign output name: writer emits s_se_virgin_predictions.csv (Sweden/SE name) inside the KR league instead of the S-KR candidate name; currently dormant because dev failed.
+- **KR-KLeague1** — `league/KR-KLeague1/engine/goals/arms.py:18` — Wrong preregistered arm: x2_multipliers uses open-play/set-play xG ratios, then adjusted_lambdas applies them to every team (lines 57–60), rather than the K2 ID-linked mover offset in PREREG_G_KR; verdict explicitly discloses this unfixed SE port defect.
+- **KR-KLeague3** — `league/KR-KLeague3/engine/goals/harness.py:173` — Incomplete dormant sealed gate: virgin_pass is only LL<=climatology; it omits LL<=Gate Zero and both home-win/OU calibration checks required by PREREG_G_KR3; current failed-dev guard prevents reaching this path.
+- **IS-BestaDeildin** — `league/IS-BestaDeildin/engine/corners/harness.py:121` — Premature sealed read and missing Gate Zero stop: virgin builds 2026 feature rows before computing dev_pass, and evaluates any variant independently even if Gate Zero fails; frozen design says Gate Zero dev failure leaves virgin unread (current Gate Zero passed).
+- **IS-BestaDeildin** — `league/IS-BestaDeildin/engine/sot/harness.py:91` — Premature sealed read and bypassed Gate Zero check: virgin loads 2026 before checking dev; dev_gz/best_dev_base at 93–94 are unused, and lines 104–107 always predict/update Gate Zero on sealed rows even if no arm passed (current arms passed).
+
+Engine files actually opened (load, gate, constant and function excerpts; not an exhaustive correctness proof):
+
+- `league/IS-1Deild/engine/goals/arms.py`
+- `league/IS-1Deild/engine/goals/build_membership.py`
+- `league/IS-1Deild/engine/goals/dc.py`
+- `league/IS-1Deild/engine/goals/harness.py`
+- `league/IS-1Deild/engine/goals/run_g_is1.py`
+- `league/IS-2Deild/engine/goals/arms.py`
+- `league/IS-2Deild/engine/goals/dc.py`
+- `league/IS-2Deild/engine/goals/harness.py`
+- `league/IS-2Deild/engine/goals/run_g_is2.py`
+- `league/IS-BestaDeildin/engine/cards/harness.py`
+- `league/IS-BestaDeildin/engine/cards/model.py`
+- `league/IS-BestaDeildin/engine/cards/run_k_is.py`
+- `league/IS-BestaDeildin/engine/corners/core.py`
+- `league/IS-BestaDeildin/engine/corners/harness.py`
+- `league/IS-BestaDeildin/engine/corners/run_c_is.py`
+- `league/IS-BestaDeildin/engine/goals/arms.py`
+- `league/IS-BestaDeildin/engine/goals/dc.py`
+- `league/IS-BestaDeildin/engine/goals/harness.py`
+- `league/IS-BestaDeildin/engine/goals/run_g_is.py`
+- `league/IS-BestaDeildin/engine/sot/harness.py`
+- `league/IS-BestaDeildin/engine/sot/model.py`
+- `league/IS-BestaDeildin/engine/sot/run_s_is.py`
+- `league/IS-BestaDeildin/engine/total_shots/model.py`
+- `league/IS-BestaDeildin/engine/total_shots/run_t_is.py`
+- `league/IT-SerieB/engine/cards/harness.py`
+- `league/IT-SerieB/engine/cards/model.py`
+- `league/IT-SerieB/engine/cards/run_k_itb.py`
+- `league/IT-SerieB/engine/corners/core.py`
+- `league/IT-SerieB/engine/corners/harness.py`
+- `league/IT-SerieB/engine/corners/run_c_itb.py`
+- `league/IT-SerieB/engine/goals/arms.py`
+- `league/IT-SerieB/engine/goals/dc.py`
+- `league/IT-SerieB/engine/goals/harness.py`
+- `league/IT-SerieB/engine/goals/run_g_itb.py`
+- `league/IT-SerieB/engine/sot/harness.py`
+- `league/IT-SerieB/engine/sot/model.py`
+- `league/IT-SerieB/engine/sot/run_s_itb.py`
+- `league/IT-SerieB/engine/total_shots/model.py`
+- `league/IT-SerieB/engine/total_shots/run_t_itb.py`
+- `league/IT-SerieC/engine/goals/arms.py`
+- `league/IT-SerieC/engine/goals/dc.py`
+- `league/IT-SerieC/engine/goals/harness.py`
+- `league/IT-SerieC/engine/goals/run_g_itc.py`
+- `league/J1/engine/cards/harness.py`
+- `league/J1/engine/cards/model.py`
+- `league/J1/engine/cards/referee.py`
+- `league/J1/engine/cards/run_k_j1.py`
+- `league/J1/engine/corners/core.py`
+- `league/J1/engine/corners/harness.py`
+- `league/J1/engine/corners/run_c_j1.py`
+- `league/J1/engine/goals/arms.py`
+- `league/J1/engine/goals/dc.py`
+- `league/J1/engine/goals/harness.py`
+- `league/J1/engine/goals/run_g_j1.py`
+- `league/J1/engine/sot/harness.py`
+- `league/J1/engine/sot/model.py`
+- `league/J1/engine/sot/run_s_j1.py`
+- `league/J1/engine/total_shots/model.py`
+- `league/J1/engine/total_shots/run_t_j1.py`
+- `league/J2/engine/cards/k_j2.py`
+- `league/J2/engine/goals/g_j2.py`
+- `league/J3/engine/goals/g_j3.py`
+- `league/KR-KLeague1/engine/cards/harness.py`
+- `league/KR-KLeague1/engine/cards/model.py`
+- `league/KR-KLeague1/engine/cards/run_k_kr.py`
+- `league/KR-KLeague1/engine/corners/core.py`
+- `league/KR-KLeague1/engine/corners/harness.py`
+- `league/KR-KLeague1/engine/corners/run_c_kr.py`
+- `league/KR-KLeague1/engine/goals/arms.py`
+- `league/KR-KLeague1/engine/goals/dc.py`
+- `league/KR-KLeague1/engine/goals/harness.py`
+- `league/KR-KLeague1/engine/goals/run_g_kr.py`
+- `league/KR-KLeague1/engine/sot/harness.py`
+- `league/KR-KLeague1/engine/sot/model.py`
+- `league/KR-KLeague1/engine/sot/run_s_kr.py`
+- `league/KR-KLeague1/engine/total_shots/model.py`
+- `league/KR-KLeague1/engine/total_shots/run_t_kr.py`
+- `league/KR-KLeague2/engine/cards/run_k_kr2.py`
+- `league/KR-KLeague2/engine/corners/run_c_kr2.py`
+- `league/KR-KLeague2/engine/count_common.py`
+- `league/KR-KLeague2/engine/goals/arms.py`
+- `league/KR-KLeague2/engine/goals/dc.py`
+- `league/KR-KLeague2/engine/goals/harness.py`
+- `league/KR-KLeague2/engine/goals/run_g_kr2.py`
+- `league/KR-KLeague2/engine/market_runner.py`
+- `league/KR-KLeague2/engine/sot/run_s_kr2.py`
+- `league/KR-KLeague2/engine/total_shots/run_t_kr2.py`
+- `league/KR-KLeague3/engine/goals/arms.py`
+- `league/KR-KLeague3/engine/goals/dc.py`
+- `league/KR-KLeague3/engine/goals/harness.py`
+- `league/KR-KLeague3/engine/goals/run_g_kr3.py`
+- `league/KW-PremierLeague/engine/goals/arms.py`
+- `league/KW-PremierLeague/engine/goals/dc.py`
+- `league/KW-PremierLeague/engine/goals/harness.py`
+- `league/KW-PremierLeague/engine/goals/run_g_kw.py`
+- `league/KZ-PremierLeague/engine/goals/arms.py`
+- `league/KZ-PremierLeague/engine/goals/dc.py`
+- `league/KZ-PremierLeague/engine/goals/harness.py`
+- `league/KZ-PremierLeague/engine/goals/run_g_kz.py`

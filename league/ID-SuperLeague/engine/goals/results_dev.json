@@ -1,0 +1,148 @@
+{
+  "protocol": {
+    "phase": "dev",
+    "seed": "2021/2022",
+    "scored": [
+      "2022/2023",
+      "2023/2024",
+      "2024/2025"
+    ]
+  },
+  "arms": {
+    "gate_zero": {
+      "seasons": {
+        "2022/2023": {
+          "n": 306,
+          "ll_1x2": 1.128959437765838,
+          "rps": 0.25060264366226775,
+          "ou25_ll": 0.7638960889317397,
+          "ou25_calibration_pp": -13.088056428547956,
+          "ou25_calibration_se_pp": 2.949315293647622,
+          "home_win_calibration_pp": -15.68750477650434,
+          "home_win_calibration_se_pp": 2.9180732624671952
+        },
+        "2023/2024": {
+          "n": 306,
+          "ll_1x2": 1.0837686591587206,
+          "rps": 0.22156505193956044,
+          "ou25_ll": 0.7206270876953021,
+          "ou25_calibration_pp": -7.384190274628256,
+          "ou25_calibration_se_pp": 2.905118438780726,
+          "home_win_calibration_pp": -2.9775031434072843,
+          "home_win_calibration_se_pp": 2.85248754455191
+        },
+        "2024/2025": {
+          "n": 306,
+          "ll_1x2": 1.0699499805724575,
+          "rps": 0.22541575068332342,
+          "ou25_ll": 0.6942554203918916,
+          "ou25_calibration_pp": 0.026064803028934783,
+          "ou25_calibration_se_pp": 2.86626384372672,
+          "home_win_calibration_pp": 2.9417628719847664,
+          "home_win_calibration_se_pp": 2.796731211378201
+        }
+      },
+      "pooled": {
+        "n": 918,
+        "ll_1x2": 1.0942260258323386,
+        "rps": 0.23252781542838388,
+        "ou25_ll": 0.7262595323396445,
+        "ou25_calibration_pp": -6.815393966715759,
+        "ou25_calibration_se_pp": 1.685930432250846,
+        "home_win_calibration_pp": -5.241081682642286,
+        "home_win_calibration_se_pp": 1.6671000018726532
+      },
+      "dev_pass": false
+    },
+    "shrink": {
+      "seasons": {
+        "2022/2023": {
+          "n": 306,
+          "ll_1x2": 1.128959437765838,
+          "rps": 0.25060264366226775,
+          "ou25_ll": 0.7638960889317397,
+          "ou25_calibration_pp": -13.088056428547956,
+          "ou25_calibration_se_pp": 2.949315293647622,
+          "home_win_calibration_pp": -15.68750477650434,
+          "home_win_calibration_se_pp": 2.9180732624671952
+        },
+        "2023/2024": {
+          "n": 306,
+          "ll_1x2": 1.0837686591587206,
+          "rps": 0.22156505193956044,
+          "ou25_ll": 0.7206270876953021,
+          "ou25_calibration_pp": -7.384190274628256,
+          "ou25_calibration_se_pp": 2.905118438780726,
+          "home_win_calibration_pp": -2.9775031434072843,
+          "home_win_calibration_se_pp": 2.85248754455191
+        },
+        "2024/2025": {
+          "n": 306,
+          "ll_1x2": 1.0699499805724575,
+          "rps": 0.22541575068332342,
+          "ou25_ll": 0.6942554203918916,
+          "ou25_calibration_pp": 0.026064803028934783,
+          "ou25_calibration_se_pp": 2.86626384372672,
+          "home_win_calibration_pp": 2.9417628719847664,
+          "home_win_calibration_se_pp": 2.796731211378201
+        }
+      },
+      "pooled": {
+        "n": 918,
+        "ll_1x2": 1.0942260258323386,
+        "rps": 0.23252781542838388,
+        "ou25_ll": 0.7262595323396445,
+        "ou25_calibration_pp": -6.815393966715759,
+        "ou25_calibration_se_pp": 1.685930432250846,
+        "home_win_calibration_pp": -5.241081682642286,
+        "home_win_calibration_se_pp": 1.6671000018726532
+      },
+      "dev_pass": false
+    }
+  },
+  "climatology": {
+    "seasons": {
+      "2022/2023": {
+        "n": 306,
+        "ll_1x2": 1.0981339492399105,
+        "rps": 0.2446174548250673,
+        "ou25_ll": 0.7006667858819755,
+        "ou25_calibration_pp": -6.535947712418305,
+        "ou25_calibration_se_pp": 2.8599936776089785,
+        "home_win_calibration_pp": -16.013071895424837,
+        "home_win_calibration_se_pp": 2.862013080070019
+      },
+      "2023/2024": {
+        "n": 306,
+        "ll_1x2": 1.0795731774362547,
+        "rps": 0.2210648148148148,
+        "ou25_ll": 0.6959028965836205,
+        "ou25_calibration_pp": -7.516339869281044,
+        "ou25_calibration_se_pp": 2.8384256704883075,
+        "home_win_calibration_pp": -6.045751633986928,
+        "home_win_calibration_se_pp": 2.8568699752225877
+      },
+      "2024/2025": {
+        "n": 306,
+        "ll_1x2": 1.082691073977822,
+        "rps": 0.2298498678096269,
+        "ou25_ll": 0.6944102168120011,
+        "ou25_calibration_pp": 2.832244008714595,
+        "ou25_calibration_se_pp": 2.8620130800700183,
+        "home_win_calibration_pp": 1.1982570806100212,
+        "home_win_calibration_se_pp": 2.821350417782413
+      }
+    },
+    "pooled": {
+      "n": 918,
+      "ll_1x2": 1.0867994002179957,
+      "rps": 0.231844045816503,
+      "ou25_ll": 0.6969932997591991,
+      "ou25_calibration_pp": -3.7400145243282514,
+      "ou25_calibration_se_pp": 1.6528630933012216,
+      "home_win_calibration_pp": -6.953522149600581,
+      "home_win_calibration_se_pp": 1.6582595822601125
+    }
+  },
+  "gate_zero_pass": false
+}

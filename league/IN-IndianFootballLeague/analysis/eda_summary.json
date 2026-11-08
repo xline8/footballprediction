@@ -1,0 +1,322 @@
+{
+ "seasons": {
+  "2021/2022": {
+   "n": 114,
+   "stats": 0,
+   "splits": 0,
+   "events": 105,
+   "shotmap": 0,
+   "lineup": 105,
+   "goals_pm": 2.5789473684210527,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.11428571428571428,
+   "yell_plain_pm": 0.0,
+   "yell_stats_pm": null,
+   "teams": 13,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "awarded": 0,
+   "home_win_rate": 0.3508771929824561,
+   "draw_rate": 0.2719298245614035,
+   "over25_rate": 0.4824561403508772,
+   "main_n": 78,
+   "championship_n": 21,
+   "relegation_n": 15,
+   "referee": 84
+  },
+  "2022/2023": {
+   "n": 132,
+   "stats": 0,
+   "splits": 0,
+   "events": 125,
+   "shotmap": 0,
+   "lineup": 132,
+   "goals_pm": 2.727272727272727,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.104,
+   "yell_plain_pm": 0.0,
+   "yell_stats_pm": null,
+   "teams": 12,
+   "xg_rows": 0,
+   "score_mismatch": 2,
+   "awarded": 2,
+   "home_win_rate": 0.5151515151515151,
+   "draw_rate": 0.2196969696969697,
+   "over25_rate": 0.5151515151515151,
+   "main_n": 132,
+   "championship_n": 0,
+   "relegation_n": 0,
+   "referee": 130
+  },
+  "2023/2024": {
+   "n": 154,
+   "stats": 0,
+   "splits": 0,
+   "events": 146,
+   "shotmap": 0,
+   "lineup": 154,
+   "goals_pm": 3.331168831168831,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.1095890410958904,
+   "yell_plain_pm": 0.0,
+   "yell_stats_pm": null,
+   "teams": 13,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "awarded": 0,
+   "home_win_rate": 0.4025974025974026,
+   "draw_rate": 0.23376623376623376,
+   "over25_rate": 0.6103896103896104,
+   "main_n": 154,
+   "championship_n": 0,
+   "relegation_n": 0,
+   "referee": 138
+  },
+  "2024/2025": {
+   "n": 132,
+   "stats": 0,
+   "splits": 0,
+   "events": 125,
+   "shotmap": 0,
+   "lineup": 132,
+   "goals_pm": 3.1818181818181817,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.056,
+   "yell_plain_pm": 0.0,
+   "yell_stats_pm": null,
+   "teams": 12,
+   "xg_rows": 0,
+   "score_mismatch": 2,
+   "awarded": 2,
+   "home_win_rate": 0.42424242424242425,
+   "draw_rate": 0.26515151515151514,
+   "over25_rate": 0.5833333333333334,
+   "main_n": 132,
+   "championship_n": 0,
+   "relegation_n": 0,
+   "referee": 101
+  },
+  "2025/2026": {
+   "n": 66,
+   "stats": 0,
+   "splits": 0,
+   "events": 63,
+   "shotmap": 0,
+   "lineup": 66,
+   "goals_pm": 3.0454545454545454,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.0,
+   "yell_plain_pm": 0.0,
+   "yell_stats_pm": null,
+   "teams": 10,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "awarded": 0,
+   "home_win_rate": 0.4090909090909091,
+   "draw_rate": 0.2727272727272727,
+   "over25_rate": 0.5757575757575758,
+   "main_n": 45,
+   "championship_n": 15,
+   "relegation_n": 6,
+   "referee": 4
+  },
+  "2026/2027": {
+   "n": 10,
+   "stats": 0,
+   "splits": 0,
+   "events": 10,
+   "shotmap": 0,
+   "lineup": 10,
+   "goals_pm": 2.7,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 2.7,
+   "yell_plain_pm": 2.7,
+   "yell_stats_pm": null,
+   "teams": 11,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "awarded": 0,
+   "home_win_rate": 0.3,
+   "draw_rate": 0.2,
+   "over25_rate": 0.4,
+   "main_n": 10,
+   "championship_n": 0,
+   "relegation_n": 0,
+   "referee": 10
+  }
+ },
+ "event_cards_by_season": {
+  "2021/2022": {
+   "n_events_matches": 105,
+   "yellow_plain_total": 0,
+   "yellowred_total": 12,
+   "red_total": 24
+  },
+  "2022/2023": {
+   "n_events_matches": 125,
+   "yellow_plain_total": 0,
+   "yellowred_total": 13,
+   "red_total": 24
+  },
+  "2023/2024": {
+   "n_events_matches": 146,
+   "yellow_plain_total": 0,
+   "yellowred_total": 16,
+   "red_total": 27
+  },
+  "2024/2025": {
+   "n_events_matches": 125,
+   "yellow_plain_total": 0,
+   "yellowred_total": 7,
+   "red_total": 31
+  },
+  "2025/2026": {
+   "n_events_matches": 63,
+   "yellow_plain_total": 0,
+   "yellowred_total": 0,
+   "red_total": 15
+  },
+  "2026/2027": {
+   "n_events_matches": 10,
+   "yellow_plain_total": 27,
+   "yellowred_total": 0,
+   "red_total": 1
+  }
+ },
+ "empty_events": {
+  "n_total": 34,
+  "n_with_goals": 0,
+  "goals_in_them": 0,
+  "all_scoreless": true
+ },
+ "halves_dev": {
+  "goals_events": {
+   "share_1h": 0.43873015873015875,
+   "n_goals": 1575,
+   "n_matches": 497,
+   "note": "event times, dev era, awarded excluded"
+  },
+  "yellows_events": {
+   "share_1h": 0.0625,
+   "n_yellows": 48,
+   "n_matches": 497,
+   "note": "no plain Yellow events in any season; event yellows are YellowRed only \u2014 NOT a frozen constant (no K market)"
+  },
+  "sot": null,
+  "corners": null,
+  "total_shots": null,
+  "yellows_stats": null
+ },
+ "trait_reliability_dev": {
+  "goals_for": {
+   "split_half_r": 0.6077073129368616,
+   "n_teams": 19
+  },
+  "goals_against": {
+   "split_half_r": 0.46243644502888004,
+   "n_teams": 19
+  }
+ },
+ "season_to_season": {
+  "2021-2022": {
+   "n_teams_common": 12,
+   "gf_corr": 0.40607585374233207,
+   "ga_corr": -0.022926378451282616
+  },
+  "2022-2023": {
+   "n_teams_common": 9,
+   "gf_corr": 0.3630471243681932,
+   "ga_corr": 0.25579607680595434
+  },
+  "2023-2024": {
+   "n_teams_common": 10,
+   "gf_corr": 0.25542940643962064,
+   "ga_corr": 0.22983301219657787
+  }
+ },
+ "entrant_transitions_dev": [
+  {
+   "season": "2023/2024",
+   "team_id": 1513627,
+   "team": "Delhi FC",
+   "n_matches": 24,
+   "gf_diff": 0.16774891774891776,
+   "ga_diff": 0.00108225108225124
+  },
+  {
+   "season": "2023/2024",
+   "team_id": 184549,
+   "team": "Shillong Lajong",
+   "n_matches": 24,
+   "gf_diff": -0.1655844155844155,
+   "ga_diff": -0.12391774891774876
+  },
+  {
+   "season": "2023/2024",
+   "team_id": 1562126,
+   "team": "Inter Kashi",
+   "n_matches": 24,
+   "gf_diff": 0.29274891774891776,
+   "ga_diff": 0.04274891774891776
+  },
+  {
+   "season": "2023/2024",
+   "team_id": 1562127,
+   "team": "Namdhari FC",
+   "n_matches": 24,
+   "gf_diff": -0.45725108225108224,
+   "ga_diff": 0.00108225108225124
+  },
+  {
+   "season": "2024/2025",
+   "team_id": 1690249,
+   "team": "SC Bengaluru",
+   "n_matches": 22,
+   "gf_diff": -0.5,
+   "ga_diff": 0.31818181818181834
+  },
+  {
+   "season": "2024/2025",
+   "team_id": 165182,
+   "team": "Dempo SC",
+   "n_matches": 22,
+   "gf_diff": 0.0,
+   "ga_diff": -0.09090909090909083
+  }
+ ],
+ "x2_offset_dev": {
+  "n_transitions": 6,
+  "g_log": -0.11038961038961037,
+  "c_log": 0.024711399711399833,
+  "gf_diff_mean": -0.11038961038961037,
+  "ga_diff_mean": 0.024711399711399833
+ },
+ "lines": {
+  "goals_ou": {
+   "over_rates": {
+    "1.5": 0.7870813397129187,
+    "2.5": 0.5717703349282297,
+    "3.5": 0.35645933014354064
+   },
+   "primary": 2.5,
+   "n": 418
+  }
+ },
+ "home_win_rate_dev_scored": 0.4449760765550239,
+ "draw_rate_dev_scored": 0.23923444976076555,
+ "dev_scored_n": 418,
+ "virgin_n": 66,
+ "reserve_n": 10
+}

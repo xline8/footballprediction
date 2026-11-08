@@ -1,0 +1,11 @@
+{
+  "virgin_read": false,
+  "verdict": "FAIL",
+  "shipped_arm": null,
+  "legs": {
+    "dev_gate": {
+      "gate_zero": false,
+      "x2": false
+    }
+  }
+}

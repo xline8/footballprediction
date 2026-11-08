@@ -1,0 +1,99 @@
+{
+  "candidate": "C-PY-L1",
+  "stage": "sealed",
+  "protocol": {
+    "virgin_season": "2026 - Clausura",
+    "frozen_n": 112,
+    "single_read_via": "gate_lib.load_sealed_rows"
+  },
+  "arms": {
+    "gate_zero": {
+      "n": 112,
+      "season": "2026 - Clausura",
+      "ll_8.5": 0.6926573450243775,
+      "mean_p_8.5": 0.5429311913766357,
+      "actual_over_8.5": 0.625,
+      "ll_9.5": 0.7317461019694015,
+      "mean_p_9.5": 0.4263252548799724,
+      "actual_over_9.5": 0.5178571428571429,
+      "ll_10.5": 0.7191470081426055,
+      "mean_p_10.5": 0.3202223002414345,
+      "actual_over_10.5": 0.41964285714285715,
+      "calibration_diff_pp": -8.206880862336433,
+      "calibration_se_pp": 4.678600403162324,
+      "calibration_band": "FAIL",
+      "params": {
+        "gamma": 0.3,
+        "r": 1.2277830188152112,
+        "beta": [
+          0.0025,
+          0.0
+        ],
+        "fit_n": 385
+      }
+    },
+    "x7": {
+      "n": 112,
+      "season": "2026 - Clausura",
+      "ll_8.5": 0.697266316884132,
+      "mean_p_8.5": 0.5469685780377077,
+      "actual_over_8.5": 0.625,
+      "ll_9.5": 0.7349896518830953,
+      "mean_p_9.5": 0.43273623989039783,
+      "actual_over_9.5": 0.5178571428571429,
+      "ll_10.5": 0.7147532009795555,
+      "mean_p_10.5": 0.32828885221987125,
+      "actual_over_10.5": 0.41964285714285715,
+      "calibration_diff_pp": -7.803142196229233,
+      "calibration_se_pp": 4.703266756556037,
+      "calibration_band": "FAIL",
+      "params": {
+        "gamma": 0.3,
+        "r": 1.2277830188152112,
+        "beta": [
+          0.01
+        ],
+        "fit_n": 385
+      }
+    }
+  },
+  "baselines": {
+    "league_base_rate": {
+      "n": 112,
+      "season": "2026 - Clausura",
+      "ll_8.5": 0.7989612399577346,
+      "mean_p_8.5": 0.3661163674995635,
+      "actual_over_8.5": 0.625,
+      "ll_9.5": 0.7691821401490869,
+      "mean_p_9.5": 0.32770437750785836,
+      "actual_over_9.5": 0.5178571428571429,
+      "ll_10.5": 0.7161827162815328,
+      "mean_p_10.5": 0.293307471504806,
+      "actual_over_10.5": 0.41964285714285715
+    },
+    "naive_trailing_10": {
+      "n": 112,
+      "season": "2026 - Clausura",
+      "ll_8.5": 0.7695031470352953,
+      "mean_p_8.5": 0.4092617529514464,
+      "actual_over_8.5": 0.625,
+      "ll_9.5": 0.7509080587727829,
+      "mean_p_9.5": 0.3690023975837304,
+      "actual_over_9.5": 0.5178571428571429,
+      "ll_10.5": 0.7112289350745036,
+      "mean_p_10.5": 0.332543234453602,
+      "actual_over_10.5": 0.41964285714285715
+    }
+  },
+  "legs": {
+    "ll_8.5_x7_le_gate_zero": false,
+    "ll_8.5_x7_le_league_base_rate": true,
+    "ll_8.5_x7_le_naive_trailing_10": true,
+    "calibration": "FAIL",
+    "dev_sign_check": {
+      "wins": 2,
+      "of": 2,
+      "pass": true
+    }
+  }
+}

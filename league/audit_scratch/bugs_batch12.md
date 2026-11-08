@@ -1,0 +1,185 @@
+# Batch 12 clear bug findings
+
+Static inspection only; no gate was run or changed. Verdicts remain authoritative for the JSONL outcomes. A bypass described here is a reachable code defect, not a claim that the prohibited path was executed.
+
+- UY-LigaAUF — `league/UY-LigaAUF/engine/goals/dc.py:200` — run_goals loads the entire CSV (including sealed 2025 and reserved 2026) before filtering dev_all; UY_DEV_ONLY and Gate Zero checks occur only after this read, violating the sealed-read isolation rule (no evidence that sealed labels enter fitting).
+- TR-SuperLig — `league/TR-SuperLig/engine/goals/harness.py:89` — Callable virgin_metrics loads and scores default arms without checking persisted dev gates; the CLI exposes it for dev-failed candidates (G-US/G-USL/G-USLL1); the frozen Gate Zero prerequisite is bypassable.
+- US-MLS — `league/US-MLS/engine/goals/harness.py:89` — Callable virgin_metrics loads and scores default arms without checking persisted dev gates; the CLI exposes it for dev-failed candidates (G-US/G-USL/G-USLL1); the frozen Gate Zero prerequisite is bypassable.
+- US-USLChampionship — `league/US-USLChampionship/engine/goals/harness.py:89` — Callable virgin_metrics loads and scores default arms without checking persisted dev gates; the CLI exposes it for dev-failed candidates (G-US/G-USL/G-USLL1); the frozen Gate Zero prerequisite is bypassable.
+- US-USLLeagueOne — `league/US-USLLeagueOne/engine/goals/harness.py:90` — Callable virgin_metrics loads and scores default arms without checking persisted dev gates; the CLI exposes it for dev-failed candidates (G-US/G-USL/G-USLL1); the frozen Gate Zero prerequisite is bypassable.
+- TR-SuperLig — `league/TR-SuperLig/engine/cards/harness.py:63` — virgin_metrics selects individually dev-passing arms but never requires Gate Zero to pass before loading sealed rows; this permits the K-TR/K-US X8 read explicitly forbidden by the frozen variants-are-moot rule.
+- TR-SuperLig — `league/TR-SuperLig/engine/cards/harness.py:78` — predict checks only presence in results_virgin arms, then exports; no sealed LL/calibration/sign eligibility check is enforced before shipping predictions.
+- US-MLS — `league/US-MLS/engine/cards/harness.py:68` — virgin_metrics selects individually dev-passing arms but never requires Gate Zero to pass before loading sealed rows; this permits the K-TR/K-US X8 read explicitly forbidden by the frozen variants-are-moot rule.
+- US-MLS — `league/US-MLS/engine/cards/harness.py:83` — predict checks only presence in results_virgin arms, then exports; no sealed LL/calibration/sign eligibility check is enforced before shipping predictions.
+- US-USLChampionship — `league/US-USLChampionship/engine/cards/harness.py:68` — virgin_metrics selects individually dev-passing arms but never requires Gate Zero to pass before loading sealed rows; this permits the K-TR/K-US X8 read explicitly forbidden by the frozen variants-are-moot rule.
+- US-USLChampionship — `league/US-USLChampionship/engine/cards/harness.py:83` — predict checks only presence in results_virgin arms, then exports; no sealed LL/calibration/sign eligibility check is enforced before shipping predictions.
+- US-USLLeagueOne — `league/US-USLLeagueOne/engine/cards/harness.py:71` — virgin_metrics selects individually dev-passing arms but never requires Gate Zero to pass before loading sealed rows; this permits the K-TR/K-US X8 read explicitly forbidden by the frozen variants-are-moot rule.
+- US-USLLeagueOne — `league/US-USLLeagueOne/engine/cards/harness.py:86` — predict checks only presence in results_virgin arms, then exports; no sealed LL/calibration/sign eligibility check is enforced before shipping predictions.
+- TR-SuperLig — `league/TR-SuperLig/engine/cards/harness.py:105` — best_base considers only the base method, omitting the naive baseline; prereg sealed LL requires comparison with the best of both baselines.
+- TR-SuperLig — `league/TR-SuperLig/engine/cards/harness.py:111` — Calibration acceptance is abs(diff)<=.01 OR abs(diff)<=se rather than abs(diff)<=.01+se, rejecting errors in the valid 1pp-plus-SE provisional band.
+- US-MLS — `league/US-MLS/engine/cards/harness.py:110` — best_base considers only the base method, omitting the naive baseline; prereg sealed LL requires comparison with the best of both baselines.
+- US-MLS — `league/US-MLS/engine/cards/harness.py:115` — Calibration acceptance is abs(diff)<=.01 OR abs(diff)<=se rather than abs(diff)<=.01+se, rejecting errors in the valid 1pp-plus-SE provisional band.
+- US-USLChampionship — `league/US-USLChampionship/engine/cards/harness.py:110` — best_base considers only the base method, omitting the naive baseline; prereg sealed LL requires comparison with the best of both baselines.
+- US-USLChampionship — `league/US-USLChampionship/engine/cards/harness.py:115` — Calibration acceptance is abs(diff)<=.01 OR abs(diff)<=se rather than abs(diff)<=.01+se, rejecting errors in the valid 1pp-plus-SE provisional band.
+- TR-SuperLig — `league/TR-SuperLig/engine/corners/run_c_tr.py:42` — When no arm passes sealed gates, runner still chooses Gate Zero and calls write_predictions; prereg says no passing arm means FAIL and nothing ships (USL verdict documents coordinator removal of such a fallback export).
+- US-MLS — `league/US-MLS/engine/corners/run_c_j1.py:42` — When no arm passes sealed gates, runner still chooses Gate Zero and calls write_predictions; prereg says no passing arm means FAIL and nothing ships (USL verdict documents coordinator removal of such a fallback export).
+- US-USLChampionship — `league/US-USLChampionship/engine/corners/run_c_usl.py:42` — When no arm passes sealed gates, runner still chooses Gate Zero and calls write_predictions; prereg says no passing arm means FAIL and nothing ships (USL verdict documents coordinator removal of such a fallback export).
+- US-USLLeagueOne — `league/US-USLLeagueOne/engine/corners/run_c_usl.py:42` — When no arm passes sealed gates, runner still chooses Gate Zero and calls write_predictions; prereg says no passing arm means FAIL and nothing ships (USL verdict documents coordinator removal of such a fallback export).
+- TR-SuperLig — `league/TR-SuperLig/engine/sot/harness.py:137` — choose returns GZ when every arm fails sealed gates, and virgin writes its predictions anyway; USLL1 verdict documents this fallback export being removed.
+- TR-SuperLig — `league/TR-SuperLig/engine/sot/harness.py:111` — A requested arm overwrites the gate-selected choice whenever it was read, allowing export even if that arm fails sealed LL/calibration.
+- US-MLS — `league/US-MLS/engine/sot/harness.py:130` — choose returns GZ when every arm fails sealed gates, and virgin writes its predictions anyway; USLL1 verdict documents this fallback export being removed.
+- US-MLS — `league/US-MLS/engine/sot/harness.py:104` — A requested arm overwrites the gate-selected choice whenever it was read, allowing export even if that arm fails sealed LL/calibration.
+- US-USLChampionship — `league/US-USLChampionship/engine/sot/harness.py:132` — choose returns GZ when every arm fails sealed gates, and virgin writes its predictions anyway; USLL1 verdict documents this fallback export being removed.
+- US-USLChampionship — `league/US-USLChampionship/engine/sot/harness.py:104` — A requested arm overwrites the gate-selected choice whenever it was read, allowing export even if that arm fails sealed LL/calibration.
+- US-USLLeagueOne — `league/US-USLLeagueOne/engine/sot/harness.py:132` — choose returns GZ when every arm fails sealed gates, and virgin writes its predictions anyway; USLL1 verdict documents this fallback export being removed.
+- US-USLLeagueOne — `league/US-USLLeagueOne/engine/sot/harness.py:104` — A requested arm overwrites the gate-selected choice whenever it was read, allowing export even if that arm fails sealed LL/calibration.
+- VN-VLeague — `league/VN-VLeague/engine/goals/harness.py:141` — virgin_metrics enables allow_virgin=True without first checking the frozen Gate Zero dev result; this bypasses the default loader isolation guard despite G-VN failing dev.
+- ZA-PSL — `league/ZA-PSL/engine/goals/harness.py:128` — virgin loads sealed rows before evaluating dev eligibility, and still scores sealed climatology with no passing arm; run_g_za.py exposes this despite the frozen G-ZA dev FAIL.
+- ZA-PSL — `league/ZA-PSL/engine/sot/harness.py:89` — virgin ignores dev gates entirely (run_s_za.py calls virgin(None,None)), reads/scores all arms even though S-ZA failed dev and prereg prohibits any sealed read.
+- ZA-PSL — `league/ZA-PSL/engine/sot/harness.py:147` — Sealed choose compares LL and calibration at 7.5; PREREG_S_ZA fixes the primary gate line at 6.5 (aliases at lines 136/143 also point to 7.5).
+- ZA-PSL — `league/ZA-PSL/engine/cards/harness.py:86` — After the dev check, virgin unconditionally sets shipped_arm=ARM and exports without testing sealed LL or calibration; prereg requires both sealed legs.
+- ZA-PSL — `league/ZA-PSL/engine/total_shots/run_t_ru1.py:16` — Retained executable stale runner points to th_matches.csv, asserts 240/240/240 dev counts and uses primary 26.5 plus sealed 15.5, rather than ZA data/counts and prereg 21.5; corrected run_t_za.py coexists.
+- TR-SuperLig — `league/TR-SuperLig/engine/total_shots/run_t_tr.py:207` — Copied halves constant .455/.545 is persisted and used at line 256, contradicting config and PREREG_T_TR frozen .4544/.5456; affects presentation exports, not FT gates.
+- US-MLS — `league/US-MLS/engine/total_shots/run_t_j1.py:170` — Export checks only dev_pass, then writes the requested arm without evaluating sealed LL/calibration or the dev sign leg; prereg requires all three before shipping.
+- VE-PrimeraDivision — `league/VE-PrimeraDivision/engine/corners/harness.py:9` — League-base path uses the ported NB distribution rather than PREREG_C_VE pooled prior over-rate Bernoulli baseline; verdict confirms sealed base LL .769799 versus literal .6931, changing leg (i) (candidate remains FAIL on calibration).
+
+Engine files opened and skimmed:
+
+- `league/TR-1Lig/engine/goals/arms.py`
+- `league/TR-1Lig/engine/goals/dc.py`
+- `league/TR-1Lig/engine/goals/harness.py`
+- `league/TR-1Lig/engine/goals/run_g_tr.py`
+- `league/TR-SuperLig/engine/cards/harness.py`
+- `league/TR-SuperLig/engine/cards/model.py`
+- `league/TR-SuperLig/engine/cards/referee.py`
+- `league/TR-SuperLig/engine/cards/run_k_tr.py`
+- `league/TR-SuperLig/engine/corners/core.py`
+- `league/TR-SuperLig/engine/corners/harness.py`
+- `league/TR-SuperLig/engine/corners/run_c_tr.py`
+- `league/TR-SuperLig/engine/goals/arms.py`
+- `league/TR-SuperLig/engine/goals/dc.py`
+- `league/TR-SuperLig/engine/goals/harness.py`
+- `league/TR-SuperLig/engine/goals/run_g_tr.py`
+- `league/TR-SuperLig/engine/sot/harness.py`
+- `league/TR-SuperLig/engine/sot/model.py`
+- `league/TR-SuperLig/engine/sot/run_s_tr.py`
+- `league/TR-SuperLig/engine/total_shots/model.py`
+- `league/TR-SuperLig/engine/total_shots/run_t_tr.py`
+- `league/TZ-PremierLeague/engine/goals/arms.py`
+- `league/TZ-PremierLeague/engine/goals/dc.py`
+- `league/TZ-PremierLeague/engine/goals/harness.py`
+- `league/TZ-PremierLeague/engine/goals/run_g_tz.py`
+- `league/UA-PremierLeague/engine/cards/harness.py`
+- `league/UA-PremierLeague/engine/cards/model.py`
+- `league/UA-PremierLeague/engine/cards/run_k_ua.py`
+- `league/UA-PremierLeague/engine/corners/core.py`
+- `league/UA-PremierLeague/engine/corners/harness.py`
+- `league/UA-PremierLeague/engine/corners/run_c_ua.py`
+- `league/UA-PremierLeague/engine/goals/arms.py`
+- `league/UA-PremierLeague/engine/goals/dc.py`
+- `league/UA-PremierLeague/engine/goals/harness.py`
+- `league/UA-PremierLeague/engine/goals/run_g_ua.py`
+- `league/UA-PremierLeague/engine/sot/harness.py`
+- `league/UA-PremierLeague/engine/sot/model.py`
+- `league/UA-PremierLeague/engine/sot/run_s_ua.py`
+- `league/UA-PremierLeague/engine/total_shots/model.py`
+- `league/UA-PremierLeague/engine/total_shots/run_t_ua.py`
+- `league/US-MLS/engine/cards/harness.py`
+- `league/US-MLS/engine/cards/model.py`
+- `league/US-MLS/engine/cards/run_k_j1.py`
+- `league/US-MLS/engine/corners/core.py`
+- `league/US-MLS/engine/corners/harness.py`
+- `league/US-MLS/engine/corners/run_c_j1.py`
+- `league/US-MLS/engine/goals/arms.py`
+- `league/US-MLS/engine/goals/dc.py`
+- `league/US-MLS/engine/goals/harness.py`
+- `league/US-MLS/engine/goals/run_g_j1.py`
+- `league/US-MLS/engine/sot/harness.py`
+- `league/US-MLS/engine/sot/model.py`
+- `league/US-MLS/engine/sot/run_s_j1.py`
+- `league/US-MLS/engine/total_shots/model.py`
+- `league/US-MLS/engine/total_shots/run_t_j1.py`
+- `league/US-USLChampionship/engine/cards/harness.py`
+- `league/US-USLChampionship/engine/cards/model.py`
+- `league/US-USLChampionship/engine/cards/run_k_usl.py`
+- `league/US-USLChampionship/engine/corners/core.py`
+- `league/US-USLChampionship/engine/corners/harness.py`
+- `league/US-USLChampionship/engine/corners/run_c_usl.py`
+- `league/US-USLChampionship/engine/goals/arms.py`
+- `league/US-USLChampionship/engine/goals/dc.py`
+- `league/US-USLChampionship/engine/goals/harness.py`
+- `league/US-USLChampionship/engine/goals/run_g_usl.py`
+- `league/US-USLChampionship/engine/sot/harness.py`
+- `league/US-USLChampionship/engine/sot/model.py`
+- `league/US-USLChampionship/engine/sot/run_s_usl.py`
+- `league/US-USLChampionship/engine/total_shots/model.py`
+- `league/US-USLChampionship/engine/total_shots/run_t_usl.py`
+- `league/US-USLLeagueOne/engine/cards/harness.py`
+- `league/US-USLLeagueOne/engine/cards/model.py`
+- `league/US-USLLeagueOne/engine/cards/run_k_usl.py`
+- `league/US-USLLeagueOne/engine/corners/core.py`
+- `league/US-USLLeagueOne/engine/corners/harness.py`
+- `league/US-USLLeagueOne/engine/corners/run_c_usl.py`
+- `league/US-USLLeagueOne/engine/goals/arms.py`
+- `league/US-USLLeagueOne/engine/goals/dc.py`
+- `league/US-USLLeagueOne/engine/goals/harness.py`
+- `league/US-USLLeagueOne/engine/goals/run_g_usl.py`
+- `league/US-USLLeagueOne/engine/sot/harness.py`
+- `league/US-USLLeagueOne/engine/sot/model.py`
+- `league/US-USLLeagueOne/engine/sot/run_s_usl.py`
+- `league/US-USLLeagueOne/engine/total_shots/model.py`
+- `league/US-USLLeagueOne/engine/total_shots/run_t_usl.py`
+- `league/UY-LigaAUF/engine/goals/arms.py`
+- `league/UY-LigaAUF/engine/goals/dc.py`
+- `league/UY-LigaAUF/engine/goals/harness.py`
+- `league/UY-LigaAUF/engine/goals/model.py`
+- `league/UY-LigaAUF/engine/goals/run_g_uy.py`
+- `league/UY-SegundaDivision/engine/goals/arms.py`
+- `league/UY-SegundaDivision/engine/goals/dc.py`
+- `league/UY-SegundaDivision/engine/goals/harness.py`
+- `league/UY-SegundaDivision/engine/goals/run_g_uyseg.py`
+- `league/VE-PrimeraDivision/engine/cards/harness.py`
+- `league/VE-PrimeraDivision/engine/cards/model.py`
+- `league/VE-PrimeraDivision/engine/cards/run_k_ve.py`
+- `league/VE-PrimeraDivision/engine/corners/core.py`
+- `league/VE-PrimeraDivision/engine/corners/harness.py`
+- `league/VE-PrimeraDivision/engine/corners/run_c_ve.py`
+- `league/VE-PrimeraDivision/engine/goals/arms.py`
+- `league/VE-PrimeraDivision/engine/goals/dc.py`
+- `league/VE-PrimeraDivision/engine/goals/harness.py`
+- `league/VE-PrimeraDivision/engine/goals/run_g_ve.py`
+- `league/VE-PrimeraDivision/engine/sot/harness.py`
+- `league/VE-PrimeraDivision/engine/sot/model.py`
+- `league/VE-PrimeraDivision/engine/sot/run_s_ve.py`
+- `league/VE-PrimeraDivision/engine/total_shots/model.py`
+- `league/VE-PrimeraDivision/engine/total_shots/run_t_ve.py`
+- `league/VN-VLeague/engine/goals/arms.py`
+- `league/VN-VLeague/engine/goals/dc.py`
+- `league/VN-VLeague/engine/goals/harness.py`
+- `league/VN-VLeague/engine/goals/run_g_vn.py`
+- `league/WAL-CymruPremier/engine/goals/arms.py`
+- `league/WAL-CymruPremier/engine/goals/dc.py`
+- `league/WAL-CymruPremier/engine/goals/harness.py`
+- `league/WAL-CymruPremier/engine/goals/run_g_wal.py`
+- `league/ZA-PSL/engine/cards/harness.py`
+- `league/ZA-PSL/engine/cards/model.py`
+- `league/ZA-PSL/engine/cards/run_k_ru1.py`
+- `league/ZA-PSL/engine/cards/run_k_za.py`
+- `league/ZA-PSL/engine/corners/core.py`
+- `league/ZA-PSL/engine/corners/harness.py`
+- `league/ZA-PSL/engine/corners/run_c_ru1.py`
+- `league/ZA-PSL/engine/corners/run_c_za.py`
+- `league/ZA-PSL/engine/goals/arms.py`
+- `league/ZA-PSL/engine/goals/dc.py`
+- `league/ZA-PSL/engine/goals/harness.py`
+- `league/ZA-PSL/engine/goals/run_g_ru1.py`
+- `league/ZA-PSL/engine/goals/run_g_za.py`
+- `league/ZA-PSL/engine/sot/harness.py`
+- `league/ZA-PSL/engine/sot/model.py`
+- `league/ZA-PSL/engine/sot/run_s_ru1.py`
+- `league/ZA-PSL/engine/sot/run_s_za.py`
+- `league/ZA-PSL/engine/total_shots/model.py`
+- `league/ZA-PSL/engine/total_shots/run_t_ru1.py`
+- `league/ZA-PSL/engine/total_shots/run_t_za.py`
+
+UZ-Superliga: no engine directory or Python engine files.

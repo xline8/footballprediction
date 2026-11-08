@@ -1,0 +1,205 @@
+{
+  "counts": {
+    "all_matches": 1311,
+    "included": 1311,
+    "included_by_season": {
+      "2021/2022": 240,
+      "2022/2023": 240,
+      "2023/2024": 240,
+      "2024/2025": 240,
+      "2025/2026": 240,
+      "2026/2027": 111
+    },
+    "distinct_team_ids": 25,
+    "name_variant_ids": 12
+  },
+  "levels": {
+    "2021/2022": {
+      "n": 240,
+      "goals": 2.7125,
+      "event_yellows": 0.0,
+      "yellowreds": 0.108333,
+      "reds": 0.070833,
+      "sot": null,
+      "corners": null,
+      "total_shots": null,
+      "possession": null
+    },
+    "2022/2023": {
+      "n": 240,
+      "goals": 2.775,
+      "event_yellows": 0.0,
+      "yellowreds": 0.079167,
+      "reds": 0.0875,
+      "sot": null,
+      "corners": null,
+      "total_shots": null,
+      "possession": null
+    },
+    "2023/2024": {
+      "n": 240,
+      "goals": 2.8625,
+      "event_yellows": 0.0,
+      "yellowreds": 0.108333,
+      "reds": 0.05,
+      "sot": null,
+      "corners": null,
+      "total_shots": null,
+      "possession": null
+    },
+    "2024/2025": {
+      "n": 240,
+      "goals": 2.520833,
+      "event_yellows": 0.0,
+      "yellowreds": 0.054167,
+      "reds": 0.091667,
+      "sot": null,
+      "corners": null,
+      "total_shots": null,
+      "possession": null
+    },
+    "2025/2026": {
+      "n": 240,
+      "goals": 2.679167,
+      "event_yellows": 3.733333,
+      "yellowreds": 0.070833,
+      "reds": 0.075,
+      "sot": null,
+      "corners": null,
+      "total_shots": null,
+      "possession": null
+    },
+    "2026/2027": {
+      "n": 111,
+      "goals": 3.018018,
+      "event_yellows": 4.0,
+      "yellowreds": 0.036036,
+      "reds": 0.081081,
+      "sot": null,
+      "corners": null,
+      "total_shots": null,
+      "possession": null
+    }
+  },
+  "reliabilities": {
+    "goals_for": {
+      "r": 0.327207,
+      "n_units": 64
+    },
+    "goals_against": {
+      "r": 0.294798,
+      "n_units": 64
+    }
+  },
+  "halves": {
+    "goals_1h_share": 0.449598,
+    "goals_total": 2609.0,
+    "goals_1h_total": 1173.0,
+    "yellows_1h_share": null,
+    "yellows_total": null,
+    "yellows_1h_total": null
+  },
+  "halves_variance": {
+    "goals": {
+      "pooled_1h_share": 0.449598,
+      "per_match_share_var": 0.108868,
+      "binomial_noise_var": 0.11616,
+      "true_var": -0.007292,
+      "team_split_half_r": 0.13,
+      "n_matches": 960
+    },
+    "yellows": null,
+    "note": "Dev-era plain-Yellow target is absent; yellow half shares are not computable."
+  },
+  "referee_coverage": {
+    "nonempty_text_by_season": {
+      "2021/2022": 0,
+      "2022/2023": 0,
+      "2023/2024": 0,
+      "2024/2025": 0,
+      "2025/2026": 0,
+      "2026/2027": 49
+    },
+    "dev_named": 0,
+    "reliability": null,
+    "note": "NOT ESTIMABLE: no named referees in the dev era."
+  },
+  "movers_x2": {
+    "transitions": [
+      {
+        "boundary": "2021/2022->2022/2023",
+        "club": "Karvina",
+        "n": 30,
+        "gf_per_match": 1.933333,
+        "ga_per_match": 1.233333,
+        "league_gf_per_match": 1.3875,
+        "dGF": 0.545833,
+        "dGA": -0.154167,
+        "fnl_prev_gf": null,
+        "fnl_prev_ga": null
+      },
+      {
+        "boundary": "2022/2023->2023/2024",
+        "club": "FC Zbrojovka Brno",
+        "n": 30,
+        "gf_per_match": 1.366667,
+        "ga_per_match": 1.4,
+        "league_gf_per_match": 1.43125,
+        "dGF": -0.064583,
+        "dGA": -0.03125,
+        "fnl_prev_gf": null,
+        "fnl_prev_ga": null
+      },
+      {
+        "boundary": "2023/2024->2024/2025",
+        "club": "FC Zlin",
+        "n": 30,
+        "gf_per_match": 1.5,
+        "ga_per_match": 0.466667,
+        "league_gf_per_match": 1.260417,
+        "dGF": 0.239583,
+        "dGA": -0.79375,
+        "fnl_prev_gf": null,
+        "fnl_prev_ga": null
+      },
+      {
+        "boundary": "2024/2025->2025/2026",
+        "club": "SK Dynamo \u010cesk\u00e9 Bud\u011bjovice",
+        "n": 30,
+        "gf_per_match": 1.033333,
+        "ga_per_match": 1.433333,
+        "league_gf_per_match": 1.339583,
+        "dGF": -0.30625,
+        "dGA": 0.09375,
+        "fnl_prev_gf": null,
+        "fnl_prev_ga": null
+      }
+    ],
+    "cumulative_offsets_before_target_season": {
+      "2022/2023": null,
+      "2023/2024": {
+        "dGF": 0.545833,
+        "dGA": -0.154167
+      },
+      "2024/2025": {
+        "dGF": 0.240625,
+        "dGA": -0.092708
+      },
+      "2025/2026": {
+        "dGF": 0.240278,
+        "dGA": -0.326389
+      }
+    },
+    "note": "Computed from fnl_matches.csv and the CZ-Liga (league 122) index, excluding placement matches. One top-tier entrant per boundary; B-team and third-tier entrants start at the league mean."
+  },
+  "primary_lines": {
+    "goals": {
+      "primary": "OU2.5",
+      "over_rate": 0.510417
+    },
+    "sot": null,
+    "corners": null,
+    "total_shots": null,
+    "cards": null
+  }
+}

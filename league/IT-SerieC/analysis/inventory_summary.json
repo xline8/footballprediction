@@ -1,0 +1,138 @@
+{
+  "league_id": 147,
+  "index_rows": 6184,
+  "finished_rows": 6184,
+  "seasons": {
+    "2021/2022": 1154,
+    "2022/2023": 1190,
+    "2023/2024": 1190,
+    "2024/2025": 1118,
+    "2025/2026": 1146,
+    "2026/2027": 386
+  },
+  "regular_rows": 5936,
+  "has_stats": 386,
+  "has_shotmap": 0,
+  "has_period_splits": 0,
+  "referee_nonempty": 223,
+  "has_events": 5658,
+  "by_season": {
+    "2021/2022": {
+      "index_rows": 1154,
+      "finished_rows": 1154,
+      "regular_rows": 1102,
+      "excluded_rows": 52,
+      "teams": 59,
+      "has_stats": 0,
+      "has_shotmap": 0,
+      "has_events": 1050,
+      "referee_nonempty": 0,
+      "leagueName_values": {
+        "Serie C Grp. A": 380,
+        "Serie C Grp. B": 380,
+        "Serie C Grp. C": 342,
+        "Serie C Super Cup": 3,
+        "Serie C Promotion Playoff": 39,
+        "Serie C Relegation Playoff": 10
+      },
+      "has_period_splits": 0
+    },
+    "2022/2023": {
+      "index_rows": 1190,
+      "finished_rows": 1190,
+      "regular_rows": 1140,
+      "excluded_rows": 50,
+      "teams": 60,
+      "has_stats": 0,
+      "has_shotmap": 0,
+      "has_events": 1089,
+      "referee_nonempty": 0,
+      "leagueName_values": {
+        "Serie C Grp. A": 380,
+        "Serie C Grp. C": 380,
+        "Serie C Grp. B": 380,
+        "Serie C Super Cup": 3,
+        "Serie C Relegation Playoff": 8,
+        "Serie C Promotion Playoff": 39
+      },
+      "has_period_splits": 0
+    },
+    "2023/2024": {
+      "index_rows": 1190,
+      "finished_rows": 1190,
+      "regular_rows": 1140,
+      "excluded_rows": 50,
+      "teams": 60,
+      "has_stats": 0,
+      "has_shotmap": 0,
+      "has_events": 1087,
+      "referee_nonempty": 0,
+      "leagueName_values": {
+        "Serie C Grp. B": 380,
+        "Serie C Grp. C": 380,
+        "Serie C Grp. A": 380,
+        "Serie C Super Cup": 3,
+        "Serie C Promotion Playoff": 39,
+        "Serie C Relegation Playoff": 8
+      },
+      "has_period_splits": 0
+    },
+    "2024/2025": {
+      "index_rows": 1118,
+      "finished_rows": 1118,
+      "regular_rows": 1066,
+      "excluded_rows": 52,
+      "teams": 58,
+      "has_stats": 0,
+      "has_shotmap": 0,
+      "has_events": 1022,
+      "referee_nonempty": 0,
+      "leagueName_values": {
+        "Serie C Grp. A": 380,
+        "Serie C Grp. C": 306,
+        "Serie C Grp. B": 380,
+        "Serie C Super Cup": 3,
+        "Serie C Promotion Playoff": 39,
+        "Serie C Relegation Playoff": 10
+      },
+      "has_period_splits": 0
+    },
+    "2025/2026": {
+      "index_rows": 1146,
+      "finished_rows": 1146,
+      "regular_rows": 1102,
+      "excluded_rows": 44,
+      "teams": 59,
+      "has_stats": 0,
+      "has_shotmap": 0,
+      "has_events": 1060,
+      "referee_nonempty": 0,
+      "leagueName_values": {
+        "Serie C Grp. B": 342,
+        "Serie C Grp. A": 380,
+        "Serie C Grp. C": 380,
+        "Serie C Super Cup": 3,
+        "Serie C Promotion Playoff": 39,
+        "Serie C Relegation Playoff": 2
+      },
+      "has_period_splits": 0
+    },
+    "2026/2027": {
+      "index_rows": 386,
+      "finished_rows": 386,
+      "regular_rows": 386,
+      "excluded_rows": 0,
+      "teams": 60,
+      "has_stats": 386,
+      "has_shotmap": 0,
+      "has_events": 350,
+      "referee_nonempty": 223,
+      "leagueName_values": {
+        "Serie C Grp. A": 130,
+        "Serie C Grp. C": 127,
+        "Serie C Grp. B": 129
+      },
+      "has_period_splits": 284
+    }
+  }
+}

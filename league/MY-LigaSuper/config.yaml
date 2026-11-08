@@ -1,0 +1,40 @@
+league: MY-LigaSuper
+country: Malaysia
+fotmob_id: 8985
+tier: 1
+warehouse: data_enrichment/fotmob_world/Malaysia/Liga Super
+data:
+  matches: league/MY-LigaSuper/data/my_ligasuper_matches.csv
+seasons: ["2021", "2022", "2023", "2024/2025", "2025/2026", "2026/2027"]
+dev_period:
+  goals: ["2022", "2023", "2024/2025"]
+  stats_markets: []
+  cards: []
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027 (partial, reserve)"
+halves_constants:
+  goals_1h_share: 0.4534
+  yellow_cards_1h_share: null
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+markets:
+  goals: G-MY  # DC goals-only; Gate Zero + SHRINK; no X2 mover prior
+  sot: S-MY  # NOT-BUILDABLE — stats null and shotmap empty in 793/793
+  corners: C-MY  # NOT-BUILDABLE — stats null in 793/793
+  cards: K-MY  # NOT-BUILDABLE — no plain Yellow events; referee named 0/793
+  total_shots: T-MY  # NOT-BUILDABLE — stats null and shotmap empty in 793/793
+shipping:
+  arm: NONE
+  no_ship: true  # G-MY FAIL at the dev gate (OU2.5 LL 0.7093 vs climatology 0.6811; RPS 0.2032 vs naive 0.1985); virgin 2025/26 NOT read; SHRINK identical to Gate Zero; nothing ships
+notes:
+  - "Single-table double round-robin regular phase; no split, championship/relegation round, or playoff."
+  - "Format history: 12 teams in 2021 and 2022, 14 in 2023, 13 in 2024/2025 and 2025/2026, and 12 seen in partial 2026/2027."
+  - "2023 is a whole calendar-year season; later seasons use European-season labels."
+  - "Payload inventory: stats null 793/793; shotmap shots empty 793/793; referee empty 793/793; events present 759/793."
+  - "Card events total 127: 88 Red, 39 YellowRed, and 0 plain Yellow."
+  - "The awarded match is retained with is_awarded=1 and excluded from every fit and score."
+  - "Team identity is FotMob team ID; canonical names use each ID's most recent corpus name and aliases are recorded in DATA_UNDERSTANDING.md."
+  - "There is no sibling Malaysian league in the complete warehouse index, so no X2 mover prior is available."
+  - "G-MY outcome: dev FAIL (pooled 0.9527 / 0.2032 / 0.7093 vs climatology 1.0548 / 0.2376 / 0.6811, naive 1.0031 / 0.1985 / 0.7688; SHRINK identical); virgin 2025/26 WAS NOT read (Gate Zero failed dev, variants moot); winner NONE; no predictions file; 2026/27 untouched."
+  - "G-MY diagnostic: model under-predicts overs pooled -7.08pp (mean P(over) 0.5176 vs actual 0.5885); worst in 2022 (-12.22pp) and 2023 (-9.30pp), absent in 2024/2025 (-0.11pp). RPS loss to naive is driven by 2023 alone."

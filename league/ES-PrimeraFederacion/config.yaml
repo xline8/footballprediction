@@ -1,0 +1,28 @@
+# ES-PrimeraFederacion (Spain) — league config
+league: ES-PrimeraFederacion
+country: Spain
+fotmob_id: 8968
+tier: 3
+warehouse: data_enrichment/fotmob_world/Spain/Primera Federación
+data:
+  matches: league/ES-PrimeraFederacion/data/espf_matches.csv
+  team_matches: league/ES-PrimeraFederacion/data/espf_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]  # walk-forward, season-blocked
+virgin_primary: "2025/2026"        # complete season, n=772 — read ONCE per candidate
+virgin_confirmatory: "2026/2027"   # partial (220 played at pull); reserved, NOT read in this build
+halves_constants:                  # frozen, event-derived, DEV seasons only (no stats splits exist)
+  goals_1h_share: 0.4301
+markets:
+  goals: G-ESPF    # DC reference, GOALS-ONLY (no xG/stats/shotmap anywhere in the corpus); arms: Gate Zero, SHRINK, X2 mover tier offset (LaLiga2 id 140 / from below)
+  sot: S-ESPF      # NOT BUILDABLE — no stats feed, no shotmap (0/4,081 payloads)
+  corners: C-ESPF  # NOT BUILDABLE — no stats feed (0/4,081 payloads)
+  cards: K-ESPF    # NOT BUILDABLE — card events exist in only 18-25% of matches, 995 events total (~0.24/match); no stats feed to cross-check
+  total_shots: T-ESPF  # NOT BUILDABLE — no stats feed, no shotmap (0/4,081 payloads)
+notes:
+  - 40 teams in 2 groups of 20; 38 rounds, double round-robin within group = 760 regular matches/season + cross-group promotion play-offs (semis '1/2' + 'final'; 7 in 2021/2022 single-leg, 14 in 2022/2023-2024/2025 two-legged incl. champions final, 12 in 2025/2026, no champions-final rows). Play-offs are ordinary rows, no phase feature.
+  - Heavy churn: exactly 14 of 40 clubs change every season (4 relegated from LaLiga2, 10 promoted from Segunda Federación, mirrored exits). 91 distinct clubs across the corpus. Movers measured (dev entry seasons): ex-LaLiga2 clubs enter at GD +0.23/match, ex-SegundaFed at -0.06 — the X2 mover offset is a first-class feature here.
+  - Team identity is keyed on FotMob team_id everywhere: 14 of the 91 ids carry more than one name spelling across seasons (accents dropped in some payloads, plus full renames: 'Barcelona B'/'Barca Atletic', 'Celta Vigo B'/'Celta Fortuna', 'Atletico Madrid B'/'Atletico Madrileno', 'Athletic Club B'/'Athletic Bilbao B'); raw-name set arithmetic invents phantom clubs.
+  - Scores-only league: content.stats empty in 4,081/4,081 payloads; shotmap shots empty in 4,081/4,081; referee text empty in 4,081/4,081 (the Referee object exists but carries no name). The ONLY per-match content beyond the score is the event feed (Goal/Half/Card, thin for cards).
+  - 17 awarded matches (16 in 2021/2022 — Extremadura UD folded mid-season, remaining fixtures awarded 2-0/3-0 — plus 1 in 2023/2024); 9 extra-time matches, all in play-offs (scoreStr is the after-extra-time score). Both included as ordinary rows.
+  - Predictions-only: no ES-PrimeraFederacion odds/settlement source in-system.

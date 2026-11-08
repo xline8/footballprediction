@@ -1,0 +1,31 @@
+# DE-3Liga (Germany) — league config
+league: DE-3Liga
+country: Germany
+fotmob_id: 208
+tier: 3
+warehouse: data_enrichment/fotmob_world/Germany/3. Liga
+data:
+  matches: league/DE-3Liga/data/de3_matches.csv
+  team_matches: league/DE-3Liga/data/de3_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.445
+  sot_1h_share: 0.447
+  corners_1h_share: 0.466
+  total_shots_1h_share: 0.452
+  yellow_cards_1h_share: 0.361
+markets:
+  goals: G-DE3
+  sot: S-DE3
+  corners: C-DE3
+  cards: K-DE3
+  total_shots: T-DE3
+notes:
+  - FORMAT: 20 teams, 38-match double round-robin in complete seasons; no split or qualification rows occur in this corpus. All 1,992 rows are regular phase.
+  - VIRGIN: 2025/2026 is complete (380); 2026/2027 is partial (130) and reserved confirmatory only.
+  - DATA: stats and events are present in all rows, but shotmap is absent in all rows and no xG is available.
+  - CARDS: event-unified yellows are the target; stats yellows are retained only as a cross-check because the stats block undercounts.
+  - X2: entrants from 2. Bundesliga can be identified, but Regionalliga is not in the warehouse; observed entrant effects are weak/inconsistent, so X2 is dropped.

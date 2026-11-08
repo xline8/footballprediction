@@ -1,0 +1,152 @@
+{
+ "2022/2023": {
+  "7881": {
+   "source": "serie_a",
+   "name": "Venezia"
+  },
+  "8529": {
+   "source": "serie_a",
+   "name": "Cagliari"
+  },
+  "8540": {
+   "source": "serie_c",
+   "name": "Palermo"
+  },
+  "9887": {
+   "source": "serie_c",
+   "name": "Modena"
+  },
+  "9976": {
+   "source": "serie_c",
+   "name": "Bari"
+  },
+  "10233": {
+   "source": "serie_a",
+   "name": "Genoa"
+  },
+  "189475": {
+   "source": "serie_c",
+   "name": "Sudtirol"
+  }
+ },
+ "2023/2024": {
+  "6500": {
+   "source": "serie_c",
+   "name": "AC Reggiana 1919"
+  },
+  "6512": {
+   "source": "serie_c",
+   "name": "Lecco"
+  },
+  "7801": {
+   "source": "serie_a",
+   "name": "Cremonese"
+  },
+  "9881": {
+   "source": "serie_a",
+   "name": "Spezia"
+  },
+  "9882": {
+   "source": "serie_a",
+   "name": "Sampdoria"
+  },
+  "10168": {
+   "source": "serie_c",
+   "name": "Catanzaro"
+  },
+  "189481": {
+   "source": "serie_c",
+   "name": "FeralpiSalo"
+  }
+ },
+ "2024/2025": {
+  "6106": {
+   "source": "serie_c",
+   "name": "Juve Stabia"
+  },
+  "6480": {
+   "source": "serie_a",
+   "name": "Salernitana"
+  },
+  "6488": {
+   "source": "serie_c",
+   "name": "Carrarese"
+  },
+  "7943": {
+   "source": "serie_a",
+   "name": "Sassuolo"
+  },
+  "9889": {
+   "source": "serie_c",
+   "name": "Mantova"
+  },
+  "9891": {
+   "source": "serie_a",
+   "name": "Frosinone"
+  },
+  "584022": {
+   "source": "serie_c",
+   "name": "Cesena"
+  }
+ },
+ "2025/2026": {
+  "6504": {
+   "source": "serie_a",
+   "name": "Monza"
+  },
+  "6722": {
+   "source": "serie_c",
+   "name": "Avellino"
+  },
+  "7881": {
+   "source": "serie_a",
+   "name": "Venezia"
+  },
+  "8534": {
+   "source": "serie_a",
+   "name": "Empoli"
+  },
+  "9878": {
+   "source": "serie_c",
+   "name": "Pescara"
+  },
+  "208932": {
+   "source": "serie_c",
+   "name": "Virtus Entella"
+  },
+  "583944": {
+   "source": "serie_c",
+   "name": "Padova"
+  }
+ },
+ "2026/2027": {
+  "6266": {
+   "source": "serie_c",
+   "name": "Benevento"
+  },
+  "6479": {
+   "source": "serie_a",
+   "name": "Pisa"
+  },
+  "7801": {
+   "source": "serie_a",
+   "name": "Cremonese"
+  },
+  "8522": {
+   "source": "serie_c",
+   "name": "Ascoli"
+  },
+  "9849": {
+   "source": "serie_c",
+   "name": "Arezzo"
+  },
+  "9876": {
+   "source": "serie_a",
+   "name": "Hellas Verona"
+  },
+  "145007": {
+   "source": "serie_c",
+   "name": "LR Vicenza"
+  }
+ }
+}

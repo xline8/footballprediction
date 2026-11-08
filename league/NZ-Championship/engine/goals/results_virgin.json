@@ -1,0 +1,9 @@
+{
+  "virgin_read": false,
+  "virgin_season": "2025",
+  "reason": "Gate Zero failed the mechanical dev gate: pooled 1X2 LL 1.127229096712 vs climatology 1.057336435538, RPS 0.263013027130 vs climatology 0.250858695379, and OU2.5 LL 0.598031445292 vs frozen base-rate LL 0.562335144619; the virgin was not read per the frozen rule.",
+  "dev_gate": {
+    "gate_zero": false,
+    "shrink": false
+  }
+}

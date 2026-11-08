@@ -1,0 +1,1817 @@
+leagues:
+  J1:
+    source: jleague
+    fotmob_id: 223
+    ccode: JPN
+    warehouse: data_enrichment/fotmob_jleague
+    data:
+      matches: league/J1/data/j1_matches.csv
+      team_matches: league/J1/data/j1_team_matches.csv
+    seasons: ["2021", "2022", "2023", "2024", "2025", "2026", "2026/2027"]
+    markets:
+      sot:
+        arm: GZ
+        engine_dir: league/J1/engine/sot
+        primary_line: 8.5
+        ladder: [7.5, 8.5, 9.5]
+        halves_share_1h: 0.448
+        div: J1
+        ratio_prior: 200
+        ladder_1h: [2.5, 3.5, 4.5]
+        ladder_2h: [3.5, 4.5, 5.5]
+      corners:
+        arm: gate_zero
+        engine_dir: league/J1/engine/corners
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.447
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      total_shots:
+        arm: A
+        engine_dir: league/J1/engine/total_shots
+        primary_line: 24.5
+        ladder: [23.5, 24.5, 25.5]
+        halves_share_1h: 0.455
+  DK-Superligaen:
+    source: world
+    fotmob_id: 46
+    ccode: DEN
+    country: Denmark
+    world_league: Superligaen
+    warehouse: data_enrichment/fotmob_world/Denmark/Superligaen
+    data:
+      matches: league/DK-Superligaen/data/dk_matches.csv
+      team_matches: league/DK-Superligaen/data/dk_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      corners:
+        arm: gate_zero
+        engine_dir: league/DK-Superligaen/engine/corners
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.488
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      total_shots:
+        arm: C
+        engine_dir: league/DK-Superligaen/engine/total_shots
+        primary_line: 25.5
+        ladder: [24.5, 25.5, 26.5]
+        halves_share_1h: 0.470
+  NL-Eredivisie:
+    source: world
+    fotmob_id: 57
+    ccode: NED
+    country: Netherlands
+    world_league: Eredivisie
+    warehouse: data_enrichment/fotmob_world/Netherlands/Eredivisie
+    data:
+      matches: league/NL-Eredivisie/data/nl_matches.csv
+      team_matches: league/NL-Eredivisie/data/team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      sot:
+        arm: GZ
+        engine_dir: league/NL-Eredivisie/engine/sot
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.446
+        div: NL-Eredivisie
+        ratio_prior: 200
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      total_shots:
+        arm: A
+        engine_dir: league/NL-Eredivisie/engine/total_shots
+        primary_line: 26.5
+        ladder: [25.5, 26.5, 27.5]
+        halves_share_1h: 0.449
+  AU-ALeague:
+    source: world
+    fotmob_id: 113
+    ccode: AUS
+    country: Australia
+    world_league: A-League
+    warehouse: data_enrichment/fotmob_world/Australia/A-League
+    data:
+      matches: league/AU-ALeague/data/au_matches.csv
+      team_matches: league/AU-ALeague/data/au_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      sot:
+        arm: RS
+        engine_dir: league/AU-ALeague/engine/sot
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.456
+        div: AU-ALeague
+        ratio_prior: 20000
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      corners:
+        arm: gate_zero
+        engine_dir: league/AU-ALeague/engine/corners
+        primary_line: 10.5
+        ladder: [9.5, 10.5, 11.5]
+        halves_share_1h: 0.452
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      cards:
+        arm: gate_zero
+        engine_dir: league/AU-ALeague/engine/cards
+        primary_line: 3.5
+        ladder: [2.5, 3.5, 4.5]
+        halves_share_1h: 0.308
+        ladder_1h: [0.5, 1.5, 2.5]
+        ladder_2h: [1.5, 2.5, 3.5]
+      total_shots:
+        arm: A
+        engine_dir: league/AU-ALeague/engine/total_shots
+        primary_line: 27.5
+        ladder: [26.5, 27.5, 28.5]
+        halves_share_1h: 0.451
+        ladder_1h: [11.5, 12.5, 13.5]
+        ladder_2h: [13.5, 14.5, 15.5]
+  US-MLS:
+    source: world
+    fotmob_id: 130
+    ccode: USA
+    country: United States
+    world_league: MLS
+    warehouse: data_enrichment/fotmob_world/United States/MLS
+    data:
+      matches: league/US-MLS/data/us_matches.csv
+      team_matches: league/US-MLS/data/us_team_matches.csv
+    seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+    markets:
+      sot:
+        arm: GZ
+        engine_dir: league/US-MLS/engine/sot
+        primary_line: 8.5
+        ladder: [7.5, 8.5, 9.5]
+        halves_share_1h: 0.450
+        div: US-MLS
+        ratio_prior: 200
+        ladder_1h: [2.5, 3.5, 4.5]
+        ladder_2h: [3.5, 4.5, 5.5]
+      corners:
+        arm: gate_zero
+        engine_dir: league/US-MLS/engine/corners
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.464
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      total_shots:
+        arm: C
+        engine_dir: league/US-MLS/engine/total_shots
+        primary_line: 25.5
+        ladder: [24.5, 25.5, 26.5]
+        halves_share_1h: 0.456
+        ladder_1h: [9.5, 10.5, 11.5]
+        ladder_2h: [11.5, 12.5, 13.5]
+  BR-SerieA:
+    source: world
+    fotmob_id: 268
+    ccode: BRA
+    country: Brazil
+    world_league: Série A
+    warehouse: data_enrichment/fotmob_world/Brazil/Série A
+    data:
+      matches: league/BR-SerieA/data/br_matches.csv
+      team_matches: league/BR-SerieA/data/br_team_matches.csv
+    seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+    markets:
+      sot:
+        arm: RS
+        engine_dir: league/BR-SerieA/engine/sot
+        primary_line: 8.5
+        ladder: [7.5, 8.5, 9.5]
+        halves_share_1h: 0.462
+        div: BR-SerieA
+        ratio_prior: 20000
+        ladder_1h: [2.5, 3.5, 4.5]
+        ladder_2h: [3.5, 4.5, 5.5]
+      total_shots:
+        arm: C
+        engine_dir: league/BR-SerieA/engine/total_shots
+        primary_line: 26.5
+        ladder: [25.5, 26.5, 27.5]
+        halves_share_1h: 0.463
+        ladder_1h: [11.5, 12.5, 13.5]
+        ladder_2h: [12.5, 13.5, 14.5]
+  AR-LigaProfesional:
+    source: world
+    fotmob_id: 112
+    ccode: ARG
+    country: Argentina
+    world_league: Liga Profesional
+    warehouse: data_enrichment/fotmob_world/Argentina/Liga Profesional
+    data:
+      matches: league/AR-LigaProfesional/data/ar_matches.csv
+      team_matches: league/AR-LigaProfesional/data/team_matches.csv
+    seasons: ["2021", "2022", "2023", "2024", "2025 - Apertura", "2025 - Clausura", "2026 - Apertura", "2026 - Clausura"]
+    markets:
+      corners:
+        arm: x7
+        engine_dir: league/AR-LigaProfesional/engine/corners
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.480
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+  CH-SuperLeague:
+    source: world
+    fotmob_id: 69
+    ccode: SUI
+    country: Switzerland
+    world_league: Super League
+    warehouse: data_enrichment/fotmob_world/Switzerland/Super League
+    data:
+      matches: league/CH-SuperLeague/data/ch_matches.csv
+      team_matches: league/CH-SuperLeague/data/ch_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      sot:
+        arm: RS
+        engine_dir: league/CH-SuperLeague/engine/sot
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.453
+        div: CH-SuperLeague
+        ratio_prior: 20000
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      corners:
+        arm: gate_zero
+        engine_dir: league/CH-SuperLeague/engine/corners
+        primary_line: 10.5
+        ladder: [9.5, 10.5, 11.5]
+        halves_share_1h: 0.471
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      total_shots:
+        arm: A
+        engine_dir: league/CH-SuperLeague/engine/total_shots
+        primary_line: 26.5
+        ladder: [25.5, 26.5, 27.5]
+        halves_share_1h: 0.456
+        ladder_1h: [11.5, 12.5, 13.5]
+        ladder_2h: [13.5, 14.5, 15.5]
+  SCO-Premiership:
+    source: world
+    fotmob_id: 64
+    ccode: SCO
+    country: Scotland
+    world_league: Premiership
+    warehouse: data_enrichment/fotmob_world/Scotland/Premiership
+    data:
+      matches: league/SCO-Premiership/data/sco_matches.csv
+      team_matches: league/SCO-Premiership/data/sco_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      goals:
+        arm: gate_zero
+        engine_dir: league/SCO-Premiership/engine/goals
+        primary_line: 2.5
+        ladder: [1.5, 2.5, 3.5]
+        halves_share_1h: 0.4405
+        ladder_1h: [0.5, 1.5, 2.5]
+        ladder_2h: [1.5, 2.5, 3.5]
+      sot:
+        arm: GZ
+        engine_dir: league/SCO-Premiership/engine/sot
+        primary_line: 8.5
+        ladder: [7.5, 8.5, 9.5]
+        halves_share_1h: 0.4492
+        div: SCO-Premiership
+        ratio_prior: 200
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      corners:
+        arm: gate_zero
+        engine_dir: league/SCO-Premiership/engine/corners
+        primary_line: 10.5
+        ladder: [9.5, 10.5, 11.5]
+        halves_share_1h: 0.4704
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      total_shots:
+        arm: B
+        engine_dir: league/SCO-Premiership/engine/total_shots
+        primary_line: 24.5
+        ladder: [23.5, 24.5, 25.5]
+        halves_share_1h: 0.4582
+        ladder_1h: [10.5, 11.5, 12.5]
+        ladder_2h: [12.5, 13.5, 14.5]
+  SE-Allsvenskan:
+    source: world
+    fotmob_id: 67
+    ccode: SWE
+    country: Sweden
+    world_league: Allsvenskan
+    warehouse: data_enrichment/fotmob_world/Sweden/Allsvenskan
+    data:
+      matches: league/SE-Allsvenskan/data/se_matches.csv
+      team_matches: league/SE-Allsvenskan/data/se_team_matches.csv
+    seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+    markets:
+      sot:
+        arm: X4
+        engine_dir: league/SE-Allsvenskan/engine/sot
+        primary_line: 8.5
+        ladder: [7.5, 8.5, 9.5]
+        halves_share_1h: 0.455
+        div: SE-Allsvenskan
+        ratio_prior: 200
+        ladder_1h: [2.5, 3.5, 4.5]
+        ladder_2h: [3.5, 4.5, 5.5]
+      corners:
+        arm: x7
+        engine_dir: league/SE-Allsvenskan/engine/corners
+        primary_line: 10.5
+        ladder: [9.5, 10.5, 11.5]
+        halves_share_1h: 0.473
+        ladder_1h: [4.5, 5.5, 6.5]
+        ladder_2h: [5.5, 6.5, 7.5]
+      total_shots:
+        arm: A
+        engine_dir: league/SE-Allsvenskan/engine/total_shots
+        primary_line: 26.5
+        ladder: [25.5, 26.5, 27.5]
+        halves_share_1h: 0.457
+        ladder_1h: [11.5, 12.5, 13.5]
+        ladder_2h: [13.5, 14.5, 15.5]
+  BE-FirstDivisionA:
+    source: world
+    fotmob_id: 40
+    ccode: BEL
+    country: Belgium
+    world_league: First Division A
+    warehouse: data_enrichment/fotmob_world/Belgium/First Division A
+    data:
+      matches: league/BE-FirstDivisionA/data/be_matches.csv
+      team_matches: league/BE-FirstDivisionA/data/be_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      sot:
+        arm: RS
+        engine_dir: league/BE-FirstDivisionA/engine/sot
+        primary_line: 8.5
+        ladder: [7.5, 8.5, 9.5]
+        halves_share_1h: 0.452
+        div: BE-FirstDivisionA
+        ratio_prior: 20000
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      cards:
+        arm: gate_zero
+        engine_dir: league/BE-FirstDivisionA/engine/cards
+        primary_line: 3.5
+        ladder: [2.5, 3.5, 4.5]
+        halves_share_1h: 0.317
+        ladder_1h: [0.5, 1.5, 2.5]
+        ladder_2h: [1.5, 2.5, 3.5]
+  NO-Eliteserien:
+    source: world
+    fotmob_id: 59
+    ccode: NOR
+    country: Norway
+    world_league: Eliteserien
+    warehouse: data_enrichment/fotmob_world/Norway/Eliteserien
+    data:
+      matches: league/NO-Eliteserien/data/no_matches.csv
+      team_matches: league/NO-Eliteserien/data/no_team_matches.csv
+    seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+    markets:
+      corners:
+        arm: gate_zero
+        engine_dir: league/NO-Eliteserien/engine/corners
+        primary_line: 10.5
+        ladder: [9.5, 10.5, 11.5]
+        halves_share_1h: 0.473
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      cards:
+        arm: gate_zero
+        engine_dir: league/NO-Eliteserien/engine/cards
+        primary_line: 2.5
+        ladder: [1.5, 2.5, 3.5]
+        halves_share_1h: 0.317
+        ladder_1h: [0.5, 1.5, 2.5]
+        ladder_2h: [1.5, 2.5, 3.5]
+        cards_actual: [yellow_home, yellow_away]
+      total_shots:
+        arm: A
+        engine_dir: league/NO-Eliteserien/engine/total_shots
+        primary_line: 26.5
+        ladder: [25.5, 26.5, 27.5]
+        halves_share_1h: 0.465
+        ladder_1h: [10.5, 11.5, 12.5]
+        ladder_2h: [12.5, 13.5, 14.5]
+  ENG-Championship:
+    source: world
+    fotmob_id: 48
+    ccode: ENG
+    country: England
+    world_league: Championship
+    warehouse: data_enrichment/fotmob_world/England/Championship
+    data:
+      matches: league/ENG-Championship/data/engch_matches.csv
+      team_matches: league/ENG-Championship/data/engch_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      sot:
+        arm: RS
+        engine_dir: league/ENG-Championship/engine/sot
+        primary_line: 7.5
+        ladder: [6.5, 7.5, 8.5]
+        halves_share_1h: 0.4548
+        div: ENG-Championship
+        ratio_prior: 20000
+        ladder_1h: [2.5, 3.5, 4.5]
+        ladder_2h: [3.5, 4.5, 5.5]
+      corners:
+        arm: gate_zero
+        engine_dir: league/ENG-Championship/engine/corners
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.4638
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+  DE-2Bundesliga:
+    source: world
+    fotmob_id: 146
+    ccode: GER
+    country: Germany
+    world_league: 2. Bundesliga
+    warehouse: data_enrichment/fotmob_world/Germany/2. Bundesliga
+    data:
+      matches: league/DE-2Bundesliga/data/de2_matches.csv
+      team_matches: league/DE-2Bundesliga/data/de2_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      sot:
+        arm: RS
+        engine_dir: league/DE-2Bundesliga/engine/sot
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.443
+        div: DE-2Bundesliga
+        ratio_prior: 20000
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+  KR-KLeague1:
+    source: world
+    fotmob_id: 9080
+    ccode: KOR
+    country: South Korea
+    world_league: K League 1
+    warehouse: data_enrichment/fotmob_world/South Korea/K League 1
+    data:
+      matches: league/KR-KLeague1/data/kr_matches.csv
+      team_matches: league/KR-KLeague1/data/kr_team_matches.csv
+    seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+    markets:
+      cards:
+        arm: gate_zero
+        engine_dir: league/KR-KLeague1/engine/cards
+        primary_line: 3.5
+        ladder: [2.5, 3.5, 4.5]
+        halves_share_1h: 0.350
+        ladder_1h: [0.5, 1.5, 2.5]
+        ladder_2h: [1.5, 2.5, 3.5]
+        cards_actual: [yellow_home, yellow_away]
+  TR-SuperLig:
+    source: world
+    fotmob_id: 71
+    ccode: TUR
+    country: Turkiye
+    world_league: Süper Lig
+    warehouse: data_enrichment/fotmob_world/Turkiye/Süper Lig
+    data:
+      matches: league/TR-SuperLig/data/tr_matches.csv
+      team_matches: league/TR-SuperLig/data/tr_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      goals:
+        arm: x3
+        engine_dir: league/TR-SuperLig/engine/goals
+        primary_line: 2.5
+        ladder: [1.5, 2.5, 3.5]
+        halves_share_1h: 0.4403
+        ladder_1h: [0.5, 1.5, 2.5]
+        ladder_2h: [1.5, 2.5, 3.5]
+      sot:
+        arm: GZ
+        engine_dir: league/TR-SuperLig/engine/sot
+        primary_line: 8.5
+        ladder: [7.5, 8.5, 9.5]
+        halves_share_1h: 0.4435
+        div: TR-SuperLig
+        ratio_prior: 200
+        ladder_1h: [2.5, 3.5, 4.5]
+        ladder_2h: [3.5, 4.5, 5.5]
+      corners:
+        arm: gate_zero
+        engine_dir: league/TR-SuperLig/engine/corners
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.4801
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      total_shots:
+        arm: A
+        engine_dir: league/TR-SuperLig/engine/total_shots
+        primary_line: 25.5
+        ladder: [24.5, 25.5, 26.5]
+        halves_share_1h: 0.4544
+        ladder_1h: [11.5, 12.5, 13.5]
+        ladder_2h: [13.5, 14.5, 15.5]
+  ES-LaLiga2:
+    source: world
+    fotmob_id: 140
+    ccode: ESP
+    country: Spain
+    world_league: LaLiga2
+    warehouse: data_enrichment/fotmob_world/Spain/LaLiga2
+    data:
+      matches: league/ES-LaLiga2/data/es_matches.csv
+      team_matches: league/ES-LaLiga2/data/es_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      sot:
+        arm: GZ
+        engine_dir: league/ES-LaLiga2/engine/sot
+        primary_line: 7.5
+        ladder: [6.5, 7.5, 8.5]
+        halves_share_1h: 0.4491
+        div: ES-LaLiga2
+        ratio_prior: 200
+        team_key: id
+        ladder_1h: [2.5, 3.5, 4.5]
+        ladder_2h: [3.5, 4.5, 5.5]
+      corners:
+        arm: x7
+        engine_dir: league/ES-LaLiga2/engine/corners
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.4692
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      total_shots:
+        arm: C
+        engine_dir: league/ES-LaLiga2/engine/total_shots
+        primary_line: 23.5
+        ladder: [22.5, 23.5, 24.5]
+        halves_share_1h: 0.4522
+        ladder_1h: [9.5, 10.5, 11.5]
+        ladder_2h: [11.5, 12.5, 13.5]
+  MX-LigaMX:
+    source: world
+    fotmob_id: 230
+    ccode: MEX
+    country: Mexico
+    world_league: Liga MX
+    warehouse: data_enrichment/fotmob_world/Mexico/Liga MX
+    data:
+      matches: league/MX-LigaMX/data/mx_matches.csv
+      team_matches: league/MX-LigaMX/data/team_matches.csv
+    seasons: ["2021/2022 - Apertura", "2021/2022 - Clausura", "2022/2023 - Apertura", "2022/2023 - Clausura", "2023/2024 - Apertura", "2023/2024 - Clausura", "2024/2025 - Apertura", "2024/2025 - Clausura", "2025/2026 - Apertura", "2025/2026 - Clausura", "2026/2027 - Apertura"]
+    markets:
+      corners:
+        arm: gate_zero
+        engine_dir: league/MX-LigaMX/engine/corners
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.465
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+  IN-ISL:
+    source: world
+    fotmob_id: 9478
+    ccode: IND
+    country: India
+    world_league: Indian Super League
+    warehouse: data_enrichment/fotmob_world/India/Indian Super League
+    data:
+      matches: league/IN-ISL/data/in_matches.csv
+      team_matches: league/IN-ISL/data/in_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      sot:
+        arm: GZ
+        engine_dir: league/IN-ISL/engine/sot
+        primary_line: 8.5
+        ladder: [7.5, 8.5, 9.5]
+        halves_share_1h: 0.453
+        div: IN-ISL
+        ratio_prior: 200
+        ladder_1h: [2.5, 3.5, 4.5]
+        ladder_2h: [3.5, 4.5, 5.5]
+      corners:
+        arm: gate_zero
+        engine_dir: league/IN-ISL/engine/corners
+        primary_line: 10.5
+        ladder: [9.5, 10.5, 11.5]
+        halves_share_1h: 0.458
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+  DE-3Liga:
+    source: world
+    fotmob_id: 208
+    ccode: GER
+    country: Germany
+    world_league: 3. Liga
+    warehouse: data_enrichment/fotmob_world/Germany/3. Liga
+    data:
+      matches: league/DE-3Liga/data/de3_matches.csv
+      team_matches: league/DE-3Liga/data/de3_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      corners:
+        arm: x7
+        engine_dir: league/DE-3Liga/engine/corners
+        primary_line: 10.5
+        ladder: [9.5, 10.5, 11.5]
+        halves_share_1h: 0.466
+        ladder_1h: [4.5, 5.5, 6.5]
+        ladder_2h: [5.5, 6.5, 7.5]
+      total_shots:
+        arm: A
+        engine_dir: league/DE-3Liga/engine/total_shots
+        primary_line: 26.5
+        ladder: [25.5, 26.5, 27.5]
+        halves_share_1h: 0.452
+        ladder_1h: [11.5, 12.5, 13.5]
+        ladder_2h: [13.5, 14.5, 15.5]
+  SA-ProLeague:
+    source: world
+    fotmob_id: 536
+    ccode: KSA
+    country: Saudi Arabia
+    world_league: Saudi Pro League
+    warehouse: data_enrichment/fotmob_world/Saudi Arabia/Saudi Pro League
+    data:
+      matches: league/SA-ProLeague/data/sa_matches.csv
+      team_matches: league/SA-ProLeague/data/sa_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      sot:
+        arm: RS
+        engine_dir: league/SA-ProLeague/engine/sot
+        primary_line: 8.5
+        ladder: [7.5, 8.5, 9.5]
+        halves_share_1h: 0.4469
+        div: SA-ProLeague
+        ratio_prior: 20000
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      corners:
+        arm: gate_zero
+        engine_dir: league/SA-ProLeague/engine/corners
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.4740
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      total_shots:
+        arm: A
+        engine_dir: league/SA-ProLeague/engine/total_shots
+        primary_line: 24.5
+        ladder: [23.5, 24.5, 25.5]
+        halves_share_1h: 0.4559
+        ladder_1h: [10.5, 11.5, 12.5]
+        ladder_2h: [12.5, 13.5, 14.5]
+  ENG-LeagueOne:
+    source: world
+    fotmob_id: 108
+    ccode: ENG
+    country: England
+    world_league: League One
+    warehouse: data_enrichment/fotmob_world/England/League One
+    data:
+      matches: league/ENG-LeagueOne/data/engl1_matches.csv
+      team_matches: league/ENG-LeagueOne/data/engl1_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      sot:
+        arm: GZ
+        engine_dir: league/ENG-LeagueOne/engine/sot
+        primary_line: 7.5
+        ladder: [6.5, 7.5, 8.5]
+        halves_share_1h: 0.4414
+        div: ENG-LeagueOne
+        ratio_prior: 200
+        ladder_1h: [2.5, 3.5, 4.5]
+        ladder_2h: [3.5, 4.5, 5.5]
+      corners:
+        arm: gate_zero
+        engine_dir: league/ENG-LeagueOne/engine/corners
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.4672
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      total_shots:
+        arm: C
+        engine_dir: league/ENG-LeagueOne/engine/total_shots
+        primary_line: 23.5
+        ladder: [22.5, 23.5, 24.5]
+        halves_share_1h: 0.4551
+        ladder_1h: [9.5, 10.5, 11.5]
+        ladder_2h: [11.5, 12.5, 13.5]
+  CO-PrimeraA:
+    source: world
+    fotmob_id: 274
+    ccode: COL
+    country: Colombia
+    world_league: Primera A
+    warehouse: data_enrichment/fotmob_world/Colombia/Primera A
+    data:
+      matches: league/CO-PrimeraA/data/co_primeraa_matches.csv
+      team_matches: league/CO-PrimeraA/data/co_primeraa_team_matches.csv
+    seasons: ["2021 - Apertura", "2021 - Clausura", "2022 - Apertura", "2022 - Clausura", "2023 - Apertura", "2023 - Clausura", "2024 - Apertura", "2024 - Clausura", "2025 - Apertura", "2025 - Clausura", "2026 - Apertura", "2026 - Clausura"]
+    markets:
+      sot:
+        arm: GZ
+        engine_dir: league/CO-PrimeraA/engine/sot
+        primary_line: 7.5
+        ladder: [6.5, 7.5, 8.5]
+        halves_share_1h: 0.4862
+        div: CO-PrimeraA
+        ratio_prior: 200
+        ladder_1h: [2.5, 3.5, 4.5]
+        ladder_2h: [3.5, 4.5, 5.5]
+      corners:
+        arm: gate_zero
+        engine_dir: league/CO-PrimeraA/engine/corners
+        primary_line: 8.5
+        ladder: [7.5, 8.5, 9.5]
+        halves_share_1h: 0.4956
+        ladder_1h: [4.5, 5.5, 6.5]
+        ladder_2h: [5.5, 6.5, 7.5]
+      total_shots:
+        arm: A
+        engine_dir: league/CO-PrimeraA/engine/total_shots
+        primary_line: 24.5
+        ladder: [23.5, 24.5, 25.5]
+        halves_share_1h: 0.4850
+      cards:
+        arm: x8
+        engine_dir: league/CO-PrimeraA/engine/cards
+        primary_line: 5.5
+        ladder: [3.5, 4.5, 5.5, 6.5]
+        halves_share_1h: 0.3543
+        ladder_1h: [0.5, 1.5, 2.5]
+        ladder_2h: [1.5, 2.5, 3.5]
+        exclude_seasons: ["2021 - Apertura", "2021 - Clausura", "2022 - Apertura", "2022 - Clausura"]
+        cards_target: event_unified_yellows
+        cards_actual: [ev_yellow_inc2nd_home, ev_yellow_inc2nd_away]
+  BR-SerieB:
+    source: world
+    fotmob_id: 8814
+    ccode: BRA
+    country: Brazil
+    world_league: Série B
+    warehouse: data_enrichment/fotmob_world/Brazil/Série B
+    data:
+      matches: league/BR-SerieB/data/brb_matches.csv
+      team_matches: league/BR-SerieB/data/brb_team_matches.csv
+    seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+    markets:
+      sot:
+        arm: RS
+        engine_dir: league/BR-SerieB/engine/sot
+        primary_line: 7.5
+        ladder: [6.5, 7.5, 8.5]
+        halves_share_1h: 0.467
+        div: BR-SerieB
+        ratio_prior: 20000
+        ladder_1h: [2.5, 3.5, 4.5]
+        ladder_2h: [3.5, 4.5, 5.5]
+      corners:
+        arm: gate_zero
+        engine_dir: league/BR-SerieB/engine/corners
+        primary_line: 10.5
+        ladder: [9.5, 10.5, 11.5]
+        halves_share_1h: 0.472
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+  IT-SerieB:
+    source: world
+    fotmob_id: 86
+    ccode: ITA
+    country: Italy
+    world_league: Serie B
+    warehouse: data_enrichment/fotmob_world/Italy/Serie B
+    data:
+      matches: league/IT-SerieB/data/itserieb_matches.csv
+      team_matches: league/IT-SerieB/data/itserieb_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      corners:
+        arm: gate_zero
+        engine_dir: league/IT-SerieB/engine/corners
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.4734
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      total_shots:
+        arm: A
+        engine_dir: league/IT-SerieB/engine/total_shots
+        primary_line: 25.5
+        ladder: [24.5, 25.5, 26.5]
+        halves_share_1h: 0.4650
+        ladder_1h: [11.5, 12.5, 13.5]
+        ladder_2h: [13.5, 14.5, 15.5]
+  PL-Ekstraklasa:
+    source: world
+    fotmob_id: 196
+    ccode: POL
+    country: Poland
+    world_league: Ekstraklasa
+    warehouse: data_enrichment/fotmob_world/Poland/Ekstraklasa
+    data:
+      matches: league/PL-Ekstraklasa/data/pl_matches.csv
+      team_matches: league/PL-Ekstraklasa/data/pl_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      sot:
+        arm: GZ
+        engine_dir: league/PL-Ekstraklasa/engine/sot
+        primary_line: 8.5
+        ladder: [7.5, 8.5, 9.5]
+        halves_share_1h: 0.4584
+        div: PL-Ekstraklasa
+        ratio_prior: 200
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+  US-USLChampionship:
+    source: world
+    fotmob_id: 8972
+    ccode: USA
+    country: United States
+    world_league: USL Championship
+    warehouse: data_enrichment/fotmob_world/United States/USL Championship
+    data:
+      matches: league/US-USLChampionship/data/usl_matches.csv
+      team_matches: league/US-USLChampionship/data/usl_team_matches.csv
+    seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+    markets:
+      sot:
+        arm: GZ
+        engine_dir: league/US-USLChampionship/engine/sot
+        primary_line: 8.5
+        ladder: [7.5, 8.5, 9.5]
+        halves_share_1h: 0.456
+        div: US-USLChampionship
+        ratio_prior: 200
+        ladder_1h: [2.5, 3.5, 4.5]
+        ladder_2h: [3.5, 4.5, 5.5]
+      total_shots:
+        arm: B
+        engine_dir: league/US-USLChampionship/engine/total_shots
+        primary_line: 24.5
+        ladder: [23.5, 24.5, 25.5]
+        halves_share_1h: 0.453
+        ladder_1h: [10.5, 11.5, 12.5]
+        ladder_2h: [12.5, 13.5, 14.5]
+  FR-Ligue2:
+    source: world
+    fotmob_id: 110
+    ccode: FRA
+    country: France
+    world_league: Ligue 2
+    warehouse: data_enrichment/fotmob_world/France/Ligue 2
+    data:
+      matches: league/FR-Ligue2/data/fr_matches.csv
+      team_matches: league/FR-Ligue2/data/fr_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      corners:
+        arm: gate_zero
+        engine_dir: league/FR-Ligue2/engine/corners
+        primary_line: 8.5
+        ladder: [7.5, 8.5, 9.5]
+        halves_share_1h: 0.4803
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      total_shots:
+        arm: A
+        engine_dir: league/FR-Ligue2/engine/total_shots
+        primary_line: 22.5
+        ladder: [21.5, 22.5, 23.5]
+        halves_share_1h: 0.4702
+        ladder_1h: [9.5, 10.5, 11.5]
+        ladder_2h: [11.5, 12.5, 13.5]
+  GR-SuperLeague:
+    source: world
+    fotmob_id: 135
+    ccode: GRE
+    country: Greece
+    world_league: Super League 1
+    warehouse: data_enrichment/fotmob_world/Greece/Super League 1
+    data:
+      matches: league/GR-SuperLeague/data/gr_matches.csv
+      team_matches: league/GR-SuperLeague/data/gr_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      corners:
+        arm: gate_zero
+        engine_dir: league/GR-SuperLeague/engine/corners
+        primary_line: 8.5
+        ladder: [7.5, 8.5, 9.5]
+        halves_share_1h: 0.4862
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      total_shots:
+        arm: C
+        engine_dir: league/GR-SuperLeague/engine/total_shots
+        primary_line: 22.5
+        ladder: [21.5, 22.5, 23.5]
+        halves_share_1h: 0.4611
+        exclude_seasons: ["2021/2022"]
+        ladder_1h: [10.5, 11.5, 12.5]
+        ladder_2h: [11.5, 12.5, 13.5]
+  EG-PremierLeague:
+    source: world
+    fotmob_id: 519
+    ccode: EGY
+    country: Egypt
+    world_league: Premier League
+    warehouse: data_enrichment/fotmob_world/Egypt/Premier League
+    data:
+      matches: league/EG-PremierLeague/data/eg_matches.csv
+      team_matches: league/EG-PremierLeague/data/eg_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      corners:
+        arm: gate_zero
+        engine_dir: league/EG-PremierLeague/engine/corners
+        primary_line: 8.5
+        ladder: [7.5, 8.5, 9.5]
+        halves_share_1h: 0.4604
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      total_shots:
+        arm: A
+        engine_dir: league/EG-PremierLeague/engine/total_shots
+        primary_line: 22.5
+        ladder: [21.5, 22.5, 23.5]
+        halves_share_1h: 0.4459
+        ladder_1h: [9.5, 10.5, 11.5]
+        ladder_2h: [11.5, 12.5, 13.5]
+  NL-EersteDivisie:
+    source: world
+    fotmob_id: 111
+    ccode: NED
+    country: Netherlands
+    world_league: Eerste Divisie
+    warehouse: data_enrichment/fotmob_world/Netherlands/Eerste Divisie
+    data:
+      matches: league/NL-EersteDivisie/data/nl_eerste_matches.csv
+      team_matches: league/NL-EersteDivisie/data/team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      sot:
+        arm: GZ
+        engine_dir: league/NL-EersteDivisie/engine/sot
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.451
+        div: NL-EersteDivisie
+        ratio_prior: 200
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      total_shots:
+        arm: A
+        engine_dir: league/NL-EersteDivisie/engine/total_shots
+        primary_line: 25.5
+        ladder: [24.5, 25.5, 26.5]
+        halves_share_1h: 0.451
+  RU-PremierLeague:
+    source: world
+    fotmob_id: 63
+    ccode: RUS
+    country: Russia
+    world_league: Premier League
+    warehouse: data_enrichment/fotmob_world/Russia/Premier League
+    data:
+      matches: league/RU-PremierLeague/data/ru_matches.csv
+      team_matches: league/RU-PremierLeague/data/ru_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      sot:
+        arm: GZ
+        engine_dir: league/RU-PremierLeague/engine/sot
+        primary_line: 8.5
+        ladder: [7.5, 8.5, 9.5]
+        halves_share_1h: 0.4612
+        div: RU-PremierLeague
+        ratio_prior: 200
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      total_shots:
+        arm: B
+        engine_dir: league/RU-PremierLeague/engine/total_shots
+        primary_line: 25.5
+        ladder: [24.5, 25.5, 26.5]
+        halves_share_1h: 0.4602
+        ladder_1h: [11.5, 12.5, 13.5]
+        ladder_2h: [13.5, 14.5, 15.5]
+  RO-LigaI:
+    source: world
+    fotmob_id: 189
+    ccode: ROU
+    country: Romania
+    world_league: Liga I
+    warehouse: data_enrichment/fotmob_world/Romania/Liga I
+    data:
+      matches: league/RO-LigaI/data/ro_matches.csv
+      team_matches: league/RO-LigaI/data/ro_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      corners:
+        arm: gate_zero
+        engine_dir: league/RO-LigaI/engine/corners
+        primary_line: 8.5
+        ladder: [7.5, 8.5, 9.5]
+        halves_share_1h: 0.477
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+  PE-Liga1:
+    source: world
+    fotmob_id: 131
+    ccode: PER
+    country: Peru
+    world_league: Liga 1
+    warehouse: data_enrichment/fotmob_world/Peru/Liga 1
+    data:
+      matches: league/PE-Liga1/data/pe_liga1_matches.csv
+      team_matches: league/PE-Liga1/data/pe_liga1_team_matches.csv
+    seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+    markets:
+      sot:
+        arm: RS
+        engine_dir: league/PE-Liga1/engine/sot
+        primary_line: 8.5
+        ladder: [7.5, 8.5, 9.5]
+        halves_share_1h: 0.4611
+        div: PE-Liga1
+        ratio_prior: 20000
+        ladder_1h: [2.5, 3.5, 4.5]
+        ladder_2h: [3.5, 4.5, 5.5]
+      corners:
+        arm: x7
+        engine_dir: league/PE-Liga1/engine/corners
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.4817
+        shots_target: unified
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      total_shots:
+        arm: A
+        engine_dir: league/PE-Liga1/engine/total_shots
+        primary_line: 19.5
+        ladder: [17.5, 18.5, 19.5, 20.5, 21.5]
+        halves_share_1h: 0.4662
+        shots_target: unified
+        ladder_1h: [8.5, 9.5, 10.5]
+        ladder_2h: [9.5, 10.5, 11.5]
+  RU-1Division:
+    source: world
+    fotmob_id: 338
+    ccode: RUS
+    country: Russia
+    world_league: 1. Division
+    warehouse: data_enrichment/fotmob_world/Russia/1. Division
+    data:
+      matches: league/RU-1Division/data/ru1_matches.csv
+      team_matches: league/RU-1Division/data/ru1_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      corners:
+        arm: gate_zero
+        engine_dir: league/RU-1Division/engine/corners
+        primary_line: 8.5
+        ladder: [7.5, 8.5, 9.5]
+        halves_share_1h: null
+  IE-PremierDivision:
+    source: world
+    fotmob_id: 126
+    ccode: IRL
+    country: Ireland
+    world_league: Premier Division
+    warehouse: data_enrichment/fotmob_world/Ireland/Premier Division
+    data:
+      matches: league/IE-PremierDivision/data/ie_matches.csv
+      team_matches: league/IE-PremierDivision/data/ie_team_matches.csv
+    seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+    markets:
+      corners:
+        arm: gate_zero
+        engine_dir: league/IE-PremierDivision/engine/corners
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.4762
+        exclude_seasons: ["2021"]
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+  TH-ThaiLeague:
+    source: world
+    fotmob_id: 8984
+    ccode: THA
+    country: Thailand
+    world_league: Thai League
+    warehouse: data_enrichment/fotmob_world/Thailand/Thai League
+    data:
+      matches: league/TH-ThaiLeague/data/th_matches.csv
+      team_matches: league/TH-ThaiLeague/data/th_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      corners:
+        arm: gate_zero
+        engine_dir: league/TH-ThaiLeague/engine/corners
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.4622
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      total_shots:
+        arm: B
+        engine_dir: league/TH-ThaiLeague/engine/total_shots
+        primary_line: 26.5
+        ladder: [25.5, 26.5, 27.5]
+        halves_share_1h: 0.4522
+        ladder_1h: [11.5, 12.5, 13.5]
+        ladder_2h: [13.5, 14.5, 15.5]
+  ZA-PSL:
+    source: world
+    fotmob_id: 537
+    ccode: RSA
+    country: South Africa
+    world_league: Premier Soccer League
+    warehouse: data_enrichment/fotmob_world/South Africa/Premier Soccer League
+    data:
+      matches: league/ZA-PSL/data/za_matches.csv
+      team_matches: league/ZA-PSL/data/za_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      corners:
+        arm: gate_zero
+        engine_dir: league/ZA-PSL/engine/corners
+        primary_line: 8.5
+        ladder: [7.5, 8.5, 9.5]
+        halves_share_1h: 0.4679
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+  CZ-Liga:
+    source: world
+    fotmob_id: 122
+    ccode: CZE
+    country: Czechia
+    world_league: 1. Liga
+    warehouse: data_enrichment/fotmob_world/Czechia/1. Liga
+    data:
+      matches: league/CZ-Liga/data/cz_matches.csv
+      team_matches: league/CZ-Liga/data/cz_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      sot:
+        arm: GZ
+        engine_dir: league/CZ-Liga/engine/sot
+        primary_line: 8.5
+        ladder: [7.5, 8.5, 9.5]
+        halves_share_1h: null
+        div: CZ-Liga
+        ratio_prior: 200
+        team_key: canonical_name
+      corners:
+        arm: gate_zero
+        engine_dir: league/CZ-Liga/engine/corners
+        primary_line: 10.5
+        ladder: [9.5, 10.5, 11.5]
+        halves_share_1h: null
+  BG-FirstLeague:
+    source: world
+    fotmob_id: 270
+    ccode: BUL
+    country: Bulgaria
+    world_league: First Professional League
+    warehouse: data_enrichment/fotmob_world/Bulgaria/First Professional League
+    data:
+      matches: league/BG-FirstLeague/data/bg_matches.csv
+      team_matches: league/BG-FirstLeague/data/bg_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      sot:
+        arm: GZ
+        engine_dir: league/BG-FirstLeague/engine/sot
+        primary_line: 8.5
+        ladder: [7.5, 8.5, 9.5]
+        halves_share_1h: null
+        div: BG-FirstLeague
+        ratio_prior: 200
+      corners:
+        arm: gate_zero
+        engine_dir: league/BG-FirstLeague/engine/corners
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: null
+      total_shots:
+        arm: A
+        engine_dir: league/BG-FirstLeague/engine/total_shots
+        primary_line: 17.5
+        ladder: [16.5, 17.5, 18.5]
+        halves_share_1h: null
+  CL-LigaDePrimera:
+    source: world
+    fotmob_id: 273
+    ccode: CHI
+    country: Chile
+    world_league: Liga de Primera
+    warehouse: data_enrichment/fotmob_world/Chile/Liga de Primera
+    data:
+      matches: league/CL-LigaDePrimera/data/cl_matches.csv
+      team_matches: league/CL-LigaDePrimera/data/cl_team_matches.csv
+    seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+    markets:
+      sot:
+        arm: RS
+        engine_dir: league/CL-LigaDePrimera/engine/sot
+        primary_line: 8.5
+        ladder: [7.5, 8.5, 9.5]
+        halves_share_1h: 0.4456
+        div: CL-LigaDePrimera
+        ratio_prior: 20000
+        ladder_1h: [2.5, 3.5, 4.5]
+        ladder_2h: [3.5, 4.5, 5.5]
+      corners:
+        arm: gate_zero
+        engine_dir: league/CL-LigaDePrimera/engine/corners
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.4644
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      total_shots:
+        arm: A
+        engine_dir: league/CL-LigaDePrimera/engine/total_shots
+        primary_line: 25.5
+        ladder: [24.5, 25.5, 26.5]
+        halves_share_1h: 0.4535
+        ladder_1h: [10.5, 11.5, 12.5]
+        ladder_2h: [12.5, 13.5, 14.5]
+  CN-SuperLeague:
+    source: world
+    fotmob_id: 120
+    ccode: CHN
+    country: China
+    world_league: Super League
+    warehouse: data_enrichment/fotmob_world/China/Super League
+    data:
+      matches: league/CN-SuperLeague/data/cn_matches.csv
+      team_matches: league/CN-SuperLeague/data/cn_team_matches.csv
+    seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+    markets:
+      sot:
+        arm: GZ
+        engine_dir: league/CN-SuperLeague/engine/sot
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.4580
+        div: Super League
+        ratio_prior: 200
+        team_key: id
+        exclude_seasons: ["2021", "2022"]
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      cards:
+        arm: gate_zero
+        engine_dir: league/CN-SuperLeague/engine/cards
+        primary_line: 3.5
+        ladder: [3.5, 4.5]
+        halves_share_1h: 0.3328
+        exclude_seasons: ["2021", "2022"]
+        ladder_1h: [0.5, 1.5, 2.5]
+        ladder_2h: [1.5, 2.5, 3.5]
+      total_shots:
+        arm: B
+        engine_dir: league/CN-SuperLeague/engine/total_shots
+        primary_line: 26.5
+        ladder: [25.5, 26.5, 27.5]
+        halves_share_1h: 0.4594
+        exclude_seasons: ["2021", "2022"]
+        ladder_1h: [11.5, 12.5, 13.5]
+        ladder_2h: [13.5, 14.5, 15.5]
+  CY-1Division:
+    source: world
+    fotmob_id: 136
+    ccode: CYP
+    country: Cyprus
+    world_league: 1. Division
+    warehouse: data_enrichment/fotmob_world/Cyprus/1. Division
+    data:
+      matches: league/CY-1Division/data/cy_matches.csv
+      team_matches: league/CY-1Division/data/cy_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      corners:
+        arm: gate_zero
+        engine_dir: league/CY-1Division/engine/corners
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: null
+      total_shots:
+        arm: A
+        engine_dir: league/CY-1Division/engine/total_shots
+        primary_line: 18.5
+        ladder: [17.5, 18.5, 19.5]
+        halves_share_1h: null
+  NO-OBOSLigaen:
+    source: world
+    fotmob_id: 203
+    ccode: NOR
+    country: Norway
+    world_league: OBOS-ligaen
+    warehouse: data_enrichment/fotmob_world/Norway/OBOS-ligaen
+    data:
+      matches: league/NO-OBOSLigaen/data/no_obos_matches.csv
+      team_matches: league/NO-OBOSLigaen/data/no_obos_team_matches.csv
+    seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+    markets:
+      corners:
+        arm: gate_zero
+        engine_dir: league/NO-OBOSLigaen/engine/corners
+        primary_line: 10.5
+        ladder: [9.5, 10.5, 11.5]
+        halves_share_1h: null
+  SE-Superettan:
+    source: world
+    fotmob_id: 168
+    ccode: SWE
+    country: Sweden
+    world_league: Superettan
+    warehouse: data_enrichment/fotmob_world/Sweden/Superettan
+    data:
+      matches: league/SE-Superettan/data/se2_matches.csv
+      team_matches: league/SE-Superettan/data/se2_team_matches.csv
+    seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+    markets:
+      cards:
+        arm: gate_zero
+        engine_dir: league/SE-Superettan/engine/cards
+        primary_line: 3.5
+        ladder: [2.5, 3.5, 4.5]
+        halves_share_1h: 0.3344
+        cards_actual: [yellow_home, yellow_away]
+  FI-Veikkausliiga:
+    source: world
+    fotmob_id: 51
+    ccode: FIN
+    country: Finland
+    world_league: Veikkausliiga
+    warehouse: data_enrichment/fotmob_world/Finland/Veikkausliiga
+    data:
+      matches: league/FI-Veikkausliiga/data/fi_matches.csv
+      team_matches: league/FI-Veikkausliiga/data/fi_team_matches.csv
+    seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+    markets:
+      cards:
+        arm: gate_zero
+        engine_dir: league/FI-Veikkausliiga/engine/cards
+        primary_line: 3.5
+        ladder: [2.5, 3.5, 4.5]
+        halves_share_1h: 0.3109
+        cards_actual: [yellow_home, yellow_away]
+  HU-NBI:
+    source: world
+    fotmob_id: 212
+    ccode: HUN
+    country: Hungary
+    world_league: Nemzeti Bajnokság I
+    warehouse: data_enrichment/fotmob_world/Hungary/Nemzeti Bajnokság I
+    data:
+      matches: league/HU-NBI/data/hu_nbi.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      corners:
+        arm: gate_zero
+        engine_dir: league/HU-NBI/engine/corners
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: null
+        columns:
+          corners_home: corners_h
+          corners_away: corners_a
+          total_shots_home: total_shots_h
+          total_shots_away: total_shots_a
+          home_team_id: home_id
+          away_team_id: away_id
+          BallPossesion_home: possession_h
+          BallPossesion_away: possession_a
+          big_chance_home: big_chances_h
+          big_chance_away: big_chances_a
+          touches_opp_box_home: box_touches_h
+          touches_opp_box_away: box_touches_a
+  US-USLLeagueOne:
+    source: world
+    fotmob_id: 9296
+    ccode: USA
+    country: USA
+    world_league: USL League One
+    warehouse: data_enrichment/fotmob_world/United States/USL League One
+    data:
+      matches: league/US-USLLeagueOne/data/usll1_matches.csv
+      team_matches: league/US-USLLeagueOne/data/usll1_team_matches.csv
+    seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+    markets:
+      corners:
+        arm: gate_zero
+        engine_dir: league/US-USLLeagueOne/engine/corners
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.469
+        exclude_phases: ["playoff"]
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      total_shots:
+        arm: B
+        engine_dir: league/US-USLLeagueOne/engine/total_shots
+        primary_line: 24.5
+        ladder: [23.5, 24.5, 25.5]
+        halves_share_1h: 0.461
+        exclude_phases: ["playoff"]
+        ladder_1h: [10.5, 11.5, 12.5]
+        ladder_2h: [12.5, 13.5, 14.5]
+  SK-1Liga:
+    source: world
+    fotmob_id: 176
+    ccode: SVK
+    country: Slovakia
+    world_league: 1. liga
+    warehouse: data_enrichment/fotmob_world/Slovakia/1. liga
+    data:
+      matches: league/SK-1Liga/data/sk_matches.csv
+      team_matches: league/SK-1Liga/data/sk_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      sot:
+        arm: GZ
+        engine_dir: league/SK-1Liga/engine/sot
+        primary_line: 8.5
+        ladder: [7.5, 8.5, 9.5]
+        halves_share_1h: null
+        div: SK-1Liga
+        ratio_prior: 200
+        team_key: canonical_name
+  AE-ProLeague:
+    source: world
+    fotmob_id: 538
+    ccode: ARE
+    country: United Arab Emirates
+    world_league: Pro League
+    warehouse: data_enrichment/fotmob_world/United Arab Emirates/Pro League
+    data:
+      matches: league/AE-ProLeague/data/ae_matches.csv
+      team_matches: league/AE-ProLeague/data/ae_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      total_shots:
+        arm: C
+        engine_dir: league/AE-ProLeague/engine/total_shots
+        primary_line: 25.5
+        ladder: [24.5, 25.5, 26.5]
+        halves_share_1h: 0.4608
+        ladder_1h: [10.5, 11.5, 12.5]
+        ladder_2h: [12.5, 13.5, 14.5]
+  HR-HNL:
+    source: world
+    fotmob_id: 252
+    ccode: HRV
+    country: Croatia
+    world_league: HNL
+    warehouse: data_enrichment/fotmob_world/Croatia/HNL
+    data:
+      matches: league/HR-HNL/data/hr_matches.csv
+      team_matches: league/HR-HNL/data/hr_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      corners:
+        arm: x7
+        engine_dir: league/HR-HNL/engine/corners
+        primary_line: 8.5
+        ladder: [7.5, 8.5, 9.5]
+        halves_share_1h: 0.4793
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+  DK-1Division:
+    source: world
+    fotmob_id: 85
+    ccode: DEN
+    country: Denmark
+    world_league: 1. Division
+    warehouse: data_enrichment/fotmob_world/Denmark/1. Division
+    data:
+      matches: league/DK-1Division/data/dk1_matches.csv
+      team_matches: league/DK-1Division/data/dk1_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      corners:
+        arm: x5
+        engine_dir: league/DK-1Division/engine/corners
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.469
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      cards:
+        arm: gate_zero
+        engine_dir: league/DK-1Division/engine/cards
+        primary_line: 3.5
+        ladder: [2.5, 3.5, 4.5]
+        halves_share_1h: 0.314
+        cards_target: yellow_plus_red
+        ladder_1h: [0.5, 1.5, 2.5]
+        ladder_2h: [1.5, 2.5, 3.5]
+      sot:
+        arm: GZ
+        engine_dir: league/DK-1Division/engine/sot
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.455
+        div: DK-1Division
+        ratio_prior: 200
+        team_key: id
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      total_shots:
+        arm: x5
+        engine_dir: league/DK-1Division/engine/total_shots
+        primary_line: 26.5
+        ladder: [25.5, 26.5, 27.5]
+        halves_share_1h: 0.461
+        ladder_1h: [11.5, 12.5, 13.5]
+        ladder_2h: [13.5, 14.5, 15.5]
+  AU-ALeagueWomen:
+    source: world
+    fotmob_id: 9495
+    ccode: AUS
+    country: Australia
+    world_league: A-League Women
+    warehouse: data_enrichment/fotmob_world/Australia/A-League Women
+    data:
+      matches: league/AU-ALeagueWomen/data/auw_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      corners:
+        arm: x7
+        engine_dir: league/AU-ALeagueWomen/engine/corners
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.48
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+        columns:
+          corners_home: home_corners
+          corners_away: away_corners
+          total_shots_home: home_total_shots
+          total_shots_away: away_total_shots
+          BallPossesion_home: home_BallPossesion
+          BallPossesion_away: away_BallPossesion
+          big_chance_home: home_big_chance
+          big_chance_away: away_big_chance
+          touches_opp_box_home: home_touches_opp_box
+          touches_opp_box_away: away_touches_opp_box
+        exclude_phases: ["finals"]
+      sot:
+        arm: RS
+        engine_dir: league/AU-ALeagueWomen/engine/sot
+        primary_line: 10.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.469
+        div: AU-ALeagueWomen
+        ratio_prior: 20000
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+        team_key: id
+        columns:
+          total_shots_home: home_total_shots
+          total_shots_away: away_total_shots
+          ShotsOnTarget_home: home_ShotsOnTarget
+          ShotsOnTarget_away: away_ShotsOnTarget
+        exclude_phases: ["finals"]
+  IS-BestaDeildin:
+    source: world
+    fotmob_id: 215
+    ccode: ISL
+    country: Iceland
+    world_league: Besta deildin
+    warehouse: data_enrichment/fotmob_world/Iceland/Besta deildin
+    data:
+      matches: league/IS-BestaDeildin/data/is_matches.csv
+      team_matches: league/IS-BestaDeildin/data/is_team_matches.csv
+    seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+    markets:
+      sot:
+        arm: GZ
+        engine_dir: league/IS-BestaDeildin/engine/sot
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.4644
+        div: IS-BestaDeildin
+        ratio_prior: 200
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+      corners:
+        arm: x7
+        engine_dir: league/IS-BestaDeildin/engine/corners
+        primary_line: 11.5
+        ladder: [10.5, 11.5, 12.5]
+        halves_share_1h: 0.4707
+        ladder_1h: [5.0, 5.5, 6.0]
+        ladder_2h: [5.5, 6.0, 6.5]
+      total_shots:
+        arm: B
+        engine_dir: league/IS-BestaDeildin/engine/total_shots
+        primary_line: 27.5
+        ladder: [26.5, 27.5, 28.5]
+        halves_share_1h: 0.4623
+        ladder_1h: [11.5, 12.5, 13.5]
+        ladder_2h: [13.5, 14.5, 15.5]
+  SA-FirstDivision:
+    source: world
+    fotmob_id: 10721
+    ccode: KSA
+    country: Saudi Arabia
+    world_league: Saudi First Division
+    warehouse: data_enrichment/fotmob_world/Saudi Arabia/Saudi First Division
+    data:
+      matches: league/SA-FirstDivision/data/safd_matches.csv
+      team_matches: league/SA-FirstDivision/data/safd_team_matches.csv
+    seasons: ["2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      sot:
+        arm: GZ
+        engine_dir: league/SA-FirstDivision/engine/sot
+        primary_line: 8.5
+        ladder: [7.5, 8.5, 9.5]
+        halves_share_1h: 0.454
+        div: SA-FirstDivision
+        ratio_prior: 200
+        seasons: ["2025/2026", "2026/2027"]
+        regular_rounds_only: true
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+  LV-Virsliga:
+    source: world
+    fotmob_id: 226
+    ccode: LVA
+    country: Latvia
+    world_league: Virsliga
+    warehouse: data_enrichment/fotmob_world/Latvia/Virsliga
+    data:
+      matches: league/LV-Virsliga/data/lv_virsliga_matches.csv
+      team_matches: league/LV-Virsliga/data/lv_virsliga_team_matches.csv
+    seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+    markets:
+      sot:
+        arm: GZ
+        engine_dir: league/LV-Virsliga/engine/sot
+        primary_line: 9.5
+        ladder: [8.5, 9.5, 10.5]
+        halves_share_1h: 0.4637
+        div: LV-Virsliga
+        ratio_prior: 200
+        ladder_1h: [3.5, 4.5, 5.5]
+        ladder_2h: [4.5, 5.5, 6.5]
+  AR-PrimeraBNacional:
+    source: world
+    fotmob_id: 8965
+    ccode: ARG
+    country: Argentina
+    world_league: Primera B Nacional
+    warehouse: data_enrichment/fotmob_world/Argentina/Primera B Nacional
+    data:
+      matches: league/AR-PrimeraBNacional/data/bnac_matches.csv
+    seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+    markets:
+      cards:
+        arm: x8
+        engine_dir: league/AR-PrimeraBNacional/engine/cards
+        primary_line: 4.5
+        ladder: [3.5, 4.5, 5.5]
+        halves_share_1h: 0.3900912370
+        ladder_1h: [0.5, 1.5, 2.5]
+        ladder_2h: [1.5, 2.5, 3.5]
+        exclude_seasons: ["2021", "2022"]
+        cards_actual: [yellow_home, yellow_away]
+  KZ-PremierLeague:
+    source: world
+    fotmob_id: 225
+    ccode: KAZ
+    country: Kazakhstan
+    world_league: Premier League
+    warehouse: data_enrichment/fotmob_world/Kazakhstan/Premier League
+    data:
+      matches: league/KZ-PremierLeague/data/kz_premier_matches.csv
+      team_matches: league/KZ-PremierLeague/data/kz_premier_team_matches.csv
+    seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+    markets:
+      goals:
+        arm: gate_zero
+        engine_dir: league/KZ-PremierLeague/engine/goals
+        primary_line: 2.5
+        ladder: [1.5, 2.5, 3.5]
+        halves_share_1h: 0.4539
+        ladder_1h: [0.5, 1.5, 2.5]
+        ladder_2h: [1.5, 2.5, 3.5]
+  BA-PremierLeague:
+    source: world
+    fotmob_id: 267
+    ccode: BIH
+    country: Bosnia-Herzegovina
+    world_league: Premier League
+    warehouse: data_enrichment/fotmob_world/Bosnia-Herzegovina/Premier League
+    data:
+      matches: league/BA-PremierLeague/data/ba_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      goals:
+        arm: gate_zero
+        engine_dir: league/BA-PremierLeague/engine/goals
+        primary_line: 2.5
+        ladder: [1.5, 2.5, 3.5]
+        halves_share_1h: 0.4493
+        ladder_1h: [0.5, 1.5, 2.5]
+        ladder_2h: [1.5, 2.5, 3.5]
+        exclude_awarded: true
+  TZ-PremierLeague:
+    source: world
+    fotmob_id: 9066
+    ccode: TAN
+    country: Tanzania
+    world_league: Premier League
+    warehouse: data_enrichment/fotmob_world/Tanzania/Premier League
+    data:
+      matches: league/TZ-PremierLeague/data/tz_matches.csv
+      team_matches: league/TZ-PremierLeague/data/tz_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      goals:
+        arm: shrink
+        engine_dir: league/TZ-PremierLeague/engine/goals
+        primary_line: 2.5
+        ladder: [1.5, 2.5, 3.5]
+        halves_share_1h: 0.4867818118
+        ladder_1h: [0.5, 1.5, 2.5]
+        ladder_2h: [1.5, 2.5, 3.5]
+        exclude_awarded: true
+        team_key: name
+  FO-PremierLeague:
+    source: world
+    fotmob_id: 250
+    ccode: FRO
+    country: Faroe Islands
+    world_league: Premier League
+    warehouse: data_enrichment/fotmob_world/Faroe Islands/Premier League
+    data:
+      matches: league/FO-PremierLeague/data/fo_premier_league_matches.csv
+    seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+    markets:
+      cards:
+        arm: shrink
+        engine_dir: league/FO-PremierLeague/engine/cards
+        primary_line: 3.5
+        ladder: [1.5, 2.5, 3.5, 4.5]
+        halves_share_1h: 0.348
+        ladder_1h: [0.5, 1.5, 2.5]
+        ladder_2h: [1.5, 2.5, 3.5]
+        cards_actual: [yellow_home, yellow_away]
+        exclude_excluded: true
+  ID-SuperLeague:
+    source: world
+    fotmob_id: 8983
+    ccode: IDN
+    country: Indonesia
+    world_league: Super League
+    warehouse: data_enrichment/fotmob_world/Indonesia/Super League
+    data:
+      matches: league/ID-SuperLeague/data/id_matches.csv
+      team_matches: league/ID-SuperLeague/data/id_team_matches.csv
+    seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+    markets:
+      cards:
+        arm: x5
+        engine_dir: league/ID-SuperLeague/engine/cards
+        primary_line: 4.5
+        ladder: [3.5, 4.5, 5.5]
+        halves_share_1h: 0.385
+        ladder_1h: [0.5, 1.5, 2.5]
+        ladder_2h: [1.5, 2.5, 3.5]
+        exclude_phases: [championship_playoff, stray_playoff]
+        cards_actual: [yellow_home, yellow_away]

@@ -1,0 +1,25 @@
+# Bosnia-Herzegovina Premier League — league config
+league: BA-PremierLeague
+country: Bosnia-Herzegovina
+fotmob_id: 267
+tier: 1
+warehouse: data_enrichment/fotmob_world/Bosnia-Herzegovina/Premier League
+data:
+  matches: league/BA-PremierLeague/data/ba_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026"]   # walk-forward, season-blocked; 2021/2022 seed, scored 2022/23-2025/26
+virgin_primary: "2026/2027"          # transitional season, in progress, n=64 as of 2026-11-08 — read ONCE per candidate
+virgin_confirmatory: "2026/2027"  # reserved; evaluated once when complete
+halves_constants:               # frozen league constants (EDA F3) — the ONLY halves mechanism
+  goals_1h_share: 0.4493
+markets:
+  goals: G-BA        # DC reference, goals-only; arms: Gate Zero, SHRINK (thin-history)
+  sot: S-BA          # NOT BUILDABLE — no SOT data (stats null, shotmap empty, all seasons)
+  corners: C-BA      # NOT BUILDABLE — no corners data
+  cards: K-BA        # NOT BUILDABLE — 0 Yellow events, no stats, referee empty
+  total_shots: T-BA  # NOT BUILDABLE — no shot data
+notes:
+  - Scores + events only: stats null 1,036/1,036; shotmap empty 1,036/1,036; referee empty 1,036/1,036; lineups 13/1,036.
+  - Format: 12 teams x 33 rounds 2021/22-2024/25; 10 teams x 36 rounds from 2025/26. No split-group, championship/relegation round, or playoff phase in any season.
+  - 4 awarded matches excluded from every fit and evaluation (official 3-0/0-3 does not reflect play).
+  - Predictions-only: no BA-PremierLeague odds/settlement source in-system.

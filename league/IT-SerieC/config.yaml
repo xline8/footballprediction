@@ -1,0 +1,24 @@
+# IT-SerieC (Italy Serie C) — league config
+league: IT-SerieC
+country: Italy
+fotmob_id: 147
+tier: 3
+warehouse: data_enrichment/fotmob_world/Italy/Serie C
+data:
+  matches: league/IT-SerieC/data/itseriec_matches.csv
+  team_matches: league/IT-SerieC/data/itseriec_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]  # seed + season-blocked walk-forward
+virgin_primary: "2025/2026"        # complete season, regular n=1102 — read ONCE
+virgin_confirmatory: "2026/2027"   # in progress; reserved, NOT read
+halves_constants: none              # no complete-season period splits; FT only
+markets:
+  goals: G-ITC        # goals-only DC reference; arms: Gate Zero, SHRINK
+  sot: NOT BUILDABLE  # stats/shotmap only appear in the in-progress season
+  corners: NOT BUILDABLE  # no complete-season stats target
+  cards: NOT BUILDABLE    # no complete-season stats/referee target
+  total_shots: NOT BUILDABLE  # no complete-season stats/shotmap target
+notes:
+  - Modeling uses regular-phase matches only: 5936 of 6184 finished matches; playoffs/playouts/Super Cup are excluded.
+  - X2 mover offset DROPPED on EDA F4; SHRINK is the pre-registered thin-data arm.
+  - Predictions-only: no IT-SerieC odds/settlement source in-system.

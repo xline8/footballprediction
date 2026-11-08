@@ -1,0 +1,106 @@
+{
+  "2021": {
+    "n_matches": 578,
+    "distinct_teams": 35,
+    "date_range": [
+      "2021-03-12",
+      "2021-11-15"
+    ],
+    "coverage": {
+      "events_pct": 87.37024221453287,
+      "referee_pct": 0.0,
+      "stats_nonempty_pct": 0.0,
+      "shotmap_nonempty_pct": 0.0,
+      "period_splits": "none"
+    },
+    "format": "Zona A 17 teams (8x34) + Zona B 18 teams (9x34)",
+    "zones": {
+      "A": 272,
+      "B": 306
+    }
+  },
+  "2022": {
+    "n_matches": 666,
+    "distinct_teams": 37,
+    "date_range": [
+      "2022-02-11",
+      "2022-10-12"
+    ],
+    "coverage": {
+      "events_pct": 88.88888888888889,
+      "referee_pct": 88.58858858858859,
+      "stats_nonempty_pct": 0.0,
+      "shotmap_nonempty_pct": 0.0,
+      "period_splits": "none"
+    },
+    "format": "single table, 37 teams, 37 rounds x18",
+    "zones": {
+      "single": 666
+    }
+  },
+  "2023": {
+    "n_matches": 648,
+    "distinct_teams": 37,
+    "date_range": [
+      "2023-02-04",
+      "2023-10-16"
+    ],
+    "coverage": {
+      "events_pct": 100.0,
+      "referee_pct": 94.75308641975309,
+      "stats_nonempty_pct": 0.0,
+      "shotmap_nonempty_pct": 0.0,
+      "period_splits": "none"
+    },
+    "format": "Zona A 19 teams (38x9) + Zona B 18 teams (34x9)",
+    "zones": {
+      "A": 342,
+      "B": 306
+    }
+  },
+  "2024": {
+    "n_matches": 722,
+    "distinct_teams": 38,
+    "date_range": [
+      "2024-02-02",
+      "2024-10-31"
+    ],
+    "coverage": {
+      "events_pct": 100.0,
+      "referee_pct": 94.87534626038781,
+      "stats_nonempty_pct": 0.0,
+      "shotmap_nonempty_pct": 0.0,
+      "period_splits": "none"
+    },
+    "format": "single table, 38 teams, 38 rounds x19",
+    "zones": {
+      "single": 722
+    }
+  },
+  "2025": {
+    "n_matches": 612,
+    "distinct_teams": 36,
+    "date_range": [
+      "2025-02-07",
+      "2025-10-06"
+    ],
+    "coverage": {
+      "events_pct": 100.0,
+      "referee_pct": 97.22222222222221,
+      "stats_nonempty_pct": 0.0,
+      "shotmap_nonempty_pct": 0.0,
+      "period_splits": "none"
+    },
+    "format": "Zona A/B, 18 teams each, 34 rounds x9",
+    "zones": {
+      "B": 306,
+      "A": 306
+    }
+  },
+  "2026": {
+    "n_matches": 648,
+    "virgin": true,
+    "format": "virgin: single table, 36 teams, 36 rounds x18",
+    "completeness_basis": "inventory count; no outcomes/statistics used"
+  }
+}

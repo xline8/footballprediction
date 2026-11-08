@@ -1,0 +1,83 @@
+{
+  "2021": {
+    "n_matches": 272,
+    "distinct_teams": 17,
+    "date_range": [
+      "2021-03-06",
+      "2021-11-06"
+    ],
+    "format": "Apertura + Clausura, 17 teams, 136 matches each",
+    "coverage": {
+      "events_pct": 92.27941176470588,
+      "referee_pct": 0.0,
+      "stats_nonempty_pct": 0.0,
+      "shotmap_nonempty_pct": 0.0
+    }
+  },
+  "2022": {
+    "n_matches": 272,
+    "distinct_teams": 17,
+    "date_range": [
+      "2022-02-12",
+      "2022-10-03"
+    ],
+    "format": "Apertura + Clausura, 17 teams, 136 matches each",
+    "coverage": {
+      "events_pct": 90.44117647058823,
+      "referee_pct": 0.0,
+      "stats_nonempty_pct": 0.0,
+      "shotmap_nonempty_pct": 0.0
+    }
+  },
+  "2023": {
+    "n_matches": 272,
+    "distinct_teams": 17,
+    "date_range": [
+      "2023-02-10",
+      "2023-10-09"
+    ],
+    "format": "Apertura + Clausura, 17 teams, 136 matches each",
+    "coverage": {
+      "events_pct": 87.13235294117648,
+      "referee_pct": 0.0,
+      "stats_nonempty_pct": 0.0,
+      "shotmap_nonempty_pct": 0.0
+    }
+  },
+  "2024": {
+    "n_matches": 462,
+    "distinct_teams": 22,
+    "date_range": [
+      "2024-02-02",
+      "2024-11-04"
+    ],
+    "format": "Apertura + Clausura, 22 teams, 231 matches each",
+    "coverage": {
+      "events_pct": 88.31168831168831,
+      "referee_pct": 0.0,
+      "stats_nonempty_pct": 0.0,
+      "shotmap_nonempty_pct": 0.0
+    }
+  },
+  "2025": {
+    "n_matches": 420,
+    "distinct_teams": 21,
+    "date_range": [
+      "2025-02-07",
+      "2025-11-16"
+    ],
+    "format": "Apertura + Clausura, 21 teams, 210 matches each",
+    "coverage": {
+      "events_pct": 88.57142857142857,
+      "referee_pct": 0.0,
+      "stats_nonempty_pct": 0.0,
+      "shotmap_nonempty_pct": 0.0
+    }
+  },
+  "2026": {
+    "n_matches": 462,
+    "virgin": true,
+    "format": "virgin definition only: single table, 22 teams, rounds 1–42, 462 group matches",
+    "completeness_basis": "inventory count; no outcomes/statistics used"
+  }
+}

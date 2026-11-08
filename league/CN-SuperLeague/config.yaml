@@ -1,0 +1,36 @@
+league: CN-SuperLeague
+country: China
+fotmob_id: 120
+tier: 1
+data:
+  matches: league/CN-SuperLeague/data/cn_matches.csv
+  team_matches: league/CN-SuperLeague/data/cn_team_matches.csv
+seasons: [2021, 2022, 2023, 2024, 2025, 2026]
+dev_period_goals: [2024, 2025]
+dev_period_stats: [2024, 2025]
+seed_goals: [2023]
+warmup_stats: [2023]
+virgin_primary: 2026
+virgin_end: "2026-11-08"
+era_restriction: "all fits use 2023+ only"
+phase_rule: "ordinary rows with phase flag; 2021 phases are documented, not a fit filter"
+halves_constants:
+  goals_1h_share: 0.4458
+  sot_1h_share: 0.4580
+  corners_1h_share: 0.4711
+  total_shots_1h_share: 0.4594
+  yellow_cards_1h_share: 0.3328
+markets:
+  goals: G-CN
+  sot: S-CN
+  corners: C-CN
+  cards: K-CN
+  total_shots: T-CN
+notes:
+  - "FORMAT: 2021 two 8-team groups plus championship/relegation playoffs; 2022 18-team double round-robin; 2023+ 16-team double round-robin; all rows retain phase."
+  - "STATS ERA: 2023 warm-up; 2024-2025 scored dev; 2026 complete virgin through 2026-11-08."
+  - "CARDS: frozen target is stats-feed yellow_cards home+away in dev and virgin; event-unified count is a documented sensitivity only."
+  - "CARDS ARTEFACT: 2023+ agreement 82.5-90.42%, mean stats-minus-events -0.15 to -0.03; 2021-22 undercount -0.81/-0.57, agreement 69.32-73.49%."
+  - "REFEREE: X8 dropped; reliability is near zero and coverage falls to 64.58% in 2025 and 48.75% in 2026."
+  - "TOUCHES: coverage is 54.58% in 2023 and 100% from 2024; X7 needs 8 prior matches or falls back to Gate Zero."
+  - "REGIME BREAK: 2024 level step; 2023 card step; 2021 COVID group/playoff format; 2022 18 teams and stats-feed anomalies."

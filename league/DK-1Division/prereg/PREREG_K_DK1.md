@@ -1,0 +1,9 @@
+# Pre-registration — K-DK1
+
+Frozen 2026-11-10 before fitting. Target: stats-feed `yellow_cards_home + yellow_cards_away + red_cards_home + red_cards_away`; this is the frozen source because it is structured and complete from 2022/2023, while event cards agree only 88.0–92.2% in completed development seasons and 65.1% in 2026/2027. 2021/2022 has no stats-feed cards and is excluded. Phase rule: regular 1–22, feed-labelled promotion/championship/relegation 23–32 ordinary rows. Halves use `yellow_cards_1h_share: 0.314` from 2023/2024–2025/2026. Primary line: 3.5.
+
+Gate Zero is the `model_cards.py` production pattern. The only permitted variant is X5 trailing target rates; X8 referee strictness is dropped (r=.305 and incomplete appointments). Dev is 2022/2023–2024/2025, virgin 2025/2026 read once, 2026/2027 reserved.
+
+Calibration: `|breach| ≤1pp` clean PASS; `≤1 SE` PROVISIONAL; otherwise FAIL. Dev gate: pooled dev LL beats climatology/base-rate and naive trailing-10; Gate Zero failure makes variants moot and virgin unread. Virgin LL must beat or tie Gate Zero and climatology, with calibration and per-season variant sign. Both-pass selects the lower pooled virgin LL; ties go simpler.
+
+GATE LEGS (frozen): Dev gate — pooled dev LL and primary-line LL of an arm must beat climatology/base-rate and naive trailing-10, else the arm is dead. Virgin legs — (i) LL leg: arm's virgin LL ≤ Gate Zero's AND ≤ climatology's; (ii) calibration leg: |mean predicted − actual| ≤ 1.0pp pooled, SE reported; within 1 SE is PROVISIONAL, beyond is FAIL; (iii) variants must beat Gate Zero in at least half of dev seasons. Both-pass rule: if Gate Zero and a variant both pass all legs, the lower pooled virgin LL ships; if only one passes, it ships; if none passes, K-DK1 FAIL and nothing ships. Virgin is read once.

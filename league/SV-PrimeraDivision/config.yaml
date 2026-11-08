@@ -1,0 +1,75 @@
+# El Salvador Primera Division — league config
+league: SV-PrimeraDivision
+country: El Salvador
+fotmob_id: 335
+tier: 1
+warehouse: data_enrichment/fotmob_world/El Salvador/Primera Division
+warehouse_root: ~/workspace/footballprediction
+data:
+  matches: league/SV-PrimeraDivision/data/sv_matches.csv
+  team_matches: league/SV-PrimeraDivision/data/sv_team_matches.csv
+seasons: ["2021/2022 - Apertura", "2021/2022 - Clausura", "2022/2023 - Apertura", "2022/2023 - Clausura", "2023/2024 - Apertura", "2023/2024 - Clausura", "2024/2025 - Apertura", "2024/2025 - Clausura", "2025/2026 - Apertura", "2025/2026 - Clausura", "2026/2027 - Apertura"]
+dev_seed: "2021/2022 - Apertura"
+dev_period: ["2021/2022 - Clausura", "2022/2023 - Apertura", "2022/2023 - Clausura", "2023/2024 - Apertura", "2023/2024 - Clausura", "2024/2025 - Apertura", "2024/2025 - Clausura"]
+dev_scored_n: 815
+virgin_primary: ["2025/2026 - Apertura", "2025/2026 - Clausura"]
+virgin_n: 264
+virgin_confirmatory: "2026/2027 - Apertura"
+halves_constants:
+  goals_1h_share: 0.4335
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+  yellow_cards_1h_share: null
+markets:
+  goals: G-SV
+  sot: S-SV
+  corners: C-SV
+  cards: K-SV
+  total_shots: T-SV
+notes:
+  - FORMAT: FotMob 335 is a parent id; each Apertura/Clausura is its
+    own sub-league id under parentLeagueId 335. 12 teams (11 in both
+    2024/2025 tournaments), regular phase 22 rounds (132 matches at
+    12 teams, 110 at 11), then playoffs (QF 8 + SF 4 + final 1 = 13).
+    Regular phase ONLY is modelled (MX-LigaMX precedent); playoffs
+    are excluded from every fit, score and EDA level.
+  - SCORES ONLY: stats/shotmap/playerStats empty in all 1,448
+    payloads by content; referee text empty in all 1,448; lineups
+    carry zero starters in all 1,448 (no lineup block exists at all);
+    events exist in 1,334/1,448 and carry Goal/Half/Card only — the
+    593 Card events are all dismissals (Red 449, YellowRed 144,
+    0 plain Yellows). S/C/K/T NOT BUILDABLE (payload-level evidence
+    in prereg).
+  - Teams keyed by FotMob team id (header.teams[].id; 19 ids, stable).
+    Name variants map to one id: 49747 Hercules/Once Deportivo,
+    49739 CD Aguila/CD Aguila (diacritic), 1783449 Inter Santa Tecla/
+    Inter FA. Header score == index score on 1,448/1,448.
+  - FORMAT ANOMALIES (frozen): 2022/2023 Apertura regular phase is
+    rounds 1-10 only (67 matches; round "1" carries 12 matches in two
+    batches, Jul + Sep 2022), then full playoffs. 2022/2023 Clausura
+    playoffs stop after 5 QF matches (season ends 2023-05-20, no
+    SF/final). 2026/2027 Apertura in progress (rounds 1-19 + one
+    round-"21" match, 115 matches to 2026-11-09).
+  - EVENT-FEED ERRORS (flagged event_ft_mismatch, FT score from
+    header/index): 1 duplicate goal event (4708064, same eventId
+    twice; HT 2-1 verified consistent). 2 event-less non-0-0 matches
+    (3677630 Firpo-Santa Tecla 0-2; 4397305 Jocoro-Santa Tecla 0-3)
+    are played matches with a missing event feed; HT unknown. All
+    other 112 event-less matches are 0-0 draws. No awarded/forfeit
+    rows exist; eligible = 1,448.
+  - HALVES: goals 1H share 0.4335 (ratio of sums over 1,115 trusted
+    HT rows, completed tournaments); per-match share excess variance
+    -0.0042, team-tournament split-half r = -0.076 — frozen constant,
+    presentation only.
+  - TRAITS: goals-for split-half r = 0.372 pooled (130 team-
+    tournaments), goals-against r = 0.360 — both moderate, unlike
+    Ghana's trait-free attack. Season-year pooled: attack 0.464,
+    defence 0.407. The dev gate adjudicates whether the DC ratings
+    add signal.
+  - TURNOVER: 0-2 new clubs per season-year, always at the Apertura
+    (never Apertura -> Clausura of the same year). X2: no built
+    Salvadoran parent/sibling exists in the warehouse, so no
+    cross-league mover prior is available; SHRINK is the thin-data
+    arm (1-2 new clubs enter most years).
+  - Calibration convention: actual minus predicted.

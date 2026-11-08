@@ -1,0 +1,39 @@
+{
+  "league": "HU-NBII",
+  "fotmob_id": 9117,
+  "index_rows": 344,
+  "seasons": {
+    "2025/2026": {
+      "n": 240,
+      "date_min": "2025-07-27",
+      "date_max": "2026-05-17",
+      "coverage": {
+        "scoreStr": 137,
+        "finished": 96,
+        "finished_and_scoreStr": 96,
+        "events_nonempty": 110,
+        "referee_nonblank": 0,
+        "stats_nonempty": 0,
+        "shotmap_shots_nonempty": 0,
+        "lineup_nonempty": 0,
+        "periods_nonempty": 0
+      }
+    },
+    "2026/2027": {
+      "n": 104,
+      "date_min": "2026-07-25",
+      "date_max": "2026-11-08",
+      "coverage": {
+        "scoreStr": 104,
+        "finished": 104,
+        "finished_and_scoreStr": 104,
+        "events_nonempty": 101,
+        "referee_nonblank": 0,
+        "stats_nonempty": 0,
+        "shotmap_shots_nonempty": 0,
+        "lineup_nonempty": 0,
+        "periods_nonempty": 0
+      }
+    }
+  }
+}

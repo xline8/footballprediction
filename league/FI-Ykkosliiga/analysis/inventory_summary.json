@@ -1,0 +1,89 @@
+{
+  "by_season": {
+    "2021": {
+      "matches": 162,
+      "date_min": "2021-05-05",
+      "date_max": "2021-10-23",
+      "teams": 12,
+      "stats_nonnull": 0.0,
+      "stats_false_positive_index": 0.0,
+      "period_splits": 0.0,
+      "shotmap_nonempty": 0.0,
+      "events": 153.0,
+      "referee_named": 0,
+      "card_event_matches": 27,
+      "card_events": 32
+    },
+    "2022": {
+      "matches": 164,
+      "date_min": "2022-04-18",
+      "date_max": "2022-10-17",
+      "teams": 12,
+      "stats_nonnull": 0.0,
+      "stats_false_positive_index": 0.0,
+      "period_splits": 0.0,
+      "shotmap_nonempty": 0.0,
+      "events": 161.0,
+      "referee_named": 0,
+      "card_event_matches": 23,
+      "card_events": 24
+    },
+    "2023": {
+      "matches": 164,
+      "date_min": "2023-04-14",
+      "date_max": "2023-10-21",
+      "teams": 12,
+      "stats_nonnull": 0.0,
+      "stats_false_positive_index": 0.0,
+      "period_splits": 0.0,
+      "shotmap_nonempty": 0.0,
+      "events": 154.0,
+      "referee_named": 0,
+      "card_event_matches": 19,
+      "card_events": 21
+    },
+    "2024": {
+      "matches": 135,
+      "date_min": "2024-04-13",
+      "date_max": "2024-10-19",
+      "teams": 10,
+      "stats_nonnull": 0.0,
+      "stats_false_positive_index": 0.0,
+      "period_splits": 0.0,
+      "shotmap_nonempty": 0.0,
+      "events": 129.0,
+      "referee_named": 0,
+      "card_event_matches": 26,
+      "card_events": 28
+    },
+    "2025": {
+      "matches": 135,
+      "date_min": "2025-04-21",
+      "date_max": "2025-10-18",
+      "teams": 10,
+      "stats_nonnull": 0.0,
+      "stats_false_positive_index": 0.0,
+      "period_splits": 0.0,
+      "shotmap_nonempty": 0.0,
+      "events": 131.0,
+      "referee_named": 0,
+      "card_event_matches": 22,
+      "card_events": 26
+    },
+    "2026": {
+      "matches": 135,
+      "date_min": "2026-04-03",
+      "date_max": "2026-10-17",
+      "teams": 10,
+      "stats_nonnull": 0.0,
+      "stats_false_positive_index": 135.0,
+      "period_splits": 0.0,
+      "shotmap_nonempty": 0.0,
+      "events": 135.0,
+      "referee_named": 32,
+      "card_event_matches": 134,
+      "card_events": 494
+    }
+  },
+  "team_ids_total": 23
+}

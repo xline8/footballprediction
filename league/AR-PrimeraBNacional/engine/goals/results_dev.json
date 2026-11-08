@@ -1,0 +1,227 @@
+{
+  "protocol": {
+    "loaded_seasons": [
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+      "2025"
+    ],
+    "scored_seasons": [
+      "2022",
+      "2023",
+      "2024",
+      "2025"
+    ],
+    "loaded_n": 3226,
+    "scored_n": 2648
+  },
+  "arms": {
+    "gate_zero": {
+      "ll_beats_climatology": false,
+      "rps_beats_climatology": false,
+      "oull_beats_climatology": false,
+      "pass": false,
+      "margins": {
+        "ll": -0.0016568110668830904,
+        "rps": -0.0003665050995142749,
+        "oull": -0.014662965625491076
+      }
+    },
+    "x2": {
+      "ll_beats_climatology": false,
+      "rps_beats_climatology": true,
+      "oull_beats_climatology": false,
+      "pass": false,
+      "margins": {
+        "ll": -0.0002871885649624595,
+        "rps": 3.500322132318767e-05,
+        "oull": -0.013201239727024805
+      }
+    }
+  },
+  "rows": [
+    {
+      "n": 666,
+      "ll_1x2": 1.074491611664544,
+      "rps": 0.20936201782617075,
+      "oull_2_5": 0.6478466540463265,
+      "arm": "gate_zero",
+      "season": "2022",
+      "kind": "model",
+      "gate_zero_sign": {
+        "arm_ll": 1.074491611664544,
+        "gate_zero_ll": 1.074491611664544,
+        "ll_le_gate_zero": true
+      }
+    },
+    {
+      "n": 666,
+      "ll_1x2": 1.0718235817316437,
+      "rps": 0.20859996574356196,
+      "oull_2_5": 0.6472834308683001,
+      "arm": "x2",
+      "season": "2022",
+      "kind": "model",
+      "gate_zero_sign": {
+        "arm_ll": 1.0718235817316437,
+        "gate_zero_ll": 1.074491611664544,
+        "ll_le_gate_zero": true
+      }
+    },
+    {
+      "n": 666,
+      "ll_1x2": 1.063825058951726,
+      "rps": 0.2059641641977213,
+      "oull_2_5": 0.6359110816760769,
+      "arm": "baseline",
+      "season": "2022",
+      "kind": "climatology",
+      "gate_zero_sign": null
+    },
+    {
+      "n": 648,
+      "ll_1x2": 1.0475917998348119,
+      "rps": 0.21177188911638967,
+      "oull_2_5": 0.6662025996219133,
+      "arm": "gate_zero",
+      "season": "2023",
+      "kind": "model",
+      "gate_zero_sign": {
+        "arm_ll": 1.0475917998348119,
+        "gate_zero_ll": 1.0475917998348119,
+        "ll_le_gate_zero": true
+      }
+    },
+    {
+      "n": 648,
+      "ll_1x2": 1.045590117867038,
+      "rps": 0.21108718407898885,
+      "oull_2_5": 0.6654709948152813,
+      "arm": "x2",
+      "season": "2023",
+      "kind": "model",
+      "gate_zero_sign": {
+        "arm_ll": 1.045590117867038,
+        "gate_zero_ll": 1.0475917998348119,
+        "ll_le_gate_zero": true
+      }
+    },
+    {
+      "n": 648,
+      "ll_1x2": 1.054055654096246,
+      "rps": 0.2132749324102747,
+      "oull_2_5": 0.6538153020477238,
+      "arm": "baseline",
+      "season": "2023",
+      "kind": "climatology",
+      "gate_zero_sign": null
+    },
+    {
+      "n": 722,
+      "ll_1x2": 1.0675696743180805,
+      "rps": 0.211564464712565,
+      "oull_2_5": 0.6269757578922857,
+      "arm": "gate_zero",
+      "season": "2024",
+      "kind": "model",
+      "gate_zero_sign": {
+        "arm_ll": 1.0675696743180805,
+        "gate_zero_ll": 1.0675696743180805,
+        "ll_le_gate_zero": true
+      }
+    },
+    {
+      "n": 722,
+      "ll_1x2": 1.0677229828954924,
+      "rps": 0.21171246994281287,
+      "oull_2_5": 0.6238087939511137,
+      "arm": "x2",
+      "season": "2024",
+      "kind": "model",
+      "gate_zero_sign": {
+        "arm_ll": 1.0677229828954924,
+        "gate_zero_ll": 1.0675696743180805,
+        "ll_le_gate_zero": false
+      }
+    },
+    {
+      "n": 722,
+      "ll_1x2": 1.067084726528111,
+      "rps": 0.2118096629202514,
+      "oull_2_5": 0.6104019935651835,
+      "arm": "baseline",
+      "season": "2024",
+      "kind": "climatology",
+      "gate_zero_sign": null
+    },
+    {
+      "n": 612,
+      "ll_1x2": 1.0555858237008777,
+      "rps": 0.20661743069059604,
+      "oull_2_5": 0.6110141328500834,
+      "arm": "gate_zero",
+      "season": "2025",
+      "kind": "model",
+      "gate_zero_sign": {
+        "arm_ll": 1.0555858237008777,
+        "gate_zero_ll": 1.0555858237008777,
+        "ll_le_gate_zero": true
+      }
+    },
+    {
+      "n": 612,
+      "ll_1x2": 1.0545017529042289,
+      "rps": 0.2062598518367333,
+      "oull_2_5": 0.6098132902645417,
+      "arm": "x2",
+      "season": "2025",
+      "kind": "model",
+      "gate_zero_sign": {
+        "arm_ll": 1.0545017529042289,
+        "gate_zero_ll": 1.0555858237008777,
+        "ll_le_gate_zero": true
+      }
+    },
+    {
+      "n": 612,
+      "ll_1x2": 1.053752887662502,
+      "rps": 0.206848574240662,
+      "oull_2_5": 0.5932278336581122,
+      "arm": "baseline",
+      "season": "2025",
+      "kind": "climatology",
+      "gate_zero_sign": null
+    },
+    {
+      "n": 2648,
+      "ll_1x2": 1.061652087848995,
+      "rps": 0.20991793773593917,
+      "oull_2_5": 0.6381353106693092,
+      "arm": "gate_zero",
+      "season": "pooled",
+      "kind": "model",
+      "gate_zero_sign": null
+    },
+    {
+      "n": 2648,
+      "ll_1x2": 1.0602824653470744,
+      "rps": 0.2095164294151017,
+      "oull_2_5": 0.6366735847708429,
+      "arm": "x2",
+      "season": "pooled",
+      "kind": "model",
+      "gate_zero_sign": null
+    },
+    {
+      "n": 2648,
+      "ll_1x2": 1.059995276782112,
+      "rps": 0.2095514326364249,
+      "oull_2_5": 0.6234723450438181,
+      "arm": "baseline",
+      "season": "pooled",
+      "kind": "climatology",
+      "gate_zero_sign": null
+    }
+  ]
+}

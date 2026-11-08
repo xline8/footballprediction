@@ -1,0 +1,394 @@
+{
+  "league": "IR-PersianGulf",
+  "fotmob_id": 523,
+  "index_rows": 1245,
+  "played_matches": 1243,
+  "excluded_playoff": [
+    "1000015890",
+    "1000015891"
+  ],
+  "excluded_playoff_reason": "non-numeric matchRound / phase=playoff; Asian Qualifiers Play-offs, not league matches",
+  "excluded_unplayed": [],
+  "excluded_unplayed_reason": "none; all 1,245 payloads have status finished True",
+  "edition_id_trap": {
+    "index_league_id": 523,
+    "payload_parentLeagueId": 523,
+    "payload_general_leagueId_is_season_edition": true,
+    "accepted_league_names": [
+      "Persian Gulf Pro League",
+      "Persian Gulf"
+    ],
+    "excluded_name": 0
+  },
+  "seasons": {
+    "2021/2022": {
+      "played": 240,
+      "teams": 16,
+      "rounds": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30"
+      ],
+      "date_range": [
+        "2021-10-19",
+        "2022-06-02"
+      ],
+      "lineup_present": 0,
+      "referee_named": 0,
+      "events_nonempty": 192,
+      "card_events": {
+        "Yellow": 0,
+        "YellowRed": 3,
+        "Red": 20
+      }
+    },
+    "2022/2023": {
+      "played": 240,
+      "teams": 16,
+      "rounds": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30"
+      ],
+      "date_range": [
+        "2022-08-12",
+        "2023-05-18"
+      ],
+      "lineup_present": 0,
+      "referee_named": 0,
+      "events_nonempty": 203,
+      "card_events": {
+        "Yellow": 0,
+        "YellowRed": 8,
+        "Red": 23
+      }
+    },
+    "2023/2024": {
+      "played": 240,
+      "teams": 16,
+      "rounds": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30"
+      ],
+      "date_range": [
+        "2023-08-09",
+        "2024-06-01"
+      ],
+      "lineup_present": 0,
+      "referee_named": 0,
+      "events_nonempty": 218,
+      "card_events": {
+        "Yellow": 0,
+        "YellowRed": 20,
+        "Red": 25
+      }
+    },
+    "2024/2025": {
+      "played": 240,
+      "teams": 16,
+      "rounds": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30"
+      ],
+      "date_range": [
+        "2024-08-15",
+        "2025-05-15"
+      ],
+      "lineup_present": 0,
+      "referee_named": 0,
+      "events_nonempty": 214,
+      "card_events": {
+        "Yellow": 0,
+        "YellowRed": 17,
+        "Red": 39
+      }
+    },
+    "2025/2026": {
+      "played": 178,
+      "teams": 16,
+      "rounds": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23"
+      ],
+      "date_range": [
+        "2025-08-18",
+        "2026-02-27"
+      ],
+      "lineup_present": 178,
+      "referee_named": 14,
+      "events_nonempty": 176,
+      "card_events": {
+        "Yellow": 749,
+        "YellowRed": 19,
+        "Red": 24
+      }
+    },
+    "2026/2027": {
+      "played": 105,
+      "teams": 18,
+      "rounds": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12"
+      ],
+      "date_range": [
+        "2026-08-14",
+        "2026-11-08"
+      ],
+      "lineup_present": 95,
+      "referee_named": 29,
+      "events_nonempty": 103,
+      "card_events": {
+        "Yellow": 331,
+        "YellowRed": 10,
+        "Red": 13
+      }
+    }
+  },
+  "coverage_played": {
+    "stats_nonnull": 0,
+    "shotmap_shots_gt0": 0,
+    "lineup_nonnull": 273,
+    "referee_text": 43,
+    "events_nonempty": 1106,
+    "period_splits": 0,
+    "score_events_mismatch": [
+      "3765423",
+      "3765395"
+    ]
+  },
+  "card_events": {
+    "Yellow": 1080,
+    "Red": 144,
+    "YellowRed": 77,
+    "matches_with_any_card_event": 407
+  },
+  "team_renames_same_id": {
+    "139914": [
+      "Foolad Khouzestan",
+      "Foolad Khuzestan"
+    ]
+  },
+  "distinct_team_ids": 23,
+  "format": "double round-robin; 16 teams/30 rounds through 2025/2026, 18 teams/30 rounds from 2026/2027",
+  "expansion": {
+    "season": "2026/2027",
+    "relegated": [
+      "Mes Rafsanjan"
+    ],
+    "promoted": [
+      "Sanat Naft Abadan",
+      "Nassaji Mazandaran FC",
+      "Mes Shahr Babak"
+    ]
+  },
+  "warehouse_gap": {
+    "season": "2025/2026",
+    "played": 178,
+    "rounds_present": "1-23",
+    "rounds_absent": "24-30",
+    "reason": "warehouse gap, not format change"
+  },
+  "feed_break": {
+    "yellow_events": "absent in 2021/2022-2024/2025; present from 2025/2026",
+    "referee_text": "empty in 960 dev matches; named in 14 + 29 recent matches"
+  },
+  "payload_inventory": {
+    "index_rows_by_season": {
+      "2021/2022": 240,
+      "2022/2023": 240,
+      "2023/2024": 240,
+      "2024/2025": 240,
+      "2025/2026": 180,
+      "2026/2027": 105
+    },
+    "lineup_present_by_season": {
+      "2021/2022": 0,
+      "2022/2023": 0,
+      "2023/2024": 0,
+      "2024/2025": 0,
+      "2025/2026": 180,
+      "2026/2027": 95
+    },
+    "events_nonempty_by_season": {
+      "2021/2022": 192,
+      "2022/2023": 203,
+      "2023/2024": 218,
+      "2024/2025": 214,
+      "2025/2026": 178,
+      "2026/2027": 103
+    },
+    "card_events_by_season": {
+      "2021/2022": {
+        "Yellow": 0,
+        "Red": 20,
+        "YellowRed": 3
+      },
+      "2022/2023": {
+        "Yellow": 0,
+        "Red": 23,
+        "YellowRed": 8
+      },
+      "2023/2024": {
+        "Yellow": 0,
+        "Red": 25,
+        "YellowRed": 20
+      },
+      "2024/2025": {
+        "Yellow": 0,
+        "Red": 39,
+        "YellowRed": 17
+      },
+      "2025/2026": {
+        "Yellow": 761,
+        "Red": 24,
+        "YellowRed": 19
+      },
+      "2026/2027": {
+        "Yellow": 331,
+        "Red": 13,
+        "YellowRed": 10
+      }
+    }
+  }
+}

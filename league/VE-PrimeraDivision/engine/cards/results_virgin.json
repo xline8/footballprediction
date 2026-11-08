@@ -1,0 +1,8 @@
+{
+  "verdict": "FAIL",
+  "virgin_read": false,
+  "reason": "Gate Zero failed the dev gate; virgin NOT read",
+  "read_arms": [],
+  "dev_pass": false,
+  "clausura_rows_loaded": false
+}

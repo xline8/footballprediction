@@ -1,0 +1,45 @@
+{
+ "arms": {
+  "GateZero": {
+   "pooled": {
+    "n": 28,
+    "ll_1x2": 1.188348778168526,
+    "rps": 0.25782334910247573,
+    "ll_ou25": 0.897791771519661
+   },
+   "gate_dev_pass": false
+  },
+  "ENTRANT": {
+   "pooled": {
+    "n": 28,
+    "ll_1x2": 1.188348778168526,
+    "rps": 0.25782334910247573,
+    "ll_ou25": 0.897791771519661
+   },
+   "gate_dev_pass": false
+  }
+ },
+ "climatology": {
+  "n": 28,
+  "ll_1x2": 1.121285668955634,
+  "rps": 0.23464330116765075,
+  "ll_ou25": 0.6945050113477106
+ },
+ "naive_trailing_10": {
+  "n": 28,
+  "ll_1x2": 1.115253375940749,
+  "rps": 0.2353761013035663,
+  "ll_ou25": 0.7984174547302165
+ },
+ "protocol": {
+  "league": "QA-SecondDivision",
+  "dev_season": "2024/2025",
+  "warm_up_matches": 28,
+  "scored_matches": 28,
+  "primary_line": "OU2.5",
+  "sign_convention": "actual_minus_predicted",
+  "date_grouped": true,
+  "entrant_dev_identical": true,
+  "entrant_max_abs_diff": 0.0
+ }
+}

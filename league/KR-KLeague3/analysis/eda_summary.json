@@ -1,0 +1,229 @@
+{
+  "seed": 90210,
+  "inventory": {
+    "2021": {
+      "index": 214,
+      "regular": 202,
+      "playoff": 4,
+      "unplayed": 8,
+      "stats": 0,
+      "events": 141,
+      "referee": 0,
+      "shotmap": 0,
+      "xg": 0
+    },
+    "2022": {
+      "index": 240,
+      "regular": 240,
+      "playoff": 0,
+      "unplayed": 0,
+      "stats": 0,
+      "events": 212,
+      "referee": 0,
+      "shotmap": 0,
+      "xg": 0
+    },
+    "2023": {
+      "index": 210,
+      "regular": 210,
+      "playoff": 0,
+      "unplayed": 0,
+      "stats": 0,
+      "events": 187,
+      "referee": 0,
+      "shotmap": 0,
+      "xg": 0
+    },
+    "2024": {
+      "index": 240,
+      "regular": 240,
+      "playoff": 0,
+      "unplayed": 0,
+      "stats": 0,
+      "events": 218,
+      "referee": 0,
+      "shotmap": 0,
+      "xg": 0
+    },
+    "2025": {
+      "index": 210,
+      "regular": 210,
+      "playoff": 0,
+      "unplayed": 0,
+      "stats": 0,
+      "events": 193,
+      "referee": 0,
+      "shotmap": 0,
+      "xg": 0
+    },
+    "2026": {
+      "index": 182,
+      "regular": 182,
+      "playoff": 0,
+      "unplayed": 0,
+      "stats": 0,
+      "events": 169,
+      "referee": 0,
+      "shotmap": 0,
+      "xg": 0
+    }
+  },
+  "levels": {
+    "2021": {
+      "n": 202,
+      "goals": 2.3069306930693068,
+      "home_goals": 1.2227722772277227,
+      "away_goals": 1.0841584158415842,
+      "hw_pct": 0.3811881188118812,
+      "draw_pct": 0.31683168316831684,
+      "over25_pct": 0.3910891089108911,
+      "goal_variance": 2.2137825722870796
+    },
+    "2022": {
+      "n": 240,
+      "goals": 2.275,
+      "home_goals": 1.2041666666666666,
+      "away_goals": 1.0708333333333333,
+      "hw_pct": 0.4,
+      "draw_pct": 0.2833333333333333,
+      "over25_pct": 0.43333333333333335,
+      "goal_variance": 2.367573221757322
+    },
+    "2023": {
+      "n": 210,
+      "goals": 2.342857142857143,
+      "home_goals": 1.2666666666666666,
+      "away_goals": 1.0761904761904761,
+      "hw_pct": 0.4,
+      "draw_pct": 0.2904761904761905,
+      "over25_pct": 0.4380952380952381,
+      "goal_variance": 2.6474367737525633
+    },
+    "2024": {
+      "n": 240,
+      "goals": 2.6166666666666667,
+      "home_goals": 1.3291666666666666,
+      "away_goals": 1.2875,
+      "hw_pct": 0.3875,
+      "draw_pct": 0.2625,
+      "over25_pct": 0.4875,
+      "goal_variance": 3.074198047419805
+    },
+    "2025": {
+      "n": 210,
+      "goals": 2.4,
+      "home_goals": 1.223809523809524,
+      "away_goals": 1.1761904761904762,
+      "hw_pct": 0.40476190476190477,
+      "draw_pct": 0.20952380952380953,
+      "over25_pct": 0.48095238095238096,
+      "goal_variance": 2.355980861244019
+    },
+    "2026": {
+      "n": 182,
+      "goals": 2.7142857142857144,
+      "home_goals": 1.510989010989011,
+      "away_goals": 1.2032967032967032,
+      "hw_pct": 0.4010989010989011,
+      "draw_pct": 0.29120879120879123,
+      "over25_pct": 0.489010989010989,
+      "goal_variance": 3.4759273875295973
+    }
+  },
+  "levels_pooled": {
+    "n": 1284,
+    "goals": 2.4376947040498442,
+    "home_goals": 1.2873831775700935,
+    "away_goals": 1.1503115264797508,
+    "hw_pct": 0.3956386292834891,
+    "draw_pct": 0.2749221183800623,
+    "over25_pct": 0.4532710280373832,
+    "goal_variance": 2.6921399659579013
+  },
+  "reliability": {
+    "goals_for": {
+      "r": 0.4411371571023966,
+      "n_splits": 60,
+      "seed": 90210,
+      "min_matches": 24
+    },
+    "goals_against": {
+      "r": 0.7389149283039109,
+      "n_splits": 60,
+      "seed": 90210,
+      "min_matches": 24
+    }
+  },
+  "halves": {
+    "event_reconciled_regular": 1229,
+    "event_failed_regular": 55,
+    "scoring_matches_complete_events": 1094,
+    "share_1h": 0.42733043768793855,
+    "observed_variance": 0.1198490313385655,
+    "noise_floor": 0.12295199629994036,
+    "true_variance": -0.0031029649613748544,
+    "season_share_1h": {
+      "2021": 0.40483383685800606,
+      "2022": 0.4230769230769231,
+      "2023": 0.40853658536585363,
+      "2024": 0.4585987261146497,
+      "2025": 0.4087301587301587,
+      "2026": 0.4451219512195122
+    }
+  },
+  "cards": {
+    "YellowRed": 57,
+    "Red": 84
+  },
+  "flags_absent_all_payloads": {
+    "stats": 0,
+    "shotmap": 0,
+    "lineup": 0,
+    "splits": 0
+  },
+  "team_name_variants": {
+    "739800": [
+      "Hwaseong",
+      "Hwaseong FC"
+    ],
+    "187953": [
+      "Gimhae",
+      "Gimhae FC 2008"
+    ],
+    "739810": [
+      "Yangju Citizen",
+      "Yangju Citizens"
+    ],
+    "739791": [
+      "Pocheon Citizen FC",
+      "Pocheon Citizens FC"
+    ]
+  },
+  "team_ids": 23,
+  "teams_per_season": {
+    "2021": 15,
+    "2022": 16,
+    "2023": 15,
+    "2024": 16,
+    "2025": 15,
+    "2026": 14
+  },
+  "regular_counts": {
+    "2021": 202,
+    "2022": 240,
+    "2023": 210,
+    "2024": 240,
+    "2025": 210,
+    "2026": 182
+  },
+  "playoff_counts": {
+    "2021": 4,
+    "2022": 0,
+    "2023": 0,
+    "2024": 0,
+    "2025": 0,
+    "2026": 0
+  },
+  "dev_over25_2022_2024": 0.45362318840579713,
+  "virgin_over25_2025": 0.48095238095238096
+}

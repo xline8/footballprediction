@@ -1,0 +1,33 @@
+{
+  "protocol": {
+    "warmup": "2023",
+    "scored": [
+      "2024"
+    ],
+    "rows_loaded": 224,
+    "target": "stats_yellow_home + stats_yellow_away"
+  },
+  "results": [
+    {
+      "arm": "gate_zero",
+      "season": "2024",
+      "kind": "model",
+      "n": 112,
+      "ll_4.5": 0.6889925666536776
+    },
+    {
+      "arm": "gate_zero",
+      "season": "2024",
+      "kind": "base",
+      "n": 112,
+      "ll_4.5": 0.6955271442139569
+    },
+    {
+      "arm": "gate_zero",
+      "season": "2024",
+      "kind": "naive",
+      "n": 112,
+      "ll_4.5": 0.6874907481640247
+    }
+  ]
+}

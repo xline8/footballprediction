@@ -1,0 +1,20 @@
+league: IS-2Deild
+country: Iceland
+fotmob_id: 10226
+tier: 3
+warehouse: data_enrichment/fotmob_world/Iceland/2. Deild
+data:
+  matches: league/IS-2Deild/data/is2_matches.csv
+  team_matches: league/IS-2Deild/data/is2_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period: ["2022", "2023", "2024", "2025"]
+virgin_primary: "2026"
+halves_constants:
+  goals_1h_share: 0.4418
+markets:
+  goals: G-IS2  # FAIL — dev Gate Zero failed all three legs; virgin not read
+notes:
+  - 2021 contains 16 never-played Data not found placeholders; the played count is 116.
+  - Team identity is FotMob team id; id/name variants include IR Reykjavik/ÍR Reykjavík and Vikingur Olafsvik/Víkingur Olafsvik.
+  - In 2026 Magni hosts KFG twice; both played fixtures are retained and the reverse fixture is absent.
+  - IS-1Deild's config was not on main at build time; mover classification is measured from warehouse payloads, not from that build.

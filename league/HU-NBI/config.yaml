@@ -1,0 +1,38 @@
+league: HU-NBI
+country: Hungary
+fotmob_id: 212
+tier: 1
+warehouse: data_enrichment/fotmob_world/Hungary/Nemzeti Bajnokság I
+data:
+  matches: league/HU-NBI/data/hu_nbi.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+reserved_in_progress: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.4471
+  yellow_cards_1h_share: 0.3644
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+markets:
+  goals: G-HU-NBI
+  sot: S-HU-NBI
+  corners: C-HU-NBI
+  cards: K-HU-NBI
+  total_shots: T-HU-NBI
+passing_markets:
+  - market: corners
+    arm: gate_zero
+    primary_line: 9.5
+    verdict: PASS_PROVISIONAL
+    halves_share_1h: null
+    virgin_ll: 0.6755
+    calibration_breach_pp: -1.56
+    calibration_se_pp: 3.55
+notes:
+  - "Regular format: 12 teams, triple round robin, 198 matches per complete season; no playoff phase is present in the feed."
+  - "Stats are Periods.All/top_stats only. The feed has possession, total_shots, ShotsOnTarget and corners; no xG or shotmap exists."
+  - "Cards target is event-unified Yellow + YellowRed; stats-feed cards keys are absent in every row. Red counts are descriptive only and exclude the cards target."
+  - "2026/2027 is in progress and reserved; it is used only for inventory counts, never for EDA, lines, constants, or design decisions."
+  - "Half rule: FotMob event time <= 45 counts as first half, including stoppage-time events represented with minute 45."

@@ -1,0 +1,209 @@
+{
+ "goals_levels": {
+  "2021/2022": {
+   "n": 240,
+   "goals_per_match": 2.1625,
+   "home_goals": 1.1833,
+   "away_goals": 0.9792,
+   "over25_rate": 0.3833,
+   "home_win_rate": 0.4083
+  },
+  "2022/2023": {
+   "n": 240,
+   "goals_per_match": 2.1333,
+   "home_goals": 1.1875,
+   "away_goals": 0.9458,
+   "over25_rate": 0.4083,
+   "home_win_rate": 0.4083
+  },
+  "2023/2024": {
+   "n": 240,
+   "goals_per_match": 2.225,
+   "home_goals": 1.2167,
+   "away_goals": 1.0083,
+   "over25_rate": 0.4042,
+   "home_win_rate": 0.4125
+  },
+  "2024/2025": {
+   "n": 240,
+   "goals_per_match": 2.3125,
+   "home_goals": 1.2417,
+   "away_goals": 1.0708,
+   "over25_rate": 0.4125,
+   "home_win_rate": 0.4333
+  }
+ },
+ "rich_2024_2025": {
+  "n_matches": 176,
+  "n_stats": 164,
+  "sot": {
+   "mean": 7.1951,
+   "over_rates": {
+    "6.5": 0.5671,
+    "7.5": 0.4329,
+    "8.5": 0.3049,
+    "9.5": 0.2134,
+    "10.5": 0.128,
+    "20.5": 0.0,
+    "21.5": 0.0,
+    "22.5": 0.0,
+    "23.5": 0.0,
+    "24.5": 0.0,
+    "25.5": 0.0
+   }
+  },
+  "corners": {
+   "mean": 8.628,
+   "over_rates": {
+    "6.5": 0.7683,
+    "7.5": 0.6402,
+    "8.5": 0.4756,
+    "9.5": 0.3902,
+    "10.5": 0.2561,
+    "20.5": 0.0,
+    "21.5": 0.0,
+    "22.5": 0.0,
+    "23.5": 0.0,
+    "24.5": 0.0,
+    "25.5": 0.0
+   }
+  },
+  "total_shots": {
+   "mean": 16.5427,
+   "over_rates": {
+    "6.5": 0.9512,
+    "7.5": 0.9329,
+    "8.5": 0.9146,
+    "9.5": 0.878,
+    "10.5": 0.8537,
+    "20.5": 0.2378,
+    "21.5": 0.1829,
+    "22.5": 0.1707,
+    "23.5": 0.1402,
+    "24.5": 0.122,
+    "25.5": 0.0732
+   }
+  },
+  "yellows_unified": {
+   "mean": 4.4432,
+   "over_rates": {
+    "2.5": 0.8125,
+    "3.5": 0.6364,
+    "4.5": 0.4943,
+    "5.5": 0.2784
+   }
+  },
+  "possession_home_mean": 51.055
+ },
+ "scored_dev_stats_n": 109,
+ "scored_dev_matches_n": 112,
+ "goals_1h_share_dev": 0.4274,
+ "goals_event_check": {
+  "goal_events": 2120,
+  "score_goals": 2120
+ },
+ "goals_1h_share_var": {
+  "observed_var": 0.12079,
+  "binomial_noise_var": 0.12835,
+  "true_var": 0.0
+ },
+ "yellows_1h_share_rich_dev": 0.3465,
+ "split_half_reliability": {
+  "goals_for": {
+   "n_teams": 20,
+   "r": 0.641
+  },
+  "goals_against": {
+   "n_teams": 20,
+   "r": 0.552
+  },
+  "ShotsOnTarget_for": {
+   "n_teams": 16,
+   "r": 0.402
+  },
+  "ShotsOnTarget_against": {
+   "n_teams": 16,
+   "r": 0.446
+  },
+  "corners_for": {
+   "n_teams": 16,
+   "r": 0.604
+  },
+  "corners_against": {
+   "n_teams": 16,
+   "r": 0.432
+  },
+  "total_shots_for": {
+   "n_teams": 16,
+   "r": 0.651
+  },
+  "total_shots_against": {
+   "n_teams": 16,
+   "r": 0.512
+  },
+  "yellow_for": {
+   "n_teams": 16,
+   "r": 0.01
+  },
+  "yellow_against": {
+   "n_teams": 16,
+   "r": 0.31
+  },
+  "BallPossesion_for": {
+   "n_teams": 16,
+   "r": 0.608
+  }
+ },
+ "entrants": [
+  {
+   "season": "2022/2023",
+   "team_id": "320835",
+   "gf_pm": 1.133,
+   "ga_pm": 1.333,
+   "league_gf_pm": 1.067
+  },
+  {
+   "season": "2022/2023",
+   "team_id": "102044",
+   "gf_pm": 0.933,
+   "ga_pm": 1.367,
+   "league_gf_pm": 1.067
+  },
+  {
+   "season": "2023/2024",
+   "team_id": "950070",
+   "gf_pm": 1.167,
+   "ga_pm": 1.167,
+   "league_gf_pm": 1.113
+  },
+  {
+   "season": "2023/2024",
+   "team_id": "316656",
+   "gf_pm": 0.7,
+   "ga_pm": 1.633,
+   "league_gf_pm": 1.113
+  },
+  {
+   "season": "2024/2025",
+   "team_id": "102033",
+   "gf_pm": 1.2,
+   "ga_pm": 1.4,
+   "league_gf_pm": 1.156
+  },
+  {
+   "season": "2024/2025",
+   "team_id": "102032",
+   "gf_pm": 0.9,
+   "ga_pm": 1.467,
+   "league_gf_pm": 1.156
+  }
+ ],
+ "entrant_gaps": {
+  "dGF": -0.1065,
+  "dGA": 0.2825,
+  "n": 6
+ },
+ "referee_nonempty_dev": 0,
+ "period_splits_any": 0,
+ "shotmap_any": 0
+}

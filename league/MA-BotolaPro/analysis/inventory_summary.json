@@ -1,0 +1,74 @@
+{
+ "2021/2022": {
+  "n": 240,
+  "stats_all": 0,
+  "events": 209,
+  "matches_with_yellow_event": 21,
+  "referee_nonempty": 0,
+  "period_splits": 0,
+  "teams": 16,
+  "rounds": 30,
+  "date_min": "2021-09-10",
+  "date_max": "2022-07-05"
+ },
+ "2022/2023": {
+  "n": 240,
+  "stats_all": 0,
+  "events": 214,
+  "matches_with_yellow_event": 36,
+  "referee_nonempty": 0,
+  "period_splits": 0,
+  "teams": 16,
+  "rounds": 30,
+  "date_min": "2022-09-01",
+  "date_max": "2023-06-23"
+ },
+ "2023/2024": {
+  "n": 240,
+  "stats_all": 0,
+  "events": 215,
+  "matches_with_yellow_event": 34,
+  "referee_nonempty": 0,
+  "period_splits": 0,
+  "teams": 16,
+  "rounds": 30,
+  "date_min": "2023-08-25",
+  "date_max": "2024-06-14"
+ },
+ "2024/2025": {
+  "n": 240,
+  "stats_all": 172,
+  "events": 238,
+  "matches_with_yellow_event": 187,
+  "referee_nonempty": 0,
+  "period_splits": 0,
+  "teams": 16,
+  "rounds": 30,
+  "date_min": "2024-08-30",
+  "date_max": "2025-05-12"
+ },
+ "2025/2026": {
+  "n": 240,
+  "stats_all": 226,
+  "events": 240,
+  "matches_with_yellow_event": 236,
+  "referee_nonempty": 0,
+  "period_splits": 0,
+  "teams": 16,
+  "rounds": 30,
+  "date_min": "2025-09-12",
+  "date_max": "2026-07-05"
+ },
+ "2026/2027": {
+  "n": 55,
+  "stats_all": 49,
+  "events": 55,
+  "matches_with_yellow_event": 55,
+  "referee_nonempty": 0,
+  "period_splits": 0,
+  "teams": 16,
+  "rounds": 7,
+  "date_min": "2026-09-24",
+  "date_max": "2026-11-08"
+ }
+}

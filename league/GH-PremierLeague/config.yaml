@@ -1,0 +1,63 @@
+# Ghana Premier League — league config
+league: GH-PremierLeague
+country: Ghana
+fotmob_id: 522
+tier: 1
+warehouse: data_enrichment/fotmob_world/Ghana/Premier League
+warehouse_root: ~/workspace/footballprediction
+data:
+  matches: league/GH-PremierLeague/data/gh_matches.csv
+  team_matches: league/GH-PremierLeague/data/gh_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2022/2023", "2023/2024", "2024/2025"]
+dev_scored_n: 901
+virgin_primary: "2025/2026"
+virgin_n: 299
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.4622
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+  yellow_cards_1h_share: null
+markets:
+  goals: G-GH
+  sot: S-GH
+  corners: C-GH
+  cards: K-GH
+  total_shots: T-GH
+notes:
+  - FORMAT: FotMob 522 is a single-table league id (parentLeagueId =
+    522). 18 teams, double round robin, 34 rounds, 306 matches per
+    full season; 2024/2025 has 305 (round-33 Holy Stars vs Nations FC
+    absent from the warehouse entirely).
+  - SCORES ONLY: stats/shotmap/playerStats empty in all 1,619
+    payloads by content; referee text empty in all 1,619; lineups in
+    10 payloads but zero starters in all 10; events exist in
+    1,412/1,619 and carry Goal/Half/Card only — the 177 Card events
+    are all dismissals (YellowRed 68, Red 109, 0 plain Yellows).
+    S/C/K/T NOT BUILDABLE (payload-level evidence in prereg).
+  - PAYLOAD QUIRK (unique in the program): general and header are
+    null in every payload — team identity and FT score come from the
+    index, not the payload. No team ids exist; teams are keyed by
+    name (32 distinct names, stable).
+  - EXCLUSIONS (frozen): 23 awarded/forfeit 3-0 results (event-less
+    AND score 3-0/0-3) — Nsoatreman 14 straight from 2025-03-16 and
+    Hohoe United 7 straight from 2026-04-03 (mid-season
+    withdrawals), plus 2 singles. One awarded row is
+    direction-reversed in the source (4584723, Nsoatreman listed 3-0
+    winners inside their forfeit run) — excluded, flip flagged not
+    repaired. 1,596 eligible rows.
+  - EVENT-FEED ERRORS (flagged ht_suspect, FT score from index):
+    3 duplicate goal events (4015488, 4015491, 4015543) + 1 missing
+    away goal event (4584614). HT values excluded from halves work.
+  - HALVES: goals 1H share 0.4622 (ratio of sums over 1,408 trusted
+    HT rows); per-match share excess variance -0.0009, team-season
+    split-half r = -0.053 — frozen constant, presentation only.
+  - TRAITS: attack split-half r = -0.028 pooled (trait-free);
+    defence r = 0.320 (moderate). The dev gate adjudicates whether
+    the DC ratings add signal.
+  - X2: no built Ghanaian parent/sibling exists in the warehouse, so
+    no cross-league mover prior is available; SHRINK is the
+    thin-data arm (3-4 new clubs enter every season).
+  - Calibration convention: actual minus predicted.

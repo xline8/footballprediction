@@ -1,0 +1,726 @@
+{
+ "seasons": {
+  "2024/2025": {
+   "n": 56,
+   "stats": 38,
+   "splits": 38,
+   "events": 56,
+   "lineup": 56,
+   "referee": 0,
+   "goals_pm": 2.607142857142857,
+   "home_goals_pm": 1.4464285714285714,
+   "away_goals_pm": 1.1607142857142858,
+   "sot_pm": 7.894736842105263,
+   "corners_pm": 8.921052631578947,
+   "shots_pm": 23.263157894736842,
+   "yell_ev_pm": 5.25,
+   "yell_stats_pm": 5.052631578947368,
+   "teams": 8,
+   "xg_rows": 0,
+   "shotmap_shots": 0,
+   "score_mismatch": 0,
+   "home_win_rate": 0.39285714285714285,
+   "draw_rate": 0.30357142857142855,
+   "over25_rate": 0.44642857142857145,
+   "phases": {
+    "regular": 56
+   },
+   "league_names": {
+    "Qatar Stars League 2": 56
+   },
+   "stats_by_round": {
+    "1": 0,
+    "2": 1,
+    "3": 0,
+    "4": 0,
+    "5": 1,
+    "6": 4,
+    "7": 4,
+    "8": 4,
+    "9": 4,
+    "10": 4,
+    "11": 4,
+    "12": 4,
+    "13": 4,
+    "14": 4
+   }
+  },
+  "2025/2026": {
+   "n": 56,
+   "stats": 56,
+   "splits": 56,
+   "events": 56,
+   "lineup": 56,
+   "referee": 0,
+   "goals_pm": 3.017857142857143,
+   "home_goals_pm": 1.4285714285714286,
+   "away_goals_pm": 1.5892857142857142,
+   "sot_pm": 8.642857142857142,
+   "corners_pm": 9.732142857142858,
+   "shots_pm": 23.125,
+   "yell_ev_pm": 5.214285714285714,
+   "yell_stats_pm": 4.696428571428571,
+   "teams": 8,
+   "xg_rows": 0,
+   "shotmap_shots": 0,
+   "score_mismatch": 0,
+   "home_win_rate": 0.32142857142857145,
+   "draw_rate": 0.23214285714285715,
+   "over25_rate": 0.625,
+   "phases": {
+    "regular": 56
+   },
+   "league_names": {
+    "Qatar Stars League 2": 46,
+    "Second Division": 10
+   },
+   "stats_by_round": {
+    "1": 4,
+    "2": 4,
+    "3": 4,
+    "4": 4,
+    "5": 4,
+    "6": 4,
+    "7": 4,
+    "8": 4,
+    "9": 4,
+    "10": 4,
+    "11": 4,
+    "12": 4,
+    "13": 4,
+    "14": 4
+   }
+  },
+  "2026/2027": {
+   "n": 29,
+   "stats": 29,
+   "splits": 29,
+   "events": 29,
+   "lineup": 29,
+   "referee": 1,
+   "goals_pm": 2.7586206896551726,
+   "home_goals_pm": 1.3103448275862069,
+   "away_goals_pm": 1.4482758620689655,
+   "sot_pm": 9.0,
+   "corners_pm": 8.206896551724139,
+   "shots_pm": 26.413793103448278,
+   "yell_ev_pm": 4.172413793103448,
+   "yell_stats_pm": 3.7586206896551726,
+   "teams": 11,
+   "xg_rows": 0,
+   "shotmap_shots": 0,
+   "score_mismatch": 0,
+   "home_win_rate": 0.3448275862068966,
+   "draw_rate": 0.20689655172413793,
+   "over25_rate": 0.4827586206896552,
+   "phases": {
+    "regular": 29
+   },
+   "league_names": {
+    "Qatar Stars League 2": 21,
+    "Second Division": 8
+   },
+   "stats_by_round": {
+    "1": 5,
+    "2": 5,
+    "3": 5,
+    "4": 5,
+    "5": 4,
+    "6": 5
+   }
+  }
+ },
+ "total_matches": 141,
+ "mismatch_match_ids": [],
+ "date_mismatch_ids": [],
+ "name_mismatch_ids": [],
+ "stats_keys_per_season": {
+  "2024/2025": {
+   "All:BallPossesion": 38,
+   "All:Offsides": 38,
+   "All:ShotsOffTarget": 38,
+   "All:ShotsOnTarget": 76,
+   "All:accurate_crosses": 38,
+   "All:accurate_passes": 76,
+   "All:aerials_won": 38,
+   "All:big_chance": 38,
+   "All:big_chance_missed_title": 38,
+   "All:blocked_shots": 38,
+   "All:clearances": 38,
+   "All:corners": 38,
+   "All:defense": 38,
+   "All:discipline": 38,
+   "All:dribbles_succeeded": 38,
+   "All:duel_won": 38,
+   "All:duels": 38,
+   "All:fouls": 38,
+   "All:ground_duels_won": 38,
+   "All:interceptions": 38,
+   "All:keeper_saves": 38,
+   "All:long_balls_accurate": 38,
+   "All:matchstats.headers.tackles": 38,
+   "All:passes": 76,
+   "All:player_throws": 38,
+   "All:red_cards": 38,
+   "All:shot_blocks": 38,
+   "All:shots": 38,
+   "All:shots_inside_box": 38,
+   "All:shots_outside_box": 38,
+   "All:shots_woodwork": 38,
+   "All:total_shots": 76,
+   "All:yellow_cards": 76,
+   "FirstHalf:BallPossesion": 38,
+   "FirstHalf:Offsides": 38,
+   "FirstHalf:ShotsOffTarget": 38,
+   "FirstHalf:ShotsOnTarget": 76,
+   "FirstHalf:accurate_crosses": 38,
+   "FirstHalf:accurate_passes": 76,
+   "FirstHalf:aerials_won": 38,
+   "FirstHalf:big_chance": 38,
+   "FirstHalf:big_chance_missed_title": 38,
+   "FirstHalf:blocked_shots": 38,
+   "FirstHalf:clearances": 38,
+   "FirstHalf:corners": 38,
+   "FirstHalf:defense": 38,
+   "FirstHalf:discipline": 38,
+   "FirstHalf:dribbles_succeeded": 38,
+   "FirstHalf:duel_won": 38,
+   "FirstHalf:duels": 38,
+   "FirstHalf:fouls": 38,
+   "FirstHalf:ground_duels_won": 38,
+   "FirstHalf:interceptions": 38,
+   "FirstHalf:keeper_saves": 38,
+   "FirstHalf:long_balls_accurate": 38,
+   "FirstHalf:matchstats.headers.tackles": 38,
+   "FirstHalf:passes": 76,
+   "FirstHalf:player_throws": 38,
+   "FirstHalf:red_cards": 38,
+   "FirstHalf:shot_blocks": 38,
+   "FirstHalf:shots": 38,
+   "FirstHalf:shots_inside_box": 38,
+   "FirstHalf:shots_outside_box": 38,
+   "FirstHalf:shots_woodwork": 38,
+   "FirstHalf:total_shots": 76,
+   "FirstHalf:yellow_cards": 76,
+   "SecondHalf:BallPossesion": 38,
+   "SecondHalf:Offsides": 38,
+   "SecondHalf:ShotsOffTarget": 38,
+   "SecondHalf:ShotsOnTarget": 76,
+   "SecondHalf:accurate_crosses": 38,
+   "SecondHalf:accurate_passes": 76,
+   "SecondHalf:aerials_won": 38,
+   "SecondHalf:big_chance": 38,
+   "SecondHalf:big_chance_missed_title": 38,
+   "SecondHalf:blocked_shots": 38,
+   "SecondHalf:clearances": 38,
+   "SecondHalf:corners": 38,
+   "SecondHalf:defense": 38,
+   "SecondHalf:discipline": 38,
+   "SecondHalf:dribbles_succeeded": 38,
+   "SecondHalf:duel_won": 38,
+   "SecondHalf:duels": 38,
+   "SecondHalf:fouls": 38,
+   "SecondHalf:ground_duels_won": 38,
+   "SecondHalf:interceptions": 38,
+   "SecondHalf:keeper_saves": 38,
+   "SecondHalf:long_balls_accurate": 38,
+   "SecondHalf:matchstats.headers.tackles": 38,
+   "SecondHalf:passes": 76,
+   "SecondHalf:player_throws": 38,
+   "SecondHalf:red_cards": 38,
+   "SecondHalf:shot_blocks": 38,
+   "SecondHalf:shots": 38,
+   "SecondHalf:shots_inside_box": 38,
+   "SecondHalf:shots_outside_box": 38,
+   "SecondHalf:shots_woodwork": 38,
+   "SecondHalf:total_shots": 76,
+   "SecondHalf:yellow_cards": 76
+  },
+  "2025/2026": {
+   "All:BallPossesion": 56,
+   "All:Offsides": 56,
+   "All:ShotsOffTarget": 56,
+   "All:ShotsOnTarget": 112,
+   "All:accurate_crosses": 56,
+   "All:accurate_passes": 112,
+   "All:aerials_won": 56,
+   "All:big_chance": 56,
+   "All:big_chance_missed_title": 56,
+   "All:blocked_shots": 56,
+   "All:clearances": 56,
+   "All:corners": 56,
+   "All:defense": 56,
+   "All:discipline": 56,
+   "All:dribbles_succeeded": 56,
+   "All:duel_won": 56,
+   "All:duels": 56,
+   "All:fouls": 56,
+   "All:ground_duels_won": 56,
+   "All:interceptions": 56,
+   "All:keeper_saves": 56,
+   "All:long_balls_accurate": 56,
+   "All:matchstats.headers.tackles": 56,
+   "All:passes": 112,
+   "All:player_throws": 56,
+   "All:red_cards": 56,
+   "All:shot_blocks": 56,
+   "All:shots": 56,
+   "All:shots_inside_box": 56,
+   "All:shots_outside_box": 56,
+   "All:shots_woodwork": 56,
+   "All:total_shots": 112,
+   "All:yellow_cards": 112,
+   "FirstHalf:BallPossesion": 56,
+   "FirstHalf:Offsides": 56,
+   "FirstHalf:ShotsOffTarget": 56,
+   "FirstHalf:ShotsOnTarget": 112,
+   "FirstHalf:accurate_crosses": 56,
+   "FirstHalf:accurate_passes": 112,
+   "FirstHalf:aerials_won": 56,
+   "FirstHalf:big_chance": 56,
+   "FirstHalf:big_chance_missed_title": 56,
+   "FirstHalf:blocked_shots": 56,
+   "FirstHalf:clearances": 56,
+   "FirstHalf:corners": 56,
+   "FirstHalf:defense": 56,
+   "FirstHalf:discipline": 56,
+   "FirstHalf:dribbles_succeeded": 56,
+   "FirstHalf:duel_won": 56,
+   "FirstHalf:duels": 56,
+   "FirstHalf:fouls": 56,
+   "FirstHalf:ground_duels_won": 56,
+   "FirstHalf:interceptions": 56,
+   "FirstHalf:keeper_saves": 56,
+   "FirstHalf:long_balls_accurate": 56,
+   "FirstHalf:matchstats.headers.tackles": 56,
+   "FirstHalf:passes": 112,
+   "FirstHalf:player_throws": 56,
+   "FirstHalf:red_cards": 56,
+   "FirstHalf:shot_blocks": 56,
+   "FirstHalf:shots": 56,
+   "FirstHalf:shots_inside_box": 56,
+   "FirstHalf:shots_outside_box": 56,
+   "FirstHalf:shots_woodwork": 56,
+   "FirstHalf:total_shots": 112,
+   "FirstHalf:yellow_cards": 112,
+   "SecondHalf:BallPossesion": 56,
+   "SecondHalf:Offsides": 56,
+   "SecondHalf:ShotsOffTarget": 56,
+   "SecondHalf:ShotsOnTarget": 112,
+   "SecondHalf:accurate_crosses": 56,
+   "SecondHalf:accurate_passes": 112,
+   "SecondHalf:aerials_won": 56,
+   "SecondHalf:big_chance": 56,
+   "SecondHalf:big_chance_missed_title": 56,
+   "SecondHalf:blocked_shots": 56,
+   "SecondHalf:clearances": 56,
+   "SecondHalf:corners": 56,
+   "SecondHalf:defense": 56,
+   "SecondHalf:discipline": 56,
+   "SecondHalf:dribbles_succeeded": 56,
+   "SecondHalf:duel_won": 56,
+   "SecondHalf:duels": 56,
+   "SecondHalf:fouls": 56,
+   "SecondHalf:ground_duels_won": 56,
+   "SecondHalf:interceptions": 56,
+   "SecondHalf:keeper_saves": 56,
+   "SecondHalf:long_balls_accurate": 56,
+   "SecondHalf:matchstats.headers.tackles": 56,
+   "SecondHalf:passes": 112,
+   "SecondHalf:player_throws": 56,
+   "SecondHalf:red_cards": 56,
+   "SecondHalf:shot_blocks": 56,
+   "SecondHalf:shots": 56,
+   "SecondHalf:shots_inside_box": 56,
+   "SecondHalf:shots_outside_box": 56,
+   "SecondHalf:shots_woodwork": 56,
+   "SecondHalf:total_shots": 112,
+   "SecondHalf:yellow_cards": 112
+  },
+  "2026/2027": {
+   "All:BallPossesion": 29,
+   "All:Offsides": 29,
+   "All:ShotsOffTarget": 29,
+   "All:ShotsOnTarget": 58,
+   "All:accurate_crosses": 29,
+   "All:accurate_passes": 58,
+   "All:aerials_won": 29,
+   "All:big_chance": 29,
+   "All:big_chance_missed_title": 29,
+   "All:blocked_shots": 29,
+   "All:clearances": 29,
+   "All:corners": 29,
+   "All:defense": 29,
+   "All:discipline": 29,
+   "All:dribbles_succeeded": 29,
+   "All:duel_won": 29,
+   "All:duels": 29,
+   "All:fouls": 29,
+   "All:ground_duels_won": 29,
+   "All:interceptions": 29,
+   "All:keeper_saves": 29,
+   "All:long_balls_accurate": 29,
+   "All:matchstats.headers.tackles": 29,
+   "All:passes": 58,
+   "All:player_throws": 29,
+   "All:red_cards": 29,
+   "All:shot_blocks": 29,
+   "All:shots": 29,
+   "All:shots_inside_box": 29,
+   "All:shots_outside_box": 29,
+   "All:shots_woodwork": 29,
+   "All:total_shots": 58,
+   "All:yellow_cards": 58,
+   "FirstHalf:BallPossesion": 29,
+   "FirstHalf:Offsides": 29,
+   "FirstHalf:ShotsOffTarget": 29,
+   "FirstHalf:ShotsOnTarget": 58,
+   "FirstHalf:accurate_crosses": 29,
+   "FirstHalf:accurate_passes": 58,
+   "FirstHalf:aerials_won": 29,
+   "FirstHalf:big_chance": 29,
+   "FirstHalf:big_chance_missed_title": 29,
+   "FirstHalf:blocked_shots": 29,
+   "FirstHalf:clearances": 29,
+   "FirstHalf:corners": 29,
+   "FirstHalf:defense": 29,
+   "FirstHalf:discipline": 29,
+   "FirstHalf:dribbles_succeeded": 29,
+   "FirstHalf:duel_won": 29,
+   "FirstHalf:duels": 29,
+   "FirstHalf:fouls": 29,
+   "FirstHalf:ground_duels_won": 29,
+   "FirstHalf:interceptions": 29,
+   "FirstHalf:keeper_saves": 29,
+   "FirstHalf:long_balls_accurate": 29,
+   "FirstHalf:matchstats.headers.tackles": 29,
+   "FirstHalf:passes": 58,
+   "FirstHalf:player_throws": 29,
+   "FirstHalf:red_cards": 29,
+   "FirstHalf:shot_blocks": 29,
+   "FirstHalf:shots": 29,
+   "FirstHalf:shots_inside_box": 29,
+   "FirstHalf:shots_outside_box": 29,
+   "FirstHalf:shots_woodwork": 29,
+   "FirstHalf:total_shots": 58,
+   "FirstHalf:yellow_cards": 58,
+   "SecondHalf:BallPossesion": 29,
+   "SecondHalf:Offsides": 29,
+   "SecondHalf:ShotsOffTarget": 29,
+   "SecondHalf:ShotsOnTarget": 58,
+   "SecondHalf:accurate_crosses": 29,
+   "SecondHalf:accurate_passes": 58,
+   "SecondHalf:aerials_won": 29,
+   "SecondHalf:big_chance": 29,
+   "SecondHalf:big_chance_missed_title": 29,
+   "SecondHalf:blocked_shots": 29,
+   "SecondHalf:clearances": 29,
+   "SecondHalf:corners": 29,
+   "SecondHalf:defense": 29,
+   "SecondHalf:discipline": 29,
+   "SecondHalf:dribbles_succeeded": 29,
+   "SecondHalf:duel_won": 29,
+   "SecondHalf:duels": 29,
+   "SecondHalf:fouls": 29,
+   "SecondHalf:ground_duels_won": 29,
+   "SecondHalf:interceptions": 29,
+   "SecondHalf:keeper_saves": 29,
+   "SecondHalf:long_balls_accurate": 29,
+   "SecondHalf:matchstats.headers.tackles": 29,
+   "SecondHalf:passes": 58,
+   "SecondHalf:player_throws": 29,
+   "SecondHalf:red_cards": 29,
+   "SecondHalf:shot_blocks": 29,
+   "SecondHalf:shots": 29,
+   "SecondHalf:shots_inside_box": 29,
+   "SecondHalf:shots_outside_box": 29,
+   "SecondHalf:shots_woodwork": 29,
+   "SecondHalf:total_shots": 58,
+   "SecondHalf:yellow_cards": 58
+  }
+ },
+ "card_event_kinds_per_season": {
+  "2024/2025": {
+   "Yellow": 289,
+   "YellowRed": 5,
+   "Red": 4
+  },
+  "2025/2026": {
+   "Yellow": 282,
+   "YellowRed": 10,
+   "Red": 3
+  },
+  "2026/2027": {
+   "Yellow": 117,
+   "Red": 8,
+   "YellowRed": 4
+  }
+ },
+ "referees": {
+  "2024/2025": {
+   "distinct": 0,
+   "top": []
+  },
+  "2025/2026": {
+   "distinct": 0,
+   "top": []
+  },
+  "2026/2027": {
+   "distinct": 1,
+   "top": [
+    [
+     "Farhan Al Ruaili",
+     1
+    ]
+   ]
+  }
+ },
+ "splits_consistency": {
+  "2024/2025": {
+   "n": 38,
+   "exact_shots": 38,
+   "exact_corners": 38,
+   "exact_sot": 38,
+   "exact_yellows": 38
+  },
+  "2025/2026": {
+   "n": 56,
+   "exact_shots": 56,
+   "exact_corners": 56,
+   "exact_sot": 56,
+   "exact_yellows": 56
+  },
+  "2026/2027": {
+   "n": 29,
+   "exact_shots": 29,
+   "exact_corners": 29,
+   "exact_sot": 29,
+   "exact_yellows": 29
+  }
+ },
+ "yell_agreement": {
+  "2024/2025": {
+   "n": 38,
+   "exact": 34,
+   "stats_low": 4,
+   "stats_high": 0,
+   "mean_stats_minus_events": -0.21052631578947367
+  },
+  "2025/2026": {
+   "n": 56,
+   "exact": 37,
+   "stats_low": 19,
+   "stats_high": 0,
+   "mean_stats_minus_events": -0.5178571428571429
+  },
+  "2026/2027": {
+   "n": 29,
+   "exact": 23,
+   "stats_low": 6,
+   "stats_high": 0,
+   "mean_stats_minus_events": -0.41379310344827586
+  }
+ },
+ "halves_dev": {
+  "goals_2024_2025_events": {
+   "share_1h": 0.4589041095890411,
+   "n_matches": 51,
+   "n_total": 146.0,
+   "mean_of_ratios": 0.43944911297852474,
+   "sd_of_ratios": 0.33281805578185336,
+   "true_sd": 0.0
+  },
+  "sot_2025_2026_splits": {
+   "share_1h": 0.4194214876033058,
+   "n_matches": 55,
+   "n_total": 484.0,
+   "mean_of_ratios": 0.41056322465413364,
+   "sd_of_ratios": 0.16822989130307797,
+   "true_sd": 0.0
+  },
+  "corners_2025_2026_splits": {
+   "share_1h": 0.44954128440366975,
+   "n_matches": 56,
+   "n_total": 545.0,
+   "mean_of_ratios": 0.4520998006305946,
+   "sd_of_ratios": 0.1665204531681925,
+   "true_sd": 0.010139854375991098
+  },
+  "shots_2025_2026_splits": {
+   "share_1h": 0.44555984555984557,
+   "n_matches": 56,
+   "n_total": 1295.0,
+   "mean_of_ratios": 0.4466411811575574,
+   "sd_of_ratios": 0.09793902426735426,
+   "true_sd": 0.0
+  },
+  "yell_stats_2025_2026_splits": {
+   "share_1h": 0.33460076045627374,
+   "n_matches": 56,
+   "n_total": 263.0,
+   "mean_of_ratios": 0.3543013038548753,
+   "sd_of_ratios": 0.25283670604174924,
+   "true_sd": 0.021503268612624374
+  },
+  "yell_events_2025_2026_times": {
+   "share_1h": 0.3150684931506849,
+   "n_matches": 56,
+   "n_total": 292.0,
+   "mean_of_ratios": 0.332165404040404,
+   "sd_of_ratios": 0.24878433349477733,
+   "true_sd": 0.0893058468208347
+  }
+ },
+ "trait_reliability": {
+  "g_dev_goals_for": {
+   "split_half_r": -0.7315557490183195,
+   "n_teams": 8
+  },
+  "stats_pool_goals_for": {
+   "split_half_r": -0.14899612408874496,
+   "n_teams": 9
+  },
+  "stats_pool_sot_for": {
+   "split_half_r": 0.5476502294668143,
+   "n_teams": 9
+  },
+  "stats_pool_corners_for": {
+   "split_half_r": -0.3966577535318226,
+   "n_teams": 9
+  },
+  "stats_pool_shots_for": {
+   "split_half_r": 0.7836839300217371,
+   "n_teams": 9
+  },
+  "stats_pool_yellow_for": {
+   "split_half_r": -0.010252958279972251,
+   "n_teams": 9
+  },
+  "stats_pool_possession": {
+   "split_half_r": 0.23751071818403283,
+   "n_teams": 9
+  },
+  "2024/2025_sot_for": {
+   "split_half_r": 0.6061131957761735,
+   "n_teams": 8
+  },
+  "2024/2025_corners_for": {
+   "split_half_r": -0.33438676118080385,
+   "n_teams": 8
+  },
+  "2025/2026_sot_for": {
+   "split_half_r": 0.359835785764961,
+   "n_teams": 8
+  },
+  "2025/2026_corners_for": {
+   "split_half_r": 0.3792937798559272,
+   "n_teams": 8
+  },
+  "chrono_stats_pool_goals_for": {
+   "split_half_r": -0.19449796575062717,
+   "n_teams": 9
+  },
+  "chrono_stats_pool_sot_for": {
+   "split_half_r": 0.6701020743304092,
+   "n_teams": 9
+  },
+  "chrono_stats_pool_corners_for": {
+   "split_half_r": -0.5982970873661467,
+   "n_teams": 9
+  },
+  "chrono_stats_pool_shots_for": {
+   "split_half_r": 0.740873853079151,
+   "n_teams": 9
+  },
+  "chrono_stats_pool_yellow_for": {
+   "split_half_r": -0.2792722019744354,
+   "n_teams": 9
+  },
+  "chrono_g_dev_goals_for": {
+   "split_half_r": -0.7409585736349483,
+   "n_teams": 8
+  }
+ },
+ "entrant_transitions": [
+  {
+   "season": "2025/2026",
+   "team_id": 101902,
+   "team": "Al-Khor",
+   "gf_diff": -0.008928571428571397,
+   "ga_diff": 0.2767857142857144,
+   "n_matches": 14
+  }
+ ],
+ "lines": {
+  "goals_ou_2024_2025": {
+   "over_rates": {
+    "1.5": 0.7321428571428571,
+    "2.5": 0.44642857142857145,
+    "3.5": 0.26785714285714285
+   },
+   "primary": 2.5,
+   "n": 56
+  },
+  "sot_2025_2026": {
+   "over_rates": {
+    "7.5": 0.5535714285714286,
+    "8.5": 0.48214285714285715,
+    "9.5": 0.3392857142857143
+   },
+   "primary": 8.5,
+   "n": 56
+  },
+  "corners_2025_2026": {
+   "over_rates": {
+    "8.5": 0.6607142857142857,
+    "9.5": 0.4642857142857143,
+    "10.5": 0.3392857142857143
+   },
+   "primary": 9.5,
+   "n": 56
+  },
+  "shots_2025_2026": {
+   "over_rates": {
+    "22.5": 0.5714285714285714,
+    "23.5": 0.44642857142857145,
+    "24.5": 0.39285714285714285
+   },
+   "primary": 23.5,
+   "n": 56
+  },
+  "yell_ev_2025_2026": {
+   "over_rates": {
+    "3.5": 0.75,
+    "4.5": 0.5892857142857143,
+    "5.5": 0.5
+   },
+   "primary": 5.5,
+   "n": 56
+  },
+  "yell_stats_2025_2026": {
+   "over_rates": {
+    "3.5": 0.6785714285714286,
+    "4.5": 0.5357142857142857,
+    "5.5": 0.3392857142857143
+   },
+   "primary": 4.5,
+   "n": 56
+  }
+ },
+ "dev_windows": {
+  "goals": {
+   "warm_up": "2024/2025 rounds 1-7 (28 matches, never scored)",
+   "scored": "2024/2025 rounds 8-14 (28 matches)",
+   "virgin": "2025/2026 complete (56)",
+   "confirmatory": "2026/2027 (untouched)"
+  },
+  "stats_markets": {
+   "warm_up": "2025/2026 rounds 1-7 (28 matches, never scored); fit history also 2024/2025 stats-era rounds 6-14 (38)",
+   "scored": "2025/2026 rounds 8-14 (28 matches)",
+   "virgin": "2026/2027 partial (29, TRANSITIONAL)",
+   "confirmatory": "2026/2027 season-end re-read"
+  }
+ },
+ "home_win_rate_g_dev": 0.39285714285714285,
+ "draw_rate_g_dev": 0.30357142857142855
+}

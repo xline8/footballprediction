@@ -1,0 +1,41 @@
+{
+  "protocol": "S-NO-OBOS VIRGIN; season 2026 read once; arms GZ+RS (dev-passing)",
+  "primary_line": 9.5,
+  "arms": {
+    "GZ": {
+      "n": 237,
+      "ll_9.5": 0.7010110882164742,
+      "mean_predicted_over_rate": 0.5517836663324325,
+      "actual_over_rate": 0.5147679324894515,
+      "calibration_diff": 0.03701573384298096,
+      "calibration_se": 0.03267145185483478
+    },
+    "RS": {
+      "n": 237,
+      "ll_9.5": 0.698376675495759,
+      "mean_predicted_over_rate": 0.5535090356065357,
+      "actual_over_rate": 0.5147679324894515,
+      "calibration_diff": 0.03874110311708423,
+      "calibration_se": 0.0325868594801553
+    }
+  },
+  "baselines": {
+    "base_rate": {
+      "n": 237,
+      "ll_9.5": 0.6986651413796803,
+      "mean_predicted_over_rate": 0.4602739726027397,
+      "actual_over_rate": 0.5147679324894515,
+      "calibration_diff": -0.054493959886711796,
+      "calibration_se": 0.032533028078777435
+    },
+    "naive_trailing_10": {
+      "n": 237,
+      "ll_9.5": 0.7068770389494179,
+      "mean_predicted_over_rate": 0.5401875964892596,
+      "actual_over_rate": 0.5147679324894515,
+      "calibration_diff": 0.025419663999808106,
+      "calibration_se": 0.03285487256393574
+    }
+  },
+  "base_rate_value": 0.4602739726027397
+}

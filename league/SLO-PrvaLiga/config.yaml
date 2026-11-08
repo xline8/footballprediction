@@ -1,0 +1,38 @@
+# Slovenia Prva Liga — Phase A frozen configuration
+league: SLO-PrvaLiga
+country: Slovenia
+fotmob_id: 173
+tier: 1
+warehouse: data_enrichment/fotmob_world/Slovenia/Prva Liga
+data:
+  matches: league/SLO-PrvaLiga/data/slo_prva_liga_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period:
+  goals: ["2022/2023", "2023/2024", "2024/2025"]
+  stats_markets: []  # NOT-BUILDABLE: stats null and shotmap empty in every payload
+  cards: []          # NOT-BUILDABLE: no plain Yellow events and no referee names
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027 (partial, reserve)"
+halves_constants:
+  goals_1h_share: 0.4498
+  yellow_cards_1h_share: null
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+markets:
+  goals: G-SLO  # DC goals-only; Gate Zero + SHRINK; no X2 mover prior
+  sot: S-SLO    # NOT-BUILDABLE — stats null and shotmap empty in 956/956
+  corners: C-SLO # NOT-BUILDABLE — stats null in 956/956
+  cards: K-SLO  # NOT-BUILDABLE — Yellow events 0; referee named 0/956
+  total_shots: T-SLO # NOT-BUILDABLE — stats null and shotmap empty in 956/956
+shipping:
+  arm: NONE
+  no_ship: true  # G-SLO FAIL at the dev gate (OU2.5 LL 0.6971 vs climatology 0.6957); virgin 2025/26 NOT read; SHRINK identical to Gate Zero; nothing ships
+notes:
+  - "Single-table regular phase, 36 rounds and 5 matches per round in complete seasons; 2026/2027 is partial."
+  - "Payload inventory: stats null 956/956; shotmap shots empty 956/956; referee empty 956/956; lineup non-null 32/956."
+  - "Events present in 893/956; card events are Red and YellowRed only; plain Yellow count is zero."
+  - "Awarded matches are retained with is_awarded=1 and excluded from every fit and score."
+  - "The complete Slovenia index contains only FotMob league id 173; no sibling league is available for X2 mover estimation."
+  - "G-SLO outcome: dev FAIL (pooled 1.0310 / 0.2109 / 0.6971 vs climatology 1.0869 / 0.2304 / 0.6957, naive 1.1562 / 0.2197 / 0.7704; SHRINK identical); virgin 2025/26 WAS NOT read (Gate Zero failed dev, variants moot); winner NONE; no predictions file; 2026/27 untouched."
+  - "2025/2026 shortfall is Domzale: 18 matches (rounds 1-18 only); all 18 missing fixtures are Domzale fixtures in rounds 19-36; no reason stated in the payloads."

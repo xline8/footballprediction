@@ -1,0 +1,26 @@
+# Liga Portugal (Portugal) — league config
+league: PT-LigaPortugal
+country: Portugal
+fotmob_id: 61
+tier: 1
+warehouse: data_enrichment/fotmob_world (index filter league_id=61)
+data:
+  matches: league/PT-LigaPortugal/data/pt_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2022/2023", "2023/2024", "2024/2025", "2025/2026"]  # evaluation seasons, expanding season-blocked fits
+virgin_primary: "2026/2027"       # TRANSITIONAL, in progress, n=98 — read ONCE per candidate; season-end confirmatory reserved
+halves_constants:                 # frozen, EDA complete-split era 2023/24-2025/26
+  goals_1h_share: 0.443
+  sot_1h_share: 0.449
+  corners_1h_share: 0.471
+  yellow_cards_1h_share: 0.331
+  total_shots_1h_share: 0.456
+markets:
+  goals: G-PT        # DC + xG blend; arms: Gate Zero, SHRINK (thin-history)
+  sot: S-PT          # v5 pattern; arms: Gate Zero, X4 xG/shot, X6 xGOT era
+  corners: C-PT      # corners_v3 pattern; arms: Gate Zero (X9), X7 box touches
+  cards: K-PT        # cards pattern; arms: Gate Zero, X8 referee (weak, r=0.28)
+  total_shots: T-PT  # v1 pattern; arms: A Gate Zero, E9 trailing-r
+notes:
+  - xG and shotmap complete in all seasons; period splits complete from 2023/2024.
+  - Predictions-only: no Portugal odds/settlement source in-system.

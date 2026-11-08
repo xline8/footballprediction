@@ -1,0 +1,24 @@
+# Guatemala Liga Nacional — Phase A descriptive configuration
+league: GT-LigaNacional
+country: Guatemala
+fotmob_id: 336
+tier: 1
+warehouse: data_enrichment/fotmob_world (index filter league_id=336)
+data:
+  matches: league/GT-LigaNacional/data/gt_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+confirmatory_reserved: "2026/2027"
+halves_constants: {} # event-derived 1H share is descriptive only; FT-only
+markets:
+  goals: G-GT # buildable; header goals present in all 1,443 finished matches
+  sot: NOT_BUILDABLE # stats is None everywhere; shotmaps have zero shots
+  corners: NOT_BUILDABLE # stats is None everywhere
+  cards: NOT_BUILDABLE # only red/second-yellow Card events, no yellow-card target or validation
+  total_shots: NOT_BUILDABLE # shotmaps have zero shots and stats is None
+notes:
+  - Index coverage flags are not trusted; payload content is measured.
+  - There is no named referee, xG, lineup, period split, SOT, corners, total-shots, or stats yellow-card source.
+  - Guatemala has no other warehouse league, so no X2 mover prior is available.
+  - The builder includes every index row whose payload says header.status.finished=true; all 1,443 rows pass.

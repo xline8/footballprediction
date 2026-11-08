@@ -1,0 +1,14 @@
+{
+  "market": "corners",
+  "arm": "x5",
+  "params": {
+    "gamma": 0.15,
+    "r": 1.2188132180917006,
+    "beta": [
+      0.0025,
+      0.0
+    ],
+    "fit_n": 565
+  },
+  "halves_share_1h": 0.469
+}

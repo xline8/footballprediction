@@ -1,0 +1,426 @@
+{
+  "n": 1114,
+  "row_counts": {
+    "2021/2022": 112,
+    "2022/2023": 192,
+    "2023/2024": 246,
+    "2024/2025": 216,
+    "2025/2026": 278,
+    "2026/2027": 70
+  },
+  "seasons": [
+    "2021/2022",
+    "2022/2023",
+    "2023/2024",
+    "2024/2025",
+    "2025/2026",
+    "2026/2027"
+  ],
+  "per_season": {
+    "2021/2022": {
+      "n": 112,
+      "teams": 8,
+      "goals": 2.8571,
+      "home_goals": 1.4911,
+      "away_goals": 1.3661,
+      "home_advantage": 0.125,
+      "sot": null,
+      "corners": null,
+      "cards": null,
+      "total_shots": null,
+      "stats_cov_pct": 0.0,
+      "half_cov_pct": 0.0,
+      "shotmap_cov_pct": 0.0,
+      "events_cov_pct": 96.4,
+      "ref_cov_pct": 0.0,
+      "stats_cards_cov_pct": 0.0,
+      "phases": {
+        "regular": 112
+      }
+    },
+    "2022/2023": {
+      "n": 192,
+      "teams": 12,
+      "goals": 3,
+      "home_goals": 1.6198,
+      "away_goals": 1.3802,
+      "home_advantage": 0.2396,
+      "sot": null,
+      "corners": null,
+      "cards": null,
+      "total_shots": null,
+      "stats_cov_pct": 0.0,
+      "half_cov_pct": 0.0,
+      "shotmap_cov_pct": 0.0,
+      "events_cov_pct": 95.3,
+      "ref_cov_pct": 0.0,
+      "stats_cards_cov_pct": 0.0,
+      "phases": {
+        "regular": 132,
+        "relegation_group": 30,
+        "promotion_group": 30
+      }
+    },
+    "2023/2024": {
+      "n": 246,
+      "teams": 16,
+      "goals": 2.8293,
+      "home_goals": 1.4146,
+      "away_goals": 1.4146,
+      "home_advantage": 0.0,
+      "sot": null,
+      "corners": null,
+      "cards": null,
+      "total_shots": null,
+      "stats_cov_pct": 0.0,
+      "half_cov_pct": 0.0,
+      "shotmap_cov_pct": 0.0,
+      "events_cov_pct": 95.9,
+      "ref_cov_pct": 0.0,
+      "stats_cards_cov_pct": 0.0,
+      "phases": {
+        "regular": 240,
+        "promotion_playoff": 6
+      }
+    },
+    "2024/2025": {
+      "n": 216,
+      "teams": 15,
+      "goals": 2.838,
+      "home_goals": 1.4907,
+      "away_goals": 1.3472,
+      "home_advantage": 0.1435,
+      "sot": null,
+      "corners": null,
+      "cards": null,
+      "total_shots": null,
+      "stats_cov_pct": 0.0,
+      "half_cov_pct": 0.0,
+      "shotmap_cov_pct": 0.0,
+      "events_cov_pct": 95.8,
+      "ref_cov_pct": 0.0,
+      "stats_cards_cov_pct": 0.0,
+      "phases": {
+        "regular": 210,
+        "promotion_playoff": 6
+      }
+    },
+    "2025/2026": {
+      "n": 278,
+      "teams": 17,
+      "goals": 2.8381,
+      "home_goals": 1.464,
+      "away_goals": 1.3741,
+      "home_advantage": 0.0899,
+      "sot": 8.9711,
+      "corners": 9.6029,
+      "cards": 4.0,
+      "total_shots": 26.2708,
+      "stats_cov_pct": 99.6,
+      "half_cov_pct": 99.6,
+      "shotmap_cov_pct": 99.6,
+      "events_cov_pct": 99.6,
+      "ref_cov_pct": 83.8,
+      "stats_cards_cov_pct": 99.6,
+      "phases": {
+        "regular": 278
+      }
+    },
+    "2026/2027": {
+      "n": 70,
+      "teams": 15,
+      "goals": 3.0857,
+      "home_goals": 1.7857,
+      "away_goals": 1.3,
+      "home_advantage": 0.4857,
+      "sot": 9.4857,
+      "corners": 9.8286,
+      "cards": 4.0429,
+      "total_shots": 26.7143,
+      "stats_cov_pct": 100.0,
+      "half_cov_pct": 100.0,
+      "shotmap_cov_pct": 100.0,
+      "events_cov_pct": 100.0,
+      "ref_cov_pct": 91.4,
+      "stats_cards_cov_pct": 100.0,
+      "phases": {
+        "regular": 70
+      }
+    }
+  },
+  "team_counts_by_id": {
+    "2021/2022": 8,
+    "2022/2023": 12,
+    "2023/2024": 16,
+    "2024/2025": 15,
+    "2025/2026": 17,
+    "2026/2027": 15
+  },
+  "reserve_ids": [
+    1173026,
+    1378461,
+    1378462,
+    1378463,
+    1379188
+  ],
+  "reserve_names": {
+    "1173026": [
+      "Club Brugge NXT"
+    ],
+    "1378461": [
+      "Anderlecht Futures"
+    ],
+    "1378462": [
+      "SL 16 FC"
+    ],
+    "1378463": [
+      "Genk U23"
+    ],
+    "1379188": [
+      "Gent U23"
+    ]
+  },
+  "goal_reliability_odd_even": {
+    "goals_for": {
+      "r": 0.502,
+      "n_teams": 17
+    },
+    "goals_against": {
+      "r": 0.7148,
+      "n_teams": 17
+    }
+  },
+  "dev_event_matches": 734,
+  "halves": {
+    "n": 726,
+    "constant": 0.434014,
+    "observed_variance": 0.102295,
+    "binomial_noise": 0.109344,
+    "true_variance": -0.007049,
+    "rule": "event period FirstHalf when present; otherwise minute <=45; no fabricated goals"
+  },
+  "cards_forensics": {
+    "n_both": 277,
+    "exact_agreement_pct": 72.2022,
+    "mean_stats_minus_plain_events": -0.3466,
+    "stats_lower_pct": 27.7978,
+    "stats_higher_pct": 0.0,
+    "exact_agreement_pct_including_yellowred": 72.2022,
+    "yellowred_is_separate": true
+  },
+  "movers": [
+    {
+      "entry_season": "2022/2023",
+      "team_id": "583877",
+      "team": "Beerschot",
+      "b": [
+        1.3438,
+        1.2812,
+        32
+      ],
+      "a": [
+        0.9706,
+        2.2353,
+        34
+      ],
+      "b_gap": [
+        -0.1562,
+        -0.2188
+      ],
+      "a_gap": [
+        -0.4824,
+        0.7823
+      ]
+    },
+    {
+      "entry_season": "2023/2024",
+      "team_id": "10000",
+      "team": "Zulte Waregem",
+      "b": [
+        1.625,
+        1.125,
+        32
+      ],
+      "a": [
+        1.4706,
+        2.2941,
+        34
+      ],
+      "b_gap": [
+        0.2104,
+        -0.2896
+      ],
+      "a_gap": [
+        -0.0612,
+        0.7623
+      ]
+    },
+    {
+      "entry_season": "2023/2024",
+      "team_id": "149408",
+      "team": "RFC Seraing",
+      "b": [
+        1.1,
+        1.7,
+        30
+      ],
+      "a": [
+        0.8235,
+        2,
+        34
+      ],
+      "b_gap": [
+        -0.3146,
+        0.2853
+      ],
+      "a_gap": [
+        -0.7083,
+        0.4682
+      ]
+    },
+    {
+      "entry_season": "2023/2024",
+      "team_id": "8573",
+      "team": "Oostende",
+      "b": [
+        1.0667,
+        1.3,
+        30
+      ],
+      "a": [
+        1.0882,
+        2.2353,
+        34
+      ],
+      "b_gap": [
+        -0.3479,
+        -0.1146
+      ],
+      "a_gap": [
+        -0.4436,
+        0.7035
+      ]
+    },
+    {
+      "entry_season": "2024/2025",
+      "team_id": "6351",
+      "team": "Eupen",
+      "b": [
+        1.3571,
+        1.6786,
+        28
+      ],
+      "a": [
+        0.8056,
+        1.8333,
+        36
+      ],
+      "b_gap": [
+        -0.0619,
+        0.2596
+      ],
+      "a_gap": [
+        -0.6066,
+        0.4211
+      ]
+    },
+    {
+      "entry_season": "2024/2025",
+      "team_id": "9992",
+      "team": "RWD Molenbeek",
+      "b": [
+        1.5,
+        0.8333,
+        30
+      ],
+      "a": [
+        1.0833,
+        2.1111,
+        36
+      ],
+      "b_gap": [
+        0.081,
+        -0.5857
+      ],
+      "a_gap": [
+        -0.3289,
+        0.6989
+      ]
+    }
+  ],
+  "new_entries": [
+    {
+      "entry_season": "2022/2023",
+      "team_id": "1173026",
+      "team": "Club Brugge NXT",
+      "reserve": 1
+    },
+    {
+      "entry_season": "2022/2023",
+      "team_id": "1378461",
+      "team": "Anderlecht Futures",
+      "reserve": 1
+    },
+    {
+      "entry_season": "2022/2023",
+      "team_id": "1378462",
+      "team": "SL 16 FC",
+      "reserve": 1
+    },
+    {
+      "entry_season": "2022/2023",
+      "team_id": "1378463",
+      "team": "Genk U23",
+      "reserve": 1
+    },
+    {
+      "entry_season": "2022/2023",
+      "team_id": "7947",
+      "team": "FCV Dender EH",
+      "reserve": 0
+    },
+    {
+      "entry_season": "2023/2024",
+      "team_id": "274583",
+      "team": "Patro Eisden",
+      "reserve": 0
+    },
+    {
+      "entry_season": "2023/2024",
+      "team_id": "6363",
+      "team": "FC Liege",
+      "reserve": 0
+    },
+    {
+      "entry_season": "2023/2024",
+      "team_id": "96953",
+      "team": "Francs Borains",
+      "reserve": 0
+    },
+    {
+      "entry_season": "2024/2025",
+      "team_id": "1218969",
+      "team": "RAAL La Louviere",
+      "reserve": 0
+    },
+    {
+      "entry_season": "2024/2025",
+      "team_id": "213307",
+      "team": "SC Lokeren-Temse",
+      "reserve": 0
+    }
+  ],
+  "mover_pooled": {
+    "n": 6,
+    "b_gf_gap": -0.0982,
+    "b_ga_gap": -0.1106,
+    "a_gf_gap": -0.4385,
+    "a_ga_gap": 0.6394
+  },
+  "count_levels_virgin": {
+    "sot": 8.9711,
+    "corners": 9.6029,
+    "cards": 4.0,
+    "total_shots": 26.2708
+  }
+}

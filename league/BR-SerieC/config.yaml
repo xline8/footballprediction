@@ -1,0 +1,23 @@
+league: BR-SerieC
+country: Brazil
+fotmob_id: 8971
+tier: 3
+data:
+  matches: league/BR-SerieC/data/brc_matches.csv
+  team_matches: league/BR-SerieC/data/brc_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period: ["2021", "2022", "2023", "2024", "2025"] # warm-up 2021; scored 2022–2025, n=856
+virgin_primary: "2026"
+virgin_confirmatory: null
+halves_constants:
+  goals_1h_share: 0.443
+markets:
+  goals: G-BRC
+  sot: S-BRC
+  corners: C-BRC
+  cards: K-BRC
+  total_shots: T-BRC
+notes:
+  - 2021 is a two-group first phase, two second-stage groups and a two-leg final; 2022–2026 use a 20-team first phase, two second-stage/Promotion Round groups and a two-leg final.
+  - Fit/eval excludes the two Final legs per season; 2026 is complete and has no confirmatory window.
+  - Stats, shotmap and period-split targets are absent from payload content; only goals is buildable.

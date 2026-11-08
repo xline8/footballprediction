@@ -1,0 +1,43 @@
+# SK-2Liga (Slovakia 2. Liga) — league config
+league: SK-2Liga
+country: Slovakia
+fotmob_id: 8973
+tier: 2
+warehouse: data_enrichment/fotmob_world_index.csv (league_id=8973)
+data:
+  matches: league/SK-2Liga/data/sk2_matches.csv
+  team_matches: league/SK-2Liga/data/sk2_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.4940
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+  yellow_cards_1h_share: null
+markets:
+  goals: G-SK2
+  sot: S-SK2 (not buildable — no SOT data)
+  corners: C-SK2 (not buildable — no corners data)
+  cards: K-SK2 (not buildable — no cards data)
+  total_shots: T-SK2 (not buildable — no shots data)
+notes:
+  - Split-year seasons; 16 teams / 30 rounds except 2024/2025 (14 teams /
+    26 rounds, 182 matches). Single league: no split groups, no playoffs.
+  - Score-only league: no stats block, no shotmap, no xG in any payload.
+    Only the goals candidate is buildable.
+  - 126 index rows are unfinished warehouse pull gaps (77 in 2021/2022,
+    40 in 2022/2023, 9 in 2023/2024); inclusion is finished matches only
+    (1,143 rows).
+  - Events (goal times) exist in 610 finished matches (2023/2024 onward),
+    reconciling with the FT score in 608; 2 defect matches excluded from
+    halves only. Dev-era frozen goals 1H share 0.4940 (495/1002).
+  - Referee names absent from all 1,143 finished matches; X8 dropped.
+  - Movers into the league are relegated 1. Liga clubs (one per season);
+    cumulative first-season offsets are estimable and frozen in the prereg.
+    Clubs arriving from 3. Liga have no warehouse record and start at the
+    league mean in every arm.
+  - 2026/2027 is in progress (127 matches, rounds 1–16) and is not read
+    in this build (reserved confirmatory).

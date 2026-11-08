@@ -1,0 +1,309 @@
+{
+  "season_levels": {
+    "2021/2022": {
+      "n": 240,
+      "goals_per_match": 1.808,
+      "home_goals_per_match": 0.942,
+      "away_goals_per_match": 0.867,
+      "home_win_pct": 0.342,
+      "draw_pct": 0.367,
+      "away_win_pct": 0.292,
+      "btts_pct": 0.362,
+      "over1_5_pct": 0.571,
+      "over2_5_pct": 0.292,
+      "over3_5_pct": 0.096
+    },
+    "2022/2023": {
+      "n": 240,
+      "goals_per_match": 2.0,
+      "home_goals_per_match": 1.133,
+      "away_goals_per_match": 0.867,
+      "home_win_pct": 0.367,
+      "draw_pct": 0.358,
+      "away_win_pct": 0.275,
+      "btts_pct": 0.388,
+      "over1_5_pct": 0.55,
+      "over2_5_pct": 0.317,
+      "over3_5_pct": 0.196
+    },
+    "2023/2024": {
+      "n": 240,
+      "goals_per_match": 2.179,
+      "home_goals_per_match": 1.117,
+      "away_goals_per_match": 1.062,
+      "home_win_pct": 0.371,
+      "draw_pct": 0.317,
+      "away_win_pct": 0.312,
+      "btts_pct": 0.433,
+      "over1_5_pct": 0.613,
+      "over2_5_pct": 0.35,
+      "over3_5_pct": 0.208
+    },
+    "2024/2025": {
+      "n": 240,
+      "goals_per_match": 1.979,
+      "home_goals_per_match": 1.083,
+      "away_goals_per_match": 0.896,
+      "home_win_pct": 0.375,
+      "draw_pct": 0.342,
+      "away_win_pct": 0.283,
+      "btts_pct": 0.383,
+      "over1_5_pct": 0.6,
+      "over2_5_pct": 0.308,
+      "over3_5_pct": 0.142
+    },
+    "2025/2026": {
+      "n": 178,
+      "goals_per_match": 1.815,
+      "home_goals_per_match": 1.034,
+      "away_goals_per_match": 0.781,
+      "home_win_pct": 0.399,
+      "draw_pct": 0.36,
+      "away_win_pct": 0.242,
+      "btts_pct": 0.376,
+      "over1_5_pct": 0.517,
+      "over2_5_pct": 0.287,
+      "over3_5_pct": 0.124
+    },
+    "2026/2027": {
+      "n": 105,
+      "goals_per_match": 1.99,
+      "home_goals_per_match": 1.152,
+      "away_goals_per_match": 0.838,
+      "home_win_pct": 0.362,
+      "draw_pct": 0.371,
+      "away_win_pct": 0.267,
+      "btts_pct": 0.4,
+      "over1_5_pct": 0.648,
+      "over2_5_pct": 0.324,
+      "over3_5_pct": 0.124
+    }
+  },
+  "dev_levels": {
+    "n": 960,
+    "goals_per_match": 1.992,
+    "home_goals_per_match": 1.069,
+    "away_goals_per_match": 0.923,
+    "home_win_pct": 0.364,
+    "draw_pct": 0.346,
+    "away_win_pct": 0.291,
+    "btts_pct": 0.392,
+    "over1_5_pct": 0.583,
+    "over2_5_pct": 0.317,
+    "over3_5_pct": 0.16
+  },
+  "virgin_levels": {
+    "n": 178,
+    "goals_per_match": 1.815,
+    "home_goals_per_match": 1.034,
+    "away_goals_per_match": 0.781,
+    "home_win_pct": 0.399,
+    "draw_pct": 0.36,
+    "away_win_pct": 0.242,
+    "btts_pct": 0.376,
+    "over1_5_pct": 0.517,
+    "over2_5_pct": 0.287,
+    "over3_5_pct": 0.124
+  },
+  "reliability": {
+    "goals_for": {
+      "n_team_seasons": 98,
+      "r_chronological": 0.368,
+      "per_season": {
+        "2021/2022": {
+          "n": 16,
+          "r": 0.574
+        },
+        "2022/2023": {
+          "n": 16,
+          "r": 0.553
+        },
+        "2023/2024": {
+          "n": 16,
+          "r": 0.249
+        },
+        "2024/2025": {
+          "n": 16,
+          "r": 0.79
+        },
+        "2025/2026": {
+          "n": 16,
+          "r": 0.378
+        },
+        "2026/2027": {
+          "n": 18,
+          "r": 0.044
+        }
+      },
+      "r_random_mean_60": 0.452,
+      "r_random_range_60": [
+        0.319,
+        0.592
+      ]
+    },
+    "goals_against": {
+      "n_team_seasons": 98,
+      "r_chronological": 0.519,
+      "per_season": {
+        "2021/2022": {
+          "n": 16,
+          "r": 0.521
+        },
+        "2022/2023": {
+          "n": 16,
+          "r": 0.695
+        },
+        "2023/2024": {
+          "n": 16,
+          "r": 0.594
+        },
+        "2024/2025": {
+          "n": 16,
+          "r": 0.718
+        },
+        "2025/2026": {
+          "n": 16,
+          "r": 0.046
+        },
+        "2026/2027": {
+          "n": 18,
+          "r": 0.504
+        }
+      },
+      "r_random_mean_60": 0.398,
+      "r_random_range_60": [
+        0.243,
+        0.552
+      ]
+    },
+    "reds": {
+      "n_team_seasons": 98,
+      "r_chronological": 0.194,
+      "per_season": {
+        "2021/2022": {
+          "n": 16,
+          "r": -0.275
+        },
+        "2022/2023": {
+          "n": 16,
+          "r": 0.056
+        },
+        "2023/2024": {
+          "n": 16,
+          "r": 0.36
+        },
+        "2024/2025": {
+          "n": 16,
+          "r": 0.142
+        },
+        "2025/2026": {
+          "n": 16,
+          "r": 0.132
+        },
+        "2026/2027": {
+          "n": 18,
+          "r": 0.161
+        }
+      }
+    },
+    "yellows": {
+      "n_team_seasons": 16,
+      "r_chronological": 0.452,
+      "per_season": {
+        "2025/2026": {
+          "n": 16,
+          "r": 0.452
+        }
+      },
+      "flagged_single_season": true,
+      "season_scope": [
+        "2025/2026"
+      ]
+    }
+  },
+  "halves": {
+    "goals": {
+      "matches_with_ht": 1233,
+      "share_1h": 0.4271,
+      "goals_1h": 1031,
+      "goals_ft": 2414,
+      "per_season": {
+        "2021/2022": 0.4165,
+        "2022/2023": 0.425,
+        "2023/2024": 0.4283,
+        "2024/2025": 0.4337,
+        "2025/2026": 0.4448,
+        "2026/2027": 0.4078
+      },
+      "observed_variance": 0.13734,
+      "noise_floor_per_match": 0.14094,
+      "true_variance": -0.0036,
+      "team_split_half_r": 0.087,
+      "team_split_half_n": 98
+    }
+  },
+  "entrants": {
+    "2021/2022 -> 2022/2023": {
+      "entrants": [
+        "Malavan",
+        "Mes Kerman"
+      ],
+      "n_teams": 2,
+      "team_matches": 60,
+      "gf_gap": -0.267,
+      "ga_gap": 0.283
+    },
+    "2022/2023 -> 2023/2024": {
+      "entrants": [
+        "Shams Azar Qazvin",
+        "Esteghlal Khuzestan"
+      ],
+      "n_teams": 2,
+      "team_matches": 60,
+      "gf_gap": 0.01,
+      "ga_gap": 0.194
+    },
+    "2023/2024 -> 2024/2025": {
+      "entrants": [
+        "Chadormalu Ardakan SC",
+        "Kheybar Khorramabad"
+      ],
+      "n_teams": 2,
+      "team_matches": 60,
+      "gf_gap": -0.223,
+      "ga_gap": -0.006
+    },
+    "2024/2025 -> 2025/2026": {
+      "entrants": [
+        "Paykan",
+        "Fajr Sepasi"
+      ],
+      "n_teams": 2,
+      "team_matches": 46,
+      "gf_gap": -0.038,
+      "ga_gap": 0.136
+    },
+    "2025/2026 -> 2026/2027": {
+      "entrants": [
+        "Sanat Naft Abadan",
+        "Nassaji Mazandaran FC",
+        "Mes Shahr Babak"
+      ],
+      "n_teams": 3,
+      "team_matches": 35,
+      "gf_gap": -0.397,
+      "ga_gap": 0.404
+    },
+    "pooled_dev_transitions": {
+      "transitions": [
+        "2022/2023",
+        "2023/2024",
+        "2024/2025"
+      ],
+      "n_teams": 6,
+      "team_matches": 180,
+      "gf_gap": -0.16,
+      "ga_gap": 0.157
+    }
+  }
+}

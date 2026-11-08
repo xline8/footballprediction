@@ -1,0 +1,34 @@
+# Türkiye Süper Lig — phase 1, frozen before fitting
+league: TR-SuperLig
+country: Türkiye
+fotmob_id: 71
+tier: 1
+warehouse: data_enrichment/fotmob_world/Turkiye/Süper Lig
+data:
+  matches: league/TR-SuperLig/data/tr_matches.csv
+  team_matches: league/TR-SuperLig/data/tr_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"        # complete, n=306; read once per candidate
+virgin_confirmatory: "2026/2027"   # partial, reserved; not read
+halves_constants:                  # complete-splits DEV era only: 2023/2024 + 2024/2025
+  goals_1h_share: 0.4403
+  sot_1h_share: 0.4435
+  corners_1h_share: 0.4801
+  total_shots_1h_share: 0.4544
+  yellow_cards_1h_share: 0.3428
+markets:
+  goals: G-TR
+  sot: S-TR
+  corners: C-TR
+  cards: K-TR
+  total_shots: T-TR
+notes:
+  - FORMAT: all seasons are single-tier double round-robin regular seasons; no split or playoffs. Team counts are 20/19/20/19/18, with 2026/2027 partial at 18.
+  - Awarded rows are excluded by header.status.awarded, not by team name; the current warehouse also has one awarded row in 2023/2024 and one in 2024/2025, which is flagged against the coordinator's verified summary.
+  - Team identity is by FotMob team_id; four ids carry spelling variants.
+  - xG and xG split stats begin in 2022/2023; 2021/2022 uses goals-only X1 fallback and no X3/X4.
+  - Halves constants use complete-splits DEV seasons 2023/2024 + 2024/2025 only.
+  - Cards target is stats-feed yellow_cards with a frozen broken-stats event fallback (stats 0-0 contradicted by events -> events; 47 rows, 43 in 2021/2022); the dev-only agreement check (exact 84.9%, stats lower 14.4%, mean -0.241) and event audit columns are in eda_numbers.json.
+  - xGOT is near-universal from 2024/2025; X6 is era-guarded and its reliability is recorded before adoption.
+  - No model fitting or virgin reads occur in phase 1.

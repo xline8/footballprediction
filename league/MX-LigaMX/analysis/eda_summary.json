@@ -1,0 +1,766 @@
+{
+  "seasons": {
+    "2021/2022 - Apertura": {
+      "n_matches": 153,
+      "goals_per_match": 2.1699346405228757,
+      "home_goals": 1.2156862745098038,
+      "away_goals": 0.954248366013072,
+      "home_draw_away_pct": [
+        38.56209150326798,
+        35.294117647058826,
+        26.143790849673206
+      ],
+      "btts_pct": 45.09803921568628,
+      "over2_5_pct": 38.56209150326798,
+      "total_shots": 24.65359477124183,
+      "sot": 7.568627450980392,
+      "corners": 8.973856209150327,
+      "yellows": 4.065359477124183,
+      "team_xg": 2.2788888888888885,
+      "dispersion_var_mean": {
+        "goals": 0.9022273303741282,
+        "SOT": 0.8549222797927462,
+        "corners": 1.0043029094951508,
+        "cards": 1.0799627686579796,
+        "shots": 1.4038308589607633
+      }
+    },
+    "2021/2022 - Clausura": {
+      "n_matches": 153,
+      "goals_per_match": 2.5294117647058822,
+      "home_goals": 1.3202614379084967,
+      "away_goals": 1.2091503267973855,
+      "home_draw_away_pct": [
+        39.869281045751634,
+        24.836601307189543,
+        35.294117647058826
+      ],
+      "btts_pct": 52.28758169934641,
+      "over2_5_pct": 48.36601307189542,
+      "total_shots": 25.84313725490196,
+      "sot": 8.509803921568627,
+      "corners": 9.4640522875817,
+      "yellows": 4.764705882352941,
+      "team_xg": 2.425686274509804,
+      "dispersion_var_mean": {
+        "goals": 0.8638310893512853,
+        "SOT": 1.0361387339316033,
+        "corners": 1.167890375109043,
+        "cards": 1.0294022092267707,
+        "shots": 1.3604943694593084
+      }
+    },
+    "2022/2023 - Apertura": {
+      "n_matches": 153,
+      "goals_per_match": 2.7450980392156863,
+      "home_goals": 1.522875816993464,
+      "away_goals": 1.2222222222222223,
+      "home_draw_away_pct": [
+        43.13725490196079,
+        31.372549019607842,
+        25.49019607843137
+      ],
+      "btts_pct": 58.82352941176471,
+      "over2_5_pct": 52.28758169934641,
+      "total_shots": 27.477124183006534,
+      "sot": 9.163398692810457,
+      "corners": 9.718954248366012,
+      "yellows": 4.758169934640523,
+      "team_xg": 2.4745098039215687,
+      "dispersion_var_mean": {
+        "goals": 1.0666353383458647,
+        "SOT": 1.22549553269765,
+        "corners": 1.0769210349343434,
+        "cards": 1.0149472238288029,
+        "shots": 1.2570672041664581
+      }
+    },
+    "2022/2023 - Clausura": {
+      "n_matches": 153,
+      "goals_per_match": 2.823529411764706,
+      "home_goals": 1.5555555555555556,
+      "away_goals": 1.2679738562091503,
+      "home_draw_away_pct": [
+        41.830065359477125,
+        26.143790849673206,
+        32.02614379084967
+      ],
+      "btts_pct": 58.16993464052288,
+      "over2_5_pct": 56.209150326797385,
+      "total_shots": 28.464052287581698,
+      "sot": 9.5359477124183,
+      "corners": 10.117647058823529,
+      "yellows": 4.437908496732026,
+      "team_xg": 2.7581045751633986,
+      "dispersion_var_mean": {
+        "goals": 0.9605263157894737,
+        "SOT": 1.3467407380686125,
+        "corners": 1.005201958384333,
+        "cards": 1.1083636927369969,
+        "shots": 1.1394918121940902
+      }
+    },
+    "2023/2024 - Apertura": {
+      "n_matches": 153,
+      "goals_per_match": 2.849673202614379,
+      "home_goals": 1.65359477124183,
+      "away_goals": 1.196078431372549,
+      "home_draw_away_pct": [
+        47.05882352941176,
+        23.52941176470588,
+        29.411764705882355
+      ],
+      "btts_pct": 56.209150326797385,
+      "over2_5_pct": 54.90196078431373,
+      "total_shots": 27.424836601307188,
+      "sot": 9.568627450980392,
+      "corners": 10.137254901960784,
+      "yellows": 5.045751633986928,
+      "team_xg": 2.7282352941176473,
+      "dispersion_var_mean": {
+        "goals": 0.8854719942056978,
+        "SOT": 1.119014236410699,
+        "corners": 0.9774508805863789,
+        "cards": 0.9735649031906192,
+        "shots": 1.3197280618132559
+      }
+    },
+    "2023/2024 - Clausura": {
+      "n_matches": 153,
+      "goals_per_match": 2.9869281045751634,
+      "home_goals": 1.6470588235294117,
+      "away_goals": 1.3398692810457515,
+      "home_draw_away_pct": [
+        45.751633986928105,
+        24.836601307189543,
+        29.411764705882355
+      ],
+      "btts_pct": 58.82352941176471,
+      "over2_5_pct": 57.51633986928104,
+      "total_shots": 27.241830065359476,
+      "sot": 8.96078431372549,
+      "corners": 10.091503267973856,
+      "yellows": 4.470588235294118,
+      "team_xg": 2.704313725490196,
+      "dispersion_var_mean": {
+        "goals": 0.9294310722100659,
+        "SOT": 0.857364966025567,
+        "corners": 0.988793632397055,
+        "cards": 1.0214681440443216,
+        "shots": 1.1360364683301345
+      }
+    },
+    "2024/2025 - Apertura": {
+      "n_matches": 153,
+      "goals_per_match": 2.633986928104575,
+      "home_goals": 1.588235294117647,
+      "away_goals": 1.0457516339869282,
+      "home_draw_away_pct": [
+        48.36601307189542,
+        26.143790849673206,
+        25.49019607843137
+      ],
+      "btts_pct": 49.01960784313725,
+      "over2_5_pct": 50.98039215686274,
+      "total_shots": 26.80392156862745,
+      "sot": 9.026143790849673,
+      "corners": 10.104575163398692,
+      "yellows": 4.1568627450980395,
+      "team_xg": 2.6024836601307193,
+      "dispersion_var_mean": {
+        "goals": 0.9678725349353532,
+        "SOT": 1.0830347955333666,
+        "corners": 1.110965479675904,
+        "cards": 1.0417701092353524,
+        "shots": 1.0765602741308282
+      }
+    },
+    "2024/2025 - Clausura": {
+      "n_matches": 153,
+      "goals_per_match": 2.8562091503267975,
+      "home_goals": 1.5555555555555556,
+      "away_goals": 1.3006535947712419,
+      "home_draw_away_pct": [
+        48.36601307189542,
+        20.26143790849673,
+        31.372549019607842
+      ],
+      "btts_pct": 61.43790849673203,
+      "over2_5_pct": 58.16993464052288,
+      "total_shots": 25.784313725490197,
+      "sot": 8.908496732026144,
+      "corners": 10.117647058823529,
+      "yellows": 4.339869281045751,
+      "team_xg": 2.495686274509804,
+      "dispersion_var_mean": {
+        "goals": 0.9094604359869926,
+        "SOT": 1.1717959609221145,
+        "corners": 1.1274479804161563,
+        "cards": 1.0404248573240331,
+        "shots": 1.3170702421452871
+      }
+    },
+    "2025/2026 - Apertura": {
+      "n_matches": 153,
+      "goals_per_match": 3.104575163398693,
+      "home_goals": 1.7843137254901962,
+      "away_goals": 1.3202614379084967,
+      "home_draw_away_pct": [
+        47.05882352941176,
+        24.836601307189543,
+        28.104575163398692
+      ],
+      "btts_pct": 58.16993464052288,
+      "over2_5_pct": 55.55555555555556,
+      "total_shots": 26.124183006535947,
+      "sot": 9.0,
+      "corners": 9.411764705882353,
+      "yellows": 4.712418300653595,
+      "team_xg": 2.7599346405228755,
+      "dispersion_var_mean": {
+        "goals": 1.1026315789473684,
+        "SOT": 1.2412280701754386,
+        "corners": 1.0842105263157893,
+        "cards": 0.8646616541353382,
+        "shots": 1.2804833888574325
+      }
+    },
+    "2025/2026 - Clausura": {
+      "n_matches": 153,
+      "goals_per_match": 2.738562091503268,
+      "home_goals": 1.588235294117647,
+      "away_goals": 1.1503267973856208,
+      "home_draw_away_pct": [
+        45.09803921568628,
+        25.49019607843137,
+        29.411764705882355
+      ],
+      "btts_pct": 60.130718954248366,
+      "over2_5_pct": 55.55555555555556,
+      "total_shots": 27.431372549019606,
+      "sot": 9.130718954248366,
+      "corners": 9.379084967320262,
+      "yellows": 4.281045751633987,
+      "team_xg": 2.6613725490196076,
+      "dispersion_var_mean": {
+        "goals": 0.931007411129255,
+        "SOT": 1.0558527672079268,
+        "corners": 1.062002567394095,
+        "cards": 1.0279630373644035,
+        "shots": 1.4998024905007334
+      }
+    }
+  },
+  "pooled": {
+    "n_matches": 1530,
+    "goals_per_match": 2.7437908496732026,
+    "home_goals": 1.5431372549019609,
+    "away_goals": 1.2006535947712418,
+    "home_draw_away_pct": [
+      44.509803921568626,
+      26.27450980392157,
+      29.215686274509807
+    ],
+    "btts_pct": 55.81699346405229,
+    "over2_5_pct": 52.81045751633987,
+    "total_shots": 26.72483660130719,
+    "sot": 8.937254901960785,
+    "corners": 9.751633986928105,
+    "yellows": 4.503267973856209,
+    "team_xg": 2.588921568627451,
+    "dispersion_var_mean": {
+      "goals": 0.9714701104982875,
+      "SOT": 1.1313505659631218,
+      "corners": 1.0703792802949939,
+      "cards": 1.0312231544754962,
+      "shots": 1.311360074662407
+    }
+  },
+  "home_advantage_goals": 0.34248366013071896,
+  "reliability": {
+    "goals_for": {
+      "r": 0.7728222861940268,
+      "n_splits": 60,
+      "odd_even_r": null
+    },
+    "goals_against": {
+      "r": 0.7898067008678401,
+      "n_splits": 60,
+      "odd_even_r": null
+    },
+    "shots_for": {
+      "r": 0.8452953045744973,
+      "n_splits": 60,
+      "odd_even_r": null
+    },
+    "shots_against": {
+      "r": 0.8902743421801703,
+      "n_splits": 60,
+      "odd_even_r": null
+    },
+    "SOT_for": {
+      "r": 0.8479631275802846,
+      "n_splits": 60,
+      "odd_even_r": null
+    },
+    "SOT_against": {
+      "r": 0.7973578009332222,
+      "n_splits": 60,
+      "odd_even_r": null
+    },
+    "corners_for": {
+      "r": 0.669836718235378,
+      "n_splits": 60,
+      "odd_even_r": null
+    },
+    "corners_against": {
+      "r": 0.7175549723258654,
+      "n_splits": 60,
+      "odd_even_r": null
+    },
+    "yellows_for": {
+      "r": 0.5280440027459176,
+      "n_splits": 60,
+      "odd_even_r": null
+    },
+    "yellows_against": {
+      "r": 0.5350762026003114,
+      "n_splits": 60,
+      "odd_even_r": null
+    },
+    "xG_for": {
+      "r": 0.8106117812030053,
+      "n_splits": 60,
+      "odd_even_r": null
+    },
+    "xG_against": {
+      "r": 0.8807737692082637,
+      "n_splits": 60,
+      "odd_even_r": null
+    },
+    "big_chance_for": {
+      "r": 0.72625161471078,
+      "n_splits": 60,
+      "odd_even_r": null
+    },
+    "big_chance_against": {
+      "r": 0.7819846202794941,
+      "n_splits": 60,
+      "odd_even_r": null
+    },
+    "possession_for": {
+      "r": 0.926605836866785,
+      "n_splits": 60,
+      "odd_even_r": null
+    },
+    "possession_against": {
+      "r": 0.926605836866785,
+      "n_splits": 60,
+      "odd_even_r": null
+    },
+    "box_touches_for": {
+      "r": 0.8632365751483219,
+      "n_splits": 60,
+      "odd_even_r": null
+    },
+    "box_touches_against": {
+      "r": 0.8899822997182578,
+      "n_splits": 60,
+      "odd_even_r": null
+    },
+    "ratio_traits": {
+      "set_play_xg_share": {
+        "r": 0.5582312987464221,
+        "n_splits": 60,
+        "method": "ratio_of_sums"
+      },
+      "xg_per_shot": {
+        "r": 0.6260952185309843,
+        "n_splits": 60,
+        "method": "ratio_of_sums"
+      },
+      "on_target_rate": {
+        "r": 0.5776120264214339,
+        "n_splits": 60,
+        "method": "ratio_of_sums"
+      },
+      "xgot_per_shot_attacking": {
+        "r": 0.0845267347612447,
+        "n_splits": 60,
+        "method": "ratio_of_sums"
+      },
+      "finishing_goals_minus_xg": {
+        "r": 0.17127555610018463,
+        "n_splits": 60,
+        "odd_even_r": null
+      },
+      "xgot_per_shot_restricted_2025": {
+        "r": 0.0728853304652552,
+        "n_splits": 60,
+        "method": "ratio_of_sums"
+      }
+    }
+  },
+  "halves": {
+    "goals": {
+      "n_matches": 1419,
+      "share_1h": 0.4561696045736065,
+      "observed_variance": 0.11378936798643531,
+      "noise_floor_permatch": 0.11275487904505839,
+      "true_variance": 0.001034488941376921
+    },
+    "SOT": {
+      "n_matches": 1020,
+      "share_1h": 0.4551405881090363,
+      "observed_variance": 0.03323506339371623,
+      "noise_floor_permatch": 0.03184348398662568,
+      "true_variance": 0.0013915794070905457
+    },
+    "corners": {
+      "n_matches": 1021,
+      "share_1h": 0.46522257551669316,
+      "observed_variance": 0.02985088004818445,
+      "noise_floor_permatch": 0.02840845714354488,
+      "true_variance": 0.0014424229046395703
+    },
+    "total_shots": {
+      "n_matches": 1021,
+      "share_1h": 0.45755610609151853,
+      "observed_variance": 0.010115034643736408,
+      "noise_floor_permatch": 0.009718934022691961,
+      "true_variance": 0.0003961006210444467
+    },
+    "yellows": {
+      "n_matches": 1497,
+      "share_1h": 0.38461538461538464,
+      "observed_variance": 0.0750428792441421,
+      "noise_floor_permatch": 0.06791662971478223,
+      "true_variance": 0.0071262495293598765
+    }
+  },
+  "referees": {
+    "coverage_pct": 76.14379084967321,
+    "coverage_by_season": {
+      "2021/2022 - Apertura": 0.0,
+      "2021/2022 - Clausura": 96.73202614379085,
+      "2022/2023 - Apertura": 95.42483660130719,
+      "2022/2023 - Clausura": 95.42483660130719,
+      "2023/2024 - Apertura": 100.0,
+      "2023/2024 - Clausura": 96.07843137254902,
+      "2024/2025 - Apertura": 97.38562091503267,
+      "2024/2025 - Clausura": 97.38562091503267,
+      "2025/2026 - Apertura": 24.836601307189543,
+      "2025/2026 - Clausura": 58.169934640522875
+    },
+    "eligible_referees": 19,
+    "card_rate_split_half": {
+      "r": 0.33142634961048384,
+      "n_splits": 60,
+      "odd_even_r": null
+    }
+  },
+  "team_stability": {
+    "teams_overall": [
+      "Atlas",
+      "Atl\u00e9tico de San Luis",
+      "CF Am\u00e9rica",
+      "Chivas",
+      "Cruz Azul",
+      "FC Ju\u00e1rez",
+      "Le\u00f3n",
+      "Mazatlan FC",
+      "Monterrey",
+      "Necaxa",
+      "Pachuca",
+      "Puebla",
+      "Pumas",
+      "Quer\u00e9taro FC",
+      "Santos Laguna",
+      "Tigres",
+      "Tijuana",
+      "Toluca"
+    ],
+    "n_teams_overall": 18,
+    "by_season": {
+      "2021/2022 - Apertura": 18,
+      "2021/2022 - Clausura": 18,
+      "2022/2023 - Apertura": 18,
+      "2022/2023 - Clausura": 18,
+      "2023/2024 - Apertura": 18,
+      "2023/2024 - Clausura": 18,
+      "2024/2025 - Apertura": 18,
+      "2024/2025 - Clausura": 18,
+      "2025/2026 - Apertura": 18,
+      "2025/2026 - Clausura": 18
+    },
+    "transitions": {
+      "2021/2022 - Apertura -> 2021/2022 - Clausura": {
+        "new": [],
+        "departed": []
+      },
+      "2021/2022 - Clausura -> 2022/2023 - Apertura": {
+        "new": [],
+        "departed": []
+      },
+      "2022/2023 - Apertura -> 2022/2023 - Clausura": {
+        "new": [],
+        "departed": []
+      },
+      "2022/2023 - Clausura -> 2023/2024 - Apertura": {
+        "new": [],
+        "departed": []
+      },
+      "2023/2024 - Apertura -> 2023/2024 - Clausura": {
+        "new": [],
+        "departed": []
+      },
+      "2023/2024 - Clausura -> 2024/2025 - Apertura": {
+        "new": [],
+        "departed": []
+      },
+      "2024/2025 - Apertura -> 2024/2025 - Clausura": {
+        "new": [],
+        "departed": []
+      },
+      "2024/2025 - Clausura -> 2025/2026 - Apertura": {
+        "new": [],
+        "departed": []
+      },
+      "2025/2026 - Apertura -> 2025/2026 - Clausura": {
+        "new": [],
+        "departed": []
+      }
+    }
+  },
+  "xg_calibration_goals_over_xg": {
+    "2021/2022 - Apertura": 0.9521897496199846,
+    "2021/2022 - Clausura": 1.042761296580713,
+    "2022/2023 - Apertura": 1.109350237717908,
+    "2022/2023 - Clausura": 1.023720941254532,
+    "2023/2024 - Apertura": 1.0445115231661157,
+    "2023/2024 - Clausura": 1.1045050270688321,
+    "2024/2025 - Apertura": 1.0121050781053793,
+    "2024/2025 - Clausura": 1.1444584119002725,
+    "2025/2026 - Apertura": 1.124872711772089,
+    "2025/2026 - Clausura": 1.029003659225423
+  },
+  "line_tables": {
+    "dev": {
+      "sot": {
+        "n": 1377,
+        "mean": 8.915758896151052,
+        "median": 9.0,
+        "over": {
+          "6.5": 75.96223674655047,
+          "7.5": 65.28685548293392,
+          "8.5": 51.19825708061002,
+          "9.5": 39.433551198257085
+        }
+      },
+      "corners": {
+        "n": 1377,
+        "mean": 9.793028322440087,
+        "median": 10.0,
+        "over": {
+          "7.5": 75.59912854030502,
+          "8.5": 62.96296296296296,
+          "9.5": 50.76252723311547,
+          "10.5": 37.54538852578068
+        }
+      },
+      "cards": {
+        "n": 1377,
+        "mean": 4.527959331880901,
+        "median": 4.0,
+        "over": {
+          "3.5": 67.10239651416123,
+          "4.5": 47.49455337690632,
+          "5.5": 31.29992737835875,
+          "6.5": 18.445896877269426
+        }
+      },
+      "shots": {
+        "n": 1377,
+        "mean": 26.64633260711692,
+        "median": 26.0,
+        "over": {
+          "22.5": 75.81699346405229,
+          "23.5": 70.079883805374,
+          "24.5": 62.745098039215684,
+          "25.5": 54.82933914306464,
+          "26.5": 47.85766158315178
+        }
+      },
+      "goals": {
+        "n": 1377,
+        "mean": 2.7443718228031955,
+        "median": 3.0,
+        "over": {
+          "1.5": 76.6158315177923,
+          "2.5": 52.505446623093675,
+          "3.5": 29.484386347131448
+        }
+      }
+    },
+    "virgin": {
+      "sot": {
+        "n": 153,
+        "mean": 9.130718954248366,
+        "median": 9.0,
+        "over": {
+          "6.5": 82.35294117647058,
+          "7.5": 67.97385620915033,
+          "8.5": 55.55555555555556,
+          "9.5": 41.17647058823529
+        }
+      },
+      "corners": {
+        "n": 153,
+        "mean": 9.379084967320262,
+        "median": 9.0,
+        "over": {
+          "7.5": 70.58823529411765,
+          "8.5": 62.745098039215684,
+          "9.5": 45.751633986928105,
+          "10.5": 33.98692810457516
+        }
+      },
+      "cards": {
+        "n": 153,
+        "mean": 4.281045751633987,
+        "median": 4.0,
+        "over": {
+          "3.5": 63.39869281045751,
+          "4.5": 42.48366013071895,
+          "5.5": 26.797385620915033,
+          "6.5": 14.37908496732026
+        }
+      },
+      "shots": {
+        "n": 153,
+        "mean": 27.431372549019606,
+        "median": 28.0,
+        "over": {
+          "22.5": 75.81699346405229,
+          "23.5": 69.93464052287581,
+          "24.5": 63.39869281045751,
+          "25.5": 60.78431372549019,
+          "26.5": 56.209150326797385
+        }
+      },
+      "goals": {
+        "n": 153,
+        "mean": 2.738562091503268,
+        "median": 3.0,
+        "over": {
+          "1.5": 77.77777777777779,
+          "2.5": 55.55555555555556,
+          "3.5": 28.104575163398692
+        }
+      }
+    }
+  },
+  "cards_agreement": {
+    "2021/2022 - Apertura": {
+      "stats_total": 608.0,
+      "events_total": 622.0,
+      "per_match_agreement_count": 135,
+      "n_matches": 153
+    },
+    "2021/2022 - Clausura": {
+      "stats_total": 708.0,
+      "events_total": 729.0,
+      "per_match_agreement_count": 133,
+      "n_matches": 153
+    },
+    "2022/2023 - Apertura": {
+      "stats_total": 708.0,
+      "events_total": 728.0,
+      "per_match_agreement_count": 135,
+      "n_matches": 153
+    },
+    "2022/2023 - Clausura": {
+      "stats_total": 658.0,
+      "events_total": 679.0,
+      "per_match_agreement_count": 133,
+      "n_matches": 153
+    },
+    "2023/2024 - Apertura": {
+      "stats_total": 750.0,
+      "events_total": 772.0,
+      "per_match_agreement_count": 120,
+      "n_matches": 153
+    },
+    "2023/2024 - Clausura": {
+      "stats_total": 671.0,
+      "events_total": 684.0,
+      "per_match_agreement_count": 135,
+      "n_matches": 153
+    },
+    "2024/2025 - Apertura": {
+      "stats_total": 614.0,
+      "events_total": 636.0,
+      "per_match_agreement_count": 130,
+      "n_matches": 153
+    },
+    "2024/2025 - Clausura": {
+      "stats_total": 660.0,
+      "events_total": 664.0,
+      "per_match_agreement_count": 131,
+      "n_matches": 153
+    },
+    "2025/2026 - Apertura": {
+      "stats_total": 713.0,
+      "events_total": 721.0,
+      "per_match_agreement_count": 122,
+      "n_matches": 153
+    }
+  },
+  "altitude": {
+    "mapping": {
+      "Ciudad de M\u00e9xico (D.F.)": 2240,
+      "Ciudad de M\u00e9xico": 2240,
+      "Toluca de Lerdo": 2600,
+      "Pachuca de Soto": 2432,
+      "Puebla": 2135,
+      "Morelia": 1920,
+      "Aguascalientes": 1888,
+      "San Luis Potos\u00ed": 1860,
+      "Santiago de Quer\u00e9taro": 1820,
+      "Le\u00f3n de los Aldamas": 1815,
+      "Zapopan": 1566,
+      "Guadalajara": 1566,
+      "Ciudad Ju\u00e1rez": 1140,
+      "Torre\u00f3n": 1120,
+      "San Nicol\u00e1s de los Garza": 512,
+      "Guadalupe": 512,
+      "Monterrey": 512,
+      "Tijuana": 31,
+      "Mazatl\u00e1n": 10
+    },
+    "known_matches": 1530,
+    "unknown_matches": 0,
+    "pooled_high_altitude": {
+      "n": 510,
+      "home_goal_edge": 0.5862745098039216,
+      "home_win_rate": 50.588235294117645
+    },
+    "pooled_rest": {
+      "n": 1020,
+      "home_goal_edge": 0.22058823529411764,
+      "home_win_rate": 41.47058823529412
+    },
+    "away_under_1000_high_home": {
+      "n": 120,
+      "home_goal_edge": 0.875,
+      "home_win_rate": 56.666666666666664
+    },
+    "away_under_1000_rest_home": {
+      "n": 220,
+      "home_goal_edge": 0.07727272727272727,
+      "home_win_rate": 40.45454545454545
+    },
+    "verdict": "DESCRIPTIVE / NOT ADOPTED: static home altitude is collinear with stable team identity and absorbed by team/venue ratings."
+  },
+  "xgot_era_guard": "2025-01-01+"
+}

@@ -1,0 +1,52 @@
+{
+  "levels": {
+    "2021/2022": {
+      "n": 198,
+      "mean_goals": 2.278
+    },
+    "2022/2023": {
+      "n": 198,
+      "mean_goals": 2.47
+    },
+    "2023/2024": {
+      "n": 198,
+      "mean_goals": 2.783
+    },
+    "2024/2025": {
+      "n": 198,
+      "mean_goals": 2.667
+    },
+    "2025/2026": {
+      "n": 180,
+      "mean_goals": 2.161
+    },
+    "2026/2027": {
+      "n": 64,
+      "mean_goals": 2.578
+    }
+  },
+  "pooled": {
+    "n": 1036,
+    "mean_goals": 2.484,
+    "home_win": 0.488,
+    "draw": 0.244,
+    "away_win": 0.267,
+    "over25": 0.44,
+    "btts": 0.436
+  },
+  "goals_1h_share_pooled": 0.4493,
+  "goals_1h_share_n": 961,
+  "split_half_GF_mean_complete": 0.593,
+  "split_half_GA_mean_complete": 0.621,
+  "team_1h_share_split_half_mean": 0.02,
+  "cards_total": 205,
+  "cards_yellow": 0,
+  "cards_yellowred": 77,
+  "cards_red": 128,
+  "awarded_match_ids": [
+    "3638998",
+    "3844149",
+    "4575363",
+    "4757570"
+  ]
+}

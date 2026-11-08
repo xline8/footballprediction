@@ -1,0 +1,950 @@
+{
+  "n": 969,
+  "seasons": [
+    "2021/2022",
+    "2022/2023",
+    "2023/2024",
+    "2024/2025",
+    "2025/2026",
+    "2026/2027"
+  ],
+  "dev_seasons": [
+    "2022/2023",
+    "2023/2024",
+    "2024/2025"
+  ],
+  "per_season": {
+    "2021/2022": {
+      "n": 180,
+      "goals_per_match": 2.4,
+      "home_goal_share": 0.5208,
+      "sot_per_match": 7.144,
+      "corners_per_match": 9.939,
+      "total_shots_per_match": 15.739,
+      "event_yellows_per_match": 3.211,
+      "red_events_per_match": 0.122,
+      "stats_all_n": 180,
+      "referee_n": 84
+    },
+    "2022/2023": {
+      "n": 180,
+      "goals_per_match": 2.8,
+      "home_goal_share": 0.5536,
+      "sot_per_match": 8.046,
+      "corners_per_match": 10.272,
+      "total_shots_per_match": 15.243,
+      "event_yellows_per_match": 3.783,
+      "red_events_per_match": 0.172,
+      "stats_all_n": 173,
+      "referee_n": 180
+    },
+    "2023/2024": {
+      "n": 180,
+      "goals_per_match": 2.794,
+      "home_goal_share": 0.5129,
+      "sot_per_match": 7.86,
+      "corners_per_match": 10.145,
+      "total_shots_per_match": 14.953,
+      "event_yellows_per_match": 3.656,
+      "red_events_per_match": 0.144,
+      "stats_all_n": 172,
+      "referee_n": 180
+    },
+    "2024/2025": {
+      "n": 180,
+      "goals_per_match": 2.511,
+      "home_goal_share": 0.5686,
+      "sot_per_match": 7.098,
+      "corners_per_match": 8.707,
+      "total_shots_per_match": 14.122,
+      "event_yellows_per_match": 4.261,
+      "red_events_per_match": 0.15,
+      "stats_all_n": 82,
+      "referee_n": 180
+    },
+    "2025/2026": {
+      "n": 180,
+      "goals_per_match": 2.433,
+      "home_goal_share": 0.5502,
+      "sot_per_match": 7.051,
+      "corners_per_match": 9.537,
+      "total_shots_per_match": 13.345,
+      "event_yellows_per_match": 4.339,
+      "red_events_per_match": 0.183,
+      "stats_all_n": 177,
+      "referee_n": 180
+    },
+    "2026/2027": {
+      "n": 69,
+      "goals_per_match": 2.246,
+      "home_goal_share": 0.5548,
+      "sot_per_match": 6.0,
+      "corners_per_match": 9.931,
+      "total_shots_per_match": 11.586,
+      "event_yellows_per_match": 3.739,
+      "red_events_per_match": 0.13,
+      "stats_all_n": 29,
+      "referee_n": 69
+    }
+  },
+  "primary_lines": {
+    "over_rates": {
+      "goals_ou_2.5": {
+        "n": 540,
+        "over_rate": 0.516667,
+        "distance_from_0.5": 0.016667
+      },
+      "sot_7.5": {
+        "n": 427,
+        "over_rate": 0.515222,
+        "distance_from_0.5": 0.015222
+      },
+      "sot_8.5": {
+        "n": 427,
+        "over_rate": 0.409836,
+        "distance_from_0.5": 0.090164
+      },
+      "sot_9.5": {
+        "n": 427,
+        "over_rate": 0.288056,
+        "distance_from_0.5": 0.211944
+      },
+      "corners_8.5": {
+        "n": 427,
+        "over_rate": 0.63466,
+        "distance_from_0.5": 0.13466
+      },
+      "corners_9.5": {
+        "n": 427,
+        "over_rate": 0.538642,
+        "distance_from_0.5": 0.038642
+      },
+      "corners_10.5": {
+        "n": 427,
+        "over_rate": 0.42623,
+        "distance_from_0.5": 0.07377
+      },
+      "event_yellows_3.5": {
+        "n": 540,
+        "over_rate": 0.540741,
+        "distance_from_0.5": 0.040741
+      },
+      "event_yellows_4.5": {
+        "n": 540,
+        "over_rate": 0.346296,
+        "distance_from_0.5": 0.153704
+      },
+      "event_yellows_5.5": {
+        "n": 540,
+        "over_rate": 0.209259,
+        "distance_from_0.5": 0.290741
+      },
+      "total_shots_13.5": {
+        "n": 427,
+        "over_rate": 0.625293,
+        "distance_from_0.5": 0.125293
+      },
+      "total_shots_14.5": {
+        "n": 427,
+        "over_rate": 0.557377,
+        "distance_from_0.5": 0.057377
+      },
+      "total_shots_15.5": {
+        "n": 427,
+        "over_rate": 0.47541,
+        "distance_from_0.5": 0.02459
+      },
+      "total_shots_16.5": {
+        "n": 427,
+        "over_rate": 0.395785,
+        "distance_from_0.5": 0.104215
+      }
+    },
+    "chosen": {
+      "goals": "goals_ou_2.5",
+      "sot": "sot_7.5",
+      "corners": "corners_9.5",
+      "event_yellows": "event_yellows_3.5",
+      "total_shots": "total_shots_15.5"
+    }
+  },
+  "reliability": {
+    "goals": {
+      "2021/2022": {
+        "for": {
+          "r": 0.0697,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.3319,
+          "n_teams": 10
+        }
+      },
+      "2022/2023": {
+        "for": {
+          "r": 0.4531,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.0405,
+          "n_teams": 10
+        }
+      },
+      "2023/2024": {
+        "for": {
+          "r": 0.3191,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.5029,
+          "n_teams": 10
+        }
+      },
+      "2024/2025": {
+        "for": {
+          "r": 0.4008,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.4081,
+          "n_teams": 10
+        }
+      },
+      "2025/2026": {
+        "for": {
+          "r": 0.7382,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.0456,
+          "n_teams": 10
+        }
+      },
+      "2026/2027": {
+        "for": {
+          "r": -0.2104,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.4451,
+          "n_teams": 10
+        }
+      },
+      "mean_for_r": 0.2951,
+      "mean_against_r": 0.2957
+    },
+    "sot": {
+      "2021/2022": {
+        "for": {
+          "r": 0.2481,
+          "n_teams": 10
+        },
+        "against": {
+          "r": -0.0799,
+          "n_teams": 10
+        }
+      },
+      "2022/2023": {
+        "for": {
+          "r": 0.2422,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.6401,
+          "n_teams": 10
+        }
+      },
+      "2023/2024": {
+        "for": {
+          "r": 0.6814,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.6037,
+          "n_teams": 10
+        }
+      },
+      "2024/2025": {
+        "for": {
+          "r": -0.438,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.4436,
+          "n_teams": 10
+        }
+      },
+      "2025/2026": {
+        "for": {
+          "r": 0.2491,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.4606,
+          "n_teams": 10
+        }
+      },
+      "2026/2027": {
+        "for": {
+          "r": null,
+          "n_teams": 0
+        },
+        "against": {
+          "r": null,
+          "n_teams": 0
+        }
+      },
+      "mean_for_r": 0.1966,
+      "mean_against_r": 0.4136
+    },
+    "corners": {
+      "2021/2022": {
+        "for": {
+          "r": -0.1345,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.621,
+          "n_teams": 10
+        }
+      },
+      "2022/2023": {
+        "for": {
+          "r": 0.5192,
+          "n_teams": 10
+        },
+        "against": {
+          "r": -0.0672,
+          "n_teams": 10
+        }
+      },
+      "2023/2024": {
+        "for": {
+          "r": 0.4605,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.5979,
+          "n_teams": 10
+        }
+      },
+      "2024/2025": {
+        "for": {
+          "r": 0.1888,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.4068,
+          "n_teams": 10
+        }
+      },
+      "2025/2026": {
+        "for": {
+          "r": 0.57,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.8432,
+          "n_teams": 10
+        }
+      },
+      "2026/2027": {
+        "for": {
+          "r": null,
+          "n_teams": 0
+        },
+        "against": {
+          "r": null,
+          "n_teams": 0
+        }
+      },
+      "mean_for_r": 0.3208,
+      "mean_against_r": 0.4803
+    },
+    "total_shots": {
+      "2021/2022": {
+        "for": {
+          "r": 0.2346,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.4011,
+          "n_teams": 10
+        }
+      },
+      "2022/2023": {
+        "for": {
+          "r": 0.5439,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.6628,
+          "n_teams": 10
+        }
+      },
+      "2023/2024": {
+        "for": {
+          "r": 0.8447,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.3522,
+          "n_teams": 10
+        }
+      },
+      "2024/2025": {
+        "for": {
+          "r": -0.2509,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.6092,
+          "n_teams": 10
+        }
+      },
+      "2025/2026": {
+        "for": {
+          "r": 0.4605,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.5202,
+          "n_teams": 10
+        }
+      },
+      "2026/2027": {
+        "for": {
+          "r": null,
+          "n_teams": 0
+        },
+        "against": {
+          "r": null,
+          "n_teams": 0
+        }
+      },
+      "mean_for_r": 0.3666,
+      "mean_against_r": 0.5091
+    },
+    "event_yellows": {
+      "2021/2022": {
+        "for": {
+          "r": 0.5108,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.1757,
+          "n_teams": 10
+        }
+      },
+      "2022/2023": {
+        "for": {
+          "r": 0.5904,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.3586,
+          "n_teams": 10
+        }
+      },
+      "2023/2024": {
+        "for": {
+          "r": 0.7668,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.6569,
+          "n_teams": 10
+        }
+      },
+      "2024/2025": {
+        "for": {
+          "r": 0.0292,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.0212,
+          "n_teams": 10
+        }
+      },
+      "2025/2026": {
+        "for": {
+          "r": -0.0535,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.3608,
+          "n_teams": 10
+        }
+      },
+      "2026/2027": {
+        "for": {
+          "r": -0.0406,
+          "n_teams": 10
+        },
+        "against": {
+          "r": -0.1897,
+          "n_teams": 10
+        }
+      },
+      "mean_for_r": 0.3005,
+      "mean_against_r": 0.2306
+    },
+    "possession": {
+      "2021/2022": {
+        "for": {
+          "r": 0.5865,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.5865,
+          "n_teams": 10
+        }
+      },
+      "2022/2023": {
+        "for": {
+          "r": 0.4033,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.4033,
+          "n_teams": 10
+        }
+      },
+      "2023/2024": {
+        "for": {
+          "r": 0.7321,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.7321,
+          "n_teams": 10
+        }
+      },
+      "2024/2025": {
+        "for": {
+          "r": 0.6109,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.6109,
+          "n_teams": 10
+        }
+      },
+      "2025/2026": {
+        "for": {
+          "r": 0.8585,
+          "n_teams": 10
+        },
+        "against": {
+          "r": 0.8585,
+          "n_teams": 10
+        }
+      },
+      "2026/2027": {
+        "for": {
+          "r": null,
+          "n_teams": 0
+        },
+        "against": {
+          "r": null,
+          "n_teams": 0
+        }
+      },
+      "mean_for_r": 0.6383,
+      "mean_against_r": 0.6383
+    }
+  },
+  "halves": {
+    "goals": {
+      "pooled": {
+        "share": 0.455314,
+        "n_matches": 875,
+        "observed_variance": 0.11576111,
+        "binomial_noise_expected_variance": 0.11846993,
+        "true_variance_estimate": -0.00270882
+      },
+      "per_season": {
+        "2021/2022": {
+          "share": 0.439815,
+          "n_matches": 162,
+          "observed_variance": 0.11794851,
+          "binomial_noise_expected_variance": 0.1279705,
+          "true_variance_estimate": -0.01002199
+        },
+        "2022/2023": {
+          "share": 0.426587,
+          "n_matches": 166,
+          "observed_variance": 0.11257056,
+          "binomial_noise_expected_variance": 0.11027825,
+          "true_variance_estimate": 0.00229231
+        },
+        "2023/2024": {
+          "share": 0.439364,
+          "n_matches": 163,
+          "observed_variance": 0.09440821,
+          "binomial_noise_expected_variance": 0.10701173,
+          "true_variance_estimate": -0.01260352
+        },
+        "2024/2025": {
+          "share": 0.486726,
+          "n_matches": 165,
+          "observed_variance": 0.12179321,
+          "binomial_noise_expected_variance": 0.12239203,
+          "true_variance_estimate": -0.00059882
+        },
+        "2025/2026": {
+          "share": 0.465753,
+          "n_matches": 156,
+          "observed_variance": 0.11550034,
+          "binomial_noise_expected_variance": 0.11802201,
+          "true_variance_estimate": -0.00252166
+        },
+        "2026/2027": {
+          "share": 0.522581,
+          "n_matches": 63,
+          "observed_variance": 0.14356222,
+          "binomial_noise_expected_variance": 0.13210907,
+          "true_variance_estimate": 0.01145315
+        }
+      }
+    },
+    "event_yellows": {
+      "note": "First-half card counts were recomputed from source JSONs below.",
+      "pooled": {
+        "share": 0.312114,
+        "n_matches": 936,
+        "observed_variance": 0.07979792,
+        "binomial_noise_expected_variance": 0.07350107,
+        "true_variance_estimate": 0.00629686
+      },
+      "per_season": {
+        "2021/2022": {
+          "share": 0.295848,
+          "n_matches": 167,
+          "observed_variance": 0.08676469,
+          "binomial_noise_expected_variance": 0.07889787,
+          "true_variance_estimate": 0.00786682
+        },
+        "2022/2023": {
+          "share": 0.309838,
+          "n_matches": 174,
+          "observed_variance": 0.08224162,
+          "binomial_noise_expected_variance": 0.07394861,
+          "true_variance_estimate": 0.00829301
+        },
+        "2023/2024": {
+          "share": 0.335866,
+          "n_matches": 172,
+          "observed_variance": 0.08554887,
+          "binomial_noise_expected_variance": 0.08264095,
+          "true_variance_estimate": 0.00290792
+        },
+        "2024/2025": {
+          "share": 0.319426,
+          "n_matches": 177,
+          "observed_variance": 0.0770716,
+          "binomial_noise_expected_variance": 0.06783764,
+          "true_variance_estimate": 0.00923396
+        },
+        "2025/2026": {
+          "share": 0.297055,
+          "n_matches": 178,
+          "observed_variance": 0.07051312,
+          "binomial_noise_expected_variance": 0.06343446,
+          "true_variance_estimate": 0.00707866
+        },
+        "2026/2027": {
+          "share": 0.317829,
+          "n_matches": 68,
+          "observed_variance": 0.07033553,
+          "binomial_noise_expected_variance": 0.07647321,
+          "true_variance_estimate": -0.00613768
+        }
+      }
+    }
+  },
+  "referee_strictness": {
+    "split": {
+      "r": 0.3318,
+      "n_referees": 16,
+      "minimum_matches_per_half": 8
+    },
+    "coverage_pct_by_season": {
+      "2021/2022": 46.7,
+      "2022/2023": 100.0,
+      "2023/2024": 100.0,
+      "2024/2025": 100.0,
+      "2025/2026": 100.0,
+      "2026/2027": 100.0
+    }
+  },
+  "cards_stats_vs_events": {
+    "n_rich_matches": 19,
+    "exact_agree_n": 19,
+    "exact_agree_pct": 100.0,
+    "mean_signed_diff_stats_minus_events": 0.0,
+    "mean_absolute_diff": 0.0
+  },
+  "x2_movers": {
+    "by_season": {
+      "2022/2023": {
+        "league_gf_per_match": 1.4,
+        "league_ga_per_match": 1.4,
+        "relegated_from_premiership": {
+          "team_ids": [
+            8284
+          ],
+          "teams": [
+            "Dundee FC"
+          ],
+          "n_team_matches": 36,
+          "gf_per_match": 1.8333,
+          "ga_per_match": 1.1111,
+          "gf_delta_vs_league": 0.4333,
+          "ga_delta_vs_league": -0.2889
+        },
+        "promoted_from_league_one": {
+          "team_ids": [
+            6002,
+            8235
+          ],
+          "teams": [
+            "Cove Rangers",
+            "Queen's Park"
+          ],
+          "n_team_matches": 72,
+          "gf_per_match": 1.4028,
+          "ga_per_match": 1.7639,
+          "gf_delta_vs_league": 0.0028,
+          "ga_delta_vs_league": 0.3639
+        }
+      },
+      "2023/2024": {
+        "league_gf_per_match": 1.3972,
+        "league_ga_per_match": 1.3972,
+        "relegated_from_premiership": {
+          "team_ids": [
+            9938
+          ],
+          "teams": [
+            "Dundee United"
+          ],
+          "n_team_matches": 36,
+          "gf_per_match": 2.0278,
+          "ga_per_match": 0.6389,
+          "gf_delta_vs_league": 0.6306,
+          "ga_delta_vs_league": -0.7583
+        },
+        "promoted_from_league_one": {
+          "team_ids": [
+            8176,
+            8457
+          ],
+          "teams": [
+            "Airdrieonians",
+            "Dunfermline Athletic"
+          ],
+          "n_team_matches": 72,
+          "gf_per_match": 1.2083,
+          "ga_per_match": 1.2778,
+          "gf_delta_vs_league": -0.1889,
+          "ga_delta_vs_league": -0.1194
+        }
+      },
+      "2024/2025": {
+        "league_gf_per_match": 1.2556,
+        "league_ga_per_match": 1.2556,
+        "relegated_from_premiership": {
+          "team_ids": [
+            8282
+          ],
+          "teams": [
+            "Livingston"
+          ],
+          "n_team_matches": 36,
+          "gf_per_match": 1.5278,
+          "ga_per_match": 0.75,
+          "gf_delta_vs_league": 0.2722,
+          "ga_delta_vs_league": -0.5056
+        },
+        "promoted_from_league_one": {
+          "team_ids": [
+            8429,
+            8596
+          ],
+          "teams": [
+            "Hamilton Academical",
+            "Falkirk"
+          ],
+          "n_team_matches": 72,
+          "gf_per_match": 1.5278,
+          "ga_per_match": 1.3472,
+          "gf_delta_vs_league": 0.2722,
+          "ga_delta_vs_league": 0.0917
+        }
+      },
+      "2025/2026": {
+        "league_gf_per_match": 1.2167,
+        "league_ga_per_match": 1.2167,
+        "relegated_from_premiership": {
+          "team_ids": [
+            8467,
+            8649
+          ],
+          "teams": [
+            "St. Johnstone",
+            "Ross County"
+          ],
+          "n_team_matches": 72,
+          "gf_per_match": 1.4306,
+          "ga_per_match": 1.1389,
+          "gf_delta_vs_league": 0.2139,
+          "ga_delta_vs_league": -0.0778
+        },
+        "promoted_from_league_one": {
+          "team_ids": [
+            8280
+          ],
+          "teams": [
+            "Arbroath"
+          ],
+          "n_team_matches": 36,
+          "gf_per_match": 1.1944,
+          "ga_per_match": 1.1389,
+          "gf_delta_vs_league": -0.0222,
+          "ga_delta_vs_league": -0.0778
+        }
+      }
+    },
+    "pooled": {
+      "relegated_from_premiership": {
+        "seasons": 4,
+        "team_season_groups": [
+          {
+            "team_ids": [
+              8284
+            ],
+            "teams": [
+              "Dundee FC"
+            ],
+            "n_team_matches": 36,
+            "gf_per_match": 1.8333,
+            "ga_per_match": 1.1111,
+            "gf_delta_vs_league": 0.4333,
+            "ga_delta_vs_league": -0.2889
+          },
+          {
+            "team_ids": [
+              9938
+            ],
+            "teams": [
+              "Dundee United"
+            ],
+            "n_team_matches": 36,
+            "gf_per_match": 2.0278,
+            "ga_per_match": 0.6389,
+            "gf_delta_vs_league": 0.6306,
+            "ga_delta_vs_league": -0.7583
+          },
+          {
+            "team_ids": [
+              8282
+            ],
+            "teams": [
+              "Livingston"
+            ],
+            "n_team_matches": 36,
+            "gf_per_match": 1.5278,
+            "ga_per_match": 0.75,
+            "gf_delta_vs_league": 0.2722,
+            "ga_delta_vs_league": -0.5056
+          },
+          {
+            "team_ids": [
+              8467,
+              8649
+            ],
+            "teams": [
+              "St. Johnstone",
+              "Ross County"
+            ],
+            "n_team_matches": 72,
+            "gf_per_match": 1.4306,
+            "ga_per_match": 1.1389,
+            "gf_delta_vs_league": 0.2139,
+            "ga_delta_vs_league": -0.0778
+          }
+        ],
+        "mean_gf_delta": 0.3875,
+        "mean_ga_delta": -0.4077
+      },
+      "promoted_from_league_one": {
+        "seasons": 4,
+        "team_season_groups": [
+          {
+            "team_ids": [
+              6002,
+              8235
+            ],
+            "teams": [
+              "Cove Rangers",
+              "Queen's Park"
+            ],
+            "n_team_matches": 72,
+            "gf_per_match": 1.4028,
+            "ga_per_match": 1.7639,
+            "gf_delta_vs_league": 0.0028,
+            "ga_delta_vs_league": 0.3639
+          },
+          {
+            "team_ids": [
+              8176,
+              8457
+            ],
+            "teams": [
+              "Airdrieonians",
+              "Dunfermline Athletic"
+            ],
+            "n_team_matches": 72,
+            "gf_per_match": 1.2083,
+            "ga_per_match": 1.2778,
+            "gf_delta_vs_league": -0.1889,
+            "ga_delta_vs_league": -0.1194
+          },
+          {
+            "team_ids": [
+              8429,
+              8596
+            ],
+            "teams": [
+              "Hamilton Academical",
+              "Falkirk"
+            ],
+            "n_team_matches": 72,
+            "gf_per_match": 1.5278,
+            "ga_per_match": 1.3472,
+            "gf_delta_vs_league": 0.2722,
+            "ga_delta_vs_league": 0.0917
+          },
+          {
+            "team_ids": [
+              8280
+            ],
+            "teams": [
+              "Arbroath"
+            ],
+            "n_team_matches": 36,
+            "gf_per_match": 1.1944,
+            "ga_per_match": 1.1389,
+            "gf_delta_vs_league": -0.0222,
+            "ga_delta_vs_league": -0.0778
+          }
+        ],
+        "mean_gf_delta": 0.016,
+        "mean_ga_delta": 0.0646
+      }
+    }
+  },
+  "no_playoff_rows": true,
+  "phase": "regular"
+}

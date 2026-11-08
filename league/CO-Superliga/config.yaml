@@ -1,0 +1,28 @@
+# CO-Superliga (Colombia Superliga) — league config
+league: CO-Superliga
+country: Colombia
+fotmob_id: 11536
+tier: cup  # NOT a league: annual two-legged Final, champion vs champion
+warehouse: data_enrichment/fotmob_world/Colombia/Superliga
+data:
+  matches: league/CO-Superliga/data/co_superliga_matches.csv  # gitignored; regenerate via data/build_data.py
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+# Format (frozen, from payloads): ONE two-legged Final tie per season
+# (infoBox.legInfo bestOf=2, roundName "Final"); aggregate winner takes the
+# title; level on aggregate -> straight to penalties (2025: 1-1 agg, Pen 3-4,
+# no extra-time halves in any payload). No away-goals decider observed.
+# Phase rule: n/a — a single tie per season, no phases.
+dev_period: []       # NO dev window: 2 matches/season cannot support season-blocked walk-forward
+seed_period: []
+virgin: "2026"       # NOT READ for any candidate: n=2, gate arithmetic meaningless (see prereg)
+excluded: []
+# Feasibility verdict (2026-11-10): 0 PASS / 0 FAIL / 5 NOT BUILDABLE.
+# All five candidates not buildable on thinness — see prereg/PREREG_CO_SUPERLIGA.md
+# and reports/LEAGUE_VERDICT.md. No engine built, no predictions issued.
+halves_constants: {}  # none frozen: 1H shares at n=7 (stats) / n=29 (goals) are noise
+markets:
+  goals: G-COS        # NOT BUILDABLE — 12 matches total, 2/season
+  sot: S-COS          # NOT BUILDABLE — stats in 7/12, shotmap in 4/12
+  corners: C-COS      # NOT BUILDABLE — stats in 7/12
+  cards: K-COS        # NOT BUILDABLE — no referee field; events only, n=12
+  total_shots: T-COS  # NOT BUILDABLE — stats in 7/12, shotmap empty before 2025

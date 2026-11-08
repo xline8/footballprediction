@@ -1,0 +1,10 @@
+{
+  "virgin_read": false,
+  "virgin_season": "2026",
+  "reason": "Gate Zero failed the dev gate (pooled dev 1X2 LL 1.085780 > climatology 1.063502; RPS 0.243000 > 0.236163; OU2.5 LL 0.685037 > base-rate 0.625810); per the frozen rule variants are moot and the virgin window was not read.",
+  "dev_gate": {
+    "gate_zero": false,
+    "shrink": false,
+    "x2": false
+  }
+}

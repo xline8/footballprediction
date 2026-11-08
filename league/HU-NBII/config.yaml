@@ -1,0 +1,21 @@
+# Hungary NB II (FotMob 9117)
+league: HU-NBII
+country: Hungary
+fotmob_id: 9117
+tier: 2
+data:
+  matches: league/HU-NBII/data/hu_nbii_matches.csv  # gitignored; regenerate with data/build_data.py
+seasons: ["2025/2026", "2026/2027"]
+# Frozen format: 16 clubs, one double round-robin, 30 rounds. No split,
+# championship round, playoff, or group phase is represented in this scope.
+dev_period: []  # no gateable window
+seed_period: []  # no fitting or training period under the Phase A verdict
+virgin_primary: none  # not read for evaluation
+halves_constants: none
+markets:
+  goals: NOT BUILDABLE  # 2025/26 incomplete genuine coverage; no season-blocked dev/evaluation window
+  sot: NOT BUILDABLE  # stats and shotmap targets absent in 344/344 payloads
+  corners: NOT BUILDABLE  # stats and shotmap targets absent in 344/344 payloads
+  cards: NOT BUILDABLE  # usable card target absent; only 47 card events in 344 matches
+  total_shots: NOT BUILDABLE  # shotmap shots empty in 344/344 payloads
+# Verdict: 0 PASS / 0 FAIL / 5 NOT BUILDABLE. See prereg and reports.

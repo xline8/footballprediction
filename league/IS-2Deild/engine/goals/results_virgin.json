@@ -1,0 +1,1 @@
+{"reason":"Gate Zero failed the dev gate on all three legs (pooled dev 1X2 LL 1.066661 vs climatology 1.037573; RPS 0.241576 vs 0.236529; OU2.5 LL 0.662205 vs base rate 0.615360); per the frozen rule variants are moot","verdict":"FAIL","virgin_read":false,"virgin_season":"2026"}

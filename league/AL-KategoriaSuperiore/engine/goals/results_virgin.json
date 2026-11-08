@@ -1,0 +1,10 @@
+{
+  "virgin_read": false,
+  "reason": "gate_zero_failed_dev",
+  "shipped_arm": null,
+  "protocol": {
+    "league": "AL-KategoriaSuperiore",
+    "virgin_season": "2026/2027",
+    "n": 55
+  }
+}

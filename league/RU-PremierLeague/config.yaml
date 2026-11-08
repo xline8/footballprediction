@@ -1,0 +1,30 @@
+league: RU-PremierLeague
+country: Russia
+fotmob_id: 63
+tier: 1
+warehouse_root: ~/workspace/footballprediction
+data:
+  matches: league/RU-PremierLeague/data/ru_matches.csv
+  team_matches: league/RU-PremierLeague/data/ru_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.4472
+  sot_1h_share: 0.4612
+  corners_1h_share: 0.4801
+  total_shots_1h_share: 0.4602
+  yellow_cards_1h_share: 0.3519
+markets:
+  goals: G-RU
+  sot: S-RU
+  corners: C-RU
+  cards: K-RU
+  total_shots: T-RU
+notes:
+  - FORMAT: 16 teams, 30 matches per complete season, single regular phase, double round-robin; 2026/2027 is in progress.
+  - xG era: full stats xG, set-play xG and shotmaps begin in the virgin 2025/2026 season (11 stray 2024/2025 rows, one anomalous 2021/2022 payload); touches_opp_box is partial from 2021/2022 (47-71%) and full from 2024/2025.
+  - CARDS: the stats-vs-events artefact is PRESENT (exact agreement 76.5%, mean stats-events -0.55); the target is EVENT-UNIFIED yellows (ev_yellow_home + ev_yellow_away). Primary cards line 4.5.
+  - Calibration convention: actual minus predicted.
+

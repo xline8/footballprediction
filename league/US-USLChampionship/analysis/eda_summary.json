@@ -1,0 +1,773 @@
+{
+ "seasons": {
+  "2021": {
+   "n": 510,
+   "goals": 2.8784313725490196,
+   "home_goals": 1.6509803921568627,
+   "away_goals": 1.227450980392157,
+   "home_adv": 0.4235294117647057,
+   "sot": 8.847058823529412,
+   "corners": 9.27843137254902,
+   "shots": 24.688235294117646,
+   "yellow": 3.2430830039525693,
+   "red": 0.11857707509881422,
+   "over_rates": {
+    "ou2.5": 0.5450980392156862,
+    "sot8.5": 0.5137254901960784,
+    "corners9.5": 0.43529411764705883,
+    "cards4.5": 0.3588235294117647,
+    "shots25.5": 0.42745098039215684
+   }
+  },
+  "2022": {
+   "n": 472,
+   "goals": 2.9364406779661016,
+   "home_goals": 1.6567796610169492,
+   "away_goals": 1.2796610169491525,
+   "home_adv": 0.3771186440677967,
+   "sot": 8.805084745762711,
+   "corners": 9.358050847457626,
+   "shots": 24.697033898305083,
+   "yellow": 4.3326271186440675,
+   "red": 0.2542372881355932,
+   "over_rates": {
+    "ou2.5": 0.5635593220338984,
+    "sot8.5": 0.510593220338983,
+    "corners9.5": 0.4470338983050847,
+    "cards4.5": 0.5084745762711864,
+    "shots25.5": 0.4364406779661017
+   }
+  },
+  "2023": {
+   "n": 423,
+   "goals": 2.75177304964539,
+   "home_goals": 1.49645390070922,
+   "away_goals": 1.2553191489361701,
+   "home_adv": 0.24113475177304977,
+   "sot": 8.122931442080379,
+   "corners": 9.118203309692671,
+   "shots": 23.416075650118202,
+   "yellow": 4.671394799054373,
+   "red": 0.19621749408983452,
+   "over_rates": {
+    "ou2.5": 0.524822695035461,
+    "sot8.5": 0.42789598108747046,
+    "corners9.5": 0.4231678486997636,
+    "cards4.5": 0.5460992907801419,
+    "shots25.5": 0.3404255319148936
+   }
+  },
+  "2024": {
+   "n": 423,
+   "goals": 2.6430260047281324,
+   "home_goals": 1.5106382978723405,
+   "away_goals": 1.132387706855792,
+   "home_adv": 0.37825059101654857,
+   "sot": 8.515366430260046,
+   "corners": 9.444444444444445,
+   "shots": 24.91016548463357,
+   "yellow": 4.914893617021277,
+   "red": 0.20094562647754138,
+   "over_rates": {
+    "ou2.5": 0.4846335697399527,
+    "sot8.5": 0.5059101654846335,
+    "corners9.5": 0.48226950354609927,
+    "cards4.5": 0.5721040189125296,
+    "shots25.5": 0.44208037825059104
+   }
+  },
+  "2025": {
+   "n": 375,
+   "goals": 2.6346666666666665,
+   "home_goals": 1.48,
+   "away_goals": 1.1546666666666667,
+   "home_adv": 0.32533333333333325,
+   "sot": 7.656,
+   "corners": 8.968,
+   "shots": 22.770666666666667,
+   "yellow": 4.72,
+   "red": 0.21866666666666668,
+   "over_rates": {
+    "ou2.5": 0.49866666666666665,
+    "sot8.5": 0.384,
+    "corners9.5": 0.3973333333333333,
+    "cards4.5": 0.5013333333333333,
+    "shots25.5": 0.30666666666666664
+   }
+  }
+ },
+ "levels": {
+  "n": 2203,
+  "goals": 2.7798456650022696,
+  "home_goals": 1.566500226963232,
+  "away_goals": 1.2133454380390376,
+  "home_adv": 0.3531547889241944,
+  "sot": 8.432591920108942,
+  "corners": 9.243758511121198,
+  "shots": 24.162051747616886,
+  "yellow": 4.325147794452024,
+  "red": 0.19554342883128695,
+  "over_rates": {
+   "ou2.5": 0.5256468452110759,
+   "sot8.5": 0.47299137539718566,
+   "corners9.5": 0.4380390376758965,
+   "cards4.5": 0.4920562868815252,
+   "shots25.5": 0.3949160236041761
+  }
+ },
+ "reserved_inventory": {
+  "2026": {
+   "n": 387,
+   "phase_counts": {
+    "regular": 375,
+    "playoff": 12
+   }
+  }
+ },
+ "teams_per_season": {
+  "2021": 31,
+  "2022": 27,
+  "2023": 24,
+  "2024": 24,
+  "2025": 24,
+  "2026": 25
+ },
+ "phase_counts": {
+  "2021": {
+   "regular": 496,
+   "playoff": 14
+  },
+  "2022": {
+   "regular": 459,
+   "playoff": 13
+  },
+  "2023": {
+   "regular": 408,
+   "playoff": 15
+  },
+  "2024": {
+   "regular": 408,
+   "playoff": 15
+  },
+  "2025": {
+   "regular": 360,
+   "playoff": 15
+  }
+ },
+ "phase_counts_all": {
+  "regular": 2506,
+  "playoff": 84
+ },
+ "phase_disagreement_count": 0,
+ "coverage": {
+  "2021": {
+   "n": 510,
+   "stats": 1.0,
+   "shotmap": 0.0,
+   "splits": 0.0,
+   "referee": 0.0,
+   "xg": 0.0,
+   "yellow": 0.9921568627450981,
+   "box": 0.21372549019607842
+  },
+  "2022": {
+   "n": 472,
+   "stats": 1.0,
+   "shotmap": 0.0,
+   "splits": 0.0,
+   "referee": 0.9872881355932204,
+   "xg": 0.0,
+   "yellow": 1.0,
+   "box": 0.336864406779661
+  },
+  "2023": {
+   "n": 423,
+   "stats": 1.0,
+   "shotmap": 0.0,
+   "splits": 0.9267139479905437,
+   "referee": 0.9716312056737588,
+   "xg": 0.0,
+   "yellow": 1.0,
+   "box": 0.3900709219858156
+  },
+  "2024": {
+   "n": 423,
+   "stats": 1.0,
+   "shotmap": 0.0,
+   "splits": 1.0,
+   "referee": 0.91725768321513,
+   "xg": 0.0,
+   "yellow": 1.0,
+   "box": 1.0
+  },
+  "2025": {
+   "n": 375,
+   "stats": 1.0,
+   "shotmap": 0.0,
+   "splits": 1.0,
+   "referee": 0.9626666666666667,
+   "xg": 0.0,
+   "yellow": 1.0,
+   "box": 1.0
+  },
+  "2026": {
+   "n": 387,
+   "stats": 1.0,
+   "shotmap": 0.0,
+   "splits": 1.0,
+   "referee": 0.875968992248062,
+   "xg": 0.0,
+   "yellow": 1.0,
+   "box": 1.0
+  }
+ },
+ "dispersion": {
+  "goals": 1.0694314176708901,
+  "sot": 1.1519865496370092,
+  "corners": 1.2246819064684862,
+  "shots": 1.4637606377421335,
+  "yellow": 1.3677252592635185
+ },
+ "reliability": {
+  "goals_for": {
+   "r": 0.6331619391638823,
+   "n_teams": 36,
+   "reps": 30
+  },
+  "goals_against": {
+   "r": 0.6845979772827296,
+   "n_teams": 36,
+   "reps": 30
+  },
+  "sot_for": {
+   "r": 0.6515274562832143,
+   "n_teams": 36,
+   "reps": 30
+  },
+  "corners_for": {
+   "r": 0.5848986107394214,
+   "n_teams": 36,
+   "reps": 30
+  },
+  "yellow_for": {
+   "r": 0.7588678086286609,
+   "n_teams": 36,
+   "reps": 30
+  },
+  "shots_for": {
+   "r": 0.7158766123432652,
+   "n_teams": 36,
+   "reps": 30
+  },
+  "box_touches_for": {
+   "r": 0.55581516811519,
+   "n_teams": 36,
+   "reps": 30
+  },
+  "box_touches_against": {
+   "r": 0.49492723257676746,
+   "n_teams": 36,
+   "reps": 30
+  },
+  "big_chance_for": {
+   "r": 0.5919146244114898,
+   "n_teams": 36,
+   "reps": 30
+  }
+ },
+ "corners_territorial": {
+  "corr_corners_boxtouches": 0.5135242266656135,
+  "corr_corners_possession": 0.3053513876772754,
+  "n": 2462
+ },
+ "referees": {
+  "r": 0.37794419681629104,
+  "n_refs": 31,
+  "n_matches": 1626,
+  "reps": 30
+ },
+ "referee_coverage": 0.7380844303222878,
+ "halves": {
+  "2024_2025": {
+   "goals": {
+    "share": 0.4591642924976258,
+    "true_var": -0.004195346064024941,
+    "n": 730
+   },
+   "sot": {
+    "share": 0.455893712343581,
+    "true_var": -0.0026191615372851418,
+    "n": 798
+   },
+   "corners": {
+    "share": 0.4596357705898342,
+    "true_var": 0.002242691954740493,
+    "n": 798
+   },
+   "shots": {
+    "share": 0.4530299853218704,
+    "true_var": 0.0009326399421532277,
+    "n": 798
+   },
+   "yellow": {
+    "share": 0.36944660950896335,
+    "true_var": 0.003202794148519636,
+    "n": 791
+   }
+  },
+  "2023_subset": {
+   "goals": {
+    "share": 0.46826126954921804,
+    "true_var": -0.0024798568018645356,
+    "n": 365
+   },
+   "sot": {
+    "share": 0.46737766624843163,
+    "true_var": -0.0011859620086331346,
+    "n": 392
+   },
+   "corners": {
+    "share": 0.45248107653490327,
+    "true_var": 0.0054217398446526205,
+    "n": 392
+   },
+   "shots": {
+    "share": 0.4594184027777778,
+    "true_var": 0.0005937034117222146,
+    "n": 392
+   },
+   "yellow": {
+    "share": 0.29912663755458513,
+    "true_var": 0.010855906468317904,
+    "n": 383
+   }
+  }
+ },
+ "dev_levels": {
+  "goals": 2.7830045523520486,
+  "sot": 8.493171471927162,
+  "corners": 9.308801213960546,
+  "shots": 24.35432473444613,
+  "yellow": 4.628224582701062
+ },
+ "dev_pooled_over_rates": {
+  "ou2.5": 0.5257966616084977,
+  "sot8.5": 0.48254931714719274,
+  "corners9.5": 0.45068285280728376,
+  "cards4.5": 0.5409711684370258,
+  "shots25.5": 0.40743550834597875
+ },
+ "virgin_levels": {
+  "goals": 2.6346666666666665,
+  "sot": 7.656,
+  "corners": 8.968,
+  "shots": 22.770666666666667,
+  "yellow": 4.72
+ },
+ "virgin_n": 375,
+ "cards_stats_vs_events": {
+  "2021": {
+   "n": 510,
+   "exact_match_rate": 0.3137254901960784,
+   "mean_diff_stats_minus_events": 3.2176470588235295
+  },
+  "2022": {
+   "n": 472,
+   "exact_match_rate": 0.13983050847457626,
+   "mean_diff_stats_minus_events": 4.3326271186440675
+  },
+  "2023": {
+   "n": 423,
+   "exact_match_rate": 0.7139479905437353,
+   "mean_diff_stats_minus_events": -0.14893617021276595
+  },
+  "2024": {
+   "n": 423,
+   "exact_match_rate": 0.7186761229314421,
+   "mean_diff_stats_minus_events": -0.19621749408983452
+  },
+  "2025": {
+   "n": 375,
+   "exact_match_rate": 0.8346666666666667,
+   "mean_diff_stats_minus_events": -0.08266666666666667
+  },
+  "2026": {
+   "n": 387,
+   "exact_match_rate": 0.8501291989664083,
+   "mean_diff_stats_minus_events": -0.059431524547803614
+  }
+ },
+ "cards_source": "stats",
+ "line_screen": {
+  "ou2.5": {
+   "lower": 0.7443095599393019,
+   "primary": 0.5257966616084977,
+   "upper": 0.3095599393019727
+  },
+  "sot8.5": {
+   "lower": 0.6054628224582701,
+   "primary": 0.48254931714719274,
+   "upper": 0.3619119878603945
+  },
+  "corners9.5": {
+   "lower": 0.5773899848254932,
+   "primary": 0.45068285280728376,
+   "upper": 0.3323216995447648
+  },
+  "cards4.5": {
+   "lower": 0.6965098634294385,
+   "primary": 0.5409711684370258,
+   "upper": 0.3611532625189681
+  },
+  "shots25.5": {
+   "lower": 0.4764795144157815,
+   "primary": 0.40743550834597875,
+   "upper": 0.34066767830045525
+  }
+ },
+ "new_teams_by_season": {
+  "2021": [
+   162183,
+   197328,
+   267813,
+   267816,
+   424268,
+   514649,
+   521004,
+   521005,
+   521006,
+   614315,
+   614316,
+   614318,
+   614321,
+   614324,
+   614325,
+   614327,
+   721896,
+   722267,
+   722268,
+   722269,
+   915806,
+   915809,
+   1003204,
+   1003205,
+   1003206,
+   1003207,
+   1003208,
+   1003209,
+   1003210,
+   1124827,
+   1130413
+  ],
+  "2022": [
+   540855,
+   915808
+  ],
+  "2023": [],
+  "2024": [
+   162185,
+   1597140
+  ],
+  "2025": [
+   1430405
+  ],
+  "2026": [
+   1737991,
+   1877733
+  ]
+ },
+ "departed_teams_by_season": {
+  "2021": [],
+  "2022": [
+   521006,
+   614315,
+   614324,
+   614327,
+   722268,
+   1003210
+  ],
+  "2023": [
+   521005,
+   521006,
+   614315,
+   614318,
+   614324,
+   614327,
+   722268,
+   915806,
+   1003210
+  ],
+  "2024": [
+   521005,
+   521006,
+   614315,
+   614318,
+   614324,
+   614327,
+   722267,
+   722268,
+   915806,
+   1003210,
+   1124827
+  ],
+  "2025": [
+   521005,
+   521006,
+   614315,
+   614318,
+   614324,
+   614327,
+   722267,
+   722268,
+   915806,
+   1003204,
+   1003210,
+   1124827
+  ],
+  "2026": [
+   162185,
+   521005,
+   521006,
+   614315,
+   614318,
+   614324,
+   614327,
+   722267,
+   722268,
+   915806,
+   1003204,
+   1003210,
+   1124827
+  ]
+ },
+ "new_team_effects": {
+  "162183": {
+   "team": "Charleston Battery",
+   "first_season": "2021",
+   "n": 32,
+   "goal_diff_per_match": -0.34375
+  },
+  "197328": {
+   "team": "Tampa Bay Rowdies",
+   "first_season": "2021",
+   "n": 36,
+   "goal_diff_per_match": 1.0
+  },
+  "267813": {
+   "team": "Orange County SC",
+   "first_season": "2021",
+   "n": 36,
+   "goal_diff_per_match": 0.2777777777777778
+  },
+  "267816": {
+   "team": "Pittsburgh Riverhounds SC",
+   "first_season": "2021",
+   "n": 32,
+   "goal_diff_per_match": 0.5625
+  },
+  "424268": {
+   "team": "Phoenix Rising FC",
+   "first_season": "2021",
+   "n": 33,
+   "goal_diff_per_match": 1.0
+  },
+  "514649": {
+   "team": "Indy Eleven",
+   "first_season": "2021",
+   "n": 32,
+   "goal_diff_per_match": -0.46875
+  },
+  "521004": {
+   "team": "Sacramento Republic FC",
+   "first_season": "2021",
+   "n": 32,
+   "goal_diff_per_match": -0.1875
+  },
+  "521005": {
+   "team": "LA Galaxy II",
+   "first_season": "2021",
+   "n": 32,
+   "goal_diff_per_match": -0.0625
+  },
+  "521006": {
+   "team": "OKC Energy FC",
+   "first_season": "2021",
+   "n": 32,
+   "goal_diff_per_match": -0.25
+  },
+  "614315": {
+   "team": "Charlotte Independence",
+   "first_season": "2021",
+   "n": 34,
+   "goal_diff_per_match": 0.6470588235294118
+  },
+  "614316": {
+   "team": "Louisville City FC",
+   "first_season": "2021",
+   "n": 35,
+   "goal_diff_per_match": 0.7142857142857143
+  },
+  "614318": {
+   "team": "New York Red Bulls II",
+   "first_season": "2021",
+   "n": 32,
+   "goal_diff_per_match": -0.78125
+  },
+  "614321": {
+   "team": "Colorado Springs Switchbacks FC",
+   "first_season": "2021",
+   "n": 33,
+   "goal_diff_per_match": 0.2727272727272727
+  },
+  "614324": {
+   "team": "Real Monarchs SLC",
+   "first_season": "2021",
+   "n": 32,
+   "goal_diff_per_match": -0.875
+  },
+  "614325": {
+   "team": "FC Tulsa",
+   "first_season": "2021",
+   "n": 33,
+   "goal_diff_per_match": -0.09090909090909091
+  },
+  "614327": {
+   "team": "Tacoma Defiance",
+   "first_season": "2021",
+   "n": 32,
+   "goal_diff_per_match": -0.125
+  },
+  "721896": {
+   "team": "Miami FC",
+   "first_season": "2021",
+   "n": 33,
+   "goal_diff_per_match": 0.42424242424242425
+  },
+  "722267": {
+   "team": "Rio Grande Valley FC",
+   "first_season": "2021",
+   "n": 34,
+   "goal_diff_per_match": 0.14705882352941177
+  },
+  "722268": {
+   "team": "Sporting Kansas City II",
+   "first_season": "2021",
+   "n": 32,
+   "goal_diff_per_match": -0.96875
+  },
+  "722269": {
+   "team": "San Antonio FC",
+   "first_season": "2021",
+   "n": 35,
+   "goal_diff_per_match": 0.45714285714285713
+  },
+  "915806": {
+   "team": "Atlanta United 2",
+   "first_season": "2021",
+   "n": 32,
+   "goal_diff_per_match": -0.28125
+  },
+  "915809": {
+   "team": "Las Vegas Lights FC",
+   "first_season": "2021",
+   "n": 32,
+   "goal_diff_per_match": -1.125
+  },
+  "1003204": {
+   "team": "Memphis 901 FC",
+   "first_season": "2021",
+   "n": 33,
+   "goal_diff_per_match": 0.09090909090909091
+  },
+  "1003205": {
+   "team": "Loudoun United FC",
+   "first_season": "2021",
+   "n": 32,
+   "goal_diff_per_match": -1.46875
+  },
+  "1003206": {
+   "team": "Hartford Athletic",
+   "first_season": "2021",
+   "n": 32,
+   "goal_diff_per_match": 0.0
+  },
+  "1003207": {
+   "team": "Birmingham Legion FC",
+   "first_season": "2021",
+   "n": 33,
+   "goal_diff_per_match": 0.5757575757575758
+  },
+  "1003208": {
+   "team": "New Mexico United",
+   "first_season": "2021",
+   "n": 32,
+   "goal_diff_per_match": 0.125
+  },
+  "1003209": {
+   "team": "El Paso Locomotive FC",
+   "first_season": "2021",
+   "n": 33,
+   "goal_diff_per_match": 0.6363636363636364
+  },
+  "1003210": {
+   "team": "Austin Bold",
+   "first_season": "2021",
+   "n": 32,
+   "goal_diff_per_match": -0.3125
+  },
+  "1124827": {
+   "team": "San Diego Loyal SC",
+   "first_season": "2021",
+   "n": 33,
+   "goal_diff_per_match": 0.18181818181818182
+  },
+  "1130413": {
+   "team": "Oakland Roots SC",
+   "first_season": "2021",
+   "n": 34,
+   "goal_diff_per_match": -0.17647058823529413
+  },
+  "540855": {
+   "team": "Detroit City FC",
+   "first_season": "2022",
+   "n": 35,
+   "goal_diff_per_match": 0.34285714285714286
+  },
+  "915808": {
+   "team": "Monterey Bay F.C.",
+   "first_season": "2022",
+   "n": 34,
+   "goal_diff_per_match": -0.5
+  },
+  "162185": {
+   "team": "North Carolina FC",
+   "first_season": "2024",
+   "n": 35,
+   "goal_diff_per_match": 0.2857142857142857
+  },
+  "1597140": {
+   "team": "Rhode Island FC",
+   "first_season": "2024",
+   "n": 38,
+   "goal_diff_per_match": 0.4473684210526316
+  },
+  "1430405": {
+   "team": "Lexington SC",
+   "first_season": "2025",
+   "n": 30,
+   "goal_diff_per_match": -0.36666666666666664
+  },
+  "1737991": {
+   "team": "Sporting JAX",
+   "first_season": "2026",
+   "n": 30,
+   "goal_diff_per_match": -1.5333333333333334
+  },
+  "1877733": {
+   "team": "Brooklyn",
+   "first_season": "2026",
+   "n": 30,
+   "goal_diff_per_match": -0.9666666666666667
+  }
+ }
+}

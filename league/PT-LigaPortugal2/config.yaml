@@ -1,0 +1,23 @@
+# Portugal Liga Portugal 2 — phase A configuration
+league: PT-LigaPortugal2
+country: Portugal
+fotmob_id: 185
+tier: 2
+warehouse: data_enrichment/fotmob_world (index filter league_id=185)
+data:
+  matches: league/PT-LigaPortugal2/data/pt2_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"       # complete, n=306; read once after dev gate
+confirmatory_reserved: "2026/2027" # in progress, n=89; not read in this build
+halves_constants: {}               # no period-split stats; FT-only
+markets:
+  goals: G-PT2                  # buildable; complete goals in all 1,619 matches
+  sot: NOT_BUILDABLE            # only 396 matches in one partial + one full stats era
+  corners: NOT_BUILDABLE        # only 396 matches in one partial + one full stats era
+  cards: NOT_BUILDABLE           # event cards occur in dev, but semantics are unstable and stats overlap is empty
+  total_shots: NOT_BUILDABLE    # only 396 matches in one partial + one full stats era
+notes:
+  - No xG key and no non-empty shotmap exists in any payload.
+  - No named referee exists in any payload.
+  - Half-time goals are descriptive only; no halves constant is frozen.

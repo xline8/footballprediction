@@ -1,0 +1,142 @@
+{
+ "arms": {
+  "GateZero": {
+   "pooled": {
+    "n": 237,
+    "ll_1x2": 0.9785193411244261,
+    "rps": 0.1949691261604783,
+    "ll_ou25": 0.5876372627758044
+   },
+   "calibration": {
+    "home_win_rate": {
+     "diff_pp": -3.742418484070656,
+     "se_pp": 2.960982122517301,
+     "abs_diff_pp": 3.742418484070656,
+     "boundary_gap_pp": 2.742418484070656,
+     "verdict": "PROVISIONAL PASS"
+    },
+    "ou25_over_rate": {
+     "diff_pp": 8.017455886309584,
+     "se_pp": 2.865373454022074,
+     "abs_diff_pp": 8.017455886309584,
+     "boundary_gap_pp": 7.017455886309584,
+     "verdict": "FAIL"
+    }
+   },
+   "gate_legs": {
+    "i_ll": {
+     "ll_1x2": 0.9785193411244261,
+     "gate_zero": 0.9785193411244261,
+     "climatology": 1.0639472506714356,
+     "pass": true
+    },
+    "ii_calibration": {
+     "home_win_rate": {
+      "diff_pp": -3.742418484070656,
+      "se_pp": 2.960982122517301,
+      "abs_diff_pp": 3.742418484070656,
+      "boundary_gap_pp": 2.742418484070656,
+      "verdict": "PROVISIONAL PASS"
+     },
+     "ou25_over_rate": {
+      "diff_pp": 8.017455886309584,
+      "se_pp": 2.865373454022074,
+      "abs_diff_pp": 8.017455886309584,
+      "boundary_gap_pp": 7.017455886309584,
+      "verdict": "FAIL"
+     },
+     "pass": false
+    },
+    "iii_dev_sign": {
+     "verdict": "EXEMPT"
+    }
+   },
+   "gate_dev_pass": true,
+   "pass": false
+  },
+  "SHRINK": {
+   "pooled": {
+    "n": 237,
+    "ll_1x2": 0.9785193411244261,
+    "rps": 0.1949691261604783,
+    "ll_ou25": 0.5876372627758044
+   },
+   "calibration": {
+    "home_win_rate": {
+     "diff_pp": -3.742418484070656,
+     "se_pp": 2.960982122517301,
+     "abs_diff_pp": 3.742418484070656,
+     "boundary_gap_pp": 2.742418484070656,
+     "verdict": "PROVISIONAL PASS"
+    },
+    "ou25_over_rate": {
+     "diff_pp": 8.017455886309584,
+     "se_pp": 2.865373454022074,
+     "abs_diff_pp": 8.017455886309584,
+     "boundary_gap_pp": 7.017455886309584,
+     "verdict": "FAIL"
+    }
+   },
+   "gate_legs": {
+    "i_ll": {
+     "ll_1x2": 0.9785193411244261,
+     "gate_zero": 0.9785193411244261,
+     "climatology": 1.0639472506714356,
+     "pass": true
+    },
+    "ii_calibration": {
+     "home_win_rate": {
+      "diff_pp": -3.742418484070656,
+      "se_pp": 2.960982122517301,
+      "abs_diff_pp": 3.742418484070656,
+      "boundary_gap_pp": 2.742418484070656,
+      "verdict": "PROVISIONAL PASS"
+     },
+     "ou25_over_rate": {
+      "diff_pp": 8.017455886309584,
+      "se_pp": 2.865373454022074,
+      "abs_diff_pp": 8.017455886309584,
+      "boundary_gap_pp": 7.017455886309584,
+      "verdict": "FAIL"
+     },
+     "pass": false
+    },
+    "iii_dev_sign": {
+     "seasons": {
+      "2022/2023": true,
+      "2023/2024": true,
+      "2024/2025": true
+     },
+     "wins": 3,
+     "required": 2,
+     "verdict": "PASS"
+    }
+   },
+   "gate_dev_pass": true,
+   "pass": false
+  }
+ },
+ "climatology": {
+  "pooled": {
+   "n": 237,
+   "ll_1x2": 1.0639472506714356,
+   "rps": 0.21981412829576272,
+   "ll_ou25": 0.5913142200854868
+  }
+ },
+ "naive_trailing_10": {
+  "pooled": {
+   "n": 237,
+   "ll_1x2": 1.0937166240941645,
+   "rps": 0.2204225095129417,
+   "ll_ou25": 0.6569673671188256
+  }
+ },
+ "winner": "NONE",
+ "meta": {
+  "virgin_season": "2025/2026",
+  "n": 237,
+  "fit_cutoff": "2025-08-09",
+  "n_train": 758
+ }
+}

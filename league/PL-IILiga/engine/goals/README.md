@@ -1,0 +1,3 @@
+# G-PL-II goals engine
+
+This development-only engine reads `league/PL-IILiga/data/plii_matches.csv`, fits the preregistered goals-only Dixon–Coles Gate Zero and SHRINK arms, and evaluates the season-blocked walk-forward seed 2021/2022 against 2022/2023–2024/2025 (pooled n=927). It writes `results_dev.json` and `results_dev.csv`; calibration convention is actual minus predicted and the primary line is OU2.5. Run `python3 league/PL-IILiga/engine/goals/run_g_plii.py dev` from the repository root or worktree root. Phase B deliberately has no virgin command and must not read 2025/2026 or 2026/2027 rows; no virgin results, fitted parameters, predictions, or verdict file are created here. The dev-gate outcome is recorded mechanically in `results_dev.json`.

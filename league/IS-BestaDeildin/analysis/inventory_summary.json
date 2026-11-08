@@ -1,0 +1,59 @@
+{
+  "by_season": {
+    "2021": {
+      "n": 132,
+      "stats_n": 0,
+      "splits_n": 0.0,
+      "referee_named": 0,
+      "big_chance_n": 0,
+      "touches_opp_box_n": 0,
+      "shotmap_n": 0.0
+    },
+    "2022": {
+      "n": 162,
+      "stats_n": 0,
+      "splits_n": 0.0,
+      "referee_named": 0,
+      "big_chance_n": 0,
+      "touches_opp_box_n": 0,
+      "shotmap_n": 0.0
+    },
+    "2023": {
+      "n": 162,
+      "stats_n": 162,
+      "splits_n": 90.0,
+      "referee_named": 81,
+      "big_chance_n": 162,
+      "touches_opp_box_n": 35,
+      "shotmap_n": 0.0
+    },
+    "2024": {
+      "n": 162,
+      "stats_n": 162,
+      "splits_n": 162.0,
+      "referee_named": 126,
+      "big_chance_n": 162,
+      "touches_opp_box_n": 162,
+      "shotmap_n": 0.0
+    },
+    "2025": {
+      "n": 162,
+      "stats_n": 162,
+      "splits_n": 162.0,
+      "referee_named": 130,
+      "big_chance_n": 162,
+      "touches_opp_box_n": 162,
+      "shotmap_n": 0.0
+    },
+    "2026": {
+      "n": 162,
+      "stats_n": 162,
+      "splits_n": 162.0,
+      "referee_named": 65,
+      "big_chance_n": 162,
+      "touches_opp_box_n": 162,
+      "shotmap_n": 0.0
+    }
+  },
+  "team_ids_total": 17
+}

@@ -1,0 +1,333 @@
+{
+ "seasons": {
+  "2021": {
+   "n": 178,
+   "teams": 16,
+   "goals": 2.3933,
+   "home_goals": 1.3258,
+   "away_goals": 1.0674,
+   "home_win_rate": 0.3708,
+   "ou25_rate": 0.4326,
+   "sot": null,
+   "corners": null,
+   "total_shots_stat": null,
+   "yellow_stats": null,
+   "yellow_events": 0.0,
+   "stats_cov": 0.0,
+   "half_cov": 0.0,
+   "ref_cov": 0.0,
+   "xg_present": 0,
+   "shotmap": 0,
+   "events_cov": 0.0,
+   "goal_events_complete": 23
+  },
+  "2022": {
+   "n": 272,
+   "teams": 17,
+   "goals": 2.3419,
+   "home_goals": 1.3676,
+   "away_goals": 0.9743,
+   "home_win_rate": 0.4596,
+   "ou25_rate": 0.4265,
+   "sot": null,
+   "corners": null,
+   "total_shots_stat": null,
+   "yellow_stats": null,
+   "yellow_events": 0.1801,
+   "stats_cov": 0.0,
+   "half_cov": 0.0,
+   "ref_cov": 0.0,
+   "xg_present": 0,
+   "shotmap": 0,
+   "events_cov": 0.9154,
+   "goal_events_complete": 272
+  },
+  "2023": {
+   "n": 240,
+   "teams": 16,
+   "goals": 2.5917,
+   "home_goals": 1.45,
+   "away_goals": 1.1417,
+   "home_win_rate": 0.4625,
+   "ou25_rate": 0.5042,
+   "sot": null,
+   "corners": null,
+   "total_shots_stat": null,
+   "yellow_stats": null,
+   "yellow_events": 0.1958,
+   "stats_cov": 0.0,
+   "half_cov": 0.0,
+   "ref_cov": 0.0,
+   "xg_present": 0,
+   "shotmap": 0,
+   "events_cov": 0.95,
+   "goal_events_complete": 239
+  },
+  "2024": {
+   "n": 240,
+   "teams": 16,
+   "goals": 2.5292,
+   "home_goals": 1.3458,
+   "away_goals": 1.1833,
+   "home_win_rate": 0.3833,
+   "ou25_rate": 0.4958,
+   "sot": null,
+   "corners": null,
+   "total_shots_stat": null,
+   "yellow_stats": null,
+   "yellow_events": 0.1292,
+   "stats_cov": 0.0,
+   "half_cov": 0.0,
+   "ref_cov": 0.0,
+   "xg_present": 0,
+   "shotmap": 0,
+   "events_cov": 0.925,
+   "goal_events_complete": 236
+  },
+  "2025": {
+   "n": 240,
+   "teams": 16,
+   "goals": 2.3417,
+   "home_goals": 1.3792,
+   "away_goals": 0.9625,
+   "home_win_rate": 0.425,
+   "ou25_rate": 0.4583,
+   "sot": null,
+   "corners": null,
+   "total_shots_stat": null,
+   "yellow_stats": null,
+   "yellow_events": 6.2208,
+   "stats_cov": 0.0,
+   "half_cov": 0.0,
+   "ref_cov": 0.2167,
+   "xg_present": 0,
+   "shotmap": 0,
+   "events_cov": 1.0,
+   "goal_events_complete": 240
+  },
+  "2026": {
+   "n": 233,
+   "teams": 16,
+   "goals": 2.6438,
+   "home_goals": 1.5408,
+   "away_goals": 1.103,
+   "home_win_rate": 0.4421,
+   "ou25_rate": 0.4764,
+   "sot": null,
+   "corners": null,
+   "total_shots_stat": null,
+   "yellow_stats": null,
+   "yellow_events": 4.8841,
+   "stats_cov": 0.0,
+   "half_cov": 0.0,
+   "ref_cov": 0.0086,
+   "xg_present": 0,
+   "shotmap": 0,
+   "events_cov": 1.0,
+   "goal_events_complete": 233
+  }
+ },
+ "inventory": {
+  "2021": {
+   "rows": 246,
+   "finished": 184,
+   "finished_regular": 178,
+   "finished_playoff": 6,
+   "unfinished": 62,
+   "stats_flag_index": 0,
+   "stats_content_rows": 0,
+   "dates": [
+    "2021-04-03",
+    "2021-12-10"
+   ]
+  },
+  "2022": {
+   "rows": 280,
+   "finished": 280,
+   "finished_regular": 272,
+   "finished_playoff": 8,
+   "unfinished": 0,
+   "stats_flag_index": 0,
+   "stats_content_rows": 0,
+   "dates": [
+    "2022-02-15",
+    "2022-11-27"
+   ]
+  },
+  "2023": {
+   "rows": 252,
+   "finished": 252,
+   "finished_regular": 240,
+   "finished_playoff": 12,
+   "unfinished": 0,
+   "stats_flag_index": 0,
+   "stats_content_rows": 0,
+   "dates": [
+    "2023-02-10",
+    "2023-12-10"
+   ]
+  },
+  "2024": {
+   "rows": 252,
+   "finished": 252,
+   "finished_regular": 240,
+   "finished_playoff": 12,
+   "unfinished": 0,
+   "stats_flag_index": 0,
+   "stats_content_rows": 0,
+   "dates": [
+    "2024-02-24",
+    "2024-12-07"
+   ]
+  },
+  "2025": {
+   "rows": 252,
+   "finished": 252,
+   "finished_regular": 240,
+   "finished_playoff": 12,
+   "unfinished": 0,
+   "stats_flag_index": 250,
+   "stats_content_rows": 0,
+   "dates": [
+    "2025-02-21",
+    "2025-12-07"
+   ]
+  },
+  "2026": {
+   "rows": 233,
+   "finished": 233,
+   "finished_regular": 233,
+   "finished_playoff": 0,
+   "unfinished": 0,
+   "stats_flag_index": 233,
+   "stats_content_rows": 0,
+   "dates": [
+    "2026-02-20",
+    "2026-10-31"
+   ]
+  }
+ },
+ "cards_check": {
+  "2021": {
+   "n_stats_rows": 0,
+   "event_plain_yellows_total": 0,
+   "event_yellowred_total": 0,
+   "event_red_total": 0,
+   "matches_with_any_event": 0
+  },
+  "2022": {
+   "n_stats_rows": 0,
+   "event_plain_yellows_total": 0,
+   "event_yellowred_total": 51,
+   "event_red_total": 109,
+   "matches_with_any_event": 256
+  },
+  "2023": {
+   "n_stats_rows": 0,
+   "event_plain_yellows_total": 0,
+   "event_yellowred_total": 50,
+   "event_red_total": 118,
+   "matches_with_any_event": 240
+  },
+  "2024": {
+   "n_stats_rows": 0,
+   "event_plain_yellows_total": 0,
+   "event_yellowred_total": 38,
+   "event_red_total": 99,
+   "matches_with_any_event": 234
+  },
+  "2025": {
+   "n_stats_rows": 0,
+   "event_plain_yellows_total": 1514,
+   "event_yellowred_total": 57,
+   "event_red_total": 156,
+   "matches_with_any_event": 252
+  },
+  "2026": {
+   "n_stats_rows": 0,
+   "event_plain_yellows_total": 1111,
+   "event_yellowred_total": 27,
+   "event_red_total": 98,
+   "matches_with_any_event": 233
+  }
+ },
+ "halves": {
+  "goals_events_dev2022_2024_complete": {
+   "n": 687,
+   "share_mean_of_ratios": 0.4231,
+   "pooled_share": 0.4273,
+   "var_obs": 0.1116,
+   "binom_sampling_var": 0.12255,
+   "true_var_est": 0.0
+  },
+  "goals_events_2022_2025_complete_REFERENCE_ONLY": {
+   "n": 896,
+   "share_mean_of_ratios": 0.4175,
+   "pooled_share": 0.4264,
+   "var_obs": 0.11107,
+   "binom_sampling_var": 0.12192,
+   "true_var_est": 0.0
+  },
+  "stats_markets": "no period splits and no All-period stats exist in any season: no halves source for SOT/corners/cards/total_shots"
+ },
+ "reliability": {
+  "goals_for": {
+   "n": 97,
+   "r": 0.198
+  },
+  "goals_against": {
+   "n": 97,
+   "r": 0.241
+  },
+  "sot_for": {
+   "n": 0,
+   "r": null
+  },
+  "corners_for": {
+   "n": 0,
+   "r": null
+  },
+  "shots_for": {
+   "n": 0,
+   "r": null
+  },
+  "yellows_events": {
+   "n": 97,
+   "r": 0.959
+  },
+  "box_touches_for": {
+   "n": 0,
+   "r": null
+  }
+ },
+ "referee": {
+  "matches_with_ref": 56,
+  "by_season": {
+   "2021": 0,
+   "2022": 0,
+   "2023": 0,
+   "2024": 0,
+   "2025": 54,
+   "2026": 2
+  }
+ },
+ "multi_name_ids": {
+  "192436": [
+   "Deportes Copiapo",
+   "Deportes Copiapó"
+  ],
+  "4061": [
+   "Union San Felipe",
+   "Unión San Felipe"
+  ],
+  "4054": [
+   "Universidad de Concepcion",
+   "Universidad de Concepción"
+  ],
+  "162905": [
+   "Curico Unido",
+   "Curicó Unido"
+  ]
+ },
+ "n_team_ids": 25
+}

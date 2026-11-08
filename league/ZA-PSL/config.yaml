@@ -1,0 +1,33 @@
+league: ZA-PSL
+country: South Africa
+fotmob_id: 537
+tier: 1
+warehouse_root: ~/workspace/footballprediction
+data:
+  matches: league/ZA-PSL/data/za_matches.csv
+  team_matches: league/ZA-PSL/data/za_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period_goals: ["2022/2023", "2023/2024", "2024/2025"]
+dev_period_stats: ["2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.4724
+  sot_1h_share: 0.4736
+  corners_1h_share: 0.4679
+  total_shots_1h_share: 0.4584
+  yellow_cards_1h_share: 0.3253
+markets:
+  goals: G-ZA
+  sot: S-ZA
+  corners: C-ZA
+  cards: K-ZA
+  total_shots: T-ZA
+notes:
+  - "FORMAT: straight double round-robin, 16 teams / 240 matches per season; EXCEPTION 2024/2025 = 15 teams / 210 matches (Royal AM expelled mid-season, fixtures expunged — complete official season). 12 Qualification Group play-off rows in the index are EXCLUDED from the corpus (not a phase)."
+  - "TEAM IDENTITY: keyed on FotMob team id only. Three ids carry two names (102099 SuperSport United/Siwelele, 149599 Maritzburg United/Durban City, 102100 AmaZulu FC/AmaZulu) — FotMob applies renames retroactively to part of the archive."
+  - "STATS ERA: no stats in 2021/2022; stats from 2022/2023 (239/240). Period splits: 60 matches in 2022/2023, near-complete from 2023/2024. touches_opp_box partial until 2024/2025."
+  - "XG ERA: shotmap/expected_goals exist only in 2025/2026 (virgin) and 2026/2027; goals model is goals-only DC."
+  - "CARDS: stats-vs-events artefact present and era-flipped in BOTH dev and virgin — event feeds 2022/2023-2025/2026 publish NO plain-yellow events (unified mean ~0.05 vs stats 3.30-3.75). Frozen target = stats-feed yellow_cards in dev and virgin; no virgin event-unified sensitivity exists. Stats-card level in the seed season (2.23) is a recording shift vs scored seasons (3.75)."
+  - "REFEREE: text coverage sparse in dev (82/69/62 per season) and 13/240 in the virgin; strictness split-half r=0.080 — X8 dropped on both legs."
+  - "Calibration convention: actual minus predicted."

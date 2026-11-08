@@ -1,0 +1,33 @@
+# AU-ALeague (Australia A-League Men) — league config
+league: AU-ALeague
+country: Australia
+fotmob_id: 113
+tier: 1
+warehouse: data_enrichment/fotmob_world/Australia/A-League
+data:
+  matches: league/AU-ALeague/data/au_matches.csv
+  team_matches: league/AU-ALeague/data/au_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]  # walk-forward, season-blocked
+virgin_primary: "2025/2026"        # n=163; read ONCE per candidate (see MODEL_DESIGN note on transitional label)
+virgin_confirmatory: "2026/2027"   # partial (23 played at pull); reserved, NOT read in this build
+halves_constants:                  # frozen, complete-splits era 2023/2024-2025/2026 (n=571 with splits; goals from events)
+  goals_1h_share: 0.432
+  sot_1h_share: 0.456
+  corners_1h_share: 0.452
+  total_shots_1h_share: 0.451
+  yellow_cards_1h_share: 0.308
+markets:
+  goals: G-AU        # DC reference; arms: Gate Zero, SHRINK (thin-data prior), X3 set-play
+  sot: S-AU          # v5 reference; arms: Gate Zero, RS ratio-shrink, X4 xG/shot, X6 xGOT (era-guarded)
+  corners: C-AU      # corners_v3 reference; arms: Gate Zero (X9), X7 box touches
+  cards: K-AU        # cards reference; Gate Zero ONLY (X8 referee DROPPED: trait r=0.06, virgin coverage 82.8%)
+  total_shots: T-AU  # shots family; arms: A v1 pattern, B v2 level layer, C E9 trailing-r
+notes:
+  - Oct-May season (southern hemisphere). 12 teams (13 in 2024/2025: Auckland FC joined, Western United left after that season). Regular season (156 matches at 12 teams, 169 at 13) + Finals Series of 7 matches (2 elimination finals "1/4", 4 semi-final matches "1/2", 1 Grand Final) per season; finals are flagged phase='finals' and included in every fit (same teams, same league programme; 7 of 163 matches cannot carry a separate model). No relegation — no mover/tier offset exists.
+  - 5 finals went to extra time (3 in 2023/2024, 2 in 2025/2026); their All stats cover >90 minutes, flagged has_extra_time, kept and never silently repaired. Penalty-shootout shots (32) are excluded from shotmap aggregates.
+  - Per-half stats: absent in 2021/2022, 24.5% in 2022/2023, complete from 2023/2024. Halves constants measured on the complete era only.
+  - xGOT population rule breaks at 2024/2025 (only on-target shots populated before; ~100% from 2024/2025) — X6 is era-guarded exactly as in J1/DK.
+  - Referee coverage is incomplete (76.7% in 2021/2022, 82.8% in the virgin season) and the referee strictness trait is not reliable in AU (split-half r=0.06) — X8 dropped, K-AU is Gate-Zero-only.
+  - Small corpus: n=857 total, dev walk-forward pool n=508, virgin n=163. Gate SEs are correspondingly wide; provisional-pass outcomes are more likely and are recorded as such.
+  - Predictions-only: no AU odds/settlement source in-system.

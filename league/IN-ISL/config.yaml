@@ -1,0 +1,36 @@
+# IN-ISL (India Indian Super League) — league config
+league: IN-ISL
+country: India
+fotmob_id: 9478
+tier: 1
+warehouse: data_enrichment/fotmob_world/India/Indian Super League
+data:
+  matches: league/IN-ISL/data/in_matches.csv
+  team_matches: league/IN-ISL/data/in_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]  # walk-forward; warm-up 2021/2022, scored 2022/2023-2024/2025 (n=419)
+virgin_primary: "2025/2026"        # n=91, COMPLETE (truncated single round-robin, Feb-May 2026); read ONCE per candidate
+virgin_confirmatory: "2026/2027"   # partial (28 played at pull); reserved, NOT read in this build
+halves_constants:                  # frozen, complete-splits DEV era 2023/2024-2024/2025 (n=302; goals/yellows from events)
+  goals_1h_share: 0.435
+  sot_1h_share: 0.453
+  corners_1h_share: 0.458
+  total_shots_1h_share: 0.447
+  yellow_cards_1h_share: 0.366
+markets:
+  goals: G-IN        # DC reference; arms: Gate Zero, SHRINK (thin-data prior), X3 set-play
+  sot: S-IN          # v5 reference; arms: Gate Zero, RS ratio-shrink, X4 xG/shot (X6 DROPPED: era starts in last dev season, trait weak)
+  corners: C-IN      # corners_v3 reference; arms: Gate Zero (X9), X7 box touches
+  cards: K-IN        # cards reference; Gate Zero ONLY (X8 DROPPED: referee coverage 13.5% dev, 0% virgin); target = EVENT-UNIFIED yellows
+  total_shots: T-IN  # shots family; arms: A v1 pattern, B v2 level layer, C E9 trailing-r
+notes:
+  - Franchise league, NO relegation. League stage + play-offs ( knock-out rounds labelled 1/4, 1/2, final in the feed; 5-7 matches/season) are phase-flagged ('playoffs') and included in every fit — same teams, same programme, too few to model separately. FREEZE: this inclusion rule is fixed in the preregs.
+  - Format history: 11 teams 2021/2022-2022/2023 (110 league matches + play-offs), 12 in 2023/2024 (+Punjab FC), 13 in 2024/2025 (+Mohammedan SC). 2025/2026 (the virgin) was a TRUNCATED season: started Feb 2026, single round-robin, 14 teams, 91 matches, NO play-offs; Hyderabad FC absent; Inter Kashi and SC Delhi debut with zero in-league history (the SHRINK / unseen-team case, live in the virgin).
+  - 2021/2022 was played largely in a Goa bubble (neutral venues) — the pooled home edge is the program's weakest (+0.14 goals); no venue correction is built, the fact is recorded.
+  - Per-half stats: sparse in 2021/2022 (21/115) and 2022/2023 (3/117), complete from 2023/2024. Halves constants measured on the complete-splits DEV era only (2023/2024-2024/2025, n=302) so the virgin stays untouched even at design level for splits.
+  - Cards feed check (run EARLY, dev-era evidence only, before any fitting): the stats feed undercounts the event feed in EVERY dev season (net -0.035/-0.051/-0.115/-0.055 per match; exact agreement 93.0% -> 71.2% by 2024/2025). Decision, following the NO-Eliteserien precedent: the cards target is EVENT-UNIFIED yellows (event card == 'Yellow'; YellowRed not counted, sibling-builder convention). Stats-feed yellows remain in yellow_cards_* for the record.
+  - Referee coverage is the program's worst: 6.1%/12.0%/12.2%/13.5% in the dev seasons, 0% in the virgin (28/28 in the partial 2026/2027 is confirmatory-only). Only 88 of 653 matches name a referee; the most frequent has 11 matches. X8 is not measurable, let alone adoptable.
+  - xGOT population breaks at 2024/2025 (populated only for on-target shots before, ~31% of shots; ~98-100% from 2024/2025) — X6's era therefore contains exactly ONE dev season; with its weak era trait (r ~ 0.35) X6 is dropped (see FEATURES).
+  - FotMob xG runs LOW in this league: goals/xG = 1.09-1.23 per season (pooled ~1.19), unlike AU (1.002) — recorded under F11; the unmodified blend pattern is still Gate Zero.
+  - Thin league: n=653 total, dev scored n=419, virgin n=91. Calibration SEs on the virgin run ~5pp; PROVISIONAL outcomes are the expected currency and no gate is loosened for pool size.
+  - Predictions-only: no IN odds/settlement source in-system.

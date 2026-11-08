@@ -1,0 +1,39 @@
+# CN-LeagueOne (China) — league config (Phase 2 freeze; completed Phase 6)
+league: CN-LeagueOne
+country: China
+fotmob_id: 9137
+tier: 2
+warehouse: data_enrichment/fotmob_world/China/China League One
+data:
+  matches: league/CN-LeagueOne/data/cn_matches.csv
+  team_matches: league/CN-LeagueOne/data/cn_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period:
+  goals: ["2022", "2023", "2024"]   # scored; warm-up 2021
+  stats_markets: []                  # NOT-BUILDABLE: no stats feed in any season (0/1572)
+  cards: []                          # NOT-BUILDABLE: no yellows target in any season (stats absent; plain Yellow events 0 in all 1572 matches); referee 0% all seasons
+virgin_primary: "2025"               # COMPLETE season (240 matches) — NOT READ (G-CN failed the dev gate; virgin_read: false)
+virgin_confirmatory: null            # 2026 is in progress (240) and stays untouched
+halves_constants:                   # frozen from DEV-era data only (EDA F3)
+  goals_1h_share: 0.4493            # event times, dev era 2021-2024, n=2760 goals, 1000 matches with events
+  yellow_cards_1h_share: null       # no period splits in dev (0 matches) — no constant; no K market
+  sot_1h_share: null                # no period splits in dev — no constant
+  corners_1h_share: null            # no period splits in dev — no constant
+  total_shots_1h_share: null        # no period splits in dev — no constant
+markets:
+  goals: G-CN        # DC goals-only (no xG in feed); arms: Gate Zero, SHRINK (X2 dropped: no entrant tilt in EDA F4)
+  sot: S-CN          # NOT-BUILDABLE — no stats feed in any season
+  corners: C-CN      # NOT-BUILDABLE — no stats feed in any season
+  cards: K-CN        # NOT-BUILDABLE — no stats yellows in any season; plain Yellow events 0 in all 1572 matches (target never exists); referee 0% (no X8)
+  total_shots: T-CN  # NOT-BUILDABLE — no stats feed in any season
+notes:
+  - Calendar-year seasons, single group every season (FotMob leagueName "China League"); 18 teams, 34 rounds, 306 matches per season in 2021-2022; 16 teams, 30 rounds, 240 matches per season in 2023-2026. 39 FotMob team ids over the corpus.
+  - Stats feed absent in EVERY season: 0/1572 matches carry any stats Periods key; shotmap 0/1572; xG rows 0. Scores-only league.
+  - No xG and no shotmap in ANY season -> X1 blend falls back goals-only; X3/X4/X6/X7/X9 impossible by data absence.
+  - Event feed carries goals reliably (0 score mismatches in 1572 matches; header wins) and cards as YellowRed/Red only — plain Yellow events 0 in all 1572 matches. 125 matches have a wholly empty events payload, 3 of them with goals (9 goals); their events-derived fields are missing, never zero.
+  - Team-name stability: 39 FotMob team ids over the corpus; no id carries conflicting spellings. All logic keyed by team id.
+  - Referees: named in 0 matches in every season — X8 dropped on absence.
+  - Three awarded matches, all 2022: 3892074 (2022-06-10 Kunshan-Beijing Technology 3-0), 3892065 (2022-06-14 Beijing Technology-Jiangxi Beidamen 0-3), 3946586 (2022-08-01 Heilongjiang Ice City-Zibo Cuju 3-0), kept as ordinary rows with awarded=true; excluded from dev halves constants by construction.
+  - Scoring level is low and recovering: goals/match 2.71 / 2.61 / 2.26 / 2.48 in dev, 2.61 in the virgin, 2.69 in the reserve 2026. OU2.5 over-rate 0.38-0.51 every season.
+  - Predictions-only: no CN odds/settlement source in-system.
+  - Outcome (Phase 6): G-CN FAIL at the dev gate (OU leg) — Gate Zero pooled dev (n=786) 1X2 LL 1.0286 / RPS 0.2096 / OU2.5 LL 0.6927 vs climatology 1.0886 / 0.2293 / 0.6919; beats naive trailing-10 on all three (1.1995 / 0.2128 / 0.7680) but the gate requires beating BOTH baselines. Pooled OU miss is 0.0007, carried by 2024 alone (model wins the OU leg in 2022 and 2023). SHRINK numerically identical to Gate Zero (n<6 never binds under season-blocked prediction). Virgin 2025 NOT read; 2026 untouched; nothing ships. S/C/K/T not-buildable (see reports/*_CN_VERDICT.md).

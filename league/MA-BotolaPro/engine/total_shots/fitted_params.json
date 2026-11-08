@@ -1,0 +1,10 @@
+{
+  "market": "total_shots",
+  "arms": [
+    "A",
+    "B",
+    "C"
+  ],
+  "nb_r": 79.94,
+  "primary_line": 16.5
+}

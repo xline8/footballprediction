@@ -1,0 +1,52 @@
+{
+  "league": "HU-NBI",
+  "market": "corners",
+  "virgin_season": "2025/2026",
+  "primary_line": 9.5,
+  "arms": {
+    "gate_zero": {
+      "n": 198,
+      "ll_9.5": 0.6754756820440175,
+      "mean_p": 0.49035452171691496,
+      "actual_rate": 0.47474747474747475,
+      "calibration_breach_pp": -1.5607046969440208,
+      "calibration_se_pp": 3.5488105132577337,
+      "params": {
+        "gamma": 0.0,
+        "r": 1.0861219180167718,
+        "beta": [
+          0.005
+        ],
+        "fit_n": 775
+      },
+      "beta_active_rows": 190
+    },
+    "plain": {
+      "n": 198,
+      "ll_9.5": 0.6945903256864278,
+      "mean_p": 0.48967482878510227,
+      "actual_rate": 0.47474747474747475,
+      "calibration_breach_pp": -1.4927354037627516,
+      "calibration_se_pp": 3.5488105132577337,
+      "params": {
+        "gamma": 0.0,
+        "r": 1.0861219180167718,
+        "beta": [
+          0.0
+        ],
+        "fit_n": 775
+      },
+      "beta_active_rows": 190
+    }
+  },
+  "baselines": {
+    "base_rate": {
+      "n": 198,
+      "ll_9.5": 0.7121271850344232
+    },
+    "naive_trailing_10": {
+      "n": 198,
+      "ll_9.5": 0.726652595789667
+    }
+  }
+}

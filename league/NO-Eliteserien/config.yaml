@@ -1,0 +1,31 @@
+# NO-Eliteserien (Norway) — league config
+league: NO-Eliteserien
+country: Norway
+fotmob_id: 59
+tier: 1
+warehouse: data_enrichment/fotmob_world/Norway/Eliteserien
+data:
+  matches: league/NO-Eliteserien/data/no_matches.csv
+  team_matches: league/NO-Eliteserien/data/no_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period: ["2022", "2023", "2024"]   # scored dev (2021 = warm-up / initial training)
+virgin_primary: "2025"          # last complete season, n=240 — read ONCE per candidate
+virgin_confirmatory: "2026"     # in progress (n=207 at pull); reserved, never read in this build
+halves_constants:               # frozen league constants (EDA F3) — the ONLY halves mechanism
+  goals_1h_share: 0.439
+  sot_1h_share: 0.456
+  corners_1h_share: 0.473
+  total_shots_1h_share: 0.465
+  yellow_cards_1h_share: 0.317
+markets:
+  goals: G-NO        # DC reference; arms: Gate Zero, thin-team shrinkage, X3 set-play tilt
+  sot: S-NO          # v5 reference; arms: Gate Zero, ratio-shrink, X4 xG/shot (no X6 — era starts in virgin season)
+  corners: C-NO      # corners_v3 reference; primary line 10.5; arms: Gate Zero (X9), X7 box touches
+  cards: K-NO        # cards reference; primary line 2.5; arms: Gate Zero, X8 referee (r=0.316 on the event-unified target, as amended)
+  total_shots: T-NO  # shots family; primary line 26.5; arms: v1 pattern, E9 trailing-r
+notes:
+  - Format: 16 teams, single double round-robin (rounds 1-30), calendar-year season (Mar/Apr–Nov/Dec), no split or playoff block in this league_id; relegation/promotion with the 1. divisjon means mover clubs enter each season (23 distinct clubs in the corpus).
+  - FT stats, xG and shotmap are 100% in every season; period splits complete from 2023; box touches complete from 2024; referee names complete from 2022.
+  - Cards target is EVENT-unified (Yellow+YellowRed): the stats feed undercounts yellows in every season (corpus 4,353 vs 4,625) — amended post-build, before cards fitting (see analysis/PREPROCESSING.md rule 7).
+  - 2022 xG feed runs low (goals/xG 1.216 vs 0.98–1.05 in other complete seasons) — recorded caveat on G-NO's 2022 dev season, not a correction.
+  - Predictions-only: no NO-Eliteserien odds/settlement source in-system.

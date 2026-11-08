@@ -1,0 +1,38 @@
+# SE-Superettan (Sweden) — league config
+league: SE-Superettan
+country: Sweden
+fotmob_id: 168
+tier: 2
+warehouse: data_enrichment/fotmob_world/Sweden/Superettan
+data:
+  matches: league/SE-Superettan/data/se2_matches.csv
+  team_matches: league/SE-Superettan/data/se2_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period:
+  goals: ["2022", "2023", "2024", "2025"]   # scored; warm-up 2021
+  stats_markets: ["2023", "2024", "2025"]   # scored; warm-up 2022 (first stats season)
+  cards: ["2022", "2023", "2024", "2025"]   # scored; warm-up 2021
+virgin_primary: "2026"          # COMPLETE regular season (240/240, last round 2026-11-07) — read ONCE per candidate
+virgin_confirmatory: null       # no later season exists in the feed
+halves_constants:               # frozen from EVENT TIMES on the dev era (no period splits exist in this feed)
+  goals_1h_share: 0.4317        # 2021-2025, n=1112 matches with goals
+  yellow_cards_1h_share: 0.3344 # 2021-2025, n=1180 matches with yellows
+  sot_1h_share: null            # FT-only: no splits, no event source
+  corners_1h_share: null        # FT-only: no splits, no event source
+  total_shots_1h_share: null    # FT-only: no splits, no event source
+markets:
+  goals: G-SE2       # DC goals-only (no xG in feed); arms: Gate Zero, SHRINK, X2 mover (parent-corpus)
+  sot: S-SE2         # v5 reference; arms: Gate Zero, RS ratio-shrink (X4 impossible: no shotmap)
+  corners: C-SE2     # corners reference, possession-only covariates (big_chance absent); arm: Gate Zero only (X7 impossible: no touches key)
+  cards: K-SE2       # cards reference on EVENT-derived yellows; arm: Gate Zero only (X8 impossible: referee names empty 1440/1440)
+  total_shots: T-SE2 # shots family; arms: A v1 pattern, B v2 level layer, C E9 trailing-r
+notes:
+  - Calendar-year season (late Mar/Apr - early Nov), 16 teams, straight double round robin (30 rounds, 240 matches/season), no split in this league_id.
+  - Play-offs: promotion play-off vs Allsvenskan and relegation play-off vs Division 1 are NOT in this league_id corpus (every row carries Tournament id 168, rounds 1-30 only, 16 teams x 30 matches every season). Phase rule frozen: corpus = regular season only; no play-off rows exist to exclude.
+  - Stats feed is THIN: only BallPossesion / total_shots / ShotsOnTarget / corners, single "All" period, from 2022 only. 2021 has 32 payloads with an empty stats block (0 usable). Missing-stats matches: 2023 x9 (incl. 7 of the final round, 2023-11-11), 2025 x1 (2025-10-06), 2026 x3 per index (2 with no keys at all + 1 empty block).
+  - No xG, no shotmap, no big_chance, no touches_opp_box in ANY season -> X1 blend falls back goals-only; X3/X4/X6/X7 all impossible by data absence.
+  - Referee name empty in 1440/1440 payloads -> X8 impossible; cards are a single-arm candidate.
+  - Cards target is EVENT-derived by necessity (stats feed carries no card keys): unified yellows = Card events Yellow + YellowRed.
+  - Team-name stability: keyed by FotMob team id everywhere. One id carries two names (8482: AFC United / AFC Eskilstuna, a club rename) - id is the stable key.
+  - SOT regime anomaly: 2025 SOT/shot ratio 0.571 vs 0.439-0.484 in every other stats season; 2026 virgin SOT level (8.57/match) is below every dev season. Recorded pre-fitting; the gates decide.
+  - Predictions-only: no SE2 odds/settlement source in-system.

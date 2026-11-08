@@ -1,0 +1,137 @@
+{
+  "protocol": {
+    "market": "corners",
+    "primary_line": 8.5,
+    "seed": "2022",
+    "scored": [
+      "2023",
+      "2024"
+    ]
+  },
+  "arms": {
+    "gate_zero": {
+      "pooled": {
+        "n": 461,
+        "ll_primary": 0.7160183580507606,
+        "mean_p": 0.5160454736989628,
+        "actual_rate": 0.5206073752711496,
+        "calibration_diff": -0.004561901572186831,
+        "calibration_se": 0.023766941577510296
+      },
+      "seasons": {
+        "2023": {
+          "n": 232,
+          "ll_primary": 0.6816910534594613,
+          "mean_p": 0.4939862292965564,
+          "actual_rate": 0.5646551724137931,
+          "calibration_diff": -0.07066894311723669,
+          "calibration_se": 0.03218792841925294
+        },
+        "2024": {
+          "n": 229,
+          "ll_primary": 0.7507953653222951,
+          "mean_p": 0.5383937038358986,
+          "actual_rate": 0.4759825327510917,
+          "calibration_diff": 0.06241117108480692,
+          "calibration_se": 0.03452074801837395
+        }
+      },
+      "sign_check": null,
+      "dev_pass": false
+    },
+    "x7": {
+      "pooled": {
+        "n": 461,
+        "ll_primary": 0.7356715323507051,
+        "mean_p": 0.5116311561246688,
+        "actual_rate": 0.5206073752711496,
+        "calibration_diff": -0.008976219146480795,
+        "calibration_se": 0.024118152043840095
+      },
+      "seasons": {
+        "2023": {
+          "n": 232,
+          "ll_primary": 0.6821050161043514,
+          "mean_p": 0.4955362515867911,
+          "actual_rate": 0.5646551724137931,
+          "calibration_diff": -0.06911892082700205,
+          "calibration_se": 0.03220995658270658
+        },
+        "2024": {
+          "n": 229,
+          "ll_primary": 0.7899397933513778,
+          "mean_p": 0.5279369109403355,
+          "actual_rate": 0.4759825327510917,
+          "calibration_diff": 0.05195437818924378,
+          "calibration_se": 0.0355705940865102
+        }
+      },
+      "sign_check": {
+        "wins": 0,
+        "of": 2,
+        "pass": false
+      },
+      "dev_pass": false
+    }
+  },
+  "baselines": {
+    "base_rate": {
+      "pooled": {
+        "n": 461,
+        "ll_primary": 0.6960150843494243,
+        "mean_p": 0.5148217946873958,
+        "actual_rate": 0.5206073752711496,
+        "calibration_diff": -0.005785580583753958,
+        "calibration_se": 0.023377727856852076
+      },
+      "seasons": {
+        "2023": {
+          "n": 232,
+          "ll_primary": 0.6937480681050703,
+          "mean_p": 0.4977168949771689,
+          "actual_rate": 0.5646551724137931,
+          "calibration_diff": -0.06693827743662421,
+          "calibration_se": 0.032621382297979354
+        },
+        "2024": {
+          "n": 229,
+          "ll_primary": 0.6983117994965429,
+          "mean_p": 0.532150776053215,
+          "actual_rate": 0.4759825327510917,
+          "calibration_diff": 0.05616824330212333,
+          "calibration_se": 0.03307508478639115
+        }
+      }
+    },
+    "naive": {
+      "pooled": {
+        "n": 461,
+        "ll_primary": 0.7343073636157313,
+        "mean_p": 0.5467833861352158,
+        "actual_rate": 0.5206073752711496,
+        "calibration_diff": 0.0261760108640662,
+        "calibration_se": 0.024153157045430494
+      },
+      "seasons": {
+        "2023": {
+          "n": 232,
+          "ll_primary": 0.7018565670146384,
+          "mean_p": 0.47979534956567976,
+          "actual_rate": 0.5646551724137931,
+          "calibration_diff": -0.08485982284811339,
+          "calibration_se": 0.032705051742233496
+        },
+        "2024": {
+          "n": 229,
+          "ll_primary": 0.7671832798229522,
+          "mean_p": 0.6146489952362306,
+          "actual_rate": 0.4759825327510917,
+          "calibration_diff": 0.13866646248513895,
+          "calibration_se": 0.03407658794982622
+        }
+      }
+    }
+  },
+  "dev_passing_arms": [],
+  "gate_zero_dev_pass": false
+}

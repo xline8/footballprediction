@@ -1,0 +1,41 @@
+{
+  "protocol": {
+    "virgin_read": false,
+    "dead_arms_not_read": [
+      "gate_zero",
+      "x8"
+    ]
+  },
+  "arms": {},
+  "referee_coverage": {
+    "dev": {
+      "2023 - Apertura": {
+        "known": 164,
+        "n": 165,
+        "fraction": 0.9939393939393939
+      },
+      "2023 - Clausura": {
+        "known": 163,
+        "n": 169,
+        "fraction": 0.9644970414201184
+      },
+      "2024 - Apertura": {
+        "known": 149,
+        "n": 153,
+        "fraction": 0.9738562091503268
+      },
+      "2024 - Clausura": {
+        "known": 110,
+        "n": 153,
+        "fraction": 0.7189542483660131
+      }
+    },
+    "virgin": {}
+  },
+  "verdict": "FAIL",
+  "shipped_arm": null,
+  "legs": {
+    "dev_gate": false,
+    "virgin_read": false
+  }
+}

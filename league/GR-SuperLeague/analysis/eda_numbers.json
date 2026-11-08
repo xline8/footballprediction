@@ -1,0 +1,607 @@
+{
+  "n": 1261,
+  "seasons": [
+    "2021/2022",
+    "2022/2023",
+    "2023/2024",
+    "2024/2025",
+    "2025/2026",
+    "2026/2027"
+  ],
+  "team_ids": 21,
+  "per_season": {
+    "2021/2022": {
+      "n": 240,
+      "teams": 14,
+      "goals": 2.375,
+      "home_goals": 1.308,
+      "away_goals": 1.067,
+      "sot": 8.608,
+      "corners": 8.963,
+      "shots": 16.887,
+      "yellows": 4.467,
+      "xg_stats": null,
+      "xg_set_play": null,
+      "coverage": {
+        "stats_all": 100.0,
+        "period_splits": 0.0,
+        "referee": 0.0,
+        "box_touches": 0.0,
+        "stats_xg": 0.0,
+        "stats_xg_set_play": 0.0,
+        "shotmap": 0.0,
+        "shotmap_xg": 0.0,
+        "xgot_population_rate": 0.0,
+        "xgot_population_shots": 0,
+        "shotmap_shots": 0
+      }
+    },
+    "2022/2023": {
+      "n": 240,
+      "teams": 14,
+      "goals": 2.35,
+      "home_goals": 1.283,
+      "away_goals": 1.067,
+      "sot": 7.425,
+      "corners": 8.571,
+      "shots": 21.958,
+      "yellows": 3.971,
+      "xg_stats": null,
+      "xg_set_play": null,
+      "coverage": {
+        "stats_all": 100.0,
+        "period_splits": 21.2,
+        "referee": 89.6,
+        "box_touches": 82.5,
+        "stats_xg": 0.0,
+        "stats_xg_set_play": 0.0,
+        "shotmap": 0.0,
+        "shotmap_xg": 0.0,
+        "xgot_population_rate": 0.0,
+        "xgot_population_shots": 0,
+        "shotmap_shots": 0
+      }
+    },
+    "2023/2024": {
+      "n": 240,
+      "teams": 14,
+      "goals": 2.971,
+      "home_goals": 1.667,
+      "away_goals": 1.304,
+      "sot": 8.742,
+      "corners": 8.879,
+      "shots": 24.158,
+      "yellows": 5.208,
+      "xg_stats": 2.952,
+      "xg_set_play": 0.603,
+      "coverage": {
+        "stats_all": 100.0,
+        "period_splits": 100.0,
+        "referee": 99.6,
+        "box_touches": 89.6,
+        "stats_xg": 5.0,
+        "stats_xg_set_play": 5.0,
+        "shotmap": 5.0,
+        "shotmap_xg": 5.0,
+        "xgot_population_rate": 35.8,
+        "xgot_population_shots": 110,
+        "shotmap_shots": 307
+      }
+    },
+    "2024/2025": {
+      "n": 236,
+      "teams": 14,
+      "goals": 2.449,
+      "home_goals": 1.297,
+      "away_goals": 1.153,
+      "sot": 8.14,
+      "corners": 8.754,
+      "shots": 23.686,
+      "yellows": 5.199,
+      "xg_stats": 2.493,
+      "xg_set_play": 0.417,
+      "coverage": {
+        "stats_all": 100.0,
+        "period_splits": 97.9,
+        "referee": 73.7,
+        "box_touches": 97.9,
+        "stats_xg": 2.5,
+        "stats_xg_set_play": 2.5,
+        "shotmap": 2.5,
+        "shotmap_xg": 2.5,
+        "xgot_population_rate": 98.6,
+        "xgot_population_shots": 143,
+        "shotmap_shots": 145
+      }
+    },
+    "2025/2026": {
+      "n": 236,
+      "teams": 14,
+      "goals": 2.568,
+      "home_goals": 1.424,
+      "away_goals": 1.144,
+      "sot": 7.979,
+      "corners": 8.75,
+      "shots": 23.78,
+      "yellows": 4.847,
+      "xg_stats": 2.612,
+      "xg_set_play": 0.578,
+      "coverage": {
+        "stats_all": 100.0,
+        "period_splits": 100.0,
+        "referee": 82.6,
+        "box_touches": 100.0,
+        "stats_xg": 100.0,
+        "stats_xg_set_play": 100.0,
+        "shotmap": 100.0,
+        "shotmap_xg": 100.0,
+        "xgot_population_rate": 99.7,
+        "xgot_population_shots": 5609,
+        "shotmap_shots": 5627
+      }
+    },
+    "2026/2027": {
+      "n": 69,
+      "teams": 14,
+      "goals": 2.725,
+      "home_goals": 1.71,
+      "away_goals": 1.014,
+      "sot": 7.957,
+      "corners": 8.986,
+      "shots": 25.261,
+      "yellows": 4.681,
+      "xg_stats": 2.65,
+      "xg_set_play": 0.525,
+      "coverage": {
+        "stats_all": 100.0,
+        "period_splits": 100.0,
+        "referee": 100.0,
+        "box_touches": 100.0,
+        "stats_xg": 100.0,
+        "stats_xg_set_play": 98.6,
+        "shotmap": 100.0,
+        "shotmap_xg": 100.0,
+        "xgot_population_rate": 99.8,
+        "xgot_population_shots": 1743,
+        "shotmap_shots": 1747
+      }
+    }
+  },
+  "phase_levels": {
+    "2021/2022": {
+      "regular": 182,
+      "playoff_championship": 30,
+      "playoff_relegation": 28
+    },
+    "2022/2023": {
+      "regular": 182,
+      "playoff_championship": 30,
+      "playoff_relegation": 28
+    },
+    "2023/2024": {
+      "regular": 182,
+      "playoff_championship": 30,
+      "playoff_relegation": 28
+    },
+    "2024/2025": {
+      "regular": 182,
+      "playoff_championship": 12,
+      "playoff_conference": 12,
+      "playoff_relegation": 30
+    },
+    "2025/2026": {
+      "regular": 182,
+      "playoff_championship": 12,
+      "playoff_conference": 12,
+      "playoff_relegation": 30
+    },
+    "2026/2027": {
+      "regular": 69
+    }
+  },
+  "cards_check": {
+    "n": 1017,
+    "exact_agree_pct": 81.4,
+    "stats_lower_pct": 15.7,
+    "stats_higher_pct": 2.9,
+    "mean_stats_minus_events": -0.25,
+    "max_abs_diff": 8.0,
+    "unified_target": "stats yellow_cards, events fallback when stats card absent",
+    "exact_agree_including_yellowred_pct": 80.9
+  },
+  "reliability": {
+    "goals_for": 0.867,
+    "goals_against": 0.742,
+    "sot_for": 0.85,
+    "sot_against": 0.808,
+    "corners_for": 0.833,
+    "corners_against": 0.714,
+    "yellows_for": 0.686,
+    "yellows_against": 0.488,
+    "shots_for": 0.907,
+    "shots_against": 0.88,
+    "box_touches_for": 0.953,
+    "box_touches_against": 0.855,
+    "possession": 0.931,
+    "big_chances": 0.86
+  },
+  "reliability_nteams": {
+    "goals_for": 19,
+    "goals_against": 19,
+    "sot_for": 19,
+    "sot_against": 19,
+    "corners_for": 19,
+    "corners_against": 19,
+    "yellows_for": 19,
+    "yellows_against": 19,
+    "shots_for": 19,
+    "shots_against": 19,
+    "box_touches_for": 18,
+    "box_touches_against": 18,
+    "possession": 19,
+    "big_chances": 18
+  },
+  "stats_xg_era": [
+    "2023/2024",
+    "2024/2025",
+    "2025/2026",
+    "2026/2027"
+  ],
+  "stats_xg_reliability": 0.83,
+  "stats_xg_reliability_nteams": 14,
+  "stats_xg_set_play_reliability": 0.165,
+  "stats_xg_set_play_reliability_nteams": 14,
+  "referee_reliability": 0.262,
+  "referee_reliability_nrefs": 15,
+  "referee_count": 117,
+  "ratio_reliability": {
+    "stats_xg_per_shot": 0.67,
+    "shotmap_xg_per_shot": 0.665,
+    "xgot_per_shot": 0.264,
+    "set_play_xg_share": 0.193,
+    "on_target_rate": 0.083
+  },
+  "ratio_reliability_nteams": {
+    "stats_xg_per_shot": 14,
+    "shotmap_xg_per_shot": 14,
+    "xgot_per_shot": 16,
+    "set_play_xg_share": 14,
+    "on_target_rate": 14
+  },
+  "shotmap_xg_era": [
+    "2025/2026",
+    "2026/2027"
+  ],
+  "xgot_era": [
+    "2025/2026",
+    "2026/2027"
+  ],
+  "half_complete_seasons": [
+    "2023/2024",
+    "2024/2025",
+    "2025/2026"
+  ],
+  "half_shares": {
+    "ShotsOnTarget": {
+      "n": 707,
+      "share_ratio_of_sums": 0.453,
+      "observed_var": 0.0379,
+      "true_var": 0.0019,
+      "true_sd": 0.0441
+    },
+    "corners": {
+      "n": 707,
+      "share_ratio_of_sums": 0.4862,
+      "observed_var": 0.0385,
+      "true_var": 0.0053,
+      "true_sd": 0.0731
+    },
+    "total_shots": {
+      "n": 707,
+      "share_ratio_of_sums": 0.4611,
+      "observed_var": 0.0111,
+      "true_var": 0.0,
+      "true_sd": 0.0025
+    },
+    "yellow_cards": {
+      "n": 697,
+      "share_ratio_of_sums": 0.3522,
+      "observed_var": 0.0631,
+      "true_var": 0.0048,
+      "true_sd": 0.0694
+    },
+    "goals": {
+      "n": 662,
+      "share_ratio_of_sums": 0.4528,
+      "observed_var": 0.1064,
+      "true_var": -0.0076,
+      "true_sd": 0.0
+    },
+    "xg_stats": {
+      "n": 254,
+      "share_ratio_of_sums": 0.4455,
+      "observed_var": 0.0344,
+      "true_var": -0.0745,
+      "true_sd": 0.0
+    }
+  },
+  "newcomers": [
+    {
+      "season": "2022/2023",
+      "team_id": "4493",
+      "n": 33,
+      "gf": 0.758,
+      "ga": 1.455
+    },
+    {
+      "season": "2023/2024",
+      "team_id": "104814",
+      "n": 33,
+      "gf": 1.121,
+      "ga": 1.606
+    },
+    {
+      "season": "2023/2024",
+      "team_id": "488099",
+      "n": 33,
+      "gf": 1.152,
+      "ga": 2.061
+    },
+    {
+      "season": "2024/2025",
+      "team_id": "4493",
+      "n": 36,
+      "gf": 1.389,
+      "ga": 1.194
+    },
+    {
+      "season": "2024/2025",
+      "team_id": "7975",
+      "n": 36,
+      "gf": 1,
+      "ga": 1.444
+    },
+    {
+      "season": "2025/2026",
+      "team_id": "488099",
+      "n": 36,
+      "gf": 1.111,
+      "ga": 1.417
+    },
+    {
+      "season": "2025/2026",
+      "team_id": "8120",
+      "n": 36,
+      "gf": 0.944,
+      "ga": 1.556
+    },
+    {
+      "season": "2026/2027",
+      "team_id": "1585",
+      "n": 10,
+      "gf": 1.5,
+      "ga": 1.9
+    },
+    {
+      "season": "2026/2027",
+      "team_id": "8675",
+      "n": 10,
+      "gf": 1.1,
+      "ga": 1.4
+    }
+  ],
+  "newcomer_gaps": {
+    "n": 9,
+    "expected_per_transition": 3,
+    "newcomer_gf": 1.119,
+    "newcomer_ga": 1.559,
+    "league_team_gf": 1.276,
+    "league_team_ga": 1.276,
+    "gf_gap": -0.157,
+    "ga_gap": 0.283,
+    "by_transition": {
+      "2022/2023": {
+        "n": 1,
+        "gf": 0.758,
+        "ga": 1.455
+      },
+      "2023/2024": {
+        "n": 2,
+        "gf": 1.136,
+        "ga": 1.833
+      },
+      "2024/2025": {
+        "n": 2,
+        "gf": 1.195,
+        "ga": 1.319
+      },
+      "2025/2026": {
+        "n": 2,
+        "gf": 1.027,
+        "ga": 1.486
+      },
+      "2026/2027": {
+        "n": 2,
+        "gf": 1.3,
+        "ga": 1.65
+      }
+    }
+  },
+  "finishing": {
+    "2023/2024": 20.13,
+    "2024/2025": 38.636,
+    "2025/2026": 0.983,
+    "2026/2027": 1.028
+  },
+  "on_target_rate": {
+    "2021/2022": 0.51,
+    "2022/2023": 0.338,
+    "2023/2024": 0.362,
+    "2024/2025": 0.344,
+    "2025/2026": 0.336,
+    "2026/2027": 0.315
+  },
+  "pooled_complete": {
+    "n": 1192,
+    "home_goals": 1.396,
+    "away_goals": 1.147,
+    "goals": 2.543,
+    "home_win_pct": 42.0,
+    "draw_pct": 26.2,
+    "away_win_pct": 31.8
+  },
+  "dev_over_rates": {
+    "goals": {
+      "n": 956,
+      "over_rate": 0.482
+    },
+    "sot": {
+      "7.5": {
+        "n": 956,
+        "over_rate": 0.562
+      },
+      "8.5": {
+        "n": 956,
+        "over_rate": 0.447
+      },
+      "9.5": {
+        "n": 956,
+        "over_rate": 0.326
+      },
+      "10.5": {
+        "n": 956,
+        "over_rate": 0.219
+      }
+    },
+    "corners": {
+      "7.5": {
+        "n": 956,
+        "over_rate": 0.633
+      },
+      "8.5": {
+        "n": 956,
+        "over_rate": 0.517
+      },
+      "9.5": {
+        "n": 956,
+        "over_rate": 0.386
+      },
+      "10.5": {
+        "n": 956,
+        "over_rate": 0.283
+      }
+    },
+    "yellows": {
+      "3.5": {
+        "n": 956,
+        "over_rate": 0.699
+      },
+      "4.5": {
+        "n": 956,
+        "over_rate": 0.52
+      },
+      "5.5": {
+        "n": 956,
+        "over_rate": 0.359
+      }
+    },
+    "shots": {
+      "21.5": {
+        "n": 956,
+        "over_rate": 0.49
+      },
+      "22.5": {
+        "n": 956,
+        "over_rate": 0.43
+      },
+      "23.5": {
+        "n": 956,
+        "over_rate": 0.359
+      },
+      "24.5": {
+        "n": 956,
+        "over_rate": 0.297
+      },
+      "25.5": {
+        "n": 956,
+        "over_rate": 0.241
+      }
+    }
+  },
+  "scored_dev_over_rates": {
+    "shots": {
+      "21.5": {
+        "n": 716,
+        "over_rate": 0.595
+      },
+      "22.5": {
+        "n": 716,
+        "over_rate": 0.534
+      },
+      "23.5": {
+        "n": 716,
+        "over_rate": 0.447
+      },
+      "24.5": {
+        "n": 716,
+        "over_rate": 0.376
+      },
+      "25.5": {
+        "n": 716,
+        "over_rate": 0.306
+      }
+    },
+    "corners": {
+      "7.5": {
+        "n": 716,
+        "over_rate": 0.631
+      },
+      "8.5": {
+        "n": 716,
+        "over_rate": 0.508
+      },
+      "9.5": {
+        "n": 716,
+        "over_rate": 0.376
+      }
+    },
+    "sot": {
+      "7.5": {
+        "n": 716,
+        "over_rate": 0.557
+      },
+      "8.5": {
+        "n": 716,
+        "over_rate": 0.429
+      },
+      "9.5": {
+        "n": 716,
+        "over_rate": 0.3
+      }
+    },
+    "yellows": {
+      "3.5": {
+        "n": 716,
+        "over_rate": 0.711
+      },
+      "4.5": {
+        "n": 716,
+        "over_rate": 0.546
+      },
+      "5.5": {
+        "n": 716,
+        "over_rate": 0.388
+      }
+    }
+  },
+  "primary_lines": {
+    "goals": 2.5,
+    "sot": 8.5,
+    "corners": 8.5,
+    "yellows": 4.5,
+    "shots": 22.5
+  },
+  "dev_n": 956,
+  "virgin_n": 236,
+  "confirmatory_n": 69
+}

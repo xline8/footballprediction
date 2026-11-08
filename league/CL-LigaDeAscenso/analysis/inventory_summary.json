@@ -1,0 +1,80 @@
+{
+ "2021": {
+  "rows": 246,
+  "finished": 184,
+  "finished_regular": 178,
+  "finished_playoff": 6,
+  "unfinished": 62,
+  "stats_flag_index": 0,
+  "stats_content_rows": 0,
+  "dates": [
+   "2021-04-03",
+   "2021-12-10"
+  ]
+ },
+ "2022": {
+  "rows": 280,
+  "finished": 280,
+  "finished_regular": 272,
+  "finished_playoff": 8,
+  "unfinished": 0,
+  "stats_flag_index": 0,
+  "stats_content_rows": 0,
+  "dates": [
+   "2022-02-15",
+   "2022-11-27"
+  ]
+ },
+ "2023": {
+  "rows": 252,
+  "finished": 252,
+  "finished_regular": 240,
+  "finished_playoff": 12,
+  "unfinished": 0,
+  "stats_flag_index": 0,
+  "stats_content_rows": 0,
+  "dates": [
+   "2023-02-10",
+   "2023-12-10"
+  ]
+ },
+ "2024": {
+  "rows": 252,
+  "finished": 252,
+  "finished_regular": 240,
+  "finished_playoff": 12,
+  "unfinished": 0,
+  "stats_flag_index": 0,
+  "stats_content_rows": 0,
+  "dates": [
+   "2024-02-24",
+   "2024-12-07"
+  ]
+ },
+ "2025": {
+  "rows": 252,
+  "finished": 252,
+  "finished_regular": 240,
+  "finished_playoff": 12,
+  "unfinished": 0,
+  "stats_flag_index": 250,
+  "stats_content_rows": 0,
+  "dates": [
+   "2025-02-21",
+   "2025-12-07"
+  ]
+ },
+ "2026": {
+  "rows": 233,
+  "finished": 233,
+  "finished_regular": 233,
+  "finished_playoff": 0,
+  "unfinished": 0,
+  "stats_flag_index": 233,
+  "stats_content_rows": 0,
+  "dates": [
+   "2026-02-20",
+   "2026-10-31"
+  ]
+ }
+}

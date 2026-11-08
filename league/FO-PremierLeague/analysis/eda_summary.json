@@ -1,0 +1,18 @@
+{
+  "league": "FO-PremierLeague",
+  "eligible_matches": 809,
+  "seasons": {
+    "2021": {"n":135,"goals":3.630,"home_goals":1.911,"home_win":0.459,"draw":0.170,"away_win":0.370,"ou25":0.696,"btts":0.519,"yellow_cards":3.778,"yellow_over35":0.541,"yellow_over45":0.341},
+    "2022": {"n":134,"goals":3.276,"home_goals":1.701,"home_win":0.418,"draw":0.172,"away_win":0.410,"ou25":0.619,"btts":0.493,"yellow_cards":3.858,"yellow_over35":0.604,"yellow_over45":0.388},
+    "2023": {"n":135,"goals":3.148,"home_goals":1.719,"home_win":0.474,"draw":0.156,"away_win":0.370,"ou25":0.600,"btts":0.481,"yellow_cards":4.141,"yellow_over35":0.630,"yellow_over45":0.385},
+    "2024": {"n":135,"goals":3.296,"home_goals":1.867,"home_win":0.533,"draw":0.126,"away_win":0.341,"ou25":0.696,"btts":0.481,"yellow_cards":4.252,"yellow_over35":0.600,"yellow_over45":0.363},
+    "2025": {"n":135,"goals":3.630,"home_goals":1.807,"home_win":0.400,"draw":0.200,"away_win":0.400,"ou25":0.719,"btts":0.593,"yellow_cards":3.844,"yellow_over35":0.541,"yellow_over45":0.415},
+    "2026": {"n":135,"goals":2.815,"home_goals":1.467,"home_win":0.393,"draw":0.274,"away_win":0.333,"ou25":0.541,"btts":0.556,"yellow_cards":3.748,"yellow_over35":0.541,"yellow_over45":0.319}
+  },
+  "pooled": {"goals_per_match":3.2991347342,"goals_1h_share":0.4413638067,"yellow_1h_share":0.3476},
+  "half_share_variance": {"observed":0.1005,"binomial_noise":0.0994,"true_estimate":0.0011},
+  "reliability": {"goals_for":0.876,"goals_against":0.928,"yellows_for":0.869,"yellows_against":0.851},
+  "cards_dev_2022_2025": {"mean":4.024,"variance":4.617,"over25":0.744,"over35":0.594,"over45":0.388},
+  "goals_dev_2022_2025": {"mean":3.338,"over25":0.659},
+  "virgin_2026": {"goals_mean":2.815,"goals_over25":0.541,"cards_mean":3.748,"cards_over35":0.541}
+}

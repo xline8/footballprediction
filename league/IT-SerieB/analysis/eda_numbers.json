@@ -1,0 +1,629 @@
+{
+ "levels": {
+  "2021/2022": {
+   "n": 390,
+   "goals": 2.4846153846153847,
+   "home_goals": 1.3846153846153846,
+   "away_goals": 1.1,
+   "hw": 0.4076923076923077,
+   "draw": 0.3,
+   "over25": 0.41794871794871796,
+   "btts": 0.517948717948718,
+   "sot": 8.325641025641026,
+   "sot_n": 390,
+   "corners": 10.128205128205128,
+   "corners_n": 390,
+   "shots": 25.933333333333334,
+   "shots_n": 390,
+   "yellows_stats": 5.005128205128205,
+   "yellows_stats_n": 390,
+   "xg": 2.95,
+   "xg_n": 4,
+   "yellows_events": 5.1692307692307695,
+   "reds_stats": 0.2512820512820513
+  },
+  "2022/2023": {
+   "n": 390,
+   "goals": 2.3282051282051284,
+   "home_goals": 1.2897435897435898,
+   "away_goals": 1.0384615384615385,
+   "hw": 0.41025641025641024,
+   "draw": 0.32051282051282054,
+   "over25": 0.4025641025641026,
+   "btts": 0.4897435897435897,
+   "sot": 7.884615384615385,
+   "sot_n": 390,
+   "corners": 9.846153846153847,
+   "corners_n": 390,
+   "shots": 25.125641025641027,
+   "shots_n": 390,
+   "yellows_stats": 4.812820512820513,
+   "yellows_stats_n": 390,
+   "xg": 2.624,
+   "xg_n": 5,
+   "yellows_events": 5.007692307692308,
+   "reds_stats": 0.29743589743589743
+  },
+  "2023/2024": {
+   "n": 390,
+   "goals": 2.5256410256410255,
+   "home_goals": 1.3461538461538463,
+   "away_goals": 1.1794871794871795,
+   "hw": 0.36923076923076925,
+   "draw": 0.32051282051282054,
+   "over25": 0.48717948717948717,
+   "btts": 0.558974358974359,
+   "sot": 8.197435897435897,
+   "sot_n": 390,
+   "corners": 9.535897435897436,
+   "corners_n": 390,
+   "shots": 25.671794871794873,
+   "shots_n": 390,
+   "yellows_stats": 4.964102564102564,
+   "yellows_stats_n": 390,
+   "xg": 3.57,
+   "xg_n": 1,
+   "yellows_events": 5.064102564102564,
+   "reds_stats": 0.24871794871794872
+  },
+  "2024/2025": {
+   "n": 389,
+   "goals": 2.4601542416452444,
+   "home_goals": 1.3547557840616966,
+   "away_goals": 1.1053984575835476,
+   "hw": 0.4087403598971722,
+   "draw": 0.33161953727506427,
+   "over25": 0.4601542416452442,
+   "btts": 0.5347043701799485,
+   "sot": 8.077120822622108,
+   "sot_n": 389,
+   "corners": 9.0,
+   "corners_n": 389,
+   "shots": 25.640102827763496,
+   "shots_n": 389,
+   "yellows_stats": 4.84020618556701,
+   "yellows_stats_n": 388,
+   "xg": 2.6366666666666667,
+   "xg_n": 3,
+   "yellows_events": 4.907455012853471,
+   "reds_stats": 0.2519280205655527
+  },
+  "2025/2026": {
+   "n": 390,
+   "goals": 2.546153846153846,
+   "home_goals": 1.4794871794871796,
+   "away_goals": 1.0666666666666667,
+   "hw": 0.44871794871794873,
+   "draw": 0.31025641025641026,
+   "over25": 0.48205128205128206,
+   "btts": 0.5333333333333333,
+   "sot": 8.417948717948718,
+   "sot_n": 390,
+   "corners": 9.497435897435897,
+   "corners_n": 390,
+   "shots": 26.102564102564102,
+   "shots_n": 390,
+   "yellows_stats": 4.274358974358974,
+   "yellows_stats_n": 390,
+   "xg": 2.5835128205128206,
+   "xg_n": 390,
+   "yellows_events": 4.361538461538461,
+   "reds_stats": 0.24102564102564103
+  },
+  "2026/2027": {
+   "n": 110,
+   "goals": 2.609090909090909,
+   "home_goals": 1.3454545454545455,
+   "away_goals": 1.2636363636363637,
+   "hw": 0.36363636363636365,
+   "draw": 0.3181818181818182,
+   "over25": 0.4818181818181818,
+   "btts": 0.5909090909090909,
+   "sot": 8.472727272727273,
+   "sot_n": 110,
+   "corners": 9.572727272727272,
+   "corners_n": 110,
+   "shots": 27.645454545454545,
+   "shots_n": 110,
+   "yellows_stats": 3.8727272727272726,
+   "yellows_stats_n": 110,
+   "xg": 2.702363636363636,
+   "xg_n": 110,
+   "yellows_events": 3.963636363636364,
+   "reds_stats": 0.17272727272727273
+  }
+ },
+ "over_rates": {
+  "eval_2022_2025": {
+   "sot": {
+    "6.5": 0.6766,
+    "7.5": 0.5492,
+    "8.5": 0.4234,
+    "9.5": 0.2943
+   },
+   "corners": {
+    "8.5": 0.6022,
+    "9.5": 0.4782,
+    "10.5": 0.3601
+   },
+   "cards_events": {
+    "3.5": 0.7665,
+    "4.5": 0.5843,
+    "5.5": 0.3704
+   },
+   "cards_stats": {
+    "3.5": 0.7491,
+    "4.5": 0.5565,
+    "5.5": 0.3587
+   },
+   "shots": {
+    "22.5": 0.6741,
+    "23.5": 0.6116,
+    "24.5": 0.5398,
+    "25.5": 0.4748
+   },
+   "goals": {
+    "2.5": 0.45
+   }
+  },
+  "dev_2021_2025": {
+   "sot": {
+    "6.5": 0.6883,
+    "7.5": 0.5619,
+    "8.5": 0.4317,
+    "9.5": 0.3028
+   },
+   "corners": {
+    "8.5": 0.6158,
+    "9.5": 0.4945,
+    "10.5": 0.3752
+   },
+   "cards_events": {
+    "3.5": 0.7736,
+    "4.5": 0.5882,
+    "5.5": 0.3887
+   },
+   "cards_stats": {
+    "3.5": 0.7535,
+    "4.5": 0.561,
+    "5.5": 0.3742
+   },
+   "shots": {
+    "22.5": 0.687,
+    "23.5": 0.6228,
+    "24.5": 0.5497,
+    "25.5": 0.4798
+   },
+   "goals": {
+    "2.5": 0.4419
+   }
+  }
+ },
+ "cards_check_dev": {
+  "2021/2022": {
+   "stats_total": 1952.0,
+   "events_yellow_total": 2016,
+   "stats_vs_events_pct": -3.17,
+   "exact_agree_yellow_only": 0.8154,
+   "exact_agree_yellow_plus_yr": 0.8077,
+   "stats_zero_but_events_positive": 4
+  },
+  "2022/2023": {
+   "stats_total": 1877.0,
+   "events_yellow_total": 1953,
+   "stats_vs_events_pct": -3.89,
+   "exact_agree_yellow_only": 0.7974,
+   "exact_agree_yellow_plus_yr": 0.7923,
+   "stats_zero_but_events_positive": 5
+  },
+  "2023/2024": {
+   "stats_total": 1936.0,
+   "events_yellow_total": 1975,
+   "stats_vs_events_pct": -1.97,
+   "exact_agree_yellow_only": 0.841,
+   "exact_agree_yellow_plus_yr": 0.8359,
+   "stats_zero_but_events_positive": 0
+  },
+  "2024/2025": {
+   "stats_total": 1878.0,
+   "events_yellow_total": 1909,
+   "stats_vs_events_pct": -1.62,
+   "exact_agree_yellow_only": 0.8972,
+   "exact_agree_yellow_plus_yr": 0.8946,
+   "stats_zero_but_events_positive": 1
+  },
+  "2025/2026_descriptive": {
+   "stats_total": 1667.0,
+   "events_yellow_total": 1701,
+   "exact_agree_yellow_only": 0.8744
+  }
+ },
+ "reliability": {
+  "goals_for": {
+   "r": 0.531,
+   "n_teams": 46
+  },
+  "goals_against": {
+   "r": 0.457,
+   "n_teams": 46
+  },
+  "sot_for": {
+   "r": 0.555,
+   "n_teams": 46
+  },
+  "sot_against": {
+   "r": 0.631,
+   "n_teams": 46
+  },
+  "corners_for": {
+   "r": 0.296,
+   "n_teams": 46
+  },
+  "corners_against": {
+   "r": 0.403,
+   "n_teams": 46
+  },
+  "shots_for": {
+   "r": 0.367,
+   "n_teams": 46
+  },
+  "shots_against": {
+   "r": 0.528,
+   "n_teams": 46
+  },
+  "yellows_events_for": {
+   "r": 0.475,
+   "n_teams": 46
+  },
+  "yellows_stats_for": {
+   "r": 0.431,
+   "n_teams": 44
+  },
+  "possession": {
+   "r": 0.788,
+   "n_teams": 46
+  },
+  "big_chance_for": {
+   "r": 0.352,
+   "n_teams": 44
+  },
+  "box_touches_for": {
+   "r": 0.32,
+   "n_teams": 16
+  },
+  "box_touches_against": {
+   "r": -0.129,
+   "n_teams": 16
+  }
+ },
+ "reliability_goals_by_season": {
+  "2021/2022": {
+   "gf": {
+    "r": 0.583,
+    "n_teams": 20
+   },
+   "ga": {
+    "r": 0.535,
+    "n_teams": 20
+   }
+  },
+  "2022/2023": {
+   "gf": {
+    "r": 0.113,
+    "n_teams": 20
+   },
+   "ga": {
+    "r": 0.513,
+    "n_teams": 20
+   }
+  },
+  "2023/2024": {
+   "gf": {
+    "r": 0.182,
+    "n_teams": 20
+   },
+   "ga": {
+    "r": 0.55,
+    "n_teams": 20
+   }
+  },
+  "2024/2025": {
+   "gf": {
+    "r": 0.441,
+    "n_teams": 20
+   },
+   "ga": {
+    "r": 0.017,
+    "n_teams": 20
+   }
+  },
+  "2025/2026": {
+   "gf": {
+    "r": 0.538,
+    "n_teams": 20
+   },
+   "ga": {
+    "r": 0.517,
+    "n_teams": 20
+   }
+  },
+  "2026/2027": {
+   "gf": {
+    "r": 0.202,
+    "n_teams": 20
+   },
+   "ga": {
+    "r": 0.289,
+    "n_teams": 20
+   }
+  }
+ },
+ "half_shares": {
+  "seasons_used": [
+   "2023/2024",
+   "2024/2025",
+   "2025/2026",
+   "2026/2027"
+  ],
+  "sot": {
+   "share_ratio_of_sums": 0.4573,
+   "n": 1278,
+   "obs_sd": 0.1889,
+   "exp_sd_approx": 0.1734,
+   "true_sd": 0.0748
+  },
+  "corners": {
+   "share_ratio_of_sums": 0.4722,
+   "n": 1277,
+   "obs_sd": 0.1796,
+   "exp_sd_approx": 0.163,
+   "true_sd": 0.0753
+  },
+  "shots": {
+   "share_ratio_of_sums": 0.4643,
+   "n": 1278,
+   "obs_sd": 0.1022,
+   "exp_sd_approx": 0.0979,
+   "true_sd": 0.0294
+  },
+  "goals_events": {
+   "share_ratio_of_sums": 0.4479,
+   "n": 1279
+  },
+  "yellows_events": {
+   "share_ratio_of_sums": 0.3702,
+   "n": 1279
+  }
+ },
+ "referee": {
+  "n_referees_ge10_dev": 54,
+  "split_half_r": 0.061,
+  "coverage_by_season": {
+   "2021/2022": 0.4744,
+   "2022/2023": 0.9718,
+   "2023/2024": 0.7974,
+   "2024/2025": 0.7404,
+   "2025/2026": 0.7538,
+   "2026/2027": 0.9
+  }
+ },
+ "movers": {
+  "2022/2023": {
+   "churn_new_teams": 7,
+   "mu_team_goals": 1.1641,
+   "by_source": {
+    "serie_c": {
+     "n_clubs": 4,
+     "team_matches": 159,
+     "gf": 1.2264,
+     "ga": 1.1132,
+     "dgf": 0.0623,
+     "dga": -0.0509,
+     "clubs": [
+      "Bari",
+      "Modena",
+      "Palermo",
+      "Sudtirol"
+     ]
+    },
+    "serie_a": {
+     "n_clubs": 3,
+     "team_matches": 120,
+     "gf": 1.35,
+     "ga": 0.9833,
+     "dgf": 0.1859,
+     "dga": -0.1808,
+     "clubs": [
+      "Cagliari",
+      "Genoa",
+      "Venezia"
+     ]
+    }
+   }
+  },
+  "2023/2024": {
+   "churn_new_teams": 7,
+   "mu_team_goals": 1.2628,
+   "by_source": {
+    "serie_c": {
+     "n_clubs": 4,
+     "team_matches": 155,
+     "gf": 1.1806,
+     "ga": 1.5613,
+     "dgf": -0.0822,
+     "dga": 0.2985,
+     "clubs": [
+      "AC Reggiana 1919",
+      "Catanzaro",
+      "FeralpiSalo",
+      "Lecco"
+     ]
+    },
+    "serie_a": {
+     "n_clubs": 3,
+     "team_matches": 119,
+     "gf": 1.2185,
+     "ga": 1.1513,
+     "dgf": -0.0443,
+     "dga": -0.1116,
+     "clubs": [
+      "Cremonese",
+      "Sampdoria",
+      "Spezia"
+     ]
+    }
+   }
+  },
+  "2024/2025": {
+   "churn_new_teams": 7,
+   "mu_team_goals": 1.2301,
+   "by_source": {
+    "serie_a": {
+     "n_clubs": 3,
+     "team_matches": 115,
+     "gf": 1.3217,
+     "ga": 1.1913,
+     "dgf": 0.0917,
+     "dga": -0.0388,
+     "clubs": [
+      "Frosinone",
+      "Salernitana",
+      "Sassuolo"
+     ]
+    },
+    "serie_c": {
+     "n_clubs": 4,
+     "team_matches": 156,
+     "gf": 1.1346,
+     "ga": 1.2692,
+     "dgf": -0.0955,
+     "dga": 0.0392,
+     "clubs": [
+      "Carrarese",
+      "Cesena",
+      "Juve Stabia",
+      "Mantova"
+     ]
+    }
+   }
+  },
+  "2025/2026": {
+   "churn_new_teams": 7,
+   "mu_team_goals": 1.2731,
+   "by_source": {
+    "serie_a": {
+     "n_clubs": 3,
+     "team_matches": 118,
+     "gf": 1.6186,
+     "ga": 1.0339,
+     "dgf": 0.3456,
+     "dga": -0.2392,
+     "clubs": [
+      "Empoli",
+      "Monza",
+      "Venezia"
+     ]
+    },
+    "serie_c": {
+     "n_clubs": 4,
+     "team_matches": 153,
+     "gf": 1.1046,
+     "ga": 1.4641,
+     "dgf": -0.1685,
+     "dga": 0.191,
+     "clubs": [
+      "Avellino",
+      "Padova",
+      "Pescara",
+      "Virtus Entella"
+     ]
+    }
+   }
+  },
+  "2026/2027": {
+   "churn_new_teams": 7,
+   "mu_team_goals": 1.3045,
+   "by_source": {
+    "serie_a": {
+     "n_clubs": 3,
+     "team_matches": 33,
+     "gf": 1.6061,
+     "ga": 1.2727,
+     "dgf": 0.3015,
+     "dga": -0.0318,
+     "clubs": [
+      "Cremonese",
+      "Hellas Verona",
+      "Pisa"
+     ]
+    },
+    "serie_c": {
+     "n_clubs": 4,
+     "team_matches": 44,
+     "gf": 1.25,
+     "ga": 1.4091,
+     "dgf": -0.0545,
+     "dga": 0.1045,
+     "clubs": [
+      "Arezzo",
+      "Ascoli",
+      "Benevento",
+      "LR Vicenza"
+     ]
+    }
+   }
+  }
+ },
+ "movers_pooled_entry_2022_2026": {
+  "serie_a": {
+   "team_matches": 472,
+   "gf": 1.3771,
+   "ga": 1.089,
+   "mu": 1.2323,
+   "dgf": 0.1448,
+   "dga": -0.1433
+  },
+  "serie_c": {
+   "team_matches": 623,
+   "gf": 1.1621,
+   "ga": 1.3499,
+   "mu": 1.232,
+   "dgf": -0.0698,
+   "dga": 0.118
+  }
+ },
+ "movers_pooled_entry_all": {
+  "serie_a": {
+   "team_matches": 505,
+   "gf": 1.3921,
+   "ga": 1.101,
+   "mu": 1.237,
+   "dgf": 0.155,
+   "dga": -0.136
+  },
+  "serie_c": {
+   "team_matches": 667,
+   "gf": 1.1679,
+   "ga": 1.3538,
+   "mu": 1.2367,
+   "dgf": -0.0688,
+   "dga": 0.1171
+  }
+ },
+ "home_adv_pooled_complete": {
+  "home_goals": 1.370959466393022,
+  "away_goals": 1.0979989738327347,
+  "ratio": 1.2486,
+  "n": 1949
+ },
+ "xg_descriptive": {
+  "2025/2026": {
+   "goals_over_xg": 0.9855,
+   "n_with_xg": 390
+  },
+  "2026/2027": {
+   "goals_over_xg": 0.9655,
+   "n_with_xg": 110
+  }
+ }
+}

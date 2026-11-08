@@ -1,0 +1,303 @@
+{
+  "league": "UZ-Superliga",
+  "season": "2026",
+  "scope": "descriptive scores-only EDA",
+  "levels": {
+    "n": 215,
+    "total_goals": 565,
+    "goals_per_match": 2.627907,
+    "home_goals_per_match": 1.390698,
+    "away_goals_per_match": 1.237209,
+    "home_win_rate": 0.413953,
+    "draw_rate": 0.232558,
+    "away_win_rate": 0.353488,
+    "over_1_5_rate": 0.716279,
+    "over_2_5_rate": 0.534884,
+    "over_3_5_rate": 0.269767,
+    "btts_rate": 0.562791,
+    "home_clean_sheet_rate": 0.265116,
+    "away_clean_sheet_rate": 0.255814,
+    "goal_distribution": {
+      "0": 18,
+      "1": 43,
+      "2": 39,
+      "3": 57,
+      "4": 32,
+      "5": 16,
+      "6": 10
+    }
+  },
+  "team_attack_defence": {
+    "AGMK": {
+      "matches": 27,
+      "gf_per_match": 1.444444,
+      "ga_per_match": 1.296296
+    },
+    "Andijon": {
+      "matches": 27,
+      "gf_per_match": 1.148148,
+      "ga_per_match": 1.37037
+    },
+    "Bunyodkor Tashkent": {
+      "matches": 26,
+      "gf_per_match": 1.038462,
+      "ga_per_match": 1.653846
+    },
+    "Buxoro": {
+      "matches": 27,
+      "gf_per_match": 1.407407,
+      "ga_per_match": 1.259259
+    },
+    "Dinamo Samarkand": {
+      "matches": 27,
+      "gf_per_match": 1.555556,
+      "ga_per_match": 1.481481
+    },
+    "Kokand 1912": {
+      "matches": 27,
+      "gf_per_match": 0.962963,
+      "ga_per_match": 1.444444
+    },
+    "Lokomotiv Tashkent": {
+      "matches": 27,
+      "gf_per_match": 1.62963,
+      "ga_per_match": 1.259259
+    },
+    "Mashal Muborak": {
+      "matches": 27,
+      "gf_per_match": 0.444444,
+      "ga_per_match": 1.962963
+    },
+    "Nasaf Qarshi": {
+      "matches": 27,
+      "gf_per_match": 1.444444,
+      "ga_per_match": 0.888889
+    },
+    "Navbahor Namangan": {
+      "matches": 27,
+      "gf_per_match": 1.703704,
+      "ga_per_match": 0.925926
+    },
+    "Neftchi Fargona": {
+      "matches": 26,
+      "gf_per_match": 2.346154,
+      "ga_per_match": 0.884615
+    },
+    "Pakhtakor Tashkent": {
+      "matches": 27,
+      "gf_per_match": 1.777778,
+      "ga_per_match": 0.962963
+    },
+    "Qizilqum Zarafshon": {
+      "matches": 27,
+      "gf_per_match": 0.925926,
+      "ga_per_match": 1.185185
+    },
+    "Sogdiana": {
+      "matches": 27,
+      "gf_per_match": 1.62963,
+      "ga_per_match": 1.962963
+    },
+    "Surkhon-2011": {
+      "matches": 27,
+      "gf_per_match": 0.740741,
+      "ga_per_match": 1.074074
+    },
+    "Xorazm": {
+      "matches": 27,
+      "gf_per_match": 0.851852,
+      "ga_per_match": 1.407407
+    }
+  },
+  "split_half_reliability": {
+    "gf_per_match": {
+      "pearson_r": 0.696256,
+      "n_teams": 16,
+      "split": "rounds 1-13 vs 14-27"
+    },
+    "ga_per_match": {
+      "pearson_r": 0.179057,
+      "n_teams": 16,
+      "split": "rounds 1-13 vs 14-27"
+    }
+  },
+  "round_goals_per_match": {
+    "1": {
+      "matches": 8,
+      "goals": 19,
+      "goals_per_match": 2.375
+    },
+    "2": {
+      "matches": 8,
+      "goals": 18,
+      "goals_per_match": 2.25
+    },
+    "3": {
+      "matches": 8,
+      "goals": 15,
+      "goals_per_match": 1.875
+    },
+    "4": {
+      "matches": 8,
+      "goals": 24,
+      "goals_per_match": 3.0
+    },
+    "5": {
+      "matches": 8,
+      "goals": 25,
+      "goals_per_match": 3.125
+    },
+    "6": {
+      "matches": 8,
+      "goals": 14,
+      "goals_per_match": 1.75
+    },
+    "7": {
+      "matches": 8,
+      "goals": 22,
+      "goals_per_match": 2.75
+    },
+    "8": {
+      "matches": 8,
+      "goals": 23,
+      "goals_per_match": 2.875
+    },
+    "9": {
+      "matches": 8,
+      "goals": 24,
+      "goals_per_match": 3.0
+    },
+    "10": {
+      "matches": 8,
+      "goals": 25,
+      "goals_per_match": 3.125
+    },
+    "11": {
+      "matches": 8,
+      "goals": 14,
+      "goals_per_match": 1.75
+    },
+    "12": {
+      "matches": 8,
+      "goals": 23,
+      "goals_per_match": 2.875
+    },
+    "13": {
+      "matches": 8,
+      "goals": 28,
+      "goals_per_match": 3.5
+    },
+    "14": {
+      "matches": 8,
+      "goals": 19,
+      "goals_per_match": 2.375
+    },
+    "15": {
+      "matches": 8,
+      "goals": 20,
+      "goals_per_match": 2.5
+    },
+    "16": {
+      "matches": 8,
+      "goals": 21,
+      "goals_per_match": 2.625
+    },
+    "17": {
+      "matches": 8,
+      "goals": 28,
+      "goals_per_match": 3.5
+    },
+    "18": {
+      "matches": 8,
+      "goals": 16,
+      "goals_per_match": 2.0
+    },
+    "19": {
+      "matches": 8,
+      "goals": 16,
+      "goals_per_match": 2.0
+    },
+    "20": {
+      "matches": 8,
+      "goals": 29,
+      "goals_per_match": 3.625
+    },
+    "21": {
+      "matches": 8,
+      "goals": 22,
+      "goals_per_match": 2.75
+    },
+    "22": {
+      "matches": 8,
+      "goals": 25,
+      "goals_per_match": 3.125
+    },
+    "23": {
+      "matches": 8,
+      "goals": 28,
+      "goals_per_match": 3.5
+    },
+    "24": {
+      "matches": 8,
+      "goals": 15,
+      "goals_per_match": 1.875
+    },
+    "25": {
+      "matches": 8,
+      "goals": 20,
+      "goals_per_match": 2.5
+    },
+    "26": {
+      "matches": 7,
+      "goals": 12,
+      "goals_per_match": 1.714286
+    },
+    "27": {
+      "matches": 8,
+      "goals": 20,
+      "goals_per_match": 2.5
+    }
+  },
+  "halftime_share": {
+    "n_matches_with_ht": 99,
+    "rounds_covered": [
+      10,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27
+    ],
+    "ht_goals": 128,
+    "ft_goals_same_matches": 279,
+    "ht_share_of_goals": 0.458781,
+    "ht_goals_per_match": 1.292929,
+    "coverage_note": "HT scores derivable only where the matchFacts Half event exists (99/215, rounds 10 and 14-27); not a frozen constant"
+  },
+  "absent_targets": [
+    "shots",
+    "shots on target",
+    "corners",
+    "cards",
+    "xG",
+    "referee effects"
+  ],
+  "reference_points": {
+    "J1_goals_per_match": 2.55,
+    "J1_goals_per_match_label": "J1 EDA.md levels table, pooled (n=2,091)",
+    "J1_home_win_rate": 0.413,
+    "J1_draw_rate": 0.268,
+    "J1_away_win_rate": 0.319,
+    "J1_over_2_5_rate": 0.47,
+    "J1_btts_rate": 0.504
+  }
+}

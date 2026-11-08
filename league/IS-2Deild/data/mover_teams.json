@@ -1,0 +1,414 @@
+{
+  "seasons": {
+    "2021": {
+      "is2deild_team_ids": [
+        4494,
+        4495,
+        4514,
+        7806,
+        58490,
+        163250,
+        175110,
+        264165,
+        264168,
+        319923,
+        449429,
+        580181
+      ],
+      "is1deild_team_ids": [
+        4496,
+        4515,
+        4518,
+        4661,
+        6291,
+        8298,
+        8299,
+        114130,
+        163251,
+        175111,
+        750462,
+        1043160
+      ]
+    },
+    "2022": {
+      "is2deild_team_ids": [
+        4494,
+        4495,
+        4514,
+        4515,
+        4661,
+        58490,
+        163250,
+        264165,
+        449429,
+        559291,
+        1160061,
+        1340091
+      ],
+      "is1deild_team_ids": [
+        4496,
+        4516,
+        4518,
+        6434,
+        8298,
+        114130,
+        163251,
+        175110,
+        175111,
+        319923,
+        750462,
+        1043160
+      ]
+    },
+    "2023": {
+      "is2deild_team_ids": [
+        4494,
+        4514,
+        4515,
+        163250,
+        175110,
+        203800,
+        264165,
+        319922,
+        319923,
+        542586,
+        1160061,
+        1340091
+      ],
+      "is1deild_team_ids": [
+        4495,
+        4496,
+        4518,
+        4661,
+        6683,
+        8004,
+        8298,
+        114130,
+        163251,
+        175111,
+        559291,
+        750462
+      ]
+    },
+    "2024": {
+      "is2deild_team_ids": [
+        4494,
+        4514,
+        4515,
+        58490,
+        114130,
+        264165,
+        319923,
+        542586,
+        559291,
+        1160061,
+        1340091,
+        1599412
+      ],
+      "is1deild_team_ids": [
+        4472,
+        4495,
+        4496,
+        4518,
+        4661,
+        6683,
+        8298,
+        8299,
+        163250,
+        163251,
+        175111,
+        319922
+      ]
+    },
+    "2025": {
+      "is2deild_team_ids": [
+        4494,
+        4515,
+        131751,
+        175111,
+        319922,
+        319923,
+        542586,
+        559291,
+        580181,
+        1160061,
+        1340091,
+        1599412
+      ],
+      "is1deild_team_ids": [
+        4472,
+        4495,
+        4496,
+        4514,
+        4516,
+        4518,
+        4661,
+        6434,
+        6683,
+        8298,
+        114130,
+        163250
+      ]
+    },
+    "2026": {
+      "is2deild_team_ids": [
+        4494,
+        4515,
+        4518,
+        114130,
+        319922,
+        319923,
+        449429,
+        542586,
+        580181,
+        1340091,
+        1360600,
+        1599412
+      ],
+      "is1deild_team_ids": [
+        4495,
+        4514,
+        4516,
+        4661,
+        6434,
+        6683,
+        8298,
+        163250,
+        163251,
+        175111,
+        559291,
+        750462
+      ]
+    }
+  },
+  "transitions": [
+    {
+      "season": "2022",
+      "team_id": 4515,
+      "team": "Vikingur Olafsvik",
+      "source": "relegated-from-1Deild",
+      "arrival_matches": 22,
+      "arrival_gf": 1.9545454545454546,
+      "arrival_ga": 1.8636363636363635,
+      "previous_1deild_matches": 22,
+      "previous_1deild_gf": 1.2727272727272727,
+      "previous_1deild_ga": 3.5454545454545454
+    },
+    {
+      "season": "2022",
+      "team_id": 4661,
+      "team": "Throttur Reykjavik",
+      "source": "relegated-from-1Deild",
+      "arrival_matches": 22,
+      "arrival_gf": 2.227272727272727,
+      "arrival_ga": 1.2272727272727273,
+      "previous_1deild_matches": 22,
+      "previous_1deild_gf": 1.7727272727272727,
+      "previous_1deild_ga": 2.409090909090909
+    },
+    {
+      "season": "2022",
+      "team_id": 559291,
+      "team": "\u00c6gir",
+      "source": "from-below",
+      "arrival_matches": 22,
+      "arrival_gf": 1.6818181818181819,
+      "arrival_ga": 1.5909090909090908
+    },
+    {
+      "season": "2022",
+      "team_id": 1160061,
+      "team": "Hottur/Huginn",
+      "source": "from-below",
+      "arrival_matches": 22,
+      "arrival_gf": 1.6363636363636365,
+      "arrival_ga": 1.4545454545454546
+    },
+    {
+      "season": "2022",
+      "team_id": 1340091,
+      "team": "KFA",
+      "source": "from-below",
+      "arrival_matches": 22,
+      "arrival_gf": 1.4545454545454546,
+      "arrival_ga": 2.4545454545454546
+    },
+    {
+      "season": "2023",
+      "team_id": 175110,
+      "team": "KV Reykjavik",
+      "source": "relegated-from-1Deild",
+      "arrival_matches": 22,
+      "arrival_gf": 0.8181818181818182,
+      "arrival_ga": 2.6818181818181817,
+      "previous_1deild_matches": 22,
+      "previous_1deild_gf": 1.2272727272727273,
+      "previous_1deild_ga": 2.3636363636363638
+    },
+    {
+      "season": "2023",
+      "team_id": 203800,
+      "team": "Sindri",
+      "source": "from-below",
+      "arrival_matches": 22,
+      "arrival_gf": 1.1363636363636365,
+      "arrival_ga": 2.409090909090909
+    },
+    {
+      "season": "2023",
+      "team_id": 319922,
+      "team": "Dalvik/Reynir",
+      "source": "from-below",
+      "arrival_matches": 22,
+      "arrival_gf": 2.0454545454545454,
+      "arrival_ga": 1.0454545454545454
+    },
+    {
+      "season": "2023",
+      "team_id": 319923,
+      "team": "Throttur Vogar",
+      "source": "relegated-from-1Deild",
+      "arrival_matches": 22,
+      "arrival_gf": 1.9090909090909092,
+      "arrival_ga": 1.3636363636363635,
+      "previous_1deild_matches": 22,
+      "previous_1deild_gf": 0.36363636363636365,
+      "previous_1deild_ga": 2.5454545454545454
+    },
+    {
+      "season": "2023",
+      "team_id": 542586,
+      "team": "KFG",
+      "source": "from-below",
+      "arrival_matches": 22,
+      "arrival_gf": 1.8636363636363635,
+      "arrival_ga": 1.8181818181818181
+    },
+    {
+      "season": "2024",
+      "team_id": 58490,
+      "team": "Reynir Sandgerdi",
+      "source": "from-below",
+      "arrival_matches": 22,
+      "arrival_gf": 1.2727272727272727,
+      "arrival_ga": 2.5
+    },
+    {
+      "season": "2024",
+      "team_id": 114130,
+      "team": "Selfoss",
+      "source": "relegated-from-1Deild",
+      "arrival_matches": 22,
+      "arrival_gf": 2.3181818181818183,
+      "arrival_ga": 1.2272727272727273,
+      "previous_1deild_matches": 22,
+      "previous_1deild_gf": 1.6818181818181819,
+      "previous_1deild_ga": 2.227272727272727
+    },
+    {
+      "season": "2024",
+      "team_id": 559291,
+      "team": "\u00c6gir",
+      "source": "relegated-from-1Deild",
+      "arrival_matches": 22,
+      "arrival_gf": 1.3181818181818181,
+      "arrival_ga": 1.5909090909090908,
+      "previous_1deild_matches": 22,
+      "previous_1deild_gf": 1.0454545454545454,
+      "previous_1deild_ga": 3.0454545454545454
+    },
+    {
+      "season": "2024",
+      "team_id": 1599412,
+      "team": "Korm\u00e1kur/Hv\u00f6t",
+      "source": "from-below",
+      "arrival_matches": 22,
+      "arrival_gf": 0.8636363636363636,
+      "arrival_ga": 1.9090909090909092
+    },
+    {
+      "season": "2025",
+      "team_id": 131751,
+      "team": "Vidir",
+      "source": "from-below",
+      "arrival_matches": 22,
+      "arrival_gf": 1.5,
+      "arrival_ga": 1.8636363636363635
+    },
+    {
+      "season": "2025",
+      "team_id": 175111,
+      "team": "Grotta",
+      "source": "relegated-from-1Deild",
+      "arrival_matches": 22,
+      "arrival_gf": 2.1363636363636362,
+      "arrival_ga": 1.1363636363636365,
+      "previous_1deild_matches": 22,
+      "previous_1deild_gf": 1.4090909090909092,
+      "previous_1deild_ga": 2.272727272727273
+    },
+    {
+      "season": "2025",
+      "team_id": 319922,
+      "team": "Dalvik/Reynir",
+      "source": "relegated-from-1Deild",
+      "arrival_matches": 22,
+      "arrival_gf": 1.7272727272727273,
+      "arrival_ga": 1.1818181818181819,
+      "previous_1deild_matches": 22,
+      "previous_1deild_gf": 1.0454545454545454,
+      "previous_1deild_ga": 2.227272727272727
+    },
+    {
+      "season": "2025",
+      "team_id": 580181,
+      "team": "Kari",
+      "source": "from-below",
+      "arrival_matches": 22,
+      "arrival_gf": 1.4545454545454546,
+      "arrival_ga": 2.5
+    },
+    {
+      "season": "2026",
+      "team_id": 4518,
+      "team": "Fj\u00f6lnir",
+      "source": "relegated-from-1Deild",
+      "arrival_matches": 22,
+      "arrival_gf": 2.227272727272727,
+      "arrival_ga": 2.090909090909091,
+      "previous_1deild_matches": 22,
+      "previous_1deild_gf": 1.4545454545454546,
+      "previous_1deild_ga": 2.409090909090909
+    },
+    {
+      "season": "2026",
+      "team_id": 114130,
+      "team": "Selfoss",
+      "source": "relegated-from-1Deild",
+      "arrival_matches": 22,
+      "arrival_gf": 2.5,
+      "arrival_ga": 1.6363636363636365,
+      "previous_1deild_matches": 22,
+      "previous_1deild_gf": 1.1363636363636365,
+      "previous_1deild_ga": 2.0
+    },
+    {
+      "season": "2026",
+      "team_id": 449429,
+      "team": "Magni",
+      "source": "from-below",
+      "arrival_matches": 22,
+      "arrival_gf": 1.5909090909090908,
+      "arrival_ga": 2.4545454545454546
+    },
+    {
+      "season": "2026",
+      "team_id": 1360600,
+      "team": "Hviti Riddarinn",
+      "source": "from-below",
+      "arrival_matches": 22,
+      "arrival_gf": 1.2727272727272727,
+      "arrival_ga": 2.4545454545454546
+    }
+  ]
+}

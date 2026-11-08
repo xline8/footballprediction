@@ -1,0 +1,33 @@
+# SA-ProLeague (Saudi Arabia) — league config
+league: SA-ProLeague
+country: Saudi Arabia
+fotmob_id: 536
+tier: 1
+warehouse: data_enrichment/fotmob_world/Saudi Arabia/Saudi Pro League
+data:
+  matches: league/SA-ProLeague/data/sa_matches.csv
+  team_matches: league/SA-ProLeague/data/sa_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2023/2024", "2024/2025"]  # scored dev folds — post-break seasons ONLY (regime break 2023)
+dev_seed: ["2021/2022", "2022/2023"]    # warm-up / training history, never scored
+virgin_primary: "2025/2026"        # complete season, n=306 — read ONCE per candidate
+virgin_confirmatory: "2026/2027"   # partial (104 played at pull); reserved, NOT read in this build
+halves_constants:                  # frozen, measured on the complete-splits era 2023/2024–2025/2026 (n≈918)
+  goals_1h_share: 0.4251
+  sot_1h_share: 0.4469
+  corners_1h_share: 0.4740
+  total_shots_1h_share: 0.4559
+  yellow_cards_1h_share: 0.3509
+markets:
+  goals: G-SA        # DC reference; arms: Gate Zero, SHRINK (thin-data prior), X3 set-play (post-era xG only)
+  sot: S-SA          # v5 reference; arms: Gate Zero, RS ratio-shrink, X4 xG/shot (X6 era starts inside last dev season — not run)
+  corners: C-SA      # corners_v3 reference; arms: Gate Zero (X9), X7 box touches
+  cards: K-SA        # cards reference; arms: Gate Zero only (X8 referee DROPPED: r=-0.279, virgin coverage 0.7%); target = event-feed yellows
+  total_shots: T-SA  # shots family; arms: A v1 pattern, B v2 level layer, C E9 trailing-r
+notes:
+  - REGIME BREAK at 2023/2024 (foreign-star influx): goals 2.677 -> 2.959/match, team GD spread SD 0.663 -> 0.896, home edge +0.269 -> +0.175. Dev is scored on post-break seasons only; pre-break data enters fits decayed, never scored.
+  - Shotmap + stats-feed xG era starts 2023/2024 (100%); pre-break coverage 2.5%/13.3%. xGOT population era starts 2024/2025 (99.4%+ of shots).
+  - 16 teams through 2022/2023, 18 from 2023/2024; plain double round-robin, no split/playoffs in any season.
+  - Cards: stats feed undercounts the event feed in every dev-era season (mean -0.85/-0.24/-0.15/-0.13 per match) — unified target is the EVENT feed (Yellow + YellowRed), AR/BR/NO precedent, decided on dev-era evidence only.
+  - Team trait stability across the break is high (shots-for r=0.922, SOT 0.871, goals-for 0.779 over 16 ever-present clubs): the break is a level shift + widened spread, not a reshuffle.
+  - Predictions-only: no SA odds/settlement source in-system.

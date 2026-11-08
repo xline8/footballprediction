@@ -1,0 +1,34 @@
+# Iraq Stars League — Phase A configuration (frozen before fitting)
+league: IQ-StarsLeague
+country: Iraq
+fotmob_id: 524
+tier: 1
+warehouse: data_enrichment/fotmob_world/Iraq/Stars League
+data:
+  matches: league/IQ-StarsLeague/data/iqsl_matches.csv
+  team_matches: league/IQ-StarsLeague/data/iqsl_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  # Event-verified regular matches in 2024/2025; event order vs HT marker.
+  goals_1h_share: 0.4323308271
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+  yellow_cards_1h_share: null
+markets:
+  goals: G-IQSL
+  sot: S-IQSL  # not-buildable
+  corners: C-IQSL  # not-buildable
+  cards: K-IQSL  # not-buildable
+  total_shots: T-IQSL  # not-buildable
+notes:
+  - 20 teams, 38 regular rounds, double round-robin; split-year Aug–Jul seasons.
+  - Phase is regular unless general.matchRound is 1/2 or final; those three 2023/2024 matches are championship playoffs and excluded from modelling. content.hasPlayoff is not used.
+  - The index has 2,032 JSONs, but payload-first played-only inclusion finds 1,983 scored matches; 49 scheduled placeholders have no payload score and are excluded.
+  - 2024/2025 has three Karbalaa–Erbil matches and only one Al Kahrabaa–Erbil match; all played rows are retained and the fixture anomaly is flagged in preprocessing.
+  - stats, shotmap shots, lineup, and referee text are absent in all 2,032 payloads. Events exist only in the later era; no yellow-card target exists.
+  - Iraq has no parent/sibling tier in the warehouse; no X2 cross-league prior is used.
+  - Calibration convention: breach = mean predicted rate − actual rate (pp).

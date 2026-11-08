@@ -1,0 +1,41 @@
+# KW-PremierLeague (Kuwait) — league config (Phase 2 freeze; completed Phase 6)
+league: KW-PremierLeague
+country: Kuwait
+fotmob_id: 529
+tier: 1
+warehouse: data_enrichment/fotmob_world/Kuwait/Premier League
+data:
+  matches: league/KW-PremierLeague/data/kw_matches.csv
+  team_matches: league/KW-PremierLeague/data/kw_team_matches.csv
+seasons: ["2021", "2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period:
+  goals: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]   # scored; warm-up 2021 (calendar season)
+  stats_markets: []                  # NOT-BUILDABLE: no stats feed in any season (0/711)
+  cards: []                          # NOT-BUILDABLE: no yellows target in any season (stats absent; event Yellow/YellowRed 0 in corpus); referee 0% all seasons
+virgin_primary: "2025/2026"          # COMPLETE season (111 played) — NOT READ (G-KW failed the dev gate; virgin_read: false)
+virgin_confirmatory: "2026/2027"     # in progress (45 played) — untouched
+halves_constants:                   # frozen from DEV-era data only (EDA F3)
+  goals_1h_share: 0.4411            # event times, dev era; events exist in dev ONLY in 2024/2025 (87 matches, 297 goals, awarded excluded) — thinnest base in the programme, flagged
+  yellow_cards_1h_share: null       # no yellows target in dev — no constant; no K market
+  sot_1h_share: null                # no period splits in dev — no constant
+  corners_1h_share: null            # no period splits in dev — no constant
+  total_shots_1h_share: null        # no period splits in dev — no constant
+markets:
+  goals: G-KW        # DC goals-only (no xG in feed); arms: Gate Zero, SHRINK, X2 (KEPT: EDA F4, 8 dev transitions, mean GF -0.390 / GA +0.404)
+  sot: S-KW          # NOT-BUILDABLE — no stats feed in any season
+  corners: C-KW      # NOT-BUILDABLE — no stats feed in any season
+  cards: K-KW        # NOT-BUILDABLE — no yellows target in any season: stats absent AND event Yellow/YellowRed 0 in the whole corpus (only 53 straight Reds); referee 0% (no X8)
+  total_shots: T-KW  # NOT-BUILDABLE — no stats feed in any season; shotmap empty in every season
+notes:
+  - DUAL SEASON LABELS RESOLVED: "2021" (calendar, Jan-May 2021) and "2021/2022" (split, Nov 2021-Apr 2022) are DISTINCT seasons — 0 shared match ids, disjoint dates. Both kept verbatim; canonical order 2021 < 2021/2022 < 2022/2023 < ... Kuwait switched format mid-2021.
+  - 69 of 711 index rows are unplayed fixtures (finished=false, placeholder index score 0-0): 26/21/12/10 in the first four seasons, 0 from 2024/2025. Played corpus = 642 (64/69/120/122/111/111/45). The BRIEF's "711 played" is the index row count.
+  - Stats feed absent in EVERY season: 0/711 matches carry any stats Periods key; shotmap 0/711; lineup 0/711; referee 0/711; no expected_goals key anywhere. Scores-only league.
+  - Event feed exists ONLY from 2024/2025 (0 event matches 2021-2023/2024; 87/111 in 2024/2025; 105/111 virgin; 45/45 reserve). Where present it is exact: 0 score mismatches in 237 event matches. 405 matches have no events (374 of them with goals — halves unknown, never zero-filled).
+  - No xG and no shotmap in ANY season -> X1 blend falls back goals-only; X3/X4/X6/X7/X9 impossible by data absence.
+  - Cards: only straight Red events exist (53 total); plain Yellow and YellowRed are 0 in the ENTIRE corpus — no yellows target under any source in any era.
+  - Format: 10 teams in every dev season and the virgin (12 in the reserve); phases main/championship/relegation are ordinary flagged rows (split groups from 2022/2023). One awarded match (4067510, 2022/2023), none in the virgin. 14 team ids, 0 spelling variants; all logic keyed by team id.
+  - High-scoring league: goals/match dev 3.06 / 2.93 / 3.27 / 3.03 / 3.21; OU2.5 over-rate dev scored 0.5877 (line frozen OU 2.5); home win 0.4265, draw 0.2370; mean team goals 1.5640.
+  - Trait reliability strong: split-half r 0.786 (GF) / 0.922 (GA), n=13 teams; season-to-season GF corr 0.17-0.84, GA 0.41-0.74.
+  - Predictions-only: no KW odds/settlement source in-system.
+  - Outcome (Phase 6): G-KW FAIL at the dev gate on the OU leg vs climatology alone — Gate Zero pooled dev (n=422) 1X2 LL 0.9436 / RPS 0.1882 / OU2.5 LL 0.7293 vs climatology 1.0767 / 0.2357 / 0.6806 and naive trailing-10 1.0108 / 0.2086 / 0.7405 (beats both baselines on 1X2 and RPS, beats naive on OU). SHRINK numerically identical (n<6 never binds). X2 worse pooled (0.9496 / 0.1899 / 0.7371): identical in the first two scored seasons (offset 0 by the frozen rule), worse in 2023/2024, mixed in 2024/2025. Model OU LL loses to climatology in the first three dev seasons but wins all three metrics in 2024/2025. Virgin 2025/2026 NOT read; 2026/2027 untouched; nothing ships. S/C/K/T not-buildable (see reports/*_KW_VERDICT.md).
+shipping_arm: NONE

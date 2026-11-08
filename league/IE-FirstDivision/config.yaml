@@ -1,0 +1,29 @@
+# IE-FirstDivision League (Ireland) — league config
+league: IE-FirstDivision
+country: Ireland
+fotmob_id: 218
+tier: 2
+warehouse: data_enrichment/fotmob_world/Ireland/First Division
+data:
+  matches: league/IE-FirstDivision/data/ie_first_division_matches.csv
+  team_matches: league/IE-FirstDivision/data/ie_first_division_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period: ["2021", "2022", "2023", "2024", "2025"]   # walk-forward, season-blocked, regular season only
+virgin_primary: "2026"          # complete, n=180 regular — read ONCE per candidate
+halves_constants:               # frozen league constants (EDA F3) — the ONLY halves mechanism
+  goals_1h_share: 0.441
+markets:
+  goals: G-IEFD      # DC reference, goals-only; arms: Gate Zero, X2 relegated-mover offset
+  sot: S-IEFD        # NOT buildable — no SOT target anywhere (see prereg/PREREG_NOT_BUILDABLE.md)
+  corners: C-IEFD    # NOT buildable — no corners target anywhere
+  cards: K-IEFD      # NOT buildable — no yellow target anywhere (Red/YellowRed events only)
+  total_shots: T-IEFD  # NOT buildable — no total-shots target anywhere
+notes:
+  - Scores + events ONLY: no team stats, no shotmap, no named referees in any of the 1,028 payloads.
+  - Regular-season scope only: playoffs (5/season, two-legged semi-finals + final) are excluded from fitting and evaluation.
+  - 2021: 10 teams, 27 rounds (triple round-robin). 2022: 9 teams, 36 rounds (one bye per round). 2023-2026: 10 teams, 36 rounds.
+  - 2025 regular n=179, not 180: one match (Finn Harps vs Kerry FC, round 1) is absent from the warehouse; not imputed.
+  - xG does not exist in this corpus; the goals model is goals-only throughout (reference blend fallback).
+  - 2026 is complete but virgin and is excluded from all design and EDA estimates except the coverage inventory and the mover-arrival identity.
+  - Every product presents FT + 1H/2H via the frozen constant above (goals only); halves are presentation only.
+  - Predictions-only: no Ireland First Division odds/settlement source in-system.

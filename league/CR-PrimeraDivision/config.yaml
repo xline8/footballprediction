@@ -1,0 +1,28 @@
+# Costa Rica Primera Division — league config
+league: CR-PrimeraDivision
+country: Costa Rica
+fotmob_id: 121
+tier: 1
+warehouse: data_enrichment/fotmob_world/Costa Rica/Primera Division
+data:
+  matches: league/CR-PrimeraDivision/data/cr_matches.csv
+  team_aliases: league/CR-PrimeraDivision/data/team_aliases.json
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024"]   # goals: 2021/2022 trains, 2022/2023-2023/2024 scored
+virgin_primary: "2024/2025"          # last complete season, regular n=262 — read ONCE per candidate
+virgin_confirmatory: ["2025/2026", "2026/2027"]  # reserved; 2025/2026 partial pull + format change, 2026/2027 in progress
+halves_constants:               # frozen league constants (EDA F3) — the ONLY halves mechanism
+  goals_1h_share: 0.460
+  yellow_cards_1h_share: 0.379
+markets:
+  goals: G-CR        # DC reference, goals-only (no xG exists); arms: Gate Zero only
+  cards: K-CR        # cards reference, yellows from events; arms: Gate Zero only; dev = 2023/2024 split
+notes:
+  - Scores-only league: content.stats is null in every match; no corners, SOT, total shots, xG or shotmap.
+    Goals and cards come from match events. SOT / corners / total shots are NOT candidates.
+  - Card events unreliable before 2023/2024 (yellows missing in 2021/2022; Apertura 2022/2023 broken;
+    Clausura 2022/2023 patchy, 10.6% false-zero rate). Reliable cards era starts 2023/2024.
+  - Referee identity effectively absent (0 non-empty in 5 of 6 seasons) — no referee feature.
+  - Playoffs (Final Stage + Championship Final, 60 matches) are excluded from fitting scope.
+  - Format change 2025/2026: 12 teams -> 10 teams, 22 rounds -> 18 rounds per tournament.
+  - Predictions-only: no Costa Rica odds/settlement source in-system.

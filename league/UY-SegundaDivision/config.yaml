@@ -1,0 +1,28 @@
+league: UY-SegundaDivision
+country: Uruguay
+fotmob_id: 9122
+tier: 2
+warehouse: data_enrichment/fotmob_world/Uruguay/Segunda Division
+data:
+  matches: league/UY-SegundaDivision/data/uy_segunda_matches.csv
+  team_matches: league/UY-SegundaDivision/data/uy_segunda_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period: ["2021", "2022", "2023", "2024", "2025"]
+virgin_primary: "2026"  # transitional: 218 finished, last match 2026-11-01
+virgin_confirmatory: null
+halves_constants:
+  goals_1h_share: 0.4328981723
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+  yellow_cards_1h_share: null
+markets:
+  goals: G-UYSEG
+  sot: "NOT BUILDABLE — no SOT target"
+  corners: "NOT BUILDABLE — no corners target"
+  cards: "NOT BUILDABLE — zero plain Yellow and rare Red/YellowRed only"
+  total_shots: "NOT BUILDABLE — no total-shots target"
+notes:
+  - "Finished payloads only; 53 unfinished 2021 0-0 index placeholders dropped."
+  - "2026 is transitional and reserved for confirmatory reading after completeness is established."
+  - "Goals FT plus 1H/2H presentation uses the frozen event-time constant only."

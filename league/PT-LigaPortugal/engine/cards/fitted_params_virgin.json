@@ -1,0 +1,327 @@
+{
+  "arm": "x8",
+  "r": 40.656675394180645,
+  "mu_per_match": 4.775340061952456,
+  "referee_rates": {
+    "Rui Manuel Gomes Costa": [
+      173.0,
+      32.0
+    ],
+    "Miguel Bertolo Nogueira": [
+      267.0,
+      64.0
+    ],
+    "Ant\u00f3nio Emanuel Carvalho Nobre": [
+      340.0,
+      67.0
+    ],
+    "Hugo Filipe Ferreira de Campos Moreira Miguel": [
+      32.0,
+      6.0
+    ],
+    "Vitor Jorge Fernandes Ferreira": [
+      85.0,
+      18.0
+    ],
+    "F\u00e1bio Oliveira Melo": [
+      90.0,
+      16.0
+    ],
+    "Manuel Ant\u00f3nio Rodrigues Oliveira": [
+      235.0,
+      43.0
+    ],
+    "Andr\u00e9 Filipe Domingues Narciso": [
+      322.0,
+      64.0
+    ],
+    "Gustavo Fernandes Correia": [
+      367.0,
+      66.0
+    ],
+    "F\u00e1bio Jos\u00e9 Costa Ver\u00edssimo": [
+      431.0,
+      79.0
+    ],
+    "Manuel Mota": [
+      113.0,
+      27.0
+    ],
+    "H\u00e9lder Miguel Azevedo Malheiro": [
+      380.0,
+      69.0
+    ],
+    "Cl\u00e1udio Filipe Ruivo Pereira": [
+      312.0,
+      69.0
+    ],
+    "Nuno Miguel Serrano Almeida": [
+      202.0,
+      46.0
+    ],
+    "Artur Manuel Ribeiro Soares Dias": [
+      241.0,
+      41.0
+    ],
+    "Jo\u00e3o Pedro Silva Pinheiro": [
+      387.0,
+      79.0
+    ],
+    "Jo\u00e3o Ant\u00f3nio Ferreira Gon\u00e7alves": [
+      301.0,
+      62.0
+    ],
+    "Hugo Serafim Coelho Magalh\u00e3es Silva": [
+      20.0,
+      5.0
+    ],
+    "Luis Miguel Branco Godinho": [
+      150.0,
+      27.0
+    ],
+    "Tiago Bruno Lopes Martins": [
+      199.0,
+      36.0
+    ],
+    "David Rafael Oliveira Silva": [
+      228.0,
+      40.0
+    ],
+    "Hugo Silva": [
+      12.0,
+      2.0
+    ],
+    "Bruno Jos\u00e9 Ribeiro Pires Costa": [
+      170.0,
+      42.0
+    ],
+    "Ricardo Jorge Antunes Baixinho": [
+      245.0,
+      39.0
+    ],
+    "H\u00e9lder Carvalho": [
+      138.0,
+      29.0
+    ],
+    "Pierre Gaillouste": [
+      4.0,
+      1.0
+    ],
+    "Carlos Andr\u00e9 Fernandes Macedo": [
+      153.0,
+      39.0
+    ],
+    "Bastien Dechepy": [
+      3.0,
+      1.0
+    ],
+    "Bruno Vieira": [
+      107.0,
+      19.0
+    ],
+    "Iancu Ioan Vasilica": [
+      138.0,
+      37.0
+    ],
+    "Ab\u00edlio Jos\u00e9 Gon\u00e7alves Bessa": [
+      4.0,
+      2.0
+    ],
+    "Bruno Miguel Ribeiro Costa": [
+      3.0,
+      1.0
+    ],
+    "Luis Miguel Branco": [
+      3.0,
+      1.0
+    ],
+    "Lu\u00eds Miguel Branco Godinho": [
+      253.0,
+      51.0
+    ],
+    "Jos\u00e9 Armando Torres Bessa": [
+      148.0,
+      27.0
+    ],
+    "Jo\u00e3o Pedro Correia Gon\u00e7alves Morte": [
+      7.0,
+      1.0
+    ],
+    "Jose Bessa": [
+      7.0,
+      2.0
+    ],
+    "Luis Godinho": [
+      14.0,
+      2.0
+    ],
+    "Nuno Almeida": [
+      2.0,
+      1.0
+    ],
+    "Pedro Miguel Torres Ramalho": [
+      102.0,
+      17.0
+    ],
+    "Anzhony Francisco Gon\u00e7alves Rodrigues": [
+      81.0,
+      19.0
+    ],
+    "Nuno Miguel Serrano Tavares Almeida": [
+      10.0,
+      3.0
+    ],
+    "S\u00e9rgio Jos\u00e9 dos Santos Guelho": [
+      100.0,
+      21.0
+    ],
+    "Miguel Andr\u00e9 Monteiro Fonseca": [
+      86.0,
+      16.0
+    ],
+    "Gon\u00e7alo Neves": [
+      14.0,
+      4.0
+    ],
+    "Jose Antonio De Almeida Pinheiro": [
+      8.0,
+      1.0
+    ],
+    "Anzhony Rodrigues": [
+      4.0,
+      1.0
+    ],
+    "Catarina Isabel Ferreira Campos": [
+      6.0,
+      1.0
+    ],
+    "Lu\u00ed\u00ads Carlos Mateus Filipe": [
+      32.0,
+      8.0
+    ],
+    "M\u00e1rcio Andr\u00e9 Dias Torres": [
+      30.0,
+      9.0
+    ],
+    "Diogo Miguel Mauzinho Rosa": [
+      44.0,
+      7.0
+    ],
+    "Sergio Guelho": [
+      8.0,
+      2.0
+    ],
+    "Joao Goncalves": [
+      9.0,
+      2.0
+    ],
+    "H\u00e9lder Filipe Cl\u00e1udio Carvalho": [
+      38.0,
+      11.0
+    ],
+    "Fabio Verissimo": [
+      18.0,
+      3.0
+    ],
+    "Luis Filipe": [
+      6.0,
+      1.0
+    ],
+    "Carlos Macedo": [
+      2.0,
+      1.0
+    ],
+    "Bruno Costa": [
+      2.0,
+      1.0
+    ],
+    "Gustavo Correia": [
+      8.0,
+      1.0
+    ],
+    "Andre Narciso": [
+      4.0,
+      1.0
+    ],
+    "Antonio Nobre": [
+      6.0,
+      1.0
+    ],
+    "Iancu Vasilica": [
+      2.0,
+      1.0
+    ],
+    "Jo\u00e3o Pinheiro": [
+      0.0,
+      0.0
+    ],
+    "Lu\u00eds Carlos Mateus Filipe": [
+      0.0,
+      0.0
+    ],
+    "F\u00e1bio Ver\u00edssimo": [
+      0.0,
+      0.0
+    ],
+    "Pedro Ramalho": [
+      0.0,
+      0.0
+    ],
+    "Bruno Pires Costa": [
+      0.0,
+      0.0
+    ],
+    "Miguel Nogueira": [
+      0.0,
+      0.0
+    ],
+    "Diogo Rosa": [
+      0.0,
+      0.0
+    ],
+    "Lu\u00eds Godinho": [
+      0.0,
+      0.0
+    ],
+    "David Silva": [
+      0.0,
+      0.0
+    ],
+    "Andr\u00e9 Narciso": [
+      0.0,
+      0.0
+    ],
+    "Ant\u00f3nio Nobre": [
+      0.0,
+      0.0
+    ],
+    "Vitor Ferreira": [
+      0.0,
+      0.0
+    ],
+    "S\u00e9rgio Guelho": [
+      0.0,
+      0.0
+    ],
+    "Jos\u00e9 Bessa": [
+      0.0,
+      0.0
+    ],
+    "Miguel Fonseca": [
+      0.0,
+      0.0
+    ],
+    "Jo\u00e3o Ferreira": [
+      0.0,
+      0.0
+    ],
+    "F\u00e1bio Melo": [
+      0.0,
+      0.0
+    ],
+    "Cl\u00e1udio Pereira": [
+      0.0,
+      0.0
+    ]
+  }
+}

@@ -1,0 +1,259 @@
+{
+  "agreements": {
+    "awarded_payload_vs_inference": {
+      "agree": 1283,
+      "exceptions": [
+        "4950929"
+      ]
+    },
+    "date": {
+      "agree": 1284,
+      "exceptions": []
+    },
+    "goal_events_vs_index_score": {
+      "agree": 1281,
+      "exceptions": [
+        {
+          "events": [
+            0,
+            0
+          ],
+          "index": [
+            3,
+            0
+          ],
+          "match_id": "3726033"
+        },
+        {
+          "events": [
+            0,
+            0
+          ],
+          "index": [
+            2,
+            0
+          ],
+          "match_id": "4288438"
+        },
+        {
+          "events": [
+            1,
+            0
+          ],
+          "index": [
+            0,
+            3
+          ],
+          "match_id": "4950929"
+        }
+      ]
+    },
+    "header_score": {
+      "agree": 1284,
+      "exceptions": []
+    },
+    "identity": {
+      "agree": 1284,
+      "exceptions": []
+    },
+    "parent_league_id": {
+      "agree": 1284,
+      "exceptions": []
+    },
+    "tournament_parent_id": {
+      "agree": 1284,
+      "exceptions": []
+    }
+  },
+  "by_season": {
+    "2021/2022": {
+      "cards": 21,
+      "eligible": 239,
+      "events": 209,
+      "goals_index": 471,
+      "ht_derivable": 209,
+      "lineup_blocks": 0,
+      "lineup_starters": 0,
+      "n": 240,
+      "player_stats_nonnull": 0,
+      "referee_nonempty": 0,
+      "shotmap_shots": 0,
+      "stats_all": 0,
+      "stats_half": 0
+    },
+    "2022/2023": {
+      "cards": 27,
+      "eligible": 240,
+      "events": 227,
+      "goals_index": 561,
+      "ht_derivable": 227,
+      "lineup_blocks": 0,
+      "lineup_starters": 0,
+      "n": 240,
+      "player_stats_nonnull": 0,
+      "referee_nonempty": 0,
+      "shotmap_shots": 0,
+      "stats_all": 0,
+      "stats_half": 0
+    },
+    "2023/2024": {
+      "cards": 20,
+      "eligible": 240,
+      "events": 202,
+      "goals_index": 517,
+      "ht_derivable": 202,
+      "lineup_blocks": 0,
+      "lineup_starters": 0,
+      "n": 240,
+      "player_stats_nonnull": 0,
+      "referee_nonempty": 0,
+      "shotmap_shots": 0,
+      "stats_all": 0,
+      "stats_half": 0
+    },
+    "2024/2025": {
+      "cards": 16,
+      "eligible": 240,
+      "events": 218,
+      "goals_index": 572,
+      "ht_derivable": 218,
+      "lineup_blocks": 0,
+      "lineup_starters": 0,
+      "n": 240,
+      "player_stats_nonnull": 0,
+      "referee_nonempty": 0,
+      "shotmap_shots": 0,
+      "stats_all": 0,
+      "stats_half": 0
+    },
+    "2025/2026": {
+      "cards": 17,
+      "eligible": 239,
+      "events": 210,
+      "goals_index": 522,
+      "ht_derivable": 210,
+      "lineup_blocks": 10,
+      "lineup_starters": 0,
+      "n": 240,
+      "player_stats_nonnull": 0,
+      "referee_nonempty": 0,
+      "shotmap_shots": 0,
+      "stats_all": 0,
+      "stats_half": 0
+    },
+    "2026/2027": {
+      "cards": 13,
+      "eligible": 84,
+      "events": 81,
+      "goals_index": 202,
+      "ht_derivable": 81,
+      "lineup_blocks": 0,
+      "lineup_starters": 0,
+      "n": 84,
+      "player_stats_nonnull": 0,
+      "referee_nonempty": 0,
+      "shotmap_shots": 0,
+      "stats_all": 0,
+      "stats_half": 0
+    }
+  },
+  "card_values": {
+    "Red": 99,
+    "YellowRed": 15
+  },
+  "event_types": {
+    "Card": 114,
+    "Goal": 2838,
+    "Half": 2294
+  },
+  "team_counts": {
+    "by_season": {
+      "2021/2022": 16,
+      "2022/2023": 17,
+      "2023/2024": 17,
+      "2024/2025": 16,
+      "2025/2026": 16,
+      "2026/2027": 16
+    },
+    "distinct_names": 26
+  },
+  "totals": {
+    "awarded": 2,
+    "cards": 114,
+    "eligible": 1282,
+    "events": 1147,
+    "files_on_disk": 1284,
+    "goal_events": 2838,
+    "ht_derivable": 1147,
+    "index_rows": 1284,
+    "lineup_blocks": 10,
+    "lineup_starters": 0,
+    "player_stats_nonnull": 0,
+    "red_events": 114,
+    "referee_nonempty": 0,
+    "score_parse": 1284,
+    "shotmap_nonempty": 0,
+    "stats_half_nonempty": 0,
+    "stats_nonempty": 0,
+    "total_goals": 2845,
+    "unique_match_ids": 1284
+  },
+  "turnover": {
+    "new_by_season": {
+      "2021/2022": [],
+      "2022/2023": [
+        "Fountain Gate FC",
+        "Ihefu FC",
+        "Singida Big Stars"
+      ],
+      "2023/2024": [
+        "JKT Tanzania",
+        "Mashujaa",
+        "Singida Black Stars",
+        "Tabora United"
+      ],
+      "2024/2025": [
+        "KenGold",
+        "Pamba Jiji"
+      ],
+      "2025/2026": [
+        "Mbeya City",
+        "Mtibwa Sugar",
+        "TRA United"
+      ],
+      "2026/2027": [
+        "Geita Gold FC",
+        "Kagera Sugar",
+        "Polisi Tanzania FC"
+      ]
+    },
+    "out_by_season": {
+      "2021/2022": [],
+      "2022/2023": [
+        "Biashara Mara United",
+        "Mbeya Kwanza FC"
+      ],
+      "2023/2024": [
+        "Mbeya City",
+        "Polisi Tanzania FC",
+        "Ruvu Shooting",
+        "Singida Big Stars"
+      ],
+      "2024/2025": [
+        "Geita Gold FC",
+        "Ihefu FC",
+        "Mtibwa Sugar"
+      ],
+      "2025/2026": [
+        "Kagera Sugar",
+        "KenGold",
+        "Tabora United"
+      ],
+      "2026/2027": [
+        "Kinondoni MC",
+        "Mtibwa Sugar",
+        "Tanzania Prisons"
+      ]
+    }
+  }
+}

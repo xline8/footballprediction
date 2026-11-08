@@ -1,0 +1,32 @@
+league: TH-ThaiLeague
+country: Thailand
+fotmob_id: 8984
+tier: 1
+warehouse_root: ~/workspace/footballprediction
+data:
+  matches: league/TH-ThaiLeague/data/th_matches.csv
+  team_matches: league/TH-ThaiLeague/data/th_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period_goals: ["2022/2023", "2023/2024", "2024/2025"]
+dev_period_stats: ["2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.4402
+  sot_1h_share: 0.4447
+  corners_1h_share: 0.4622
+  total_shots_1h_share: 0.4522
+  yellow_cards_1h_share: 0.3076
+markets:
+  goals: G-TH
+  sot: S-TH
+  corners: C-TH
+  cards: K-TH
+  total_shots: T-TH
+notes:
+  - "FORMAT: 16 teams every season, single regular phase, double round-robin, 240 matches/season; phase=regular for all rows; split-year Aug-May calendar."
+  - "STATS ERA: no stats in 2021/2022; full stats from 2022/2023. Period splits: 49 matches in 2022/2023, all stats matches from 2023/2024."
+  - "XG ERA: shotmap/expected_goals exist only in 2025/2026 (virgin) and 2026/2027, plus 1 match in 2024/2025; goals model is goals-only DC."
+  - "CARDS: stats-vs-events artefact present but era-flipped (see analysis). Frozen target = stats-feed yellow_cards in dev and virgin; virgin event-unified count is a documented sensitivity only."
+  - "REFEREE: text coverage 91-98% in 2022/2023-2024/2025 but collapses to 9/240 in the virgin; X8 dropped (reliability r=0.199 plus the coverage collapse)."
+  - "Calibration convention: actual minus predicted."

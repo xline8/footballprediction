@@ -1,0 +1,849 @@
+{
+  "scope": {
+    "all_matches": 1350,
+    "regular_only": 1290,
+    "reliable_cards_era": "2023/2024",
+    "reliable_cards_regular_n": 798
+  },
+  "levels_all": {
+    "2021/2022": {
+      "n": 280,
+      "goals_per_match": 2.6892857142857145,
+      "home_goals_per_match": 1.6214285714285714,
+      "away_goals_per_match": 1.0678571428571428,
+      "home_advantage_goals": 0.5535714285714286,
+      "home_win_pct": 0.4928571428571429,
+      "draw_pct": 0.2785714285714286,
+      "away_win_pct": 0.22857142857142856,
+      "btts_pct": 0.5428571428571428,
+      "over_2_5_pct": 0.5035714285714286,
+      "goals_dispersion_var_mean": 0.927572862671179,
+      "yellows_per_match": 0.2357142857142857,
+      "yellows_dispersion_var_mean": 1.0103182361246876,
+      "reds_per_match": 0.18571428571428572,
+      "over_yellow_3_5_pct": 0.0,
+      "over_yellow_4_5_pct": 0.0,
+      "over_yellow_5_5_pct": 0.0
+    },
+    "2022/2023": {
+      "n": 244,
+      "goals_per_match": 2.8360655737704916,
+      "home_goals_per_match": 1.6639344262295082,
+      "away_goals_per_match": 1.1721311475409837,
+      "home_advantage_goals": 0.4918032786885246,
+      "home_win_pct": 0.5,
+      "draw_pct": 0.23770491803278687,
+      "away_win_pct": 0.26229508196721313,
+      "btts_pct": 0.5614754098360656,
+      "over_2_5_pct": 0.5409836065573771,
+      "goals_dispersion_var_mean": 0.9481671780965295,
+      "yellows_per_match": 2.7745901639344264,
+      "yellows_dispersion_var_mean": 3.729616864525776,
+      "reds_per_match": 0.29098360655737704,
+      "over_yellow_3_5_pct": 0.3524590163934426,
+      "over_yellow_4_5_pct": 0.29918032786885246,
+      "over_yellow_5_5_pct": 0.22540983606557377
+    },
+    "2023/2024": {
+      "n": 276,
+      "goals_per_match": 2.6666666666666665,
+      "home_goals_per_match": 1.5724637681159421,
+      "away_goals_per_match": 1.0942028985507246,
+      "home_advantage_goals": 0.4782608695652174,
+      "home_win_pct": 0.4855072463768116,
+      "draw_pct": 0.22826086956521738,
+      "away_win_pct": 0.286231884057971,
+      "btts_pct": 0.4782608695652174,
+      "over_2_5_pct": 0.5253623188405797,
+      "goals_dispersion_var_mean": 1.010909090909091,
+      "yellows_per_match": 3.9528985507246377,
+      "yellows_dispersion_var_mean": 1.5384684609615864,
+      "reds_per_match": 0.2246376811594203,
+      "over_yellow_3_5_pct": 0.5181159420289855,
+      "over_yellow_4_5_pct": 0.40217391304347827,
+      "over_yellow_5_5_pct": 0.2572463768115942
+    },
+    "2024/2025": {
+      "n": 278,
+      "goals_per_match": 2.460431654676259,
+      "home_goals_per_match": 1.4244604316546763,
+      "away_goals_per_match": 1.0359712230215827,
+      "home_advantage_goals": 0.38848920863309355,
+      "home_win_pct": 0.45323741007194246,
+      "draw_pct": 0.2841726618705036,
+      "away_win_pct": 0.26258992805755393,
+      "btts_pct": 0.49640287769784175,
+      "over_2_5_pct": 0.45323741007194246,
+      "goals_dispersion_var_mean": 1.1225536766102984,
+      "yellows_per_match": 4.244604316546763,
+      "yellows_dispersion_var_mean": 1.0115768218809276,
+      "reds_per_match": 0.25539568345323743,
+      "over_yellow_3_5_pct": 0.6294964028776978,
+      "over_yellow_4_5_pct": 0.44964028776978415,
+      "over_yellow_5_5_pct": 0.2805755395683453
+    },
+    "2025/2026": {
+      "n": 192,
+      "goals_per_match": 2.46875,
+      "home_goals_per_match": 1.3802083333333333,
+      "away_goals_per_match": 1.0885416666666667,
+      "home_advantage_goals": 0.2916666666666667,
+      "home_win_pct": 0.4375,
+      "draw_pct": 0.2760416666666667,
+      "away_win_pct": 0.2864583333333333,
+      "btts_pct": 0.4947916666666667,
+      "over_2_5_pct": 0.46875,
+      "goals_dispersion_var_mean": 0.9624229571210816,
+      "yellows_per_match": 5.359375,
+      "yellows_dispersion_var_mean": 0.8247065467922398,
+      "reds_per_match": 0.171875,
+      "over_yellow_3_5_pct": 0.796875,
+      "over_yellow_4_5_pct": 0.6510416666666666,
+      "over_yellow_5_5_pct": 0.4583333333333333
+    },
+    "2026/2027": {
+      "n": 80,
+      "goals_per_match": 2.7625,
+      "home_goals_per_match": 1.5125,
+      "away_goals_per_match": 1.25,
+      "home_advantage_goals": 0.2625,
+      "home_win_pct": 0.4875,
+      "draw_pct": 0.1875,
+      "away_win_pct": 0.325,
+      "btts_pct": 0.5375,
+      "over_2_5_pct": 0.4875,
+      "goals_dispersion_var_mean": 0.891173606735781,
+      "yellows_per_match": 4.7875,
+      "yellows_dispersion_var_mean": 1.2622203126549227,
+      "reds_per_match": 0.1875,
+      "over_yellow_3_5_pct": 0.675,
+      "over_yellow_4_5_pct": 0.5375,
+      "over_yellow_5_5_pct": 0.35
+    }
+  },
+  "levels_regular": {
+    "2021/2022": {
+      "n": 264,
+      "goals_per_match": 2.727272727272727,
+      "home_goals_per_match": 1.6363636363636365,
+      "away_goals_per_match": 1.0909090909090908,
+      "home_advantage_goals": 0.5454545454545454,
+      "home_win_pct": 0.48863636363636365,
+      "draw_pct": 0.2727272727272727,
+      "away_win_pct": 0.23863636363636365,
+      "btts_pct": 0.5454545454545454,
+      "over_2_5_pct": 0.5151515151515151,
+      "goals_dispersion_var_mean": 0.9095057034220534,
+      "yellows_per_match": 0.24621212121212122,
+      "yellows_dispersion_var_mean": 1.003743784732378,
+      "reds_per_match": 0.18181818181818182,
+      "over_yellow_3_5_pct": 0.0,
+      "over_yellow_4_5_pct": 0.0,
+      "over_yellow_5_5_pct": 0.0
+    },
+    "2022/2023": {
+      "n": 228,
+      "goals_per_match": 2.8903508771929824,
+      "home_goals_per_match": 1.6710526315789473,
+      "away_goals_per_match": 1.219298245614035,
+      "home_advantage_goals": 0.4517543859649123,
+      "home_win_pct": 0.49122807017543857,
+      "draw_pct": 0.23684210526315788,
+      "away_win_pct": 0.2719298245614035,
+      "btts_pct": 0.5789473684210527,
+      "over_2_5_pct": 0.5526315789473685,
+      "goals_dispersion_var_mean": 0.9392618638572661,
+      "yellows_per_match": 2.8201754385964914,
+      "yellows_dispersion_var_mean": 3.7764813888641484,
+      "reds_per_match": 0.3026315789473684,
+      "over_yellow_3_5_pct": 0.3508771929824561,
+      "over_yellow_4_5_pct": 0.2982456140350877,
+      "over_yellow_5_5_pct": 0.23684210526315788
+    },
+    "2023/2024": {
+      "n": 264,
+      "goals_per_match": 2.6931818181818183,
+      "home_goals_per_match": 1.5681818181818181,
+      "away_goals_per_match": 1.125,
+      "home_advantage_goals": 0.4431818181818182,
+      "home_win_pct": 0.4734848484848485,
+      "draw_pct": 0.23863636363636365,
+      "away_win_pct": 0.2878787878787879,
+      "btts_pct": 0.4962121212121212,
+      "over_2_5_pct": 0.5303030303030303,
+      "goals_dispersion_var_mean": 1.0167172033177712,
+      "yellows_per_match": 4.003787878787879,
+      "yellows_dispersion_var_mean": 1.467238147997597,
+      "reds_per_match": 0.20833333333333334,
+      "over_yellow_3_5_pct": 0.5227272727272727,
+      "over_yellow_4_5_pct": 0.4015151515151515,
+      "over_yellow_5_5_pct": 0.25757575757575757
+    },
+    "2024/2025": {
+      "n": 262,
+      "goals_per_match": 2.469465648854962,
+      "home_goals_per_match": 1.400763358778626,
+      "away_goals_per_match": 1.0687022900763359,
+      "home_advantage_goals": 0.3320610687022901,
+      "home_win_pct": 0.4389312977099237,
+      "draw_pct": 0.2824427480916031,
+      "away_win_pct": 0.2786259541984733,
+      "btts_pct": 0.5114503816793893,
+      "over_2_5_pct": 0.4580152671755725,
+      "goals_dispersion_var_mean": 1.1252464957629378,
+      "yellows_per_match": 4.190839694656488,
+      "yellows_dispersion_var_mean": 1.0243633495941769,
+      "reds_per_match": 0.25572519083969464,
+      "over_yellow_3_5_pct": 0.6221374045801527,
+      "over_yellow_4_5_pct": 0.44274809160305345,
+      "over_yellow_5_5_pct": 0.27099236641221375
+    },
+    "2025/2026": {
+      "n": 192,
+      "goals_per_match": 2.46875,
+      "home_goals_per_match": 1.3802083333333333,
+      "away_goals_per_match": 1.0885416666666667,
+      "home_advantage_goals": 0.2916666666666667,
+      "home_win_pct": 0.4375,
+      "draw_pct": 0.2760416666666667,
+      "away_win_pct": 0.2864583333333333,
+      "btts_pct": 0.4947916666666667,
+      "over_2_5_pct": 0.46875,
+      "goals_dispersion_var_mean": 0.9624229571210816,
+      "yellows_per_match": 5.359375,
+      "yellows_dispersion_var_mean": 0.8247065467922398,
+      "reds_per_match": 0.171875,
+      "over_yellow_3_5_pct": 0.796875,
+      "over_yellow_4_5_pct": 0.6510416666666666,
+      "over_yellow_5_5_pct": 0.4583333333333333
+    },
+    "2026/2027": {
+      "n": 80,
+      "goals_per_match": 2.7625,
+      "home_goals_per_match": 1.5125,
+      "away_goals_per_match": 1.25,
+      "home_advantage_goals": 0.2625,
+      "home_win_pct": 0.4875,
+      "draw_pct": 0.1875,
+      "away_win_pct": 0.325,
+      "btts_pct": 0.5375,
+      "over_2_5_pct": 0.4875,
+      "goals_dispersion_var_mean": 0.891173606735781,
+      "yellows_per_match": 4.7875,
+      "yellows_dispersion_var_mean": 1.2622203126549227,
+      "reds_per_match": 0.1875,
+      "over_yellow_3_5_pct": 0.675,
+      "over_yellow_4_5_pct": 0.5375,
+      "over_yellow_5_5_pct": 0.35
+    }
+  },
+  "levels_pooled": {
+    "all": {
+      "n": 1350,
+      "goals_per_match": 2.637037037037037,
+      "home_goals_per_match": 1.5377777777777777,
+      "away_goals_per_match": 1.0992592592592592,
+      "home_advantage_goals": 0.43851851851851853,
+      "home_win_pct": 0.4762962962962963,
+      "draw_pct": 0.2562962962962963,
+      "away_win_pct": 0.2674074074074074,
+      "btts_pct": 0.5162962962962963,
+      "over_2_5_pct": 0.4985185185185185,
+      "goals_dispersion_var_mean": 0.992349722224536,
+      "yellows_per_match": 3.2785185185185184,
+      "yellows_dispersion_var_mean": 2.445841792735627,
+      "reds_per_match": 0.22518518518518518,
+      "over_yellow_3_5_pct": 0.4525925925925926,
+      "over_yellow_4_5_pct": 0.35333333333333333,
+      "over_yellow_5_5_pct": 0.23703703703703705
+    },
+    "regular": {
+      "n": 1290,
+      "goals_per_match": 2.66046511627907,
+      "home_goals_per_match": 1.5348837209302326,
+      "away_goals_per_match": 1.1255813953488372,
+      "home_advantage_goals": 0.40930232558139534,
+      "home_win_pct": 0.4682170542635659,
+      "draw_pct": 0.2565891472868217,
+      "away_win_pct": 0.2751937984496124,
+      "btts_pct": 0.5263565891472868,
+      "over_2_5_pct": 0.5046511627906977,
+      "goals_dispersion_var_mean": 0.9894860763751375,
+      "yellows_per_match": 3.313953488372093,
+      "yellows_dispersion_var_mean": 2.414467899772706,
+      "reds_per_match": 0.22248062015503875,
+      "over_yellow_3_5_pct": 0.4558139534883721,
+      "over_yellow_4_5_pct": 0.3550387596899225,
+      "over_yellow_5_5_pct": 0.23953488372093024
+    },
+    "regular_reliable_cards": {
+      "n": 798,
+      "goals_per_match": 2.572681704260652,
+      "home_goals_per_match": 1.462406015037594,
+      "away_goals_per_match": 1.1102756892230576,
+      "home_advantage_goals": 0.35213032581453635,
+      "home_win_pct": 0.4548872180451128,
+      "draw_pct": 0.2568922305764411,
+      "away_win_pct": 0.2882205513784461,
+      "btts_pct": 0.5050125313283208,
+      "over_2_5_pct": 0.487468671679198,
+      "goals_dispersion_var_mean": 1.026754005064046,
+      "yellows_per_match": 4.469924812030075,
+      "yellows_dispersion_var_mean": 1.1858926398721867,
+      "reds_per_match": 0.21303258145363407,
+      "over_yellow_3_5_pct": 0.6365914786967418,
+      "over_yellow_4_5_pct": 0.48872180451127817,
+      "over_yellow_5_5_pct": 0.31954887218045114
+    }
+  },
+  "reliability": {
+    "goals_for": {
+      "r_random": 0.7949652277158457,
+      "r_odd_even": 0.812504593574562,
+      "n_teams": 15
+    },
+    "goals_against": {
+      "r_random": 0.7930082343741957,
+      "r_odd_even": 0.8234677096844505,
+      "n_teams": 15
+    },
+    "yellows_for": {
+      "r_random": 0.62066415769789,
+      "r_odd_even": 0.5591330405082686,
+      "n_teams": 14
+    },
+    "yellows_against": {
+      "r_random": 0.6142771226264188,
+      "r_odd_even": 0.4820469766166884,
+      "n_teams": 14
+    }
+  },
+  "halves": {
+    "goals": {
+      "n": 1194,
+      "pooled_share": 0.46005267778753295,
+      "observed_var": 0.11743644574332844,
+      "noise_floor": 0.11852911650748615,
+      "true_var": -0.0010926707641577132,
+      "per_season": {
+        "2021/2022": {
+          "n": 248,
+          "share": 0.4361111111111111
+        },
+        "2022/2023": {
+          "n": 217,
+          "share": 0.48103186646433993
+        },
+        "2023/2024": {
+          "n": 244,
+          "share": 0.43741209563994377
+        },
+        "2024/2025": {
+          "n": 235,
+          "share": 0.48031496062992124
+        },
+        "2025/2026": {
+          "n": 173,
+          "share": 0.47468354430379744
+        },
+        "2026/2027": {
+          "n": 77,
+          "share": 0.45871559633027525
+        }
+      },
+      "team_split_half": {
+        "r_random": 0.2736606652269807,
+        "r_odd_even": 0.21299808790406652,
+        "n_teams": 15
+      }
+    },
+    "yellows_reliable": {
+      "n": 772,
+      "pooled_share": 0.3790299971965237,
+      "observed_var": 0.073544747284136,
+      "noise_floor": 0.0703946697689583,
+      "true_var": 0.0031500775151776933,
+      "per_season": {
+        "2021/2022": {
+          "n": 0,
+          "share": null
+        },
+        "2022/2023": {
+          "n": 0,
+          "share": null
+        },
+        "2023/2024": {
+          "n": 252,
+          "share": 0.38789025543992434
+        },
+        "2024/2025": {
+          "n": 251,
+          "share": 0.35974499089253187
+        },
+        "2025/2026": {
+          "n": 191,
+          "share": 0.37900874635568516
+        },
+        "2026/2027": {
+          "n": 78,
+          "share": 0.40992167101827676
+        }
+      },
+      "team_split_half": {
+        "r_random": -0.4597549092683761,
+        "r_odd_even": -0.10060429248724315,
+        "n_teams": 14
+      }
+    }
+  },
+  "card_feed_diagnostics": {
+    "2021/2022 2021-07": {
+      "n": 9,
+      "mean_yellows": 0.3333333333333333,
+      "zero_card_rate": 0.6666666666666666,
+      "matches_with_yellow_event": 3
+    },
+    "2021/2022 2021-08": {
+      "n": 38,
+      "mean_yellows": 0.10526315789473684,
+      "zero_card_rate": 0.9210526315789473,
+      "matches_with_yellow_event": 3
+    },
+    "2021/2022 2021-09": {
+      "n": 31,
+      "mean_yellows": 0.3225806451612903,
+      "zero_card_rate": 0.6774193548387096,
+      "matches_with_yellow_event": 10
+    },
+    "2021/2022 2021-10": {
+      "n": 34,
+      "mean_yellows": 0.4117647058823529,
+      "zero_card_rate": 0.6470588235294118,
+      "matches_with_yellow_event": 12
+    },
+    "2021/2022 2021-11": {
+      "n": 20,
+      "mean_yellows": 0.15,
+      "zero_card_rate": 0.85,
+      "matches_with_yellow_event": 3
+    },
+    "2021/2022 2021-12": {
+      "n": 8,
+      "mean_yellows": 0.125,
+      "zero_card_rate": 0.875,
+      "matches_with_yellow_event": 1
+    },
+    "2021/2022 2022-01": {
+      "n": 13,
+      "mean_yellows": 0.23076923076923078,
+      "zero_card_rate": 0.8461538461538461,
+      "matches_with_yellow_event": 2
+    },
+    "2021/2022 2022-02": {
+      "n": 32,
+      "mean_yellows": 0.15625,
+      "zero_card_rate": 0.84375,
+      "matches_with_yellow_event": 5
+    },
+    "2021/2022 2022-03": {
+      "n": 15,
+      "mean_yellows": 0.2,
+      "zero_card_rate": 0.8,
+      "matches_with_yellow_event": 3
+    },
+    "2021/2022 2022-04": {
+      "n": 42,
+      "mean_yellows": 0.2619047619047619,
+      "zero_card_rate": 0.8095238095238095,
+      "matches_with_yellow_event": 8
+    },
+    "2021/2022 2022-05": {
+      "n": 30,
+      "mean_yellows": 0.3,
+      "zero_card_rate": 0.7,
+      "matches_with_yellow_event": 9
+    },
+    "2021/2022 2022-06": {
+      "n": 5,
+      "mean_yellows": 0.0,
+      "zero_card_rate": 1.0,
+      "matches_with_yellow_event": 0
+    },
+    "2021/2022 2022-07": {
+      "n": 3,
+      "mean_yellows": 0.0,
+      "zero_card_rate": 1.0,
+      "matches_with_yellow_event": 0
+    },
+    "2022/2023 2022-07": {
+      "n": 18,
+      "mean_yellows": 0.1111111111111111,
+      "zero_card_rate": 0.8888888888888888,
+      "matches_with_yellow_event": 2
+    },
+    "2022/2023 2022-08": {
+      "n": 31,
+      "mean_yellows": 0.3548387096774194,
+      "zero_card_rate": 0.7096774193548387,
+      "matches_with_yellow_event": 9
+    },
+    "2022/2023 2022-09": {
+      "n": 41,
+      "mean_yellows": 0.17073170731707318,
+      "zero_card_rate": 0.8536585365853658,
+      "matches_with_yellow_event": 6
+    },
+    "2022/2023 2022-10": {
+      "n": 13,
+      "mean_yellows": 0.15384615384615385,
+      "zero_card_rate": 0.8461538461538461,
+      "matches_with_yellow_event": 2
+    },
+    "2022/2023 2022-11": {
+      "n": 1,
+      "mean_yellows": 1.0,
+      "zero_card_rate": 0.0,
+      "matches_with_yellow_event": 1
+    },
+    "2022/2023 2023-01": {
+      "n": 23,
+      "mean_yellows": 4.565217391304348,
+      "zero_card_rate": 0.13043478260869565,
+      "matches_with_yellow_event": 20
+    },
+    "2022/2023 2023-02": {
+      "n": 37,
+      "mean_yellows": 5.0,
+      "zero_card_rate": 0.21621621621621623,
+      "matches_with_yellow_event": 29
+    },
+    "2022/2023 2023-03": {
+      "n": 30,
+      "mean_yellows": 4.966666666666667,
+      "zero_card_rate": 0.06666666666666667,
+      "matches_with_yellow_event": 28
+    },
+    "2022/2023 2023-04": {
+      "n": 36,
+      "mean_yellows": 4.444444444444445,
+      "zero_card_rate": 0.027777777777777776,
+      "matches_with_yellow_event": 35
+    },
+    "2022/2023 2023-05": {
+      "n": 14,
+      "mean_yellows": 3.9285714285714284,
+      "zero_card_rate": 0.07142857142857142,
+      "matches_with_yellow_event": 13
+    },
+    "2023/2024 2023-07": {
+      "n": 12,
+      "mean_yellows": 4.416666666666667,
+      "zero_card_rate": 0.08333333333333333,
+      "matches_with_yellow_event": 11
+    },
+    "2023/2024 2023-08": {
+      "n": 24,
+      "mean_yellows": 4.75,
+      "zero_card_rate": 0.0,
+      "matches_with_yellow_event": 24
+    },
+    "2023/2024 2023-09": {
+      "n": 36,
+      "mean_yellows": 4.611111111111111,
+      "zero_card_rate": 0.027777777777777776,
+      "matches_with_yellow_event": 35
+    },
+    "2023/2024 2023-10": {
+      "n": 29,
+      "mean_yellows": 4.241379310344827,
+      "zero_card_rate": 0.06896551724137931,
+      "matches_with_yellow_event": 27
+    },
+    "2023/2024 2023-11": {
+      "n": 31,
+      "mean_yellows": 3.4516129032258065,
+      "zero_card_rate": 0.06451612903225806,
+      "matches_with_yellow_event": 29
+    },
+    "2023/2024 2023-12": {
+      "n": 6,
+      "mean_yellows": 0.0,
+      "zero_card_rate": 1.0,
+      "matches_with_yellow_event": 0
+    },
+    "2023/2024 2024-01": {
+      "n": 30,
+      "mean_yellows": 3.6,
+      "zero_card_rate": 0.03333333333333333,
+      "matches_with_yellow_event": 29
+    },
+    "2023/2024 2024-02": {
+      "n": 29,
+      "mean_yellows": 3.9310344827586206,
+      "zero_card_rate": 0.06896551724137931,
+      "matches_with_yellow_event": 27
+    },
+    "2023/2024 2024-03": {
+      "n": 22,
+      "mean_yellows": 3.090909090909091,
+      "zero_card_rate": 0.045454545454545456,
+      "matches_with_yellow_event": 21
+    },
+    "2023/2024 2024-04": {
+      "n": 32,
+      "mean_yellows": 4.15625,
+      "zero_card_rate": 0.0,
+      "matches_with_yellow_event": 32
+    },
+    "2023/2024 2024-05": {
+      "n": 25,
+      "mean_yellows": 4.2,
+      "zero_card_rate": 0.08,
+      "matches_with_yellow_event": 23
+    },
+    "2024/2025 2024-07": {
+      "n": 18,
+      "mean_yellows": 3.6666666666666665,
+      "zero_card_rate": 0.05555555555555555,
+      "matches_with_yellow_event": 17
+    },
+    "2024/2025 2024-08": {
+      "n": 24,
+      "mean_yellows": 3.9583333333333335,
+      "zero_card_rate": 0.041666666666666664,
+      "matches_with_yellow_event": 23
+    },
+    "2024/2025 2024-09": {
+      "n": 32,
+      "mean_yellows": 4.5625,
+      "zero_card_rate": 0.0,
+      "matches_with_yellow_event": 32
+    },
+    "2024/2025 2024-10": {
+      "n": 26,
+      "mean_yellows": 4.346153846153846,
+      "zero_card_rate": 0.038461538461538464,
+      "matches_with_yellow_event": 25
+    },
+    "2024/2025 2024-11": {
+      "n": 27,
+      "mean_yellows": 4.7407407407407405,
+      "zero_card_rate": 0.0,
+      "matches_with_yellow_event": 27
+    },
+    "2024/2025 2024-12": {
+      "n": 13,
+      "mean_yellows": 5.076923076923077,
+      "zero_card_rate": 0.0,
+      "matches_with_yellow_event": 13
+    },
+    "2024/2025 2025-01": {
+      "n": 29,
+      "mean_yellows": 4.379310344827586,
+      "zero_card_rate": 0.034482758620689655,
+      "matches_with_yellow_event": 28
+    },
+    "2024/2025 2025-02": {
+      "n": 30,
+      "mean_yellows": 4.066666666666666,
+      "zero_card_rate": 0.06666666666666667,
+      "matches_with_yellow_event": 28
+    },
+    "2024/2025 2025-03": {
+      "n": 29,
+      "mean_yellows": 4.103448275862069,
+      "zero_card_rate": 0.0,
+      "matches_with_yellow_event": 29
+    },
+    "2024/2025 2025-04": {
+      "n": 32,
+      "mean_yellows": 4.15625,
+      "zero_card_rate": 0.09375,
+      "matches_with_yellow_event": 29
+    },
+    "2024/2025 2025-05": {
+      "n": 18,
+      "mean_yellows": 3.611111111111111,
+      "zero_card_rate": 0.1111111111111111,
+      "matches_with_yellow_event": 16
+    },
+    "2025/2026 2025-07": {
+      "n": 5,
+      "mean_yellows": 6.0,
+      "zero_card_rate": 0.0,
+      "matches_with_yellow_event": 5
+    },
+    "2025/2026 2025-08": {
+      "n": 22,
+      "mean_yellows": 5.363636363636363,
+      "zero_card_rate": 0.0,
+      "matches_with_yellow_event": 22
+    },
+    "2025/2026 2025-09": {
+      "n": 27,
+      "mean_yellows": 5.037037037037037,
+      "zero_card_rate": 0.037037037037037035,
+      "matches_with_yellow_event": 26
+    },
+    "2025/2026 2025-10": {
+      "n": 15,
+      "mean_yellows": 6.466666666666667,
+      "zero_card_rate": 0.0,
+      "matches_with_yellow_event": 15
+    },
+    "2025/2026 2025-11": {
+      "n": 16,
+      "mean_yellows": 4.625,
+      "zero_card_rate": 0.0,
+      "matches_with_yellow_event": 16
+    },
+    "2025/2026 2025-12": {
+      "n": 11,
+      "mean_yellows": 4.2727272727272725,
+      "zero_card_rate": 0.0,
+      "matches_with_yellow_event": 11
+    },
+    "2025/2026 2026-01": {
+      "n": 25,
+      "mean_yellows": 4.88,
+      "zero_card_rate": 0.0,
+      "matches_with_yellow_event": 25
+    },
+    "2025/2026 2026-02": {
+      "n": 15,
+      "mean_yellows": 5.866666666666666,
+      "zero_card_rate": 0.0,
+      "matches_with_yellow_event": 15
+    },
+    "2025/2026 2026-03": {
+      "n": 25,
+      "mean_yellows": 6.12,
+      "zero_card_rate": 0.0,
+      "matches_with_yellow_event": 25
+    },
+    "2025/2026 2026-04": {
+      "n": 25,
+      "mean_yellows": 5.12,
+      "zero_card_rate": 0.0,
+      "matches_with_yellow_event": 25
+    },
+    "2025/2026 2026-05": {
+      "n": 6,
+      "mean_yellows": 6.0,
+      "zero_card_rate": 0.0,
+      "matches_with_yellow_event": 6
+    },
+    "2026/2027 2026-07": {
+      "n": 5,
+      "mean_yellows": 2.2,
+      "zero_card_rate": 0.2,
+      "matches_with_yellow_event": 4
+    },
+    "2026/2027 2026-08": {
+      "n": 25,
+      "mean_yellows": 5.2,
+      "zero_card_rate": 0.04,
+      "matches_with_yellow_event": 24
+    },
+    "2026/2027 2026-09": {
+      "n": 15,
+      "mean_yellows": 5.266666666666667,
+      "zero_card_rate": 0.0,
+      "matches_with_yellow_event": 15
+    },
+    "2026/2027 2026-10": {
+      "n": 22,
+      "mean_yellows": 4.590909090909091,
+      "zero_card_rate": 0.0,
+      "matches_with_yellow_event": 22
+    },
+    "2026/2027 2026-11": {
+      "n": 13,
+      "mean_yellows": 4.769230769230769,
+      "zero_card_rate": 0.0,
+      "matches_with_yellow_event": 13
+    }
+  },
+  "card_feed_by_season": {
+    "2021/2022": {
+      "n": 280,
+      "mean_yellows": 0.2357142857142857,
+      "zero_card_matches": 221,
+      "matches_with_yellow_event": 59,
+      "referee_known": 0
+    },
+    "2022/2023": {
+      "n": 244,
+      "mean_yellows": 2.7745901639344264,
+      "zero_card_matches": 99,
+      "matches_with_yellow_event": 145,
+      "referee_known": 0
+    },
+    "2023/2024": {
+      "n": 276,
+      "mean_yellows": 3.9528985507246377,
+      "zero_card_matches": 18,
+      "matches_with_yellow_event": 258,
+      "referee_known": 0
+    },
+    "2024/2025": {
+      "n": 278,
+      "mean_yellows": 4.244604316546763,
+      "zero_card_matches": 11,
+      "matches_with_yellow_event": 267,
+      "referee_known": 0
+    },
+    "2025/2026": {
+      "n": 192,
+      "mean_yellows": 5.359375,
+      "zero_card_matches": 1,
+      "matches_with_yellow_event": 191,
+      "referee_known": 22
+    },
+    "2026/2027": {
+      "n": 80,
+      "mean_yellows": 4.7875,
+      "zero_card_matches": 2,
+      "matches_with_yellow_event": 78,
+      "referee_known": 0
+    }
+  },
+  "thin_history": {
+    "2022/2023": {
+      "min_prior_matches": 0,
+      "n_teams": 12,
+      "teams_with_lt_10": [
+        9935
+      ],
+      "teams_with_zero": [
+        9935
+      ]
+    },
+    "2023/2024": {
+      "min_prior_matches": 0,
+      "n_teams": 12,
+      "teams_with_lt_10": [
+        210220
+      ],
+      "teams_with_zero": [
+        210220
+      ]
+    },
+    "2024/2025": {
+      "min_prior_matches": 0,
+      "n_teams": 12,
+      "teams_with_lt_10": [
+        861724
+      ],
+      "teams_with_zero": [
+        861724
+      ]
+    }
+  },
+  "cards_distribution_reliable": {
+    "mean": 4.469924812030075,
+    "p_over_3_5": 0.6365914786967418,
+    "p_over_4_5": 0.48872180451127817,
+    "p_over_5_5": 0.31954887218045114
+  }
+}

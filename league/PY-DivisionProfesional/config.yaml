@@ -1,0 +1,30 @@
+# PY-DivisionProfesional (Paraguay) — league config
+league: PY-DivisionProfesional
+country: Paraguay
+fotmob_id: 199
+tier: 1
+warehouse: data_enrichment/fotmob_world/Paraguay/Division Profesional
+data:
+  matches: league/PY-DivisionProfesional/data/py_matches.csv
+  team_matches: league/PY-DivisionProfesional/data/py_team_matches.csv
+seasons: ["2021 - Apertura", "2021 - Clausura", "2022 - Apertura", "2022 - Clausura",
+          "2023 - Apertura", "2023 - Clausura", "2024 - Apertura", "2024 - Clausura",
+          "2025 - Apertura", "2025 - Clausura", "2026 - Apertura", "2026 - Clausura"]
+# Split calendar: Apertura + Clausura tournaments per year (phase-flagged in the CSV).
+# Stats feed exists ONLY from 2025 - Apertura; shotmap 0% in every season (no xG anywhere).
+dev_period_goals: ["2022 - Apertura", "2022 - Clausura", "2023 - Apertura", "2023 - Clausura",
+                   "2024 - Apertura", "2024 - Clausura", "2025 - Apertura", "2025 - Clausura"]
+virgin_goals: "2026 - Apertura"        # complete, n=132 — read ONCE per the G-PY prereg
+dev_period_counts: ["2025 - Clausura", "2026 - Apertura"]   # seed = 2025 - Apertura (training only)
+virgin_counts: "2026 - Clausura"      # TRANSITIONAL: 112 of 132 played at pull; season-end confirmatory read outstanding
+halves_constants: {goals: 0.418, sot: 0.442, corners: 0.492, cards: 0.327, total_shots: 0.465}
+markets:
+  goals: G-PY          # Dixon-Coles goals-only (no xG in this league); arms: Gate Zero, SHRINK
+  sot: S-PY            # v5 pattern without xG inputs; arms: Gate Zero, RS; primary line 7.5
+  corners: C-PY        # corners v3 pattern; arms: Gate Zero, X7; primary line 8.5
+  cards: K-PY          # Gate Zero only (X8 dropped: dev-era referee coverage 11.1%); target = event-unified yellows; primary line 4.5
+  total_shots: T-PY    # arms A (v1), B (v2 level layer), C (E9 trailing-r); primary line 24.5
+notes:
+  - Cards target is event-unified (stats feed undercounts in every dev season; check frozen pre-fitting, see analysis/DATA_UNDERSTANDING.md).
+  - Team identity is team_id; display names canonicalised (4 clubs have era-varying FotMob spellings).
+  - Predictions-only: no PY odds/settlement source in-system.

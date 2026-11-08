@@ -1,0 +1,14 @@
+{
+  "levels": {
+    "2021": {"n":149,"goals_per_match":2.128,"ou25_over":0.349,"home_draw_away":[0.450,0.315,0.235]},
+    "2022": {"n":216,"goals_per_match":2.319,"ou25_over":0.449,"home_draw_away":[0.514,0.264,0.222]},
+    "2023": {"n":216,"goals_per_match":2.153,"ou25_over":0.366,"home_draw_away":[0.463,0.306,0.231]},
+    "2024": {"n":216,"goals_per_match":2.417,"ou25_over":0.444,"home_draw_away":[0.495,0.296,0.208]},
+    "2025": {"n":216,"goals_per_match":2.000,"ou25_over":0.315,"home_draw_away":[0.440,0.329,0.231]},
+    "2026": {"n":216,"goals_per_match":2.259,"ou25_over":0.403,"home_draw_away":[0.458,0.287,0.255]}
+  },
+  "pooled": {"home_goals":1.305,"away_goals":0.912,"goals_dispersion":0.986},
+  "halves": {"ht_known_matches":1079,"first_half_goals":1065,"goals":2406,"share":0.4426,"per_match_variance":0.1271,"binomial_noise_floor":0.1323,"true_variance":-0.0052,"team_split_half_r":-0.37},
+  "trait_split_half": {"goals_for_r":0.411,"goals_for_sd":0.107,"goals_against_r":0.143,"goals_against_sd":0.121,"random_halves":60,"min_matches_per_team":24,"teams":36},
+  "movers": {"pooled_mean_goals_per_team_match":1.1157,"ex_b":{"n":346,"dGF":-0.0405,"dGA":-0.0868},"newcomers":{"n":340,"dGF":-0.0627,"dGA":0.0667}}
+}

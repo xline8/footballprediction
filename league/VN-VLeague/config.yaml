@@ -1,0 +1,31 @@
+# Vietnam V-League — league config
+league: VN-VLeague
+country: Vietnam
+fotmob_id: 9088
+tier: 1
+warehouse: data_enrichment/fotmob_world/Vietnam/V-League
+data:
+  matches: league/VN-VLeague/data/vn_vleague_matches.csv
+  team_matches: league/VN-VLeague/data/vn_vleague_team_matches.csv
+seasons: ["2021", "2022", "2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021", "2022", "2023", "2023/2024", "2024/2025"]   # walk-forward, season-blocked; 2021 is the seed (84, truncated)
+virgin_primary: "2025/2026"          # complete season, n=182, read ONCE per candidate
+virgin_confirmatory: "2026/2027"     # in progress (49 matches through 2026-11-08); season-end confirmatory read only
+halves_constants:               # frozen league constants (EDA F3) — the ONLY halves mechanism
+  goals_1h_share: 0.4468
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+  yellow_cards_1h_share: null
+markets:
+  goals: G-VN
+  sot: "NOT BUILDABLE — no SOT target"
+  corners: "NOT BUILDABLE — no corners target"
+  cards: "NOT BUILDABLE — zero plain-Yellow events in 2021-2023/2024; yellows appear only from 2024/2025"
+  total_shots: "NOT BUILDABLE — no total-shots target"
+notes:
+  - "Scores-only league: no stats, shotmap, splits, playerStats, or named referees in any season; lineups only from 2024/2025."
+  - "Mixed season labelling verified disjoint: calendar-year 2021-2023, then season-format 2023/2024 onward; 2023 ends 2023-08-27, 2023/2024 starts 2023-10-20."
+  - "2021 truncated after round 12 (COVID, 84 matches). 2023 split-group: phase 1 (91) + championship/relegation groups (43). 2022 has 13 teams; all other complete seasons 14 teams, 26 rounds. All schedules balanced."
+  - "One score/event mismatch flagged (match 4688919, official 1-0 kept). HT scores cross-validate 924/924."
+  - "Goals FT plus 1H/2H presentation uses the frozen event-time constant only."

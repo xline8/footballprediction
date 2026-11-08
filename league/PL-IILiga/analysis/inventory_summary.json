@@ -1,0 +1,191 @@
+{
+  "league_id": 8935,
+  "n_index_rows": 1679,
+  "n_match_rows": 1679,
+  "n_team_match_rows": 3358,
+  "seasons": {
+    "2021/2022": {
+      "n": 309,
+      "teams": 18,
+      "goals": 2.773,
+      "home_goals": 1.56,
+      "away_goals": 1.214,
+      "home_win_pct": 47.2,
+      "draw_pct": 21.4,
+      "away_win_pct": 31.4,
+      "ou25_over_rate": 0.547,
+      "events_pct": 87.7,
+      "ht_validated_pct": 95.5,
+      "b_team_match_pct": 21.4,
+      "b_teams": 2,
+      "awarded_no_events": 14,
+      "stats_pct": 0.0,
+      "shotmap_pct": 0.0,
+      "referee_pct": 0.0
+    },
+    "2022/2023": {
+      "n": 309,
+      "teams": 18,
+      "goals": 2.764,
+      "home_goals": 1.537,
+      "away_goals": 1.227,
+      "home_win_pct": 43.7,
+      "draw_pct": 25.9,
+      "away_win_pct": 30.4,
+      "ou25_over_rate": 0.531,
+      "events_pct": 91.6,
+      "ht_validated_pct": 100.0,
+      "b_team_match_pct": 31.1,
+      "b_teams": 3,
+      "awarded_no_events": 0,
+      "stats_pct": 0.0,
+      "shotmap_pct": 0.0,
+      "referee_pct": 0.0
+    },
+    "2023/2024": {
+      "n": 309,
+      "teams": 18,
+      "goals": 2.628,
+      "home_goals": 1.466,
+      "away_goals": 1.162,
+      "home_win_pct": 44.0,
+      "draw_pct": 27.8,
+      "away_win_pct": 28.2,
+      "ou25_over_rate": 0.521,
+      "events_pct": 91.3,
+      "ht_validated_pct": 99.7,
+      "b_team_match_pct": 31.1,
+      "b_teams": 3,
+      "awarded_no_events": 0,
+      "stats_pct": 0.0,
+      "shotmap_pct": 0.0,
+      "referee_pct": 0.0
+    },
+    "2024/2025": {
+      "n": 309,
+      "teams": 18,
+      "goals": 2.806,
+      "home_goals": 1.534,
+      "away_goals": 1.272,
+      "home_win_pct": 45.0,
+      "draw_pct": 21.7,
+      "away_win_pct": 33.3,
+      "ou25_over_rate": 0.508,
+      "events_pct": 94.5,
+      "ht_validated_pct": 99.7,
+      "b_team_match_pct": 21.4,
+      "b_teams": 2,
+      "awarded_no_events": 1,
+      "stats_pct": 0.0,
+      "shotmap_pct": 0.0,
+      "referee_pct": 0.0
+    },
+    "2025/2026": {
+      "n": 309,
+      "teams": 18,
+      "goals": 2.909,
+      "home_goals": 1.524,
+      "away_goals": 1.385,
+      "home_win_pct": 38.8,
+      "draw_pct": 29.8,
+      "away_win_pct": 31.4,
+      "ou25_over_rate": 0.566,
+      "events_pct": 91.3,
+      "ht_validated_pct": 97.7,
+      "b_team_match_pct": 21.7,
+      "b_teams": 2,
+      "awarded_no_events": 7,
+      "stats_pct": 0.0,
+      "shotmap_pct": 0.0,
+      "referee_pct": 0.0
+    },
+    "2026/2027": {
+      "n": 134,
+      "teams": 18,
+      "goals": 3.082,
+      "home_goals": 1.701,
+      "away_goals": 1.381,
+      "home_win_pct": 43.3,
+      "draw_pct": 23.9,
+      "away_win_pct": 32.8,
+      "ou25_over_rate": 0.619,
+      "events_pct": 94.8,
+      "ht_validated_pct": 100.0,
+      "b_team_match_pct": 21.6,
+      "b_teams": 2,
+      "awarded_no_events": 0,
+      "stats_pct": 0.0,
+      "shotmap_pct": 0.0,
+      "referee_pct": 0.0
+    }
+  },
+  "phase_rule": "phase from general.leagueName; all phases ordinary rows in every fit/window; no phase feature; B teams kept as ordinary teams",
+  "phase_levels": {
+    "2021/2022": {
+      "regular": {
+        "n": 306,
+        "goals": 2.771
+      },
+      "playoff_promotion": {
+        "n": 3,
+        "goals": 3
+      }
+    },
+    "2022/2023": {
+      "regular": {
+        "n": 306,
+        "goals": 2.761
+      },
+      "playoff_promotion": {
+        "n": 3,
+        "goals": 3
+      }
+    },
+    "2023/2024": {
+      "regular": {
+        "n": 306,
+        "goals": 2.631
+      },
+      "playoff_promotion": {
+        "n": 3,
+        "goals": 2.333
+      }
+    },
+    "2024/2025": {
+      "regular": {
+        "n": 306,
+        "goals": 2.788
+      },
+      "playoff_promotion": {
+        "n": 3,
+        "goals": 4.667
+      }
+    },
+    "2025/2026": {
+      "regular": {
+        "n": 306,
+        "goals": 2.905
+      },
+      "playoff_promotion": {
+        "n": 3,
+        "goals": 3.333
+      }
+    },
+    "2026/2027": {
+      "regular": {
+        "n": 134,
+        "goals": 3.082
+      }
+    }
+  },
+  "event_goal_validation": {
+    "n_events_matches": 1537,
+    "n_validated": 1536,
+    "n_mismatch": 1,
+    "n_no_events": 142,
+    "no_events_0_0": 120
+  },
+  "stats_xg_era": [],
+  "shotmap_xg_era": [],
+  "xgot_era": []
+}

@@ -1,0 +1,32 @@
+# BR-SerieA (Brazil) — league config
+league: BR-SerieA
+country: Brazil
+fotmob_id: 268
+tier: 1
+warehouse: data_enrichment/fotmob_world/Brazil/Série A
+data:
+  matches: league/BR-SerieA/data/br_matches.csv
+  team_matches: league/BR-SerieA/data/br_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period: ["2021", "2022", "2023", "2024"]  # walk-forward; warm-up 2021, scored 2022-2024 (n=1140)
+virgin_primary: "2025"             # complete season, n=380 — read ONCE per candidate
+virgin_confirmatory: "2026"        # partial (339 played at pull); reserved, NOT read in this build
+halves_constants:                  # frozen, measured on the complete-splits era 2023-2025
+  goals_1h_share: 0.455
+  sot_1h_share: 0.462
+  corners_1h_share: 0.474
+  total_shots_1h_share: 0.463
+  yellow_cards_1h_share: 0.366
+markets:
+  goals: G-BR        # DC + xG blend reference; arms: Gate Zero, SHRINK, X2 mover offset, X3 set-play
+  sot: S-BR          # v5 reference; arms: Gate Zero, RS ratio-shrink, X4 xG/shot
+  corners: C-BR      # corners_v3 reference; arms: Gate Zero (X9), X7 box touches
+  cards: K-BR        # cards reference; arms: Gate Zero, X8 referee; target = unified yellows
+  total_shots: T-BR  # shots family; arms: A v1 pattern, B v2 level layer, C E9 trailing-r
+notes:
+  - Calendar-year season (Apr-Dec), 20 teams double round-robin, 380 matches/season, no playoffs or split rounds.
+  - Two feed eras: 2021-2022 thin (xG/period-splits/shotmap ~5-10%, box touches ~45%, referee 0% in 2021); complete from 2023.
+  - Stats feed UNDERCOUNTS yellows in 2021-2022 (3.0/match vs events 4.5-4.9): unified cards target = events for 2021-2022, stats feed from 2023 (yellow_unified_* columns).
+  - xGOT population reaches ~100% of shots only in 2025 — X6 dropped (era = virgin season, untestable in dev).
+  - Série B (league_id 8814) is in the warehouse: X2 mover offset estimable in-corpus (4 promoted sides/season).
+  - Predictions-only: no BR odds/settlement source in-system.

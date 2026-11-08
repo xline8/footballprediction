@@ -1,0 +1,278 @@
+{
+  "league": "CY-2Division",
+  "league_id": "9100",
+  "rows": 1210,
+  "team_rows": 2420,
+  "seasons": {
+    "2021/2022": {
+      "matches": 240,
+      "goals_per_match": 2.392,
+      "home_goals_per_match": 1.242,
+      "away_goals_per_match": 1.15,
+      "home_win_rate": 0.388,
+      "draw_rate": 0.25,
+      "away_win_rate": 0.362,
+      "btts_rate": 0.438,
+      "ou1_5_over_rate": 0.692,
+      "ou2_5_over_rate": 0.446,
+      "ou3_5_over_rate": 0.2,
+      "home_advantage_goals": 0.092,
+      "coverage": {
+        "events": 0.0,
+        "ht_derivable": 0.0,
+        "stats_all": 0.0,
+        "stats_flag": 0.0,
+        "period_splits": 0.0,
+        "shotmap": 0.0,
+        "lineup": 0.0,
+        "referee": 0.0
+      },
+      "distinct_team_ids": 16,
+      "phase_counts": {
+        "regular": 240
+      },
+      "date_range": [
+        "2021-09-10",
+        "2022-05-14"
+      ],
+      "multi_name_ids": {}
+    },
+    "2022/2023": {
+      "matches": 218,
+      "goals_per_match": 2.528,
+      "home_goals_per_match": 1.275,
+      "away_goals_per_match": 1.252,
+      "home_win_rate": 0.367,
+      "draw_rate": 0.243,
+      "away_win_rate": 0.39,
+      "btts_rate": 0.45,
+      "ou1_5_over_rate": 0.665,
+      "ou2_5_over_rate": 0.445,
+      "ou3_5_over_rate": 0.275,
+      "home_advantage_goals": 0.023,
+      "coverage": {
+        "events": 92.7,
+        "ht_derivable": 92.7,
+        "stats_all": 0.0,
+        "stats_flag": 0.0,
+        "period_splits": 0.0,
+        "shotmap": 0.0,
+        "lineup": 0.0,
+        "referee": 0.0
+      },
+      "distinct_team_ids": 16,
+      "phase_counts": {
+        "promotion": 56,
+        "regular": 120,
+        "relegation": 42
+      },
+      "date_range": [
+        "2022-09-09",
+        "2023-04-30"
+      ],
+      "multi_name_ids": {}
+    },
+    "2023/2024": {
+      "matches": 232,
+      "goals_per_match": 2.56,
+      "home_goals_per_match": 1.263,
+      "away_goals_per_match": 1.297,
+      "home_win_rate": 0.379,
+      "draw_rate": 0.228,
+      "away_win_rate": 0.392,
+      "btts_rate": 0.474,
+      "ou1_5_over_rate": 0.741,
+      "ou2_5_over_rate": 0.483,
+      "ou3_5_over_rate": 0.224,
+      "home_advantage_goals": -0.034,
+      "coverage": {
+        "events": 92.7,
+        "ht_derivable": 92.7,
+        "stats_all": 0.0,
+        "stats_flag": 0.0,
+        "period_splits": 0.0,
+        "shotmap": 0.0,
+        "lineup": 0.0,
+        "referee": 0.0
+      },
+      "distinct_team_ids": 16,
+      "phase_counts": {
+        "promotion": 56,
+        "regular": 120,
+        "relegation": 56
+      },
+      "date_range": [
+        "2023-09-15",
+        "2024-04-28"
+      ],
+      "multi_name_ids": {}
+    },
+    "2024/2025": {
+      "matches": 232,
+      "goals_per_match": 2.772,
+      "home_goals_per_match": 1.664,
+      "away_goals_per_match": 1.108,
+      "home_win_rate": 0.552,
+      "draw_rate": 0.155,
+      "away_win_rate": 0.293,
+      "btts_rate": 0.491,
+      "ou1_5_over_rate": 0.733,
+      "ou2_5_over_rate": 0.543,
+      "ou3_5_over_rate": 0.293,
+      "home_advantage_goals": 0.556,
+      "coverage": {
+        "events": 95.3,
+        "ht_derivable": 95.3,
+        "stats_all": 0.0,
+        "stats_flag": 0.0,
+        "period_splits": 0.0,
+        "shotmap": 0.0,
+        "lineup": 0.0,
+        "referee": 0.0
+      },
+      "distinct_team_ids": 16,
+      "phase_counts": {
+        "promotion": 56,
+        "regular": 120,
+        "relegation": 56
+      },
+      "date_range": [
+        "2024-09-13",
+        "2025-04-26"
+      ],
+      "multi_name_ids": {}
+    },
+    "2025/2026": {
+      "matches": 232,
+      "goals_per_match": 2.707,
+      "home_goals_per_match": 1.384,
+      "away_goals_per_match": 1.323,
+      "home_win_rate": 0.375,
+      "draw_rate": 0.254,
+      "away_win_rate": 0.371,
+      "btts_rate": 0.483,
+      "ou1_5_over_rate": 0.763,
+      "ou2_5_over_rate": 0.487,
+      "ou3_5_over_rate": 0.263,
+      "home_advantage_goals": 0.06,
+      "coverage": {
+        "events": 93.1,
+        "ht_derivable": 93.1,
+        "stats_all": 0.0,
+        "stats_flag": 0.0,
+        "period_splits": 0.0,
+        "shotmap": 0.0,
+        "lineup": 0.0,
+        "referee": 0.0
+      },
+      "distinct_team_ids": 16,
+      "phase_counts": {
+        "promotion": 56,
+        "regular": 120,
+        "relegation": 56
+      },
+      "date_range": [
+        "2025-09-12",
+        "2026-04-25"
+      ],
+      "multi_name_ids": {
+        "154791": [
+          "Chalkanoras Idaliou",
+          "Halkanoras Idaliou"
+        ]
+      }
+    },
+    "2026/2027": {
+      "matches": 56,
+      "goals_per_match": 2.464,
+      "home_goals_per_match": 1.232,
+      "away_goals_per_match": 1.232,
+      "home_win_rate": 0.339,
+      "draw_rate": 0.268,
+      "away_win_rate": 0.393,
+      "btts_rate": 0.446,
+      "ou1_5_over_rate": 0.714,
+      "ou2_5_over_rate": 0.464,
+      "ou3_5_over_rate": 0.232,
+      "home_advantage_goals": 0,
+      "coverage": {
+        "events": 89.3,
+        "ht_derivable": 89.3,
+        "stats_all": 0.0,
+        "stats_flag": 0.0,
+        "period_splits": 0.0,
+        "shotmap": 0.0,
+        "lineup": 0.0,
+        "referee": 0.0
+      },
+      "distinct_team_ids": 16,
+      "phase_counts": {
+        "regular": 56
+      },
+      "date_range": [
+        "2026-09-11",
+        "2026-11-08"
+      ],
+      "multi_name_ids": {}
+    }
+  },
+  "distinct_team_ids": 32,
+  "multi_name_team_ids": {
+    "154797": [
+      "Onisilos Sotira",
+      "PO Achyronas-Onisilos"
+    ],
+    "154791": [
+      "Chalkanoras Idaliou",
+      "Halkanoras Idaliou"
+    ]
+  },
+  "phase_values": [
+    "promotion",
+    "regular",
+    "relegation"
+  ],
+  "phase_counts": {
+    "2021/2022": {
+      "regular": 240
+    },
+    "2022/2023": {
+      "promotion": 56,
+      "regular": 120,
+      "relegation": 42
+    },
+    "2023/2024": {
+      "promotion": 56,
+      "regular": 120,
+      "relegation": 56
+    },
+    "2024/2025": {
+      "promotion": 56,
+      "regular": 120,
+      "relegation": 56
+    },
+    "2025/2026": {
+      "promotion": 56,
+      "regular": 120,
+      "relegation": 56
+    },
+    "2026/2027": {
+      "regular": 56
+    }
+  },
+  "cards_source_counts": {
+    "events": 1210
+  },
+  "plain_yellow_cards_in_events": 0,
+  "yellowred_cards_in_events": 51,
+  "red_cards_in_events": 153,
+  "stats_flag_vs_payload": {
+    "has_stats_flag": 0,
+    "has_stats_all": 0
+  },
+  "events_present": 904,
+  "goal_event_score_mismatch": [],
+  "stats_periods": [],
+  "stats_keys": [],
+  "referee_nonempty": 0
+}

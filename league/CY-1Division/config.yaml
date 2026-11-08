@@ -1,0 +1,31 @@
+# CY-1Division (Cyprus) — league config
+league: CY-1Division
+country: Cyprus
+fotmob_id: 136
+tier: 1
+warehouse_root: ~/workspace/footballprediction
+data:
+  matches: league/CY-1Division/data/cy_matches.csv
+  team_matches: league/CY-1Division/data/cy_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.4563
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+  yellow_cards_1h_share: 0.3693
+markets:
+  goals: G-CY
+  sot: S-CY
+  corners: C-CY
+  cards: K-CY
+  total_shots: T-CY
+notes:
+  - "FORMAT: 12 teams in 2021/2022, 14 teams from 2022/2023; regular double round-robin (132 then 182 matches) plus Championship Playoff (30/season) and Relegation Playoff (30 in 2021/2022, 56 in 2022/2023-2023/2024, 28 in 2024/2025-2025/2026). League renamed 'Cyprus League' from 2024/2025 (first 10 matches of 2024/2025 still carry the old name, same leagueId — artefact only). All phases modelled as ordinary matches, phase flagged, no phase feature."
+  - "STATS: feed carries only BallPossesion, total_shots, ShotsOnTarget, corners (Period All only, 1,248/1,271 payloads; index has_stats flag true for 1,249 — one payload flagged but with no stats block). No xG, no shotmap, no big_chance, no touches_opp_box, no period splits in any season. Referee empty in all 1,271 payloads."
+  - "CARDS: stats feed has no yellow_cards key at all; target is event-unified yellows (direct Yellow + YellowRed), cards_source=events on all rows. No stats-vs-events artefact can exist in this league."
+  - "HALVES: goals 0.4563 and cards 0.3693 constants come from event times (pre-virgin). SOT, corners and total shots have no halves source and are FT-only."
+  - "Calibration convention: actual minus predicted."

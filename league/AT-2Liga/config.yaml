@@ -1,0 +1,32 @@
+# AT-2Liga (Austria) — league config
+league: AT-2Liga
+country: Austria
+fotmob_id: 119
+tier: 2
+warehouse: data_enrichment/fotmob_world/Austria/2. Liga
+data:
+  matches: league/AT-2Liga/data/at2_matches.csv
+  team_matches: league/AT-2Liga/data/at2_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2022/2023", "2023/2024", "2024/2025"]   # scored dev (2021/2022 = warm-up / initial training)
+virgin_primary: "2025/2026"     # last complete season, n=210 (15 teams) — read ONCE per candidate
+virgin_confirmatory: "2026/2027"  # in progress (n=96 at pull); reserved, never read in this build
+halves_constants:               # frozen league constants (EDA F3, event-derived) — the ONLY halves mechanism
+  goals_1h_share: 0.4543
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+  yellow_cards_1h_share: 0.3430
+markets:
+  goals: G-AT2        # DC goals-only; arms: Gate Zero, thin-team shrinkage (F4)
+  sot: S-AT2          # v5 reference; arms: Gate Zero, ratio-shrink
+  corners: C-AT2      # corners_v3 reference, possession-only covariate; Gate Zero only
+  cards: K-AT2        # cards reference on event-unified yellows; Gate Zero only (referee coverage 0%)
+  total_shots: T-AT2  # shots family; arms: A v1, B v2 level layer, C E9 trailing-r
+notes:
+  - Format: single regular phase, double round-robin; 16 teams except 2025/2026 (15 teams, 210 matches). Five B-teams appear across the corpus (Liefering 1915, Sturm Graz II 1921, Rapid Wien II 1952, Austria Wien II 10248, FC Juniors OOe 292054) — non-promotable; they enter/leave only via the Regionalliga.
+  - Thin feed: stats carry only possession, total shots, SOT, corners (Periods.All only, 1,254/1,266 matches; 12 stats-less matches all in 2023/2024). No xG, no shotmap, no period splits, referee empty in 1,266/1,266.
+  - Cards target is event-unified yellows (stats feed has no cards key); cards_source='events' on every row.
+  - Feed definition break: total shots / SOT counting changes in 2024/2025 (medians 17-18 -> 22 shots, SOT/shots 0.49 -> 0.58); virgin season 2025/2026 is back in the original definition; 2026/2027 is mixed. S-AT2 / T-AT2 verdicts carry this caveat.
+  - Halves: goals and yellows present FT + 1H/2H via the frozen event-derived constants above; SOT / corners / total shots are FT only (no halves source exists).
+  - Predictions-only: no AT-2Liga odds/settlement source in-system.

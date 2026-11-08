@@ -1,0 +1,111 @@
+{
+ "population": {
+  "source": "Phase 2 table j1_matches.csv, has_stats_half == True (FotMob stats-feed period splits; complete from 2024, 86% in 2023)",
+  "n_matches_flagged": 1362,
+  "by_season": {
+   "2023": 263,
+   "2024": 380,
+   "2025": 380,
+   "2026": 200,
+   "2026-2027": 139
+  }
+ },
+ "coverage": {
+  "fh_present": 1362,
+  "ft_present": 1362,
+  "split_sum_mismatch_rows": 51
+ },
+ "primary_stats_feed": {
+  "n_matches": 1263,
+  "n_yellows": 3440,
+  "n_yellows_1h": 1229,
+  "constant_ratio_of_sums": 0.35727,
+  "mean_of_shares": 0.36048,
+  "share_sd": 0.34819,
+  "true_var_excess": 0.0069,
+  "noise_floor": 0.11434,
+  "observed_var": 0.12124
+ },
+ "per_season_stats_feed": {
+  "2023": {
+   "n_matches": 247,
+   "n_yellows": 733,
+   "constant_ratio_of_sums": 0.2633,
+   "true_var_excess": 0.00971
+  },
+  "2024": {
+   "n_matches": 356,
+   "n_yellows": 946,
+   "constant_ratio_of_sums": 0.39535,
+   "true_var_excess": -0.00094
+  },
+  "2025": {
+   "n_matches": 345,
+   "n_yellows": 907,
+   "constant_ratio_of_sums": 0.36935,
+   "true_var_excess": -0.00028
+  },
+  "2026": {
+   "n_matches": 182,
+   "n_yellows": 470,
+   "constant_ratio_of_sums": 0.36809,
+   "true_var_excess": 0.01792
+  },
+  "2026-2027": {
+   "n_matches": 133,
+   "n_yellows": 384,
+   "constant_ratio_of_sums": 0.40104,
+   "true_var_excess": 0.00922
+  }
+ },
+ "decomposition_2024plus": {
+  "n_matches": 1016,
+  "mean_of_shares": 0.38569,
+  "observed_var": 0.12434,
+  "noise_floor": 0.1203,
+  "true_var_excess": 0.00403
+ },
+ "sensitivity_2024plus": {
+  "n_matches": 1016,
+  "n_yellows": 2707,
+  "constant_ratio_of_sums": 0.38271
+ },
+ "team_1h_yellow_share_split_half": {
+  "n_teams": 26,
+  "r": 0.097
+ },
+ "crosscheck_events": {
+  "n_matches_with_events": 1263,
+  "n_yellows_events": 3496,
+  "n_yellows_1h_events": 1298,
+  "share_1h_ratio_of_sums": 0.37128,
+  "card_events_missing_time": 0,
+  "by_season": {
+   "2023": {
+    "n_1h": 249,
+    "n_total": 742,
+    "share": 0.33558
+   },
+   "2024": {
+    "n_1h": 380,
+    "n_total": 967,
+    "share": 0.39297
+   },
+   "2025": {
+    "n_1h": 337,
+    "n_total": 916,
+    "share": 0.3679
+   },
+   "2026": {
+    "n_1h": 174,
+    "n_total": 477,
+    "share": 0.36478
+   },
+   "2026-2027": {
+    "n_1h": 158,
+    "n_total": 394,
+    "share": 0.40102
+   }
+  }
+ }
+}

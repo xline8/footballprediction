@@ -1,0 +1,43 @@
+league: BE-FirstDivisionB
+country: Belgium
+fotmob_id: 264
+tier: 2
+data:
+  matches: league/BE-FirstDivisionB/data/beb_matches.csv
+  team_matches: league/BE-FirstDivisionB/data/beb_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.434014
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+  yellow_cards_1h_share: null
+markets:
+  goals:
+    candidate: G-BEB
+    buildable: true
+    arms: [Gate Zero, SHRINK, X2]
+  sot:
+    candidate: S-BEB
+    buildable: false
+    reason: "No scorable dev window; target exists only in 2025/2026 virgin and partial 2026/2027."
+  corners:
+    candidate: C-BEB
+    buildable: false
+    reason: "No scorable dev window; target exists only in 2025/2026 virgin and partial 2026/2027."
+  cards:
+    candidate: K-BEB
+    buildable: false
+    reason: "No scorable dev window; target exists only in 2025/2026 virgin and partial 2026/2027."
+  total_shots:
+    candidate: T-BEB
+    buildable: false
+    reason: "No scorable dev window; target exists only in 2025/2026 virgin and partial 2026/2027."
+notes:
+  - "All phases included as ordinary rows; phase is flagged, never a feature."
+  - "2025/2026 league rename maps Belgian Challenger Pro League plain rows to regular."
+  - "Reserve logic is frozen by IDs in build_data.py."
+

@@ -1,0 +1,150 @@
+{
+ "2022/2023": {
+  "Magdeburg": "up",
+  "Kaiserslautern": "up",
+  "Greuther F\u00fcrth": "down",
+  "Eintracht Braunschweig": "up",
+  "Arminia Bielefeld": "down"
+ },
+ "ids": {
+  "2022/2023": {
+   "8188": "up",
+   "8350": "up",
+   "8357": "down",
+   "9776": "up",
+   "9912": "down"
+  },
+  "2023/2024": {
+   "10189": "down",
+   "8177": "down",
+   "8196": "up",
+   "8232": "up",
+   "9775": "up"
+  },
+  "2024/2025": {
+   "7789": "up",
+   "8171": "up",
+   "8201": "up",
+   "8262": "down",
+   "8722": "down"
+  },
+  "2025/2026": {
+   "8150": "down",
+   "8480": "up",
+   "9911": "down",
+   "9912": "up"
+  }
+ },
+ "2023/2024": {
+  "Schalke 04": "down",
+  "Hertha BSC": "down",
+  "Wehen Wiesbaden": "up",
+  "Elversberg": "up",
+  "VfL Osnabr\u00fcck": "up"
+ },
+ "2024/2025": {
+  "Jahn Regensburg": "up",
+  "Preussen M\u00fcnster": "up",
+  "Ulm": "up",
+  "Darmstadt": "down",
+  "1. FC K\u00f6ln": "down"
+ },
+ "2025/2026": {
+  "Holstein Kiel": "down",
+  "Dynamo Dresden": "up",
+  "Bochum": "down",
+  "Arminia Bielefeld": "up"
+ },
+ "deltas_by_season": {
+  "2022/2023": {
+   "up": {
+    "n_team_matches": 102,
+    "gf": 1.343,
+    "ga": 1.588,
+    "league_gf": 1.472,
+    "gf_delta": -0.129,
+    "ga_delta": 0.116
+   },
+   "down": {
+    "n_team_matches": 68,
+    "gf": 1.426,
+    "ga": 1.647,
+    "league_gf": 1.472,
+    "gf_delta": -0.046,
+    "ga_delta": 0.175
+   }
+  },
+  "2023/2024": {
+   "up": {
+    "n_team_matches": 102,
+    "gf": 1.137,
+    "ga": 1.784,
+    "league_gf": 1.547,
+    "gf_delta": -0.41,
+    "ga_delta": 0.237
+   },
+   "down": {
+    "n_team_matches": 68,
+    "gf": 1.794,
+    "ga": 1.75,
+    "league_gf": 1.547,
+    "gf_delta": 0.247,
+    "ga_delta": 0.203
+   }
+  },
+  "2024/2025": {
+   "up": {
+    "n_team_matches": 102,
+    "gf": 0.971,
+    "ga": 1.588,
+    "league_gf": 1.511,
+    "gf_delta": -0.541,
+    "ga_delta": 0.077
+   },
+   "down": {
+    "n_team_matches": 68,
+    "gf": 1.603,
+    "ga": 1.368,
+    "league_gf": 1.511,
+    "gf_delta": 0.092,
+    "ga_delta": -0.144
+   }
+  },
+  "2025/2026": {
+   "up": {
+    "n_team_matches": 68,
+    "gf": 1.574,
+    "ga": 1.529,
+    "league_gf": 1.466,
+    "gf_delta": 0.108,
+    "ga_delta": 0.064
+   },
+   "down": {
+    "n_team_matches": 68,
+    "gf": 1.368,
+    "ga": 1.397,
+    "league_gf": 1.466,
+    "gf_delta": -0.098,
+    "ga_delta": -0.069
+   }
+  }
+ },
+ "deltas_dev_pooled": {
+  "up": {
+   "n_team_matches": 306,
+   "gf": 1.15,
+   "ga": 1.654,
+   "league_gf": 1.51,
+   "gf_delta": -0.36,
+   "ga_delta": 0.143
+  },
+  "down": {
+   "n_team_matches": 204,
+   "gf": 1.608,
+   "ga": 1.588,
+   "league_gf": 1.51,
+   "gf_delta": 0.097,
+   "ga_delta": 0.078
+  }
+ }
+}

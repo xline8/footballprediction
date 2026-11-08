@@ -1,0 +1,13 @@
+{
+  "arm": "reference_label_only_gate_zero",
+  "training_rows": 304,
+  "params": {
+    "gamma": 0.3,
+    "r": 1.2655165051648671,
+    "beta": [
+      0.0025,
+      -0.025
+    ],
+    "fit_n": 382
+  }
+}

@@ -1,0 +1,32 @@
+league: MX-LigaMX
+country: Mexico
+fotmob_id: 230
+tier: 1
+warehouse: data_enrichment/fotmob_world/Mexico/Liga MX
+data:
+  matches: league/MX-LigaMX/data/mx_matches.csv
+  team_matches: league/MX-LigaMX/data/team_matches.csv
+seasons: ["2021/2022 - Apertura", "2021/2022 - Clausura", "2022/2023 - Apertura", "2022/2023 - Clausura", "2023/2024 - Apertura", "2023/2024 - Clausura", "2024/2025 - Apertura", "2024/2025 - Clausura", "2025/2026 - Apertura", "2025/2026 - Clausura"]
+in_progress_season: "2026/2027 - Apertura"
+dev_period: ["2021/2022 - Apertura", "2021/2022 - Clausura", "2022/2023 - Apertura", "2022/2023 - Clausura", "2023/2024 - Apertura", "2023/2024 - Clausura", "2024/2025 - Apertura", "2024/2025 - Clausura", "2025/2026 - Apertura"]
+virgin_primary: "2025/2026 - Clausura"
+virgin_confirmatory: "2026/2027 - Apertura"
+halves_constants:
+  goals_1h_share: 0.456170
+  sot_1h_share: 0.455141
+  corners_1h_share: 0.465223
+  total_shots_1h_share: 0.457556
+  yellow_cards_1h_share: 0.384615
+markets:
+  goals: G-MX
+  sot: S-MX
+  corners: C-MX
+  cards: K-MX
+  total_shots: T-MX
+notes:
+  - Regular phase is matchRound digit 1 through 17; all other non-empty labels are excluded playoffs/play-ins.
+  - No promotion/relegation in the window; the team set is constant and X2 movers are dropped.
+  - Unified yellow target is event-derived; raw stats-feed yellow_cards columns remain for audit.
+  - Referee coverage is 0% in warm-up, strong in most dev, 24.8% in 2025/2026 Apertura and 58.2% in virgin regular rows.
+  - Altitude is descriptive only and not adopted because it is collinear with stable team identity.
+  - Phase A is analysis only: no fitting, preregistration or engines.

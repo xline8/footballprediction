@@ -1,0 +1,105 @@
+{
+  "protocol": {
+    "virgin_season": "2026 Clausura",
+    "transitional": true,
+    "scored_n": 90
+  },
+  "virgin_read": true,
+  "read_arms": [
+    "A",
+    "B",
+    "C"
+  ],
+  "metrics": {
+    "A": {
+      "n": 90,
+      "logloss": {
+        "24.5": 0.6313478902323462,
+        "23.5": 0.5496928999336826,
+        "25.5": 0.6805967744353087
+      },
+      "calibration_pp": -19.811711104801343,
+      "calibration_se_pp": 4.50430996243407,
+      "actual_over_rate_pp": 75.55555555555556,
+      "mean_pred_over_pp": 55.74384445075423,
+      "leg_i": false,
+      "leg_ii": false,
+      "leg_iii": true,
+      "virgin_(i)": false,
+      "virgin_(ii)": false,
+      "virgin_(iii)": true
+    },
+    "B": {
+      "n": 90,
+      "logloss": {
+        "24.5": 0.6022116905419419,
+        "23.5": 0.5220808721349046,
+        "25.5": 0.6466984522193008
+      },
+      "calibration_pp": -15.459986578550552,
+      "calibration_se_pp": 4.5237332210776176,
+      "actual_over_rate_pp": 75.55555555555556,
+      "mean_pred_over_pp": 60.09556897700501,
+      "leg_i": true,
+      "leg_ii": false,
+      "leg_iii": true,
+      "virgin_(i)": true,
+      "virgin_(ii)": false,
+      "virgin_(iii)": true
+    },
+    "C": {
+      "n": 90,
+      "logloss": {
+        "24.5": 0.633548683409285,
+        "23.5": 0.5532394692239803,
+        "25.5": 0.6821646955945482
+      },
+      "calibration_pp": -20.145153373151143,
+      "calibration_se_pp": 4.500438734909584,
+      "actual_over_rate_pp": 75.55555555555556,
+      "mean_pred_over_pp": 55.410402182404425,
+      "leg_i": false,
+      "leg_ii": false,
+      "leg_iii": true,
+      "virgin_(i)": false,
+      "virgin_(ii)": false,
+      "virgin_(iii)": true
+    },
+    "baseline_league": {
+      "n": 90,
+      "logloss": {
+        "24.5": 0.6549615804468902,
+        "23.5": 0.5737874408471089,
+        "25.5": 0.7228925851201193
+      },
+      "calibration_pp": -21.783628306218773,
+      "calibration_se_pp": 4.542374115664056,
+      "actual_over_rate_pp": 75.55555555555556,
+      "mean_pred_over_pp": 53.77192724933677
+    },
+    "baseline_naive": {
+      "n": 90,
+      "logloss": {
+        "24.5": 0.6164730552866157,
+        "23.5": 0.5332704586982087,
+        "25.5": 0.6528124422156911
+      },
+      "calibration_pp": -15.876015530645704,
+      "calibration_se_pp": 4.592738057974414,
+      "actual_over_rate_pp": 75.55555555555556,
+      "mean_pred_over_pp": 59.67954002490984
+    }
+  },
+  "dev_pass": {
+    "A": true,
+    "B": true,
+    "C": true
+  },
+  "shipped_arm": null,
+  "verdict": "FAIL",
+  "calibration_breach_plus_se_pp": {
+    "A": 14.307401142367272,
+    "B": 9.936253357472935,
+    "C": 14.64471463824156
+  }
+}

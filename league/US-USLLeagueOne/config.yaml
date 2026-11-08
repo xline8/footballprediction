@@ -1,0 +1,33 @@
+# USA USL League One — league config
+league: US-USLLeagueOne
+country: USA
+fotmob_id: 9296
+tier: 3
+warehouse: data_enrichment/fotmob_world_index.csv (league_id=9296)
+data:
+  matches: league/US-USLLeagueOne/data/usll1_matches.csv
+  team_matches: league/US-USLLeagueOne/data/usll1_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period: ["2022", "2023", "2024"]
+virgin_primary: "2025"
+virgin_confirmatory: "2026"
+halves_constants:
+  goals_1h_share: 0.468
+  sot_1h_share: 0.465
+  corners_1h_share: 0.469
+  total_shots_1h_share: 0.461
+  yellow_cards_1h_share: 0.373
+markets:
+  goals: G-USLL1
+  sot: S-USLL1
+  corners: C-USLL1
+  cards: K-USLL1
+  total_shots: T-USLL1
+notes:
+  - Calendar-year seasons; playoff rows are retained and phase-flagged but excluded from every fitting/scoring window.
+  - Cards: stats-feed yellows are broken in 2021-22 and event cards are absent in 2021-25; valid target is stats yellows from 2023 when the key is present.
+  - No promotion/relegation or pro/rel mover population; churn is expansion, voluntary division moves, and departures/folding. Thin-team risk uses SHR, not X2.
+  - Box-touch coverage ramps from 30.5% in 2023 to 100% in 2025; X7 uses min-8 trailing with Gate Zero fallback.
+  - Referee strictness evidence is r=0.379 at the >=10-match threshold; missing referees use Gate Zero with no imputation.
+  - 2026 is transitional/reserved inventory: regular season ended 2026-10-25, semi-finals are in the feed, and the final is absent.
+  - Cards dev is 2023-2024 valid rows with a cold start at the 2023 opener; virgin primary is 2025 and confirmatory is 2026.

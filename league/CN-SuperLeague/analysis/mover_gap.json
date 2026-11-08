@@ -1,0 +1,82 @@
+{
+  "definition": "Teams whose first observed CN season is 2023 or later; first-season team GF/GA compared with that season's league team-match mean.",
+  "n_teams": 8,
+  "mean_first_season_gf_per_match": 1.166667,
+  "mean_first_season_ga_per_match": 1.625,
+  "mean_league_gf_gap": -0.369271,
+  "mean_league_ga_gap": 0.089062,
+  "teams": [
+    {
+      "team_id": "4183",
+      "first_season": "2023",
+      "matches": 30,
+      "gf_per_match": 1.133333,
+      "ga_per_match": 1.5,
+      "gf_gap_vs_season_mean": -0.254167,
+      "ga_gap_vs_season_mean": 0.1125
+    },
+    {
+      "team_id": "835637",
+      "first_season": "2023",
+      "matches": 30,
+      "gf_per_match": 0.866667,
+      "ga_per_match": 1.4,
+      "gf_gap_vs_season_mean": -0.520833,
+      "ga_gap_vs_season_mean": 0.0125
+    },
+    {
+      "team_id": "1283248",
+      "first_season": "2024",
+      "matches": 30,
+      "gf_per_match": 1.366667,
+      "ga_per_match": 1.933333,
+      "gf_gap_vs_season_mean": -0.195833,
+      "ga_gap_vs_season_mean": 0.370833
+    },
+    {
+      "team_id": "930027",
+      "first_season": "2024",
+      "matches": 30,
+      "gf_per_match": 0.966667,
+      "ga_per_match": 1.833333,
+      "gf_gap_vs_season_mean": -0.595833,
+      "ga_gap_vs_season_mean": 0.270833
+    },
+    {
+      "team_id": "1477043",
+      "first_season": "2025",
+      "matches": 30,
+      "gf_per_match": 1.0,
+      "ga_per_match": 1.5,
+      "gf_gap_vs_season_mean": -0.60625,
+      "ga_gap_vs_season_mean": -0.10625
+    },
+    {
+      "team_id": "1477056",
+      "first_season": "2025",
+      "matches": 30,
+      "gf_per_match": 1.566667,
+      "ga_per_match": 1.733333,
+      "gf_gap_vs_season_mean": -0.039583,
+      "ga_gap_vs_season_mean": 0.127083
+    },
+    {
+      "team_id": "1477050",
+      "first_season": "2026",
+      "matches": 30,
+      "gf_per_match": 1.033333,
+      "ga_per_match": 1.166667,
+      "gf_gap_vs_season_mean": -0.554167,
+      "ga_gap_vs_season_mean": -0.420833
+    },
+    {
+      "team_id": "737054",
+      "first_season": "2026",
+      "matches": 30,
+      "gf_per_match": 1.4,
+      "ga_per_match": 1.933333,
+      "gf_gap_vs_season_mean": -0.1875,
+      "ga_gap_vs_season_mean": 0.345833
+    }
+  ]
+}

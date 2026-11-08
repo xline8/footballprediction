@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="290" font-family="sans-serif">
+<rect width="640" height="290" fill="white"/>
+<text x="20" y="24" font-size="15" font-weight="bold">Halves constants 2025/2026: observed SD vs binomial noise SD</text>
+<text x="20" y="42" font-size="11" fill="#555">Per-match 1H share (FH total / FT total), regular played n=304 (yellows n=301). True SD ≈ 0 everywhere.</text>
+<text x="200" y="62" font-size="11" fill="#555">0</text>
+<text x="565" y="62" font-size="11" fill="#555">0.30</text>
+<g font-size="12">
+<text x="185" y="86" text-anchor="end">SOT — share 0.4540</text>
+<rect x="200" y="74" width="224.2" height="14" fill="#2a7f62"/><text x="430" y="86">obs 0.1770</text>
+<rect x="200" y="92" width="239.3" height="14" fill="#9aa5a1"/><text x="445" y="104">noise 0.1889</text>
+<text x="185" y="132" text-anchor="end">Corners — share 0.4678</text>
+<rect x="200" y="120" width="226.5" height="14" fill="#2a7f62"/><text x="432" y="132">obs 0.1788</text>
+<rect x="200" y="138" width="226.1" height="14" fill="#9aa5a1"/><text x="432" y="150">noise 0.1785</text>
+<text x="185" y="178" text-anchor="end">Total shots — share 0.4557</text>
+<rect x="200" y="166" width="130.8" height="14" fill="#2a7f62"/><text x="337" y="178">obs 0.1033</text>
+<rect x="200" y="184" width="133.9" height="14" fill="#9aa5a1"/><text x="340" y="196">noise 0.1057</text>
+<text x="185" y="224" text-anchor="end">Event yellows — share 0.4010</text>
+<rect x="200" y="212" width="327.8" height="14" fill="#2a7f62"/><text x="534" y="224">obs 0.2588</text>
+<rect x="200" y="230" width="332.0" height="14" fill="#9aa5a1"/><text x="538" y="242">noise 0.2621</text>
+</g>
+<text x="20" y="272" font-size="11" fill="#555">Observed SD ≈ noise SD in all four markets: per-match 1H shares are binomial noise around the frozen constant. Goals: no constant (no HT data in dev).</text>
+</svg>

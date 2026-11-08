@@ -1,0 +1,399 @@
+{
+  "league": "NL-TweedeDivisie",
+  "season_levels": {
+    "2021/2022": {
+      "n_matches": 306,
+      "goals_per_match": 3.0718954248366015,
+      "home_goals": 1.7156862745098038,
+      "away_goals": 1.3562091503267975,
+      "home_draw_away_pct": [
+        50.326797385620914,
+        19.607843137254903,
+        30.065359477124183
+      ],
+      "btts_pct": 55.22875816993464,
+      "over1_5_pct": 85.94771241830065,
+      "over2_5_pct": 59.47712418300654,
+      "over3_5_pct": 35.294117647058826,
+      "goals_variance": 2.4997321332904745,
+      "red_cards_per_match": 0.16993464052287582
+    },
+    "2022/2023": {
+      "n_matches": 306,
+      "goals_per_match": 3.196078431372549,
+      "home_goals": 1.738562091503268,
+      "away_goals": 1.457516339869281,
+      "home_draw_away_pct": [
+        45.09803921568628,
+        21.241830065359476,
+        33.66013071895425
+      ],
+      "btts_pct": 58.16993464052288,
+      "over1_5_pct": 82.02614379084967,
+      "over2_5_pct": 61.111111111111114,
+      "over3_5_pct": 40.19607843137255,
+      "goals_variance": 3.390935390549663,
+      "red_cards_per_match": 0.12745098039215685
+    },
+    "2023/2024": {
+      "n_matches": 306,
+      "goals_per_match": 3.156862745098039,
+      "home_goals": 1.6241830065359477,
+      "away_goals": 1.5326797385620916,
+      "home_draw_away_pct": [
+        38.888888888888886,
+        23.202614379084967,
+        37.908496732026144
+      ],
+      "btts_pct": 60.78431372549019,
+      "over1_5_pct": 84.31372549019608,
+      "over2_5_pct": 62.091503267973856,
+      "over3_5_pct": 38.88888888888889,
+      "goals_variance": 2.913018322082932,
+      "red_cards_per_match": 0.12418300653594772
+    },
+    "2024/2025": {
+      "n_matches": 306,
+      "goals_per_match": 3.320261437908497,
+      "home_goals": 1.7679738562091503,
+      "away_goals": 1.5522875816993464,
+      "home_draw_away_pct": [
+        43.790849673202615,
+        17.973856209150327,
+        38.23529411764706
+      ],
+      "btts_pct": 58.82352941176471,
+      "over1_5_pct": 83.98692810457517,
+      "over2_5_pct": 64.05228758169935,
+      "over3_5_pct": 43.4640522875817,
+      "goals_variance": 3.1626700953605487,
+      "red_cards_per_match": 0.1895424836601307
+    },
+    "2025/2026": {
+      "n_matches": 306,
+      "goals_per_match": 3.343137254901961,
+      "home_goals": 1.826797385620915,
+      "away_goals": 1.5163398692810457,
+      "home_draw_away_pct": [
+        46.73202614379085,
+        19.607843137254903,
+        33.66013071895425
+      ],
+      "btts_pct": 61.43790849673203,
+      "over1_5_pct": 84.9673202614379,
+      "over2_5_pct": 66.01307189542483,
+      "over3_5_pct": 42.810457516339866,
+      "goals_variance": 3.163837994214079,
+      "red_cards_per_match": 0.11764705882352941
+    },
+    "2026/2027": {
+      "n_matches": 108,
+      "goals_per_match": 3.6203703703703702,
+      "home_goals": 1.9444444444444444,
+      "away_goals": 1.6759259259259258,
+      "home_draw_away_pct": [
+        42.592592592592595,
+        19.444444444444443,
+        37.96296296296296
+      ],
+      "btts_pct": 67.5925925925926,
+      "over1_5_pct": 90.74074074074075,
+      "over2_5_pct": 72.22222222222221,
+      "over3_5_pct": 48.148148148148145,
+      "goals_variance": 3.2844409830391137,
+      "red_cards_per_match": 0.1388888888888889
+    }
+  },
+  "pooled_levels": {
+    "n_matches": 1638,
+    "goals_per_match": 3.244200244200244,
+    "home_goals": 1.7484737484737485,
+    "away_goals": 1.4957264957264957,
+    "home_draw_away_pct": [
+      44.81074481074481,
+      20.268620268620268,
+      34.92063492063492
+    ],
+    "btts_pct": 59.462759462759465,
+    "over1_5_pct": 84.67643467643468,
+    "over2_5_pct": 63.18681318681318,
+    "over3_5_pct": 40.65934065934066,
+    "goals_variance": 3.053341418643801,
+    "red_cards_per_match": 0.1452991452991453
+  },
+  "home_advantage_goals": 0.25274725274725274,
+  "reliability": {
+    "goals_for": {
+      "r": 0.7474095188012433,
+      "n_splits": 60,
+      "odd_even_r": 0.8040558454428876
+    },
+    "goals_against": {
+      "r": 0.7137523763012809,
+      "n_splits": 60,
+      "odd_even_r": 0.7692504973202845
+    },
+    "red_cards_for": {
+      "r": -0.09123560971909743,
+      "n_splits": 60,
+      "odd_even_r": -0.08996733546802493
+    }
+  },
+  "reliability_by_season": {
+    "2021/2022": {
+      "goals_for": {
+        "r": 0.3195641045465631,
+        "n_splits": 60,
+        "odd_even_r": 0.132623979065456
+      },
+      "goals_against": {
+        "r": 0.42230762759277407,
+        "n_splits": 60,
+        "odd_even_r": 0.39089455377864385
+      }
+    },
+    "2022/2023": {
+      "goals_for": {
+        "r": 0.475706379337066,
+        "n_splits": 60,
+        "odd_even_r": 0.20155497646878587
+      },
+      "goals_against": {
+        "r": 0.6290486522865831,
+        "n_splits": 60,
+        "odd_even_r": 0.7477367181904728
+      }
+    },
+    "2023/2024": {
+      "goals_for": {
+        "r": 0.5317985126519157,
+        "n_splits": 60,
+        "odd_even_r": 0.5174919113820989
+      },
+      "goals_against": {
+        "r": 0.320923414962092,
+        "n_splits": 60,
+        "odd_even_r": 0.38497664663894166
+      }
+    },
+    "2024/2025": {
+      "goals_for": {
+        "r": 0.7378763834375773,
+        "n_splits": 60,
+        "odd_even_r": 0.8269626363264699
+      },
+      "goals_against": {
+        "r": 0.6394961473491716,
+        "n_splits": 60,
+        "odd_even_r": 0.49473917443342585
+      }
+    },
+    "2025/2026": {
+      "goals_for": {
+        "r": 0.4412131847645208,
+        "n_splits": 60,
+        "odd_even_r": 0.3018903165161524
+      },
+      "goals_against": {
+        "r": 0.5177233348843315,
+        "n_splits": 60,
+        "odd_even_r": 0.38254093041211384
+      }
+    },
+    "2026/2027": {
+      "goals_for": {
+        "r": 0.36404088737556883,
+        "n_splits": 60,
+        "odd_even_r": 0.23165187992707217
+      },
+      "goals_against": {
+        "r": 0.4084404837513632,
+        "n_splits": 60,
+        "odd_even_r": 0.3358578335031455
+      }
+    }
+  },
+  "halves": {
+    "goals": {
+      "n_matches": 1582,
+      "share_1h": 0.4356417011667294,
+      "observed_variance": 0.09310403793073009,
+      "noise_floor_per_match": 0.09855085386698095,
+      "true_variance": -0.005446815936250862,
+      "team_share_split_half": {
+        "r": -0.1334397735470719,
+        "n_splits": 60,
+        "odd_even_r": 0.2985106396159837
+      }
+    }
+  },
+  "jong_comparison": {
+    "teams": [
+      "Jong Almere City FC",
+      "Jong FC Volendam",
+      "Jong Sparta Rotterdam"
+    ],
+    "n_teams": 3,
+    "reliability": {
+      "goals_for": {
+        "r": 0.6732512910230462,
+        "n_splits": 60,
+        "odd_even_r": 0.9956881409874644
+      },
+      "goals_against": {
+        "r": 0.5986046184496715,
+        "n_splits": 60,
+        "odd_even_r": 0.794046716413109
+      }
+    },
+    "goals_for_variance": 2.358149426331244,
+    "goals_against_variance": 2.084521539066994,
+    "non_jong_comparison": {
+      "reliability": {
+        "goals_for": {
+          "r": 0.7509018061969627,
+          "n_splits": 60,
+          "odd_even_r": 0.7730091213624872
+        },
+        "goals_against": {
+          "r": 0.7341635353013248,
+          "n_splits": 60,
+          "odd_even_r": 0.7602737789172679
+        }
+      },
+      "goals_for_variance": 1.7603452563410484,
+      "goals_against_variance": 1.7967802122302292
+    }
+  },
+  "movers": {
+    "2022/2023": {
+      "entrants_absent_prior": [
+        "Lisse",
+        "OFC Oostzaan"
+      ],
+      "entrants_in_eerste_prev_season": [],
+      "entrant_gap": {
+        "teams": [
+          "Lisse",
+          "OFC Oostzaan"
+        ],
+        "n_teams": 2,
+        "n_team_matches": 66,
+        "gf_per_match": 1.1666666666666667,
+        "ga_per_match": 2.090909090909091,
+        "league_team_goal_mean": 1.5980392156862746,
+        "gf_gap": -0.43137254901960786,
+        "ga_gap": 0.4928698752228162
+      },
+      "jong_entrants": []
+    },
+    "2023/2024": {
+      "entrants_absent_prior": [
+        "ACV",
+        "ADO '20",
+        "GVVV Veenendaal",
+        "Jong Almere City FC"
+      ],
+      "entrants_in_eerste_prev_season": [],
+      "entrant_gap": {
+        "teams": [
+          "ACV",
+          "ADO '20",
+          "GVVV Veenendaal",
+          "Jong Almere City FC"
+        ],
+        "n_teams": 4,
+        "n_team_matches": 124,
+        "gf_per_match": 1.5887096774193548,
+        "ga_per_match": 1.5564516129032258,
+        "league_team_goal_mean": 1.5784313725490196,
+        "gf_gap": 0.010278304870335209,
+        "ga_gap": -0.021979759645793795
+      },
+      "jong_entrants": [
+        "Jong Almere City FC"
+      ]
+    },
+    "2024/2025": {
+      "entrants_absent_prior": [
+        "Barendrecht",
+        "RKAV Volendam"
+      ],
+      "entrants_in_eerste_prev_season": [],
+      "entrant_gap": {
+        "teams": [
+          "Barendrecht",
+          "RKAV Volendam"
+        ],
+        "n_teams": 2,
+        "n_team_matches": 66,
+        "gf_per_match": 1.7424242424242424,
+        "ga_per_match": 1.9393939393939394,
+        "league_team_goal_mean": 1.6601307189542485,
+        "gf_gap": 0.08229352346999397,
+        "ga_gap": 0.279263220439691
+      },
+      "jong_entrants": []
+    },
+    "2025/2026": {
+      "entrants_absent_prior": [
+        "Hoek",
+        "IJsselmeervogels",
+        "Kozakken Boys"
+      ],
+      "entrants_in_eerste_prev_season": [],
+      "entrant_gap": {
+        "teams": [
+          "Hoek",
+          "IJsselmeervogels",
+          "Kozakken Boys"
+        ],
+        "n_teams": 3,
+        "n_team_matches": 96,
+        "gf_per_match": 1.46875,
+        "ga_per_match": 1.53125,
+        "league_team_goal_mean": 1.6715686274509804,
+        "gf_gap": -0.20281862745098045,
+        "ga_gap": -0.14031862745098045
+      },
+      "jong_entrants": []
+    },
+    "2026/2027": {
+      "entrants_absent_prior": [
+        "Kloetinge",
+        "Rohda Raalte"
+      ],
+      "entrants_in_eerste_prev_season": [],
+      "entrant_gap": {
+        "teams": [
+          "Kloetinge",
+          "Rohda Raalte"
+        ],
+        "n_teams": 2,
+        "n_team_matches": 23,
+        "gf_per_match": 1.0434782608695652,
+        "ga_per_match": 2.9130434782608696,
+        "league_team_goal_mean": 1.8101851851851851,
+        "gf_gap": -0.7667069243156199,
+        "ga_gap": 1.1028582930756845
+      },
+      "jong_entrants": []
+    },
+    "pooled_complete_transitions": {
+      "n_team_matches": 256,
+      "gf_per_match": 1.51953125,
+      "ga_per_match": 1.79296875,
+      "league_team_goal_mean": 1.6122004357298474,
+      "gf_gap": -0.09266918572984739,
+      "ga_gap": 0.1807683142701526
+    }
+  },
+  "reds": {
+    "per_match": 0.1452991452991453,
+    "total": 238,
+    "yellow_events_total": 0,
+    "matches_with_red": 211
+  },
+  "virgin_design_aggregate_note": "2025/2026 levels are descriptive only; no fitting, arm selection, or gate setting was performed.",
+  "star_absence": "Not measured; excluded from Phase 1 feature set."
+}

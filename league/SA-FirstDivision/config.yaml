@@ -1,0 +1,32 @@
+# SA-FirstDivision (Saudi Arabia) — Phase A frozen configuration
+league: SA-FirstDivision
+country: Saudi Arabia
+fotmob_id: 10721
+tier: 2
+warehouse_root: .
+data:
+  matches: league/SA-FirstDivision/data/safd_matches.csv
+  team_matches: league/SA-FirstDivision/data/safd_team_matches.csv
+seasons: ["2024/2025", "2025/2026", "2026/2027"]
+dev_protocol: "Goals: within-season walk-forward over 2024/2025 regular played (warm-up first 90, scored rest). S/C/T/K: within-season walk-forward over 2025/2026 regular played (warm-up first 90, scored rest 214)."
+virgin_primary: "2025/2026"  # goals regular played n=304; complete
+virgin_confirmatory: "2026/2027"  # partial n=94; transitional, confirmatory read at season end
+halves_constants:
+  goals_1h_share: null  # FT-only for G-SAFD: no HT data in goals dev season
+  sot_1h_share: 0.454  # frozen, 2025/2026 regular played n=304, true SD 0.0
+  corners_1h_share: 0.4678  # frozen, 2025/2026 regular played n=304, true SD 0.0105
+  total_shots_1h_share: 0.4557  # frozen, 2025/2026 regular played n=304, true SD 0.0
+  yellow_cards_1h_share: 0.401  # frozen, event yellows 2025/2026 regular played n=301, true SD 0.0
+markets:
+  goals: G-SAFD  # DC goals-only
+  sot: S-SAFD  # model_sot v5 reference
+  corners: C-SAFD  # model_corners_v3 reference
+  cards: K-SAFD  # event-unified yellows
+  total_shots: T-SAFD  # shots family A/B/C
+notes:
+  - "FORMAT: 18 teams, 34-round regular phase plus 3-match promotion playoffs per complete season; playoffs excluded from every fit and scored window."
+  - "WINDOWS: goals dev is 2024/2025 regular played; goals virgin is 2025/2026 regular played n=304 after two awarded matches; S/C/T/K dev scored n=214 after warm-up; virgin is 2026/2027 partial n=94 and transitional."
+  - "2024/2025 is score-only. No shotmap, xG, or xGOT exists in any payload."
+  - "Referee coverage is 0% in both complete seasons; six teams change at each season boundary."
+  - "Cards target is event-unified Yellow + YellowRed; stats yellow undercounts it."
+  - "2026/2027 goals confirmatory results are not read in this build; no outcome levels are computed for that season."

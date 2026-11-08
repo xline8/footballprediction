@@ -1,0 +1,38 @@
+# RS-SuperLiga (Serbia) — league config
+league: RS-SuperLiga
+country: Serbia
+fotmob_id: 182
+tier: 1
+warehouse: data_enrichment/fotmob_world/Serbia/Super Liga
+data:
+  matches: league/RS-SuperLiga/data/rs_matches.csv
+  team_matches: league/RS-SuperLiga/data/rs_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period:
+  goals: ["2022/2023", "2023/2024", "2024/2025"]   # scored; warm-up 2021/2022 (300 matches; 296 league-member)
+  stats_markets: []   # NO dev season carries a stats feed — S/C/T not buildable
+  cards: []           # NO usable dev yellows target — K not buildable
+virgin_primary: "2025/2026"          # COMPLETE season (296/296, last match 2026-05-24) — NOT READ: G-RS failed the dev gate, so per the prereg the virgin was never read for any candidate
+virgin_confirmatory: "2026/2027"     # in progress (104 matches in warehouse) — untouched as confirmatory reserve
+halves_constants:               # frozen: goals from EVENT TIMES (dev era, league-member rows only); no other market has a dev halves share
+  goals_1h_share: 0.4606        # 2021/2022-2024/2025 league-member rows, n=1087 matches with events (1449/3146 goals in 1H)
+  yellow_cards_1h_share: null   # K-RS not built (dev event yellows 0.041-0.120/match are YellowRed-only; unusable)
+  sot_1h_share: null            # S-RS not built (no dev SOT)
+  corners_1h_share: null        # C-RS not built (no dev corners)
+  total_shots_1h_share: null    # T-RS not built (no dev total shots)
+markets:
+  goals: G-RS        # DC goals-only (no xG in feed); arms: Gate Zero, SHRINK, X2 (regular-phase entrant rule) — FAIL at dev gate (OU2.5 leg 0.698890 vs climatology 0.695516); virgin NOT read; nothing ships
+  sot: null          # NOT BUILT: SOT exists only in the virgin (8.831/match); no dev SOT, no X4 (no shotmap, no xG)
+  corners: null      # NOT BUILT: corners exist only in the virgin (9.003/match); X7 dropped and the FI possession-only fallback is also virgin-only
+  cards: null        # NOT BUILT: no usable yellows target — dev event feed YellowRed-only (r=0.060) and stats feed virgin-only, undercounting events by 0.432/match; X8 dead (referee names absent in dev)
+  total_shots: null  # NOT BUILT: total_shots exists only in the virgin (25.084/match); zero rich-era dev seasons (FI T-FI precedent, stronger)
+notes:
+  - Split season (Jul - late May / early Jun), 18 teams 2021/2022-2022/2023, 16 teams from 2023/2024. Format per season from general.leagueName + matchRound: regular 240 + Championship Group 28 + Relegation Group 28 (+ Qualification 4 in 2021/2022-2022/2023 only — cross-tier relegation play-off ties vs Prva Liga clubs, EXCLUDED from fitting, halves, and X2; they stay in rs_matches.csv with phase=qualification). Phase rule frozen: all league-member phases are ordinary rows with a phase flag.
+  - Stats feed has TWO eras with a hard break: ABSENT 2021/2022-2024/2025 (0 stats rows, 0 keys) and RICH 2025/2026-2026/2027 (36 keys incl. card keys, touches_opp_box, big_chance, WITH period splits; splits verified All = 1H + 2H in the virgin inventory). The rich era starts exactly at the virgin season, which is why S/C/K/T are not-buildable rather than gate FAILs.
+  - No xG and no shotmap in ANY season -> X1 blend falls back goals-only; X3/X4/X6 impossible by data absence.
+  - Referee name empty in all of 2021/2022-2024/2025, 197/296 named in 2025/2026 -> X8 impossible on the dev era.
+  - Cards target would have been EVENT-derived unified yellows (stats card keys exist only 2025/2026+). Stats-vs-events check 2025/2026 (inventory only): exact agreement 72.6%, mean stats-events -0.432 per match, stats never exceeds events.
+  - Team-name stability: 27 FotMob team ids in the corpus (25 in dev+virgin); 7 ids carry two name spellings (diacritic variants across eras). All logic keyed by team id.
+  - Awarded match 4271663 (2023/2024): FT score authoritative (awarded 0-3), fitted/scored; excluded from halves measurement only.
+  - Goals levels per match: 2.563 / 2.430 / 2.770 / 2.882 (dev), 2.662 (virgin, inventory only — never used for fitting or gating), 2.587 (reserve, untouched).
+  - Predictions-only: no RS odds/settlement source in-system.

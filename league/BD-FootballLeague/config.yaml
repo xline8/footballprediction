@@ -1,0 +1,29 @@
+league: BD-FootballLeague
+country: Bangladesh
+fotmob_id: 10443
+tier: 1
+warehouse: data_enrichment/fotmob_world/Bangladesh/Bangladesh Football League
+data:
+  matches: league/BD-FootballLeague/data/bd_footballleague_matches.csv
+  team_matches: league/BD-FootballLeague/data/bd_footballleague_team_matches.csv
+seasons: ["2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2022/2023", "2023/2024", "2024/2025", "2025/2026"]
+virgin_primary: "2026/2027"
+virgin_confirmatory: "2026/2027-complete"
+halves_constants:
+  goals_1h_share: 0.4217
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+  yellow_cards_1h_share: null
+markets:
+  goals: G-BD
+  sot: "NOT BUILDABLE — stats None in 394/394 and shotmap shots empty in 394/394"
+  corners: "NOT BUILDABLE — stats None in 394/394 and shotmap shots empty in 394/394"
+  cards: "NOT BUILDABLE — plain-Yellow events are 0 in every season; only Red/YellowRed events exist (59 total); named referees 0/365 in dev"
+  total_shots: "NOT BUILDABLE — stats None in 394/394 and shotmap shots empty in 394/394"
+notes:
+  - "All 394 payloads are finished; 2026/2027 is in progress through 2026-10-24 (29 matches, rounds 1-5)."
+  - "No split group or playoff fixture exists. 2022/2023 is missing rounds 1-3 (15 matches) from the warehouse; 2023/2024-2025/2026 are complete 10-team double round-robins; 2026/2027 expands to 13 teams with one round-4 fixture missing from the index."
+  - "Zero score/event mismatches; HT cross-check agrees 363/363."
+  - "Dev evaluation is thin (n=270 across three seasons) with a 95-match incomplete seed; the pooled gate is the decision unit."

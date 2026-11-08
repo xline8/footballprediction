@@ -1,0 +1,41 @@
+# SG-PremierLeague (Singapore) — league config (Phase 2 freeze; completed Phase 6)
+league: SG-PremierLeague
+country: Singapore
+fotmob_id: 461
+tier: 1
+warehouse: data_enrichment/fotmob_world/Singapore/Premier League
+data:
+  matches: league/SG-PremierLeague/data/sg_matches.csv
+  team_matches: league/SG-PremierLeague/data/sg_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024/2025", "2025/2026", "2026/2027"]
+dev_period:
+  goals: ["2022", "2023", "2024/2025"]   # scored; warm-up 2021
+  stats_markets: []                  # NOT-BUILDABLE: no stats feed in any season (0/555)
+  cards: []                          # NOT-BUILDABLE: no yellows target in any season (stats absent; event plain Yellows 0 in every season); referee 0% in dev
+virgin_primary: "2025/2026"          # COMPLETE season (84 matches) — NOT READ (G-SG failed the dev gate; virgin_read: false)
+virgin_confirmatory: null            # 2026/2027 is in progress (23) and stays untouched
+halves_constants:                   # frozen from DEV-era data only (EDA F3)
+  goals_1h_share: 0.4404            # event times, dev era 2021-2024/2025, n=1905 goals, 440 matches with events (all 12 no-event dev matches are 0-0, so event goals == all dev goals)
+  yellow_cards_1h_share: null       # no yellows target in dev — no constant; no K market
+  sot_1h_share: null                # no period splits in dev — no constant
+  corners_1h_share: null            # no period splits in dev — no constant
+  total_shots_1h_share: null        # no period splits in dev — no constant
+markets:
+  goals: G-SG        # DC goals-only (no xG in feed); arms: Gate Zero, SHRINK (X2 DROPPED: EDA F4, 1 dev entrant transition only, GA sign contradicts the entrant pattern)
+  sot: S-SG          # NOT-BUILDABLE — no stats feed in any season
+  corners: C-SG      # NOT-BUILDABLE — no stats feed in any season
+  cards: K-SG        # NOT-BUILDABLE — no stats yellows in any season; event plain Yellows 0 in EVERY season (no target at all); referee 0% in dev (no X8)
+  total_shots: T-SG  # NOT-BUILDABLE — no stats feed in any season; shotmap empty in every season
+notes:
+  - Season structure changes mid-corpus: calendar-year seasons 2021-2023, split seasons from 2024/2025. Single group every season (8 teams in 2021, 2022, 2025/2026; 9 teams in 2023, 2024/2025; 8 teams in 2026/2027, in progress).
+  - Naming: general.leagueName is "S.League" in 2021-2022 (196 matches) and "Premier League" from 2023 (359 matches) — a rename of the same competition; coverageLevel "lower" for all 555. One team id carries two names: 67377 "FC Jurong" / "Albirex Niigata FC". 9 team ids, 10 published names. All logic keyed by team id.
+  - Stats feed absent in EVERY season: 0/555 matches carry any stats Periods key; shotmap 0/555; xG rows 0. Scores-only league.
+  - No xG and no shotmap in ANY season -> X1 blend falls back goals-only; X3/X4/X6/X7/X9 impossible by data absence.
+  - Event feed carries goals perfectly: 0 score/events mismatches in 555 matches, and all 12 matches with an empty events payload are 0-0 (0 goals in them), so event goals are complete for the dev era. Cards exist only as YellowRed + Red (plain Yellow 0 in every season).
+  - Referees: named in 0 dev and 0 virgin matches (13/23 only in the untouched reserve) — X8 dropped on dev-era absence.
+  - No awarded matches (0/555).
+  - The highest-scoring league in the program: goals/match 3.976 / 4.518 / 4.185 / 4.257 in dev, 3.607 in the virgin (inventory only), 3.478 in the reserve. OU2.5 over-rate 0.74-0.79 every season; dev scored 0.7747. Draw rate low (dev scored 0.1868).
+  - Virgin level risk (recorded pre-fitting, not adjusted): virgin goals/match 3.607 sits -0.71 below the dev scored mean 4.316 — the largest dev->virgin level drop in the program; virgin n=84 is small. Moot for this build: the virgin was never read.
+  - Trait reliability is strong: split-half r 0.881 (GF) / 0.869 (GA), n=9 teams.
+  - Predictions-only: no SG odds/settlement source in-system.
+  - Outcome (Phase 6): G-SG FAIL at the dev gate (OU leg vs climatology) — Gate Zero pooled dev (n=364) 1X2 LL 0.9607 / RPS 0.2056 / OU2.5 LL 0.5507 vs climatology 1.0521 / 0.2421 / 0.5338 and naive trailing-10 0.9633 / 0.2080 / 0.5783: beats BOTH baselines on 1X2 LL and RPS, loses the OU leg to climatology pooled and in every dev season. SHRINK numerically identical to Gate Zero (n<6 never binds under season-blocked prediction). Virgin 2025/2026 NOT read; 2026/2027 untouched; nothing ships. S/C/K/T not-buildable (see reports/*_SG_VERDICT.md).

@@ -1,0 +1,862 @@
+Reading additional input from stdin...
+OpenAI Codex v0.167.0
+--------
+workdir: /home/hatch/workspace/footballprediction
+model: gpt-5.6-luna
+provider: openai
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR]
+reasoning effort: none
+reasoning summaries: none
+session id: 01a1cf33-cde0-7bc2-95ba-7253bb985d77
+--------
+user
+# BRIEF — K-CO join proof (CO-PrimeraA cards, arm X8, PROVISIONAL)
+
+Issued by the improvement-program watchdog, 2026-11-12 ~16:58 WIB.
+Worker: Codex luna (`~/.local/bin/codex`, stdin closed). No push, ever.
+No touching top-5 production, other crons, or the morning report.
+
+## Why now
+
+- K-CO passed Lane 1 provisionally on 2026-11-11 19:08 WIB (verdict in
+  `league/IMPROVEMENT_STATUS.md`; prereg commit 6557938e; dev X8
+  LL@5.5 0.691751 vs base 0.695579 / naive 0.707987; single sealed read
+  2026-Apertura n=204: leg (i) PASS — X8 LL@5.5 0.665796, best of four;
+  calibration −1.574pp, SE 3.413pp → PROVISIONAL; sign 5/5).
+- Shipping was BLOCKED only by the referee operational gate (user
+  decision 2026-11-11 19:47 WIB: HOLD AND RECHECK — join as PROVISIONAL
+  when ≥1 upcoming fixture carries a named referee).
+- **Gate NOW PASSED, rechecked 2026-11-12 16:58 WIB: 2/10 upcoming
+  Clausura Round 19 fixtures carry named referees** — Deportivo Pasto
+  vs Junior FC (2026-11-12, match 1000014235, referee Diego Alejandro
+  Ruíz Casas) and Llaneros FC vs Chicó FC (2026-11-13, match
+  1000014232, referee Carlos Márquez). Evidence:
+  `league/improvement_scratch/KCO_RECHECK/recheck_2026-11-12_1658.json`
+  in the main checkout (verify it yourself before starting — re-run
+  `league/improvement_scratch/KCO_RECHECK/recheck_referees_1658.py`
+  with the main checkout's `.venv` if you want an independent read).
+- Join prep is already done on branch `build/lane1-kco` (commit
+  423d37b7): `league/runner/active.yaml` cards block (arm x8,
+  primary 5.5, ladder [3.5, 4.5, 5.5, 6.5], halves 0.3543,
+  `exclude_seasons` 2021–2022 Apertura/Clausura, `cards_target:
+  event_unified_yellows`, `cards_actual:
+  [ev_yellow_inc2nd_home, ev_yellow_inc2nd_away]`) + `run_daily.py`
+  adapter + README. Worktree: `~/workspace/wt-lane1-kco`.
+
+## Task: standard join proof, then merge iff MERGE-READY
+
+Follow the established join-proof pattern exactly as recorded for
+G-TZ (merged c979d05a), K-FO (885a27bb) and K-ID (8f8b4b00) in
+`league/IMPROVEMENT_STATUS.md` and `league/PROGRAM_STATUS.md`:
+
+1. Work in `~/workspace/wt-lane1-kco` on branch `build/lane1-kco`.
+   Confirm the worktree is at 423d37b7 and its
+   `data_enrichment/fotmob_world` symlink points at the main
+   checkout's warehouse (restore it if missing — git-ignored, no
+   commit impact). Use the worktree's `.venv` if present, else the
+   main checkout's `.venv`. Run with `MALLOC_ARENA_MAX=2`.
+   NOTE: CO's builder also reads Primera B warehouse JSONs — the
+   fresh-worktree trap did NOT trigger for CO in any prior proof run
+   (warehouse present via the symlinked main-checkout warehouse);
+   do NOT copy warehouse data into the worktree.
+2. Two full end-to-end runner runs from the worktree. Each takes
+   ~30 min. Record predictions/errors/fetched_new per run. Run 2
+   must show fetched_new=0 in every league.
+3. Byte-compare ALL prediction/state snapshot files between the two
+   runs. Only `run_log.jsonl` may differ by design. Any other diff
+   must be explained concretely as a live-feed change (fixture
+   added/moved/renamed) with numeric proof that predicted values
+   are bit-equal — never hand-waved.
+4. CO must predict its upcoming fixtures (expect ~10, 12–14 Nov)
+   with 0 errors; independent recompute of ALL CO live predictions
+   must be diff 0.0 on every float field. Verify the cards history
+   row count loads exactly as the frozen harness expects.
+5. Inertness: other leagues' outputs unchanged vs the HEAD runner
+   (byte-identical on a probe set covering the cards adapter and
+   neighbouring arms). Any adapter change you need must be proven
+   no-op for existing leagues.
+6. Synthetic settlement on one finished CO match: settles exactly
+   once, a second settle pass settles nothing, files restored
+   byte-identical afterwards.
+7. Write the full proof report to
+   `league/improvement_scratch/KCO_JOIN/report.md` on the branch and
+   commit it there.
+
+## Merge (ONLY if every check above passes = MERGE-READY)
+
+- Merge `build/lane1-kco` into the main checkout
+  (`~/workspace/footballprediction`, branch `local/fotmob-source`,
+  currently 740c6316). The main checkout currently carries
+  uncommitted runner-output modifications (daily CSVs, settled_keys
+  sidecars, xg_raw, fotmob_world_index) — do NOT commit, discard,
+  or touch them; merge only the branch.
+- Resolve any `active.yaml` / README / `run_daily.py` conflicts as
+  the UNION of both sides' league entries (the TZ/FO/ID precedent).
+- Verify the merged state: `active.yaml` parses via the runner's
+  own parser to **63 leagues / 123 markets**, `run_daily.py`
+  compiles, CO cards history loads under the merged code.
+- Commit the merge in the main checkout. Then append the join event
+  to `league/IMPROVEMENT_STATUS.md` (heartbeat line + event-log
+  entry, same format as the G-TZ/K-FO/K-ID entries) and commit that
+  too. No push.
+- Report back: MERGE-READY + merge commit hash + runner counts
+  (63/123) + CO upcoming/predicted/errors + recompute diff.
+
+## If NOT MERGE-READY
+
+Stop. Do NOT merge. Report exactly which check failed, with the
+numbers and file evidence. Leave the branch and worktree as they are.
+
+## Rules
+
+- Gates never move; no retroactive passes; the sealed window stays
+  burned for this candidate (it was already read once — do NOT read
+  any sealed data again; this proof uses live/future fixtures only).
+- Never push. Never edit `~/MEMORY.md` or `~/workspace/goals/`.
+- Log progress with timestamps to
+  `league/improvement_scratch/KCO_JOIN/codex.log` in the worktree
+  (append as you go) so the watchdog can follow it.
+warning: Codex could not find bubblewrap on PATH. Install bubblewrap with your OS package manager. See the sandbox prerequisites: https://developers.openai.com/codex/concepts/sandboxing#prerequisites. Codex will use the bundled bubblewrap in the meantime.
+codex
+I’ll verify the recheck evidence, branch/worktree state, symlink, and existing join-proof tooling first. Then I’ll run the two live proofs with timestamped logging and only merge if every required check is evidenced.
+exec
+/bin/bash -lc "pwd; printf '%s\\n' '--- main status ---'; git status --short --branch; printf '%s\\n' '--- worktree ---'; git -C /home/hatch/workspace/wt-lane1-kco status --short --branch; git -C /home/hatch/workspace/wt-lane1-kco rev-parse HEAD; printf '%s\\n' '--- symlink ---'; readlink -f /home/hatch/workspace/wt-lane1-kco/data_enrichment/fotmob_world || true; printf '%s\\n' '--- recheck ---'; python - <<'PY'
+import json
+p='league/improvement_scratch/KCO_RECHECK/recheck_2026-11-12_1658.json'
+with open(p) as f: d=json.load(f)
+print(json.dumps(d, indent=2)[:12000])
+PY
+printf '%s\\n' '--- join files ---'; find /home/hatch/workspace/wt-lane1-kco/league/improvement_scratch/KCO_JOIN -maxdepth 2 -type f -printf '%p\\n' 2>/dev/null | sort; printf '%s\\n' '--- precedent refs ---'; rg -n \"JOIN|join|MERGE-READY|heartbeat|event-log\" league/IMPROVEMENT_STATUS.md league/PROGRAM_STATUS.md | tail -80" in /home/hatch/workspace/footballprediction
+ succeeded in 310ms:
+/home/hatch/workspace/footballprediction
+--- main status ---
+## local/fotmob-source
+ M data_enrichment/fotmob_world_index.csv
+ M league/BG-FirstLeague/data/build_data.py
+ M xg_raw/Bundesliga_2026.json
+ M xg_raw/Bundesliga_2026_all.json
+ M xg_raw/Bundesliga_2026_fixtures.json
+ M xg_raw/EPL_2026.json
+ M xg_raw/EPL_2026_all.json
+ M xg_raw/EPL_2026_fixtures.json
+ M xg_raw/La_liga_2026.json
+ M xg_raw/La_liga_2026_all.json
+ M xg_raw/La_liga_2026_fixtures.json
+ M xg_raw/Ligue_1_2026.json
+ M xg_raw/Ligue_1_2026_all.json
+ M xg_raw/Ligue_1_2026_fixtures.json
+ M xg_raw/Serie_A_2026.json
+ M xg_raw/Serie_A_2026_all.json
+ M xg_raw/Serie_A_2026_fixtures.json
+ D xg_raw/backup_fixtures/Bundesliga_2026_fixtures_20261017_0929.json
+ D xg_raw/backup_fixtures/Bundesliga_2026_fixtures_20261017_1038.json
+ D xg_raw/backup_fixtures/Bundesliga_2026_fixtures_20261017_1041.json
+ D xg_raw/backup_fixtures/Bundesliga_2026_fixtures_20261017_1147.json
+ D xg_raw/backup_fixtures/Bundesliga_2026_fixtures_20261017_1249.json
+ D xg_raw/backup_fixtures/Bundesliga_2026_fixtures_20261017_1350.json
+ D xg_raw/backup_fixtures/Bundesliga_2026_fixtures_20261017_1454.json
+ D xg_raw/backup_fixtures/Bundesliga_2026_fixtures_20261017_1555.json
+ D xg_raw/backup_fixtures/Bundesliga_2026_fixtures_20261017_1658.json
+ D xg_raw/backup_fixtures/Bundesliga_2026_fixtures_20261017_1802.json
+ D xg_raw/backup_fixtures/Bundesliga_2026_fixtures_20261017_1906.json
+ D xg_raw/backup_fixtures/Bundesliga_2026_fixtures_20261017_2008.json
+ D xg_raw/backup_fixtures/Bundesliga_2026_fixtures_20261017_2110.json
+ D xg_raw/backup_fixtures/Bundesliga_2026_fixtures_20261018_1153.json
+ D xg_raw/backup_fixtures/Bundesliga_2026_fixtures_20261018_1255.json
+ D xg_raw/backup_fixtures/Bundesliga_2026_fixtures_20261018_1358.json
+ D xg_raw/backup_fixtures/Bundesliga_2026_fixtures_20261018_1818.json
+ D xg_raw/backup_fixtures/Bundesliga_2026_fixtures_20261018_1920.json
+ D xg_raw/backup_fixtures/Bundesliga_2026_fixtures_20261019_2055.json
+ D xg_raw/backup_fixtures/EPL_2026_fixtures_20261017_0929.json
+ D xg_raw/backup_fixtures/EPL_2026_fixtures_20261017_1038.json
+ D xg_raw/backup_fixtures/EPL_2026_fixtures_20261017_1041.json
+ D xg_raw/backup_fixtures/EPL_2026_fixtures_20261017_1147.json
+ D xg_raw/backup_fixtures/EPL_2026_fixtures_20261017_1249.json
+ D xg_raw/backup_fixtures/EPL_2026_fixtures_20261017_1350.json
+ D xg_raw/backup_fixtures/EPL_2026_fixtures_20261017_1454.json
+ D xg_raw/backup_fixtures/EPL_2026_fixtures_20261017_1555.json
+ D xg_raw/backup_fixtures/EPL_2026_fixtures_20261017_1658.json
+ D xg_raw/backup_fixtures/EPL_2026_fixtures_20261017_1802.json
+ D xg_raw/backup_fixtures/EPL_2026_fixtures_20261017_1906.json
+ D xg_raw/backup_fixtures/EPL_2026_fixtures_20261017_2008.json
+ D xg_raw/backup_fixtures/EPL_2026_fixtures_20261017_2110.json
+ D xg_raw/backup_fixtures/EPL_2026_fixtures_20261018_1153.json
+ D xg_raw/backup_fixtures/EPL_2026_fixtures_20261018_1255.json
+ D xg_raw/backup_fixtures/EPL_2026_fixtures_20261018_1357.json
+ D xg_raw/backup_fixtures/EPL_2026_fixtures_20261018_1818.json
+ D xg_raw/backup_fixtures/EPL_2026_fixtures_20261018_1920.json
+ D xg_raw/backup_fixtures/EPL_2026_fixtures_20261019_2055.json
+ D xg_raw/backup_fixtures/La_liga_2026_fixtures_20261017_0929.json
+ D xg_raw/backup_fixtures/La_liga_2026_fixtures_20261017_1038.json
+ D xg_raw/backup_fixtures/La_liga_2026_fixtures_20261017_1041.json
+ D xg_raw/backup_fixtures/La_liga_2026_fixtures_20261017_1147.json
+ D xg_raw/backup_fixtures/La_liga_2026_fixtures_20261017_1249.json
+ D xg_raw/backup_fixtures/La_liga_2026_fixtures_20261017_1350.json
+ D xg_raw/backup_fixtures/La_liga_2026_fixtures_20261017_1454.json
+ D xg_raw/backup_fixtures/La_liga_2026_fixtures_20261017_1555.json
+ D xg_raw/backup_fixtures/La_liga_2026_fixtures_20261017_1658.json
+ D xg_raw/backup_fixtures/La_liga_2026_fixtures_20261017_1802.json
+ D xg_raw/backup_fixtures/La_liga_2026_fixtures_20261017_1906.json
+ D xg_raw/backup_fixtures/La_liga_2026_fixtures_20261017_2008.json
+ D xg_raw/backup_fixtures/La_liga_2026_fixtures_20261017_2110.json
+ D xg_raw/backup_fixtures/La_liga_2026_fixtures_20261018_1153.json
+ D xg_raw/backup_fixtures/La_liga_2026_fixtures_20261018_1255.json
+ D xg_raw/backup_fixtures/La_liga_2026_fixtures_20261018_1358.json
+ D xg_raw/backup_fixtures/La_liga_2026_fixtures_20261018_1818.json
+ D xg_raw/backup_fixtures/La_liga_2026_fixtures_20261018_1920.json
+ D xg_raw/backup_fixtures/La_liga_2026_fixtures_20261019_2055.json
+ D xg_raw/backup_fixtures/Ligue_1_2026_fixtures_20261017_0929.json
+ D xg_raw/backup_fixtures/Ligue_1_2026_fixtures_20261017_1038.json
+ D xg_raw/backup_fixtures/Ligue_1_2026_fixtures_20261017_1041.json
+ D xg_raw/backup_fixtures/Ligue_1_2026_fixtures_20261017_1147.json
+ D xg_raw/backup_fixtures/Ligue_1_2026_fixtures_20261017_1249.json
+ D xg_raw/backup_fixtures/Ligue_1_2026_fixtures_20261017_1350.json
+ D xg_raw/backup_fixtures/Ligue_1_2026_fixtures_20261017_1454.json
+ D xg_raw/backup_fixtures/Ligue_1_2026_fixtures_20261017_1555.json
+ D xg_raw/backup_fixtures/Ligue_1_2026_fixtures_20261017_1658.json
+ D xg_raw/backup_fixtures/Ligue_1_2026_fixtures_20261017_1804.json
+ D xg_raw/backup_fixtures/Ligue_1_2026_fixtures_20261017_1906.json
+ D xg_raw/backup_fixtures/Ligue_1_2026_fixtures_20261017_2008.json
+ D xg_raw/backup_fixtures/Ligue_1_2026_fixtures_20261017_2111.json
+ D xg_raw/backup_fixtures/Ligue_1_2026_fixtures_20261018_1153.json
+ D xg_raw/backup_fixtures/Ligue_1_2026_fixtures_20261018_1255.json
+ D xg_raw/backup_fixtures/Ligue_1_2026_fixtures_20261018_1358.json
+ D xg_raw/backup_fixtures/Ligue_1_2026_fixtures_20261018_1818.json
+ D xg_raw/backup_fixtures/Ligue_1_2026_fixtures_20261018_1920.json
+ D xg_raw/backup_fixtures/Ligue_1_2026_fixtures_20261019_2055.json
+ D xg_raw/backup_fixtures/Serie_A_2026_fixtures_20261017_0929.json
+ D xg_raw/backup_fixtures/Serie_A_2026_fixtures_20261017_1038.json
+ D xg_raw/backup_fixtures/Serie_A_2026_fixtures_20261017_1041.json
+ D xg_raw/backup_fixtures/Serie_A_2026_fixtures_20261017_1147.json
+ D xg_raw/backup_fixtures/Serie_A_2026_fixtures_20261017_1249.json
+ D xg_raw/backup_fixtures/Serie_A_2026_fixtures_20261017_1350.json
+ D xg_raw/backup_fixtures/Serie_A_2026_fixtures_20261017_1454.json
+ D xg_raw/backup_fixtures/Serie_A_2026_fixtures_20261017_1555.json
+ D xg_raw/backup_fixtures/Serie_A_2026_fixtures_20261017_1658.json
+ D xg_raw/backup_fixtures/Serie_A_2026_fixtures_20261017_1803.json
+ D xg_raw/backup_fixtures/Serie_A_2026_fixtures_20261017_1906.json
+ D xg_raw/backup_fixtures/Serie_A_2026_fixtures_20261017_2008.json
+ D xg_raw/backup_fixtures/Serie_A_2026_fixtures_20261017_2110.json
+ D xg_raw/backup_fixtures/Serie_A_2026_fixtures_20261018_1153.json
+ D xg_raw/backup_fixtures/Serie_A_2026_fixtures_20261018_1255.json
+ D xg_raw/backup_fixtures/Serie_A_2026_fixtures_20261018_1358.json
+ D xg_raw/backup_fixtures/Serie_A_2026_fixtures_20261018_1818.json
+ D xg_raw/backup_fixtures/Serie_A_2026_fixtures_20261018_1920.json
+ D xg_raw/backup_fixtures/Serie_A_2026_fixtures_20261019_2055.json
+ M xg_raw/fotmob_xg.json
+?? .wtest2
+?? data_enrichment/fotmob_full.lock
+?? data_enrichment/fotmob_full_checkpoint.json
+?? data_enrichment/fotmob_world_resume_2026-11-09.log
+?? data_enrichment/sot_backfill/checkpoint.json
+?? data_enrichment/sot_backfill/gap_checkpoint.json
+?? data_enrichment/sot_backfill/gap_fill.lock
+?? data_enrichment/sot_backfill/gap_raw/
+?? data_enrichment/sot_backfill/summary.json
+?? experiments/experiment_shots_on_target.py
+?? experiments/halves/RESULTS_HALVES_GOALS.md
+?? experiments/halves/run_halves_goals.py
+?? experiments/sot_model/AUTOPSY.md
+?? experiments/sot_model/REPLAY.md
+?? experiments/sot_model/REPLAY_LONG.md
+?? experiments/sot_model/RESULTS.md
+?? experiments/sot_model/RESULTS_V2.md
+?? experiments/sot_model/RESULTS_V3.md
+?? experiments/sot_model/RESULTS_V4.md
+?? experiments/sot_model/autopsy_sot.py
+?? experiments/sot_model/replay_long.py
+?? experiments/sot_model/replay_sot.py
+?? experiments/sot_model/run_sot_experiment.py
+?? experiments/sot_model/run_sot_v2.py
+?? experiments/sot_model/run_sot_v3.py
+?? experiments/sot_model/run_sot_v4.py
+?? football-prediction.service
+?? football_data.egg-info/
+?? install_service.sh
+?? league/AE-ProLeague/predictions/settled_keys.json
+?? league/AR-LigaProfesional/predictions/settled_keys.json
+?? league/AR-PrimeraBNacional/predictions/settled_keys.json
+?? league/AU-ALeague/predictions/settled_keys.json
+?? league/AU-ALeagueWomen/predictions/settled_keys.json
+?? league/BA-PremierLeague/predictions/settled_keys.json
+?? league/BE-FirstDivisionA/predictions/settled_keys.json
+?? league/BR-SerieA/predictions/settled_keys.json
+?? league/BR-SerieB/predictions/settled_keys.json
+?? league/CH-SuperLeague/predictions/settled_keys.json
+?? league/CL-LigaDePrimera/predictions/settled_keys.json
+?? league/CN-SuperLeague/predictions/settled_keys.json
+?? league/CO-PrimeraA/predictions/settled_keys.json
+?? league/CY-1Division/predictions/settled_keys.json
+?? league/CZ-Liga/predictions/settled_keys.json
+?? league/DE-2Bundesliga/predictions/settled_keys.json
+?? league/DE-3Liga/predictions/settled_keys.json
+?? league/DK-1Division/predictions/settled_keys.json
+?? league/DK-Superligaen/predictions/settled_keys.json
+?? league/EG-PremierLeague/predictions/settled_keys.json
+?? league/ENG-Championship/predictions/settled_keys.json
+?? league/ENG-LeagueOne/predictions/settled_keys.json
+?? league/ES-LaLiga2/predictions/settled_keys.json
+?? league/FI-Veikkausliiga/predictions/settled_keys.json
+?? league/FO-PremierLeague/predictions/
+?? league/FR-Ligue2/predictions/settled_keys.json
+?? league/GR-SuperLeague/predictions/settled_keys.json
+?? league/HR-HNL/predictions/settled_keys.json
+?? league/HU-NBI/predictions/settled_keys.json
+?? league/ID-SuperLeague/predictions/settled_keys.json
+?? league/IE-PremierDivision/predictions/settled_keys.json
+?? league/IN-ISL/predictions/settled_keys.json
+?? league/IS-BestaDeildin/predictions/settled_keys.json
+?? league/IT-SerieB/predictions/settled_keys.json
+?? league/J1/predictions/settled_keys.json
+?? league/KR-KLeague1/predictions/settled_keys.json
+?? league/KZ-PremierLeague/predictions/settled_keys.json
+?? league/LV-Virsliga/predictions/settled_keys.json
+?? league/MX-LigaMX/predictions/settled_keys.json
+?? league/NL-EersteDivisie/predictions/settled_keys.json
+?? league/NL-Eredivisie/predictions/settled_keys.json
+?? league/NO-Eliteserien/predictions/settled_keys.json
+?? league/NO-OBOSLigaen/predictions/settled_keys.json
+?? league/PE-Liga1/predictions/settled_keys.json
+?? league/PL-Ekstraklasa/predictions/settled_keys.json
+?? league/RO-LigaI/predictions/settled_keys.json
+?? league/RU-1Division/predictions/settled_keys.json
+?? league/RU-PremierLeague/predictions/settled_keys.json
+?? league/SA-FirstDivision/predictions/settled_keys.json
+?? league/SA-ProLeague/predictions/settled_keys.json
+?? league/SCO-Premiership/predictions/settled_keys.json
+?? league/SE-Allsvenskan/predictions/settled_keys.json
+?? league/SE-Superettan/predictions/settled_keys.json
+?? league/SK-1Liga/predictions/settled_keys.json
+?? league/TH-ThaiLeague/predictions/settled_keys.json
+?? league/TR-SuperLig/predictions/settled_keys.json
+?? league/TZ-PremierLeague/predictions/
+?? league/US-MLS/predictions/settled_keys.json
+?? league/US-USLChampionship/predictions/settled_keys.json
+?? league/US-USLLeagueOne/predictions/settled_keys.json
+?? league/ZA-PSL/predictions/settled_keys.json
+?? league/audit_scratch/work/codex_b03.log
+?? league/audit_scratch/work/codex_b04.log
+?? league/audit_scratch/work/codex_b05.log
+?? league/audit_scratch/work/codex_b06.log
+?? league/audit_scratch/work/codex_b07.log
+?? league/audit_scratch/work/codex_b08.log
+?? league/audit_scratch/work/codex_b09.log
+?? league/audit_scratch/work/codex_b10.log
+?? league/audit_scratch/work/codex_b11.log
+?? league/audit_scratch/work/codex_b12.log
+?? league/audit_scratch/work/make_prompts.py
+?? league/audit_scratch/work/prompt_batch01.txt
+?? league/audit_scratch/work/prompt_batch02.txt
+?? league/audit_scratch/work/prompt_batch03.txt
+?? league/audit_scratch/work/prompt_batch04.txt
+?? league/audit_scratch/work/prompt_batch05.txt
+?? league/audit_scratch/work/prompt_batch06.txt
+?? league/audit_scratch/work/prompt_batch07.txt
+?? league/audit_scratch/work/prompt_batch08.txt
+?? league/audit_scratch/work/prompt_batch09.txt
+?? league/audit_scratch/work/prompt_batch10.txt
+?? league/audit_scratch/work/prompt_batch11.txt
+?? league/audit_scratch/work/prompt_batch12.txt
+?? league/audit_scratch/work/prompt_template.txt
+?? league/improvement_scratch/KCO_JOIN/
+?? league/improvement_scratch/KCO_RECHECK/recheck_2026-11-12_1658.json
+?? league/improvement_scratch/KCO_RECHECK/recheck_referees_1658.py
+?? league/zz-test.txt
+?? start_server.sh
+?? t3.txt
+?? xg_raw/backup_fixtures/Bundesliga_2026_fixtures_20261109_0152.json
+?? xg_raw/backup_fixtures/Bundesliga_2026_fixtures_20261110_0152.json
+?? xg_raw/backup_fixtures/Bundesliga_2026_fixtures_20261111_0152.json
+?? xg_raw/backup_fixtures/Bundesliga_2026_fixtures_20261112_0152.json
+?? xg_raw/backup_fixtures/EPL_2026_fixtures_20261109_0152.json
+?? xg_raw/backup_fixtures/EPL_2026_fixtures_20261110_0152.json
+?? xg_raw/backup_fixtures/EPL_2026_fixtures_20261111_0152.json
+?? xg_raw/backup_fixtures/EPL_2026_fixtures_20261112_0152.json
+?? xg_raw/backup_fixtures/La_liga_2026_fixtures_20261109_0152.json
+?? xg_raw/backup_fixtures/La_liga_2026_fixtures_20261110_0152.json
+?? xg_raw/backup_fixtures/La_liga_2026_fixtures_20261111_0152.json
+?? xg_raw/backup_fixtures/La_liga_2026_fixtures_20261112_0152.json
+?? xg_raw/backup_fixtures/Ligue_1_2026_fixtures_20261109_0152.json
+?? xg_raw/backup_fixtures/Ligue_1_2026_fixtures_20261110_0152.json
+?? xg_raw/backup_fixtures/Ligue_1_2026_fixtures_20261111_0152.json
+?? xg_raw/backup_fixtures/Ligue_1_2026_fixtures_20261112_0152.json
+?? xg_raw/backup_fixtures/Serie_A_2026_fixtures_20261109_0152.json
+?? xg_raw/backup_fixtures/Serie_A_2026_fixtures_20261110_0152.json
+?? xg_raw/backup_fixtures/Serie_A_2026_fixtures_20261111_0152.json
+?? xg_raw/backup_fixtures/Serie_A_2026_fixtures_20261112_0152.json
+?? zz-test.txt
+--- worktree ---
+## build/lane1-kco
+?? league/improvement_scratch/KCO_JOIN/
+423d37b7636c8afbe73fac5c30b816392d2c8bef
+--- symlink ---
+/home/hatch/workspace/wt-lane1-kco/data_enrichment/fotmob_world
+--- recheck ---
+/bin/bash: line 1: python: command not found
+--- join files ---
+/home/hatch/workspace/wt-lane1-kco/league/improvement_scratch/KCO_JOIN/codex.log
+--- precedent refs ---
+league/PROGRAM_STATUS.md:5594:  predicted; all proofs float-exact. The join earned its keep
+league/PROGRAM_STATUS.md:5619:  in a dedicated commit BEFORE any CH virgin was read). CH join
+league/PROGRAM_STATUS.md:5636:  the 6-builder pace continues. SCO join commissioned: it needs
+league/PROGRAM_STATUS.md:5640:  concurrent builders. (2) Runner joins parallelised: a league
+league/PROGRAM_STATUS.md:5641:  joins as soon as its own merge lands; only shared-file edits
+league/PROGRAM_STATUS.md:5642:  serialise if two join builders collide. (3) Gates, preregs and
+league/PROGRAM_STATUS.md:5648:  Super League, Sweden Allsvenskan) alongside PT + the AR join —
+league/PROGRAM_STATUS.md:5651:- 2026-11-09 16:39 — **US-MLS + BR-SerieA JOINED THE DAILY
+league/PROGRAM_STATUS.md:5661:  6 leagues / 16 markets. AR join commissioned (last one).
+league/PROGRAM_STATUS.md:5678:  yellows 4,89 (program high), draws ≈31%. AR join queued.
+league/PROGRAM_STATUS.md:5679:- 2026-11-09 16:27 — **AU-ALeague JOINED THE DAILY RUNNER**
+league/PROGRAM_STATUS.md:5690:  / 11 markets daily. Combined MLS+BR join commissioned.
+league/PROGRAM_STATUS.md:5704:  with the strongest home edge (+0,39). BR join queued.
+league/PROGRAM_STATUS.md:5718:  cold; SHR helped marginally, could not rescue G-US). MLS join
+league/PROGRAM_STATUS.md:5720:- 2026-11-09 16:12 — **NL-Eredivisie JOINED THE DAILY RUNNER**
+league/PROGRAM_STATUS.md:5730:  The runner now serves J1 + DK + NL daily. AU join commissioned
+league/PROGRAM_STATUS.md:5749:  repaired and re-verified). AU's runner join needs the first
+league/PROGRAM_STATUS.md:5751:- 2026-11-09 16:00 — **DK-Superligaen JOINED THE DAILY RUNNER.**
+league/PROGRAM_STATUS.md:5762:  produced its usual 240 × 3 untouched. NL join commissioned on
+league/PROGRAM_STATUS.md:5783:  NL joins the runner queue behind DK (same world path; builder
+league/PROGRAM_STATUS.md:5798:  vs J1 0,447). **Runner join is NOT config-only**: inspection of
+league/PROGRAM_STATUS.md:5822:- 2026-11-09 15:22 — **PHASE FINAL GO-LIVE: J1 JOINED THE DAILY
+league/PROGRAM_STATUS.md:5836:  league joins by adding its block to active.yaml (passing markets
+league/PROGRAM_STATUS.md:5857:  all plain reference arms) + 2 FAIL (goals, cards).** J1 joins the
+league/PROGRAM_STATUS.md:5868:  a result, not a tuning invitation. J1 joins the daily runner with
+league/PROGRAM_STATUS.md:5882:  joins the daily runner with SOT (Gate Zero) as its only passing
+league/PROGRAM_STATUS.md:5951:  two joins (SK-1Liga in wt-runner50; US-USLLeagueOne wt-runner47) —
+league/PROGRAM_STATUS.md:5954:  runner 47 leagues / 100 markets (per heartbeat 00:51).
+league/PROGRAM_STATUS.md:6023:- WATCHDOG 2026-11-11 05:20 WIB — heartbeat line read 04:17 (58 min old)
+league/PROGRAM_STATUS.md:6024:  but the program is LIVE, not stalled: DK-1Division join proof
+league/PROGRAM_STATUS.md:6026:  AU-ALeagueWomen join proof running since 04:49 (wt-runner54,
+league/PROGRAM_STATUS.md:6028:  No duplicate builders launched; no resume needed. Ledger heartbeat
+league/PROGRAM_STATUS.md:6030:  Next: coordinator merges DK-1Division join after verification,
+league/PROGRAM_STATUS.md:6031:  then the join queue; improvement program Gate Zero phase starts
+league/PROGRAM_STATUS.md:6033:- WATCHDOG 2026-11-11 07:16 WIB — heartbeat line read 06:28 (48 min old)
+league/PROGRAM_STATUS.md:6034:  but the program is LIVE, not stalled: IS-BestaDeildin join proof run 1
+league/PROGRAM_STATUS.md:6041:  away). Heartbeat NOT refreshed (no resume; heartbeat edits reserved
+league/PROGRAM_STATUS.md:6043:- WATCHDOG 2026-11-11 07:46 WIB — heartbeat line read 06:28 (78 min old)
+league/PROGRAM_STATUS.md:6044:  but the program is LIVE, not stalled: IS-BestaDeildin join proof run 1
+league/PROGRAM_STATUS.md:6052:  (no resume; heartbeat edits reserved for resume).
+league/PROGRAM_STATUS.md:6053:- WATCHDOG 2026-11-11 08:15 WIB — heartbeat line read 07:52 (23 min old,
+league/PROGRAM_STATUS.md:6054:  fresh). Program LIVE: SA-FirstDivision SOT join proof run 1 RUNNING
+league/PROGRAM_STATUS.md:6061:  (19 leagues away). Heartbeat NOT refreshed (no resume; heartbeat
+league/PROGRAM_STATUS.md:6063:- WATCHDOG 2026-11-11 08:48 WIB — heartbeat line read 07:52 (56 min old)
+league/PROGRAM_STATUS.md:6064:  but the program is LIVE, not stalled: SA-FirstDivision SOT join proof
+league/PROGRAM_STATUS.md:6079:  away). Heartbeat NOT refreshed (no resume; heartbeat edits reserved
+league/PROGRAM_STATUS.md:6081:- WATCHDOG 2026-11-11 09:15 WIB — heartbeat line read 07:52 (83 min old)
+league/PROGRAM_STATUS.md:6082:  but the program is LIVE, not stalled: SA-FirstDivision SOT join proof
+league/PROGRAM_STATUS.md:6092:  (19 leagues away). Heartbeat NOT refreshed (no resume; heartbeat edits
+league/PROGRAM_STATUS.md:6094:- WATCHDOG 2026-11-11 09:46 WIB — heartbeat line read 07:52 (114 min old)
+league/PROGRAM_STATUS.md:6095:  but the program is LIVE, not stalled: SA-FirstDivision SOT join proof
+league/PROGRAM_STATUS.md:6107:  away). Heartbeat NOT refreshed (no resume; heartbeat edits reserved
+league/PROGRAM_STATUS.md:6109:- WATCHDOG 2026-11-11 10:15 WIB — heartbeat line read 09:49 (26 min old,
+league/PROGRAM_STATUS.md:6111:  (12:09 CPU time); wt-runner57 present (LV-Virsliga SOT join worktree,
+league/PROGRAM_STATUS.md:6112:  launching next per heartbeat). No duplicate builders launched; no
+league/PROGRAM_STATUS.md:6117:  resume; heartbeat edits reserved for resume).
+league/PROGRAM_STATUS.md:6118:- WATCHDOG 2026-11-11 10:45 WIB — heartbeat line read 09:49 (56 min old)
+league/PROGRAM_STATUS.md:6119:  but the program is LIVE, not stalled: LV-Virsliga SOT join proof run
+league/PROGRAM_STATUS.md:6127:  resume; heartbeat edits reserved for resume).
+league/PROGRAM_STATUS.md:6128:- WATCHDOG 2026-11-11 11:15 WIB — heartbeat line read 09:49 (86 min old)
+league/PROGRAM_STATUS.md:6129:  but the program is LIVE, not stalled: LV-Virsliga SOT join proof run
+league/PROGRAM_STATUS.md:6137:  refreshed (no resume; heartbeat edits reserved for resume).
+league/PROGRAM_STATUS.md:6138:- WATCHDOG 2026-11-11 12:15 WIB — heartbeat line read 11:24 (51 min old)
+league/PROGRAM_STATUS.md:6140:  join proof run 1 RUNNING in wt-runner58 (branch
+league/PROGRAM_STATUS.md:6149:  refreshed (no resume; heartbeat edits reserved for resume).
+league/PROGRAM_STATUS.md:6150:- WATCHDOG 2026-11-11 12:45 WIB — heartbeat line read 11:24 (81 min old)
+league/PROGRAM_STATUS.md:6152:  join proof run 2 RUNNING in wt-runner58 (branch
+league/PROGRAM_STATUS.md:6162:  175 (19 leagues away). Heartbeat NOT refreshed (no resume; heartbeat
+league/PROGRAM_STATUS.md:6164:- WATCHDOG 2026-11-11 13:15 WIB — heartbeat line read 11:24 (111 min old)
+league/PROGRAM_STATUS.md:6166:  join proof run 2 FINISHED 12:45:32 WIB (run_log.jsonl 810 rows, ALL
+league/PROGRAM_STATUS.md:6168:  join branch is COMMITTED (4450088d, 12:47:43 WIB, build/runner-ar-
+league/PROGRAM_STATUS.md:6176:  175 (19 leagues away). Heartbeat NOT refreshed (no resume; heartbeat
+league/PROGRAM_STATUS.md:6178:- 2026-11-11 13:47 — **AR-PrimeraBNacional JOINED runner (57/117)** — merge e8f7c2d9 (branch build/runner-ar-primerab 4450088d; base b3e983df predated the three watchdog ledger commits, so the merge took HEAD's PROGRAM_STATUS.md with no conflict; active.yaml/README/run_daily.py merged cleanly). Market: cards X8 **PROVISIONAL PASS** (dev pooled n=1,334 GZ LL@4.5 0.680252, X8 0.659605; virgin 2026 n=648 X8 LL@4.5 0.669291 vs GZ 0.676939 / base 0.692222 / naive 0.687911; cal −1.0611pp, SE 1.9191pp — breach 0.0611pp ≤ 1 SE → PROVISIONAL; both-pass rule ships lowest virgin LL, X8). Goals FAIL dev, excluded. First X8 join: `predict_cards` in run_daily.py gained the opt-in X8 path (arm accepted; history-row construction extracted to `_cards_history_rows` with team-column alias + referee/`key` attached ONLY for x8; referee fetched per upcoming fixture from FotMob matchDetails, failed fetch falls back to no referee and never fails the run; engine without `estimate_r` supplies frozen dispersion as module-level `R` (112.39 here) with two-argument `nb_over`; x8 output rows carry referee/n_prior/multiplier/fallback/fallback_reason). One defect caught by the inertness probe pre-proof: unconditional referee attachment activated dormant referee branches in gate_zero engines (KR-KLeague1 `update()` then requires `row["kickoff_utc"]`) — fixed by attaching referee only for x8; inertness proven on KR-KLeague1 cards byte-identical. Operational gate passed the day of the join: 9 upcoming fixtures (2026 Reducido playoffs, 2026-11-14/15), 1/9 carries a referee in matchDetails (6575527 Godoy Cruz–Tristán Suárez, Maximiliano Ramírez) with zero in-league priors, so all 9 production predictions are Gate-Zero-equivalent (multiplier 1.0). Proof: 2 full end-to-end runs (57 leagues, 117 markets, 13,031 predictions each, 0 errors, fetched_new=0 in run 2; 288 files bit-identical between runs). Coordinator merged-state verification from main (one-league run, /tmp/verify_ar_join.py): rebuild 3,874 rows, 9 predicted, 0 settled, 0 errors; first fixture 6546950 exp_total 4.5341 / P(over 4.5) 0.4724, range 3.8819–5.6716 — all 4 AR output files byte-identical to the branch proof outputs; referee Maximiliano Ramírez on 6575527, multiplier 1.0, fallback True, as recorded. Join lane now 1/2; KZ-PremierLeague goals GZ join launching next.
+league/PROGRAM_STATUS.md:6179:- WATCHDOG 2026-11-11 13:44 WIB — heartbeat line read 11:24 (140 min old) and the pending coordinator step from the 13:15 check (merge build/runner-ar-primerab) still unmerged, no run_daily/Codex process running: RESUMED per the watchdog rule. Merged the AR join (e8f7c2d9), verified it in merged state (above), refreshed the heartbeat to 13:49, and launched the KZ-PremierLeague goals GZ join builder (branch build/runner-kz, worktree wt-runner59) — the next item in the join queue. BA-PremierLeague goals GZ remains queued after KZ. No QUOTA-WAIT (audit QUOTA-WAIT until 04:06 expired; audit COMPLETE 05:20), no PAUSED-BY-USER. Counter still 156; next milestone 175 (19 leagues away). No Codex processes were running at check time; the KZ builder drives Codex luna itself.
+league/PROGRAM_STATUS.md:6180:- WATCHDOG 2026-11-11 14:48 WIB — heartbeat line read 13:49 (59 min old): RESUMED per the watchdog rule. The KZ-PremierLeague goals GZ join builder launched 13:49 was interrupted twice by timeout/runtime restart; its final report (agent 4dab2151) confirms proof run 2 did NOT complete — killed 14:46 WIB at 225/410 rows (EG-PremierLeague data_refresh; run2.log empty, no run_daily/Codex process alive). No QUOTA-WAIT in effect (audit QUOTA-WAIT until 04:06 expired; audit COMPLETE 05:20), no PAUSED-BY-USER. Counter still 156; next milestone 175 (19 leagues away). Preserved work verified on disk: wt-runner59 has the 2 intended modifications uncommitted (active.yaml +20, run_daily.py +12/-1), proof run 1 snapshot in ~/workspace/kz-proof/run1, run_log.jsonl 635 rows. Relaunching proof run 2 from scratch via a resume builder on the same branch/worktree (idempotent runner; analyse the relaunched run's rows from line 635, not 410); then snapshot comparison, synthetic settlement, README paragraph, commit, and merge verification. BA-PremierLeague goals GZ remains queued after KZ.
+league/PROGRAM_STATUS.md:6181:- 2026-11-11 15:26 — **KZ-PremierLeague JOINED runner (58/118)** — merge efb502eb (branch build/runner-kz b0336713; base fc3036e5; active.yaml/README/run_daily.py merged cleanly, no conflict). Market: goals Gate Zero **PROVISIONAL PASS** (virgin 2026 complete season n=240, 1X2 LL 1.0152 vs climatology 1.0678; calibration home-win −1.26pp SE 3.09pp and OU2.5 −3.21pp SE 3.21pp, both breaches within 1 SE → PROVISIONAL; dev pooled 1X2 LL 1.0290 < climatology 1.0712, RPS 0.2135 < 0.2285, OU2.5 LL 0.6819 < base rate 0.6929; SHRINK identical to Gate Zero everywhere measured, so the both-pass rule ships the simpler arm). SOT, corners, cards, total shots NOT BUILDABLE, excluded (scores-only league). Third goals join and the first to need the signature-dispatched adapter: `predict_goals` now calls `adjusted_lambdas` with exactly the signature each engine ships — engines taking (model, home, away, arm, counts) are called 5-arg, all other engines take the existing path unchanged; KZ engine untouched. Trap proven real: HEAD raises TypeError on KZ in both call forms; amended code predicts. Inertness proven on SCO-PremierLeague + TR-SuperLig goals (HEAD vs amended on 8 fixed fixtures each, byte-identical, max |d| 0.0). Replay: harness-style causal walk reproduces the shipped virgin CSV exactly (max |Δlam| 0.0, max |Δp| 0.0, LL 1.015226 = verdict 1.0152); live-adapter walk LL 1.000751, decomposed as refit-anchor 0.009951 + within-virgin-update 1.741266 on lam, future leakage 0 by construction. FotMob probe the day of the join: 2027 season unpublished (selectedSeason='2026', 0 upcoming), so the join predicts nothing live until FotMob publishes 2027. Proof: 2 full end-to-end runs (58 leagues, 118 markets, 13,031 predictions each, 0 errors, fetched_new=0 in run 2; 410 log rows each). Run 2's first attempt was killed mid-run by a runtime restart at 14:46 WIB (225/410 rows, last write EG-PremierLeague data_refresh) and was relaunched from scratch by the watchdog's resume builder — the partial run is not a proof and was not compared. 291/292 snapshot files bit-identical between the runs; the one exception is HR-HNL's daily corners CSV, where FotMob moved 12 fixture dates between the runs (upstream listing change, same 116 match_ids/teams, max float difference 1.1e-14). Synthetic settlement on finished match 5204163 (2026-07-05, Atyrau–Kaspiy Aktau 1–2, actual total 3): live adapter exp_total 1.6096, p_over_2.5 0.2191, chosen under, missed, log loss 1.5181; settled exactly once (second pass 0); all four touched files restored byte-identical (md5-verified). Coordinator merged-state verification from main (/tmp/verify_kz_join.py): rebuild 1,124 rows, 0 upcoming, 0 predicted, 0 settled, 0 errors; all 4 KZ output files byte-identical to the branch proof run-2 snapshot. Join lane now 1/2; BA-PremierLeague goals GZ launching next.
+league/PROGRAM_STATUS.md:6182:- WATCHDOG 2026-11-11 15:26 WIB — resume from the 14:48 check COMPLETE: KZ-PremierLeague goals GZ join merged (efb502eb) and verified in merged state (above); heartbeat refreshed to 15:26. BA-PremierLeague goals GZ join builder launching now (branch build/runner-ba) — the last item in the join queue; after BA the join lane is empty and remaining work is the improvement program Gate Zero phase. No QUOTA-WAIT, no PAUSED-BY-USER. Counter still 156; next milestone 175 (19 leagues away).
+league/PROGRAM_STATUS.md:6183:- WATCHDOG 2026-11-11 16:15 WIB — heartbeat line read 15:26 (49 min old): RESUMED per the watchdog rule. The BA-PremierLeague goals GZ join builder launched 15:26 (agent 619e22b8) was cancelled ~15:50 WIB mid-proof-run-1 — no result of its own; its proof run 1 was killed at MX-LigaMX pull_fixtures (run_log.jsonl 138 rows, last write 15:50:20 WIB; run1.log empty; no run_daily/Codex process alive; BA-PremierLeague 0 rows — not yet reached). No QUOTA-WAIT in effect (audit QUOTA-WAIT until 04:06 expired; audit COMPLETE 05:20), no PAUSED-BY-USER. Counter still 156; next milestone 175 (19 leagues away). Preserved work verified on disk: wt-runner60 (branch build/runner-ba, base 33b84154) has the 2 intended modifications uncommitted (active.yaml +20 BA block; run_daily.py +26/-6 — .get() xG reads for the scores-only league + exclude_awarded opt-in, 4 awarded matches excluded per the frozen prereg). Relaunching proof run 1 from scratch via a resume builder on the same branch/worktree (idempotent runner; the partial 138-row run is not a proof); then snapshot comparison, synthetic settlement, README paragraph, commit, and merge verification. BA is the LAST item in the join queue; after BA the join lane is empty and remaining work is the improvement program Gate Zero phase.
+league/PROGRAM_STATUS.md:6184:- WATCHDOG 2026-11-11 17:21 WIB — heartbeat line read 16:15 (65 min old): RESUMED per the watchdog rule. The 16:15 resume builder (agent c6b5e293) was cancelled 17:17:50 WIB — 9 seconds after its proof run 1 COMPLETED 17:17:41 WIB. Proof run 1 verified by the coordinator in worktree state: run_log.jsonl 415 rows, 0 errors, BA-PremierLeague goals 115 predictions / 0 settled / fetched_new 0, daily CSV 115 rows (from 2026-11-21), ba_matches.csv 1036 rows (4 awarded excluded per the frozen prereg). Preserved on disk: wt-runner60 (branch build/runner-ba, base 33b84154) still holds the 2 intended modifications uncommitted (active.yaml +20 BA block; run_daily.py +26/-6 — .get() xG reads for the scores-only league + exclude_awarded opt-in). No QUOTA-WAIT in effect (audit QUOTA-WAIT until 04:06 expired; audit COMPLETE 05:20), no PAUSED-BY-USER. Counter still 156; next milestone 175 (19 leagues away). Relaunching a resume builder on the same branch/worktree to continue from proof run 1 COMPLETE (proof run 2 + snapshot comparison + synthetic settlement + README + commit); coordinator verifies + merges. BA is the LAST item in the join queue; after BA the join lane is empty and remaining work is the improvement program Gate Zero phase.
+league/PROGRAM_STATUS.md:6185:- WATCHDOG 2026-11-11 18:21 WIB — heartbeat line read 17:21 (60 min old). BA join found already MERGED 17:55 (ad5cc1fd, merge of e2143005) but unrecorded in the ledger — the merge commit’s tree carries the builder’s 3 files only; the builder wrote no ledger update. Verified in merged state: active.yaml parses (59 leagues / 119 markets), run_daily.py compiles, merge diff exactly the builder’s change; proof runs on disk (~/workspace/ba-proof/run1.log + run2.log, 13,146 predictions each, 0 errors; snapshot 295/296, ZA-PSL rename only; synthetic settlement verified). Ledger updated: BA JOINED in the Phase Final table, heartbeat refreshed to 18:21, runner 59/119. No QUOTA-WAIT, no PAUSED-BY-USER. Counter still 156; the 175 milestone is moot (program total is 156). ALL LEAGUES COMPLETE — build program done; remaining work is the improvement program Gate Zero phase. Watchdog may be deleted by the user per the ALL-DONE rule.
+
+exec
+/bin/bash -lc "set -o pipefail
+printf '%s\\n' '--- evidence via venv ---'
+.venv/bin/python - <<'PY'
+import json
+p='league/improvement_scratch/KCO_RECHECK/recheck_2026-11-12_1658.json'
+with open(p) as f: d=json.load(f)
+print(json.dumps(d, indent=2))
+PY
+printf '%s\\n' '--- symlink details ---'
+ls -ld data_enrichment/fotmob_world /home/hatch/workspace/wt-lane1-kco/data_enrichment/fotmob_world
+printf '%s\\n' '--- branch diff ---'
+git diff --stat 740c6316..HEAD 2>/dev/null || true
+git show --stat --oneline HEAD
+printf '%s\\n' '--- run instructions/tools ---'
+rg -n \"run_daily.py|run_log.jsonl|snapshot|synthetic settlement|fetched_new|settle\" README.md league/run_daily.py league/runner league/improvement_scratch -g '*.md' -g '*.py' -g '*.sh' | head -240" in /home/hatch/workspace/wt-lane1-kco
+ exited 2 in 596ms:
+--- evidence via venv ---
+/bin/bash: line 3: .venv/bin/python: No such file or directory
+--- symlink details ---
+ls: cannot access 'data_enrichment/fotmob_world': No such file or directory
+ls: cannot access '/home/hatch/workspace/wt-lane1-kco/data_enrichment/fotmob_world': No such file or directory
+--- branch diff ---
+ .../engine/cards/lane1_dev_pass_registry.json      |     7 -
+ .../engine/cards/results_dev_lane1.json            |    70 -
+ .../engine/cards/results_virgin_lane1.json         |   172 -
+ league/AT-Bundesliga/engine/cards/run_lane1.py     |   195 -
+ .../predictions/k_at_lane1_virgin_predictions.csv  |   196 -
+ league/AT-Bundesliga/prereg/PREREG_L1_K_AT.md      |   169 -
+ league/AT-Bundesliga/reports/K_AT_LANE1_VERDICT.md |   131 -
+ .../engine/total_shots/dev_pass_registry_l1.json   |     7 -
+ .../engine/total_shots/harness_l1.py               |   254 -
+ .../AU-ALeagueWomen/engine/total_shots/model_l1.py |   234 -
+ .../engine/total_shots/results_dev_l1.json         | 20444 -------------------
+ league/AU-ALeagueWomen/prereg/PREREG_L1_T_AUW.md   |   159 -
+ league/AU-ALeagueWomen/reports/VERDICT_L1_T_AUW.md |    87 -
+ .../engine/total_shots/dev_pass_registry_l1.json   |     7 -
+ .../engine/total_shots/harness_l1.py               |    56 -
+ .../engine/total_shots/model_l1.py                 |   229 -
+ .../engine/total_shots/results_dev_l1.json         |   162 -
+ league/CA-PremierLeague/prereg/PREREG_L1_T_CA.md   |   140 -
+ league/CA-PremierLeague/reports/VERDICT_L1_T_CA.md |    77 -
+ league/FO-PremierLeague/data/build_data.py         |    36 +-
+ .../engine/cards/dev_pass_registry_l1.json         |     7 -
+ .../engine/cards/fitted_params_virgin_l1.json      |    95 -
+ .../engine/cards/results_dev_l1.json               |   525 -
+ .../engine/cards/results_virgin_l1.json            |   138 -
+ .../FO-PremierLeague/engine/cards/run_l1_k_fo.py   |   367 -
+ league/FO-PremierLeague/prereg/PREREG_L1_K_FO.md   |   250 -
+ league/FO-PremierLeague/reports/VERDICT_L1_K_FO.md |   130 -
+ .../engine/total_shots/dev_pass_registry_l1.json   |     7 -
+ league/HU-NBI/engine/total_shots/harness_l1.py     |   138 -
+ league/HU-NBI/engine/total_shots/model_l1.py       |   227 -
+ .../HU-NBI/engine/total_shots/results_dev_l1.json  |   136 -
+ league/HU-NBI/prereg/PREREG_L1_T_HUNBI.md          |   181 -
+ league/HU-NBI/reports/VERDICT_L1_T_HUNBI.md        |   104 -
+ league/ID-SuperLeague/data/build_data.py           |     5 +-
+ .../engine/cards/dev_pass_registry_l1.json         |     7 -
+ .../engine/cards/fitted_params_virgin_l1.json      |    10 -
+ .../engine/cards/results_dev_l1.json               |   180 -
+ .../engine/cards/results_virgin_l1.json            |    61 -
+ league/ID-SuperLeague/engine/cards/run_l1_k_id.py  |   317 -
+ .../predictions/k_id_lane1_virgin_predictions.csv  |   307 -
+ league/ID-SuperLeague/prereg/PREREG_L1_K_ID.md     |   252 -
+ league/ID-SuperLeague/reports/VERDICT_L1_K_ID.md   |   122 -
+ league/IMPROVEMENT_STATUS.md                       |   532 +-
+ .../engine/cards/dev_pass_registry_l1.json         |     7 -
+ league/PE-Liga1/engine/cards/results_dev_l1.json   |   738 -
+ .../PE-Liga1/engine/cards/results_virgin_l1.json   |   257 -
+ league/PE-Liga1/engine/cards/run_l1_k_pe.py        |   274 -
+ league/PE-Liga1/prereg/PREREG_L1_K_PE.md           |   178 -
+ league/PE-Liga1/reports/VERDICT_L1_K_PE.md         |   111 -
+ league/PROGRAM_STATUS.md                           |     3 -
+ .../engine/corners/lane1_dev_pass_registry.json    |     7 -
+ .../engine/corners/results_dev_lane1.json          |   231 -
+ .../engine/corners/results_virgin_lane1.json       |    99 -
+ .../engine/corners/run_lane1.py                    |   244 -
+ .../prereg/PREREG_L1_C_PY.md                       |   186 -
+ .../reports/C_PY_LANE1_VERDICT.md                  |   142 -
+ .../engine/cards/lane1_dev_pass_registry.json      |     7 -
+ .../engine/cards/results_dev_lane1.json            |    80 -
+ .../engine/cards/results_virgin_lane1.json         |   172 -
+ league/SE-Allsvenskan/engine/cards/run_lane1.py    |   218 -
+ .../predictions/k_se_lane1_virgin_predictions.csv  |   241 -
+ league/SE-Allsvenskan/prereg/PREREG_L1_K_SE.md     |   178 -
+ .../SE-Allsvenskan/reports/K_SE_LANE1_VERDICT.md   |   142 -
+ league/TZ-PremierLeague/data/build_data.py         |    20 +-
+ .../engine/goals/dev_check_l1.json                 |    26 -
+ .../engine/goals/dev_pass_registry_l1.json         |     7 -
+ .../engine/goals/fitted_params_virgin_l1.json      |    63 -
+ .../engine/goals/results_dev_l1.json               |   245 -
+ .../engine/goals/results_virgin_l1.json            |    55 -
+ league/TZ-PremierLeague/engine/goals/run_lane1.py  |   262 -
+ league/TZ-PremierLeague/prereg/PREREG_L1_G_TZ.md   |   179 -
+ league/TZ-PremierLeague/reports/VERDICT_L1_G_TZ.md |   129 -
+ .../US-MLS/engine/cards/dev_pass_registry_l1.json  |     7 -
+ league/US-MLS/engine/cards/results_dev_l1.json     |   123 -
+ league/US-MLS/engine/cards/results_virgin_l1.json  |   196 -
+ league/US-MLS/engine/cards/run_l1_k_us.py          |   329 -
+ league/US-MLS/prereg/PREREG_L1_K_US.md             |   231 -
+ league/US-MLS/reports/VERDICT_L1_K_US.md           |   168 -
+ .../KCO_RECHECK/recheck_2026-11-11_2300.json       |   100 -
+ .../KCO_RECHECK/recheck_2026-11-11_2358.json       |   100 -
+ .../KCO_RECHECK/recheck_2026-11-12_0058.json       |   100 -
+ .../KCO_RECHECK/recheck_2026-11-12_0158.json       |   100 -
+ .../KCO_RECHECK/recheck_2026-11-12_0258.json       |   100 -
+ .../KCO_RECHECK/recheck_2026-11-12_0358.json       |   100 -
+ .../KCO_RECHECK/recheck_2026-11-12_0458.json       |   100 -
+ .../KCO_RECHECK/recheck_2026-11-12_0558.json       |   100 -
+ .../KCO_RECHECK/recheck_2026-11-12_0658.json       |   100 -
+ .../KCO_RECHECK/recheck_2026-11-12_0758.json       |   100 -
+ .../KCO_RECHECK/recheck_2026-11-12_0858.json       |   100 -
+ .../KCO_RECHECK/recheck_2026-11-12_0958.json       |   100 -
+ .../KCO_RECHECK/recheck_2026-11-12_1058.json       |   100 -
+ .../KCO_RECHECK/recheck_2026-11-12_1158.json       |   100 -
+ .../KCO_RECHECK/recheck_2026-11-12_1258.json       |   100 -
+ .../KCO_RECHECK/recheck_2026-11-12_1358.json       |   100 -
+ .../KCO_RECHECK/recheck_2026-11-12_1458.json       |   100 -
+ .../KCO_RECHECK/recheck_2026-11-12_1558.json       |   100 -
+ .../KCO_RECHECK/recheck_referees.py                |    80 -
+ .../KCO_RECHECK/recheck_referees_0058.py           |    80 -
+ .../KCO_RECHECK/recheck_referees_0158.py           |    80 -
+ .../KCO_RECHECK/recheck_referees_0258.py           |    80 -
+ .../KCO_RECHECK/recheck_referees_0358.py           |    80 -
+ .../KCO_RECHECK/recheck_referees_0458.py           |    80 -
+ .../KCO_RECHECK/recheck_referees_0558.py           |    80 -
+ .../KCO_RECHECK/recheck_referees_0658.py           |    80 -
+ .../KCO_RECHECK/recheck_referees_0758.py           |    80 -
+ .../KCO_RECHECK/recheck_referees_0858.py           |    80 -
+ .../KCO_RECHECK/recheck_referees_0958.py           |    80 -
+ .../KCO_RECHECK/recheck_referees_1058.py           |    80 -
+ .../KCO_RECHECK/recheck_referees_1158.py           |    80 -
+ .../KCO_RECHECK/recheck_referees_1258.py           |    80 -
+ .../KCO_RECHECK/recheck_referees_1358.py           |    80 -
+ .../KCO_RECHECK/recheck_referees_1458.py           |    80 -
+ .../KCO_RECHECK/recheck_referees_1558.py           |    80 -
+ .../KCO_RECHECK/recheck_referees_2358.py           |    80 -
+ league/runner/README.md                            |    97 +-
+ league/runner/active.yaml                          |    76 +-
+ league/runner/run_daily.py                         |   112 +-
+ 117 files changed, 79 insertions(+), 35931 deletions(-)
+423d37b7 Runner prep (NOT merged, BLOCKED on referee gate 0/10): CO-PrimeraA cards joins with X8 (Lane 1 PROVISIONAL PASS)
+ league/runner/README.md    |  2 ++
+ league/runner/active.yaml  | 11 +++++++++++
+ league/runner/run_daily.py | 38 +++++++++++++++++++++++++++++++++-----
+ 3 files changed, 46 insertions(+), 5 deletions(-)
+--- run instructions/tools ---
+rg: league/run_daily.py: No such file or directory (os error 2)
+README.md:54:  the close and still loses money. CLV, not settlement ROI, is the headline
+README.md:170:`archive/<date>/` and settles every leg on the 90-minute score in
+README.md:175:that names the unit, so an issued selection is settled rather than
+README.md:176:silently deleted. League corner picks settle on the HC/AC counts in
+README.md:193:from tipsterarea match-page snapshots (summarised in `market_compare.csv`),
+README.md:207:settled by extra time (lambdas scaled to 30 minutes) and penalties weighted
+README.md:343:results and odds snapshots (`ta/*.csv`), the daily archive (`archive/`),
+README.md:364:  `ta_scrape.py`. Its match pages carry the multi-bookmaker odds snapshots
+README.md:373:the recommendation settlement rules (1X2, double chance, over/under, BTTS,
+README.md:374:corners, and slip units) and the money ledger's settle rules (including
+league/runner/run_daily.py:28:RUN_LOG = RUNNER / "run_log.jsonl"
+league/runner/run_daily.py:95:           "step": step, "market": market, "fetched_new": counts.get("fetched_new", 0),
+league/runner/run_daily.py:97:           "predicted": counts.get("predicted", 0), "settled": counts.get("settled", 0),
+league/runner/run_daily.py:159:    log_step(name, "pull_fixtures", {"fetched_new": fetched, "fixtures_upcoming": len(upcoming), "errors": errors})
+league/runner/run_daily.py:238:    log_step(name, "pull_fixtures", {"fetched_new": fetched,
+league/runner/run_daily.py:427:    # the CZ-Liga join); settlement reads only FT fields, so it is
+league/runner/run_daily.py:577:    # yellow_cards_home/yellow_cards_away (also the runner's settlement
+league/runner/run_daily.py:808:    # (RU-1Division); settlement reads only FT fields, so it is unaffected.
+league/runner/run_daily.py:842:    # (BG-FirstLeague is the first total-shots user); settlement remains FT-only.
+league/runner/run_daily.py:1163:def settle(name, market, cfg, rows, run_date):
+league/runner/run_daily.py:1164:    pred_dir = ROOT / "league" / name / "predictions"; sidecar = pred_dir / "settled_keys.json"
+league/runner/run_daily.py:1165:    settled = set(json.loads(sidecar.read_text()) if sidecar.exists() else [])
+league/runner/run_daily.py:1184:        # lower-case fallback and settle nothing, ever. Honour the
+league/runner/run_daily.py:1200:    # PE-Liga1 opts into the engine's unified shots for settlement actuals.
+league/runner/run_daily.py:1221:                if x["market"] != market or key in settled or not r: continue
+league/runner/run_daily.py:1235:                settled.add(key); added.append(key)
+league/runner/run_daily.py:1236:    atomic_json(sidecar, sorted(settled))
+league/runner/run_daily.py:1275:                    settled = settle(name, market, cfg, match_rows, run_date)
+league/runner/run_daily.py:1276:                    log_step(name, "settle", {"settled": settled}, market)
+league/runner/run_daily.py:1278:                    log_step(name, "settle", {"errors": [repr(exc)]}, market)
+league/runner/README.md:8:then settles eligible ledger entries from the refreshed match CSV.
+league/runner/README.md:13:.venv/bin/python league/runner/run_daily.py
+league/runner/README.md:16:The small YAML reader in `run_daily.py` is a standard-library parser for this
+league/runner/README.md:20:Prediction and settlement errors are isolated per league and per market and
+league/runner/README.md:21:are written to `run_log.jsonl`. There is no fixture horizon: all remaining
+league/runner/README.md:28:`predictions/settled_keys.json` JSON-list sidecar, so each ledger entry is
+league/runner/README.md:29:settled at most once. The sidecar is runtime state like the daily CSVs, the
+league/runner/README.md:31:part of the committed runner (only `active.yaml`, `run_daily.py`, and this
+league/runner/README.md:32:README are). If the sidecar is lost, already-settled entries would settle
+league/runner/README.md:60:league simply predicts zero fixtures and settles nothing, with no error.
+league/runner/README.md:134:adapter function in `run_daily.py`; configuration alone cannot define its
+league/runner/README.md:160:— and settles on total yellow cards. History rows read
+league/runner/README.md:179:columns by default, but a cards market block may override the settlement
+league/runner/README.md:186:already reads `yellow_home`/`yellow_away` in both leagues; only settlement
+league/runner/README.md:187:needed the per-league columns. With `cards_actual` absent, settlement
+league/runner/README.md:193:fields empty and leaves the FT fields unchanged; settlement reads only the FT
+league/runner/README.md:253:before that date, 1X2/BTTS recorded in the daily CSV, settlement grades only
+league/runner/README.md:285:pre-match in the pull. (Its settlement would have needed no override:
+league/runner/README.md:308:line between the two feeds; a synthetic settlement on match 3802053
+league/runner/README.md:310:actual_total 4.0, proving the override is what settle() reads. It is a
+league/runner/README.md:443:virgin window and no MX prediction could ever settle. Regular-phase
+league/runner/README.md:477:predicted in both markets with zero errors, and nothing settled (every
+league/runner/README.md:481:beta [0.0025, -0.025], fit_n 643), and a synthetic settlement check
+league/runner/README.md:482:settled both markets exactly once with independently verified grading
+league/runner/README.md:485:leagues, zero errors, `fetched_new` 0 everywhere, identical per-market
+league/runner/README.md:534:float-exact (max difference 0.0). A synthetic settlement on RW
+league/runner/README.md:589:of the three markets, and a synthetic settlement on match 5837087
+league/runner/README.md:591:shots) correctly, settled nothing on a second pass, and left the
+league/runner/README.md:635:on the virgin fit). Second, settlement resolves each market's actual
+league/runner/README.md:639:entries could never settle. Both fallbacks engage only when the
+league/runner/README.md:670:at 0.0 difference in all three markets, and a synthetic settlement
+league/runner/README.md:671:exercise settled one entry per market — SOT's actual (13) read
+league/runner/README.md:695:in both markets with zero errors, and nothing settled (every ledger
+league/runner/README.md:699:beta [-0.0025, 0.0], fit_n 2259), and a synthetic settlement check
+league/runner/README.md:700:settled both markets exactly once with independently verified grading
+league/runner/README.md:706:errors, `fetched_new` 0 everywhere, log rows identical apart from
+league/runner/README.md:709:settled-keys files).
+league/runner/README.md:750:errors, and nothing settled (every ledger entry is a future
+league/runner/README.md:754:`fetched_new` 0 everywhere (the shared warehouse was already
+league/runner/README.md:756:ignoring timestamps; of 709 snapshotted output files, all were
+league/runner/README.md:758:`run_log.jsonl` itself. The first fixture of each market
+league/runner/README.md:763:settlement on LR Vicenza–Catanzaro (2026-08-21) graded corners
+league/runner/README.md:806:join: settlement would need the per-market override
+league/runner/README.md:821:difference 0.0, and a synthetic settlement on match 5804035 (Legia
+league/runner/README.md:823:total 11.0 correctly, settled nothing on a second pass, and left
+league/runner/README.md:872:and nothing settled (every ledger entry is a future fixture). An
+league/runner/README.md:875:with max difference 0.0 in each market, and a synthetic settlement
+league/runner/README.md:878:correctly, settled each market exactly once (a second pass settled
+league/runner/README.md:925:markets, and a synthetic settlement on match 5803209 graded
+league/runner/README.md:982:predicted in both markets with zero errors, and nothing settled
+league/runner/README.md:986:zero errors and `fetched_new` 0 everywhere (the shared warehouse
+league/runner/README.md:988:identical ignoring timestamps; of 194 snapshotted output files,
+league/runner/README.md:990:`run_log.jsonl` itself. The first fixture of each market
+league/runner/README.md:996:synthetic settlement on Aris Thessaloniki–NFC Volos (2025-08-23)
+league/runner/README.md:1045:nothing settled (every ledger entry is a future fixture; the EG
+league/runner/README.md:1052:synthetic settlement on Wadi Degla FC–ZED FC (2026-08-21) graded
+league/runner/README.md:1054:settled each market exactly once, and left the artifacts md5-clean.
+league/runner/README.md:1067:RU-PremierLeague has joined with SOT (GZ) and total shots (arm B). RU-PremierLeague has joined with SOT (GZ — Gate Zero; PROVISIONAL PASS, virgin calibration −4.07pp within one standard error of 3.11pp; primary 8.5, ladder 7.5/8.5/9.5, halves share 0.4612, div RU-PremierLeague, ratio prior 200, 1H ladder 3.5/4.5/5.5, 2H ladder 4.5/5.5/6.5) and total shots (arm B, PROVISIONAL PASS, virgin calibration −2.59pp within one standard error of 3.09pp; primary 25.5, ladder 24.5/25.5/26.5, halves share 0.4602, 1H ladder 11.5/12.5/13.5, 2H ladder 13.5/14.5/15.5) — read from the frozen preregs and verdicts and cross-checked against the shipped virgin predictions. Goals (FAIL at dev), corners, and cards failed their gates and are excluded. The arm-B dispatch needed no extension: the runner's predict_total_shots_arm_b (the SCO-Premiership precedent) calls exactly the composition RU ships — RU's total-shots model.py is identical to SCO's except its docstring (same M_BAR 24.9) — and RU's fitted_params.json carries every field the dispatch reads (lambda 30.0, r_A 91.2360, level cell [30, 0.5, 50], ladder 24.5/25.5/26.5, half split [0.4602, 0.5398]): the registered lines and constant, not the defective shipped-format writer values the league build bypassed (a 25.5/26.5/27.5 FT ladder and a stale 0.4592 half split from another league); the recompute below is the arbiter and it reproduces the runner. The SOT engine needed no change: it already accepts the runner's ratio_prior keyword (the AU pattern), and the coordinator verified the runner's ratio_prior=200 construction is bitwise-identical to the no-arg engine. The data builder needed two fixes: its frozen 1,312-match count was a hard equality — a bug for a league whose 2026/2027 season is still running — now a floor, and it ignored the runner's INDEX/MAIN_REPO globals (it read the index from a hard-coded main-checkout root via argparse); it now follows the runner contract, with the explicit CLI override preserved. The builder encodes missing values as empty fields: there are no 'nan' strings anywhere in either CSV, the SOT and total-shots adapter columns are complete on all 1,312 rows, and no name in either CSV is non-ASCII (FotMob's Russian team and referee names are Latin transliterations; the payloads' only non-ASCII characters are Latin-extended player-name letters that never reach the CSVs), so encoding round-trips through the runner's UTF-8 readers exactly. RU-PremierLeague is a world league (Russia, Premier League, FotMob id 63) over seasons 2021/2022–2026/2027, a clean 240-match double round-robin per complete season (1,312 matches and 2,624 team rows at the join: five complete seasons plus 112 played in 2026/2027); at the 2026-11-09 join, FotMob listed exactly the remaining 128 fixtures of 2026/2027 (from 2026-11-20), all predicted in both markets with zero errors, and nothing settled (every ledger entry is a future fixture). An independent recompute of the first fixture (5847235, FC Rostov–Krylya Sovetov Samara, 2026-11-20) from the engine code alone matched all 18 daily-CSV fields with max difference 0.0 in each market, and a synthetic settlement on match 5847230 (Zenit St. Petersburg–FC Rostov, 2026-11-08) graded SOT actual 8.0 and total-shots actual 22.0 correctly, settled each market exactly once (a second pass settled nothing), and left the artifacts md5-clean. Two end-to-end proof runs on 2026-11-09 (29 leagues, 68 markets) each completed with zero errors and fetched nothing new in any league in either run (9,612 predictions in run 1, 9,606 in run 2); every output was bit-identical between the runs (215 compared files) except ES-LaLiga2's three daily CSVs, because FotMob's LaLiga2 listing dropped two fixtures dated 2026-11-09 (Las Palmas–Eldense and Sabadell–Real Sociedad B) between the runs — 321 upcoming in run 1, 319 in run 2, and neither was fetched as a result — while RU's outputs were bit-identical. The completed runs followed five attempts lost to infrastructure under heavy parallel load on this box: three OOM kills (exit 137) at the NL-Eredivisie stage (whose builder retains every parsed payload in memory), one VM reboot at about 20:38 UTC that also wiped /tmp, and one further OOM kill after the reboot; the successful runs were launched detached with MALLOC_ARENA_MAX=2 on the runner process, which changes no output.
+league/runner/README.md:1107:0.0, and a synthetic settlement on match 5853548 graded its
+league/runner/README.md:1108:actual corners total 3.0 correctly (log loss exact), settled
+league/runner/README.md:1113:settled) and the completed run 2 predicted 9,470 with
+league/runner/README.md:1114:`fetched_new` 0 in every league. Run 2 took three attempts: the
+league/runner/README.md:1169:total-shots settlement grades the unified actual under the same
+league/runner/README.md:1200:spelling and the lower-case SOT settlement actuals). PE-Liga1 is
+league/runner/README.md:1205:errors, and nothing settled (every ledger entry is a future
+league/runner/README.md:1212:14 total-shots fields), and a synthetic settlement on match
+league/runner/README.md:1216:of 33.0 — settled each market exactly once (a second pass
+league/runner/README.md:1217:settled nothing), and left the artifacts md5-clean. Two full
+league/runner/README.md:1223:`fetched_new` 0 everywhere) differs from that pair only because
+league/runner/README.md:1226:and settled 2 ES entries per market. Three further attempts
+league/runner/README.md:1236:RU-1Division has joined with corners only (arm `gate_zero`, PROVISIONAL PASS in `reports/C_RU1_VERDICT.md`: virgin LL 0.698888 at the primary 8.5 line, calibration +3.28pp with the 2.28pp excess over the 1.0pp boundary within one standard error of 2.97pp; dev LL 0.695540 beat both baselines). Goals, SOT, cards, and total shots failed their gates and are excluded. Corners configuration is primary 8.5, ladder 7.5/8.5/9.5, and `halves_share_1h: null` — this league's feed has no period splits at all (`has_period_splits_content` is 0 on all 1,757 built rows, and its frozen config and shipped virgin predictions are FT-only), so it is the first user of the FT-only corners opt-in documented above: the runner writes the halves columns empty, in the same positions as every other corners league, and predicts the FT ladder only. The corners engine is the possession-only Gate Zero variant (the big-chance half of the RU-Premier pair is absent from every payload here; its fit grid hard-codes the 8.5 primary, as the reference cores do), and its `fit_params`/`model_prediction`/`over_prob` signatures match the adapter exactly, so no engine change was needed. The data builder needed the RU-Premier fixes: its frozen 1,756-match count was a hard equality — now a floor, because season sizes vary (380 in 2021/2022, 306 in each of the next three seasons, 305 in 2025/2026) and 2026/2027 is still running — and it ignored the runner's INDEX/MAIN_REPO globals; it now follows the runner contract, with the explicit CLI override preserved. The builder encodes missing values as empty fields: there are no 'nan' strings in either CSV, corners are empty on 89 score-only rows (dropped by the adapter, never imputed), the builder keeps FotMob's `BallPossesion` casing, and no team name is non-ASCII, so encoding round-trips exactly. RU-1Division is a world league (Russia, `1. Division`, FotMob id 338) over seasons 2021/2022–2026/2027 (1,757 matches and 3,514 team rows at the join: five complete seasons plus 154 played in 2026/2027); at the 2026-11-09 join, FotMob listed the remaining 152 fixtures of 2026/2027 (from 2026-11-14), all predicted in corners with zero errors, and nothing settled (every ledger entry is a future fixture; the ledger holds 152 entries with no duplicate (market, match_id, run_date) key). An independent recompute of the first fixture (5897681, Volga Ulyanovsk–Torpedo Moscow, 2026-11-14) from the engine code alone matched all four FT fields with max difference 0.0 and confirmed all eight halves fields empty (live fit gamma 0.15, r 1.4546, beta [0.0], fit_n 1,658), and a synthetic settlement on match 5897664 (FC Yenisey Krasnoyarsk–PFC Sochi, 2026-11-08) graded corners actual 9.0 correctly on the FT line, settled exactly once (a second pass settled nothing), and left the artifacts md5-clean. Two end-to-end proof runs on 2026-11-09 (33 leagues, 75 markets) each completed with zero errors and 10,682 predictions; the first run fetched exactly one match — RU-1Division's 5897663 (Veles Moscow–KamAZ, played 2026-11-09), the new league's first-ever pull — and the second run fetched nothing new in any league; every output was bit-identical between the runs (344 compared files, including both FotMob indexes), so the FT-only amendment changed no pre-existing league's numbers. The first run's first attempt was lost to a VM reboot at about 22:28 UTC after 27 of 33 leagues and was rerun in full; the completed runs were made with `MALLOC_ARENA_MAX=2` on the runner process, which changes no output.
+league/runner/README.md:1276:synthetic settlement on match 5100791 graded corners actual
+league/runner/README.md:1277:9.0 (9 + 0) at the 9.5 line, settled exactly once, and left
+league/runner/README.md:1284:fixtures in either proof run — IE predicted 0, settled 0, and
+league/runner/README.md:1288:fetched nothing new in any league (`fetched_new` 0 in all 35),
+league/runner/README.md:1335:markets with zero errors, and nothing settled (every ledger entry
+league/runner/README.md:1343:difference 0.0 in each market, and a synthetic settlement on
+league/runner/README.md:1346:settled each market exactly once (a second pass settled nothing),
+league/runner/README.md:1410:twelve daily-CSV fields at 0.0. A synthetic settlement on match
+league/runner/README.md:1411:4909914 graded corners actual 8.0 (7 + 1) at the 8.5 line, settled
+league/runner/README.md:1419:second run fetched nothing new in any league (`fetched_new` 0 in
+league/runner/README.md:1425:was fetched). Of the 266 snapshot files compared, 261 are
+league/runner/README.md:1527:errors, and nothing settled (every ledger entry is a future
+league/runner/README.md:1538:settlement on match 5943698 (Slavia Prague–Artis Brno,
+league/runner/README.md:1540:correctly on the FT lines, settled each market exactly once
+league/runner/README.md:1541:(a second pass settled nothing), and left the artifacts
+league/runner/README.md:1547:warehouse), and settled nothing. Of 277 compared files, 271
+league/runner/README.md:1555:rebuilt CSV and nothing settled), and BR-SerieB's Ponte
+league/runner/README.md:1564:(02:07:55–02:09:41 UTC) that failed MX-LigaMX's corners settle
+league/runner/README.md:1566:an isolated re-test of the failed settle passed minutes later
+league/runner/README.md:1581:fetched_new 0, 0 settled, rebuilt CSVs md5-identical to the
+league/runner/README.md:1640:errors, and nothing settled (the ledger holds 255 entries, 85
+league/runner/README.md:1647:settlement on match 5760520 (Levski Sofia–CSKA Sofia,
+league/runner/README.md:1649:total-shots actual 15.0 correctly on the FT lines, settled
+league/runner/README.md:1650:each market exactly once (a second pass settled nothing), and
+league/runner/README.md:1660:FC–Cúcuta, finished during the proof window and settled in
+league/runner/README.md:1691:market, fetched_new 0, 0 settled, ledger 255 entries.
+league/runner/README.md:1768:markets with zero errors, and nothing settled (the ledger holds
+league/runner/README.md:1774:each market, and a synthetic settlement on match 1000013267
+league/runner/README.md:1777:correctly on the FT lines, settled each market exactly once (a
+league/runner/README.md:1778:second pass settled nothing), and left the artifacts md5-clean.
+league/runner/README.md:1782:already in the shared warehouse), and nothing settled. Of 442
+league/runner/README.md:1843:settlement default, so CN cards needs no `cards_actual`
+league/runner/README.md:1873:proof runs predict zero CN fixtures and settle nothing, and a
+league/runner/README.md:1881:synthetic settlement on match 5186644 (Zhejiang
+league/runner/README.md:1884:37.0 correctly, settled each market exactly once (a second
+league/runner/README.md:1885:pass settled nothing), and left the artifacts md5-clean. Two
+league/runner/README.md:1891:was identical between the runs. Of 449 snapshotted output
+league/runner/README.md:1930:A synthetic settlement on match 5943698 (Slavia Prague–Artis
+league/runner/README.md:1931:Brno, 2026-11-08) graded SOT actual 12.0 correctly, settled
+league/runner/README.md:1939:settlement truncated the CZ ledger to empty — the ledger was
+league/runner/README.md:1941:own entry construction (md5-verified) before the settlement
+league/runner/README.md:1980:amendment was needed: `run_daily.py` is untouched by this join.
+league/runner/README.md:1992:A synthetic settlement on match 5975448 (Pafos FC vs Omonia 29
+league/runner/README.md:1995:20.725, p18.5 0.6328, hit, LL 0.4576), settled each market exactly
+league/runner/README.md:1996:once (a second pass settled nothing), and left the artifacts
+league/runner/README.md:2003:shots exp 20.748, p18.5 0.6336). Of 181 snapshotted output files,
+league/runner/README.md:2017:NO-OBOSLigaen has joined with corners only (arm `gate_zero`, PROVISIONAL PASS in `reports/C_NO_OBOS_VERDICT.md`: virgin LL 0.6898 at the primary 10.5 line, calibration +1.14pp with the 0.14pp excess over the 1.0pp boundary within one standard error of 3.24pp; dev LL 0.6969 beat both baselines, league base rate 0.7257 and naive trailing-10 0.7205; Gate Zero and PLAIN tied exactly on the virgin window — the virgin fit chose beta [0.0], so the possession multiplier is inactive and the two arms are identical — and the frozen tie rule ships the simpler arm, Gate Zero). Goals, SOT, cards, and total shots failed their gates or were not buildable and are excluded. Corners configuration is primary 10.5, ladder 9.5/10.5/11.5, and `halves_share_1h: null` — this league's feed has no period splits at all (its frozen config has `corners_1h_share: null` and the shipped virgin predictions are FT-only), so it uses the FT-only corners opt-in documented above (RU-1Division precedent): the runner writes the halves columns empty and predicts the FT ladder only. The data builder needed no change: its only count assert is `len(rows) == len(idx)`, a self-consistent check that grows with the index rather than a frozen build-time count, so there is no AU/MLS trap to floor. NO-OBOSLigaen is a world league (Norway, `OBOS-ligaen`, FotMob id 203) over calendar-year seasons 2021–2026 (1,440 matches and 2,880 team rows at the join: six complete 240-match seasons; the virgin is the complete 2026 season, 237 matches with a corners target); at the 2026-11-10 join FotMob listed no upcoming fixtures (the 2026 season ended 2026-11-08 and 2027 is not requested), so nothing was predicted and nothing settled — the daily corners CSV is header-only and the ledger holds no entries. An independent recompute through the real runner adapter reproduced the shipped virgin predictions exactly: the fit on the pre-virgin window (2021–2025) reproduces `fitted_params_virgin.json` bit-for-bit (gamma 0.15, r 1.165312214160854, beta [0.0], fit_n 1,080), and the apply replay over all 237 fixtures on 66 dates matched mu and all three ladder lines with max difference 0.0 and confirmed all halves fields empty. The production live refit on full history (2021–2026) keeps gamma 0.15 and beta [0.0] with r 1.1671928089114483 (fit_n 1,317); its predictions on the virgin fixtures differ by at most 0.0002 in p_over, which is the runner's by-design daily refit, not a defect — no adapter change to `run_daily.py` was needed. A synthetic settlement on match 5105318 (Sandnes Ulf–Åsane, 2026-11-08) graded corners actual 15.0 correctly on the FT line (live prediction exp_total 11.0629, P(over 10.5) 0.5379, chosen over, hit, log loss 0.62), settled exactly once (a second pass settled nothing), and left the artifacts md5-clean. Two end-to-end proof runs on 2026-11-10 (43 leagues; 92 markets in run 1, 95 in run 2) each produced 11,957 predictions; run 1 fetched 74,852 matches (a fresh worktree with an empty warehouse) with exactly one error row — CO-PrimeraA's league step, see below — and run 2 fetched nothing new in any league with zero errors. Of 366 compared files, 363 were bit-identical between the runs, including every NO-OBOSLigaen output; the exceptions are BR-SerieB's corners and SOT daily CSVs and ZA-PSL's corners daily CSV. ZA-PSL's FT values are bit-equal to run 1's ledger on all 160 fixtures (max difference 0.0), so its delta is confined to non-ledger fields, as documented for that league. BR-SerieB differs on a single fixture, 5190810 (São Bernardo–Athletic Club MG): FotMob rescheduled it from 2026-11-14 in run 1's pull to 2026-11-12 in run 2's pull — the ledger records the run-1 date — and the fixture date anchors both models' decay/refit computation, so SOT exp_total moved 8.48895 to 8.48875 (p_over shifts at most 0.000013, no side flip) and corners mu moved 1.4e-14; the other 13 fixtures in each market are bit-identical. CO-PrimeraA's six files appear only in run 2: it failed in run 1 because its builder also reads Primera B warehouse JSONs, which no runner league pulls and a fresh worktree lacks — a pre-existing cross-league warehouse dependency, not caused by this join; the Primera B files were populated from the main checkout's warehouse (no code change) and CO then rebuilt and predicted cleanly in run 2 (0 upcoming, 0 predicted). The proof pair took four launches: run 1 completed at the first attempt, and run 2's first attempt was cut short by a service restart two leagues in, its second was OOM-killed (exit 137) at the AR-LigaProfesional stage under heavy parallel load on this box, and its third completed. All completed runs were made with `MALLOC_ARENA_MAX=2`, which changes no output.
+league/runner/README.md:2037:adapter amendment was needed: `run_daily.py` is untouched by
+league/runner/README.md:2044:default path would settle nothing — a synthetic settlement on
+league/runner/README.md:2046:settled 0 under the default and 1 under the opt-in (actual 1.0,
+league/runner/README.md:2047:p3.5 0.5684, miss, LL 0.8401), a second pass settled 0, and the
+league/runner/README.md:2082:all 229 snapshotted output files (97 daily CSVs, ledgers,
+league/runner/README.md:2083:settled-keys sidecars, grading ledgers) are bit-identical
+league/runner/README.md:2131:needed: `run_daily.py` is untouched by this join. Settlement
+league/runner/README.md:2137:(`yellow_cards_home`/`yellow_cards_away`) would not settle
+league/runner/README.md:2143:where the stats keys are empty. A synthetic settlement on
+league/runner/README.md:2145:stats 3) settled 1 under the default with actual 3.0 (hit, LL
+league/runner/README.md:2147:0.7988), a second pass settled 0, and the artifacts were
+league/runner/README.md:2184:snapshotted output files (99 daily CSVs, ledgers,
+league/runner/README.md:2185:settled-keys sidecars, grading ledgers) are bit-identical
+league/runner/README.md:2194:including the replay and settlement scripts — those runs had
+league/runner/README.md:2251:`_a` names. Instead `run_daily.py` gained one minimal, default-inert
+league/runner/README.md:2253:both `predict_corners` and the corners branch of `settle()` only when
+league/runner/README.md:2255:name to itself). It mirrors the `cards_actual` precedent for settle-side
+league/runner/README.md:2259:HEAD version of `run_daily.py` and with the amended version on identical
+league/runner/README.md:2263:versions alike), and `settle()` run with both versions against scratch
+league/runner/README.md:2265:log loss 0.6201), a second pass settling nothing in both. The settle
+league/runner/README.md:2266:mapping itself was proven on HU with a synthetic settlement on virgin
+league/runner/README.md:2267:match 4813070: settled 1 with actual 6.0 read from `corners_h` /
+league/runner/README.md:2294:with `MALLOC_ARENA_MAX=2`. Of 241 snapshotted output files (100 daily
+league/runner/README.md:2295:CSVs, ledgers, settled-keys sidecars, grading ledgers), 240 are
+league/runner/README.md:2303:0.4399); the ledger holds 121 entries and nothing has settled yet. Two
+league/runner/README.md:2312:US-USLLeagueOne has joined with corners (arm `gate_zero`, PROVISIONAL PASS in `reports/C_USLL1_VERDICT.md`: dev pooled LL@9.5 0.684403 vs league base 0.693505 and naive trailing-10 0.691119, n=486, 2022-2024 regular; virgin 2025 LL@9.5 0.688533 vs base 0.697479; calibration +1.490pp, breach within 1 SE of 3.441pp; the X7 box-touch arm failed its dev gate outright at 0.714615 and is excluded) and total shots (arm `B`, PROVISIONAL PASS in `reports/T_USLL1_VERDICT.md`: dev gate pool 2023-2024, n=321: B 0.679305 vs league base 0.694009 and naive 0.684291; virgin 2025 LL@24.5 B 0.693325 vs league base 0.696400, lowest of the three arms; calibration +2.866pp, breach within 1 SE of 3.444pp; arm C fails the dev-sign leg vs A (0/2) and is excluded; arm A is provisional but B has the lower virgin LL). Goals, SOT and cards failed their gates and are excluded. Corners configuration is primary 9.5, ladder 8.5/9.5/10.5, halves share 0.469, 1H ladder 3.5/4.5/5.5, 2H ladder 4.5/5.5/6.5; total-shots configuration is primary 24.5, ladder 23.5/24.5/25.5, halves share 0.461, 1H ladder 10.5/11.5/12.5, 2H ladder 12.5/13.5/14.5. Both markets set the new `exclude_phases: ["playoff"]` opt-in: the league's frozen phase rule excludes playoff rows from every fitting/scoring window (both engines' load functions drop non-regular rows), and the runner adapters previously included them — without the opt-in the corners fit on the pre-virgin window flips to gamma 0.0, beta [0.0025, 0.0], fit_n 665 (vs the frozen gamma 0.15, beta [0.0, 0.0], fit_n 643), and the total-shots arm-B replay sits 0.69 in mu off the shipped file. With the opt-in the fit reproduces the frozen `fitted_params_virgin.json` bit-for-bit and the total-shots replay residual is the adapter's date-grouped state only (see below). The opt-in is default-inert and mirrors the `exclude_seasons` precedent: SCO-Premiership corners and US-USLChampionship total shots arm B (84 playoff rows in its history) produce bit-identical adapter output before and after the change when the key is absent, and SCO corners is unchanged even with the key set (it has no playoff rows), while USLChampionship arm B moves on all 375 probe rows when the key is set, proving the opt-in engages (no other league's config sets the key, so no other league's behaviour changes). The data builder's frozen 1,174-match count is now a floor (`len(rows)>=1174`), so a daily rebuild survives the next played match being appended; every rebuild in the proof produced exactly 1,174 matches and 2,348 team rows. US-USLLeagueOne is a world league (USA, `USL League One`, FotMob id 9296) over calendar-year seasons 2021-2026. An independent recompute through the frozen engines reproduced both shipped virgin predictions from the rebuilt data: corners exactly (max difference 0.0 on mu, r and all nine ladder lines over all 210 rows, and the refit on the pre-virgin window reproduces `fitted_params_virgin.json` bit-for-bit), total shots to 1.7e-9 (float repr); the total-shots `fitted_params.json` values match the virgin file's arm-B values exactly (lambda 300.0, r_A 117.1426320116539, level cell [60, 1.0, 20], half split [0.461, 0.539]). The replay through the runner adapters differs only by named, by-design causes: corners max |mu| difference 1.384 (max |p_over| 0.170 at the 9.5 line) because the replay device truncates history at 2024-12-31 while the shipped file's features include earlier-2025 matches — the first-date fixtures match exactly (diff 0.0) and the gap grows through the season as within-2025 history accumulates — and total shots max |mu| difference 0.371 (max |p_over| 0.027) because the adapter defers state updates to end of day while the total-shots harness consumes same-day earlier matches (a date-grouped-harness variant reproduces the adapter value exactly); in production the adapters see complete history up to each fixture date, so neither gap is a production defect. Note the brief's claim that `predict_corners` pins the fit to `fitted_params_virgin.json` is incorrect: the runner live-fits every corners league (verified: no such code exists, `git log -S fitted_params_virgin` on `run_daily.py` is empty), and the live refit on full history (all regular rows 2021-2026) keeps gamma 0.15 but moves r to 1.1255 and beta to [0.0025, 0.025] (fit_n 1,131), shifting the virgin fixtures' mu by at most 1.40 and p_over at 9.5 by at most 0.167 — the runner's by-design daily refit, as for NO-OBOSLigaen, not a defect, and no pinning mechanism was added. Two end-to-end proof runs on 2026-11-10 (45 leagues; 99 markets): run 1 produced 12,197 predictions with 54,492 matches fetched (fresh worktree) and zero errors; run 2 produced 12,227 predictions with fetched_new=0 in every league and zero errors. The proof pair took five launches: run 1's first attempt was killed by a runtime restart at league 12/45 (after fetching 20,281 matches, zero errors) and its completed restart ran clean; run 2's first attempt was killed by a service-restart SIGTERM at league 41/45 (fetched 0, 11,885 predictions, zero errors), its second attempt was OOM-killed (exit 137) at league 7/45 while the wt-runner49 agent's full run shared the box, and its third attempt completed cleanly (overlapping the wt-runner50 agent's run, which also finished). The run-1 md5 snapshot was lost when the restarts wiped /tmp, so the run-1/run-2 file comparison was recovered through the ledgers, as the brief's exception clause allows: all 12,197 non-CO rows are bit-equal on exp_total, every FT ladder p_over and date against run 1's ledger entries (exact float equality, 0 mismatches, 0 rows without a ledger entry), and USLL1's halves recompute exactly from exp_total with the live corners r and the frozen total-shots r_A. The sole fixture-set difference is CO-PrimeraA: 0 predicted in run 1, 10 per market in run 2 (FotMob published the 2026-11-12 matchday between 16:37 and 18:14) — new rows, not changed values; its pre-copied Primera B warehouse files meant the known fresh-worktree trap never fired. At the join FotMob listed exactly one upcoming USLL1 fixture, the 2026 final on 2026-11-15 (Charlotte Independence vs Boise, match 1000023200), predicted in both markets in both runs (corners exp_total 8.8729, P(over 9.5) 0.3967; total shots exp_total 29.0744, P(over 24.5) 0.7694), and nothing settled (the final is in the future). A synthetic settlement on the latest finished match, the 2026-11-09 semi-final 1000023079 (Charlotte Independence vs Forward Madison FC), graded both markets correctly through the real adapters and settle path (corners live exp_total 9.4832, P(over 9.5) 0.4722, chosen under, actual 6.0, hit, log loss 0.6391; total shots live exp_total 27.0347, P(over 24.5) 0.6572, chosen over, actual 26.0, hit, log loss 0.4197), settled exactly once per market (a second pass settled nothing), matched an independent recompute, and left every artifact md5-clean after the synthetic entries were removed. All completed runs were made with `MALLOC_ARENA_MAX=2`, which changes no output. Defects found (pre-existing, not changed by this join): the frozen builder's phase rule keys off the FotMob league name ending in "Playoff", so the six 2026 playoff matches (quarter-finals 2026-10-30/11-02 and semi-finals 2026-11-08/09, round names "Championship - Quarter-finals/Semi-finals") are flagged "regular" and enter the production fit and state, while the 29 properly-flagged 2021-2025 playoff rows are excluded — bounded impact (6 of 1,174 rows), and the coming final will be flagged the same way when played; and the entry's `warehouse:` field says "United States/USL League One" while the runner pulls with `country: USA` into "USA/USL League One" — cosmetic only, since world leagues never read the `warehouse:` field (only the J-League rebuild path does).
+league/runner/README.md:2352:2026/2027 history. No `run_daily.py` change was needed: the opt-in
+league/runner/README.md:2377:runtime restart (which also wiped the /tmp md5 snapshot of run 1's
+league/runner/README.md:2378:outputs), and the full relaunch completed first try. The lost snapshot
+league/runner/README.md:2392:entries and nothing has settled yet. A live recompute of all 48
+league/runner/README.md:2402:AE-ProLeague has joined with total shots (arm `C`, PROVISIONAL PASS in `reports/T_AE_VERDICT.md`: dev pooled n=545 LL@25.5 A 0.682015, B 0.682259, C 0.681906 vs league base 0.696534 and naive 0.695637, all three arms passing dev; virgin 2025/2026 n=182 arm C LL@25.5 0.686302 — lowest of the three arms (A 0.687007, B 0.687541) and below league base 0.691060; calibration breach +3.10pp (actual−predicted −3.10pp; the virgin season ran cold on shots, 24.48/match vs 25.67–26.87 dev, so every arm overstates the over-rate), inside 1 SE (3.67pp) of the 1.0pp boundary — legs (i) and (iii) PASS, leg (ii) PROVISIONAL. Both-pass rule: A and C pass all legs; the lower pooled virgin LL ships → arm C. Arm B is excluded (fails leg (i) vs A). Goals, SOT, corners and cards failed their gates and are excluded. Total-shots configuration is primary 25.5, ladder 24.5/25.5/26.5, halves share 0.4608, 1H ladder 10.5/11.5/12.5, 2H ladder 12.5/13.5/14.5. No `exclude_seasons`: the frozen harness fits on all seasons (2021/2022 is the tuning seed, scored from 2022/2023), and the adapter reads `trailing_r_window` 200 from `fitted_params.json` as designed — no block key was added for it. Two changes were needed. The data builder's frozen-count asserts are now floors (completed seasons stay exact at 182 each, the in-progress 2026/2027 season `>= 49`, total `>= 959`), following the AU/MLS/USLL1 trap precedent, so a daily rebuild survives new 2026/2027 results. And the runner's total-shots arm-C path now falls back to the market's frozen `halves_share_1h` when `fitted_params.json` carries no `half_split` — AE is the first arm-C league without one (all six existing arm-C leagues carry it; the unamended adapter raised `KeyError: 'half_split'` on the first replay attempt), mirroring the arm-A (CL-LigaDePrimera) and arm-B (CN-SuperLeague) fallback precedent. Inertness was proven on GR-SuperLeague, the natural probe (same arm C, `half_split` present): `predict_total_shots_arm_c` run with the HEAD version of `run_daily.py` and with the amended version on identical inputs produced byte-identical output on all 8 fixed pseudo-upcoming fixtures. The independent recompute of the shipped virgin predictions (182 rows, arm C) reproduces the verdict exactly from the CSV itself (LL@25.5 0.686302, breach +3.10pp); replaying them through the runner adapter differs by max |mu| 0.0210 (mean 0.0027) and max |p_over@25.5| 0.00148, replay LL@25.5 0.686260 — and the gap is fully decomposed, not assumed: re-running the replay with the 2 awarded matches removed from history (the frozen harness drops them; the runner adapter includes them, pre-existing uniform adapter behaviour, not changed by this join) reproduces the shipped file to max |mu| 1.8e-07, so the entire replay difference is the awarded-rows effect on the live refit. Fitted params: lambda 300.0, r_A 156.5851, level cell [120.0, 0.5, 50.0], trailing window 200. Two full end-to-end proof runs on 2026-11-10 (VM date; 2026-11-11 WIB) — 49 leagues, 12,418 predictions each, zero errors in either run; run 2 fetched nothing new in any league. Both runs completed first try with `MALLOC_ARENA_MAX=2` (run 1 ~34 min, run 2 ~32 min) despite the SK-1Liga join proof run and the final Codex-sol audit sharing the box — no kills, no restarts, no retries. Of 250 snapshotted output files (daily CSVs, ledgers, settled-keys sidecars, grading ledgers), 249 are bit-identical between the runs, including every AE-ProLeague output; the sole exception is ZA-PSL's corners daily CSV, the known pre-existing case — its FT values are bit-equal to run 1's ledger on all 160 fixtures (max difference 0.0 on exp_total and all 480 ladder p_over values), so its delta is confined to non-ledger fields. Unlike the last joins, AE-ProLeague predicted real fixtures on day one: 70 upcoming 2026/2027 fixtures in both runs (2026-11-19 to 2027-02-21), first 2026-11-19 Al-Wasl–Hatta (match 1000022240, exp_total 26.9833, P(over 25.5) 0.5816); exp_total spans 24.3319–28.5102, the 1H share is exactly 0.4608 on all 70 rows, the ledger holds 70 entries, and nothing has settled yet (all fixtures are in the future). It is a world league (United Arab Emirates, `Pro League`, FotMob id 538) over split-year seasons 2021/2022–2026/2027, 14 teams, straight double round-robin, no play-offs; at the join the rebuild held 959 matches (182 per completed season, 49 played in 2026/2027). Two environment items: this worktree arrived without the `data_enrichment/fotmob_world` symlink the other runner worktrees carry, so the symlink to the main checkout's warehouse was restored (git-ignored, no commit impact) before the proof runs; and the CO-PrimeraA fresh-worktree trap did not trigger — its builder also reads Primera B warehouse JSONs, which are present via the symlinked main-checkout warehouse, so CO rebuilt and predicted 10 fixtures per market in both runs with no copy and no code change. Run 1's only fetch was J1's 2,092 matches into the fresh worktree's J-League store; AE fetched nothing new in either run.
+league/runner/README.md:2430:feed). No `run_daily.py` change was needed: the adapter passes the
+league/runner/README.md:2460:fetched_new=0 in every league. Of the 104 daily files, 103 are
+league/runner/README.md:2473:settled yet. Two environment items: this worktree arrived without the
+league/runner/README.md:2483:DK-1Division has joined with corners (arm `x5`, PROVISIONAL PASS in `reports/C_DK1_VERDICT.md`), cards (arm `gate_zero`, clean PASS in `reports/K_DK1_VERDICT.md`), SOT (arm `GZ`, PROVISIONAL PASS in `reports/S_DK1_VERDICT.md`), and total shots (arm `x5`, PROVISIONAL PASS in `reports/T_DK1_VERDICT.md`). Goals failed the dev gate (`engine/goals/results_virgin.json`: virgin deliberately unread) and are excluded. It is a Denmark 1. division world league (FotMob id 85, ccode DEN, `1. Division`, 12 teams, 192 matches per completed season; the rebuild held 1,044 matches — 192 per season 2021/2022–2025/2026 plus 84 played in 2026/2027 (one more than at build time, a match finished 2026-11-09) — and 2,088 team rows). The 2021/2022 season carries no stats at all in the feed, so every adapter's history starts at the 2022/2023 seed season, exactly as the frozen harnesses do. Configuration: corners primary 9.5, ladder 8.5/9.5/10.5, halves share 0.469, 1H ladder 3.5/4.5/5.5, 2H ladder 4.5/5.5/6.5; cards primary 3.5, ladder 2.5/3.5/4.5, halves share 0.314, 1H ladder 0.5/1.5/2.5, 2H ladder 1.5/2.5/3.5; SOT primary 9.5, ladder 8.5/9.5/10.5, halves share 0.455, 1H ladder 3.5/4.5/5.5, 2H ladder 4.5/5.5/6.5, div DK-1Division, ratio_prior 200; total shots primary 26.5, ladder 25.5/26.5/27.5, halves share 0.461, 1H ladder 11.5/12.5/13.5, 2H ladder 13.5/14.5/15.5. Gate arithmetic. Corners virgin 2025/2026 (n=192, dev seed 2022/2023, scored 2023/2024–2024/2025, n=384): Gate Zero LL 0.7051, calibration −5.16pp — it FAILS the calibration leg (|−5.16|pp > 1.0 + SE 3.64 = 4.64pp), so Gate Zero cannot ship; X5 LL 0.7035, calibration −3.71pp, inside the 4.64pp provisional bound, so X5 ships PROVISIONAL (X7 0.7065 fails likewise at −5.29pp; 2025/2026 was a high-corner season and every arm under-predicted, X5's trailing blend adapting best). Cards virgin (n=192): Gate Zero LL 0.6780, calibration +0.03pp, SE 3.56pp — clean PASS; X5 0.6861 fails the LL leg against Gate Zero. SOT virgin (n=192): Gate Zero LL 0.6902 vs base 0.6909 — the LL leg passes by 0.0007 (thin); X5 0.6904 fails the LL leg; calibration −1.48pp, SE 3.60pp — beyond the 1.0pp clean boundary but within 1 SE, so PROVISIONAL. Total shots virgin (n=192): X5 LL 0.6764, calibration −1.70pp (PROVISIONAL); Gate Zero 0.6786, calibration −0.77pp (clean); X7 0.6786 — the both-pass rule ships the lower pooled virgin LL, so provisional X5 ships over clean Gate Zero. X5 is new to the runner (no `x5` string existed in `run_daily.py`). Both X5 arms are the same construction from the league's own harness: a 0.5/0.5 trailing-rate blend. Corners: `mu = 0.5*mu_GZ + 0.5*naive` where naive is the trailing-10 total from `core.attach_naive`, with Gate Zero's r — implemented inside `predict_corners`, engaged only when `arm == "x5"` (the adapter fits Gate Zero's params and blends; `attach_naive` is date-grouped like every other state in that engine, so same-date fixtures never see each other). Total shots: `mu = 0.5*GZ + 0.5*(nh+na)` from the shots-family `NaiveTracker`, a single NB on the blended mu with the frozen r — implemented as the new `predict_total_shots_arm_x5`, which reads lambda/r from the league's `fitted_params_virgin.json` (lambda 100.0, r 57.00194178382675; there is no `fitted_params.json` for this arm and the ladder lives in `active.yaml`) and walks the pointer exactly like arm C minus the base-rate/level/trailing-r layers X5 does not use. No new engine, no parallel prediction path, no change to any other arm. Fitted params: corners gamma 0.15, r 1.2188132180917006, beta [0.0025, 0.0], fit_n 565; cards r 27.70577184854863; SOT nb_r 79.94; total shots lambda 100.0, r 57.00194178382675, beta_x7 0.0. Four defects in the join path were found and fixed inside `run_daily.py` (the league builder was not touched). (1) DK's builder omits the `league` column every SOT loader reads as its division key (`div = r["league"]`), so `predict_sot` would raise KeyError; `rebuild_csv_world` now appends the column (league name) when absent, only for leagues that run SOT — no joined SOT league's CSV lacks the column, so the branch engages for DK only. (2) The frozen cards target is stats-feed yellow+red, but the builder's `yellow_home` alias is yellow only, so the default cards path would fit and grade the wrong target; the new opt-in `cards_target: yellow_plus_red` reads yellow_cards+red_cards on both sides in `predict_cards` and in `settle` (the existing `cards_actual` opt-in names two columns and cannot express a four-column sum). (3) DK's SOT `Engine` takes only `(matches, arm)` — it fixes the ratio prior at 200.0 for non-RS arms — while `predict_sot` unconditionally passed `ratio_prior`; `predict_sot` now passes the argument only when the engine accepts it (signature check, mirroring the goals adapter's call-each-engine- as-it-is-written rule). (4) DK's SOT loader keys history on team names, but three FotMob ids carry two spellings inside the fit window (9814 Horsens/AC Horsens, 8487 Sønderjyske/SønderjyskE, 8470 Aalborg BK/AaB), so name-keyed history splits those teams; with `team_key: id` the adapter now remaps history names to ids from the match CSV (a name mapping to more than one id is left alone — none does here), and the existing fixture-key cast then keys fixtures on ints. Also corrected: the brief's `ccode: DNK` is wrong — the FotMob index and DK-Superligaen both use `DEN` for Denmark, and the join uses `DEN`. Replay (independent recompute of the shipped virgin predictions, 192 rows per market; shipped CSVs carry only the primary-line p_over, so the check is mu + primary p + 1H/2H expected totals). Engine-only harness walks reproduce all four shipped files at CSV rounding level (max |mu| ≤ 0.0005, max |p| ≤ 5e-5). Corners: the fit on the pre-virgin window reproduces `fitted_params_virgin.json` bit-for-bit (gamma 0.15, r 1.2188132180917006, beta [0.0025, 0.0], fit_n 565); the first virgin fixture through the real adapter matches at rounding level (mu 9.6238 vs 9.624, p9.5 0.4862); the full apply replay with frozen params matches all 192 at rounding level. Total shots: the adapter walk (one real `predict_total_shots_arm_x5` call over all 192 virgin fixtures) matches all 192 at rounding level too — the same-day naive difference that could have arisen does not, because each team plays once per matchday, so no same-day match can enter either fixture team's trailing-10. Cards: the adapter walk matches mu/1H/2H at rounding level on all 192; p_over 3.5 differs by at most 0.0056 (worst fixture 5272926, 2026-05-22 Aarhus Fremad–AaB), fully decomposed: the adapter re-estimates r on the growing window (r 46.79 on 756 records there vs the frozen rs_v 27.71), while the harness freezes rs_v — the runner's by-design live re-estimation, not an adapter error. SOT: the adapter walk (id-keyed) differs by at most 0.0884 on mu and 0.0055 on p9.5 (worst fixture 4812058, Lyngby–Hillerød), fully decomposed: a fresh-refit walk reproduces those exact maxima, so the whole gap is the RegressionStore refit anchor — the harness's theta is up to 7 days stale, the adapter fits fresh at each fixture day (the CY-class artefact). Without the id remap the name-keyed walk is worse (max |mu| 0.1268, worst fixture 5272880 AC Horsens–Esbjerg fB — a renamed team), which is what the remap removes. The production live refit on full history (corners gamma 0.15 → 0.0, r 1.2188 → 1.2235, fit_n 840) moves virgin-fixture predictions by at most 0.370 on mu and 0.044 on p9.5 — the runner's by-design daily refit on the longer window, which now includes the high-corner 2025/2026 season and 83 matches of 2026/2027. Inertness: old (HEAD) vs new adapter outputs on pre-existing leagues are byte-identical on all 8 probes (corners GZ DK-Superligaen, corners X7 AR-LigaProfesional, total shots C DK-Superligaen, A NL-Eredivisie, B US-USLLeagueOne, cards GZ AU-ALeague, SOT GZ NL-Eredivisie, SOT RS AU-ALeague) — 0 field diffs. Synthetic settlement on finished match 5764501 (Hobro–Kolding IF, 2026-10-10; chosen because it carries a red card, so the cards target discriminates: yellow+red 4.0 vs yellow-only 3.0): corners actual 14.0 (pred exp 10.0483, p9.5 0.5347, over, hit, LL 0.6261); cards actual 4.0 — the yellow+red target, proving the opt-in in the settle path (pred exp 3.5299, p3.5 0.4664, under, miss, LL 0.7626; yellow-only would have graded 3.0, a hit); SOT actual 9.0 (pred exp 8.4587, p9.5 0.3787, under, hit, LL 0.4760); total shots actual 21.0 (pred exp 24.7316, p26.5 0.3652, under, hit, LL 0.4545). Each market settled exactly once (a second settle pass settled nothing). Two full end-to-end proof runs on 2026-11-10 (VM date; 2026-11-11 WIB), 51 leagues, 108 markets. Run 1 (first attempt, exit 0, ~33 min): 12,658 total predictions across 108 daily files, 0 error rows in 369 run-log rows; fetched_new 2,092 for J1 (fresh J-League store) and 1,044 for DK — the DK fetch was a case bug (below), every other league 0. DK predicted 48 upcoming fixtures per market (2026-11-19 to 2027-03-19), first Fredericia–Hillerød 2026-11-19 match 5764470 (corners exp 9.4488 p9.5 0.4655; cards exp 3.1437 p3.5 0.3840; SOT exp 10.2144 p9.5 0.5473; total shots exp 29.5998 p26.5 0.6636); 192 ledger entries (48 per market), nothing settled, settled_keys empty. Run 2 (first attempt, exit 0, ~32 min): 12,658 total predictions across the same 108 daily files, 0 error rows in 369 run-log rows, fetched_new=0 in every league (including DK — the case fix works, and J1's store is now populated too); DK again 48 upcoming fixtures per market, same dates, same first fixture, identical expected totals (corners 9.448767250658385, cards 3.1436974819915218, SOT 10.214422993807698, total shots 29.59980218718723); the DK ledger still holds exactly 192 entries, all run_date 2026-11-10 (run 2 added none — dedup by market/match_id/run_date works), settled_keys still empty, grading ledger still empty. Of 361 snapshotted files, 359 are bit-identical between the two runs; the two exceptions are the run log (accumulates rows by design) and ZA-PSL's daily_2026-11-10_corners.csv — the known recurring case: all 160 rows match the run-1 ledger on exp_total, all three ladder p_over values and the primary-line p_over (primary 8.5) with 0 mismatches, and the ledger itself is bit-identical between runs, so the file differs only in row order (rows are sorted by date only, and 143 of its 160 fixtures sit in 37 same-date groups) — every predicted value is bit-equal to run 1. No retries were needed on either run. One more defect, found by the proof run itself: the brief wrote `world_league: 1. division` (lowercase d), but FotMob's league name and the warehouse directory are `1. Division`. The case-sensitive pull path treated all 1,044 finished DK matches as missing and re-fetched them over HTTP into a duplicate lowercase directory `Denmark/1. division/` (154 MB) in the shared warehouse, and the worktree index rows were rewritten to the lowercase paths. The config now uses `1. Division`; the duplicate directory was deleted, the index paths restored to the capital-D spelling, and the one match that existed only in the duplicate (5764526, finished 2026-11-09) was re-fetched into the correct directory. Four recent matches (5764525, 5764528, 5764529, 5764530 — round 14, 2026-11-06/07) had their stats revised by FotMob between the original pull and the re-fetch (e.g. 5764528 total shots home 9 → 10, SOT home 2 → 4); those four JSONs were refreshed so the warehouse holds the current snapshot, and the rebuilt CSV is now md5-identical to the run-1 CSV (b32e186e5770c322811c3c138f2203d3). Run 2 must show fetched_new=0 for DK, proving the fix. Two environment items: this worktree arrived without the `data_enrichment/fotmob_world` symlink the other runner worktrees carry, so the symlink to the main checkout's warehouse was restored (git-ignored, no commit impact) before the proof runs; and the CO-PrimeraA fresh-worktree trap did not trigger in either run — its builder also reads Primera B warehouse JSONs, which are present via the symlinked main-checkout warehouse, so CO rebuilt and predicted cleanly in both runs with no copy and no code change. Both runs shared the box with the HR-HNL join proof run and the final Codex-sol audit — no kills, no restarts, no retries.
+league/runner/README.md:2485:AU-ALeagueWomen has joined with corners (arm `x7`) and SOT (arm `RS`), both PROVISIONAL PASS; cards (arm `X8`) did NOT join — it was stopped at the X8 operational gate (see below). Corners in `reports/C_AUW_VERDICT.md`: dev pooled n=330 X7 LL@9.5 0.695593 vs Gate Zero 0.700197, league base 0.713786 and naive 0.716623 — both pass dev; virgin 2025/2026 n=110 X7 LL@9.5 0.684884, calibration −3.205pp, SE 4.739pp; Gate Zero 0.694234 FAILS leg (i) against naive (0.688210), so X7 is the only eligible arm; dev sign check 2/3 PASS. Fitted params: gamma 0.15, r 1.1887220308967725, beta [0.0] (no box-touch signal ships), fit_n 429. Corners configuration is primary 9.5, ladder 8.5/9.5/10.5, halves share 0.48, 1H ladder 3.5/4.5/5.5, 2H ladder 4.5/5.5/6.5. SOT in `reports/S_AUW_VERDICT.md`: dev pooled n=330 RS LL@10.5 0.683937 vs Gate Zero 0.685236, base 0.694965 and naive 0.691271 — both pass dev; virgin n=110 RS LL@10.5 0.643041 vs Gate Zero 0.643941 (a 0.0009 LL margin — RS ships on the lower virgin LL), calibration +1.471pp, SE 4.546pp; dev sign check 2/3 PASS. SOT configuration is primary 10.5, ladder 8.5/9.5/10.5, halves share 0.469, div AU-ALeagueWomen, ratio_prior 20000 (stated explicitly; the RS default is 20000), 1H ladder 3.5/4.5/5.5, 2H ladder 4.5/5.5/6.5, team_key id. Goals failed dev and total shots failed dev — both excluded. Cards X8 (K-AUW PROVISIONAL PASS on the numbers: dev pooled n=330 X8 LL@2.5 0.673358 vs Gate Zero 0.676237; virgin n=110 X8 0.597092, calibration +1.616pp, SE 4.328pp; dev sign 3/3) was STOPPED at the X8 operational gate, the same gate that stopped DE-2Bundesliga and PL-Ekstraklasa cards X8: the referee arm needs pre-match appointments, and FotMob carries none for AUW — the leagues payload for 2026/2027 has 91 upcoming fixtures, 0 of which mention a referee anywhere in their JSON, and a per-fixture matchDetails check of all 91 shows the infoBox Referee text empty on every one (the key exists, the name does not). The history column is populated (19/19 played 2026/2027 matches, 550/597 overall) but that does not pass the gate, which is about pre-match appointments only. No cards block was added and no X8 plumbing was shipped; do not ship Gate Zero in its place. Latent defect recorded for any future cards attempt: `predict_cards` would silently drop all AUW history anyway, because the builder writes home_yellow_cards/away_yellow_cards while the adapter only accepts yellow_home/yellow_away or yellow_cards_home/yellow_cards_away. Three adapter/config points, all verified. First, the AUW builder writes home_-prefixed stat columns (home_corners, home_total_shots, home_ShotsOnTarget) and no `league` column, so the stock adapters cannot read it: `predict_corners` works through its existing `columns` opt-in (HU-NBI precedent) plus `exclude_phases: ["finals"]` (the frozen harnesses are regular-only; US-USLLeagueOne precedent), with no code change. Second, `predict_sot` needed the same two opt-ins added, mirroring the corners precedent: a `columns` mapping rewrites the CSV through a temp file (standard name -> the CSV's actual name), the market div is injected as `league` when that column is absent, and with team_key id the team-name columns are swapped for the team ids exactly as the frozen harness keys its rows — without this the frozen engine's load_matches silently loads ZERO rows from the AUW CSV (verified: 0 rows unamended, 568 regular rows with the mapping). Inertness was proven on AU-ALeague, the natural probe (same country, RS arm, no columns key): HEAD vs amended `predict_sot` on 8 fixed pseudo-upcoming fixtures produced byte-identical output. Third, `settle` now honours the `columns` mapping for SOT exactly as it already did for corners: without it the SOT actuals would resolve to the lower-case fallback and AUW SOT would never settle (verified with a synthetic ledger entry: SOT settles with actual_total 7.0 and corners with 6.0 on the same played match; inertness on AU-ALeague SOT settle: 3 settled under both versions with identical grading lines). The config differs from the brief's block in four stated ways: no `team_matches` line (the builder writes no team table; HU-NBI precedent), the SOT block adds team_key id + columns + exclude_phases, the corners block adds columns + exclude_phases, and the cards block is omitted (gate fail). The data builder's frozen-count assert is now a floor (`>= 597`, AU/MLS/USLL1/AE precedent) and nothing else in it changed; the rebuild holds 597 rows (568 regular + 29 finals). Corners shipped-CSV ladder note: the shipped virgin CSV's ladder columns are [9.5, 10.5, 11.5] while the frozen protocol ladder is [8.5, 9.5, 10.5] — the evaluated lines reproduce exactly (col 9.5 LL 0.684884, col 10.5 LL 0.655306), so the CSV simply does not export the 8.5 column; the block ladder follows the frozen protocol. The shipped CSV's halves also use a stale 0.452 share (fixed to the frozen 0.480 in the harness by ca1da555 after the CSV was written), so the adapter's 1H/2H columns differ from the shipped CSV by design and the replay check is on FT mu and the 9.5/10.5 columns. The independent recompute of the shipped virgin predictions reproduces all three verdicts exactly from the per-match CSVs (corners X7 LL@9.5 0.684884, SOT RS LL@10.5 0.643041, cards X8 LL@2.5 0.597092). Replaying through the runner adapters (live refit on full history) differs by named, by-design causes only: corners max |dmu| 1.771, mean 0.718, replay LL@9.5 0.733020 vs shipped 0.684884; on pre-virgin history only max |dmu| 0.951, mean 0.315, LL 0.691199; and on the exact causal-state copy the adapter reproduces the shipped mu at exactly 0.0 (max |dmu| 0.0, max |dp| 0.0) with the frozen fitted params (gamma 0.15, r 1.1887220308967725, beta [0.0], fit_n 429). SOT live refit max |dmu| 1.569, mean 0.334, replay LL@10.5 0.619206 vs shipped 0.643041; on pre-virgin history max |dmu| 1.990, mean 0.794, LL 0.694654 — the whole causal gap is the update-order effect (the adapter predicts all 110 virgin fixtures from pre-virgin state while the frozen harness updates as it walks the season): a harness-style replay with within-virgin updates suppressed reproduces mean |dmu| 0.793747 exactly, and the harness-style causal replay itself reproduces the shipped file at max |dmu| 1.8e-15. Two full end-to-end proof runs on 2026-11-10 (VM date; 2026-11-11 WIB) — 52 leagues, 107 markets, 12,764 predictions each, zero errors in either run; run 1 fetched only J1's 2,092 matches into the fresh worktree, run 2 fetched_new=0 in every league. Both runs completed first try with `MALLOC_ARENA_MAX=2` (run 1 ~34 min, run 2 ~27 min) despite the DK-1Division join proof run sharing the box for the first half of run 1 — no kills, no restarts, no retries. Of 263 snapshotted output files (daily CSVs, ledgers, settled-keys sidecars, grading ledgers), all 263 are bit-identical between the runs, including every AU-ALeagueWomen output (the ZA-PSL known pre-existing case did not differ this time); the AUW ledger still holds exactly 182 entries with run 2 appending nothing. AU-ALeagueWomen predicted real fixtures on day one: 91 upcoming 2026/2027 fixtures per market in both runs (2026-11-14 to 2027-04-11), first 2026-11-14 Melbourne City FC (W)–Newcastle Jets (W) (corners mu 8.5740, P(over 9.5) 0.3620; SOT mu 10.4237, P(over 10.5) 0.4006); corners mu spans 7.3751–9.3085, SOT mu spans 8.9312–11.3478, the 1H shares are exactly 0.48 (corners) and 0.469 (SOT) on all 91 rows, the ledger holds 182 entries, and nothing has settled yet (all fixtures are in the future). It is a world league (Australia, `A-League Women`, FotMob id 9495) over split-year seasons 2021/2022–2026/2027, 11 teams in 2025/2026 and 2026/2027 (10 in 2021/2022, 12 in 2023/2024–2024/2025), straight double round-robin plus finals (finals excluded from every fit by the frozen regular-only rule); at the join the rebuild held 597 matches (70/99/132/138/110 regular per completed season plus 29 finals, 19 played in the in-progress 2026/2027). Two environment items: this worktree arrived without the `data_enrichment/fotmob_world` symlink the other runner worktrees carry, so the symlink to the main checkout's warehouse was restored (git-ignored, no commit impact) before the proof runs, and the worktree carries no `.venv`, so the proof runs used the main checkout's `.venv`; the CO-PrimeraA fresh-worktree trap did not trigger in either run — its builder also reads Primera B warehouse JSONs, which are present via the symlinked main-checkout warehouse, so CO rebuilt and predicted cleanly in both runs with no copy and no code change.
+league/runner/README.md:2486:IS-BestaDeildin has joined with SOT (arm `GZ`), corners (arm `x7`) and total shots (arm `B`), all PROVISIONAL PASS in `reports/S_IS_VERDICT.md`, `reports/C_IS_VERDICT.md` and `reports/T_IS_VERDICT.md`. Goals and cards failed dev and are excluded. It is an Iceland world league (FotMob id 215, ccode ISL, `Besta deildin`, 12 teams, 162 matches per completed season; the rebuild held 942 matches — 132 in 2021 plus 162 per season 2022–2026 — and 1,884 team rows). The 2021/2022 seasons carry no stats at all in the feed, so every adapter's history starts at the 2023 seed season, exactly as the frozen harnesses do. Configuration: SOT primary 9.5, ladder 8.5/9.5/10.5, halves share 0.4644, 1H ladder 3.5/4.5/5.5, 2H ladder 4.5/5.5/6.5, div IS-BestaDeildin, ratio_prior 200; corners primary 11.5, ladder 10.5/11.5/12.5, halves share 0.4707, 1H ladder 5.0/5.5/6.0, 2H ladder 5.5/6.0/6.5; total shots primary 27.5, ladder 26.5/27.5/28.5, halves share 0.4623, 1H ladder 11.5/12.5/13.5, 2H ladder 13.5/14.5/15.5. No `exclude_phases`: the frozen harnesses score all phases and the virgin n=162 is the full 2026 season (132 regular + 15 championship + 15 relegation). Virgin LLs, recomputed exactly from the shipped per-match CSVs: SOT GZ 0.631861 vs base 0.672605 / naive 0.640239, calibration −1.398pp, SE 3.707pp; corners X7 0.674422 vs GZ 0.698517 / base 0.689293, calibration −2.353pp, SE 3.863pp; total shots B 0.553977 vs A 0.559717 / C 0.566887 / base 0.608400, calibration −3.446pp, SE 3.381pp. Fitted params: SOT nb_r 79.94; corners gamma 0.3, r 1.1860067504340819, beta [0.0], fit_n 474; total shots lambda 300.0, r_A 150.81292325968832, level_cell [30.0, 1.0, 50.0], M_bar 27.93. No adapter change to `run_daily.py` was needed. The SOT frozen walk (harness-style, ratio_prior 200) reproduces all 162 shipped rows at exactly 0.0 on all 12 columns; the corners frozen params on adapter-built features reproduce all 162 at exactly 0.0 on all 12 columns; the total-shots adapter call reproduces mu within 0.426 (mean 0.071), entirely the same-day level-layer effect — zero (max 7.1e-15) on single-match dates, since the harness updates the league-wide level layer after each match while the adapter feeds a whole date at once — with adapter LL@27.5 0.555773 vs shipped 0.553977. The SOT live-adapter gap (max |Δmu| 1.885, mean 0.380) decomposes into the within-virgin update effect (pre-virgin-state-only walk vs shipped: max 1.871, mean 0.302) and the future-leakage effect (live adapter vs pre-virgin-state-only: max 2.199, mean 0.603) — both by-design consequences of the adapter predicting from full-history state. The corners live-adapter gap is only the r refit (live fit keeps gamma 0.3 and beta [0.0], r 1.1860 → 1.1974 on full history): mu matches at 0.0, p_over 11.5 within 0.0013, live LL@11.5 0.674457 vs shipped 0.674422. Two adapter-path findings, both verified immaterial for this league. First, the team-name split is real: nine FotMob ids carry two spellings (4472 Keflavik/Keflavík, 4516 HK Kopavogs/HK Kópavogs, 6017 Vikingur Reykjavik/Víkingur Reykjavík, 6291 Fram Reykjavik/Fram Reykjavík, 8004 IA Akranes/ÍA Akranes, 8130 KR Reykjavik/KR Reykjavík, 8151 FH Hafnarfjordur/FH Hafnarfjörður, 8299 IBV Vestmannaeyjar/ÍBV Vestmannaeyjar, 8332 Breidablik/Breiðablik); the diacritic spelling becomes sole in 2026 for all nine, and Keflavík (4472) and Víkingur Reykjavík (6017) appear in diacritic form only in 2026. The frozen harness keys history on raw names, so the runner does the same — no `team_key`, no canonicalisation: an id-keyed walk is worse (max |Δmu| 1.064 vs 0.0 name-keyed), which is what the DK precedent's remap would have broken here. Second, the corners adapter's in-memory history build bypasses `core.load`'s 2023 touches quarantine, so z_bt differs on 38 of 648 rows — but quarantined vs unquarantined fits are identical on the same window (gamma 0.3, beta [0.0], r equal to 15 digits), so no quarantine opt-in was added and no blocker arose. Total shots: `fitted_params.json` carries no `half_split`, so the arm-B fallback to the market's frozen `halves_share_1h` engages (CN precedent) — the 1H share is exactly 0.4623 on all 162 replay rows. The data builder's frozen-count assert is now a floor (`>= 942`, AE/USLL1 precedent); the rebuild holds exactly 942 rows. Two full end-to-end proof runs on 2026-11-10/11 (VM dates; 2026-11-11 WIB), 54 leagues, 114 markets, 12,956 predictions each, zero errors in either run; run 1 fetched only J1's 2,092 matches into the fresh worktree, run 2 fetched_new=0 in every league. The runs straddled midnight UTC, so run 2's ledger entries carry run_date 2026-11-11 while run 1's carry 2026-11-10: of 276 snapshotted files, the only 48 that differ are the ledger.jsonl files, each holding exactly the run-1 entries plus an identical set dated 2026-11-11 (e.g. DK-1Division 192+192, J1 720+720); all 228 other files, including every IS-BestaDeildin output, are bit-identical. The 2026 season is complete and 2027 fixtures are not published yet, so IS predicted 0 upcoming fixtures per market in both runs and nothing settled; the daily CSVs are header-only and the ledger holds no entries from the runs. A synthetic settlement on finished match 5225640 (2026-05-21, ÍA Akranes–ÍBV Vestmannaeyjar; actuals SOT 9.0, corners 12.0, total shots 28.0, each within 1.0 of its primary line) proves `settle()` works: SOT live exp 10.1068, P(over 9.5) 0.6474, chosen over, miss, LL 1.0426; corners live exp 11.5311, P(over 11.5) 0.4782, chosen under, miss, LL 0.7378; total shots live exp 29.6751, P(over 27.5) 0.6258, chosen over, hit, LL 0.4687. Each market settled exactly once (a second settle pass settled nothing). Replay artefact, stated plainly: feeding a played match as an upcoming fixture makes `predict_corners` return two rows for it (the history copy with correct prior-only features, exp 11.5311, and the fixture copy whose features are built on leaked full-history prior, exp 12.6920, because the out-of-order fixture rows land at the end of the FeatureBuilder input); both rows landed in the ledger — `write_predictions` dedups only against the pre-existing ledger, not within one call — and `settle()` graded the first (correct) entry. In production this cannot occur: upcoming fixtures are future-dated and absent from the CSV, so exactly one prediction per fixture with correct prior. Two environment items: this worktree arrived without the `data_enrichment/fotmob_world` symlink the other runner worktrees carry, so the symlink to the main checkout's warehouse was restored (git-ignored, no commit impact) before the proof runs, and the worktree carries no `.venv`, so the proof runs used the main checkout's `.venv`; the CO-PrimeraA fresh-worktree trap did not trigger in either run — its builder also reads Primera B warehouse JSONs, which are present via the symlinked main-checkout warehouse, so CO rebuilt and predicted cleanly in both runs with no copy and no code change. All proof runs were made with `MALLOC_ARENA_MAX=2`.
+league/runner/README.md:2488:SA-FirstDivision has joined with SOT (arm `GZ`), CLEAN PASS in `reports/S_SAFD_VERDICT.md`. Goals, corners, total shots and cards all failed their gates and are excluded. It is a Saudi Arabia world league (FotMob id 10721, ccode KSA, `Saudi First Division`, 18 teams, 306 regular matches per completed season plus 3 promotion-playoff matches; the rebuild held 712 matches — 309 per completed season 2024/2025 and 2025/2026, 94 played in the in-progress 2026/2027 — and 1,424 team rows). The 2024/2025 season carries no stats at all in the feed, so every adapter's history starts at the 2025/2026 seed season, exactly as the frozen harness does. SOT configuration is primary 8.5, ladder 7.5/8.5/9.5, halves share 0.454, 1H ladder 3.5/4.5/5.5, 2H ladder 4.5/5.5/6.5, div SA-FirstDivision, ratio_prior 200 (documentary — the engine is `Engine(ms, arm)` and fixes the prior at 200 internally, DK pattern). Dev pooled n=214 (90 warm-up + 214 scored, date-grouped predict-then-update): Gate Zero LL@8.5 0.6944 vs league base 0.6963 / naive 0.6987 — both arms pass dev. Virgin 2026/2027 TRANSITIONAL n=94, read once: Gate Zero LL 0.686013 vs base 0.690133 / naive 0.705866; calibration −0.686pp pred−actual, SE 5.145pp — inside the 1.0pp clean band. RS 0.686166 fails leg (i) vs Gate Zero and does not ship. Fitted params: nb_r 79.94. Two adapter changes in `run_daily.py`, both opt-in and engaged only by new market keys. First, `predict_sot` now honours a `seasons` allowlist, mirroring the `ratio_prior` signature-check pattern: when the market carries a `seasons` list AND the loader's signature accepts a second positional, it is passed; leagues without the key call exactly as before. SA's loader is `load_matches(path, seasons)` with seasons REQUIRED, so the stock one-argument call raises TypeError (verified: HEAD raises `TypeError: load_matches() missing 1 required positional argument: 'seasons'`), and SA passes ["2025/2026", "2026/2027"] only — score-only 2024/2025 (all 309 rows with empty stat fields) would crash the loader's bare `float(r[k])`. Inertness: HEAD vs amended `predict_sot` on DK-1Division (GZ, team_key id) is byte-identical on 8 fixed pseudo-upcoming fixtures. Second, `predict_sot` now honours `regular_rounds_only`: the frozen harness excludes playoffs, but the pull returns whatever FotMob lists as upcoming; the pull's fixture dicts carry `round` (verified on the completed 2025/2026 payload: "1".."34" regular, "Promotion Play-offs - Semi-finals"/"Final" for the 3 playoff fixtures), so when the market opts in, fixtures whose round is not a plain round number are skipped — a fixture with no round info passes through, and leagues without the key are unchanged (verified: a playoff-round fixture is skipped for SA and kept for DK). The pull also carries `round` in its upcoming dicts for world leagues (additive; no other consumer reads it). One defect in the join path was found by the first proof run and fixed in the league builder: SA's `build_data.py` had no `main()` (every other world builder defines one), so `rebuild_csv_world` raised `AttributeError: module 'daily_SA-FirstDivision_builder' has no attribute 'main'` and SA predicted nothing in that run; `main()` now wraps the existing `__main__` block, and `rebuild_csv_world` rebuilds 712 rows cleanly. Replay (independent recompute of the shipped virgin predictions, 94 rows): the harness-style causal walk reproduces the shipped CSV at max |Δmu| 1.8e-15 and the virgin LL at 0.686013 exactly. The live adapter walk differs by at most 0.4580 on mu (mean 0.1242) and 0.2181 on p_over 8.5 (worst fixture 1000018433, 2026-08-31 Al-Saqer FC–Al Akhdoud, adapter 0.525 vs shipped 0.307 — both clubs are 2026/2027 newcomers with no dev history, so the adapter's full-history state knows far more about them than the harness did at that date), with replay LL@8.5 0.637147 — decomposed: the refit-anchor effect is exactly 0.0000 (the adapter's first refit lands on the harness's 7-day grid), the no-within-virgin-update effect is 0.4676, and the future-leakage effect (the adapter's Ratings/naive state is built from the full history including later virgin matches, while the harness updates as it walks) is 0.5856 max pairwise; the adapter's replay LL looks better than the gated 0.686013 only because of that leakage, and is not the gated number. The 1H/2H columns differ by at most 0.044 (mean 0.011), the same mu-driven cause — the 1H share is exactly 0.454 on all 94 replay rows. The loader's exclusions were verified in the replay: it returns 398 rows (304 dev + 94 virgin), excluding the 3 playoff and 2 awarded rows of 2025/2026. Team names: the fitted 24 teams equal the union of the 2025/2026 and 2026/2027 team sets exactly, and the FotMob index names match the CSV's canonical names on all 712 matches — no split, so no `team_key` and no canonicalisation. Two edge findings. First, playoffs: the 2026/2027 promotion playoffs (~May 2027) are not yet published — FotMob lists fixtures only ~2 months ahead, and the current pull's 68 upcoming fixtures run 2026-11-18 to 2027-01-10, all regular rounds (the 9 round-19 fixtures dated 2027-01-03..05 are marked cancelled in the feed and the pull already skips cancelled fixtures); the `regular_rounds_only` opt-in above is what will keep the playoffs unpredicted when they appear. Second, awarded matches at settlement: 2026/2027 has 0 awarded rows; the only 2 awarded rows in the data are 2025/2026 regular matches (2026-01-21 Al-Faisaly–Abha 3-0, match 1000006540; 2026-01-22 Al-Ula FC–Al-Wehda 0-3, match 1000006697) and both carry scores but NO SOT/total-shots stats (empty fields), so `settle()`'s empty-actual guard skips them rather than grading them wrongly. The risk is latent only: if FotMob ever attaches stats to an awarded match, `settle()` would grade it while the harness excludes awarded rows from scoring. Proposed minimal opt-in, NOT implemented: a market key `exclude_awarded_settle: true` making `settle()` skip rows with `awarded` != "0" (the CSV already carries the column). Three full end-to-end proof runs on 2026-11-11 (VM date; 2026-11-11 WIB), 55 leagues, 115 markets, all with `MALLOC_ARENA_MAX=2`. Run 1 (exit 0, ~34 min): 12,956 predictions, 0 settled, 1 error row in 392 log rows — the SA `main()` defect above, so SA predicted nothing (fetched_new 2,092 for J1's fresh store only, every other league 0). Run 2's first attempt was killed by a runtime restart at 5 leagues (log rows 392..426, no error — the restart, not the run); the relaunched run 2 (exit 0, ~28 min): 13,024 predictions, 0 settled, 0 errors in 395 log rows, fetched_new=0 in every league; SA predicted 68 upcoming fixtures, first 2026-11-18 Al-Adalah–Al-Orobah FC (match 1000018504, exp_total 8.0903, p_over 8.5 0.4167), mu range 7.2146–9.3080, 1H share exactly 0.454 on all 68 rows, ledger 68 entries, nothing settled, settled_keys empty. Run 3 (exit 0, ~28 min): 13,024 predictions, 0 settled, 0 errors in 395 log rows, fetched_new=0 in every league; SA again 68 fixtures with the same first fixture and values, ledger still exactly 68 entries (dedup by market/match_id/run_date works). Of 280 snapshotted output files (daily CSVs, ledgers, settled-keys sidecars, grading ledgers), all 280 are bit-identical between runs 2 and 3, including every SA-FirstDivision output — the known ZA-PSL corners case did not differ this time. Two environment items: this worktree arrived without the `data_enrichment/fotmob_world` symlink the other runner worktrees carry, so the symlink to the main checkout's warehouse was restored (git-ignored, no commit impact) before the proof runs; and the worktree carries no `.venv`, so the proof runs used the main checkout's `.venv`. The CO-PrimeraA fresh-worktree trap did not trigger in any run — its builder also reads Primera B warehouse JSONs, which are present via the symlinked main-checkout warehouse, so CO rebuilt and predicted cleanly in all runs with no copy and no code change.
+league/runner/README.md:2490:LV-Virsliga has joined with SOT (arm `GZ`), CLEAN PASS in `reports/S_LV_VERDICT.md`. Goals, corners, total shots and cards all failed their gates and are excluded. It is a Latvia world league (FotMob id 226, ccode LVA, `Virsliga`, 10 teams, straight quadruple round-robin, 36 rounds, 180 matches per complete season, no play-offs in the feed; calendar-year seasons 2021–2026; the rebuild held 1,011 matches and 2,022 team rows — 112 in truncated 2021, 180 per season 2022–2025, 179 in 2026 — with the 6 two-legged relegation finals of 2022–2024 excluded by the builder). The stats era starts 2025-03-05 (no stats block before it); SOT dev is a walk-forward over the stats era only (warm-up 2025-03-05–04-30, scored 2025-05-01–11-09, n=133): Gate Zero LL@9.5 0.682846 vs league base 0.689921 / naive 0.683999 — Gate Zero beats both baselines on dev (vs naive by only 0.00115 — thin, but a pass); RS 0.685650 loses to naive and is dead at dev. Virgin 2026 n=179, read once: Gate Zero LL 0.679910 vs league base 0.679994 / naive 0.680898; calibration +0.21pp actual−predicted, SE 3.697pp. Leg (i) passes by 0.000084 over the league base rate — the frozen rule is a comparison, not a margin, and it passes; leg (ii) |+0.21pp| ≤ 1.0pp is clean; leg (iii) Gate Zero is exempt (RS dead at dev). Mean predicted SOT 8.98 vs actual 9.19 on virgin. SOT configuration is primary 9.5, ladder 8.5/9.5/10.5, halves share 0.4637, 1H ladder 3.5/4.5/5.5, 2H ladder 4.5/5.5/6.5, div LV-Virsliga, ratio_prior 200. Fitted params: walk-forward model, no single fitted parameter set (`engine/sot/fitted_params_virgin.json` carries only the market/line/arm record — see the engine README). No `run_daily.py` change was needed: the stock `predict_sot` path fits — the loader is `load_matches(path, allowed_seasons=None, ...)` (SOT v5 pattern, same as IS), requires `has_stats_all == "1"` plus the four stat columns, reads `div = r["league"]` (the builder writes the `league` column), keys history on raw team names, and the engine is `Engine(matches, arm, *, ratio_prior=None)`, so the runner's `ratio_prior: 200` kwarg is accepted; no `seasons` key (the SA opt-in does not apply — pre-stats rows are dropped by the `has_stats_all` filter exactly as the harness does), no `columns`/`exclude_phases`/`team_key` (the 6 relegation finals are excluded from the CSV tables by the builder itself, and the CSV carries standard stat names). No adapter change was made, so no inertness probe was required. The builder's asserts are untouched hard equalities (source 1,017 / rows 1,011 / excluded 6): the RFS–Riga FC round-36 match has NOT appeared — a live FotMob probe shows match 5162094 (Riga FC vs RFS, 2026-11-08) is listed as cancelled/postponed, not finished, so it is neither fetched nor predicted and the counts are unchanged. Team names: the two ids with two spellings (8016 FK Liepaja/FK Liepāja, 662738 Grobina/Grobiņa) each use a single spelling across the whole stats era (FK Liepāja and Grobiņa in all 359 stats rows; the ASCII spellings occur only in pre-stats seasons the loader drops), so the name-keyed history is unsplit — no canonicalisation, no `team_key`. Replay (independent recompute of the shipped virgin predictions, 179 rows): the harness-style causal walk reproduces the shipped CSV at max |Δmu| 3.6e-15 and max |Δp| 0.0 on every ladder line (LL@9.5 0.679910 exact). The live adapter walk (full-history state, no within-virgin updates) differs by at most 0.8429 on mu and 0.1922 on p_over 9.5 (worst fixture 5161934, 2026-04-04, adapter mu 8.9837 vs shipped 9.8265, p 0.4332 vs 0.5361), with replay LL@9.5 0.672860 — decomposed: the refit-anchor effect is 7.8e-14 (the adapter's refit grid anchored at the first virgin date reproduces the harness thetas exactly), the no-within-virgin-update effect is 0.5888 on mu (0.1730 on p), and the future-leakage effect (the adapter's Ratings/naive state is built from the full history including later virgin matches, while the harness updates as it walks) is 0.8540 on mu (0.1419 on p); the adapter's replay LL looks better than the gated 0.679910 only because of that leakage, and is not the gated number. The 1H share is exactly 0.4637 on all 179 replay rows. Two full end-to-end proof runs on 2026-11-11 (VM date; 2026-11-11 WIB), 56 leagues, 116 markets, all with `MALLOC_ARENA_MAX=2`. Run 1 (exit 0, ~28 min, log 03:00–03:27 UTC): 13,024 predictions, 0 settled, 0 errors in 400 log rows; fetched_new 2,092 for J1's fresh store only, every other league 0. Run 2's first attempt was killed by a runtime restart at 18 leagues (138 log rows, 03:37–03:48 UTC, 0 errors — the restart, not the run); the relaunched run 2 (exit 0, ~27 min, log 03:49–04:17 UTC): 13,022 predictions, 0 settled, 0 errors in 400 log rows, fetched_new=0 in every league. The 2-prediction difference is a live-feed change, not a runner defect: AU-ALeagueWomen fixture 1000020337 (Newcastle Jets (W) vs Adelaide United (W), 2026-11-21) was listed as postponed/cancelled by FotMob between the runs — verified by a live probe — so the relaunch correctly stopped predicting it (91→90 rows in both its markets). LV predicted 0 upcoming fixtures and settled 0 in every run (the 2026 season is complete and the 2027 season is unpublished); its daily CSV is header-only and its ledger holds no entries from the runs. Of 284 snapshotted output files (daily CSVs, ledgers, settled-keys sidecars, grading ledgers), 281 are bit-identical between run 1 and the relaunched run 2; the only 3 that differ are the two AU-ALeagueWomen files above and ZA-PSL corners, whose difference is a live-feed team-name spelling change ("AmaZulu FC" → "AmaZulu" on 19 rows) with every numeric value bit-equal (max |d| 0.0 on exp_total, every ladder p_over, both halves columns, and dates). One process caveat, stated plainly: the run-1 snapshot tar lived in /tmp and was lost in the same runtime restart that killed run 2's first attempt, so the comparison baseline is the post-run-1 on-disk state re-snapshotted to `~/workspace/lv-proof` after the killed attempt — 38 leagues' files are pristine run-1 outputs, while the 18 leagues the killed attempt had processed carry daily CSVs it deterministically rewrote (per-league/market predicted counts match run 1 exactly on all 43 common entries; ledgers are deduplicated, so no duplicate lines). A synthetic settlement on finished match 5161946 (2026-04-14, SK Super Nova–Riga FC; actual SOT 9.0, within 0.5 of the 9.5 primary line) proves `settle()` works: adapter exp_total 9.3850, P(over 9.5) 0.4270, chosen under, hit, log loss 0.5569; it settled exactly once (a second settle pass settled 0), and the four touched runtime files were restored byte-identical to the post-proof-run state afterward (verified against the snapshot). Two environment items: this worktree arrived without the `data_enrichment/fotmob_world` symlink the other runner worktrees carry, so the symlink to the main checkout's warehouse was restored (git-ignored, no commit impact) before the proof runs; and the worktree carries no `.venv`, so the proof runs used the main checkout's `.venv`. The CO-PrimeraA fresh-worktree trap did not trigger in any run — its builder also reads Primera B warehouse JSONs, which are present via the symlinked main-checkout warehouse, so CO rebuilt and predicted cleanly in all runs with no copy and no code change.
+league/runner/README.md:2492:AR-PrimeraBNacional has joined with cards only (arm `x8`), PROVISIONAL PASS in `reports/K_BNAC_VERDICT.md`: dev pooled n=1,334 (2024+2025) Gate Zero LL@4.5 0.680252, X8 0.659605 — both pass dev, X8 wins the dev sign check 2/2 blocks; virgin 2026 n=648, read once, X8 LL@4.5 0.669291 vs Gate Zero 0.676939 / league base 0.692222 / naive 0.687911, calibration −1.0611pp actual−predicted, SE 1.9191pp (breach 0.0611pp ≤ 1 SE → PROVISIONAL); the both-pass rule ships the lowest virgin LL, X8. Goals FAIL dev and are excluded. It is an Argentina world league (FotMob id 8965, ccode ARG, `Primera B Nacional`, 36 teams in 2026; calendar-year seasons 2021–2026; the rebuild held 3,874 matches and 7,748 team rows). The builder asserts phase counts group 3,874 / playoff 92 but writes group rows only, so the CSV carries no playoff rows and the virgin 648 is the full 2026 group season — no `exclude_phases` (the frozen harness scores all phases, and there are none to exclude). Cards configuration is primary 4.5, ladder 3.5/4.5/5.5, halves share 0.3900912370, 1H ladder 0.5/1.5/2.5, 2H ladder 1.5/2.5/3.5, `exclude_seasons: ["2021", "2022"]`, and `cards_actual: [yellow_home, yellow_away]`; there is no `team_matches` key (the builder writes `team_matches.csv`, not `bnac_team_matches.csv`, and the world rebuild path never reads the key). The two added keys are forced, not stylistic: the 2021/2022 `yellow_home`/`yellow_away` values are literal `"nan"` strings, which the default empty-value skip does not drop and `int(float("nan"))` crashes on, so the seasons must be excluded (CN precedent); and the CSV carries no `yellow_cards_home`/`yellow_cards_away` columns, so without the `cards_actual` override `settle()` would silently grade nothing (KR/NO/FI precedent). Fitted params: HL 270, K_PRIOR 8, K_REF 8, r 112.39, shipped_arm x8. The operational gate passed, measured the day of the join: 9 upcoming fixtures (all 2026 Reducido playoffs, 2026-11-14/15), 0/9 carry a referee mention in the leagues payload, 1/9 carries a referee name in matchDetails infoBox (match 6575527 Godoy Cruz vs Tristán Suárez, 2026-11-15, Maximiliano Ramírez) — stated plainly, that one appointed referee has zero in-league priors, so all 9 production predictions are Gate-Zero-equivalent (multiplier 1.0 on every row); the gate passes on its ≥1 rule, and the per-fixture Gate Zero fallback covers the rest. This is the FIRST X8 join, so `predict_cards` in `run_daily.py` gained the X8 path, all of it opt-in by `arm == "x8"`: it accepts the arm; it extracts history-row construction into `_cards_history_rows` (which also adds the team-column alias, `home_team_id`/`home_team` preferred, `home_id`/`home_name` fallback — this builder uses the latter spelling — and attaches `referee` plus the harness's `(date, match_id)` `key` tuple); for `x8` it fetches each upcoming fixture's appointed referee from FotMob matchDetails (one shared client per run, `follow_redirects=True`, a fixture dict that already carries a referee uses it, a failed fetch falls back to no referee and never fails the run); an engine without `estimate_r` supplies its frozen dispersion as module-level `R` (112.39 here) with a two-argument `nb_over(mu, line)`, while every other cards engine keeps the existing `estimate_r` + three-argument path; and `x8` output rows additionally carry `referee`, `n_prior`, `multiplier`, `fallback`, `fallback_reason` (mirroring the harness's `_csv_row`). One defect in that first version was caught by the inertness probe and fixed before the proof runs: attaching `referee` to history rows unconditionally activated dormant referee branches in `gate_zero` engines (KR-KLeague1's `update()` then requires `row["kickoff_utc"]`, which the runner never supplied, raising `KeyError`) — referee identity is now attached only for `x8`, so `gate_zero` rows are exactly as before. Inertness was proven on KR-KLeague1 cards (`gate_zero`): HEAD vs amended `predict_cards` on 8 fixed pseudo-upcoming fixtures is byte-identical. The BNAC engine was never adapter-runnable under `gate_zero` (HEAD fails at `home_team_id`, the amended adapter at `row["referee"]`) — not a regression; the joined arm is `x8`. Replay (independent recompute of the shipped virgin predictions, 648 rows): the harness-style causal walk through the adapter's own history-row builder reproduces the shipped CSV at max |Δmu| 0.0 and max |Δp| 0.0 on every row, multiplier/fallback/`n_prior` exact on 648/648, LL@4.5 0.669291 exact — and the same walk with arm `gate_zero` reproduces the verdict's Gate Zero virgin LL 0.676939 exactly. The live adapter walk (one `predict_cards` call, upcoming = all 648 virgin fixtures, full-history state) differs by max |Δmu| 1.96456 (mean 0.3758) and max |Δp| 0.2841 at 4.5, LL@4.5 0.629376 — decomposed, not assumed: the gap is entirely state timing, the first virgin fixture (2026-02-13) sits 0.7029 off while the last (2026-11-02) sits 0.0961 off, and all 601 multiplier mismatches come from extra referee priors in the full-history state (0 have identical `n_prior`; e.g. Maximiliano Manduca shipped `n_prior` 0 → replay 29), while the pre-virgin-state-only walk differs by max |Δmu| 1.44879 (mean 0.3034), LL@4.5 0.678042 — the no-within-2026-learning direction. The replay LL looks better than the gated 0.669291 only because of future leakage, and is not the gated number. Team names: all 16 upcoming team names and ids match the CSV exactly, no split, no canonicalisation; live infoBox Referee text matches the CSV `referee` column on 8/8 sampled finished 2026 matches. Two full end-to-end proof runs on 2026-11-11 (VM date; 2026-11-11 WIB), 57 leagues, 117 markets, all with `MALLOC_ARENA_MAX=2`. Run 1 (exit 0, ~28 min, log 04:49–05:17 UTC): 13,031 predictions, 0 settled, 0 errors in 405 log rows; fetched_new 2,092 for J1's fresh store only, every other league 0. Run 2 (exit 0, ~28 min, log 05:17–05:45 UTC): 13,031 predictions, 0 settled, 0 errors in 405 log rows, fetched_new=0 in every league. Of 288 snapshotted output files (daily CSVs, ledgers, settled-keys sidecars, grading ledgers), all 288 are bit-identical between the runs, including every AR-PrimeraBNacional output — the known ZA-PSL corners case did not differ this time. AR-PrimeraBNacional predicted its 9 real upcoming fixtures in both runs (first 2026-11-14 Godoy Cruz–Tristán Suárez, match 6546950, exp_total 4.5341, P(over 4.5) 0.4724; exp_total range 3.8819–5.6716; the 1H share is exactly 0.3900912370 on all 9 rows; the ledger holds exactly 9 entries, run_date 2026-11-11) and settled nothing (all fixtures are in the future). A synthetic settlement on finished match 5239418 (2026-10-31, Godoy Cruz–Almirante Brown; actual yellows 3+2=5, shipped multiplier 1.0322) proves `settle()` works through the `cards_actual` override: live exp_total 4.9448, P(over 4.5) 0.5462, multiplier 1.0341, chosen over, hit, log loss 0.6048; it settled exactly once (a second pass settled nothing), and the four touched files were restored byte-identical afterward. Two environment items: this worktree arrived without the `data_enrichment/fotmob_world` symlink the other runner worktrees carry, so the symlink to the main checkout's warehouse was restored (git-ignored, no commit impact) before the proof runs; and the worktree carries no `.venv`, so the proof runs used the main checkout's `.venv`. The CO-PrimeraA fresh-worktree trap did not trigger in either run — its builder also reads Primera B warehouse JSONs, which are present via the symlinked main-checkout warehouse, so CO rebuilt and predicted cleanly in both runs with no copy and no code change. Two process caveats, stated plainly: the Codex implementation run crashed mid-task (a Rust stderr-pipe panic after printing a large grep dump) before delivering its summary, so its adapter change was reviewed line-by-line and its inertness probe re-run by the runner instead of taken on trust; and a runtime restart wiped /tmp between the proof runs and the synthetic settlement, so the gate/probe/replay scripts are gone but their outputs are recorded here and the proof snapshots live in `~/workspace/arb-proof/`.
+league/runner/README.md:2494:KZ-PremierLeague has joined with goals only (Gate Zero, PROVISIONAL PASS in `reports/G_KZ_VERDICT.md`: virgin 2026, complete season, n=240, 1X2 LL 1.0152 vs climatology 1.0678; calibration home-win −1.26pp (SE 3.09pp) and OU2.5 −3.21pp (SE 3.21pp), both breaches within 1 SE → PROVISIONAL on both legs; dev pooled 1X2 LL 1.0290 < climatology 1.0712, RPS 0.2135 < 0.2285, OU2.5 LL 0.6819 < base-rate 0.6929; SHRINK is identical to Gate Zero everywhere it was measured, so the both-pass rule ships the simpler arm). SOT, corners, cards, and total shots are NOT BUILDABLE and are excluded — it is a scores-only league (no SOT target, no corners target, zero plain Yellow, no total-shots target). Goals configuration is primary 2.5, ladder 1.5/2.5/3.5, halves share 0.4539 (the frozen KZ goals constant), 1H ladder 0.5/1.5/2.5, 2H ladder 1.5/2.5/3.5. The shipped virgin fitted params are rho 0.0, mu 1.3373, h 0.2543, 22 teams — the two 2026 entrants, Altai Semey and Irtysh Pavlodar, start at the league mean, a = d = 0. It is a Kazakhstan world league (FotMob id 225, calendar-year seasons 2021–2026, 1,124 matches at the join; the 2026 season is complete at 240 matches). This is the third goals join and the first to need the signature-dispatched adapter: the goals adapter now calls `adjusted_lambdas` with exactly the signature each engine ships — engines taking `(model, home, away, arm, counts)` are called with five arguments, all other engines take the existing path. The trap was proven real: HEAD raises TypeError on KZ in both call forms, and the amended code predicts. Inertness was proven on SCO-Premiership and TR-SuperLig goals: HEAD vs amended `predict_goals` on 8 fixed fixtures each is byte-identical (max |d| 0.0). Replay (independent recompute of the shipped virgin predictions, 240 rows): the harness-style causal walk reproduces the shipped CSV exactly — max |Δlam| 0.0, max |Δp| 0.0, LL 1.015226 = verdict 1.0152 — while the live-adapter walk (one `predict_goals` call, upcoming = all 240 virgin fixtures, full-history state) gives LL 1.000751, decomposed as refit-anchor 0.009951 + within-virgin-update 1.741266 on lam, future leakage 0 by construction. A FotMob probe the day of the join found the 2027 season unpublished (`selectedSeason='2026'`, 0 upcoming), so the join predicts nothing live until FotMob publishes 2027. Two full end-to-end proof runs on 2026-11-11, 58 leagues, 118 markets, all with `MALLOC_ARENA_MAX=2`. Run 1 (exit 0, ~31 min): 13,031 predictions, 0 settled, 0 errors in 410 log rows; fetched_new 2,092 for J1's fresh store only, every other league 0. Run 2 (exit 0, ~30 min, log 07:49–08:19 UTC): 13,031 predictions, 0 settled, 0 errors in 410 log rows, fetched_new=0 in every league. KZ in both runs: 0 upcoming / 0 predicted / 0 errors, header-only daily goals CSV, empty ledger, `[]` settled keys. Of 292 snapshotted output files, 291 are bit-identical between the runs; the one exception is HR-HNL's daily corners CSV, where FotMob moved 12 fixture dates between the runs (2026-11-21→22, 11-28→27/29, 12-05→06/07, 12-12→13/14) — same 116 match_ids and teams, max float difference 1.1e-14 — an upstream listing change, not a code difference. Run 2's first attempt was killed mid-run by a runtime restart at 14:46 WIB (225 of ~410 rows, last write EG-PremierLeague `data_refresh`) and was relaunched from scratch; the partial run is not a proof and was not compared. A synthetic settlement on finished match 5204163 (2026-07-05, Atyrau–Kaspiy Aktau 1–2, actual total 3) proves `settle()` works through the adapter: live exp_total 1.6096, p_over_2.5 0.2191, chosen under, missed, log loss 1.5181; it settled exactly once (a second pass settled nothing), and the four touched files were restored byte-identical afterward. This worktree arrived without the `data_enrichment/fotmob_world` symlink the other runner worktrees carry, so the symlink to the main checkout's warehouse was restored (git-ignored, no commit impact) before the proof runs; and the worktree carries no `.venv`, so the proof runs used the main checkout's `.venv`.
+league/runner/README.md:2496:BA-PremierLeague has joined with goals only (Gate Zero, PROVISIONAL PASS in `reports/G_BA_VERDICT.md`: virgin 2026/2027 in progress, n=64, 1X2 LL 0.8880 vs climatology 1.0625, RPS 0.1630; calibration home-win −1.00pp (breach 0.004pp over the 1.0pp boundary, SE 5.41pp) and OU2.5 −2.45pp (breach 1.45pp, SE 6.32pp), both breaches within 1 SE → PROVISIONAL on both legs; dev pooled n=772 1X2 LL 0.9473 < climatology 1.0522, RPS 0.1947 < 0.2283, OU2.5 LL 0.6845 < base-rate 0.6972; SHRINK is identical to Gate Zero everywhere it was measured — the arm is degenerate in this league by construction, since no team ever has 1–5 prior matches under expanding season-blocked fits — so the both-pass rule ships the simpler arm). SOT, corners, cards, and total shots are NOT BUILDABLE and are excluded — it is a scores-only league. Goals configuration is primary 2.5, ladder 1.5/2.5/3.5, halves share 0.4493 (the frozen BA goals constant), 1H ladder 0.5/1.5/2.5, 2H ladder 1.5/2.5/3.5, plus the `exclude_awarded: true` opt-in. The shipped virgin fitted params are rho 0.0, mu 1.1811, h 0.3204, training n=968 — the two 2026/2027 newcomers, Čelik Zenica and BSK Banja Luka, start at the league mean, a = d = 0. It is a Bosnia-Herzegovina world league (FotMob id 267, seasons 2021/2022–2026/2027, 1,036 matches at the join). This is the fourth goals join and the first to need two adapter changes in `predict_goals`: the xG columns are now read with `.get()` (BA's builder writes no expected-goals columns, so None degrades to the goals-only observation exactly as the engines do; leagues carrying the columns are unchanged), and the `exclude_awarded` opt-in drops BA's 4 awarded matches from every fit, matching the frozen prereg and the harness loader — other goals leagues (SCO, TR, KZ) do not opt in, so their fits are unchanged. Inertness was proven on SCO-Premiership and TR-SuperLig goals: HEAD vs amended `predict_goals` on 8 fixed fixtures each is byte-identical. Replay (independent recompute of the shipped virgin predictions, 64 rows): the harness-style causal walk reproduces the shipped CSV exactly — max |Δlam| 0.0, max |Δp| 0.0, LL 0.8880 = verdict 0.8880 — while the live-adapter walk (one `predict_goals` call, upcoming = all 64 virgin fixtures, full-history state) gives LL 0.9271, decomposed as refit-anchor 0.0005 on lam and within-virgin-update 1.0063 on lam (the live fit also sees earlier 2026/2027 results, which the frozen virgin fit does not), future leakage 0 by construction. An independent recompute of the 115 live daily predictions through the real runner adapter in a separate process reproduces the shipped daily CSV exactly — all 19 numeric fields, max |diff| 0.0. Two full end-to-end proof runs on 2026-11-11, 59 leagues, 119 markets. Run 1 (exit 0, log 09:49–10:17 UTC, ~28 min): 13,146 predictions, 0 settled, 0 errors in 415 log rows; fetched_new=0 in every league. Run 2 (exit 0, log 10:22–10:50 UTC, ~28 min): 13,146 predictions, 0 settled, 0 errors in 415 log rows, fetched_new=0 in every league. BA in both runs: 115 upcoming (first 2026-11-21 BSK Banja Luka–Zrinjski Mostar, match 6141013) / 115 predicted / 0 settled / 0 errors, ledger holds 115 entries, `[]` settled keys. Of 296 snapshotted output files, 295 are bit-identical between the runs; the one exception is ZA-PSL's daily corners CSV, where FotMob renamed AmaZulu to AmaZulu FC between the runs — same 160 rows, same match ids and dates, all numeric predictions identical — an upstream listing change, not a code difference. A synthetic settlement on finished match 5927590 (2026-09-02, Široki Brijeg–FK Sarajevo 1–2, actual total 3) proves `settle()` works through the adapter: live exp_total 2.3888, p_over_2.5 0.4274, chosen under, missed, log loss 0.8502; it settled exactly once (a second pass settled nothing), and the four touched files were restored byte-identical afterward. As with the KZ join, this worktree arrived without the `data_enrichment/fotmob_world` symlink, so the symlink to the main checkout's warehouse was restored (git-ignored, no commit impact) before the proof runs; and the worktree carries no `.venv`, so the proof runs used the main checkout's `.venv`.
+league/improvement_scratch/P3/code/run_p3.py:25:def sot_component_snapshot(league):
+league/improvement_scratch/P3/code/run_p3.py:74:        o["vc_components"]["snapshot"] = sot_component_snapshot(lg)
+league/improvement_scratch/P3/code/README.md:40:  final-walk component snapshot for the SOT leagues, applies the
+league/improvement_scratch/LANE1_WAVE1/cohort_report.md:127:| K-NO-OBOS (X8) | **YES** | Prereg operational condition "as K-J1": "Referee assignment must be known at prediction time in the live pipeline; warehouse records are post-match snapshots and cannot prove pre-match publication." Historical virgin coverage 229/240 = 95.4%. |
+league/improvement_scratch/LANE1_WAVE1/cohort_report.md:131:| K-US (X8) | **YES** | Prereg operational condition, identical K-J1 wording. Historical coverage strong (dev 96.2–99.0%, virgin 96.1%) but still a post-match-snapshot statistic. |
+
+codex
+The branch is exactly at `423d37b7`. The worktree is missing the required ignored warehouse symlink, and it has no local `.venv`; I’ll restore the symlink to the main checkout’s warehouse and use the main `.venv`, as permitted. The main checkout’s unrelated dirty state is being left untouched.
+codex
+NOT MERGE-READY — blocked before proof execution.
+
+- Worktree is at `423d37b7`.
+- Required symlink is missing.
+- Restoring it failed with `Read-only file system`; the sandbox only permits writes in the main checkout, while the task requires writes in `/home/hatch/workspace/wt-lane1-kco`.
+- Therefore no proof runs, snapshots, report, commit, or merge were performed. Main checkout remains untouched.
+
+=== PROOF RUN 2 blocked 2026-11-12 10:38 UTC (2026-11-12 18:38 WIB) ===
+[2026-11-12 10:38 UTC] Confirmed no proof run can proceed: /home/hatch/workspace/kco-proof/ is absent and creation fails with Read-only file system. No /tmp substitute used, no runner launched, no files outside this worktree touched.
+
+=== PROOF RUN 3 CONTINUATION starts 2026-11-12 18:55 WIB ===
+[2026-11-12 18:55 WIB] Resumed from preserved run1/run2/pre snapshots; verified 3-file diff against d42ab8d1 baseline and warehouse symlink.
+[2026-11-12 18:55 WIB] Runner evidence: run1 exit 0, 1,957s, 13,521 predictions, 0 settled, 0 errors; run2 exit 0, 1,762s, 13,520 predictions, 0 settled, 0 errors; CO 40 predictions/run; run2 fetched_new=0 for all leagues.
+[2026-11-12 18:55 WIB] Remaining checks passed: CO independent recompute 40/40 rows, 0 differing fields, max float diff 0.0; frozen cards history 1,336 rows; AR x8 and AU gate_zero inertness 8/8 byte-identical each; synthetic CO settlement 1 then 0 with artifacts restored byte-identically.
+[2026-11-12 18:55 WIB] Byte-compare adjudication recorded verbatim in report.md; README updated to joined PROVISIONAL state. No main-checkout access beyond its .venv binary; no sealed data read; no push.
+=== PROOF RUN 3 starts 2026-11-12 18:00 WIB ===
+[2026-11-12 19:44 WIB] Run 1 exit 0 (1957s), run 2 exit 0 (1762s); snapshots captured. Byte-compare failed: 3 files differ including run_log.jsonl; AR cards had fixture 6575527 removed and fixture 6546956 changed date plus 14 fields, max numeric prediction delta 0.00002444775096077656 (not bit-equal). ZA corners had 19 team-name-only changes with prediction fields unchanged. Run 2 fetched_new=0 for every league; both runs errors=0. Proof stopped per brief; no README/report/commit.
+
+=== PROOF RUN 2 starts 2026-11-12 00:00 UTC (2026-11-12 WIB) ===
+[2026-11-12 00:00 UTC] Starting verified proof on build/lane1-kco at d42ab8d1; expected 3-file diff and warehouse symlink confirmed.
+[2026-11-12 00:00 UTC] BLOCKED before pre-run snapshot: required persistent /home/hatch/workspace/kco-proof/ does not exist and mkdir was rejected: Read-only file system. Brief forbids /tmp substitution; no runner runs launched.
+
+=== PROOF RUN 2 starts 2026-11-12 00:00 UTC (2026-11-12 WIB) ===
+[2026-11-12 00:00 UTC] Starting verified proof on build/lane1-kco at d42ab8d1; expected 3-file diff and warehouse symlink confirmed.
+tokens used
+30,876
+NOT MERGE-READY — blocked before proof execution.
+
+- Worktree is at `423d37b7`.
+- Required symlink is missing.
+- Restoring it failed with `Read-only file system`; the sandbox only permits writes in the main checkout, while the task requires writes in `/home/hatch/workspace/wt-lane1-kco`.
+- Therefore no proof runs, snapshots, report, commit, or merge were performed. Main checkout remains untouched.
+
+=== PROOF RUN 2 blocked 2026-11-12 10:38 UTC (2026-11-12 18:38 WIB) ===
+[2026-11-12 10:38 UTC] Confirmed no proof run can proceed: /home/hatch/workspace/kco-proof/ is absent and creation fails with Read-only file system. No /tmp substitute used, no runner launched, no files outside this worktree touched.

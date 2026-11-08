@@ -1,0 +1,40 @@
+# FI-Ykkonen (Finland) — league config (Phase 2 freeze; completed Phase 6)
+league: FI-Ykkonen
+country: Finland
+fotmob_id: 8969
+tier: 3
+warehouse: data_enrichment/fotmob_world/Finland/Ykkonen
+data:
+  matches: league/FI-Ykkonen/data/fi_matches.csv
+  team_matches: league/FI-Ykkonen/data/fi_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period:
+  goals: ["2022", "2023", "2024"]   # scored; warm-up 2021
+  stats_markets: []                  # NOT-BUILDABLE: no stats feed in any season (0/1730)
+  cards: []                          # NOT-BUILDABLE: no stats yellows in any season; event plain Yellows 0 in whole corpus; referee 0% all seasons
+virgin_primary: "2025"               # COMPLETE season (162 matches) — NOT READ (G-FI failed the dev gate; virgin_read: false)
+virgin_confirmatory: null            # 2026 is in progress (162) and stays untouched
+halves_constants:                   # frozen from DEV-era data only (EDA F3)
+  goals_1h_share: 0.4463            # event times, dev era 2021-2024, n=4730 goals, 1353 matches with events, awarded excluded
+  yellow_cards_1h_share: null       # no period splits in dev (0 matches) — no constant; no K market
+  sot_1h_share: null                # no period splits in dev — no constant
+  corners_1h_share: null            # no period splits in dev — no constant
+  total_shots_1h_share: null        # no period splits in dev — no constant
+markets:
+  goals: G-FI        # DC goals-only (no xG in feed); arms: Gate Zero, SHRINK, X2 (frozen g_log -0.182 / c_log +0.223, EDA F4, 22 transitions)
+  sot: S-FI          # NOT-BUILDABLE — no stats feed in any season
+  corners: C-FI      # NOT-BUILDABLE — no stats feed in any season
+  cards: K-FI        # NOT-BUILDABLE — no stats yellows in any season; 0 plain Yellow events in whole corpus; referee 0% (no X8)
+  total_shots: T-FI  # NOT-BUILDABLE — no stats feed or shotmap in any season
+notes:
+  - Calendar-year seasons. FotMob league_id 8969 CHANGES IDENTITY mid-corpus: 2021-2023 = Kakkonen (old tier 3, three parallel groups Lohko A/B/C, 36-37 teams/season), 2024-2026 = Ykkonen (tier 3 after restructuring, 12 teams, 132 regular + 15 championship + 15 relegation = 162/season). Factual tier is tier 3 in both eras. Split decision: Jarvis OPSI A (board comment 6761468990) — dev <= 2024 as-is on the brief split; structure + composition effect recorded in prereg/PREREG_G_FI.md.
+  - Level is NOT broken by the identity change: regular-phase goals/match Kakkonen 2023 3.329 vs Ykkonen 2024 3.326; halves constant 0.4445 vs 0.4594; trait reliability GF 0.610/0.564, GA 0.660/0.680 by era; trait carry across the break (2023->2024) GF 0.33 / GA 0.30. The 2024 headline level (3.512) is a split-phase composition effect: 30 championship/relegation matches at 4.333 goals/match.
+  - Within-dev heterogeneity: Kakkonen group levels 2022-2023 A 3.470 / B 3.639 / C 3.034 goals/match; pooled DC ratings anchor the three groups on only 22 cross-group matches (all 2023) plus the 2024 single table. No group adjustment was made — the pooled dev gate judges it.
+  - Stats feed absent in EVERY season: 0/1730 matches carry any stats Periods key; shotmap 0/1730; xG rows 0. Scores-only league.
+  - No xG and no shotmap in ANY season -> X1 blend falls back goals-only; X3/X4/X6/X7/X9 impossible by data absence.
+  - Event feed carries goals reliably (7 awarded matches in the corpus, kept as ordinary flagged rows, header score wins; 55 matches have a wholly empty events payload, all scoreless) and cards only as YellowRed/Red: 0 plain Yellow events in the whole corpus. 7 score/event mismatches total (6 in dev, 1 in the virgin).
+  - Team-name stability: team id 112425 carries two spellings (GrIFK Grankulla / GrIFK). All logic keyed by team id.
+  - Referees: named in 0 matches in every season — X8 dropped on absence.
+  - Scoring level is high and stable: goals/match 3.32 / 3.43 / 3.33 / 3.51 in dev, 3.40 dev scored mean. OU2.5 over-rate 0.63-0.71 every season.
+  - Predictions-only: no FI odds/settlement source in-system.
+  - Outcome (Phase 6): G-FI FAIL at the dev gate — Gate Zero pooled dev (n=1010) 1X2 LL 1.0747 / RPS 0.2437 / OU2.5 LL 0.7026 vs climatology 1.0420 / 0.2355 / 0.6485; beats naive trailing-10 on 1X2 LL (1.1023) and OU2.5 LL (0.7208) but loses RPS (0.2288), and loses to climatology on all three — the gate requires beating BOTH baselines. SHRINK numerically identical to Gate Zero (n<6 never binds under season-blocked prediction). X2 improves all three pooled metrics (1.0660 / 0.2404 / 0.6940) but fails the dev gate itself. Virgin 2025 NOT read; 2026 untouched; nothing ships. S/C/K/T not-buildable (see reports/*_FI_VERDICT.md).

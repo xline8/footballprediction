@@ -1,0 +1,29 @@
+league: KR-KLeague1
+country: South Korea
+fotmob_id: 9080
+tier: 1
+warehouse: data_enrichment/fotmob_world
+data:
+  matches: league/KR-KLeague1/data/kr_matches.csv
+  team_matches: league/KR-KLeague1/data/kr_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period: ["2021", "2022", "2023", "2024"]
+virgin_primary: "2025"
+virgin_confirmatory: "2026"
+halves_constants:
+  goals_1h_share: 0.389
+  sot_1h_share: 0.415
+  corners_1h_share: 0.429
+  total_shots_1h_share: 0.418
+  yellow_cards_1h_share: 0.350
+markets:
+  goals: G-KR
+  sot: S-KR
+  corners: C-KR
+  cards: K-KR
+  total_shots: T-KR
+notes:
+  - K League 1 has 12 teams, 38 rounds, and split rounds labelled phase=split from round 34.
+  - Dev is 912 matches; virgin is complete 2025 (228); 2026 (210) is reserved confirmatory data.
+  - xG blend is guarded to matches with expected_goals; shotmap era starts in 2022.
+  - Unified yellows use event feed when events exist, stats fallback otherwise; both feeds remain in CSV.

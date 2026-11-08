@@ -1,0 +1,33 @@
+# AE-ProLeague (United Arab Emirates) — league config
+league: AE-ProLeague
+country: United Arab Emirates
+fotmob_id: 538
+tier: 1
+warehouse: data_enrichment/fotmob_world/United Arab Emirates/Pro League
+data:
+  matches: league/AE-ProLeague/data/ae_matches.csv
+  team_matches: league/AE-ProLeague/data/ae_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_seed: ["2021/2022"]
+dev_period: ["2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.4463
+  sot_1h_share: 0.4618
+  corners_1h_share: 0.4801
+  total_shots_1h_share: 0.4608
+  yellow_cards_1h_share: 0.3724
+markets:
+  goals: G-AE
+  sot: S-AE
+  corners: C-AE
+  cards: K-AE
+  total_shots: T-AE
+notes:
+  - Straight double round-robin, 14 teams, rounds 1-26, no play-offs in any season.
+  - No shotmap and no xG anywhere (0/959): goals DC is goals-only; X3/X4/X6 dropped.
+  - Cards target = stats-feed yellows (event feed carries ~0 plain yellows in 2024/2025 and 2025/2026, incl. the virgin).
+  - Referee named in 6/182 virgin matches: X8 dropped; cards are Gate Zero only.
+  - 2 awarded matches excluded from all fits/scores by flag.
+  - Predictions-only: no AE odds/settlement source in-system.

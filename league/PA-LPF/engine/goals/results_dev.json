@@ -1,0 +1,254 @@
+{
+  "protocol": {
+    "league": "PA-LPF",
+    "dev_seasons_loaded": [
+      "2023",
+      "2024",
+      "2025"
+    ],
+    "scored_seasons": [
+      "2024",
+      "2025"
+    ],
+    "scored_n": 382,
+    "awarded_excluded": true,
+    "playoff_excluded": true,
+    "half_life": 270,
+    "half_split": 0.449173,
+    "sign_convention": "predicted_minus_actual"
+  },
+  "folds": [
+    {
+      "season": "2024",
+      "cutoff_date": "2024-01-20",
+      "training_n": 120,
+      "h": 0.29548166396648756,
+      "rho": -0.1,
+      "mu": 1.3030526114993266,
+      "prior_count_audit": {
+        "1603136": {
+          "team": "Veraguas United",
+          "n": 0
+        }
+      }
+    },
+    {
+      "season": "2025",
+      "cutoff_date": "2025-01-18",
+      "training_n": 311,
+      "h": 0.1963500760334635,
+      "rho": -0.05,
+      "mu": 1.133677770174192,
+      "prior_count_audit": {
+        "654378": {
+          "team": "SD Atletico Nacional",
+          "n": 0
+        }
+      }
+    }
+  ],
+  "rows": [
+    {
+      "arm": "gate_zero",
+      "season": "2024",
+      "kind": "climatology",
+      "n": 191,
+      "ll_1x2": 1.0935932552442924,
+      "rps": 0.22736183827806888,
+      "oull_2_5": 0.68034333509889
+    },
+    {
+      "arm": "gate_zero",
+      "season": "2024",
+      "kind": "naive",
+      "n": 191,
+      "ll_1x2": 1.124842285591375,
+      "rps": 0.2376517665018994,
+      "oull_2_5": 0.6878188602846101
+    },
+    {
+      "arm": "gate_zero",
+      "season": "2024",
+      "kind": "model",
+      "n": 191,
+      "ll_1x2": 1.0971526638990596,
+      "rps": 0.22779136384019028,
+      "oull_2_5": 0.6732567506480467
+    },
+    {
+      "arm": "shrink",
+      "season": "2024",
+      "kind": "climatology",
+      "n": 191,
+      "ll_1x2": 1.0935932552442924,
+      "rps": 0.22736183827806888,
+      "oull_2_5": 0.68034333509889
+    },
+    {
+      "arm": "shrink",
+      "season": "2024",
+      "kind": "naive",
+      "n": 191,
+      "ll_1x2": 1.124842285591375,
+      "rps": 0.2376517665018994,
+      "oull_2_5": 0.6878188602846101
+    },
+    {
+      "arm": "shrink",
+      "season": "2024",
+      "kind": "model",
+      "n": 191,
+      "ll_1x2": 1.0971526638990596,
+      "rps": 0.22779136384019028,
+      "oull_2_5": 0.6732567506480467
+    },
+    {
+      "arm": "gate_zero",
+      "season": "2025",
+      "kind": "climatology",
+      "n": 191,
+      "ll_1x2": 1.1055866422556393,
+      "rps": 0.22445422579145027,
+      "oull_2_5": 0.6816517397910505
+    },
+    {
+      "arm": "gate_zero",
+      "season": "2025",
+      "kind": "naive",
+      "n": 191,
+      "ll_1x2": 1.0963587521016829,
+      "rps": 0.22095392645016768,
+      "oull_2_5": 0.6991816190272603
+    },
+    {
+      "arm": "gate_zero",
+      "season": "2025",
+      "kind": "model",
+      "n": 191,
+      "ll_1x2": 1.1040080299425612,
+      "rps": 0.22501103716642523,
+      "oull_2_5": 0.670945931140927
+    },
+    {
+      "arm": "shrink",
+      "season": "2025",
+      "kind": "climatology",
+      "n": 191,
+      "ll_1x2": 1.1055866422556393,
+      "rps": 0.22445422579145027,
+      "oull_2_5": 0.6816517397910505
+    },
+    {
+      "arm": "shrink",
+      "season": "2025",
+      "kind": "naive",
+      "n": 191,
+      "ll_1x2": 1.0963587521016829,
+      "rps": 0.22095392645016768,
+      "oull_2_5": 0.6991816190272603
+    },
+    {
+      "arm": "shrink",
+      "season": "2025",
+      "kind": "model",
+      "n": 191,
+      "ll_1x2": 1.1040080299425612,
+      "rps": 0.22501103716642523,
+      "oull_2_5": 0.670945931140927
+    },
+    {
+      "arm": "gate_zero",
+      "season": "pooled",
+      "kind": "model",
+      "n": 382,
+      "ll_1x2": 1.1005803469208104,
+      "rps": 0.22640120050330775,
+      "oull_2_5": 0.6721013408944868
+    },
+    {
+      "arm": "gate_zero",
+      "season": "pooled",
+      "kind": "climatology",
+      "n": 382,
+      "ll_1x2": 1.0995899487499659,
+      "rps": 0.22590803203475954,
+      "oull_2_5": 0.6809975374449703
+    },
+    {
+      "arm": "gate_zero",
+      "season": "pooled",
+      "kind": "naive",
+      "n": 382,
+      "ll_1x2": 1.1106005188465289,
+      "rps": 0.22930284647603355,
+      "oull_2_5": 0.6935002396559351
+    },
+    {
+      "arm": "shrink",
+      "season": "pooled",
+      "kind": "model",
+      "n": 382,
+      "ll_1x2": 1.1005803469208104,
+      "rps": 0.22640120050330775,
+      "oull_2_5": 0.6721013408944868
+    },
+    {
+      "arm": "shrink",
+      "season": "pooled",
+      "kind": "climatology",
+      "n": 382,
+      "ll_1x2": 1.0995899487499659,
+      "rps": 0.22590803203475954,
+      "oull_2_5": 0.6809975374449703
+    },
+    {
+      "arm": "shrink",
+      "season": "pooled",
+      "kind": "naive",
+      "n": 382,
+      "ll_1x2": 1.1106005188465289,
+      "rps": 0.22930284647603355,
+      "oull_2_5": 0.6935002396559351
+    }
+  ],
+  "dev_gate": {
+    "gate_zero": {
+      "ll_1x2": {
+        "status": "FAIL",
+        "model": 1.1005803469208104,
+        "climatology": 1.0995899487499659
+      },
+      "rps": {
+        "status": "FAIL",
+        "model": 0.22640120050330775,
+        "climatology": 0.22590803203475954
+      },
+      "ou2_5": {
+        "status": "PASS",
+        "model": 0.6721013408944868,
+        "climatology": 0.6809975374449703
+      }
+    },
+    "shrink": {
+      "ll_1x2": {
+        "status": "FAIL",
+        "model": 1.1005803469208104,
+        "climatology": 1.0995899487499659
+      },
+      "rps": {
+        "status": "FAIL",
+        "model": 0.22640120050330775,
+        "climatology": 0.22590803203475954
+      },
+      "ou2_5": {
+        "status": "PASS",
+        "model": 0.6721013408944868,
+        "climatology": 0.6809975374449703
+      }
+    }
+  },
+  "shrink_degeneracy": {
+    "equivalent": true,
+    "reason": "all sub-6 prior-count teams are n=0 newcomers"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "arm": "x8",
+  "protocol": "fixed pre-virgin training",
+  "train_n": 439
+}

@@ -1,0 +1,323 @@
+{
+  "scope": {
+    "eda_seasons": [
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+      "2025"
+    ],
+    "virgin_excluded": "2026; no descriptive statistics computed"
+  },
+  "seasons": {
+    "2021": {
+      "n_matches": 272,
+      "goals_per_match": 2.3713235294117645,
+      "home_goals": 1.2904411764705883,
+      "away_goals": 1.0808823529411764,
+      "home_draw_away_pct": [
+        39.705882352941174,
+        30.14705882352941,
+        30.14705882352941
+      ],
+      "home_advantage_goals": 0.20955882352941177,
+      "btts_pct": 51.10294117647059,
+      "over_1_5_pct": 68.38235294117648,
+      "over_2_5_pct": 39.338235294117645,
+      "over_3_5_pct": 21.323529411764707,
+      "dispersion_var_mean": 1.069818930747447
+    },
+    "2022": {
+      "n_matches": 272,
+      "goals_per_match": 2.202205882352941,
+      "home_goals": 1.2426470588235294,
+      "away_goals": 0.9595588235294118,
+      "home_draw_away_pct": [
+        41.544117647058826,
+        30.14705882352941,
+        28.308823529411764
+      ],
+      "home_advantage_goals": 0.28308823529411764,
+      "btts_pct": 47.05882352941176,
+      "over_1_5_pct": 66.17647058823529,
+      "over_2_5_pct": 40.80882352941176,
+      "over_3_5_pct": 19.11764705882353,
+      "dispersion_var_mean": 0.8945721343690901
+    },
+    "2023": {
+      "n_matches": 272,
+      "goals_per_match": 1.9375,
+      "home_goals": 1.0073529411764706,
+      "away_goals": 0.9301470588235294,
+      "home_draw_away_pct": [
+        33.455882352941174,
+        34.92647058823529,
+        31.61764705882353
+      ],
+      "home_advantage_goals": 0.07720588235294118,
+      "btts_pct": 42.279411764705884,
+      "over_1_5_pct": 57.35294117647059,
+      "over_2_5_pct": 32.720588235294116,
+      "over_3_5_pct": 12.5,
+      "dispersion_var_mean": 1.062611593857874
+    },
+    "2024": {
+      "n_matches": 462,
+      "goals_per_match": 1.9675324675324675,
+      "home_goals": 1.132034632034632,
+      "away_goals": 0.8354978354978355,
+      "home_draw_away_pct": [
+        41.55844155844156,
+        32.25108225108225,
+        26.190476190476193
+      ],
+      "home_advantage_goals": 0.29653679653679654,
+      "btts_pct": 38.52813852813853,
+      "over_1_5_pct": 59.09090909090909,
+      "over_2_5_pct": 33.76623376623377,
+      "over_3_5_pct": 13.41991341991342,
+      "dispersion_var_mean": 0.9795823400127431
+    },
+    "2025": {
+      "n_matches": 420,
+      "goals_per_match": 2.0619047619047617,
+      "home_goals": 1.1738095238095239,
+      "away_goals": 0.888095238095238,
+      "home_draw_away_pct": [
+        39.285714285714285,
+        34.04761904761905,
+        26.666666666666668
+      ],
+      "home_advantage_goals": 0.2857142857142857,
+      "btts_pct": 44.52380952380952,
+      "over_1_5_pct": 62.61904761904762,
+      "over_2_5_pct": 34.04761904761905,
+      "over_3_5_pct": 15.476190476190476,
+      "dispersion_var_mean": 1.028303394753813
+    }
+  },
+  "pooled": {
+    "n_matches": 1698,
+    "goals_per_match": 2.088339222614841,
+    "home_goals": 1.1654888103651355,
+    "away_goals": 0.9228504122497055,
+    "home_draw_away_pct": [
+      39.399293286219084,
+      32.44994110718492,
+      28.150765606595996
+    ],
+    "home_advantage_goals": 0.24263839811542992,
+    "btts_pct": 43.99293286219081,
+    "over_1_5_pct": 62.30859835100118,
+    "over_2_5_pct": 35.68904593639576,
+    "over_3_5_pct": 15.959952885747938,
+    "dispersion_var_mean": 1.0143450121494384
+  },
+  "home_advantage_goals": 0.24263839811542992,
+  "reliability": {
+    "goals_for": {
+      "r": 0.34697312287691295,
+      "n_splits": 60,
+      "career_pooled_teams": 29,
+      "odd_even_r": 0.26300949130840834
+    },
+    "goals_against": {
+      "r": 0.4868770721327922,
+      "n_splits": 60,
+      "career_pooled_teams": 29,
+      "odd_even_r": 0.4244152488487863
+    }
+  },
+  "halves": {
+    "goals": {
+      "n_matches": 1463,
+      "share_1h": 0.43993231810490696,
+      "observed_variance": 0.1288332688632539,
+      "noise_floor_per_match": 0.1353698377033726,
+      "true_variance": -0.0065365688401186894,
+      "team_share_split_half": {
+        "r": -0.11668613623607668,
+        "n_splits": 60,
+        "career_pooled_teams": 29,
+        "odd_even_r": -0.11704497536157529
+      }
+    }
+  },
+  "referees": {
+    "coverage_by_season": {
+      "2021": 0.0,
+      "2022": 0.0,
+      "2023": 0.0,
+      "2024": 0.0,
+      "2025": 0.0
+    },
+    "coverage_pct": 0.0
+  },
+  "movers": {
+    "2022": {
+      "newcomers": [
+        {
+          "team_id": "581802",
+          "team_name": "Dock Sud",
+          "direction": "from_below_or_cross_competition",
+          "n_matches": 32,
+          "gf_gap": -0.03860294117647056,
+          "ga_gap": 0.21139705882352944
+        },
+        {
+          "team_id": "581820",
+          "team_name": "Ituzaingó",
+          "direction": "from_below_or_cross_competition",
+          "n_matches": 32,
+          "gf_gap": 0.14889705882352944,
+          "ga_gap": 0.023897058823529438
+        }
+      ],
+      "n_newcomers": 2
+    },
+    "2023": {
+      "newcomers": [
+        {
+          "team_id": "298634",
+          "team_name": "Sacachispas FC",
+          "direction": "from_nacional",
+          "n_matches": 32,
+          "gf_gap": -0.28125,
+          "ga_gap": -0.09375
+        },
+        {
+          "team_id": "581809",
+          "team_name": "Argentino de Merlo",
+          "direction": "from_below_or_cross_competition",
+          "n_matches": 32,
+          "gf_gap": -0.03125,
+          "ga_gap": -0.21875
+        }
+      ],
+      "n_newcomers": 2
+    },
+    "2024": {
+      "newcomers": [
+        {
+          "team_id": "213533",
+          "team_name": "Sportivo Italiano",
+          "direction": "from_below_or_cross_competition",
+          "n_matches": 42,
+          "gf_gap": -0.07900432900432897,
+          "ga_gap": 0.15909090909090906
+        },
+        {
+          "team_id": "213537",
+          "team_name": "Flandria",
+          "direction": "from_nacional",
+          "n_matches": 42,
+          "gf_gap": -0.1028138528138528,
+          "ga_gap": -0.1028138528138528
+        },
+        {
+          "team_id": "298630",
+          "team_name": "Villa Dálmine",
+          "direction": "from_nacional",
+          "n_matches": 42,
+          "gf_gap": -0.4599567099567099,
+          "ga_gap": -0.22186147186147187
+        },
+        {
+          "team_id": "298633",
+          "team_name": "Excursionistas",
+          "direction": "from_below_or_cross_competition",
+          "n_matches": 42,
+          "gf_gap": 0.54004329004329,
+          "ga_gap": 0.11147186147186161
+        },
+        {
+          "team_id": "425965",
+          "team_name": "CA Ferrocarril Midland",
+          "direction": "from_below_or_cross_competition",
+          "n_matches": 42,
+          "gf_gap": 0.27813852813852813,
+          "ga_gap": -0.22186147186147187
+        },
+        {
+          "team_id": "581808",
+          "team_name": "Laferrere",
+          "direction": "from_below_or_cross_competition",
+          "n_matches": 42,
+          "gf_gap": -0.1028138528138528,
+          "ga_gap": 0.3257575757575758
+        },
+        {
+          "team_id": "581822",
+          "team_name": "CS Deportivo Liniers",
+          "direction": "from_below_or_cross_competition",
+          "n_matches": 42,
+          "gf_gap": -0.22186147186147187,
+          "ga_gap": -0.1742424242424242
+        },
+        {
+          "team_id": "581825",
+          "team_name": "San Martín Burzaco",
+          "direction": "from_below_or_cross_competition",
+          "n_matches": 42,
+          "gf_gap": -0.29329004329004327,
+          "ga_gap": 0.04004329004328999
+        }
+      ],
+      "n_newcomers": 8
+    },
+    "2025": {
+      "newcomers": [
+        {
+          "team_id": "1018433",
+          "team_name": "Real Pilar",
+          "direction": "from_below_or_cross_competition",
+          "n_matches": 40,
+          "gf_gap": 0.19404761904761925,
+          "ga_gap": -0.3559523809523808
+        },
+        {
+          "team_id": "213532",
+          "team_name": "Brown de Adrogué",
+          "direction": "from_nacional",
+          "n_matches": 40,
+          "gf_gap": -0.005952380952380931,
+          "ga_gap": -0.055952380952380865
+        }
+      ],
+      "n_newcomers": 2
+    },
+    "pooled_2022_2025": {
+      "n_team_blocks": 14,
+      "gf_gap": -0.032547791844010306,
+      "ga_gap": -0.04096615919094908,
+      "by_direction": {
+        "from_nacional": {
+          "n": 4,
+          "gf_gap": -0.2124932359307359,
+          "ga_gap": -0.11859442640692638
+        },
+        "from_below_or_cross_competition": {
+          "n": 10,
+          "gf_gap": 0.03943038579067994,
+          "ga_gap": -0.009914852304558153
+        }
+      }
+    }
+  },
+  "primary_lines": {
+    "goals": {
+      "OU1.5": 62.30859835100118,
+      "OU2.5": 35.68904593639576,
+      "OU3.5": 15.959952885747938
+    }
+  },
+  "absent": {
+    "stats_payloads_nonempty": 0,
+    "shotmap_shots": 0,
+    "sot": 0,
+    "corners": 0,
+    "yellow_card_events": 0,
+    "total_shots": 0,
+    "xg": 0
+  }
+}

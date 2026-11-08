@@ -1,0 +1,32 @@
+league: AR-PrimeraBNacional
+country: Argentina
+fotmob_id: 8965
+tier: 2
+seasons: [2021, 2022, 2023, 2024, 2025, 2026]
+dev:
+  goals:
+    warmup: [2021]
+    scored: [2022, 2023, 2024, 2025]
+    n_scored_matches: 2648
+  cards:
+    warmup: [2023]
+    scored: [2024, 2025]
+    n_scored_matches: 1334
+virgin:
+  season: 2026
+  goals_matches: 648
+  cards_matches: 648
+halves:
+  goals_1h_share: 0.4353813559
+  yellows_1h_share: 0.3900912370
+markets:
+  G-BNAC: buildable
+  K-BNAC: buildable_from_2023
+  S-BNAC: not_buildable_no_target
+  C-BNAC: not_buildable_no_target
+  T-BNAC: not_buildable_no_target
+notes:
+  - 2021 Zona A/B; 2022 single table; 2023 asymmetric zones; 2024 single table; 2025 zones.
+  - 2026 is virgin and is not used for descriptive statistics or fitting.
+  - Yellow event target begins in 2023; 2021-2022 card columns are NaN.
+  - No payload has non-empty stats or shotmap data.

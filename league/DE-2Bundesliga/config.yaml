@@ -1,0 +1,35 @@
+# DE-2Bundesliga (Germany) — league config
+league: DE-2Bundesliga
+country: Germany
+fotmob_id: 146
+tier: 2
+warehouse: data_enrichment/fotmob_world/Germany/2. Bundesliga
+data:
+  matches: league/DE-2Bundesliga/data/de2_matches.csv
+  team_matches: league/DE-2Bundesliga/data/de2_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]  # walk-forward, season-blocked
+virgin_primary: "2025/2026"        # complete season, n=306 — read ONCE per candidate
+virgin_confirmatory: "2026/2027"   # partial (99 played at pull); reserved, NOT read in this build
+halves_constants:                  # frozen, measured on the complete-splits era 2023/2024–2025/2026 (n≈918)
+  goals_1h_share: 0.450
+  sot_1h_share: 0.443
+  corners_1h_share: 0.454
+  total_shots_1h_share: 0.447
+  yellow_cards_1h_share: 0.346
+markets:
+  goals: G-DE2        # DC reference; arms: Gate Zero, SHRINK (thin-data prior), X2 mover (direction-specific), X3 set-play (on SHRINK)
+  sot: S-DE2          # v5 reference; arms: Gate Zero, RS ratio-shrink, X4 xG/shot (X6 dropped on reliability)
+  corners: C-DE2      # corners_v3 reference; arms: Gate Zero (X9), X7 box touches; primary line 10.5
+  cards: K-DE2        # cards reference; arms: Gate Zero, X8 referee; primary line 4.5
+  total_shots: T-DE2  # shots family; arms: A v1 pattern, B v2 level layer, C E9 trailing-r; primary line 27.5
+notes:
+  - FORMAT: 18 teams, double round-robin, 306 matches/season, NO split and NO play-offs in every corpus season. The relegation play-off is NOT in this warehouse pull (verified twice: all 1,629 files carry leagueName '2. Bundesliga'); the builder's 'qualification' flag is a guard only and never triggers on this corpus.
+  - VIRGIN CORRECTION: the commissioning brief called 2025/2026 "in progress (transitional)"; the warehouse holds the complete season (306 matches, 2025-08-01 → 2026-05-17), so 2025/2026 is the virgin and the partial 2026/2027 is the reserved confirmatory window.
+  - CHURN: 33 team ids ever; 4–5 entrants/season from BOTH neighbours (Bundesliga id 54 down, 3. Liga id 208 up). Dev-pooled entrant deltas: up ΔGF −0.360 / ΔGA +0.143 (9 clubs); down ΔGF +0.097 / ΔGA +0.078 (6 clubs). X2 offsets are estimated inside each fit from prior transitions only (rule frozen in PREREG_G_DE2).
+  - Per-half stats are absent in 2021/2022 and partial in 2022/2023 (26.8%) — halves constants use the complete era (2023/2024–2025/2026) only.
+  - Referee coverage: 46.4% in 2021/2022, 88–100% from 2022/2023 (~90% overall).
+  - Cards: stats feed is the unified source (exact stats-vs-events agreement 87.5%, stats lower in 12.0%, mean −0.126/match — the BE/DK shape; adding YellowRed events worsens agreement, mean −0.217). No event-unified amendment needed.
+  - xGOT population rule breaks at 2024/2025 (only on-target shots populated before; ~99.7% from 2024/2025); X6 dropped on reliability anyway (era r=0.182).
+  - touches_opp_box coverage: 61–80% in 2021/2022–2023/2024, 100% from 2024/2025.
+  - Predictions-only: no DE-2 odds/settlement source in-system.

@@ -1,0 +1,24 @@
+# Denmark 2. Division — Phase A configuration (frozen before fitting)
+league: DK-2Division
+country: Denmark
+fotmob_id: 239
+tier: 3
+data:
+  matches: league/DK-2Division/data/dk2_matches.csv
+  team_matches: league/DK-2Division/data/dk2_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.4611
+markets:
+  goals: G-DK2
+  sot: null # not buildable: no stats feed
+  corners: null # not buildable: no stats feed
+  cards: null # not buildable: reds-only event counts, no cards target
+  total_shots: null # not buildable: no stats feed/shotmap
+notes:
+  - 12 teams; rounds 1–22 regular and 23–32 split groups, verified from the fixture graph.
+  - G-DK2 is goals-only; xG, shotmap, stats, referee, and usable cards are absent.
+  - 2026/2027 is transitional and not read for verdicts.

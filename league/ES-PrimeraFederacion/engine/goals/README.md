@@ -1,0 +1,3 @@
+# G-ESPF goals engine
+
+Reads `league/ES-PrimeraFederacion/data/espf_matches.csv`, keyed by FotMob team id. Dev is 2021/2022 warm-up plus 2022/2023–2024/2025 scoring; virgin is 2025/2026 only after the frozen preregistered gates. Run `python3 league/ES-PrimeraFederacion/engine/goals/run_g_espf.py dev` and then `virgin-metrics`. Prereg: `league/ES-PrimeraFederacion/prereg/PREREG_G_ESPF.md`; halves constant 0.4301. Observation is goals-only. X2 movers are keyed by team id from prior-season LaLiga2 (FotMob 140) and PF (8968) payloads. Each arm must pass the pooled dev 1X2 LL, RPS, and OU2.5 LL gate before it is included in the virgin read.

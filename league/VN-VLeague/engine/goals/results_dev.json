@@ -1,0 +1,393 @@
+{
+  "protocol": {
+    "league": "VN-VLeague",
+    "seed": "2021",
+    "dev_seasons": [
+      "2022",
+      "2023",
+      "2023/2024",
+      "2024/2025"
+    ],
+    "scored_n": 654,
+    "primary_line": "OU2.5",
+    "naive_rule": "trailing 10; <6 matches for either team falls back to league mean"
+  },
+  "rows": [
+    {
+      "n": 156,
+      "ll_1x2": 1.1577,
+      "rps": 0.2464,
+      "oull_2_5": 0.8563,
+      "arm": "gate_zero",
+      "season": "2022",
+      "kind": "model"
+    },
+    {
+      "n": 156,
+      "ll_1x2": 1.1326,
+      "rps": 0.2297,
+      "oull_2_5": 0.6943,
+      "arm": "gate_zero",
+      "season": "2022",
+      "kind": "climatology"
+    },
+    {
+      "n": 156,
+      "ll_1x2": 1.2488,
+      "rps": 0.2651,
+      "oull_2_5": 0.8776,
+      "arm": "gate_zero",
+      "season": "2022",
+      "kind": "naive_trailing10"
+    },
+    {
+      "n": 156,
+      "ll_1x2": 1.1577,
+      "rps": 0.2464,
+      "oull_2_5": 0.8563,
+      "arm": "shrink",
+      "season": "2022",
+      "kind": "model"
+    },
+    {
+      "n": 156,
+      "ll_1x2": 1.1326,
+      "rps": 0.2297,
+      "oull_2_5": 0.6943,
+      "arm": "shrink",
+      "season": "2022",
+      "kind": "climatology"
+    },
+    {
+      "n": 156,
+      "ll_1x2": 1.2488,
+      "rps": 0.2651,
+      "oull_2_5": 0.8776,
+      "arm": "shrink",
+      "season": "2022",
+      "kind": "naive_trailing10"
+    },
+    {
+      "n": 134,
+      "ll_1x2": 1.0967,
+      "rps": 0.2103,
+      "oull_2_5": 0.6932,
+      "arm": "gate_zero",
+      "season": "2023",
+      "kind": "model"
+    },
+    {
+      "n": 134,
+      "ll_1x2": 1.1401,
+      "rps": 0.219,
+      "oull_2_5": 0.6804,
+      "arm": "gate_zero",
+      "season": "2023",
+      "kind": "climatology"
+    },
+    {
+      "n": 134,
+      "ll_1x2": 1.1957,
+      "rps": 0.2344,
+      "oull_2_5": 0.7773,
+      "arm": "gate_zero",
+      "season": "2023",
+      "kind": "naive_trailing10"
+    },
+    {
+      "n": 134,
+      "ll_1x2": 1.0967,
+      "rps": 0.2103,
+      "oull_2_5": 0.6932,
+      "arm": "shrink",
+      "season": "2023",
+      "kind": "model"
+    },
+    {
+      "n": 134,
+      "ll_1x2": 1.1401,
+      "rps": 0.219,
+      "oull_2_5": 0.6804,
+      "arm": "shrink",
+      "season": "2023",
+      "kind": "climatology"
+    },
+    {
+      "n": 134,
+      "ll_1x2": 1.1957,
+      "rps": 0.2344,
+      "oull_2_5": 0.7773,
+      "arm": "shrink",
+      "season": "2023",
+      "kind": "naive_trailing10"
+    },
+    {
+      "n": 182,
+      "ll_1x2": 1.0825,
+      "rps": 0.2297,
+      "oull_2_5": 0.7092,
+      "arm": "gate_zero",
+      "season": "2023/2024",
+      "kind": "model"
+    },
+    {
+      "n": 182,
+      "ll_1x2": 1.0671,
+      "rps": 0.2251,
+      "oull_2_5": 0.6891,
+      "arm": "gate_zero",
+      "season": "2023/2024",
+      "kind": "climatology"
+    },
+    {
+      "n": 182,
+      "ll_1x2": 1.0936,
+      "rps": 0.2331,
+      "oull_2_5": 0.7475,
+      "arm": "gate_zero",
+      "season": "2023/2024",
+      "kind": "naive_trailing10"
+    },
+    {
+      "n": 182,
+      "ll_1x2": 1.0825,
+      "rps": 0.2297,
+      "oull_2_5": 0.7092,
+      "arm": "shrink",
+      "season": "2023/2024",
+      "kind": "model"
+    },
+    {
+      "n": 182,
+      "ll_1x2": 1.0671,
+      "rps": 0.2251,
+      "oull_2_5": 0.6891,
+      "arm": "shrink",
+      "season": "2023/2024",
+      "kind": "climatology"
+    },
+    {
+      "n": 182,
+      "ll_1x2": 1.0936,
+      "rps": 0.2331,
+      "oull_2_5": 0.7475,
+      "arm": "shrink",
+      "season": "2023/2024",
+      "kind": "naive_trailing10"
+    },
+    {
+      "n": 182,
+      "ll_1x2": 1.0575,
+      "rps": 0.2079,
+      "oull_2_5": 0.7102,
+      "arm": "gate_zero",
+      "season": "2024/2025",
+      "kind": "model"
+    },
+    {
+      "n": 182,
+      "ll_1x2": 1.0957,
+      "rps": 0.2179,
+      "oull_2_5": 0.6886,
+      "arm": "gate_zero",
+      "season": "2024/2025",
+      "kind": "climatology"
+    },
+    {
+      "n": 182,
+      "ll_1x2": 1.1837,
+      "rps": 0.2417,
+      "oull_2_5": 0.813,
+      "arm": "gate_zero",
+      "season": "2024/2025",
+      "kind": "naive_trailing10"
+    },
+    {
+      "n": 182,
+      "ll_1x2": 1.0575,
+      "rps": 0.2079,
+      "oull_2_5": 0.7102,
+      "arm": "shrink",
+      "season": "2024/2025",
+      "kind": "model"
+    },
+    {
+      "n": 182,
+      "ll_1x2": 1.0957,
+      "rps": 0.2179,
+      "oull_2_5": 0.6886,
+      "arm": "shrink",
+      "season": "2024/2025",
+      "kind": "climatology"
+    },
+    {
+      "n": 182,
+      "ll_1x2": 1.1837,
+      "rps": 0.2417,
+      "oull_2_5": 0.813,
+      "arm": "shrink",
+      "season": "2024/2025",
+      "kind": "naive_trailing10"
+    },
+    {
+      "n": 654,
+      "ll_1x2": 1.0964,
+      "rps": 0.2236,
+      "oull_2_5": 0.7413,
+      "arm": "gate_zero",
+      "season": "pooled",
+      "kind": "model"
+    },
+    {
+      "n": 654,
+      "ll_1x2": 1.1056,
+      "rps": 0.223,
+      "oull_2_5": 0.6884,
+      "arm": "gate_zero",
+      "season": "pooled",
+      "kind": "climatology"
+    },
+    {
+      "n": 654,
+      "ll_1x2": 1.1766,
+      "rps": 0.2434,
+      "oull_2_5": 0.8029,
+      "arm": "gate_zero",
+      "season": "pooled",
+      "kind": "naive_trailing10"
+    },
+    {
+      "n": 654,
+      "ll_1x2": 1.0964,
+      "rps": 0.2236,
+      "oull_2_5": 0.7413,
+      "arm": "shrink",
+      "season": "pooled",
+      "kind": "model"
+    },
+    {
+      "n": 654,
+      "ll_1x2": 1.1056,
+      "rps": 0.223,
+      "oull_2_5": 0.6884,
+      "arm": "shrink",
+      "season": "pooled",
+      "kind": "climatology"
+    },
+    {
+      "n": 654,
+      "ll_1x2": 1.1766,
+      "rps": 0.2434,
+      "oull_2_5": 0.8029,
+      "arm": "shrink",
+      "season": "pooled",
+      "kind": "naive_trailing10"
+    }
+  ],
+  "dev_gate": {
+    "gate_zero": {
+      "ll_1x2": {
+        "pass": true,
+        "arm": 1.0964,
+        "baseline": 1.1056
+      },
+      "rps": {
+        "pass": false,
+        "arm": 0.2236,
+        "baseline": 0.223
+      },
+      "oull_2_5": {
+        "pass": false,
+        "arm": 0.7413,
+        "baseline": 0.6884
+      }
+    },
+    "shrink": {
+      "ll_1x2": {
+        "pass": true,
+        "arm": 1.0964,
+        "baseline": 1.1056
+      },
+      "rps": {
+        "pass": false,
+        "arm": 0.2236,
+        "baseline": 0.223
+      },
+      "oull_2_5": {
+        "pass": false,
+        "arm": 0.7413,
+        "baseline": 0.6884
+      }
+    }
+  },
+  "dev_pass": {
+    "gate_zero": false,
+    "shrink": false
+  },
+  "fits": {
+    "2022": {
+      "cutoff": "2022-02-25",
+      "rho": 0.0,
+      "mu": 1.1653,
+      "training_n": 84
+    },
+    "2023": {
+      "cutoff": "2023-02-03",
+      "rho": 0.0,
+      "mu": 1.2239,
+      "training_n": 240
+    },
+    "2023/2024": {
+      "cutoff": "2023-10-20",
+      "rho": -0.15,
+      "mu": 1.1943,
+      "training_n": 374
+    },
+    "2024/2025": {
+      "cutoff": "2024-09-14",
+      "rho": -0.1,
+      "mu": 1.3029,
+      "training_n": 556
+    }
+  },
+  "shrink_bites": {
+    "2022": {
+      "shrink_changed_rows": 0,
+      "shrink_thin_history_teams": 0
+    },
+    "2023": {
+      "shrink_changed_rows": 0,
+      "shrink_thin_history_teams": 0
+    },
+    "2023/2024": {
+      "shrink_changed_rows": 0,
+      "shrink_thin_history_teams": 0
+    },
+    "2024/2025": {
+      "shrink_changed_rows": 0,
+      "shrink_thin_history_teams": 0
+    }
+  },
+  "gate_zero_ou25_vs_climatology": {
+    "2022": {
+      "gate_zero": 0.8563,
+      "climatology": 0.6943
+    },
+    "2023": {
+      "gate_zero": 0.6932,
+      "climatology": 0.6804
+    },
+    "2023/2024": {
+      "gate_zero": 0.7092,
+      "climatology": 0.6891
+    },
+    "2024/2025": {
+      "gate_zero": 0.7102,
+      "climatology": 0.6886
+    },
+    "pooled": {
+      "gate_zero": 0.7413,
+      "climatology": 0.6884
+    }
+  }
+}

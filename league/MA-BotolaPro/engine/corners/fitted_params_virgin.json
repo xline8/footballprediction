@@ -1,0 +1,13 @@
+{
+  "gamma": 0.15,
+  "r": 1.0502099326342236,
+  "beta": [
+    0.005
+  ],
+  "fit_n": 159,
+  "market": "corners",
+  "arm": "gate_zero",
+  "pre_virgin_fit_rows": 172,
+  "league_base_mu": 8.686046511627907,
+  "league_base_r": 1.097086018492575
+}

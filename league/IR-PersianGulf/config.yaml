@@ -1,0 +1,28 @@
+# IR Persian Gulf Pro League (Iran) — league config
+league: IR-PersianGulf
+country: Iran
+fotmob_id: 523
+tier: 1
+warehouse: data_enrichment/fotmob_world/Iran/Persian Gulf
+data:
+  matches: league/IR-PersianGulf/data/ir_persiangulf_matches.csv
+  team_matches: league/IR-PersianGulf/data/team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]   # warm-up + scored dev 2022/2023–2024/2025
+virgin_primary: "2025/2026"          # partial, n=178, rounds 1–23
+virgin_confirmatory: "2026/2027"     # partial, in progress
+halves_constants:
+  goals_1h_share: 0.427
+markets:
+  goals: G-IRPG        # DC reference; arms: Gate Zero, SHRINK, X2
+  sot: null            # no target anywhere: stats null in all payloads
+  corners: null        # no target anywhere: stats null in all payloads
+  cards: null          # yellows absent pre-2025/2026; only one usable season
+  total_shots: null    # no target anywhere: stats null in all payloads
+notes:
+  - The payload general.leagueId is a season-edition id; identity uses parentLeagueId 523 and accepted names Persian Gulf Pro League/Persian Gulf.
+  - Two Asian Qualifiers playoff rows are excluded; played league n=1,243.
+  - 2025/2026 has a warehouse gap after round 23 (n=178), not a format change.
+  - The league expands from 16 teams to 18 in 2026/2027: Mes Rafsanjan relegated; Sanat Naft Abadan, Nassaji Mazandaran FC, and Mes Shahr Babak promoted.
+  - Team id 139914 is Foolad Khouzestan → Foolad Khuzestan.
+  - The Azadegan sibling is FotMob 9372, tier 2; entrants arrive from it. X2 uses the frozen dev-transition offset, not Azadegan ratings, because its goals model failed its dev gate and shipped no ratings.

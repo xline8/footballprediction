@@ -1,0 +1,207 @@
+{
+  "league_id": 8815,
+  "n_index_rows": 1935,
+  "n_match_rows": 1935,
+  "n_team_match_rows": 3870,
+  "seasons": {
+    "2021/2022": {
+      "n": 546,
+      "teams": 34,
+      "goals": 2.258,
+      "home_goals": 1.383,
+      "away_goals": 0.875,
+      "home_win_pct": 46.7,
+      "draw_pct": 27.5,
+      "away_win_pct": 25.8,
+      "ou25_over_rate": 0.412,
+      "events_pct": 87.9,
+      "ht_validated_pct": 87.7,
+      "b_team_match_pct": 22.7,
+      "b_teams": 4,
+      "awarded_no_events": 6,
+      "stats_pct": 0.0,
+      "shotmap_pct": 0.0,
+      "referee_pct": 0.0
+    },
+    "2022/2023": {
+      "n": 420,
+      "teams": 30,
+      "goals": 2.386,
+      "home_goals": 1.314,
+      "away_goals": 1.071,
+      "home_win_pct": 41.7,
+      "draw_pct": 23.6,
+      "away_win_pct": 34.8,
+      "ou25_over_rate": 0.445,
+      "events_pct": 84.5,
+      "ht_validated_pct": 83.3,
+      "b_team_match_pct": 25.7,
+      "b_teams": 4,
+      "awarded_no_events": 28,
+      "stats_pct": 0.0,
+      "shotmap_pct": 0.0,
+      "referee_pct": 0.0
+    },
+    "2023/2024": {
+      "n": 364,
+      "teams": 24,
+      "goals": 2.299,
+      "home_goals": 1.343,
+      "away_goals": 0.956,
+      "home_win_pct": 46.7,
+      "draw_pct": 26.1,
+      "away_win_pct": 27.2,
+      "ou25_over_rate": 0.404,
+      "events_pct": 92.0,
+      "ht_validated_pct": 92.0,
+      "b_team_match_pct": 33.0,
+      "b_teams": 4,
+      "awarded_no_events": 0,
+      "stats_pct": 0.0,
+      "shotmap_pct": 0.0,
+      "referee_pct": 0.0
+    },
+    "2024/2025": {
+      "n": 261,
+      "teams": 20,
+      "goals": 2.284,
+      "home_goals": 1.276,
+      "away_goals": 1.008,
+      "home_win_pct": 43.7,
+      "draw_pct": 27.2,
+      "away_win_pct": 29.1,
+      "ou25_over_rate": 0.429,
+      "events_pct": 92.7,
+      "ht_validated_pct": 92.7,
+      "b_team_match_pct": 28.4,
+      "b_teams": 3,
+      "awarded_no_events": 1,
+      "stats_pct": 0.0,
+      "shotmap_pct": 0.0,
+      "referee_pct": 0.0
+    },
+    "2025/2026": {
+      "n": 265,
+      "teams": 20,
+      "goals": 2.291,
+      "home_goals": 1.313,
+      "away_goals": 0.977,
+      "home_win_pct": 44.2,
+      "draw_pct": 23.0,
+      "away_win_pct": 32.8,
+      "ou25_over_rate": 0.392,
+      "events_pct": 94.3,
+      "ht_validated_pct": 94.3,
+      "b_team_match_pct": 27.9,
+      "b_teams": 3,
+      "awarded_no_events": 0,
+      "stats_pct": 0.0,
+      "shotmap_pct": 0.0,
+      "referee_pct": 0.0
+    },
+    "2026/2027": {
+      "n": 79,
+      "teams": 16,
+      "goals": 2.342,
+      "home_goals": 1.342,
+      "away_goals": 1,
+      "home_win_pct": 49.4,
+      "draw_pct": 29.1,
+      "away_win_pct": 21.5,
+      "ou25_over_rate": 0.418,
+      "events_pct": 93.7,
+      "ht_validated_pct": 93.7,
+      "b_team_match_pct": 35.4,
+      "b_teams": 3,
+      "awarded_no_events": 0,
+      "stats_pct": 0.0,
+      "shotmap_pct": 0.0,
+      "referee_pct": 0.0
+    }
+  },
+  "phase_rule": "phase from general.leagueName; all phases ordinary rows in every fit/window; no phase feature; B teams kept as ordinary teams",
+  "phase_levels": {
+    "2021/2022": {
+      "regular": {
+        "n": 544,
+        "goals": 2.263
+      },
+      "playoff": {
+        "n": 2,
+        "goals": 1
+      }
+    },
+    "2022/2023": {
+      "regular": {
+        "n": 420,
+        "goals": 2.386
+      }
+    },
+    "2023/2024": {
+      "regular": {
+        "n": 264,
+        "goals": 2.212
+      },
+      "playoff_promotion": {
+        "n": 40,
+        "goals": 3.05
+      },
+      "playoff_relegation": {
+        "n": 60,
+        "goals": 2.183
+      }
+    },
+    "2024/2025": {
+      "regular": {
+        "n": 180,
+        "goals": 2.289
+      },
+      "playoff_promotion": {
+        "n": 40,
+        "goals": 2.7
+      },
+      "playoff_relegation": {
+        "n": 40,
+        "goals": 1.875
+      },
+      "supercup": {
+        "n": 1,
+        "goals": 1
+      }
+    },
+    "2025/2026": {
+      "regular": {
+        "n": 180,
+        "goals": 2.322
+      },
+      "playoff_promotion": {
+        "n": 24,
+        "goals": 1.833
+      },
+      "playoff_relegation": {
+        "n": 60,
+        "goals": 2.4
+      },
+      "supercup": {
+        "n": 1,
+        "goals": 1
+      }
+    },
+    "2026/2027": {
+      "regular": {
+        "n": 79,
+        "goals": 2.342
+      }
+    }
+  },
+  "event_goal_validation": {
+    "n_events_matches": 1736,
+    "n_validated": 1730,
+    "n_mismatch": 6,
+    "n_no_events": 199,
+    "no_events_0_0": 164
+  },
+  "stats_xg_era": [],
+  "shotmap_xg_era": [],
+  "xgot_era": []
+}

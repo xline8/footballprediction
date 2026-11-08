@@ -1,0 +1,87 @@
+{
+  "event_card_types": {
+    "2021/2022|Red|": 44,
+    "2021/2022|YellowRed|": 31,
+    "2022/2023|Red|": 70,
+    "2022/2023|YellowRed|": 38,
+    "2023/2024|Red|": 69,
+    "2023/2024|YellowRed|": 34,
+    "2024/2025|Red|": 84,
+    "2024/2025|YellowRed|": 16,
+    "2025/2026|Red|": 120,
+    "2025/2026|YellowRed|": 8,
+    "2026/2027|Red|": 55,
+    "2026/2027|YellowRed|": 1
+  },
+  "excluded_rows": 0,
+  "finished_rows": 1443,
+  "index_rows": 1443,
+  "seasons": {
+    "2021/2022": {
+      "card_event_matches": 62,
+      "events_present": 263,
+      "expected_goals_matches": 0,
+      "ht_goal_matches": 263,
+      "n": 292,
+      "period_split_matches": 0,
+      "referee_named": 0,
+      "shotmap_shots_positive": 0,
+      "stats_matches": 0
+    },
+    "2022/2023": {
+      "card_event_matches": 89,
+      "events_present": 272,
+      "expected_goals_matches": 0,
+      "ht_goal_matches": 272,
+      "n": 292,
+      "period_split_matches": 0,
+      "referee_named": 0,
+      "shotmap_shots_positive": 0,
+      "stats_matches": 0
+    },
+    "2023/2024": {
+      "card_event_matches": 80,
+      "events_present": 203,
+      "expected_goals_matches": 0,
+      "ht_goal_matches": 203,
+      "n": 220,
+      "period_split_matches": 0,
+      "referee_named": 0,
+      "shotmap_shots_positive": 0,
+      "stats_matches": 0
+    },
+    "2024/2025": {
+      "card_event_matches": 83,
+      "events_present": 208,
+      "expected_goals_matches": 0,
+      "ht_goal_matches": 208,
+      "n": 234,
+      "period_split_matches": 0,
+      "referee_named": 0,
+      "shotmap_shots_positive": 0,
+      "stats_matches": 0
+    },
+    "2025/2026": {
+      "card_event_matches": 102,
+      "events_present": 276,
+      "expected_goals_matches": 0,
+      "ht_goal_matches": 276,
+      "n": 292,
+      "period_split_matches": 0,
+      "referee_named": 0,
+      "shotmap_shots_positive": 0,
+      "stats_matches": 0
+    },
+    "2026/2027": {
+      "card_event_matches": 43,
+      "events_present": 110,
+      "expected_goals_matches": 0,
+      "ht_goal_matches": 110,
+      "n": 113,
+      "period_split_matches": 0,
+      "referee_named": 0,
+      "shotmap_shots_positive": 0,
+      "stats_matches": 0
+    }
+  }
+}

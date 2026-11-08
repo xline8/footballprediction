@@ -1,0 +1,39 @@
+# BO-PrimeraDivision (Bolivia) — league config
+league: BO-PrimeraDivision
+country: Bolivia
+fotmob_id: 144
+tier: 1
+warehouse: data_enrichment/fotmob_world/Bolivia/Primera Division
+data:
+  matches: league/BO-PrimeraDivision/data/bo_matches.csv
+  team_matches: league/BO-PrimeraDivision/data/bo_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period_goals: ["2022", "2023", "2024"]
+seed_goals: "2021"
+virgin_goals: "2025"
+virgin_confirmatory_goals: "2026"
+seed_counts: "2025 rounds 1-10"
+dev_period_counts: ["2025 rounds 11-30"]
+virgin_counts: "2026 transitional"
+halves_constants:
+  goals_1h_share: 0.4323
+  sot_1h_share: 0.4555
+  corners_1h_share: 0.4866
+  total_shots_1h_share: 0.4633
+  yellow_cards_1h_share: 0.3739
+halves_constants_source: "goals from 2021-2024 regular event times (n=1,136 matches, 1,065 with goals); counts from 2025 regular Periods FirstHalf/SecondHalf ratio of sums (n=240; cards event-unified, n=239 with cards). Dev/seed windows only — no virgin window used."
+markets:
+  goals: G-BO
+  sot: S-BO
+  corners: C-BO
+  cards: K-BO
+  total_shots: T-BO
+notes:
+  - "Phase rule: numeric roundName is regular; 1/4, 1/2, final are play-off rows (13 in 2022, 15 in 2024) excluded from every fit and scored window."
+  - "Stats era is 2025-2026 only (439 matches); no xG and no shotmap anywhere, so goals are goals-only."
+  - "K-BO target is event-unified yellows (Yellow + YellowRed): stats feed undercounts (1,324 vs 1,495 in 2025, agree 151/240)."
+  - "Referee text empty 2021-2024; named only 40/240 in 2025, 79/199 in 2026 — X8 dropped."
+  - "No Bolivian second-tier corpus in the warehouse — X2 dropped."
+  - "2025 goals/match 3.62 is a genuine outlier vs 2.76-3.06 in 2021-2024 and 3.04 in 2026; 2025 is the goals virgin window."
+  - "Awarded match 3777008 (2021-12-11, San Jose 0-3 Jorge Wilstermann) has no Goal events; retained as a score-based goals observation."
+  - "2026 is in progress (199/240 played at pull); it is the TRANSITIONAL virgin for count markets, with a season-end confirmatory read outstanding."

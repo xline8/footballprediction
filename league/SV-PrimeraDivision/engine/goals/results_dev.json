@@ -1,0 +1,495 @@
+{
+  "protocol": {
+    "league": "SV-PrimeraDivision",
+    "dev_seasons_loaded": [
+      "2021/2022 - Apertura",
+      "2021/2022 - Clausura",
+      "2022/2023 - Apertura",
+      "2022/2023 - Clausura",
+      "2023/2024 - Apertura",
+      "2023/2024 - Clausura",
+      "2024/2025 - Apertura",
+      "2024/2025 - Clausura"
+    ],
+    "scored_n": 815,
+    "primary_line": "OU2.5",
+    "eligibility": "eligible=1 and stage=regular",
+    "naive_rule": "trailing 10; <6 matches for either team falls back to league mean"
+  },
+  "rows": [
+    {
+      "n": 132,
+      "ll_1x2": 1.108602361277371,
+      "rps": 0.22239465285098528,
+      "oull_2_5": 0.7076955687304763,
+      "arm": "gate_zero",
+      "season": "2021/2022 - Clausura",
+      "kind": "model"
+    },
+    {
+      "n": 132,
+      "ll_1x2": 1.083931231691175,
+      "rps": 0.21590909090909036,
+      "oull_2_5": 0.6931471805599462,
+      "arm": "gate_zero",
+      "season": "2021/2022 - Clausura",
+      "kind": "climatology"
+    },
+    {
+      "n": 132,
+      "ll_1x2": 1.1195709117751396,
+      "rps": 0.22482358739881397,
+      "oull_2_5": 0.7464003736077129,
+      "arm": "gate_zero",
+      "season": "2021/2022 - Clausura",
+      "kind": "naive_trailing10"
+    },
+    {
+      "n": 67,
+      "ll_1x2": 1.0738649225033858,
+      "rps": 0.21950783816241518,
+      "oull_2_5": 0.6798638626716441,
+      "arm": "gate_zero",
+      "season": "2022/2023 - Apertura",
+      "kind": "model"
+    },
+    {
+      "n": 67,
+      "ll_1x2": 1.0535543673399637,
+      "rps": 0.21300254495429188,
+      "oull_2_5": 0.6932147560689206,
+      "arm": "gate_zero",
+      "season": "2022/2023 - Apertura",
+      "kind": "climatology"
+    },
+    {
+      "n": 67,
+      "ll_1x2": 1.0810323630420529,
+      "rps": 0.22175690533861744,
+      "oull_2_5": 0.7321084854408204,
+      "arm": "gate_zero",
+      "season": "2022/2023 - Apertura",
+      "kind": "naive_trailing10"
+    },
+    {
+      "n": 132,
+      "ll_1x2": 1.0681061000662948,
+      "rps": 0.21607906134679997,
+      "oull_2_5": 0.6788757191255773,
+      "arm": "gate_zero",
+      "season": "2022/2023 - Clausura",
+      "kind": "model"
+    },
+    {
+      "n": 132,
+      "ll_1x2": 1.1065065081633252,
+      "rps": 0.22859090120821032,
+      "oull_2_5": 0.6840984480188129,
+      "arm": "gate_zero",
+      "season": "2022/2023 - Clausura",
+      "kind": "climatology"
+    },
+    {
+      "n": 132,
+      "ll_1x2": 1.1833722936957562,
+      "rps": 0.24618891428363932,
+      "oull_2_5": 0.7127547332749281,
+      "arm": "gate_zero",
+      "season": "2022/2023 - Clausura",
+      "kind": "naive_trailing10"
+    },
+    {
+      "n": 132,
+      "ll_1x2": 1.05567703101157,
+      "rps": 0.21466044740945522,
+      "oull_2_5": 0.7636496014185276,
+      "arm": "gate_zero",
+      "season": "2023/2024 - Apertura",
+      "kind": "model"
+    },
+    {
+      "n": 132,
+      "ll_1x2": 1.0923163238876903,
+      "rps": 0.22797761492255508,
+      "oull_2_5": 0.6998696163946728,
+      "arm": "gate_zero",
+      "season": "2023/2024 - Apertura",
+      "kind": "climatology"
+    },
+    {
+      "n": 132,
+      "ll_1x2": 1.0729873691368446,
+      "rps": 0.2194743732841482,
+      "oull_2_5": 0.7790700487746768,
+      "arm": "gate_zero",
+      "season": "2023/2024 - Apertura",
+      "kind": "naive_trailing10"
+    },
+    {
+      "n": 132,
+      "ll_1x2": 1.049519926870854,
+      "rps": 0.22693616041914547,
+      "oull_2_5": 0.6785767023163901,
+      "arm": "gate_zero",
+      "season": "2023/2024 - Clausura",
+      "kind": "model"
+    },
+    {
+      "n": 132,
+      "ll_1x2": 1.0802776177535,
+      "rps": 0.2352399355464114,
+      "oull_2_5": 0.6902748323712462,
+      "arm": "gate_zero",
+      "season": "2023/2024 - Clausura",
+      "kind": "climatology"
+    },
+    {
+      "n": 132,
+      "ll_1x2": 1.1537377371885493,
+      "rps": 0.25732835441114776,
+      "oull_2_5": 0.6937979752535839,
+      "arm": "gate_zero",
+      "season": "2023/2024 - Clausura",
+      "kind": "naive_trailing10"
+    },
+    {
+      "n": 110,
+      "ll_1x2": 1.0126468915383953,
+      "rps": 0.21541919054856587,
+      "oull_2_5": 0.7082186132450093,
+      "arm": "gate_zero",
+      "season": "2024/2025 - Apertura",
+      "kind": "model"
+    },
+    {
+      "n": 110,
+      "ll_1x2": 1.0851259757920015,
+      "rps": 0.24015986737805184,
+      "oull_2_5": 0.6877482230125709,
+      "arm": "gate_zero",
+      "season": "2024/2025 - Apertura",
+      "kind": "climatology"
+    },
+    {
+      "n": 110,
+      "ll_1x2": 1.0446823700385308,
+      "rps": 0.2261069987770475,
+      "oull_2_5": 0.77527649887547,
+      "arm": "gate_zero",
+      "season": "2024/2025 - Apertura",
+      "kind": "naive_trailing10"
+    },
+    {
+      "n": 110,
+      "ll_1x2": 1.0228084627440086,
+      "rps": 0.2037098701746454,
+      "oull_2_5": 0.6653457440207102,
+      "arm": "gate_zero",
+      "season": "2024/2025 - Clausura",
+      "kind": "model"
+    },
+    {
+      "n": 110,
+      "ll_1x2": 1.1099571610592063,
+      "rps": 0.23431204427466043,
+      "oull_2_5": 0.6774003589560342,
+      "arm": "gate_zero",
+      "season": "2024/2025 - Clausura",
+      "kind": "climatology"
+    },
+    {
+      "n": 110,
+      "ll_1x2": 1.1171790908872825,
+      "rps": 0.23022748047929018,
+      "oull_2_5": 0.7150911844221856,
+      "arm": "gate_zero",
+      "season": "2024/2025 - Clausura",
+      "kind": "naive_trailing10"
+    },
+    {
+      "n": 815,
+      "ll_1x2": 1.056516017321023,
+      "rps": 0.21715399306002214,
+      "oull_2_5": 0.6994407855070401,
+      "arm": "gate_zero",
+      "season": "pooled",
+      "kind": "model"
+    },
+    {
+      "n": 815,
+      "ll_1x2": 1.0895306375740446,
+      "rps": 0.22856662136825004,
+      "oull_2_5": 0.6894567151934452,
+      "arm": "gate_zero",
+      "season": "pooled",
+      "kind": "climatology"
+    },
+    {
+      "n": 815,
+      "ll_1x2": 1.1142946578929653,
+      "rps": 0.23333265724386149,
+      "oull_2_5": 0.7362193459724133,
+      "arm": "gate_zero",
+      "season": "pooled",
+      "kind": "naive_trailing10"
+    },
+    {
+      "n": 132,
+      "ll_1x2": 1.108602361277371,
+      "rps": 0.22239465285098528,
+      "oull_2_5": 0.7076955687304763,
+      "arm": "shrink",
+      "season": "2021/2022 - Clausura",
+      "kind": "model"
+    },
+    {
+      "n": 132,
+      "ll_1x2": 1.083931231691175,
+      "rps": 0.21590909090909036,
+      "oull_2_5": 0.6931471805599462,
+      "arm": "shrink",
+      "season": "2021/2022 - Clausura",
+      "kind": "climatology"
+    },
+    {
+      "n": 132,
+      "ll_1x2": 1.1195709117751396,
+      "rps": 0.22482358739881397,
+      "oull_2_5": 0.7464003736077129,
+      "arm": "shrink",
+      "season": "2021/2022 - Clausura",
+      "kind": "naive_trailing10"
+    },
+    {
+      "n": 67,
+      "ll_1x2": 1.0738649225033858,
+      "rps": 0.21950783816241518,
+      "oull_2_5": 0.6798638626716441,
+      "arm": "shrink",
+      "season": "2022/2023 - Apertura",
+      "kind": "model"
+    },
+    {
+      "n": 67,
+      "ll_1x2": 1.0535543673399637,
+      "rps": 0.21300254495429188,
+      "oull_2_5": 0.6932147560689206,
+      "arm": "shrink",
+      "season": "2022/2023 - Apertura",
+      "kind": "climatology"
+    },
+    {
+      "n": 67,
+      "ll_1x2": 1.0810323630420529,
+      "rps": 0.22175690533861744,
+      "oull_2_5": 0.7321084854408204,
+      "arm": "shrink",
+      "season": "2022/2023 - Apertura",
+      "kind": "naive_trailing10"
+    },
+    {
+      "n": 132,
+      "ll_1x2": 1.0681061000662948,
+      "rps": 0.21607906134679997,
+      "oull_2_5": 0.6788757191255773,
+      "arm": "shrink",
+      "season": "2022/2023 - Clausura",
+      "kind": "model"
+    },
+    {
+      "n": 132,
+      "ll_1x2": 1.1065065081633252,
+      "rps": 0.22859090120821032,
+      "oull_2_5": 0.6840984480188129,
+      "arm": "shrink",
+      "season": "2022/2023 - Clausura",
+      "kind": "climatology"
+    },
+    {
+      "n": 132,
+      "ll_1x2": 1.1833722936957562,
+      "rps": 0.24618891428363932,
+      "oull_2_5": 0.7127547332749281,
+      "arm": "shrink",
+      "season": "2022/2023 - Clausura",
+      "kind": "naive_trailing10"
+    },
+    {
+      "n": 132,
+      "ll_1x2": 1.05567703101157,
+      "rps": 0.21466044740945522,
+      "oull_2_5": 0.7636496014185276,
+      "arm": "shrink",
+      "season": "2023/2024 - Apertura",
+      "kind": "model"
+    },
+    {
+      "n": 132,
+      "ll_1x2": 1.0923163238876903,
+      "rps": 0.22797761492255508,
+      "oull_2_5": 0.6998696163946728,
+      "arm": "shrink",
+      "season": "2023/2024 - Apertura",
+      "kind": "climatology"
+    },
+    {
+      "n": 132,
+      "ll_1x2": 1.0729873691368446,
+      "rps": 0.2194743732841482,
+      "oull_2_5": 0.7790700487746768,
+      "arm": "shrink",
+      "season": "2023/2024 - Apertura",
+      "kind": "naive_trailing10"
+    },
+    {
+      "n": 132,
+      "ll_1x2": 1.049519926870854,
+      "rps": 0.22693616041914547,
+      "oull_2_5": 0.6785767023163901,
+      "arm": "shrink",
+      "season": "2023/2024 - Clausura",
+      "kind": "model"
+    },
+    {
+      "n": 132,
+      "ll_1x2": 1.0802776177535,
+      "rps": 0.2352399355464114,
+      "oull_2_5": 0.6902748323712462,
+      "arm": "shrink",
+      "season": "2023/2024 - Clausura",
+      "kind": "climatology"
+    },
+    {
+      "n": 132,
+      "ll_1x2": 1.1537377371885493,
+      "rps": 0.25732835441114776,
+      "oull_2_5": 0.6937979752535839,
+      "arm": "shrink",
+      "season": "2023/2024 - Clausura",
+      "kind": "naive_trailing10"
+    },
+    {
+      "n": 110,
+      "ll_1x2": 1.0126468915383953,
+      "rps": 0.21541919054856587,
+      "oull_2_5": 0.7082186132450093,
+      "arm": "shrink",
+      "season": "2024/2025 - Apertura",
+      "kind": "model"
+    },
+    {
+      "n": 110,
+      "ll_1x2": 1.0851259757920015,
+      "rps": 0.24015986737805184,
+      "oull_2_5": 0.6877482230125709,
+      "arm": "shrink",
+      "season": "2024/2025 - Apertura",
+      "kind": "climatology"
+    },
+    {
+      "n": 110,
+      "ll_1x2": 1.0446823700385308,
+      "rps": 0.2261069987770475,
+      "oull_2_5": 0.77527649887547,
+      "arm": "shrink",
+      "season": "2024/2025 - Apertura",
+      "kind": "naive_trailing10"
+    },
+    {
+      "n": 110,
+      "ll_1x2": 1.0228084627440086,
+      "rps": 0.2037098701746454,
+      "oull_2_5": 0.6653457440207102,
+      "arm": "shrink",
+      "season": "2024/2025 - Clausura",
+      "kind": "model"
+    },
+    {
+      "n": 110,
+      "ll_1x2": 1.1099571610592063,
+      "rps": 0.23431204427466043,
+      "oull_2_5": 0.6774003589560342,
+      "arm": "shrink",
+      "season": "2024/2025 - Clausura",
+      "kind": "climatology"
+    },
+    {
+      "n": 110,
+      "ll_1x2": 1.1171790908872825,
+      "rps": 0.23022748047929018,
+      "oull_2_5": 0.7150911844221856,
+      "arm": "shrink",
+      "season": "2024/2025 - Clausura",
+      "kind": "naive_trailing10"
+    },
+    {
+      "n": 815,
+      "ll_1x2": 1.056516017321023,
+      "rps": 0.21715399306002214,
+      "oull_2_5": 0.6994407855070401,
+      "arm": "shrink",
+      "season": "pooled",
+      "kind": "model"
+    },
+    {
+      "n": 815,
+      "ll_1x2": 1.0895306375740446,
+      "rps": 0.22856662136825004,
+      "oull_2_5": 0.6894567151934452,
+      "arm": "shrink",
+      "season": "pooled",
+      "kind": "climatology"
+    },
+    {
+      "n": 815,
+      "ll_1x2": 1.1142946578929653,
+      "rps": 0.23333265724386149,
+      "oull_2_5": 0.7362193459724133,
+      "arm": "shrink",
+      "season": "pooled",
+      "kind": "naive_trailing10"
+    }
+  ],
+  "dev_gate": {
+    "gate_zero": {
+      "ll_1x2": true,
+      "rps": true,
+      "oull_2_5": false
+    },
+    "shrink": {
+      "ll_1x2": true,
+      "rps": true,
+      "oull_2_5": false
+    }
+  },
+  "shrink_bites": {
+    "2021/2022 - Clausura": {
+      "changed_rows": 0,
+      "target_teams_1_5": 0
+    },
+    "2022/2023 - Apertura": {
+      "changed_rows": 0,
+      "target_teams_1_5": 0
+    },
+    "2022/2023 - Clausura": {
+      "changed_rows": 0,
+      "target_teams_1_5": 0
+    },
+    "2023/2024 - Apertura": {
+      "changed_rows": 0,
+      "target_teams_1_5": 0
+    },
+    "2023/2024 - Clausura": {
+      "changed_rows": 0,
+      "target_teams_1_5": 0
+    },
+    "2024/2025 - Apertura": {
+      "changed_rows": 0,
+      "target_teams_1_5": 0
+    },
+    "2024/2025 - Clausura": {
+      "changed_rows": 0,
+      "target_teams_1_5": 0
+    }
+  }
+}

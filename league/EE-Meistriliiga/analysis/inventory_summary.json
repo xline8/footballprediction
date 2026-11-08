@@ -1,0 +1,653 @@
+{
+  "card_definition": "Yellow only for yellow columns; Red and YellowRed for red columns; event-feed provenance.",
+  "churn": {
+    "2021": {
+      "entered": [
+        112484,
+        1588,
+        163540,
+        187946,
+        2252,
+        4146,
+        4147,
+        8155,
+        828265,
+        8694
+      ],
+      "left": []
+    },
+    "2022": {
+      "entered": [
+        49578
+      ],
+      "left": [
+        8694
+      ]
+    },
+    "2023": {
+      "entered": [
+        673053
+      ],
+      "left": [
+        187946
+      ]
+    },
+    "2024": {
+      "entered": [
+        584714
+      ],
+      "left": [
+        673053
+      ]
+    },
+    "2025": {
+      "entered": [
+        673053
+      ],
+      "left": [
+        584714
+      ]
+    },
+    "2026": {
+      "entered": [
+        584714
+      ],
+      "left": [
+        49578
+      ]
+    }
+  },
+  "finished_rows": 1056,
+  "index_rows": 1056,
+  "referee_cards": {
+    "2021": {},
+    "2022": {},
+    "2023": {},
+    "2024": {},
+    "2025": {
+      "Grigori O\u0161omkov": {
+        "matches": 7,
+        "yellow_cards": 19,
+        "yellow_per_match": 2.7143
+      },
+      "Jagnar Jakobson": {
+        "matches": 1,
+        "yellow_cards": 3,
+        "yellow_per_match": 3.0
+      },
+      "Joonas Jaanovits": {
+        "matches": 6,
+        "yellow_cards": 22,
+        "yellow_per_match": 3.6667
+      },
+      "J\u00fcrgen Lorenz": {
+        "matches": 6,
+        "yellow_cards": 22,
+        "yellow_per_match": 3.6667
+      },
+      "Karl Koppel": {
+        "matches": 4,
+        "yellow_cards": 13,
+        "yellow_per_match": 3.25
+      },
+      "Kevin Kaivoja": {
+        "matches": 6,
+        "yellow_cards": 30,
+        "yellow_per_match": 5.0
+      },
+      "Kristjan-Eric L\u00e4\u00e4ne": {
+        "matches": 4,
+        "yellow_cards": 8,
+        "yellow_per_match": 2.0
+      },
+      "Kristo K\u00fclljastinen": {
+        "matches": 6,
+        "yellow_cards": 22,
+        "yellow_per_match": 3.6667
+      },
+      "Kristo Tohver": {
+        "matches": 5,
+        "yellow_cards": 24,
+        "yellow_per_match": 4.8
+      },
+      "Martti Pukk": {
+        "matches": 7,
+        "yellow_cards": 30,
+        "yellow_per_match": 4.2857
+      },
+      "Rasmus Maalinn": {
+        "matches": 5,
+        "yellow_cards": 16,
+        "yellow_per_match": 3.2
+      },
+      "Tanel \u00dcprus": {
+        "matches": 4,
+        "yellow_cards": 10,
+        "yellow_per_match": 2.5
+      }
+    },
+    "2026": {
+      "Andree Porila": {
+        "matches": 1,
+        "yellow_cards": 7,
+        "yellow_per_match": 7.0
+      },
+      "Erik Reinum\u00e4gi": {
+        "matches": 3,
+        "yellow_cards": 10,
+        "yellow_per_match": 3.3333
+      },
+      "Grigori O\u0161omkov": {
+        "matches": 5,
+        "yellow_cards": 29,
+        "yellow_per_match": 5.8
+      },
+      "Jagnar Jakobson": {
+        "matches": 7,
+        "yellow_cards": 31,
+        "yellow_per_match": 4.4286
+      },
+      "Joonas Jaanovits": {
+        "matches": 5,
+        "yellow_cards": 23,
+        "yellow_per_match": 4.6
+      },
+      "Juri Frischer": {
+        "matches": 6,
+        "yellow_cards": 29,
+        "yellow_per_match": 4.8333
+      },
+      "J\u00fcrgen Lorenz": {
+        "matches": 4,
+        "yellow_cards": 8,
+        "yellow_per_match": 2.0
+      },
+      "Karl Koppel": {
+        "matches": 6,
+        "yellow_cards": 16,
+        "yellow_per_match": 2.6667
+      },
+      "Kevin Kaivoja": {
+        "matches": 6,
+        "yellow_cards": 28,
+        "yellow_per_match": 4.6667
+      },
+      "Kristjan-Eric L\u00e4\u00e4ne": {
+        "matches": 4,
+        "yellow_cards": 14,
+        "yellow_per_match": 3.5
+      },
+      "Kristo K\u00fclljastinen": {
+        "matches": 5,
+        "yellow_cards": 13,
+        "yellow_per_match": 2.6
+      },
+      "Kristo Tohver": {
+        "matches": 5,
+        "yellow_cards": 27,
+        "yellow_per_match": 5.4
+      },
+      "Martti Pukk": {
+        "matches": 6,
+        "yellow_cards": 26,
+        "yellow_per_match": 4.3333
+      },
+      "Rasmus Maalinn": {
+        "matches": 6,
+        "yellow_cards": 35,
+        "yellow_per_match": 5.8333
+      },
+      "Tanel \u00dcprus": {
+        "matches": 3,
+        "yellow_cards": 17,
+        "yellow_per_match": 5.6667
+      }
+    }
+  },
+  "season_counts": {
+    "2021": 156,
+    "2022": 180,
+    "2023": 180,
+    "2024": 180,
+    "2025": 180,
+    "2026": 180
+  },
+  "seasons": {
+    "2021": {
+      "card_events": 34,
+      "events": 150,
+      "finished": 156,
+      "index_rows": 156,
+      "period_splits": 0,
+      "referee": 0,
+      "rounds": {
+        "1": 5,
+        "10": 5,
+        "11": 5,
+        "12": 5,
+        "13": 5,
+        "14": 5,
+        "15": 5,
+        "16": 5,
+        "17": 5,
+        "18": 5,
+        "19": 5,
+        "2": 5,
+        "20": 5,
+        "21": 5,
+        "22": 5,
+        "23": 5,
+        "24": 5,
+        "25": 5,
+        "26": 5,
+        "27": 5,
+        "28": 5,
+        "29": 5,
+        "3": 5,
+        "30": 5,
+        "31": 3,
+        "32": 3,
+        "4": 5,
+        "5": 5,
+        "6": 5,
+        "7": 5,
+        "8": 5,
+        "9": 5
+      },
+      "score_present": 156,
+      "shotmap_nonempty": 0,
+      "stats_nonnull": 0,
+      "teams": [
+        "112484",
+        "1588",
+        "163540",
+        "187946",
+        "2252",
+        "4146",
+        "4147",
+        "8155",
+        "828265",
+        "8694"
+      ]
+    },
+    "2022": {
+      "card_events": 41,
+      "events": 177,
+      "finished": 180,
+      "index_rows": 180,
+      "period_splits": 0,
+      "referee": 0,
+      "rounds": {
+        "1": 5,
+        "10": 5,
+        "11": 5,
+        "12": 5,
+        "13": 5,
+        "14": 5,
+        "15": 5,
+        "16": 5,
+        "17": 5,
+        "18": 5,
+        "19": 5,
+        "2": 5,
+        "20": 5,
+        "21": 5,
+        "22": 5,
+        "23": 5,
+        "24": 5,
+        "25": 5,
+        "26": 5,
+        "27": 5,
+        "28": 5,
+        "29": 5,
+        "3": 5,
+        "30": 5,
+        "31": 5,
+        "32": 5,
+        "33": 5,
+        "34": 5,
+        "35": 5,
+        "36": 5,
+        "4": 5,
+        "5": 5,
+        "6": 5,
+        "7": 5,
+        "8": 5,
+        "9": 5
+      },
+      "score_present": 180,
+      "shotmap_nonempty": 0,
+      "stats_nonnull": 0,
+      "teams": [
+        "112484",
+        "1588",
+        "163540",
+        "187946",
+        "2252",
+        "4146",
+        "4147",
+        "49578",
+        "8155",
+        "828265"
+      ]
+    },
+    "2023": {
+      "card_events": 49,
+      "events": 169,
+      "finished": 180,
+      "index_rows": 180,
+      "period_splits": 0,
+      "referee": 0,
+      "rounds": {
+        "1": 5,
+        "10": 5,
+        "11": 5,
+        "12": 5,
+        "13": 5,
+        "14": 5,
+        "15": 5,
+        "16": 5,
+        "17": 5,
+        "18": 5,
+        "19": 5,
+        "2": 5,
+        "20": 5,
+        "21": 5,
+        "22": 5,
+        "23": 5,
+        "24": 5,
+        "25": 5,
+        "26": 5,
+        "27": 5,
+        "28": 5,
+        "29": 5,
+        "3": 5,
+        "30": 5,
+        "31": 5,
+        "32": 5,
+        "33": 5,
+        "34": 5,
+        "35": 5,
+        "36": 5,
+        "4": 5,
+        "5": 5,
+        "6": 5,
+        "7": 5,
+        "8": 5,
+        "9": 5
+      },
+      "score_present": 180,
+      "shotmap_nonempty": 0,
+      "stats_nonnull": 0,
+      "teams": [
+        "112484",
+        "1588",
+        "163540",
+        "2252",
+        "4146",
+        "4147",
+        "49578",
+        "673053",
+        "8155",
+        "828265"
+      ]
+    },
+    "2024": {
+      "card_events": 44,
+      "events": 171,
+      "finished": 180,
+      "index_rows": 180,
+      "period_splits": 0,
+      "referee": 0,
+      "rounds": {
+        "1": 5,
+        "10": 5,
+        "11": 5,
+        "12": 5,
+        "13": 5,
+        "14": 5,
+        "15": 5,
+        "16": 5,
+        "17": 5,
+        "18": 5,
+        "19": 5,
+        "2": 5,
+        "20": 5,
+        "21": 5,
+        "22": 5,
+        "23": 5,
+        "24": 5,
+        "25": 5,
+        "26": 5,
+        "27": 5,
+        "28": 5,
+        "29": 5,
+        "3": 5,
+        "30": 5,
+        "31": 5,
+        "32": 5,
+        "33": 5,
+        "34": 5,
+        "35": 5,
+        "36": 5,
+        "4": 5,
+        "5": 5,
+        "6": 5,
+        "7": 5,
+        "8": 5,
+        "9": 5
+      },
+      "score_present": 180,
+      "shotmap_nonempty": 0,
+      "stats_nonnull": 0,
+      "teams": [
+        "112484",
+        "1588",
+        "163540",
+        "2252",
+        "4146",
+        "4147",
+        "49578",
+        "584714",
+        "8155",
+        "828265"
+      ]
+    },
+    "2025": {
+      "card_events": 761,
+      "events": 180,
+      "finished": 180,
+      "index_rows": 180,
+      "period_splits": 0,
+      "referee": 61,
+      "rounds": {
+        "1": 5,
+        "10": 5,
+        "11": 5,
+        "12": 5,
+        "13": 5,
+        "14": 5,
+        "15": 5,
+        "16": 5,
+        "17": 5,
+        "18": 5,
+        "19": 5,
+        "2": 5,
+        "20": 5,
+        "21": 5,
+        "22": 5,
+        "23": 5,
+        "24": 5,
+        "25": 5,
+        "26": 5,
+        "27": 5,
+        "28": 5,
+        "29": 5,
+        "3": 5,
+        "30": 5,
+        "31": 5,
+        "32": 5,
+        "33": 5,
+        "34": 5,
+        "35": 5,
+        "36": 5,
+        "4": 5,
+        "5": 5,
+        "6": 5,
+        "7": 5,
+        "8": 5,
+        "9": 5
+      },
+      "score_present": 180,
+      "shotmap_nonempty": 0,
+      "stats_nonnull": 0,
+      "teams": [
+        "112484",
+        "1588",
+        "163540",
+        "2252",
+        "4146",
+        "4147",
+        "49578",
+        "673053",
+        "8155",
+        "828265"
+      ]
+    },
+    "2026": {
+      "card_events": 800,
+      "events": 180,
+      "finished": 180,
+      "index_rows": 180,
+      "period_splits": 0,
+      "referee": 72,
+      "rounds": {
+        "1": 5,
+        "10": 5,
+        "11": 5,
+        "12": 5,
+        "13": 5,
+        "14": 5,
+        "15": 5,
+        "16": 5,
+        "17": 5,
+        "18": 5,
+        "19": 5,
+        "2": 5,
+        "20": 5,
+        "21": 5,
+        "22": 5,
+        "23": 5,
+        "24": 5,
+        "25": 5,
+        "26": 5,
+        "27": 5,
+        "28": 5,
+        "29": 5,
+        "3": 5,
+        "30": 5,
+        "31": 5,
+        "32": 5,
+        "33": 5,
+        "34": 5,
+        "35": 5,
+        "36": 5,
+        "4": 5,
+        "5": 5,
+        "6": 5,
+        "7": 5,
+        "8": 5,
+        "9": 5
+      },
+      "score_present": 180,
+      "shotmap_nonempty": 0,
+      "stats_nonnull": 0,
+      "teams": [
+        "112484",
+        "1588",
+        "163540",
+        "2252",
+        "4146",
+        "4147",
+        "584714",
+        "673053",
+        "8155",
+        "828265"
+      ]
+    }
+  },
+  "team_seasons": {
+    "2021": [
+      112484,
+      1588,
+      163540,
+      187946,
+      2252,
+      4146,
+      4147,
+      8155,
+      828265,
+      8694
+    ],
+    "2022": [
+      112484,
+      1588,
+      163540,
+      187946,
+      2252,
+      4146,
+      4147,
+      49578,
+      8155,
+      828265
+    ],
+    "2023": [
+      112484,
+      1588,
+      163540,
+      2252,
+      4146,
+      4147,
+      49578,
+      673053,
+      8155,
+      828265
+    ],
+    "2024": [
+      112484,
+      1588,
+      163540,
+      2252,
+      4146,
+      4147,
+      49578,
+      584714,
+      8155,
+      828265
+    ],
+    "2025": [
+      112484,
+      1588,
+      163540,
+      2252,
+      4146,
+      4147,
+      49578,
+      673053,
+      8155,
+      828265
+    ],
+    "2026": [
+      112484,
+      1588,
+      163540,
+      2252,
+      4146,
+      4147,
+      584714,
+      673053,
+      8155,
+      828265
+    ]
+  }
+}

@@ -1,0 +1,67 @@
+# Algeria Ligue 1 — league config
+league: DZ-Ligue1
+country: Algeria
+fotmob_id: 516
+tier: 1
+warehouse: data_enrichment/fotmob_world/Algeria/Ligue 1
+warehouse_root: ~/workspace/footballprediction
+data:
+  matches: league/DZ-Ligue1/data/dz_matches.csv
+  team_matches: league/DZ-Ligue1/data/dz_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_seed: "2021/2022"
+dev_period: ["2022/2023", "2023/2024", "2024/2025"]
+dev_scored_n: 719
+virgin_primary: "2025/2026"
+virgin_n: 240
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.4421
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+  yellow_cards_1h_share: null
+markets:
+  goals: G-DZ
+  sot: S-DZ
+  corners: C-DZ
+  cards: K-DZ
+  total_shots: T-DZ
+notes:
+  - FORMAT: single round-robin league; no sub-tournaments, no
+    playoffs. 2021/2022: 18 teams, 34 rounds (306 matches); from
+    2022/2023: 16 teams, 30 rounds (240/season). The league shrank
+    18 -> 16 after 2021/2022 (4 out, 2 in); 2-in/2-out every season
+    after. 2026/2027 in progress (rounds 1-9, 66 matches).
+  - SCORES ONLY: stats/shotmap/playerStats empty in all 1,332
+    payloads by content; referee text empty in all 1,332; lineups
+    carry real starters in exactly 1 match (4040543) and empty
+    shells in 9 more; events exist in 1,190/1,332 and carry
+    Goal/Half/Card only — the 244 Card events are all dismissals
+    (Red 184, YellowRed 60, 0 plain Yellows). S/C/K/T NOT BUILDABLE
+    (payload-level evidence in prereg).
+  - One awarded match: 4366461 (US Souf 0-3 Ben Aknoun, 2023/2024,
+    round 19) — excluded from every fit/score/EDA level
+    (eligible=0, GH/NG precedent); 1,331 eligible rows.
+  - Teams keyed by FotMob team id (header.teams[].id; 27 ids,
+    stable). Name variants map to one id: 101633 CR Belouizdad,
+    45655 ES Setif, 1531341 ES Ben Aknoun (diacritic/order).
+    Header score == index score on 1,332/1,332.
+  - HALVES: goals 1H share 0.4421 (ratio of sums over 1,129 HT-
+    readable completed-season matches); per-match share excess
+    variance -0.00039, team-season split-half r = -0.05 — frozen
+    constant, presentation only.
+  - TRAITS: goals-for split-half r = 0.396 pooled (82 team-
+    seasons), goals-against r = 0.602 pooled — but defence is
+    era-qualified: r = 0.74/0.78/0.77 in 2021/22-2023/24, then
+    0.15/0.03 in 2024/25-2025/26. The dev gate adjudicates
+    whether the DC ratings add signal.
+  - LEVELS (pooled completed, n=1,265): 2.19 goals/match — the
+    lowest in the program so far; home edge +0.51 goals (1.35 vs
+    0.84) — the largest; home win 50.8%, away win 21.0%; Over 2.5
+    38.0%, BTTS 42.5%.
+  - TURNOVER: 2 new clubs per season, always at season start.
+    X2: no other Algerian league exists in the warehouse, so no
+    cross-league mover prior is available; SHRINK is the thin-data
+    arm (1-2 new clubs enter most years).
+  - Calibration convention: actual minus predicted.

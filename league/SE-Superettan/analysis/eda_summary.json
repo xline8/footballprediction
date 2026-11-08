@@ -1,0 +1,189 @@
+{
+ "seasons": [
+  "2021",
+  "2022",
+  "2023",
+  "2024",
+  "2025",
+  "2026"
+ ],
+ "n": 1440,
+ "levels": {
+  "2021": {
+   "n": 240,
+   "stats_n": 0,
+   "goals": 2.55,
+   "home_goals": 1.408,
+   "away_goals": 1.142,
+   "sot": null,
+   "corners": null,
+   "shots": null,
+   "yellows": 3.667
+  },
+  "2022": {
+   "n": 240,
+   "stats_n": 240,
+   "goals": 2.904,
+   "home_goals": 1.617,
+   "away_goals": 1.288,
+   "sot": 9.792,
+   "corners": 10.417,
+   "shots": 19.983,
+   "yellows": 4.242
+  },
+  "2023": {
+   "n": 240,
+   "stats_n": 231,
+   "goals": 2.804,
+   "home_goals": 1.625,
+   "away_goals": 1.179,
+   "sot": 9.671,
+   "corners": 10.593,
+   "shots": 20.074,
+   "yellows": 4.037
+  },
+  "2024": {
+   "n": 240,
+   "stats_n": 240,
+   "goals": 2.638,
+   "home_goals": 1.492,
+   "away_goals": 1.146,
+   "sot": 9.5,
+   "corners": 10.229,
+   "shots": 19.625,
+   "yellows": 3.925
+  },
+  "2025": {
+   "n": 240,
+   "stats_n": 239,
+   "goals": 2.858,
+   "home_goals": 1.6,
+   "away_goals": 1.258,
+   "sot": 12.326,
+   "corners": 9.674,
+   "shots": 21.577,
+   "yellows": 3.529
+  },
+  "2026": {
+   "n": 240,
+   "stats_n": 237,
+   "goals": 2.896,
+   "home_goals": 1.546,
+   "away_goals": 1.35,
+   "sot": 8.574,
+   "corners": 10.131,
+   "shots": 19.519,
+   "yellows": 3.171
+  }
+ },
+ "traits": {
+  "sot_for": {
+   "n_teams": 31,
+   "r": 0.589
+  },
+  "corners_for": {
+   "n_teams": 31,
+   "r": 0.752
+  },
+  "shots_for": {
+   "n_teams": 31,
+   "r": 0.756
+  },
+  "yellows_for": {
+   "n_teams": 33,
+   "r": 0.624
+  },
+  "goals_for": {
+   "n_teams": 33,
+   "r": 0.501
+  },
+  "possession": {
+   "n_teams": 31,
+   "r": 0.605
+  }
+ },
+ "halves_goals_all": {
+  "share": 0.4342,
+  "n_matches": 1336,
+  "obs_var": 0.10659,
+  "binom_var": 0.08214,
+  "excess_var": 0.02446
+ },
+ "halves_goals_dev": {
+  "share": 0.4317,
+  "n_matches": 1112,
+  "obs_var": 0.10417,
+  "binom_var": 0.08264,
+  "excess_var": 0.02152
+ },
+ "halves_yellows_dev": {
+  "share": 0.3344,
+  "n_matches": 1180,
+  "obs_var": 0.08439,
+  "binom_var": 0.05641,
+  "excess_var": 0.02798
+ },
+ "dev_medians": {
+  "sot": 10.0,
+  "corners": 10.0,
+  "shots": 20.0,
+  "yellows": 4.0,
+  "goals_over25_rate": 0.532
+ },
+ "x2_relegated_entrants": [
+  {
+   "season": "2022",
+   "team_id": 8527
+  },
+  {
+   "season": "2022",
+   "team_id": 2004
+  },
+  {
+   "season": "2022",
+   "team_id": 8310
+  },
+  {
+   "season": "2023",
+   "team_id": 9859
+  },
+  {
+   "season": "2023",
+   "team_id": 8359
+  },
+  {
+   "season": "2024",
+   "team_id": 6692
+  },
+  {
+   "season": "2024",
+   "team_id": 6544
+  },
+  {
+   "season": "2025",
+   "team_id": 9892
+  },
+  {
+   "season": "2025",
+   "team_id": 6194
+  },
+  {
+   "season": "2026",
+   "team_id": 8641
+  },
+  {
+   "season": "2026",
+   "team_id": 8449
+  },
+  {
+   "season": "2026",
+   "team_id": 6181
+  }
+ ],
+ "x2_entrant_gf_ga_diff_vs_league_team_mean": {
+  "n": 12,
+  "gf_diff": 0.117,
+  "ga_diff": -0.192
+ },
+ "promoted_entrants_no_corpus": 13
+}

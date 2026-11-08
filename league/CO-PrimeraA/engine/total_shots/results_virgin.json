@@ -1,0 +1,108 @@
+{
+  "protocol": {
+    "virgin_season": "2026 - Apertura",
+    "transitional": false
+  },
+  "read_arms": [
+    "A",
+    "B",
+    "C"
+  ],
+  "metrics": {
+    "A": {
+      "n": 204,
+      "logloss": {
+        "24.5": 0.6593181572726862,
+        "23.5": 0.6450270541785946,
+        "25.5": 0.6635092987569716,
+        "26.5": 0.6482711840107424
+      },
+      "calibration_pp": -0.99839396209461,
+      "calibration_se_pp": 3.3898986043669566,
+      "actual_over_rate_pp": 53.431372549019606,
+      "mean_pred_over_pp": 52.432978586924996,
+      "leg_i": true,
+      "leg_ii": true,
+      "leg_iii": true,
+      "virgin_(i)": true,
+      "virgin_(ii)": true,
+      "virgin_(iii)": true
+    },
+    "B": {
+      "n": 204,
+      "logloss": {
+        "24.5": 0.6597058445053896,
+        "23.5": 0.6464134693084219,
+        "25.5": 0.6639381171281695,
+        "26.5": 0.6496042329231448
+      },
+      "calibration_pp": -0.9195819800058421,
+      "calibration_se_pp": 3.3913798764943355,
+      "actual_over_rate_pp": 53.431372549019606,
+      "mean_pred_over_pp": 52.51179056901377,
+      "leg_i": false,
+      "leg_ii": true,
+      "leg_iii": true,
+      "virgin_(i)": false,
+      "virgin_(ii)": true,
+      "virgin_(iii)": true
+    },
+    "C": {
+      "n": 204,
+      "logloss": {
+        "24.5": 0.6591530725293582,
+        "23.5": 0.6449074320249066,
+        "25.5": 0.6633184210722788,
+        "26.5": 0.6480764089624552
+      },
+      "calibration_pp": -0.8951900360120071,
+      "calibration_se_pp": 3.3895156488875795,
+      "actual_over_rate_pp": 53.431372549019606,
+      "mean_pred_over_pp": 52.53618251300758,
+      "leg_i": true,
+      "leg_ii": true,
+      "leg_iii": false,
+      "virgin_(i)": true,
+      "virgin_(ii)": true,
+      "virgin_(iii)": false
+    },
+    "baseline_league": {
+      "n": 204,
+      "logloss": {
+        "24.5": 0.6911466611948828,
+        "23.5": 0.67417536346869,
+        "25.5": 0.6964058645541479,
+        "26.5": 0.6874702084327713
+      },
+      "calibration_pp": -1.2451957506711309,
+      "calibration_se_pp": 3.50119753225872,
+      "actual_over_rate_pp": 53.431372549019606,
+      "mean_pred_over_pp": 52.18617679834847
+    },
+    "baseline_naive": {
+      "n": 204,
+      "logloss": {
+        "24.5": 0.6644519551455141,
+        "23.5": 0.6520089746688105,
+        "25.5": 0.6678520936187602,
+        "26.5": 0.654308147687478
+      },
+      "calibration_pp": 0.4727081640437293,
+      "calibration_se_pp": 3.4080488009189813,
+      "actual_over_rate_pp": 53.431372549019606,
+      "mean_pred_over_pp": 53.904080713063315
+    }
+  },
+  "dev_pass": {
+    "A": true,
+    "B": true,
+    "C": true
+  },
+  "shipped_arm": "A",
+  "verdict": "PASS",
+  "calibration_breach_plus_se_pp": {
+    "A": -3.3915046422723467,
+    "B": -3.4717978964884932,
+    "C": -3.4943256128755724
+  }
+}

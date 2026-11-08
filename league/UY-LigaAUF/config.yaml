@@ -1,0 +1,38 @@
+# UY-LigaAUF (Uruguay) — league config (Phase 2 freeze; completed Phase 6)
+league: UY-LigaAUF
+country: Uruguay
+fotmob_id: 161
+tier: 1
+warehouse: data_enrichment/Uruguay/Liga AUF Uruguaya
+data:
+  matches: league/UY-LigaAUF/data/uy_matches.csv
+  team_matches: league/UY-LigaAUF/data/uy_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period:
+  goals: ["2022", "2023", "2024"]   # scored; warm-up 2021
+  stats_markets: []                  # NOT-BUILDABLE: stats feed 0% in every season (2021-2026)
+  cards: []                          # NOT-BUILDABLE: no consistent cards target in dev (stats absent everywhere; event feed has zero plain Yellow events 2021-2022, Yellows only from 2023)
+virgin_primary: "2025"               # COMPLETE season (300 matches) — NOT READ: G-UY failed the dev gate, so no virgin read happened
+virgin_confirmatory: null           # 2026 is in progress (281) and stays untouched
+halves_constants:                   # frozen from DEV-era data only (EDA F3)
+  goals_1h_share: 0.4276            # event times, dev era 2021-2024, n=2664 goals, 1096 matches (per-season 0.4138-0.4373)
+  yellow_cards_1h_share: null       # no period splits in any season (0 matches) — no constant
+  sot_1h_share: null                # no period splits in any season — no constant
+  corners_1h_share: null            # no period splits in any season — no constant
+  total_shots_1h_share: null        # no period splits in any season — no constant
+markets:
+  goals: G-UY        # DC goals-only (no xG in feed); arms: Gate Zero, ENTRANT (X2 adopted: dev entrant tilt GF -0.128 / GA +0.145 over 9 transitions, GF negative 8/9, GA positive 5/9)
+  sot: S-UY          # NOT-BUILDABLE — no stats target in any season
+  corners: C-UY      # NOT-BUILDABLE — no stats target in any season
+  cards: K-UY        # NOT-BUILDABLE — no consistent dev target (stats absent; event Yellows only from 2023 = definition break); X8 referee absent in dev
+  total_shots: T-UY  # NOT-BUILDABLE — no stats target in any season
+notes:
+  - Calendar-year seasons, 16 teams, ~300 matches/season (2021 short: 241, no Intermedio); phases apertura 120 + clausura 120 + intermedio 57 + final_stage 1-3 per complete season; all phases ordinary rows.
+  - Stats feed 0% in every season (0/1717 matches, 0 stats keys in any raw JSON); shotmap 0/1717; referee named 0/1717; period splits 0/1717. Lineups 0% in 2021-2022, 278/300 in 2023, 297-300/season from 2024.
+  - No xG and no shotmap in ANY season -> X1 blend falls back goals-only; X3/X4/X6/X7/X9 impossible by data absence.
+  - Event feed carries goals reliably (2 score mismatches in 1679 event matches, header wins: 3834312 awarded 0-3, events 2-1; 4425121 scoreStr 5-0 vs 6 Goal events) and plain Yellow Card events only from 2023 (2021-2022: Yellow 0).
+  - 38 matches have a wholly empty events payload; all are scoreless (0-0); their events-derived fields are missing, never zero.
+  - Team-name canonicalisation: 3 accent variants (Progreso, Penarol, Central Espanol) mapped to the majority spelling per team id. 26 FotMob team ids over the corpus, 16 per season. All logic keyed by team id.
+  - Trait reliability (dev, split-half): goals_for r 0.588, goals_against r 0.809 (n=24 teams). Season-to-season r rises 0.27 -> 0.68 (attack).
+  - Predictions-only: no UY odds/settlement source in-system.
+  - Outcome (Phase 6): G-UY FAIL at the dev gate — Gate Zero 1X2 LL 1.0705 / RPS 0.2228 / OU2.5 LL 0.6869 vs climatology 1.0939 / 0.2305 / 0.6806 and naive trailing-10 1.1465 / 0.2280 / 0.7296 (OU leg loses to climatology by 0.0063; 1X2/RPS legs beat both baselines); ENTRANT also fails (1.0753 / 0.2244 / 0.6858, leg iii 0/3 seasons). Virgin 2025 was NOT read; nothing ships. S/C/K/T not-buildable (see reports/*_UY_VERDICT.md).

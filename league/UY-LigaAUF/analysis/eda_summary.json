@@ -1,0 +1,483 @@
+{
+ "seasons": {
+  "2021": {
+   "n": 241,
+   "stats": 0,
+   "splits": 0,
+   "events": 226,
+   "lineup": 0,
+   "referee": 0,
+   "goals_pm": 2.5311203319502074,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.19469026548672566,
+   "yell_stats_pm": null,
+   "teams": 16,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "awarded": 0,
+   "phases": {
+    "apertura": 120,
+    "clausura": 120,
+    "final_stage": 1
+   },
+   "home_win_rate": 0.4024896265560166,
+   "draw_rate": 0.26556016597510373,
+   "away_win_rate": 0.33195020746887965,
+   "ou25_over_rate": 0.47717842323651455
+  },
+  "2022": {
+   "n": 298,
+   "stats": 0,
+   "splits": 0,
+   "events": 278,
+   "lineup": 0,
+   "referee": 0,
+   "goals_pm": 2.1912751677852347,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.22661870503597123,
+   "yell_stats_pm": null,
+   "teams": 16,
+   "xg_rows": 0,
+   "score_mismatch": 1,
+   "awarded": 1,
+   "phases": {
+    "apertura": 120,
+    "clausura": 120,
+    "intermedio": 57,
+    "final_stage": 1
+   },
+   "home_win_rate": 0.3523489932885906,
+   "draw_rate": 0.2651006711409396,
+   "away_win_rate": 0.3825503355704698,
+   "ou25_over_rate": 0.3825503355704698
+  },
+  "2023": {
+   "n": 300,
+   "stats": 0,
+   "splits": 0,
+   "events": 297,
+   "lineup": 278,
+   "referee": 0,
+   "goals_pm": 2.2866666666666666,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 5.787878787878788,
+   "yell_stats_pm": null,
+   "teams": 16,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "awarded": 0,
+   "phases": {
+    "apertura": 120,
+    "clausura": 120,
+    "intermedio": 57,
+    "final_stage": 3
+   },
+   "home_win_rate": 0.39666666666666667,
+   "draw_rate": 0.31,
+   "away_win_rate": 0.29333333333333333,
+   "ou25_over_rate": 0.4
+  },
+  "2024": {
+   "n": 297,
+   "stats": 0,
+   "splits": 0,
+   "events": 297,
+   "lineup": 297,
+   "referee": 0,
+   "goals_pm": 2.4343434343434343,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 5.508417508417509,
+   "yell_stats_pm": null,
+   "teams": 16,
+   "xg_rows": 0,
+   "score_mismatch": 1,
+   "awarded": 0,
+   "phases": {
+    "apertura": 120,
+    "clausura": 120,
+    "intermedio": 57
+   },
+   "home_win_rate": 0.3939393939393939,
+   "draw_rate": 0.26936026936026936,
+   "away_win_rate": 0.3367003367003367,
+   "ou25_over_rate": 0.43097643097643096
+  },
+  "2025": {
+   "n": 300,
+   "stats": 0,
+   "splits": 0,
+   "events": 300,
+   "lineup": 300,
+   "referee": 0,
+   "goals_pm": 2.3333333333333335,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 5.373333333333333,
+   "yell_stats_pm": null,
+   "teams": 16,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "awarded": 0,
+   "phases": {
+    "apertura": 120,
+    "clausura": 120,
+    "intermedio": 57,
+    "final_stage": 3
+   },
+   "home_win_rate": 0.41,
+   "draw_rate": 0.28,
+   "away_win_rate": 0.31,
+   "ou25_over_rate": 0.43
+  },
+  "2026": {
+   "n": 281,
+   "stats": 0,
+   "splits": 0,
+   "events": 281,
+   "lineup": 281,
+   "referee": 0,
+   "goals_pm": 2.377224199288256,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 5.669039145907473,
+   "yell_stats_pm": null,
+   "teams": 16,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "awarded": 0,
+   "phases": {
+    "apertura": 120,
+    "clausura": 104,
+    "intermedio": 57
+   },
+   "home_win_rate": 0.4199288256227758,
+   "draw_rate": 0.2526690391459075,
+   "away_win_rate": 0.3274021352313167,
+   "ou25_over_rate": 0.4412811387900356
+  }
+ },
+ "total_matches": 1717,
+ "mismatch_match_ids": [
+  3834312,
+  4425121
+ ],
+ "awarded_match_ids": [
+  3834312
+ ],
+ "stats_keys_per_season": {
+  "2021": {},
+  "2022": {},
+  "2023": {},
+  "2024": {},
+  "2025": {},
+  "2026": {}
+ },
+ "card_event_kinds_per_season": {
+  "2021": {
+   "YellowRed": 44,
+   "Red": 40
+  },
+  "2022": {
+   "Red": 63,
+   "YellowRed": 63
+  },
+  "2023": {
+   "YellowRed": 60,
+   "Yellow": 1659,
+   "Red": 53
+  },
+  "2024": {
+   "Yellow": 1597,
+   "Red": 62,
+   "YellowRed": 39
+  },
+  "2025": {
+   "Yellow": 1586,
+   "YellowRed": 26,
+   "Red": 81
+  },
+  "2026": {
+   "Yellow": 1543,
+   "Red": 69,
+   "YellowRed": 50
+  }
+ },
+ "referees": {
+  "2021": {
+   "distinct": 0,
+   "top": []
+  },
+  "2022": {
+   "distinct": 0,
+   "top": []
+  },
+  "2023": {
+   "distinct": 0,
+   "top": []
+  },
+  "2024": {
+   "distinct": 0,
+   "top": []
+  },
+  "2025": {
+   "distinct": 0,
+   "top": []
+  },
+  "2026": {
+   "distinct": 0,
+   "top": []
+  }
+ },
+ "lineup_object_present_per_season": {
+  "2021": 0,
+  "2022": 0,
+  "2023": 278,
+  "2024": 297,
+  "2025": 300,
+  "2026": 281
+ },
+ "shotmap_present_per_season": {
+  "2021": 0,
+  "2022": 0,
+  "2023": 0,
+  "2024": 0,
+  "2025": 0,
+  "2026": 0
+ },
+ "empty_events": {
+  "n_total": 38,
+  "by_season": {
+   "2021": 15,
+   "2022": 20,
+   "2023": 3
+  },
+  "all_scoreless": true,
+  "goals_total": 0,
+  "goals_mean": 0.0
+ },
+ "halves_dev": {
+  "note": "No stats period splits exist in ANY season (0 matches with FirstHalf/SecondHalf splits in the whole warehouse), so SOT/corners/total-shots/yellows 1H shares are NOT computable on dev. Only the goals share (event times) exists.",
+  "splits_matches_dev": 0,
+  "goals_events": {
+   "share_1h": 0.42755255255255253,
+   "n_goals": 2664,
+   "n_matches": 1096,
+   "excluded_mismatch_matches": 2
+  },
+  "goals_events_by_season": {
+   "2021": {
+    "share_1h": 0.4278688524590164,
+    "n_goals": 610
+   },
+   "2022": {
+    "share_1h": 0.41384615384615386,
+    "n_goals": 650
+   },
+   "2023": {
+    "share_1h": 0.43002915451895046,
+    "n_goals": 686
+   },
+   "2024": {
+    "share_1h": 0.4373259052924791,
+    "n_goals": 718
+   }
+  }
+ },
+ "event_yellows_dev_total_plain_yellow": 3256,
+ "event_yellowred_dev_total": 206,
+ "event_red_dev_total": 218,
+ "trait_reliability_dev": {
+  "goals_for": {
+   "split_half_r": 0.588268231166752,
+   "n_teams": 24,
+   "note": null
+  },
+  "goals_against": {
+   "split_half_r": 0.8087039222242385,
+   "n_teams": 24,
+   "note": null
+  },
+  "sot_for": {
+   "split_half_r": null,
+   "n_teams": 0,
+   "note": "not measurable on dev (target absent in dev era)"
+  },
+  "corners_for": {
+   "split_half_r": null,
+   "n_teams": 0,
+   "note": "not measurable on dev (target absent in dev era)"
+  },
+  "shots_for": {
+   "split_half_r": null,
+   "n_teams": 0,
+   "note": "not measurable on dev (target absent in dev era)"
+  },
+  "yellow_for": {
+   "split_half_r": null,
+   "n_teams": 0,
+   "note": "not measurable on dev (target absent in dev era)"
+  },
+  "possession": {
+   "split_half_r": null,
+   "n_teams": 0,
+   "note": "not measurable on dev (target absent in dev era)"
+  }
+ },
+ "season_to_season_dev": {
+  "goals_for": [
+   {
+    "seasons": "2021-2022",
+    "r": 0.2727714086114814,
+    "n_teams": 13
+   },
+   {
+    "seasons": "2022-2023",
+    "r": 0.550895187464327,
+    "n_teams": 13
+   },
+   {
+    "seasons": "2023-2024",
+    "r": 0.6801859663891924,
+    "n_teams": 13
+   }
+  ],
+  "goals_against": [
+   {
+    "seasons": "2021-2022",
+    "r": 0.3239904592217267,
+    "n_teams": 13
+   },
+   {
+    "seasons": "2022-2023",
+    "r": 0.5537810689641682,
+    "n_teams": 13
+   },
+   {
+    "seasons": "2023-2024",
+    "r": 0.42268409239325216,
+    "n_teams": 13
+   }
+  ]
+ },
+ "entrant_transitions_dev": [
+  {
+   "season": "2022",
+   "team_id": 8562,
+   "team": "Danubio",
+   "gf_diff": -0.06861055686559037,
+   "ga_diff": -0.33888082713586054
+  },
+  {
+   "season": "2022",
+   "team_id": 7796,
+   "team": "Defensor Sporting",
+   "gf_diff": 0.03949755124251775,
+   "ga_diff": -0.12266461091964431
+  },
+  {
+   "season": "2022",
+   "team_id": 924934,
+   "team": "Albion",
+   "gf_diff": -0.17671866497369837,
+   "ga_diff": 0.44490295664792323
+  },
+  {
+   "season": "2023",
+   "team_id": 1319664,
+   "team": "La Luz",
+   "gf_diff": -0.008198198198198225,
+   "ga_diff": 0.5593693693693693
+  },
+  {
+   "season": "2023",
+   "team_id": 6043,
+   "team": "Racing",
+   "gf_diff": -0.0352252252252252,
+   "ga_diff": -0.008198198198198225
+  },
+  {
+   "season": "2023",
+   "team_id": 1836,
+   "team": "Cerro",
+   "gf_diff": -0.3054954954954955,
+   "ga_diff": -0.19738738738738737
+  },
+  {
+   "season": "2024",
+   "team_id": 4424,
+   "team": "Miramar Misiones",
+   "gf_diff": -0.2441987441987441,
+   "ga_diff": 0.21526071526071533
+  },
+  {
+   "season": "2024",
+   "team_id": 4421,
+   "team": "Rampla Juniors",
+   "gf_diff": -0.2712257712257712,
+   "ga_diff": 0.3503958503958504
+  },
+  {
+   "season": "2024",
+   "team_id": 1838,
+   "team": "Club Atl\u00e9tico Progreso",
+   "gf_diff": -0.08203658203658204,
+   "ga_diff": 0.4044499044499046
+  }
+ ],
+ "entrant_summary_dev": {
+  "n": 9,
+  "mean_gf_diff": -0.1280235207751986,
+  "mean_ga_diff": 0.1452497524980747,
+  "gf_negative_count": 8,
+  "ga_positive_count": 5,
+  "dev_scored_mean_team_goals": 1.15195530726257,
+  "dev_scored_n_matches": 895
+ },
+ "lines": {
+  "goals_ou": {
+   "over_rates": {
+    "1.5": 0.6715083798882682,
+    "2.5": 0.4044692737430168,
+    "3.5": 0.20446927374301677
+   },
+   "primary": 2.5,
+   "n": 895
+  },
+  "sot": null,
+  "corners": null,
+  "shots": null,
+  "yellows": null,
+  "note": "S/C/K/T lines are null: no stats target exists in any dev season, so there is no dev window to select a line on."
+ },
+ "home_win_rate_dev": 0.38100558659217876,
+ "draw_rate_dev": 0.28156424581005585,
+ "away_win_rate_dev": 0.33743016759776534,
+ "dev_windows": {
+  "goals": {
+   "warm_up": [
+    "2021"
+   ],
+   "scored": [
+    "2022",
+    "2023",
+    "2024"
+   ],
+   "n_scored": 895
+  },
+  "stats_markets": {
+   "warm_up": [],
+   "scored": [],
+   "note": "No stats season exists in dev (<=2024) or anywhere else; the stats feed is 0% in 2021-2026."
+  }
+ }
+}

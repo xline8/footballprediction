@@ -1,0 +1,7 @@
+# CA-PremierLeague data understanding
+
+The source is the main warehouse index (`league_id=9986`) and its JSON payloads. The builder reads the payload path from the index, so the worktree does not need a warehouse copy. There are 699 finished matches across calendar seasons 2021–2026. Regular rounds are identified only when `general.matchRound` is a numeric string; every other round is playoff. This yields 672 regular matches and 27 excluded playoffs. The 2026 regular inventory is complete at 112 matches, but the season is still in progress because four semi-final matches are present and the final is absent.
+
+The feed has stats for 699/699 matches, no shotmap payloads, and no `expected_goals` key in any payload. Goals are therefore official score goals only. Team identity is FotMob id: 8 clubs in 2021/22, FC Edmonton folds after 2022, Vancouver FC (1436202) enters in 2023, York United id 1022954 is renamed Inter Toronto FC in 2025, and Supra du Québec enters in 2026. There is no promotion/relegation tier corpus.
+
+Important feed facts are preserved, not repaired: 2021/22 stats yellows are implausibly low (1.15 and 0.94 per regular match) while 2023–2025 are 4.35, 4.99 and 4.71. Events do not provide `Yellow` cards before 2025. The cards target is consequently stats yellows, restricted to the credible 2023–2025 era. Referee names cover 0/115, 91/117, 98/117, 110/117 and 40/117 all matches in 2021–2025. `touches_opp_box` is present in 34, 28, 22, 117 and 117 all matches for 2021–2025.

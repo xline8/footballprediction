@@ -1,0 +1,9 @@
+# Pre-registration — S-DK1
+
+Frozen 2026-11-10 before fitting. Target: full-time sum of stats-feed `ShotsOnTarget_home + ShotsOnTarget_away`; event data is not the target. The target exists in 2022/2023–2026/2027, not 2021/2022. Phase rule: regular rounds 1–22; feed-labelled promotion/championship and relegation rounds 23–32 remain ordinary rows. Halves use frozen `sot_1h_share: 0.455` from complete splits 2023/2024–2025/2026.
+
+Gate Zero is the `model_sot.py` v5 production pattern. Permitted variants are X5 trailing target rates and, only if implemented without adding an unregistered feature, X7; no xG/X4 or shotmap/X6 arm is eligible. Dev is 2022/2023–2024/2025, virgin is 2025/2026 read once, and 2026/2027 is reserved. Primary line: 9.5.
+
+Calibration: `|breach| ≤1pp` clean PASS; `≤1 SE` PROVISIONAL; otherwise FAIL. Dev gate: pooled dev LL beats climatology/base-rate and naive trailing-10; Gate Zero failure makes variants moot and virgin unread. Virgin requires LL ≤ Gate Zero and climatology, calibration, and per-season sign for variants. Both-pass selects the lower pooled virgin LL; ties go simpler.
+
+GATE LEGS (frozen): Dev gate — pooled dev LL and the base-rate comparison of an arm must beat climatology/base-rate, and its primary-line LL must beat the naive trailing-10 baseline, else the arm is dead. Virgin legs — (i) LL leg: arm's virgin LL ≤ Gate Zero's AND ≤ climatology's; (ii) calibration leg: |mean predicted − actual| ≤ 1.0pp pooled for the primary-line rate, SE reported; within 1 SE is PROVISIONAL, beyond is FAIL; (iii) per-season sign check on dev in at least half the seasons for variants. Both-pass rule: if Gate Zero and a variant pass all legs, the lower pooled virgin LL ships; if only one passes, it ships; if none passes, S-DK1 FAIL and nothing ships. Virgin is read once.

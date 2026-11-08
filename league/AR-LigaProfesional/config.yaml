@@ -1,0 +1,32 @@
+# AR Liga Profesional (Argentina) — league config
+league: AR-LigaProfesional
+country: Argentina
+fotmob_id: 112
+tier: 1
+warehouse: data_enrichment/fotmob_world/Argentina/Liga Profesional
+data:
+  matches: league/AR-LigaProfesional/data/ar_matches.csv
+  team_matches: league/AR-LigaProfesional/data/team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025 - Apertura", "2025 - Clausura", "2026 - Apertura", "2026 - Clausura"]
+dev_period: ["2021", "2022", "2023", "2024", "2025 - Apertura", "2025 - Clausura", "2026 - Apertura"]   # 2021 = training/warm-up; scored dev = 2022–2026 - Apertura (n=1854)
+virgin_primary: "2026 - Clausura"          # group phase complete (16/16 rounds, n=240) — read ONCE per candidate
+virgin_confirmatory: "2027 - Apertura"     # not yet in the warehouse; reserved, evaluated once when pulled and complete
+halves_constants:               # frozen league constants (EDA F3) — the ONLY halves mechanism
+  goals_1h_share: 0.444
+  sot_1h_share: 0.459
+  corners_1h_share: 0.480
+  total_shots_1h_share: 0.462
+  yellow_cards_1h_share: 0.373
+markets:
+  goals: G-AR        # DC reference; arms: Gate Zero, X2 newcomer priors, X3 set-play decomposition
+  sot: S-AR          # v5 reference; arms: Gate Zero, RS ratio-shrink, X4 xG/shot, X6 xGOT (era 2025-01-01+)
+  corners: C-AR      # corners_v3 reference; arms: Gate Zero (X9), X7 box touches
+  cards: K-AR        # cards reference; arms: Gate Zero, X8 referee covariate; target = event-feed unified yellows (stats key inconsistent in this league)
+  total_shots: T-AR  # shots family; arms: A v1 pattern, B v2 level layer, C E9 trailing-r
+notes:
+  - Group phase only: 45 playoff matches (15 per completed split tournament) are excluded by design; the 2026 - Clausura playoffs had not been played at pull time.
+  - Format eras: single round-robin 2021 (26 teams) and 2022-2024 (28 teams); split Apertura/Clausura with two zones of 15 from 2025 (30 teams, 16 group rounds per tournament).
+  - xG and shotmap exist only from 2023; the goals blend runs goals-only for 2021-2022 training data (production fallback).
+  - Cards target is event-derived unified yellows in every block (stats-feed yellow_cards undercounts throughout and breaks in 2026 — see analysis/DATA_UNDERSTANDING.md §3.3).
+  - Every product presents FT + 1H/2H via the frozen constants above.
+  - Predictions-only: no Liga Profesional odds/settlement source in-system.

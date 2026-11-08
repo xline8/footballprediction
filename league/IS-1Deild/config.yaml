@@ -1,0 +1,40 @@
+league: IS-1Deild
+country: Iceland
+fotmob_id: 216
+tier: 2
+warehouse: data_enrichment/fotmob_world/Iceland/1. Deild
+data:
+  matches: league/IS-1Deild/data/is1_matches.csv
+  team_matches: league/IS-1Deild/data/is1_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period: ["2022", "2023", "2024", "2025"]
+virgin_primary: "2026"
+halves_constants:
+  goals_1h_share: 0.4418
+markets:
+  goals:
+    id: G-IS1
+    status: candidate
+  sot:
+    id: S-IS1
+    status: not_buildable
+    reason: no SOT target: 0/812 stats and 0/812 shotmaps
+  corners:
+    id: C-IS1
+    status: not_buildable
+    reason: no corners target: 0/812 stats and 0/812 shotmaps
+  cards:
+    id: K-IS1
+    status: not_buildable
+    reason: no yellow target; no stats and no Yellow events
+  total_shots:
+    id: T-IS1
+    status: not_buildable
+    reason: no total-shots target: 0/812 stats and 0/812 shotmaps
+notes:
+  - Promotion playoff introduced in 2023; 20 playoff matches are retained.
+  - Scores-only corpus: no stats, shotmap/xG or named referee in any payload.
+  - Match 3794991 scoreStr is 0-3 while its event feed has 5 home and 3 away goals; scoreStr is authoritative.
+  - 22 matches have no events; HT is missing for those rows.
+  - Team IDs, not names, define identity; six IDs have diacritic/name variants.
+

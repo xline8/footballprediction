@@ -1,0 +1,430 @@
+{
+ "seasons": [
+  "2021/2022",
+  "2022/2023",
+  "2023/2024",
+  "2024/2025",
+  "2025/2026"
+ ],
+ "dev_seasons": [
+  "2021/2022",
+  "2022/2023",
+  "2023/2024",
+  "2024/2025"
+ ],
+ "virgin_season": "2025/2026",
+ "reserve_season_excluded": "2026/2027",
+ "reserve_exclusion_note": "2026/2027 (104 rows in rs_matches.csv) excluded from every computation in this script; its raw-JSON directory was never read.",
+ "n": 1488,
+ "n_dev": 1192,
+ "n_virgin": 296,
+ "levels": {
+  "2021/2022": {
+   "n": 300,
+   "stats_n": 0,
+   "goals": 2.563,
+   "home_goals": 1.357,
+   "away_goals": 1.207,
+   "sot": null,
+   "corners": null,
+   "shots": null,
+   "yellows_event": 0.1,
+   "yellows_stats": null,
+   "over25_rate": 0.5
+  },
+  "2022/2023": {
+   "n": 300,
+   "stats_n": 0,
+   "goals": 2.43,
+   "home_goals": 1.357,
+   "away_goals": 1.073,
+   "sot": null,
+   "corners": null,
+   "shots": null,
+   "yellows_event": 0.12,
+   "yellows_stats": null,
+   "over25_rate": 0.447
+  },
+  "2023/2024": {
+   "n": 296,
+   "stats_n": 0,
+   "goals": 2.77,
+   "home_goals": 1.544,
+   "away_goals": 1.226,
+   "sot": null,
+   "corners": null,
+   "shots": null,
+   "yellows_event": 0.091,
+   "yellows_stats": null,
+   "over25_rate": 0.544
+  },
+  "2024/2025": {
+   "n": 296,
+   "stats_n": 0,
+   "goals": 2.882,
+   "home_goals": 1.527,
+   "away_goals": 1.355,
+   "sot": null,
+   "corners": null,
+   "shots": null,
+   "yellows_event": 0.041,
+   "yellows_stats": null,
+   "over25_rate": 0.564
+  },
+  "2025/2026": {
+   "n": 296,
+   "stats_n": 296,
+   "goals": 2.662,
+   "home_goals": 1.493,
+   "away_goals": 1.169,
+   "sot": 8.831,
+   "corners": 9.003,
+   "shots": 25.084,
+   "yellows_event": 4.662,
+   "yellows_stats": 4.23,
+   "over25_rate": 0.5
+  }
+ },
+ "traits_dev": {
+  "goals_for": {
+   "n_teams": 23,
+   "r": 0.906
+  },
+  "yellows_event_for": {
+   "n_teams": 23,
+   "r": 0.06
+  },
+  "sot_for": {
+   "n_teams": 0,
+   "r": null,
+   "note": "no dev data: ShotsOnTarget exists only in the virgin season (stats feed absent 2021/2022-2024/2025); reliability cannot be measured on dev and virgin rows must not choose features"
+  },
+  "corners_for": {
+   "n_teams": 0,
+   "r": null,
+   "note": "no dev data: corners exists only in the virgin season (stats feed absent 2021/2022-2024/2025); reliability cannot be measured on dev and virgin rows must not choose features"
+  },
+  "shots_for": {
+   "n_teams": 0,
+   "r": null,
+   "note": "no dev data: total_shots exists only in the virgin season (stats feed absent 2021/2022-2024/2025); reliability cannot be measured on dev and virgin rows must not choose features"
+  },
+  "possession": {
+   "n_teams": 0,
+   "r": null,
+   "note": "no dev data: BallPossesion exists only in the virgin season (stats feed absent 2021/2022-2024/2025); reliability cannot be measured on dev and virgin rows must not choose features"
+  },
+  "touches_for": {
+   "n_teams": 0,
+   "r": null,
+   "note": "no dev data: touches_opp_box exists only in the virgin season (stats feed absent 2021/2022-2024/2025); reliability cannot be measured on dev and virgin rows must not choose features"
+  },
+  "big_chance_for": {
+   "n_teams": 0,
+   "r": null,
+   "note": "no dev data: big_chance exists only in the virgin season (stats feed absent 2021/2022-2024/2025); reliability cannot be measured on dev and virgin rows must not choose features"
+  },
+  "fouls_for": {
+   "n_teams": 0,
+   "r": null,
+   "note": "no dev data: fouls exists only in the virgin season (stats feed absent 2021/2022-2024/2025); reliability cannot be measured on dev and virgin rows must not choose features"
+  },
+  "keeper_saves_for": {
+   "n_teams": 0,
+   "r": null,
+   "note": "no dev data: keeper_saves exists only in the virgin season (stats feed absent 2021/2022-2024/2025); reliability cannot be measured on dev and virgin rows must not choose features"
+  }
+ },
+ "traits_season_to_season_goals_for_dev": {
+  "2021/2022_vs_2022/2023": {
+   "n_teams": 14,
+   "r": 0.85
+  },
+  "2022/2023_vs_2023/2024": {
+   "n_teams": 14,
+   "r": 0.888
+  },
+  "2023/2024_vs_2024/2025": {
+   "n_teams": 13,
+   "r": 0.858
+  }
+ },
+ "halves_goals_dev": {
+  "share": 0.4605,
+  "n_matches": 1095,
+  "total_denominator": 3168.0,
+  "total_numerator": 1459.0,
+  "obs_var": 0.11152,
+  "binom_var": 0.08587,
+  "excess_var": 0.02565
+ },
+ "halves_goals_dev_incl_awarded": {
+  "share": 0.4617,
+  "n_matches": 1096,
+  "total_denominator": 3171.0,
+  "total_numerator": 1464.0,
+  "obs_var": 0.11276,
+  "binom_var": 0.0859,
+  "excess_var": 0.02686
+ },
+ "halves_goals_dev_league_only": {
+  "share": 0.4606,
+  "n_matches": 1087,
+  "total_denominator": 3146.0,
+  "total_numerator": 1449.0,
+  "obs_var": 0.11159,
+  "binom_var": 0.08584,
+  "excess_var": 0.02575
+ },
+ "halves_yellows_dev": {
+  "share": 0.1238,
+  "n_matches": 101,
+  "total_denominator": 105.0,
+  "total_numerator": 13.0,
+  "obs_var": 0.11327,
+  "binom_var": 0.10435,
+  "excess_var": 0.00892
+ },
+ "halves_note_awarded_match": "Match 4271663 (2023/2024, FK Radnicki 1923 vs FK Crvena Zvezda) was an awarded 0-3 win: FT goals 3 but 7 Goal events (5 in 1H). Its event 1H count exceeds its FT total, so it is excluded from the frozen halves_goals_dev share; the inclusive value is reported separately as halves_goals_dev_incl_awarded.",
+ "halves_splits_dev": {
+  "total_shots": {
+   "share": null,
+   "n_matches": 0,
+   "note": "no dev data: period splits (FirstHalf/SecondHalf) exist only in the virgin season; the virgin share is NOT used as a frozen constant"
+  },
+  "ShotsOnTarget": {
+   "share": null,
+   "n_matches": 0,
+   "note": "no dev data: period splits (FirstHalf/SecondHalf) exist only in the virgin season; the virgin share is NOT used as a frozen constant"
+  },
+  "corners": {
+   "share": null,
+   "n_matches": 0,
+   "note": "no dev data: period splits (FirstHalf/SecondHalf) exist only in the virgin season; the virgin share is NOT used as a frozen constant"
+  },
+  "yellow_cards": {
+   "share": null,
+   "n_matches": 0,
+   "note": "no dev data: period splits (FirstHalf/SecondHalf) exist only in the virgin season; the virgin share is NOT used as a frozen constant"
+  }
+ },
+ "halves_yellows_dev_note": "Dev event yellows total 13 first-half cards on 108 cards overall (see inventory); the 1H share is computed on that near-empty feed and is NOT a usable frozen constant for a cards product.",
+ "dev_medians": {
+  "sot": null,
+  "corners": null,
+  "shots": null,
+  "yellows": null,
+  "note": "no dev medians for SOT/corners/shots/yellows: no stats feed in dev and the event cards feed is broken (YellowRed-only); no primary line can be set from dev for S/C/K/T",
+  "goals_over25_rate_dev": 0.513,
+  "goals_median_dev": 3.0
+ },
+ "qualification_cross_tier_clubs": [
+  {
+   "team_id": 187856,
+   "team": "Indjija",
+   "seasons": [
+    "2022/2023"
+   ]
+  },
+  {
+   "team_id": 1061408,
+   "team": "FK Graficar",
+   "seasons": [
+    "2022/2023"
+   ]
+  }
+ ],
+ "qualification_matches": {
+  "n": 8,
+  "seasons": [
+   "2021/2022",
+   "2022/2023"
+  ],
+  "note": "2-legged relegation/promotion play-off ties: a Super Liga club vs a Prva Liga (tier 2) club. Cross-tier rows; the design doc excludes them from fitting (see MODEL_DESIGN). They stay in rs_matches.csv with phase=qualification and in the levels table, but out of halves_goals_dev_league_only and out of the X2 entrant measurement."
+ },
+ "x2_entrants": [
+  {
+   "season": "2022/2023",
+   "team_id": 2391,
+   "team": "Javor"
+  },
+  {
+   "season": "2022/2023",
+   "team_id": 1266892,
+   "team": "FK Mladost Novi Sad"
+  },
+  {
+   "season": "2023/2024",
+   "team_id": 568569,
+   "team": "FK IMT Beograd"
+  },
+  {
+   "season": "2023/2024",
+   "team_id": 676141,
+   "team": "\u017delezni\u010dar Pan\u010devo"
+  },
+  {
+   "season": "2024/2025",
+   "team_id": 8692,
+   "team": "OFK Beograd"
+  },
+  {
+   "season": "2024/2025",
+   "team_id": 585081,
+   "team": "Tekstilac Odzaci"
+  },
+  {
+   "season": "2024/2025",
+   "team_id": 585084,
+   "team": "Jedinstvo Ub"
+  },
+  {
+   "season": "2025/2026",
+   "team_id": 2391,
+   "team": "Javor"
+  },
+  {
+   "season": "2025/2026",
+   "team_id": 463461,
+   "team": "FK Radnik Surdulica"
+  }
+ ],
+ "x2_entrant_gf_ga_diff_vs_league_team_mean_dev": {
+  "n": 7,
+  "gf_diff": -0.326,
+  "ga_diff": 0.242,
+  "note": "dev transitions only (2022/2023-2024/2025); the 2025/2026 entrant is listed in x2_entrants for inventory but its performance is not measured"
+ },
+ "cards_stats_vs_events": {
+  "2025/2026": {
+   "n": 296,
+   "exact": 0.726,
+   "mean_ev": 4.662,
+   "mean_stats": 4.23,
+   "mean_stats_minus_ev": -0.432,
+   "ev_gt_stats": 81,
+   "stats_gt_ev": 0,
+   "note": "rich-era-only check (stats yellows exist only in the virgin season); the stats feed NEVER exceeds events here -- it systematically undercounts yellows vs the event feed"
+  }
+ },
+ "splits_consistency_corners_home_virgin_inventory": {
+  "n": 296,
+  "mismatch": 0
+ },
+ "phase_counts": {
+  "2021/2022": {
+   "regular": 240,
+   "championship": 28,
+   "relegation": 28,
+   "qualification": 4
+  },
+  "2022/2023": {
+   "regular": 240,
+   "championship": 28,
+   "relegation": 28,
+   "qualification": 4
+  },
+  "2023/2024": {
+   "regular": 240,
+   "championship": 28,
+   "relegation": 28,
+   "qualification": 0
+  },
+  "2024/2025": {
+   "regular": 240,
+   "championship": 28,
+   "relegation": 28,
+   "qualification": 0
+  },
+  "2025/2026": {
+   "regular": 240,
+   "championship": 28,
+   "relegation": 28,
+   "qualification": 0
+  }
+ },
+ "teams_per_season": {
+  "2021/2022": 18,
+  "2022/2023": 18,
+  "2023/2024": 16,
+  "2024/2025": 16,
+  "2025/2026": 16
+ },
+ "team_ids_multi_name": {
+  "8687": [
+   "FK Crvena Zvezda",
+   "Red Star Belgrade"
+  ],
+  "6374": [
+   "Cukaricki",
+   "\u010cukari\u010dki"
+  ],
+  "676140": [
+   "TSC Backa Topola",
+   "TSC Ba\u010dka Topola"
+  ],
+  "1739": [
+   "Mladost Lucani",
+   "Mladost Lu\u010dani"
+  ],
+  "1675": [
+   "FK Radnicki 1923",
+   "FK Radni\u010dki 1923"
+  ],
+  "6410": [
+   "Radnicki Nis",
+   "Radni\u010dki Ni\u0161"
+  ],
+  "676141": [
+   "Zeleznicar Pancevo",
+   "\u017delezni\u010dar Pan\u010devo"
+  ]
+ },
+ "team_ids_total": 25,
+ "team_ids_note": "25 distinct team ids in dev+virgin rows. The pre-findings figure of 27 counts the full CSV including the reserve season 2026/2027, which this script excludes; 2 ids appear only in the reserve season and are not enumerated here.",
+ "calendar": {
+  "2021/2022": {
+   "first": "2021-07-16",
+   "last": "2022-05-29"
+  },
+  "2022/2023": {
+   "first": "2022-07-08",
+   "last": "2023-06-04"
+  },
+  "2023/2024": {
+   "first": "2023-07-29",
+   "last": "2024-05-25"
+  },
+  "2024/2025": {
+   "first": "2024-07-19",
+   "last": "2025-05-25"
+  },
+  "2025/2026": {
+   "first": "2025-07-19",
+   "last": "2026-05-24"
+  }
+ },
+ "no_events_matches_dev": {
+  "2021/2022": 22,
+  "2022/2023": 23,
+  "2023/2024": 16,
+  "2024/2025": 21
+ },
+ "coverage_level_by_season": {
+  "2021/2022": {
+   "lower": 300
+  },
+  "2022/2023": {
+   "lower": 300
+  },
+  "2023/2024": {
+   "lower": 296
+  },
+  "2024/2025": {
+   "lower": 296
+  },
+  "2025/2026": {
+   "ratings": 296
+  }
+ }
+}

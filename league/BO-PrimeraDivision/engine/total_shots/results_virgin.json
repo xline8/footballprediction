@@ -1,0 +1,108 @@
+{
+  "protocol": {
+    "virgin_season": "2026",
+    "transitional": true
+  },
+  "read_arms": [
+    "A",
+    "B",
+    "C"
+  ],
+  "metrics": {
+    "A": {
+      "n": 199,
+      "logloss": {
+        "29.5": 0.6993227446831057,
+        "28.5": 0.6875956472918017,
+        "30.5": 0.7002187193255988,
+        "31.5": 0.694437208699502
+      },
+      "calibration_pp": 1.8757393003386555,
+      "calibration_se_pp": 3.570458645574834,
+      "actual_over_rate_pp": 49.246231155778894,
+      "mean_pred_over_pp": 51.12197045611755,
+      "leg_i": false,
+      "leg_ii": true,
+      "leg_iii": true,
+      "virgin_(i)": false,
+      "virgin_(ii)": true,
+      "virgin_(iii)": true
+    },
+    "B": {
+      "n": 199,
+      "logloss": {
+        "29.5": 0.6976186856209394,
+        "28.5": 0.6867125021599468,
+        "30.5": 0.7009473430328242,
+        "31.5": 0.696020200020695
+      },
+      "calibration_pp": 1.2324116202753768,
+      "calibration_se_pp": 3.5656702251571937,
+      "actual_over_rate_pp": 49.246231155778894,
+      "mean_pred_over_pp": 50.47864277605427,
+      "leg_i": false,
+      "leg_ii": true,
+      "leg_iii": true,
+      "virgin_(i)": false,
+      "virgin_(ii)": true,
+      "virgin_(iii)": true
+    },
+    "C": {
+      "n": 199,
+      "logloss": {
+        "29.5": 0.6989173105088345,
+        "28.5": 0.6873101255333689,
+        "30.5": 0.6998718287852682,
+        "31.5": 0.6941444810788279
+      },
+      "calibration_pp": 1.7837755923406005,
+      "calibration_se_pp": 3.569384148320186,
+      "actual_over_rate_pp": 49.246231155778894,
+      "mean_pred_over_pp": 51.0300067481195,
+      "leg_i": false,
+      "leg_ii": true,
+      "leg_iii": true,
+      "virgin_(i)": false,
+      "virgin_(ii)": true,
+      "virgin_(iii)": true
+    },
+    "baseline_league": {
+      "n": 199,
+      "logloss": {
+        "29.5": 0.6965906847000308,
+        "28.5": 0.6988320376316822,
+        "30.5": 0.6938729909705995,
+        "31.5": 0.6868925906352145
+      },
+      "calibration_pp": 2.945105736400598,
+      "calibration_se_pp": 3.559387312998767,
+      "actual_over_rate_pp": 49.246231155778894,
+      "mean_pred_over_pp": 52.19133689217949
+    },
+    "baseline_naive": {
+      "n": 199,
+      "logloss": {
+        "29.5": 0.7156265103595453,
+        "28.5": 0.69996886289337,
+        "30.5": 0.7195807864107023,
+        "31.5": 0.7177629114344407
+      },
+      "calibration_pp": 1.9215119227260806,
+      "calibration_se_pp": 3.6230877378946627,
+      "actual_over_rate_pp": 49.246231155778894,
+      "mean_pred_over_pp": 51.16774307850497
+    }
+  },
+  "dev_pass": {
+    "A": true,
+    "B": true,
+    "C": true
+  },
+  "shipped_arm": null,
+  "verdict": "FAIL",
+  "calibration_breach_plus_se_pp": {
+    "A": -2.6947193452361784,
+    "B": -3.333258604881817,
+    "C": -2.7856085559795853
+  }
+}

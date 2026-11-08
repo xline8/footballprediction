@@ -1,0 +1,720 @@
+{
+ "seasons": {
+  "2021": {
+   "n": 262,
+   "stats": 0,
+   "splits": 0,
+   "events": 0,
+   "lineup_11": 0,
+   "referee": 0,
+   "goals_pm": 3.2900763358778624,
+   "goals_pm_norra": 3.3655172413793104,
+   "goals_pm_sodra": 3.1965811965811968,
+   "home_goals_pm": 1.8358778625954197,
+   "away_goals_pm": 1.4541984732824427,
+   "yell_ev_pm": null,
+   "teams": 32,
+   "teams_norra": 16,
+   "teams_sodra": 16,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "phases": {
+    "norra": 145,
+    "sodra": 117
+   },
+   "rounds": 30
+  },
+  "2022": {
+   "n": 480,
+   "stats": 0,
+   "splits": 0,
+   "events": 480,
+   "lineup_11": 480,
+   "referee": 0,
+   "goals_pm": 3.025,
+   "goals_pm_norra": 3.2083333333333335,
+   "goals_pm_sodra": 2.841666666666667,
+   "home_goals_pm": 1.5833333333333333,
+   "away_goals_pm": 1.4416666666666667,
+   "yell_ev_pm": 3.4375,
+   "teams": 32,
+   "teams_norra": 16,
+   "teams_sodra": 16,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "phases": {
+    "norra": 240,
+    "sodra": 240
+   },
+   "rounds": 30
+  },
+  "2023": {
+   "n": 480,
+   "stats": 0,
+   "splits": 0,
+   "events": 480,
+   "lineup_11": 480,
+   "referee": 0,
+   "goals_pm": 2.875,
+   "goals_pm_norra": 2.9583333333333335,
+   "goals_pm_sodra": 2.7916666666666665,
+   "home_goals_pm": 1.5916666666666666,
+   "away_goals_pm": 1.2833333333333334,
+   "yell_ev_pm": 3.28125,
+   "teams": 32,
+   "teams_norra": 16,
+   "teams_sodra": 16,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "phases": {
+    "sodra": 240,
+    "norra": 240
+   },
+   "rounds": 30
+  },
+  "2024": {
+   "n": 480,
+   "stats": 0,
+   "splits": 0,
+   "events": 480,
+   "lineup_11": 480,
+   "referee": 0,
+   "goals_pm": 3.0625,
+   "goals_pm_norra": 3.3208333333333333,
+   "goals_pm_sodra": 2.8041666666666667,
+   "home_goals_pm": 1.65625,
+   "away_goals_pm": 1.40625,
+   "yell_ev_pm": 3.370833333333333,
+   "teams": 32,
+   "teams_norra": 16,
+   "teams_sodra": 16,
+   "xg_rows": 0,
+   "score_mismatch": 1,
+   "phases": {
+    "norra": 240,
+    "sodra": 240
+   },
+   "rounds": 30
+  },
+  "2025": {
+   "n": 480,
+   "stats": 0,
+   "splits": 0,
+   "events": 480,
+   "lineup_11": 480,
+   "referee": 0,
+   "goals_pm": 3.1979166666666665,
+   "goals_pm_norra": 3.3625,
+   "goals_pm_sodra": 3.033333333333333,
+   "home_goals_pm": 1.7791666666666666,
+   "away_goals_pm": 1.41875,
+   "yell_ev_pm": 3.314583333333333,
+   "teams": 32,
+   "teams_norra": 16,
+   "teams_sodra": 16,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "phases": {
+    "norra": 240,
+    "sodra": 240
+   },
+   "rounds": 30
+  }
+ },
+ "note_2026": "Season 2026 rows exist in the built CSVs but were filtered out at load and never read in any analysis, fit, or gate (confirmatory reserve).",
+ "total_matches_le_2025": 2182,
+ "mismatch_match_ids": [
+  4398485
+ ],
+ "stats_keys_per_season": {
+  "2021": {},
+  "2022": {},
+  "2023": {},
+  "2024": {},
+  "2025": {}
+ },
+ "card_event_kinds_per_season": {
+  "2021": {},
+  "2022": {
+   "Yellow": 1613,
+   "Red": 33,
+   "YellowRed": 37
+  },
+  "2023": {
+   "Yellow": 1537,
+   "Red": 48,
+   "YellowRed": 38
+  },
+  "2024": {
+   "Yellow": 1595,
+   "Red": 32,
+   "YellowRed": 23
+  },
+  "2025": {
+   "Yellow": 1567,
+   "Red": 33,
+   "YellowRed": 24
+  }
+ },
+ "event_kinds_per_season": {
+  "2021": {},
+  "2022": {
+   "Goal": 1452,
+   "Substitution": 3421,
+   "Card": 1683,
+   "Half": 960,
+   "MissedPenalty": 17
+  },
+  "2023": {
+   "Goal": 1380,
+   "Half": 960,
+   "Substitution": 3563,
+   "Card": 1623,
+   "MissedPenalty": 23
+  },
+  "2024": {
+   "Goal": 1471,
+   "Card": 1650,
+   "Substitution": 3744,
+   "Half": 960,
+   "MissedPenalty": 17
+  },
+  "2025": {
+   "Goal": 1535,
+   "Card": 1624,
+   "Half": 960,
+   "Substitution": 3774,
+   "MissedPenalty": 18
+  }
+ },
+ "referees": {
+  "2021": {
+   "distinct": 0,
+   "top": []
+  },
+  "2022": {
+   "distinct": 0,
+   "top": []
+  },
+  "2023": {
+   "distinct": 0,
+   "top": []
+  },
+  "2024": {
+   "distinct": 0,
+   "top": []
+  },
+  "2025": {
+   "distinct": 0,
+   "top": []
+  }
+ },
+ "lineup_object_present_per_season": {
+  "2021": 2,
+  "2022": 480,
+  "2023": 480,
+  "2024": 480,
+  "2025": 480
+ },
+ "shotmap_matches_per_season": {
+  "2021": 0,
+  "2022": 0,
+  "2023": 0,
+  "2024": 0,
+  "2025": 0
+ },
+ "played_per_season_raw_json": {
+  "2021": 262,
+  "2022": 480,
+  "2023": 480,
+  "2024": 480,
+  "2025": 480
+ },
+ "csv_vs_raw_played_match": {
+  "2021": true,
+  "2022": true,
+  "2023": true,
+  "2024": true,
+  "2025": true
+ },
+ "team_name_variants": {
+  "191433": {
+   "IF Karlstad Fotboll": 75,
+   "IF Karlstad": 75
+  },
+  "6571": {
+   "Lindoe FF": 11,
+   "IF Sylvia": 79
+  },
+  "1011931": {
+   "FC Stockholm Internazionale": 86,
+   "FC Stockholm": 34
+  },
+  "1144284": {
+   "United IK": 30,
+   "Nordic United FC": 60
+  },
+  "1331261": {
+   "Ariana FC": 70,
+   "AFC Malmoe": 20
+  }
+ },
+ "n_team_ids_le_2025": 62,
+ "anomaly_2021": {
+  "index_rows_2021": 480,
+  "played_csv": 262,
+  "unplayed_raw": 218,
+  "unplayed_index_scores": {
+   "0-0": 218
+  },
+  "played_by_group": {
+   "norra": 145,
+   "sodra": 117
+  },
+  "unplayed_by_group": {
+   "norra": 95,
+   "sodra": 123
+  },
+  "by_group_round_band": {
+   "norra_rounds_1_12": {
+    "played": 38,
+    "unplayed": 58
+   },
+   "norra_rounds_13_30": {
+    "played": 107,
+    "unplayed": 37
+   },
+   "sodra_rounds_1_12": {
+    "played": 18,
+    "unplayed": 78
+   },
+   "sodra_rounds_13_30": {
+    "played": 99,
+    "unplayed": 45
+   }
+  },
+  "date_range_played": [
+   "2021-04-02",
+   "2021-11-21"
+  ],
+  "note": "Unplayed fixtures exist in EVERY round (1-30) of both groups; they are heaviest in rounds 1-12 (136 of 192 fixtures unplayed) and lighter in rounds 13-30 (82 of 288)."
+ },
+ "halves_dev": {
+  "note": "No stats period splits exist in ANY season (0 matches), so SOT/corners/total-shots/yellows 1H shares from splits are NOT computable. Only event-time shares exist (goals, and yellows as descriptive evidence for K).",
+  "splits_matches_dev": 0,
+  "goals_events": {
+   "share_1h": 0.4384740637357525,
+   "n_goals": 4299,
+   "n_matches": 1439,
+   "excluded_mismatch_matches": 1,
+   "per_season": {
+    "2022": {
+     "share_1h": 0.44352617079889806,
+     "n_goals": 1452,
+     "n_matches": 480
+    },
+    "2023": {
+     "share_1h": 0.4463768115942029,
+     "n_goals": 1380,
+     "n_matches": 480
+    },
+    "2024": {
+     "share_1h": 0.42603953646898435,
+     "n_goals": 1467,
+     "n_matches": 479
+    }
+   }
+  },
+  "yellows_events_descriptive": {
+   "share_1h": 0.2840909090909091,
+   "n_yellows": 4840,
+   "n_matches": 1439,
+   "per_season": {
+    "2022": {
+     "share_1h": 0.3,
+     "n_yellows": 1650
+    },
+    "2023": {
+     "share_1h": 0.2780952380952381,
+     "n_yellows": 1575
+    },
+    "2024": {
+     "share_1h": 0.2736842105263158,
+     "n_yellows": 1615
+    }
+   }
+  }
+ },
+ "event_cards_dev_totals": {
+  "plain_yellow": 4745,
+  "yellowred": 98,
+  "red": 113
+ },
+ "trait_reliability_dev": {
+  "goals_for": {
+   "split_half_r_dev_2021_2024": 0.5618804680940866,
+   "n_teams_dev": 57,
+   "split_half_r_scored_2022_2024": 0.703235612591771,
+   "n_teams_scored": 49
+  },
+  "goals_against": {
+   "split_half_r_dev_2021_2024": 0.7416346404424331,
+   "n_teams_dev": 57,
+   "split_half_r_scored_2022_2024": 0.6043659240604877,
+   "n_teams_scored": 49
+  },
+  "sot_for": {
+   "split_half_r_dev_2021_2024": null,
+   "n_teams_dev": 0,
+   "note": "not measurable on dev (target absent in dev era)"
+  },
+  "corners_for": {
+   "split_half_r_dev_2021_2024": null,
+   "n_teams_dev": 0,
+   "note": "not measurable on dev (target absent in dev era)"
+  },
+  "shots_for": {
+   "split_half_r_dev_2021_2024": null,
+   "n_teams_dev": 0,
+   "note": "not measurable on dev (target absent in dev era)"
+  },
+  "yellow_for": {
+   "split_half_r_dev_2021_2024": null,
+   "n_teams_dev": 0,
+   "note": "not measurable on dev (target absent in dev era)"
+  },
+  "possession": {
+   "split_half_r_dev_2021_2024": null,
+   "n_teams_dev": 0,
+   "note": "not measurable on dev (target absent in dev era)"
+  },
+  "event_yellows_for": {
+   "split_half_r_dev_2022_2024": 0.54880549176313,
+   "n_teams_dev": 49,
+   "note": "Descriptive only (K is not-buildable per BRIEF): event-derived yellows exist 2022-2024 but there is no stats feed to validate them against, and 2021 has no events."
+  }
+ },
+ "season_to_season_gf_corr_dev": {
+  "2021_2022": {
+   "r": 0.30554922493701536,
+   "n_teams": 22
+  },
+  "2022_2023": {
+   "r": 0.5882736614285843,
+   "n_teams": 24
+  },
+  "2023_2024": {
+   "r": 0.39271342525534025,
+   "n_teams": 23
+  }
+ },
+ "entrant_transitions_dev": [
+  {
+   "season": "2022",
+   "team_id": 191427,
+   "team": "Team TG FF",
+   "phase": "norra",
+   "gf_diff": -0.8791666666666667,
+   "ga_diff": 1.0208333333333333
+  },
+  {
+   "season": "2022",
+   "team_id": 6152,
+   "team": "Motala AIF FK",
+   "phase": "norra",
+   "gf_diff": 0.3208333333333333,
+   "ga_diff": 0.25416666666666665
+  },
+  {
+   "season": "2022",
+   "team_id": 241064,
+   "team": "BK Olympic",
+   "phase": "sodra",
+   "gf_diff": 0.12083333333333335,
+   "ga_diff": -0.14583333333333326
+  },
+  {
+   "season": "2022",
+   "team_id": 6185,
+   "team": "BK Forward",
+   "phase": "norra",
+   "gf_diff": -0.5125,
+   "ga_diff": 0.5208333333333333
+  },
+  {
+   "season": "2022",
+   "team_id": 8297,
+   "team": "GAIS",
+   "phase": "sodra",
+   "gf_diff": 0.5875000000000001,
+   "ga_diff": -0.8458333333333333
+  },
+  {
+   "season": "2022",
+   "team_id": 1967,
+   "team": "Vasalunds IF",
+   "phase": "norra",
+   "gf_diff": 0.5208333333333333,
+   "ga_diff": -0.11250000000000004
+  },
+  {
+   "season": "2022",
+   "team_id": 6160,
+   "team": "IK Oddevold",
+   "phase": "sodra",
+   "gf_diff": 0.054166666666666696,
+   "ga_diff": -0.8125
+  },
+  {
+   "season": "2022",
+   "team_id": 6545,
+   "team": "Falkenbergs FF",
+   "phase": "sodra",
+   "gf_diff": 0.6208333333333333,
+   "ga_diff": -0.8125
+  },
+  {
+   "season": "2022",
+   "team_id": 1011931,
+   "team": "FC Stockholm Internazionale",
+   "phase": "norra",
+   "gf_diff": -0.012499999999999956,
+   "ga_diff": 0.02083333333333348
+  },
+  {
+   "season": "2022",
+   "team_id": 8189,
+   "team": "\u00c4ngelholms FF",
+   "phase": "sodra",
+   "gf_diff": -0.1791666666666667,
+   "ga_diff": 0.08750000000000013
+  },
+  {
+   "season": "2023",
+   "team_id": 47369,
+   "team": "Ahlafors IF",
+   "phase": "sodra",
+   "gf_diff": -0.7041666666666667,
+   "ga_diff": 0.4624999999999999
+  },
+  {
+   "season": "2023",
+   "team_id": 303470,
+   "team": "Eskilsminne IF",
+   "phase": "sodra",
+   "gf_diff": 0.26249999999999996,
+   "ga_diff": -0.3041666666666667
+  },
+  {
+   "season": "2023",
+   "team_id": 1331261,
+   "team": "Ariana FC",
+   "phase": "sodra",
+   "gf_diff": -0.1708333333333334,
+   "ga_diff": -0.0708333333333333
+  },
+  {
+   "season": "2023",
+   "team_id": 161432,
+   "team": "Dalkurd FF",
+   "phase": "norra",
+   "gf_diff": -0.004166666666666652,
+   "ga_diff": -0.4708333333333333
+  },
+  {
+   "season": "2023",
+   "team_id": 6523,
+   "team": "Bodens BK",
+   "phase": "norra",
+   "gf_diff": -0.4708333333333333,
+   "ga_diff": 0.5625
+  },
+  {
+   "season": "2023",
+   "team_id": 1144284,
+   "team": "Nordic United FC",
+   "phase": "norra",
+   "gf_diff": 0.6291666666666669,
+   "ga_diff": -0.1708333333333334
+  },
+  {
+   "season": "2023",
+   "team_id": 916701,
+   "team": "IFK Stocksund",
+   "phase": "norra",
+   "gf_diff": 0.09583333333333344,
+   "ga_diff": 0.49583333333333335
+  },
+  {
+   "season": "2023",
+   "team_id": 2014,
+   "team": "Norrby",
+   "phase": "sodra",
+   "gf_diff": 0.4624999999999999,
+   "ga_diff": 0.029166666666666563
+  },
+  {
+   "season": "2024",
+   "team_id": 1959,
+   "team": "Friska Viljor",
+   "phase": "norra",
+   "gf_diff": -0.2645833333333334,
+   "ga_diff": 1.1354166666666665
+  },
+  {
+   "season": "2024",
+   "team_id": 627694,
+   "team": "FBK Karlstad",
+   "phase": "norra",
+   "gf_diff": 0.06875000000000009,
+   "ga_diff": 0.46875
+  },
+  {
+   "season": "2024",
+   "team_id": 303472,
+   "team": "Karlbergs BK",
+   "phase": "norra",
+   "gf_diff": 0.06875000000000009,
+   "ga_diff": 0.1020833333333333
+  },
+  {
+   "season": "2024",
+   "team_id": 10225,
+   "team": "Assyriska FF",
+   "phase": "norra",
+   "gf_diff": 0.002083333333333437,
+   "ga_diff": 0.5354166666666669
+  },
+  {
+   "season": "2024",
+   "team_id": 6162,
+   "team": "Torslanda IK",
+   "phase": "sodra",
+   "gf_diff": -0.19791666666666674,
+   "ga_diff": -0.33125000000000004
+  },
+  {
+   "season": "2024",
+   "team_id": 6238,
+   "team": "AFC Eskilstuna",
+   "phase": "norra",
+   "gf_diff": 0.06875000000000009,
+   "ga_diff": 0.46875
+  },
+  {
+   "season": "2024",
+   "team_id": 6170,
+   "team": "FC Roseng\u00e5rd",
+   "phase": "sodra",
+   "gf_diff": -0.19791666666666674,
+   "ga_diff": -0.36458333333333326
+  },
+  {
+   "season": "2024",
+   "team_id": 749404,
+   "team": "Onsala BK",
+   "phase": "sodra",
+   "gf_diff": -0.49791666666666656,
+   "ga_diff": 0.6687500000000002
+  },
+  {
+   "season": "2024",
+   "team_id": 8510,
+   "team": "J\u00f6nk\u00f6ping S.",
+   "phase": "sodra",
+   "gf_diff": -0.1312500000000001,
+   "ga_diff": -0.19791666666666674
+  }
+ ],
+ "entrant_summary_dev": {
+  "n": 27,
+  "mean_gf_diff": -0.012577160493827145,
+  "mean_ga_diff": 0.08125000000000002,
+  "gf_negative_count": 13,
+  "ga_positive_count": 15,
+  "per_season": {
+   "2022": {
+    "n": 10,
+    "mean_gf_diff": 0.06416666666666668,
+    "mean_ga_diff": -0.08249999999999999
+   },
+   "2023": {
+    "n": 8,
+    "mean_gf_diff": 0.012500000000000011,
+    "mean_ga_diff": 0.06666666666666664
+   },
+   "2024": {
+    "n": 9,
+    "mean_gf_diff": -0.12013888888888886,
+    "mean_ga_diff": 0.2761574074074074
+   }
+  },
+  "note": "Entrants mix relegated Superettan sides (strong) and promoted Division 2 sides (weak); no systematic tilt."
+ },
+ "group_switches_le_2025": [],
+ "lines": {
+  "goals_ou_scored_2022_2024": {
+   "over_rates": {
+    "1.5": 0.7909722222222222,
+    "2.5": 0.5833333333333334,
+    "3.5": 0.3402777777777778
+   },
+   "primary": 2.5,
+   "n": 1440
+  },
+  "goals_ou_all_dev_incl_2021": {
+   "over_rates": {
+    "1.5": 0.7978848413631022,
+    "2.5": 0.5940070505287897,
+    "3.5": 0.35135135135135137
+   },
+   "primary": 2.5,
+   "n": 1702
+  },
+  "sot": null,
+  "corners": null,
+  "shots": null,
+  "yellows": null,
+  "note": "S/C/K/T lines are null: no stats target exists in any season, so there is no dev window to select a line on."
+ },
+ "home_win_rate_scored": 0.43125,
+ "draw_rate_scored": 0.20972222222222223,
+ "home_goals_mean_scored": 1.6104166666666666,
+ "away_goals_mean_scored": 1.3770833333333334,
+ "goals_distribution_scored": {
+  "0": 59,
+  "1": 242,
+  "2": 299,
+  "3": 350,
+  "4": 233,
+  "5": 136,
+  "6": 66,
+  "7": 42,
+  "8": 9,
+  "9": 3,
+  "11": 1
+ },
+ "ou25_by_group_scored": {
+  "norra": 0.625,
+  "sodra": 0.5416666666666666
+ },
+ "dev_windows": {
+  "goals": {
+   "warm_up": [
+    "2021 (partial: 262 played of 480 fixtures; no events)"
+   ],
+   "scored": [
+    "2022",
+    "2023",
+    "2024"
+   ],
+   "n_scored": 1440,
+   "n_warm_up": 262
+  },
+  "stats_markets": {
+   "warm_up": [],
+   "scored": [],
+   "note": "No stats season exists in any season (stats feed 0% in 2021-2025); the stats era never starts."
+  }
+ }
+}

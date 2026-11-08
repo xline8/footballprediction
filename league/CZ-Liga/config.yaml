@@ -1,0 +1,25 @@
+# CZ-Liga (Czechia 1. Liga)
+league: CZ-Liga
+country: Czechia
+fotmob_id: 122
+tier: 1
+warehouse: data_enrichment/fotmob_world/Czechia/1. Liga
+data:
+  matches: league/CZ-Liga/data/cz_matches.csv
+  team_matches: league/CZ-Liga/data/cz_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.450903
+  yellow_cards_1h_share: 0.314973
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+markets:
+  goals: {code: G-CZ, buildable: true}
+  sot: {code: S-CZ, buildable: true, primary_line: 8.5}
+  corners: {code: C-CZ, buildable: true, primary_line: 10.5}
+  cards: {code: K-CZ, buildable: true, primary_line: 3.5}
+  total_shots: {code: T-CZ, buildable: false}

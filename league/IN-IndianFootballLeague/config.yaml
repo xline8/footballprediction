@@ -1,0 +1,41 @@
+# IN-IndianFootballLeague (India) — league config (Phase 2 freeze; completed Phase 6)
+league: IN-IndianFootballLeague
+country: India
+fotmob_id: 8982
+tier: 2
+warehouse: data_enrichment/fotmob_world/India/Indian Football League
+data:
+  matches: league/IN-IndianFootballLeague/data/in_matches.csv
+  team_matches: league/IN-IndianFootballLeague/data/in_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period:
+  goals: ["2022/2023", "2023/2024", "2024/2025"]   # scored; warm-up 2021/2022
+  stats_markets: []                  # NOT-BUILDABLE: no stats feed in any season (0/608)
+  cards: []                          # NOT-BUILDABLE: no yellows target in dev (stats absent; event plain Yellows 0 in every dev season AND in the virgin — only in the reserve); referee dev 91.3% but virgin 4/66
+virgin_primary: "2025/2026"          # COMPLETE season (66 matches: 45 regular + 15 promotion group + 6 relegation group) — NOT READ (G-IN failed the dev gate; virgin_read: false)
+virgin_confirmatory: null            # 2026/2027 is in progress (10) and stays untouched
+halves_constants:                   # frozen from DEV-era data only (EDA F3)
+  goals_1h_share: 0.4387            # event times, dev era 2021/2022-2024/2025, n=1575 goals, 497 matches with events, awarded excluded
+  yellow_cards_1h_share: null       # no yellows target in dev — no constant; no K market
+  sot_1h_share: null                # no period splits in dev — no constant
+  corners_1h_share: null            # no period splits in dev — no constant
+  total_shots_1h_share: null        # no period splits in dev — no constant
+markets:
+  goals: G-IN        # DC goals-only (no xG in feed); arms: Gate Zero, SHRINK (X2 DROPPED: EDA F4, 6 dev transitions, mean GF -0.110 / GA +0.025, signs mixed)
+  sot: S-IN          # NOT-BUILDABLE — no stats feed in any season
+  corners: C-IN      # NOT-BUILDABLE — no stats feed in any season
+  cards: K-IN        # NOT-BUILDABLE — no stats yellows in any season; event plain Yellows 0 in every dev season AND in the virgin (definition break sits in the reserve only); referee 91.3% dev but 4/66 virgin (no shippable X8)
+  total_shots: T-IN  # NOT-BUILDABLE — no stats feed in any season; shotmap empty in every season
+notes:
+  - Split-year seasons with in-season split groups in two of them: 2021/2022 regular (78) + Championship Group (21) + Relegation Group (15); 2025/2026 regular (45) + Promotion Group (15) + Relegation Group (6). Single group in 2022/2023 (12 teams, 132), 2023/2024 (13 teams, 154), 2024/2025 (12 teams, 132). All split-phase rows are ordinary rows with a phase flag.
+  - Naming: the competition was rebranded mid-corpus — general.leagueName "I-League" through 2024/2025, "Indian Football League" from 2025/2026 ("I League" also appears in 2026/2027). Same league_id 8982 throughout; coverageLevel "lower" for all 608 matches.
+  - Stats feed absent in EVERY season: 0/608 matches carry any stats Periods key; shotmap 0/608; xG rows 0. Scores-only league.
+  - No xG and no shotmap in ANY season -> X1 blend falls back goals-only; X3/X4/X6/X7/X9 impossible by data absence.
+  - Event feed carries goals reliably (4 score mismatches in 608 matches, all of them the 4 awarded matches — header wins) and cards only as YellowRed + Red in every dev season and in the virgin (plain Yellow 0; plain Yellows appear only in the 2026/2027 reserve, 27 events). 34 matches have a wholly empty events payload — all 34 are 0-0 draws per the header (0 goals in them); their events-derived fields are missing, never zero.
+  - Team-name stability: 24 FotMob team ids over the corpus; 4 ids carry two spellings (Rajasthan United FC/Rajasthan United, Sudeva/Sudeva FC, Aizawl/Aizawl FC, Real Kashmir/Real Kashmir FC). All logic keyed by team id.
+  - Referees: named in 467/608 (dev era 453/496 = 91.3%; virgin only 4/66 = 6.1%; reserve 10/10) — X8 dropped: no yellows target to predict, and virgin coverage collapse makes a referee arm unshippable regardless.
+  - Four awarded matches (disciplinary 0-3/3-0 awards; on-pitch scores differed in all four): 4058291 (2022/2023 Sudeva 0-3 Kenkre, played 1-2), 4058277 (2022/2023 Real Kashmir 0-3 Churchill Brothers, played 1-0), 4664604 (2024/2025 Namdhari 0-3 Inter Kashi, played 2-0), 4664639 (2024/2025 Aizawl 3-0 Churchill Brothers, played 1-1) — kept as ordinary rows with awarded=true; none sits in the virgin season.
+  - Scoring level ROSE across the dev era: goals/match 2.579 / 2.727 / 3.331 / 3.182 in dev, 3.045 in the virgin (inventory only), 2.700 in the reserve 2026/2027. OU2.5 over-rate 0.48-0.61 per dev season; dev scored 0.5718.
+  - Trait reliability is moderate: split-half r 0.608 (GF) / 0.462 (GA), n=19 teams; season-to-season team-mean correlations weak-to-moderate (GF 0.41/0.36/0.26, GA -0.02/0.26/0.23).
+  - Predictions-only: no IN odds/settlement source in-system.
+  - Outcome (Phase 6): G-IN FAIL at the dev gate — Gate Zero pooled dev (n=418) 1X2 LL 1.0861 / RPS 0.2337 / OU2.5 LL 0.7568 vs climatology 1.0813 / 0.2365 / 0.6903 and naive trailing-10 1.1344 / 0.2320 / 0.7399 — passes only 2 of 6 legs (RPS vs climatology, 1X2 vs naive); the OU leg is lost to both baselines, driven by the first scored season (OU 0.8303 vs 0.6948 in 2022/2023) as the expanding fit chased the rising goals level. SHRINK numerically identical to Gate Zero (n<6 never binds under season-blocked prediction). X2 not run (dropped pre-fitting). Virgin 2025/2026 NOT read; 2026/2027 untouched; nothing ships. S/C/K/T not-buildable (see reports/*_IN_VERDICT.md).

@@ -1,0 +1,322 @@
+{
+ "seasons": {
+  "2021/2022": {
+   "payloads": 112,
+   "finished": 112,
+   "unfinished": 0,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 105,
+   "referee": 0,
+   "lineup": 0,
+   "playerStats": 0,
+   "teams_finished": 8,
+   "ht_crosscheck_agree": 104,
+   "ht_crosscheck_checked": 104,
+   "goals_pm_finished": 2.5982142857142856,
+   "home_win_rate": 0.4107142857142857,
+   "draw_rate": 0.22321428571428573,
+   "away_win_rate": 0.36607142857142855,
+   "ou15_over_rate": 0.7678571428571429,
+   "ou25_over_rate": 0.49107142857142855,
+   "ou35_over_rate": 0.23214285714285715,
+   "btts_rate": 0.41964285714285715
+  },
+  "2022/2023": {
+   "payloads": 180,
+   "finished": 180,
+   "unfinished": 0,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 166,
+   "referee": 0,
+   "lineup": 0,
+   "playerStats": 0,
+   "teams_finished": 10,
+   "ht_crosscheck_agree": 165,
+   "ht_crosscheck_checked": 165,
+   "goals_pm_finished": 2.638888888888889,
+   "home_win_rate": 0.4,
+   "draw_rate": 0.25555555555555554,
+   "away_win_rate": 0.34444444444444444,
+   "ou15_over_rate": 0.7444444444444445,
+   "ou25_over_rate": 0.5166666666666667,
+   "ou35_over_rate": 0.3055555555555556,
+   "btts_rate": 0.4722222222222222
+  },
+  "2023/2024": {
+   "payloads": 180,
+   "finished": 180,
+   "unfinished": 0,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 169,
+   "referee": 0,
+   "lineup": 0,
+   "playerStats": 0,
+   "teams_finished": 10,
+   "ht_crosscheck_agree": 169,
+   "ht_crosscheck_checked": 169,
+   "goals_pm_finished": 2.6166666666666667,
+   "home_win_rate": 0.4388888888888889,
+   "draw_rate": 0.22777777777777777,
+   "away_win_rate": 0.3333333333333333,
+   "ou15_over_rate": 0.7,
+   "ou25_over_rate": 0.48333333333333334,
+   "ou35_over_rate": 0.2777777777777778,
+   "btts_rate": 0.4722222222222222
+  },
+  "2024/2025": {
+   "payloads": 180,
+   "finished": 180,
+   "unfinished": 0,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 165,
+   "referee": 0,
+   "lineup": 0,
+   "playerStats": 0,
+   "teams_finished": 10,
+   "ht_crosscheck_agree": 165,
+   "ht_crosscheck_checked": 165,
+   "goals_pm_finished": 2.4,
+   "home_win_rate": 0.40555555555555556,
+   "draw_rate": 0.2777777777777778,
+   "away_win_rate": 0.31666666666666665,
+   "ou15_over_rate": 0.6666666666666666,
+   "ou25_over_rate": 0.40555555555555556,
+   "ou35_over_rate": 0.2388888888888889,
+   "btts_rate": 0.4388888888888889
+  },
+  "2025/2026": {
+   "payloads": 198,
+   "finished": 198,
+   "unfinished": 0,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 182,
+   "referee": 0,
+   "lineup": 0,
+   "playerStats": 0,
+   "teams_finished": 12,
+   "ht_crosscheck_agree": 181,
+   "ht_crosscheck_checked": 181,
+   "goals_pm_finished": 2.590909090909091,
+   "home_win_rate": 0.37373737373737376,
+   "draw_rate": 0.24242424242424243,
+   "away_win_rate": 0.3838383838383838,
+   "ou15_over_rate": 0.7272727272727273,
+   "ou25_over_rate": 0.48484848484848486,
+   "ou35_over_rate": 0.2474747474747475,
+   "btts_rate": 0.4595959595959596
+  },
+  "2026/2027": {
+   "payloads": 64,
+   "finished": 64,
+   "unfinished": 0,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 57,
+   "referee": 0,
+   "lineup": 0,
+   "playerStats": 0,
+   "teams_finished": 12,
+   "ht_crosscheck_agree": 57,
+   "ht_crosscheck_checked": 57,
+   "goals_pm_finished": 2.5625,
+   "home_win_rate": 0.4375,
+   "draw_rate": 0.296875,
+   "away_win_rate": 0.265625,
+   "ou15_over_rate": 0.65625,
+   "ou25_over_rate": 0.484375,
+   "ou35_over_rate": 0.328125,
+   "btts_rate": 0.515625
+  }
+ },
+ "pooled_dev": {
+  "n": 652,
+  "goals_pm": 2.5598159509202456,
+  "home_win_rate": 0.41411042944785276,
+  "draw_rate": 0.24846625766871167,
+  "away_win_rate": 0.3374233128834356,
+  "ou15_over_rate": 0.7147239263803681,
+  "ou25_over_rate": 0.4723926380368098,
+  "ou35_over_rate": 0.2668711656441718
+ },
+ "pooled_eval": {
+  "n": 540,
+  "goals_pm": 2.551851851851852,
+  "home_win_rate": 0.4148148148148148,
+  "draw_rate": 0.2537037037037037,
+  "away_win_rate": 0.3314814814814815,
+  "ou15_over_rate": 0.7037037037037037,
+  "ou25_over_rate": 0.4685185185185185,
+  "ou35_over_rate": 0.2740740740740741
+ },
+ "trait_reliability_by_season": {
+  "2021/2022": {
+   "n_teams": 8,
+   "r_goals_for": 0.7513897804980739,
+   "r_goals_against": 0.6895413345327458
+  },
+  "2022/2023": {
+   "n_teams": 10,
+   "r_goals_for": 0.8881533682577277,
+   "r_goals_against": 0.6973112126116625
+  },
+  "2023/2024": {
+   "n_teams": 10,
+   "r_goals_for": 0.7374440017183983,
+   "r_goals_against": 0.6573312191094024
+  },
+  "2024/2025": {
+   "n_teams": 10,
+   "r_goals_for": 0.8714736246073148,
+   "r_goals_against": 0.699518197287855
+  }
+ },
+ "halves_dev": {
+  "rule": "Half-event HT score; cross-checked vs goal-event times <=45",
+  "share_1h": 0.4343918514080288,
+  "n_goals": 1669,
+  "n_matches": 605,
+  "by_season": {
+   "2021/2022": {
+    "share_1h": 0.44329896907216493,
+    "n_goals": 291,
+    "n_matches": 105
+   },
+   "2022/2023": {
+    "share_1h": 0.4063157894736842,
+    "n_goals": 475,
+    "n_matches": 166
+   },
+   "2023/2024": {
+    "share_1h": 0.4288747346072187,
+    "n_goals": 471,
+    "n_matches": 169
+   },
+   "2024/2025": {
+    "share_1h": 0.4652777777777778,
+    "n_goals": 432,
+    "n_matches": 165
+   }
+  },
+  "per_match_share_variance": 0.11783937420500078,
+  "binomial_expected_variance": 0.1218800789834438,
+  "excess_variance": -0.0040407047784430244,
+  "team_share_split_half_r": -0.37873843537044566,
+  "team_share_n": 11
+ },
+ "entrants_dev": {
+  "transitions": [
+   {
+    "season": "2021/2022",
+    "team_id": 2103,
+    "gp": 28,
+    "gf_diff": -0.406,
+    "ga_diff": 0.451
+   },
+   {
+    "season": "2021/2022",
+    "team_id": 4617,
+    "gp": 28,
+    "gf_diff": 0.201,
+    "ga_diff": -0.192
+   },
+   {
+    "season": "2021/2022",
+    "team_id": 7981,
+    "gp": 28,
+    "gf_diff": 1.272,
+    "ga_diff": -0.835
+   },
+   {
+    "season": "2021/2022",
+    "team_id": 8076,
+    "gp": 28,
+    "gf_diff": 0.058,
+    "ga_diff": -0.085
+   },
+   {
+    "season": "2021/2022",
+    "team_id": 213987,
+    "gp": 28,
+    "gf_diff": -0.513,
+    "ga_diff": 0.344
+   },
+   {
+    "season": "2021/2022",
+    "team_id": 577619,
+    "gp": 28,
+    "gf_diff": -0.121,
+    "ga_diff": -0.335
+   },
+   {
+    "season": "2021/2022",
+    "team_id": 787209,
+    "gp": 28,
+    "gf_diff": -0.692,
+    "ga_diff": 0.737
+   },
+   {
+    "season": "2021/2022",
+    "team_id": 951893,
+    "gp": 28,
+    "gf_diff": 0.201,
+    "ga_diff": -0.085
+   },
+   {
+    "season": "2022/2023",
+    "team_id": 4150,
+    "gp": 36,
+    "gf_diff": -0.375,
+    "ga_diff": 0.403
+   },
+   {
+    "season": "2022/2023",
+    "team_id": 4674,
+    "gp": 36,
+    "gf_diff": -0.319,
+    "ga_diff": 0.042
+   },
+   {
+    "season": "2023/2024",
+    "team_id": 485832,
+    "gp": 36,
+    "gf_diff": -0.447,
+    "ga_diff": 0.081
+   }
+  ]
+ },
+ "prior_match_bands": {
+  "2021/2022": {
+   "0": 8
+  },
+  "2022/2023": {
+   "0": 2,
+   "24+": 8
+  },
+  "2023/2024": {
+   "24+": 9,
+   "0": 1
+  },
+  "2024/2025": {
+   "24+": 10
+  },
+  "2025/2026": {
+   "24+": 10,
+   "0": 2
+  },
+  "2026/2027": {
+   "24+": 11,
+   "0": 1
+  }
+ }
+}

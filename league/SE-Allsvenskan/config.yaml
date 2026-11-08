@@ -1,0 +1,32 @@
+# SE-Allsvenskan (Sweden) — league config
+league: SE-Allsvenskan
+country: Sweden
+fotmob_id: 67
+tier: 1
+warehouse: data_enrichment/fotmob_world/Sweden/Allsvenskan
+data:
+  matches: league/SE-Allsvenskan/data/se_matches.csv
+  team_matches: league/SE-Allsvenskan/data/se_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period: ["2021", "2022", "2023", "2024"]  # walk-forward, season-blocked
+virgin_primary: "2025"          # complete season, n=240 — read ONCE per candidate
+virgin_confirmatory: "2026"     # partial (224/240 played at pull, to 2026-11-08); reserved, NOT read in this build
+halves_constants:               # frozen, measured on the complete-splits era (see EDA F3)
+  goals_1h_share: 0.440         # 2023-2025, n=678
+  sot_1h_share: 0.455           # 2023-2025, n=720
+  corners_1h_share: 0.473       # 2023-2025, n=720
+  total_shots_1h_share: 0.457   # 2023-2025, n=720
+  yellow_cards_1h_share: 0.370  # 2024-2025 only, n=470 (2023 FH yellow splits artefact-suspect)
+markets:
+  goals: G-SE        # DC reference; arms: Gate Zero, SHRINK (thin-data prior), X3 set-play
+  sot: S-SE          # v5 reference; arms: Gate Zero, RS ratio-shrink, X4 xG/shot (weak trait)
+  corners: C-SE      # corners_v3 reference; arms: Gate Zero (X9), X7 box touches
+  cards: K-SE        # cards reference; arms: Gate Zero, X8 referee
+  total_shots: T-SE  # shots family; arms: A v1 pattern, B v2 level layer, C E9 trailing-r
+notes:
+  - Calendar-year season (Mar/Apr–Nov), 16 teams, straight double round robin (30 rounds, 240 matches/season), no split, no playoffs in this league_id.
+  - Per-half stats: absent in 2022, 11.7% in 2021, complete from 2023. Halves constants use the complete era only.
+  - Referee names: absent in 2021, 71–88% from 2022 onward — the X8 arm falls back to Gate Zero where the identity is unknown (no imputation).
+  - xGOT population rule breaks across eras: only on-target shots populated 2021–2023 (~0.33 of shots), transitional 2024 (0.65), ~100% from 2025. Era-guarded trait fails its reliability check regardless (EDA F7) — no X6 arm.
+  - touches_opp_box coverage: 39–51% in 2021–2023, 100% from 2024.
+  - Predictions-only: no SE odds/settlement source in-system.

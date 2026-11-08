@@ -1,0 +1,34 @@
+# UZ-Superliga (Uzbekistan Superliga) — league config
+league: UZ-Superliga
+country: Uzbekistan
+fotmob_id: 540
+tier: 1
+warehouse: data_enrichment/fotmob_world/Uzbekistan/Superliga
+data:
+  matches: league/UZ-Superliga/data/uz_superliga_matches.csv  # gitignored; regenerate via data/build_data.py
+seasons: ["2026"]
+# Format (frozen, from payloads): 16 teams, double round-robin, 30 rounds,
+# 240 matches, single regular phase (no split group, championship /
+# relegation round, or playoff). 2026 IN PROGRESS (215/240, rounds 1-27,
+# 2026-02-27..2026-11-08); round 26 short by one fixture (Bunyodkor
+# Tashkent vs Neftchi Fargona missing/postponed); rounds 28-30 unplayed.
+# Summer break between rounds 11 (2026-05-02..04) and 12 (2026-07-16..18).
+dev_period: []       # NO dev window: one partial season; season-blocked walk-forward needs a training season plus an evaluation season
+seed_period: []      # no complete season exists at all
+virgin: null         # NOT READ for evaluation: no second season exists; 2026 is the only season and is incomplete
+excluded: []         # no match excluded: 215/215 finished, scores cross-checked index vs header.teams
+# Feasibility verdict (2026-11-10): 0 PASS / 0 FAIL / 5 NOT BUILDABLE.
+# See prereg/PREREG_UZ_SUPERLIGA.md and reports/LEAGUE_VERDICT.md.
+# No engine built, no predictions issued.
+halves_constants: {}  # none frozen: HT scores derivable for only 99/215 matches (late-season event feed); measured HT share 0.4588 is descriptive, not a constant
+markets:
+  goals: G-UZ        # NOT BUILDABLE — one partial season; no dev evaluation season; no virgin window
+  sot: S-UZ          # NOT BUILDABLE — no SOT target in any payload (stats null, shotmap empty 215/215)
+  corners: C-UZ      # NOT BUILDABLE — no corners target in any payload
+  cards: K-UZ        # NOT BUILDABLE — no yellow-card target; referee blank 215/215, 29 Card events in 99 matches
+  total_shots: T-UZ  # NOT BUILDABLE — no total-shots target in any payload
+notes:
+  - Levels 2026 (n=215): 2.628 goals/match; home 1.391 / away 1.237; HW/D/AW 41.4/23.3/35.3%; Over 2.5 53.5%; BTTS 56.3%. Above J1 (2.55, Over 2.5 47.0%, BTTS 50.4%).
+  - Split-half trait reliability within 2026 (rounds 1-13 vs 14-27, n=16 teams): attack GF/match r=0.696 (real trait), defence GA/match r=0.179 (weak). Descriptive only; no gateable window to validate against.
+  - Event-feed finding: matchFacts.events non-empty in 99/215 payloads (rounds 10, 14-27); Half event at 45' gives the HT score (99/99 consistent), Goal-event count equals FT goals (99/99). HT share of goals 0.4588 on those 99 — not frozen.
+  - Revisit condition: earliest gateable build is dev = 2026 (once complete) + 2027 with virgin = 2028. Needs a new prereg; nothing is scheduled.

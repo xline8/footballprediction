@@ -1,0 +1,26 @@
+{
+  "candidate": "G-TZ-L1",
+  "max_abs_diff_vs_persisted": 0.0,
+  "shrink_pooled": {
+    "ll_1x2": 0.9255009566198792,
+    "rps": 0.18015842369975424,
+    "oull_2_5": 0.689403567523286
+  },
+  "climatology_pooled": {
+    "ll_1x2": 1.0690803629745378,
+    "rps": 0.22394387285619735,
+    "oull_2_5": 0.6927204890226273
+  },
+  "dev_legs": {
+    "ll_1x2_vs_climatology": true,
+    "rps_vs_climatology": true,
+    "oull_2_5_vs_base_rate": true
+  },
+  "rounding_ok": true,
+  "dev_pass": true,
+  "sign_check_dev": {
+    "wins": 3,
+    "n": 3,
+    "pass": true
+  }
+}

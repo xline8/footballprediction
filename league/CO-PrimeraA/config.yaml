@@ -1,0 +1,36 @@
+# CO-PrimeraA (Colombia Primera A) — league config
+league: CO-PrimeraA
+country: Colombia
+fotmob_id: 274
+tier: 1
+warehouse: data_enrichment/fotmob_world/Colombia/Primera A
+data:
+  matches: league/CO-PrimeraA/data/co_primeraa_matches.csv
+  team_matches: league/CO-PrimeraA/data/co_primeraa_team_matches.csv
+seasons: ["2021 - Apertura", "2021 - Clausura", "2022 - Apertura", "2022 - Clausura",
+          "2023 - Apertura", "2023 - Clausura", "2024 - Apertura", "2024 - Clausura",
+          "2025 - Apertura", "2025 - Clausura", "2026 - Apertura", "2026 - Clausura"]
+# Split calendar: Apertura + Clausura per year; regular -> quadrangular -> finals
+# (2021-Ap knockout instead of quadrangular; 2026-Ap has NO quadrangular).
+# Phase rule (frozen): all phases modelled, phase flagged, no phase filter/feature.
+dev_period: ["2022 - Apertura", "2022 - Clausura", "2023 - Apertura", "2023 - Clausura",
+             "2024 - Apertura", "2024 - Clausura", "2025 - Apertura", "2025 - Clausura"]
+seed_period: ["2021 - Apertura", "2021 - Clausura"]
+virgin: "2026 - Apertura"          # complete, n=204 — read ONCE per prereg, dev-passers only
+excluded: ["2026 - Clausura"]      # in progress at build time (179 played); unread everywhere
+cards_era: ["2023 - Apertura", "2023 - Clausura", "2024 - Apertura", "2024 - Clausura",
+            "2025 - Apertura", "2025 - Clausura", "2026 - Apertura"]  # event-unified target era
+cards_seed: "2023 - Apertura"
+cards_dev: ["2023 - Clausura", "2024 - Apertura", "2024 - Clausura", "2025 - Apertura", "2025 - Clausura"]
+halves_constants: {goals: 0.4706, sot: 0.4862, corners: 0.4956, cards: 0.3543, total_shots: 0.4850}
+markets:
+  goals: G-COA        # Dixon-Coles goals-only (xG era starts at virgin boundary); arms: Gate Zero, X2 (Primera B mover prior)
+  sot: S-COA          # v5 pattern, no xG inputs; arms: Gate Zero, RS; primary line 7.5
+  corners: C-COA      # corners v3 pattern; arms: Gate Zero, X7; primary line 8.5
+  cards: K-COA        # target = event-unified yellows, era 2023+; arms: Gate Zero, X8; primary line 5.5
+  total_shots: T-COA  # arms A (v1), B (v2 level), C (E9 trailing-r); primary line 24.5
+notes:
+  - Cards target is event-unified (stats feed level-breaks in 2022; card events absent 2021-2022 — see analysis/DATA_UNDERSTANDING.md).
+  - No unfinished 0-0 placeholders in this corpus (the Primera B trap does not occur); builder asserts finished status + counts.
+  - Team identity is team_id; display names canonicalised by the builder.
+  - Predictions-only: no CO odds/settlement source in-system.

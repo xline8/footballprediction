@@ -1,0 +1,27 @@
+import json
+from pathlib import Path
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+
+HERE=Path(__file__).resolve().parent
+D=json.loads((HERE/"eda_numbers.json").read_text())
+OUT=HERE/"charts"; OUT.mkdir(exist_ok=True); seasons=D["seasons"]
+
+fig,axes=plt.subplots(2,3,figsize=(11,6))
+for ax,(key,label) in zip(axes.flat,[("goals","goals"),("sot","SOT"),("corners","corners"),("cards_events","event yellows"),("total_shots","total shots"),("home_advantage","home advantage")]):
+    ax.bar(seasons,[D["per_season"][s][key] or 0 for s in seasons],color="#37474f")
+    ax.set_title(label+" per match" if key!="home_advantage" else label)
+    ax.tick_params(axis="x",rotation=30,labelsize=7)
+fig.tight_layout(); fig.savefig(OUT/"levels_by_season.png",dpi=130); plt.close(fig)
+
+items=sorted((k,v) for k,v in D["reliability"].items() if v is not None)
+fig,ax=plt.subplots(figsize=(9,6)); ax.barh([x[0] for x in items],[x[1] for x in items],color="#2e7d32")
+ax.axvline(.3,color="grey",ls="--"); ax.set_title("RU-1Division trait split-half reliability")
+fig.tight_layout(); fig.savefig(OUT/"trait_reliability.png",dpi=130); plt.close(fig)
+
+g=D["half_period"]["goals"]
+fig,ax=plt.subplots(figsize=(5.5,3.8)); ax.bar(["goals"],[g["share_ratio_of_sums"]],color="#37474f"); ax.axhline(.5,color="grey",ls="--"); ax.set_ylim(0,.6)
+ax.set_title("Frozen first-half share — goals"); ax.text(0,g["share_ratio_of_sums"]+.015,f"{g['share_ratio_of_sums']:.4f}",ha="center")
+fig.tight_layout(); fig.savefig(OUT/"halves_constants.png",dpi=130); plt.close(fig)
+print("charts written")

@@ -1,0 +1,149 @@
+Batch 11 static bug scan. No engine or gate was executed. Findings describe current source; dormant or bypass paths are distinguished from the authoritative outcomes. Corrected historical defects are not reported as current bugs.
+
+- SE-Ettan — `league/SE-Ettan/engine/goals/dc.py:46` — Dev loader materializes the entire CSV with pandas (including sealed 2025 and reserve 2026), parses dates and sorts it before filtering at line 48; violates load isolation, although returned fit/score rows are dev-only.
+- TN-LigueI — `league/TN-LigueI/engine/goals/dc.py:31` — Dev loader materializes sealed 2025/2026 and reserve rows with pandas before filtering at line 40; also checks awarded flags across them at line 37; no evidence these rows enter the fitted dev metrics.
+- SCO-Premiership — `league/SCO-Premiership/engine/goals/run_g_sco.py:20` — CLI virgin-predict calls virgin_metrics directly, bypassing the dev guard in the virgin-metrics branch; harness loads sealed rows and exports the requested arm without checking dev or sealed gates (prereg permits only passing arms).
+- SE-Allsvenskan — `league/SE-Allsvenskan/engine/goals/run_g_se.py:20` — CLI virgin-predict calls virgin_metrics directly, bypassing the dev guard in the virgin-metrics branch; harness loads sealed rows and exports the requested arm without checking dev or sealed gates (prereg permits only passing arms).
+- SE-Superettan — `league/SE-Superettan/engine/goals/run_g_se2.py:20` — CLI virgin-predict calls virgin_metrics directly, bypassing the dev guard in the virgin-metrics branch; harness loads sealed rows and exports the requested arm without checking dev or sealed gates (prereg permits only passing arms).
+- SK-1Liga — `league/SK-1Liga/engine/goals/run_g_sk.py:20` — CLI virgin-predict calls virgin_metrics directly, bypassing the dev guard in the virgin-metrics branch; harness loads sealed rows and exports the requested arm without checking dev or sealed gates (prereg permits only passing arms).
+- SCO-Premiership — `league/SCO-Premiership/engine/sot/harness.py:130` — choose() returns GZ when no arm satisfies the sealed gates; virgin() then unconditionally writes predictions at line 113 and fitted params, allowing a failed candidate to export (observed for SE-Superettan per verdict).
+- SCO-Premiership — `league/SCO-Premiership/engine/sot/harness.py:103` — requested_arm overrides the gate-selected winner if merely present in out[arms], so an evaluated arm failing sealed LL/calibration can be exported; no second eligibility check follows.
+- SE-Allsvenskan — `league/SE-Allsvenskan/engine/sot/harness.py:130` — choose() returns GZ when no arm satisfies the sealed gates; virgin() then unconditionally writes predictions at line 113 and fitted params, allowing a failed candidate to export (observed for SE-Superettan per verdict).
+- SE-Allsvenskan — `league/SE-Allsvenskan/engine/sot/harness.py:103` — requested_arm overrides the gate-selected winner if merely present in out[arms], so an evaluated arm failing sealed LL/calibration can be exported; no second eligibility check follows.
+- SK-1Liga — `league/SK-1Liga/engine/sot/harness.py:130` — choose() returns GZ when no arm satisfies the sealed gates; virgin() then unconditionally writes predictions at line 113 and fitted params, allowing a failed candidate to export (observed for SE-Superettan per verdict).
+- SK-1Liga — `league/SK-1Liga/engine/sot/harness.py:103` — requested_arm overrides the gate-selected winner if merely present in out[arms], so an evaluated arm failing sealed LL/calibration can be exported; no second eligibility check follows.
+- SE-Superettan — `league/SE-Superettan/engine/sot/harness.py:130` — choose() returns GZ when no arm satisfies the sealed gates; virgin() then unconditionally writes predictions at line 113 and fitted params, allowing a failed candidate to export (observed for SE-Superettan per verdict).
+- SE-Superettan — `league/SE-Superettan/engine/sot/harness.py:103` — requested_arm overrides the gate-selected winner if merely present in out[arms], so an evaluated arm failing sealed LL/calibration can be exported; no second eligibility check follows.
+- SE-Allsvenskan — `league/SE-Allsvenskan/engine/cards/harness.py:47` — virgin_metrics checks only requested arms, so --arms x8 passes its own dev guard despite failed Gate Zero, reads the sealed window at line 49, then CLI accesses missing gate_zero; frozen variants-moot guard is absent.
+- SE-Superettan — `league/SE-Superettan/engine/goals/arms.py:37` — X2 tests parent membership in the same season s (also line 45 for target entrants), rather than previous season; relegated clubs cannot overlap leagues that season, leaving completed transitions empty and the registered arm inert; verdict confirms defect.
+- SE-Superettan — `league/SE-Superettan/engine/sot/harness.py:98` — Sealed baseline rows are selected with season == 2025 while arms use 2026 at line 91; the LL gate compares different windows; verdict supplies the independent corrected comparison.
+- TH-ThaiLeague — `league/TH-ThaiLeague/engine/sot/harness.py:88` — Sealed function sets passing=list(ARMS) with no dev eligibility check, evaluating both arms despite the authoritative dev FAIL; function is currently outside the dev-only CLI.
+- TH-ThaiLeague — `league/TH-ThaiLeague/engine/sot/harness.py:138` — Calibration aliases use 7.5 (and choose() LL at line 146 uses 7.5) although registered primary line is 9.5 and LINES only contains 8.5/9.5/10.5; stale RU keys prevent the correct sealed gate and can raise KeyError; dormant sealed function.
+- TH-ThaiLeague — `league/TH-ThaiLeague/engine/sot/harness.py:89` — Sealed protocol still identifies league RU-1Division and prediction path at line 150 is s_ru1_virgin_predictions.csv; copied league identity persists in dormant sealed function.
+- TH-ThaiLeague — `league/TH-ThaiLeague/engine/goals/harness.py:127` — virgin() loads sealed rows before checking dev; with no passing arm it still calculates sealed climatology metrics at lines 144–146 instead of refusing the read; current CLI exposes dev only.
+- TH-ThaiLeague — `league/TH-ThaiLeague/engine/goals/harness.py:136` — Sealed protocol names RU-PremierLeague and output path at line 157 is g_ru_virgin_predictions.csv despite TH input; copied identity persists in dormant sealed function.
+- TH-ThaiLeague — `league/TH-ThaiLeague/engine/cards/harness.py:85` — Sealed result hardcodes shipped_arm=ARM without evaluating sealed LL or calibration gates; also labels Thai input RU-PremierLeague; dev guard currently blocks this path for the failed candidate.
+- TH-ThaiLeague — `league/TH-ThaiLeague/engine/total_shots/run_t_ru1.py:238` — Retained legacy harness asserts 287 sealed rows versus frozen Thai 240; lines 249–258 gate/index LL at 15.5 despite LINES=25.5/26.5/27.5 and prereg primary 26.5, and PRED at line 17 retains t_ru1 identity; dev-only CLI leaves broken virgin() dormant.
+
+Engine files opened and statically skimmed:
+
+- `league/SCO-LeagueOne/engine/cards/harness.py`
+- `league/SCO-LeagueOne/engine/cards/model.py`
+- `league/SCO-LeagueOne/engine/cards/run_k_sco_l1.py`
+- `league/SCO-LeagueOne/engine/goals/arms.py`
+- `league/SCO-LeagueOne/engine/goals/dc.py`
+- `league/SCO-LeagueOne/engine/goals/harness.py`
+- `league/SCO-LeagueOne/engine/goals/run_g_sco_l1.py`
+- `league/SCO-Premiership/engine/cards/harness.py`
+- `league/SCO-Premiership/engine/cards/model.py`
+- `league/SCO-Premiership/engine/cards/run_k_sco.py`
+- `league/SCO-Premiership/engine/corners/core.py`
+- `league/SCO-Premiership/engine/corners/harness.py`
+- `league/SCO-Premiership/engine/corners/run_c_sco.py`
+- `league/SCO-Premiership/engine/goals/arms.py`
+- `league/SCO-Premiership/engine/goals/dc.py`
+- `league/SCO-Premiership/engine/goals/harness.py`
+- `league/SCO-Premiership/engine/goals/run_g_sco.py`
+- `league/SCO-Premiership/engine/sot/harness.py`
+- `league/SCO-Premiership/engine/sot/model.py`
+- `league/SCO-Premiership/engine/sot/run_s_sco.py`
+- `league/SCO-Premiership/engine/total_shots/model.py`
+- `league/SCO-Premiership/engine/total_shots/run_t_sco.py`
+- `league/SE-Allsvenskan/engine/cards/harness.py`
+- `league/SE-Allsvenskan/engine/cards/model.py`
+- `league/SE-Allsvenskan/engine/cards/run_k_se.py`
+- `league/SE-Allsvenskan/engine/corners/core.py`
+- `league/SE-Allsvenskan/engine/corners/harness.py`
+- `league/SE-Allsvenskan/engine/corners/run_c_se.py`
+- `league/SE-Allsvenskan/engine/goals/arms.py`
+- `league/SE-Allsvenskan/engine/goals/dc.py`
+- `league/SE-Allsvenskan/engine/goals/harness.py`
+- `league/SE-Allsvenskan/engine/goals/run_g_se.py`
+- `league/SE-Allsvenskan/engine/sot/harness.py`
+- `league/SE-Allsvenskan/engine/sot/model.py`
+- `league/SE-Allsvenskan/engine/sot/run_s_se.py`
+- `league/SE-Allsvenskan/engine/total_shots/model.py`
+- `league/SE-Allsvenskan/engine/total_shots/run_t_se.py`
+- `league/SE-Ettan/engine/goals/arms.py`
+- `league/SE-Ettan/engine/goals/dc.py`
+- `league/SE-Ettan/engine/goals/harness.py`
+- `league/SE-Ettan/engine/goals/model.py`
+- `league/SE-Ettan/engine/goals/run_g_se.py`
+- `league/SE-Superettan/engine/cards/harness.py`
+- `league/SE-Superettan/engine/cards/model.py`
+- `league/SE-Superettan/engine/cards/run_k_se2.py`
+- `league/SE-Superettan/engine/corners/core.py`
+- `league/SE-Superettan/engine/corners/harness.py`
+- `league/SE-Superettan/engine/corners/run_c_se2.py`
+- `league/SE-Superettan/engine/goals/arms.py`
+- `league/SE-Superettan/engine/goals/dc.py`
+- `league/SE-Superettan/engine/goals/harness.py`
+- `league/SE-Superettan/engine/goals/run_g_se2.py`
+- `league/SE-Superettan/engine/sot/harness.py`
+- `league/SE-Superettan/engine/sot/model.py`
+- `league/SE-Superettan/engine/sot/run_s_se2.py`
+- `league/SE-Superettan/engine/total_shots/model.py`
+- `league/SE-Superettan/engine/total_shots/run_t_se2.py`
+- `league/SG-PremierLeague/engine/goals/arms.py`
+- `league/SG-PremierLeague/engine/goals/dc.py`
+- `league/SG-PremierLeague/engine/goals/harness.py`
+- `league/SG-PremierLeague/engine/goals/run_g_sg.py`
+- `league/SK-1Liga/engine/cards/harness.py`
+- `league/SK-1Liga/engine/cards/model.py`
+- `league/SK-1Liga/engine/cards/run_k_sk.py`
+- `league/SK-1Liga/engine/corners/core.py`
+- `league/SK-1Liga/engine/corners/harness.py`
+- `league/SK-1Liga/engine/corners/run_c_sk.py`
+- `league/SK-1Liga/engine/goals/arms.py`
+- `league/SK-1Liga/engine/goals/dc.py`
+- `league/SK-1Liga/engine/goals/harness.py`
+- `league/SK-1Liga/engine/goals/run_g_sk.py`
+- `league/SK-1Liga/engine/sot/harness.py`
+- `league/SK-1Liga/engine/sot/model.py`
+- `league/SK-1Liga/engine/sot/run_s_sk.py`
+- `league/SK-2Liga/engine/goals/arms.py`
+- `league/SK-2Liga/engine/goals/dc.py`
+- `league/SK-2Liga/engine/goals/harness.py`
+- `league/SK-2Liga/engine/goals/run_g_sk2.py`
+- `league/SLO-PrvaLiga/engine/goals/arms.py`
+- `league/SLO-PrvaLiga/engine/goals/dc.py`
+- `league/SLO-PrvaLiga/engine/goals/harness.py`
+- `league/SLO-PrvaLiga/engine/goals/model.py`
+- `league/SLO-PrvaLiga/engine/goals/run_g_slo.py`
+- `league/SV-PrimeraDivision/engine/goals/arms.py`
+- `league/SV-PrimeraDivision/engine/goals/dc.py`
+- `league/SV-PrimeraDivision/engine/goals/harness.py`
+- `league/SV-PrimeraDivision/engine/goals/run_g_sv.py`
+- `league/TH-ThaiLeague/engine/cards/harness.py`
+- `league/TH-ThaiLeague/engine/cards/model.py`
+- `league/TH-ThaiLeague/engine/cards/run_k_ru1.py`
+- `league/TH-ThaiLeague/engine/cards/run_k_th.py`
+- `league/TH-ThaiLeague/engine/corners/core.py`
+- `league/TH-ThaiLeague/engine/corners/harness.py`
+- `league/TH-ThaiLeague/engine/corners/run_c_ru1.py`
+- `league/TH-ThaiLeague/engine/corners/run_c_th.py`
+- `league/TH-ThaiLeague/engine/goals/arms.py`
+- `league/TH-ThaiLeague/engine/goals/dc.py`
+- `league/TH-ThaiLeague/engine/goals/harness.py`
+- `league/TH-ThaiLeague/engine/goals/run_g_ru1.py`
+- `league/TH-ThaiLeague/engine/goals/run_g_th.py`
+- `league/TH-ThaiLeague/engine/sot/harness.py`
+- `league/TH-ThaiLeague/engine/sot/model.py`
+- `league/TH-ThaiLeague/engine/sot/run_s_ru1.py`
+- `league/TH-ThaiLeague/engine/sot/run_s_th.py`
+- `league/TH-ThaiLeague/engine/total_shots/model.py`
+- `league/TH-ThaiLeague/engine/total_shots/run_t_ru1.py`
+- `league/TH-ThaiLeague/engine/total_shots/run_t_th.py`
+- `league/TH-ThaiLeague2/engine/cards/harness.py`
+- `league/TH-ThaiLeague2/engine/cards/model.py`
+- `league/TH-ThaiLeague2/engine/cards/run_k_th2.py`
+- `league/TH-ThaiLeague2/engine/goals/arms.py`
+- `league/TH-ThaiLeague2/engine/goals/dc.py`
+- `league/TH-ThaiLeague2/engine/goals/harness.py`
+- `league/TH-ThaiLeague2/engine/goals/run_g_th2.py`
+- `league/TN-LigueI/engine/goals/arms.py`
+- `league/TN-LigueI/engine/goals/dc.py`
+- `league/TN-LigueI/engine/goals/harness.py`
+- `league/TN-LigueI/engine/goals/model.py`
+- `league/TN-LigueI/engine/goals/run_g_tn.py`
+- `league/TN-LigueI/engine/goals/run_virgin_g_tn.py`

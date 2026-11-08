@@ -1,0 +1,20 @@
+# J2 League (Japan) — league config
+league: J2
+country: Japan
+fotmob_id: 8974
+tier: 2
+warehouse: data_enrichment/fotmob_jleague/J2
+data:
+  matches: league/J2/data/j2_matches.csv
+  team_matches: league/J2/data/j2_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026/2027"]
+dev_period: ["2021", "2022", "2023", "2024"]   # walk-forward, season-blocked
+virgin_primary: "2025"          # n=383 — read ONCE per candidate
+markets:
+  goals: G-J2        # DC reference, goals-only (no xG in J2); X2 cross-tier priors both directions
+  cards: K-J2        # cards reference, events-based yellows target; arm: X8 referee covariate
+not_candidates:
+  corners: "targets exist only inside Sep 2021–Sep 2024 stats window; virgin 2025 has none (F13)"
+  sot: "same window problem as corners (F13)"
+notes:
+  - Stats window (shots/SOT/corners) exists only Sep 2021 – Sep 2024; xG never.

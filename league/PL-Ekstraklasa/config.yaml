@@ -1,0 +1,31 @@
+# PL-Ekstraklasa (Poland) — Stage 1 league configuration
+league: PL-Ekstraklasa
+country: Poland
+fotmob_id: 196
+tier: 1
+warehouse: data_enrichment/fotmob_world/Poland/Ekstraklasa
+data:
+  matches: league/PL-Ekstraklasa/data/pl_matches.csv
+  team_matches: league/PL-Ekstraklasa/data/pl_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.4618
+  sot_1h_share: 0.4584
+  corners_1h_share: 0.4723
+  total_shots_1h_share: 0.4592
+  yellow_cards_1h_share: 0.3338
+markets:
+  goals: G-PL
+  sot: S-PL
+  corners: C-PL
+  cards: K-PL
+  total_shots: T-PL
+notes:
+  - FORMAT: every season is 18 teams, 34 rounds, single regular phase, double round-robin; 306 matches in each complete season and 124 in 2026/2027 at this pull.
+  - PHASE RULE: freeze phase=regular for every row. There is no split/play-off phase in this warehouse era and no phase feature.
+  - I Liga (league_id 197) and II Liga (8935) are present in the warehouse but this build does not build a second-league corpus; X2 is judged by same-league newcomers (GF gap −0.142, GA gap +0.288) but not consumed; SHRINK is the goals thin-data arm.
+  - xG era: stats-feed expected_goals begins in 2023/2024 and shotmap xG is usable only in the 2025/2026 era; xGOT is era-guarded and fails its reliability/design conditions.
+  - Calibration is defined everywhere as actual minus predicted, per the Stage 1 brief.

@@ -1,0 +1,637 @@
+{
+  "awarded_match_ids": [
+    "4480811"
+  ],
+  "canonical_team_names": {
+    "1012221": "Sarawak United",
+    "1114226": "Kuching City",
+    "1124836": "Kelantan The Real Warriors FC",
+    "165158": "Brunei DPMM",
+    "165222": "Negeri Sembilan",
+    "165223": "Selangor",
+    "165225": "Kelantan",
+    "165228": "Johor Darul Ta'zim",
+    "165229": "Terengganu",
+    "165231": "Perak",
+    "165232": "Penang",
+    "165233": "Kedah Darul Aman",
+    "165234": "Sri Pahang",
+    "165235": "PDRM",
+    "1783730": "Melaka FC",
+    "1783759": "Star City",
+    "191752": "Kuala Lumpur City",
+    "2127190": "Kelantan Red Warrior",
+    "242698": "Sabah",
+    "584737": "Petaling Jaya City FC",
+    "584740": "Melaka United",
+    "611677": "UiTM"
+  },
+  "content_absence_zero_counts_by_season": {
+    "2021": {
+      "lineup": 129,
+      "player_stats": 132,
+      "referee": 132,
+      "shotmap": 132,
+      "stats": 132,
+      "yellow": 132
+    },
+    "2022": {
+      "lineup": 132,
+      "player_stats": 132,
+      "referee": 132,
+      "shotmap": 132,
+      "stats": 132,
+      "yellow": 132
+    },
+    "2023": {
+      "lineup": 182,
+      "player_stats": 182,
+      "referee": 182,
+      "shotmap": 182,
+      "stats": 182,
+      "yellow": 182
+    },
+    "2024/2025": {
+      "lineup": 156,
+      "player_stats": 156,
+      "referee": 156,
+      "shotmap": 156,
+      "stats": 156,
+      "yellow": 156
+    },
+    "2025/2026": {
+      "lineup": 156,
+      "player_stats": 156,
+      "referee": 156,
+      "shotmap": 156,
+      "stats": 156,
+      "yellow": 156
+    },
+    "2026/2027": {
+      "lineup": 35,
+      "player_stats": 35,
+      "referee": 35,
+      "shotmap": 35,
+      "stats": 35,
+      "yellow": 35
+    }
+  },
+  "country_distribution": {
+    "Malaysia": 793
+  },
+  "date_ranges": {
+    "2021": [
+      "2021-03-05",
+      "2021-09-12"
+    ],
+    "2022": [
+      "2022-03-04",
+      "2022-10-15"
+    ],
+    "2023": [
+      "2023-02-24",
+      "2023-12-17"
+    ],
+    "2024/2025": [
+      "2024-05-10",
+      "2025-04-20"
+    ],
+    "2025/2026": [
+      "2025-08-08",
+      "2026-05-17"
+    ],
+    "2026/2027": [
+      "2026-08-21",
+      "2026-11-01"
+    ]
+  },
+  "entrants_by_team_id": {
+    "2021": [
+      165223,
+      165228,
+      165229,
+      165231,
+      165232,
+      165233,
+      165234,
+      191752,
+      242698,
+      584737,
+      584740,
+      611677
+    ],
+    "2022": [
+      165222,
+      1012221
+    ],
+    "2023": [
+      165225,
+      165235,
+      1114226,
+      1124836
+    ],
+    "2024/2025": [],
+    "2025/2026": [
+      165158,
+      1783730,
+      1783759
+    ],
+    "2026/2027": [
+      2127190
+    ]
+  },
+  "events_total": {
+    "cards": 127,
+    "goals": 2481,
+    "half": 759,
+    "red": 88,
+    "yellow": 0,
+    "yellowred": 39
+  },
+  "fotmob_id": 8985,
+  "has_playoff_distribution": {
+    "False": 274,
+    "None": 519
+  },
+  "index_rows": 793,
+  "league": "MY-LigaSuper",
+  "leagueName_distribution": {
+    "Liga Super": 499,
+    "Super Liga": 294
+  },
+  "league_scope_note": "single table, double round-robin, regular phase; no split or playoff",
+  "malaysia_league_ids_in_index": [
+    "8985"
+  ],
+  "parentLeagueId_distribution": {
+    "8985": 793
+  },
+  "payloads_present": 793,
+  "phase_distribution": {
+    "regular": 793
+  },
+  "rounds_by_season": {
+    "2021": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20",
+      "21",
+      "22"
+    ],
+    "2022": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20",
+      "21",
+      "22"
+    ],
+    "2023": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20",
+      "21",
+      "22",
+      "23",
+      "24",
+      "25",
+      "26"
+    ],
+    "2024/2025": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20",
+      "21",
+      "22",
+      "23",
+      "24",
+      "25",
+      "26"
+    ],
+    "2025/2026": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20",
+      "21",
+      "22",
+      "23",
+      "24",
+      "25",
+      "26"
+    ],
+    "2026/2027": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "13",
+      "16",
+      "20"
+    ]
+  },
+  "seasons": {
+    "2021": {
+      "awarded": 0,
+      "card_event_rows": 14,
+      "card_events": 15,
+      "coverage": {
+        "cards": 14,
+        "events": 124,
+        "half": 124,
+        "lineup": 3,
+        "player_stats": 0,
+        "referee": 0,
+        "score": 132,
+        "shotmap": 0,
+        "stats": 0
+      },
+      "date_range": [
+        "2021-03-05",
+        "2021-09-12"
+      ],
+      "eventless": 8,
+      "goal_events": 357,
+      "lineup_nonnull": 3,
+      "model_rows": 132,
+      "n": 132,
+      "red_events": 7,
+      "round_count": 22,
+      "teams": 12,
+      "yellow_events": 0,
+      "yellowred_events": 8
+    },
+    "2022": {
+      "awarded": 0,
+      "card_event_rows": 18,
+      "card_events": 19,
+      "coverage": {
+        "cards": 18,
+        "events": 124,
+        "half": 124,
+        "lineup": 0,
+        "player_stats": 0,
+        "referee": 0,
+        "score": 132,
+        "shotmap": 0,
+        "stats": 0
+      },
+      "date_range": [
+        "2022-03-04",
+        "2022-10-15"
+      ],
+      "eventless": 8,
+      "goal_events": 388,
+      "lineup_nonnull": 0,
+      "model_rows": 132,
+      "n": 132,
+      "red_events": 11,
+      "round_count": 22,
+      "teams": 12,
+      "yellow_events": 0,
+      "yellowred_events": 8
+    },
+    "2023": {
+      "awarded": 0,
+      "card_event_rows": 21,
+      "card_events": 26,
+      "coverage": {
+        "cards": 21,
+        "events": 175,
+        "half": 175,
+        "lineup": 0,
+        "player_stats": 0,
+        "referee": 0,
+        "score": 182,
+        "shotmap": 0,
+        "stats": 0
+      },
+      "date_range": [
+        "2023-02-24",
+        "2023-12-17"
+      ],
+      "eventless": 7,
+      "goal_events": 625,
+      "lineup_nonnull": 0,
+      "model_rows": 182,
+      "n": 182,
+      "red_events": 10,
+      "round_count": 26,
+      "teams": 14,
+      "yellow_events": 0,
+      "yellowred_events": 16
+    },
+    "2024/2025": {
+      "awarded": 1,
+      "card_event_rows": 25,
+      "card_events": 26,
+      "coverage": {
+        "cards": 25,
+        "events": 151,
+        "half": 151,
+        "lineup": 0,
+        "player_stats": 0,
+        "referee": 0,
+        "score": 156,
+        "shotmap": 0,
+        "stats": 0
+      },
+      "date_range": [
+        "2024-05-10",
+        "2025-04-20"
+      ],
+      "eventless": 5,
+      "goal_events": 472,
+      "lineup_nonnull": 0,
+      "model_rows": 155,
+      "n": 156,
+      "red_events": 23,
+      "round_count": 26,
+      "teams": 13,
+      "yellow_events": 0,
+      "yellowred_events": 3
+    },
+    "2025/2026": {
+      "awarded": 0,
+      "card_event_rows": 28,
+      "card_events": 31,
+      "coverage": {
+        "cards": 28,
+        "events": 151,
+        "half": 151,
+        "lineup": 0,
+        "player_stats": 0,
+        "referee": 0,
+        "score": 156,
+        "shotmap": 0,
+        "stats": 0
+      },
+      "date_range": [
+        "2025-08-08",
+        "2026-05-17"
+      ],
+      "eventless": 5,
+      "goal_events": 514,
+      "lineup_nonnull": 0,
+      "model_rows": 156,
+      "n": 156,
+      "red_events": 28,
+      "round_count": 26,
+      "teams": 13,
+      "yellow_events": 0,
+      "yellowred_events": 3
+    },
+    "2026/2027": {
+      "awarded": 0,
+      "card_event_rows": 10,
+      "card_events": 10,
+      "coverage": {
+        "cards": 10,
+        "events": 34,
+        "half": 34,
+        "lineup": 0,
+        "player_stats": 0,
+        "referee": 0,
+        "score": 35,
+        "shotmap": 0,
+        "stats": 0
+      },
+      "date_range": [
+        "2026-08-21",
+        "2026-11-01"
+      ],
+      "eventless": 1,
+      "goal_events": 125,
+      "lineup_nonnull": 0,
+      "model_rows": 35,
+      "n": 35,
+      "red_events": 9,
+      "round_count": 9,
+      "teams": 12,
+      "yellow_events": 0,
+      "yellowred_events": 1
+    }
+  },
+  "team_count_total": 22,
+  "team_counts_by_season": {
+    "2021": 12,
+    "2022": 12,
+    "2023": 14,
+    "2024/2025": 13,
+    "2025/2026": 13,
+    "2026/2027": 12
+  },
+  "team_ids_by_season": {
+    "2021": [
+      165223,
+      165228,
+      165229,
+      165231,
+      165232,
+      165233,
+      165234,
+      191752,
+      242698,
+      584737,
+      584740,
+      611677
+    ],
+    "2022": [
+      165222,
+      165223,
+      165228,
+      165229,
+      165232,
+      165233,
+      165234,
+      191752,
+      242698,
+      584737,
+      584740,
+      1012221
+    ],
+    "2023": [
+      165222,
+      165223,
+      165225,
+      165228,
+      165229,
+      165231,
+      165232,
+      165233,
+      165234,
+      165235,
+      191752,
+      242698,
+      1114226,
+      1124836
+    ],
+    "2024/2025": [
+      165222,
+      165223,
+      165228,
+      165229,
+      165231,
+      165232,
+      165233,
+      165234,
+      165235,
+      191752,
+      242698,
+      1114226,
+      1124836
+    ],
+    "2025/2026": [
+      165158,
+      165222,
+      165223,
+      165228,
+      165229,
+      165232,
+      165235,
+      191752,
+      242698,
+      1114226,
+      1124836,
+      1783730,
+      1783759
+    ],
+    "2026/2027": [
+      165158,
+      165222,
+      165223,
+      165228,
+      165229,
+      165232,
+      191752,
+      242698,
+      1114226,
+      1783730,
+      1783759,
+      2127190
+    ]
+  },
+  "team_name_variants": {
+    "1124836": [
+      "Kelantan DNFC",
+      "Kelantan The Real Warriors FC",
+      "Kelantan United"
+    ],
+    "165228": [
+      "Johor Darul Ta'zim",
+      "Johor Darul Ta'zim FC"
+    ],
+    "165232": [
+      "Penang",
+      "Penang FC",
+      "Pulau Pinang"
+    ],
+    "165233": [
+      "Kedah",
+      "Kedah Darul Aman",
+      "Kedah Darul Aman FC"
+    ],
+    "165234": [
+      "Sri Pahang",
+      "Sri Pahang FC"
+    ],
+    "1783759": [
+      "Imigresen FC",
+      "Star City"
+    ],
+    "191752": [
+      "Kuala Lumpur City",
+      "Kuala Lumpur FA"
+    ],
+    "242698": [
+      "Sabah",
+      "Sabah FA",
+      "Sabah FC"
+    ]
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "protocol": {
+    "league": "AT-2Liga",
+    "virgin_season": "2025/2026",
+    "n": 210,
+    "scored_arms": [
+      "gate_zero"
+    ],
+    "primary_line": 9.5,
+    "sign_convention": "actual_minus_predicted"
+  },
+  "gate_zero": {
+    "n": 210,
+    "season": "2025/2026",
+    "ll_8.5": 0.6755484674749984,
+    "mean_p_8.5": 0.5906895082959067,
+    "actual_over_8.5": 0.5904761904761905,
+    "ll_9.5": 0.6806906481808993,
+    "mean_p_9.5": 0.46928970402806525,
+    "actual_over_9.5": 0.3904761904761905,
+    "ll_10.5": 0.6133667108256485,
+    "mean_p_10.5": 0.35514383714682507,
+    "actual_over_10.5": 0.2857142857142857,
+    "both_teams_active_share": 0.8952380952380953,
+    "active_with_nonzero_beta_share": 0.8952380952380953,
+    "calibration_diff": -0.07881351355187477,
+    "calibration_se": 0.033715805570237865,
+    "arm": "gate_zero",
+    "params": {
+      "gamma": 0.0,
+      "r": 1.157300302872021,
+      "beta": [
+        -0.0025
+      ],
+      "fit_n": 935
+    }
+  },
+  "league_base_rate": {
+    "n": 210,
+    "season": "2025/2026",
+    "ll_8.5": 0.7458373391181287,
+    "mean_p_8.5": 0.4056477531944751,
+    "actual_over_8.5": 0.5904761904761905,
+    "ll_9.5": 0.6701086161850073,
+    "mean_p_9.5": 0.36728037960970716,
+    "actual_over_9.5": 0.3904761904761905,
+    "ll_10.5": 0.6033335064998242,
+    "mean_p_10.5": 0.3325164409329911,
+    "actual_over_10.5": 0.2857142857142857,
+    "both_teams_active_share": 0.0,
+    "active_with_nonzero_beta_share": 0.0,
+    "calibration_diff": 0.023195810866483313,
+    "calibration_se": 0.03374578018258081
+  },
+  "naive_trailing_10": {
+    "n": 210,
+    "season": "2025/2026",
+    "ll_8.5": 0.7628856977182463,
+    "mean_p_8.5": 0.38448224159133726,
+    "actual_over_8.5": 0.5904761904761905,
+    "ll_9.5": 0.6734784941365766,
+    "mean_p_9.5": 0.3472347265993673,
+    "actual_over_9.5": 0.3904761904761905,
+    "ll_10.5": 0.6050088527479001,
+    "mean_p_10.5": 0.31363490870730704,
+    "actual_over_10.5": 0.2857142857142857,
+    "both_teams_active_share": 0.0,
+    "active_with_nonzero_beta_share": 0.0,
+    "calibration_diff": 0.04324146387682315,
+    "calibration_se": 0.03376283268743841
+  },
+  "shipped_arm": null
+}

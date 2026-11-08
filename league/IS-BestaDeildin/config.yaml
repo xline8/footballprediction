@@ -1,0 +1,28 @@
+league: IS-BestaDeildin
+country: Iceland
+fotmob_id: 215
+tier: 1
+warehouse: data_enrichment/fotmob_world/Iceland/Besta deildin
+data:
+  matches: league/IS-BestaDeildin/data/is_matches.csv
+  team_matches: league/IS-BestaDeildin/data/is_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period: ["2022", "2023", "2024", "2025"]
+virgin_primary: "2026"
+halves_constants:
+  goals_1h_share: 0.4455
+  sot_1h_share: 0.4644
+  corners_1h_share: 0.4707
+  total_shots_1h_share: 0.4623
+  yellow_cards_1h_share: 0.3499
+markets:
+  goals: G-IS  # FAIL — dev Gate Zero failed; virgin not read
+  sot: S-IS  # PASS provisional (calibration) — Gate Zero ships
+  corners: C-IS  # PASS provisional (calibration) — X7 ships
+  cards: K-IS  # FAIL — dev Gate Zero failed; virgin not read
+  total_shots: T-IS  # PASS provisional (calibration) — arm B ships
+notes:
+  - 2021 is regular-only; 2022-2026 each have 132 regular, 15 championship and 15 relegation matches.
+  - 2021-2022 have goals/events only; 2023-2026 have stats. No xG key or populated shotmap occurs in any payload.
+  - touches_opp_box is quarantined to 2024+ for X7 because 2023 is a different scale.
+  - K-IS targets stats yellow_cards; event yellows are retained for the artefact check.

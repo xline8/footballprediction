@@ -1,0 +1,20 @@
+# J3 League (Japan) — league config
+league: J3
+country: Japan
+fotmob_id: 9136
+tier: 3
+warehouse: data_enrichment/fotmob_jleague/J3
+data:
+  matches: league/J3/data/j3_matches.csv
+  team_matches: league/J3/data/j3_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026/2027"]
+dev_period: ["2021", "2022", "2023", "2024"]   # walk-forward, season-blocked
+virgin_primary: "2025"          # n=383 — read ONCE per candidate
+markets:
+  goals: G-J3        # DC reference, goals-only, FULL-TIME ONLY (no halves: HT missing 6.8% + F3)
+not_candidates:
+  sot: "no data (F13)"
+  corners: "no data (F13)"
+  cards: "yellows do not exist in J3 feeds (F13)"
+notes:
+  - Scores-only league outside a 62-match 2025 stats window.

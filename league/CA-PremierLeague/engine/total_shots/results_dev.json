@@ -1,0 +1,160 @@
+{
+  "protocol": {
+    "warmup": "2021",
+    "scored": [
+      "2022",
+      "2023",
+      "2024"
+    ],
+    "rows_loaded": 448,
+    "M_BAR": 22.832589285714285,
+    "primary_line": 22.5,
+    "ladder": [
+      21.5,
+      22.5,
+      23.5
+    ]
+  },
+  "results": [
+    {
+      "arm": "A",
+      "season": "pooled",
+      "kind": "model",
+      "n": 336,
+      "ll_22.5": 0.6876763633836925
+    },
+    {
+      "arm": "A",
+      "season": "2022",
+      "kind": "model",
+      "n": 112,
+      "ll_22.5": 0.6811524788076626
+    },
+    {
+      "arm": "A",
+      "season": "2023",
+      "kind": "model",
+      "n": 112,
+      "ll_22.5": 0.6934623653326516
+    },
+    {
+      "arm": "A",
+      "season": "2024",
+      "kind": "model",
+      "n": 112,
+      "ll_22.5": 0.6884142460107634
+    },
+    {
+      "arm": "B",
+      "season": "pooled",
+      "kind": "model",
+      "n": 336,
+      "ll_22.5": 0.6879507733763806
+    },
+    {
+      "arm": "B",
+      "season": "2022",
+      "kind": "model",
+      "n": 112,
+      "ll_22.5": 0.6817089639224353
+    },
+    {
+      "arm": "B",
+      "season": "2023",
+      "kind": "model",
+      "n": 112,
+      "ll_22.5": 0.6935859888731982
+    },
+    {
+      "arm": "B",
+      "season": "2024",
+      "kind": "model",
+      "n": 112,
+      "ll_22.5": 0.6885573673335081
+    },
+    {
+      "arm": "C",
+      "season": "pooled",
+      "kind": "model",
+      "n": 336,
+      "ll_22.5": 0.6872204476362308
+    },
+    {
+      "arm": "C",
+      "season": "2022",
+      "kind": "model",
+      "n": 112,
+      "ll_22.5": 0.679646362602976
+    },
+    {
+      "arm": "C",
+      "season": "2023",
+      "kind": "model",
+      "n": 112,
+      "ll_22.5": 0.693600474332612
+    },
+    {
+      "arm": "C",
+      "season": "2024",
+      "kind": "model",
+      "n": 112,
+      "ll_22.5": 0.6884145059731045
+    },
+    {
+      "arm": "baseline_league",
+      "season": "2022",
+      "kind": "baseline",
+      "n": 112,
+      "ll_22.5": 0.6893163003736575
+    },
+    {
+      "arm": "baseline_league",
+      "season": "2023",
+      "kind": "baseline",
+      "n": 112,
+      "ll_22.5": 0.7007004337998989
+    },
+    {
+      "arm": "baseline_league",
+      "season": "2024",
+      "kind": "baseline",
+      "n": 112,
+      "ll_22.5": 0.6995275809168843
+    },
+    {
+      "arm": "baseline_league",
+      "season": "pooled",
+      "kind": "baseline",
+      "n": 336,
+      "ll_22.5": 0.6965147716968136
+    },
+    {
+      "arm": "baseline_naive",
+      "season": "2022",
+      "kind": "baseline",
+      "n": 112,
+      "ll_22.5": 0.6895171136024353
+    },
+    {
+      "arm": "baseline_naive",
+      "season": "2023",
+      "kind": "baseline",
+      "n": 112,
+      "ll_22.5": 0.6812743638283493
+    },
+    {
+      "arm": "baseline_naive",
+      "season": "2024",
+      "kind": "baseline",
+      "n": 112,
+      "ll_22.5": 0.6881635484708581
+    },
+    {
+      "arm": "baseline_naive",
+      "season": "pooled",
+      "kind": "baseline",
+      "n": 336,
+      "ll_22.5": 0.6863183419672142
+    }
+  ]
+}

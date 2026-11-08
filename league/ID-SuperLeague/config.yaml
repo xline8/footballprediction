@@ -1,0 +1,38 @@
+# Indonesia Super League — Phase A configuration (frozen before fitting)
+league: ID-SuperLeague
+country: Indonesia
+fotmob_id: 8983
+tier: 1
+warehouse: data_enrichment/fotmob_world/Indonesia/Super League
+data:
+  matches: league/ID-SuperLeague/data/id_matches.csv
+  team_matches: league/ID-SuperLeague/data/id_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  # Measured on regular-season, event-verified matches 2023/2024–2025/2026
+  # from event order vs the half-time marker (no period splits exist).
+  goals_1h_share: 0.434
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+  yellow_cards_1h_share: 0.385
+markets:
+  goals: G-ID
+  sot: S-ID
+  corners: C-ID
+  cards: K-ID
+  total_shots: T-ID
+notes:
+  - 18 teams, double round-robin, 306 regular matches per completed season; split-year seasons Aug–May. League was Liga 1, renamed Super League for 2025/2026 (same FotMob id 8983).
+  - Phase rule: the 8 matches with content.hasPlayoff == True in 2023/2024 are the championship series (knockout) and are excluded; the 2 index rows labelled season "2021/2023" are a two-legged AFC playoff between the champions of 2021/2022 and 2022/2023 and are excluded.
+  - STATS ERA (measured from payload content, not index flags): the stats feed carries only BallPossesion, total_shots, ShotsOnTarget and corners under Periods.All — 2021/2022 from 2022-01-13 (140/306), 2022/2023 complete (306/306), 2023/2024 until 2023-10-30 (153/314), 2024/2025 only 8 scattered matches, 2025/2026 and 2026/2027 zero. No period splits, no xG, no stats-feed cards, empty shotmap everywhere.
+  - DEFECT: in every 2023/2024 stats payload, total_shots is an exact copy of ShotsOnTarget (100% of rows equal, corr 1.0, verified in raw JSON). The 2023/2024 total-shots values are not total shots.
+  - SOT, corners and total shots have no target in the virgin season (2025/2026: 0 stats rows) and are NOT BUILDABLE.
+  - CARDS: the stats feed has no cards key at all, so the target is event-unified yellows (direct Yellow + YellowRed, RU-1Division precedent), scored only on events_complete matches (event feed contains Substitution and Half events). Completeness by season (regular): 267/306, 306/306, 144/306, 281/306, 306/306 (virgin), 72/80 (transitional).
+  - Referee identity is absent: infoBox.Referee exists in all 1,620 payloads but its text field is empty in all 1,620. X8 is dropped.
+  - Teams are keyed on FotMob team ids: names change under stable ids (id 185749 rebrands repeatedly; id 1665351 Malut United is listed as "Java United F.C." in 2026/2027).
+  - 2026/2027 is in progress (80 finished matches at warehouse snapshot) and is not read for verdicts.
+  - Calibration convention (engine agg): calibration_pp = mean predicted rate − actual rate, in percentage points; positive means the model over-predicts the over-rate.

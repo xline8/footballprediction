@@ -1,0 +1,259 @@
+{
+ "counts": {
+  "all_matches": 1492,
+  "included": 1461,
+  "excluded_placement": 31,
+  "included_by_season": {
+   "2021/2022": 270,
+   "2022/2023": 270,
+   "2023/2024": 270,
+   "2024/2025": 270,
+   "2025/2026": 270,
+   "2026/2027": 111
+  },
+  "team_ids": 19
+ },
+ "levels": {
+  "2021/2022": {
+   "n": 270,
+   "goals": 2.792593,
+   "sot": 8.561798,
+   "corners": 9.921348,
+   "total_shots": 16.374532,
+   "yellows": 4.12963
+  },
+  "2022/2023": {
+   "n": 270,
+   "goals": 2.959259,
+   "sot": 9.303704,
+   "corners": 10.907407,
+   "total_shots": 18.225926,
+   "yellows": 3.881481
+  },
+  "2023/2024": {
+   "n": 270,
+   "goals": 2.859259,
+   "sot": 8.768061,
+   "corners": 10.456274,
+   "total_shots": 17.722433,
+   "yellows": 4.614815
+  },
+  "2024/2025": {
+   "n": 270,
+   "goals": 2.666667,
+   "sot": 8.078067,
+   "corners": 9.996283,
+   "total_shots": 17.780669,
+   "yellows": 3.848148
+  },
+  "2025/2026": {
+   "n": 270,
+   "goals": 2.6,
+   "sot": 8.511111,
+   "corners": 9.959259,
+   "total_shots": 25.537037,
+   "yellows": 3.955556
+  },
+  "2026/2027": {
+   "n": 111,
+   "goals": 2.756757,
+   "sot": 8.891892,
+   "corners": 10.18018,
+   "total_shots": 28.09009,
+   "yellows": 3.747748
+  }
+ },
+ "reliabilities": {
+  "goals_for": {
+   "r": 0.648126,
+   "n_units": 64
+  },
+  "goals_against": {
+   "r": 0.365817,
+   "n_units": 64
+  },
+  "sot_for": {
+   "r": 0.689384,
+   "n_units": 64
+  },
+  "sot_against": {
+   "r": 0.621177,
+   "n_units": 64
+  },
+  "corners_for": {
+   "r": 0.526432,
+   "n_units": 64
+  },
+  "corners_against": {
+   "r": 0.613841,
+   "n_units": 64
+  },
+  "yellows_for": {
+   "r": 0.302355,
+   "n_units": 64
+  },
+  "yellows_against": {
+   "r": 0.508926,
+   "n_units": 64
+  },
+  "possession_for": {
+   "r": 0.809194,
+   "n_units": 64
+  },
+  "possession_against": {
+   "r": 0.809194,
+   "n_units": 64
+  },
+  "total_shots_for": {
+   "r": 0.680488,
+   "n_units": 64
+  },
+  "total_shots_against": {
+   "r": 0.710887,
+   "n_units": 64
+  }
+ },
+ "referee_reliability": {
+  "r": null,
+  "n_referees": 0,
+  "coverage": 0.0
+ },
+ "halves": {
+  "goals_1h_share": 0.450903,
+  "yellow_cards_1h_share": 0.314973,
+  "goals_total": 3045.0,
+  "yellow_total": 4448.0
+ },
+ "primary_lines": {
+  "sot": {
+   "rates": {
+    "7.5": 0.634238,
+    "8.5": 0.498597,
+    "9.5": 0.378859
+   },
+   "primary": 8.5
+  },
+  "corners": {
+   "rates": {
+    "8.5": 0.687558,
+    "9.5": 0.575304,
+    "10.5": 0.456501
+   },
+   "primary": 10.5
+  },
+  "cards": {
+   "rates": {
+    "3.5": 0.567593,
+    "4.5": 0.384259,
+    "5.5": 0.246296
+   },
+   "primary": 3.5
+  },
+  "goals": {
+   "primary": "OU2.5",
+   "over_rate": 0.548148
+  }
+ },
+ "movers_x2": {
+  "transitions": [
+   {
+    "boundary": "2021/2022->2022/2023",
+    "club": "FC Zbrojovka Brno",
+    "n": 35,
+    "gf_per_match": 1.171,
+    "ga_per_match": 1.829,
+    "league_gf_per_match": 1.48,
+    "dGF": -0.308,
+    "dGA": 0.349,
+    "fnl_prev_gf": 2.03,
+    "fnl_prev_ga": 0.97
+   },
+   {
+    "boundary": "2022/2023->2023/2024",
+    "club": "Karvina",
+    "n": 35,
+    "gf_per_match": 1.086,
+    "ga_per_match": 1.771,
+    "league_gf_per_match": 1.43,
+    "dGF": -0.344,
+    "dGA": 0.342,
+    "fnl_prev_gf": 1.93,
+    "fnl_prev_ga": 1.23
+   },
+   {
+    "boundary": "2023/2024->2024/2025",
+    "club": "Dukla Praha",
+    "n": 35,
+    "gf_per_match": 0.971,
+    "ga_per_match": 1.571,
+    "league_gf_per_match": 1.333,
+    "dGF": -0.362,
+    "dGA": 0.238,
+    "fnl_prev_gf": 1.83,
+    "fnl_prev_ga": 0.97
+   },
+   {
+    "boundary": "2024/2025->2025/2026",
+    "club": "FC Zlin",
+    "n": 35,
+    "gf_per_match": 1.229,
+    "ga_per_match": 1.6,
+    "league_gf_per_match": 1.3,
+    "dGF": -0.071,
+    "dGA": 0.3,
+    "fnl_prev_gf": 1.5,
+    "fnl_prev_ga": 0.47
+   }
+  ],
+  "cumulative_offsets_before_target_season": {
+   "2022/2023": null,
+   "2023/2024": {
+    "dGF": -0.308,
+    "dGA": 0.349
+   },
+   "2024/2025": {
+    "dGF": -0.326,
+    "dGA": 0.345
+   },
+   "2025/2026": {
+    "dGF": -0.338,
+    "dGA": 0.31
+   }
+  },
+  "note": "Computed by coordinator from cz_matches.csv (included phases) + FNL (id 253) index scores. One promoted club per boundary; 4/4 transitions negative dGF and positive dGA."
+ },
+ "halves_variance": {
+  "goals": {
+   "pooled_1h_share": 0.4509,
+   "per_match_share_var": 0.1066,
+   "binomial_noise_var": 0.1116,
+   "true_var": -0.005,
+   "team_split_half_r": -0.067,
+   "n_matches": 1011
+  },
+  "yellows": {
+   "pooled_1h_share": 0.315,
+   "per_match_share_var": 0.0738,
+   "binomial_noise_var": 0.0704,
+   "true_var": 0.0033,
+   "team_split_half_r": -0.214,
+   "n_matches": 1055
+  },
+  "note": "Dev era (2021/2022-2024/2025), included phases, event times (minute<=45 = 1H). True variance ~0 and team split-half r negative for both -> per-team half shares are NOISE; league frozen constants only."
+ },
+ "referee_coverage": {
+  "nonempty_text_by_season": {
+   "2021/2022": 0,
+   "2022/2023": 0,
+   "2023/2024": 0,
+   "2024/2025": 0,
+   "2025/2026": 241,
+   "2026/2027": 109
+  },
+  "note": "infoBox.Referee dict exists in all 1492 payloads but text is EMPTY throughout the dev era; names appear only from 2025/2026. X8 not estimable in dev -> DROPPED."
+ },
+ "goal_event_discrepancy": {
+  "matches": 1,
+  "detail": "2025/2026 championship group, 2026-05-09 Slavia Prague-Sparta Prague: score 0-3 but 5 Goal events; 2 disallowed home goals retained as Goal events. FT score (header) is authoritative; event goal counts are used ONLY for halves constants (dev era, unaffected) and this match's ht event counts overstate home 1H goals by 1 (presentation only)."
+ }
+}

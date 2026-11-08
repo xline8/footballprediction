@@ -1,0 +1,388 @@
+{
+  "seasons": [
+    "2021",
+    "2022",
+    "2023",
+    "2024",
+    "2025",
+    "2026"
+  ],
+  "n": 895,
+  "levels": {
+    "2021": {
+      "n": 162,
+      "goals": 2.8086,
+      "home_goals": 1.5062,
+      "away_goals": 1.3025,
+      "home_win_rate": 0.4259,
+      "over_2_5_rate": 0.5247,
+      "ht_goals_share": 0.44395604395604393,
+      "card_mean": 0.1235
+    },
+    "2022": {
+      "n": 164,
+      "goals": 3.1646,
+      "home_goals": 1.872,
+      "away_goals": 1.2927,
+      "home_win_rate": 0.4817,
+      "over_2_5_rate": 0.6341,
+      "ht_goals_share": 0.4624277456647399,
+      "card_mean": 0.0976
+    },
+    "2023": {
+      "n": 164,
+      "goals": 2.9146,
+      "home_goals": 1.6463,
+      "away_goals": 1.2683,
+      "home_win_rate": 0.4634,
+      "over_2_5_rate": 0.5366,
+      "ht_goals_share": 0.4393305439330544,
+      "card_mean": 0.0915
+    },
+    "2024": {
+      "n": 135,
+      "goals": 3.1111,
+      "home_goals": 1.6593,
+      "away_goals": 1.4519,
+      "home_win_rate": 0.4148,
+      "over_2_5_rate": 0.5926,
+      "ht_goals_share": 0.44285714285714284,
+      "card_mean": 0.1259
+    },
+    "2025": {
+      "n": 135,
+      "goals": 3.2815,
+      "home_goals": 1.7407,
+      "away_goals": 1.5407,
+      "home_win_rate": 0.4296,
+      "over_2_5_rate": 0.637,
+      "ht_goals_share": 0.4401805869074492,
+      "card_mean": 0.0074
+    },
+    "2026": {
+      "n": 135,
+      "goals": 2.6667,
+      "home_goals": 1.4074,
+      "away_goals": 1.2593,
+      "home_win_rate": 0.4296,
+      "over_2_5_rate": 0.4889,
+      "ht_goals_share": 0.4361111111111111,
+      "card_mean": 3.5778
+    }
+  },
+  "inventory": {
+    "2021": {
+      "matches": 162,
+      "date_min": "2021-05-05",
+      "date_max": "2021-10-23",
+      "teams": 12,
+      "stats_nonnull": 0.0,
+      "stats_false_positive_index": 0.0,
+      "period_splits": 0.0,
+      "shotmap_nonempty": 0.0,
+      "events": 153.0,
+      "referee_named": 0,
+      "card_event_matches": 27,
+      "card_events": 32
+    },
+    "2022": {
+      "matches": 164,
+      "date_min": "2022-04-18",
+      "date_max": "2022-10-17",
+      "teams": 12,
+      "stats_nonnull": 0.0,
+      "stats_false_positive_index": 0.0,
+      "period_splits": 0.0,
+      "shotmap_nonempty": 0.0,
+      "events": 161.0,
+      "referee_named": 0,
+      "card_event_matches": 23,
+      "card_events": 24
+    },
+    "2023": {
+      "matches": 164,
+      "date_min": "2023-04-14",
+      "date_max": "2023-10-21",
+      "teams": 12,
+      "stats_nonnull": 0.0,
+      "stats_false_positive_index": 0.0,
+      "period_splits": 0.0,
+      "shotmap_nonempty": 0.0,
+      "events": 154.0,
+      "referee_named": 0,
+      "card_event_matches": 19,
+      "card_events": 21
+    },
+    "2024": {
+      "matches": 135,
+      "date_min": "2024-04-13",
+      "date_max": "2024-10-19",
+      "teams": 10,
+      "stats_nonnull": 0.0,
+      "stats_false_positive_index": 0.0,
+      "period_splits": 0.0,
+      "shotmap_nonempty": 0.0,
+      "events": 129.0,
+      "referee_named": 0,
+      "card_event_matches": 26,
+      "card_events": 28
+    },
+    "2025": {
+      "matches": 135,
+      "date_min": "2025-04-21",
+      "date_max": "2025-10-18",
+      "teams": 10,
+      "stats_nonnull": 0.0,
+      "stats_false_positive_index": 0.0,
+      "period_splits": 0.0,
+      "shotmap_nonempty": 0.0,
+      "events": 131.0,
+      "referee_named": 0,
+      "card_event_matches": 22,
+      "card_events": 26
+    },
+    "2026": {
+      "matches": 135,
+      "date_min": "2026-04-03",
+      "date_max": "2026-10-17",
+      "teams": 10,
+      "stats_nonnull": 0.0,
+      "stats_false_positive_index": 135.0,
+      "period_splits": 0.0,
+      "shotmap_nonempty": 0.0,
+      "events": 135.0,
+      "referee_named": 32,
+      "card_event_matches": 134,
+      "card_events": 494
+    }
+  },
+  "traits_odd_even": {
+    "goals_for": {
+      "n_teams": 22,
+      "r": 0.7529
+    },
+    "goals_against": {
+      "n_teams": 22,
+      "r": 0.8207
+    },
+    "yellow_for": {
+      "n_teams": 22,
+      "r": -0.2309
+    },
+    "yellow_against": {
+      "n_teams": 22,
+      "r": -0.4344
+    }
+  },
+  "halves_goals_pooled": {
+    "share": 0.44622,
+    "n_matches": 718,
+    "n_goals": 2315,
+    "observed_var": 0.099739,
+    "binomial_noise_var": 0.076641,
+    "excess_var": 0.023098
+  },
+  "halves_goals_by_season": {
+    "2021": {
+      "share": 0.443956,
+      "n_matches": 152,
+      "n_goals": 455,
+      "observed_var": 0.103308,
+      "binomial_noise_var": 0.082467,
+      "excess_var": 0.020841
+    },
+    "2022": {
+      "share": 0.462428,
+      "n_matches": 159,
+      "n_goals": 519,
+      "observed_var": 0.095951,
+      "binomial_noise_var": 0.076157,
+      "excess_var": 0.019794
+    },
+    "2023": {
+      "share": 0.439331,
+      "n_matches": 152,
+      "n_goals": 478,
+      "observed_var": 0.105433,
+      "binomial_noise_var": 0.078327,
+      "excess_var": 0.027105
+    },
+    "2024": {
+      "share": 0.442857,
+      "n_matches": 125,
+      "n_goals": 420,
+      "observed_var": 0.09939,
+      "binomial_noise_var": 0.073433,
+      "excess_var": 0.025957
+    },
+    "2025": {
+      "share": 0.440181,
+      "n_matches": 130,
+      "n_goals": 443,
+      "observed_var": 0.094465,
+      "binomial_noise_var": 0.072313,
+      "excess_var": 0.022152
+    }
+  },
+  "halves_splits_2026": null,
+  "cards_coverage": {
+    "2021": {
+      "matches": 162,
+      "card_event_matches": 27,
+      "card_events": 32,
+      "coverage": 0.166667
+    },
+    "2022": {
+      "matches": 164,
+      "card_event_matches": 23,
+      "card_events": 24,
+      "coverage": 0.140244
+    },
+    "2023": {
+      "matches": 164,
+      "card_event_matches": 19,
+      "card_events": 21,
+      "coverage": 0.115854
+    },
+    "2024": {
+      "matches": 135,
+      "card_event_matches": 26,
+      "card_events": 28,
+      "coverage": 0.192593
+    },
+    "2025": {
+      "matches": 135,
+      "card_event_matches": 22,
+      "card_events": 26,
+      "coverage": 0.162963
+    },
+    "2026": {
+      "matches": 135,
+      "card_event_matches": 134,
+      "card_events": 494,
+      "coverage": 0.992593
+    }
+  },
+  "team_ids": 23,
+  "team_id_name_changes": [],
+  "x2_entrants": [
+    {
+      "season": "2022",
+      "team_id": "1906",
+      "team": "J\u00e4PS",
+      "from_veikkausliiga": false
+    },
+    {
+      "season": "2022",
+      "team_id": "2370",
+      "team": "PEPO Lappeenranta",
+      "from_veikkausliiga": false
+    },
+    {
+      "season": "2022",
+      "team_id": "630375",
+      "team": "Pargas IF",
+      "from_veikkausliiga": false
+    },
+    {
+      "season": "2022",
+      "team_id": "6701",
+      "team": "FC KTP",
+      "from_veikkausliiga": true
+    },
+    {
+      "season": "2022",
+      "team_id": "741816",
+      "team": "SJK Akatemia",
+      "from_veikkausliiga": false
+    },
+    {
+      "season": "2023",
+      "team_id": "162150",
+      "team": "SalPa",
+      "from_veikkausliiga": false
+    },
+    {
+      "season": "2023",
+      "team_id": "2159",
+      "team": "K\u00e4Pa",
+      "from_veikkausliiga": false
+    },
+    {
+      "season": "2023",
+      "team_id": "4673",
+      "team": "JJK Jyv\u00e4skyl\u00e4",
+      "from_veikkausliiga": false
+    },
+    {
+      "season": "2023",
+      "team_id": "88731",
+      "team": "HIFK",
+      "from_veikkausliiga": true
+    },
+    {
+      "season": "2024",
+      "team_id": "2362",
+      "team": "JIPPO",
+      "from_veikkausliiga": false
+    },
+    {
+      "season": "2024",
+      "team_id": "260273",
+      "team": "PK-35",
+      "from_veikkausliiga": false
+    },
+    {
+      "season": "2024",
+      "team_id": "6701",
+      "team": "FC KTP",
+      "from_veikkausliiga": true
+    },
+    {
+      "season": "2025",
+      "team_id": "162142",
+      "team": "EIF",
+      "from_veikkausliiga": true
+    },
+    {
+      "season": "2025",
+      "team_id": "2160",
+      "team": "Klubi 04",
+      "from_veikkausliiga": false
+    },
+    {
+      "season": "2025",
+      "team_id": "8424",
+      "team": "FC Lahti",
+      "from_veikkausliiga": true
+    },
+    {
+      "season": "2026",
+      "team_id": "6003",
+      "team": "MP",
+      "from_veikkausliiga": false
+    },
+    {
+      "season": "2026",
+      "team_id": "6701",
+      "team": "FC KTP",
+      "from_veikkausliiga": true
+    },
+    {
+      "season": "2026",
+      "team_id": "7870",
+      "team": "Haka",
+      "from_veikkausliiga": true
+    }
+  ],
+  "x2_entrant_counts": {
+    "all": 18,
+    "from_veikkausliiga": 7,
+    "from_tier3_or_unknown": 11
+  },
+  "x2_entrant_gf_ga_diff_vs_league_team_mean": {
+    "n": 18,
+    "gf_diff": 0.0825,
+    "ga_diff": -0.0265
+  }
+}

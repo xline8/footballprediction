@@ -1,0 +1,62 @@
+{
+  "protocol": {
+    "virgin_season": "2026 Clausura",
+    "transitional": true,
+    "scored_n": 90,
+    "unscored_missing_target": 1
+  },
+  "metrics": {
+    "gate_zero": {
+      "n": 90,
+      "ll": 0.7209471750161965,
+      "lines": {
+        "7.5": 0.6892229728022373,
+        "8.5": 0.7209471750161965,
+        "9.5": 0.7225868208698822
+      },
+      "mean_p": 0.4832670626507831,
+      "actual_rate": 0.5777777777777777,
+      "block": "2026 Clausura",
+      "kind": "model",
+      "calibration_actual_minus_predicted_pp": 9.451071512699466,
+      "calibration_se_pp": 5.349776083779694,
+      "calibration_status": "FAIL",
+      "leg_i": true,
+      "leg_ii": false,
+      "params": {
+        "gamma": 0.0,
+        "r": 1.3580297871457279,
+        "beta": [
+          -0.0075,
+          0.0
+        ],
+        "fit_n": 171
+      }
+    },
+    "league_base_rate": {
+      "n": 90,
+      "ll": 0.7697989617316199,
+      "lines": {
+        "7.5": 0.7563019680300483,
+        "8.5": 0.7697989617316199,
+        "9.5": 0.7376496784236999
+      },
+      "mean_p": 0.36970805654880373,
+      "actual_rate": 0.5777777777777777
+    },
+    "naive_trailing_10": {
+      "n": 90,
+      "ll": 0.7738692718315786,
+      "lines": {
+        "7.5": 0.7631338434622791,
+        "8.5": 0.7738692718315786,
+        "9.5": 0.7385830269513518
+      },
+      "mean_p": 0.3557653146383256,
+      "actual_rate": 0.5777777777777777
+    }
+  },
+  "verdict": "FAIL",
+  "shipped_arm": null,
+  "virgin_read": true
+}

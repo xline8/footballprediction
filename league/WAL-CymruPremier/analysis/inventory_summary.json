@@ -1,0 +1,121 @@
+{
+  "by_season": {
+    "2021/2022": {
+      "eligible": 192,
+      "events": 183,
+      "ht_derivable": 195,
+      "lineup": 0,
+      "referee": 0,
+      "rows": 195,
+      "shotmap": 0,
+      "stats_all": 0,
+      "stats_half": 0
+    },
+    "2022/2023": {
+      "eligible": 192,
+      "events": 185,
+      "ht_derivable": 195,
+      "lineup": 0,
+      "referee": 0,
+      "rows": 195,
+      "shotmap": 0,
+      "stats_all": 0,
+      "stats_half": 0
+    },
+    "2023/2024": {
+      "eligible": 192,
+      "events": 186,
+      "ht_derivable": 195,
+      "lineup": 0,
+      "referee": 0,
+      "rows": 195,
+      "shotmap": 0,
+      "stats_all": 0,
+      "stats_half": 0
+    },
+    "2024/2025": {
+      "eligible": 192,
+      "events": 184,
+      "ht_derivable": 196,
+      "lineup": 0,
+      "referee": 0,
+      "rows": 196,
+      "shotmap": 0,
+      "stats_all": 0,
+      "stats_half": 0
+    },
+    "2025/2026": {
+      "eligible": 192,
+      "events": 179,
+      "ht_derivable": 195,
+      "lineup": 0,
+      "referee": 0,
+      "rows": 195,
+      "shotmap": 0,
+      "stats_all": 0,
+      "stats_half": 0
+    },
+    "2026/2027": {
+      "eligible": 127,
+      "events": 125,
+      "ht_derivable": 127,
+      "lineup": 0,
+      "referee": 0,
+      "rows": 127,
+      "shotmap": 0,
+      "stats_all": 0,
+      "stats_half": 0
+    }
+  },
+  "card_values": {
+    "Red": 154,
+    "YellowRed": 80
+  },
+  "event_types": {
+    "Card": 234,
+    "Goal": 3317,
+    "Half": 2087,
+    "PenaltyShootout": 3
+  },
+  "rename_map": {
+    "321094": [
+      "Pontypridd Town",
+      "Pontypridd United"
+    ],
+    "560953": [
+      "Cardiff Met FC",
+      "Cardiff Met University"
+    ],
+    "7852": [
+      "TNS",
+      "The New Saints"
+    ]
+  },
+  "team_counts": {
+    "by_season": {
+      "2021/2022": 12,
+      "2022/2023": 12,
+      "2023/2024": 12,
+      "2024/2025": 12,
+      "2025/2026": 12,
+      "2026/2027": 16
+    },
+    "distinct_ids": 22
+  },
+  "totals": {
+    "awarded": 0,
+    "cards": 234,
+    "eligible": 1087,
+    "eventless": 61,
+    "files_on_disk": 1103,
+    "finished": 1103,
+    "goal_event_score_agree": 1103,
+    "identity_agree": 1103,
+    "index_rows": 1103,
+    "parent_league_agree": 1103,
+    "playoff": 16,
+    "red_events": 234,
+    "unique_match_ids": 1103,
+    "zero_zero_eventless": 61
+  }
+}

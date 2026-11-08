@@ -1,0 +1,143 @@
+{
+  "format_history": {
+    "2021": "two 8-team groups plus championship/relegation playoffs; 176",
+    "2022": "18-team double round-robin; 306",
+    "2023+": "16-team seasons; 240"
+  },
+  "fotmob_league_id": 120,
+  "index_rows": 1442,
+  "league": "China Super League",
+  "phase_2021": {
+    "championship": 32,
+    "group_a": 56,
+    "group_b": 56,
+    "relegation": 32
+  },
+  "quirks": {
+    "2022_no_stats": 8,
+    "expected_goals": "absent",
+    "shotmap": "absent",
+    "stats_conflicts_total": {
+      "matches_with_conflict": 0,
+      "total": 0
+    }
+  },
+  "seasons": {
+    "2021": {
+      "coverage": {
+        "events": 100.0,
+        "referee": 99.43,
+        "score": 100.0,
+        "shotmap": 0.0,
+        "splits": 0.0,
+        "stats": 100.0,
+        "xg": 0.0
+      },
+      "date_range": [
+        "2021-04-20",
+        "2022-01-04"
+      ],
+      "matches": 176,
+      "teams_by_id": 16
+    },
+    "2022": {
+      "coverage": {
+        "events": 97.39,
+        "referee": 97.39,
+        "score": 100.0,
+        "shotmap": 0.0,
+        "splits": 0.33,
+        "stats": 97.39,
+        "xg": 0.0
+      },
+      "date_range": [
+        "2022-06-03",
+        "2022-12-31"
+      ],
+      "matches": 306,
+      "teams_by_id": 18
+    },
+    "2023": {
+      "coverage": {
+        "events": 100.0,
+        "referee": 97.08,
+        "score": 100.0,
+        "shotmap": 0.0,
+        "splits": 100.0,
+        "stats": 100.0,
+        "xg": 0.0
+      },
+      "date_range": [
+        "2023-04-15",
+        "2023-11-04"
+      ],
+      "matches": 240,
+      "teams_by_id": 16
+    },
+    "2024": {
+      "coverage": {
+        "events": 100.0,
+        "referee": 92.08,
+        "score": 100.0,
+        "shotmap": 0.0,
+        "splits": 100.0,
+        "stats": 100.0,
+        "xg": 0.0
+      },
+      "date_range": [
+        "2024-03-01",
+        "2024-11-02"
+      ],
+      "matches": 240,
+      "teams_by_id": 16
+    },
+    "2025": {
+      "coverage": {
+        "events": 100.0,
+        "referee": 64.58,
+        "score": 100.0,
+        "shotmap": 0.0,
+        "splits": 100.0,
+        "stats": 100.0,
+        "xg": 0.0
+      },
+      "date_range": [
+        "2025-02-22",
+        "2025-11-22"
+      ],
+      "matches": 240,
+      "teams_by_id": 16
+    },
+    "2026": {
+      "coverage": {
+        "events": 100.0,
+        "referee": 48.75,
+        "score": 100.0,
+        "shotmap": 0.0,
+        "splits": 100.0,
+        "stats": 100.0,
+        "xg": 0.0
+      },
+      "date_range": [
+        "2026-03-06",
+        "2026-11-08"
+      ],
+      "matches": 240,
+      "teams_by_id": 16
+    }
+  },
+  "team_rename_examples": {
+    "198612": [
+      "Wuhan FC",
+      "Wuhan Yangtze River"
+    ],
+    "309014": [
+      "Cangzhou Mighty Lions F.C",
+      "Cangzhou Mighty Lions F.C."
+    ],
+    "51442": [
+      "Henan FC",
+      "Henan Songshan Longmen"
+    ]
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "protocol": {
+    "league": "SCO-Championship",
+    "virgin_season": "2025/2026",
+    "n": 177,
+    "scored_arms": [
+      "GZ",
+      "RS"
+    ],
+    "sign_convention": "predicted_minus_actual"
+  },
+  "n": 177,
+  "arms": {
+    "GZ": {
+      "n": 177,
+      "ll_6.5": 0.7059754356020389,
+      "mean_p_6.5": 0.583579748759854,
+      "actual_over_6.5": 0.5480225988700564,
+      "calibration_diff_6.5": 0.03555714988979743,
+      "calibration_se_6.5": 0.0380072709097691,
+      "ll_7.5": 0.6936010818081288,
+      "mean_p_7.5": 0.4445243319368838,
+      "actual_over_7.5": 0.4180790960451977,
+      "calibration_diff_7.5": 0.02644523589168561,
+      "calibration_se_7.5": 0.037669596631802804,
+      "ll_8.5": 0.6477757746796747,
+      "mean_p_8.5": 0.3180398669622547,
+      "actual_over_8.5": 0.3333333333333333,
+      "calibration_diff_8.5": -0.015293466371078843,
+      "calibration_se_8.5": 0.03593205708252667,
+      "calibration_diff": 0.02644523589168561,
+      "calibration_se": 0.037669596631802804,
+      "legs": {
+        "ll_le_reference": true,
+        "ll_le_best_baseline": false,
+        "dev_sign_wins": 3,
+        "dev_sign_check": true,
+        "calibration": "PROVISIONAL PASS"
+      }
+    },
+    "RS": {
+      "n": 177,
+      "ll_6.5": 0.7063842206711362,
+      "mean_p_6.5": 0.5829300727511921,
+      "actual_over_6.5": 0.5480225988700564,
+      "calibration_diff_6.5": 0.034907473881135825,
+      "calibration_se_6.5": 0.038028241331615344,
+      "ll_7.5": 0.6938154129402456,
+      "mean_p_7.5": 0.44378069299666545,
+      "actual_over_7.5": 0.4180790960451977,
+      "calibration_diff_7.5": 0.025701596951468196,
+      "calibration_se_7.5": 0.03768072496298224,
+      "ll_8.5": 0.6480097096700299,
+      "mean_p_8.5": 0.3172911633486339,
+      "actual_over_8.5": 0.3333333333333333,
+      "calibration_diff_8.5": -0.016042169984699376,
+      "calibration_se_8.5": 0.035936102505887434,
+      "calibration_diff": 0.025701596951468196,
+      "calibration_se": 0.03768072496298224,
+      "legs": {
+        "ll_le_reference": false,
+        "ll_le_best_baseline": false,
+        "dev_sign_wins": 2,
+        "dev_sign_check": true,
+        "calibration": "PROVISIONAL PASS"
+      }
+    }
+  },
+  "read_arms": [
+    "GZ",
+    "RS"
+  ],
+  "baselines": {
+    "league_base_rate": {
+      "n": 177,
+      "ll_6.5": 0.6929903081377298,
+      "mean_p_6.5": 0.500823723228995,
+      "actual_over_6.5": 0.5480225988700564,
+      "calibration_diff_6.5": 0.047198875641061455,
+      "calibration_se_6.5": 0.0375146812168981,
+      "ll_7.5": 0.69341845845201,
+      "mean_p_7.5": 0.500823723228995,
+      "actual_over_7.5": 0.4180790960451977,
+      "calibration_diff_7.5": -0.08274462718379731,
+      "calibration_se_7.5": 0.037179613601899135,
+      "ll_8.5": 0.693697686917845,
+      "mean_p_8.5": 0.500823723228995,
+      "actual_over_8.5": 0.3333333333333333,
+      "calibration_diff_8.5": -0.1674903898956617,
+      "calibration_se_8.5": 0.035533452725935076,
+      "calibration_diff": -0.08274462718379731,
+      "calibration_se": 0.037179613601899135
+    },
+    "naive": {
+      "n": 177,
+      "ll_6.5": 0.7222056043050843,
+      "mean_p_6.5": 0.5663246343212391,
+      "actual_over_6.5": 0.5480225988700564,
+      "calibration_diff_6.5": -0.01830203545118232,
+      "calibration_se_6.5": 0.03862542507634267,
+      "ll_7.5": 0.7101694431654842,
+      "mean_p_7.5": 0.42815769792512015,
+      "actual_over_7.5": 0.4180790960451977,
+      "calibration_diff_7.5": -0.010078601879922579,
+      "calibration_se_7.5": 0.038333999239630594,
+      "ll_8.5": 0.6680611463064439,
+      "mean_p_8.5": 0.3042860110767586,
+      "actual_over_8.5": 0.3333333333333333,
+      "calibration_diff_8.5": 0.029047322256574727,
+      "calibration_se_8.5": 0.03656831340079746,
+      "calibration_diff": -0.010078601879922579,
+      "calibration_se": 0.038333999239630594
+    }
+  },
+  "shipped_arm": null
+}

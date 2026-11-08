@@ -1,0 +1,73 @@
+{
+  "gate_zero": {
+    "n": 240,
+    "season": "2026 - Clausura",
+    "ll_8.5": 0.6815308446806015,
+    "mean_p_8.5": 0.5479320381424929,
+    "actual_over_8.5": 0.5791666666666667,
+    "ll_9.5": 0.6944127286056233,
+    "mean_p_9.5": 0.4244384324099102,
+    "actual_over_9.5": 0.45416666666666666,
+    "both_teams_active_share": 1.0,
+    "active_with_nonzero_beta_share": 1.0,
+    "arm": "gate_zero",
+    "calibration_diff": -0.02972823425675647,
+    "calibration_se": 0.03230892549274126,
+    "params": {
+      "gamma": 0.15,
+      "r": 1.1222070553058048,
+      "beta": [
+        0.0,
+        0.025
+      ],
+      "fit_n": 2168
+    }
+  },
+  "x7": {
+    "n": 240,
+    "season": "2026 - Clausura",
+    "ll_8.5": 0.6768906132161931,
+    "mean_p_8.5": 0.5494307553894726,
+    "actual_over_8.5": 0.5791666666666667,
+    "ll_9.5": 0.6881314186720664,
+    "mean_p_9.5": 0.4254216487440919,
+    "actual_over_9.5": 0.45416666666666666,
+    "both_teams_active_share": 1.0,
+    "active_with_nonzero_beta_share": 0.0,
+    "arm": "x7",
+    "calibration_diff": -0.028745017922574778,
+    "calibration_se": 0.03212511534913717,
+    "params": {
+      "gamma": 0.15,
+      "r": 1.1222070553058048,
+      "beta": [
+        0.0
+      ],
+      "fit_n": 2168
+    }
+  },
+  "league_base_rate": {
+    "n": 240,
+    "season": "2026 - Clausura",
+    "ll_8.5": 0.7608363578981435,
+    "mean_p_8.5": 0.3808651536494794,
+    "actual_over_8.5": 0.5791666666666667,
+    "ll_9.5": 0.7155218866406451,
+    "mean_p_9.5": 0.34246756562797437,
+    "actual_over_9.5": 0.45416666666666666,
+    "both_teams_active_share": 0.0,
+    "active_with_nonzero_beta_share": 0.0
+  },
+  "naive_trailing_10": {
+    "n": 240,
+    "season": "2026 - Clausura",
+    "ll_8.5": 0.7437252406435939,
+    "mean_p_8.5": 0.3873672367423397,
+    "actual_over_8.5": 0.5791666666666667,
+    "ll_9.5": 0.7041864233212147,
+    "mean_p_9.5": 0.34880869541917076,
+    "actual_over_9.5": 0.45416666666666666,
+    "both_teams_active_share": 0.0,
+    "active_with_nonzero_beta_share": 0.0
+  }
+}

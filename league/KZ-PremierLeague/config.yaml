@@ -1,0 +1,30 @@
+# Kazakhstan Premier League — league config
+league: KZ-PremierLeague
+country: Kazakhstan
+fotmob_id: 225
+tier: 1
+warehouse: data_enrichment/fotmob_world/Kazakhstan/Premier League
+data:
+  matches: league/KZ-PremierLeague/data/kz_premier_matches.csv
+  team_matches: league/KZ-PremierLeague/data/kz_premier_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period: ["2021", "2022", "2023", "2024", "2025"]   # walk-forward, season-blocked; 2021 is the seed
+virgin_primary: "2026"          # complete season, n=240, read ONCE per candidate
+virgin_confirmatory: null
+halves_constants:               # frozen league constants (EDA F3) — the ONLY halves mechanism
+  goals_1h_share: 0.4539
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+  yellow_cards_1h_share: null
+markets:
+  goals: G-KZ
+  sot: "NOT BUILDABLE — no SOT target"
+  corners: "NOT BUILDABLE — no corners target"
+  cards: "NOT BUILDABLE — zero plain Yellow; rare Red/YellowRed only"
+  total_shots: "NOT BUILDABLE — no total-shots target"
+notes:
+  - "Scores-only league: no stats, shotmap, splits, lineups, playerStats, or named referees in any season."
+  - "Calendar-year seasons; single round-robin table, no split group or playoff phase (hasPlayoff False 2025/2026)."
+  - "2024 has 13 teams (24 matches each); 2026 has 16 teams (30 matches each). All schedules balanced."
+  - "Goals FT plus 1H/2H presentation uses the frozen event-time constant only."

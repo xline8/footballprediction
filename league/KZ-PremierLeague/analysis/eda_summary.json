@@ -1,0 +1,475 @@
+{
+ "seasons": {
+  "2021": {
+   "payloads": 182,
+   "finished": 182,
+   "unfinished": 0,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 170,
+   "referee": 0,
+   "lineup": 0,
+   "teams_finished": 14,
+   "ht_crosscheck_agree": 170,
+   "ht_crosscheck_checked": 170,
+   "goals_pm_finished": 2.5714285714285716,
+   "home_win_rate": 0.3956043956043956,
+   "draw_rate": 0.2692307692307692,
+   "away_win_rate": 0.33516483516483514,
+   "ou25_over_rate": 0.45054945054945056
+  },
+  "2022": {
+   "payloads": 182,
+   "finished": 182,
+   "unfinished": 0,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 172,
+   "referee": 0,
+   "lineup": 0,
+   "teams_finished": 14,
+   "ht_crosscheck_agree": 166,
+   "ht_crosscheck_checked": 166,
+   "goals_pm_finished": 2.6263736263736264,
+   "home_win_rate": 0.4945054945054945,
+   "draw_rate": 0.24175824175824176,
+   "away_win_rate": 0.26373626373626374,
+   "ou25_over_rate": 0.489010989010989
+  },
+  "2023": {
+   "payloads": 182,
+   "finished": 182,
+   "unfinished": 0,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 172,
+   "referee": 0,
+   "lineup": 0,
+   "teams_finished": 14,
+   "ht_crosscheck_agree": 170,
+   "ht_crosscheck_checked": 170,
+   "goals_pm_finished": 2.4450549450549453,
+   "home_win_rate": 0.43956043956043955,
+   "draw_rate": 0.25274725274725274,
+   "away_win_rate": 0.3076923076923077,
+   "ou25_over_rate": 0.47802197802197804
+  },
+  "2024": {
+   "payloads": 156,
+   "finished": 156,
+   "unfinished": 0,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 145,
+   "referee": 0,
+   "lineup": 0,
+   "teams_finished": 13,
+   "ht_crosscheck_agree": 144,
+   "ht_crosscheck_checked": 144,
+   "goals_pm_finished": 2.3653846153846154,
+   "home_win_rate": 0.4551282051282051,
+   "draw_rate": 0.25,
+   "away_win_rate": 0.2948717948717949,
+   "ou25_over_rate": 0.4230769230769231
+  },
+  "2025": {
+   "payloads": 182,
+   "finished": 182,
+   "unfinished": 0,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 169,
+   "referee": 0,
+   "lineup": 0,
+   "teams_finished": 14,
+   "ht_crosscheck_agree": 167,
+   "ht_crosscheck_checked": 167,
+   "goals_pm_finished": 2.7252747252747254,
+   "home_win_rate": 0.4230769230769231,
+   "draw_rate": 0.2802197802197802,
+   "away_win_rate": 0.2967032967032967,
+   "ou25_over_rate": 0.5
+  },
+  "2026": {
+   "payloads": 240,
+   "finished": 240,
+   "unfinished": 0,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 230,
+   "referee": 0,
+   "lineup": 0,
+   "teams_finished": 16,
+   "ht_crosscheck_agree": 223,
+   "ht_crosscheck_checked": 223,
+   "goals_pm_finished": 2.566666666666667,
+   "home_win_rate": 0.4583333333333333,
+   "draw_rate": 0.275,
+   "away_win_rate": 0.26666666666666666,
+   "ou25_over_rate": 0.5041666666666667
+  }
+ },
+ "pooled_eval": {
+  "n": 702,
+  "home_win_rate": 0.452991452991453,
+  "draw_rate": 0.2564102564102564,
+  "away_win_rate": 0.2905982905982906,
+  "ou25_over_rate": 0.47435897435897434,
+  "goals_pm": 2.547008547008547
+ },
+ "trait_reliability_dev": {
+  "goals_for": {
+   "split_half_r": 0.8017116811159919,
+   "n_teams": 20,
+   "note": null
+  },
+  "goals_against": {
+   "split_half_r": 0.29643499835089154,
+   "n_teams": 20,
+   "note": null
+  },
+  "sot": {
+   "split_half_r": null,
+   "n_teams": 0,
+   "note": "target absent; n=0"
+  },
+  "corners": {
+   "split_half_r": null,
+   "n_teams": 0,
+   "note": "target absent; n=0"
+  },
+  "shots": {
+   "split_half_r": null,
+   "n_teams": 0,
+   "note": "target absent; n=0"
+  },
+  "yellows": {
+   "split_half_r": null,
+   "n_teams": 0,
+   "note": "target absent; n=0"
+  }
+ },
+ "season_to_season_dev": {
+  "goals_for": [
+   {
+    "seasons": "2021-2022",
+    "r": 0.7361506508628736,
+    "n_teams": 12
+   },
+   {
+    "seasons": "2022-2023",
+    "r": 0.3164441189234352,
+    "n_teams": 11
+   },
+   {
+    "seasons": "2023-2024",
+    "r": 0.6130822087088724,
+    "n_teams": 10
+   },
+   {
+    "seasons": "2024-2025",
+    "r": 0.7036407810873364,
+    "n_teams": 12
+   }
+  ],
+  "goals_against": [
+   {
+    "seasons": "2021-2022",
+    "r": 0.250977366845162,
+    "n_teams": 12
+   },
+   {
+    "seasons": "2022-2023",
+    "r": 0.5026254555095787,
+    "n_teams": 11
+   },
+   {
+    "seasons": "2023-2024",
+    "r": 0.5704089554864751,
+    "n_teams": 10
+   },
+   {
+    "seasons": "2024-2025",
+    "r": 0.5986150112742694,
+    "n_teams": 12
+   }
+  ]
+ },
+ "halves_dev": {
+  "rule": "event minute <=45 is first half; added-time field unavailable",
+  "share_1h": 0.4538564422648239,
+  "n_goals": 2243,
+  "n_matches": 824,
+  "by_season": {
+   "2021": {
+    "share_1h": 0.4444444444444444,
+    "n_goals": 468
+   },
+   "2022": {
+    "share_1h": 0.4631578947368421,
+    "n_goals": 475
+   },
+   "2023": {
+    "share_1h": 0.46153846153846156,
+    "n_goals": 442
+   },
+   "2024": {
+    "share_1h": 0.43561643835616437,
+    "n_goals": 365
+   },
+   "2025": {
+    "share_1h": 0.460446247464503,
+    "n_goals": 493
+   }
+  },
+  "per_match_share_variance": 0.12018060452256625,
+  "team_share_split_half_r": 0.08598066879798914,
+  "team_share_n": 20,
+  "team_share_between_variance": 0.004416707814157665,
+  "team_share_within_variance": 0.17337510388488275,
+  "team_share_split_half_within_season_r": -0.23908376104453902,
+  "team_share_within_season_n": 69,
+  "team_share_split_half_season_demeaned_r": 0.07697000688054684,
+  "team_share_season_demeaned_n": 20
+ },
+ "entrants_dev": {
+  "transitions": [
+   {
+    "season": "2022",
+    "team_id": 436087,
+    "team": "Maktaaral FC",
+    "gf_diff": -0.2362637362637363,
+    "ga_diff": 0.14835164835164827
+   },
+   {
+    "season": "2022",
+    "team_id": 1337967,
+    "team": "Aksu",
+    "gf_diff": -0.08241758241758235,
+    "ga_diff": 0.10989010989010994
+   },
+   {
+    "season": "2023",
+    "team_id": 2128,
+    "team": "Okzhetpes Kokshetau",
+    "gf_diff": -0.22252747252747263,
+    "ga_diff": 0.2005494505494505
+   },
+   {
+    "season": "2024",
+    "team_id": 200281,
+    "team": "FC Yelimay",
+    "gf_diff": 0.27564102564102555,
+    "ga_diff": 0.15064102564102555
+   },
+   {
+    "season": "2024",
+    "team_id": 1614087,
+    "team": "Zhenis",
+    "gf_diff": -0.4326923076923077,
+    "ga_diff": 0.15064102564102555
+   },
+   {
+    "season": "2025",
+    "team_id": 1622701,
+    "team": "Ulytau",
+    "gf_diff": -0.5934065934065934,
+    "ga_diff": 0.2142857142857142
+   }
+  ],
+  "n": 6,
+  "mean_gf_diff": -0.21527777777777782,
+  "mean_ga_diff": 0.16239316239316234,
+  "gf_negative": 5,
+  "gf_positive": 1,
+  "ga_negative": 0,
+  "ga_positive": 6,
+  "entrants_by_season": {
+   "2021": [],
+   "2022": [
+    436087,
+    1337967
+   ],
+   "2023": [
+    2128
+   ],
+   "2024": [
+    200281,
+    1614087
+   ],
+   "2025": [
+    1622701
+   ],
+   "2026": [
+    2539,
+    732295
+   ]
+  },
+  "baseline": "same-season finished KZ team-match mean",
+  "note": "Descriptive only: no Kazakh sibling league exists, so no X2 mover arm is registered (brief)."
+ },
+ "movers_dev": {
+  "transitions": [
+   {
+    "season": "2022",
+    "team_id": 436087,
+    "team": "Maktaaral FC",
+    "gf_diff": -0.2362637362637363,
+    "ga_diff": 0.14835164835164827
+   },
+   {
+    "season": "2022",
+    "team_id": 1337967,
+    "team": "Aksu",
+    "gf_diff": -0.08241758241758235,
+    "ga_diff": 0.10989010989010994
+   },
+   {
+    "season": "2023",
+    "team_id": 2128,
+    "team": "Okzhetpes Kokshetau",
+    "gf_diff": -0.22252747252747263,
+    "ga_diff": 0.2005494505494505
+   },
+   {
+    "season": "2024",
+    "team_id": 200281,
+    "team": "FC Yelimay",
+    "gf_diff": 0.27564102564102555,
+    "ga_diff": 0.15064102564102555
+   },
+   {
+    "season": "2024",
+    "team_id": 1614087,
+    "team": "Zhenis",
+    "gf_diff": -0.4326923076923077,
+    "ga_diff": 0.15064102564102555
+   },
+   {
+    "season": "2025",
+    "team_id": 1622701,
+    "team": "Ulytau",
+    "gf_diff": -0.5934065934065934,
+    "ga_diff": 0.2142857142857142
+   }
+  ],
+  "n": 6,
+  "mean_gf_diff": -0.21527777777777782,
+  "mean_ga_diff": 0.16239316239316234,
+  "gf_negative": 5,
+  "gf_positive": 1,
+  "ga_negative": 0,
+  "ga_positive": 6,
+  "entrants_by_season": {
+   "2021": [],
+   "2022": [
+    436087,
+    1337967
+   ],
+   "2023": [
+    2128
+   ],
+   "2024": [
+    200281,
+    1614087
+   ],
+   "2025": [
+    1622701
+   ],
+   "2026": [
+    2539,
+    732295
+   ]
+  },
+  "baseline": "same-season finished KZ team-match mean",
+  "note": "Descriptive only: no Kazakh sibling league exists, so no X2 mover arm is registered (brief)."
+ },
+ "shrink_bite": {
+  "2022": {
+   "teams": 14,
+   "prior_counts": {
+    "zero": 2,
+    "1_5": 0,
+    "6_23": 0,
+    "ge24": 12
+   },
+   "min_nonzero": 26
+  },
+  "2023": {
+   "teams": 14,
+   "prior_counts": {
+    "zero": 1,
+    "1_5": 0,
+    "6_23": 0,
+    "ge24": 13
+   },
+   "min_nonzero": 26
+  },
+  "2024": {
+   "teams": 13,
+   "prior_counts": {
+    "zero": 2,
+    "1_5": 0,
+    "6_23": 0,
+    "ge24": 11
+   },
+   "min_nonzero": 52
+  },
+  "2025": {
+   "teams": 14,
+   "prior_counts": {
+    "zero": 1,
+    "1_5": 0,
+    "6_23": 0,
+    "ge24": 13
+   },
+   "min_nonzero": 24
+  },
+  "2026": {
+   "teams": 16,
+   "prior_counts": {
+    "zero": 2,
+    "1_5": 0,
+    "6_23": 0,
+    "ge24": 14
+   },
+   "min_nonzero": 26
+  }
+ },
+ "lines": {
+  "goals_ou": {
+   "over_rates": {
+    "1.5": 0.707977207977208,
+    "2.5": 0.47435897435897434,
+    "3.5": 0.24643874643874644
+   },
+   "primary": "2.5",
+   "n": 702
+  },
+  "stats_markets": null
+ },
+ "dev_windows": {
+  "warm_up": [
+   "2021"
+  ],
+  "evaluation": [
+   "2022",
+   "2023",
+   "2024",
+   "2025"
+  ],
+  "n_evaluation": 702
+ },
+ "card_events_dev": {
+  "Yellow": 0,
+  "Red": 127,
+  "YellowRed": 68
+ },
+ "dev_levels_note": "Fitting-relevant numbers use finished 2021-2025 only; 2026 inventory/levels display only."
+}

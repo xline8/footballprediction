@@ -1,0 +1,88 @@
+{
+  "by_season": {
+    "2021/2022": {
+      "n": 306,
+      "stats_nonempty": 0,
+      "shotmap_nonempty": 0,
+      "events_nonempty": 270,
+      "ht_readable": 270,
+      "lineup_starters": 0,
+      "playerstats_nonempty": 0,
+      "referee_nonempty": 0,
+      "plain_yellow_events": 0,
+      "dismissal_events": 42,
+      "event_ft_mismatch": 0,
+      "lineup_blocks": 0
+    },
+    "2022/2023": {
+      "n": 240,
+      "stats_nonempty": 0,
+      "shotmap_nonempty": 0,
+      "events_nonempty": 214,
+      "ht_readable": 214,
+      "lineup_starters": 1,
+      "playerstats_nonempty": 0,
+      "referee_nonempty": 0,
+      "plain_yellow_events": 0,
+      "dismissal_events": 37,
+      "event_ft_mismatch": 0,
+      "lineup_blocks": 1
+    },
+    "2023/2024": {
+      "n": 240,
+      "stats_nonempty": 0,
+      "shotmap_nonempty": 0,
+      "events_nonempty": 214,
+      "ht_readable": 214,
+      "lineup_starters": 0,
+      "playerstats_nonempty": 0,
+      "referee_nonempty": 0,
+      "plain_yellow_events": 0,
+      "dismissal_events": 38,
+      "event_ft_mismatch": 1,
+      "lineup_blocks": 0
+    },
+    "2024/2025": {
+      "n": 240,
+      "stats_nonempty": 0,
+      "shotmap_nonempty": 0,
+      "events_nonempty": 210,
+      "ht_readable": 210,
+      "lineup_starters": 0,
+      "playerstats_nonempty": 0,
+      "referee_nonempty": 0,
+      "plain_yellow_events": 0,
+      "dismissal_events": 62,
+      "event_ft_mismatch": 0,
+      "lineup_blocks": 2
+    },
+    "2025/2026": {
+      "n": 240,
+      "stats_nonempty": 0,
+      "shotmap_nonempty": 0,
+      "events_nonempty": 221,
+      "ht_readable": 221,
+      "lineup_starters": 0,
+      "playerstats_nonempty": 0,
+      "referee_nonempty": 0,
+      "plain_yellow_events": 0,
+      "dismissal_events": 45,
+      "event_ft_mismatch": 0,
+      "lineup_blocks": 7
+    },
+    "2026/2027": {
+      "n": 66,
+      "stats_nonempty": 0,
+      "shotmap_nonempty": 0,
+      "events_nonempty": 61,
+      "ht_readable": 61,
+      "lineup_starters": 0,
+      "playerstats_nonempty": 0,
+      "referee_nonempty": 0,
+      "plain_yellow_events": 0,
+      "dismissal_events": 20,
+      "event_ft_mismatch": 0,
+      "lineup_blocks": 0
+    }
+  }
+}

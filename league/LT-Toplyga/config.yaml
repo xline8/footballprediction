@@ -1,0 +1,19 @@
+league: LT-Toplyga
+country: Lithuania
+fotmob_id: 228
+tier: 1
+seasons: [2021, 2022, 2023, 2024, 2025, 2026]
+dev_period:
+  seed: 2021
+  eval: [2022, 2023, 2024, 2025]
+  n: 720
+virgin_primary: 2026
+markets:
+  goals: G-LT
+halves:
+  constant_1h_goal_share: 0.43038
+  presentation_only: true
+notes:
+  - Scores-only scope; stats, shotmap, lineups and referee are absent.
+  - 2026 is complete, with 9 teams, 36 rounds and 4 matches per round.
+  - No split group or playoff phase exists.

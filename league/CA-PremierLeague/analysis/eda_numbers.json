@@ -1,0 +1,582 @@
+{
+  "counts": {
+    "all_matches": 699,
+    "regular_included": 672,
+    "playoffs_excluded": 27,
+    "regular_by_season": {
+      "2021": 112,
+      "2022": 112,
+      "2023": 112,
+      "2024": 112,
+      "2025": 112,
+      "2026": 112
+    },
+    "teams": 10
+  },
+  "levels": {
+    "2021": {
+      "n_regular": 112,
+      "status": "complete",
+      "goals": 2.544643,
+      "home_goal_diff": 0.330357,
+      "sot": 8.526786,
+      "corners": 9.428571,
+      "total_shots": 23.267857,
+      "yellows_stats": 1.151786,
+      "stats_n": 112
+    },
+    "2022": {
+      "n_regular": 112,
+      "status": "complete",
+      "goals": 2.5,
+      "home_goal_diff": 0.107143,
+      "sot": 7.571429,
+      "corners": 9.125,
+      "total_shots": 21.446429,
+      "yellows_stats": 0.9375,
+      "stats_n": 112
+    },
+    "2023": {
+      "n_regular": 112,
+      "status": "complete",
+      "goals": 2.607143,
+      "home_goal_diff": -0.017857,
+      "sot": 7.946429,
+      "corners": 9.241071,
+      "total_shots": 23.160714,
+      "yellows_stats": 4.348214,
+      "stats_n": 112
+    },
+    "2024": {
+      "n_regular": 112,
+      "status": "complete",
+      "goals": 2.544643,
+      "home_goal_diff": 0.294643,
+      "sot": 8.035714,
+      "corners": 9.580357,
+      "total_shots": 23.455357,
+      "yellows_stats": 4.991071,
+      "stats_n": 112
+    },
+    "2025": {
+      "n_regular": 112,
+      "status": "complete",
+      "goals": 3.0,
+      "home_goal_diff": 0.428571,
+      "sot": 8.392857,
+      "corners": 8.767857,
+      "total_shots": 23.678571,
+      "yellows_stats": 4.714286,
+      "stats_n": 112
+    },
+    "2026": {
+      "n_regular": 112,
+      "status": "in_progress_inventory_only",
+      "goals": 3.160714,
+      "home_goal_diff": 0.428571,
+      "sot": 8.598214,
+      "corners": 9.214286,
+      "total_shots": 25.607143,
+      "yellows_stats": 4.107143,
+      "stats_n": 112
+    }
+  },
+  "reliabilities_by_season_pair": {
+    "2021-2022": {
+      "goals_for": {
+        "r": 0.195576,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "goals_against": {
+        "r": 0.376551,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "sot_for": {
+        "r": 0.103042,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "sot_against": {
+        "r": 0.222961,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "corners_for": {
+        "r": 0.56782,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "corners_against": {
+        "r": 0.580167,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "shots_for": {
+        "r": 0.240501,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "shots_against": {
+        "r": 0.523292,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "possession_for": {
+        "r": 0.780605,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "possession_against": {
+        "r": 0.780605,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "big_chance_for": {
+        "r": -0.206924,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "big_chance_against": {
+        "r": 0.386084,
+        "n_units": 16,
+        "min_matches": 8
+      }
+    },
+    "2022-2023": {
+      "goals_for": {
+        "r": -0.07945,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "goals_against": {
+        "r": 0.248098,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "sot_for": {
+        "r": 0.418079,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "sot_against": {
+        "r": 0.360631,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "corners_for": {
+        "r": 0.623308,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "corners_against": {
+        "r": 0.439037,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "shots_for": {
+        "r": 0.545407,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "shots_against": {
+        "r": 0.579327,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "possession_for": {
+        "r": 0.812067,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "possession_against": {
+        "r": 0.812067,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "big_chance_for": {
+        "r": 0.538264,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "big_chance_against": {
+        "r": 0.620226,
+        "n_units": 16,
+        "min_matches": 8
+      }
+    },
+    "2023-2024": {
+      "goals_for": {
+        "r": 0.011909,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "goals_against": {
+        "r": 0.143161,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "sot_for": {
+        "r": 0.540662,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "sot_against": {
+        "r": 0.481734,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "corners_for": {
+        "r": 0.715352,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "corners_against": {
+        "r": 0.145276,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "shots_for": {
+        "r": 0.592249,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "shots_against": {
+        "r": 0.55626,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "possession_for": {
+        "r": 0.873435,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "possession_against": {
+        "r": 0.873435,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "big_chance_for": {
+        "r": 0.12715,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "big_chance_against": {
+        "r": 0.653673,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "yellows_for": {
+        "r": 0.195758,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "yellows_against": {
+        "r": 0.462728,
+        "n_units": 16,
+        "min_matches": 8
+      }
+    },
+    "2024-2025": {
+      "goals_for": {
+        "r": 0.43741,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "goals_against": {
+        "r": 0.763685,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "sot_for": {
+        "r": 0.625154,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "sot_against": {
+        "r": 0.55912,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "corners_for": {
+        "r": 0.622878,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "corners_against": {
+        "r": 0.22821,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "shots_for": {
+        "r": 0.630166,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "shots_against": {
+        "r": 0.430833,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "possession_for": {
+        "r": 0.901195,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "possession_against": {
+        "r": 0.901195,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "big_chance_for": {
+        "r": 0.474131,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "big_chance_against": {
+        "r": 0.649646,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "yellows_for": {
+        "r": 0.289836,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "yellows_against": {
+        "r": 0.53145,
+        "n_units": 16,
+        "min_matches": 8
+      }
+    }
+  },
+  "yellow_reliabilities_credible": {
+    "2023-2024": {
+      "yellows_for": {
+        "r": 0.195758,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "yellows_against": {
+        "r": 0.462728,
+        "n_units": 16,
+        "min_matches": 8
+      }
+    },
+    "2024-2025": {
+      "yellows_for": {
+        "r": 0.289836,
+        "n_units": 16,
+        "min_matches": 8
+      },
+      "yellows_against": {
+        "r": 0.53145,
+        "n_units": 16,
+        "min_matches": 8
+      }
+    }
+  },
+  "halves_2023_2024": {
+    "goals": {
+      "label": "goals",
+      "n_matches": 210,
+      "share_1h": 0.426343,
+      "observed_variance": 0.119578,
+      "binomial_poisson_noise_variance": 0.116441,
+      "true_variance": 0.003137,
+      "true_sd": 0.056009
+    },
+    "sot": {
+      "label": "sot",
+      "n_matches": 224,
+      "share_1h": 0.435196,
+      "observed_variance": 0.032049,
+      "binomial_poisson_noise_variance": 0.035849,
+      "true_variance": 0,
+      "true_sd": 0.0
+    },
+    "corners": {
+      "label": "corners",
+      "n_matches": 224,
+      "share_1h": 0.466319,
+      "observed_variance": 0.030643,
+      "binomial_poisson_noise_variance": 0.030319,
+      "true_variance": 0.000324,
+      "true_sd": 0.018009
+    },
+    "total_shots": {
+      "label": "total_shots",
+      "n_matches": 224,
+      "share_1h": 0.447807,
+      "observed_variance": 0.010268,
+      "binomial_poisson_noise_variance": 0.011158,
+      "true_variance": 0,
+      "true_sd": 0.0
+    },
+    "yellows": {
+      "label": "yellows",
+      "n_matches": 220,
+      "share_1h": 0.314532,
+      "observed_variance": 0.059656,
+      "binomial_poisson_noise_variance": 0.057999,
+      "true_variance": 0.001657,
+      "true_sd": 0.040705
+    }
+  },
+  "referee": {
+    "coverage_by_season": {
+      "2021": {
+        "named": 0,
+        "n": 115
+      },
+      "2022": {
+        "named": 91,
+        "n": 117
+      },
+      "2023": {
+        "named": 98,
+        "n": 117
+      },
+      "2024": {
+        "named": 110,
+        "n": 117
+      },
+      "2025": {
+        "named": 40,
+        "n": 117
+      },
+      "2026": {
+        "named": 50,
+        "n": 116
+      }
+    },
+    "split_half_strictness": {
+      "r": 0.370905,
+      "n_referees": 16,
+      "min_matches": 8
+    }
+  },
+  "movers_x2": {
+    "class": "expansion_entry_only_no_tier_corpus",
+    "vancouver_2023": {
+      "team_id": "1436202",
+      "matches": 28,
+      "gf_per_match": 1.0,
+      "ga_per_match": 1.785714,
+      "league_team_mean": 1.303571,
+      "delta_gf": -0.303571,
+      "delta_ga": 0.482143
+    }
+  },
+  "box_touch_availability": {
+    "availability_by_season": {
+      "2021": {
+        "matches": 115,
+        "nonmissing": 34
+      },
+      "2022": {
+        "matches": 117,
+        "nonmissing": 28
+      },
+      "2023": {
+        "matches": 117,
+        "nonmissing": 22
+      },
+      "2024": {
+        "matches": 117,
+        "nonmissing": 117
+      },
+      "2025": {
+        "matches": 117,
+        "nonmissing": 117
+      },
+      "2026": {
+        "matches": 116,
+        "nonmissing": 116
+      }
+    },
+    "trailing_min8_dev_seasons": {
+      "2021": 31,
+      "2022": 24,
+      "2023": 17,
+      "2024": 112
+    }
+  },
+  "possession_big_chance_reliability": {
+    "possession_for": {
+      "r": 0.873435,
+      "n_units": 16,
+      "min_matches": 8
+    },
+    "possession_against": {
+      "r": 0.873435,
+      "n_units": 16,
+      "min_matches": 8
+    },
+    "big_chance_for": {
+      "r": 0.12715,
+      "n_units": 16,
+      "min_matches": 8
+    },
+    "big_chance_against": {
+      "r": 0.653673,
+      "n_units": 16,
+      "min_matches": 8
+    }
+  },
+  "cards_audit_2025": {
+    "n": 112,
+    "exact_total_agreement": 90,
+    "stats_mean": 4.714286,
+    "event_yellow_mean": 4.9375
+  },
+  "primary_lines": {
+    "G-CA": {
+      "n": 448,
+      "over_rates": {
+        "1.5": 0.732143,
+        "2.5": 0.495536,
+        "3.5": 0.227679
+      },
+      "primary": 2.5
+    },
+    "S-CA": {
+      "n": 448,
+      "over_rates": {
+        "7.5": 0.546875,
+        "8.5": 0.424107,
+        "9.5": 0.305804
+      },
+      "primary": 7.5
+    },
+    "C-CA": {
+      "n": 448,
+      "over_rates": {
+        "8.5": 0.616071,
+        "9.5": 0.486607,
+        "10.5": 0.363839
+      },
+      "primary": 9.5
+    },
+    "K-CA": {
+      "n": 224,
+      "over_rates": {
+        "3.5": 0.723214,
+        "4.5": 0.549107,
+        "5.5": 0.34375
+      },
+      "primary": 4.5
+    },
+    "T-CA": {
+      "n": 448,
+      "over_rates": {
+        "21.5": 0.575893,
+        "22.5": 0.506696,
+        "23.5": 0.439732
+      },
+      "primary": 22.5
+    }
+  },
+  "contradictions": []
+}

@@ -1,0 +1,128 @@
+{
+  "virgin_read": true,
+  "protocol": {
+    "league": "BA-PremierLeague",
+    "virgin_season": "2026/2027",
+    "n": 64,
+    "cutoff": "2026-08-07",
+    "scored_arms": [
+      "gate_zero",
+      "shrink"
+    ]
+  },
+  "arms": {
+    "gate_zero": {
+      "n": 64,
+      "ll_1x2": 0.887961730821386,
+      "rps": 0.1629925100654806,
+      "oull_2_5": 0.6989177319238882,
+      "climatology_ll_1x2": 1.0624507139540802,
+      "calibration": {
+        "home_win_diff": -0.01004314479660642,
+        "home_win_se": 0.05413877297112458,
+        "over25_diff": -0.024523635230483124,
+        "over25_se": 0.06322151920848781
+      },
+      "dev_sign_count": 4,
+      "legs": {
+        "dev_gate": {
+          "status": "PASS",
+          "pooled": {
+            "arm": "gate_zero",
+            "season": "pooled",
+            "kind": "model",
+            "n": 772,
+            "ll_1x2": 0.947283607230138,
+            "rps": 0.194672292104108,
+            "oull_2_5": 0.6844905443547975
+          }
+        },
+        "virgin_ll_vs_gatezero": {
+          "status": "PASS",
+          "arm_ll": 0.887961730821386,
+          "gate_zero_ll": 0.887961730821386
+        },
+        "virgin_ll_vs_climatology": {
+          "status": "PASS",
+          "arm_ll": 0.887961730821386,
+          "climatology_ll": 1.0624507139540802
+        },
+        "calibration_hw": {
+          "status": "PROVISIONAL PASS",
+          "diff": -0.01004314479660642,
+          "se": 0.05413877297112458
+        },
+        "calibration_ou": {
+          "status": "PROVISIONAL PASS",
+          "diff": -0.024523635230483124,
+          "se": 0.06322151920848781
+        },
+        "sign_check": {
+          "status": "PASS",
+          "count": 4,
+          "out_of": 4
+        }
+      }
+    },
+    "shrink": {
+      "n": 64,
+      "ll_1x2": 0.887961730821386,
+      "rps": 0.1629925100654806,
+      "oull_2_5": 0.6989177319238882,
+      "climatology_ll_1x2": 1.0624507139540802,
+      "calibration": {
+        "home_win_diff": -0.01004314479660642,
+        "home_win_se": 0.05413877297112458,
+        "over25_diff": -0.024523635230483124,
+        "over25_se": 0.06322151920848781
+      },
+      "dev_sign_count": 4,
+      "legs": {
+        "dev_gate": {
+          "status": "PASS",
+          "pooled": {
+            "arm": "shrink",
+            "season": "pooled",
+            "kind": "model",
+            "n": 772,
+            "ll_1x2": 0.947283607230138,
+            "rps": 0.194672292104108,
+            "oull_2_5": 0.6844905443547975
+          }
+        },
+        "virgin_ll_vs_gatezero": {
+          "status": "PASS",
+          "arm_ll": 0.887961730821386,
+          "gate_zero_ll": 0.887961730821386
+        },
+        "virgin_ll_vs_climatology": {
+          "status": "PASS",
+          "arm_ll": 0.887961730821386,
+          "climatology_ll": 1.0624507139540802
+        },
+        "calibration_hw": {
+          "status": "PROVISIONAL PASS",
+          "diff": -0.01004314479660642,
+          "se": 0.05413877297112458
+        },
+        "calibration_ou": {
+          "status": "PROVISIONAL PASS",
+          "diff": -0.024523635230483124,
+          "se": 0.06322151920848781
+        },
+        "sign_check": {
+          "status": "PASS",
+          "count": 4,
+          "out_of": 4
+        }
+      }
+    }
+  },
+  "climatology": {
+    "n": 64,
+    "ll_1x2": 1.0624507139540802,
+    "rps": 0.2186347414794073,
+    "oull_2_5": 0.6814906435497824
+  },
+  "shipped_arm": "gate_zero"
+}

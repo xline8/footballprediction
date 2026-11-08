@@ -1,0 +1,320 @@
+{
+ "seasons": {
+  "2021": {
+   "n": 240,
+   "stats": 0,
+   "splits": 0,
+   "events": 210,
+   "shotmap": 0,
+   "lineup": 4,
+   "goals_pm": 2.7125,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.14761904761904762,
+   "yell_plain_pm": 0.0,
+   "yell_stats_pm": null,
+   "teams": 16,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "awarded": 15,
+   "home_win_rate": 0.425,
+   "draw_rate": 0.25416666666666665,
+   "over25_rate": 0.5166666666666667,
+   "main_n": 240
+  },
+  "2022": {
+   "n": 240,
+   "stats": 0,
+   "splits": 0,
+   "events": 221,
+   "shotmap": 0,
+   "lineup": 0,
+   "goals_pm": 2.5416666666666665,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.13574660633484162,
+   "yell_plain_pm": 0.0,
+   "yell_stats_pm": null,
+   "teams": 16,
+   "xg_rows": 0,
+   "score_mismatch": 1,
+   "awarded": 1,
+   "home_win_rate": 0.35,
+   "draw_rate": 0.29583333333333334,
+   "over25_rate": 0.4666666666666667,
+   "main_n": 240
+  },
+  "2023": {
+   "n": 210,
+   "stats": 0,
+   "splits": 0,
+   "events": 199,
+   "shotmap": 0,
+   "lineup": 0,
+   "goals_pm": 2.738095238095238,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.07035175879396985,
+   "yell_plain_pm": 0.0,
+   "yell_stats_pm": null,
+   "teams": 15,
+   "xg_rows": 0,
+   "score_mismatch": 1,
+   "awarded": 1,
+   "home_win_rate": 0.44761904761904764,
+   "draw_rate": 0.21428571428571427,
+   "over25_rate": 0.5,
+   "main_n": 210
+  },
+  "2024": {
+   "n": 240,
+   "stats": 0,
+   "splits": 0,
+   "events": 216,
+   "shotmap": 0,
+   "lineup": 0,
+   "goals_pm": 2.345833333333333,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.0787037037037037,
+   "yell_plain_pm": 0.0,
+   "yell_stats_pm": null,
+   "teams": 16,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "awarded": 0,
+   "home_win_rate": 0.4,
+   "draw_rate": 0.275,
+   "over25_rate": 0.4041666666666667,
+   "main_n": 240
+  },
+  "2025": {
+   "n": 240,
+   "stats": 0,
+   "splits": 0,
+   "events": 227,
+   "shotmap": 0,
+   "lineup": 0,
+   "goals_pm": 2.5458333333333334,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.00881057268722467,
+   "yell_plain_pm": 0.0,
+   "yell_stats_pm": null,
+   "teams": 16,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "awarded": 0,
+   "home_win_rate": 0.43333333333333335,
+   "draw_rate": 0.21666666666666667,
+   "over25_rate": 0.475,
+   "main_n": 240
+  },
+  "2026": {
+   "n": 224,
+   "stats": 0,
+   "splits": 0,
+   "events": 207,
+   "shotmap": 0,
+   "lineup": 0,
+   "goals_pm": 2.6026785714285716,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.014492753623188406,
+   "yell_plain_pm": 0.0,
+   "yell_stats_pm": null,
+   "teams": 16,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "awarded": 0,
+   "home_win_rate": 0.4107142857142857,
+   "draw_rate": 0.24107142857142858,
+   "over25_rate": 0.46875,
+   "main_n": 224
+  }
+ },
+ "event_cards_by_season": {
+  "2021": {
+   "n_events_matches": 210,
+   "yellow_plain_total": 0,
+   "yellowred_total": 31,
+   "red_total": 40
+  },
+  "2022": {
+   "n_events_matches": 221,
+   "yellow_plain_total": 0,
+   "yellowred_total": 30,
+   "red_total": 42
+  },
+  "2023": {
+   "n_events_matches": 199,
+   "yellow_plain_total": 0,
+   "yellowred_total": 14,
+   "red_total": 30
+  },
+  "2024": {
+   "n_events_matches": 216,
+   "yellow_plain_total": 0,
+   "yellowred_total": 17,
+   "red_total": 32
+  },
+  "2025": {
+   "n_events_matches": 227,
+   "yellow_plain_total": 0,
+   "yellowred_total": 2,
+   "red_total": 31
+  },
+  "2026": {
+   "n_events_matches": 207,
+   "yellow_plain_total": 0,
+   "yellowred_total": 3,
+   "red_total": 26
+  }
+ },
+ "empty_events": {
+  "n_total": 114,
+  "n_with_goals": 16,
+  "goals_in_them": 48,
+  "all_scoreless": false
+ },
+ "halves_dev": {
+  "goals_events": {
+   "share_1h": 0.4314310051107325,
+   "n_goals": 2348,
+   "n_matches": 845,
+   "note": "event times, dev era, awarded excluded"
+  },
+  "yellows_events": {
+   "share_1h": 0.14285714285714285,
+   "n_yellows": 91,
+   "n_matches": 845,
+   "note": "no plain Yellow events in any season; event yellows are YellowRed only \u2014 NOT a frozen constant (no K market)"
+  },
+  "sot": null,
+  "corners": null,
+  "total_shots": null,
+  "yellows_stats": null
+ },
+ "trait_reliability_dev": {
+  "goals_for": {
+   "split_half_r": 0.8551491198717861,
+   "n_teams": 20
+  },
+  "goals_against": {
+   "split_half_r": 0.9474246032944756,
+   "n_teams": 20
+  }
+ },
+ "season_to_season": {
+  "2021-2022": {
+   "n_teams_common": 13,
+   "gf_corr": 0.44705494479167684,
+   "ga_corr": 0.634311020702236
+  },
+  "2022-2023": {
+   "n_teams_common": 13,
+   "gf_corr": 0.25256636592951404,
+   "ga_corr": 0.2793950833487213
+  },
+  "2023-2024": {
+   "n_teams_common": 13,
+   "gf_corr": 0.30563817769125473,
+   "ga_corr": 0.6959475044922363
+  }
+ },
+ "entrant_transitions_dev": [
+  {
+   "season": "2022",
+   "team_id": 10064,
+   "team": "Belshina Bobruisk",
+   "n_matches": 30,
+   "gf_diff": -0.0708333333333333,
+   "ga_diff": 0.2625000000000002
+  },
+  {
+   "season": "2022",
+   "team_id": 1142489,
+   "team": "Arsenal Dzerzhinsk",
+   "n_matches": 30,
+   "gf_diff": -0.6708333333333333,
+   "ga_diff": 0.12916666666666665
+  },
+  {
+   "season": "2022",
+   "team_id": 10067,
+   "team": "Dnyapro Mogilev",
+   "n_matches": 30,
+   "gf_diff": -0.5708333333333333,
+   "ga_diff": 1.1624999999999999
+  },
+  {
+   "season": "2023",
+   "team_id": 56866,
+   "team": "FC Smorgon",
+   "n_matches": 28,
+   "gf_diff": -0.36904761904761907,
+   "ga_diff": 0.7380952380952381
+  },
+  {
+   "season": "2023",
+   "team_id": 10071,
+   "team": "Naftan Novopolotsk",
+   "n_matches": 28,
+   "gf_diff": -0.36904761904761907,
+   "ga_diff": 0.6666666666666665
+  },
+  {
+   "season": "2024",
+   "team_id": 1142489,
+   "team": "Arsenal Dzerzhinsk",
+   "n_matches": 30,
+   "gf_diff": -0.20624999999999993,
+   "ga_diff": 0.027083333333333348
+  },
+  {
+   "season": "2024",
+   "team_id": 10075,
+   "team": "FK Vitebsk",
+   "n_matches": 30,
+   "gf_diff": -0.07291666666666652,
+   "ga_diff": -0.33958333333333324
+  },
+  {
+   "season": "2024",
+   "team_id": 10067,
+   "team": "Dnyapro Mogilev",
+   "n_matches": 30,
+   "gf_diff": -0.2729166666666666,
+   "ga_diff": 0.7604166666666667
+  }
+ ],
+ "x2_offset_dev": {
+  "n_transitions": 8,
+  "g_log": -0.2231435513142097,
+  "c_log": 0.22314355131420976,
+  "gf_diff_mean": -0.3253348214285714,
+  "ga_diff_mean": 0.4258556547619048
+ },
+ "lines": {
+  "goals_ou": {
+   "over_rates": {
+    "1.5": 0.7,
+    "2.5": 0.45507246376811594,
+    "3.5": 0.263768115942029
+   },
+   "primary": 2.5,
+   "n": 690
+  }
+ },
+ "home_win_rate_dev_scored": 0.39710144927536234,
+ "draw_rate_dev_scored": 0.263768115942029,
+ "dev_scored_n": 690,
+ "virgin_n": 240,
+ "reserve_n": 224
+}

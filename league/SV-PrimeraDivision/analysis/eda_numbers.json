@@ -1,0 +1,498 @@
+{
+  "by_tournament": {
+    "2021/2022 - Apertura": {
+      "n": 132,
+      "mean_goals_per_match": 2.6742424242424243,
+      "home_goals_per_match": 1.4621212121212122,
+      "away_goals_per_match": 1.2121212121212122,
+      "home_win_rate": 0.4090909090909091,
+      "draw_rate": 0.3181818181818182,
+      "away_win_rate": 0.2727272727272727,
+      "over_2_5_rate": 0.5,
+      "btts_rate": 0.5909090909090909,
+      "zero_zero_rate": 0.05303030303030303,
+      "mean_ht_goals_where_available": 1.1587301587301588
+    },
+    "2021/2022 - Clausura": {
+      "n": 132,
+      "mean_goals_per_match": 2.287878787878788,
+      "home_goals_per_match": 1.2348484848484849,
+      "away_goals_per_match": 1.053030303030303,
+      "home_win_rate": 0.4015151515151515,
+      "draw_rate": 0.3409090909090909,
+      "away_win_rate": 0.25757575757575757,
+      "over_2_5_rate": 0.4090909090909091,
+      "btts_rate": 0.49242424242424243,
+      "zero_zero_rate": 0.12878787878787878,
+      "mean_ht_goals_where_available": 1.0583333333333333
+    },
+    "2022/2023 - Apertura": {
+      "n": 67,
+      "mean_goals_per_match": 2.4925373134328357,
+      "home_goals_per_match": 1.5671641791044777,
+      "away_goals_per_match": 0.9253731343283582,
+      "home_win_rate": 0.4925373134328358,
+      "draw_rate": 0.29850746268656714,
+      "away_win_rate": 0.208955223880597,
+      "over_2_5_rate": 0.47761194029850745,
+      "btts_rate": 0.5074626865671642,
+      "zero_zero_rate": 0.11940298507462686,
+      "mean_ht_goals_where_available": 1.2833333333333334
+    },
+    "2022/2023 - Clausura": {
+      "n": 132,
+      "mean_goals_per_match": 2.3636363636363638,
+      "home_goals_per_match": 1.25,
+      "away_goals_per_match": 1.1136363636363635,
+      "home_win_rate": 0.3712121212121212,
+      "draw_rate": 0.3106060606060606,
+      "away_win_rate": 0.3181818181818182,
+      "over_2_5_rate": 0.42424242424242425,
+      "btts_rate": 0.4772727272727273,
+      "zero_zero_rate": 0.12878787878787878,
+      "mean_ht_goals_where_available": 1.113821138211382
+    },
+    "2023/2024 - Apertura": {
+      "n": 132,
+      "mean_goals_per_match": 2.7196969696969697,
+      "home_goals_per_match": 1.4090909090909092,
+      "away_goals_per_match": 1.3106060606060606,
+      "home_win_rate": 0.4015151515151515,
+      "draw_rate": 0.2878787878787879,
+      "away_win_rate": 0.3106060606060606,
+      "over_2_5_rate": 0.5075757575757576,
+      "btts_rate": 0.5681818181818182,
+      "zero_zero_rate": 0.09090909090909091,
+      "mean_ht_goals_where_available": 1.2540983606557377
+    },
+    "2023/2024 - Clausura": {
+      "n": 132,
+      "mean_goals_per_match": 2.515151515151515,
+      "home_goals_per_match": 1.4090909090909092,
+      "away_goals_per_match": 1.106060606060606,
+      "home_win_rate": 0.44696969696969696,
+      "draw_rate": 0.22727272727272727,
+      "away_win_rate": 0.32575757575757575,
+      "over_2_5_rate": 0.4621212121212121,
+      "btts_rate": 0.4772727272727273,
+      "zero_zero_rate": 0.12121212121212122,
+      "mean_ht_goals_where_available": 1.2222222222222223
+    },
+    "2024/2025 - Apertura": {
+      "n": 110,
+      "mean_goals_per_match": 2.4,
+      "home_goals_per_match": 1.3,
+      "away_goals_per_match": 1.1,
+      "home_win_rate": 0.41818181818181815,
+      "draw_rate": 0.21818181818181817,
+      "away_win_rate": 0.36363636363636365,
+      "over_2_5_rate": 0.44545454545454544,
+      "btts_rate": 0.42727272727272725,
+      "zero_zero_rate": 0.07272727272727272,
+      "mean_ht_goals_where_available": 1.1262135922330097
+    },
+    "2024/2025 - Clausura": {
+      "n": 110,
+      "mean_goals_per_match": 2.172727272727273,
+      "home_goals_per_match": 1.1,
+      "away_goals_per_match": 1.0727272727272728,
+      "home_win_rate": 0.33636363636363636,
+      "draw_rate": 0.2909090909090909,
+      "away_win_rate": 0.37272727272727274,
+      "over_2_5_rate": 0.38181818181818183,
+      "btts_rate": 0.4090909090909091,
+      "zero_zero_rate": 0.15454545454545454,
+      "mean_ht_goals_where_available": 1.1578947368421053
+    },
+    "2025/2026 - Apertura": {
+      "n": 132,
+      "mean_goals_per_match": 2.734848484848485,
+      "home_goals_per_match": 1.356060606060606,
+      "away_goals_per_match": 1.378787878787879,
+      "home_win_rate": 0.3787878787878788,
+      "draw_rate": 0.2803030303030303,
+      "away_win_rate": 0.3409090909090909,
+      "over_2_5_rate": 0.5454545454545454,
+      "btts_rate": 0.5681818181818182,
+      "zero_zero_rate": 0.09848484848484848,
+      "mean_ht_goals_where_available": 1.3064516129032258
+    },
+    "2025/2026 - Clausura": {
+      "n": 132,
+      "mean_goals_per_match": 2.6136363636363638,
+      "home_goals_per_match": 1.3409090909090908,
+      "away_goals_per_match": 1.2727272727272727,
+      "home_win_rate": 0.38636363636363635,
+      "draw_rate": 0.2803030303030303,
+      "away_win_rate": 0.3333333333333333,
+      "over_2_5_rate": 0.45454545454545453,
+      "btts_rate": 0.5075757575757576,
+      "zero_zero_rate": 0.07575757575757576,
+      "mean_ht_goals_where_available": 1.136
+    },
+    "2026/2027 - Apertura": {
+      "n": 115,
+      "mean_goals_per_match": 2.6956521739130435,
+      "home_goals_per_match": 1.4608695652173913,
+      "away_goals_per_match": 1.2347826086956522,
+      "home_win_rate": 0.4,
+      "draw_rate": 0.33043478260869563,
+      "away_win_rate": 0.26956521739130435,
+      "over_2_5_rate": 0.4956521739130435,
+      "btts_rate": 0.5652173913043478,
+      "zero_zero_rate": 0.11304347826086956,
+      "mean_ht_goals_where_available": 1.2788461538461537
+    },
+    "pooled_regular": {
+      "n": 1211,
+      "mean_goals_per_match": 2.5053674649050373,
+      "home_goals_per_match": 1.3360858794384807,
+      "away_goals_per_match": 1.1692815854665566,
+      "home_win_rate": 0.4004954582989265,
+      "draw_rate": 0.2857142857142857,
+      "away_win_rate": 0.3137902559867878,
+      "over_2_5_rate": 0.46160198183319573,
+      "btts_rate": 0.5053674649050371,
+      "zero_zero_rate": 0.10322047894302229,
+      "mean_ht_goals_where_available": 1.1775784753363228
+    },
+    "pooled_regular_incl_partial": {
+      "n": 1326,
+      "mean_goals_per_match": 2.521870286576169,
+      "home_goals_per_match": 1.3469079939668176,
+      "away_goals_per_match": 1.1749622926093515,
+      "home_win_rate": 0.4004524886877828,
+      "draw_rate": 0.2895927601809955,
+      "away_win_rate": 0.30995475113122173,
+      "over_2_5_rate": 0.4645550527903469,
+      "btts_rate": 0.5105580693815988,
+      "zero_zero_rate": 0.10407239819004525,
+      "mean_ht_goals_where_available": 1.1862182116488926
+    },
+    "playoffs": {
+      "n": 122,
+      "mean_goals_per_match": 2.2295081967213113,
+      "home_goals_per_match": 1.278688524590164,
+      "away_goals_per_match": 0.9508196721311475,
+      "home_win_rate": 0.4098360655737705,
+      "draw_rate": 0.29508196721311475,
+      "away_win_rate": 0.29508196721311475,
+      "over_2_5_rate": 0.39344262295081966,
+      "btts_rate": 0.5245901639344263,
+      "zero_zero_rate": 0.09016393442622951,
+      "mean_ht_goals_where_available": 1.0956521739130434
+    }
+  },
+  "trait_reliability": {
+    "by_tournament": {
+      "2021/2022 - Apertura": {
+        "n_teams": 12,
+        "r_attack": 0.5493704641901888,
+        "r_defence": 0.44746700241837234
+      },
+      "2021/2022 - Clausura": {
+        "n_teams": 12,
+        "r_attack": 0.6321443647069025,
+        "r_defence": 0.08131885370030663
+      },
+      "2022/2023 - Apertura": {
+        "n_teams": 12,
+        "r_attack": 0.21856228249965748,
+        "r_defence": 0.3209914532178703
+      },
+      "2022/2023 - Clausura": {
+        "n_teams": 12,
+        "r_attack": -0.3172355567819582,
+        "r_defence": 0.6745979071111148
+      },
+      "2023/2024 - Apertura": {
+        "n_teams": 12,
+        "r_attack": 0.04129875566486762,
+        "r_defence": 0.6734531021870444
+      },
+      "2023/2024 - Clausura": {
+        "n_teams": 12,
+        "r_attack": 0.5552567762549462,
+        "r_defence": 0.29584346659288063
+      },
+      "2024/2025 - Apertura": {
+        "n_teams": 11,
+        "r_attack": 0.5737586307919635,
+        "r_defence": -0.014551933937346035
+      },
+      "2024/2025 - Clausura": {
+        "n_teams": 11,
+        "r_attack": 0.5066562246753882,
+        "r_defence": 0.5740185849644069
+      },
+      "2025/2026 - Apertura": {
+        "n_teams": 12,
+        "r_attack": 0.47480294208172785,
+        "r_defence": 0.5083737185533652
+      },
+      "2025/2026 - Clausura": {
+        "n_teams": 12,
+        "r_attack": 0.4785178892893768,
+        "r_defence": 0.4042195089179523
+      },
+      "2026/2027 - Apertura": {
+        "n_teams": 12,
+        "r_attack": 0.25925330511843764,
+        "r_defence": 0.3255008056201469
+      }
+    },
+    "pooled": {
+      "n_teams": 130,
+      "r_attack": 0.3723418478706962,
+      "r_defence": 0.3599440495271748
+    },
+    "pooled_season_year": {
+      "n_teams": 71,
+      "r_attack": 0.4640037355013132,
+      "r_defence": 0.4065257740310575
+    },
+    "method": "Each team's regular-season matches sorted chronologically and split into two halves; teams require >=10 matches and >=5 per half."
+  },
+  "halves": {
+    "by_tournament": {
+      "2021/2022 - Apertura": {
+        "n_regular": 132,
+        "n_ht_readable": 126,
+        "ht_coverage": 0.9545454545454546,
+        "share": 0.41595441595441596,
+        "sum_ht_goals": 146,
+        "sum_ft_goals": 351,
+        "observed_variance": 0.11479674533271512,
+        "binomial_noise_floor": 0.11721377984507389,
+        "excess_variance": -0.002417034512358765
+      },
+      "2021/2022 - Clausura": {
+        "n_regular": 132,
+        "n_ht_readable": 120,
+        "ht_coverage": 0.9090909090909091,
+        "share": 0.4205298013245033,
+        "sum_ht_goals": 127,
+        "sum_ft_goals": 302,
+        "observed_variance": 0.11993559690390763,
+        "binomial_noise_floor": 0.12992158712590507,
+        "excess_variance": -0.009985990221997434
+      },
+      "2022/2023 - Apertura": {
+        "n_regular": 67,
+        "n_ht_readable": 60,
+        "ht_coverage": 0.8955223880597015,
+        "share": 0.46107784431137727,
+        "sum_ht_goals": 77,
+        "sum_ft_goals": 167,
+        "observed_variance": 0.12715742602700372,
+        "binomial_noise_floor": 0.12278730497890916,
+        "excess_variance": 0.004370121048094561
+      },
+      "2022/2023 - Clausura": {
+        "n_regular": 132,
+        "n_ht_readable": 123,
+        "ht_coverage": 0.9318181818181818,
+        "share": 0.4391025641025641,
+        "sum_ht_goals": 137,
+        "sum_ft_goals": 312,
+        "observed_variance": 0.13050999575633657,
+        "binomial_noise_floor": 0.122611894543225,
+        "excess_variance": 0.00789810121311156
+      },
+      "2023/2024 - Apertura": {
+        "n_regular": 132,
+        "n_ht_readable": 122,
+        "ht_coverage": 0.9242424242424242,
+        "share": 0.42618384401114207,
+        "sum_ht_goals": 153,
+        "sum_ft_goals": 359,
+        "observed_variance": 0.0965072868441358,
+        "binomial_noise_floor": 0.11028687518036188,
+        "excess_variance": -0.013779588336226084
+      },
+      "2023/2024 - Clausura": {
+        "n_regular": 132,
+        "n_ht_readable": 117,
+        "ht_coverage": 0.8863636363636364,
+        "share": 0.43465045592705165,
+        "sum_ht_goals": 143,
+        "sum_ft_goals": 329,
+        "observed_variance": 0.1228105680079215,
+        "binomial_noise_floor": 0.12202973527117181,
+        "excess_variance": 0.0007808327367496981
+      },
+      "2024/2025 - Apertura": {
+        "n_regular": 110,
+        "n_ht_readable": 103,
+        "ht_coverage": 0.9363636363636364,
+        "share": 0.4393939393939394,
+        "sum_ht_goals": 116,
+        "sum_ft_goals": 264,
+        "observed_variance": 0.10705168995702856,
+        "binomial_noise_floor": 0.1261006132084988,
+        "excess_variance": -0.019048923251470243
+      },
+      "2024/2025 - Clausura": {
+        "n_regular": 110,
+        "n_ht_readable": 95,
+        "ht_coverage": 0.8636363636363636,
+        "share": 0.4602510460251046,
+        "sum_ht_goals": 110,
+        "sum_ft_goals": 239,
+        "observed_variance": 0.12455107205714212,
+        "binomial_noise_floor": 0.12701224450506518,
+        "excess_variance": -0.0024611724479230573
+      },
+      "2025/2026 - Apertura": {
+        "n_regular": 132,
+        "n_ht_readable": 124,
+        "ht_coverage": 0.9393939393939394,
+        "share": 0.4487534626038781,
+        "sum_ht_goals": 162,
+        "sum_ft_goals": 361,
+        "observed_variance": 0.10939065502151242,
+        "binomial_noise_floor": 0.11087462707089137,
+        "excess_variance": -0.0014839720493789454
+      },
+      "2025/2026 - Clausura": {
+        "n_regular": 132,
+        "n_ht_readable": 125,
+        "ht_coverage": 0.946969696969697,
+        "share": 0.4115942028985507,
+        "sum_ht_goals": 142,
+        "sum_ft_goals": 345,
+        "observed_variance": 0.10880526601485349,
+        "binomial_noise_floor": 0.11618305414905215,
+        "excess_variance": -0.007377788134198662
+      },
+      "2026/2027 - Apertura": {
+        "n_regular": 115,
+        "n_ht_readable": 104,
+        "ht_coverage": 0.9043478260869565,
+        "share": 0.4290322580645161,
+        "sum_ht_goals": 133,
+        "sum_ft_goals": 310,
+        "observed_variance": 0.10525396051666853,
+        "binomial_noise_floor": 0.10541823242587021,
+        "excess_variance": -0.00016427190920167978
+      }
+    },
+    "pooled_completed": {
+      "n_regular": 1211,
+      "n_ht_readable": 1115,
+      "ht_coverage": 0.9207266721717589,
+      "share": 0.4334763948497854,
+      "sum_ht_goals": 1313,
+      "sum_ft_goals": 3029,
+      "observed_variance": 0.11580595690913865,
+      "binomial_noise_floor": 0.12004701953706763,
+      "excess_variance": -0.0042410626279289765
+    },
+    "pooled_incl_partial": {
+      "n_regular": 1326,
+      "n_ht_readable": 1219,
+      "ht_coverage": 0.9193061840120663,
+      "share": 0.4330637915543576,
+      "sum_ht_goals": 1446,
+      "sum_ft_goals": 3339,
+      "observed_variance": 0.11489954686029957,
+      "binomial_noise_floor": 0.1187888945072682,
+      "excess_variance": -0.0038893476469686328
+    },
+    "frozen_goals_1h_share": 0.4334763948497854,
+    "team_tournament_split_half": {
+      "n_pairs": 125,
+      "r": -0.07629013299305887
+    },
+    "variance_formula": "Observed population variance of match HT-goals/FT-goals for FT-goals>0; noise floor is mean[p*(1-p)/FT-goals] with p equal to the pooled completed-tournament share.",
+    "partial_label": "2026/2027 - Apertura"
+  },
+  "turnover": {
+    "2021/2022 - Clausura": {
+      "new_team_ids": [],
+      "n_new": 0,
+      "left_team_ids": [],
+      "n_left": 0
+    },
+    "2022/2023 - Apertura": {
+      "new_team_ids": [
+        459605
+      ],
+      "n_new": 1,
+      "left_team_ids": [
+        179505
+      ],
+      "n_left": 1
+    },
+    "2022/2023 - Clausura": {
+      "new_team_ids": [],
+      "n_new": 0,
+      "left_team_ids": [],
+      "n_left": 0
+    },
+    "2023/2024 - Apertura": {
+      "new_team_ids": [
+        179505,
+        1525664
+      ],
+      "n_new": 2,
+      "left_team_ids": [
+        49741,
+        177605
+      ],
+      "n_left": 2
+    },
+    "2023/2024 - Clausura": {
+      "new_team_ids": [],
+      "n_new": 0,
+      "left_team_ids": [],
+      "n_left": 0
+    },
+    "2024/2025 - Apertura": {
+      "new_team_ids": [
+        1662005
+      ],
+      "n_new": 1,
+      "left_team_ids": [
+        322381,
+        948224
+      ],
+      "n_left": 2
+    },
+    "2024/2025 - Clausura": {
+      "new_team_ids": [],
+      "n_new": 0,
+      "left_team_ids": [],
+      "n_left": 0
+    },
+    "2025/2026 - Apertura": {
+      "new_team_ids": [
+        1783449,
+        1783451
+      ],
+      "n_new": 2,
+      "left_team_ids": [
+        459605
+      ],
+      "n_left": 1
+    },
+    "2025/2026 - Clausura": {
+      "new_team_ids": [],
+      "n_new": 0,
+      "left_team_ids": [],
+      "n_left": 0
+    },
+    "2026/2027 - Apertura": {
+      "new_team_ids": [
+        136492,
+        2096787
+      ],
+      "n_new": 2,
+      "left_team_ids": [
+        49747,
+        1783451
+      ],
+      "n_left": 2
+    }
+  }
+}

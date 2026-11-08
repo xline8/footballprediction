@@ -1,0 +1,23 @@
+league: FO-PremierLeague
+country: Faroe Islands
+fotmob_id: 250
+tier: 1
+warehouse: data_enrichment/fotmob_world/Faroe Islands/Premier League
+data:
+  matches: league/FO-PremierLeague/data/fo_premier_league_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period: ["2021", "2022", "2023", "2024", "2025"]
+virgin_primary: "2026"
+halves_constants:
+  goals_1h_share: 0.441
+  yellow_cards_1h_share: 0.348
+markets:
+  goals: G-FO
+  cards: K-FO
+  sot: S-FO  # NOT BUILDABLE: no SOT or usable stats in 810/810 payloads
+  corners: C-FO  # NOT BUILDABLE: no corners or usable stats in 810/810 payloads
+  total_shots: T-FO  # NOT BUILDABLE: no total shots or shotmap shots
+notes:
+  - "One AW match is retained with excluded=1; 809 matches are eligible."
+  - "Teams are keyed by FotMob id; display names are canonical most-frequent spellings."
+  - "Halves are presentation-only frozen constants, not fitted features."

@@ -1,0 +1,209 @@
+{
+  "dev_gate": {
+    "gate_zero": {
+      "passes": false,
+      "pooled_climatology": {
+        "arm": "gate_zero",
+        "kind": "climatology",
+        "ll_1x2": 1.0573364355375683,
+        "n": 92,
+        "oull_2_5": 0.5683882847002043,
+        "rps": 0.2508586953790711,
+        "season": "pooled"
+      },
+      "pooled_model": {
+        "arm": "gate_zero",
+        "kind": "model",
+        "ll_1x2": 1.127229096711626,
+        "n": 92,
+        "oull_2_5": 0.5980314452918247,
+        "rps": 0.2630130271304043,
+        "season": "pooled"
+      }
+    },
+    "shrink": {
+      "passes": false,
+      "pooled_climatology": {
+        "arm": "shrink",
+        "kind": "climatology",
+        "ll_1x2": 1.0573364355375683,
+        "n": 92,
+        "oull_2_5": 0.5683882847002043,
+        "rps": 0.2508586953790711,
+        "season": "pooled"
+      },
+      "pooled_model": {
+        "arm": "shrink",
+        "kind": "model",
+        "ll_1x2": 1.127229096711626,
+        "n": 92,
+        "oull_2_5": 0.5980314452918247,
+        "rps": 0.2630130271304043,
+        "season": "pooled"
+      }
+    }
+  },
+  "lambda_differences_vs_gate_zero": {
+    "gate_zero": {
+      "2023": {
+        "lambda_components_differing": 0,
+        "matches_differing": 0,
+        "n": 46
+      },
+      "2024": {
+        "lambda_components_differing": 0,
+        "matches_differing": 0,
+        "n": 46
+      }
+    },
+    "shrink": {
+      "2023": {
+        "lambda_components_differing": 0,
+        "matches_differing": 0,
+        "n": 46
+      },
+      "2024": {
+        "lambda_components_differing": 0,
+        "matches_differing": 0,
+        "n": 46
+      }
+    }
+  },
+  "ou25_base_rate_baseline": {
+    "arm": "base_rate",
+    "kind": "ou2_5_base_rate",
+    "n": 92,
+    "oull_2_5": 0.5623351446188083,
+    "over_rate": 0.75,
+    "season": "pooled"
+  },
+  "rows": [
+    {
+      "arm": "gate_zero",
+      "kind": "model",
+      "ll_1x2": 0.9691552854597012,
+      "n": 46,
+      "oull_2_5": 0.529737314897169,
+      "rps": 0.218763877238986,
+      "season": "2023"
+    },
+    {
+      "arm": "gate_zero",
+      "kind": "climatology",
+      "ll_1x2": 1.0548837181191875,
+      "n": 46,
+      "oull_2_5": 0.5811913316788548,
+      "rps": 0.2589576056846925,
+      "season": "2023"
+    },
+    {
+      "arm": "shrink",
+      "kind": "model",
+      "ll_1x2": 0.9691552854597012,
+      "n": 46,
+      "oull_2_5": 0.529737314897169,
+      "rps": 0.218763877238986,
+      "season": "2023"
+    },
+    {
+      "arm": "shrink",
+      "kind": "climatology",
+      "ll_1x2": 1.0548837181191875,
+      "n": 46,
+      "oull_2_5": 0.5811913316788548,
+      "rps": 0.2589576056846925,
+      "season": "2023"
+    },
+    {
+      "arm": "gate_zero",
+      "kind": "model",
+      "ll_1x2": 1.2853029079635505,
+      "n": 46,
+      "oull_2_5": 0.6663255756864804,
+      "rps": 0.3072621770218225,
+      "season": "2024"
+    },
+    {
+      "arm": "gate_zero",
+      "kind": "climatology",
+      "ll_1x2": 1.059789152955949,
+      "n": 46,
+      "oull_2_5": 0.5555852377215539,
+      "rps": 0.2427597850734497,
+      "season": "2024"
+    },
+    {
+      "arm": "shrink",
+      "kind": "model",
+      "ll_1x2": 1.2853029079635505,
+      "n": 46,
+      "oull_2_5": 0.6663255756864804,
+      "rps": 0.3072621770218225,
+      "season": "2024"
+    },
+    {
+      "arm": "shrink",
+      "kind": "climatology",
+      "ll_1x2": 1.059789152955949,
+      "n": 46,
+      "oull_2_5": 0.5555852377215539,
+      "rps": 0.2427597850734497,
+      "season": "2024"
+    },
+    {
+      "arm": "gate_zero",
+      "kind": "model",
+      "ll_1x2": 1.127229096711626,
+      "n": 92,
+      "oull_2_5": 0.5980314452918247,
+      "rps": 0.2630130271304043,
+      "season": "pooled"
+    },
+    {
+      "arm": "gate_zero",
+      "kind": "climatology",
+      "ll_1x2": 1.0573364355375683,
+      "n": 92,
+      "oull_2_5": 0.5683882847002043,
+      "rps": 0.2508586953790711,
+      "season": "pooled"
+    },
+    {
+      "arm": "shrink",
+      "kind": "model",
+      "ll_1x2": 1.127229096711626,
+      "n": 92,
+      "oull_2_5": 0.5980314452918247,
+      "rps": 0.2630130271304043,
+      "season": "pooled"
+    },
+    {
+      "arm": "shrink",
+      "kind": "climatology",
+      "ll_1x2": 1.0573364355375683,
+      "n": 92,
+      "oull_2_5": 0.5683882847002043,
+      "rps": 0.2508586953790711,
+      "season": "pooled"
+    }
+  ],
+  "sign_check": {
+    "passes": true,
+    "rows": [
+      {
+        "arm": "shrink",
+        "gate_zero_ll_1x2": 0.9691552854597012,
+        "ll_1x2": 0.9691552854597012,
+        "passes": true,
+        "season": "2023"
+      },
+      {
+        "arm": "shrink",
+        "gate_zero_ll_1x2": 1.2853029079635505,
+        "ll_1x2": 1.2853029079635505,
+        "passes": true,
+        "season": "2024"
+      }
+    ]
+  }
+}

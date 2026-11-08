@@ -1,0 +1,491 @@
+{
+ "n": 1859,
+ "seasons": [
+  "2021/2022",
+  "2022/2023",
+  "2023/2024",
+  "2024/2025",
+  "2025/2026",
+  "2026/2027"
+ ],
+ "per_season": {
+  "2021/2022": {
+   "n": 380,
+   "goals": 2.284,
+   "home_goals": 1.258,
+   "away_goals": 1.026,
+   "sot": 7.488,
+   "corners": 8.937,
+   "shots": 21.789,
+   "yellows_events": 3.589,
+   "yellows_stats": 3.003,
+   "reds": 0.208,
+   "xg": 2.49,
+   "coverage": {
+    "stats": 99.7,
+    "half": 0.0,
+    "shotmap": 0.3,
+    "referee": 50.0,
+    "touches": 65.8,
+    "xg": 0.3,
+    "events": 100.0
+   },
+   "phase_counts": {
+    "regular": 380,
+    "playoff": 0
+   }
+  },
+  "2022/2023": {
+   "n": 380,
+   "goals": 2.411,
+   "home_goals": 1.321,
+   "away_goals": 1.089,
+   "sot": 7.863,
+   "corners": 8.684,
+   "shots": 22.358,
+   "yellows_events": 3.666,
+   "yellows_stats": 3.45,
+   "reds": 0.224,
+   "xg": 2.643,
+   "coverage": {
+    "stats": 100.0,
+    "half": 32.1,
+    "shotmap": 0.8,
+    "referee": 100.0,
+    "touches": 67.1,
+    "xg": 0.8,
+    "events": 100.0
+   },
+   "phase_counts": {
+    "regular": 380,
+    "playoff": 0
+   }
+  },
+  "2023/2024": {
+   "n": 379,
+   "goals": 2.459,
+   "home_goals": 1.33,
+   "away_goals": 1.129,
+   "sot": 8.034,
+   "corners": 9.383,
+   "shots": 23.045,
+   "yellows_events": 3.427,
+   "yellows_stats": 3.364,
+   "reds": 0.201,
+   "xg": null,
+   "coverage": {
+    "stats": 100.0,
+    "half": 100.0,
+    "shotmap": 0.0,
+    "referee": 99.7,
+    "touches": 82.1,
+    "xg": 0.0,
+    "events": 100.0
+   },
+   "phase_counts": {
+    "regular": 379,
+    "playoff": 0
+   }
+  },
+  "2024/2025": {
+   "n": 306,
+   "goals": 2.578,
+   "home_goals": 1.507,
+   "away_goals": 1.072,
+   "sot": 8.601,
+   "corners": 9.5,
+   "shots": 24.062,
+   "yellows_events": 3.755,
+   "yellows_stats": 3.703,
+   "reds": 0.222,
+   "xg": 2.38,
+   "coverage": {
+    "stats": 100.0,
+    "half": 100.0,
+    "shotmap": 1.6,
+    "referee": 96.7,
+    "touches": 100.0,
+    "xg": 1.6,
+    "events": 100.0
+   },
+   "phase_counts": {
+    "regular": 306,
+    "playoff": 0
+   }
+  },
+  "2025/2026": {
+   "n": 306,
+   "goals": 2.542,
+   "home_goals": 1.314,
+   "away_goals": 1.229,
+   "sot": 7.817,
+   "corners": 9.255,
+   "shots": 22.618,
+   "yellows_events": 3.915,
+   "yellows_stats": 3.889,
+   "reds": 0.252,
+   "xg": 2.631,
+   "coverage": {
+    "stats": 100.0,
+    "half": 100.0,
+    "shotmap": 100.0,
+    "referee": 82.7,
+    "touches": 100.0,
+    "xg": 100.0,
+    "events": 100.0
+   },
+   "phase_counts": {
+    "regular": 306,
+    "playoff": 0
+   }
+  },
+  "2026/2027": {
+   "n": 108,
+   "goals": 2.676,
+   "home_goals": 1.389,
+   "away_goals": 1.287,
+   "sot": 8.509,
+   "corners": 9.296,
+   "shots": 25.204,
+   "yellows_events": 3.972,
+   "yellows_stats": 3.815,
+   "reds": 0.213,
+   "xg": 2.84,
+   "coverage": {
+    "stats": 100.0,
+    "half": 100.0,
+    "shotmap": 100.0,
+    "referee": 100.0,
+    "touches": 100.0,
+    "xg": 100.0,
+    "events": 100.0
+   },
+   "phase_counts": {
+    "regular": 108,
+    "playoff": 0
+   }
+  }
+ },
+ "yellows_stats_vs_events": {
+  "exact_agreement_pct_by_season": {
+   "2021/2022": 77.0,
+   "2022/2023": 87.1,
+   "2023/2024": 90.5,
+   "2024/2025": 90.8,
+   "2025/2026": 81.7,
+   "2026/2027": 75.0
+  },
+  "pooled_dev_pct": 86.1,
+  "pooled_all_pct": 84.8,
+  "totals_by_season": {
+   "2021/2022": {
+    "events": 1364,
+    "stats": 1138
+   },
+   "2022/2023": {
+    "events": 1393,
+    "stats": 1311
+   },
+   "2023/2024": {
+    "events": 1299,
+    "stats": 1275
+   },
+   "2024/2025": {
+    "events": 1149,
+    "stats": 1133
+   },
+   "2025/2026": {
+    "events": 1198,
+    "stats": 1190
+   },
+   "2026/2027": {
+    "events": 429,
+    "stats": 412
+   }
+  }
+ },
+ "goals_per_xg": {
+  "2021/2022": null,
+  "2022/2023": null,
+  "2023/2024": null,
+  "2024/2025": null,
+  "2025/2026": 0.966,
+  "2026/2027": 0.942
+ },
+ "reliability": {
+  "goals_for": {
+   "r": 0.556,
+   "n_teams": 36
+  },
+  "sot_for": {
+   "r": 0.639,
+   "n_teams": 36
+  },
+  "corners_for": {
+   "r": 0.606,
+   "n_teams": 36
+  },
+  "shots_for": {
+   "r": 0.715,
+   "n_teams": 36
+  },
+  "yellows_for": {
+   "r": 0.445,
+   "n_teams": 36
+  },
+  "touches_for": {
+   "r": 0.771,
+   "n_teams": 36
+  },
+  "touches_against": {
+   "r": 0.732,
+   "n_teams": 36
+  },
+  "bigchance_for": {
+   "r": 0.713,
+   "n_teams": 36
+  },
+  "possession": {
+   "r": 0.872,
+   "n_teams": 36
+  },
+  "xg_for": {
+   "r": null,
+   "n_teams": 0,
+   "note": "era_dead_xg"
+  },
+  "set_play_share": {
+   "r": null,
+   "n_teams": 0,
+   "note": "era_dead_xg"
+  },
+  "xg_per_shot": {
+   "r": null,
+   "n_teams": 0,
+   "note": "era_dead_xg"
+  },
+  "xgot_per_shot": {
+   "r": null,
+   "n_teams": 0,
+   "note": "era_dead_xg"
+  }
+ },
+ "referee_reliability": {
+  "dev_2021_2025": {
+   "r": 0.028,
+   "n_refs": 34
+  },
+  "complete_2021_2026": {
+   "r": 0.156,
+   "n_refs": 37
+  }
+ },
+ "half_shares_2023_2026": {
+  "goals_events": {
+   "n": 895,
+   "share": 0.4457,
+   "observed_sd": 0.3444,
+   "true_sd": 0.0
+  },
+  "sot": {
+   "n": 990,
+   "share": 0.4738,
+   "observed_sd": 0.1946,
+   "true_sd": 0.0203
+  },
+  "corners": {
+   "n": 991,
+   "share": 0.4803,
+   "observed_sd": 0.1786,
+   "true_sd": 0.0194
+  },
+  "total_shots": {
+   "n": 991,
+   "share": 0.4702,
+   "observed_sd": 0.1103,
+   "true_sd": 0.0268
+  },
+  "yellows_events": {
+   "n": 964,
+   "share": 0.3736,
+   "observed_sd": 0.2948,
+   "true_sd": 0.0804
+  }
+ },
+ "churn": {
+  "distinct_teams_per_season": {
+   "2021/2022": 20,
+   "2022/2023": 20,
+   "2023/2024": 20,
+   "2024/2025": 18,
+   "2025/2026": 18,
+   "2026/2027": 18
+  },
+  "entries": {
+   "2022/2023": {
+    "count": 5,
+    "teams": [
+     "Annecy FC",
+     "Bordeaux",
+     "Laval",
+     "Metz",
+     "Saint-Etienne"
+    ]
+   },
+   "2023/2024": {
+    "count": 6,
+    "teams": [
+     "AC Ajaccio",
+     "Angers",
+     "Auxerre",
+     "Concarneau",
+     "Dunkerque",
+     "Troyes"
+    ]
+   },
+   "2024/2025": {
+    "count": 5,
+    "teams": [
+     "Clermont Foot",
+     "Lorient",
+     "Martigues",
+     "Metz",
+     "Red Star"
+    ]
+   },
+   "2025/2026": {
+    "count": 6,
+    "teams": [
+     "Boulogne",
+     "Le Mans",
+     "Montpellier",
+     "Nancy",
+     "Reims",
+     "Saint-Etienne"
+    ]
+   },
+   "2026/2027": {
+    "count": 4,
+    "teams": [
+     "Dijon",
+     "Metz",
+     "Nantes",
+     "Sochaux"
+    ]
+   }
+  },
+  "distinct_teams_overall": 37
+ },
+ "movers": {
+  "2022/2023": {
+   "from Ligue1": [
+    "bordeaux",
+    "metz",
+    "saint-etienne"
+   ],
+   "from Ligue3": [
+    "annecy fc",
+    "laval"
+   ]
+  },
+  "2023/2024": {
+   "from Ligue1": [
+    "ac ajaccio",
+    "angers",
+    "auxerre",
+    "troyes"
+   ],
+   "from Ligue3": [
+    "concarneau",
+    "dunkerque"
+   ]
+  },
+  "2024/2025": {
+   "from Ligue1": [
+    "clermont foot",
+    "lorient",
+    "metz"
+   ],
+   "from Ligue3": [
+    "martigues",
+    "red star"
+   ]
+  },
+  "2025/2026": {
+   "from Ligue1": [
+    "montpellier",
+    "reims",
+    "saint-etienne"
+   ],
+   "from Ligue3": [
+    "boulogne",
+    "le mans",
+    "nancy"
+   ]
+  },
+  "2026/2027": {
+   "from Ligue1": [
+    "metz",
+    "nantes"
+   ],
+   "from Ligue3": [
+    "dijon",
+    "sochaux"
+   ]
+  }
+ },
+ "mover_pooled": {
+  "from Ligue1": {
+   "team_matches": 493,
+   "gf_per_match": 1.479,
+   "ga_per_match": 1.101,
+   "gd_per_match": 0.377,
+   "league_mu": 1.252,
+   "gf_delta_vs_mu": 0.227,
+   "ga_delta_vs_mu": -0.151
+  },
+  "from Ligue3": {
+   "team_matches": 346,
+   "gf_per_match": 1.075,
+   "ga_per_match": 1.413,
+   "gd_per_match": -0.338,
+   "league_mu": 1.252,
+   "gf_delta_vs_mu": -0.177,
+   "ga_delta_vs_mu": 0.161
+  }
+ },
+ "over_rates": {
+  "evaluation_2022_2025": {
+   "goals_ou_2.5": 46.1,
+   "sot_over_7.5": 56.6,
+   "sot_over_8.5": 43.7,
+   "shots_over_23.5": 45.3,
+   "corners_over_9.5": 44.4,
+   "corners_over_10.5": 32.8,
+   "cards_over_4.5": 29.1,
+   "cards_over_5.5": 15.0,
+   "shots_over_24.5": 38.4,
+   "shots_over_25.5": 31.9,
+   "shots_over_26.5": 25.4
+  },
+  "virgin_2025_2026": {
+   "goals_ou_2.5": 47.7,
+   "sot_over_7.5": 51.0,
+   "sot_over_8.5": 38.2,
+   "shots_over_23.5": 43.5,
+   "corners_over_9.5": 43.5,
+   "corners_over_10.5": 32.4,
+   "cards_over_4.5": 35.9,
+   "cards_over_5.5": 17.6,
+   "shots_over_24.5": 37.3,
+   "shots_over_25.5": 32.0,
+   "shots_over_26.5": 24.8
+  }
+ },
+ "home_advantage_complete": {
+  "home_win_rate_pct": 42.3,
+  "home_goals": 1.34,
+  "away_goals": 1.106
+ },
+ "thin_data_team_seasons_lt6": 0
+}

@@ -1,0 +1,46 @@
+league: VE-PrimeraDivision
+country: Venezuela
+fotmob_id: 339
+seasons: [2021, 2022, 2023, 2024, 2025, 2026]
+warehouse: data_enrichment/fotmob_world/Venezuela/Primera Division
+data:
+  matches: league/VE-PrimeraDivision/data/ve_matches.csv
+  team_matches: league/VE-PrimeraDivision/data/ve_team_matches.csv
+
+windows:
+  dev_goals: [2023, 2024]
+  seed_goals: [2021, 2022]
+  virgin_goals: [2025]
+  confirmatory_goals: [2026]
+  counts_seed: 2025 Clausura regular
+  counts_dev: 2026 Apertura regular
+  counts_virgin: 2026 Clausura regular
+  counts_virgin_status: TRANSITIONAL
+
+markets:
+  goals: G-VE
+  sot: S-VE
+  corners: C-VE
+  cards: K-VE
+  total_shots: T-VE
+cards_target: stats_yellows
+halves_constants:
+  source: regular matches only; ratio of summed first-half values to summed full-match values
+  goals: {source: Goal events, seasons: 2021-2025, exclude_awarded: true, n: 947, share: 0.4478293983}
+  ShotsOnTarget: {source: stats period splits, stats-era regular, n: 243, share: 0.4651384909}
+  corners: {source: stats period splits, stats-era regular, n: 242, share: 0.4669067987}
+  stats_yellows: {source: stats period splits, stats-era regular, n: 241, share: 0.3900144718}
+  total_shots: {source: stats period splits, stats-era regular, n: 243, share: 0.4661748548}
+
+notes:
+  phase_rule: >-
+    playoff iff matchRound contains (case-insensitive) quadrangular or final,
+    OR general.leagueName contains Second stage, Second Stage, Super Final,
+    Final Stage, or Fase Final; otherwise regular.
+  stats_era: stats begin 2025-07-04; 2025 has 117 and 2026 has 226 stats matches.
+  cards: use stats yellow_cards for K; event cards are audit-only because pre-2026 events are broken and 2026 overcounts.
+  xg: no non-empty shotmaps and no expected_goals key; goals-only fallback.
+  drops: X8 referee reliability and X2 second-tier prior are not runnable; X1 is degraded and X3/X4/X6 impossible.
+  awarded: 3575291 and 1000018666 use score-based goals; first-half goals are missing.
+  in_progress: 2026 runs through 2026-11-08; remaining Clausura Quadrangular round 6, Clausura Final, and Super Final are pending.
+  naming: 2026 uses two disjoint leagueName variants for the same league id; do not split the competition.

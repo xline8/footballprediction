@@ -1,0 +1,298 @@
+{
+  "2021": {
+    "n_matches": 325,
+    "coverage_pct": {
+      "has_stats_all": 100.0,
+      "has_stats_half": 2.769230769230769,
+      "has_shotmap": 3.076923076923077,
+      "has_events": 100.0,
+      "has_lineup": 100.0,
+      "has_player_stats": 100.0
+    },
+    "xg_present_pct": 3.076923076923077,
+    "referee_nonnull_pct": 0.0,
+    "touches_opp_box_present_count": 188,
+    "score_events_mismatch_count": 0,
+    "distinct_teams": 26,
+    "date_range": [
+      "2021-07-16",
+      "2021-12-13"
+    ],
+    "xgot_population_shares": {
+      "all": {
+        "numerator_xgot_nonnull": 72.0,
+        "denominator_shots": 259.0,
+        "share": 0.277992277992278
+      },
+      "on_target": {
+        "numerator_xgot_nonnull": 72.0,
+        "denominator_shots": 134.0,
+        "share": 0.5373134328358209
+      },
+      "off_target": {
+        "numerator_xgot_nonnull": 0.0,
+        "denominator_shots": 125.0,
+        "share": 0.0
+      }
+    }
+  },
+  "2022": {
+    "n_matches": 378,
+    "coverage_pct": {
+      "has_stats_all": 100.0,
+      "has_stats_half": 1.8518518518518519,
+      "has_shotmap": 4.761904761904762,
+      "has_events": 100.0,
+      "has_lineup": 100.0,
+      "has_player_stats": 100.0
+    },
+    "xg_present_pct": 4.761904761904762,
+    "referee_nonnull_pct": 100.0,
+    "touches_opp_box_present_count": 168,
+    "score_events_mismatch_count": 0,
+    "distinct_teams": 28,
+    "date_range": [
+      "2022-06-03",
+      "2022-10-25"
+    ],
+    "xgot_population_shares": {
+      "all": {
+        "numerator_xgot_nonnull": 188.0,
+        "denominator_shots": 471.0,
+        "share": 0.3991507430997877
+      },
+      "on_target": {
+        "numerator_xgot_nonnull": 160.0,
+        "denominator_shots": 269.0,
+        "share": 0.5947955390334573
+      },
+      "off_target": {
+        "numerator_xgot_nonnull": 28.0,
+        "denominator_shots": 202.0,
+        "share": 0.13861386138613863
+      }
+    }
+  },
+  "2023": {
+    "n_matches": 378,
+    "coverage_pct": {
+      "has_stats_all": 100.0,
+      "has_stats_half": 72.75132275132275,
+      "has_shotmap": 100.0,
+      "has_events": 100.0,
+      "has_lineup": 100.0,
+      "has_player_stats": 100.0
+    },
+    "xg_present_pct": 100.0,
+    "referee_nonnull_pct": 99.47089947089947,
+    "touches_opp_box_present_count": 239,
+    "score_events_mismatch_count": 0,
+    "distinct_teams": 28,
+    "date_range": [
+      "2023-01-27",
+      "2023-07-30"
+    ],
+    "xgot_population_shares": {
+      "all": {
+        "numerator_xgot_nonnull": 2886.0,
+        "denominator_shots": 9164.0,
+        "share": 0.31492797904845043
+      },
+      "on_target": {
+        "numerator_xgot_nonnull": 2874.0,
+        "denominator_shots": 5142.0,
+        "share": 0.558926487747958
+      },
+      "off_target": {
+        "numerator_xgot_nonnull": 12.0,
+        "denominator_shots": 4022.0,
+        "share": 0.0029835902536051715
+      }
+    }
+  },
+  "2024": {
+    "n_matches": 378,
+    "coverage_pct": {
+      "has_stats_all": 100.0,
+      "has_stats_half": 100.0,
+      "has_shotmap": 100.0,
+      "has_events": 100.0,
+      "has_lineup": 100.0,
+      "has_player_stats": 100.0
+    },
+    "xg_present_pct": 100.0,
+    "referee_nonnull_pct": 100.0,
+    "touches_opp_box_present_count": 378,
+    "score_events_mismatch_count": 0,
+    "distinct_teams": 28,
+    "date_range": [
+      "2024-05-10",
+      "2024-12-17"
+    ],
+    "xgot_population_shares": {
+      "all": {
+        "numerator_xgot_nonnull": 7736.0,
+        "denominator_shots": 9068.0,
+        "share": 0.8531098367887076
+      },
+      "on_target": {
+        "numerator_xgot_nonnull": 4587.0,
+        "denominator_shots": 5093.0,
+        "share": 0.9006479481641468
+      },
+      "off_target": {
+        "numerator_xgot_nonnull": 3149.0,
+        "denominator_shots": 3975.0,
+        "share": 0.7922012578616352
+      }
+    }
+  },
+  "2025 - Apertura": {
+    "n_matches": 240,
+    "coverage_pct": {
+      "has_stats_all": 100.0,
+      "has_stats_half": 100.0,
+      "has_shotmap": 100.0,
+      "has_events": 100.0,
+      "has_lineup": 100.0,
+      "has_player_stats": 100.0
+    },
+    "xg_present_pct": 100.0,
+    "referee_nonnull_pct": 99.16666666666667,
+    "touches_opp_box_present_count": 240,
+    "score_events_mismatch_count": 1,
+    "distinct_teams": 30,
+    "date_range": [
+      "2025-01-23",
+      "2025-05-04"
+    ],
+    "xgot_population_shares": {
+      "all": {
+        "numerator_xgot_nonnull": 5665.0,
+        "denominator_shots": 5689.0,
+        "share": 0.9957813323958516
+      },
+      "on_target": {
+        "numerator_xgot_nonnull": 3213.0,
+        "denominator_shots": 3236.0,
+        "share": 0.9928924598269468
+      },
+      "off_target": {
+        "numerator_xgot_nonnull": 2452.0,
+        "denominator_shots": 2453.0,
+        "share": 0.9995923359152059
+      }
+    }
+  },
+  "2025 - Clausura": {
+    "n_matches": 240,
+    "coverage_pct": {
+      "has_stats_all": 100.0,
+      "has_stats_half": 100.0,
+      "has_shotmap": 100.0,
+      "has_events": 100.0,
+      "has_lineup": 100.0,
+      "has_player_stats": 100.0
+    },
+    "xg_present_pct": 100.0,
+    "referee_nonnull_pct": 100.0,
+    "touches_opp_box_present_count": 240,
+    "score_events_mismatch_count": 0,
+    "distinct_teams": 30,
+    "date_range": [
+      "2025-07-11",
+      "2025-11-17"
+    ],
+    "xgot_population_shares": {
+      "all": {
+        "numerator_xgot_nonnull": 5565.0,
+        "denominator_shots": 5580.0,
+        "share": 0.9973118279569892
+      },
+      "on_target": {
+        "numerator_xgot_nonnull": 3174.0,
+        "denominator_shots": 3189.0,
+        "share": 0.9952963311382879
+      },
+      "off_target": {
+        "numerator_xgot_nonnull": 2391.0,
+        "denominator_shots": 2391.0,
+        "share": 1.0
+      }
+    }
+  },
+  "2026 - Apertura": {
+    "n_matches": 240,
+    "coverage_pct": {
+      "has_stats_all": 100.0,
+      "has_stats_half": 100.0,
+      "has_shotmap": 100.0,
+      "has_events": 100.0,
+      "has_lineup": 100.0,
+      "has_player_stats": 100.0
+    },
+    "xg_present_pct": 100.0,
+    "referee_nonnull_pct": 90.83333333333333,
+    "touches_opp_box_present_count": 240,
+    "score_events_mismatch_count": 0,
+    "distinct_teams": 30,
+    "date_range": [
+      "2026-01-22",
+      "2026-05-05"
+    ],
+    "xgot_population_shares": {
+      "all": {
+        "numerator_xgot_nonnull": 5770.0,
+        "denominator_shots": 5783.0,
+        "share": 0.9977520318173958
+      },
+      "on_target": {
+        "numerator_xgot_nonnull": 3207.0,
+        "denominator_shots": 3220.0,
+        "share": 0.9959627329192546
+      },
+      "off_target": {
+        "numerator_xgot_nonnull": 2563.0,
+        "denominator_shots": 2563.0,
+        "share": 1.0
+      }
+    }
+  },
+  "2026 - Clausura": {
+    "n_matches": 240,
+    "coverage_pct": {
+      "has_stats_all": 100.0,
+      "has_stats_half": 100.0,
+      "has_shotmap": 100.0,
+      "has_events": 100.0,
+      "has_lineup": 100.0,
+      "has_player_stats": 100.0
+    },
+    "xg_present_pct": 100.0,
+    "referee_nonnull_pct": 100.0,
+    "touches_opp_box_present_count": 240,
+    "score_events_mismatch_count": 0,
+    "distinct_teams": 30,
+    "date_range": [
+      "2026-07-23",
+      "2026-11-08"
+    ],
+    "xgot_population_shares": {
+      "all": {
+        "numerator_xgot_nonnull": 6424.0,
+        "denominator_shots": 6443.0,
+        "share": 0.997051063169331
+      },
+      "on_target": {
+        "numerator_xgot_nonnull": 3541.0,
+        "denominator_shots": 3559.0,
+        "share": 0.9949423995504355
+      },
+      "off_target": {
+        "numerator_xgot_nonnull": 2883.0,
+        "denominator_shots": 2884.0,
+        "share": 0.9996532593619972
+      }
+    }
+  }
+}

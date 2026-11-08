@@ -1,0 +1,80 @@
+{
+  "candidate": "K-SE-L1",
+  "stage": "dev",
+  "dev_pass_arm_of_record_x8": true,
+  "legs": {
+    "gate_zero": {
+      "pooled_ll_3_5": {
+        "model": 0.6917335534321686,
+        "base": 0.6884277768836752,
+        "naive": 0.6870554469856246
+      },
+      "per_season_ll_3_5": {
+        "2022": 0.7058259244808689,
+        "2023": 0.6799869996458654,
+        "2024": 0.6893877361697714
+      },
+      "harness_pooled_ll_3_5": {
+        "model": 0.6917335534321686,
+        "base": 0.6884277768836751,
+        "naive": 0.6870554469856246
+      }
+    },
+    "x8": {
+      "pooled_ll_3_5": {
+        "model": 0.6770395587248762,
+        "base": 0.6884277768836752,
+        "naive": 0.6870554469856246
+      },
+      "per_season_ll_3_5": {
+        "2022": 0.6940086210992822,
+        "2023": 0.668228559699969,
+        "2024": 0.6688814953753773
+      },
+      "harness_pooled_ll_3_5": {
+        "model": 0.6770395587248762,
+        "base": 0.6884277768836751,
+        "naive": 0.6870554469856246
+      }
+    }
+  },
+  "sign_check_x8_vs_gate_zero": {
+    "wins": 3,
+    "of": 3,
+    "pass": true
+  },
+  "documented_pooled_ll_3_5": {
+    "gate_zero": 0.6917,
+    "x8": 0.677,
+    "base": 0.6884,
+    "naive": 0.6871
+  },
+  "reproduced_within_artefact_rounding": {
+    "gate_zero": true,
+    "x8": true,
+    "base": true,
+    "naive": true
+  },
+  "referee_coverage": {
+    "2021": {
+      "known": 0,
+      "n": 240,
+      "fraction": 0.0
+    },
+    "2022": {
+      "known": 210,
+      "n": 240,
+      "fraction": 0.875
+    },
+    "2023": {
+      "known": 204,
+      "n": 240,
+      "fraction": 0.85
+    },
+    "2024": {
+      "known": 170,
+      "n": 240,
+      "fraction": 0.7083333333333334
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "protocol": {
+    "virgin_season": "2026",
+    "transitional": true
+  },
+  "read_arms": [
+    "GZ",
+    "RS"
+  ],
+  "arms": {
+    "GZ": {
+      "ll_11.5": 0.6414091718442263,
+      "calibration_diff": -0.04930592663963249,
+      "calibration_se": 0.03350375820718629,
+      "n": 199,
+      "leg_i": true,
+      "leg_ii": false,
+      "leg_iii": true,
+      "virgin_(i)": true,
+      "virgin_(ii)": false,
+      "virgin_(iii)": true
+    },
+    "RS": {
+      "ll_11.5": 0.6410452635338385,
+      "calibration_diff": -0.04851530447205683,
+      "calibration_se": 0.03350311814692621,
+      "n": 199,
+      "leg_i": true,
+      "leg_ii": false,
+      "leg_iii": true,
+      "virgin_(i)": true,
+      "virgin_(ii)": false,
+      "virgin_(iii)": true
+    }
+  },
+  "baselines": {
+    "league_base_rate": {
+      "ll_11.5": 0.6704414734856451,
+      "rate": 0.45
+    },
+    "naive": {
+      "ll_11.5": 0.6567931892220108,
+      "calibration_diff": -0.035383185108891727,
+      "calibration_se": 0.03411341370875354,
+      "n": 199
+    }
+  },
+  "dev_gate": {
+    "GZ": true,
+    "RS": true
+  },
+  "shipped_arm": null,
+  "verdict": "FAIL",
+  "calibration_breach_plus_se_pp": {
+    "GZ": 0.58021684324462,
+    "RS": 0.5012186325130619
+  }
+}

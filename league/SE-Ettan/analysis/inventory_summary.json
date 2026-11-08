@@ -1,0 +1,126 @@
+{
+ "seasons": {
+  "2021": {
+   "n": 262,
+   "stats": 0,
+   "splits": 0,
+   "events": 0,
+   "lineup_11": 0,
+   "referee": 0,
+   "goals_pm": 3.2900763358778624,
+   "goals_pm_norra": 3.3655172413793104,
+   "goals_pm_sodra": 3.1965811965811968,
+   "home_goals_pm": 1.8358778625954197,
+   "away_goals_pm": 1.4541984732824427,
+   "yell_ev_pm": null,
+   "teams": 32,
+   "teams_norra": 16,
+   "teams_sodra": 16,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "phases": {
+    "norra": 145,
+    "sodra": 117
+   },
+   "rounds": 30
+  },
+  "2022": {
+   "n": 480,
+   "stats": 0,
+   "splits": 0,
+   "events": 480,
+   "lineup_11": 480,
+   "referee": 0,
+   "goals_pm": 3.025,
+   "goals_pm_norra": 3.2083333333333335,
+   "goals_pm_sodra": 2.841666666666667,
+   "home_goals_pm": 1.5833333333333333,
+   "away_goals_pm": 1.4416666666666667,
+   "yell_ev_pm": 3.4375,
+   "teams": 32,
+   "teams_norra": 16,
+   "teams_sodra": 16,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "phases": {
+    "norra": 240,
+    "sodra": 240
+   },
+   "rounds": 30
+  },
+  "2023": {
+   "n": 480,
+   "stats": 0,
+   "splits": 0,
+   "events": 480,
+   "lineup_11": 480,
+   "referee": 0,
+   "goals_pm": 2.875,
+   "goals_pm_norra": 2.9583333333333335,
+   "goals_pm_sodra": 2.7916666666666665,
+   "home_goals_pm": 1.5916666666666666,
+   "away_goals_pm": 1.2833333333333334,
+   "yell_ev_pm": 3.28125,
+   "teams": 32,
+   "teams_norra": 16,
+   "teams_sodra": 16,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "phases": {
+    "sodra": 240,
+    "norra": 240
+   },
+   "rounds": 30
+  },
+  "2024": {
+   "n": 480,
+   "stats": 0,
+   "splits": 0,
+   "events": 480,
+   "lineup_11": 480,
+   "referee": 0,
+   "goals_pm": 3.0625,
+   "goals_pm_norra": 3.3208333333333333,
+   "goals_pm_sodra": 2.8041666666666667,
+   "home_goals_pm": 1.65625,
+   "away_goals_pm": 1.40625,
+   "yell_ev_pm": 3.370833333333333,
+   "teams": 32,
+   "teams_norra": 16,
+   "teams_sodra": 16,
+   "xg_rows": 0,
+   "score_mismatch": 1,
+   "phases": {
+    "norra": 240,
+    "sodra": 240
+   },
+   "rounds": 30
+  },
+  "2025": {
+   "n": 480,
+   "stats": 0,
+   "splits": 0,
+   "events": 480,
+   "lineup_11": 480,
+   "referee": 0,
+   "goals_pm": 3.1979166666666665,
+   "goals_pm_norra": 3.3625,
+   "goals_pm_sodra": 3.033333333333333,
+   "home_goals_pm": 1.7791666666666666,
+   "away_goals_pm": 1.41875,
+   "yell_ev_pm": 3.314583333333333,
+   "teams": 32,
+   "teams_norra": 16,
+   "teams_sodra": 16,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "phases": {
+    "norra": 240,
+    "sodra": 240
+   },
+   "rounds": 30
+  }
+ },
+ "total_matches_le_2025": 2182,
+ "note_2026": "Season 2026 rows exist in the built CSVs but were filtered out at load and never read in any analysis, fit, or gate (confirmatory reserve)."
+}

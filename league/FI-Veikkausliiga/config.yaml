@@ -1,0 +1,37 @@
+# FI-Veikkausliiga (Finland) — league config
+league: FI-Veikkausliiga
+country: Finland
+fotmob_id: 51
+tier: 1
+warehouse: data_enrichment/fotmob_world/Finland/Veikkausliiga
+data:
+  matches: league/FI-Veikkausliiga/data/fi_matches.csv
+  team_matches: league/FI-Veikkausliiga/data/fi_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period:
+  goals: ["2022", "2023", "2024", "2025"]   # scored; warm-up 2021
+  stats_markets: ["2022", "2023", "2024", "2025"]   # scored; warm-up 2021 (130 stats rows)
+  cards: ["2022", "2023", "2024", "2025"]   # scored; warm-up 2021
+virgin_primary: "2026"          # COMPLETE season (177/177, last match 2026-11-08) — read ONCE per candidate
+virgin_confirmatory: null       # no later season exists in the feed
+halves_constants:               # frozen: goals/yellows from EVENT TIMES (dev era); SOT/corners from 2025 PERIOD SPLITS (only dev season with splits)
+  goals_1h_share: 0.4295        # 2021-2025 events, n=790 matches with goals
+  yellow_cards_1h_share: 0.3109 # 2021-2025 events, n=826 matches with yellows
+  sot_1h_share: 0.4400          # 2025 splits, n=177
+  corners_1h_share: 0.4631      # 2025 splits, n=177
+  total_shots_1h_share: null    # T-FI not built (target definition break)
+markets:
+  goals: G-FI        # DC goals-only (no xG in feed); arms: Gate Zero, SHRINK, X2 entrant (in-corpus)
+  sot: S-FI          # v5 reference; arms: Gate Zero, RS ratio-shrink (X4/X6 impossible: no shotmap)
+  corners: C-FI      # corners reference, possession-only covariates (big_chance rich-era only); arm: Gate Zero only (X7 window-infeasible)
+  cards: K-FI        # cards reference on EVENT-derived yellows; arm: Gate Zero only (X8 impossible: referee names absent in dev era)
+  total_shots: null  # NOT BUILT: total_shots definition break between thin era (2021-24, 15.2-19.4/match) and rich era (2025-26, 26.3-26.4/match); only one rich-era dev season exists
+notes:
+  - Calendar-year season (Apr - early Nov), 12 teams. Format per season from general.leagueName: regular 132 + Championship Group 15 (2021-24) or 30 (2025-26) + Relegation Group 15 + ECL Playoff 5 (2022-24 only). Phase rule frozen: all phases are ordinary rows with a phase flag; no cross-tier play-off rows exist in league_id 51.
+  - Stats feed has TWO eras: thin 2021-2024 (BallPossesion/total_shots/ShotsOnTarget/corners, All period only; 2021 missing stats for 32 regular-phase matches) and rich 2025-2026 (32 keys incl. card keys, touches_opp_box, big_chance, WITH period splits; splits verified All = 1H + 2H).
+  - No xG and no shotmap in ANY season -> X1 blend falls back goals-only; X3/X4/X6 impossible by data absence.
+  - Referee name empty in all of 2021-2024, 36/177 in 2025, 96/177 in 2026 -> X8 impossible on the dev era; cards are a single-arm candidate.
+  - Cards target is EVENT-derived unified yellows for all seasons (stats card keys exist only 2025-2026). Stats-vs-events check 2025-2026: exact agreement 81.9%/76.8%, mean stats-events -0.040/-0.096 per match — no era flip; the event target is forced by coverage, not disagreement.
+  - Team-name stability: 17 FotMob team ids, every id carries exactly one name in this corpus. All logic keyed by team id.
+  - 2025 is a high outlier season (goals 3.294/match, SOT 9.463); virgin 2026 is low (goals 2.610, SOT 8.701). Recorded pre-fitting; the gates decide.
+  - Predictions-only: no FI odds/settlement source in-system.

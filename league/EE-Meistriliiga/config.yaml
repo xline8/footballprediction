@@ -1,0 +1,19 @@
+league: EE-Meistriliiga
+country: Estonia
+fotmob_id: 248
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period: ["2021", "2022", "2023", "2024", "2025"]
+virgin_primary: "2026"
+virgin_confirmatory: null
+markets:
+  goals: G-EE
+  sot: S-EE
+  corners: C-EE
+  cards: K-EE
+  total_shots: T-EE
+notes:
+  - 2021 is partial: 156 matches, rounds 1-30 complete and rounds 31-32 partial.
+  - 2022-2026 are complete 10-team, 36-round single leagues; FotMob's Regular Season label is the whole competition.
+  - Stats, shotmap and period splits are absent in all payloads; FT-only presentation.
+  - Card events are yellow-less before 2025 (pre-2025 Card events are reds
+    only: 34/41/49/44 in 2021-2024, zero yellows); cards are not buildable.

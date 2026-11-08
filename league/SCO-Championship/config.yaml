@@ -1,0 +1,28 @@
+# Scotland Championship — Phase A configuration
+league: SCO-Championship
+country: Scotland
+fotmob_id: 123
+tier: 2
+data:
+  matches: league/SCO-Championship/data/sco_championship_matches.csv
+  team_matches: league/SCO-Championship/data/sco_championship_team_matches.csv
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.4553
+  yellow_cards_1h_share: 0.3121
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+markets:
+  goals: G-SCOCH
+  sot: S-SCOCH
+  corners: C-SCOCH
+  cards: K-SCOCH
+  total_shots: T-SCOCH
+notes:
+  - Ten-team quadruple round-robin, 36 rounds; phase=regular is frozen for every feed row.
+  - Stats coverage has the documented 2022/2023, 2023/2024, 2024/2025, 2025/2026, and 2026/2027 outages.
+  - Cards target event-feed unified yellows; stats yellows agree exactly on the 19 rich matches.
+  - The feed has no xG or shotmap and no play-off rows.

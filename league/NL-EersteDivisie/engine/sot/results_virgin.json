@@ -1,0 +1,35 @@
+{
+  "n": 380,
+  "arms": {
+    "GZ": {
+      "ll_9.5": 0.6808678169530551,
+      "calibration_diff": 0.029376149750456253,
+      "calibration_se": 0.025330948822890484,
+      "n": 380
+    },
+    "RS": {
+      "ll_9.5": 0.6808997505367202,
+      "calibration_diff": 0.029465923209982033,
+      "calibration_se": 0.02533099474404076,
+      "n": 380
+    }
+  },
+  "read_arms": [
+    "GZ",
+    "RS"
+  ],
+  "baselines": {
+    "league_base_rate_constant": {
+      "ll_9.5": 0.6970131502451042,
+      "calibration_diff": -0.08355263157894735,
+      "n": 380
+    },
+    "naive": {
+      "ll_9.5": 0.6841119169526624,
+      "calibration_diff": -0.011501135319442057,
+      "n": 380
+    }
+  },
+  "calibration_sign_convention": "actual_over_rate - mean_predicted_over_probability",
+  "league_base_rate_constant_definition": "pooled 2021/2022-2024/2025 over-9.5 rate, constant across 2025/2026"
+}

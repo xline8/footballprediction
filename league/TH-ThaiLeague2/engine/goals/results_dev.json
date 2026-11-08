@@ -1,0 +1,48 @@
+{
+  "protocol": {
+    "league": "TH-ThaiLeague2",
+    "dev_season": "2024/2025",
+    "warmup_matches": 90,
+    "scored_n": 183,
+    "primary_line": "OU2.5",
+    "sign_convention": "actual_minus_predicted"
+  },
+  "rows": [
+    {
+      "n": 183,
+      "ll_1x2": 1.0620426466015942,
+      "rps": 0.2232368752337618,
+      "oull_2_5": 0.7248839814173893,
+      "arm": "gate_zero",
+      "season": "pooled",
+      "kind": "model"
+    },
+    {
+      "n": 183,
+      "ll_1x2": 1.0478435151928793,
+      "rps": 0.2212586941573383,
+      "oull_2_5": 0.6960577882281702,
+      "arm": "gate_zero",
+      "season": "pooled",
+      "kind": "climatology"
+    },
+    {
+      "n": 183,
+      "ll_1x2": 1.0620426466015942,
+      "rps": 0.2232368752337618,
+      "oull_2_5": 0.7248839814173893,
+      "arm": "shrink",
+      "season": "pooled",
+      "kind": "model"
+    },
+    {
+      "n": 183,
+      "ll_1x2": 1.0478435151928793,
+      "rps": 0.2212586941573383,
+      "oull_2_5": 0.6960577882281702,
+      "arm": "shrink",
+      "season": "pooled",
+      "kind": "climatology"
+    }
+  ]
+}

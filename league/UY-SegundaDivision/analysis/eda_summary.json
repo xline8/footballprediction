@@ -1,0 +1,389 @@
+{
+ "seasons": {
+  "2021": {
+   "payloads": 138,
+   "finished": 85,
+   "unfinished": 53,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 0,
+   "referee": 0,
+   "lineup": 0,
+   "teams_finished": 12,
+   "goals_pm_finished": 2.1058823529411765,
+   "home_win_rate": 0.3176470588235294,
+   "draw_rate": 0.25882352941176473,
+   "away_win_rate": 0.4235294117647059,
+   "ou25_over_rate": 0.3764705882352941
+  },
+  "2022": {
+   "payloads": 169,
+   "finished": 169,
+   "unfinished": 0,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 156,
+   "referee": 0,
+   "lineup": 0,
+   "teams_finished": 12,
+   "goals_pm_finished": 2.1597633136094676,
+   "home_win_rate": 0.378698224852071,
+   "draw_rate": 0.28402366863905326,
+   "away_win_rate": 0.33727810650887574,
+   "ou25_over_rate": 0.3727810650887574
+  },
+  "2023": {
+   "payloads": 231,
+   "finished": 231,
+   "unfinished": 0,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 214,
+   "referee": 0,
+   "lineup": 0,
+   "teams_finished": 14,
+   "goals_pm_finished": 2.411255411255411,
+   "home_win_rate": 0.39826839826839827,
+   "draw_rate": 0.2554112554112554,
+   "away_win_rate": 0.3463203463203463,
+   "ou25_over_rate": 0.4155844155844156
+  },
+  "2024": {
+   "payloads": 233,
+   "finished": 233,
+   "unfinished": 0,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 212,
+   "referee": 0,
+   "lineup": 0,
+   "teams_finished": 14,
+   "goals_pm_finished": 2.124463519313305,
+   "home_win_rate": 0.41630901287553645,
+   "draw_rate": 0.2703862660944206,
+   "away_win_rate": 0.3133047210300429,
+   "ou25_over_rate": 0.33905579399141633
+  },
+  "2025": {
+   "payloads": 230,
+   "finished": 230,
+   "unfinished": 0,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 210,
+   "referee": 0,
+   "lineup": 0,
+   "teams_finished": 14,
+   "goals_pm_finished": 2.1652173913043478,
+   "home_win_rate": 0.3782608695652174,
+   "draw_rate": 0.29130434782608694,
+   "away_win_rate": 0.33043478260869563,
+   "ou25_over_rate": 0.3652173913043478
+  },
+  "2026": {
+   "payloads": 218,
+   "finished": 218,
+   "unfinished": 0,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 202,
+   "referee": 0,
+   "lineup": 0,
+   "teams_finished": 14,
+   "goals_pm_finished": 2.3256880733944953,
+   "home_win_rate": 0.40825688073394495,
+   "draw_rate": 0.3211009174311927,
+   "away_win_rate": 0.2706422018348624,
+   "ou25_over_rate": 0.3944954128440367
+  }
+ },
+ "pooled_eval": {
+  "n": 863,
+  "home_win_rate": 0.3939745075318656,
+  "draw_rate": 0.2746234067207416,
+  "away_win_rate": 0.3314020857473928,
+  "ou25_over_rate": 0.373117033603708,
+  "goals_pm": 2.2190034762456547
+ },
+ "trait_reliability_dev": {
+  "goals_for": {
+   "split_half_r": 0.18667489238383952,
+   "n_teams": 30,
+   "note": null
+  },
+  "goals_against": {
+   "split_half_r": 0.6174050275608762,
+   "n_teams": 30,
+   "note": null
+  },
+  "sot": {
+   "split_half_r": null,
+   "n_teams": 0,
+   "note": "target absent; n=0"
+  },
+  "corners": {
+   "split_half_r": null,
+   "n_teams": 0,
+   "note": "target absent; n=0"
+  },
+  "shots": {
+   "split_half_r": null,
+   "n_teams": 0,
+   "note": "target absent; n=0"
+  },
+  "yellows": {
+   "split_half_r": null,
+   "n_teams": 0,
+   "note": "target absent; n=0"
+  }
+ },
+ "season_to_season_dev": {
+  "goals_for": [
+   {
+    "seasons": "2021-2022",
+    "r": -0.6369176371732521,
+    "n_teams": 7
+   },
+   {
+    "seasons": "2022-2023",
+    "r": 0.2577120791942305,
+    "n_teams": 7
+   },
+   {
+    "seasons": "2023-2024",
+    "r": 0.5772430019907984,
+    "n_teams": 9
+   },
+   {
+    "seasons": "2024-2025",
+    "r": -0.06329981217200731,
+    "n_teams": 9
+   }
+  ],
+  "goals_against": [
+   {
+    "seasons": "2021-2022",
+    "r": 0.4085907614586942,
+    "n_teams": 7
+   },
+   {
+    "seasons": "2022-2023",
+    "r": 0.44265818197375206,
+    "n_teams": 7
+   },
+   {
+    "seasons": "2023-2024",
+    "r": 0.4434029163779385,
+    "n_teams": 9
+   },
+   {
+    "seasons": "2024-2025",
+    "r": -0.19434617298139933,
+    "n_teams": 9
+   }
+  ]
+ },
+ "halves_dev": {
+  "rule": "event minute <=45 is first half; added-time field unavailable",
+  "share_1h": 0.43289817232375977,
+  "n_goals": 1915,
+  "n_matches": 792,
+  "by_season": {
+   "2022": {
+    "share_1h": 0.5178082191780822,
+    "n_goals": 365
+   },
+   "2023": {
+    "share_1h": 0.41831238779174146,
+    "n_goals": 557
+   },
+   "2024": {
+    "share_1h": 0.3797979797979798,
+    "n_goals": 495
+   },
+   "2025": {
+    "share_1h": 0.4397590361445783,
+    "n_goals": 498
+   }
+  },
+  "per_match_share_variance": 0.13285672916549232,
+  "team_share_split_half_r": 0.33005105147502795,
+  "team_share_n": 26,
+  "team_share_between_variance": 0.012163662433223978,
+  "team_share_within_variance": 0.17613793379881054,
+  "team_share_split_half_within_season_r": 0.14565454706316663,
+  "team_share_within_season_n": 54,
+  "team_share_split_half_season_demeaned_r": 0.26484293455468366,
+  "team_share_season_demeaned_n": 26
+ },
+ "movers_dev": {
+  "transitions": [
+   {
+    "season": "2022",
+    "team_id": 188312,
+    "team": "Sud America",
+    "gf_diff": -0.0798816568047338,
+    "ga_diff": 0.32752575060267364
+   },
+   {
+    "season": "2022",
+    "team_id": 1835,
+    "team": "Villa Espanola",
+    "gf_diff": -0.0798816568047338,
+    "ga_diff": 0.29048871356563666
+   },
+   {
+    "season": "2022",
+    "team_id": 1838,
+    "team": "Club Atletico Progreso",
+    "gf_diff": -0.22802980495288194,
+    "ga_diff": -0.0798816568047338
+   },
+   {
+    "season": "2023",
+    "team_id": 2220,
+    "team": "Cerrito",
+    "gf_diff": -0.018127705627705604,
+    "ga_diff": 0.5443722943722944
+   },
+   {
+    "season": "2023",
+    "team_id": 2221,
+    "team": "Rentistas",
+    "gf_diff": -0.029157117392411447,
+    "ga_diff": -0.3526865291571174
+   },
+   {
+    "season": "2023",
+    "team_id": 924934,
+    "team": "Albion",
+    "gf_diff": 0.1693722943722944,
+    "ga_diff": 0.0756222943722944
+   },
+   {
+    "season": "2024",
+    "team_id": 1319664,
+    "team": "La Luz",
+    "gf_diff": -0.1872317596566524,
+    "ga_diff": 0.00026824034334760327
+   },
+   {
+    "season": "2024",
+    "team_id": 395613,
+    "team": "Montevideo City Torque",
+    "gf_diff": 0.30919681177191904,
+    "ga_diff": -0.14794604537093814
+   },
+   {
+    "season": "2024",
+    "team_id": 4669,
+    "team": "Plaza Colonia",
+    "gf_diff": 0.1877682403433476,
+    "ga_diff": -0.0622317596566524
+   },
+   {
+    "season": "2025",
+    "team_id": 7808,
+    "team": "Fenix",
+    "gf_diff": 0.01114130434782612,
+    "ga_diff": 0.04239130434782612
+   },
+   {
+    "season": "2025",
+    "team_id": 1833,
+    "team": "Deportivo Maldonado",
+    "gf_diff": 0.11183574879227054,
+    "ga_diff": -0.3326086956521739
+   },
+   {
+    "season": "2025",
+    "team_id": 4421,
+    "team": "Rampla Juniors",
+    "gf_diff": -0.37293127629733513,
+    "ga_diff": 0.17545582047685837
+   }
+  ],
+  "n": 12,
+  "mean_gf_diff": -0.01716054815906637,
+  "mean_ga_diff": 0.04006414428660963,
+  "gf_negative": 7,
+  "gf_positive": 5,
+  "ga_negative": 5,
+  "ga_positive": 7,
+  "tier3_entrants_by_season": {
+   "2021": 0,
+   "2022": 2,
+   "2023": 4,
+   "2024": 2,
+   "2025": 2,
+   "2026": 2
+  },
+  "baseline": "same-season finished Segunda team-match mean",
+  "frozen_log_offsets_by_target": {
+   "2022": {
+    "mean_gf_diff_prior": 0.0,
+    "mean_ga_diff_prior": 0.0,
+    "log_gf": 0.0,
+    "log_ga": 0.0,
+    "n_prior": 0
+   },
+   "2023": {
+    "mean_gf_diff_prior": -0.12926437285411652,
+    "mean_ga_diff_prior": 0.1793776024545255,
+    "log_gf": -0.12387155715899953,
+    "log_ga": 0.14986208260454228,
+    "n_prior": 3
+   },
+   "2024": {
+    "mean_gf_diff_prior": -0.0442842745350287,
+    "mean_ga_diff_prior": 0.13424014449184132,
+    "log_gf": -0.040732060491910374,
+    "log_ga": 0.11421345295702448,
+    "n_prior": 6
+   },
+   "2025": {
+    "mean_gf_diff_prior": 0.0048919605831602275,
+    "mean_ga_diff_prior": 0.06617014469631166,
+    "log_gf": 0.004399459068593835,
+    "log_ga": 0.05792876936597828,
+    "n_prior": 9
+   }
+  }
+ },
+ "lines": {
+  "goals_ou": {
+   "over_rates": {
+    "1.5": 0.6477404403244496,
+    "2.5": 0.373117033603708,
+    "3.5": 0.17265353418308227
+   },
+   "primary": "2.5",
+   "n": 863
+  },
+  "stats_markets": null
+ },
+ "dev_windows": {
+  "warm_up": [
+   "2021"
+  ],
+  "evaluation": [
+   "2022",
+   "2023",
+   "2024",
+   "2025"
+  ],
+  "n_evaluation": 863
+ },
+ "card_events_dev": {
+  "Yellow": 0,
+  "Red": 318,
+  "YellowRed": 60
+ },
+ "dev_levels_note": "Fitting-relevant numbers use finished 2021-2025 only; 2026 inventory/levels display only."
+}

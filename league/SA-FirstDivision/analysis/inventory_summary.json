@@ -1,0 +1,56 @@
+{
+  "league": "SA-FirstDivision",
+  "fotmob_league_id": 10721,
+  "index_rows": 712,
+  "built_match_rows": 712,
+  "built_team_match_rows": 1424,
+  "seasons": {
+    "2024/2025": {
+      "rows": 309,
+      "playoffs": 3,
+      "awarded_match_ids": [],
+      "stats_real": 0,
+      "events_present": 0,
+      "referee_present": 0,
+      "lineup_present": 0,
+      "shotmap_empty": 309,
+      "key_coverage": {
+        "All": {"count_each": 0, "keys": ["BallPossesion", "Offsides", "ShotsOffTarget", "ShotsOnTarget", "accurate_crosses", "accurate_passes", "aerials_won", "big_chance", "big_chance_missed_title", "blocked_shots", "clearances", "corners", "dribbles_succeeded", "duel_won", "fouls", "ground_duels_won", "interceptions", "keeper_saves", "long_balls_accurate", "matchstats.headers.tackles", "opposition_half_passes", "own_half_passes", "passes", "player_throws", "red_cards", "shot_blocks", "shots_inside_box", "shots_outside_box", "shots_woodwork", "total_shots", "touches_opp_box", "yellow_cards"]},
+        "FirstHalf": {"count_each": 0, "keys": ["BallPossesion", "Offsides", "ShotsOffTarget", "ShotsOnTarget", "accurate_crosses", "accurate_passes", "aerials_won", "big_chance", "big_chance_missed_title", "blocked_shots", "clearances", "corners", "dribbles_succeeded", "duel_won", "fouls", "ground_duels_won", "interceptions", "keeper_saves", "long_balls_accurate", "matchstats.headers.tackles", "opposition_half_passes", "own_half_passes", "passes", "player_throws", "red_cards", "shot_blocks", "shots_inside_box", "shots_outside_box", "shots_woodwork", "total_shots", "touches_opp_box", "yellow_cards"]},
+        "SecondHalf": {"count_each": 0, "keys": ["BallPossesion", "Offsides", "ShotsOffTarget", "ShotsOnTarget", "accurate_crosses", "accurate_passes", "aerials_won", "big_chance", "big_chance_missed_title", "blocked_shots", "clearances", "corners", "dribbles_succeeded", "duel_won", "fouls", "ground_duels_won", "interceptions", "keeper_saves", "long_balls_accurate", "matchstats.headers.tackles", "opposition_half_passes", "own_half_passes", "passes", "player_throws", "red_cards", "shot_blocks", "shots_inside_box", "shots_outside_box", "shots_woodwork", "total_shots", "touches_opp_box", "yellow_cards"]}
+      }
+    },
+    "2025/2026": {
+      "rows": 309,
+      "playoffs": 3,
+      "awarded_match_ids": ["1000006540", "1000006697"],
+      "stats_real": 307,
+      "events_present": 307,
+      "referee_present": 0,
+      "lineup_present": 309,
+      "shotmap_empty": 309,
+      "key_coverage": {
+        "All": {"count_each": 307, "keys": ["BallPossesion", "Offsides", "ShotsOffTarget", "ShotsOnTarget", "accurate_crosses", "accurate_passes", "aerials_won", "big_chance", "big_chance_missed_title", "blocked_shots", "clearances", "corners", "dribbles_succeeded", "duel_won", "fouls", "ground_duels_won", "interceptions", "keeper_saves", "long_balls_accurate", "matchstats.headers.tackles", "opposition_half_passes", "own_half_passes", "passes", "player_throws", "red_cards", "shot_blocks", "shots_inside_box", "shots_outside_box", "shots_woodwork", "total_shots", "touches_opp_box", "yellow_cards"]},
+        "FirstHalf": {"count_each": 307, "keys": ["BallPossesion", "Offsides", "ShotsOffTarget", "ShotsOnTarget", "accurate_crosses", "accurate_passes", "aerials_won", "big_chance", "big_chance_missed_title", "blocked_shots", "clearances", "corners", "dribbles_succeeded", "duel_won", "fouls", "ground_duels_won", "interceptions", "keeper_saves", "long_balls_accurate", "matchstats.headers.tackles", "opposition_half_passes", "own_half_passes", "passes", "player_throws", "red_cards", "shot_blocks", "shots_inside_box", "shots_outside_box", "shots_woodwork", "total_shots", "touches_opp_box", "yellow_cards"]},
+        "SecondHalf": {"count_each": 307, "keys": ["BallPossesion", "Offsides", "ShotsOffTarget", "ShotsOnTarget", "accurate_crosses", "accurate_passes", "aerials_won", "big_chance", "big_chance_missed_title", "blocked_shots", "clearances", "corners", "dribbles_succeeded", "duel_won", "fouls", "ground_duels_won", "interceptions", "keeper_saves", "long_balls_accurate", "matchstats.headers.tackles", "opposition_half_passes", "own_half_passes", "passes", "player_throws", "red_cards", "shot_blocks", "shots_inside_box", "shots_outside_box", "shots_woodwork", "total_shots", "touches_opp_box", "yellow_cards"]}
+      }
+    },
+    "2026/2027": {
+      "rows": 94,
+      "playoffs": 0,
+      "awarded_match_ids": [],
+      "stats_real": 94,
+      "events_present": 94,
+      "referee_present": 93,
+      "lineup_present": 94,
+      "shotmap_empty": 94,
+      "key_coverage": {
+        "All": {"count_each": 94, "keys": ["BallPossesion", "Offsides", "ShotsOffTarget", "ShotsOnTarget", "accurate_crosses", "accurate_passes", "aerials_won", "big_chance", "big_chance_missed_title", "blocked_shots", "clearances", "corners", "dribbles_succeeded", "duel_won", "fouls", "ground_duels_won", "interceptions", "keeper_saves", "long_balls_accurate", "matchstats.headers.tackles", "opposition_half_passes", "own_half_passes", "passes", "player_throws", "red_cards", "shot_blocks", "shots_inside_box", "shots_outside_box", "shots_woodwork", "total_shots", "touches_opp_box", "yellow_cards"]},
+        "FirstHalf": {"count_each": 94, "keys": ["BallPossesion", "Offsides", "ShotsOffTarget", "ShotsOnTarget", "accurate_crosses", "accurate_passes", "aerials_won", "big_chance", "big_chance_missed_title", "blocked_shots", "clearances", "corners", "dribbles_succeeded", "duel_won", "fouls", "ground_duels_won", "interceptions", "keeper_saves", "long_balls_accurate", "matchstats.headers.tackles", "opposition_half_passes", "own_half_passes", "passes", "player_throws", "red_cards", "shot_blocks", "shots_inside_box", "shots_outside_box", "shots_woodwork", "total_shots", "touches_opp_box", "yellow_cards"]},
+        "SecondHalf": {"count_each": 94, "keys": ["BallPossesion", "Offsides", "ShotsOffTarget", "ShotsOnTarget", "accurate_crosses", "accurate_passes", "aerials_won", "big_chance", "big_chance_missed_title", "blocked_shots", "clearances", "corners", "dribbles_succeeded", "duel_won", "fouls", "ground_duels_won", "interceptions", "keeper_saves", "long_balls_accurate", "matchstats.headers.tackles", "opposition_half_passes", "own_half_passes", "passes", "player_throws", "red_cards", "shot_blocks", "shots_inside_box", "shots_outside_box", "shots_woodwork", "total_shots", "touches_opp_box", "yellow_cards"]}
+      }
+    }
+  },
+  "cards_2025_2026_stats_real": {"event_yellow": 1326, "event_red": 50, "event_yellowred": 39, "exact_matches": 259, "stats_low_matches": 48, "stats_high_matches": 0, "mean_stats_minus_events": -0.2964169381},
+  "status_checks": {"cancelled_count": 0, "awarded_count": 2}
+}

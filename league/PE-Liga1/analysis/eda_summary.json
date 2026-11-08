@@ -1,0 +1,835 @@
+{
+ "inventory": {
+  "n_total": 1860,
+  "by_season": {
+   "2021": 239,
+   "2022": 346,
+   "2023": 344,
+   "2024": 306,
+   "2025": 328,
+   "2026": 297
+  },
+  "by_block": {
+   "2021 - Fase 1": 82,
+   "2021 - Fase 2": 157,
+   "2022 - Apertura": 171,
+   "2022 - Clausura": 175,
+   "2023 - Apertura": 171,
+   "2023 - Clausura": 173,
+   "2024 - Apertura": 153,
+   "2024 - Clausura": 153,
+   "2025 - Apertura": 171,
+   "2025 - Clausura": 157,
+   "2026 - Apertura": 153,
+   "2026 - Clausura": 144
+  },
+  "playoff_n": 15,
+  "awarded_n": 9,
+  "awarded_list": [
+   [
+    "2023",
+    "2023-02-03",
+    "Cusco FC",
+    "Sport Huancayo",
+    "0",
+    "3"
+   ],
+   [
+    "2023",
+    "2023-02-04",
+    "Atletico Grau",
+    "FBC Melgar",
+    "3",
+    "0"
+   ],
+   [
+    "2023",
+    "2023-02-04",
+    "CD UT Cajamarca",
+    "Cienciano",
+    "3",
+    "0"
+   ],
+   [
+    "2023",
+    "2023-02-05",
+    "Sporting Cristal",
+    "Alianza Lima",
+    "3",
+    "0"
+   ],
+   [
+    "2023",
+    "2023-02-05",
+    "Deportivo Garcilaso",
+    "Binacional",
+    "3",
+    "0"
+   ],
+   [
+    "2023",
+    "2023-02-07",
+    "Deportivo Municipal",
+    "Carlos A. Mannucci",
+    "0",
+    "3"
+   ],
+   [
+    "2023",
+    "2023-07-09",
+    "Carlos A. Mannucci",
+    "Deportivo Municipal",
+    "0",
+    "0"
+   ],
+   [
+    "2023",
+    "2023-08-14",
+    "Deportivo Municipal",
+    "Atletico Grau",
+    "0",
+    "3"
+   ],
+   [
+    "2025",
+    "2025-11-08",
+    "Ayacucho FC",
+    "Comerciantes Unidos",
+    "0",
+    "3"
+   ]
+  ],
+  "coverage": {
+   "2021": {
+    "n": 239,
+    "has_stats": 224,
+    "has_rich_stats": 41,
+    "has_period_splits": 0,
+    "has_xg": 0,
+    "shotmap_rows": 0,
+    "referee_named": 0,
+    "ht_source": {
+     "half_event": 226,
+     "events": 13
+    },
+    "events_exact": 239
+   },
+   "2022": {
+    "n": 346,
+    "has_stats": 298,
+    "has_rich_stats": 156,
+    "has_period_splits": 1,
+    "has_xg": 0,
+    "shotmap_rows": 0,
+    "referee_named": 239,
+    "ht_source": {
+     "half_event": 330,
+     "events": 16
+    },
+    "events_exact": 346
+   },
+   "2023": {
+    "n": 344,
+    "has_stats": 328,
+    "has_rich_stats": 159,
+    "has_period_splits": 5,
+    "has_xg": 0,
+    "shotmap_rows": 0,
+    "referee_named": 336,
+    "ht_source": {
+     "half_event": 336,
+     "none": 7,
+     "events": 1
+    },
+    "events_exact": 337
+   },
+   "2024": {
+    "n": 306,
+    "has_stats": 270,
+    "has_rich_stats": 152,
+    "has_period_splits": 2,
+    "has_xg": 0,
+    "shotmap_rows": 0,
+    "referee_named": 259,
+    "ht_source": {
+     "half_event": 306
+    },
+    "events_exact": 306
+   },
+   "2025": {
+    "n": 328,
+    "has_stats": 285,
+    "has_rich_stats": 199,
+    "has_period_splits": 199,
+    "has_xg": 0,
+    "shotmap_rows": 0,
+    "referee_named": 262,
+    "ht_source": {
+     "half_event": 328
+    },
+    "events_exact": 326
+   },
+   "2026": {
+    "n": 297,
+    "has_stats": 297,
+    "has_rich_stats": 297,
+    "has_period_splits": 297,
+    "has_xg": 0,
+    "shotmap_rows": 0,
+    "referee_named": 141,
+    "ht_source": {
+     "half_event": 297
+    },
+    "events_exact": 297
+   }
+  },
+  "modelling_corpus": {
+   "regular_nonawarded": 1836,
+   "dev_2021_2024": 1216,
+   "virgin_2025": 323,
+   "reserved_2026": 297
+  }
+ },
+ "levels_by_block": {
+  "2021 - Fase 1": {
+   "n": 81,
+   "goals": 2.5185185185185186,
+   "home_goals": 1.3580246913580247,
+   "away_goals": 1.1604938271604939,
+   "home_win_rate": 0.43209876543209874,
+   "over25_rate": 0.49382716049382713,
+   "sot": 8.379746835443038,
+   "corners": 10.113924050632912,
+   "total_shots": 21.70886075949367,
+   "ev_yellow_inc2nd": 0.4567901234567901,
+   "ev_yellow_plain": 0.0,
+   "stats_yellow_rich": 5.425,
+   "rich_n": 40,
+   "stats_n": 79
+  },
+  "2021 - Fase 2": {
+   "n": 153,
+   "goals": 2.7908496732026142,
+   "home_goals": 1.3529411764705883,
+   "away_goals": 1.4379084967320261,
+   "home_win_rate": 0.32679738562091504,
+   "over25_rate": 0.5163398692810458,
+   "sot": 8.288732394366198,
+   "corners": 9.654929577464788,
+   "total_shots": 18.345070422535212,
+   "ev_yellow_inc2nd": 0.1830065359477124,
+   "ev_yellow_plain": 0.0,
+   "stats_yellow_rich": null,
+   "rich_n": 0,
+   "stats_n": 142
+  },
+  "2022 - Apertura": {
+   "n": 171,
+   "goals": 2.736842105263158,
+   "home_goals": 1.631578947368421,
+   "away_goals": 1.105263157894737,
+   "home_win_rate": 0.5087719298245614,
+   "over25_rate": 0.5087719298245614,
+   "sot": 9.10828025477707,
+   "corners": 10.67515923566879,
+   "total_shots": 26.764331210191084,
+   "ev_yellow_inc2nd": 0.2222222222222222,
+   "ev_yellow_plain": 0.0,
+   "stats_yellow_rich": 5.128205128205129,
+   "rich_n": 156,
+   "stats_n": 157
+  },
+  "2022 - Clausura": {
+   "n": 171,
+   "goals": 2.7017543859649122,
+   "home_goals": 1.6900584795321638,
+   "away_goals": 1.0116959064327486,
+   "home_win_rate": 0.5380116959064327,
+   "over25_rate": 0.5087719298245614,
+   "sot": 9.167883211678832,
+   "corners": 10.248175182481752,
+   "total_shots": 20.335766423357665,
+   "ev_yellow_inc2nd": 0.19883040935672514,
+   "ev_yellow_plain": 0.0,
+   "stats_yellow_rich": null,
+   "rich_n": 0,
+   "stats_n": 137
+  },
+  "2023 - Apertura": {
+   "n": 165,
+   "goals": 2.7333333333333334,
+   "home_goals": 1.7272727272727273,
+   "away_goals": 1.006060606060606,
+   "home_win_rate": 0.5575757575757576,
+   "over25_rate": 0.48484848484848486,
+   "sot": 9.16875,
+   "corners": 10.35,
+   "total_shots": 26.3,
+   "ev_yellow_inc2nd": 6.072727272727272,
+   "ev_yellow_plain": 5.866666666666666,
+   "stats_yellow_rich": 5.70440251572327,
+   "rich_n": 159,
+   "stats_n": 160
+  },
+  "2023 - Clausura": {
+   "n": 169,
+   "goals": 2.331360946745562,
+   "home_goals": 1.4260355029585798,
+   "away_goals": 0.9053254437869822,
+   "home_win_rate": 0.47337278106508873,
+   "over25_rate": 0.42011834319526625,
+   "sot": 7.813253012048193,
+   "corners": 9.259036144578314,
+   "total_shots": 19.156626506024097,
+   "ev_yellow_inc2nd": 4.840236686390533,
+   "ev_yellow_plain": 4.745562130177515,
+   "stats_yellow_rich": null,
+   "rich_n": 0,
+   "stats_n": 166
+  },
+  "2024 - Apertura": {
+   "n": 153,
+   "goals": 2.718954248366013,
+   "home_goals": 1.7124183006535947,
+   "away_goals": 1.0065359477124183,
+   "home_win_rate": 0.5359477124183006,
+   "over25_rate": 0.49673202614379086,
+   "sot": 8.379084967320262,
+   "corners": 9.42483660130719,
+   "total_shots": 25.313725490196077,
+   "ev_yellow_inc2nd": 4.705882352941177,
+   "ev_yellow_plain": 4.588235294117647,
+   "stats_yellow_rich": 4.4868421052631575,
+   "rich_n": 152,
+   "stats_n": 153
+  },
+  "2024 - Clausura": {
+   "n": 153,
+   "goals": 2.5947712418300655,
+   "home_goals": 1.5686274509803921,
+   "away_goals": 1.026143790849673,
+   "home_win_rate": 0.5163398692810458,
+   "over25_rate": 0.49019607843137253,
+   "sot": 8.0,
+   "corners": 8.495726495726496,
+   "total_shots": 19.11111111111111,
+   "ev_yellow_inc2nd": 3.934640522875817,
+   "ev_yellow_plain": 3.869281045751634,
+   "stats_yellow_rich": null,
+   "rich_n": 0,
+   "stats_n": 117
+  },
+  "2025 - Apertura": {
+   "n": 171,
+   "goals": 2.7076023391812867,
+   "home_goals": 1.6491228070175439,
+   "away_goals": 1.0584795321637428,
+   "home_win_rate": 0.4853801169590643,
+   "over25_rate": 0.5087719298245614,
+   "sot": 8.2578125,
+   "corners": 8.5078125,
+   "total_shots": 21.4609375,
+   "ev_yellow_inc2nd": 4.695906432748538,
+   "ev_yellow_plain": 4.608187134502924,
+   "stats_yellow_rich": 4.521739130434782,
+   "rich_n": 46,
+   "stats_n": 128
+  },
+  "2025 - Clausura": {
+   "n": 152,
+   "goals": 2.5460526315789473,
+   "home_goals": 1.519736842105263,
+   "away_goals": 1.0263157894736843,
+   "home_win_rate": 0.4868421052631579,
+   "over25_rate": 0.5263157894736842,
+   "sot": 8.526315789473685,
+   "corners": 9.046052631578947,
+   "total_shots": 25.717105263157894,
+   "ev_yellow_inc2nd": 4.684210526315789,
+   "ev_yellow_plain": 4.625,
+   "stats_yellow_rich": 4.578947368421052,
+   "rich_n": 152,
+   "stats_n": 152
+  },
+  "2026 - Apertura": {
+   "n": 153,
+   "goals": 2.633986928104575,
+   "home_goals": 1.65359477124183,
+   "away_goals": 0.9803921568627451,
+   "home_win_rate": 0.5359477124183006,
+   "over25_rate": 0.5163398692810458,
+   "sot": 8.830065359477125,
+   "corners": 8.411764705882353,
+   "total_shots": 25.751633986928105,
+   "ev_yellow_inc2nd": 4.522875816993464,
+   "ev_yellow_plain": 4.450980392156863,
+   "stats_yellow_rich": 4.300653594771242,
+   "rich_n": 153,
+   "stats_n": 153
+  },
+  "2026 - Clausura": {
+   "n": 144,
+   "goals": 2.9444444444444446,
+   "home_goals": 1.75,
+   "away_goals": 1.1944444444444444,
+   "home_win_rate": 0.4930555555555556,
+   "over25_rate": 0.5625,
+   "sot": 9.493055555555555,
+   "corners": 9.541666666666666,
+   "total_shots": 29.52777777777778,
+   "ev_yellow_inc2nd": 4.638888888888889,
+   "ev_yellow_plain": 4.5,
+   "stats_yellow_rich": 4.222222222222222,
+   "rich_n": 144,
+   "stats_n": 144
+  }
+ },
+ "dev_totals": {
+  "goals": 2.6472039473684212,
+  "sot": 8.557155715571557,
+  "corners": 9.792079207920793,
+  "total_shots": 22.326732673267326,
+  "ev_yellow_inc2nd": 2.6965460526315788,
+  "sot_median": 8.0,
+  "corners_median": 10.0,
+  "shots_median": 22.0,
+  "cards_median": 2.0,
+  "dev_n": 1216,
+  "dev_stats_n": 1111
+ },
+ "cards_traits_2023plus": {
+  "evyel_for": {
+   "r": 0.5180516333030087,
+   "n_teams": 26
+  },
+  "evyel_against": {
+   "r": 0.35445634070242577,
+   "n_teams": 26
+  }
+ },
+ "referee_trait_2023_2024": {
+  "r": 0.7689731161797614,
+  "n_refs": 16,
+  "coverage_2023": 0.9790419161676647,
+  "coverage_2024": 0.8464052287581699
+ },
+ "cards_dev": {
+  "seed_2023_n": 334,
+  "eval_2024_n": 306,
+  "mean_2023_2024": 4.909375,
+  "median_2023_2024": 5.0
+ },
+ "shots_unified": {
+  "dev_mean": 19.727272727272727,
+  "dev_median": 20.0,
+  "virgin_mean": 19.59285714285714
+ },
+ "cards_artefact": {
+  "plain": {
+   "exact_pct": 45.75936883629191,
+   "mean_ev": 3.203155818540434,
+   "mean_stats": 5.1400394477317555,
+   "mean_diff_ev_minus_stats": -1.9368836291913214,
+   "n": 507
+  },
+  "inc2nd": {
+   "exact_pct": 45.36489151873767,
+   "mean_ev": 3.418145956607495,
+   "mean_stats": 5.1400394477317555,
+   "mean_diff_ev_minus_stats": -1.7218934911242603,
+   "n": 507
+  },
+  "by_season": {
+   "2021": {
+    "n": 40,
+    "exact_inc2nd_pct": 0.0,
+    "mean_diff_inc2nd": -4.875
+   },
+   "2022": {
+    "n": 156,
+    "exact_inc2nd_pct": 1.9230769230769231,
+    "mean_diff_inc2nd": -4.897435897435898
+   },
+   "2023": {
+    "n": 159,
+    "exact_inc2nd_pct": 68.55345911949685,
+    "mean_diff_inc2nd": 0.32075471698113206
+   },
+   "2024": {
+    "n": 152,
+    "exact_inc2nd_pct": 77.63157894736842,
+    "mean_diff_inc2nd": 0.23026315789473684
+   }
+  }
+ },
+ "traits": {
+  "goals_for": {
+   "r": 0.665899291470968,
+   "n_teams": 28
+  },
+  "goals_against": {
+   "r": 0.8623736466621931,
+   "n_teams": 28
+  },
+  "sot_for": {
+   "r": 0.5980193330747219,
+   "n_teams": 27
+  },
+  "sot_against": {
+   "r": 0.53584049189423,
+   "n_teams": 27
+  },
+  "corners_for": {
+   "r": 0.7310293954493047,
+   "n_teams": 27
+  },
+  "corners_against": {
+   "r": 0.6344811899456411,
+   "n_teams": 27
+  },
+  "shots_for": {
+   "r": 0.6434589029206046,
+   "n_teams": 27
+  },
+  "shots_against": {
+   "r": 0.6100625708359487,
+   "n_teams": 27
+  },
+  "evyel_for": {
+   "r": 0.9240628898460592,
+   "n_teams": 28
+  },
+  "evyel_against": {
+   "r": 0.897947027840615,
+   "n_teams": 28
+  },
+  "touches_for": {
+   "r": 0.6656310801374012,
+   "n_teams": 27
+  },
+  "touches_against": {
+   "r": 0.6142411499185615,
+   "n_teams": 27
+  },
+  "poss_for": {
+   "r": 0.8009241688766413,
+   "n_teams": 27
+  },
+  "bigchance_for": {
+   "r": 0.4463026476961919,
+   "n_teams": 27
+  },
+  "corr_corners_touches": 0.5708207121415448,
+  "corr_corners_poss": 0.4472304650269377
+ },
+ "referee_trait": {
+  "r": 0.8890157998847468,
+  "n_refs": 17,
+  "dev_coverage": 0.6751644736842105,
+  "virgin_coverage": 0.804953560371517
+ },
+ "halves": {
+  "goals": {
+   "pooled_share": 0.43770424836601307,
+   "n_matches": 1704,
+   "obs_var": 0.11563069519683367,
+   "noise_var": 0.04122159835964483,
+   "true_var": 0.07440909683718883,
+   "true_sd": 0.27278030874164805
+  },
+  "sot": {
+   "pooled_share": 0.4610564010743062,
+   "n_matches": 503,
+   "obs_var": 0.0334148562560623,
+   "noise_var": 0.026911254175923674,
+   "true_var": 0.006503602080138629,
+   "true_sd": 0.08064491354164023
+  },
+  "corners": {
+   "pooled_share": 0.4816788807461692,
+   "n_matches": 503,
+   "obs_var": 0.03378046933719981,
+   "noise_var": 0.0276306930808369,
+   "true_var": 0.006149776256362909,
+   "true_sd": 0.07842050915648859
+  },
+  "total_shots": {
+   "pooled_share": 0.46621018160166716,
+   "n_matches": 503,
+   "obs_var": 0.009478034829811768,
+   "noise_var": 0.009429010860232786,
+   "true_var": 4.902396957898181e-05,
+   "true_sd": 0.007001711903454884
+  },
+  "cards_events": {
+   "pooled_share": 0.3765030874228144,
+   "n_matches": 1352,
+   "obs_var": 0.07914976769993566,
+   "noise_var": 0.03251803843884591,
+   "true_var": 0.04663172926108975,
+   "true_sd": 0.21594381042551267
+  },
+  "splits_era_n": 503,
+  "cards_events_2023plus": {
+   "pooled_share": 0.38175170350673093,
+   "n_matches": 1232,
+   "obs_var": 0.07124281469926715,
+   "noise_var": 0.0351780746504218,
+   "true_var": 0.03606474004884534,
+   "true_sd": 0.18990718798625117
+  },
+  "goals_team_share_splithalf": {
+   "r": 0.15093495626846204,
+   "n_teams": 24
+  }
+ },
+ "altitude": {
+  "by_class": [
+   {
+    "class": "high>=2300",
+    "n": 861,
+    "home_goals": 1.6353077816492452,
+    "away_goals": 1.0801393728222997,
+    "home_win_rate": 0.4924506387921022,
+    "home_edge_gd": 0.5551684088269454,
+    "teams": [
+     "Asociacion Deportiva Tarma",
+     "Ayacucho FC",
+     "Binacional",
+     "CD UT Cajamarca",
+     "Cienciano",
+     "Comerciantes Unidos",
+     "Cusco FC",
+     "Deportivo Garcilaso",
+     "FBC Melgar",
+     "FC Cajamarca",
+     "Los Chankas",
+     "Sport Huancayo"
+    ]
+   },
+   {
+    "class": "mid 700-2299",
+    "n": 64,
+    "home_goals": 1.078125,
+    "away_goals": 1.484375,
+    "home_win_rate": 0.234375,
+    "home_edge_gd": -0.40625,
+    "teams": [
+     "Alianza Universidad",
+     "Carlos Stein",
+     "Club Deportivo Moquegua"
+    ]
+   },
+   {
+    "class": "low<700",
+    "n": 911,
+    "home_goals": 1.5960482985729967,
+    "away_goals": 1.031833150384193,
+    "home_win_rate": 0.5137211855104281,
+    "home_edge_gd": 0.5642151481888035,
+    "teams": [
+     "ADC Juan Pablo II",
+     "Academia Cantolao",
+     "Alianza Atletico",
+     "Alianza Lima",
+     "Atletico Grau",
+     "Carlos A. Mannucci",
+     "Deportivo Municipal",
+     "Sport Boys",
+     "Sporting Cristal",
+     "Union Comercio",
+     "Universidad Cesar Vallejo",
+     "Universidad San Martin",
+     "Universitario de Deportes"
+    ]
+   }
+  ],
+  "high_teams": {
+   "Cienciano": {
+    "city": "Cusco",
+    "alt_m": 3400,
+    "home_n": 99,
+    "home_gd": 0.7878787878787878,
+    "away_gd": -0.34
+   },
+   "FBC Melgar": {
+    "city": "Arequipa",
+    "alt_m": 2335,
+    "home_n": 101,
+    "home_gd": 1.0792079207920793,
+    "away_gd": 0.21428571428571427
+   },
+   "Ayacucho FC": {
+    "city": "Ayacucho",
+    "alt_m": 2761,
+    "home_n": 46,
+    "home_gd": -0.17391304347826086,
+    "away_gd": -0.66
+   },
+   "Sport Huancayo": {
+    "city": "Huancayo",
+    "alt_m": 3259,
+    "home_n": 100,
+    "home_gd": 0.72,
+    "away_gd": -0.5959595959595959
+   },
+   "Cusco FC": {
+    "city": "Cusco",
+    "alt_m": 3400,
+    "home_n": 81,
+    "home_gd": 0.8765432098765432,
+    "away_gd": -0.5487804878048781
+   },
+   "CD UT Cajamarca": {
+    "city": "Cajamarca",
+    "alt_m": 2750,
+    "home_n": 100,
+    "home_gd": 0.1,
+    "away_gd": -0.9292929292929293
+   },
+   "Comerciantes Unidos": {
+    "city": "Cutervo",
+    "alt_m": 2649,
+    "home_n": 51,
+    "home_gd": 0.058823529411764705,
+    "away_gd": -0.96
+   },
+   "Los Chankas": {
+    "city": "Andahuaylas",
+    "alt_m": 2926,
+    "home_n": 51,
+    "home_gd": 0.5882352941176471,
+    "away_gd": -1.0784313725490196
+   },
+   "Binacional": {
+    "city": "Juliaca",
+    "alt_m": 3825,
+    "home_n": 58,
+    "home_gd": 0.6206896551724138,
+    "away_gd": -1.1403508771929824
+   },
+   "Deportivo Garcilaso": {
+    "city": "Cusco",
+    "alt_m": 3400,
+    "home_n": 69,
+    "home_gd": 0.5217391304347826,
+    "away_gd": -0.19117647058823528
+   },
+   "Asociacion Deportiva Tarma": {
+    "city": "Tarma",
+    "alt_m": 3053,
+    "home_n": 88,
+    "home_gd": 0.5454545454545454,
+    "away_gd": -0.7209302325581395
+   },
+   "FC Cajamarca": {
+    "city": "Cajamarca",
+    "alt_m": 2750,
+    "home_n": 17,
+    "home_gd": -0.4117647058823529,
+    "away_gd": -0.75
+   }
+  }
+ },
+ "entrants": {
+  "2022": {
+   "teams": [
+    {
+     "team": "Atletico Grau",
+     "n": 36,
+     "gf": 1.3888888888888888,
+     "ga": 1.1666666666666667
+    },
+    {
+     "team": "Asociacion Deportiva Tarma",
+     "n": 36,
+     "gf": 1.0833333333333333,
+     "ga": 1.3611111111111112
+    }
+   ],
+   "league_gf_per_team_match": 1.3596491228070176,
+   "entrant_gf": 1.2361111111111112,
+   "entrant_ga": 1.2638888888888888
+  },
+  "2023": {
+   "teams": [
+    {
+     "team": "Union Comercio",
+     "n": 36,
+     "gf": 1.1666666666666667,
+     "ga": 2.0
+    },
+    {
+     "team": "Cusco FC",
+     "n": 35,
+     "gf": 1.2,
+     "ga": 1.2
+    },
+    {
+     "team": "Deportivo Garcilaso",
+     "n": 35,
+     "gf": 1.5142857142857142,
+     "ga": 1.3428571428571427
+    }
+   ],
+   "league_gf_per_team_match": 1.2649700598802396,
+   "entrant_gf": 1.2936507936507937,
+   "entrant_ga": 1.5142857142857142
+  },
+  "2024": {
+   "teams": [
+    {
+     "team": "Comerciantes Unidos",
+     "n": 34,
+     "gf": 1.0588235294117647,
+     "ga": 1.7647058823529411
+    },
+    {
+     "team": "Los Chankas",
+     "n": 34,
+     "gf": 1.2352941176470589,
+     "ga": 1.3823529411764706
+    }
+   ],
+   "league_gf_per_team_match": 1.3284313725490196,
+   "entrant_gf": 1.1470588235294117,
+   "entrant_ga": 1.5735294117647058
+  },
+  "2025": {
+   "teams": [
+    {
+     "team": "Ayacucho FC",
+     "n": 34,
+     "gf": 0.8823529411764706,
+     "ga": 1.5588235294117647
+    },
+    {
+     "team": "Alianza Universidad",
+     "n": 35,
+     "gf": 1.1142857142857143,
+     "ga": 1.8857142857142857
+    },
+    {
+     "team": "Binacional",
+     "n": 18,
+     "gf": 1.1111111111111112,
+     "ga": 1.8333333333333333
+    },
+    {
+     "team": "ADC Juan Pablo II",
+     "n": 35,
+     "gf": 0.9428571428571428,
+     "ga": 1.457142857142857
+    }
+   ],
+   "league_gf_per_team_match": 1.3157894736842106,
+   "entrant_gf": 1.0126517273576097,
+   "entrant_ga": 1.6837535014005602
+  }
+ },
+ "entrant_dev_pooled": {
+  "n_teams": 7,
+  "gf_delta_vs_league": -0.08235605409303126,
+  "ga_delta_vs_league": 0.14198701646852663
+ }
+}

@@ -1,0 +1,39 @@
+# NO-2Divisjon (Norway) — league config (Phase 2 freeze; completed Phase 6)
+league: NO-2Divisjon
+country: Norway
+fotmob_id: 204
+tier: 3
+warehouse: data_enrichment/fotmob_world/Norway/2. divisjon
+data:
+  matches: league/NO-2Divisjon/data/no_matches.csv
+  team_matches: league/NO-2Divisjon/data/no_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period:
+  goals: ["2022", "2023", "2024"]   # scored; warm-up 2021
+  stats_markets: []                  # NOT-BUILDABLE: no stats feed in any season (0/2158)
+  cards: []                          # NOT-BUILDABLE: no consistent yellows target in dev (stats absent; event plain Yellows only from 2024); referee 0% all seasons
+virgin_primary: "2025"               # COMPLETE season (364 matches) — NOT READ (G-NO failed the dev gate; virgin_read: false)
+virgin_confirmatory: null            # 2026 is in progress (364) and stays untouched
+halves_constants:                   # frozen from DEV-era data only (EDA F3)
+  goals_1h_share: 0.4435            # event times, dev era 2021-2024, n=4893 goals, 1398 matches with events
+  yellow_cards_1h_share: null       # no period splits in dev (0 matches) — no constant; no K market
+  sot_1h_share: null                # no period splits in dev — no constant
+  corners_1h_share: null            # no period splits in dev — no constant
+  total_shots_1h_share: null        # no period splits in dev — no constant
+markets:
+  goals: G-NO        # DC goals-only (no xG in feed); arms: Gate Zero, SHRINK (X2 dropped: no entrant tilt in EDA F4)
+  sot: S-NO          # NOT-BUILDABLE — no stats feed in any season
+  corners: C-NO      # NOT-BUILDABLE — no stats feed in any season
+  cards: K-NO        # NOT-BUILDABLE — no stats yellows in any season; event plain Yellows only from 2024 (target break); referee 0% (no X8)
+  total_shots: T-NO  # NOT-BUILDABLE — no stats feed in any season
+notes:
+  - Calendar-year seasons, 28 teams in two parallel groups (Avd. 1 / Avd. 2, 14 teams each, 26 rounds, 182 matches per group per full season); 2022 has 27 teams (Avd. 1: 13 teams, 156 matches) for 338 matches.
+  - Stats feed absent in EVERY season: 0/2158 matches carry any stats Periods key; shotmap 0/2158; xG rows 0. Scores-only league.
+  - No xG and no shotmap in ANY season -> X1 blend falls back goals-only; X3/X4/X6/X7/X9 impossible by data absence.
+  - Event feed carries goals reliably (2 score mismatches in 2158 matches, header wins: 4696470 awarded, 5143624 duplicated goal event) and cards only from 2024 (plain Yellow 0 in 2021-2023; 1101 in 2024, 1206 in 2025, 1190 in 2026). 32 matches have a wholly empty events payload, all scoreless; their events-derived fields are missing, never zero.
+  - Team-name stability: 59 FotMob team ids over the corpus, 28 per season (27 in 2022); one id carries two spellings (10232 Ullensaker/Kisa vs Ull/Kisa). All logic keyed by team id.
+  - Referees: named in 0 matches in every season — X8 dropped on absence.
+  - One awarded match: 4696470 (2025-03-31 Alta-Levanger, played 4-3, awarded 0-3), kept as an ordinary row with awarded=true; it sits in the virgin season, which was never read.
+  - Scoring level is high and stable: goals/match 3.52 / 3.39 / 3.33 / 3.45 in dev, 3.53 in the virgin, 3.45 in the reserve 2026. OU2.5 over-rate 0.62-0.68 every season.
+  - Predictions-only: no NO odds/settlement source in-system.
+  - Outcome (Phase 6): G-NO FAIL at the dev gate (OU leg) — Gate Zero pooled dev (n=1066) 1X2 LL 1.0046 / RPS 0.2188 / OU2.5 LL 0.6835 vs climatology 1.0392 / 0.2332 / 0.6501; beats naive trailing-10 on all three (1.1274 / 0.2368 / 0.7052) but the gate requires beating BOTH baselines. SHRINK numerically identical to Gate Zero (n<6 never binds under season-blocked prediction). Virgin 2025 NOT read; 2026 untouched; nothing ships. S/C/K/T not-buildable (see reports/*_NO_VERDICT.md).

@@ -1,0 +1,11 @@
+# Pre-registration — G-ID
+
+Frozen 2026-11-10 before fitting. Target: full-time total goals and 1X2 from `home_goals`/`away_goals`, goals-only because expected_goals is absent everywhere in this league's payloads (X1 dropped). Phase rule: `regular` rows only — the 8 championship-series matches of 2023/2024 and the 2 stray AFC-playoff rows are excluded (MODEL_DESIGN). Halves are presented with frozen `goals_1h_share: 0.434` from event order on 2023/2024–2025/2026 event-verified regular matches; no team half feature.
+
+Reference is the production Dixon–Coles pattern (programme `dc.py`: half-life 270d, rho grid 0/−0.05/−0.10/−0.15, iterative proportional fit), fit season-blocked on all regular matches strictly before each scored season. Arms: Gate Zero; SHRINK — attack/defence log-ratings of a team with n < 6 prior in-league matches are scaled by n/6 toward the league mean (pre-registered answer to the promoted-team opener problem; X2 mover offset is dropped because Indonesia Liga 2 is empty in the warehouse, so no prior-tier observations exist to estimate it from).
+
+Dev is season-blocked: seed 2021/2022, evaluate 2022/2023–2024/2025. Virgin is 2025/2026, read once only after dev gates pass. 2026/2027 is reserved and unread. Primary line is OU 2.5 (dev over-rate 0.508).
+
+Calibration: `|breach| ≤1pp` is clean PASS; `≤1 SE` beyond the boundary is PROVISIONAL; otherwise FAIL. Calibration convention: breach = mean predicted rate − actual rate (pp).
+
+GATE LEGS (frozen): Dev gate — pooled dev 1X2 LL and RPS of an arm must beat climatology (prior-seasons base rates), and OU2.5 LL must beat the base-rate baseline, else the arm is dead. Gate Zero failing dev ⇒ candidate FAILS, variants moot, virgin NOT read. Virgin legs — (i) LL leg: arm's virgin 1X2 LL ≤ Gate Zero's AND ≤ climatology's; (ii) calibration leg: |breach| ≤ 1.0pp pooled for home-win rate and for OU2.5 over-rate, SEs reported; a breach within 1 SE of the boundary is PROVISIONAL PASS, beyond it FAIL; (iii) per-season sign check on dev (variant arm LL ≤ Gate Zero LL in at least half the dev seasons) for the both-pass rule. Both-pass rule: if Gate Zero and the variant both pass all legs, the lower pooled virgin 1X2 LL ships; if only one passes, it ships; ties go to the simpler arm (Gate Zero). If none passes, G-ID verdict is FAIL and nothing ships. Virgin is read once.

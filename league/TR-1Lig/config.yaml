@@ -1,0 +1,28 @@
+# Türkiye 1. Lig — Phase A, frozen before fitting
+league: TR-1Lig
+country: Türkiye
+fotmob_id: 165
+tier: 2
+warehouse: data_enrichment/fotmob_world/Turkiye/1. Lig
+data:
+  matches: league/TR-1Lig/data/tr1_matches.csv
+  team_matches: league/TR-1Lig/data/tr1_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.4482
+markets:
+  goals: G-TR1
+  sot: null
+  corners: null
+  cards: null
+  total_shots: null
+notes:
+  - Regular-season rows only are eligible for fitting; all play-offs and awarded rows are excluded.
+  - 2025/2026 is virgin and 2026/2027 is reserved; neither is used for development gates or reliability.
+  - The five-row promotion play-off is reported as playoff; the final has no Stadium/neutral signal in the warehouse infoBox.
+  - Stats cover only two 2023/2024 rows and a 2024/2025 fragment; shotmap is only the 2024/2025 fragment.
+  - K-TR1 is not buildable: event yellows fail the overlap instrument check in this corpus.
+  - No model fitting or virgin reads occur in Phase A.

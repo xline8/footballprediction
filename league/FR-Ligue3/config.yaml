@@ -1,0 +1,40 @@
+# FR-Ligue3 (France) — league config (Phase 2 freeze; completed Phase 6)
+league: FR-Ligue3
+country: France
+fotmob_id: 8970
+tier: 3
+warehouse: data_enrichment/fotmob_world/France/Ligue 3
+data:
+  matches: league/FR-Ligue3/data/fr_matches.csv
+  team_matches: league/FR-Ligue3/data/fr_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period:
+  goals: ["2022/2023", "2023/2024", "2024/2025"]   # scored; warm-up 2021/2022
+  stats_markets: []                  # NOT-BUILDABLE: no stats feed in any season (0/1570)
+  cards: []                          # NOT-BUILDABLE: no consistent yellows target in dev (stats absent; event plain Yellows only from 2023/2024); referee 0% all seasons
+virgin_primary: "2025/2026"          # COMPLETE season (272 matches) — NOT READ (G-FR failed the dev gate; virgin_read: false)
+virgin_confirmatory: null            # 2026/2027 is in progress (108) and stays untouched
+halves_constants:                   # frozen from DEV-era data only (EDA F3)
+  goals_1h_share: 0.4618            # event times, dev era 2021/2022-2024/2025, n=2947 goals, 1148 matches with events
+  yellow_cards_1h_share: null       # no period splits in dev (0 matches) — no constant; no K market
+  sot_1h_share: null                # no period splits in dev — no constant
+  corners_1h_share: null            # no period splits in dev — no constant
+  total_shots_1h_share: null        # no period splits in dev — no constant
+markets:
+  goals: G-FR        # DC goals-only (no xG in feed); arms: Gate Zero, SHRINK (X2 dropped: no entrant tilt in EDA F4)
+  sot: S-FR          # NOT-BUILDABLE — no stats feed in any season
+  corners: C-FR      # NOT-BUILDABLE — no stats feed in any season
+  cards: K-FR        # NOT-BUILDABLE — no stats yellows in any season; event plain Yellows only from 2023/2024 (target break); referee 0% (no X8)
+  total_shots: T-FR  # NOT-BUILDABLE — no stats feed in any season
+notes:
+  - Season-year seasons, single group (18 teams, 306 matches in 2021/2022-2023/2024; 17 teams, 272 matches from 2024/2025); 2026/2027 has 18 teams but only 108 matches in the bundle (in progress).
+  - Naming: the league was the Championnat National through 2025/2026 and was rebranded Ligue 3 for 2026/2027. general.leagueName is "National" for 1462 matches (2021/2022-2025/2026) and "Ligue 3" only for the 108 matches of 2026/2027. Same competition throughout — no split, no merge.
+  - Stats feed absent in EVERY season: 0/1570 matches carry any stats Periods key; shotmap 0/1570; xG rows 0. Scores-only league.
+  - No xG and no shotmap in ANY season -> X1 blend falls back goals-only; X3/X4/X6/X7/X9 impossible by data absence.
+  - Event feed carries goals reliably (6 score mismatches in 1570 matches, header wins: 5 awarded + 4879591 duplicated goal event) and cards only from 2023/2024 (plain Yellow 0 in 2021/2022-2022/2023; 1115 in 2023/2024, 1144 in 2024/2025, 1073 in 2025/2026). 38 matches have a wholly empty events payload (19 in 2021/2022, 19 in 2022/2023; 3 goals in them); their events-derived fields are missing, never zero.
+  - Team-name stability: 42 FotMob team ids over the corpus; four ids carry two spellings (6246 Bourg en Bresse Peronnas/Peronnas; 47211 Orleans/Orleans; 238671 Paris 13 Atletico/Atletico; 293443 Aubagne/SC Aubagne Air Bel). All logic keyed by team id.
+  - Referees: named in 0 matches in every season — X8 dropped on absence.
+  - Six awarded matches: 3663409 (2021/2022, Stade Briochin-Boulogne, played 1-0, awarded 3-0), 3663603 (2021/2022, Red Star-Sete, played 0-2, awarded 0-3), 3955519 (2022/2023, Concarneau-Orleans, played 1-1, awarded 0-3), 3955521 (2022/2023, Cholet-Avranches, played 1-3, awarded 3-0), 4125433 (2022/2023, Nancy-Concarneau, played 0-0, awarded 0-3), 4879528 (2025/2026, Valenciennes-Sochaux, played 0-1, awarded 0-3), kept as ordinary rows with awarded=true; the last sits in the virgin season, which was never read.
+  - Scoring level is low and stable: goals/match 2.503 / 2.503 / 2.546 / 2.393 in dev, 2.423 in the virgin, 2.389 in the reserve 2026/2027. OU2.5 over-rate 0.40-0.49 every season.
+  - Predictions-only: no FR odds/settlement source in-system.
+  - Outcome (Phase 6): G-FR FAIL at the dev gate (all three legs vs climatology) — Gate Zero pooled dev (n=884) 1X2 LL 1.0923 / RPS 0.2266 / OU2.5 LL 0.6994 vs climatology 1.0869 / 0.2243 / 0.6864; beats naive trailing-10 on all three (1.2729 / 0.2390 / 0.7308) but the gate requires beating BOTH baselines. SHRINK numerically identical to Gate Zero (n<6 never binds under season-blocked prediction). Virgin 2025/2026 NOT read; 2026/2027 untouched; nothing ships. S/C/K/T not-buildable (see reports/*_FR_VERDICT.md).

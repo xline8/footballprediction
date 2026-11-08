@@ -1,0 +1,125 @@
+{
+ "n": 2059,
+ "seasons": [
+  "2021/2022",
+  "2022/2023",
+  "2023/2024",
+  "2024/2025",
+  "2025/2026",
+  "2026/2027"
+ ],
+ "per_season": {
+  "2021/2022": {
+   "n": 390,
+   "finished": 390,
+   "phase_counts": {
+    "regular": 380,
+    "relegation_playoff": 2,
+    "promotion_playoff": 8
+   },
+   "teams": 20,
+   "coverage": {
+    "stats_all": 100.0,
+    "stats_half": 1.0,
+    "shotmap": 0.8,
+    "expected_goals": 1.0,
+    "touches_opp_box": 74.4,
+    "referee": 47.4,
+    "events": 100.0
+   }
+  },
+  "2022/2023": {
+   "n": 390,
+   "finished": 390,
+   "phase_counts": {
+    "regular": 380,
+    "relegation_playoff": 2,
+    "promotion_playoff": 8
+   },
+   "teams": 20,
+   "coverage": {
+    "stats_all": 100.0,
+    "stats_half": 28.7,
+    "shotmap": 1.3,
+    "expected_goals": 1.3,
+    "touches_opp_box": 76.9,
+    "referee": 97.2,
+    "events": 100.0
+   }
+  },
+  "2023/2024": {
+   "n": 390,
+   "finished": 390,
+   "phase_counts": {
+    "regular": 380,
+    "relegation_playoff": 2,
+    "promotion_playoff": 8
+   },
+   "teams": 20,
+   "coverage": {
+    "stats_all": 100.0,
+    "stats_half": 100.0,
+    "shotmap": 0.3,
+    "expected_goals": 0.3,
+    "touches_opp_box": 99.2,
+    "referee": 79.7,
+    "events": 100.0
+   }
+  },
+  "2024/2025": {
+   "n": 389,
+   "finished": 389,
+   "phase_counts": {
+    "regular": 380,
+    "promotion_playoff": 8,
+    "relegation_playoff": 1
+   },
+   "teams": 20,
+   "coverage": {
+    "stats_all": 100.0,
+    "stats_half": 99.7,
+    "shotmap": 0.8,
+    "expected_goals": 0.8,
+    "touches_opp_box": 99.7,
+    "referee": 74.0,
+    "events": 100.0
+   }
+  },
+  "2025/2026": {
+   "n": 390,
+   "finished": 390,
+   "phase_counts": {
+    "regular": 380,
+    "promotion_playoff": 8,
+    "relegation_playoff": 2
+   },
+   "teams": 20,
+   "coverage": {
+    "stats_all": 100.0,
+    "stats_half": 100.0,
+    "shotmap": 100.0,
+    "expected_goals": 100.0,
+    "touches_opp_box": 100.0,
+    "referee": 75.4,
+    "events": 100.0
+   }
+  },
+  "2026/2027": {
+   "n": 110,
+   "finished": 110,
+   "phase_counts": {
+    "regular": 110
+   },
+   "teams": 20,
+   "coverage": {
+    "stats_all": 100.0,
+    "stats_half": 100.0,
+    "shotmap": 100.0,
+    "expected_goals": 100.0,
+    "touches_opp_box": 100.0,
+    "referee": 90.0,
+    "events": 100.0
+   }
+  }
+ }
+}

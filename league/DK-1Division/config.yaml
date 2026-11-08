@@ -1,0 +1,32 @@
+# Denmark 1. Division — Phase A configuration (frozen before fitting)
+league: DK-1Division
+country: Denmark
+fotmob_id: 85
+tier: 2
+warehouse: data_enrichment/fotmob_world/Denmark/1. Division
+data:
+  matches: league/DK-1Division/data/dk1_matches.csv
+  team_matches: league/DK-1Division/data/dk1_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  # Measured only on 2023/2024–2025/2026 (complete-splits era).
+  goals_1h_share: 0.436
+  sot_1h_share: 0.455
+  corners_1h_share: 0.469
+  total_shots_1h_share: 0.461
+  yellow_cards_1h_share: 0.314
+markets:
+  goals: G-DK1
+  sot: S-DK1
+  corners: C-DK1
+  cards: K-DK1
+  total_shots: T-DK1
+notes:
+  - 12 teams; rounds 1–22 regular, rounds 23–32 feed-labelled promotion/championship or relegation groups.
+  - There are exactly 192 matches in each completed season and no extra-tier playoff population in this feed.
+  - 2026/2027 has 83 finished matches and is transitional; it is not read for verdicts.
+  - xG, shotmap and set-play xG are absent from the actual JSON content; goals are goals-only and X1/X3 are dropped.
+  - Cards target is stats-feed yellow_cards + red_cards where available; event cards are retained only as audit columns.

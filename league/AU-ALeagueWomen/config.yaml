@@ -1,0 +1,29 @@
+league: AU-ALeagueWomen
+country: Australia
+fotmob_id: 9495
+tier: 1
+warehouse: data_enrichment/fotmob_world/Australia/A-League Women
+data:
+  matches: league/AU-ALeagueWomen/data/auw_matches.csv
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+virgin_primary_n_regular: 110
+halves_constants:
+  source: "regular matches with FirstHalf/SecondHalf stats in 2023/2024–2024/2025; goals from event times"
+  goals_1h_share: 0.459
+  sot_1h_share: 0.469
+  corners_1h_share: 0.480
+  total_shots_1h_share: 0.467
+  yellow_cards_1h_share: 0.314
+markets:
+  goals: G-AUW
+  sot: S-AUW
+  corners: C-AUW
+  cards: K-AUW
+  total_shots: T-AUW
+notes:
+  - "Finals are phase=finals and excluded from every fit and scored window."
+  - "2026/2027 is reserved/in progress and is not read by this build."
+  - "Goals are goals-only: no dev xG exists."
+  - "Cards target is stats-feed yellow_cards; event cards are not used."

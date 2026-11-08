@@ -1,0 +1,51 @@
+{
+  "protocol": {
+    "virgin_read": true,
+    "virgin_season": "2026/2027",
+    "transitional": true,
+    "n": 94
+  },
+  "arms": {
+    "GZ": {
+      "diff": -0.006855279929260775,
+      "se": 0.05144843837016842,
+      "n": 94,
+      "ll_8.5": 0.6860131187499455
+    },
+    "RS": {
+      "diff": -0.0061388915562461,
+      "se": 0.05146332929456139,
+      "n": 94,
+      "ll_8.5": 0.6861656959880561
+    }
+  },
+  "baselines": {
+    "league_base_rate": {
+      "ll_8.5": 0.6901333225918156,
+      "calibration_diff": 0.05067189249720049
+    },
+    "naive": {
+      "ll_8.5": 0.7058664538795569,
+      "calibration_diff": -0.003011724762174232
+    }
+  },
+  "read_arms": [
+    "GZ",
+    "RS"
+  ],
+  "shipped_arm": "GZ",
+  "gate_legs": {
+    "GZ": {
+      "ll_le_gz": true,
+      "ll_le_best_baseline": true,
+      "calibration_pass_or_provisional": true,
+      "dev_sign_check": true
+    },
+    "RS": {
+      "ll_le_gz": false,
+      "ll_le_best_baseline": true,
+      "calibration_pass_or_provisional": true,
+      "dev_sign_check": false
+    }
+  }
+}

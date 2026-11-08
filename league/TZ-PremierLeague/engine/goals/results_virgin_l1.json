@@ -1,0 +1,55 @@
+{
+  "protocol": {
+    "league": "TZ-PremierLeague",
+    "candidate": "G-TZ-L1",
+    "virgin_season": "2025/2026",
+    "n": 239,
+    "training_rows": 959,
+    "sign_convention": "predicted_minus_actual",
+    "arm_of_record": "shrink"
+  },
+  "arms": {
+    "shrink": {
+      "n": 239,
+      "ll_1x2": 0.8826651174737721,
+      "rps": 0.16470824093637682,
+      "oull_2_5": 0.6750884027968542,
+      "calibration_pred_minus_actual": {
+        "home_win_diff_pp": -0.5094111661177083,
+        "home_win_se_pp": 2.6961262460917004,
+        "home_win_band": "PASS",
+        "over25_diff_pp": 2.6691205164306178,
+        "over25_se_pp": 3.161868566076012,
+        "over25_band": "PROVISIONAL"
+      }
+    }
+  },
+  "baselines": {
+    "climatology": {
+      "n": 239,
+      "ll_1x2": 1.068084084515873,
+      "rps": 0.22091296445935701,
+      "oull_2_5": 0.6702650448551953,
+      "calibration_pred_minus_actual": {
+        "home_win_diff_pp": 0.48429108075444666,
+        "home_win_se_pp": 3.225976104075834,
+        "home_win_band": "PASS",
+        "over25_diff_pp": -0.5401372594360404,
+        "over25_se_pp": 3.1663691711296598,
+        "over25_band": "PASS"
+      }
+    }
+  },
+  "legs": {
+    "i_ll_vs_climatology": true,
+    "ii_calibration": true,
+    "ii_calibration_parts": {
+      "home_win": "PASS",
+      "over25": "PROVISIONAL"
+    },
+    "iii_dev_sign_check": true,
+    "sign_wins": 3,
+    "sign_n": 3
+  },
+  "verdict": "PROVISIONAL PASS"
+}

@@ -1,0 +1,307 @@
+{
+ "total_payloads": 969,
+ "total_matches": 969,
+ "finished_only_rule": "header.status.finished == true; all 969 payloads finished, drops nothing",
+ "seasons": {
+  "2021": {
+   "payloads": 84,
+   "finished": 84,
+   "unfinished": 0,
+   "score_present": 84,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 80,
+   "referee": 0,
+   "lineup": 0,
+   "event_type_counts": {
+    "Goal": 194,
+    "Half": 160,
+    "Card": 14
+   },
+   "card_type_counts": {
+    "Red": 9,
+    "YellowRed": 5
+   },
+   "card_match_distribution": {
+    "0": 72,
+    "1": 10,
+    "2": 2
+   },
+   "teams_finished": 14,
+   "goals_finished": 194,
+   "goals_per_match_finished": 2.3095238095238093,
+   "ht_crosscheck_agree": 79,
+   "ht_crosscheck_checked": 79
+  },
+  "2022": {
+   "payloads": 156,
+   "finished": 156,
+   "unfinished": 0,
+   "score_present": 156,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 147,
+   "referee": 0,
+   "lineup": 0,
+   "event_type_counts": {
+    "Half": 294,
+    "Goal": 380,
+    "Card": 17
+   },
+   "card_type_counts": {
+    "Red": 13,
+    "YellowRed": 4
+   },
+   "card_match_distribution": {
+    "0": 140,
+    "1": 15,
+    "2": 1
+   },
+   "teams_finished": 13,
+   "goals_finished": 380,
+   "goals_per_match_finished": 2.4358974358974357,
+   "ht_crosscheck_agree": 145,
+   "ht_crosscheck_checked": 145
+  },
+  "2023": {
+   "payloads": 134,
+   "finished": 134,
+   "unfinished": 0,
+   "score_present": 134,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 114,
+   "referee": 0,
+   "lineup": 0,
+   "event_type_counts": {
+    "Goal": 317,
+    "Half": 228,
+    "Card": 13
+   },
+   "card_type_counts": {
+    "Red": 7,
+    "YellowRed": 6
+   },
+   "card_match_distribution": {
+    "0": 122,
+    "1": 11,
+    "2": 1
+   },
+   "teams_finished": 14,
+   "goals_finished": 317,
+   "goals_per_match_finished": 2.3656716417910446,
+   "ht_crosscheck_agree": 113,
+   "ht_crosscheck_checked": 113
+  },
+  "2023/2024": {
+   "payloads": 182,
+   "finished": 182,
+   "unfinished": 0,
+   "score_present": 182,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 172,
+   "referee": 0,
+   "lineup": 0,
+   "event_type_counts": {
+    "Half": 344,
+    "Goal": 491,
+    "Card": 27
+   },
+   "card_type_counts": {
+    "Red": 17,
+    "YellowRed": 10
+   },
+   "card_match_distribution": {
+    "0": 156,
+    "1": 25,
+    "2": 1
+   },
+   "teams_finished": 14,
+   "goals_finished": 491,
+   "goals_per_match_finished": 2.697802197802198,
+   "ht_crosscheck_agree": 171,
+   "ht_crosscheck_checked": 171
+  },
+  "2024/2025": {
+   "payloads": 182,
+   "finished": 182,
+   "unfinished": 0,
+   "score_present": 182,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 182,
+   "referee": 0,
+   "lineup": 182,
+   "event_type_counts": {
+    "Substitution": 1433,
+    "Half": 364,
+    "Goal": 450,
+    "Card": 649,
+    "MissedPenalty": 5
+   },
+   "card_type_counts": {
+    "Yellow": 609,
+    "Red": 35,
+    "YellowRed": 5
+   },
+   "card_match_distribution": {
+    "1": 18,
+    "3": 41,
+    "2": 37,
+    "7": 4,
+    "4": 33,
+    "5": 23,
+    "11": 3,
+    "6": 15,
+    "10": 1,
+    "9": 2,
+    "0": 4,
+    "8": 1
+   },
+   "teams_finished": 14,
+   "goals_finished": 449,
+   "goals_per_match_finished": 2.467032967032967,
+   "ht_crosscheck_agree": 164,
+   "ht_crosscheck_checked": 164
+  },
+  "2025/2026": {
+   "payloads": 182,
+   "finished": 182,
+   "unfinished": 0,
+   "score_present": 182,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 180,
+   "referee": 0,
+   "lineup": 182,
+   "event_type_counts": {
+    "Goal": 478,
+    "Card": 639,
+    "Half": 360,
+    "Substitution": 872,
+    "MissedPenalty": 5
+   },
+   "card_type_counts": {
+    "Yellow": 606,
+    "Red": 27,
+    "YellowRed": 6
+   },
+   "card_match_distribution": {
+    "2": 25,
+    "7": 14,
+    "1": 20,
+    "0": 23,
+    "5": 23,
+    "3": 23,
+    "6": 16,
+    "4": 29,
+    "8": 7,
+    "10": 1,
+    "9": 1
+   },
+   "teams_finished": 14,
+   "goals_finished": 478,
+   "goals_per_match_finished": 2.6263736263736264,
+   "ht_crosscheck_agree": 174,
+   "ht_crosscheck_checked": 174
+  },
+  "2026/2027": {
+   "payloads": 49,
+   "finished": 49,
+   "unfinished": 0,
+   "score_present": 49,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 49,
+   "referee": 0,
+   "lineup": 49,
+   "event_type_counts": {
+    "Half": 98,
+    "Goal": 132,
+    "Card": 158,
+    "Substitution": 345,
+    "MissedPenalty": 1
+   },
+   "card_type_counts": {
+    "Red": 17,
+    "Yellow": 139,
+    "YellowRed": 2
+   },
+   "card_match_distribution": {
+    "4": 10,
+    "1": 8,
+    "2": 5,
+    "6": 7,
+    "5": 3,
+    "3": 7,
+    "0": 6,
+    "7": 2,
+    "8": 1
+   },
+   "teams_finished": 14,
+   "goals_finished": 132,
+   "goals_per_match_finished": 2.693877551020408,
+   "ht_crosscheck_agree": 48,
+   "ht_crosscheck_checked": 48
+  }
+ },
+ "name_variants": {
+  "109375": [
+   "Nam Dinh",
+   "Nam \u0110\u1ecbnh"
+  ],
+  "179219": [
+   "Ha Noi FC",
+   "Ha N\u1ed9i FC"
+  ],
+  "109374": [
+   "Binh Duong",
+   "HCM City"
+  ],
+  "179226": [
+   "FLC Thanh Hoa",
+   "Thanh Hoa FC",
+   "Thanh H\u00f2a FC"
+  ],
+  "1151181": [
+   "Binh Dinh",
+   "B\u00ecnh \u0110\u1ecbnh"
+  ],
+  "179222": [
+   "Hai Phong",
+   "H\u1ea3i Ph\u00f2ng"
+  ],
+  "179220": [
+   "Da Nang",
+   "Da N\u1eb5ng"
+  ],
+  "179228": [
+   "Cong An Ho Chi Minh City",
+   "Cong An Ho Ch\u00ed Minh City",
+   "Ho Chi Minh City FC"
+  ],
+  "179227": [
+   "Hoang Anh Gia Lai",
+   "Ho\u00e0ng Anh Gia Lai"
+  ],
+  "614354": [
+   "Cong An Ha Noi",
+   "C\u00f4ng An H\u00e0 N\u1ed9i"
+  ],
+  "1235223": [
+   "Ninh Binh Club",
+   "Ninh B\u00ecnh Club"
+  ]
+ },
+ "score_events_mismatch_ids": [
+  4688919
+ ]
+}

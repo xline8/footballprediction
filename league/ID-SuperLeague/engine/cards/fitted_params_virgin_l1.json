@@ -1,0 +1,10 @@
+{
+  "market": "cards",
+  "arm": "x5",
+  "r": {
+    "model": 500.0,
+    "base": 495.84427727819,
+    "naive": 500.0
+  },
+  "halves_share_1h": 0.385
+}

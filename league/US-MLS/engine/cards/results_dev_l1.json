@@ -1,0 +1,123 @@
+{
+  "candidate": "L1-K-US",
+  "stage": "dev",
+  "protocol": {
+    "warmup": "2021",
+    "scored": [
+      "2022",
+      "2023",
+      "2024"
+    ],
+    "dev_rows_loaded": 1997,
+    "primary_line": 4.5
+  },
+  "dev_pass_arm_of_record_x8": true,
+  "legs": {
+    "gate_zero": {
+      "pooled_ll_4_5": {
+        "model": 0.6784070581548867,
+        "base": 0.6771335007489464,
+        "naive": 0.6827141312054847
+      },
+      "per_season_ll_4_5": {
+        "2022": 0.706163081759514,
+        "2023": 0.6765761777418895,
+        "2024": 0.6543926160539721
+      }
+    },
+    "x8": {
+      "pooled_ll_4_5": {
+        "model": 0.6708984049105807,
+        "base": 0.6771335007489464,
+        "naive": 0.6827141312054847
+      },
+      "per_season_ll_4_5": {
+        "2022": 0.714217343911278,
+        "2023": 0.6667060116400735,
+        "2024": 0.6347513408101889
+      }
+    }
+  },
+  "sign_check_x8_vs_gate_zero": {
+    "wins": 2,
+    "of": 3,
+    "pass": true
+  },
+  "documented_pooled_ll_4_5": {
+    "gate_zero": 0.678407,
+    "x8": 0.670898,
+    "base": 0.677134,
+    "naive": 0.682714
+  },
+  "reproduction_abs_diff": {
+    "gate_zero": 5.8154886684036455e-08,
+    "x8": 4.0491058073133246e-07,
+    "base": 4.992510536094841e-07,
+    "naive": 1.312054846991373e-07
+  },
+  "reproduced_within_artefact_rounding": true,
+  "referee_coverage": {
+    "2021": {
+      "known": 0,
+      "n": 468,
+      "fraction": 0.0
+    },
+    "2022": {
+      "known": 473,
+      "n": 486,
+      "fraction": 0.9732510288065843
+    },
+    "2023": {
+      "known": 516,
+      "n": 521,
+      "fraction": 0.9904030710172744
+    },
+    "2024": {
+      "known": 502,
+      "n": 522,
+      "fraction": 0.9616858237547893
+    }
+  },
+  "r": {
+    "gate_zero": {
+      "model": 500.0,
+      "base": 500.0,
+      "naive": 500.0
+    },
+    "x8": {
+      "model": 500.0,
+      "base": 500.0,
+      "naive": 500.0
+    }
+  },
+  "x8_fallbacks": {
+    "gate_zero": {
+      "2022": {
+        "unknown_identity": 13,
+        "thin_history": 218
+      },
+      "2023": {
+        "unknown_identity": 5,
+        "thin_history": 36
+      },
+      "2024": {
+        "unknown_identity": 20,
+        "thin_history": 99
+      }
+    },
+    "x8": {
+      "2022": {
+        "unknown_identity": 13,
+        "thin_history": 218
+      },
+      "2023": {
+        "unknown_identity": 5,
+        "thin_history": 36
+      },
+      "2024": {
+        "unknown_identity": 20,
+        "thin_history": 99
+      }
+    }
+  }
+}

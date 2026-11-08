@@ -1,0 +1,17 @@
+{
+  "arms": [
+    "A",
+    "B",
+    "C"
+  ],
+  "shipped_arm": "B",
+  "lambda": 100.0,
+  "r_A": 107.84802185710615,
+  "level_cell": [
+    30.0,
+    0.5,
+    50.0
+  ],
+  "trailing_r_window": 200,
+  "primary_line": 26.5
+}

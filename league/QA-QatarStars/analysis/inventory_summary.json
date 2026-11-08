@@ -1,0 +1,125 @@
+{
+ "seasons": {
+  "2021/2022": {
+   "n": 132,
+   "stats": 0,
+   "splits": 0,
+   "events": 123,
+   "lineup": 0,
+   "referee": 0,
+   "goals_pm": 3.212121212121212,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.11382113821138211,
+   "yell_stats_pm": null,
+   "teams": 12,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "phases": {
+    "regular": 132
+   }
+  },
+  "2022/2023": {
+   "n": 132,
+   "stats": 0,
+   "splits": 0,
+   "events": 128,
+   "lineup": 0,
+   "referee": 0,
+   "goals_pm": 3.0454545454545454,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.171875,
+   "yell_stats_pm": null,
+   "teams": 12,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "phases": {
+    "regular": 132
+   }
+  },
+  "2023/2024": {
+   "n": 132,
+   "stats": 0,
+   "splits": 0,
+   "events": 127,
+   "lineup": 0,
+   "referee": 0,
+   "goals_pm": 3.6515151515151514,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.07874015748031496,
+   "yell_stats_pm": null,
+   "teams": 12,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "phases": {
+    "regular": 132
+   }
+  },
+  "2024/2025": {
+   "n": 132,
+   "stats": 1,
+   "splits": 0,
+   "events": 128,
+   "lineup": 1,
+   "referee": 0,
+   "goals_pm": 3.3484848484848486,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.03125,
+   "yell_stats_pm": null,
+   "teams": 12,
+   "xg_rows": 0,
+   "score_mismatch": 1,
+   "phases": {
+    "regular": 132
+   }
+  },
+  "2025/2026": {
+   "n": 132,
+   "stats": 132,
+   "splits": 132,
+   "events": 127,
+   "lineup": 132,
+   "referee": 9,
+   "goals_pm": 3.3181818181818183,
+   "sot_pm": 9.68939393939394,
+   "corners_pm": 9.56060606060606,
+   "shots_pm": 26.242424242424242,
+   "yell_ev_pm": 0.0,
+   "yell_stats_pm": 4.628787878787879,
+   "teams": 12,
+   "xg_rows": 0,
+   "score_mismatch": 2,
+   "phases": {
+    "regular": 132
+   }
+  },
+  "2026/2027": {
+   "n": 54,
+   "stats": 54,
+   "splits": 54,
+   "events": 54,
+   "lineup": 54,
+   "referee": 53,
+   "goals_pm": 3.6296296296296298,
+   "sot_pm": 11.0,
+   "corners_pm": 10.24074074074074,
+   "shots_pm": 29.37037037037037,
+   "yell_ev_pm": 4.296296296296297,
+   "yell_stats_pm": 4.092592592592593,
+   "teams": 12,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "phases": {
+    "regular": 54
+   }
+  }
+ },
+ "total_matches": 714
+}

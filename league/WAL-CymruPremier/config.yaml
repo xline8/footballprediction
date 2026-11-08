@@ -1,0 +1,33 @@
+league: WAL-CymruPremier
+country: Wales
+fotmob_id: 116
+tier: 1
+warehouse: data_enrichment/fotmob_world/Wales/Cymru Premier
+warehouse_root: ~/workspace/footballprediction
+data:
+  matches: league/WAL-CymruPremier/data/wal_matches.csv
+  team_matches: league/WAL-CymruPremier/data/wal_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2022/2023", "2023/2024", "2024/2025"]
+dev_scored_n: 576
+virgin_primary: "2025/2026"
+virgin_n: 192
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.4444
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+  yellow_cards_1h_share: null
+markets:
+  goals: G-WAL
+  sot: S-WAL
+  corners: C-WAL
+  cards: K-WAL
+  total_shots: T-WAL
+notes:
+  - FORMAT: 12-team regular plus two split groups; 2026/27 expands to 16 teams and a three-way split.
+  - SCORES ONLY: stats, shotmap, lineups and referee are absent.
+  - EXCLUSIONS: 16 playoff rows are retained for audit but excluded from fitting and scoring.
+  - IDENTITY: teams are keyed by stable FotMob team ID across renames.
+  - CALIBRATION: actual minus predicted.

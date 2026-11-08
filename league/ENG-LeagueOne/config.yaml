@@ -1,0 +1,32 @@
+# ENG-LeagueOne (England) — league config
+league: ENG-LeagueOne
+country: England
+fotmob_id: 108
+tier: 3
+warehouse: data_enrichment/fotmob_world/England/League One
+data:
+  matches: league/ENG-LeagueOne/data/engl1_matches.csv
+  team_matches: league/ENG-LeagueOne/data/engl1_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]  # walk-forward, season-blocked
+virgin_primary: "2025/2026"        # complete season, n=557 — read ONCE per candidate
+virgin_confirmatory: "2026/2027"   # partial (158 played at pull); reserved, NOT read in this build
+halves_constants:                  # frozen, measured on the complete-splits era
+  goals_1h_share: 0.4425
+  sot_1h_share: 0.4414
+  corners_1h_share: 0.4672
+  total_shots_1h_share: 0.4551
+  yellow_cards_1h_share: 0.3277
+markets:
+  goals: G-ENGL1      # DC reference; arms: Gate Zero, SHRINK (thin-data prior), X2 mover tier offset (Championship in warehouse; League Two inferred)
+  sot: S-ENGL1        # v5 reference; arms: Gate Zero, RS ratio-shrink, X4 xG/shot
+  corners: C-ENGL1    # corners_v3 reference; arms: Gate Zero (X9), X7 box touches
+  cards: K-ENGL1      # cards reference; arms: Gate Zero only (X8 referee DROPPED, r=0.305; team yellows trait r=0.309)
+  total_shots: T-ENGL1 # shots family; arms: A v1 pattern, B v2 level layer, C E9 trailing-r
+notes:
+  - 24 teams, 46 rounds, double round-robin = 552 regular matches/season + 5 promotion play-off matches (2-leg semis + final, phase='playoff', included as ordinary rows, no phase feature). Play-offs are COMPLETE in every season in this warehouse copy (unlike the Championship's 2025/2026 copy): virgin n=557 = 552 regular + 5 play-off.
+  - Heavy churn: 7 of 24 clubs change every season (3 relegated from the Championship, 4 promoted from League Two, mirrored exits). Movers measured: ex-Championship clubs enter at GD +0.39/match, ex-League Two at -0.25 — the X2 mover offset is a first-class feature here. League Two is NOT in the warehouse; promoted clubs are identified exactly as new clubs not in the Championship's previous-season list.
+  - xG era starts 2022/2023 (2021/2022: stats xG in only 3.2% of matches, shotmap 3.2%); the goals blend falls back to goals-only in the seed season. Set-play X3 dropped: reliability r=0.456 and its era starts inside the dev window.
+  - Per-half stats: 0.4% in 2021/2022, 21.2% in 2022/2023, ~100% from 2023/2024. xGOT population era starts 2024/2025 (94.4%+ of shots) but its trait reliability is noise (r=-0.094) — X6 dropped.
+  - Referee coverage 49.6% in 2021/2022, ~100% after; strictness reliability r=0.305 = noise by program standard — X8 dropped.
+  - Predictions-only: no ENGL1 odds/settlement source in-system.

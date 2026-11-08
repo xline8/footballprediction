@@ -1,0 +1,422 @@
+{
+  "2021/2022 - Apertura": {
+    "n_matches": 153,
+    "coverage_pct": {
+      "has_stats_all": 100.0,
+      "has_stats_half": 4.57516339869281,
+      "has_shotmap": 100.0,
+      "has_events": 100.0,
+      "has_lineup": 100.0,
+      "has_player_stats": 100.0
+    },
+    "xg_present_pct": 100.0,
+    "referee_nonnull_pct": 0.0,
+    "touches_opp_box_present_count": 65,
+    "distinct_teams": 18,
+    "date_range": [
+      "2021-07-23",
+      "2021-11-08"
+    ],
+    "cards_agreement": {
+      "stats_total": 608.0,
+      "events_total": 622.0,
+      "per_match_agreement_count": 135,
+      "n_matches": 153
+    },
+    "xgot_population_shares": {
+      "all": {
+        "numerator_xgot_nonnull": 1142.0,
+        "denominator_shots": 3783.0,
+        "share": 0.30187681734073485
+      },
+      "on_target": {
+        "numerator_xgot_nonnull": 1141.0,
+        "denominator_shots": 1996.0,
+        "share": 0.5716432865731463
+      },
+      "off_target": {
+        "numerator_xgot_nonnull": 1.0,
+        "denominator_shots": 1787.0,
+        "share": 0.0005595970900951316
+      }
+    }
+  },
+  "2021/2022 - Clausura": {
+    "n_matches": 153,
+    "coverage_pct": {
+      "has_stats_all": 100.0,
+      "has_stats_half": 11.764705882352942,
+      "has_shotmap": 100.0,
+      "has_events": 100.0,
+      "has_lineup": 100.0,
+      "has_player_stats": 100.0
+    },
+    "xg_present_pct": 100.0,
+    "referee_nonnull_pct": 96.73202614379085,
+    "touches_opp_box_present_count": 147,
+    "distinct_teams": 18,
+    "date_range": [
+      "2022-01-07",
+      "2022-05-02"
+    ],
+    "cards_agreement": {
+      "stats_total": 708.0,
+      "events_total": 729.0,
+      "per_match_agreement_count": 133,
+      "n_matches": 153
+    },
+    "xgot_population_shares": {
+      "all": {
+        "numerator_xgot_nonnull": 1387.0,
+        "denominator_shots": 3968.0,
+        "share": 0.34954637096774194
+      },
+      "on_target": {
+        "numerator_xgot_nonnull": 1315.0,
+        "denominator_shots": 2226.0,
+        "share": 0.5907457322551662
+      },
+      "off_target": {
+        "numerator_xgot_nonnull": 72.0,
+        "denominator_shots": 1742.0,
+        "share": 0.04133180252583238
+      }
+    }
+  },
+  "2022/2023 - Apertura": {
+    "n_matches": 153,
+    "coverage_pct": {
+      "has_stats_all": 100.0,
+      "has_stats_half": 10.457516339869281,
+      "has_shotmap": 100.0,
+      "has_events": 100.0,
+      "has_lineup": 100.0,
+      "has_player_stats": 100.0
+    },
+    "xg_present_pct": 100.0,
+    "referee_nonnull_pct": 95.42483660130719,
+    "touches_opp_box_present_count": 60,
+    "distinct_teams": 18,
+    "date_range": [
+      "2022-07-02",
+      "2022-10-03"
+    ],
+    "cards_agreement": {
+      "stats_total": 708.0,
+      "events_total": 728.0,
+      "per_match_agreement_count": 135,
+      "n_matches": 153
+    },
+    "xgot_population_shares": {
+      "all": {
+        "numerator_xgot_nonnull": 1409.0,
+        "denominator_shots": 4219.0,
+        "share": 0.3339653946432804
+      },
+      "on_target": {
+        "numerator_xgot_nonnull": 1391.0,
+        "denominator_shots": 2389.0,
+        "share": 0.5822519882796149
+      },
+      "off_target": {
+        "numerator_xgot_nonnull": 18.0,
+        "denominator_shots": 1830.0,
+        "share": 0.009836065573770493
+      }
+    }
+  },
+  "2022/2023 - Clausura": {
+    "n_matches": 153,
+    "coverage_pct": {
+      "has_stats_all": 100.0,
+      "has_stats_half": 40.52287581699346,
+      "has_shotmap": 100.0,
+      "has_events": 100.0,
+      "has_lineup": 100.0,
+      "has_player_stats": 100.0
+    },
+    "xg_present_pct": 100.0,
+    "referee_nonnull_pct": 95.42483660130719,
+    "touches_opp_box_present_count": 146,
+    "distinct_teams": 18,
+    "date_range": [
+      "2023-01-07",
+      "2023-05-01"
+    ],
+    "cards_agreement": {
+      "stats_total": 658.0,
+      "events_total": 679.0,
+      "per_match_agreement_count": 133,
+      "n_matches": 153
+    },
+    "xgot_population_shares": {
+      "all": {
+        "numerator_xgot_nonnull": 1484.0,
+        "denominator_shots": 4374.0,
+        "share": 0.33927754915409236
+      },
+      "on_target": {
+        "numerator_xgot_nonnull": 1453.0,
+        "denominator_shots": 2454.0,
+        "share": 0.5920945395273024
+      },
+      "off_target": {
+        "numerator_xgot_nonnull": 31.0,
+        "denominator_shots": 1920.0,
+        "share": 0.016145833333333335
+      }
+    }
+  },
+  "2023/2024 - Apertura": {
+    "n_matches": 153,
+    "coverage_pct": {
+      "has_stats_all": 100.0,
+      "has_stats_half": 100.0,
+      "has_shotmap": 100.0,
+      "has_events": 100.0,
+      "has_lineup": 100.0,
+      "has_player_stats": 100.0
+    },
+    "xg_present_pct": 100.0,
+    "referee_nonnull_pct": 100.0,
+    "touches_opp_box_present_count": 153,
+    "distinct_teams": 18,
+    "date_range": [
+      "2023-07-01",
+      "2023-11-13"
+    ],
+    "cards_agreement": {
+      "stats_total": 750.0,
+      "events_total": 772.0,
+      "per_match_agreement_count": 120,
+      "n_matches": 153
+    },
+    "xgot_population_shares": {
+      "all": {
+        "numerator_xgot_nonnull": 1441.0,
+        "denominator_shots": 4206.0,
+        "share": 0.34260580123632906
+      },
+      "on_target": {
+        "numerator_xgot_nonnull": 1434.0,
+        "denominator_shots": 2449.0,
+        "share": 0.5855451204573295
+      },
+      "off_target": {
+        "numerator_xgot_nonnull": 7.0,
+        "denominator_shots": 1757.0,
+        "share": 0.00398406374501992
+      }
+    }
+  },
+  "2023/2024 - Clausura": {
+    "n_matches": 153,
+    "coverage_pct": {
+      "has_stats_all": 100.0,
+      "has_stats_half": 100.0,
+      "has_shotmap": 100.0,
+      "has_events": 100.0,
+      "has_lineup": 100.0,
+      "has_player_stats": 100.0
+    },
+    "xg_present_pct": 100.0,
+    "referee_nonnull_pct": 96.07843137254902,
+    "touches_opp_box_present_count": 153,
+    "distinct_teams": 18,
+    "date_range": [
+      "2024-01-13",
+      "2024-04-29"
+    ],
+    "cards_agreement": {
+      "stats_total": 671.0,
+      "events_total": 684.0,
+      "per_match_agreement_count": 135,
+      "n_matches": 153
+    },
+    "xgot_population_shares": {
+      "all": {
+        "numerator_xgot_nonnull": 1342.0,
+        "denominator_shots": 4172.0,
+        "share": 0.3216682646212848
+      },
+      "on_target": {
+        "numerator_xgot_nonnull": 1334.0,
+        "denominator_shots": 2360.0,
+        "share": 0.5652542372881356
+      },
+      "off_target": {
+        "numerator_xgot_nonnull": 8.0,
+        "denominator_shots": 1812.0,
+        "share": 0.004415011037527594
+      }
+    }
+  },
+  "2024/2025 - Apertura": {
+    "n_matches": 153,
+    "coverage_pct": {
+      "has_stats_all": 100.0,
+      "has_stats_half": 100.0,
+      "has_shotmap": 100.0,
+      "has_events": 100.0,
+      "has_lineup": 100.0,
+      "has_player_stats": 100.0
+    },
+    "xg_present_pct": 100.0,
+    "referee_nonnull_pct": 97.38562091503267,
+    "touches_opp_box_present_count": 152,
+    "distinct_teams": 18,
+    "date_range": [
+      "2024-07-05",
+      "2024-11-11"
+    ],
+    "cards_agreement": {
+      "stats_total": 614.0,
+      "events_total": 636.0,
+      "per_match_agreement_count": 130,
+      "n_matches": 153
+    },
+    "xgot_population_shares": {
+      "all": {
+        "numerator_xgot_nonnull": 3513.0,
+        "denominator_shots": 4109.0,
+        "share": 0.8549525431978584
+      },
+      "on_target": {
+        "numerator_xgot_nonnull": 2119.0,
+        "denominator_shots": 2323.0,
+        "share": 0.9121825226000861
+      },
+      "off_target": {
+        "numerator_xgot_nonnull": 1394.0,
+        "denominator_shots": 1786.0,
+        "share": 0.780515117581187
+      }
+    }
+  },
+  "2024/2025 - Clausura": {
+    "n_matches": 153,
+    "coverage_pct": {
+      "has_stats_all": 100.0,
+      "has_stats_half": 100.0,
+      "has_shotmap": 100.0,
+      "has_events": 100.0,
+      "has_lineup": 100.0,
+      "has_player_stats": 100.0
+    },
+    "xg_present_pct": 100.0,
+    "referee_nonnull_pct": 97.38562091503267,
+    "touches_opp_box_present_count": 153,
+    "distinct_teams": 18,
+    "date_range": [
+      "2025-01-11",
+      "2025-04-21"
+    ],
+    "cards_agreement": {
+      "stats_total": 660.0,
+      "events_total": 664.0,
+      "per_match_agreement_count": 131,
+      "n_matches": 153
+    },
+    "xgot_population_shares": {
+      "all": {
+        "numerator_xgot_nonnull": 3942.0,
+        "denominator_shots": 3954.0,
+        "share": 0.9969650986342944
+      },
+      "on_target": {
+        "numerator_xgot_nonnull": 2293.0,
+        "denominator_shots": 2303.0,
+        "share": 0.9956578376031263
+      },
+      "off_target": {
+        "numerator_xgot_nonnull": 1649.0,
+        "denominator_shots": 1651.0,
+        "share": 0.9987886129618413
+      }
+    }
+  },
+  "2025/2026 - Apertura": {
+    "n_matches": 153,
+    "coverage_pct": {
+      "has_stats_all": 100.0,
+      "has_stats_half": 100.0,
+      "has_shotmap": 100.0,
+      "has_events": 100.0,
+      "has_lineup": 100.0,
+      "has_player_stats": 100.0
+    },
+    "xg_present_pct": 100.0,
+    "referee_nonnull_pct": 24.836601307189543,
+    "touches_opp_box_present_count": 153,
+    "distinct_teams": 18,
+    "date_range": [
+      "2025-07-12",
+      "2025-11-09"
+    ],
+    "cards_agreement": {
+      "stats_total": 713.0,
+      "events_total": 721.0,
+      "per_match_agreement_count": 122,
+      "n_matches": 153
+    },
+    "xgot_population_shares": {
+      "all": {
+        "numerator_xgot_nonnull": 3996.0,
+        "denominator_shots": 4014.0,
+        "share": 0.9955156950672646
+      },
+      "on_target": {
+        "numerator_xgot_nonnull": 2282.0,
+        "denominator_shots": 2300.0,
+        "share": 0.9921739130434782
+      },
+      "off_target": {
+        "numerator_xgot_nonnull": 1714.0,
+        "denominator_shots": 1714.0,
+        "share": 1.0
+      }
+    }
+  },
+  "2025/2026 - Clausura": {
+    "n_matches": 153,
+    "coverage_pct": {
+      "has_stats_all": 100.0,
+      "has_stats_half": 100.0,
+      "has_shotmap": 100.0,
+      "has_events": 100.0,
+      "has_lineup": 100.0,
+      "has_player_stats": 100.0
+    },
+    "xg_present_pct": 100.0,
+    "referee_nonnull_pct": 58.169934640522875,
+    "touches_opp_box_present_count": 153,
+    "distinct_teams": 18,
+    "date_range": [
+      "2026-01-10",
+      "2026-04-27"
+    ],
+    "cards_agreement": {
+      "stats_total": 662.0,
+      "events_total": 655.0,
+      "per_match_agreement_count": 121,
+      "n_matches": 153
+    },
+    "xgot_population_shares": {
+      "all": {
+        "numerator_xgot_nonnull": 4193.0,
+        "denominator_shots": 4203.0,
+        "share": 0.9976207470854151
+      },
+      "on_target": {
+        "numerator_xgot_nonnull": 2382.0,
+        "denominator_shots": 2392.0,
+        "share": 0.995819397993311
+      },
+      "off_target": {
+        "numerator_xgot_nonnull": 1811.0,
+        "denominator_shots": 1811.0,
+        "share": 1.0
+      }
+    }
+  }
+}

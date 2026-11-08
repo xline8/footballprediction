@@ -1,0 +1,237 @@
+{
+  "awarded_match_ids": [
+    "4096477",
+    "4145834",
+    "4145842",
+    "4608322",
+    "4608325",
+    "4612011",
+    "4919136",
+    "4919206",
+    "5178447"
+  ],
+  "coverage": {
+    "goal_events_match_nonempty": 925,
+    "referee_named": 0,
+    "scores": 1060,
+    "shotmap": 0,
+    "stats": 0
+  },
+  "entrants_by_team_id": {
+    "2021/2022": [
+      [
+        6366,
+        "Etoile du Sahel"
+      ],
+      [
+        8153,
+        "Esperance"
+      ],
+      [
+        102102,
+        "Club Africain"
+      ],
+      [
+        102104,
+        "Olympique de Beja"
+      ],
+      [
+        102106,
+        "CS Sfaxien"
+      ],
+      [
+        102107,
+        "CA Bizertin"
+      ],
+      [
+        102108,
+        "CS Hammam-Lif"
+      ],
+      [
+        102109,
+        "US Monastir"
+      ],
+      [
+        102112,
+        "Zarzis"
+      ],
+      [
+        147865,
+        "ES Hamam Sousse"
+      ],
+      [
+        316413,
+        "Ben Guerdane"
+      ],
+      [
+        405958,
+        "Etoile Metlaoui"
+      ],
+      [
+        671947,
+        "US Tataouine"
+      ],
+      [
+        852754,
+        "Sportif de Chebba"
+      ],
+      [
+        852755,
+        "AS Soliman"
+      ],
+      [
+        1082811,
+        "AS Rejiche"
+      ]
+    ],
+    "2022/2023": [
+      [
+        102116,
+        "Stade Tunisien"
+      ],
+      [
+        405956,
+        "EO Sidi Bouzid"
+      ]
+    ],
+    "2023/2024": [
+      [
+        102103,
+        "Gafsa"
+      ],
+      [
+        102105,
+        "Avenir de La Marsa"
+      ]
+    ],
+    "2024/2025": [
+      [
+        206148,
+        "AS Gabes"
+      ],
+      [
+        1669235,
+        "JS Omrane"
+      ]
+    ],
+    "2025/2026": [
+      [
+        177179,
+        "JS Kairouanaise"
+      ]
+    ],
+    "2026/2027": [
+      [
+        2147000,
+        "PS Sakiet Edda\u00efer"
+      ]
+    ]
+  },
+  "events": {
+    "Card": 241,
+    "Card_Red": 227,
+    "Card_Yellow": 0,
+    "Card_YellowRed": 14,
+    "Goal": 2005,
+    "Half": 1846
+  },
+  "fotmob_id": 544,
+  "index_rows": 1060,
+  "league": "TN-LigueI",
+  "leagueName_distribution": {
+    "Ligue I": 536,
+    "Ligue I Championship Group": 116,
+    "Ligue I Grp. A": 154,
+    "Ligue I Grp. B": 154,
+    "Ligue I Placement Matches": 2,
+    "Ligue I Relegation Group": 98
+  },
+  "parentLeagueId_distribution": {
+    "544": 1060
+  },
+  "payloads_present": 1060,
+  "phase_distribution": {
+    "championship": 116,
+    "group": 308,
+    "placement": 2,
+    "regular": 536,
+    "relegation": 98
+  },
+  "seasons": {
+    "2021/2022": {
+      "awarded": 0,
+      "model_rows": 156,
+      "n": 156,
+      "phases": {
+        "championship": 30,
+        "group": 112,
+        "placement": 2,
+        "relegation": 12
+      },
+      "teams": 16
+    },
+    "2022/2023": {
+      "awarded": 3,
+      "model_rows": 195,
+      "n": 198,
+      "phases": {
+        "championship": 56,
+        "group": 112,
+        "relegation": 30
+      },
+      "teams": 16
+    },
+    "2023/2024": {
+      "awarded": 0,
+      "model_rows": 170,
+      "n": 170,
+      "phases": {
+        "championship": 30,
+        "group": 84,
+        "relegation": 56
+      },
+      "teams": 14
+    },
+    "2024/2025": {
+      "awarded": 3,
+      "model_rows": 237,
+      "n": 240,
+      "phases": {
+        "regular": 240
+      },
+      "teams": 16
+    },
+    "2025/2026": {
+      "awarded": 3,
+      "model_rows": 237,
+      "n": 240,
+      "phases": {
+        "regular": 240
+      },
+      "teams": 16
+    },
+    "2026/2027": {
+      "awarded": 0,
+      "model_rows": 56,
+      "n": 56,
+      "phases": {
+        "regular": 56
+      },
+      "teams": 16
+    }
+  },
+  "team_name_variants": {
+    "102104": [
+      "Olympique de Beja",
+      "Olympique de B\u00e9ja"
+    ],
+    "405958": [
+      "Etoile Metlaoui",
+      "Etoile M\u00e9tlaoui"
+    ],
+    "8153": [
+      "Esperance",
+      "Esp\u00e9rance"
+    ]
+  }
+}

@@ -1,0 +1,1283 @@
+{
+ "cells": {
+  "J1|2021": {
+   "n": 380,
+   "finished": 380,
+   "date_min": "2021-02-26",
+   "date_max": "2021-12-04",
+   "coverage_level": {
+    "ratings": 380
+   },
+   "league_id_seen": {
+    "223": 378,
+    "871514": 2
+   },
+   "n_teams": 20,
+   "shot_matches": 0,
+   "shots_total": 0,
+   "shot_field_nonnull": {},
+   "shot_rows": 0,
+   "shot_event_types": {},
+   "shot_periods": {},
+   "periods_present": {
+    "All": 380
+   },
+   "stat_key_all": {
+    "BallPossesion": 380,
+    "total_shots": 380,
+    "ShotsOnTarget": 380,
+    "ShotsOffTarget": 380,
+    "blocked_shots": 380,
+    "shots_inside_box": 380,
+    "shots_outside_box": 380,
+    "big_chance": 380,
+    "touches_opp_box": 230,
+    "corners": 380,
+    "yellow_cards": 380,
+    "red_cards": 380,
+    "fouls": 380,
+    "Offsides": 380,
+    "keeper_saves": 380
+   },
+   "stat_key_half": {},
+   "stat_conflicts": 0,
+   "lineup_full": 380,
+   "formation": 380,
+   "player_stats": 380,
+   "events_matches": 380,
+   "goal_events": 923,
+   "card_events": 705,
+   "card_kinds": {
+    "Yellow": 675,
+    "Red": 19,
+    "YellowRed": 11
+   },
+   "ht_events": 380,
+   "ht_shotmap": 0,
+   "ht_both": 0,
+   "ht_agree": 0,
+   "ft_events_seen": 380,
+   "ft_events_agree": 378,
+   "header_redcards": 29,
+   "xg_group": 0
+  },
+  "J1|2022": {
+   "n": 306,
+   "finished": 306,
+   "date_min": "2022-02-18",
+   "date_max": "2022-11-05",
+   "coverage_level": {
+    "xG": 306
+   },
+   "league_id_seen": {
+    "223": 306
+   },
+   "n_teams": 18,
+   "shot_matches": 306,
+   "shots_total": 7530,
+   "shot_field_nonnull": {
+    "expectedGoals": 7505,
+    "x": 7530,
+    "y": 7530,
+    "situation": 7530,
+    "shotType": 7530,
+    "period": 7530,
+    "isOnTarget": 7530,
+    "isBlocked": 7530,
+    "playerId": 7530,
+    "expectedGoalsOnTarget": 2433
+   },
+   "shot_rows": 7530,
+   "shot_event_types": {
+    "AttemptSaved": 3619,
+    "Miss": 2975,
+    "Goal": 771,
+    "Post": 165
+   },
+   "shot_periods": {
+    "FirstHalf": 3369,
+    "SecondHalf": 4161
+   },
+   "periods_present": {
+    "All": 306
+   },
+   "stat_key_all": {
+    "BallPossesion": 306,
+    "expected_goals": 306,
+    "expected_goals_open_play": 306,
+    "expected_goals_set_play": 303,
+    "expected_goals_non_penalty": 306,
+    "total_shots": 306,
+    "ShotsOnTarget": 306,
+    "ShotsOffTarget": 306,
+    "blocked_shots": 306,
+    "shots_inside_box": 306,
+    "shots_outside_box": 306,
+    "big_chance": 306,
+    "touches_opp_box": 144,
+    "corners": 306,
+    "yellow_cards": 306,
+    "red_cards": 306,
+    "fouls": 306,
+    "Offsides": 306,
+    "keeper_saves": 306
+   },
+   "stat_key_half": {},
+   "stat_conflicts": 0,
+   "lineup_full": 306,
+   "formation": 306,
+   "player_stats": 306,
+   "events_matches": 306,
+   "goal_events": 771,
+   "card_events": 723,
+   "card_kinds": {
+    "Yellow": 679,
+    "YellowRed": 13,
+    "Red": 31
+   },
+   "ht_events": 306,
+   "ht_shotmap": 306,
+   "ht_both": 306,
+   "ht_agree": 299,
+   "ft_events_seen": 306,
+   "ft_events_agree": 306,
+   "header_redcards": 41,
+   "xg_group": 306
+  },
+  "J1|2023": {
+   "n": 306,
+   "finished": 306,
+   "date_min": "2023-02-17",
+   "date_max": "2023-12-03",
+   "coverage_level": {
+    "xG": 306
+   },
+   "league_id_seen": {
+    "223": 306
+   },
+   "n_teams": 18,
+   "shot_matches": 306,
+   "shots_total": 7562,
+   "shot_field_nonnull": {
+    "expectedGoals": 7529,
+    "expectedGoalsOnTarget": 2430,
+    "x": 7562,
+    "y": 7562,
+    "situation": 7562,
+    "shotType": 7562,
+    "period": 7562,
+    "isOnTarget": 7562,
+    "isBlocked": 7562,
+    "playerId": 7562
+   },
+   "shot_rows": 7562,
+   "shot_event_types": {
+    "Goal": 777,
+    "AttemptSaved": 3745,
+    "Miss": 2872,
+    "Post": 168
+   },
+   "shot_periods": {
+    "FirstHalf": 3491,
+    "SecondHalf": 4071
+   },
+   "periods_present": {
+    "All": 306,
+    "FirstHalf": 263,
+    "SecondHalf": 263
+   },
+   "stat_key_all": {
+    "BallPossesion": 306,
+    "expected_goals": 306,
+    "expected_goals_open_play": 306,
+    "expected_goals_set_play": 306,
+    "expected_goals_non_penalty": 306,
+    "total_shots": 306,
+    "ShotsOnTarget": 306,
+    "ShotsOffTarget": 306,
+    "blocked_shots": 306,
+    "shots_inside_box": 306,
+    "shots_outside_box": 306,
+    "big_chance": 306,
+    "touches_opp_box": 128,
+    "corners": 306,
+    "yellow_cards": 306,
+    "red_cards": 306,
+    "fouls": 306,
+    "Offsides": 306,
+    "keeper_saves": 306
+   },
+   "stat_key_half": {
+    "BallPossesion": 263,
+    "expected_goals": 263,
+    "expected_goals_open_play": 263,
+    "expected_goals_set_play": 263,
+    "expected_goals_non_penalty": 263,
+    "total_shots": 263,
+    "ShotsOnTarget": 263,
+    "ShotsOffTarget": 263,
+    "blocked_shots": 263,
+    "shots_inside_box": 263,
+    "shots_outside_box": 263,
+    "big_chance": 263,
+    "corners": 263,
+    "yellow_cards": 263,
+    "red_cards": 263,
+    "fouls": 263,
+    "Offsides": 263,
+    "keeper_saves": 263,
+    "touches_opp_box": 41
+   },
+   "stat_conflicts": 0,
+   "lineup_full": 306,
+   "formation": 306,
+   "player_stats": 306,
+   "events_matches": 306,
+   "goal_events": 777,
+   "card_events": 896,
+   "card_kinds": {
+    "Yellow": 856,
+    "Red": 31,
+    "YellowRed": 9
+   },
+   "ht_events": 306,
+   "ht_shotmap": 306,
+   "ht_both": 306,
+   "ht_agree": 295,
+   "ft_events_seen": 306,
+   "ft_events_agree": 306,
+   "header_redcards": 37,
+   "xg_group": 306
+  },
+  "J1|2024": {
+   "n": 380,
+   "finished": 380,
+   "date_min": "2024-02-23",
+   "date_max": "2024-12-08",
+   "coverage_level": {
+    "xG": 380
+   },
+   "league_id_seen": {
+    "223": 378,
+    "889977": 2
+   },
+   "n_teams": 20,
+   "shot_matches": 380,
+   "shots_total": 9998,
+   "shot_field_nonnull": {
+    "expectedGoals": 9971,
+    "x": 9998,
+    "y": 9998,
+    "situation": 9998,
+    "shotType": 9998,
+    "period": 9998,
+    "isOnTarget": 9998,
+    "isBlocked": 9998,
+    "playerId": 9998,
+    "expectedGoalsOnTarget": 5626
+   },
+   "shot_rows": 9998,
+   "shot_event_types": {
+    "AttemptSaved": 5033,
+    "Miss": 3765,
+    "Goal": 1013,
+    "Post": 187
+   },
+   "shot_periods": {
+    "FirstHalf": 4478,
+    "SecondHalf": 5520
+   },
+   "periods_present": {
+    "All": 380,
+    "FirstHalf": 380,
+    "SecondHalf": 380
+   },
+   "stat_key_all": {
+    "BallPossesion": 380,
+    "expected_goals": 380,
+    "expected_goals_open_play": 380,
+    "expected_goals_set_play": 380,
+    "expected_goals_non_penalty": 380,
+    "total_shots": 380,
+    "ShotsOnTarget": 380,
+    "ShotsOffTarget": 380,
+    "blocked_shots": 380,
+    "shots_inside_box": 380,
+    "shots_outside_box": 380,
+    "big_chance": 380,
+    "touches_opp_box": 380,
+    "corners": 380,
+    "yellow_cards": 380,
+    "red_cards": 380,
+    "fouls": 380,
+    "Offsides": 380,
+    "keeper_saves": 380
+   },
+   "stat_key_half": {
+    "BallPossesion": 380,
+    "expected_goals": 380,
+    "expected_goals_open_play": 380,
+    "expected_goals_set_play": 380,
+    "expected_goals_non_penalty": 380,
+    "total_shots": 380,
+    "ShotsOnTarget": 380,
+    "ShotsOffTarget": 380,
+    "blocked_shots": 380,
+    "shots_inside_box": 380,
+    "shots_outside_box": 380,
+    "big_chance": 380,
+    "touches_opp_box": 380,
+    "corners": 380,
+    "yellow_cards": 380,
+    "red_cards": 380,
+    "fouls": 380,
+    "Offsides": 380,
+    "keeper_saves": 380
+   },
+   "stat_conflicts": 0,
+   "lineup_full": 380,
+   "formation": 380,
+   "player_stats": 380,
+   "events_matches": 380,
+   "goal_events": 1013,
+   "card_events": 1017,
+   "card_kinds": {
+    "Yellow": 969,
+    "YellowRed": 15,
+    "Red": 33
+   },
+   "ht_events": 380,
+   "ht_shotmap": 380,
+   "ht_both": 380,
+   "ht_agree": 369,
+   "ft_events_seen": 380,
+   "ft_events_agree": 380,
+   "header_redcards": 45,
+   "xg_group": 380
+  },
+  "J1|2025": {
+   "n": 380,
+   "finished": 380,
+   "date_min": "2025-02-14",
+   "date_max": "2025-12-06",
+   "coverage_level": {
+    "xG": 380
+   },
+   "league_id_seen": {
+    "223": 373,
+    "896622": 7
+   },
+   "n_teams": 20,
+   "shot_matches": 380,
+   "shots_total": 9192,
+   "shot_field_nonnull": {
+    "expectedGoals": 9167,
+    "expectedGoalsOnTarget": 9167,
+    "x": 9192,
+    "y": 9192,
+    "situation": 9192,
+    "shotType": 9192,
+    "period": 9192,
+    "isOnTarget": 9192,
+    "isBlocked": 9192,
+    "playerId": 9192
+   },
+   "shot_rows": 9192,
+   "shot_event_types": {
+    "Miss": 3572,
+    "AttemptSaved": 4528,
+    "Goal": 911,
+    "Post": 181
+   },
+   "shot_periods": {
+    "FirstHalf": 4169,
+    "SecondHalf": 5023
+   },
+   "periods_present": {
+    "All": 380,
+    "FirstHalf": 380,
+    "SecondHalf": 380
+   },
+   "stat_key_all": {
+    "BallPossesion": 380,
+    "expected_goals": 380,
+    "expected_goals_open_play": 380,
+    "expected_goals_set_play": 379,
+    "expected_goals_non_penalty": 380,
+    "total_shots": 380,
+    "ShotsOnTarget": 380,
+    "ShotsOffTarget": 380,
+    "blocked_shots": 380,
+    "shots_inside_box": 380,
+    "shots_outside_box": 380,
+    "big_chance": 380,
+    "touches_opp_box": 380,
+    "corners": 380,
+    "yellow_cards": 380,
+    "red_cards": 380,
+    "fouls": 380,
+    "Offsides": 380,
+    "keeper_saves": 380
+   },
+   "stat_key_half": {
+    "BallPossesion": 380,
+    "expected_goals": 380,
+    "expected_goals_open_play": 380,
+    "expected_goals_set_play": 379,
+    "expected_goals_non_penalty": 380,
+    "total_shots": 380,
+    "ShotsOnTarget": 380,
+    "ShotsOffTarget": 380,
+    "blocked_shots": 380,
+    "shots_inside_box": 380,
+    "shots_outside_box": 380,
+    "big_chance": 380,
+    "touches_opp_box": 380,
+    "corners": 380,
+    "yellow_cards": 380,
+    "red_cards": 380,
+    "fouls": 380,
+    "Offsides": 380,
+    "keeper_saves": 380
+   },
+   "stat_conflicts": 0,
+   "lineup_full": 380,
+   "formation": 380,
+   "player_stats": 380,
+   "events_matches": 380,
+   "goal_events": 911,
+   "card_events": 945,
+   "card_kinds": {
+    "Yellow": 916,
+    "Red": 25,
+    "YellowRed": 4
+   },
+   "ht_events": 380,
+   "ht_shotmap": 380,
+   "ht_both": 380,
+   "ht_agree": 369,
+   "ft_events_seen": 380,
+   "ft_events_agree": 380,
+   "header_redcards": 27,
+   "xg_group": 380
+  },
+  "J1|2026": {
+   "n": 200,
+   "finished": 200,
+   "date_min": "2026-02-06",
+   "date_max": "2026-06-06",
+   "coverage_level": {
+    "xG": 200
+   },
+   "league_id_seen": {
+    "918259": 90,
+    "917951": 90,
+    "918267": 2,
+    "933438": 18
+   },
+   "n_teams": 20,
+   "shot_matches": 200,
+   "shots_total": 5531,
+   "shot_field_nonnull": {
+    "expectedGoals": 5513,
+    "expectedGoalsOnTarget": 5514,
+    "x": 5531,
+    "y": 5531,
+    "situation": 5531,
+    "shotType": 5531,
+    "period": 5531,
+    "isOnTarget": 5531,
+    "isBlocked": 5531,
+    "playerId": 5531
+   },
+   "shot_rows": 5531,
+   "shot_event_types": {
+    "AttemptSaved": 2535,
+    "Miss": 1925,
+    "Goal": 951,
+    "Post": 120
+   },
+   "shot_periods": {
+    "FirstHalf": 2296,
+    "SecondHalf": 2686,
+    "PenaltyShootout": 537,
+    "FirstHalfExtra": 7,
+    "SecondHalfExtra": 5
+   },
+   "periods_present": {
+    "All": 200,
+    "FirstHalf": 200,
+    "SecondHalf": 200,
+    "FirstExtraHalf": 1,
+    "SecondExtraHalf": 1
+   },
+   "stat_key_all": {
+    "BallPossesion": 200,
+    "expected_goals": 200,
+    "expected_goals_open_play": 200,
+    "expected_goals_set_play": 200,
+    "expected_goals_non_penalty": 200,
+    "total_shots": 200,
+    "ShotsOnTarget": 200,
+    "ShotsOffTarget": 200,
+    "blocked_shots": 200,
+    "shots_inside_box": 200,
+    "shots_outside_box": 200,
+    "big_chance": 200,
+    "touches_opp_box": 200,
+    "corners": 200,
+    "yellow_cards": 200,
+    "red_cards": 200,
+    "fouls": 200,
+    "Offsides": 200,
+    "keeper_saves": 200
+   },
+   "stat_key_half": {
+    "BallPossesion": 200,
+    "expected_goals": 200,
+    "expected_goals_open_play": 200,
+    "expected_goals_set_play": 200,
+    "expected_goals_non_penalty": 200,
+    "total_shots": 200,
+    "ShotsOnTarget": 200,
+    "ShotsOffTarget": 200,
+    "blocked_shots": 200,
+    "shots_inside_box": 200,
+    "shots_outside_box": 200,
+    "big_chance": 200,
+    "touches_opp_box": 200,
+    "corners": 200,
+    "yellow_cards": 200,
+    "red_cards": 200,
+    "fouls": 200,
+    "Offsides": 200,
+    "keeper_saves": 200
+   },
+   "stat_conflicts": 0,
+   "lineup_full": 200,
+   "formation": 200,
+   "player_stats": 200,
+   "events_matches": 200,
+   "goal_events": 532,
+   "card_events": 502,
+   "card_kinds": {
+    "Yellow": 477,
+    "Red": 15,
+    "YellowRed": 10
+   },
+   "ht_events": 200,
+   "ht_shotmap": 200,
+   "ht_both": 200,
+   "ht_agree": 192,
+   "ft_events_seen": 200,
+   "ft_events_agree": 200,
+   "header_redcards": 24,
+   "xg_group": 200
+  },
+  "J1|2026-2027": {
+   "n": 139,
+   "finished": 139,
+   "date_min": "2026-08-07",
+   "date_max": "2026-11-08",
+   "coverage_level": {
+    "xG": 139
+   },
+   "league_id_seen": {
+    "937875": 139
+   },
+   "n_teams": 20,
+   "shot_matches": 139,
+   "shots_total": 3758,
+   "shot_field_nonnull": {
+    "expectedGoals": 3742,
+    "expectedGoalsOnTarget": 3745,
+    "x": 3758,
+    "y": 3758,
+    "situation": 3758,
+    "shotType": 3758,
+    "period": 3758,
+    "isOnTarget": 3758,
+    "isBlocked": 3758,
+    "playerId": 3758
+   },
+   "shot_rows": 3758,
+   "shot_event_types": {
+    "AttemptSaved": 1780,
+    "Miss": 1497,
+    "Goal": 412,
+    "Post": 69
+   },
+   "shot_periods": {
+    "FirstHalf": 1686,
+    "SecondHalf": 2072
+   },
+   "periods_present": {
+    "All": 139,
+    "FirstHalf": 139,
+    "SecondHalf": 139
+   },
+   "stat_key_all": {
+    "BallPossesion": 139,
+    "expected_goals": 139,
+    "expected_goals_open_play": 139,
+    "expected_goals_set_play": 138,
+    "expected_goals_non_penalty": 139,
+    "total_shots": 139,
+    "ShotsOnTarget": 139,
+    "ShotsOffTarget": 139,
+    "blocked_shots": 139,
+    "shots_inside_box": 139,
+    "shots_outside_box": 139,
+    "big_chance": 139,
+    "touches_opp_box": 139,
+    "corners": 139,
+    "yellow_cards": 139,
+    "red_cards": 139,
+    "fouls": 139,
+    "Offsides": 139,
+    "keeper_saves": 139
+   },
+   "stat_key_half": {
+    "BallPossesion": 139,
+    "expected_goals": 139,
+    "expected_goals_open_play": 139,
+    "expected_goals_set_play": 138,
+    "expected_goals_non_penalty": 139,
+    "total_shots": 139,
+    "ShotsOnTarget": 139,
+    "ShotsOffTarget": 139,
+    "blocked_shots": 139,
+    "shots_inside_box": 139,
+    "shots_outside_box": 139,
+    "big_chance": 139,
+    "touches_opp_box": 139,
+    "corners": 139,
+    "yellow_cards": 139,
+    "red_cards": 139,
+    "fouls": 139,
+    "Offsides": 139,
+    "keeper_saves": 139
+   },
+   "stat_conflicts": 0,
+   "lineup_full": 139,
+   "formation": 139,
+   "player_stats": 139,
+   "events_matches": 139,
+   "goal_events": 412,
+   "card_events": 417,
+   "card_kinds": {
+    "Yellow": 394,
+    "YellowRed": 8,
+    "Red": 15
+   },
+   "ht_events": 139,
+   "ht_shotmap": 139,
+   "ht_both": 139,
+   "ht_agree": 134,
+   "ft_events_seen": 139,
+   "ft_events_agree": 139,
+   "header_redcards": 22,
+   "xg_group": 139
+  },
+  "J2|2021": {
+   "n": 462,
+   "finished": 462,
+   "date_min": "2021-02-27",
+   "date_max": "2021-12-05",
+   "coverage_level": {
+    "lower": 462
+   },
+   "league_id_seen": {
+    "871515": 462
+   },
+   "n_teams": 22,
+   "shot_matches": 0,
+   "shots_total": 0,
+   "shot_field_nonnull": {},
+   "shot_rows": 0,
+   "shot_event_types": {},
+   "shot_periods": {},
+   "periods_present": {
+    "All": 134
+   },
+   "stat_key_all": {
+    "BallPossesion": 134,
+    "total_shots": 134,
+    "ShotsOnTarget": 134,
+    "corners": 134
+   },
+   "stat_key_half": {},
+   "stat_conflicts": 0,
+   "lineup_full": 462,
+   "formation": 134,
+   "player_stats": 0,
+   "events_matches": 462,
+   "goal_events": 1102,
+   "card_events": 813,
+   "card_kinds": {
+    "Yellow": 795,
+    "YellowRed": 10,
+    "Red": 8
+   },
+   "ht_events": 462,
+   "ht_shotmap": 0,
+   "ht_both": 0,
+   "ht_agree": 0,
+   "ft_events_seen": 462,
+   "ft_events_agree": 462,
+   "header_redcards": 17,
+   "xg_group": 0
+  },
+  "J2|2022": {
+   "n": 465,
+   "finished": 465,
+   "date_min": "2022-02-19",
+   "date_max": "2022-11-06",
+   "coverage_level": {
+    "lower": 465
+   },
+   "league_id_seen": {
+    "877172": 462,
+    "881700": 3
+   },
+   "n_teams": 22,
+   "shot_matches": 0,
+   "shots_total": 0,
+   "shot_field_nonnull": {},
+   "shot_rows": 0,
+   "shot_event_types": {},
+   "shot_periods": {},
+   "periods_present": {
+    "All": 465
+   },
+   "stat_key_all": {
+    "BallPossesion": 465,
+    "total_shots": 465,
+    "ShotsOnTarget": 465,
+    "corners": 465
+   },
+   "stat_key_half": {},
+   "stat_conflicts": 0,
+   "lineup_full": 465,
+   "formation": 465,
+   "player_stats": 0,
+   "events_matches": 465,
+   "goal_events": 1147,
+   "card_events": 990,
+   "card_kinds": {
+    "Yellow": 956,
+    "Red": 19,
+    "YellowRed": 15
+   },
+   "ht_events": 465,
+   "ht_shotmap": 0,
+   "ht_both": 0,
+   "ht_agree": 0,
+   "ft_events_seen": 465,
+   "ft_events_agree": 465,
+   "header_redcards": 33,
+   "xg_group": 0
+  },
+  "J2|2023": {
+   "n": 465,
+   "finished": 465,
+   "date_min": "2023-02-18",
+   "date_max": "2023-12-02",
+   "coverage_level": {
+    "lower": 465
+   },
+   "league_id_seen": {
+    "883288": 462,
+    "888698": 3
+   },
+   "n_teams": 22,
+   "shot_matches": 0,
+   "shots_total": 0,
+   "shot_field_nonnull": {},
+   "shot_rows": 0,
+   "shot_event_types": {},
+   "shot_periods": {},
+   "periods_present": {
+    "All": 455
+   },
+   "stat_key_all": {
+    "BallPossesion": 455,
+    "total_shots": 455,
+    "ShotsOnTarget": 455,
+    "corners": 455
+   },
+   "stat_key_half": {},
+   "stat_conflicts": 0,
+   "lineup_full": 465,
+   "formation": 465,
+   "player_stats": 0,
+   "events_matches": 465,
+   "goal_events": 1184,
+   "card_events": 1285,
+   "card_kinds": {
+    "Yellow": 1237,
+    "YellowRed": 27,
+    "Red": 21
+   },
+   "ht_events": 465,
+   "ht_shotmap": 0,
+   "ht_both": 0,
+   "ht_agree": 0,
+   "ft_events_seen": 465,
+   "ft_events_agree": 465,
+   "header_redcards": 45,
+   "xg_group": 0
+  },
+  "J2|2024": {
+   "n": 383,
+   "finished": 383,
+   "date_min": "2024-02-24",
+   "date_max": "2024-12-07",
+   "coverage_level": {
+    "lower": 383
+   },
+   "league_id_seen": {
+    "889978": 380,
+    "895950": 3
+   },
+   "n_teams": 20,
+   "shot_matches": 0,
+   "shots_total": 0,
+   "shot_field_nonnull": {},
+   "shot_rows": 0,
+   "shot_event_types": {},
+   "shot_periods": {},
+   "periods_present": {
+    "All": 340
+   },
+   "stat_key_all": {
+    "BallPossesion": 340,
+    "total_shots": 340,
+    "ShotsOnTarget": 340,
+    "corners": 340
+   },
+   "stat_key_half": {},
+   "stat_conflicts": 0,
+   "lineup_full": 383,
+   "formation": 383,
+   "player_stats": 0,
+   "events_matches": 383,
+   "goal_events": 956,
+   "card_events": 954,
+   "card_kinds": {
+    "Yellow": 908,
+    "Red": 28,
+    "YellowRed": 18
+   },
+   "ht_events": 383,
+   "ht_shotmap": 0,
+   "ht_both": 0,
+   "ht_agree": 0,
+   "ft_events_seen": 383,
+   "ft_events_agree": 383,
+   "header_redcards": 39,
+   "xg_group": 0
+  },
+  "J2|2025": {
+   "n": 383,
+   "finished": 383,
+   "date_min": "2025-02-15",
+   "date_max": "2025-12-13",
+   "coverage_level": {
+    "lower": 383
+   },
+   "league_id_seen": {
+    "896623": 380,
+    "914259": 3
+   },
+   "n_teams": 20,
+   "shot_matches": 0,
+   "shots_total": 0,
+   "shot_field_nonnull": {},
+   "shot_rows": 0,
+   "shot_event_types": {},
+   "shot_periods": {},
+   "periods_present": {
+    "All": 1
+   },
+   "stat_key_all": {},
+   "stat_key_half": {},
+   "stat_conflicts": 0,
+   "lineup_full": 383,
+   "formation": 383,
+   "player_stats": 0,
+   "events_matches": 383,
+   "goal_events": 944,
+   "card_events": 993,
+   "card_kinds": {
+    "Yellow": 958,
+    "Red": 24,
+    "YellowRed": 11
+   },
+   "ht_events": 383,
+   "ht_shotmap": 0,
+   "ht_both": 0,
+   "ht_agree": 0,
+   "ft_events_seen": 383,
+   "ft_events_agree": 383,
+   "header_redcards": 32,
+   "xg_group": 0
+  },
+  "J2|2026-2027": {
+   "n": 160,
+   "finished": 160,
+   "date_min": "2026-08-08",
+   "date_max": "2026-11-08",
+   "coverage_level": {
+    "lower": 160
+   },
+   "league_id_seen": {
+    "938215": 160
+   },
+   "n_teams": 20,
+   "shot_matches": 0,
+   "shots_total": 0,
+   "shot_field_nonnull": {},
+   "shot_rows": 0,
+   "shot_event_types": {},
+   "shot_periods": {},
+   "periods_present": {},
+   "stat_key_all": {},
+   "stat_key_half": {},
+   "stat_conflicts": 0,
+   "lineup_full": 160,
+   "formation": 160,
+   "player_stats": 0,
+   "events_matches": 160,
+   "goal_events": 407,
+   "card_events": 437,
+   "card_kinds": {
+    "Yellow": 419,
+    "Red": 10,
+    "YellowRed": 8
+   },
+   "ht_events": 160,
+   "ht_shotmap": 0,
+   "ht_both": 0,
+   "ht_agree": 0,
+   "ft_events_seen": 160,
+   "ft_events_agree": 160,
+   "header_redcards": 17,
+   "xg_group": 0
+  },
+  "J3|2021": {
+   "n": 210,
+   "finished": 210,
+   "date_min": "2021-03-14",
+   "date_max": "2021-12-05",
+   "coverage_level": {
+    "lower": 210
+   },
+   "league_id_seen": {
+    "9136": 210
+   },
+   "n_teams": 15,
+   "shot_matches": 0,
+   "shots_total": 0,
+   "shot_field_nonnull": {},
+   "shot_rows": 0,
+   "shot_event_types": {},
+   "shot_periods": {},
+   "periods_present": {},
+   "stat_key_all": {},
+   "stat_key_half": {},
+   "stat_conflicts": 0,
+   "lineup_full": 0,
+   "formation": 0,
+   "player_stats": 0,
+   "events_matches": 195,
+   "goal_events": 533,
+   "card_events": 11,
+   "card_kinds": {
+    "Red": 5,
+    "YellowRed": 6
+   },
+   "ht_events": 195,
+   "ht_shotmap": 0,
+   "ht_both": 0,
+   "ht_agree": 0,
+   "ft_events_seen": 195,
+   "ft_events_agree": 195,
+   "header_redcards": 11,
+   "xg_group": 0
+  },
+  "J3|2022": {
+   "n": 306,
+   "finished": 306,
+   "date_min": "2022-03-12",
+   "date_max": "2022-11-20",
+   "coverage_level": {
+    "lower": 306
+   },
+   "league_id_seen": {
+    "9136": 306
+   },
+   "n_teams": 18,
+   "shot_matches": 0,
+   "shots_total": 0,
+   "shot_field_nonnull": {},
+   "shot_rows": 0,
+   "shot_event_types": {},
+   "shot_periods": {},
+   "periods_present": {},
+   "stat_key_all": {},
+   "stat_key_half": {},
+   "stat_conflicts": 0,
+   "lineup_full": 0,
+   "formation": 0,
+   "player_stats": 0,
+   "events_matches": 287,
+   "goal_events": 797,
+   "card_events": 24,
+   "card_kinds": {
+    "YellowRed": 14,
+    "Red": 10
+   },
+   "ht_events": 287,
+   "ht_shotmap": 0,
+   "ht_both": 0,
+   "ht_agree": 0,
+   "ft_events_seen": 287,
+   "ft_events_agree": 287,
+   "header_redcards": 22,
+   "xg_group": 0
+  },
+  "J3|2023": {
+   "n": 380,
+   "finished": 380,
+   "date_min": "2023-03-04",
+   "date_max": "2023-12-02",
+   "coverage_level": {
+    "lower": 380
+   },
+   "league_id_seen": {
+    "9136": 380
+   },
+   "n_teams": 20,
+   "shot_matches": 0,
+   "shots_total": 0,
+   "shot_field_nonnull": {},
+   "shot_rows": 0,
+   "shot_event_types": {},
+   "shot_periods": {},
+   "periods_present": {},
+   "stat_key_all": {},
+   "stat_key_half": {},
+   "stat_conflicts": 0,
+   "lineup_full": 0,
+   "formation": 0,
+   "player_stats": 0,
+   "events_matches": 353,
+   "goal_events": 930,
+   "card_events": 33,
+   "card_kinds": {
+    "YellowRed": 18,
+    "Red": 15
+   },
+   "ht_events": 353,
+   "ht_shotmap": 0,
+   "ht_both": 0,
+   "ht_agree": 0,
+   "ft_events_seen": 353,
+   "ft_events_agree": 353,
+   "header_redcards": 32,
+   "xg_group": 0
+  },
+  "J3|2024": {
+   "n": 380,
+   "finished": 380,
+   "date_min": "2024-02-24",
+   "date_max": "2024-11-24",
+   "coverage_level": {
+    "lower": 380
+   },
+   "league_id_seen": {
+    "9136": 380
+   },
+   "n_teams": 20,
+   "shot_matches": 0,
+   "shots_total": 0,
+   "shot_field_nonnull": {},
+   "shot_rows": 0,
+   "shot_event_types": {},
+   "shot_periods": {},
+   "periods_present": {},
+   "stat_key_all": {},
+   "stat_key_half": {},
+   "stat_conflicts": 0,
+   "lineup_full": 0,
+   "formation": 0,
+   "player_stats": 0,
+   "events_matches": 353,
+   "goal_events": 985,
+   "card_events": 34,
+   "card_kinds": {
+    "YellowRed": 18,
+    "Red": 16
+   },
+   "ht_events": 353,
+   "ht_shotmap": 0,
+   "ht_both": 0,
+   "ht_agree": 0,
+   "ft_events_seen": 353,
+   "ft_events_agree": 353,
+   "header_redcards": 33,
+   "xg_group": 0
+  },
+  "J3|2025": {
+   "n": 383,
+   "finished": 383,
+   "date_min": "2025-02-15",
+   "date_max": "2025-12-14",
+   "coverage_level": {
+    "lower": 383
+   },
+   "league_id_seen": {
+    "9136": 383
+   },
+   "n_teams": 20,
+   "shot_matches": 0,
+   "shots_total": 0,
+   "shot_field_nonnull": {},
+   "shot_rows": 0,
+   "shot_event_types": {},
+   "shot_periods": {},
+   "periods_present": {
+    "All": 129,
+    "FirstHalf": 60,
+    "SecondHalf": 60
+   },
+   "stat_key_all": {
+    "BallPossesion": 62,
+    "total_shots": 62,
+    "ShotsOnTarget": 62,
+    "ShotsOffTarget": 62,
+    "blocked_shots": 62,
+    "shots_inside_box": 62,
+    "shots_outside_box": 62,
+    "big_chance": 62,
+    "corners": 62,
+    "yellow_cards": 62,
+    "red_cards": 62,
+    "fouls": 62,
+    "Offsides": 62,
+    "keeper_saves": 62
+   },
+   "stat_key_half": {
+    "BallPossesion": 60,
+    "total_shots": 60,
+    "ShotsOnTarget": 60,
+    "ShotsOffTarget": 60,
+    "blocked_shots": 60,
+    "shots_inside_box": 60,
+    "shots_outside_box": 60,
+    "big_chance": 60,
+    "corners": 60,
+    "yellow_cards": 60,
+    "red_cards": 60,
+    "fouls": 60,
+    "Offsides": 60,
+    "keeper_saves": 60
+   },
+   "stat_conflicts": 0,
+   "lineup_full": 205,
+   "formation": 205,
+   "player_stats": 62,
+   "events_matches": 359,
+   "goal_events": 980,
+   "card_events": 28,
+   "card_kinds": {
+    "YellowRed": 8,
+    "Red": 20
+   },
+   "ht_events": 359,
+   "ht_shotmap": 0,
+   "ht_both": 0,
+   "ht_agree": 0,
+   "ft_events_seen": 359,
+   "ft_events_agree": 359,
+   "header_redcards": 28,
+   "xg_group": 0
+  },
+  "J3|2026-2027": {
+   "n": 160,
+   "finished": 160,
+   "date_min": "2026-08-08",
+   "date_max": "2026-11-08",
+   "coverage_level": {
+    "lower": 160
+   },
+   "league_id_seen": {
+    "9136": 160
+   },
+   "n_teams": 20,
+   "shot_matches": 0,
+   "shots_total": 0,
+   "shot_field_nonnull": {},
+   "shot_rows": 0,
+   "shot_event_types": {},
+   "shot_periods": {},
+   "periods_present": {
+    "All": 24
+   },
+   "stat_key_all": {},
+   "stat_key_half": {},
+   "stat_conflicts": 0,
+   "lineup_full": 160,
+   "formation": 160,
+   "player_stats": 0,
+   "events_matches": 149,
+   "goal_events": 445,
+   "card_events": 12,
+   "card_kinds": {
+    "Red": 10,
+    "YellowRed": 2
+   },
+   "ht_events": 149,
+   "ht_shotmap": 0,
+   "ht_both": 0,
+   "ht_agree": 0,
+   "ft_events_seen": 149,
+   "ft_events_agree": 149,
+   "header_redcards": 11,
+   "xg_group": 0
+  }
+ },
+ "globals": {
+  "total_files": 6228,
+  "unique_match_ids": 6228,
+  "duplicate_ids": {},
+  "team_ids_with_multiple_names": {
+   "8065": [
+    "Jubilo Iwata",
+    "Júbilo Iwata"
+   ],
+   "162194": [
+    "Thespa Gunma",
+    "Thespakusatsu Gunma"
+   ],
+   "194021": [
+    "FC Ryukyu",
+    "FC Ryūkyū"
+   ],
+   "4398": [
+    "Omiya Ardija",
+    "RB Omiya Ardija"
+   ],
+   "820969": [
+    "FC Imabari",
+    "Imabari FC"
+   ]
+  },
+  "names_with_multiple_ids": {},
+  "n_team_ids": 63,
+  "index_rows": 6228,
+  "in_index_not_on_disk": [],
+  "on_disk_not_in_index": []
+ }
+}

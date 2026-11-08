@@ -1,0 +1,595 @@
+{
+  "cards_stats_vs_events": {
+    "both_stats_and_events": 0,
+    "disagreement_at_4_5": null,
+    "exact_agreement_rate": null,
+    "mean_difference_stats_minus_events": null,
+    "stats_yellow_available": 0,
+    "validation_n": 0
+  },
+  "halves": {
+    "frozen_constants": {},
+    "goals_1h_share": 0.436626746506986,
+    "ht_goal_matches": 1575,
+    "n_matches": 1647,
+    "period_split_matches": 0
+  },
+  "movers": {
+    "method_note": "PT/PT2 CSVs were absent in this worktree; counts and changes use indexed payloads for league IDs 61, 185, and 9112.",
+    "transitions": {
+      "2022/2023": {
+        "PT2_to_PT3": {
+          "clubs": [
+            {
+              "ga_change": -0.5735294117647058,
+              "gf_change": 0.04201680672268915,
+              "team_id": "10215"
+            },
+            {
+              "ga_change": -0.2542016806722688,
+              "gf_change": 0.30042016806722693,
+              "team_id": "1722"
+            }
+          ],
+          "mean_ga_change": -0.4138655462184873,
+          "mean_gf_change": 0.17121848739495804,
+          "n": 2,
+          "prior_season": "2021/2022"
+        },
+        "PT3_to_PT": {
+          "clubs": [],
+          "mean_ga_change": null,
+          "mean_gf_change": null,
+          "n": 0,
+          "prior_season": "2021/2022"
+        },
+        "PT3_to_PT2": {
+          "clubs": [
+            {
+              "ga_change": 0.11344537815126055,
+              "gf_change": -0.3214285714285714,
+              "team_id": "1785"
+            },
+            {
+              "ga_change": 0.17139959432048668,
+              "gf_change": -0.26166328600405686,
+              "team_id": "212820"
+            }
+          ],
+          "mean_ga_change": 0.1424224862358736,
+          "mean_gf_change": -0.29154592871631413,
+          "n": 2,
+          "prior_season": "2021/2022"
+        },
+        "PT_to_PT3": {
+          "clubs": [],
+          "mean_ga_change": null,
+          "mean_gf_change": null,
+          "n": 0,
+          "prior_season": "2021/2022"
+        }
+      },
+      "2023/2024": {
+        "PT2_to_PT3": {
+          "clubs": [
+            {
+              "ga_change": -0.39522058823529416,
+              "gf_change": 0.4007352941176471,
+              "team_id": "1940"
+            },
+            {
+              "ga_change": -0.3928571428571428,
+              "gf_change": 0.30252100840336127,
+              "team_id": "7992"
+            }
+          ],
+          "mean_ga_change": -0.3940388655462185,
+          "mean_gf_change": 0.3516281512605042,
+          "n": 2,
+          "prior_season": "2022/2023"
+        },
+        "PT3_to_PT": {
+          "clubs": [],
+          "mean_ga_change": null,
+          "mean_gf_change": null,
+          "n": 0,
+          "prior_season": "2022/2023"
+        },
+        "PT3_to_PT2": {
+          "clubs": [
+            {
+              "ga_change": 0.6318458417849899,
+              "gf_change": -0.7626774847870184,
+              "team_id": "1296841"
+            },
+            {
+              "ga_change": 1.0210084033613445,
+              "gf_change": -0.6533613445378152,
+              "team_id": "361054"
+            },
+            {
+              "ga_change": 0.2799188640973631,
+              "gf_change": -0.7058823529411764,
+              "team_id": "9771"
+            }
+          ],
+          "mean_ga_change": 0.6442577030812325,
+          "mean_gf_change": -0.7073070607553366,
+          "n": 3,
+          "prior_season": "2022/2023"
+        },
+        "PT_to_PT3": {
+          "clubs": [],
+          "mean_ga_change": null,
+          "mean_gf_change": null,
+          "n": 0,
+          "prior_season": "2022/2023"
+        }
+      },
+      "2024/2025": {
+        "PT2_to_PT3": {
+          "clubs": [
+            {
+              "ga_change": -0.7977941176470589,
+              "gf_change": 0.42647058823529416,
+              "team_id": "1296841"
+            },
+            {
+              "ga_change": -0.3067226890756303,
+              "gf_change": -0.20378151260504196,
+              "team_id": "361054"
+            }
+          ],
+          "mean_ga_change": -0.5522584033613446,
+          "mean_gf_change": 0.1113445378151261,
+          "n": 2,
+          "prior_season": "2023/2024"
+        },
+        "PT3_to_PT": {
+          "clubs": [],
+          "mean_ga_change": null,
+          "mean_gf_change": null,
+          "n": 0,
+          "prior_season": "2023/2024"
+        },
+        "PT3_to_PT2": {
+          "clubs": [
+            {
+              "ga_change": 0.43014705882352944,
+              "gf_change": -0.4540441176470589,
+              "team_id": "474326"
+            },
+            {
+              "ga_change": 0.125,
+              "gf_change": 0.1746323529411764,
+              "team_id": "9780"
+            }
+          ],
+          "mean_ga_change": 0.2775735294117647,
+          "mean_gf_change": -0.13970588235294124,
+          "n": 2,
+          "prior_season": "2023/2024"
+        },
+        "PT_to_PT3": {
+          "clubs": [],
+          "mean_ga_change": null,
+          "mean_gf_change": null,
+          "n": 0,
+          "prior_season": "2023/2024"
+        }
+      },
+      "2025/2026": {
+        "PT2_to_PT3": {
+          "clubs": [
+            {
+              "ga_change": -0.24448529411764697,
+              "gf_change": 0.5533088235294118,
+              "team_id": "47535"
+            }
+          ],
+          "mean_ga_change": -0.24448529411764697,
+          "mean_gf_change": 0.5533088235294118,
+          "n": 1,
+          "prior_season": "2024/2025"
+        },
+        "PT3_to_PT": {
+          "clubs": [],
+          "mean_ga_change": null,
+          "mean_gf_change": null,
+          "n": 0,
+          "prior_season": "2024/2025"
+        },
+        "PT3_to_PT2": {
+          "clubs": [
+            {
+              "ga_change": 0.7481617647058822,
+              "gf_change": -0.1121323529411764,
+              "team_id": "188154"
+            },
+            {
+              "ga_change": -0.03125,
+              "gf_change": -0.0753676470588236,
+              "team_id": "338301"
+            }
+          ],
+          "mean_ga_change": 0.3584558823529411,
+          "mean_gf_change": -0.09375,
+          "n": 2,
+          "prior_season": "2024/2025"
+        },
+        "PT_to_PT3": {
+          "clubs": [],
+          "mean_ga_change": null,
+          "mean_gf_change": null,
+          "n": 0,
+          "prior_season": "2024/2025"
+        }
+      },
+      "2026/2027": {
+        "PT2_to_PT3": {
+          "clubs": [
+            {
+              "ga_change": -0.21895424836601296,
+              "gf_change": 0.22222222222222232,
+              "team_id": "1785"
+            },
+            {
+              "ga_change": 0.36601307189542465,
+              "gf_change": 0.33333333333333326,
+              "team_id": "6403"
+            }
+          ],
+          "mean_ga_change": 0.07352941176470584,
+          "mean_gf_change": 0.2777777777777778,
+          "n": 2,
+          "prior_season": "2025/2026"
+        },
+        "PT3_to_PT": {
+          "clubs": [],
+          "mean_ga_change": null,
+          "mean_gf_change": null,
+          "n": 0,
+          "prior_season": "2025/2026"
+        },
+        "PT3_to_PT2": {
+          "clubs": [
+            {
+              "ga_change": 0.33125000000000004,
+              "gf_change": -0.02499999999999991,
+              "team_id": "10215"
+            },
+            {
+              "ga_change": 0.42500000000000004,
+              "gf_change": -0.38125,
+              "team_id": "280216"
+            }
+          ],
+          "mean_ga_change": 0.37812500000000004,
+          "mean_gf_change": -0.20312499999999994,
+          "n": 2,
+          "prior_season": "2025/2026"
+        },
+        "PT_to_PT3": {
+          "clubs": [],
+          "mean_ga_change": null,
+          "mean_gf_change": null,
+          "n": 0,
+          "prior_season": "2025/2026"
+        }
+      }
+    }
+  },
+  "n_matches": 1647,
+  "phase_counts": {
+    "2021/2022": {
+      "Liga 3 Championship Final": 1,
+      "Liga 3 Promotion Group A": 11,
+      "Liga 3 Promotion Group B": 12,
+      "Liga 3 Relegation Group A": 12,
+      "Liga 3 Relegation Group B": 12,
+      "Liga 3 Relegation Group C": 12,
+      "Liga 3 Relegation Group D": 12,
+      "Liga 3 Zona Norte": 130,
+      "Liga 3 Zona Sul": 130
+    },
+    "2022/2023": {
+      "Liga 3 Championship Final": 1,
+      "Liga 3 Promotion Group A": 12,
+      "Liga 3 Promotion Group B": 12,
+      "Liga 3 Relegation Group A": 12,
+      "Liga 3 Relegation Group B": 12,
+      "Liga 3 Relegation Group C": 12,
+      "Liga 3 Relegation Group D": 12,
+      "Liga 3 Zona A": 132,
+      "Liga 3 Zona B": 132
+    },
+    "2023/2024": {
+      "Liga 3 Promotion Group": 56,
+      "Liga 3 Relegation Group A": 30,
+      "Liga 3 Relegation Group B": 30,
+      "Liga 3 Zona A": 90,
+      "Liga 3 Zona B": 90
+    },
+    "2024/2025": {
+      "Liga 3 Promotion Group": 56,
+      "Liga 3 Relegation Group A": 30,
+      "Liga 3 Relegation Group B": 30,
+      "Liga 3 Zona A": 90,
+      "Liga 3 Zona B": 90
+    },
+    "2025/2026": {
+      "Liga 3 Promotion Group": 56,
+      "Liga 3 Relegation Group A": 30,
+      "Liga 3 Relegation Group B": 30,
+      "Liga 3 Zona A": 90,
+      "Liga 3 Zona B": 90
+    },
+    "2026/2027": {
+      "Liga 3 Zona A": 45,
+      "Liga 3 Zona B": 45
+    }
+  },
+  "referee_coverage": {
+    "by_season": {
+      "2021/2022": 0,
+      "2022/2023": 0,
+      "2023/2024": 0,
+      "2024/2025": 0,
+      "2025/2026": 0,
+      "2026/2027": 0
+    },
+    "named": 0
+  },
+  "seasons": {
+    "2021/2022": {
+      "away_win_rate": 0.31626506024096385,
+      "card_event_matches": 95,
+      "draw_rate": 0.25903614457831325,
+      "event_yellows_matches": 0,
+      "expected_goals_matches": 0,
+      "home_win_rate": 0.4246987951807229,
+      "ht_goal_matches": 317,
+      "ht_goal_share": 0.44536817102137766,
+      "lineup_matches": 8,
+      "mean_away_goals": 1.1656626506024097,
+      "mean_event_cards_total": 0.35240963855421686,
+      "mean_event_yellows_total": 0.0,
+      "mean_home_goals": 1.3704819277108433,
+      "mean_total_goals": 2.536144578313253,
+      "n": 332,
+      "period_split_matches": 0,
+      "referee_named": 0,
+      "shotmap_shots_positive": 0,
+      "stats_matches": 0,
+      "teams": 24
+    },
+    "2022/2023": {
+      "away_win_rate": 0.3264094955489614,
+      "card_event_matches": 118,
+      "draw_rate": 0.24925816023738873,
+      "event_yellows_matches": 0,
+      "expected_goals_matches": 0,
+      "home_win_rate": 0.42433234421364985,
+      "ht_goal_matches": 317,
+      "ht_goal_share": 0.41317365269461076,
+      "lineup_matches": 0,
+      "mean_away_goals": 1.1127596439169138,
+      "mean_event_cards_total": 0.4599406528189911,
+      "mean_event_yellows_total": 0.0,
+      "mean_home_goals": 1.3649851632047478,
+      "mean_total_goals": 2.477744807121662,
+      "n": 337,
+      "period_split_matches": 0,
+      "referee_named": 0,
+      "shotmap_shots_positive": 0,
+      "stats_matches": 0,
+      "teams": 24
+    },
+    "2023/2024": {
+      "away_win_rate": 0.3108108108108108,
+      "card_event_matches": 79,
+      "draw_rate": 0.25675675675675674,
+      "event_yellows_matches": 2,
+      "expected_goals_matches": 0,
+      "home_win_rate": 0.43243243243243246,
+      "ht_goal_matches": 284,
+      "ht_goal_share": 0.43342391304347827,
+      "lineup_matches": 1,
+      "mean_away_goals": 1.1655405405405406,
+      "mean_event_cards_total": 0.34121621621621623,
+      "mean_event_yellows_total": 0.006756756756756757,
+      "mean_home_goals": 1.320945945945946,
+      "mean_total_goals": 2.4864864864864864,
+      "n": 296,
+      "period_split_matches": 0,
+      "referee_named": 0,
+      "shotmap_shots_positive": 0,
+      "stats_matches": 0,
+      "teams": 20
+    },
+    "2024/2025": {
+      "away_win_rate": 0.27702702702702703,
+      "card_event_matches": 119,
+      "draw_rate": 0.2905405405405405,
+      "event_yellows_matches": 73,
+      "expected_goals_matches": 0,
+      "home_win_rate": 0.43243243243243246,
+      "ht_goal_matches": 279,
+      "ht_goal_share": 0.43812233285917496,
+      "lineup_matches": 79,
+      "mean_away_goals": 1.0472972972972974,
+      "mean_event_cards_total": 1.2702702702702702,
+      "mean_event_yellows_total": 1.0236486486486487,
+      "mean_home_goals": 1.3277027027027026,
+      "mean_total_goals": 2.375,
+      "n": 296,
+      "period_split_matches": 0,
+      "referee_named": 0,
+      "shotmap_shots_positive": 0,
+      "stats_matches": 0,
+      "teams": 20
+    },
+    "2025/2026": {
+      "away_win_rate": 0.2939189189189189,
+      "card_event_matches": 290,
+      "draw_rate": 0.3108108108108108,
+      "event_yellows_matches": 289,
+      "expected_goals_matches": 0,
+      "home_win_rate": 0.3952702702702703,
+      "ht_goal_matches": 296,
+      "ht_goal_share": 0.46060606060606063,
+      "lineup_matches": 296,
+      "mean_away_goals": 1.037162162162162,
+      "mean_event_cards_total": 4.337837837837838,
+      "mean_event_yellows_total": 4.077702702702703,
+      "mean_home_goals": 1.1925675675675675,
+      "mean_total_goals": 2.22972972972973,
+      "n": 296,
+      "period_split_matches": 0,
+      "referee_named": 0,
+      "shotmap_shots_positive": 0,
+      "stats_matches": 0,
+      "teams": 20
+    },
+    "2026/2027": {
+      "away_win_rate": 0.3,
+      "card_event_matches": 24,
+      "draw_rate": 0.2777777777777778,
+      "event_yellows_matches": 8,
+      "expected_goals_matches": 0,
+      "home_win_rate": 0.4222222222222222,
+      "ht_goal_matches": 82,
+      "ht_goal_share": 0.4267241379310345,
+      "lineup_matches": 17,
+      "mean_away_goals": 1.1666666666666667,
+      "mean_event_cards_total": 0.5,
+      "mean_event_yellows_total": 0.28888888888888886,
+      "mean_home_goals": 1.4111111111111112,
+      "mean_total_goals": 2.577777777777778,
+      "n": 90,
+      "period_split_matches": 0,
+      "referee_named": 0,
+      "shotmap_shots_positive": 0,
+      "stats_matches": 0,
+      "teams": 20
+    }
+  },
+  "trait_reliability": {
+    "event_yellows_for": {
+      "min_half_matches": 10,
+      "n_teams": 42,
+      "r": 0.32761735681961995,
+      "valid_team_match_values": 3294
+    },
+    "goals_against": {
+      "min_half_matches": 10,
+      "n_teams": 42,
+      "r": 0.5635377130813936,
+      "valid_team_match_values": 3294
+    },
+    "goals_for": {
+      "min_half_matches": 10,
+      "n_teams": 42,
+      "r": 0.44007885889915954,
+      "valid_team_match_values": 3294
+    }
+  },
+  "trait_reliability_by_season": {
+    "event_yellows_for": {
+      "2021/2022": {
+        "min_half_matches": 10,
+        "n_teams": 24,
+        "r": null
+      },
+      "2022/2023": {
+        "min_half_matches": 10,
+        "n_teams": 24,
+        "r": null
+      },
+      "2023/2024": {
+        "min_half_matches": 10,
+        "n_teams": 20,
+        "r": 1.0
+      },
+      "2024/2025": {
+        "min_half_matches": 10,
+        "n_teams": 20,
+        "r": 0.5314215838090153
+      },
+      "2025/2026": {
+        "min_half_matches": 10,
+        "n_teams": 20,
+        "r": 0.11458085902893421
+      },
+      "2026/2027": {
+        "min_half_matches": 10,
+        "n_teams": 0,
+        "r": null
+      }
+    },
+    "goals_against": {
+      "2021/2022": {
+        "min_half_matches": 10,
+        "n_teams": 24,
+        "r": 0.143756356617153
+      },
+      "2022/2023": {
+        "min_half_matches": 10,
+        "n_teams": 24,
+        "r": 0.40530745957871805
+      },
+      "2023/2024": {
+        "min_half_matches": 10,
+        "n_teams": 20,
+        "r": 0.2276184135881874
+      },
+      "2024/2025": {
+        "min_half_matches": 10,
+        "n_teams": 20,
+        "r": 0.18203553332158223
+      },
+      "2025/2026": {
+        "min_half_matches": 10,
+        "n_teams": 20,
+        "r": 0.33745550355717396
+      },
+      "2026/2027": {
+        "min_half_matches": 10,
+        "n_teams": 0,
+        "r": null
+      }
+    },
+    "goals_for": {
+      "2021/2022": {
+        "min_half_matches": 10,
+        "n_teams": 24,
+        "r": 0.5396760423669726
+      },
+      "2022/2023": {
+        "min_half_matches": 10,
+        "n_teams": 24,
+        "r": 0.3318479462885079
+      },
+      "2023/2024": {
+        "min_half_matches": 10,
+        "n_teams": 20,
+        "r": 0.2644389502467227
+      },
+      "2024/2025": {
+        "min_half_matches": 10,
+        "n_teams": 20,
+        "r": 0.36090102298471266
+      },
+      "2025/2026": {
+        "min_half_matches": 10,
+        "n_teams": 20,
+        "r": 0.3818696731405808
+      },
+      "2026/2027": {
+        "min_half_matches": 10,
+        "n_teams": 0,
+        "r": null
+      }
+    }
+  }
+}

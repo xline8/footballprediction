@@ -1,0 +1,36 @@
+# USA USL Championship — league config
+league: US-USLChampionship
+country: USA
+fotmob_id: 8972
+tier: 2
+warehouse: data_enrichment/fotmob_world_index.csv (league_id=8972)
+data:
+  matches: league/US-USLChampionship/data/usl_matches.csv
+  team_matches: league/US-USLChampionship/data/usl_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period: ["2022", "2023", "2024"]
+virgin_primary: "2025"
+virgin_confirmatory: "2026"
+halves_constants:
+  goals_1h_share: 0.459
+  sot_1h_share: 0.456
+  corners_1h_share: 0.460
+  total_shots_1h_share: 0.453
+  yellow_cards_1h_share: 0.369
+markets:
+  goals: G-USL        # DC reference, GOALS-ONLY (no xG in league); arms: Gate Zero, SHR
+  sot: S-USL          # v5 reference; arms: Gate Zero, RS ratio-shrink (X4/X6 dropped: no shotmap/xG)
+  corners: C-USL      # corners_v3 reference; arms: Gate Zero (X9), X7 box touches
+  cards: K-USL        # cards reference; arms: Gate Zero, X8 referee covariate; target = STATS-feed yellows
+  total_shots: T-USL  # shots family; arms: A v1, B v2 level layer, C E9 trailing-r; primary line 24.5
+notes:
+  - Calendar-year seasons; regular and playoff matches are retained and phase-flagged. No phase filter is used.
+  - USL has no promotion/relegation; no X2 mover tier exists. Churn is contraction (MLS reserve sides left after 2021-22) + expansion/returning entries (Detroit/Monterey Bay 2022, North Carolina/Rhode Island 2024, Lexington 2025). Thin-team risk is handled by the pre-registered SHR arm.
+  - Conferences exist operationally, but the conference field is absent from the warehouse; no conference feature is built.
+  - Stats are 100% in every season; shotmap and xG are 0% in every season. Period splits are 0% in 2021-22, 92.7% in 2023, 100% from 2024.
+  - Cards: the event feed is the broken feed here (Card events near-absent in 2021-22); unified yellows use the stats feed (US-MLS precedent). Stats-feed yellows jump 3.24 (2021) -> 4.33 (2022) -> 4.67-4.91 (2023-24); 2021 is warm-up only and never scored.
+  - Box touches ramp 21-39% in 2021-2023 to 100% in 2024-2025. X7 uses the min-8 trailing rule with Gate Zero fallback; X8 never imputes a referee.
+  - Referee coverage is 0% in 2021 (warm-up only) and 91.7-98.7% in dev/virgin seasons; strictness split-half r=0.378 (31 referees >=20 matches).
+  - 2025 is the virgin primary, n=375, read once and only for dev-passing arms. 2026 is reserved: in progress in the warehouse, never read in this build.
+  - Calibration in this league is defined as actual - predicted (stated in every prereg/verdict).
+  - Predictions-only: no USL odds/settlement source is in-system.

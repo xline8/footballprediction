@@ -1,0 +1,33 @@
+# CH-SuperLeague (Switzerland) — league config
+league: CH-SuperLeague
+country: Switzerland
+fotmob_id: 69
+tier: 1
+warehouse: data_enrichment/fotmob_world/Switzerland/Super League
+data:
+  matches: league/CH-SuperLeague/data/ch_matches.csv
+  team_matches: league/CH-SuperLeague/data/ch_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]  # walk-forward, season-blocked
+virgin_primary: "2025/2026"        # complete season, n=228 — read ONCE per candidate
+virgin_confirmatory: "2026/2027"   # partial (78 played at pull); reserved, NOT read in this build
+halves_constants:                  # frozen, measured on the complete-splits era 2023/2024–2025/2026 (n≈682)
+  goals_1h_share: 0.437
+  sot_1h_share: 0.453
+  corners_1h_share: 0.471
+  total_shots_1h_share: 0.456
+  yellow_cards_1h_share: 0.357
+markets:
+  goals: G-CH        # DC reference; arms: Gate Zero, SHRINK (thin-data prior), X3 set-play
+  sot: S-CH          # v5 reference; arms: Gate Zero, RS ratio-shrink (X4/X6 dropped on reliability)
+  corners: C-CH      # corners_v3 reference; arms: Gate Zero (X9), X7 box touches; primary line 10.5
+  cards: K-CH        # cards reference; arms: Gate Zero, X8 referee; primary line 4.5
+  total_shots: T-CH  # shots family; arms: A v1 pattern, B v2 level layer, C E9 trailing-r
+notes:
+  - FORMAT BREAK: 2021/2022–2022/2023 = 10 teams, 36 rounds, no split (180/season); from 2023/2024 = 12 teams, rounds 1–33 regular + rounds 34–38 championship/relegation split (228/season). Split rounds are modelled as ordinary league matches; phase is flagged in the CSV.
+  - Per-half stats are complete only from 2023/2024 (0.6% in 2021/2022, 33.9% in 2022/2023) — halves constants use the complete era only.
+  - Referee coverage: 47.2% in 2021/2022, 91.7% in 2022/2023, ~99–100% from 2023/2024 (89.8% overall).
+  - xGOT population rule breaks at 2024/2025 (only on-target shots populated before; ~100% from 2024/2025); X6 dropped on reliability anyway.
+  - touches_opp_box coverage: 68–86% in 2021/2022–2023/2024, 100% from 2024/2025.
+  - One match (4201311, 2023/2024) lacks the stats-feed xG/cards block: cards from events, goals blend goals-only fallback.
+  - Predictions-only: no CH odds/settlement source in-system.

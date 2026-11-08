@@ -1,0 +1,67 @@
+{
+  "awarded_match_ids": [
+    "3796146",
+    "3796174",
+    "5066531"
+  ],
+  "event_card_types": {
+    "Red": 253,
+    "YellowRed": 112
+  },
+  "events_absent": 52,
+  "events_present": 1080,
+  "finished_rows": 1132,
+  "index_rows": 1132,
+  "lineup_absent": 1132,
+  "payload_files": 1132,
+  "playoff_by_season": {
+    "2021/2022 - Apertura": 10,
+    "2021/2022 - Clausura": 10,
+    "2022/2023 - Apertura": 10,
+    "2022/2023 - Clausura": 10,
+    "2023/2024 - Apertura": 10,
+    "2023/2024 - Clausura": 10,
+    "2024/2025 - Apertura": 10,
+    "2024/2025 - Clausura": 10,
+    "2025/2026 - Apertura": 14,
+    "2025/2026 - Clausura": 14
+  },
+  "referee_empty": 1132,
+  "regular_by_season": {
+    "2021/2022 - Apertura": 90,
+    "2021/2022 - Clausura": 90,
+    "2022/2023 - Apertura": 90,
+    "2022/2023 - Clausura": 90,
+    "2023/2024 - Apertura": 90,
+    "2023/2024 - Clausura": 90,
+    "2024/2025 - Apertura": 90,
+    "2024/2025 - Clausura": 90,
+    "2025/2026 - Apertura": 110,
+    "2025/2026 - Clausura": 110,
+    "2026/2027 - Apertura": 84
+  },
+  "shotmap_zero": 1132,
+  "stage_counts": {
+    "playoff": 108,
+    "regular": 1024
+  },
+  "stats_none": 1132,
+  "team_ids": [
+    "1384118",
+    "1512967",
+    "2096906",
+    "2096910",
+    "276800",
+    "343356",
+    "49777",
+    "49783",
+    "49785",
+    "49786",
+    "559874",
+    "6336",
+    "655719",
+    "863047",
+    "9932",
+    "9936"
+  ]
+}

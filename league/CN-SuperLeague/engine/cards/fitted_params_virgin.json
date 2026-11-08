@@ -1,0 +1,10 @@
+{
+  "arm": "gate_zero",
+  "r": {
+    "model": 38.87913311345577,
+    "base": 38.67581211111305,
+    "naive": 37.722532115475246
+  },
+  "shipped_arm": "gate_zero",
+  "halves_yellow_cards_1h_share": 0.3328
+}

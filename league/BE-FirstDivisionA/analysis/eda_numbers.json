@@ -1,0 +1,451 @@
+{
+ "n": 1698,
+ "seasons": [
+  "2021/2022",
+  "2022/2023",
+  "2023/2024",
+  "2024/2025",
+  "2025/2026",
+  "2026/2027"
+ ],
+ "team_ids": 24,
+ "per_season": {
+  "2021/2022": {
+   "n": 330,
+   "goals": 2.906,
+   "home_goals": 1.53,
+   "away_goals": 1.376,
+   "sot": 9.116,
+   "corners": 10.28,
+   "shots": 25.657,
+   "yellows_stats": 4.082,
+   "yellows_events": 4.167,
+   "reds_stats": 0.289,
+   "xg": 3.051,
+   "cov_stats": 100,
+   "cov_half": 3.3,
+   "cov_shotmap": 99.7,
+   "cov_events": 99.7,
+   "cov_ref": 41.2,
+   "cov_touches": 71.2,
+   "cov_xg": 99.7,
+   "cov_cards_stats": 99.7,
+   "cards_sources": {
+    "stats": 329,
+    "events": 0,
+    "none": 1
+   },
+   "phases": {
+    "playoff_championship": 12,
+    "playoff_europe": 12,
+    "regular": 306
+   },
+   "teams": 18
+  },
+  "2022/2023": {
+   "n": 330,
+   "goals": 3.064,
+   "home_goals": 1.652,
+   "away_goals": 1.412,
+   "sot": 8.961,
+   "corners": 9.97,
+   "shots": 24.33,
+   "yellows_stats": 3.812,
+   "yellows_events": 3.9,
+   "reds_stats": 0.282,
+   "xg": 2.837,
+   "cov_stats": 100,
+   "cov_half": 20.3,
+   "cov_shotmap": 100,
+   "cov_events": 100,
+   "cov_ref": 97.0,
+   "cov_touches": 69.7,
+   "cov_xg": 100.0,
+   "cov_cards_stats": 100.0,
+   "cards_sources": {
+    "stats": 330,
+    "events": 0,
+    "none": 0
+   },
+   "phases": {
+    "playoff_championship": 12,
+    "playoff_europe": 12,
+    "regular": 306
+   },
+   "teams": 18
+  },
+  "2023/2024": {
+   "n": 313,
+   "goals": 2.824,
+   "home_goals": 1.585,
+   "away_goals": 1.24,
+   "sot": 9.292,
+   "corners": 9.853,
+   "shots": 26.218,
+   "yellows_stats": 3.64,
+   "yellows_events": 3.792,
+   "reds_stats": 0.19,
+   "xg": 2.914,
+   "cov_stats": 99.7,
+   "cov_half": 99.4,
+   "cov_shotmap": 99.7,
+   "cov_events": 99.7,
+   "cov_ref": 99.4,
+   "cov_touches": 80.8,
+   "cov_xg": 99.4,
+   "cov_cards_stats": 99.4,
+   "cards_sources": {
+    "stats": 311,
+    "events": 1,
+    "none": 1
+   },
+   "phases": {
+    "playoff_championship": 30,
+    "playoff_europe": 30,
+    "playoff_final": 1,
+    "playoff_relegation": 12,
+    "regular": 240
+   },
+   "teams": 16
+  },
+  "2024/2025": {
+   "n": 313,
+   "goals": 2.757,
+   "home_goals": 1.591,
+   "away_goals": 1.166,
+   "sot": 9.249,
+   "corners": 10.058,
+   "shots": 26.428,
+   "yellows_stats": 3.735,
+   "yellows_events": 3.85,
+   "reds_stats": 0.224,
+   "xg": 3.007,
+   "cov_stats": 100,
+   "cov_half": 100,
+   "cov_shotmap": 100,
+   "cov_events": 100,
+   "cov_ref": 96.8,
+   "cov_touches": 100.0,
+   "cov_xg": 100.0,
+   "cov_cards_stats": 100.0,
+   "cards_sources": {
+    "stats": 313,
+    "events": 0,
+    "none": 0
+   },
+   "phases": {
+    "playoff_championship": 30,
+    "playoff_europe": 30,
+    "playoff_final": 1,
+    "playoff_relegation": 12,
+    "regular": 240
+   },
+   "teams": 16
+  },
+  "2025/2026": {
+   "n": 313,
+   "goals": 2.674,
+   "home_goals": 1.435,
+   "away_goals": 1.24,
+   "sot": 8.904,
+   "corners": 10.157,
+   "shots": 26.329,
+   "yellows_stats": 3.754,
+   "yellows_events": 3.815,
+   "reds_stats": 0.195,
+   "xg": 2.92,
+   "cov_stats": 100,
+   "cov_half": 100,
+   "cov_shotmap": 100,
+   "cov_events": 100,
+   "cov_ref": 93.0,
+   "cov_touches": 100.0,
+   "cov_xg": 100.0,
+   "cov_cards_stats": 100.0,
+   "cards_sources": {
+    "stats": 313,
+    "events": 0,
+    "none": 0
+   },
+   "phases": {
+    "playoff_championship": 30,
+    "playoff_europe": 30,
+    "playoff_final": 1,
+    "playoff_relegation": 12,
+    "regular": 240
+   },
+   "teams": 16
+  },
+  "2026/2027": {
+   "n": 99,
+   "goals": 3.192,
+   "home_goals": 1.859,
+   "away_goals": 1.333,
+   "sot": 9.293,
+   "corners": 10.293,
+   "shots": 28.616,
+   "yellows_stats": 3.455,
+   "yellows_events": 3.465,
+   "reds_stats": 0.253,
+   "xg": 3.197,
+   "cov_stats": 100,
+   "cov_half": 100,
+   "cov_shotmap": 100,
+   "cov_events": 100,
+   "cov_ref": 100.0,
+   "cov_touches": 100.0,
+   "cov_xg": 100.0,
+   "cov_cards_stats": 100.0,
+   "cards_sources": {
+    "stats": 99,
+    "events": 0,
+    "none": 0
+   },
+   "phases": {
+    "regular": 99
+   },
+   "teams": 18
+  }
+ },
+ "cards_check": {
+  "n_with_stats": 1695,
+  "exact_agree_pct": 86.4,
+  "mean_stats_minus_events": -0.1,
+  "stats_lower_pct": 11.5,
+  "stats_higher_pct": 2.1,
+  "max_abs_diff": 3,
+  "exact_agree_pct_incl_yellowred": 85.9,
+  "mean_diff_incl_yellowred": -0.192
+ },
+ "sot_stats_vs_shotmap_corr": 0.996,
+ "goals_per_xg": {
+  "2021/2022": 0.955,
+  "2022/2023": 1.08,
+  "2023/2024": 0.975,
+  "2024/2025": 0.917,
+  "2025/2026": 0.916,
+  "2026/2027": 0.998
+ },
+ "reliability": {
+  "goals_for": 0.8,
+  "goals_against": 0.787,
+  "sot_for": 0.87,
+  "corners_for": 0.729,
+  "shots_for": 0.878,
+  "yellows_for": 0.4,
+  "xg_for": 0.879,
+  "touches_for": 0.916,
+  "touches_against": 0.824,
+  "bigchance_for": 0.841,
+  "possession": 0.931
+ },
+ "reliability_nteams": {
+  "goals_for": 22,
+  "goals_against": 22,
+  "sot_for": 22,
+  "corners_for": 22,
+  "shots_for": 22,
+  "yellows_for": 22,
+  "xg_for": 22,
+  "touches_for": 22,
+  "touches_against": 22,
+  "bigchance_for": 22,
+  "possession": 22
+ },
+ "sp_share_rel": [
+  0.599,
+  22
+ ],
+ "xg_per_shot_rel": [
+  0.435,
+  22
+ ],
+ "on_target_rate_rel": [
+  0.534,
+  22
+ ],
+ "xgot_cov_pct_of_shots": {
+  "2021/2022": 34.9,
+  "2022/2023": 36.1,
+  "2023/2024": 35.2,
+  "2024/2025": 99.7,
+  "2025/2026": 99.7,
+  "2026/2027": 99.5
+ },
+ "xgot_full_era": [
+  "2024/2025",
+  "2025/2026",
+  "2026/2027"
+ ],
+ "xgot_rel_era": [
+  0.075,
+  20
+ ],
+ "ref_rel": [
+  0.378,
+  19
+ ],
+ "n_refs_ge20": 19,
+ "half_complete_seasons": [
+  "2023/2024",
+  "2024/2025",
+  "2025/2026"
+ ],
+ "half_shares": {
+  "sot": {
+   "n": 936,
+   "share_ratio_of_sums": 0.4517,
+   "obs_var": 0.0314,
+   "true_var": -0.0002,
+   "true_sd": 0.0
+  },
+  "corners": {
+   "n": 937,
+   "share_ratio_of_sums": 0.4707,
+   "obs_var": 0.0281,
+   "true_var": -0.0004,
+   "true_sd": 0.0
+  },
+  "shots": {
+   "n": 937,
+   "share_ratio_of_sums": 0.4561,
+   "obs_var": 0.0101,
+   "true_var": 0.0002,
+   "true_sd": 0.0128
+  },
+  "yellows": {
+   "n": 910,
+   "share_ratio_of_sums": 0.3173,
+   "obs_var": 0.0862,
+   "true_var": 0.0091,
+   "true_sd": 0.0953
+  },
+  "goals_all": {
+   "n": 1593,
+   "share_ratio_of_sums": 0.4477,
+   "obs_var": 0.107,
+   "true_var": -0.0034
+  },
+  "goals_half_era": {
+   "n": 869,
+   "share_ratio_of_sums": 0.4579,
+   "obs_var": 0.1115,
+   "true_var": -0.002
+  }
+ },
+ "pooled": {
+  "n_complete": 1599,
+  "goals": 2.848,
+  "home_goals": 1.559,
+  "away_goals": 1.289,
+  "hw_pct": 42.8,
+  "draw_pct": 24.9,
+  "aw_pct": 32.3,
+  "over25_pct": 54.0,
+  "btts_pct": 54.3,
+  "disp_goals": 0.999,
+  "disp_sot": 1.09,
+  "disp_corners": 1.117,
+  "disp_yellows": 1.016,
+  "disp_shots": 1.361
+ },
+ "phase_levels": {
+  "regular": {
+   "n": 1332,
+   "goals": 2.833,
+   "sot": 9.072,
+   "corners": 10.18,
+   "yellows": 3.87,
+   "shots": 25.733
+  },
+  "playoff_championship": {
+   "n": 114,
+   "goals": 2.754,
+   "sot": 8.939,
+   "corners": 8.868,
+   "yellows": 3.93,
+   "shots": 25.368
+  },
+  "playoff_europe": {
+   "n": 114,
+   "goals": 3.044,
+   "sot": 9.575,
+   "corners": 10.035,
+   "yellows": 3.08,
+   "shots": 26.92
+  },
+  "playoff_relegation": {
+   "n": 36,
+   "goals": 3.139,
+   "sot": 9.278,
+   "corners": 9.917,
+   "yellows": 3.361,
+   "shots": 24.778
+  }
+ },
+ "dev_n_all4": 1286,
+ "dev_over_rates": {
+  "goals_2.5": [
+   0.551,
+   1286
+  ],
+  "sot": {
+   "8.5": [
+    0.548,
+    1284
+   ],
+   "9.5": [
+    0.433,
+    1284
+   ],
+   "10.5": [
+    0.326,
+    1284
+   ]
+  },
+  "corners": {
+   "9.5": [
+    0.533,
+    1284
+   ],
+   "10.5": [
+    0.42,
+    1284
+   ],
+   "11.5": [
+    0.31,
+    1284
+   ]
+  },
+  "yellows": {
+   "3.5": [
+    0.543,
+    1283
+   ],
+   "4.5": [
+    0.331,
+    1283
+   ],
+   "5.5": [
+    0.192,
+    1283
+   ]
+  },
+  "shots": {
+   "25.5": [
+    0.473,
+    1284
+   ],
+   "26.5": [
+    0.415,
+    1284
+   ],
+   "27.5": [
+    0.369,
+    1284
+   ]
+  }
+ },
+ "virgin_n": 313,
+ "dev_scored_n": 956
+}

@@ -1,0 +1,577 @@
+{
+  "league": "PL-ILiga",
+  "league_id": 197,
+  "n": 1671,
+  "seasons": [
+    "2021/2022",
+    "2022/2023",
+    "2023/2024",
+    "2024/2025",
+    "2025/2026",
+    "2026/2027"
+  ],
+  "per_season": {
+    "2021/2022": {
+      "n": 309,
+      "n_regular": 306,
+      "n_playoff": 3,
+      "teams": 18,
+      "mean_total_goals": 2.492,
+      "mean_home_goals": 1.33,
+      "mean_away_goals": 1.162,
+      "home_win_pct": 38.2,
+      "draw_pct": 29.1,
+      "away_win_pct": 32.7,
+      "ou2_5_over_rate": 0.456,
+      "events_coverage_pct": 92.6,
+      "ht_goals_coverage_pct": 92.6
+    },
+    "2022/2023": {
+      "n": 309,
+      "n_regular": 306,
+      "n_playoff": 3,
+      "teams": 18,
+      "mean_total_goals": 2.654,
+      "mean_home_goals": 1.437,
+      "mean_away_goals": 1.217,
+      "home_win_pct": 40.1,
+      "draw_pct": 29.8,
+      "away_win_pct": 30.1,
+      "ou2_5_over_rate": 0.502,
+      "events_coverage_pct": 94.8,
+      "ht_goals_coverage_pct": 94.8
+    },
+    "2023/2024": {
+      "n": 309,
+      "n_regular": 306,
+      "n_playoff": 3,
+      "teams": 18,
+      "mean_total_goals": 2.663,
+      "mean_home_goals": 1.482,
+      "mean_away_goals": 1.181,
+      "home_win_pct": 42.4,
+      "draw_pct": 25.6,
+      "away_win_pct": 32.0,
+      "ou2_5_over_rate": 0.492,
+      "events_coverage_pct": 93.5,
+      "ht_goals_coverage_pct": 93.5
+    },
+    "2024/2025": {
+      "n": 309,
+      "n_regular": 306,
+      "n_playoff": 3,
+      "teams": 18,
+      "mean_total_goals": 2.709,
+      "mean_home_goals": 1.421,
+      "mean_away_goals": 1.288,
+      "home_win_pct": 38.5,
+      "draw_pct": 26.9,
+      "away_win_pct": 34.6,
+      "ou2_5_over_rate": 0.54,
+      "events_coverage_pct": 93.9,
+      "ht_goals_coverage_pct": 93.9
+    },
+    "2025/2026": {
+      "n": 309,
+      "n_regular": 306,
+      "n_playoff": 3,
+      "teams": 18,
+      "mean_total_goals": 2.981,
+      "mean_home_goals": 1.599,
+      "mean_away_goals": 1.382,
+      "home_win_pct": 41.4,
+      "draw_pct": 27.2,
+      "away_win_pct": 31.4,
+      "ou2_5_over_rate": 0.599,
+      "events_coverage_pct": 96.1,
+      "ht_goals_coverage_pct": 96.1
+    },
+    "2026/2027": {
+      "n": 126,
+      "n_regular": 126,
+      "n_playoff": 0,
+      "teams": 18,
+      "mean_total_goals": 2.698,
+      "mean_home_goals": 1.5,
+      "mean_away_goals": 1.198,
+      "home_win_pct": 43.7,
+      "draw_pct": 27.0,
+      "away_win_pct": 29.4,
+      "ou2_5_over_rate": 0.5,
+      "events_coverage_pct": 96.8,
+      "ht_goals_coverage_pct": 96.8
+    }
+  },
+  "pooled_complete_regular": {
+    "n": 1530,
+    "n_regular": 1530,
+    "n_playoff": 0,
+    "teams": 38,
+    "mean_total_goals": 2.695,
+    "mean_home_goals": 1.451,
+    "mean_away_goals": 1.244,
+    "home_win_pct": 40.0,
+    "draw_pct": 27.8,
+    "away_win_pct": 32.2,
+    "ou2_5_over_rate": 0.517,
+    "events_coverage_pct": 94.2,
+    "ht_goals_coverage_pct": 94.2,
+    "seasons": [
+      "2021/2022",
+      "2022/2023",
+      "2023/2024",
+      "2024/2025",
+      "2025/2026"
+    ]
+  },
+  "reliability": {
+    "goals_for": {
+      "r": 0.721,
+      "n_teams": 38,
+      "reps": 60,
+      "seed": 42
+    },
+    "goals_against": {
+      "r": 0.281,
+      "n_teams": 38,
+      "reps": 60,
+      "seed": 42
+    }
+  },
+  "half_shares": {
+    "goals": {
+      "n": 1417,
+      "share_ratio_of_sums": 0.457,
+      "observed_var": 0.1121,
+      "true_var": -0.0033,
+      "true_sd": 0.0
+    },
+    "source": "events; regular complete seasons"
+  },
+  "dev_period": {
+    "seasons": [
+      "2021/2022",
+      "2022/2023",
+      "2023/2024",
+      "2024/2025"
+    ],
+    "regular_n": 1224,
+    "scored_seasons": [
+      "2022/2023",
+      "2023/2024",
+      "2024/2025"
+    ],
+    "scored_n": 918,
+    "ou2_5_over_rate": 0.497,
+    "scored_season_ou2_5": {
+      "2022/2023": 0.502,
+      "2023/2024": 0.492,
+      "2024/2025": 0.54
+    }
+  },
+  "virgin": {
+    "season": "2025/2026",
+    "regular_n": 306
+  },
+  "confirmatory": {
+    "season": "2026/2027",
+    "n": 126
+  },
+  "card_event_descriptives": {
+    "2021/2022": {
+      "red": 25,
+      "yellowred": 40,
+      "mean_reds_per_match_events": 0.227,
+      "events_n": 286
+    },
+    "2022/2023": {
+      "red": 27,
+      "yellowred": 43,
+      "mean_reds_per_match_events": 0.239,
+      "events_n": 293
+    },
+    "2023/2024": {
+      "red": 38,
+      "yellowred": 46,
+      "mean_reds_per_match_events": 0.291,
+      "events_n": 289
+    },
+    "2024/2025": {
+      "red": 44,
+      "yellowred": 24,
+      "mean_reds_per_match_events": 0.234,
+      "events_n": 290
+    },
+    "2025/2026": {
+      "red": 49,
+      "yellowred": 1,
+      "mean_reds_per_match_events": 0.168,
+      "events_n": 297
+    },
+    "2026/2027": {
+      "red": 19,
+      "yellowred": 2,
+      "mean_reds_per_match_events": 0.172,
+      "events_n": 122
+    }
+  },
+  "newcomers": [
+    {
+      "season": "2022/2023",
+      "team_id": "10265",
+      "n": 34,
+      "gf": 1.794,
+      "ga": 1.118
+    },
+    {
+      "season": "2022/2023",
+      "team_id": "1601",
+      "n": 34,
+      "gf": 1.412,
+      "ga": 0.971
+    },
+    {
+      "season": "2022/2023",
+      "team_id": "177361",
+      "n": 34,
+      "gf": 1.618,
+      "ga": 1.088
+    },
+    {
+      "season": "2022/2023",
+      "team_id": "177362",
+      "n": 34,
+      "gf": 1.676,
+      "ga": 1.294
+    },
+    {
+      "season": "2022/2023",
+      "team_id": "206344",
+      "n": 34,
+      "gf": 1.029,
+      "ga": 1.676
+    },
+    {
+      "season": "2022/2023",
+      "team_id": "8019",
+      "n": 34,
+      "gf": 1.176,
+      "ga": 1.324
+    },
+    {
+      "season": "2023/2024",
+      "team_id": "2183",
+      "n": 34,
+      "gf": 1.206,
+      "ga": 1.471
+    },
+    {
+      "season": "2023/2024",
+      "team_id": "8030",
+      "n": 34,
+      "gf": 1.765,
+      "ga": 1
+    },
+    {
+      "season": "2023/2024",
+      "team_id": "8048",
+      "n": 34,
+      "gf": 1.529,
+      "ga": 1.059
+    },
+    {
+      "season": "2023/2024",
+      "team_id": "8243",
+      "n": 34,
+      "gf": 1.353,
+      "ga": 1.353
+    },
+    {
+      "season": "2023/2024",
+      "team_id": "89466",
+      "n": 34,
+      "gf": 1.441,
+      "ga": 1.235
+    },
+    {
+      "season": "2023/2024",
+      "team_id": "89469",
+      "n": 34,
+      "gf": 1,
+      "ga": 1.294
+    },
+    {
+      "season": "2024/2025",
+      "team_id": "1601",
+      "n": 34,
+      "gf": 1.471,
+      "ga": 1.353
+    },
+    {
+      "season": "2024/2025",
+      "team_id": "160406",
+      "n": 34,
+      "gf": 0.853,
+      "ga": 1.618
+    },
+    {
+      "season": "2024/2025",
+      "team_id": "273750",
+      "n": 34,
+      "gf": 1.118,
+      "ga": 1.559
+    },
+    {
+      "season": "2024/2025",
+      "team_id": "8049",
+      "n": 34,
+      "gf": 0.794,
+      "ga": 1.912
+    },
+    {
+      "season": "2024/2025",
+      "team_id": "8244",
+      "n": 34,
+      "gf": 1.471,
+      "ga": 1.206
+    },
+    {
+      "season": "2024/2025",
+      "team_id": "89467",
+      "n": 34,
+      "gf": 0.647,
+      "ga": 1.647
+    },
+    {
+      "season": "2025/2026",
+      "team_id": "1286895",
+      "n": 34,
+      "gf": 2.059,
+      "ga": 1.382
+    },
+    {
+      "season": "2025/2026",
+      "team_id": "205870",
+      "n": 34,
+      "gf": 1.324,
+      "ga": 1.176
+    },
+    {
+      "season": "2025/2026",
+      "team_id": "458623",
+      "n": 34,
+      "gf": 1.5,
+      "ga": 1.824
+    },
+    {
+      "season": "2025/2026",
+      "team_id": "585593",
+      "n": 34,
+      "gf": 1.5,
+      "ga": 1.588
+    },
+    {
+      "season": "2025/2026",
+      "team_id": "8025",
+      "n": 34,
+      "gf": 2.029,
+      "ga": 1.382
+    },
+    {
+      "season": "2025/2026",
+      "team_id": "8031",
+      "n": 34,
+      "gf": 1.647,
+      "ga": 1.471
+    },
+    {
+      "season": "2026/2027",
+      "team_id": "177361",
+      "n": 14,
+      "gf": 1.571,
+      "ga": 1.429
+    },
+    {
+      "season": "2026/2027",
+      "team_id": "2417",
+      "n": 14,
+      "gf": 1.429,
+      "ga": 1.857
+    },
+    {
+      "season": "2026/2027",
+      "team_id": "8030",
+      "n": 14,
+      "gf": 1.786,
+      "ga": 1.571
+    },
+    {
+      "season": "2026/2027",
+      "team_id": "8033",
+      "n": 14,
+      "gf": 1.214,
+      "ga": 1.429
+    },
+    {
+      "season": "2026/2027",
+      "team_id": "8322",
+      "n": 14,
+      "gf": 1.357,
+      "ga": 1.214
+    },
+    {
+      "season": "2026/2027",
+      "team_id": "89467",
+      "n": 14,
+      "gf": 1.429,
+      "ga": 1.429
+    }
+  ],
+  "newcomer_gaps": {
+    "n": 30,
+    "expected_per_transition": 3,
+    "newcomer_gf": 1.407,
+    "newcomer_ga": 1.398,
+    "league_team_gf": 1.348,
+    "league_team_ga": 1.348,
+    "gf_gap": 0.059,
+    "ga_gap": 0.05,
+    "by_transition": {
+      "2022/2023": {
+        "n": 6,
+        "gf": 1.451,
+        "ga": 1.245,
+        "gf_gap": 0.103,
+        "ga_gap": -0.103
+      },
+      "2023/2024": {
+        "n": 6,
+        "gf": 1.382,
+        "ga": 1.235,
+        "gf_gap": 0.034,
+        "ga_gap": -0.113
+      },
+      "2024/2025": {
+        "n": 6,
+        "gf": 1.059,
+        "ga": 1.549,
+        "gf_gap": -0.289,
+        "ga_gap": 0.201
+      },
+      "2025/2026": {
+        "n": 6,
+        "gf": 1.677,
+        "ga": 1.47,
+        "gf_gap": 0.329,
+        "ga_gap": 0.122
+      },
+      "2026/2027": {
+        "n": 6,
+        "gf": 1.464,
+        "ga": 1.488,
+        "gf_gap": 0.116,
+        "ga_gap": 0.14
+      }
+    }
+  },
+  "direction_split": {
+    "from_ekstraklasa": [
+      {
+        "season": "2022/2023",
+        "n": 3,
+        "gf": 1.529,
+        "ga": 1.177,
+        "gf_gap": 0.181,
+        "ga_gap": -0.171
+      },
+      {
+        "season": "2023/2024",
+        "n": 3,
+        "gf": 1.549,
+        "ga": 1.137,
+        "gf_gap": 0.201,
+        "ga_gap": -0.211
+      },
+      {
+        "season": "2024/2025",
+        "n": 3,
+        "gf": 1.196,
+        "ga": 1.402,
+        "gf_gap": -0.152,
+        "ga_gap": 0.054
+      },
+      {
+        "season": "2025/2026",
+        "n": 3,
+        "gf": 1.618,
+        "ga": 1.461,
+        "gf_gap": 0.27,
+        "ga_gap": 0.113
+      },
+      {
+        "season": "2026/2027",
+        "n": 3,
+        "gf": 1.571,
+        "ga": 1.405,
+        "gf_gap": 0.223,
+        "ga_gap": 0.057
+      }
+    ],
+    "from_ii_liga": [
+      {
+        "season": "2022/2023",
+        "n": 3,
+        "gf": 1.372,
+        "ga": 1.314,
+        "gf_gap": 0.024,
+        "ga_gap": -0.034
+      },
+      {
+        "season": "2023/2024",
+        "n": 3,
+        "gf": 1.216,
+        "ga": 1.333,
+        "gf_gap": -0.132,
+        "ga_gap": -0.015
+      },
+      {
+        "season": "2024/2025",
+        "n": 3,
+        "gf": 0.922,
+        "ga": 1.696,
+        "gf_gap": -0.426,
+        "ga_gap": 0.348
+      },
+      {
+        "season": "2025/2026",
+        "n": 3,
+        "gf": 1.735,
+        "ga": 1.48,
+        "gf_gap": 0.387,
+        "ga_gap": 0.132
+      },
+      {
+        "season": "2026/2027",
+        "n": 3,
+        "gf": 1.357,
+        "ga": 1.572,
+        "gf_gap": 0.009,
+        "ga_gap": 0.224
+      }
+    ],
+    "from_ekstraklasa_pooled": {
+      "n": 15,
+      "gf": 1.493,
+      "ga": 1.316,
+      "gf_gap": 0.145,
+      "ga_gap": -0.032
+    },
+    "from_ii_liga_pooled": {
+      "n": 15,
+      "gf": 1.32,
+      "ga": 1.479,
+      "gf_gap": -0.028,
+      "ga_gap": 0.131
+    }
+  }
+}

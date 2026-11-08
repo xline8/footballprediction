@@ -1,0 +1,32 @@
+# Morocco Botola Pro — league config
+league: MA-BotolaPro
+country: Morocco
+fotmob_id: 530
+tier: 1
+data:
+  matches: league/MA-BotolaPro/data/ma_botola_matches.csv
+  team_matches: league/MA-BotolaPro/data/ma_botola_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.4274
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+  yellow_cards_1h_share: 0.3465
+markets:
+  goals: G-MA
+  sot: S-MA
+  corners: C-MA
+  cards: K-MA
+  total_shots: T-MA
+notes:
+  - 16 teams, straight double round-robin, 30 rounds, 240 matches per complete season; no play-offs in the feed.
+  - RICH ERA from 2024-11-01: before it the stats feed is absent and the events feed carries only red / second-yellow cards (no plain yellows, no substitutions). From 2024-11-01 every match is rich.
+  - Stats feed carries exactly four keys (BallPossesion, total_shots, ShotsOnTarget, corners), Periods.All only — no period splits, no xG, no shotmap, no stats cards key in any payload.
+  - Cards target is event-unified yellows (Yellow + YellowRed) by construction — no stats target exists to disagree with.
+  - Referee text is empty in all 1,255 payloads.
+  - Halves: goals and yellows via frozen constants from event times; SOT / corners / total shots are FT-only (halves_share_1h null, RU-1Division precedent).
+  - Calibration convention: actual minus predicted.

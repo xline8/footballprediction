@@ -1,0 +1,31 @@
+# Egypt Premier League — phase 1, frozen before fitting
+league: EG-PremierLeague
+country: Egypt
+fotmob_id: 519
+tier: 1
+warehouse: data_enrichment/fotmob_world/Egypt/Premier League
+data:
+  matches: league/EG-PremierLeague/data/eg_matches.csv
+  team_matches: league/EG-PremierLeague/data/eg_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.4202
+  sot_1h_share: 0.4445
+  corners_1h_share: 0.4604
+  total_shots_1h_share: 0.4459
+  yellow_cards_1h_share: 0.3609
+markets:
+  goals: G-EG
+  sot: S-EG
+  corners: C-EG
+  cards: K-EG
+  total_shots: T-EG
+notes:
+  - "18-team double round robin through 2023/2024; 2024/2025 is a 9+9 split after a single round robin, pooled as ordinary rows. 2025/2026 has 21 teams: 14 play 33 matches and 7 play 26."
+  - "xG and shotmap era starts at virgin 2025/2026; X1 is goals-only in dev and in the virgin training window."
+  - "Cards target is stats-feed yellow_cards; event columns are retained for audit. K-EG is Gate Zero only: X8 dropped (referee r=0.290; virgin referee coverage 26.7%). C-EG arms: Gate Zero + X7 (touches-for r=0.791 era / 0.877 career)."
+  - "There is no parent tier in the warehouse."
+  - "No model fitting, gate runs, virgin modelling, or 2026/2027 reads occur in phase 1."

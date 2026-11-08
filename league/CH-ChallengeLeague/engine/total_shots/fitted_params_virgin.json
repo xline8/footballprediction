@@ -1,0 +1,6 @@
+{
+ "nb_r": 100,
+ "hl_days": 365.0,
+ "k_prior": 8.0,
+ "fit_on": "dev scored rows only (2024/2025)"
+}

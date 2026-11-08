@@ -1,0 +1,134 @@
+{
+ "seasons": {
+  "2024/2025": {
+   "n": 56,
+   "stats": 38,
+   "splits": 38,
+   "events": 56,
+   "lineup": 56,
+   "referee": 0,
+   "goals_pm": 2.607142857142857,
+   "home_goals_pm": 1.4464285714285714,
+   "away_goals_pm": 1.1607142857142858,
+   "sot_pm": 7.894736842105263,
+   "corners_pm": 8.921052631578947,
+   "shots_pm": 23.263157894736842,
+   "yell_ev_pm": 5.25,
+   "yell_stats_pm": 5.052631578947368,
+   "teams": 8,
+   "xg_rows": 0,
+   "shotmap_shots": 0,
+   "score_mismatch": 0,
+   "home_win_rate": 0.39285714285714285,
+   "draw_rate": 0.30357142857142855,
+   "over25_rate": 0.44642857142857145,
+   "phases": {
+    "regular": 56
+   },
+   "league_names": {
+    "Qatar Stars League 2": 56
+   },
+   "stats_by_round": {
+    "1": 0,
+    "2": 1,
+    "3": 0,
+    "4": 0,
+    "5": 1,
+    "6": 4,
+    "7": 4,
+    "8": 4,
+    "9": 4,
+    "10": 4,
+    "11": 4,
+    "12": 4,
+    "13": 4,
+    "14": 4
+   }
+  },
+  "2025/2026": {
+   "n": 56,
+   "stats": 56,
+   "splits": 56,
+   "events": 56,
+   "lineup": 56,
+   "referee": 0,
+   "goals_pm": 3.017857142857143,
+   "home_goals_pm": 1.4285714285714286,
+   "away_goals_pm": 1.5892857142857142,
+   "sot_pm": 8.642857142857142,
+   "corners_pm": 9.732142857142858,
+   "shots_pm": 23.125,
+   "yell_ev_pm": 5.214285714285714,
+   "yell_stats_pm": 4.696428571428571,
+   "teams": 8,
+   "xg_rows": 0,
+   "shotmap_shots": 0,
+   "score_mismatch": 0,
+   "home_win_rate": 0.32142857142857145,
+   "draw_rate": 0.23214285714285715,
+   "over25_rate": 0.625,
+   "phases": {
+    "regular": 56
+   },
+   "league_names": {
+    "Qatar Stars League 2": 46,
+    "Second Division": 10
+   },
+   "stats_by_round": {
+    "1": 4,
+    "2": 4,
+    "3": 4,
+    "4": 4,
+    "5": 4,
+    "6": 4,
+    "7": 4,
+    "8": 4,
+    "9": 4,
+    "10": 4,
+    "11": 4,
+    "12": 4,
+    "13": 4,
+    "14": 4
+   }
+  },
+  "2026/2027": {
+   "n": 29,
+   "stats": 29,
+   "splits": 29,
+   "events": 29,
+   "lineup": 29,
+   "referee": 1,
+   "goals_pm": 2.7586206896551726,
+   "home_goals_pm": 1.3103448275862069,
+   "away_goals_pm": 1.4482758620689655,
+   "sot_pm": 9.0,
+   "corners_pm": 8.206896551724139,
+   "shots_pm": 26.413793103448278,
+   "yell_ev_pm": 4.172413793103448,
+   "yell_stats_pm": 3.7586206896551726,
+   "teams": 11,
+   "xg_rows": 0,
+   "shotmap_shots": 0,
+   "score_mismatch": 0,
+   "home_win_rate": 0.3448275862068966,
+   "draw_rate": 0.20689655172413793,
+   "over25_rate": 0.4827586206896552,
+   "phases": {
+    "regular": 29
+   },
+   "league_names": {
+    "Qatar Stars League 2": 21,
+    "Second Division": 8
+   },
+   "stats_by_round": {
+    "1": 5,
+    "2": 5,
+    "3": 5,
+    "4": 5,
+    "5": 4,
+    "6": 5
+   }
+  }
+ },
+ "total_matches": 141
+}

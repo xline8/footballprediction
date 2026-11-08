@@ -1,0 +1,28 @@
+league: IE-PremierDivision
+country: Ireland
+fotmob_id: 126
+tier: 1
+warehouse: data_enrichment/fotmob_world/Ireland/Premier Division
+data:
+  matches: league/IE-PremierDivision/data/ie_matches.csv
+  team_matches: league/IE-PremierDivision/data/ie_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period: ["2021", "2022", "2023", "2024", "2025"]
+virgin_primary: "2026"
+halves_constants:
+  goals_1h_share: 0.4439
+  sot_1h_share: 0.4491
+  corners_1h_share: 0.4762
+  total_shots_1h_share: 0.46
+  yellow_cards_1h_share: 0.3238
+markets:
+  goals: G-IE
+  sot: S-IE
+  corners: C-IE
+  cards: K-IE
+  total_shots: T-IE
+notes:
+  - Calendar-year 10-team, quadruple-round-robin format: rounds 1–36, 5 matches per round; phase is regular for every built row.
+  - Cards target is event-unified Yellow plus YellowRed; stats yellow_cards is retained for artefact comparison.
+  - 2026 is complete but virgin and is excluded from all design and EDA estimates except the coverage inventory.
+  - xG-era traits are recorded as ERA-INSUFFICIENT because only 2025 is a dev season and 2026 is virgin.

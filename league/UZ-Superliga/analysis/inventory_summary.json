@@ -1,0 +1,34 @@
+{
+  "league": "UZ-Superliga",
+  "fotmob_id": 540,
+  "method": "all 215 league_id=540 payload JSONs read; payload fields verified directly",
+  "index_rows": 215,
+  "seasons": {"2026": 215},
+  "season_status": "IN_PROGRESS",
+  "date_range": "2026-02-27..2026-11-08",
+  "teams": [
+    "AGMK", "Andijon", "Bunyodkor Tashkent", "Buxoro", "Dinamo Samarkand",
+    "Kokand 1912", "Lokomotiv Tashkent", "Mashal Muborak", "Nasaf Qarshi",
+    "Navbahor Namangan", "Neftchi Fargona", "Pakhtakor Tashkent",
+    "Qizilqum Zarafshon", "Sogdiana", "Surkhon-2011", "Xorazm"
+  ],
+  "rounds_played": "1-27",
+  "matches_per_round": {"1": 8, "2": 8, "3": 8, "4": 8, "5": 8, "6": 8, "7": 8, "8": 8, "9": 8, "10": 8, "11": 8, "12": 8, "13": 8, "14": 8, "15": 8, "16": 8, "17": 8, "18": 8, "19": 8, "20": 8, "21": 8, "22": 8, "23": 8, "24": 8, "25": 8, "26": 7, "27": 8},
+  "missing_fixtures": {
+    "round_26": ["Bunyodkor Tashkent vs Neftchi Fargona"],
+    "unplayed_rounds": [28, 29, 30]
+  },
+  "field_coverage": {
+    "content_stats_null": "215/215",
+    "shotmap_shots_empty": "215/215",
+    "matchFacts_events_empty": "116/215",
+    "matchFacts_events_nonempty": "99/215",
+    "referee_blank": "215/215",
+    "period_splits_structured": "0/215",
+    "halftime_score_derivable_from_half_event": "99/215",
+    "lineup_non_null": "0/215"
+  },
+  "score_crosscheck_index_vs_header_teams": "215/215 exact",
+  "finished_flags": "215/215 true",
+  "event_coverage_note": "matchFacts.events is non-empty in 99/215 payloads (rounds 10 and 14-27; live-coverage era only). Those 99 carry a Half event at minute 45 whose homeScore/awayScore is the HT score (99/99 consistent: 0 <= HT <= FT) and Goal events whose count equals the FT goal total (99/99). HT goals total 128 vs 279 FT goals in the same 99 matches (share 0.4588) — descriptive only, NOT frozen: coverage is late-season only. Card events are sparse (29 Card events in 99 matches, vs ~300 expected at normal card rates) and the referee field is blank in 215/215, so cards are not a usable target. No structured period splits exist in any payload (content.stats is null 215/215)."
+}

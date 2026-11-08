@@ -1,0 +1,40 @@
+# NI-Premiership (Northern Ireland Premiership) — league config
+league: NI-Premiership
+country: Northern Ireland
+fotmob_id: 129
+tier: 1
+warehouse: data_enrichment/fotmob_world/Northern Ireland/Premiership
+data:
+  matches: league/NI-Premiership/data/ni_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period:
+  goals: ["2022/2023", "2023/2024", "2024/2025"]   # scored; warm-up 2021/2022 complete (228 regular)
+  stats_markets: []                  # NOT-BUILDABLE: stats feed absent in every season; shotmap empty everywhere
+  cards: []                          # NOT-BUILDABLE: no yellows anywhere (events carry Red/YellowRed only, fragmentary); referee never present
+virgin_primary: "2025/2026"          # COMPLETE season (228 regular matches)
+virgin_confirmatory: null           # 2026/2027 partial (87) is the untouched confirmatory reserve
+halves_constants:                   # frozen from DEV-era data only (EDA F3)
+  goals_1h_share: 0.4376            # goal-event times, dev scored 2022/23-2024/25, 845/1931 goals, 683 matches used
+  yellow_cards_1h_share: null       # no yellows exist
+  sot_1h_share: null                # no SOT data
+  corners_1h_share: null            # no corners data
+  total_shots_1h_share: null        # no shots data
+markets:
+  goals: G-NI        # DC goals-only (no xG in feed); arms: Gate Zero, SHRINK (X2 ENTRANT dropped: no sibling NI league, no mover tilt estimable)
+  sot: S-NI          # NOT-BUILDABLE — stats absent + shotmap empty in all 1,242 payloads
+  corners: C-NI      # NOT-BUILDABLE — stats absent in all 1,242 payloads
+  cards: K-NI        # NOT-BUILDABLE — no yellows (stats absent; events Red/YellowRed only, 261 in 225 matches); referee never present
+  total_shots: T-NI  # NOT-BUILDABLE — stats absent + shotmap empty in all 1,242 payloads
+shipping:
+  arm: NONE
+  no_ship: true      # G-NI FAIL at the dev gate (5/6 legs; OU2.5 LL vs climatology loses); virgin NOT read; S/C/K/T not buildable
+notes:
+  - Single competition verified in payloads: parentLeagueId 129 in all 1,242; leagueName phase-labelled (Premiership 1077, Championship Group 75, Relegation Group 75, ECL Playoff 15). 12 teams, 33 rounds + 5 split rounds, 228 regular/full season; 3 European-playoff matches/season (can go to extra time) EXCLUDED from all model data.
+  - Scores-only league: content.stats null 1,242/1,242; shotmap.shots empty 1,242/1,242; referee never present; no xG.
+  - One match with header/event disagreement: 3907917 (2022/23, Newry City AFC 3-0 Portadown per header/index, event trail 1-3); halves missing, not zero. All other goal-event counts match header totals; HT Half events agree with goal-time 1H counts in all 1,162 matches where both exist.
+  - 2021/2022 split rounds 34-38 reuse round labels "1"-"5" under separate season leagueIds — phase identified by leagueId, not label.
+  - Levels: 2.73 -> 2.84 -> 3.10 -> 2.54 -> 2.93 goals/match (2021/22 -> 2025/26); dev scored OU2.5 over-rate 0.5439, HW 0.4503, D 0.1857.
+  - Team traits reliable: split-half r GF 0.591 / GA 0.735 (dev era, 48 team-seasons); 0.615 / 0.754 (scored window, 36).
+  - Entrants exactly 1 per season (Newry City AFC, Loughgall, Portadown, Bangor, Limavady) from the Championship, not in warehouse; SHRINK expected identical to Gate Zero (no team with 1-5 prior matches in any scored season's training data).
+  - Outcome: G-NI FAIL at the dev gate — Gate Zero 1X2 LL 0.9830 / RPS 0.2102 / OU2.5 LL 0.7047 vs climatology 1.0431 / 0.2406 / 0.6915 and naive 1.0164 / 0.2248 / 0.7447 (5/6 legs; OU2.5 vs climatology loses in all 3 dev seasons); SHRINK identical (0 teams with 1-5 prior matches). Virgin 2025/26 NOT read; 2026/27 untouched; nothing ships. S/C/K/T not-buildable (see reports/*_NI_VERDICT.md).
+  - Predictions-only: no NI odds/settlement source in-system.

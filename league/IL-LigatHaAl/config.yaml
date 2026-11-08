@@ -1,0 +1,40 @@
+# IL-LigatHaAl (Israel) — league config (Phase 2 freeze; completed Phase 6)
+league: IL-LigatHaAl
+country: Israel
+fotmob_id: 127
+tier: 1
+warehouse: data_enrichment/fotmob_world/Israel/Ligat ha'Al
+data:
+  matches: league/IL-LigatHaAl/data/il_matches.csv
+  team_matches: league/IL-LigatHaAl/data/il_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period:
+  goals: ["2022/2023", "2023/2024", "2024/2025"]   # scored; warm-up 2021/2022
+  stats_markets: []                  # NOT-BUILDABLE: no stats season exists in dev (<=2024/2025); stats era is 2025/2026+
+  cards: []                          # NOT-BUILDABLE: no cards target in dev under either source (stats from 2025/2026; event feed has zero plain Yellow events 2021/2022-2024/2025)
+virgin_primary: "2025/2026"          # COMPLETE season (240 matches) — read ONCE per dev-passing candidate (G-IL only)
+virgin_confirmatory: null           # 2026/2027 is in progress (70) and stays untouched
+halves_constants:                   # frozen from DEV-era data only (EDA F3)
+  goals_1h_share: 0.4497            # event times, dev era 2021/2022-2024/2025, n=2493 goals, 902 matches, awarded matches excluded
+  yellow_cards_1h_share: null       # no period splits in dev (0 matches) — no constant
+  sot_1h_share: null                # no period splits in dev — no constant
+  corners_1h_share: null            # no period splits in dev — no constant
+  total_shots_1h_share: null        # no period splits in dev — no constant
+markets:
+  goals: G-IL        # DC goals-only (no xG in feed); arms: Gate Zero, ENTRANT (X2 adopted: dev entrant tilt GF -0.358 / GA +0.263, GF negative 5/6, GA positive 5/6)
+  sot: S-IL          # NOT-BUILDABLE — no dev scored window (stats era 2025/2026+)
+  corners: C-IL      # NOT-BUILDABLE — no dev scored window (stats era 2025/2026+)
+  cards: K-IL        # NOT-BUILDABLE — no dev target (stats yellows from 2025/2026; event feed zero plain Yellows 2021/2022-2024/2025); X8 referee absent in dev
+  total_shots: T-IL  # NOT-BUILDABLE — no dev scored window (stats era 2025/2026+)
+notes:
+  - Split seasons, 14 teams, 240 matches/full season (regular 182 + championship group 30 + relegation group 28); 70 played in 2026/2027.
+  - Stats feed era break at 2025/2026: 0% in 2021/2022-2024/2025, 239/240 in 2025/2026, 69/70 in 2026/2027 (24.3% overall; the brief's 56.0% last-three-seasons figure is entirely 2025/2026-2026/2027). Splits internally consistent (All = FH+SH exact 239/239 in 2025/2026).
+  - No xG and no shotmap in ANY season -> X1 blend falls back goals-only; X3/X4/X6 impossible by data absence.
+  - Event feed carries goals reliably (3 score mismatches in 1270 matches, all awarded wins, header wins) and cards only from 2025/2026 (Yellow 1230 in 2025/2026); in dev it carries Red/YellowRed only. Stats-vs-events yellows in 2025/2026 agree exactly in 68.6% of matches (mean stats-events -0.53/match; largely mechanical: event count adds YellowRed, stats books a second yellow as a red).
+  - 57 matches have a wholly empty events payload; they are not all scoreless (9 goals across them); their events-derived fields are missing, never zero. The single 2025/2026 empty-events match (4864314, Hapoel Tel Aviv 0-3 Maccabi Tel Aviv) is an awarded derby and the only 2025/2026 match without a stats feed.
+  - 7 awarded matches in total; their FT score is the awarded score; the halves-goals computation excludes them.
+  - Team-name stability: 19 FotMob team ids over the corpus, 14 per season; each id carries exactly one spelling — no canonicalisation needed. All logic keyed by team id.
+  - Referees: named in 0 dev matches; 21 distinct in 2025/2026, 15 in 2026/2027 — X8 dropped on dev absence.
+  - Scoring level is rising: goals/match 2.471 / 2.642 / 2.542 / 2.783 in dev, 2.967 in the virgin, 3.000 so far in 2026/2027.
+  - Predictions-only: no IL odds/settlement source in-system.
+  - Outcome (Phase 6): G-IL FAIL at the virgin legs — both arms passed the dev gate (Gate Zero 1.0186 / 0.2091 / 0.6918; ENTRANT 1.0115 / 0.2062 / 0.6920, all beating both baselines), but on the virgin Gate Zero 1X2 LL 1.0623 loses to naive trailing-10 (1.0238) and its OU2.5 calibration gap is -11.70pp (predicted over-rate 0.4330 vs actual 0.5500); ENTRANT is worse on the virgin (1X2 LL 1.1173, OU gap -11.16pp). Virgin 2025/2026 read once; 2026/2027 untouched; nothing ships. S/C/K/T not-buildable (see reports/*_IL_VERDICT.md).

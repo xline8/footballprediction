@@ -1,0 +1,24 @@
+{
+  "lambda": 100.0,
+  "r_A": 107.84802185710615,
+  "level_cell": [
+    30.0,
+    0.5,
+    50.0
+  ],
+  "M_bar": 24.9,
+  "trailing_r_window": 200,
+  "primary_line": 26.5,
+  "ladder": [
+    25.5,
+    26.5,
+    27.5
+  ],
+  "half_split": [0.4522, 0.5478],
+  "base_half_life": 365.0,
+  "refit_days": 7,
+  "eta_clip": [
+    -6.0,
+    4.0
+  ]
+}

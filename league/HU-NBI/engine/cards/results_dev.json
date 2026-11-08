@@ -1,0 +1,82 @@
+{
+  "protocol": {
+    "league": "HU-NBI",
+    "dev_seasons_loaded": [
+      "2021/2022",
+      "2022/2023",
+      "2023/2024",
+      "2024/2025"
+    ],
+    "virgin_seasons_forbidden": [
+      "2025/2026",
+      "2026/2027"
+    ],
+    "cards_target_mapping": "event_yellow_h + event_yellow_a"
+  },
+  "primary_line": 4.5,
+  "arms": {
+    "gate_zero": {
+      "n": 594,
+      "ll_4.5": 0.6907478682741204,
+      "per_season": {
+        "2022/2023": {
+          "n": 198,
+          "ll_4.5": 0.6932702947939309
+        },
+        "2023/2024": {
+          "n": 198,
+          "ll_4.5": 0.6786058360873368
+        },
+        "2024/2025": {
+          "n": 198,
+          "ll_4.5": 0.7003674739410934
+        }
+      }
+    }
+  },
+  "baselines": {
+    "base_rate": {
+      "n": 594,
+      "ll_4.5": 0.693713830876263,
+      "per_season": {
+        "2022/2023": {
+          "n": 198,
+          "ll_4.5": 0.6942188653317064
+        },
+        "2023/2024": {
+          "n": 198,
+          "ll_4.5": 0.6913153421734053
+        },
+        "2024/2025": {
+          "n": 198,
+          "ll_4.5": 0.6956072851236774
+        }
+      }
+    },
+    "naive_trailing_10": {
+      "n": 594,
+      "ll_4.5": 0.6879129993173911,
+      "per_season": {
+        "2022/2023": {
+          "n": 198,
+          "ll_4.5": 0.7017757102833045
+        },
+        "2023/2024": {
+          "n": 198,
+          "ll_4.5": 0.670452737891668
+        },
+        "2024/2025": {
+          "n": 198,
+          "ll_4.5": 0.6915105497772011
+        }
+      }
+    }
+  },
+  "gate": {
+    "gate_zero": {
+      "pooled_beats_base_rate": true,
+      "pooled_beats_naive_trailing_10": false
+    }
+  },
+  "coordinator_note": "The copied NO-OBOS cards runner also produced an x8 (referee) arm. X8 is NOT a registered HU-NBI arm (FEATURES.md drops it: virgin referee coverage 18/198) and the prereg forbids unregistered arms; its dev output was deleted unread-for-gating and plays no part in any verdict. Gate Zero dev: pooled LL 0.6907 beats base rate 0.6937 but loses to naive trailing-10 0.6879 -> dev gate FAIL; virgin not read."
+}

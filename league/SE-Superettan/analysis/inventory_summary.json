@@ -1,0 +1,41 @@
+{
+ "by_season": {
+  "2021": {
+   "n": 240,
+   "stats_keys_n": 0,
+   "referee_named": 0,
+   "shotmap_n": 0
+  },
+  "2022": {
+   "n": 240,
+   "stats_keys_n": 240,
+   "referee_named": 0,
+   "shotmap_n": 0
+  },
+  "2023": {
+   "n": 240,
+   "stats_keys_n": 231,
+   "referee_named": 0,
+   "shotmap_n": 0
+  },
+  "2024": {
+   "n": 240,
+   "stats_keys_n": 240,
+   "referee_named": 0,
+   "shotmap_n": 0
+  },
+  "2025": {
+   "n": 240,
+   "stats_keys_n": 239,
+   "referee_named": 0,
+   "shotmap_n": 0
+  },
+  "2026": {
+   "n": 240,
+   "stats_keys_n": 237,
+   "referee_named": 0,
+   "shotmap_n": 0
+  }
+ },
+ "team_ids_total": 33
+}

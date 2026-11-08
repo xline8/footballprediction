@@ -1,0 +1,42 @@
+# New Zealand Championship — league config
+league: NZ-Championship
+country: New Zealand
+fotmob_id: 8870
+tier: 1
+warehouse: data_enrichment/fotmob_world/New Zealand/Championship
+data:
+  matches: league/NZ-Championship/data/nz_matches.csv
+  team_matches: league/NZ-Championship/data/nz_team_matches.csv
+seasons: ["2022", "2023", "2024", "2025", "2026"]
+dev_period: ["2023", "2024"]
+virgin_primary: "2025"
+halves_constants:
+  goals_1h_share: 0.4123
+markets:
+  goals:
+    id: G-NZ
+    status: candidate
+  sot:
+    id: S-NZ
+    status: not_buildable
+    reason: no SOT target: stats 0/221 and shotmaps present-but-empty 221/221
+  corners:
+    id: C-NZ
+    status: not_buildable
+    reason: no corners target: stats 0/221 and shotmaps present-but-empty 221/221
+  cards:
+    id: K-NZ
+    status: not_buildable
+    reason: no yellow target; no stats and no Yellow events (only Red/YellowRed)
+  total_shots:
+    id: T-NZ
+    status: not_buildable
+    reason: no total-shots target: stats 0/221 and shotmaps present-but-empty 221/221
+notes:
+  - Single round robin + one final per season; 10 teams 2022-2024, 11 teams 2025-2026.
+  - Eight 2022 index rows are unplayed scheduled fixtures (never started, no scoreStr) and are excluded; 2022 has 38 played matches, not 46.
+  - Scores-only corpus: no stats, shotmap/xG or named referee in any payload; shotmap objects are present but empty.
+  - The 2024 and 2025 finals went to extra time; their scores are stored at the 90-minute value (1-1 each), derived from Goal events.
+  - 2022 has no events at all; first-half goals exist only from 2023 onward.
+  - Team IDs, not names, define identity; id 613344 is "Eastern Suburbs" / "Eastern Suburbs AFC".
+  - Thin windows: seed 2022 n=38, dev 2023-2024 n=92, virgin 2025 n=56.

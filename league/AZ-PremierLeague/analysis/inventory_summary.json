@@ -1,0 +1,204 @@
+{
+ "total_payloads": 914,
+ "total_matches": 914,
+ "finished_only_rule": "header.status.finished == true; all 914 payloads finished, drops nothing",
+ "seasons": {
+  "2021/2022": {
+   "payloads": 112,
+   "finished": 112,
+   "unfinished": 0,
+   "score_present": 112,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 105,
+   "referee": 0,
+   "lineup": 0,
+   "playerStats": 0,
+   "coverage_levels": {
+    "lower": 112
+   },
+   "event_type_counts": {
+    "Half": 210,
+    "Goal": 291,
+    "Card": 27
+   },
+   "card_type_counts": {
+    "YellowRed": 15,
+    "Red": 12
+   },
+   "teams_finished": 8,
+   "goals_finished": 291,
+   "goals_per_match_finished": 2.5982142857142856,
+   "ht_crosscheck_agree": 104,
+   "ht_crosscheck_checked": 104
+  },
+  "2022/2023": {
+   "payloads": 180,
+   "finished": 180,
+   "unfinished": 0,
+   "score_present": 180,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 166,
+   "referee": 0,
+   "lineup": 0,
+   "playerStats": 0,
+   "coverage_levels": {
+    "lower": 180
+   },
+   "event_type_counts": {
+    "Goal": 475,
+    "Half": 332,
+    "Card": 38
+   },
+   "card_type_counts": {
+    "Red": 26,
+    "YellowRed": 12
+   },
+   "teams_finished": 10,
+   "goals_finished": 475,
+   "goals_per_match_finished": 2.638888888888889,
+   "ht_crosscheck_agree": 165,
+   "ht_crosscheck_checked": 165
+  },
+  "2023/2024": {
+   "payloads": 180,
+   "finished": 180,
+   "unfinished": 0,
+   "score_present": 180,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 169,
+   "referee": 0,
+   "lineup": 0,
+   "playerStats": 0,
+   "coverage_levels": {
+    "lower": 180
+   },
+   "event_type_counts": {
+    "Half": 338,
+    "Goal": 471,
+    "Card": 39
+   },
+   "card_type_counts": {
+    "Red": 26,
+    "YellowRed": 13
+   },
+   "teams_finished": 10,
+   "goals_finished": 471,
+   "goals_per_match_finished": 2.6166666666666667,
+   "ht_crosscheck_agree": 169,
+   "ht_crosscheck_checked": 169
+  },
+  "2024/2025": {
+   "payloads": 180,
+   "finished": 180,
+   "unfinished": 0,
+   "score_present": 180,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 165,
+   "referee": 0,
+   "lineup": 0,
+   "playerStats": 0,
+   "coverage_levels": {
+    "lower": 180
+   },
+   "event_type_counts": {
+    "Goal": 432,
+    "Half": 330,
+    "Card": 20
+   },
+   "card_type_counts": {
+    "YellowRed": 4,
+    "Red": 16
+   },
+   "teams_finished": 10,
+   "goals_finished": 432,
+   "goals_per_match_finished": 2.4,
+   "ht_crosscheck_agree": 165,
+   "ht_crosscheck_checked": 165
+  },
+  "2025/2026": {
+   "payloads": 198,
+   "finished": 198,
+   "unfinished": 0,
+   "score_present": 198,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 182,
+   "referee": 0,
+   "lineup": 0,
+   "playerStats": 0,
+   "coverage_levels": {
+    "lower": 198
+   },
+   "event_type_counts": {
+    "Half": 364,
+    "Goal": 511,
+    "Card": 24
+   },
+   "card_type_counts": {
+    "Red": 23,
+    "YellowRed": 1
+   },
+   "teams_finished": 12,
+   "goals_finished": 513,
+   "goals_per_match_finished": 2.590909090909091,
+   "ht_crosscheck_agree": 181,
+   "ht_crosscheck_checked": 181
+  },
+  "2026/2027": {
+   "payloads": 64,
+   "finished": 64,
+   "unfinished": 0,
+   "score_present": 64,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 57,
+   "referee": 0,
+   "lineup": 0,
+   "playerStats": 0,
+   "coverage_levels": {
+    "lower": 64
+   },
+   "event_type_counts": {
+    "Goal": 164,
+    "Half": 114,
+    "Card": 6
+   },
+   "card_type_counts": {
+    "Red": 5,
+    "YellowRed": 1
+   },
+   "teams_finished": 12,
+   "goals_finished": 164,
+   "goals_per_match_finished": 2.5625,
+   "ht_crosscheck_agree": 57,
+   "ht_crosscheck_checked": 57
+  }
+ },
+ "score_events_mismatch_ids": [
+  4946647
+ ],
+ "name_variants": {
+  "2103": [
+   "Keshla",
+   "Shamakhi FK"
+  ],
+  "213987": [
+   "Sumqayit",
+   "Sumqay\u0131t"
+  ],
+  "7981": [
+   "Qarabag FK",
+   "Qaraba\u011f FK"
+  ]
+ }
+}

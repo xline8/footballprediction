@@ -1,0 +1,44 @@
+{
+  "2021/2022": {
+    "n": 180,
+    "events_gt0": 161,
+    "ht_present": 161,
+    "playoff": 0,
+    "awarded": 0
+  },
+  "2022/2023": {
+    "n": 180,
+    "events_gt0": 165,
+    "ht_present": 165,
+    "playoff": 0,
+    "awarded": 0
+  },
+  "2023/2024": {
+    "n": 184,
+    "events_gt0": 170,
+    "ht_present": 170,
+    "playoff": 4,
+    "awarded": 0
+  },
+  "2024/2025": {
+    "n": 184,
+    "events_gt0": 164,
+    "ht_present": 164,
+    "playoff": 4,
+    "awarded": 0
+  },
+  "2025/2026": {
+    "n": 186,
+    "events_gt0": 173,
+    "ht_present": 173,
+    "playoff": 6,
+    "awarded": 0
+  },
+  "2026/2027": {
+    "n": 55,
+    "events_gt0": 54,
+    "ht_present": 54,
+    "playoff": 0,
+    "awarded": 0
+  }
+}

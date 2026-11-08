@@ -1,0 +1,27 @@
+# NL Tweede Divisie (Netherlands) — league config
+league: NL-TweedeDivisie
+country: Netherlands
+fotmob_id: 9195
+tier: 3
+warehouse: data_enrichment/fotmob_world/Netherlands/Tweede Divisie
+data:
+  matches: league/NL-TweedeDivisie/data/nl_tweede_matches.csv
+  team_matches: league/NL-TweedeDivisie/data/team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]   # 2021/2022 = training/warm-up; scored dev = 2022/2023–2024/2025
+virgin_primary: "2025/2026"          # complete season, n=306 — read ONCE per candidate
+virgin_confirmatory: "2026/2027"     # partial (n=108, through 2026-11-07); reserved, evaluated once when complete
+halves_constants:               # frozen league constant (EDA F3) — the ONLY halves mechanism
+  goals_1h_share: 0.436
+markets:
+  goals: G-NLTD        # DC reference; arms: Gate Zero, SHRINK, X2 below-tier entrant prior
+  sot: null            # NOT buildable: no SOT target anywhere in the corpus
+  corners: null        # NOT buildable: no corners target anywhere in the corpus
+  cards: null          # NOT buildable: no yellows; reds 0.145/match, split-half r=-0.09
+  total_shots: null    # NOT buildable: no shots target anywhere in the corpus
+notes:
+  - Scores-only corpus: stats/shotmap/lineup/referee all absent in 1,638/1,638 payloads (verified by content).
+  - 18 teams, 34 rounds; no promotion/relegation with Eerste Divisie (0 entrants from Eerste in any transition).
+  - Reserve sides: Jong Almere City FC, Jong FC Volendam, Jong Sparta Rotterdam.
+  - Goals presents FT + 1H/2H via the frozen constant 0.436 (presentation only).
+  - Predictions-only: no Tweede Divisie odds/settlement source in-system.

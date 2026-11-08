@@ -1,0 +1,11 @@
+{
+  "arm": "gate_zero",
+  "label": "Gate Zero",
+  "rho": 0.0,
+  "home_advantage": 0.28,
+  "mu": 0.0,
+  "training_rows": 0,
+  "attack": {},
+  "defence": {},
+  "team_names": {}
+}

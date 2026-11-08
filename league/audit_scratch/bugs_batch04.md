@@ -1,0 +1,175 @@
+# Batch 04 clear engine bugs
+
+Static source inspection only; no gate was run or rerun. Findings describe current code paths and do not replace the authoritative document outcomes.
+
+- EC-SerieA — `league/EC-SerieA/engine/goals/dc.py:200` — Isolation leak: run_goals loads and sorts the entire ec_matches.csv (including sealed 2025 and reserved 2026) before dev filtering at line 202 or the gate guard at line 248; PREREG_G_EC forbids dev reading those rows. No evidence here that those outcomes enter the dev fit.
+- DE-2Bundesliga — `league/DE-2Bundesliga/engine/goals/run_g_de2.py:20` — Bypassed check: CLI virgin-predict calls virgin_metrics directly, bypassing the dev gate; virgin_metrics itself has no gate guard and loads/scores sealed 2025/2026 and exports the requested arm, even after the recorded dev FAIL. This is an available bypass, not evidence it was invoked.
+- DK-Superligaen — `league/DK-Superligaen/engine/goals/run_g_dk.py:20` — Bypassed check: CLI virgin-predict calls virgin_metrics directly, bypassing the dev gate; virgin_metrics itself has no gate guard and loads/scores sealed 2025/2026 and exports the requested arm, even after the recorded dev FAIL. This is an available bypass, not evidence it was invoked.
+- EG-PremierLeague — `league/EG-PremierLeague/engine/goals/run_g_eg.py:20` — Bypassed check: CLI virgin-predict calls virgin_metrics directly, bypassing the dev gate; virgin_metrics itself has no gate guard and loads/scores sealed 2025/2026 and exports the requested arm, even after the recorded dev FAIL. This is an available bypass, not evidence it was invoked.
+- ENG-Championship — `league/ENG-Championship/engine/goals/run_g_engch.py:20` — Bypassed check: CLI virgin-predict calls virgin_metrics directly, bypassing the dev gate; virgin_metrics itself has no gate guard and loads/scores sealed 2025/2026 and exports the requested arm, even after the recorded dev FAIL. This is an available bypass, not evidence it was invoked.
+- ENG-LeagueOne — `league/ENG-LeagueOne/engine/goals/run_g_engl1.py:20` — Bypassed check: CLI virgin-predict calls virgin_metrics directly, bypassing the dev gate; virgin_metrics itself has no gate guard and loads/scores sealed 2025/2026 and exports the requested arm, even after the recorded dev FAIL. This is an available bypass, not evidence it was invoked.
+- ES-LaLiga2 — `league/ES-LaLiga2/engine/goals/run_g_engch.py:20` — Bypassed check: CLI virgin-predict calls virgin_metrics directly, bypassing the dev gate; virgin_metrics itself has no gate guard and loads/scores sealed 2025/2026 and exports the requested arm, even after the recorded dev FAIL. This is an available bypass, not evidence it was invoked.
+- ES-PrimeraFederacion — `league/ES-PrimeraFederacion/engine/goals/run_g_espf.py:26` — Bypassed check: CLI virgin-predict calls virgin_metrics directly, bypassing the dev gate; virgin_metrics itself has no gate guard and loads/scores sealed 2025/2026 and exports the requested arm, even after the recorded dev FAIL. This is an available bypass, not evidence it was invoked.
+- DE-2Bundesliga — `league/DE-2Bundesliga/engine/sot/harness.py:135` — Bypassed failure: choose() returns GZ when no arm passes sealed LL/calibration; virgin() then unconditionally writes predictions and fitted_params_virgin.json, contradicting the prereg none-pass ⇒ FAIL/nothing-ships rule (latent where this batch passed).
+- DE-2Bundesliga — `league/DE-2Bundesliga/engine/sot/harness.py:109` — Bypassed sealed gate: requested_arm overrides choose() whenever the arm was evaluated, without requiring sealed LL/calibration eligibility; the CLI virgin-predict path can therefore export a failed arm.
+- DK-Superligaen — `league/DK-Superligaen/engine/sot/harness.py:130` — Bypassed failure: choose() returns GZ when no arm passes sealed LL/calibration; virgin() then unconditionally writes predictions and fitted_params_virgin.json, contradicting the prereg none-pass ⇒ FAIL/nothing-ships rule (latent where this batch passed).
+- DK-Superligaen — `league/DK-Superligaen/engine/sot/harness.py:104` — Bypassed sealed gate: requested_arm overrides choose() whenever the arm was evaluated, without requiring sealed LL/calibration eligibility; the CLI virgin-predict path can therefore export a failed arm.
+- ENG-Championship — `league/ENG-Championship/engine/sot/harness.py:130` — Bypassed failure: choose() returns GZ when no arm passes sealed LL/calibration; virgin() then unconditionally writes predictions and fitted_params_virgin.json, contradicting the prereg none-pass ⇒ FAIL/nothing-ships rule (latent where this batch passed).
+- ENG-Championship — `league/ENG-Championship/engine/sot/harness.py:104` — Bypassed sealed gate: requested_arm overrides choose() whenever the arm was evaluated, without requiring sealed LL/calibration eligibility; the CLI virgin-predict path can therefore export a failed arm.
+- ENG-LeagueOne — `league/ENG-LeagueOne/engine/sot/harness.py:130` — Bypassed failure: choose() returns GZ when no arm passes sealed LL/calibration; virgin() then unconditionally writes predictions and fitted_params_virgin.json, contradicting the prereg none-pass ⇒ FAIL/nothing-ships rule (latent where this batch passed).
+- ENG-LeagueOne — `league/ENG-LeagueOne/engine/sot/harness.py:104` — Bypassed sealed gate: requested_arm overrides choose() whenever the arm was evaluated, without requiring sealed LL/calibration eligibility; the CLI virgin-predict path can therefore export a failed arm.
+- ES-LaLiga2 — `league/ES-LaLiga2/engine/sot/harness.py:130` — Bypassed failure: choose() returns GZ when no arm passes sealed LL/calibration; virgin() then unconditionally writes predictions and fitted_params_virgin.json, contradicting the prereg none-pass ⇒ FAIL/nothing-ships rule (latent where this batch passed).
+- ES-LaLiga2 — `league/ES-LaLiga2/engine/sot/harness.py:104` — Bypassed sealed gate: requested_arm overrides choose() whenever the arm was evaluated, without requiring sealed LL/calibration eligibility; the CLI virgin-predict path can therefore export a failed arm.
+- EG-PremierLeague — `league/EG-PremierLeague/engine/sot/harness.py:105` — Bypassed sealed gate: virgin-predict --arm GZ overrides chosen=None after the failed calibration gate and exports GZ; out[shipped_arm] remains None because it was assigned before the override. The normal metrics path correctly returns FAIL.
+- DE-3Liga — `league/DE-3Liga/engine/sot/harness.py:130` — Calibration sign flipped: virgin_metrics stores predicted−actual, while PREREG_S_DE3 defines actual−predicted; verdict manually reverses it. Absolute calibration eligibility is unchanged.
+- DE-3Liga — `league/DE-3Liga/engine/corners/harness.py:117` — Calibration sign flipped: cal is predicted−actual, whereas PREREG_C_DE3 freezes actual−predicted; verdict reverses the displayed sign. Absolute calibration eligibility is unchanged.
+- DE-3Liga — `league/DE-3Liga/engine/cards/harness.py:50` — Calibration sign flipped: diff_4_5 is predicted−actual, whereas PREREG_K_DE3 freezes actual−predicted; verdict reverses it. Absolute calibration eligibility is unchanged.
+- DE-2Bundesliga — `league/DE-2Bundesliga/engine/corners/harness.py:105` — Bypassed Gate Zero dependency: virgin() checks only each requested arm's own dev pass, so a requested dev-passing X7 can be sealed-read when Gate Zero failed dev; prereg says Gate Zero failure makes variants moot. No such outcome is claimed for these recorded results.
+- DE-3Liga — `league/DE-3Liga/engine/corners/harness.py:105` — Bypassed Gate Zero dependency: virgin() checks only each requested arm's own dev pass, so a requested dev-passing X7 can be sealed-read when Gate Zero failed dev; prereg says Gate Zero failure makes variants moot. No such outcome is claimed for these recorded results.
+- DK-Superligaen — `league/DK-Superligaen/engine/corners/harness.py:105` — Bypassed Gate Zero dependency: virgin() checks only each requested arm's own dev pass, so a requested dev-passing X7 can be sealed-read when Gate Zero failed dev; prereg says Gate Zero failure makes variants moot. No such outcome is claimed for these recorded results.
+- EG-PremierLeague — `league/EG-PremierLeague/engine/corners/harness.py:105` — Bypassed Gate Zero dependency: virgin() checks only each requested arm's own dev pass, so a requested dev-passing X7 can be sealed-read when Gate Zero failed dev; prereg says Gate Zero failure makes variants moot. No such outcome is claimed for these recorded results.
+- ENG-Championship — `league/ENG-Championship/engine/corners/harness.py:105` — Bypassed Gate Zero dependency: virgin() checks only each requested arm's own dev pass, so a requested dev-passing X7 can be sealed-read when Gate Zero failed dev; prereg says Gate Zero failure makes variants moot. No such outcome is claimed for these recorded results.
+- ENG-LeagueOne — `league/ENG-LeagueOne/engine/corners/harness.py:105` — Bypassed Gate Zero dependency: virgin() checks only each requested arm's own dev pass, so a requested dev-passing X7 can be sealed-read when Gate Zero failed dev; prereg says Gate Zero failure makes variants moot. No such outcome is claimed for these recorded results.
+- ES-LaLiga2 — `league/ES-LaLiga2/engine/corners/harness.py:105` — Bypassed Gate Zero dependency: virgin() checks only each requested arm's own dev pass, so a requested dev-passing X7 can be sealed-read when Gate Zero failed dev; prereg says Gate Zero failure makes variants moot. No such outcome is claimed for these recorded results.
+
+Engine files actually opened (including loader/constant/function inspection of model modules):
+
+- `league/DE-2Bundesliga/engine/cards/harness.py`
+- `league/DE-2Bundesliga/engine/cards/model.py`
+- `league/DE-2Bundesliga/engine/cards/run_k_de2.py`
+- `league/DE-2Bundesliga/engine/corners/core.py`
+- `league/DE-2Bundesliga/engine/corners/harness.py`
+- `league/DE-2Bundesliga/engine/corners/run_c_de2.py`
+- `league/DE-2Bundesliga/engine/goals/arms.py`
+- `league/DE-2Bundesliga/engine/goals/dc.py`
+- `league/DE-2Bundesliga/engine/goals/harness.py`
+- `league/DE-2Bundesliga/engine/goals/run_g_de2.py`
+- `league/DE-2Bundesliga/engine/sot/harness.py`
+- `league/DE-2Bundesliga/engine/sot/model.py`
+- `league/DE-2Bundesliga/engine/sot/run_s_de2.py`
+- `league/DE-2Bundesliga/engine/total_shots/model.py`
+- `league/DE-2Bundesliga/engine/total_shots/run_t_de2.py`
+- `league/DE-3Liga/engine/cards/harness.py`
+- `league/DE-3Liga/engine/cards/model.py`
+- `league/DE-3Liga/engine/cards/run_k_de3.py`
+- `league/DE-3Liga/engine/corners/core.py`
+- `league/DE-3Liga/engine/corners/harness.py`
+- `league/DE-3Liga/engine/corners/run_c_de3.py`
+- `league/DE-3Liga/engine/goals/arms.py`
+- `league/DE-3Liga/engine/goals/dc.py`
+- `league/DE-3Liga/engine/goals/harness.py`
+- `league/DE-3Liga/engine/goals/run_g_de3.py`
+- `league/DE-3Liga/engine/sot/harness.py`
+- `league/DE-3Liga/engine/sot/model.py`
+- `league/DE-3Liga/engine/sot/run_s_de3.py`
+- `league/DE-3Liga/engine/total_shots/model.py`
+- `league/DE-3Liga/engine/total_shots/run_t_de3.py`
+- `league/DE-3Liga/engine/total_shots/run_t_de3_impl.py`
+- `league/DK-1Division/engine/cards/model.py`
+- `league/DK-1Division/engine/cards/run_k_dk1.py`
+- `league/DK-1Division/engine/common_dk1.py`
+- `league/DK-1Division/engine/corners/core.py`
+- `league/DK-1Division/engine/corners/run_c_dk1.py`
+- `league/DK-1Division/engine/goals/arms.py`
+- `league/DK-1Division/engine/goals/dc.py`
+- `league/DK-1Division/engine/goals/run_g_dk1.py`
+- `league/DK-1Division/engine/sot/model.py`
+- `league/DK-1Division/engine/sot/run_s_dk1.py`
+- `league/DK-1Division/engine/total_shots/model.py`
+- `league/DK-1Division/engine/total_shots/run_t_dk1.py`
+- `league/DK-2Division/engine/common_dk2.py`
+- `league/DK-2Division/engine/goals/arms.py`
+- `league/DK-2Division/engine/goals/dc.py`
+- `league/DK-2Division/engine/goals/run_g_dk2.py`
+- `league/DK-Superligaen/engine/cards/harness.py`
+- `league/DK-Superligaen/engine/cards/model.py`
+- `league/DK-Superligaen/engine/cards/run_k_dk.py`
+- `league/DK-Superligaen/engine/corners/core.py`
+- `league/DK-Superligaen/engine/corners/harness.py`
+- `league/DK-Superligaen/engine/corners/run_c_dk.py`
+- `league/DK-Superligaen/engine/goals/arms.py`
+- `league/DK-Superligaen/engine/goals/dc.py`
+- `league/DK-Superligaen/engine/goals/harness.py`
+- `league/DK-Superligaen/engine/goals/run_g_dk.py`
+- `league/DK-Superligaen/engine/sot/harness.py`
+- `league/DK-Superligaen/engine/sot/model.py`
+- `league/DK-Superligaen/engine/sot/run_s_dk.py`
+- `league/DK-Superligaen/engine/total_shots/model.py`
+- `league/DK-Superligaen/engine/total_shots/run_t_dk.py`
+- `league/DZ-Ligue1/engine/goals/arms.py`
+- `league/DZ-Ligue1/engine/goals/dc.py`
+- `league/DZ-Ligue1/engine/goals/harness.py`
+- `league/DZ-Ligue1/engine/goals/run_g_dz.py`
+- `league/EC-SerieA/engine/goals/arms.py`
+- `league/EC-SerieA/engine/goals/dc.py`
+- `league/EC-SerieA/engine/goals/harness.py`
+- `league/EC-SerieA/engine/goals/model.py`
+- `league/EC-SerieA/engine/goals/run_g_ec.py`
+- `league/EE-Meistriliiga/engine/goals/fit.py`
+- `league/EE-Meistriliiga/engine/goals/harness.py`
+- `league/EE-Meistriliiga/engine/goals/predict.py`
+- `league/EE-Meistriliiga/engine/goals/run_dev.py`
+- `league/EG-PremierLeague/engine/cards/harness.py`
+- `league/EG-PremierLeague/engine/cards/model.py`
+- `league/EG-PremierLeague/engine/cards/run_k_eg.py`
+- `league/EG-PremierLeague/engine/corners/core.py`
+- `league/EG-PremierLeague/engine/corners/harness.py`
+- `league/EG-PremierLeague/engine/corners/run_c_eg.py`
+- `league/EG-PremierLeague/engine/goals/arms.py`
+- `league/EG-PremierLeague/engine/goals/dc.py`
+- `league/EG-PremierLeague/engine/goals/harness.py`
+- `league/EG-PremierLeague/engine/goals/run_g_eg.py`
+- `league/EG-PremierLeague/engine/sot/harness.py`
+- `league/EG-PremierLeague/engine/sot/model.py`
+- `league/EG-PremierLeague/engine/sot/run_s_eg.py`
+- `league/EG-PremierLeague/engine/total_shots/model.py`
+- `league/EG-PremierLeague/engine/total_shots/run_t_eg.py`
+- `league/ENG-Championship/engine/cards/harness.py`
+- `league/ENG-Championship/engine/cards/model.py`
+- `league/ENG-Championship/engine/cards/run_k_engch.py`
+- `league/ENG-Championship/engine/corners/core.py`
+- `league/ENG-Championship/engine/corners/harness.py`
+- `league/ENG-Championship/engine/corners/run_c_engch.py`
+- `league/ENG-Championship/engine/goals/arms.py`
+- `league/ENG-Championship/engine/goals/dc.py`
+- `league/ENG-Championship/engine/goals/harness.py`
+- `league/ENG-Championship/engine/goals/run_g_engch.py`
+- `league/ENG-Championship/engine/sot/harness.py`
+- `league/ENG-Championship/engine/sot/model.py`
+- `league/ENG-Championship/engine/sot/run_s_engch.py`
+- `league/ENG-Championship/engine/total_shots/model.py`
+- `league/ENG-Championship/engine/total_shots/run_t_engch.py`
+- `league/ENG-LeagueOne/engine/cards/harness.py`
+- `league/ENG-LeagueOne/engine/cards/model.py`
+- `league/ENG-LeagueOne/engine/cards/run_k_engl1.py`
+- `league/ENG-LeagueOne/engine/corners/core.py`
+- `league/ENG-LeagueOne/engine/corners/harness.py`
+- `league/ENG-LeagueOne/engine/corners/run_c_engl1.py`
+- `league/ENG-LeagueOne/engine/goals/arms.py`
+- `league/ENG-LeagueOne/engine/goals/dc.py`
+- `league/ENG-LeagueOne/engine/goals/harness.py`
+- `league/ENG-LeagueOne/engine/goals/run_g_engl1.py`
+- `league/ENG-LeagueOne/engine/sot/harness.py`
+- `league/ENG-LeagueOne/engine/sot/model.py`
+- `league/ENG-LeagueOne/engine/sot/run_s_engl1.py`
+- `league/ENG-LeagueOne/engine/total_shots/model.py`
+- `league/ENG-LeagueOne/engine/total_shots/run_t_engl1.py`
+- `league/ES-LaLiga2/engine/cards/harness.py`
+- `league/ES-LaLiga2/engine/cards/model.py`
+- `league/ES-LaLiga2/engine/cards/run_k_engch.py`
+- `league/ES-LaLiga2/engine/corners/core.py`
+- `league/ES-LaLiga2/engine/corners/harness.py`
+- `league/ES-LaLiga2/engine/corners/run_c_engch.py`
+- `league/ES-LaLiga2/engine/goals/arms.py`
+- `league/ES-LaLiga2/engine/goals/dc.py`
+- `league/ES-LaLiga2/engine/goals/harness.py`
+- `league/ES-LaLiga2/engine/goals/run_g_engch.py`
+- `league/ES-LaLiga2/engine/sot/harness.py`
+- `league/ES-LaLiga2/engine/sot/model.py`
+- `league/ES-LaLiga2/engine/sot/run_s_engch.py`
+- `league/ES-LaLiga2/engine/total_shots/model.py`
+- `league/ES-LaLiga2/engine/total_shots/run_t_engch.py`
+- `league/ES-PrimeraFederacion/engine/goals/arms.py`
+- `league/ES-PrimeraFederacion/engine/goals/dc.py`
+- `league/ES-PrimeraFederacion/engine/goals/harness.py`
+- `league/ES-PrimeraFederacion/engine/goals/run_g_espf.py`

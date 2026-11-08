@@ -1,0 +1,80 @@
+{
+  "virgin_read": true,
+  "params": {
+    "lambda": 100.0,
+    "r": 57.00194178382675,
+    "beta_x7": 0.0
+  },
+  "arms": {
+    "gate_zero": {
+      "n": 192,
+      "ll": 0.678556481682118,
+      "mean_pred": 0.4246305713332284,
+      "actual_rate": 0.4322916666666667,
+      "calibration_pp": -0.766109533343821,
+      "calibration_se_pp": 3.563348369153649
+    },
+    "x5": {
+      "n": 192,
+      "ll": 0.676414471891191,
+      "mean_pred": 0.4152840583293176,
+      "actual_rate": 0.4322916666666667,
+      "calibration_pp": -1.700760833734905,
+      "calibration_se_pp": 3.55359665232891
+    },
+    "x7": {
+      "n": 192,
+      "ll": 0.678556481682118,
+      "mean_pred": 0.4246305713332284,
+      "actual_rate": 0.4322916666666667,
+      "calibration_pp": -0.766109533343821,
+      "calibration_se_pp": 3.563348369153649
+    }
+  },
+  "baselines": {
+    "__base": {
+      "n": 192,
+      "ll": 0.6865544423933881,
+      "mean_pred": 0.4454086917595654,
+      "actual_rate": 0.4322916666666667,
+      "calibration_pp": 1.311702509289867,
+      "calibration_se_pp": 3.5926827179314555
+    },
+    "__naive": {
+      "n": 192,
+      "ll": 0.6836841420714869,
+      "mean_pred": 0.4059345403180708,
+      "actual_rate": 0.4322916666666667,
+      "calibration_pp": -2.635712634859587,
+      "calibration_se_pp": 3.571390466513194
+    }
+  },
+  "legs": {
+    "gate_zero": {
+      "dev_pass": true,
+      "virgin_ll": 0.678556481682118,
+      "ll_leg": true,
+      "calibration": "PASS",
+      "sign_leg": true,
+      "pass": true
+    },
+    "x5": {
+      "dev_pass": true,
+      "virgin_ll": 0.676414471891191,
+      "ll_leg": true,
+      "calibration": "PROVISIONAL",
+      "sign_leg": true,
+      "pass": true
+    },
+    "x7": {
+      "dev_pass": true,
+      "virgin_ll": 0.678556481682118,
+      "ll_leg": true,
+      "calibration": "PASS",
+      "sign_leg": true,
+      "pass": true
+    }
+  },
+  "shipped_arm": "x5",
+  "verdict": "PROVISIONAL"
+}

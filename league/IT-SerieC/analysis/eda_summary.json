@@ -1,0 +1,353 @@
+{
+ "regular_phase_only": true,
+ "goals_per_match_by_season": {
+  "2021/2022": {
+   "n": 1102,
+   "goals_per_match": 2.34392,
+   "home_goals_per_match": 1.34029,
+   "away_goals_per_match": 1.00363,
+   "home_win_pct": 0.422868,
+   "draw_pct": 0.311252,
+   "over25_pct": 0.419238,
+   "btts_pct": 0.481851
+  },
+  "2022/2023": {
+   "n": 1140,
+   "goals_per_match": 2.320175,
+   "home_goals_per_match": 1.276316,
+   "away_goals_per_match": 1.04386,
+   "home_win_pct": 0.400877,
+   "draw_pct": 0.296491,
+   "over25_pct": 0.419298,
+   "btts_pct": 0.469298
+  },
+  "2023/2024": {
+   "n": 1140,
+   "goals_per_match": 2.330702,
+   "home_goals_per_match": 1.283333,
+   "away_goals_per_match": 1.047368,
+   "home_win_pct": 0.418421,
+   "draw_pct": 0.288596,
+   "over25_pct": 0.414912,
+   "btts_pct": 0.468421
+  },
+  "2024/2025": {
+   "n": 1066,
+   "goals_per_match": 2.366792,
+   "home_goals_per_match": 1.302064,
+   "away_goals_per_match": 1.064728,
+   "home_win_pct": 0.405253,
+   "draw_pct": 0.291745,
+   "over25_pct": 0.432458,
+   "btts_pct": 0.497186
+  },
+  "2025/2026": {
+   "n": 1102,
+   "goals_per_match": 2.365699,
+   "home_goals_per_match": 1.299456,
+   "away_goals_per_match": 1.066243,
+   "home_win_pct": 0.405626,
+   "draw_pct": 0.302178,
+   "over25_pct": 0.428312,
+   "btts_pct": 0.5
+  },
+  "2026/2027": {
+   "n": 386,
+   "goals_per_match": 2.593264,
+   "home_goals_per_match": 1.417098,
+   "away_goals_per_match": 1.176166,
+   "home_win_pct": 0.432642,
+   "draw_pct": 0.297927,
+   "over25_pct": 0.492228,
+   "btts_pct": 0.533679
+  }
+ },
+ "goals_per_match_by_group": {
+  "2021/2022": {
+   "A": {
+    "n": 380,
+    "goals_per_match": 2.192105,
+    "home_goals_per_match": 1.176316,
+    "away_goals_per_match": 1.015789,
+    "home_win_pct": 0.381579,
+    "draw_pct": 0.315789,
+    "over25_pct": 0.376316,
+    "btts_pct": 0.484211
+   },
+   "B": {
+    "n": 380,
+    "goals_per_match": 2.434211,
+    "home_goals_per_match": 1.405263,
+    "away_goals_per_match": 1.028947,
+    "home_win_pct": 0.428947,
+    "draw_pct": 0.323684,
+    "over25_pct": 0.457895,
+    "btts_pct": 0.486842
+   },
+   "C": {
+    "n": 342,
+    "goals_per_match": 2.412281,
+    "home_goals_per_match": 1.450292,
+    "away_goals_per_match": 0.961988,
+    "home_win_pct": 0.461988,
+    "draw_pct": 0.292398,
+    "over25_pct": 0.423977,
+    "btts_pct": 0.473684
+   }
+  },
+  "2022/2023": {
+   "A": {
+    "n": 380,
+    "goals_per_match": 2.326316,
+    "home_goals_per_match": 1.247368,
+    "away_goals_per_match": 1.078947,
+    "home_win_pct": 0.394737,
+    "draw_pct": 0.284211,
+    "over25_pct": 0.407895,
+    "btts_pct": 0.492105
+   },
+   "B": {
+    "n": 380,
+    "goals_per_match": 2.260526,
+    "home_goals_per_match": 1.205263,
+    "away_goals_per_match": 1.055263,
+    "home_win_pct": 0.355263,
+    "draw_pct": 0.315789,
+    "over25_pct": 0.413158,
+    "btts_pct": 0.471053
+   },
+   "C": {
+    "n": 380,
+    "goals_per_match": 2.373684,
+    "home_goals_per_match": 1.376316,
+    "away_goals_per_match": 0.997368,
+    "home_win_pct": 0.452632,
+    "draw_pct": 0.289474,
+    "over25_pct": 0.436842,
+    "btts_pct": 0.444737
+   }
+  },
+  "2023/2024": {
+   "A": {
+    "n": 380,
+    "goals_per_match": 2.228947,
+    "home_goals_per_match": 1.171053,
+    "away_goals_per_match": 1.057895,
+    "home_win_pct": 0.371053,
+    "draw_pct": 0.294737,
+    "over25_pct": 0.381579,
+    "btts_pct": 0.457895
+   },
+   "B": {
+    "n": 380,
+    "goals_per_match": 2.407895,
+    "home_goals_per_match": 1.4,
+    "away_goals_per_match": 1.007895,
+    "home_win_pct": 0.452632,
+    "draw_pct": 0.278947,
+    "over25_pct": 0.428947,
+    "btts_pct": 0.473684
+   },
+   "C": {
+    "n": 380,
+    "goals_per_match": 2.355263,
+    "home_goals_per_match": 1.278947,
+    "away_goals_per_match": 1.076316,
+    "home_win_pct": 0.431579,
+    "draw_pct": 0.292105,
+    "over25_pct": 0.434211,
+    "btts_pct": 0.473684
+   }
+  },
+  "2024/2025": {
+   "A": {
+    "n": 380,
+    "goals_per_match": 2.297368,
+    "home_goals_per_match": 1.289474,
+    "away_goals_per_match": 1.007895,
+    "home_win_pct": 0.436842,
+    "draw_pct": 0.268421,
+    "over25_pct": 0.413158,
+    "btts_pct": 0.473684
+   },
+   "B": {
+    "n": 380,
+    "goals_per_match": 2.360526,
+    "home_goals_per_match": 1.284211,
+    "away_goals_per_match": 1.076316,
+    "home_win_pct": 0.386842,
+    "draw_pct": 0.3,
+    "over25_pct": 0.447368,
+    "btts_pct": 0.502632
+   },
+   "C": {
+    "n": 306,
+    "goals_per_match": 2.460784,
+    "home_goals_per_match": 1.339869,
+    "away_goals_per_match": 1.120915,
+    "home_win_pct": 0.388889,
+    "draw_pct": 0.310458,
+    "over25_pct": 0.437908,
+    "btts_pct": 0.519608
+   }
+  },
+  "2025/2026": {
+   "A": {
+    "n": 380,
+    "goals_per_match": 2.339474,
+    "home_goals_per_match": 1.247368,
+    "away_goals_per_match": 1.092105,
+    "home_win_pct": 0.378947,
+    "draw_pct": 0.302632,
+    "over25_pct": 0.426316,
+    "btts_pct": 0.497368
+   },
+   "B": {
+    "n": 342,
+    "goals_per_match": 2.260234,
+    "home_goals_per_match": 1.184211,
+    "away_goals_per_match": 1.076023,
+    "home_win_pct": 0.377193,
+    "draw_pct": 0.324561,
+    "over25_pct": 0.394737,
+    "btts_pct": 0.488304
+   },
+   "C": {
+    "n": 380,
+    "goals_per_match": 2.486842,
+    "home_goals_per_match": 1.455263,
+    "away_goals_per_match": 1.031579,
+    "home_win_pct": 0.457895,
+    "draw_pct": 0.281579,
+    "over25_pct": 0.460526,
+    "btts_pct": 0.513158
+   }
+  },
+  "2026/2027": {
+   "A": {
+    "n": 130,
+    "goals_per_match": 2.476923,
+    "home_goals_per_match": 1.261538,
+    "away_goals_per_match": 1.215385,
+    "home_win_pct": 0.361538,
+    "draw_pct": 0.338462,
+    "over25_pct": 0.523077,
+    "btts_pct": 0.523077
+   },
+   "B": {
+    "n": 129,
+    "goals_per_match": 2.55814,
+    "home_goals_per_match": 1.395349,
+    "away_goals_per_match": 1.162791,
+    "home_win_pct": 0.457364,
+    "draw_pct": 0.286822,
+    "over25_pct": 0.449612,
+    "btts_pct": 0.550388
+   },
+   "C": {
+    "n": 127,
+    "goals_per_match": 2.748031,
+    "home_goals_per_match": 1.598425,
+    "away_goals_per_match": 1.149606,
+    "home_win_pct": 0.480315,
+    "draw_pct": 0.267717,
+    "over25_pct": 0.503937,
+    "btts_pct": 0.527559
+   }
+  }
+ },
+ "split_half_reliability": {
+  "goals_for": 0.376893,
+  "goals_against": 0.434578,
+  "n_team_seasons": 339,
+  "by_season": {
+   "2021/2022": {
+    "gf": {
+     "r": 0.43729,
+     "n": 59
+    },
+    "ga": {
+     "r": 0.520318,
+     "n": 59
+    }
+   },
+   "2022/2023": {
+    "gf": {
+     "r": 0.589891,
+     "n": 60
+    },
+    "ga": {
+     "r": 0.408939,
+     "n": 60
+    }
+   },
+   "2023/2024": {
+    "gf": {
+     "r": 0.496908,
+     "n": 60
+    },
+    "ga": {
+     "r": 0.435043,
+     "n": 60
+    }
+   },
+   "2024/2025": {
+    "gf": {
+     "r": 0.495209,
+     "n": 58
+    },
+    "ga": {
+     "r": 0.576691,
+     "n": 58
+    }
+   },
+   "2025/2026": {
+    "gf": {
+     "r": 0.29488,
+     "n": 59
+    },
+    "ga": {
+     "r": 0.491592,
+     "n": 59
+    }
+   },
+   "2026/2027": {
+    "gf": {
+     "r": 0.114454,
+     "n": 43
+    },
+    "ga": {
+     "r": 0.246364,
+     "n": 43
+    }
+   }
+  }
+ },
+ "home_advantage_ratio": 1.241126,
+ "regular_matches": 5936,
+ "finished_matches": 6184,
+ "movers_vs_serie_b_id_86_CORRECTED": {
+  "method": "relegated arrivals = in Serie B (id 86) season S-1 and Serie C season S, not in Serie C S-1; name matching (aliases Pordenone/Pordenone Calcio, Brescia/Union Brescia are distinct strings - Brescia->Union Brescia missed in 2025/2026); deltas vs Serie C regular per-team mean; recomputed independently by the builder after the first pass used a wrong reference base",
+  "2022/2023": {
+   "n_clubs": 5,
+   "dGF": 0.202,
+   "dGA": -0.075
+  },
+  "2023/2024": {
+   "n_clubs": 3,
+   "dGF": -0.025,
+   "dGA": -0.218
+  },
+  "2024/2025": {
+   "n_clubs": 5,
+   "dGF": 0.065,
+   "dGA": -0.23
+  },
+  "2025/2026": {
+   "n_clubs": 3,
+   "dGF": 0.159,
+   "dGA": -0.086
+  },
+  "verdict": "small, mostly consistent defensive edge (~-0.15 GA/m) and weak attack edge (~+0.10 GF/m) on 3-5 clubs/season with fragile name identity - insufficient to freeze; X2 DROPPED"
+ }
+}

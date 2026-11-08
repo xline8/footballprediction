@@ -1,0 +1,41 @@
+# Tunisia Ligue I — league config
+league: TN-LigueI
+country: Tunisia
+fotmob_id: 544
+tier: 1
+warehouse: data_enrichment/fotmob_world/Tunisia/Ligue I
+data:
+  matches: league/TN-LigueI/data/tn_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period:
+  goals: ["2022/2023", "2023/2024", "2024/2025"]   # scored; warm-up 2021/2022 complete (156, all phases)
+  stats_markets: []                  # NOT-BUILDABLE: stats feed absent in every season; shotmap empty everywhere
+  cards: []                          # NOT-BUILDABLE: no yellows anywhere (events carry Red/YellowRed only, fragmentary); referee never named
+virgin_primary: "2025/2026"          # COMPLETE season (237 model rows; 3 awarded excluded)
+virgin_confirmatory: null           # 2026/2027 partial (56) is the untouched confirmatory reserve
+halves_constants:                   # frozen from DEV-era data only (EDA F3)
+  goals_1h_share: 0.4539            # goal-event times, dev scored 2022/23-2024/25, 547/1205 goals, 602 matches used
+  yellow_cards_1h_share: null       # no yellows exist
+  sot_1h_share: null                # no SOT data
+  corners_1h_share: null            # no corners data
+  total_shots_1h_share: null        # no shots data
+markets:
+  goals: G-TN        # DC goals-only (no xG in feed); arms: Gate Zero, SHRINK (X2 ENTRANT dropped: no sibling TN league, no mover tilt estimable)
+  sot: S-TN          # NOT-BUILDABLE — stats absent + shotmap empty in all 1,060 payloads
+  corners: C-TN      # NOT-BUILDABLE — stats absent in all 1,060 payloads
+  cards: K-TN        # NOT-BUILDABLE — no yellows (stats absent; events Red/YellowRed only, 241 in 216 matches); referee never named
+  total_shots: T-TN  # NOT-BUILDABLE — stats absent + shotmap empty in all 1,060 payloads
+shipping:
+  arm: NONE
+  no_ship: true      # G-TN FAIL at the virgin calibration leg (OU2.5 diff +8.02pp, SE 2.87pp; HW provisional -3.74pp); dev gate passed 6/6 but virgin leg (ii) failed; virgin 2025/26 WAS read once; nothing ships
+notes:
+  - G-TN outcome: dev PASS (pooled 1.0043 / 0.2000 / 0.6338 vs climatology 1.0637 / 0.2194 / 0.6425, naive 1.1212 / 0.2209 / 0.7309; SHRINK identical); virgin FAIL — 1X2 LL 0.9785 beats climatology 1.0639 (leg i PASS) but OU2.5 calibration +8.02pp fails leg (ii); winner NONE; no predictions file; 2026/27 untouched.
+notes:
+  - Single competition verified in payloads: parentLeagueId 544 in all 1,060; leagueName phase-labelled (Grp. A 154, Grp. B 154, Championship Group 116, Relegation Group 98, Placement Matches 2, Ligue I 536). Format: group era 2021/22-2023/24 (2 groups + championship/relegation groups, double RR within each phase), single 16-team table from 2024/25 (240/season). No extra time or penalties anywhere; all phases are 90-minute league matches and ALL enter model data.
+  - Scores-only league: content.stats null 1,060/1,060; shotmap.shots empty 1,060/1,060; referee text empty 1,060/1,060; no xG.
+  - Nine AWARDED matches (forfeit scores, excluded from every fit and score): 4096477, 4145842, 4145834, 4608322, 4608325, 4612011, 4919136, 4919206, 5178447. E.g. 5178447 played 3-2, recorded 0-2.
+  - Team identity is the FotMob team id, never the name: id 8153 is "Esperance" and "Espérance"; 102104 "Olympique de Beja"/"Béja"; 405958 "Etoile Metlaoui"/"Métlaoui".
+  - Levels: 1.70 -> 2.05 -> 1.90 -> 2.03 -> 1.72 (virgin) goals/match; dev scored OU2.5 over-rate 0.3389, HW 0.4635, D 0.2824. Low-scoring, draw-heavy league.
+  - Team traits weak by the program-standard chronological split-half (dev era GF 0.235 / GA 0.251, n=62) but the attenuation is the mid-season regrouping: random split 0.389/0.463, regular-phase-only chronological 0.497/0.622.
+  - Entrants (Ligue II, not in warehouse): 2 in 2022/23, 2 in 2023/24, 2 in 2024/25, 1 in 2025/26 (JS Kairouanaise), 1 in 2026/27 (PS Sakiet Eddaïer). SHRINK expected identical to Gate Zero (no team with 1-5 prior matches in any scored season's training data).
+  - Predictions-only: no Tunisia odds/settlement source in-system.

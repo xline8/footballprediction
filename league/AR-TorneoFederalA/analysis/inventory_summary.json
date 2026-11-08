@@ -1,0 +1,61 @@
+{
+  "group_rows": 2992,
+  "group_by_season": {
+    "2021": 450,
+    "2022": 544,
+    "2023": 576,
+    "2024": 477,
+    "2025": 486,
+    "2026": 459
+  },
+  "index_rows_federal_a": 3219,
+  "excluded_rows": 227,
+  "stats_nonempty": 0,
+  "shots_any": 0,
+  "referee_nonempty": 0,
+  "2021": {
+    "n_matches": 450,
+    "distinct_teams": 31,
+    "date_range": [
+      "2021-04-10",
+      "2021-10-31"
+    ]
+  },
+  "2022": {
+    "n_matches": 544,
+    "distinct_teams": 34,
+    "date_range": [
+      "2022-03-26",
+      "2022-10-16"
+    ]
+  },
+  "2023": {
+    "n_matches": 576,
+    "distinct_teams": 36,
+    "date_range": [
+      "2023-03-10",
+      "2023-10-29"
+    ]
+  },
+  "2024": {
+    "n_matches": 477,
+    "distinct_teams": 38,
+    "date_range": [
+      "2024-03-22",
+      "2024-09-16"
+    ]
+  },
+  "2025": {
+    "n_matches": 486,
+    "distinct_teams": 38,
+    "date_range": [
+      "2025-03-15",
+      "2025-09-14"
+    ]
+  },
+  "2026": {
+    "n_matches": 459,
+    "virgin": true,
+    "completeness_basis": "group-phase inventory count only; no outcomes used"
+  }
+}

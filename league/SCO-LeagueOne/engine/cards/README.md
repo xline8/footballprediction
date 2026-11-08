@@ -1,0 +1,5 @@
+# League One cards engine
+
+Development-only online venue-split yellow model. It reads the event Yellow totals from `data/sco_league_one_matches.csv`, warms on 2021/2022, and scores 2022/2023 through 2024/2025 (540 matches). The only arm is Gate Zero; the ladder is 2.5/3.5/4.5 and the primary line is 3.5. Predictions are date-grouped and predict-then-update.
+
+Run `python3 league/SCO-LeagueOne/engine/cards/run_k_sco_l1.py dev`. The command writes `results_dev.json` and per-match `results_dev.csv`. After the frozen dev gate passes, run `python3 league/SCO-LeagueOne/engine/cards/run_k_sco_l1.py virgin` once to evaluate 2025/2026. The virgin command writes `results_virgin.json`, `predictions_virgin.csv`, and either shipped `fitted_params_virgin.json` plus `../../predictions/k_sco_l1_virgin_predictions.csv` on a passing verdict, or empty fitted params on FAIL. Virgin `r` values are estimated once from all pre-virgin warm-up predictions while the Online state continues through virgin. Calibration is actual − predicted.

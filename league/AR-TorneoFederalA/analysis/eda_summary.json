@@ -1,0 +1,638 @@
+{
+  "scope": {
+    "eda_seasons": [
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+      "2025"
+    ],
+    "virgin_excluded": "2026; no descriptive statistics computed"
+  },
+  "seasons": {
+    "2021": {
+      "overall": {
+        "n": 450,
+        "goals_per_match": 2.21333,
+        "home_goals": 1.30444,
+        "away_goals": 0.90889,
+        "home_win_pct": 47.778,
+        "draw_pct": 30.889
+      },
+      "by_phase": {
+        "first": {
+          "n": 450,
+          "goals_per_match": 2.21333,
+          "home_goals": 1.30444,
+          "away_goals": 0.90889,
+          "home_win_pct": 47.778,
+          "draw_pct": 30.889
+        },
+        "promotion": {
+          "n": 0,
+          "goals_per_match": null,
+          "home_goals": null,
+          "away_goals": null,
+          "home_win_pct": null,
+          "draw_pct": null
+        },
+        "relegation": {
+          "n": 0,
+          "goals_per_match": null,
+          "home_goals": null,
+          "away_goals": null,
+          "home_win_pct": null,
+          "draw_pct": null
+        }
+      }
+    },
+    "2022": {
+      "overall": {
+        "n": 544,
+        "goals_per_match": 2.125,
+        "home_goals": 1.34007,
+        "away_goals": 0.78493,
+        "home_win_pct": 50.0,
+        "draw_pct": 28.86
+      },
+      "by_phase": {
+        "first": {
+          "n": 544,
+          "goals_per_match": 2.125,
+          "home_goals": 1.34007,
+          "away_goals": 0.78493,
+          "home_win_pct": 50.0,
+          "draw_pct": 28.86
+        },
+        "promotion": {
+          "n": 0,
+          "goals_per_match": null,
+          "home_goals": null,
+          "away_goals": null,
+          "home_win_pct": null,
+          "draw_pct": null
+        },
+        "relegation": {
+          "n": 0,
+          "goals_per_match": null,
+          "home_goals": null,
+          "away_goals": null,
+          "home_win_pct": null,
+          "draw_pct": null
+        }
+      }
+    },
+    "2023": {
+      "overall": {
+        "n": 576,
+        "goals_per_match": 2.12847,
+        "home_goals": 1.37847,
+        "away_goals": 0.75,
+        "home_win_pct": 54.34,
+        "draw_pct": 25.868
+      },
+      "by_phase": {
+        "first": {
+          "n": 576,
+          "goals_per_match": 2.12847,
+          "home_goals": 1.37847,
+          "away_goals": 0.75,
+          "home_win_pct": 54.34,
+          "draw_pct": 25.868
+        },
+        "promotion": {
+          "n": 0,
+          "goals_per_match": null,
+          "home_goals": null,
+          "away_goals": null,
+          "home_win_pct": null,
+          "draw_pct": null
+        },
+        "relegation": {
+          "n": 0,
+          "goals_per_match": null,
+          "home_goals": null,
+          "away_goals": null,
+          "home_win_pct": null,
+          "draw_pct": null
+        }
+      }
+    },
+    "2024": {
+      "overall": {
+        "n": 477,
+        "goals_per_match": 1.88889,
+        "home_goals": 1.19706,
+        "away_goals": 0.69182,
+        "home_win_pct": 49.057,
+        "draw_pct": 31.027
+      },
+      "by_phase": {
+        "first": {
+          "n": 324,
+          "goals_per_match": 1.86111,
+          "home_goals": 1.15741,
+          "away_goals": 0.7037,
+          "home_win_pct": 47.84,
+          "draw_pct": 30.864
+        },
+        "promotion": {
+          "n": 72,
+          "goals_per_match": 1.93056,
+          "home_goals": 1.29167,
+          "away_goals": 0.63889,
+          "home_win_pct": 58.333,
+          "draw_pct": 26.389
+        },
+        "relegation": {
+          "n": 81,
+          "goals_per_match": 1.96296,
+          "home_goals": 1.2716,
+          "away_goals": 0.69136,
+          "home_win_pct": 45.679,
+          "draw_pct": 35.802
+        }
+      }
+    },
+    "2025": {
+      "overall": {
+        "n": 486,
+        "goals_per_match": 2.07613,
+        "home_goals": 1.30864,
+        "away_goals": 0.76749,
+        "home_win_pct": 49.588,
+        "draw_pct": 27.984
+      },
+      "by_phase": {
+        "first": {
+          "n": 324,
+          "goals_per_match": 2.0679,
+          "home_goals": 1.28395,
+          "away_goals": 0.78395,
+          "home_win_pct": 47.531,
+          "draw_pct": 29.938
+        },
+        "promotion": {
+          "n": 72,
+          "goals_per_match": 1.90278,
+          "home_goals": 1.34722,
+          "away_goals": 0.55556,
+          "home_win_pct": 58.333,
+          "draw_pct": 29.167
+        },
+        "relegation": {
+          "n": 90,
+          "goals_per_match": 2.24444,
+          "home_goals": 1.36667,
+          "away_goals": 0.87778,
+          "home_win_pct": 50.0,
+          "draw_pct": 20.0
+        }
+      }
+    }
+  },
+  "pooled": {
+    "2021": {
+      "overall": {
+        "n": 450,
+        "goals_per_match": 2.21333,
+        "home_goals": 1.30444,
+        "away_goals": 0.90889,
+        "home_win_pct": 47.778,
+        "draw_pct": 30.889
+      },
+      "by_phase": {
+        "first": {
+          "n": 450,
+          "goals_per_match": 2.21333,
+          "home_goals": 1.30444,
+          "away_goals": 0.90889,
+          "home_win_pct": 47.778,
+          "draw_pct": 30.889
+        },
+        "promotion": {
+          "n": 0,
+          "goals_per_match": null,
+          "home_goals": null,
+          "away_goals": null,
+          "home_win_pct": null,
+          "draw_pct": null
+        },
+        "relegation": {
+          "n": 0,
+          "goals_per_match": null,
+          "home_goals": null,
+          "away_goals": null,
+          "home_win_pct": null,
+          "draw_pct": null
+        }
+      }
+    },
+    "2022": {
+      "overall": {
+        "n": 544,
+        "goals_per_match": 2.125,
+        "home_goals": 1.34007,
+        "away_goals": 0.78493,
+        "home_win_pct": 50.0,
+        "draw_pct": 28.86
+      },
+      "by_phase": {
+        "first": {
+          "n": 544,
+          "goals_per_match": 2.125,
+          "home_goals": 1.34007,
+          "away_goals": 0.78493,
+          "home_win_pct": 50.0,
+          "draw_pct": 28.86
+        },
+        "promotion": {
+          "n": 0,
+          "goals_per_match": null,
+          "home_goals": null,
+          "away_goals": null,
+          "home_win_pct": null,
+          "draw_pct": null
+        },
+        "relegation": {
+          "n": 0,
+          "goals_per_match": null,
+          "home_goals": null,
+          "away_goals": null,
+          "home_win_pct": null,
+          "draw_pct": null
+        }
+      }
+    },
+    "2023": {
+      "overall": {
+        "n": 576,
+        "goals_per_match": 2.12847,
+        "home_goals": 1.37847,
+        "away_goals": 0.75,
+        "home_win_pct": 54.34,
+        "draw_pct": 25.868
+      },
+      "by_phase": {
+        "first": {
+          "n": 576,
+          "goals_per_match": 2.12847,
+          "home_goals": 1.37847,
+          "away_goals": 0.75,
+          "home_win_pct": 54.34,
+          "draw_pct": 25.868
+        },
+        "promotion": {
+          "n": 0,
+          "goals_per_match": null,
+          "home_goals": null,
+          "away_goals": null,
+          "home_win_pct": null,
+          "draw_pct": null
+        },
+        "relegation": {
+          "n": 0,
+          "goals_per_match": null,
+          "home_goals": null,
+          "away_goals": null,
+          "home_win_pct": null,
+          "draw_pct": null
+        }
+      }
+    },
+    "2024": {
+      "overall": {
+        "n": 477,
+        "goals_per_match": 1.88889,
+        "home_goals": 1.19706,
+        "away_goals": 0.69182,
+        "home_win_pct": 49.057,
+        "draw_pct": 31.027
+      },
+      "by_phase": {
+        "first": {
+          "n": 324,
+          "goals_per_match": 1.86111,
+          "home_goals": 1.15741,
+          "away_goals": 0.7037,
+          "home_win_pct": 47.84,
+          "draw_pct": 30.864
+        },
+        "promotion": {
+          "n": 72,
+          "goals_per_match": 1.93056,
+          "home_goals": 1.29167,
+          "away_goals": 0.63889,
+          "home_win_pct": 58.333,
+          "draw_pct": 26.389
+        },
+        "relegation": {
+          "n": 81,
+          "goals_per_match": 1.96296,
+          "home_goals": 1.2716,
+          "away_goals": 0.69136,
+          "home_win_pct": 45.679,
+          "draw_pct": 35.802
+        }
+      }
+    },
+    "2025": {
+      "overall": {
+        "n": 486,
+        "goals_per_match": 2.07613,
+        "home_goals": 1.30864,
+        "away_goals": 0.76749,
+        "home_win_pct": 49.588,
+        "draw_pct": 27.984
+      },
+      "by_phase": {
+        "first": {
+          "n": 324,
+          "goals_per_match": 2.0679,
+          "home_goals": 1.28395,
+          "away_goals": 0.78395,
+          "home_win_pct": 47.531,
+          "draw_pct": 29.938
+        },
+        "promotion": {
+          "n": 72,
+          "goals_per_match": 1.90278,
+          "home_goals": 1.34722,
+          "away_goals": 0.55556,
+          "home_win_pct": 58.333,
+          "draw_pct": 29.167
+        },
+        "relegation": {
+          "n": 90,
+          "goals_per_match": 2.24444,
+          "home_goals": 1.36667,
+          "away_goals": 0.87778,
+          "home_win_pct": 50.0,
+          "draw_pct": 20.0
+        }
+      }
+    }
+  },
+  "home_advantage": {
+    "overall": 50.336,
+    "by_phase": {
+      "first": 50.0,
+      "promotion": 58.333,
+      "relegation": 47.953
+    }
+  },
+  "reliability": {
+    "goals_for": {
+      "n_team_seasons": 177,
+      "split_half_r": 0.23564
+    },
+    "goals_against": {
+      "n_team_seasons": 177,
+      "split_half_r": 0.42108
+    }
+  },
+  "halves_goals": {
+    "n_matches_with_event_halves": 2249,
+    "n_nonzero_goal_matches": 2190,
+    "share_1h": 0.463826,
+    "variance": 0.13718731,
+    "noise_floor": 0.1389605,
+    "variance_minus_noise": -0.0017732,
+    "frozen_constant_pass": true
+  },
+  "referee": {
+    "coverage_pct": 0.0,
+    "adopt": false
+  },
+  "movers": {
+    "blocks": [
+      {
+        "season": "2022",
+        "team_id": "1344071",
+        "direction": "from_below_or_cross_competition",
+        "n_matches": 32,
+        "gf_gap": -0.15625,
+        "ga_gap": 0.0
+      },
+      {
+        "season": "2022",
+        "team_id": "213600",
+        "direction": "from_below_or_cross_competition",
+        "n_matches": 32,
+        "gf_gap": 0.0,
+        "ga_gap": 0.21875
+      },
+      {
+        "season": "2022",
+        "team_id": "298628",
+        "direction": "from_below_or_cross_competition",
+        "n_matches": 32,
+        "gf_gap": -0.28125,
+        "ga_gap": 0.4375
+      },
+      {
+        "season": "2022",
+        "team_id": "616459",
+        "direction": "from_below_or_cross_competition",
+        "n_matches": 32,
+        "gf_gap": 0.0,
+        "ga_gap": 0.3125
+      },
+      {
+        "season": "2022",
+        "team_id": "739766",
+        "direction": "from_below_or_cross_competition",
+        "n_matches": 32,
+        "gf_gap": 0.6875,
+        "ga_gap": -0.125
+      },
+      {
+        "season": "2023",
+        "team_id": "1442515",
+        "direction": "from_below_or_cross_competition",
+        "n_matches": 32,
+        "gf_gap": -0.12674,
+        "ga_gap": 0.34201
+      },
+      {
+        "season": "2023",
+        "team_id": "1442518",
+        "direction": "from_below_or_cross_competition",
+        "n_matches": 32,
+        "gf_gap": -0.15799,
+        "ga_gap": -0.00174
+      },
+      {
+        "season": "2023",
+        "team_id": "1442519",
+        "direction": "from_below_or_cross_competition",
+        "n_matches": 32,
+        "gf_gap": 0.27951,
+        "ga_gap": 0.24826
+      },
+      {
+        "season": "2023",
+        "team_id": "1442522",
+        "direction": "from_below_or_cross_competition",
+        "n_matches": 32,
+        "gf_gap": 0.21701,
+        "ga_gap": 0.09201
+      },
+      {
+        "season": "2023",
+        "team_id": "203830",
+        "direction": "from_nacional",
+        "n_matches": 32,
+        "gf_gap": -0.03299,
+        "ga_gap": -0.09549
+      },
+      {
+        "season": "2023",
+        "team_id": "213595",
+        "direction": "from_below_or_cross_competition",
+        "n_matches": 32,
+        "gf_gap": -0.00174,
+        "ga_gap": -0.00174
+      },
+      {
+        "season": "2023",
+        "team_id": "568718",
+        "direction": "from_below_or_cross_competition",
+        "n_matches": 32,
+        "gf_gap": -0.03299,
+        "ga_gap": -0.15799
+      },
+      {
+        "season": "2024",
+        "team_id": "1618060",
+        "direction": "from_below_or_cross_competition",
+        "n_matches": 26,
+        "gf_gap": 0.09402,
+        "ga_gap": -0.13675
+      },
+      {
+        "season": "2024",
+        "team_id": "1618062",
+        "direction": "from_below_or_cross_competition",
+        "n_matches": 24,
+        "gf_gap": 0.22222,
+        "ga_gap": -0.40278
+      },
+      {
+        "season": "2024",
+        "team_id": "622757",
+        "direction": "from_below_or_cross_competition",
+        "n_matches": 26,
+        "gf_gap": 0.09402,
+        "ga_gap": -0.02137
+      },
+      {
+        "season": "2024",
+        "team_id": "837624",
+        "direction": "from_below_or_cross_competition",
+        "n_matches": 26,
+        "gf_gap": 0.17094,
+        "ga_gap": 0.05556
+      },
+      {
+        "season": "2024",
+        "team_id": "927587",
+        "direction": "from_below_or_cross_competition",
+        "n_matches": 26,
+        "gf_gap": -0.02137,
+        "ga_gap": -0.21368
+      },
+      {
+        "season": "2025",
+        "team_id": "10085",
+        "direction": "from_nacional",
+        "n_matches": 24,
+        "gf_gap": 0.1286,
+        "ga_gap": -0.16307
+      },
+      {
+        "season": "2025",
+        "team_id": "1723154",
+        "direction": "from_below_or_cross_competition",
+        "n_matches": 24,
+        "gf_gap": 0.0036,
+        "ga_gap": -0.3714
+      },
+      {
+        "season": "2025",
+        "team_id": "1723156",
+        "direction": "from_below_or_cross_competition",
+        "n_matches": 27,
+        "gf_gap": -0.0751,
+        "ga_gap": 0.29527
+      },
+      {
+        "season": "2025",
+        "team_id": "1723190",
+        "direction": "from_below_or_cross_competition",
+        "n_matches": 26,
+        "gf_gap": 0.03886,
+        "ga_gap": -0.26884
+      },
+      {
+        "season": "2025",
+        "team_id": "1723191",
+        "direction": "from_below_or_cross_competition",
+        "n_matches": 25,
+        "gf_gap": 0.00193,
+        "ga_gap": -0.19807
+      },
+      {
+        "season": "2025",
+        "team_id": "213542",
+        "direction": "from_nacional",
+        "n_matches": 27,
+        "gf_gap": 0.22119,
+        "ga_gap": 0.25823
+      }
+    ],
+    "pooled_2022_2025": {
+      "n_team_blocks": 23,
+      "gf_gap": 0.05535,
+      "ga_gap": 0.00444,
+      "by_direction": {
+        "from_nacional": {
+          "n": 3,
+          "gf_gap": 0.1056,
+          "ga_gap": -0.00011
+        },
+        "from_below_or_cross_competition": {
+          "n": 20,
+          "gf_gap": 0.04781,
+          "ga_gap": 0.00512
+        }
+      }
+    },
+    "pooled_by_direction": {
+      "from_nacional": {
+        "n": 3,
+        "gf_gap": 0.1056,
+        "ga_gap": -0.00011
+      },
+      "from_below_or_cross_competition": {
+        "n": 20,
+        "gf_gap": 0.04781,
+        "ga_gap": 0.00512
+      }
+    }
+  },
+  "primary_lines": {
+    "OU1.5": 60.876,
+    "OU2.5": 35.728,
+    "OU3.5": 16.305
+  },
+  "absent": {
+    "stats_payloads_nonempty": 0,
+    "shotmap_shots": 0,
+    "sot": 0,
+    "corners": 0,
+    "yellow_cards": 0,
+    "total_shots": 0,
+    "xg": 0
+  }
+}

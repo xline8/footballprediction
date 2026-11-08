@@ -1,0 +1,462 @@
+{
+ "seasons": {
+  "2021": {
+   "n": 364,
+   "stats": 0,
+   "splits": 0,
+   "events": 352,
+   "shotmap": 0,
+   "lineup": 0,
+   "goals_pm": 3.521978021978022,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.06818181818181818,
+   "yell_plain_pm": 0.0,
+   "yell_stats_pm": null,
+   "teams": 28,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "awarded": 0,
+   "home_win_rate": 0.5027472527472527,
+   "draw_rate": 0.21153846153846154,
+   "over25_rate": 0.6703296703296703,
+   "avd1_n": 182,
+   "avd2_n": 182
+  },
+  "2022": {
+   "n": 338,
+   "stats": 0,
+   "splits": 0,
+   "events": 331,
+   "shotmap": 0,
+   "lineup": 0,
+   "goals_pm": 3.3875739644970415,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.045317220543806644,
+   "yell_plain_pm": 0.0,
+   "yell_stats_pm": null,
+   "teams": 27,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "awarded": 0,
+   "home_win_rate": 0.5118343195266272,
+   "draw_rate": 0.20414201183431951,
+   "over25_rate": 0.6153846153846154,
+   "avd1_n": 156,
+   "avd2_n": 182
+  },
+  "2023": {
+   "n": 364,
+   "stats": 0,
+   "splits": 0,
+   "events": 351,
+   "shotmap": 0,
+   "lineup": 19,
+   "goals_pm": 3.32967032967033,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.037037037037037035,
+   "yell_plain_pm": 0.0,
+   "yell_stats_pm": null,
+   "teams": 28,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "awarded": 0,
+   "home_win_rate": 0.4642857142857143,
+   "draw_rate": 0.22252747252747251,
+   "over25_rate": 0.6483516483516484,
+   "avd1_n": 182,
+   "avd2_n": 182
+  },
+  "2024": {
+   "n": 364,
+   "stats": 0,
+   "splits": 0,
+   "events": 364,
+   "shotmap": 0,
+   "lineup": 364,
+   "goals_pm": 3.4450549450549453,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 3.10989010989011,
+   "yell_plain_pm": 3.0247252747252746,
+   "yell_stats_pm": null,
+   "teams": 28,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "awarded": 0,
+   "home_win_rate": 0.47802197802197804,
+   "draw_rate": 0.17582417582417584,
+   "over25_rate": 0.6785714285714286,
+   "avd1_n": 182,
+   "avd2_n": 182
+  },
+  "2025": {
+   "n": 364,
+   "stats": 0,
+   "splits": 0,
+   "events": 364,
+   "shotmap": 0,
+   "lineup": 364,
+   "goals_pm": 3.5274725274725274,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 3.3543956043956045,
+   "yell_plain_pm": 3.3131868131868134,
+   "yell_stats_pm": null,
+   "teams": 28,
+   "xg_rows": 0,
+   "score_mismatch": 1,
+   "awarded": 1,
+   "home_win_rate": 0.4835164835164835,
+   "draw_rate": 0.21703296703296704,
+   "over25_rate": 0.6703296703296703,
+   "avd1_n": 182,
+   "avd2_n": 182
+  },
+  "2026": {
+   "n": 364,
+   "stats": 0,
+   "splits": 0,
+   "events": 364,
+   "shotmap": 0,
+   "lineup": 364,
+   "goals_pm": 3.4450549450549453,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 3.291208791208791,
+   "yell_plain_pm": 3.269230769230769,
+   "yell_stats_pm": null,
+   "teams": 28,
+   "xg_rows": 0,
+   "score_mismatch": 1,
+   "awarded": 0,
+   "home_win_rate": 0.46153846153846156,
+   "draw_rate": 0.14560439560439561,
+   "over25_rate": 0.6758241758241759,
+   "avd1_n": 182,
+   "avd2_n": 182
+  }
+ },
+ "event_cards_by_season": {
+  "2021": {
+   "n_events_matches": 352,
+   "yellow_plain_total": 0,
+   "yellowred_total": 24,
+   "red_total": 59
+  },
+  "2022": {
+   "n_events_matches": 331,
+   "yellow_plain_total": 0,
+   "yellowred_total": 15,
+   "red_total": 40
+  },
+  "2023": {
+   "n_events_matches": 351,
+   "yellow_plain_total": 0,
+   "yellowred_total": 13,
+   "red_total": 35
+  },
+  "2024": {
+   "n_events_matches": 364,
+   "yellow_plain_total": 1101,
+   "yellowred_total": 31,
+   "red_total": 57
+  },
+  "2025": {
+   "n_events_matches": 364,
+   "yellow_plain_total": 1206,
+   "yellowred_total": 15,
+   "red_total": 50
+  },
+  "2026": {
+   "n_events_matches": 364,
+   "yellow_plain_total": 1190,
+   "yellowred_total": 8,
+   "red_total": 44
+  }
+ },
+ "empty_events": {
+  "n_total": 32,
+  "n_with_goals": 0,
+  "goals_in_them": 0,
+  "all_scoreless": true
+ },
+ "halves_dev": {
+  "goals_events": {
+   "share_1h": 0.4434907010014306,
+   "n_goals": 4893,
+   "n_matches": 1398,
+   "note": "event times, dev era, awarded excluded"
+  },
+  "yellows_events": {
+   "share_1h": 0.2981418918918919,
+   "n_yellows": 1184,
+   "n_matches": 1398,
+   "note": "2024 only carries plain Yellows; 2021-2023 event yellows are YellowRed only \u2014 NOT a frozen constant (no K market)"
+  },
+  "sot": null,
+  "corners": null,
+  "total_shots": null,
+  "yellows_stats": null
+ },
+ "trait_reliability_dev": {
+  "goals_for": {
+   "split_half_r": 0.5613276252655268,
+   "n_teams": 49
+  },
+  "goals_against": {
+   "split_half_r": 0.6181622133083035,
+   "n_teams": 49
+  }
+ },
+ "season_to_season": {
+  "2021-2022": {
+   "n_teams_common": 19,
+   "gf_corr": 0.34260298195572697,
+   "ga_corr": 0.5827057779674301
+  },
+  "2022-2023": {
+   "n_teams_common": 20,
+   "gf_corr": 0.3258858708618473,
+   "ga_corr": 0.6456332152568395
+  },
+  "2023-2024": {
+   "n_teams_common": 19,
+   "gf_corr": 0.23332262494371653,
+   "ga_corr": 0.7587621223784113
+  }
+ },
+ "entrant_transitions_dev": [
+  {
+   "season": "2022",
+   "team_id": 10016,
+   "team": "\u00d8rn Horten",
+   "n_matches": 24,
+   "gf_diff": -0.15212031558185402,
+   "ga_diff": -0.1104536489151875
+  },
+  {
+   "season": "2022",
+   "team_id": 6115,
+   "team": "Tr\u00e6ff",
+   "n_matches": 26,
+   "gf_diff": 0.19082840236686383,
+   "ga_diff": -0.0014792899408284654
+  },
+  {
+   "season": "2022",
+   "team_id": 4231,
+   "team": "Staal J\u00f8rpeland",
+   "n_matches": 24,
+   "gf_diff": -0.277120315581854,
+   "ga_diff": 1.1395463510848127
+  },
+  {
+   "season": "2022",
+   "team_id": 4621,
+   "team": "Frigg",
+   "n_matches": 26,
+   "gf_diff": -0.2322485207100593,
+   "ga_diff": 0.8062130177514792
+  },
+  {
+   "season": "2022",
+   "team_id": 2324,
+   "team": "Ullern",
+   "n_matches": 24,
+   "gf_diff": -0.15212031558185402,
+   "ga_diff": 0.09787968441814598
+  },
+  {
+   "season": "2022",
+   "team_id": 8183,
+   "team": "Gj\u00f8vik-Lyn",
+   "n_matches": 26,
+   "gf_diff": -0.03994082840236701,
+   "ga_diff": 0.5754437869822484
+  },
+  {
+   "season": "2022",
+   "team_id": 10232,
+   "team": "Ullensaker/Kisa",
+   "n_matches": 26,
+   "gf_diff": 1.1139053254437867,
+   "ga_diff": -0.3091715976331362
+  },
+  {
+   "season": "2022",
+   "team_id": 4249,
+   "team": "Str\u00f8mmen",
+   "n_matches": 24,
+   "gf_diff": -0.19378698224852076,
+   "ga_diff": -0.06878698224852076
+  },
+  {
+   "season": "2023",
+   "team_id": 4320,
+   "team": "Junkeren",
+   "n_matches": 26,
+   "gf_diff": -0.12637362637362637,
+   "ga_diff": 0.4120879120879122
+  },
+  {
+   "season": "2023",
+   "team_id": 4393,
+   "team": "Stj\u00f8rdals Blink",
+   "n_matches": 26,
+   "gf_diff": 0.4120879120879122,
+   "ga_diff": -0.0494505494505495
+  },
+  {
+   "season": "2023",
+   "team_id": 4201,
+   "team": "Grorud",
+   "n_matches": 26,
+   "gf_diff": -0.4725274725274726,
+   "ga_diff": -0.6263736263736264
+  },
+  {
+   "season": "2023",
+   "team_id": 10224,
+   "team": "Lyn",
+   "n_matches": 26,
+   "gf_diff": 1.1813186813186813,
+   "ga_diff": -0.7802197802197803
+  },
+  {
+   "season": "2023",
+   "team_id": 8114,
+   "team": "Aalesund 2",
+   "n_matches": 26,
+   "gf_diff": -0.5494505494505495,
+   "ga_diff": 0.18131868131868134
+  },
+  {
+   "season": "2023",
+   "team_id": 8469,
+   "team": "Brann 2",
+   "n_matches": 26,
+   "gf_diff": 0.3351648351648351,
+   "ga_diff": 0.8351648351648351
+  },
+  {
+   "season": "2023",
+   "team_id": 8181,
+   "team": "Str\u00f8msgodset 2",
+   "n_matches": 26,
+   "gf_diff": -0.31868131868131866,
+   "ga_diff": 0.5274725274725276
+  },
+  {
+   "season": "2023",
+   "team_id": 4703,
+   "team": "Fram Larvik",
+   "n_matches": 26,
+   "gf_diff": -0.2417582417582418,
+   "ga_diff": 0.5274725274725276
+  },
+  {
+   "season": "2024",
+   "team_id": 7937,
+   "team": "H\u00f8dd",
+   "n_matches": 26,
+   "gf_diff": 0.2005494505494505,
+   "ga_diff": -0.8763736263736265
+  },
+  {
+   "season": "2024",
+   "team_id": 10018,
+   "team": "Viking 2",
+   "n_matches": 26,
+   "gf_diff": 0.16208791208791196,
+   "ga_diff": 0.008241758241758212
+  },
+  {
+   "season": "2024",
+   "team_id": 8292,
+   "team": "Eidsvold TF",
+   "n_matches": 26,
+   "gf_diff": 0.3159340659340657,
+   "ga_diff": 0.008241758241758212
+  },
+  {
+   "season": "2024",
+   "team_id": 8421,
+   "team": "Skeid",
+   "n_matches": 26,
+   "gf_diff": 0.3159340659340657,
+   "ga_diff": -0.9532967032967034
+  },
+  {
+   "season": "2024",
+   "team_id": 10022,
+   "team": "Strindheim",
+   "n_matches": 26,
+   "gf_diff": -0.030219780219780334,
+   "ga_diff": 0.04670329670329654
+  },
+  {
+   "season": "2024",
+   "team_id": 1899,
+   "team": "Eik-T\u00f8nsberg",
+   "n_matches": 26,
+   "gf_diff": -0.18406593406593408,
+   "ga_diff": -0.4148351648351649
+  },
+  {
+   "season": "2024",
+   "team_id": 7963,
+   "team": "Follo",
+   "n_matches": 26,
+   "gf_diff": 0.04670329670329654,
+   "ga_diff": 0.4697802197802199
+  },
+  {
+   "season": "2024",
+   "team_id": 413468,
+   "team": "Lysekloster",
+   "n_matches": 26,
+   "gf_diff": 0.08516483516483508,
+   "ga_diff": -0.1071428571428572
+  },
+  {
+   "season": "2024",
+   "team_id": 2303,
+   "team": "Jerv",
+   "n_matches": 26,
+   "gf_diff": 0.04670329670329654,
+   "ga_diff": -0.45329670329670346
+  }
+ ],
+ "x2_offset_dev": {
+  "n_transitions": 25,
+  "g_log": 0.05743871513102275,
+  "c_log": 0.03538743307974074,
+  "gf_diff_mean": 0.05743871513102275,
+  "ga_diff_mean": 0.03538743307974074
+ },
+ "lines": {
+  "goals_ou": {
+   "over_rates": {
+    "1.5": 0.8433395872420263,
+    "2.5": 0.648217636022514,
+    "3.5": 0.43902439024390244
+   },
+   "primary": 3.5,
+   "n": 1066
+  }
+ },
+ "home_win_rate_dev_scored": 0.48405253283302063,
+ "draw_rate_dev_scored": 0.20075046904315197,
+ "dev_scored_n": 1066,
+ "virgin_n": 364,
+ "reserve_n": 364
+}

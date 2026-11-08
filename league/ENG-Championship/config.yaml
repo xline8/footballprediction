@@ -1,0 +1,32 @@
+# ENG-Championship (England) — league config
+league: ENG-Championship
+country: England
+fotmob_id: 48
+tier: 2
+warehouse: data_enrichment/fotmob_world/England/Championship
+data:
+  matches: league/ENG-Championship/data/engch_matches.csv
+  team_matches: league/ENG-Championship/data/engch_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]  # walk-forward, season-blocked
+virgin_primary: "2025/2026"        # complete season, n=555 — read ONCE per candidate
+virgin_confirmatory: "2026/2027"   # partial (180 played at pull); reserved, NOT read in this build
+halves_constants:                  # frozen, measured on the complete-splits era 2023/2024–2025/2026
+  goals_1h_share: 0.4453
+  sot_1h_share: 0.4548
+  corners_1h_share: 0.4638
+  total_shots_1h_share: 0.4573
+  yellow_cards_1h_share: 0.3109
+markets:
+  goals: G-ENGCH      # DC reference; arms: Gate Zero, SHRINK (thin-data prior), X2 mover tier offset (PL/L1 both in warehouse)
+  sot: S-ENGCH        # v5 reference; arms: Gate Zero, RS ratio-shrink, X4 xG/shot
+  corners: C-ENGCH    # corners_v3 reference; arms: Gate Zero (X9), X7 box touches
+  cards: K-ENGCH      # cards reference; arms: Gate Zero only (X8 referee DROPPED, r=0.259; team yellows trait r=-0.01)
+  total_shots: T-ENGCH # shots family; arms: A v1 pattern, B v2 level layer, C E9 trailing-r
+notes:
+  - 24 teams, 46 rounds, double round-robin = 552 regular matches/season + 5 promotion play-off matches (2-leg semis + final, phase='playoff', included as ordinary rows, no phase feature). 2025/2026 warehouse copy lacks one semi-final tie (2 matches): virgin n=555 = 552 regular + 3 play-off.
+  - Heavy churn: 6 of 24 clubs change every season (3 relegated from the Premier League, 3 promoted from League One, mirrored exits). Movers measured: ex-PL clubs enter at GD +0.49/match, ex-L1 at -0.15 — the X2 mover offset is a first-class feature here.
+  - Parachute distortion is real but bounded: career GD/match top Leeds +1.12, Burnley +0.90 vs SCO's Celtic +1.73; team GD spread SD 0.43. No rating clamping.
+  - Per-half stats: 3.1% in 2021/2022, 19.6% in 2022/2023, ~100% from 2023/2024. xGOT population era starts 2024/2025 (93.7%+ of shots) but its trait reliability is weak (r=0.344) — X6 dropped.
+  - Referee coverage 48.3% in 2021/2022, ~100% after; strictness reliability r=0.259 = noise by program standard.
+  - Predictions-only: no ENGCH odds/settlement source in-system.

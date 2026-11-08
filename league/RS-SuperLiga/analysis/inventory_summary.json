@@ -1,0 +1,200 @@
+{
+ "by_season": {
+  "2021/2022": {
+   "n_json": 300,
+   "events_matches": 278,
+   "no_events_matches": 22,
+   "event_types": {
+    "Half": 556,
+    "Goal": 768,
+    "Card": 50
+   },
+   "card_detail": {
+    "YellowRed": 30,
+    "Red": 20
+   },
+   "goal_events_total": 768,
+   "ft_goals_total": 769,
+   "goal_event_vs_ft_mismatch_matches": 1,
+   "lineup_block": 0,
+   "lineup_full_xi_both_sides": 0,
+   "stats_matches": 0,
+   "stats_keys_all_n": 0,
+   "stats_keys_all": [],
+   "stats_keys_firsthalf_n": 0,
+   "periods_seen": {
+    "()": 300
+   },
+   "referee_named": 0,
+   "referee_distinct": 0,
+   "shotmap_matches": 0,
+   "has_expected_goals_key": false
+  },
+  "2022/2023": {
+   "n_json": 300,
+   "events_matches": 277,
+   "no_events_matches": 23,
+   "event_types": {
+    "Half": 554,
+    "Goal": 729,
+    "Card": 66
+   },
+   "card_detail": {
+    "YellowRed": 36,
+    "Red": 30
+   },
+   "goal_events_total": 729,
+   "ft_goals_total": 729,
+   "goal_event_vs_ft_mismatch_matches": 0,
+   "lineup_block": 11,
+   "lineup_full_xi_both_sides": 0,
+   "stats_matches": 0,
+   "stats_keys_all_n": 0,
+   "stats_keys_all": [],
+   "stats_keys_firsthalf_n": 0,
+   "periods_seen": {
+    "()": 300
+   },
+   "referee_named": 0,
+   "referee_distinct": 0,
+   "shotmap_matches": 0,
+   "has_expected_goals_key": false
+  },
+  "2023/2024": {
+   "n_json": 296,
+   "events_matches": 280,
+   "no_events_matches": 16,
+   "event_types": {
+    "Goal": 824,
+    "Half": 560,
+    "Card": 51
+   },
+   "card_detail": {
+    "Red": 24,
+    "YellowRed": 27
+   },
+   "goal_events_total": 824,
+   "ft_goals_total": 820,
+   "goal_event_vs_ft_mismatch_matches": 1,
+   "lineup_block": 4,
+   "lineup_full_xi_both_sides": 0,
+   "stats_matches": 0,
+   "stats_keys_all_n": 0,
+   "stats_keys_all": [],
+   "stats_keys_firsthalf_n": 0,
+   "periods_seen": {
+    "()": 296
+   },
+   "referee_named": 0,
+   "referee_distinct": 0,
+   "shotmap_matches": 0,
+   "has_expected_goals_key": false
+  },
+  "2024/2025": {
+   "n_json": 296,
+   "events_matches": 275,
+   "no_events_matches": 21,
+   "event_types": {
+    "Goal": 853,
+    "Half": 550,
+    "Card": 41
+   },
+   "card_detail": {
+    "Red": 29,
+    "YellowRed": 12
+   },
+   "goal_events_total": 853,
+   "ft_goals_total": 853,
+   "goal_event_vs_ft_mismatch_matches": 0,
+   "lineup_block": 32,
+   "lineup_full_xi_both_sides": 0,
+   "stats_matches": 0,
+   "stats_keys_all_n": 0,
+   "stats_keys_all": [],
+   "stats_keys_firsthalf_n": 0,
+   "periods_seen": {
+    "()": 296
+   },
+   "referee_named": 0,
+   "referee_distinct": 0,
+   "shotmap_matches": 0,
+   "has_expected_goals_key": false
+  },
+  "2025/2026": {
+   "n_json": 296,
+   "events_matches": 296,
+   "no_events_matches": 0,
+   "event_types": {
+    "Card": 1422,
+    "Goal": 788,
+    "AddedTime": 537,
+    "Half": 592,
+    "Substitution": 2644,
+    "VAR": 47,
+    "Comment": 71,
+    "MissedPenalty": 22
+   },
+   "card_detail": {
+    "Yellow": 1347,
+    "YellowRed": 33,
+    "Red": 42
+   },
+   "goal_events_total": 788,
+   "ft_goals_total": 788,
+   "goal_event_vs_ft_mismatch_matches": 0,
+   "lineup_block": 296,
+   "lineup_full_xi_both_sides": 296,
+   "stats_matches": 296,
+   "stats_keys_all_n": 36,
+   "stats_keys_all": [
+    "BallPossesion",
+    "Offsides",
+    "ShotsOffTarget",
+    "ShotsOnTarget",
+    "accurate_crosses",
+    "accurate_passes",
+    "aerials_won",
+    "big_chance",
+    "big_chance_missed_title",
+    "blocked_shots",
+    "clearances",
+    "corners",
+    "defense",
+    "discipline",
+    "dribbles_succeeded",
+    "duel_won",
+    "duels",
+    "fouls",
+    "ground_duels_won",
+    "interceptions",
+    "keeper_saves",
+    "long_balls_accurate",
+    "matchstats.headers.tackles",
+    "opposition_half_passes",
+    "own_half_passes",
+    "passes",
+    "player_throws",
+    "red_cards",
+    "shot_blocks",
+    "shots",
+    "shots_inside_box",
+    "shots_outside_box",
+    "shots_woodwork",
+    "total_shots",
+    "touches_opp_box",
+    "yellow_cards"
+   ],
+   "stats_keys_firsthalf_n": 36,
+   "periods_seen": {
+    "('All', 'FirstHalf', 'SecondHalf')": 296
+   },
+   "referee_named": 197,
+   "referee_distinct": 23,
+   "shotmap_matches": 0,
+   "has_expected_goals_key": false
+  }
+ },
+ "reserve_excluded": "2026/2027",
+ "note": "Raw JSONs read only for dev seasons + virgin (inventory). The 2026/2027 directory was never listed or opened.",
+ "team_ids_total": 25
+}

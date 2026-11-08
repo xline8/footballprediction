@@ -1,0 +1,875 @@
+{
+ "levels": {
+  "j1": {
+   "matches": 2091,
+   "goals_total": {
+    "n": 2091,
+    "mean": 2.552,
+    "sd": 1.652,
+    "var_over_mean": 1.069,
+    "p10": 1.0,
+    "p50": 2.0,
+    "p90": 5.0
+   },
+   "goals_home": {
+    "n": 2091,
+    "mean": 1.376,
+    "sd": 1.204,
+    "var_over_mean": 1.054,
+    "p10": 0.0,
+    "p50": 1.0,
+    "p90": 3.0
+   },
+   "goals_away": {
+    "n": 2091,
+    "mean": 1.176,
+    "sd": 1.135,
+    "var_over_mean": 1.095,
+    "p10": 0.0,
+    "p50": 1.0,
+    "p90": 3.0
+   },
+   "home_win_pct": 41.3,
+   "draw_pct": 26.8,
+   "away_win_pct": 31.9,
+   "btts_pct": 50.4,
+   "over25_pct": 47.0,
+   "home_goal_edge": 0.2,
+   "sot": {
+    "n": 2091,
+    "mean": 8.078,
+    "sd": 3.095,
+    "var_over_mean": 1.186,
+    "p10": 4.0,
+    "p50": 8.0,
+    "p90": 12.0
+   },
+   "shots": {
+    "n": 2091,
+    "mean": 24.767,
+    "sd": 5.771,
+    "var_over_mean": 1.345,
+    "p10": 17.0,
+    "p50": 24.0,
+    "p90": 32.0
+   },
+   "corners": {
+    "n": 2091,
+    "mean": 9.473,
+    "sd": 3.301,
+    "var_over_mean": 1.151,
+    "p10": 5.0,
+    "p50": 9.0,
+    "p90": 14.0
+   },
+   "yellow": {
+    "n": 2091,
+    "mean": 2.339,
+    "sd": 1.522,
+    "var_over_mean": 0.99,
+    "p10": 0.0,
+    "p50": 2.0,
+    "p90": 4.0
+   },
+   "red": {
+    "n": 2091,
+    "mean": 0.114,
+    "sd": 0.334,
+    "var_over_mean": 0.978,
+    "p10": 0.0,
+    "p50": 0.0,
+    "p90": 1.0
+   },
+   "xg": {
+    "n": 1711,
+    "mean": 2.519,
+    "sd": 0.984,
+    "var_over_mean": 0.384,
+    "p10": 1.35,
+    "p50": 2.4,
+    "p90": 3.84
+   }
+  },
+  "j2": {
+   "matches": 2318,
+   "goals_total": {
+    "n": 2318,
+    "mean": 2.476,
+    "sd": 1.612,
+    "var_over_mean": 1.049,
+    "p10": 1.0,
+    "p50": 2.0,
+    "p90": 5.0
+   },
+   "goals_home": {
+    "n": 2318,
+    "mean": 1.303,
+    "sd": 1.191,
+    "var_over_mean": 1.089,
+    "p10": 0.0,
+    "p50": 1.0,
+    "p90": 3.0
+   },
+   "goals_away": {
+    "n": 2318,
+    "mean": 1.173,
+    "sd": 1.084,
+    "var_over_mean": 1.002,
+    "p10": 0.0,
+    "p50": 1.0,
+    "p90": 3.0
+   },
+   "home_win_pct": 38.2,
+   "draw_pct": 27.7,
+   "away_win_pct": 34.2,
+   "btts_pct": 50.4,
+   "over25_pct": 45.7,
+   "home_goal_edge": 0.129,
+   "sot": {
+    "n": 1394,
+    "mean": 7.627,
+    "sd": 2.942,
+    "var_over_mean": 1.135,
+    "p10": 4.0,
+    "p50": 7.0,
+    "p90": 12.0
+   },
+   "shots": {
+    "n": 1394,
+    "mean": 23.966,
+    "sd": 5.614,
+    "var_over_mean": 1.315,
+    "p10": 17.0,
+    "p50": 24.0,
+    "p90": 31.0
+   },
+   "corners": {
+    "n": 1394,
+    "mean": 9.547,
+    "sd": 3.397,
+    "var_over_mean": 1.208,
+    "p10": 5.0,
+    "p50": 9.0,
+    "p90": 14.0
+   },
+   "yellow": {
+    "n": 2318,
+    "mean": 2.275,
+    "sd": 1.536,
+    "var_over_mean": 1.037,
+    "p10": 0.0,
+    "p50": 2.0,
+    "p90": 4.0
+   },
+   "red": {
+    "n": 2318,
+    "mean": 0.086,
+    "sd": 0.305,
+    "var_over_mean": 1.085,
+    "p10": 0.0,
+    "p50": 0.0,
+    "p90": 0.0
+   },
+   "xg": {}
+  },
+  "j3": {
+   "matches": 1819,
+   "goals_total": {
+    "n": 1819,
+    "mean": 2.567,
+    "sd": 1.657,
+    "var_over_mean": 1.069,
+    "p10": 1.0,
+    "p50": 2.0,
+    "p90": 5.0
+   },
+   "goals_home": {
+    "n": 1819,
+    "mean": 1.364,
+    "sd": 1.222,
+    "var_over_mean": 1.094,
+    "p10": 0.0,
+    "p50": 1.0,
+    "p90": 3.0
+   },
+   "goals_away": {
+    "n": 1819,
+    "mean": 1.203,
+    "sd": 1.128,
+    "var_over_mean": 1.057,
+    "p10": 0.0,
+    "p50": 1.0,
+    "p90": 3.0
+   },
+   "home_win_pct": 42.6,
+   "draw_pct": 24.2,
+   "away_win_pct": 33.2,
+   "btts_pct": 51.5,
+   "over25_pct": 47.9,
+   "home_goal_edge": 0.161,
+   "sot": {
+    "n": 62,
+    "mean": 8.274,
+    "sd": 3.52,
+    "var_over_mean": 1.498,
+    "p10": 4.0,
+    "p50": 8.0,
+    "p90": 12.9
+   },
+   "shots": {
+    "n": 62,
+    "mean": 25.516,
+    "sd": 6.794,
+    "var_over_mean": 1.809,
+    "p10": 16.1,
+    "p50": 25.5,
+    "p90": 33.8
+   },
+   "corners": {
+    "n": 62,
+    "mean": 9.935,
+    "sd": 3.482,
+    "var_over_mean": 1.22,
+    "p10": 5.0,
+    "p50": 10.0,
+    "p90": 14.0
+   },
+   "yellow": {
+    "n": 62,
+    "mean": 2.258,
+    "sd": 1.39,
+    "var_over_mean": 0.856,
+    "p10": 1.0,
+    "p50": 2.0,
+    "p90": 4.0
+   },
+   "red": {
+    "n": 1701,
+    "mean": 0.083,
+    "sd": 0.287,
+    "var_over_mean": 0.987,
+    "p10": 0.0,
+    "p50": 0.0,
+    "p90": 0.0
+   },
+   "xg": {}
+  }
+ },
+ "seasons": {
+  "j1": {
+   "2021": {
+    "n": 380,
+    "goals": 2.42,
+    "home_edge": 0.18,
+    "draw_pct": 24.7,
+    "sot": 7.72,
+    "sot_n": 380,
+    "shots": 23.45,
+    "shots_n": 380,
+    "corners": 9.07,
+    "corners_n": 380,
+    "yellow": 1.78,
+    "yellow_n": 380,
+    "xg": null,
+    "xg_n": 0
+   },
+   "2022": {
+    "n": 306,
+    "goals": 2.52,
+    "home_edge": 0.25,
+    "draw_pct": 31.7,
+    "sot": 8.08,
+    "sot_n": 306,
+    "shots": 24.51,
+    "shots_n": 306,
+    "corners": 9.04,
+    "corners_n": 306,
+    "yellow": 2.18,
+    "yellow_n": 306,
+    "xg": 2.33,
+    "xg_n": 306
+   },
+   "2023": {
+    "n": 306,
+    "goals": 2.54,
+    "home_edge": 0.19,
+    "draw_pct": 25.5,
+    "sot": 8.1,
+    "sot_n": 306,
+    "shots": 24.61,
+    "shots_n": 306,
+    "corners": 9.63,
+    "corners_n": 306,
+    "yellow": 2.75,
+    "yellow_n": 306,
+    "xg": 2.58,
+    "xg_n": 306
+   },
+   "2024": {
+    "n": 380,
+    "goals": 2.67,
+    "home_edge": 0.18,
+    "draw_pct": 27.4,
+    "sot": 8.56,
+    "sot_n": 380,
+    "shots": 26.23,
+    "shots_n": 380,
+    "corners": 10.07,
+    "corners_n": 380,
+    "yellow": 2.49,
+    "yellow_n": 380,
+    "xg": 2.58,
+    "xg_n": 380
+   },
+   "2025": {
+    "n": 380,
+    "goals": 2.4,
+    "home_edge": 0.23,
+    "draw_pct": 25.5,
+    "sot": 7.71,
+    "sot_n": 380,
+    "shots": 24.11,
+    "shots_n": 380,
+    "corners": 9.57,
+    "corners_n": 380,
+    "yellow": 2.39,
+    "yellow_n": 380,
+    "xg": 2.45,
+    "xg_n": 380
+   },
+   "2026": {
+    "n": 200,
+    "goals": 2.66,
+    "home_edge": 0.09,
+    "draw_pct": 28.5,
+    "sot": 8.16,
+    "sot_n": 200,
+    "shots": 24.88,
+    "shots_n": 200,
+    "corners": 9.46,
+    "corners_n": 200,
+    "yellow": 2.35,
+    "yellow_n": 200,
+    "xg": 2.59,
+    "xg_n": 200
+   },
+   "2026-2027": {
+    "n": 139,
+    "goals": 2.96,
+    "home_edge": 0.27,
+    "draw_pct": 24.5,
+    "sot": 8.58,
+    "sot_n": 139,
+    "shots": 26.92,
+    "shots_n": 139,
+    "corners": 9.3,
+    "corners_n": 139,
+    "yellow": 2.76,
+    "yellow_n": 139,
+    "xg": 2.71,
+    "xg_n": 139
+   }
+  },
+  "j2": {
+   "2021": {
+    "n": 462,
+    "goals": 2.39,
+    "home_edge": 0.05,
+    "draw_pct": 29.7,
+    "sot": 7.49,
+    "sot_n": 134,
+    "shots": 23.44,
+    "shots_n": 134,
+    "corners": 9.89,
+    "corners_n": 134,
+    "yellow": 1.72,
+    "yellow_n": 462,
+    "xg": null,
+    "xg_n": 0
+   },
+   "2022": {
+    "n": 465,
+    "goals": 2.47,
+    "home_edge": 0.1,
+    "draw_pct": 29.2,
+    "sot": 7.61,
+    "sot_n": 465,
+    "shots": 23.36,
+    "shots_n": 465,
+    "corners": 9.41,
+    "corners_n": 465,
+    "yellow": 2.06,
+    "yellow_n": 465,
+    "xg": null,
+    "xg_n": 0
+   },
+   "2023": {
+    "n": 465,
+    "goals": 2.55,
+    "home_edge": 0.12,
+    "draw_pct": 28.4,
+    "sot": 7.53,
+    "sot_n": 455,
+    "shots": 24.04,
+    "shots_n": 455,
+    "corners": 9.41,
+    "corners_n": 455,
+    "yellow": 2.66,
+    "yellow_n": 465,
+    "xg": null,
+    "xg_n": 0
+   },
+   "2024": {
+    "n": 383,
+    "goals": 2.5,
+    "home_edge": 0.23,
+    "draw_pct": 23.2,
+    "sot": 7.84,
+    "sot_n": 340,
+    "shots": 24.89,
+    "shots_n": 340,
+    "corners": 9.78,
+    "corners_n": 340,
+    "yellow": 2.37,
+    "yellow_n": 383,
+    "xg": null,
+    "xg_n": 0
+   },
+   "2025": {
+    "n": 383,
+    "goals": 2.46,
+    "home_edge": 0.11,
+    "draw_pct": 28.5,
+    "sot": null,
+    "sot_n": 0,
+    "shots": null,
+    "shots_n": 0,
+    "corners": null,
+    "corners_n": 0,
+    "yellow": 2.5,
+    "yellow_n": 383,
+    "xg": null,
+    "xg_n": 0
+   },
+   "2026-2027": {
+    "n": 160,
+    "goals": 2.54,
+    "home_edge": 0.27,
+    "draw_pct": 23.8,
+    "sot": null,
+    "sot_n": 0,
+    "shots": null,
+    "shots_n": 0,
+    "corners": null,
+    "corners_n": 0,
+    "yellow": 2.62,
+    "yellow_n": 160,
+    "xg": null,
+    "xg_n": 0
+   }
+  },
+  "j3": {
+   "2021": {
+    "n": 210,
+    "goals": 2.54,
+    "home_edge": 0.04,
+    "draw_pct": 25.7,
+    "sot": null,
+    "sot_n": 0,
+    "shots": null,
+    "shots_n": 0,
+    "corners": null,
+    "corners_n": 0,
+    "yellow": null,
+    "yellow_n": 0,
+    "xg": null,
+    "xg_n": 0
+   },
+   "2022": {
+    "n": 306,
+    "goals": 2.6,
+    "home_edge": 0.2,
+    "draw_pct": 19.3,
+    "sot": null,
+    "sot_n": 0,
+    "shots": null,
+    "shots_n": 0,
+    "corners": null,
+    "corners_n": 0,
+    "yellow": null,
+    "yellow_n": 0,
+    "xg": null,
+    "xg_n": 0
+   },
+   "2023": {
+    "n": 380,
+    "goals": 2.45,
+    "home_edge": -0.02,
+    "draw_pct": 26.8,
+    "sot": null,
+    "sot_n": 0,
+    "shots": null,
+    "shots_n": 0,
+    "corners": null,
+    "corners_n": 0,
+    "yellow": null,
+    "yellow_n": 0,
+    "xg": null,
+    "xg_n": 0
+   },
+   "2024": {
+    "n": 380,
+    "goals": 2.59,
+    "home_edge": 0.22,
+    "draw_pct": 28.7,
+    "sot": null,
+    "sot_n": 0,
+    "shots": null,
+    "shots_n": 0,
+    "corners": null,
+    "corners_n": 0,
+    "yellow": null,
+    "yellow_n": 0,
+    "xg": null,
+    "xg_n": 0
+   },
+   "2025": {
+    "n": 383,
+    "goals": 2.56,
+    "home_edge": 0.27,
+    "draw_pct": 22.5,
+    "sot": 8.27,
+    "sot_n": 62,
+    "shots": 25.52,
+    "shots_n": 62,
+    "corners": 9.94,
+    "corners_n": 62,
+    "yellow": 2.26,
+    "yellow_n": 62,
+    "xg": null,
+    "xg_n": 0
+   },
+   "2026-2027": {
+    "n": 160,
+    "goals": 2.78,
+    "home_edge": 0.27,
+    "draw_pct": 19.4,
+    "sot": null,
+    "sot_n": 0,
+    "shots": null,
+    "shots_n": 0,
+    "corners": null,
+    "corners_n": 0,
+    "yellow": null,
+    "yellow_n": 0,
+    "xg": null,
+    "xg_n": 0
+   }
+  }
+ },
+ "halves_j1": {
+  "goal_share_1h": {
+   "n": 1914,
+   "mean": 0.412,
+   "sd": 0.344,
+   "var_over_mean": 0.287,
+   "p10": 0.0,
+   "p50": 0.4,
+   "p90": 1.0
+  },
+  "goal_share_true_var": -0.00104,
+  "team_1h_goal_share_split_half": {
+   "n_teams": 29,
+   "r": 0.187
+  },
+  "team_1h_corner_share_split_half": {
+   "n_teams": 26,
+   "r": 0.05
+  },
+  "team_1h_sot_share_split_half": {
+   "n_teams": 26,
+   "r": 0.331
+  },
+  "team_1h_shots_share_split_half": {
+   "n_teams": 26,
+   "r": 0.29
+  },
+  "team_1h_xg_share_split_half": {
+   "n_teams": 26,
+   "r": 0.172
+  },
+  "sot_share_1h_true_var": 1e-05,
+  "sot_share_1h_mean": 0.448,
+  "corner_share_1h_true_var": -0.00059,
+  "corner_share_1h_mean": 0.447,
+  "shots_share_1h_true_var": -0.0007,
+  "shots_share_1h_mean": 0.455
+ },
+ "reliability": {
+  "j1": {
+   "goals_for": {
+    "n_teams": 29,
+    "r": 0.713
+   },
+   "goals_against": {
+    "n_teams": 29,
+    "r": 0.585
+   },
+   "sot_for": {
+    "n_teams": 29,
+    "r": 0.756
+   },
+   "shots_for": {
+    "n_teams": 29,
+    "r": 0.848
+   },
+   "corners_for": {
+    "n_teams": 29,
+    "r": 0.646
+   },
+   "yellow_for": {
+    "n_teams": 29,
+    "r": 0.659
+   },
+   "xg_for": {
+    "n_teams": 26,
+    "r": 0.767
+   }
+  },
+  "j2": {
+   "goals_for": {
+    "n_teams": 36,
+    "r": 0.689
+   },
+   "goals_against": {
+    "n_teams": 36,
+    "r": 0.624
+   },
+   "sot_for": {
+    "n_teams": 28,
+    "r": 0.797
+   },
+   "shots_for": {
+    "n_teams": 28,
+    "r": 0.819
+   },
+   "corners_for": {
+    "n_teams": 28,
+    "r": 0.637
+   },
+   "yellow_for": {
+    "n_teams": 36,
+    "r": 0.512
+   },
+   "xg_for": {
+    "n_teams": 0,
+    "r": null
+   }
+  },
+  "j3": {
+   "goals_for": {
+    "n_teams": 29,
+    "r": 0.658
+   },
+   "goals_against": {
+    "n_teams": 29,
+    "r": 0.68
+   },
+   "sot_for": {
+    "n_teams": 0,
+    "r": null
+   },
+   "shots_for": {
+    "n_teams": 0,
+    "r": null
+   },
+   "corners_for": {
+    "n_teams": 0,
+    "r": null
+   },
+   "yellow_for": {
+    "n_teams": 0,
+    "r": null
+   },
+   "xg_for": {
+    "n_teams": 0,
+    "r": null
+   }
+  },
+  "j1_ratio_traits": {
+   "xg_per_shot": {
+    "n_teams": 26,
+    "r": 0.437
+   },
+   "shot_conversion_goals_per_shot": {
+    "n_teams": 26,
+    "r": 0.338
+   },
+   "sot_rate": {
+    "n_teams": 26,
+    "r": 0.06
+   },
+   "finishing_goals_minus_xg": {
+    "n_teams": 26,
+    "r": 0.153
+   },
+   "setplay_xg_share": {
+    "n_teams": 26,
+    "r": 0.621
+   },
+   "xgot_per_shot_2025plus": {
+    "n_teams": 23,
+    "r": 0.518
+   },
+   "xgot_against_per_shot_2025plus": {
+    "n_teams": 23,
+    "r": 0.116
+   },
+   "opp_box_touches_for": {
+    "n_teams": 26,
+    "r": 0.857
+   }
+  }
+ },
+ "season_lag": {
+  "j1": {
+   "gf": {
+    "n_pairs": 103,
+    "r": 0.409
+   },
+   "sot": {
+    "n_pairs": 103,
+    "r": 0.507
+   },
+   "cor": {
+    "n_pairs": 103,
+    "r": 0.462
+   }
+  },
+  "j2": {
+   "gf": {
+    "n_pairs": 79,
+    "r": 0.459
+   },
+   "sot": {
+    "n_pairs": 51,
+    "r": 0.582
+   },
+   "cor": {
+    "n_pairs": 51,
+    "r": 0.392
+   }
+  }
+ },
+ "xg_calibration_j1": {
+  "2022": {
+   "n": 306,
+   "goals": 771,
+   "xg": 714.2,
+   "goals_per_xg": 1.08
+  },
+  "2023": {
+   "n": 306,
+   "goals": 777,
+   "xg": 789.7,
+   "goals_per_xg": 0.984
+  },
+  "2024": {
+   "n": 380,
+   "goals": 1013,
+   "xg": 980.4,
+   "goals_per_xg": 1.033
+  },
+  "2025": {
+   "n": 380,
+   "goals": 911,
+   "xg": 929.6,
+   "goals_per_xg": 0.98
+  },
+  "2026": {
+   "n": 200,
+   "goals": 532,
+   "xg": 518.9,
+   "goals_per_xg": 1.025
+  },
+  "2026-2027": {
+   "n": 139,
+   "goals": 412,
+   "xg": 376.9,
+   "goals_per_xg": 1.093
+  }
+ },
+ "cross_tier": {
+  "j2->j1": {
+   "promoted": {
+    "n": 13,
+    "gf_before": 1.602,
+    "gf_after": 1.044,
+    "ga_before": 0.906,
+    "ga_after": 1.412,
+    "ppg_before": 1.94,
+    "ppg_after": 1.095
+   },
+   "relegated": {
+    "n": 10,
+    "gf_before": 1.015,
+    "gf_after": 1.5,
+    "ga_before": 1.684,
+    "ga_after": 1.134,
+    "ppg_before": 0.892,
+    "ppg_after": 1.654
+   }
+  },
+  "j3->j2": {
+   "promoted": {
+    "n": 9,
+    "gf_before": 1.642,
+    "gf_after": 1.165,
+    "ga_before": 0.931,
+    "ga_after": 1.491,
+    "ppg_before": 1.936,
+    "ppg_after": 1.173
+   },
+   "relegated": {
+    "n": 11,
+    "gf_before": 0.861,
+    "gf_after": 1.357,
+    "ga_before": 1.603,
+    "ga_after": 1.25,
+    "ppg_before": 0.817,
+    "ppg_after": 1.447
+   }
+  }
+ },
+ "corners_territorial_j1": {
+  "n_team_matches": 3202,
+  "corr_corners_boxtouches": 0.471,
+  "corr_corners_possession": 0.286
+ },
+ "goal_timing": {
+  "by_15min_block": {
+   "0": 1862,
+   "1": 2100,
+   "2": 2173,
+   "3": 3052,
+   "4": 2556,
+   "5": 4006
+  },
+  "share_76plus": 0.2422,
+  "total_goals": 15749
+ },
+ "first_goal_j1": {
+  "home_first_n": 1037,
+  "home_first_ppg": 2.312,
+  "away_first_n": 877,
+  "away_first_ppg": 2.132
+ },
+ "referees": {
+  "n_referees_seen": 87,
+  "card_rate_split_half": {
+   "n_refs_ge20": 20,
+   "r": 0.646
+  },
+  "attendance_n": 2234
+ }
+}

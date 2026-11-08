@@ -1,0 +1,169 @@
+# P2 contamination census — existing analysis/ artefacts vs each league's sealed season(s)
+
+Leagues scanned: 157. Classification counts: DATA=153, MENTION=1, CLEAN=1, NO_SEAL=2, NO_ANALYSIS=0.
+
+DATA = a sealed-season aggregate row/key is present in a builder-facing artefact. MENTION = sealed season named, no aggregate row found. This is a census of the old program (AUDIT.md §4b); nothing was modified.
+
+## DATA (153)
+
+- **AE-ProLeague** (sealed: 2025/2026, 2026/2027): JSON_KEY×8, MD_MENTION×9, MD_ROW×5, PY_REF×5
+- **AL-KategoriaSuperiore** (sealed: 2026/2027): JSON_KEY×4, MD_MENTION×6, MD_ROW×3, PY_REF×1
+- **AM-PremierLeague** (sealed: 2026/2027): JSON_KEY×4, MD_MENTION×7, MD_ROW×3, PY_REF×1
+- **AR-LigaProfesional** (sealed: 2026 - Clausura, 2027 - Apertura): JSON_KEY×6, MD_MENTION×10, MD_ROW×1, PY_REF×1
+- **AR-PrimeraBMetropolitana** (sealed: 2026): JSON_KEY×1, MD_MENTION×4, MD_ROW×1, PY_REF×4
+- **AR-PrimeraBNacional** (sealed: 2026): JSON_KEY×1, MD_MENTION×10, PY_REF×4
+- **AR-TorneoFederalA** (sealed: 2026): JSON_KEY×2, MD_MENTION×6, MD_ROW×2, PY_REF×5
+- **AT-2Liga** (sealed: 2025/2026, 2026/2027): JSON_KEY×2, JSON_VALUE×15, MD_MENTION×20, MD_ROW×4, PY_REF×4
+- **AT-Bundesliga** (sealed: 2025/2026, 2026/2027): JSON_KEY×6, MD_MENTION×9, MD_ROW×2, PY_REF×3
+- **AU-ALeague** (sealed: 2025/2026, 2026/2027): MD_MENTION×15, MD_ROW×5, PY_REF×2
+- **AU-ALeagueWomen** (sealed: 2025/2026, 2026/2027): MD_MENTION×11, MD_ROW×2, PY_REF×1
+- **AU-Championship** (sealed: 2026): JSON_KEY×3, MD_MENTION×23, MD_ROW×5
+- **AZ-PremierLeague** (sealed: 2025/2026, 2026/2027): JSON_KEY×6, MD_MENTION×14, PY_REF×1
+- **BA-PremierLeague** (sealed: 2026/2027): JSON_KEY×2, MD_MENTION×5, MD_ROW×3, PY_REF×1
+- **BD-FootballLeague** (sealed: 2026/2027): JSON_KEY×3, MD_MENTION×12, MD_ROW×1, PY_REF×1
+- **BE-FirstDivisionA** (sealed: 2025/2026, 2026/2027): JSON_KEY×6, JSON_VALUE×5, MD_MENTION×15, MD_ROW×6, PY_REF×5
+- **BE-FirstDivisionB** (sealed: 2025/2026, 2026/2027): JSON_KEY×6, JSON_VALUE×2, MD_MENTION×9, MD_ROW×4, PY_REF×2
+- **BG-FirstLeague** (sealed: 2025/2026, 2026/2027): JSON_KEY×10, JSON_VALUE×16, MD_MENTION×15, MD_ROW×2, PY_REF×3
+- **BG-SecondLeague** (sealed: 2025/2026, 2026/2027): JSON_KEY×5, MD_MENTION×3, MD_ROW×5
+- **BO-PrimeraDivision** (sealed: 2025, 2026): JSON_KEY×4, MD_MENTION×22, MD_ROW×9, PY_REF×5
+- **BR-SerieA** (sealed: 2025, 2026): JSON_KEY×9, JSON_VALUE×2, MD_MENTION×24, MD_ROW×6, PY_REF×3
+- **BR-SerieB** (sealed: 2025, 2026): JSON_KEY×6, MD_MENTION×20, MD_ROW×6, PY_REF×4
+- **BR-SerieC** (sealed: 2026): JSON_KEY×3, MD_MENTION×12, MD_ROW×4, PY_REF×1
+- **BY-PremierLeague** (sealed: 2025): JSON_KEY×3, MD_MENTION×6, PY_REF×4
+- **CA-PremierLeague** (sealed: 2025, 2026): JSON_KEY×8, MD_MENTION×14, MD_ROW×2, PY_REF×10
+- **CH-ChallengeLeague** (sealed: 2025/2026): JSON_KEY×2, MD_MENTION×6, MD_ROW×1, PY_REF×1
+- **CH-SuperLeague** (sealed: 2025/2026, 2026/2027): MD_MENTION×16, MD_ROW×4, PY_REF×2
+- **CL-LigaDeAscenso** (sealed: 2025, 2026): JSON_KEY×10, MD_MENTION×30, MD_ROW×9, PY_REF×2
+- **CL-LigaDePrimera** (sealed: 2025, 2026): JSON_KEY×8, MD_MENTION×8, MD_ROW×4
+- **CN-LeagueOne** (sealed: 2025): JSON_KEY×3, MD_MENTION×6, PY_REF×4
+- **CN-SuperLeague** (sealed: 2026): JSON_KEY×10, JSON_VALUE×3, MD_MENTION×10, MD_ROW×8, PY_REF×2
+- **CO-PrimeraA** (sealed: 2026 - Apertura): JSON_KEY×2, MD_MENTION×4, MD_ROW×3, PY_REF×3
+- **CO-PrimeraB** (sealed: 2025): MD_MENTION×16, MD_ROW×6
+- **CO-Superliga** (sealed: 2026): JSON_KEY×2, MD_MENTION×7, MD_ROW×7
+- **CR-PrimeraDivision** (sealed: 2024/2025, 2025/2026, 2026/2027): JSON_KEY×22, MD_MENTION×6, MD_ROW×3, PY_REF×8
+- **CY-1Division** (sealed: 2025/2026, 2026/2027): JSON_KEY×10, JSON_VALUE×4, MD_MENTION×4, PY_REF×2
+- **CY-2Division** (sealed: 2025/2026, 2026/2027): JSON_KEY×10, JSON_VALUE×4, MD_MENTION×6, PY_REF×3
+- **CZ-FNL** (sealed: 2025/2026, 2026/2027): JSON_KEY×7, MD_MENTION×11, MD_ROW×5, PY_REF×2
+- **CZ-Liga** (sealed: 2025/2026, 2026/2027): JSON_KEY×7, MD_MENTION×16, MD_ROW×8
+- **DE-2Bundesliga** (sealed: 2025/2026, 2026/2027): JSON_KEY×11, JSON_VALUE×5, MD_MENTION×18, MD_ROW×4, PY_REF×8
+- **DE-3Liga** (sealed: 2025/2026, 2026/2027): JSON_KEY×3, JSON_VALUE×3, MD_MENTION×8, MD_ROW×4, PY_REF×3
+- **DK-1Division** (sealed: 2025/2026, 2026/2027): MD_MENTION×9, MD_ROW×4
+- **DK-2Division** (sealed: 2025/2026, 2026/2027): MD_MENTION×3, MD_ROW×6, PY_REF×3
+- **DK-Superligaen** (sealed: 2025/2026, 2026/2027): MD_MENTION×14, MD_ROW×4, PY_REF×2
+- **DZ-Ligue1** (sealed: 2025/2026, 2026/2027): JSON_KEY×10, JSON_VALUE×1, MD_MENTION×15, MD_ROW×5, PY_REF×2
+- **EC-SerieA** (sealed: 2025): JSON_KEY×7, MD_MENTION×29, MD_ROW×4, PY_REF×16
+- **EE-Meistriliiga** (sealed: 2026): JSON_KEY×10, MD_MENTION×12, MD_ROW×6
+- **EG-PremierLeague** (sealed: 2025/2026, 2026/2027): JSON_KEY×6, JSON_VALUE×3, MD_MENTION×11, MD_ROW×5, PY_REF×3
+- **ENG-Championship** (sealed: 2025/2026, 2026/2027): JSON_KEY×8, JSON_VALUE×2, MD_MENTION×16, MD_ROW×4, PY_REF×6
+- **ENG-LeagueOne** (sealed: 2025/2026, 2026/2027): JSON_KEY×8, JSON_VALUE×2, MD_MENTION×14, MD_ROW×5, PY_REF×6
+- **ES-LaLiga2** (sealed: 2025/2026, 2026/2027): JSON_KEY×14, JSON_VALUE×2, MD_MENTION×34, MD_ROW×7, PY_REF×2
+- **ES-PrimeraFederacion** (sealed: 2025/2026, 2026/2027): JSON_KEY×14, JSON_VALUE×2, MD_MENTION×13, MD_ROW×7, PY_REF×5
+- **FI-Veikkausliiga** (sealed: 2026): JSON_KEY×4, JSON_VALUE×3, MD_MENTION×20, MD_ROW×5, PY_REF×3
+- **FI-Ykkonen** (sealed: 2025): JSON_KEY×4, MD_MENTION×12, PY_REF×6
+- **FI-Ykkosliiga** (sealed: 2026): JSON_KEY×4, JSON_VALUE×4, MD_MENTION×13, MD_ROW×7, PY_REF×3
+- **FO-Logmanssteypid** (sealed: 2026): JSON_KEY×2, MD_MENTION×7, MD_ROW×7
+- **FO-PremierLeague** (sealed: 2026): JSON_KEY×2, MD_MENTION×14, MD_ROW×2, PY_REF×1
+- **FR-Ligue2** (sealed: 2025/2026, 2026/2027): JSON_KEY×14, JSON_VALUE×2, MD_MENTION×9, MD_ROW×4, PY_REF×2
+- **FR-Ligue3** (sealed: 2025/2026): JSON_KEY×3, MD_MENTION×9, PY_REF×3
+- **GE-Erovnuli** (sealed: 2025): MD_MENTION×10, MD_ROW×2
+- **GH-PremierLeague** (sealed: 2025/2026, 2026/2027): JSON_KEY×8, MD_MENTION×19, MD_ROW×8
+- **GR-SuperLeague** (sealed: 2025/2026, 2026/2027): JSON_KEY×14, JSON_VALUE×19, MD_MENTION×14, MD_ROW×9, PY_REF×5
+- **GR-SuperLeague2** (sealed: 2025/2026, 2026/2027): JSON_KEY×12, JSON_VALUE×14, MD_MENTION×19, MD_ROW×6, PY_REF×5
+- **GT-LigaNacional** (sealed: 2025/2026): JSON_KEY×6, MD_MENTION×1, MD_ROW×3
+- **HN-LigaNacional** (sealed: 2025/2026): MD_MENTION×9, MD_ROW×5
+- **HR-HNL** (sealed: 2025/2026, 2026/2027): JSON_KEY×9, JSON_VALUE×3, MD_MENTION×9, MD_ROW×4, PY_REF×5
+- **HU-NBI** (sealed: 2025/2026): JSON_KEY×8, JSON_VALUE×1, MD_MENTION×3, MD_ROW×3
+- **ID-SuperLeague** (sealed: 2025/2026, 2026/2027): MD_MENTION×15, MD_ROW×5
+- **IE-FirstDivision** (sealed: 2026): JSON_KEY×4, JSON_VALUE×1, MD_MENTION×10, MD_ROW×3, PY_REF×6
+- **IE-PremierDivision** (sealed: 2026): JSON_KEY×3, JSON_VALUE×1, MD_MENTION×10, MD_ROW×1, PY_REF×7
+- **IL-Leumit** (sealed: 2025/2026): JSON_KEY×1, JSON_VALUE×4, MD_MENTION×5, MD_ROW×2, PY_REF×1
+- **IL-LigatHaAl** (sealed: 2025/2026): JSON_KEY×4, MD_MENTION×27, MD_ROW×4, PY_REF×10
+- **IN-ISL** (sealed: 2025/2026, 2026/2027): MD_MENTION×14, MD_ROW×4, PY_REF×2
+- **IN-IndianFootballLeague** (sealed: 2025/2026): JSON_KEY×3, MD_MENTION×10, PY_REF×2
+- **IQ-StarsLeague** (sealed: 2025/2026, 2026/2027): MD_MENTION×5, MD_ROW×2
+- **IR-AzadeganLeague** (sealed: 2025/2026, 2026/2027): JSON_KEY×12, MD_MENTION×17, MD_ROW×7, PY_REF×2
+- **IR-PersianGulf** (sealed: 2025/2026, 2026/2027): JSON_KEY×21, JSON_VALUE×3, MD_MENTION×40, MD_ROW×7, PY_REF×16
+- **IS-1Deild** (sealed: 2026): JSON_KEY×5, JSON_VALUE×5, MD_MENTION×7
+- **IS-2Deild** (sealed: 2026): JSON_KEY×3, JSON_VALUE×1, MD_MENTION×4, MD_ROW×5
+- **IS-BestaDeildin** (sealed: 2026): JSON_KEY×5, JSON_VALUE×1, MD_MENTION×12, PY_REF×2
+- **IT-SerieB** (sealed: 2025/2026, 2026/2027): JSON_KEY×12, JSON_VALUE×4, MD_MENTION×17, MD_ROW×8, PY_REF×5
+- **IT-SerieC** (sealed: 2025/2026, 2026/2027): JSON_KEY×11, MD_MENTION×7, MD_ROW×6
+- **J1** (sealed: 2026, 2026/2027): JSON_KEY×5, MD_MENTION×33, MD_ROW×4
+- **KR-KLeague1** (sealed: 2025, 2026): JSON_KEY×14, JSON_VALUE×15, MD_MENTION×11, MD_ROW×4, PY_REF×7
+- **KR-KLeague2** (sealed: 2025, 2026): JSON_KEY×12, JSON_VALUE×5, MD_MENTION×30, MD_ROW×4, PY_REF×5
+- **KR-KLeague3** (sealed: 2025, 2026): JSON_KEY×12, MD_MENTION×19, MD_ROW×4, PY_REF×3
+- **KW-PremierLeague** (sealed: 2025/2026, 2026/2027): JSON_KEY×6, MD_MENTION×15, MD_ROW×2, PY_REF×10
+- **KZ-PremierLeague** (sealed: 2026): JSON_KEY×5, MD_MENTION×21, MD_ROW×1, PY_REF×4
+- **LT-Toplyga** (sealed: 2026): JSON_KEY×11, JSON_VALUE×2, MD_MENTION×10, MD_ROW×2, PY_REF×2
+- **LU-NationalDivision** (sealed: 2025/2026): JSON_KEY×5, MD_ROW×2
+- **LV-Virsliga** (sealed: 2026): JSON_KEY×1, MD_MENTION×12, MD_ROW×2, PY_REF×2
+- **MA-BotolaPro** (sealed: 2025/2026, 2026/2027): JSON_KEY×2, MD_MENTION×10, MD_ROW×2, PY_REF×2
+- **MD-NationalDivision** (sealed: 2025/2026, 2026/2027): JSON_KEY×6, MD_MENTION×9, PY_REF×4
+- **ME-1CFL** (sealed: 2025/2026): JSON_KEY×11, JSON_VALUE×2, MD_MENTION×9, MD_ROW×2, PY_REF×3
+- **MK-PrvaLiga** (sealed: 2025/2026): JSON_KEY×14, MD_MENTION×3, MD_ROW×3, PY_REF×4
+- **MX-ExpansionMX** (sealed: 2025/2026 - Clausura, 2026/2027 - Apertura): JSON_KEY×5, MD_MENTION×10, MD_ROW×3, PY_REF×2
+- **MX-LigaMX** (sealed: 2025/2026 - Clausura, 2026/2027 - Apertura): JSON_KEY×5, MD_MENTION×7, MD_ROW×2, PY_REF×1
+- **MY-LigaSuper** (sealed: 2025/2026): JSON_KEY×14, MD_MENTION×3, MD_ROW×3, PY_REF×4
+- **NG-ProfessionalLeague** (sealed: 2025/2026, 2026/2027): JSON_KEY×6, MD_MENTION×18, MD_ROW×8
+- **NI-Premiership** (sealed: 2025/2026): JSON_KEY×5, MD_MENTION×1, MD_ROW×2, PY_REF×2
+- **NL-EersteDivisie** (sealed: 2025/2026, 2026/2027): JSON_KEY×12, MD_MENTION×13, MD_ROW×6, PY_REF×3
+- **NL-Eredivisie** (sealed: 2025/2026, 2026/2027): JSON_KEY×12, MD_MENTION×10, MD_ROW×2
+- **NL-TweedeDivisie** (sealed: 2025/2026, 2026/2027): JSON_KEY×8, MD_MENTION×8, MD_ROW×6, PY_REF×4
+- **NO-2Divisjon** (sealed: 2025): JSON_KEY×3, MD_MENTION×6, PY_REF×4
+- **NO-Eliteserien** (sealed: 2025, 2026): JSON_KEY×6, MD_MENTION×27, MD_ROW×4, PY_REF×8
+- **NO-OBOSLigaen** (sealed: 2026): JSON_KEY×5, JSON_VALUE×1, MD_MENTION×16, MD_ROW×3, PY_REF×6
+- **NZ-Championship** (sealed: 2025): JSON_KEY×5, JSON_VALUE×5, MD_MENTION×16, PY_REF×4
+- **PA-LPF** (sealed: 2026): JSON_KEY×10, MD_MENTION×9, MD_ROW×2
+- **PE-Liga1** (sealed: 2025, 2026): JSON_KEY×9, JSON_VALUE×2, MD_MENTION×28, MD_ROW×9, PY_REF×7
+- **PL-Ekstraklasa** (sealed: 2025/2026, 2026/2027): JSON_KEY×10, JSON_VALUE×21, MD_MENTION×19, MD_ROW×11, PY_REF×4
+- **PL-IILiga** (sealed: 2025/2026, 2026/2027): JSON_KEY×12, JSON_VALUE×16, MD_MENTION×4, MD_ROW×2, PY_REF×9
+- **PL-ILiga** (sealed: 2025/2026, 2026/2027): JSON_KEY×8, JSON_VALUE×21, MD_MENTION×7, MD_ROW×2, PY_REF×2
+- **PT-Liga3** (sealed: 2025/2026): JSON_KEY×7, JSON_VALUE×4, MD_MENTION×3, MD_ROW×2
+- **PT-LigaPortugal** (sealed: 2026/2027): JSON_KEY×3, MD_MENTION×7, MD_ROW×2, PY_REF×2
+- **PT-LigaPortugal2** (sealed: 2025/2026): JSON_KEY×9, JSON_VALUE×2, MD_MENTION×10, MD_ROW×3, PY_REF×1
+- **PY-DivisionProfesional** (sealed: 2026 - Apertura, 2026 - Clausura): MD_MENTION×8, MD_ROW×10
+- **QA-QatarStars** (sealed: 2025/2026): JSON_KEY×7, MD_MENTION×27, MD_ROW×4, PY_REF×10
+- **QA-SecondDivision** (sealed: 2025/2026, 2026/2027): JSON_KEY×14, JSON_VALUE×1, MD_MENTION×45, MD_ROW×22, PY_REF×19
+- **RO-LigaI** (sealed: 2025/2026, 2026/2027): MD_MENTION×20, MD_ROW×6, PY_REF×1
+- **RO-LigaII** (sealed: 2025/2026, 2026/2027): MD_MENTION×9, MD_ROW×6
+- **RS-SuperLiga** (sealed: 2025/2026, 2026/2027): JSON_KEY×7, JSON_VALUE×6, MD_MENTION×18, MD_ROW×2, PY_REF×11
+- **RU-1Division** (sealed: 2025/2026, 2026/2027): JSON_KEY×24, JSON_VALUE×12, MD_MENTION×7, MD_ROW×4, PY_REF×4
+- **RU-PremierLeague** (sealed: 2025/2026, 2026/2027): JSON_KEY×16, JSON_VALUE×18, MD_MENTION×7, MD_ROW×6, PY_REF×3
+- **RU-SecondLeague** (sealed: 2026, 2026/2027): JSON_KEY×4, JSON_VALUE×4, MD_MENTION×22, MD_ROW×10
+- **SA-FirstDivision** (sealed: 2025/2026, 2026/2027): JSON_KEY×2, MD_MENTION×36, MD_ROW×3, PY_REF×10
+- **SA-ProLeague** (sealed: 2025/2026, 2026/2027): JSON_KEY×4, JSON_VALUE×2, MD_MENTION×13, MD_ROW×4, PY_REF×7
+- **SCO-Championship** (sealed: 2025/2026, 2026/2027): JSON_KEY×30, JSON_VALUE×2, MD_MENTION×8, MD_ROW×2, PY_REF×3
+- **SCO-LeagueOne** (sealed: 2025/2026, 2026/2027): JSON_KEY×6, JSON_VALUE×9, MD_MENTION×6, MD_ROW×4, PY_REF×2
+- **SCO-Premiership** (sealed: 2025/2026, 2026/2027): JSON_KEY×6, JSON_VALUE×2, MD_MENTION×10, MD_ROW×5, PY_REF×5
+- **SE-Allsvenskan** (sealed: 2025, 2026): JSON_KEY×10, JSON_VALUE×15, MD_MENTION×31, MD_ROW×4, PY_REF×7
+- **SE-Ettan** (sealed: 2025): JSON_KEY×10, MD_MENTION×21, MD_ROW×2, PY_REF×18
+- **SE-Superettan** (sealed: 2026): JSON_KEY×2, JSON_VALUE×4, MD_MENTION×15, MD_ROW×1
+- **SG-PremierLeague** (sealed: 2025/2026): JSON_KEY×3, MD_MENTION×8, PY_REF×4
+- **SK-1Liga** (sealed: 2025/2026, 2026/2027): JSON_KEY×7, MD_MENTION×21, MD_ROW×6, PY_REF×4
+- **SK-2Liga** (sealed: 2025/2026, 2026/2027): JSON_KEY×22, MD_MENTION×19, MD_ROW×5, PY_REF×2
+- **SLO-PrvaLiga** (sealed: 2025/2026): JSON_KEY×14, MD_MENTION×3, MD_ROW×3, PY_REF×4
+- **SV-PrimeraDivision** (sealed: 2025/2026 - Apertura, 2025/2026 - Clausura, 2026/2027 - Apertura): JSON_KEY×15, JSON_VALUE×1, MD_MENTION×7, MD_ROW×10, PY_REF×4
+- **TH-ThaiLeague** (sealed: 2025/2026, 2026/2027): JSON_KEY×8, JSON_VALUE×14, MD_MENTION×16, MD_ROW×7, PY_REF×2
+- **TH-ThaiLeague2** (sealed: 2025/2026, 2026/2027): JSON_KEY×8, JSON_VALUE×6, MD_MENTION×8, MD_ROW×7, PY_REF×1
+- **TN-LigueI** (sealed: 2025/2026): JSON_KEY×4, MD_MENTION×1, MD_ROW×2, PY_REF×2
+- **TR-1Lig** (sealed: 2025/2026, 2026/2027): JSON_KEY×3, JSON_VALUE×11, PY_REF×7
+- **TR-SuperLig** (sealed: 2025/2026, 2026/2027): JSON_KEY×8, JSON_VALUE×4, MD_MENTION×4, MD_ROW×5, PY_REF×4
+- **TZ-PremierLeague** (sealed: 2025/2026, 2026/2027): JSON_KEY×14, MD_MENTION×10, MD_ROW×5, PY_REF×2
+- **UA-PremierLeague** (sealed: 2025/2026, 2026/2027): JSON_KEY×2, MD_MENTION×7, PY_REF×2
+- **US-MLS** (sealed: 2025, 2026): JSON_KEY×6, JSON_VALUE×1, MD_MENTION×19, MD_ROW×2, PY_REF×6
+- **US-USLChampionship** (sealed: 2025, 2026): JSON_KEY×13, JSON_VALUE×3, MD_MENTION×21, MD_ROW×3, PY_REF×7
+- **US-USLLeagueOne** (sealed: 2025, 2026): JSON_KEY×13, JSON_VALUE×10, MD_MENTION×21, MD_ROW×2, PY_REF×8
+- **UY-LigaAUF** (sealed: 2025): JSON_KEY×7, MD_MENTION×8, PY_REF×4
+- **UY-SegundaDivision** (sealed: 2026): JSON_KEY×3, MD_MENTION×9, MD_ROW×1, PY_REF×4
+- **VE-PrimeraDivision** (sealed: 2025): JSON_KEY×5, MD_MENTION×16, MD_ROW×9, PY_REF×7
+- **VN-VLeague** (sealed: 2025/2026, 2026/2027): JSON_KEY×6, MD_MENTION×24, MD_ROW×4, PY_REF×3
+- **WAL-CymruPremier** (sealed: 2025/2026, 2026/2027): JSON_KEY×13, MD_MENTION×2, MD_ROW×4, PY_REF×4
+- **ZA-PSL** (sealed: 2025/2026, 2026/2027): JSON_KEY×8, JSON_VALUE×12, MD_MENTION×18, MD_ROW×10, PY_REF×2
+
+## MENTION (1)
+
+- **J3** (sealed: 2025): MD_MENTION×1
+
+## No DATA/MENTION hit (3)
+
+HU-NBII, J2, UZ-Superliga

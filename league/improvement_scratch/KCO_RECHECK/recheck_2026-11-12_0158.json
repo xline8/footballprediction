@@ -1,0 +1,100 @@
+{
+  "checked_at_wib": "2026-11-12 ~01:58",
+  "season": "2026 - Clausura",
+  "league_id": 274,
+  "fixtures": [
+    {
+      "match_id": 1000014235,
+      "date": "2026-11-12",
+      "home": "Deportivo Pasto",
+      "away": "Junior FC",
+      "round": "Clausura - Round 19",
+      "referee": "",
+      "source": "matchDetails"
+    },
+    {
+      "match_id": 1000014232,
+      "date": "2026-11-13",
+      "home": "Llaneros FC",
+      "away": "Chicó FC",
+      "round": "Clausura - Round 19",
+      "referee": "",
+      "source": "matchDetails"
+    },
+    {
+      "match_id": 1000014228,
+      "date": "2026-11-14",
+      "home": "Internacional de Bogotá",
+      "away": "Santa Fe",
+      "round": "Clausura - Round 19",
+      "referee": "",
+      "source": "matchDetails"
+    },
+    {
+      "match_id": 1000014227,
+      "date": "2026-11-14",
+      "home": "Atlético Nacional",
+      "away": "Once Caldas",
+      "round": "Clausura - Round 19",
+      "referee": "",
+      "source": "matchDetails"
+    },
+    {
+      "match_id": 1000014233,
+      "date": "2026-11-14",
+      "home": "Bucaramanga",
+      "away": "Fortaleza FC",
+      "round": "Clausura - Round 19",
+      "referee": "",
+      "source": "matchDetails"
+    },
+    {
+      "match_id": 1000014231,
+      "date": "2026-11-14",
+      "home": "Cúcuta",
+      "away": "CD Jaguares",
+      "round": "Clausura - Round 19",
+      "referee": "",
+      "source": "matchDetails"
+    },
+    {
+      "match_id": 1000014234,
+      "date": "2026-11-14",
+      "home": "Deportivo Cali",
+      "away": "Tolima",
+      "round": "Clausura - Round 19",
+      "referee": "",
+      "source": "matchDetails"
+    },
+    {
+      "match_id": 1000014236,
+      "date": "2026-11-14",
+      "home": "Deportivo Pereira",
+      "away": "América de Cali",
+      "round": "Clausura - Round 19",
+      "referee": "",
+      "source": "matchDetails"
+    },
+    {
+      "match_id": 1000014230,
+      "date": "2026-11-14",
+      "home": "Millonarios",
+      "away": "Alianza FC",
+      "round": "Clausura - Round 19",
+      "referee": "",
+      "source": "matchDetails"
+    },
+    {
+      "match_id": 1000014229,
+      "date": "2026-11-14",
+      "home": "Águilas Doradas",
+      "away": "Independiente Medellín",
+      "round": "Clausura - Round 19",
+      "referee": "",
+      "source": "matchDetails"
+    }
+  ],
+  "n_upcoming": 10,
+  "n_named_referee": 0,
+  "gate_pass": false
+}

@@ -1,0 +1,229 @@
+{
+  "by_season": {
+    "2022/2023": {
+      "league_gf_per_match": 1.480556,
+      "league_ga_per_match": 1.480556,
+      "down_from_championship": {
+        "team_ids": [
+          "8457",
+          "9924"
+        ],
+        "teams": [
+          "Dunfermline Athletic",
+          "Queen of the South"
+        ],
+        "n_clubs": 2,
+        "n_team_matches": 72,
+        "gf_per_match": 1.694444,
+        "ga_per_match": 1.111111,
+        "gf_delta_vs_league": 0.213889,
+        "ga_delta_vs_league": -0.369444
+      },
+      "up_other": {
+        "team_ids": [
+          "4130",
+          "675817"
+        ],
+        "teams": [
+          "Edinburgh City",
+          "Kelty Hearts"
+        ],
+        "n_clubs": 2,
+        "n_team_matches": 72,
+        "gf_per_match": 1.375,
+        "ga_per_match": 1.513889,
+        "gf_delta_vs_league": -0.105556,
+        "ga_delta_vs_league": 0.033333
+      }
+    },
+    "2023/2024": {
+      "league_gf_per_match": 1.586111,
+      "league_ga_per_match": 1.586111,
+      "down_from_championship": {
+        "team_ids": [
+          "6002",
+          "8429"
+        ],
+        "teams": [
+          "Cove Rangers",
+          "Hamilton Academical"
+        ],
+        "n_clubs": 2,
+        "n_team_matches": 72,
+        "gf_per_match": 1.819444,
+        "ga_per_match": 1.263889,
+        "gf_delta_vs_league": 0.233333,
+        "ga_delta_vs_league": -0.322222
+      },
+      "up_other": {
+        "team_ids": [
+          "46036",
+          "8141"
+        ],
+        "teams": [
+          "Annan Athletic",
+          "Stirling Albion"
+        ],
+        "n_clubs": 2,
+        "n_team_matches": 72,
+        "gf_per_match": 1.305556,
+        "ga_per_match": 1.75,
+        "gf_delta_vs_league": -0.280556,
+        "ga_delta_vs_league": 0.163889
+      }
+    },
+    "2024/2025": {
+      "league_gf_per_match": 1.35,
+      "league_ga_per_match": 1.35,
+      "down_from_championship": {
+        "team_ids": [
+          "8066",
+          "8280"
+        ],
+        "teams": [
+          "Inverness CT",
+          "Arbroath"
+        ],
+        "n_clubs": 2,
+        "n_team_matches": 72,
+        "gf_per_match": 1.430556,
+        "ga_per_match": 1.111111,
+        "gf_delta_vs_league": 0.080556,
+        "ga_delta_vs_league": -0.238889
+      },
+      "up_other": {
+        "team_ids": [
+          "8143",
+          "8321"
+        ],
+        "teams": [
+          "Stenhousemuir",
+          "Dumbarton"
+        ],
+        "n_clubs": 2,
+        "n_team_matches": 72,
+        "gf_per_match": 1.375,
+        "ga_per_match": 1.541667,
+        "gf_delta_vs_league": 0.025,
+        "ga_delta_vs_league": 0.191667
+      }
+    },
+    "2025/2026": {
+      "league_gf_per_match": 1.322222,
+      "league_ga_per_match": 1.322222,
+      "down_from_championship": {
+        "team_ids": [
+          "8429"
+        ],
+        "teams": [
+          "Hamilton Academical"
+        ],
+        "n_clubs": 1,
+        "n_team_matches": 36,
+        "gf_per_match": 1.5,
+        "ga_per_match": 1.166667,
+        "gf_delta_vs_league": 0.177778,
+        "ga_delta_vs_league": -0.155556
+      },
+      "up_other": {
+        "team_ids": [
+          "8158",
+          "9758"
+        ],
+        "teams": [
+          "Peterhead",
+          "East Fife"
+        ],
+        "n_clubs": 2,
+        "n_team_matches": 72,
+        "gf_per_match": 1.138889,
+        "ga_per_match": 1.736111,
+        "gf_delta_vs_league": -0.183333,
+        "ga_delta_vs_league": 0.413889
+      }
+    }
+  },
+  "pooled": {
+    "down_from_championship": {
+      "n_club_seasons": 7,
+      "n_team_matches": 252,
+      "gf_per_match": 1.626984,
+      "ga_per_match": 1.162698,
+      "gf_delta": 0.17619,
+      "ga_delta": -0.288095,
+      "per_season": [
+        {
+          "season": "2022/2023",
+          "n_clubs": 2,
+          "n_team_matches": 72,
+          "gf_delta": 0.213889,
+          "ga_delta": -0.369444
+        },
+        {
+          "season": "2023/2024",
+          "n_clubs": 2,
+          "n_team_matches": 72,
+          "gf_delta": 0.233333,
+          "ga_delta": -0.322222
+        },
+        {
+          "season": "2024/2025",
+          "n_clubs": 2,
+          "n_team_matches": 72,
+          "gf_delta": 0.080556,
+          "ga_delta": -0.238889
+        },
+        {
+          "season": "2025/2026",
+          "n_clubs": 1,
+          "n_team_matches": 36,
+          "gf_delta": 0.177778,
+          "ga_delta": -0.155556
+        }
+      ]
+    },
+    "up_other": {
+      "n_club_seasons": 8,
+      "n_team_matches": 288,
+      "gf_per_match": 1.298611,
+      "ga_per_match": 1.635417,
+      "gf_delta": -0.136111,
+      "ga_delta": 0.200694,
+      "per_season": [
+        {
+          "season": "2022/2023",
+          "n_clubs": 2,
+          "n_team_matches": 72,
+          "gf_delta": -0.105556,
+          "ga_delta": 0.033333
+        },
+        {
+          "season": "2023/2024",
+          "n_clubs": 2,
+          "n_team_matches": 72,
+          "gf_delta": -0.280556,
+          "ga_delta": 0.163889
+        },
+        {
+          "season": "2024/2025",
+          "n_clubs": 2,
+          "n_team_matches": 72,
+          "gf_delta": 0.025,
+          "ga_delta": 0.191667
+        },
+        {
+          "season": "2025/2026",
+          "n_clubs": 2,
+          "n_team_matches": 72,
+          "gf_delta": -0.183333,
+          "ga_delta": 0.413889
+        }
+      ]
+    }
+  },
+  "classification_notes": {
+    "down_from_championship": "played Championship (FotMob 123) in the previous season",
+    "up_other": "promoted from below, tier unverified"
+  },
+  "membership_source": "warehouse index league_ids 123 and 124 plus payload general team ids"
+}

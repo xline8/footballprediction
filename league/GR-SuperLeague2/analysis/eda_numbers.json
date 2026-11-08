@@ -1,0 +1,718 @@
+{
+  "n": 1935,
+  "seasons": [
+    "2021/2022",
+    "2022/2023",
+    "2023/2024",
+    "2024/2025",
+    "2025/2026",
+    "2026/2027"
+  ],
+  "team_ids": 58,
+  "per_season": {
+    "2021/2022": {
+      "n": 546,
+      "teams": 34,
+      "goals": 2.258,
+      "home_goals": 1.383,
+      "away_goals": 0.875,
+      "home_win_pct": 46.7,
+      "draw_pct": 27.5,
+      "away_win_pct": 25.8,
+      "ou25_over_rate": 0.412,
+      "events_pct": 87.9,
+      "ht_validated_pct": 87.7,
+      "b_team_match_pct": 22.7,
+      "b_teams": 4,
+      "awarded_no_events": 6,
+      "stats_pct": 0.0,
+      "shotmap_pct": 0.0,
+      "referee_pct": 0.0
+    },
+    "2022/2023": {
+      "n": 420,
+      "teams": 30,
+      "goals": 2.386,
+      "home_goals": 1.314,
+      "away_goals": 1.071,
+      "home_win_pct": 41.7,
+      "draw_pct": 23.6,
+      "away_win_pct": 34.8,
+      "ou25_over_rate": 0.445,
+      "events_pct": 84.5,
+      "ht_validated_pct": 83.3,
+      "b_team_match_pct": 25.7,
+      "b_teams": 4,
+      "awarded_no_events": 28,
+      "stats_pct": 0.0,
+      "shotmap_pct": 0.0,
+      "referee_pct": 0.0
+    },
+    "2023/2024": {
+      "n": 364,
+      "teams": 24,
+      "goals": 2.299,
+      "home_goals": 1.343,
+      "away_goals": 0.956,
+      "home_win_pct": 46.7,
+      "draw_pct": 26.1,
+      "away_win_pct": 27.2,
+      "ou25_over_rate": 0.404,
+      "events_pct": 92.0,
+      "ht_validated_pct": 92.0,
+      "b_team_match_pct": 33.0,
+      "b_teams": 4,
+      "awarded_no_events": 0,
+      "stats_pct": 0.0,
+      "shotmap_pct": 0.0,
+      "referee_pct": 0.0
+    },
+    "2024/2025": {
+      "n": 261,
+      "teams": 20,
+      "goals": 2.284,
+      "home_goals": 1.276,
+      "away_goals": 1.008,
+      "home_win_pct": 43.7,
+      "draw_pct": 27.2,
+      "away_win_pct": 29.1,
+      "ou25_over_rate": 0.429,
+      "events_pct": 92.7,
+      "ht_validated_pct": 92.7,
+      "b_team_match_pct": 28.4,
+      "b_teams": 3,
+      "awarded_no_events": 1,
+      "stats_pct": 0.0,
+      "shotmap_pct": 0.0,
+      "referee_pct": 0.0
+    },
+    "2025/2026": {
+      "n": 265,
+      "teams": 20,
+      "goals": 2.291,
+      "home_goals": 1.313,
+      "away_goals": 0.977,
+      "home_win_pct": 44.2,
+      "draw_pct": 23.0,
+      "away_win_pct": 32.8,
+      "ou25_over_rate": 0.392,
+      "events_pct": 94.3,
+      "ht_validated_pct": 94.3,
+      "b_team_match_pct": 27.9,
+      "b_teams": 3,
+      "awarded_no_events": 0,
+      "stats_pct": 0.0,
+      "shotmap_pct": 0.0,
+      "referee_pct": 0.0
+    },
+    "2026/2027": {
+      "n": 79,
+      "teams": 16,
+      "goals": 2.342,
+      "home_goals": 1.342,
+      "away_goals": 1,
+      "home_win_pct": 49.4,
+      "draw_pct": 29.1,
+      "away_win_pct": 21.5,
+      "ou25_over_rate": 0.418,
+      "events_pct": 93.7,
+      "ht_validated_pct": 93.7,
+      "b_team_match_pct": 35.4,
+      "b_teams": 3,
+      "awarded_no_events": 0,
+      "stats_pct": 0.0,
+      "shotmap_pct": 0.0,
+      "referee_pct": 0.0
+    }
+  },
+  "phase_levels": {
+    "2021/2022": {
+      "regular": {
+        "n": 544,
+        "goals": 2.263
+      },
+      "playoff": {
+        "n": 2,
+        "goals": 1
+      }
+    },
+    "2022/2023": {
+      "regular": {
+        "n": 420,
+        "goals": 2.386
+      }
+    },
+    "2023/2024": {
+      "regular": {
+        "n": 264,
+        "goals": 2.212
+      },
+      "playoff_promotion": {
+        "n": 40,
+        "goals": 3.05
+      },
+      "playoff_relegation": {
+        "n": 60,
+        "goals": 2.183
+      }
+    },
+    "2024/2025": {
+      "regular": {
+        "n": 180,
+        "goals": 2.289
+      },
+      "playoff_promotion": {
+        "n": 40,
+        "goals": 2.7
+      },
+      "playoff_relegation": {
+        "n": 40,
+        "goals": 1.875
+      },
+      "supercup": {
+        "n": 1,
+        "goals": 1
+      }
+    },
+    "2025/2026": {
+      "regular": {
+        "n": 180,
+        "goals": 2.322
+      },
+      "playoff_promotion": {
+        "n": 24,
+        "goals": 1.833
+      },
+      "playoff_relegation": {
+        "n": 60,
+        "goals": 2.4
+      },
+      "supercup": {
+        "n": 1,
+        "goals": 1
+      }
+    },
+    "2026/2027": {
+      "regular": {
+        "n": 79,
+        "goals": 2.342
+      }
+    }
+  },
+  "phase_levels_pooled_complete": {
+    "regular": {
+      "n": 1588,
+      "goals": 2.297
+    },
+    "playoff_promotion": {
+      "n": 104,
+      "goals": 2.635
+    },
+    "playoff_relegation": {
+      "n": 160,
+      "goals": 2.188
+    },
+    "playoff": {
+      "n": 2,
+      "goals": 1
+    },
+    "supercup": {
+      "n": 2,
+      "goals": 1
+    }
+  },
+  "event_goal_validation": {
+    "n_events_matches": 1736,
+    "n_validated": 1730,
+    "n_mismatch": 6,
+    "n_no_events": 199,
+    "no_events_0_0": 164
+  },
+  "reliability": {
+    "goals_for": 0.656,
+    "goals_against": 0.71
+  },
+  "reliability_nteams": {
+    "goals_for": 55,
+    "goals_against": 55
+  },
+  "half_shares": {
+    "goals": {
+      "n": 1617,
+      "share_ratio_of_sums": 0.4596,
+      "observed_var": 0.13,
+      "true_var": -0.0025,
+      "true_sd": 0.0
+    }
+  },
+  "half_shares_by_season": {
+    "2021/2022": {
+      "n": 471,
+      "share_ratio_of_sums": 0.4719,
+      "observed_var": 0.133,
+      "true_var": -0.0005,
+      "true_sd": 0.0
+    },
+    "2022/2023": {
+      "n": 341,
+      "share_ratio_of_sums": 0.4322,
+      "observed_var": 0.1206,
+      "true_var": -0.0066,
+      "true_sd": 0.0
+    },
+    "2023/2024": {
+      "n": 327,
+      "share_ratio_of_sums": 0.4719,
+      "observed_var": 0.1362,
+      "true_var": 0.0021,
+      "true_sd": 0.0461
+    },
+    "2024/2025": {
+      "n": 234,
+      "share_ratio_of_sums": 0.4637,
+      "observed_var": 0.1269,
+      "true_var": -0.0058,
+      "true_sd": 0.0
+    },
+    "2025/2026": {
+      "n": 244,
+      "share_ratio_of_sums": 0.4547,
+      "observed_var": 0.1318,
+      "true_var": -0.0031,
+      "true_sd": 0.0
+    },
+    "2026/2027": {
+      "n": 72,
+      "share_ratio_of_sums": 0.3622,
+      "observed_var": 0.1226,
+      "true_var": -0.0,
+      "true_sd": 0.0
+    }
+  },
+  "newcomers": [
+    {
+      "season": "2022/2023",
+      "team_id": "1291837",
+      "team": "AE Iraklis Larissa",
+      "n": 28,
+      "gf": 0.607,
+      "ga": 1.5,
+      "origin": "GammaEthniki/other"
+    },
+    {
+      "season": "2022/2023",
+      "team_id": "162366",
+      "team": "Ilioupoli GS",
+      "n": 28,
+      "gf": 1.286,
+      "ga": 1.143,
+      "origin": "GammaEthniki/other"
+    },
+    {
+      "season": "2022/2023",
+      "team_id": "162387",
+      "team": "Makedonikos Neapolis",
+      "n": 28,
+      "gf": 1,
+      "ga": 1.071,
+      "origin": "GammaEthniki/other"
+    },
+    {
+      "season": "2022/2023",
+      "team_id": "184690",
+      "team": "PAO Rouf",
+      "n": 28,
+      "gf": 0.893,
+      "ga": 2.143,
+      "origin": "GammaEthniki/other"
+    },
+    {
+      "season": "2022/2023",
+      "team_id": "4492",
+      "team": "Apollon Smirnis",
+      "n": 28,
+      "gf": 1.321,
+      "ga": 0.714,
+      "origin": "SL1-relegated"
+    },
+    {
+      "season": "2022/2023",
+      "team_id": "6478",
+      "team": "Proodeftiki",
+      "n": 28,
+      "gf": 0.821,
+      "ga": 1.321,
+      "origin": "GammaEthniki/other"
+    },
+    {
+      "season": "2022/2023",
+      "team_id": "8069",
+      "team": "Panachaiki",
+      "n": 28,
+      "gf": 1.143,
+      "ga": 1.036,
+      "origin": "GammaEthniki/other"
+    },
+    {
+      "season": "2023/2024",
+      "team_id": "162379",
+      "team": "Aiolikos Mitilini",
+      "n": 32,
+      "gf": 0.844,
+      "ga": 1.594,
+      "origin": "GammaEthniki/other"
+    },
+    {
+      "season": "2023/2024",
+      "team_id": "184694",
+      "team": "Kozani FC",
+      "n": 32,
+      "gf": 0.781,
+      "ga": 0.906,
+      "origin": "GammaEthniki/other"
+    },
+    {
+      "season": "2023/2024",
+      "team_id": "4493",
+      "team": "Levadiakos",
+      "n": 30,
+      "gf": 1.767,
+      "ga": 0.467,
+      "origin": "SL1-relegated"
+    },
+    {
+      "season": "2023/2024",
+      "team_id": "488102",
+      "team": "Giouchtas FC",
+      "n": 32,
+      "gf": 0.875,
+      "ga": 1.344,
+      "origin": "GammaEthniki/other"
+    },
+    {
+      "season": "2023/2024",
+      "team_id": "488158",
+      "team": "Kampaniakos Chalastras",
+      "n": 32,
+      "gf": 0.938,
+      "ga": 1.281,
+      "origin": "GammaEthniki/other"
+    },
+    {
+      "season": "2023/2024",
+      "team_id": "792371",
+      "team": "AO Tilikratis Lefkada",
+      "n": 22,
+      "gf": 0.773,
+      "ga": 1.682,
+      "origin": "GammaEthniki/other"
+    },
+    {
+      "season": "2023/2024",
+      "team_id": "8552",
+      "team": "Ionikos",
+      "n": 30,
+      "gf": 1.433,
+      "ga": 0.967,
+      "origin": "SL1-relegated"
+    },
+    {
+      "season": "2024/2025",
+      "team_id": "149646",
+      "team": "Kavala",
+      "n": 26,
+      "gf": 0.769,
+      "ga": 1.231,
+      "origin": "GammaEthniki/other"
+    },
+    {
+      "season": "2024/2025",
+      "team_id": "1620",
+      "team": "PAS Giannina",
+      "n": 26,
+      "gf": 1.346,
+      "ga": 1.462,
+      "origin": "SL1-relegated"
+    },
+    {
+      "season": "2024/2025",
+      "team_id": "1679128",
+      "team": "Asteras Tripolis B",
+      "n": 26,
+      "gf": 1,
+      "ga": 1.423,
+      "origin": "GammaEthniki/other"
+    },
+    {
+      "season": "2024/2025",
+      "team_id": "488099",
+      "team": "Kifisia FC",
+      "n": 27,
+      "gf": 1.815,
+      "ga": 0.519,
+      "origin": "SL1-relegated"
+    },
+    {
+      "season": "2024/2025",
+      "team_id": "488116",
+      "team": "APO Panargiakos",
+      "n": 26,
+      "gf": 0.885,
+      "ga": 1.308,
+      "origin": "GammaEthniki/other"
+    },
+    {
+      "season": "2024/2025",
+      "team_id": "8170",
+      "team": "Panionios",
+      "n": 26,
+      "gf": 1.5,
+      "ga": 0.692,
+      "origin": "GammaEthniki/other"
+    },
+    {
+      "season": "2024/2025",
+      "team_id": "968995",
+      "team": "Ethnikos Neou Keramidiou",
+      "n": 26,
+      "gf": 0.385,
+      "ga": 1.308,
+      "origin": "GammaEthniki/other"
+    },
+    {
+      "season": "2025/2026",
+      "team_id": "1303117",
+      "team": "Olympiacos B",
+      "n": 24,
+      "gf": 1.083,
+      "ga": 1.583,
+      "origin": "GammaEthniki/other"
+    },
+    {
+      "season": "2025/2026",
+      "team_id": "149647",
+      "team": "Anagennisi Karditsas",
+      "n": 24,
+      "gf": 1.167,
+      "ga": 0.75,
+      "origin": "GammaEthniki/other"
+    },
+    {
+      "season": "2025/2026",
+      "team_id": "1787833",
+      "team": "GS Marko",
+      "n": 24,
+      "gf": 1.125,
+      "ga": 0.708,
+      "origin": "GammaEthniki/other"
+    },
+    {
+      "season": "2025/2026",
+      "team_id": "1797422",
+      "team": "Hellas Syros",
+      "n": 28,
+      "gf": 1.429,
+      "ga": 0.857,
+      "origin": "GammaEthniki/other"
+    },
+    {
+      "season": "2025/2026",
+      "team_id": "488150",
+      "team": "Nestos Chrisoupolis",
+      "n": 28,
+      "gf": 1.071,
+      "ga": 0.929,
+      "origin": "GammaEthniki/other"
+    },
+    {
+      "season": "2025/2026",
+      "team_id": "7975",
+      "team": "Kallithea",
+      "n": 28,
+      "gf": 1.143,
+      "ga": 0.786,
+      "origin": "SL1-relegated"
+    },
+    {
+      "season": "2026/2027",
+      "team_id": "104810",
+      "team": "Panthrakikos Komotini",
+      "n": 10,
+      "gf": 1.2,
+      "ga": 1.2,
+      "origin": "GammaEthniki/other"
+    },
+    {
+      "season": "2026/2027",
+      "team_id": "104814",
+      "team": "Panserraikos FC",
+      "n": 10,
+      "gf": 1.4,
+      "ga": 1.4,
+      "origin": "SL1-relegated"
+    },
+    {
+      "season": "2026/2027",
+      "team_id": "162388",
+      "team": "Zakynthos APS",
+      "n": 9,
+      "gf": 0.778,
+      "ga": 1.778,
+      "origin": "GammaEthniki/other"
+    },
+    {
+      "season": "2026/2027",
+      "team_id": "2076365",
+      "team": "Pyrgos AFC",
+      "n": 10,
+      "gf": 0.8,
+      "ga": 1.4,
+      "origin": "GammaEthniki/other"
+    },
+    {
+      "season": "2026/2027",
+      "team_id": "2499",
+      "team": "Kalamaria",
+      "n": 10,
+      "gf": 0.7,
+      "ga": 1.3,
+      "origin": "GammaEthniki/other"
+    },
+    {
+      "season": "2026/2027",
+      "team_id": "8120",
+      "team": "AE Larissa",
+      "n": 10,
+      "gf": 1.5,
+      "ga": 0.6,
+      "origin": "SL1-relegated"
+    }
+  ],
+  "newcomer_gaps": {
+    "league_team_gf": 1.152,
+    "league_team_ga": 1.152,
+    "all": {
+      "n": 33,
+      "gf": 1.078,
+      "ga": 1.164,
+      "gf_gap": -0.074,
+      "ga_gap": 0.012
+    },
+    "sl1_relegated": {
+      "n": 8,
+      "gf": 1.466,
+      "ga": 0.864,
+      "gf_gap": 0.314,
+      "ga_gap": -0.288
+    },
+    "gamma_other": {
+      "n": 25,
+      "gf": 0.954,
+      "ga": 1.26,
+      "gf_gap": -0.198,
+      "ga_gap": 0.108
+    },
+    "dev_transitions": {
+      "n": 21,
+      "gf": 1.056,
+      "ga": 1.196,
+      "gf_gap": -0.096,
+      "ga_gap": 0.044
+    },
+    "dev_sl1_relegated": {
+      "n": 5,
+      "gf": 1.536,
+      "ga": 0.826,
+      "gf_gap": 0.384,
+      "ga_gap": -0.326
+    },
+    "by_transition": {
+      "2022/2023": {
+        "n": 7,
+        "gf": 1.01,
+        "ga": 1.275,
+        "gf_gap": -0.142,
+        "ga_gap": 0.123
+      },
+      "2023/2024": {
+        "n": 7,
+        "gf": 1.059,
+        "ga": 1.177,
+        "gf_gap": -0.093,
+        "ga_gap": 0.025
+      },
+      "2024/2025": {
+        "n": 7,
+        "gf": 1.1,
+        "ga": 1.135,
+        "gf_gap": -0.052,
+        "ga_gap": -0.017
+      },
+      "2025/2026": {
+        "n": 6,
+        "gf": 1.17,
+        "ga": 0.935,
+        "gf_gap": 0.018,
+        "ga_gap": -0.217
+      },
+      "2026/2027": {
+        "n": 6,
+        "gf": 1.063,
+        "ga": 1.28,
+        "gf_gap": -0.089,
+        "ga_gap": 0.128
+      }
+    }
+  },
+  "b_team": {
+    "matches_involving_b": 528,
+    "pct": 27.3,
+    "goals_per_match_b_involved": 2.455,
+    "goals_per_match_no_b": 2.249,
+    "home_win_pct_b_involved": 44.9,
+    "home_win_pct_no_b": 45.0,
+    "b_team_gf": 1.222,
+    "b_team_ga": 1.231,
+    "non_b_team_gf": 1.141,
+    "non_b_team_ga": 1.139,
+    "b_team_gf_gap": 0.07,
+    "b_team_ga_gap": 0.079,
+    "b_team_home_gf": 1.423,
+    "b_team_home_ga": 1.109,
+    "b_team_away_gf": 1.022,
+    "b_team_away_ga": 1.351
+  },
+  "pooled_complete": {
+    "n": 1856,
+    "home_goals": 1.335,
+    "away_goals": 0.969,
+    "goals": 2.303,
+    "home_win_pct": 44.8,
+    "draw_pct": 25.6,
+    "away_win_pct": 29.6,
+    "ou25_over_rate": 0.418
+  },
+  "dev_over_rates": {
+    "goals": {
+      "2.5": {
+        "n": 1591,
+        "over_rate": 0.422
+      }
+    }
+  },
+  "scored_dev_over_rates": {
+    "goals": {
+      "2.5": {
+        "n": 1045,
+        "over_rate": 0.427
+      }
+    }
+  },
+  "primary_lines": {
+    "goals": 2.5
+  },
+  "dev_n": 1591,
+  "scored_dev_n": 1045,
+  "virgin_n": 265,
+  "confirmatory_n": 79
+}

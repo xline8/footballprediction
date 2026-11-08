@@ -1,0 +1,30 @@
+# IR Azadegan League (Iran) — league config
+league: IR-AzadeganLeague
+country: Iran
+fotmob_id: 9372
+tier: 2
+warehouse: data_enrichment/fotmob_world/Iran/Azadegan League
+data:
+  matches: league/IR-AzadeganLeague/data/ir_azadegan_matches.csv
+  team_matches: league/IR-AzadeganLeague/data/team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]   # 2021/2022 = training/warm-up; scored dev = 2022/2023–2024/2025
+virgin_primary: "2025/2026"          # complete season, n=305 played — read ONCE per candidate
+virgin_confirmatory: "2026/2027"     # partial (n=68, rounds 1–9); reserved, evaluated once when complete
+halves_constants:               # frozen league constant (EDA F3) — the ONLY halves mechanism
+  goals_1h_share: 0.415
+markets:
+  goals: G-IRAZ        # DC reference; arms: Gate Zero, SHRINK
+  sot: null            # NOT buildable: no SOT target anywhere in the corpus
+  corners: null        # NOT buildable: no corners target anywhere in the corpus
+  cards: null          # NOT buildable: no yellows (0 events); reds 0.085/match, split-half r=0.07
+  total_shots: null    # NOT buildable: no shots target anywhere in the corpus
+notes:
+  - Scores-only corpus: stats/shotmap/lineup/referee all absent in 1,564/1,564 payloads (verified by content).
+  - 2 index rows are never-played placeholder 0-0s (finished False) and are excluded; played n=1,562.
+  - 18 teams, 34 rounds (17 teams in 2022/2023; 16 teams in 2026/2027 partial); ~6 entrants per season.
+  - No X2 mover prior: task scope states no parent/sibling tier; within-league entrant gaps are ~0 anyway (EDA F4).
+  - FLAG for coordinator: the warehouse index DOES contain Iran's Persian Gulf Pro League (id 523, 1,245 rows,
+    same six seasons) — see MODEL_DESIGN.md §5. It was NOT used for any prior; an X2 arm would need a fresh prereg.
+  - Goals presents FT + 1H/2H via the frozen constant 0.415 (presentation only).
+  - Predictions-only: no Azadegan League odds/settlement source in-system.

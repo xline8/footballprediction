@@ -1,0 +1,35 @@
+league: CL-LigaDeAscenso
+country: Chile
+fotmob_id: 9126
+tier: 2
+warehouse_root: ~/workspace/footballprediction
+data:
+  matches: league/CL-LigaDeAscenso/data/cla_matches.csv
+  team_matches: league/CL-LigaDeAscenso/data/cla_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period: ["2022", "2023", "2024"]
+warmup: "2021"
+virgin_primary: "2025"
+virgin_confirmatory: "2026"
+halves_constants:
+  goals_1h_share: 0.4273
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+  yellow_cards_1h_share: null
+markets:
+  goals: G-CLA
+  sot: S-CLA (NOT BUILDABLE)
+  corners: C-CLA (NOT BUILDABLE)
+  cards: K-CLA (NOT BUILDABLE)
+  total_shots: T-CLA (NOT BUILDABLE)
+notes:
+  - "FORMAT: calendar-year single tournament, double round-robin (16 teams/240 regular matches; 17 teams/272 in 2022) PLUS a promotion play-off (liguilla) every season (6/8/12/12/12 ties 2021-2025). Phase rule frozen: play-off ties are EXCLUDED from every fit and score; only phase=regular, finished=1 rows enter any window."
+  - "STATS ERA DOES NOT EXIST: the index has_stats flag (483 rows, 2025-2026) is a false positive - content.stats is None in 2021-2024 and Periods.All is null in all 483 flagged payloads. Verified from payload content: zero matches in any season carry a single stat value. SOT/corners/total_shots have no target anywhere; no period splits exist."
+  - "CARDS NOT BUILDABLE: no stats yellow source exists, and the event feed carries ZERO plain Yellow events in 2021 (no events at all), 2022, 2023 and 2024 (only Red/YellowRed); plain yellows exist only in 2025-2026, leaving no scorable dev window before the 2025 virgin."
+  - "DEFECT: 62 rows in 2021 are never-started placeholders (header.status started=False, finished=False) carrying fake 0-0 scores, concentrated Apr-Jun 2021. Excluded by the finished=1 rule. All other seasons are 100% finished."
+  - "No xG and no shotmap in any season (shotmap shots list empty everywhere): goals model is goals-only; X1/X3/X4/X6 dropped."
+  - "X2 mover arm adopted: parent tier CL-LigaDePrimera (id 273) corpus exists; exactly 2 relegated teams join the Ascenso each season (10 mover team-seasons 2022-2026)."
+  - "Referee text present on 56/1515 matches (54 in 2025, 2 in 2026, 0 before): X8 dropped."
+  - "Team ids stable; four ids carry multiple name spellings, canonicalised by id in the builder."
+  - "Calibration convention: actual minus predicted."

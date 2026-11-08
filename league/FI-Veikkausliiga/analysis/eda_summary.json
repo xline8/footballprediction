@@ -1,0 +1,282 @@
+{
+ "seasons": [
+  "2021",
+  "2022",
+  "2023",
+  "2024",
+  "2025",
+  "2026"
+ ],
+ "n": 1017,
+ "levels": {
+  "2021": {
+   "n": 162,
+   "stats_n": 130,
+   "goals": 2.519,
+   "home_goals": 1.315,
+   "away_goals": 1.204,
+   "sot": 8.485,
+   "corners": 10.308,
+   "shots": 19.377,
+   "yellows": 4.173
+  },
+  "2022": {
+   "n": 167,
+   "stats_n": 167,
+   "goals": 2.958,
+   "home_goals": 1.509,
+   "away_goals": 1.449,
+   "sot": 8.88,
+   "corners": 10.479,
+   "shots": 16.898,
+   "yellows": 4.287
+  },
+  "2023": {
+   "n": 167,
+   "stats_n": 167,
+   "goals": 2.563,
+   "home_goals": 1.353,
+   "away_goals": 1.21,
+   "sot": 8.311,
+   "corners": 9.928,
+   "shots": 15.94,
+   "yellows": 4.359
+  },
+  "2024": {
+   "n": 167,
+   "stats_n": 167,
+   "goals": 2.946,
+   "home_goals": 1.665,
+   "away_goals": 1.281,
+   "sot": 8.198,
+   "corners": 10.048,
+   "shots": 15.162,
+   "yellows": 4.431
+  },
+  "2025": {
+   "n": 177,
+   "stats_n": 177,
+   "goals": 3.294,
+   "home_goals": 1.661,
+   "away_goals": 1.633,
+   "sot": 9.463,
+   "corners": 10.955,
+   "shots": 26.395,
+   "yellows": 3.503
+  },
+  "2026": {
+   "n": 177,
+   "stats_n": 177,
+   "goals": 2.61,
+   "home_goals": 1.475,
+   "away_goals": 1.136,
+   "sot": 8.701,
+   "corners": 10.006,
+   "shots": 26.305,
+   "yellows": 3.65
+  }
+ },
+ "traits": {
+  "sot_for": {
+   "n_teams": 17,
+   "r": 0.532
+  },
+  "corners_for": {
+   "n_teams": 17,
+   "r": 0.708
+  },
+  "shots_for": {
+   "n_teams": 17,
+   "r": 0.932
+  },
+  "yellows_for": {
+   "n_teams": 17,
+   "r": 0.778
+  },
+  "goals_for": {
+   "n_teams": 17,
+   "r": 0.674
+  },
+  "possession": {
+   "n_teams": 17,
+   "r": 0.898
+  }
+ },
+ "halves_goals_all": {
+  "share": 0.437,
+  "n_matches": 954,
+  "obs_var": 0.10924,
+  "binom_var": 0.08187,
+  "excess_var": 0.02737
+ },
+ "halves_goals_dev": {
+  "share": 0.4295,
+  "n_matches": 790,
+  "obs_var": 0.10721,
+  "binom_var": 0.08049,
+  "excess_var": 0.02672
+ },
+ "halves_yellows_dev": {
+  "share": 0.3109,
+  "n_matches": 826,
+  "obs_var": 0.07213,
+  "binom_var": 0.05085,
+  "excess_var": 0.02128
+ },
+ "dev_medians": {
+  "sot": 8.0,
+  "corners": 10.0,
+  "shots": 18.0,
+  "yellows": 4.0,
+  "goals_over25_rate": 0.561
+ },
+ "x2_entrants": [
+  {
+   "season": "2022",
+   "team_id": 6597,
+   "team": "VPS"
+  },
+  {
+   "season": "2023",
+   "team_id": 6701,
+   "team": "FC KTP"
+  },
+  {
+   "season": "2024",
+   "team_id": 2361,
+   "team": "IF Gnistan"
+  },
+  {
+   "season": "2024",
+   "team_id": 162142,
+   "team": "EIF"
+  },
+  {
+   "season": "2025",
+   "team_id": 6701,
+   "team": "FC KTP"
+  },
+  {
+   "season": "2025",
+   "team_id": 8473,
+   "team": "FF Jaro"
+  },
+  {
+   "season": "2026",
+   "team_id": 8424,
+   "team": "FC Lahti"
+  },
+  {
+   "season": "2026",
+   "team_id": 6633,
+   "team": "TPS"
+  }
+ ],
+ "x2_entrant_gf_ga_diff_vs_league_team_mean": {
+  "n": 8,
+  "gf_diff": -0.21,
+  "ga_diff": 0.159
+ },
+ "cards_stats_vs_events": {
+  "2025": {
+   "n": 177,
+   "exact": 0.819,
+   "mean_ev": 3.503,
+   "mean_stats": 3.463,
+   "mean_stats_minus_ev": -0.04,
+   "ev_gt_stats": 19,
+   "stats_gt_ev": 13
+  },
+  "2026": {
+   "n": 177,
+   "exact": 0.768,
+   "mean_ev": 3.65,
+   "mean_stats": 3.554,
+   "mean_stats_minus_ev": -0.096,
+   "ev_gt_stats": 23,
+   "stats_gt_ev": 18
+  }
+ },
+ "halves_splits_2025": {
+  "total_shots": {
+   "share": 0.4527,
+   "n_matches": 177
+  },
+  "ShotsOnTarget": {
+   "share": 0.44,
+   "n_matches": 177
+  },
+  "corners": {
+   "share": 0.4631,
+   "n_matches": 177
+  },
+  "yellow_cards": {
+   "share": 0.2969,
+   "n_matches": 174
+  }
+ },
+ "splits_consistency_corners_home": {
+  "n": 354,
+  "mismatch": 0
+ },
+ "missing_stats_2021_by_phase": {
+  "regular": 32,
+  "championship": 0,
+  "relegation": 0,
+  "ecl_playoff": 0
+ },
+ "phase_counts": {
+  "2021": {
+   "regular": 132,
+   "championship": 15,
+   "relegation": 15,
+   "ecl_playoff": 0
+  },
+  "2022": {
+   "regular": 132,
+   "championship": 15,
+   "relegation": 15,
+   "ecl_playoff": 5
+  },
+  "2023": {
+   "regular": 132,
+   "championship": 15,
+   "relegation": 15,
+   "ecl_playoff": 5
+  },
+  "2024": {
+   "regular": 132,
+   "championship": 15,
+   "relegation": 15,
+   "ecl_playoff": 5
+  },
+  "2025": {
+   "regular": 132,
+   "championship": 30,
+   "relegation": 15,
+   "ecl_playoff": 0
+  },
+  "2026": {
+   "regular": 132,
+   "championship": 30,
+   "relegation": 15,
+   "ecl_playoff": 0
+  }
+ },
+ "team_ids_multi_name": {},
+ "team_ids_total_fi": 17,
+ "traits_2025_only": {
+  "touches_for": {
+   "n_teams": 12,
+   "r": 0.835
+  },
+  "big_chance_for": {
+   "n_teams": 12,
+   "r": 0.503
+  },
+  "fouls_for": {
+   "n_teams": 12,
+   "r": 0.772
+  }
+ }
+}

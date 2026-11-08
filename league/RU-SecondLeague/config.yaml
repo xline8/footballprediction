@@ -1,0 +1,33 @@
+league: RU-SecondLeague
+country: Russia
+fotmob_id: 9123
+tier: 3
+warehouse_root: ~/workspace/footballprediction
+data:
+  matches: league/RU-SecondLeague/data/ru2_matches.csv
+  team_matches: league/RU-SecondLeague/data/ru2_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023", "2023/2024", "2024", "2024/2025", "2025", "2025/2026", "2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023", "2023/2024", "2024", "2024/2025", "2025/2026"]
+dev_scored_n: 3284
+virgin_primary: ["2026", "2026/2027"]
+virgin_n: 888
+virgin_status: TRANSITIONAL (2026/2027 in progress to Jun 2027; 2026 B has 81 phantom rows)
+halves_constants:
+  goals_1h_share: 0.4393
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+  yellow_cards_1h_share: null
+markets:
+  goals: G-RU2
+  sot: S-RU2
+  corners: C-RU2
+  cards: K-RU2
+  total_shots: T-RU2
+notes:
+  - FORMAT: FotMob 9123 is a parent id over 44 sub-tournaments; two parallel tracks from 2023 — Division A (autumn-spring, Gold/Silver, first/second stage, single component via stage re-sorting) and Division B (calendar year, 4 groups, 4 disconnected components except the 2026 Final Four). Pre-2023: FNL 2 / Second League, 4 groups + subgroups + promotion/relegation groups. Pooled DC fit; no group/stage/track feature anywhere.
+  - SCORES ONLY: stats/shotmap/referee empty in all 6,558 payloads; events exist only 2021/2022-2024 and carry Goal/Half/Card only (959 Card events, all Red/YellowRed, 0 plain Yellows). S/C/K/T NOT BUILDABLE (payload-level evidence in prereg).
+  - EXCLUSIONS (frozen): 50 awarded matches + season label 2025 (harvest fragment: 42/842 finished, distorted scorelines) excluded from every fit and score.
+  - HALVES: goals 1H share 0.4393 from event-derived HT goals (3,758 matches); true SD 0.0000 — frozen constant, presentation only.
+  - X2: 9 relegated entrants from 1. Division (338), 0 from Premier League (63); pooled first-season gaps GF -0.079 / GA -0.021 — no hard-coded offset; SHRINK arm is the treatment.
+  - Calibration convention: actual minus predicted.

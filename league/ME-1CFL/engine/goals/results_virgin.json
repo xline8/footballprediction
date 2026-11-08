@@ -1,0 +1,185 @@
+{
+  "protocol": {
+    "league": "ME-1CFL",
+    "virgin_season": "2025/2026",
+    "n": 180,
+    "fit_cutoff": "2025-08-04",
+    "training_n": 718,
+    "sign_convention": "actual_minus_predicted"
+  },
+  "metrics": {
+    "climatology": {
+      "n": 180,
+      "ll_1x2": 1.0718915382852174,
+      "rps": 0.22990200262257415,
+      "oull_2_5": 0.6845522401502615,
+      "calibration": {
+        "home_win": {
+          "diff_pp": 4.610027855153202,
+          "se_pp": 3.718442636703987
+        },
+        "over25": {
+          "diff_pp": -3.0439492417208287,
+          "se_pp": 3.697983374769515
+        }
+      }
+    },
+    "gate_zero": {
+      "n": 180,
+      "ll_1x2": 1.1004313037023792,
+      "rps": 0.23781249338339078,
+      "oull_2_5": 0.7529328564010298,
+      "calibration": {
+        "home_win": {
+          "diff_pp": 3.6773914874281215,
+          "se_pp": 3.819330782102549
+        },
+        "over25": {
+          "diff_pp": -1.4890267986996026,
+          "se_pp": 3.9358239455414203
+        }
+      }
+    },
+    "shrink": {
+      "n": 180,
+      "ll_1x2": 1.1004313037023792,
+      "rps": 0.23781249338339078,
+      "oull_2_5": 0.7529328564010298,
+      "calibration": {
+        "home_win": {
+          "diff_pp": 3.6773914874281215,
+          "se_pp": 3.819330782102549
+        },
+        "over25": {
+          "diff_pp": -1.4890267986996026,
+          "se_pp": 3.9358239455414203
+        }
+      }
+    }
+  },
+  "gates": {
+    "gate_zero": {
+      "ll_leg": {
+        "pass": false,
+        "arm_ll": 1.1004313037023792,
+        "gate_zero_ll": 1.1004313037023792,
+        "climatology_ll": 1.0718915382852174,
+        "arithmetic": "1.10043130370238 <= 1.10043130370238 AND <= 1.07189153828522"
+      },
+      "calibration_leg": {
+        "home_win": {
+          "status": "PROVISIONAL PASS",
+          "difference_pp": 3.6773914874281215,
+          "se_pp": 3.819330782102549,
+          "boundary_pp": 1.0,
+          "breach_distance_pp": 2.6773914874281215,
+          "arithmetic": "abs(3.67739148742812) <= 1.0pp; excess=2.67739148742812pp <= SE 3.81933078210255pp"
+        },
+        "over25": {
+          "status": "PROVISIONAL PASS",
+          "difference_pp": -1.4890267986996026,
+          "se_pp": 3.9358239455414203,
+          "boundary_pp": 1.0,
+          "breach_distance_pp": 0.48902679869960264,
+          "arithmetic": "abs(-1.4890267986996) <= 1.0pp; excess=0.489026798699603pp <= SE 3.93582394554142pp"
+        },
+        "pass": true
+      },
+      "dev_sign_check": {
+        "exempt": true,
+        "seasons": [
+          {
+            "season": "2022/2023",
+            "arm_ll": 1.0563021294625095,
+            "gate_zero_ll": 1.0563021294625095,
+            "pass": true
+          },
+          {
+            "season": "2023/2024",
+            "arm_ll": 1.083493428338788,
+            "gate_zero_ll": 1.083493428338788,
+            "pass": true
+          },
+          {
+            "season": "2024/2025",
+            "arm_ll": 1.0683481470292726,
+            "gate_zero_ll": 1.0683481470292726,
+            "pass": true
+          }
+        ],
+        "passing_seasons": 3,
+        "required_seasons": 2,
+        "pass": true
+      },
+      "dev_gate": {
+        "pass": true,
+        "ll_1x2": true,
+        "rps": true,
+        "oull_2_5": true
+      },
+      "pass": false
+    },
+    "shrink": {
+      "ll_leg": {
+        "pass": false,
+        "arm_ll": 1.1004313037023792,
+        "gate_zero_ll": 1.1004313037023792,
+        "climatology_ll": 1.0718915382852174,
+        "arithmetic": "1.10043130370238 <= 1.10043130370238 AND <= 1.07189153828522"
+      },
+      "calibration_leg": {
+        "home_win": {
+          "status": "PROVISIONAL PASS",
+          "difference_pp": 3.6773914874281215,
+          "se_pp": 3.819330782102549,
+          "boundary_pp": 1.0,
+          "breach_distance_pp": 2.6773914874281215,
+          "arithmetic": "abs(3.67739148742812) <= 1.0pp; excess=2.67739148742812pp <= SE 3.81933078210255pp"
+        },
+        "over25": {
+          "status": "PROVISIONAL PASS",
+          "difference_pp": -1.4890267986996026,
+          "se_pp": 3.9358239455414203,
+          "boundary_pp": 1.0,
+          "breach_distance_pp": 0.48902679869960264,
+          "arithmetic": "abs(-1.4890267986996) <= 1.0pp; excess=0.489026798699603pp <= SE 3.93582394554142pp"
+        },
+        "pass": true
+      },
+      "dev_sign_check": {
+        "exempt": false,
+        "seasons": [
+          {
+            "season": "2022/2023",
+            "arm_ll": 1.0563021294625095,
+            "gate_zero_ll": 1.0563021294625095,
+            "pass": true
+          },
+          {
+            "season": "2023/2024",
+            "arm_ll": 1.083493428338788,
+            "gate_zero_ll": 1.083493428338788,
+            "pass": true
+          },
+          {
+            "season": "2024/2025",
+            "arm_ll": 1.0683481470292726,
+            "gate_zero_ll": 1.0683481470292726,
+            "pass": true
+          }
+        ],
+        "passing_seasons": 3,
+        "required_seasons": 2,
+        "pass": true
+      },
+      "dev_gate": {
+        "pass": true,
+        "ll_1x2": true,
+        "rps": true,
+        "oull_2_5": true
+      },
+      "pass": false
+    }
+  },
+  "shipped_arm": null
+}

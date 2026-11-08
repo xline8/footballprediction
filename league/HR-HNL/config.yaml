@@ -1,0 +1,34 @@
+# HR-HNL (Croatia) — league config
+league: HR-HNL
+country: Croatia
+fotmob_id: 252
+tier: 1
+warehouse: data_enrichment/fotmob_world/Croatia/HNL
+data:
+  matches: league/HR-HNL/data/hr_matches.csv
+  team_matches: league/HR-HNL/data/hr_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2022/2023", "2023/2024", "2024/2025"]   # walk-forward scored; seed/warm-up 2021/2022
+virgin_primary: "2025/2026"     # last COMPLETE season (180/180) — read ONCE per candidate
+virgin_confirmatory: "2026/2027"  # IN PROGRESS (64/180 at snapshot); reserved, evaluated once when complete
+halves_constants:               # frozen league constants (EDA F3) — the ONLY halves mechanism
+  goals_1h_share: 0.4320        # event times, dev era 2021/2022-2024/2025
+  sot_1h_share: 0.4729          # period splits pooled over dev split matches (n=411)
+  corners_1h_share: 0.4793      # period splits pooled over dev split matches (n=411)
+  total_shots_1h_share: 0.4661  # period splits pooled over dev split matches (n=411)
+  yellow_cards_1h_share: null   # K-HR not built (target artefact, EDA F6); splits share 0.3272 recorded unused
+markets:
+  goals: G-HR        # DC goals-only (no xG in feed); arms: Gate Zero, SHRINK, X2 entrant (in-corpus)
+  sot: S-HR          # v5 reference; arms: Gate Zero, RS ratio-shrink (X4/X6 impossible: no shotmap)
+  corners: C-HR      # corners_v3 reference, X9 full (possession + big_chance); arm X7 box touches
+  cards: null        # NOT BUILT: stats-vs-events era artefact — no credible target before 2023/2024 in either source; rich era leaves 1 scored dev season (T-FI precedent)
+  total_shots: T-HR  # shots family; arms: A v1, B v2 level layer, C E9 trailing-r
+notes:
+  - Split-year season (Aug - May), 10 teams, straight quadruple round-robin: 36 rounds, 180 matches/season, NO split or play-off phase in the feed. The 12->10 contraction predates the corpus (all seasons 10 ids).
+  - League renamed mid-corpus: payload general.leagueName "1. Division" in 2021/2022, mixed in 2022/2023, "HNL" from 2023/2024. Recorded per row; no modelling effect.
+  - Stats feed rich in ALL seasons (36 keys incl. yellow_cards/red_cards, big_chance); touches_opp_box partial before 2024/2025 (114/102/144 of 180). Period splits: none 2021/2022, 51/180 in 2022/2023, complete from 2023/2024; All = 1H + 2H exact for corners/SOT/shots (yellow_cards 24/655 mismatches).
+  - No xG and no shotmap in ANY season -> X1 blend falls back goals-only; X3/X4/X6 impossible by data absence.
+  - Cards artefact (EDA F6): early-era stats yellows defective (37.8% zero-yellow matches at stable fouls; 1H share 0.145) and the event feed carries NO yellow events before 2023/2024; rich-era sources agree (exact 78-85%, mean stats-events -0.13..-0.28). No unified target spans the required windows -> K-HR not built.
+  - Referee names: 81/180 in 2021/2022, 149-177/180 after — coverage fine, but the strictness trait fails reliability here (split-half r = 0.239) -> X8 dropped on the number.
+  - Team-name stability: 13 FotMob team ids; ids 10165 (NK Varazdin / NK Varaždin) and 187866 (Rudes / Rudeš) each carry two diacritic spellings. All logic keyed by team id.
+  - Predictions-only: no HR odds/settlement source in-system.

@@ -1,0 +1,5 @@
+{
+  "virgin_read": false,
+  "reason": "Gate Zero failed the dev gate (OU2.5 leg), so per PREREG_G_RS.md the virgin was NOT read for any arm.",
+  "note": "Written by the coordinator as an audit record, not by a virgin run: this engine has no virgin code path (no virgin subcommand, no virgin_metrics, no predictions writer)."
+}

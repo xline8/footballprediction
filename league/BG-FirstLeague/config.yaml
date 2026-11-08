@@ -1,0 +1,31 @@
+# BG-FirstLeague (Bulgaria) — league config
+league: BG-FirstLeague
+country: Bulgaria
+fotmob_id: 270
+tier: 1
+warehouse_root: ~/workspace/footballprediction
+data:
+  matches: league/BG-FirstLeague/data/bg_matches.csv
+  team_matches: league/BG-FirstLeague/data/bg_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.4542
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+  yellow_cards_1h_share: 0.3183
+markets:
+  goals: G-BG
+  sot: S-BG
+  corners: C-BG
+  cards: K-BG
+  total_shots: T-BG
+notes:
+  - "FORMAT: 14 teams in 2021/2022, 16 teams 2022/2023-2025/2026, 14 again in 2026/2027; regular double round-robin plus championship play-off, ECL group, relegation group and a 1-match ECL play-off per season. All phases stay in every window, flagged by the phase column; no phase feature."
+  - "STATS: the feed carries only BallPossesion, total_shots, ShotsOnTarget, corners (95-100% per season). No xG, no shotmap, no touches_opp_box, no big_chance, no period splits in any season."
+  - "CARDS: stats feed has no yellow_cards key at all; target is event-unified yellows (direct Yellow + YellowRed), cards_source=events on all rows. No stats-vs-events artefact exists in this league."
+  - "HALVES: goals and cards constants come from event times (goals 0.4542, cards 0.3183, pre-virgin). SOT, corners and total shots have no halves source and are FT-only."
+  - "Calibration convention: actual minus predicted."

@@ -1,0 +1,73 @@
+{
+  "protocol": {
+    "league": "RU-1Division",
+    "virgin_season": "2025/2026",
+    "n": 287,
+    "scored_arms": [
+      "gate_zero"
+    ],
+    "primary_line": 8.5,
+    "sign_convention": "actual_minus_predicted"
+  },
+  "gate_zero": {
+    "n": 287,
+    "season": "2025/2026",
+    "ll_7.5": 0.6378633270074148,
+    "mean_p_7.5": 0.6271979246880371,
+    "actual_over_7.5": 0.6829268292682927,
+    "ll_8.5": 0.6988883208937056,
+    "mean_p_8.5": 0.5142154175360224,
+    "actual_over_8.5": 0.5470383275261324,
+    "ll_9.5": 0.69725712309811,
+    "mean_p_9.5": 0.40562921250037287,
+    "actual_over_9.5": 0.4425087108013937,
+    "both_teams_active_share": 0.9477351916376306,
+    "active_with_nonzero_beta_share": 0.0,
+    "calibration_diff": 0.03282290999010995,
+    "calibration_se": 0.02967073854039874,
+    "arm": "gate_zero",
+    "params": {
+      "gamma": 0.15,
+      "r": 1.4538137861802025,
+      "beta": [
+        0.0
+      ],
+      "fit_n": 1225
+    }
+  },
+  "league_base_rate": {
+    "n": 287,
+    "season": "2025/2026",
+    "ll_7.5": 0.764141582373138,
+    "mean_p_7.5": 0.4209434881248488,
+    "actual_over_7.5": 0.6829268292682927,
+    "ll_8.5": 0.7469162888052439,
+    "mean_p_8.5": 0.3784863753588412,
+    "actual_over_8.5": 0.5470383275261324,
+    "ll_9.5": 0.7088811408667235,
+    "mean_p_9.5": 0.34032407224718364,
+    "actual_over_9.5": 0.4425087108013937,
+    "both_teams_active_share": 0.0,
+    "active_with_nonzero_beta_share": 0.0,
+    "calibration_diff": 0.16855195216729119,
+    "calibration_se": 0.02943449499493406
+  },
+  "naive_trailing_10": {
+    "n": 287,
+    "season": "2025/2026",
+    "ll_7.5": 0.7630946459623583,
+    "mean_p_7.5": 0.4267629561063017,
+    "actual_over_7.5": 0.6829268292682927,
+    "ll_8.5": 0.7446048124424349,
+    "mean_p_8.5": 0.38424076006820856,
+    "actual_over_8.5": 0.5470383275261324,
+    "ll_9.5": 0.7079610526575022,
+    "mean_p_9.5": 0.3459457854808784,
+    "actual_over_9.5": 0.4425087108013937,
+    "both_teams_active_share": 0.0,
+    "active_with_nonzero_beta_share": 0.0,
+    "calibration_diff": 0.16279756745792384,
+    "calibration_se": 0.029471928106528815
+  },
+  "shipped_arm": "gate_zero"
+}

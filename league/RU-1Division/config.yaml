@@ -1,0 +1,30 @@
+league: RU-1Division
+country: Russia
+fotmob_id: 338
+tier: 2
+warehouse_root: ~/workspace/footballprediction
+data:
+  matches: league/RU-1Division/data/ru1_matches.csv
+  team_matches: league/RU-1Division/data/ru1_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.4599
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+  yellow_cards_1h_share: null
+markets:
+  goals: G-RU1
+  sot: S-RU1
+  corners: C-RU1
+  cards: K-RU1
+  total_shots: T-RU1
+notes:
+  - FORMAT: 20 teams in 2021/2022, 18 teams from 2022/2023, single regular phase, double round-robin; phase=regular for all rows.
+  - PERIODS: the warehouse has only Periods.All; fh_/sh_ columns are retained for schema parity and are null.
+  - CARDS: stats yellow_cards are absent in every row; cards_source is events everywhere and the target is event-unified yellows.
+  - HALVES: no period splits exist for SOT, corners, cards, or total shots; these markets are FT presentation only.
+  - Calibration convention: actual minus predicted.

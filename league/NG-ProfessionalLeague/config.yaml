@@ -1,0 +1,56 @@
+# Nigeria Professional Football League — league config
+league: NG-ProfessionalLeague
+country: Nigeria
+fotmob_id: 533
+tier: 1
+warehouse: data_enrichment/fotmob_world/Nigeria/Professional Football League
+warehouse_root: ~/workspace/footballprediction
+data:
+  matches: league/NG-ProfessionalLeague/data/ng_matches.csv
+  team_matches: league/NG-ProfessionalLeague/data/ng_team_matches.csv
+seasons: ["2021/2022", "2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2023", "2023/2024", "2024/2025"]
+dev_scored_n: 939
+virgin_primary: "2025/2026"
+virgin_n: 379
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.4796
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+  yellow_cards_1h_share: null
+markets:
+  goals: G-NG
+  sot: S-NG
+  corners: C-NG
+  cards: K-NG
+  total_shots: T-NG
+notes:
+  - FORMAT: FotMob 533 is a parent id. One sub-tournament per season
+    except 2023, which is abridged: Grp. A (90) + Grp. B (90) +
+    Championship Group / Super 6 (15, neutral venue — home goals 0.93
+    vs away 1.13, home-win rate 20% vs 55% in the group stage).
+    The 15 Championship Group matches are EXCLUDED from every fit and
+    score (frozen rule); the group stage is the league proper.
+  - SCORES ONLY: stats/shotmap/playerStats empty in all 1,830
+    payloads by content; referee text empty in all 1,830; lineups in
+    exactly 1 payload (4635917, simple starters only); events exist
+    in 1,659/1,830 and carry Goal/Half/Card only — the 155 Card events
+    are all dismissals (YellowRed 50, Red 105, 0 plain Yellows).
+    S/C/K/T NOT BUILDABLE (payload-level evidence in prereg).
+  - EXCLUSIONS (frozen): 1 phantom fixture (3786217, started=False, no
+    score) + 1 awarded match (4464406, 3-0 awarded win) + the 15
+    Championship Group matches = 17 rows excluded from every fit,
+    score and EDA level; 1,813 eligible rows.
+  - 2025/2026 has 379/380 matches in the warehouse: the round-24
+    fixture El Kanemi Warriors vs Kun Khalifat is absent entirely
+    (both clubs on 37 matches); not a parsing gap.
+  - HALVES: goals 1H share 0.4796 (ratio of sums over 1,645 HT-scored
+    matches); split-half r = -0.03 — frozen constant, presentation
+    only. NPFL scores far more of its goals before half-time than
+    J1 (0.412) or RU2 (0.4393).
+  - X2: no built Nigerian parent/sibling exists in the warehouse, so
+    no cross-league mover prior is available; SHRINK is the
+    thin-data arm (3-4 new clubs enter every season).
+  - Calibration convention: actual minus predicted.

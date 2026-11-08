@@ -1,0 +1,14 @@
+{
+  "market": "total_shots",
+  "arm": "A",
+  "lambda": 3.0,
+  "r_A": 12.516422672487916,
+  "pre_virgin_fit_rows": 172,
+  "league_base_mu": 16.66860465116279,
+  "primary_line": 16.5,
+  "ladder": [
+    15.5,
+    16.5,
+    17.5
+  ]
+}

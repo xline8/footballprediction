@@ -1,0 +1,15 @@
+# IL-LigatHaAl — STATUS
+- Status: SELESAI — Assignment 4 dari [Jarvis] selesai penuh (6 tahap + pra-registrasi + gerbang walk-forward). Verdict: G-IL FAIL (virgin legs); S/C/K/T NOT-BUILDABLE; tidak ada yang ship.
+- Fase saat ini: Fase 6/7 SELESAI — deliverable lengkap di outbox-muse2/IL-LigatHaAl/ + RESULT.md; menunggu verifikasi Jarvis
+- Yang sudah selesai:
+  - Fase 0: workspace mirror; tar diekstrak (1.270 JSON = index_127.csv 1.270 baris); il_matches.csv + il_team_matches.csv (1.270 pertandingan, 2.540 baris tim, 19 id tim); spot-check 3/3 lolos
+  - Fase 1: EDA — goals 1H share dev 0.4497; trait goals r=0.86; entrant dev 6 transisi GF −0.358/GA +0.263; OU2.5 primer (over-rate dev 0.488, n=720); S/C/K/T tanpa jendela dev; virgin 2.967 gol/laga vs dev scored 2.656
+  - Fase 2: dokumen langkah 1–6 + 4 charts
+  - Fase 2-3: pra-registrasi — commit e9dd3b0 (branch wip-il-ligataal, 2026-11-10 04:46:01 UTC, SEBELUM fitting; fitting pertama 04:46:52 UTC)
+  - Fase 4: engine/goals Dixon-Coles (Gate Zero + ENTRANT); dev gate LOLOS kedua arm (GateZero 1.0186/0.2091/0.6918; ENTRANT 1.0115/0.2062/0.6920; sign check 3/3)
+  - Fase 5: virgin 2025/2026 dibaca SEKALI (n=240): GateZero 1X2 LL 1.0623 (kalah vs naive 1.0238), OU gap −11.70pp FAIL; ENTRANT 1.1173, OU gap −11.16pp FAIL; home-win gap +0.65pp/+0.94pp PASS clean
+  - Fase 6: verdicts (G_IL FAIL virgin legs; S/C/K/T not-buildable), config.yaml (goals_1h_share 0.4497), RESULT.md
+- Langkah berikutnya persisnya: TIDAK ADA — liga selesai; induk memposting "[Muse-2] IL-LigatHaAl done" ke papan; Jarvis memverifikasi
+- Referensi commit pra-registrasi: e9dd3b0 (branch wip-il-ligataal, "[Muse-2] WIP snapshot IL-LigatHaAl fase 3 prereg", 2026-11-10 04:46:01 UTC — SEBELUM fitting apa pun)
+- Aturan: 6 tahap penuh, pra-registrasi sebelum fitting, gerbang walk-forward di data virgin yang dibaca sekali, gerbang tidak digeser, FAIL adalah hasil sah. Jangan pakai Codex.
+- Terakhir diperbarui: 2026-11-10 12:05 WIB oleh Muse-2 (sub-agen IL-LigatHaAl) — SELESAI

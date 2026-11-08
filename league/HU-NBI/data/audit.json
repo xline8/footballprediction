@@ -1,0 +1,450 @@
+{
+  "cards_values": {
+    "Red": 136,
+    "Yellow": 4872,
+    "YellowRed": 97
+  },
+  "periods": {},
+  "playoff": {},
+  "referee_names": {
+    "2021/2022": {
+      "Adam Farkas": 6,
+      "Adam Pillok": 3,
+      "Balazs Berke": 14,
+      "Bence Csonka": 4,
+      "Csaba Pinter": 13,
+      "Ferenc Karako": 11,
+      "Gergo Bogar": 16,
+      "Istvan Vad": 10,
+      "Jozsef Erdos": 11,
+      "Mihaly Kapraly": 4,
+      "Peter Antal": 3,
+      "Peter Solymosi": 4,
+      "Peter Zierkelbach": 3,
+      "Sandor Szabo": 12,
+      "Tamas Bognar": 15,
+      "Zoltan Ivanyi": 1
+    },
+    "2022/2023": {
+      "Adam Farkas": 15,
+      "Adam Pillok": 1,
+      "Balazs Berke": 18,
+      "Bence Csonka": 8,
+      "Csaba Pinter": 16,
+      "Ferenc Karako": 17,
+      "Gergo Bogar": 19,
+      "Istvan Vad": 9,
+      "Jozsef Erdos": 17,
+      "Marcell Derdak": 3,
+      "Mario Gorog": 1,
+      "Marton Rusz": 3,
+      "Mihaly Kapraly": 9,
+      "Peter Antal": 4,
+      "Peter Zierkelbach": 3,
+      "Sandor Szabo": 13,
+      "Tamas Bognar": 12
+    },
+    "2023/2024": {
+      "Adam Farkas": 5,
+      "Adam Pillok": 3,
+      "Balazs Berke": 16,
+      "Bence Csonka": 12,
+      "Csaba Pinter": 15,
+      "Ferenc Karako": 17,
+      "Gergo Bogar": 14,
+      "Istvan Vad": 16,
+      "Jozsef Erdos": 11,
+      "Marcell Derdak": 5,
+      "Marton Rusz": 11,
+      "Mihaly Kapraly": 16,
+      "Peter Antal": 8,
+      "Peter Zierkelbach": 3,
+      "Sandor Szabo": 13,
+      "Tamas Bognar": 13
+    },
+    "2024/2025": {
+      "Adam Pillok": 2,
+      "Balazs Berke": 16,
+      "Bence Csonka": 8,
+      "Csaba Pinter": 15,
+      "Ferenc Karako": 9,
+      "Gergo Bogar": 19,
+      "Imre Kovacs": 8,
+      "Istvan Vad": 4,
+      "Jozsef Erdos": 13,
+      "Katalin Kulscar": 1,
+      "Marcell Derdak": 10,
+      "Marton Rusz": 15,
+      "Mihaly Kapraly": 15,
+      "Peter Antal": 9,
+      "Peter Zierkelbach": 7,
+      "Tamas Bognar": 16
+    },
+    "2025/2026": {
+      "Attila Molnar": 1,
+      "Balazs Berke": 4,
+      "Bence Csonka": 2,
+      "Ferenc Karako": 2,
+      "Gergo Bogar": 1,
+      "Imre Kovacs": 2,
+      "Marcell Derdak": 1,
+      "Mario Zimmermann": 1,
+      "Mihaly Kapraly": 2,
+      "Peter Antal": 1,
+      "Peter Zierkelbach": 1
+    },
+    "2026/2027": {
+      "Balazs Berke": 2,
+      "Balazs Katona": 1,
+      "Bence Csonka": 4,
+      "Bence Hanyecz": 1,
+      "Ferenc Karako": 2,
+      "Gabor Ivanyi": 1,
+      "Gergo Bogar": 3,
+      "Istvan Kovacs": 1,
+      "Marcell Derdak": 2,
+      "Mario Zimmermann": 3,
+      "Marton Rusz": 2,
+      "Mihaly Kapraly": 2,
+      "Peter Antal": 4,
+      "Peter Zierkelbach": 1,
+      "Tamas Bognar": 2
+    }
+  },
+  "round_names": {},
+  "seasons": {
+    "2021/2022": {
+      "events": 198,
+      "has_playoff": {
+        "None": 198
+      },
+      "key_counts": {
+        "BallPossesion": 198,
+        "ShotsOnTarget": 198,
+        "corners": 198,
+        "total_shots": 198
+      },
+      "matches": 198,
+      "period_splits": [
+        "All"
+      ],
+      "referee": 130,
+      "round_names": {},
+      "sections": {
+        "top_stats": 198
+      },
+      "shotmap": 0,
+      "stats": 198,
+      "stats_conflicts": 0,
+      "teams": [
+        1667,
+        7778,
+        7779,
+        7986,
+        8036,
+        8043,
+        8222,
+        8369,
+        45720,
+        187020,
+        355346,
+        465382
+      ]
+    },
+    "2022/2023": {
+      "events": 198,
+      "has_playoff": {
+        "None": 198
+      },
+      "key_counts": {
+        "BallPossesion": 198,
+        "ShotsOnTarget": 198,
+        "corners": 198,
+        "total_shots": 198
+      },
+      "matches": 198,
+      "period_splits": [
+        "All"
+      ],
+      "referee": 168,
+      "round_names": {},
+      "sections": {
+        "top_stats": 198
+      },
+      "shotmap": 0,
+      "stats": 198,
+      "stats_conflicts": 0,
+      "teams": [
+        1602,
+        1667,
+        7779,
+        7986,
+        8036,
+        8043,
+        8222,
+        8369,
+        132717,
+        187020,
+        355346,
+        465382
+      ]
+    },
+    "2023/2024": {
+      "events": 198,
+      "has_playoff": {
+        "None": 198
+      },
+      "key_counts": {
+        "BallPossesion": 193,
+        "ShotsOnTarget": 193,
+        "corners": 193,
+        "total_shots": 193
+      },
+      "matches": 198,
+      "period_splits": [
+        "All"
+      ],
+      "referee": 178,
+      "round_names": {},
+      "sections": {
+        "top_stats": 193
+      },
+      "shotmap": 0,
+      "stats": 193,
+      "stats_conflicts": 0,
+      "teams": [
+        1667,
+        2476,
+        7778,
+        7986,
+        8036,
+        8043,
+        8222,
+        8369,
+        132717,
+        187020,
+        355346,
+        465382
+      ]
+    },
+    "2024/2025": {
+      "events": 198,
+      "has_playoff": {
+        "False": 124,
+        "None": 74
+      },
+      "key_counts": {
+        "BallPossesion": 197,
+        "ShotsOnTarget": 197,
+        "corners": 197,
+        "total_shots": 197
+      },
+      "matches": 198,
+      "period_splits": [
+        "All"
+      ],
+      "referee": 167,
+      "round_names": {},
+      "sections": {
+        "top_stats": 197
+      },
+      "shotmap": 0,
+      "stats": 197,
+      "stats_conflicts": 0,
+      "teams": [
+        1667,
+        2035,
+        2476,
+        5755,
+        7778,
+        7986,
+        8036,
+        8043,
+        8222,
+        8369,
+        132717,
+        355346
+      ]
+    },
+    "2025/2026": {
+      "events": 198,
+      "has_playoff": {
+        "False": 198
+      },
+      "key_counts": {
+        "BallPossesion": 198,
+        "ShotsOnTarget": 198,
+        "corners": 198,
+        "total_shots": 198
+      },
+      "matches": 198,
+      "period_splits": [
+        "All"
+      ],
+      "referee": 18,
+      "round_names": {},
+      "sections": {
+        "top_stats": 198
+      },
+      "shotmap": 0,
+      "stats": 198,
+      "stats_conflicts": 0,
+      "teams": [
+        1667,
+        2035,
+        2280,
+        2476,
+        5755,
+        7778,
+        7986,
+        8043,
+        8222,
+        8369,
+        355346,
+        465382
+      ]
+    },
+    "2026/2027": {
+      "events": 77,
+      "has_playoff": {
+        "False": 77
+      },
+      "key_counts": {
+        "BallPossesion": 77,
+        "ShotsOnTarget": 77,
+        "corners": 77,
+        "total_shots": 77
+      },
+      "matches": 77,
+      "period_splits": [
+        "All"
+      ],
+      "referee": 31,
+      "round_names": {},
+      "sections": {
+        "top_stats": 77
+      },
+      "shotmap": 0,
+      "stats": 77,
+      "stats_conflicts": 0,
+      "teams": [
+        1602,
+        1667,
+        2035,
+        5755,
+        7778,
+        7779,
+        7986,
+        8043,
+        8222,
+        8369,
+        355346,
+        465382
+      ]
+    }
+  },
+  "section_keys": {},
+  "shotmap_rows": 0,
+  "stat_keys": {
+    "2021/2022": {
+      "BallPossesion": 198,
+      "ShotsOnTarget": 198,
+      "corners": 198,
+      "total_shots": 198
+    },
+    "2022/2023": {
+      "BallPossesion": 198,
+      "ShotsOnTarget": 198,
+      "corners": 198,
+      "total_shots": 198
+    },
+    "2023/2024": {
+      "BallPossesion": 193,
+      "ShotsOnTarget": 193,
+      "corners": 193,
+      "total_shots": 193
+    },
+    "2024/2025": {
+      "BallPossesion": 197,
+      "ShotsOnTarget": 197,
+      "corners": 197,
+      "total_shots": 197
+    },
+    "2025/2026": {
+      "BallPossesion": 198,
+      "ShotsOnTarget": 198,
+      "corners": 198,
+      "total_shots": 198
+    },
+    "2026/2027": {
+      "BallPossesion": 77,
+      "ShotsOnTarget": 77,
+      "corners": 77,
+      "total_shots": 77
+    }
+  },
+  "team_names": {
+    "132717": [
+      "Kecskemeti TE"
+    ],
+    "1602": [
+      "Vasas Budapest"
+    ],
+    "1667": [
+      "Zalaegerszeg"
+    ],
+    "187020": [
+      "Mezokovesd SE"
+    ],
+    "2035": [
+      "Nyiregyhaza Spartacus FC",
+      "Nyíregyháza Spartacus FC"
+    ],
+    "2280": [
+      "Kazincbarcikai BSC"
+    ],
+    "2476": [
+      "Diosgyori VTK"
+    ],
+    "355346": [
+      "Puskas FC Academy",
+      "Puskás FC Academy"
+    ],
+    "45720": [
+      "Gyirmot"
+    ],
+    "465382": [
+      "Kisvarda",
+      "Kisvárda"
+    ],
+    "5755": [
+      "Györi ETO"
+    ],
+    "7778": [
+      "MTK Budapest"
+    ],
+    "7779": [
+      "Budapest Honved",
+      "Kispest Honved",
+      "Kispest Honvéd"
+    ],
+    "7986": [
+      "Paksi SE"
+    ],
+    "8036": [
+      "Fehervar FC",
+      "Videoton FC Fehervar"
+    ],
+    "8043": [
+      "Ujpest",
+      "Újpest"
+    ],
+    "8222": [
+      "Ferencvaros",
+      "Ferencváros"
+    ],
+    "8369": [
+      "Debrecen"
+    ]
+  }
+}

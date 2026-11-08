@@ -1,0 +1,34 @@
+league: KR-KLeague2
+country: South Korea
+fotmob_id: 9116
+tier: 2
+warehouse: data_enrichment/fotmob_world
+data:
+  matches: league/KR-KLeague2/data/kr2_matches.csv
+  team_matches: league/KR-KLeague2/data/kr2_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period:
+  goals: ["2021", "2022", "2023", "2024"]
+  stats_markets: ["2022", "2023", "2024"]
+  cards: ["2023", "2024"]
+virgin_primary: "2025"
+virgin_confirmatory: "2026"
+halves_constants:
+  goals_1h_share: 0.396
+  sot_1h_share: 0.415
+  corners_1h_share: 0.425
+  total_shots_1h_share: 0.421
+  yellow_cards_1h_share: 0.330
+markets:
+  goals: G-KR2
+  sot: S-KR2
+  corners: C-KR2
+  cards: K-KR2
+  total_shots: T-KR2
+notes:
+  - K League 2 runs calendar-year seasons; team count 10 (2021), 11 (2022), 13 (2023-2024), 14 (2025), 17 (2026 expansion).
+  - Population is regular season only; the 2 intra-K2 play-off rows per season (2021-2025) are excluded (phase=playoff). Cross-tier ties vs K League 1 clubs are not in this feed.
+  - Stats era is 2022-2025 (2021 has no stats block at all; 8 identified missing rows inside the era). Virgin 2025 is stats-complete (273/273).
+  - xG and shotmap are absent in all 1,407 matches; goals is a goals-only Dixon-Coles.
+  - Cards target is stats-feed yellows, population 2023-2025: the event feed contains zero plain Yellow events in 2022-2025 (event-unified target impossible) and stats yellows are artefact-low in Feb-Sep 2022.
+  - 2026 is in progress (256 played, rounds 1-32, last 2026-11-08) and reserved as confirmatory data.

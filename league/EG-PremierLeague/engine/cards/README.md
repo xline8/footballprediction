@@ -1,0 +1,3 @@
+# K-EG cards engine
+Reads `data/eg_matches.csv`, target unified yellows = `yellow_home + yellow_away` = STATS-feed yellow_cards (the event feed is largely absent before 2024/2025 in EG; see analysis). Production model_cards.py port. Per-match walk-forward; warm-up 2021/2022, scored 2022/2023–2024/2025 (n=824 with target). Primary line 3.5, ladder 2.5/3.5/4.5. Gate Zero ONLY (X8 dropped: referee r=0.290, virgin referee coverage 26.7%). K-EG failed the dev gate (naive leg), so the virgin was NOT read; halves would use frozen 0.3609.
+Run: `python3 league/EG-PremierLeague/engine/cards/run_k_eg.py dev` (virgin must not be run — dev gate failed).

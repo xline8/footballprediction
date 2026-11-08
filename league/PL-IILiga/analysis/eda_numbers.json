@@ -1,0 +1,778 @@
+{
+  "n": 1679,
+  "seasons": [
+    "2021/2022",
+    "2022/2023",
+    "2023/2024",
+    "2024/2025",
+    "2025/2026",
+    "2026/2027"
+  ],
+  "team_ids": 47,
+  "per_season": {
+    "2021/2022": {
+      "n": 309,
+      "teams": 18,
+      "goals": 2.773,
+      "home_goals": 1.56,
+      "away_goals": 1.214,
+      "home_win_pct": 47.2,
+      "draw_pct": 21.4,
+      "away_win_pct": 31.4,
+      "ou25_over_rate": 0.547,
+      "events_pct": 87.7,
+      "ht_validated_pct": 95.5,
+      "b_team_match_pct": 21.4,
+      "b_teams": 2,
+      "awarded_no_events": 14,
+      "stats_pct": 0.0,
+      "shotmap_pct": 0.0,
+      "referee_pct": 0.0
+    },
+    "2022/2023": {
+      "n": 309,
+      "teams": 18,
+      "goals": 2.764,
+      "home_goals": 1.537,
+      "away_goals": 1.227,
+      "home_win_pct": 43.7,
+      "draw_pct": 25.9,
+      "away_win_pct": 30.4,
+      "ou25_over_rate": 0.531,
+      "events_pct": 91.6,
+      "ht_validated_pct": 100.0,
+      "b_team_match_pct": 31.1,
+      "b_teams": 3,
+      "awarded_no_events": 0,
+      "stats_pct": 0.0,
+      "shotmap_pct": 0.0,
+      "referee_pct": 0.0
+    },
+    "2023/2024": {
+      "n": 309,
+      "teams": 18,
+      "goals": 2.628,
+      "home_goals": 1.466,
+      "away_goals": 1.162,
+      "home_win_pct": 44.0,
+      "draw_pct": 27.8,
+      "away_win_pct": 28.2,
+      "ou25_over_rate": 0.521,
+      "events_pct": 91.3,
+      "ht_validated_pct": 99.7,
+      "b_team_match_pct": 31.1,
+      "b_teams": 3,
+      "awarded_no_events": 0,
+      "stats_pct": 0.0,
+      "shotmap_pct": 0.0,
+      "referee_pct": 0.0
+    },
+    "2024/2025": {
+      "n": 309,
+      "teams": 18,
+      "goals": 2.806,
+      "home_goals": 1.534,
+      "away_goals": 1.272,
+      "home_win_pct": 45.0,
+      "draw_pct": 21.7,
+      "away_win_pct": 33.3,
+      "ou25_over_rate": 0.508,
+      "events_pct": 94.5,
+      "ht_validated_pct": 99.7,
+      "b_team_match_pct": 21.4,
+      "b_teams": 2,
+      "awarded_no_events": 1,
+      "stats_pct": 0.0,
+      "shotmap_pct": 0.0,
+      "referee_pct": 0.0
+    },
+    "2025/2026": {
+      "n": 309,
+      "teams": 18,
+      "goals": 2.909,
+      "home_goals": 1.524,
+      "away_goals": 1.385,
+      "home_win_pct": 38.8,
+      "draw_pct": 29.8,
+      "away_win_pct": 31.4,
+      "ou25_over_rate": 0.566,
+      "events_pct": 91.3,
+      "ht_validated_pct": 97.7,
+      "b_team_match_pct": 21.7,
+      "b_teams": 2,
+      "awarded_no_events": 7,
+      "stats_pct": 0.0,
+      "shotmap_pct": 0.0,
+      "referee_pct": 0.0
+    },
+    "2026/2027": {
+      "n": 134,
+      "teams": 18,
+      "goals": 3.082,
+      "home_goals": 1.701,
+      "away_goals": 1.381,
+      "home_win_pct": 43.3,
+      "draw_pct": 23.9,
+      "away_win_pct": 32.8,
+      "ou25_over_rate": 0.619,
+      "events_pct": 94.8,
+      "ht_validated_pct": 100.0,
+      "b_team_match_pct": 21.6,
+      "b_teams": 2,
+      "awarded_no_events": 0,
+      "stats_pct": 0.0,
+      "shotmap_pct": 0.0,
+      "referee_pct": 0.0
+    }
+  },
+  "phase_levels": {
+    "2021/2022": {
+      "regular": {
+        "n": 306,
+        "goals": 2.771
+      },
+      "playoff_promotion": {
+        "n": 3,
+        "goals": 3
+      }
+    },
+    "2022/2023": {
+      "regular": {
+        "n": 306,
+        "goals": 2.761
+      },
+      "playoff_promotion": {
+        "n": 3,
+        "goals": 3
+      }
+    },
+    "2023/2024": {
+      "regular": {
+        "n": 306,
+        "goals": 2.631
+      },
+      "playoff_promotion": {
+        "n": 3,
+        "goals": 2.333
+      }
+    },
+    "2024/2025": {
+      "regular": {
+        "n": 306,
+        "goals": 2.788
+      },
+      "playoff_promotion": {
+        "n": 3,
+        "goals": 4.667
+      }
+    },
+    "2025/2026": {
+      "regular": {
+        "n": 306,
+        "goals": 2.905
+      },
+      "playoff_promotion": {
+        "n": 3,
+        "goals": 3.333
+      }
+    },
+    "2026/2027": {
+      "regular": {
+        "n": 134,
+        "goals": 3.082
+      }
+    }
+  },
+  "phase_levels_pooled_complete": {
+    "regular": {
+      "n": 1530,
+      "goals": 2.771
+    },
+    "playoff_promotion": {
+      "n": 15,
+      "goals": 3.267
+    }
+  },
+  "event_goal_validation": {
+    "n_events_matches": 1537,
+    "n_validated": 1536,
+    "n_mismatch": 1,
+    "n_no_events": 142,
+    "no_events_0_0": 120
+  },
+  "reliability": {
+    "goals_for": 0.416,
+    "goals_against": 0.486
+  },
+  "reliability_nteams": {
+    "goals_for": 90,
+    "goals_against": 90
+  },
+  "half_shares": {
+    "goals": {
+      "n": 1522,
+      "share_ratio_of_sums": 0.427,
+      "observed_var": 0.1076,
+      "true_var": -0.0056,
+      "true_sd": 0.0
+    }
+  },
+  "half_shares_by_season": {
+    "2021/2022": {
+      "n": 295,
+      "share_ratio_of_sums": 0.4184,
+      "observed_var": 0.1045,
+      "true_var": -0.0073,
+      "true_sd": 0.0
+    },
+    "2022/2023": {
+      "n": 309,
+      "share_ratio_of_sums": 0.4391,
+      "observed_var": 0.1087,
+      "true_var": -0.0054,
+      "true_sd": 0.0
+    },
+    "2023/2024": {
+      "n": 308,
+      "share_ratio_of_sums": 0.4129,
+      "observed_var": 0.1032,
+      "true_var": -0.0102,
+      "true_sd": 0.0
+    },
+    "2024/2025": {
+      "n": 308,
+      "share_ratio_of_sums": 0.4213,
+      "observed_var": 0.1172,
+      "true_var": -0.0009,
+      "true_sd": 0.0
+    },
+    "2025/2026": {
+      "n": 302,
+      "share_ratio_of_sums": 0.4419,
+      "observed_var": 0.1034,
+      "true_var": -0.0037,
+      "true_sd": 0.0
+    },
+    "2026/2027": {
+      "n": 134,
+      "share_ratio_of_sums": 0.4237,
+      "observed_var": 0.0985,
+      "true_var": -0.0026,
+      "true_sd": 0.0
+    }
+  },
+  "newcomers": [
+    {
+      "season": "2022/2023",
+      "team_id": "160406",
+      "team": "Kotwica Kolobrzeg",
+      "season_lg_gf": 1.3818770226537216,
+      "season_lg_ga": 1.3818770226537216,
+      "n": 35,
+      "gf": 1.314,
+      "ga": 1,
+      "origin": "from-below"
+    },
+    {
+      "season": "2022/2023",
+      "team_id": "160423",
+      "team": "Stomil Olsztyn",
+      "season_lg_gf": 1.3818770226537216,
+      "season_lg_ga": 1.3818770226537216,
+      "n": 36,
+      "gf": 1.528,
+      "ga": 0.944,
+      "origin": "I-Liga-relegated"
+    },
+    {
+      "season": "2022/2023",
+      "team_id": "2183",
+      "team": "Polonia Warsaw",
+      "season_lg_gf": 1.3818770226537216,
+      "season_lg_ga": 1.3818770226537216,
+      "n": 34,
+      "gf": 1.676,
+      "ga": 1.059,
+      "origin": "from-below"
+    },
+    {
+      "season": "2022/2023",
+      "team_id": "324237",
+      "team": "Siarka Tarnobrzeg",
+      "season_lg_gf": 1.3818770226537216,
+      "season_lg_ga": 1.3818770226537216,
+      "n": 34,
+      "gf": 1.088,
+      "ga": 1.676,
+      "origin": "from-below"
+    },
+    {
+      "season": "2022/2023",
+      "team_id": "556984",
+      "team": "Zaglebie II Lubin",
+      "season_lg_gf": 1.3818770226537216,
+      "season_lg_ga": 1.3818770226537216,
+      "n": 34,
+      "gf": 1.294,
+      "ga": 2,
+      "origin": "from-below"
+    },
+    {
+      "season": "2022/2023",
+      "team_id": "8029",
+      "team": "Polkowice",
+      "season_lg_gf": 1.3818770226537216,
+      "season_lg_ga": 1.3818770226537216,
+      "n": 34,
+      "gf": 1.353,
+      "ga": 1.529,
+      "origin": "I-Liga-relegated"
+    },
+    {
+      "season": "2022/2023",
+      "team_id": "89465",
+      "team": "GKS Jastrzebie",
+      "season_lg_gf": 1.3818770226537216,
+      "season_lg_ga": 1.3818770226537216,
+      "n": 34,
+      "gf": 1.206,
+      "ga": 1.324,
+      "origin": "I-Liga-relegated"
+    },
+    {
+      "season": "2023/2024",
+      "team_id": "1501585",
+      "team": "LKS Lodz II",
+      "season_lg_gf": 1.313915857605178,
+      "season_lg_ga": 1.313915857605178,
+      "n": 34,
+      "gf": 1.353,
+      "ga": 1.441,
+      "origin": "from-below"
+    },
+    {
+      "season": "2023/2024",
+      "team_id": "160419",
+      "team": "Sandecja Nowy Sacz",
+      "season_lg_gf": 1.313915857605178,
+      "season_lg_ga": 1.313915857605178,
+      "n": 34,
+      "gf": 1.029,
+      "ga": 1.412,
+      "origin": "I-Liga-relegated"
+    },
+    {
+      "season": "2023/2024",
+      "team_id": "177358",
+      "team": "Olimpia Grudziadz",
+      "season_lg_gf": 1.313915857605178,
+      "season_lg_ga": 1.313915857605178,
+      "n": 34,
+      "gf": 1.029,
+      "ga": 1.235,
+      "origin": "from-below"
+    },
+    {
+      "season": "2023/2024",
+      "team_id": "206344",
+      "team": "Chojniczanka Chojnice",
+      "season_lg_gf": 1.313915857605178,
+      "season_lg_ga": 1.313915857605178,
+      "n": 35,
+      "gf": 1.429,
+      "ga": 1.314,
+      "origin": "I-Liga-relegated"
+    },
+    {
+      "season": "2023/2024",
+      "team_id": "585211",
+      "team": "SKRA Czestochowa",
+      "season_lg_gf": 1.313915857605178,
+      "season_lg_ga": 1.313915857605178,
+      "n": 34,
+      "gf": 1.176,
+      "ga": 1.265,
+      "origin": "I-Liga-relegated"
+    },
+    {
+      "season": "2023/2024",
+      "team_id": "8031",
+      "team": "Polonia Bytom",
+      "season_lg_gf": 1.313915857605178,
+      "season_lg_ga": 1.313915857605178,
+      "n": 35,
+      "gf": 1.629,
+      "ga": 1.4,
+      "origin": "from-below"
+    },
+    {
+      "season": "2023/2024",
+      "team_id": "8049",
+      "team": "Stal Stalowa Wola",
+      "season_lg_gf": 1.313915857605178,
+      "season_lg_ga": 1.313915857605178,
+      "n": 36,
+      "gf": 1.333,
+      "ga": 1.111,
+      "origin": "from-below"
+    },
+    {
+      "season": "2024/2025",
+      "team_id": "1286895",
+      "team": "Wieczysta Krakow",
+      "season_lg_gf": 1.4029126213592233,
+      "season_lg_ga": 1.4029126213592233,
+      "n": 36,
+      "gf": 1.944,
+      "ga": 0.833,
+      "origin": "from-below"
+    },
+    {
+      "season": "2024/2025",
+      "team_id": "177360",
+      "team": "Resovia",
+      "season_lg_gf": 1.4029126213592233,
+      "season_lg_ga": 1.4029126213592233,
+      "n": 34,
+      "gf": 1.353,
+      "ga": 1.412,
+      "origin": "I-Liga-relegated"
+    },
+    {
+      "season": "2024/2025",
+      "team_id": "585212",
+      "team": "Rekord Bielsko-Biala",
+      "season_lg_gf": 1.4029126213592233,
+      "season_lg_ga": 1.4029126213592233,
+      "n": 34,
+      "gf": 1.471,
+      "ga": 1.588,
+      "origin": "from-below"
+    },
+    {
+      "season": "2024/2025",
+      "team_id": "585593",
+      "team": "Pogon Grodzisk Mazowiecki",
+      "season_lg_gf": 1.4029126213592233,
+      "season_lg_ga": 1.4029126213592233,
+      "n": 34,
+      "gf": 1.882,
+      "ga": 1.147,
+      "origin": "from-below"
+    },
+    {
+      "season": "2024/2025",
+      "team_id": "662318",
+      "team": "Swit Skolwin",
+      "season_lg_gf": 1.4029126213592233,
+      "season_lg_ga": 1.4029126213592233,
+      "n": 35,
+      "gf": 1.743,
+      "ga": 1.629,
+      "origin": "from-below"
+    },
+    {
+      "season": "2024/2025",
+      "team_id": "8026",
+      "team": "Zaglebie Sosnowiec",
+      "season_lg_gf": 1.4029126213592233,
+      "season_lg_ga": 1.4029126213592233,
+      "n": 34,
+      "gf": 1.412,
+      "ga": 1.529,
+      "origin": "I-Liga-relegated"
+    },
+    {
+      "season": "2024/2025",
+      "team_id": "8033",
+      "team": "TS Podbeskidzie Bielsko-Biala",
+      "season_lg_gf": 1.4029126213592233,
+      "season_lg_ga": 1.4029126213592233,
+      "n": 34,
+      "gf": 1.294,
+      "ga": 1.029,
+      "origin": "I-Liga-relegated"
+    },
+    {
+      "season": "2025/2026",
+      "team_id": "160419",
+      "team": "Sandecja Nowy Sacz",
+      "season_lg_gf": 1.4546925566343043,
+      "season_lg_ga": 1.4546925566343043,
+      "n": 36,
+      "gf": 1.583,
+      "ga": 1.222,
+      "origin": "from-below"
+    },
+    {
+      "season": "2025/2026",
+      "team_id": "2417",
+      "team": "Skierniewice",
+      "season_lg_gf": 1.4546925566343043,
+      "season_lg_ga": 1.4546925566343043,
+      "n": 34,
+      "gf": 2.029,
+      "ga": 1.324,
+      "origin": "from-below"
+    },
+    {
+      "season": "2025/2026",
+      "team_id": "585484",
+      "team": "Slask Wroclaw ll",
+      "season_lg_gf": 1.4546925566343043,
+      "season_lg_ga": 1.4546925566343043,
+      "n": 35,
+      "gf": 1.886,
+      "ga": 1.457,
+      "origin": "from-below"
+    },
+    {
+      "season": "2025/2026",
+      "team_id": "585524",
+      "team": "Sokol Kleczew",
+      "season_lg_gf": 1.4546925566343043,
+      "season_lg_ga": 1.4546925566343043,
+      "n": 34,
+      "gf": 1.382,
+      "ga": 1.824,
+      "origin": "from-below"
+    },
+    {
+      "season": "2025/2026",
+      "team_id": "662309",
+      "team": "Podhale Nowy Targ",
+      "season_lg_gf": 1.4546925566343043,
+      "season_lg_ga": 1.4546925566343043,
+      "n": 34,
+      "gf": 1.353,
+      "ga": 1.029,
+      "origin": "from-below"
+    },
+    {
+      "season": "2025/2026",
+      "team_id": "8049",
+      "team": "Stal Stalowa Wola",
+      "season_lg_gf": 1.4546925566343043,
+      "season_lg_ga": 1.4546925566343043,
+      "n": 34,
+      "gf": 1.559,
+      "ga": 1.265,
+      "origin": "I-Liga-relegated"
+    },
+    {
+      "season": "2025/2026",
+      "team_id": "89467",
+      "team": "Warta Pozna\u0144",
+      "season_lg_gf": 1.4546925566343043,
+      "season_lg_ga": 1.4546925566343043,
+      "n": 34,
+      "gf": 1.676,
+      "ga": 1.088,
+      "origin": "I-Liga-relegated"
+    },
+    {
+      "season": "2026/2027",
+      "team_id": "102859",
+      "team": "GKS Tychy",
+      "season_lg_gf": 1.541044776119403,
+      "season_lg_ga": 1.541044776119403,
+      "n": 14,
+      "gf": 1.429,
+      "ga": 0.643,
+      "origin": "I-Liga-relegated"
+    },
+    {
+      "season": "2026/2027",
+      "team_id": "1174006",
+      "team": "Lechia Zielona Gora",
+      "season_lg_gf": 1.541044776119403,
+      "season_lg_ga": 1.541044776119403,
+      "n": 15,
+      "gf": 1.6,
+      "ga": 1.733,
+      "origin": "from-below"
+    },
+    {
+      "season": "2026/2027",
+      "team_id": "585596",
+      "team": "Legia Warszawa II",
+      "season_lg_gf": 1.541044776119403,
+      "season_lg_ga": 1.541044776119403,
+      "n": 15,
+      "gf": 2,
+      "ga": 1.667,
+      "origin": "from-below"
+    },
+    {
+      "season": "2026/2027",
+      "team_id": "585611",
+      "team": "Avia Swidnik",
+      "season_lg_gf": 1.541044776119403,
+      "season_lg_ga": 1.541044776119403,
+      "n": 15,
+      "gf": 1.2,
+      "ga": 1.467,
+      "origin": "from-below"
+    },
+    {
+      "season": "2026/2027",
+      "team_id": "8019",
+      "team": "G\u00f3rnik \u0141\u0119czna",
+      "season_lg_gf": 1.541044776119403,
+      "season_lg_ga": 1.541044776119403,
+      "n": 15,
+      "gf": 2.2,
+      "ga": 1,
+      "origin": "I-Liga-relegated"
+    },
+    {
+      "season": "2026/2027",
+      "team_id": "8027",
+      "team": "Zawisza Bydgoszcz",
+      "season_lg_gf": 1.541044776119403,
+      "season_lg_ga": 1.541044776119403,
+      "n": 14,
+      "gf": 1.857,
+      "ga": 1.429,
+      "origin": "from-below"
+    },
+    {
+      "season": "2026/2027",
+      "team_id": "89469",
+      "team": "Znicz Pruszkow",
+      "season_lg_gf": 1.541044776119403,
+      "season_lg_ga": 1.541044776119403,
+      "n": 15,
+      "gf": 1.933,
+      "ga": 1.133,
+      "origin": "I-Liga-relegated"
+    }
+  ],
+  "newcomer_gaps": {
+    "league_team_gf": 1.4,
+    "league_team_ga": 1.4,
+    "all_complete": {
+      "n": 28,
+      "gf": 1.464,
+      "ga": 1.325,
+      "gf_gap": 0.076,
+      "ga_gap": -0.064
+    },
+    "i_liga_relegated_complete": {
+      "n": 11,
+      "gf": 1.365,
+      "ga": 1.283,
+      "gf_gap": -0.017,
+      "ga_gap": -0.1
+    },
+    "from_below_complete": {
+      "n": 17,
+      "gf": 1.529,
+      "ga": 1.351,
+      "gf_gap": 0.137,
+      "ga_gap": -0.041
+    },
+    "dev_transitions": {
+      "n": 21,
+      "gf": 1.406,
+      "ga": 1.327,
+      "gf_gap": 0.04,
+      "ga_gap": -0.039
+    },
+    "dev_i_liga_relegated": {
+      "n": 9,
+      "gf": 1.309,
+      "ga": 1.306,
+      "gf_gap": -0.057,
+      "ga_gap": -0.06
+    },
+    "by_transition": {
+      "2022/2023": {
+        "n": 7,
+        "gf": 1.351,
+        "ga": 1.362,
+        "gf_gap": -0.031,
+        "ga_gap": -0.02
+      },
+      "2023/2024": {
+        "n": 7,
+        "gf": 1.283,
+        "ga": 1.311,
+        "gf_gap": -0.031,
+        "ga_gap": -0.003
+      },
+      "2024/2025": {
+        "n": 7,
+        "gf": 1.586,
+        "ga": 1.31,
+        "gf_gap": 0.183,
+        "ga_gap": -0.093
+      },
+      "2025/2026": {
+        "n": 7,
+        "gf": 1.638,
+        "ga": 1.316,
+        "gf_gap": 0.184,
+        "ga_gap": -0.139
+      },
+      "2026/2027": {
+        "n": 7,
+        "gf": 1.746,
+        "ga": 1.296,
+        "gf_gap": 0.205,
+        "ga_gap": -0.245
+      }
+    }
+  },
+  "b_team": {
+    "matches_involving_b": 391,
+    "pct": 25.3,
+    "goals_per_match_b_involved": 2.877,
+    "goals_per_match_no_b": 2.742,
+    "home_win_pct_b_involved": 43.2,
+    "home_win_pct_no_b": 43.9,
+    "b_team_gf": 1.315,
+    "b_team_ga": 1.592,
+    "non_b_team_gf": 1.399,
+    "non_b_team_ga": 1.357,
+    "b_team_gf_gap": -0.085,
+    "b_team_ga_gap": 0.192,
+    "b_team_home_gf": 1.427,
+    "b_team_home_ga": 1.464,
+    "b_team_away_gf": 1.26,
+    "b_team_away_ga": 1.767
+  },
+  "pooled_complete": {
+    "n": 1545,
+    "home_goals": 1.524,
+    "away_goals": 1.252,
+    "goals": 2.776,
+    "home_win_pct": 43.8,
+    "draw_pct": 25.3,
+    "away_win_pct": 30.9,
+    "ou25_over_rate": 0.535
+  },
+  "dev_over_rates": {
+    "goals": {
+      "2.5": {
+        "n": 1236,
+        "over_rate": 0.527
+      }
+    }
+  },
+  "scored_dev_over_rates": {
+    "goals": {
+      "2.5": {
+        "n": 927,
+        "over_rate": 0.52
+      }
+    }
+  },
+  "primary_lines": {
+    "goals": 2.5
+  },
+  "dev_n": 1236,
+  "scored_dev_n": 927,
+  "virgin_n": 309,
+  "confirmatory_n": 134
+}

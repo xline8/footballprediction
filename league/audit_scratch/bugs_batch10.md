@@ -1,0 +1,171 @@
+# Batch 10 — clear engine bugs
+
+Static read only; no engine was imported or run and no gate was rerun. Findings describe current source; latent paths are identified. Authoritative candidate verdicts remain as recorded. No confirmed use of sealed outcomes in dev fitting was found; reading a CSV then filtering to dev before computation was not treated as an isolation leak.
+
+- PY-DivisionProfesional — `league/PY-DivisionProfesional/engine/sot/harness.py:24` — Dev league baseline uses earlier scored rows only (first probability zero), excluding the seed and changing within a tournament; PREREG_S_PY requires the pooled stats-era rate strictly before each scored block.
+- PY-DivisionProfesional — `league/PY-DivisionProfesional/engine/sot/harness.py:59` — Virgin naive baseline is vmetrics(GZ rows), which reads model probs rather than naive_probs; the baseline is identically Gate Zero, weakening LL leg (i), as the verdict confirms.
+- PY-DivisionProfesional — `league/PY-DivisionProfesional/engine/goals/harness.py:64` — Variant sign check repeats the pooled dev LL comparison eight times via get(...pooled...), rather than comparing the eight per-tournament rows required by PREREG_G_PY (latent: dev already failed).
+- PY-DivisionProfesional — `league/PY-DivisionProfesional/engine/total_shots/run_t_py.py:43` — League baseline is a Poisson probability from a decayed shots mean, rather than the frozen prior-block over-24.5 rate in PREREG_T_PY; the verdict also records a degenerate virgin baseline.
+- PY-DivisionProfesional — `league/PY-DivisionProfesional/engine/total_shots/run_t_py.py:55` — Level-cell search scores arm A, whose probabilities never use the cell factor (only B does); all cells tie mechanically, so the B level-layer selection check is dead.
+- RU-1Division — `league/RU-1Division/engine/cards/harness.py:84` — Virgin path unconditionally sets shipped_arm=ARM and writes fitted params without testing virgin LL or calibration legs; RU-Premier verdict explicitly FAILS leg (i), while RU-1 path is latent after dev failure.
+- RU-PremierLeague — `league/RU-PremierLeague/engine/cards/harness.py:84` — Virgin path unconditionally sets shipped_arm=ARM and writes fitted params without testing virgin LL or calibration legs; RU-Premier verdict explicitly FAILS leg (i), while RU-1 path is latent after dev failure.
+- RU-1Division — `league/RU-1Division/engine/cards/harness.py:84` — Copied virgin protocol identifies this league as RU-PremierLeague, rather than RU-1Division (latent path).
+- RU-1Division — `league/RU-1Division/engine/goals/harness.py:133` — Copied virgin protocol carries RU-PremierLeague instead of RU-1Division (latent path; dev failed).
+- RU-1Division — `league/RU-1Division/engine/sot/harness.py:87` — Virgin admits every arm without checking recorded dev gates; run_s_ru1.py calls this directly after run_dev, so the frozen no-virgin-after-dev-fail guard is bypassed (both arms happened to pass).
+- RU-PremierLeague — `league/RU-PremierLeague/engine/total_shots/run_t_ru.py:267` — Shipped-format writer fields are 25.5/26.5/27.5 while LINES and prereg are 24.5/25.5/26.5; q contains p_over_24_5 outside fieldnames, causing DictWriter failure; coordinator supplied the shipped CSV separately.
+- RU-PremierLeague — `league/RU-PremierLeague/engine/total_shots/run_t_ru.py:275` — Exporter retains another league's 0.4592 first-half share instead of RU frozen 0.4602 (config/PREREG_T_RU); coordinator bypassed the faulty exporter.
+- SA-FirstDivision — `league/SA-FirstDivision/engine/cards/harness.py:25` — League baseline is NB(decay-weighted league mean), via model.py Online base=mh+ma, rather than prereg expanding over-4.5 frequency; verdict confirms both constructions still FAIL.
+- SA-FirstDivision — `league/SA-FirstDivision/engine/cards/harness.py:33` — Virgin calibration is predicted minus actual although PREREG_K_SAFD freezes actual minus predicted; absolute gate outcome unchanged (latent path).
+- SA-FirstDivision — `league/SA-FirstDivision/engine/total_shots/run_t_safd.py:21` — Unadapted SA-ProLeague ladder 23.5/24.5/25.5 replaces prereg 22.5/23.5/24.5; gate primary 23.5 is unaffected, but registered reporting/output lines are wrong.
+- SA-FirstDivision — `league/SA-FirstDivision/engine/total_shots/run_t_safd.py:270` — Copied SA-ProLeague half share 0.4559 (also fitted_params half_split) replaces frozen SAFD 0.4557; currently latent because dev failed.
+- SA-FirstDivision — `league/SA-FirstDivision/engine/total_shots/run_t_safd.py:151` — League baseline is Poisson(decay-weighted mean), rather than the prereg expanding over-23.5 frequency; verdict verifies FAIL under either definition.
+- SA-FirstDivision — `league/SA-FirstDivision/engine/total_shots/run_t_safd.py:169` — score_pass updates trackers immediately after each match (same pattern later in function), so later matches on the same date see earlier results despite prereg date-grouped predict-then-update; verdict documents discrepancy.
+- SA-FirstDivision — `league/SA-FirstDivision/engine/total_shots/run_t_safd.py:247` — Variant sign check is reduced to arm==reference, permanently excluding B/C instead of comparing their pooled dev LL to the reference as PREREG_T_SAFD requires (latent).
+- SA-FirstDivision — `league/SA-FirstDivision/engine/total_shots/run_t_safd.py:249` — Both-pass selection minimizes virgin LL at 24.5, while PREREG_T_SAFD requires primary 23.5 (latent; current sign bug admits at most the reference).
+- SA-FirstDivision — `league/SA-FirstDivision/engine/total_shots/run_t_safd.py:88` — Calibration accumulator records predicted minus actual, contrary to PREREG_T_SAFD actual minus predicted; absolute gate unchanged.
+- SCO-Championship — `league/SCO-Championship/engine/goals/harness.py:39` — X2 applies offsets to entrants from seasons strictly BEFORE the target instead of target-season entrants; offsets are also estimated over all those clubs' prior games rather than entrant first seasons against season league means, violating PREREG_G_SCOCH; verdict confirms primary defect.
+- SCO-Championship — `league/SCO-Championship/engine/goals/harness.py:148` — Latent virgin calibration computes actual minus predicted, opposite PREREG_G_SCOCH predicted minus actual; absolute gate unaffected.
+- SCO-Championship — `league/SCO-Championship/engine/goals/harness.py:166` — Latent virgin protocol still names RU-PremierLeague; its shipped filename is also g_ru_virgin_predictions.csv instead of g_scoch_virgin_predictions.csv.
+
+Engine files opened and skimmed:
+
+- `league/PT-LigaPortugal2/engine/goals/arms.py`
+- `league/PT-LigaPortugal2/engine/goals/dc.py`
+- `league/PT-LigaPortugal2/engine/goals/harness.py`
+- `league/PT-LigaPortugal2/engine/goals/run_g_pt2.py`
+- `league/PY-DivisionProfesional/engine/cards/harness.py`
+- `league/PY-DivisionProfesional/engine/cards/model.py`
+- `league/PY-DivisionProfesional/engine/cards/run_k_py.py`
+- `league/PY-DivisionProfesional/engine/corners/core.py`
+- `league/PY-DivisionProfesional/engine/corners/harness.py`
+- `league/PY-DivisionProfesional/engine/corners/run_c_py.py`
+- `league/PY-DivisionProfesional/engine/goals/arms.py`
+- `league/PY-DivisionProfesional/engine/goals/dc.py`
+- `league/PY-DivisionProfesional/engine/goals/harness.py`
+- `league/PY-DivisionProfesional/engine/goals/run_g_py.py`
+- `league/PY-DivisionProfesional/engine/sot/harness.py`
+- `league/PY-DivisionProfesional/engine/sot/model.py`
+- `league/PY-DivisionProfesional/engine/sot/run_s_py.py`
+- `league/PY-DivisionProfesional/engine/total_shots/model.py`
+- `league/PY-DivisionProfesional/engine/total_shots/run_t_py.py`
+- `league/QA-QatarStars/engine/goals/arms.py`
+- `league/QA-QatarStars/engine/goals/dc.py`
+- `league/QA-QatarStars/engine/goals/harness.py`
+- `league/QA-QatarStars/engine/goals/model.py`
+- `league/QA-QatarStars/engine/goals/run_g_qa.py`
+- `league/QA-SecondDivision/engine/cards/harness.py`
+- `league/QA-SecondDivision/engine/cards/model.py`
+- `league/QA-SecondDivision/engine/cards/run_k_qasd.py`
+- `league/QA-SecondDivision/engine/corners/core.py`
+- `league/QA-SecondDivision/engine/corners/harness.py`
+- `league/QA-SecondDivision/engine/corners/run_c_qasd.py`
+- `league/QA-SecondDivision/engine/goals/arms.py`
+- `league/QA-SecondDivision/engine/goals/dc.py`
+- `league/QA-SecondDivision/engine/goals/harness.py`
+- `league/QA-SecondDivision/engine/goals/model.py`
+- `league/QA-SecondDivision/engine/goals/run_g_qasd.py`
+- `league/QA-SecondDivision/engine/sot/harness.py`
+- `league/QA-SecondDivision/engine/sot/model.py`
+- `league/QA-SecondDivision/engine/sot/run_s_qasd.py`
+- `league/QA-SecondDivision/engine/total_shots/model.py`
+- `league/QA-SecondDivision/engine/total_shots/run_t_qasd.py`
+- `league/RO-LigaI/engine/cards/harness.py`
+- `league/RO-LigaI/engine/cards/model.py`
+- `league/RO-LigaI/engine/cards/run_k_ro.py`
+- `league/RO-LigaI/engine/corners/core.py`
+- `league/RO-LigaI/engine/corners/harness.py`
+- `league/RO-LigaI/engine/corners/run_c_ro.py`
+- `league/RO-LigaI/engine/goals/arms.py`
+- `league/RO-LigaI/engine/goals/dc.py`
+- `league/RO-LigaI/engine/goals/harness.py`
+- `league/RO-LigaI/engine/goals/run_g_ro.py`
+- `league/RO-LigaI/engine/sot/harness.py`
+- `league/RO-LigaI/engine/sot/model.py`
+- `league/RO-LigaI/engine/sot/run_s_ro.py`
+- `league/RO-LigaII/engine/goals/arms.py`
+- `league/RO-LigaII/engine/goals/dc.py`
+- `league/RO-LigaII/engine/goals/harness.py`
+- `league/RO-LigaII/engine/goals/run_g_rl2.py`
+- `league/RS-SuperLiga/engine/goals/arms.py`
+- `league/RS-SuperLiga/engine/goals/dc.py`
+- `league/RS-SuperLiga/engine/goals/harness.py`
+- `league/RS-SuperLiga/engine/goals/run_g_rs.py`
+- `league/RU-1Division/engine/cards/harness.py`
+- `league/RU-1Division/engine/cards/model.py`
+- `league/RU-1Division/engine/cards/run_k_ru1.py`
+- `league/RU-1Division/engine/corners/core.py`
+- `league/RU-1Division/engine/corners/harness.py`
+- `league/RU-1Division/engine/corners/run_c_ru1.py`
+- `league/RU-1Division/engine/goals/arms.py`
+- `league/RU-1Division/engine/goals/dc.py`
+- `league/RU-1Division/engine/goals/harness.py`
+- `league/RU-1Division/engine/goals/run_g_ru1.py`
+- `league/RU-1Division/engine/sot/harness.py`
+- `league/RU-1Division/engine/sot/model.py`
+- `league/RU-1Division/engine/sot/run_s_ru1.py`
+- `league/RU-1Division/engine/total_shots/model.py`
+- `league/RU-1Division/engine/total_shots/run_t_ru1.py`
+- `league/RU-PremierLeague/engine/cards/harness.py`
+- `league/RU-PremierLeague/engine/cards/model.py`
+- `league/RU-PremierLeague/engine/cards/run_k_ru.py`
+- `league/RU-PremierLeague/engine/corners/core.py`
+- `league/RU-PremierLeague/engine/corners/harness.py`
+- `league/RU-PremierLeague/engine/corners/run_c_ru.py`
+- `league/RU-PremierLeague/engine/goals/arms.py`
+- `league/RU-PremierLeague/engine/goals/dc.py`
+- `league/RU-PremierLeague/engine/goals/harness.py`
+- `league/RU-PremierLeague/engine/goals/run_g_ru.py`
+- `league/RU-PremierLeague/engine/sot/harness.py`
+- `league/RU-PremierLeague/engine/sot/model.py`
+- `league/RU-PremierLeague/engine/sot/run_s_ru.py`
+- `league/RU-PremierLeague/engine/total_shots/model.py`
+- `league/RU-PremierLeague/engine/total_shots/run_t_ru.py`
+- `league/RU-SecondLeague/engine/goals/arms.py`
+- `league/RU-SecondLeague/engine/goals/dc.py`
+- `league/RU-SecondLeague/engine/goals/harness.py`
+- `league/RU-SecondLeague/engine/goals/run_g_ru2.py`
+- `league/SA-FirstDivision/engine/cards/harness.py`
+- `league/SA-FirstDivision/engine/cards/model.py`
+- `league/SA-FirstDivision/engine/cards/run_k_safd.py`
+- `league/SA-FirstDivision/engine/corners/core.py`
+- `league/SA-FirstDivision/engine/corners/harness.py`
+- `league/SA-FirstDivision/engine/corners/run_c_safd.py`
+- `league/SA-FirstDivision/engine/goals/arms.py`
+- `league/SA-FirstDivision/engine/goals/dc.py`
+- `league/SA-FirstDivision/engine/goals/harness.py`
+- `league/SA-FirstDivision/engine/goals/run_g_safd.py`
+- `league/SA-FirstDivision/engine/sot/harness.py`
+- `league/SA-FirstDivision/engine/sot/model.py`
+- `league/SA-FirstDivision/engine/sot/run_s_safd.py`
+- `league/SA-FirstDivision/engine/total_shots/model.py`
+- `league/SA-FirstDivision/engine/total_shots/run_t_safd.py`
+- `league/SA-ProLeague/engine/cards/harness.py`
+- `league/SA-ProLeague/engine/cards/model.py`
+- `league/SA-ProLeague/engine/cards/run_k_sa.py`
+- `league/SA-ProLeague/engine/corners/core.py`
+- `league/SA-ProLeague/engine/corners/harness.py`
+- `league/SA-ProLeague/engine/corners/run_c_sa.py`
+- `league/SA-ProLeague/engine/goals/arms.py`
+- `league/SA-ProLeague/engine/goals/dc.py`
+- `league/SA-ProLeague/engine/goals/harness.py`
+- `league/SA-ProLeague/engine/goals/run_g_sa.py`
+- `league/SA-ProLeague/engine/sot/harness.py`
+- `league/SA-ProLeague/engine/sot/model.py`
+- `league/SA-ProLeague/engine/sot/run_s_sa.py`
+- `league/SA-ProLeague/engine/total_shots/model.py`
+- `league/SA-ProLeague/engine/total_shots/run_t_sa.py`
+- `league/SCO-Championship/engine/cards/harness.py`
+- `league/SCO-Championship/engine/cards/model.py`
+- `league/SCO-Championship/engine/cards/run_k_scoch.py`
+- `league/SCO-Championship/engine/corners/core.py`
+- `league/SCO-Championship/engine/corners/harness.py`
+- `league/SCO-Championship/engine/corners/run_c_scoch.py`
+- `league/SCO-Championship/engine/goals/arms.py`
+- `league/SCO-Championship/engine/goals/dc.py`
+- `league/SCO-Championship/engine/goals/harness.py`
+- `league/SCO-Championship/engine/goals/run_g_scoch.py`
+- `league/SCO-Championship/engine/sot/harness.py`
+- `league/SCO-Championship/engine/sot/model.py`
+- `league/SCO-Championship/engine/sot/run_s_scoch.py`
+- `league/SCO-Championship/engine/total_shots/model.py`
+- `league/SCO-Championship/engine/total_shots/run_t_scoch.py`

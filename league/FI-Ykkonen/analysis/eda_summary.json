@@ -1,0 +1,1035 @@
+{
+ "seasons": {
+  "2021": {
+   "n": 396,
+   "stats": 0,
+   "splits": 0,
+   "events": 381,
+   "shotmap": 0,
+   "lineup": 0,
+   "referee": 0,
+   "goals_pm": 3.3156565656565657,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.07349081364829396,
+   "yell_plain_pm": 0.0,
+   "yell_stats_pm": null,
+   "teams": 36,
+   "xg_rows": 0,
+   "score_mismatch": 1,
+   "awarded": 1,
+   "home_win_rate": 0.45202020202020204,
+   "draw_rate": 0.1994949494949495,
+   "over25_rate": 0.6287878787878788,
+   "phases": {
+    "kakkonen_c": 132,
+    "kakkonen_a": 132,
+    "kakkonen_b": 132
+   }
+  },
+  "2022": {
+   "n": 438,
+   "stats": 0,
+   "splits": 0,
+   "events": 427,
+   "shotmap": 0,
+   "lineup": 0,
+   "referee": 0,
+   "goals_pm": 3.4269406392694064,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.08430913348946135,
+   "yell_plain_pm": 0.0,
+   "yell_stats_pm": null,
+   "teams": 37,
+   "xg_rows": 0,
+   "score_mismatch": 2,
+   "awarded": 2,
+   "home_win_rate": 0.4634703196347032,
+   "draw_rate": 0.1917808219178082,
+   "over25_rate": 0.6484018264840182,
+   "phases": {
+    "kakkonen_b": 156,
+    "kakkonen_a": 132,
+    "kakkonen_c": 132,
+    "kakkonen_promo_a": 6,
+    "kakkonen_promo_c": 6,
+    "kakkonen_promo_b": 6
+   }
+  },
+  "2023": {
+   "n": 410,
+   "stats": 0,
+   "splits": 0,
+   "events": 396,
+   "shotmap": 0,
+   "lineup": 0,
+   "referee": 0,
+   "goals_pm": 3.3292682926829267,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.1590909090909091,
+   "yell_plain_pm": 0.0,
+   "yell_stats_pm": null,
+   "teams": 36,
+   "xg_rows": 0,
+   "score_mismatch": 2,
+   "awarded": 2,
+   "home_win_rate": 0.4902439024390244,
+   "draw_rate": 0.20243902439024392,
+   "over25_rate": 0.6268292682926829,
+   "phases": {
+    "kakkonen_a": 132,
+    "kakkonen_b": 132,
+    "kakkonen_c": 132,
+    "kakkonen_promo_playoff": 10,
+    "kakkonen_playoff": 4
+   }
+  },
+  "2024": {
+   "n": 162,
+   "stats": 0,
+   "splits": 0,
+   "events": 155,
+   "shotmap": 0,
+   "lineup": 0,
+   "referee": 0,
+   "goals_pm": 3.5123456790123457,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.0967741935483871,
+   "yell_plain_pm": 0.0,
+   "yell_stats_pm": null,
+   "teams": 12,
+   "xg_rows": 0,
+   "score_mismatch": 1,
+   "awarded": 1,
+   "home_win_rate": 0.4444444444444444,
+   "draw_rate": 0.2037037037037037,
+   "over25_rate": 0.7098765432098766,
+   "phases": {
+    "ykkonen": 132,
+    "ykkonen_championship": 15,
+    "ykkonen_relegation": 15
+   }
+  },
+  "2025": {
+   "n": 162,
+   "stats": 0,
+   "splits": 0,
+   "events": 159,
+   "shotmap": 0,
+   "lineup": 0,
+   "referee": 0,
+   "goals_pm": 3.4814814814814814,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.006289308176100629,
+   "yell_plain_pm": 0.0,
+   "yell_stats_pm": null,
+   "teams": 12,
+   "xg_rows": 0,
+   "score_mismatch": 1,
+   "awarded": 1,
+   "home_win_rate": 0.5185185185185185,
+   "draw_rate": 0.19135802469135801,
+   "over25_rate": 0.691358024691358,
+   "phases": {
+    "ykkonen": 132,
+    "ykkonen_relegation": 15,
+    "ykkonen_championship": 15
+   }
+  },
+  "2026": {
+   "n": 162,
+   "stats": 0,
+   "splits": 0,
+   "events": 157,
+   "shotmap": 0,
+   "lineup": 0,
+   "referee": 0,
+   "goals_pm": 3.617283950617284,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.012738853503184714,
+   "yell_plain_pm": 0.0,
+   "yell_stats_pm": null,
+   "teams": 12,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "awarded": 0,
+   "home_win_rate": 0.43209876543209874,
+   "draw_rate": 0.25925925925925924,
+   "over25_rate": 0.6666666666666666,
+   "phases": {
+    "ykkonen": 132,
+    "ykkonen_relegation": 15,
+    "ykkonen_championship": 15
+   }
+  }
+ },
+ "phase_levels": {
+  "2021:kakkonen_a": {
+   "n": 132,
+   "teams": 12,
+   "goals_pm": 3.393939393939394,
+   "home_win_rate": 0.5227272727272727,
+   "over25_rate": 0.6212121212121212
+  },
+  "2021:kakkonen_b": {
+   "n": 132,
+   "teams": 12,
+   "goals_pm": 3.1666666666666665,
+   "home_win_rate": 0.3939393939393939,
+   "over25_rate": 0.6439393939393939
+  },
+  "2021:kakkonen_c": {
+   "n": 132,
+   "teams": 12,
+   "goals_pm": 3.3863636363636362,
+   "home_win_rate": 0.4393939393939394,
+   "over25_rate": 0.6212121212121212
+  },
+  "2022:kakkonen_a": {
+   "n": 132,
+   "teams": 12,
+   "goals_pm": 3.6515151515151514,
+   "home_win_rate": 0.4621212121212121,
+   "over25_rate": 0.6893939393939394
+  },
+  "2022:kakkonen_b": {
+   "n": 156,
+   "teams": 13,
+   "goals_pm": 3.6666666666666665,
+   "home_win_rate": 0.5128205128205128,
+   "over25_rate": 0.6987179487179487
+  },
+  "2022:kakkonen_c": {
+   "n": 132,
+   "teams": 12,
+   "goals_pm": 2.9242424242424243,
+   "home_win_rate": 0.4015151515151515,
+   "over25_rate": 0.5606060606060606
+  },
+  "2022:kakkonen_promo_a": {
+   "n": 6,
+   "teams": 4,
+   "goals_pm": 3.5,
+   "home_win_rate": 0.5,
+   "over25_rate": 0.5
+  },
+  "2022:kakkonen_promo_b": {
+   "n": 6,
+   "teams": 4,
+   "goals_pm": 4.166666666666667,
+   "home_win_rate": 0.5,
+   "over25_rate": 0.6666666666666666
+  },
+  "2022:kakkonen_promo_c": {
+   "n": 6,
+   "teams": 4,
+   "goals_pm": 2.5,
+   "home_win_rate": 0.5,
+   "over25_rate": 0.5
+  },
+  "2023:kakkonen_a": {
+   "n": 132,
+   "teams": 12,
+   "goals_pm": 3.287878787878788,
+   "home_win_rate": 0.44696969696969696,
+   "over25_rate": 0.5757575757575758
+  },
+  "2023:kakkonen_b": {
+   "n": 132,
+   "teams": 12,
+   "goals_pm": 3.606060606060606,
+   "home_win_rate": 0.5303030303030303,
+   "over25_rate": 0.7196969696969697
+  },
+  "2023:kakkonen_c": {
+   "n": 132,
+   "teams": 12,
+   "goals_pm": 3.143939393939394,
+   "home_win_rate": 0.5,
+   "over25_rate": 0.5833333333333334
+  },
+  "2023:kakkonen_playoff": {
+   "n": 4,
+   "teams": 4,
+   "goals_pm": 2.0,
+   "home_win_rate": 0.25,
+   "over25_rate": 0.5
+  },
+  "2023:kakkonen_promo_playoff": {
+   "n": 10,
+   "teams": 10,
+   "goals_pm": 3.2,
+   "home_win_rate": 0.5,
+   "over25_rate": 0.7
+  },
+  "2024:ykkonen": {
+   "n": 132,
+   "teams": 12,
+   "goals_pm": 3.3257575757575757,
+   "home_win_rate": 0.4318181818181818,
+   "over25_rate": 0.6818181818181818
+  },
+  "2024:ykkonen_championship": {
+   "n": 15,
+   "teams": 6,
+   "goals_pm": 4.133333333333334,
+   "home_win_rate": 0.5333333333333333,
+   "over25_rate": 0.8
+  },
+  "2024:ykkonen_relegation": {
+   "n": 15,
+   "teams": 6,
+   "goals_pm": 4.533333333333333,
+   "home_win_rate": 0.4666666666666667,
+   "over25_rate": 0.8666666666666667
+  },
+  "2025:ykkonen": {
+   "n": 132,
+   "teams": 12,
+   "goals_pm": 3.3863636363636362,
+   "home_win_rate": 0.5151515151515151,
+   "over25_rate": 0.6590909090909091
+  },
+  "2025:ykkonen_championship": {
+   "n": 15,
+   "teams": 6,
+   "goals_pm": 3.6666666666666665,
+   "home_win_rate": 0.5333333333333333,
+   "over25_rate": 0.8666666666666667
+  },
+  "2025:ykkonen_relegation": {
+   "n": 15,
+   "teams": 6,
+   "goals_pm": 4.133333333333334,
+   "home_win_rate": 0.5333333333333333,
+   "over25_rate": 0.8
+  },
+  "2026:ykkonen": {
+   "n": 132,
+   "teams": 12,
+   "goals_pm": 3.5,
+   "home_win_rate": 0.38636363636363635,
+   "over25_rate": 0.6363636363636364
+  },
+  "2026:ykkonen_championship": {
+   "n": 15,
+   "teams": 6,
+   "goals_pm": 4.666666666666667,
+   "home_win_rate": 0.6666666666666666,
+   "over25_rate": 0.8
+  },
+  "2026:ykkonen_relegation": {
+   "n": 15,
+   "teams": 6,
+   "goals_pm": 3.6,
+   "home_win_rate": 0.6,
+   "over25_rate": 0.8
+  }
+ },
+ "era_levels": {
+  "kakkonen_2021_2023": {
+   "label": "Kakkonen 2021-2023",
+   "n": 1244,
+   "goals_pm": 3.3593247588424435,
+   "home_win_rate": 0.46864951768488744,
+   "draw_rate": 0.1977491961414791,
+   "over25_rate": 0.635048231511254,
+   "teams": 54
+  },
+  "ykkonen_2024": {
+   "label": "Ykkonen 2024",
+   "n": 162,
+   "goals_pm": 3.5123456790123457,
+   "home_win_rate": 0.4444444444444444,
+   "draw_rate": 0.2037037037037037,
+   "over25_rate": 0.7098765432098766,
+   "teams": 12
+  },
+  "kakkonen_2023": {
+   "label": "Kakkonen 2023",
+   "n": 410,
+   "goals_pm": 3.3292682926829267,
+   "home_win_rate": 0.4902439024390244,
+   "draw_rate": 0.20243902439024392,
+   "over25_rate": 0.6268292682926829,
+   "teams": 36
+  },
+  "kakkonen_2022_2023": {
+   "label": "Kakkonen 2022-2023",
+   "n": 848,
+   "goals_pm": 3.3797169811320753,
+   "home_win_rate": 0.47641509433962265,
+   "draw_rate": 0.19693396226415094,
+   "over25_rate": 0.6379716981132075,
+   "teams": 46
+  }
+ },
+ "kakkonen_group_levels": {
+  "kakkonen_a": {
+   "label": "kakkonen_a",
+   "n": 396,
+   "goals_pm": 3.4444444444444446,
+   "home_win_rate": 0.4772727272727273,
+   "draw_rate": 0.19444444444444445,
+   "over25_rate": 0.6287878787878788,
+   "teams": 21
+  },
+  "kakkonen_a_2022_2023": {
+   "label": "kakkonen_a 2022-2023",
+   "n": 264,
+   "goals_pm": 3.4696969696969697,
+   "home_win_rate": 0.45454545454545453,
+   "draw_rate": 0.20833333333333334,
+   "over25_rate": 0.6325757575757576,
+   "teams": 17
+  },
+  "kakkonen_b": {
+   "label": "kakkonen_b",
+   "n": 420,
+   "goals_pm": 3.4904761904761905,
+   "home_win_rate": 0.48095238095238096,
+   "draw_rate": 0.18333333333333332,
+   "over25_rate": 0.6880952380952381,
+   "teams": 18
+  },
+  "kakkonen_b_2022_2023": {
+   "label": "kakkonen_b 2022-2023",
+   "n": 288,
+   "goals_pm": 3.638888888888889,
+   "home_win_rate": 0.5208333333333334,
+   "draw_rate": 0.1527777777777778,
+   "over25_rate": 0.7083333333333334,
+   "teams": 17
+  },
+  "kakkonen_c": {
+   "label": "kakkonen_c",
+   "n": 396,
+   "goals_pm": 3.1515151515151514,
+   "home_win_rate": 0.44696969696969696,
+   "draw_rate": 0.20707070707070707,
+   "over25_rate": 0.5883838383838383,
+   "teams": 18
+  },
+  "kakkonen_c_2022_2023": {
+   "label": "kakkonen_c 2022-2023",
+   "n": 264,
+   "goals_pm": 3.034090909090909,
+   "home_win_rate": 0.45075757575757575,
+   "draw_rate": 0.2196969696969697,
+   "over25_rate": 0.571969696969697,
+   "teams": 15
+  }
+ },
+ "cross_group": {
+  "2021": {
+   "regular_matches": 396,
+   "promo_matches": 0,
+   "promo_cross_group_matches": 0,
+   "promo_groups_represented": [],
+   "playoff_matches": 0,
+   "playoff_cross_group_matches": 0,
+   "regular_groups_teams": {
+    "a": 12,
+    "b": 12,
+    "c": 12
+   }
+  },
+  "2022": {
+   "regular_matches": 420,
+   "promo_matches": 18,
+   "promo_cross_group_matches": 0,
+   "promo_groups_represented": [
+    "a",
+    "b",
+    "c"
+   ],
+   "playoff_matches": 0,
+   "playoff_cross_group_matches": 0,
+   "regular_groups_teams": {
+    "a": 12,
+    "b": 13,
+    "c": 12
+   }
+  },
+  "2023": {
+   "regular_matches": 396,
+   "promo_matches": 10,
+   "promo_cross_group_matches": 10,
+   "promo_groups_represented": [
+    "a",
+    "b",
+    "c"
+   ],
+   "playoff_matches": 14,
+   "playoff_cross_group_matches": 12,
+   "regular_groups_teams": {
+    "a": 12,
+    "b": 12,
+    "c": 12
+   }
+  }
+ },
+ "team_continuity": {
+  "2021-2022": {
+   "n_common": 26,
+   "n_s1": 36,
+   "n_s2": 37
+  },
+  "2021-2023": {
+   "n_common": 22,
+   "n_s1": 36,
+   "n_s2": 36
+  },
+  "2021-2024": {
+   "n_common": 8,
+   "n_s1": 36,
+   "n_s2": 12
+  },
+  "2021-2025": {
+   "n_common": 6,
+   "n_s1": 36,
+   "n_s2": 12
+  },
+  "2021-2026": {
+   "n_common": 7,
+   "n_s1": 36,
+   "n_s2": 12
+  },
+  "2022-2023": {
+   "n_common": 27,
+   "n_s1": 37,
+   "n_s2": 36
+  },
+  "2022-2024": {
+   "n_common": 11,
+   "n_s1": 37,
+   "n_s2": 12
+  },
+  "2022-2025": {
+   "n_common": 9,
+   "n_s1": 37,
+   "n_s2": 12
+  },
+  "2022-2026": {
+   "n_common": 9,
+   "n_s1": 37,
+   "n_s2": 12
+  },
+  "2023-2024": {
+   "n_common": 10,
+   "n_s1": 36,
+   "n_s2": 12
+  },
+  "2023-2025": {
+   "n_common": 8,
+   "n_s1": 36,
+   "n_s2": 12
+  },
+  "2023-2026": {
+   "n_common": 6,
+   "n_s1": 36,
+   "n_s2": 12
+  },
+  "2024-2025": {
+   "n_common": 9,
+   "n_s1": 12,
+   "n_s2": 12
+  },
+  "2024-2026": {
+   "n_common": 7,
+   "n_s1": 12,
+   "n_s2": 12
+  },
+  "2025-2026": {
+   "n_common": 9,
+   "n_s1": 12,
+   "n_s2": 12
+  }
+ },
+ "ykkonen_2024_continuity": {
+  "n_2024": 12,
+  "in_kakkonen_2021_2023": 11,
+  "in_kakkonen_2023": 10,
+  "in_kakkonen_2022": 11,
+  "in_kakkonen_2021": 8,
+  "new_to_corpus_2024": 1
+ },
+ "event_cards_by_season": {
+  "2021": {
+   "n_events_matches": 381,
+   "yellow_plain_total": 0,
+   "yellowred_total": 28,
+   "red_total": 53
+  },
+  "2022": {
+   "n_events_matches": 427,
+   "yellow_plain_total": 0,
+   "yellowred_total": 36,
+   "red_total": 62
+  },
+  "2023": {
+   "n_events_matches": 396,
+   "yellow_plain_total": 0,
+   "yellowred_total": 63,
+   "red_total": 104
+  },
+  "2024": {
+   "n_events_matches": 155,
+   "yellow_plain_total": 0,
+   "yellowred_total": 15,
+   "red_total": 24
+  },
+  "2025": {
+   "n_events_matches": 159,
+   "yellow_plain_total": 0,
+   "yellowred_total": 1,
+   "red_total": 30
+  },
+  "2026": {
+   "n_events_matches": 157,
+   "yellow_plain_total": 0,
+   "yellowred_total": 2,
+   "red_total": 30
+  }
+ },
+ "empty_events": {
+  "n_total": 55,
+  "n_with_goals": 0,
+  "goals_in_them": 0,
+  "all_scoreless": true,
+  "by_season": {
+   "2021": 15,
+   "2022": 11,
+   "2023": 14,
+   "2024": 7,
+   "2025": 3,
+   "2026": 5
+  }
+ },
+ "awarded_detail": [
+  {
+   "match_id": 3537915,
+   "season": 2021,
+   "date": "2021-08-21",
+   "phase": "kakkonen_a",
+   "home": "K\u00e4Pa",
+   "away": "NJS",
+   "score": "0-3",
+   "ev_goals": "0-0"
+  },
+  {
+   "match_id": 3834645,
+   "season": 2022,
+   "date": "2022-07-17",
+   "phase": "kakkonen_c",
+   "home": "JBK",
+   "away": "FC Vaajakoski",
+   "score": "0-3",
+   "ev_goals": "6-3"
+  },
+  {
+   "match_id": 3834457,
+   "season": 2022,
+   "date": "2022-09-24",
+   "phase": "kakkonen_a",
+   "home": "NJS",
+   "away": "FC Futura",
+   "score": "3-0",
+   "ev_goals": "3-3"
+  },
+  {
+   "match_id": 4115741,
+   "season": 2023,
+   "date": "2023-08-23",
+   "phase": "kakkonen_a",
+   "home": "PPJ",
+   "away": "FC Reipas",
+   "score": "3-0",
+   "ev_goals": "0-2"
+  },
+  {
+   "match_id": 4115805,
+   "season": 2023,
+   "date": "2023-09-24",
+   "phase": "kakkonen_a",
+   "home": "FC Futura",
+   "away": "Klubi 04",
+   "score": "3-0",
+   "ev_goals": "0-4"
+  },
+  {
+   "match_id": 4422585,
+   "season": 2024,
+   "date": "2024-05-12",
+   "phase": "ykkonen",
+   "home": "FC Vaajakoski",
+   "away": "OLS",
+   "score": "0-3",
+   "ev_goals": "1-3"
+  },
+  {
+   "match_id": 4753719,
+   "season": 2025,
+   "date": "2025-05-11",
+   "phase": "ykkonen",
+   "home": "JJK Jyv\u00e4skyl\u00e4",
+   "away": "KPV",
+   "score": "3-0",
+   "ev_goals": "1-1"
+  }
+ ],
+ "halves_dev": {
+  "goals_events": {
+   "share_1h": 0.4463002114164905,
+   "n_goals": 4730,
+   "n_matches": 1353,
+   "note": "event times, dev era, awarded excluded"
+  },
+  "yellows_events": {
+   "share_1h": 0.1276595744680851,
+   "n_yellows": 141,
+   "n_matches": 1353,
+   "note": "plain Yellows exist only from 2024; 2021-2023 event yellows are YellowRed only \u2014 NOT a frozen constant (no K market)"
+  },
+  "sot": null,
+  "corners": null,
+  "total_shots": null,
+  "yellows_stats": null
+ },
+ "halves_by_era": {
+  "kakkonen_2021_2023": {
+   "share_1h": 0.44452449567723346,
+   "n_goals": 4164,
+   "n_matches": 1199
+  },
+  "ykkonen_2024": {
+   "share_1h": 0.45936395759717313,
+   "n_goals": 566,
+   "n_matches": 154
+  }
+ },
+ "trait_reliability_dev": {
+  "goals_for": {
+   "split_half_r": 0.612212922388158,
+   "n_teams": 55
+  },
+  "goals_against": {
+   "split_half_r": 0.631650856640078,
+   "n_teams": 55
+  }
+ },
+ "trait_reliability_by_era": {
+  "kakkonen_2021_2023": {
+   "goals_for": {
+    "split_half_r": 0.6097738658605336,
+    "n_teams": 54
+   },
+   "goals_against": {
+    "split_half_r": 0.6597864813715023,
+    "n_teams": 54
+   }
+  },
+  "ykkonen_2024": {
+   "goals_for": {
+    "split_half_r": 0.563554994329365,
+    "n_teams": 12
+   },
+   "goals_against": {
+    "split_half_r": 0.679706615543893,
+    "n_teams": 12
+   }
+  }
+ },
+ "season_to_season": {
+  "2021-2022": {
+   "n_teams_common": 26,
+   "gf_corr": 0.08267334446485354,
+   "ga_corr": 0.1844941837729154
+  },
+  "2022-2023": {
+   "n_teams_common": 27,
+   "gf_corr": 0.34718203758133076,
+   "ga_corr": 0.4289023926300128
+  },
+  "2023-2024": {
+   "n_teams_common": 10,
+   "gf_corr": 0.32518556970777174,
+   "ga_corr": 0.30450196915017663
+  }
+ },
+ "entrant_transitions_dev": [
+  {
+   "season": "2022",
+   "team_id": 7932,
+   "team": "Tampere United",
+   "n_matches": 24,
+   "gf_diff": 0.1615296803652968,
+   "ga_diff": 0.07819634703196354
+  },
+  {
+   "season": "2022",
+   "team_id": 1576,
+   "team": "RoPS",
+   "n_matches": 22,
+   "gf_diff": -0.03165213781652132,
+   "ga_diff": -0.304379410543794
+  },
+  {
+   "season": "2022",
+   "team_id": 2362,
+   "team": "JIPPO",
+   "n_matches": 25,
+   "gf_diff": 0.2865296803652968,
+   "ga_diff": -0.9534703196347032
+  },
+  {
+   "season": "2022",
+   "team_id": 1340077,
+   "team": "LaPa",
+   "n_matches": 22,
+   "gf_diff": -1.0316521378165215,
+   "ga_diff": 2.3319842258198427
+  },
+  {
+   "season": "2022",
+   "team_id": 1340078,
+   "team": "KuPS Akatemia",
+   "n_matches": 22,
+   "gf_diff": -0.34983395599833966,
+   "ga_diff": -0.07710668327106673
+  },
+  {
+   "season": "2022",
+   "team_id": 731215,
+   "team": "PPJ",
+   "n_matches": 22,
+   "gf_diff": 0.7410751349107514,
+   "ga_diff": 0.19562058945620597
+  },
+  {
+   "season": "2022",
+   "team_id": 2160,
+   "team": "Klubi 04",
+   "n_matches": 27,
+   "gf_diff": 0.6198630136986303,
+   "ga_diff": 0.21245560629122262
+  },
+  {
+   "season": "2022",
+   "team_id": 1340082,
+   "team": "Komeetat",
+   "n_matches": 22,
+   "gf_diff": -0.9861975923619759,
+   "ga_diff": 0.6501660440016606
+  },
+  {
+   "season": "2022",
+   "team_id": 162135,
+   "team": "FC Futura",
+   "n_matches": 22,
+   "gf_diff": -0.34983395599833966,
+   "ga_diff": 0.5138024076380239
+  },
+  {
+   "season": "2022",
+   "team_id": 193818,
+   "team": "MuSa",
+   "n_matches": 24,
+   "gf_diff": -0.13013698630136994,
+   "ga_diff": -0.005136986301369939
+  },
+  {
+   "season": "2022",
+   "team_id": 193820,
+   "team": "Kajha",
+   "n_matches": 22,
+   "gf_diff": -0.34983395599833966,
+   "ga_diff": 0.3319842258198422
+  },
+  {
+   "season": "2023",
+   "team_id": 1375104,
+   "team": "Atlantis Academy",
+   "n_matches": 22,
+   "gf_diff": -0.7555432372505543,
+   "ga_diff": -0.21008869179600875
+  },
+  {
+   "season": "2023",
+   "team_id": 4448,
+   "team": "Pallo-Iirot",
+   "n_matches": 22,
+   "gf_diff": 0.01718403547671854,
+   "ga_diff": -0.11917960088691792
+  },
+  {
+   "season": "2023",
+   "team_id": 2370,
+   "team": "PEPO Lappeenranta",
+   "n_matches": 22,
+   "gf_diff": 0.3808203991130821,
+   "ga_diff": 0.33536585365853666
+  },
+  {
+   "season": "2023",
+   "team_id": 630086,
+   "team": "P\u00f6xyt",
+   "n_matches": 22,
+   "gf_diff": -0.7555432372505543,
+   "ga_diff": 0.653547671840355
+  },
+  {
+   "season": "2023",
+   "team_id": 630375,
+   "team": "Pargas IF",
+   "n_matches": 22,
+   "gf_diff": -0.5282705099778269,
+   "ga_diff": 0.9717294900221729
+  },
+  {
+   "season": "2023",
+   "team_id": 1436492,
+   "team": "Kuopion Elo",
+   "n_matches": 22,
+   "gf_diff": -0.5737250554323725,
+   "ga_diff": 0.10809312638580937
+  },
+  {
+   "season": "2023",
+   "team_id": 260273,
+   "team": "PK-35",
+   "n_matches": 25,
+   "gf_diff": 0.4953658536585368,
+   "ga_diff": -0.7046341463414634
+  },
+  {
+   "season": "2023",
+   "team_id": 610904,
+   "team": "TiPS",
+   "n_matches": 22,
+   "gf_diff": -0.7555432372505543,
+   "ga_diff": 1.7899113082039912
+  },
+  {
+   "season": "2023",
+   "team_id": 2363,
+   "team": "TP-47",
+   "n_matches": 22,
+   "gf_diff": -0.07372505543237251,
+   "ga_diff": -0.07372505543237251
+  },
+  {
+   "season": "2024",
+   "team_id": 4673,
+   "team": "JJK Jyv\u00e4skyl\u00e4",
+   "n_matches": 27,
+   "gf_diff": -0.2006172839506173,
+   "ga_diff": 0.021604938271604812
+  },
+  {
+   "season": "2024",
+   "team_id": 4450,
+   "team": "KPV",
+   "n_matches": 27,
+   "gf_diff": 0.16975308641975295,
+   "ga_diff": -0.5709876543209877
+  }
+ ],
+ "x2_offset_dev": {
+  "n_transitions": 22,
+  "g_log": -0.18181761158309973,
+  "c_log": 0.22314355131420976,
+  "gf_diff_mean": -0.18181761158309973,
+  "ga_diff_mean": 0.23526151299602488
+ },
+ "entrant_transitions_by_era": {
+  "kakkonen_2022_2023": {
+   "n_transitions": 20,
+   "gf_diff_mean": -0.19845616286486648,
+   "ga_diff_mean": 0.2862568000980965
+  },
+  "ykkonen_2024": {
+   "n_transitions": 2,
+   "gf_diff_mean": -0.015432098765432167,
+   "ga_diff_mean": -0.27469135802469147
+  }
+ },
+ "lines": {
+  "goals_ou": {
+   "over_rates": {
+    "1.5": 0.8455445544554455,
+    "2.5": 0.6495049504950495,
+    "3.5": 0.43564356435643564
+   },
+   "primary": 3.5,
+   "n": 1010
+  }
+ },
+ "lines_by_era": {
+  "kakkonen_2022_2023": {
+   "over_rates": {
+    "1.5": 0.8443396226415094,
+    "2.5": 0.6379716981132075,
+    "3.5": 0.43160377358490565
+   },
+   "primary": 3.5,
+   "n": 848
+  },
+  "ykkonen_2024": {
+   "over_rates": {
+    "1.5": 0.8518518518518519,
+    "2.5": 0.7098765432098766,
+    "3.5": 0.4567901234567901
+   },
+   "primary": 3.5,
+   "n": 162
+  }
+ },
+ "lines_by_group_2022_2023": {
+  "kakkonen_a": {
+   "over_rates": {
+    "1.5": 0.8371212121212122,
+    "2.5": 0.6325757575757576,
+    "3.5": 0.42803030303030304
+   },
+   "primary": 3.5,
+   "n": 264
+  },
+  "kakkonen_b": {
+   "over_rates": {
+    "1.5": 0.875,
+    "2.5": 0.7083333333333334,
+    "3.5": 0.5138888888888888
+   },
+   "primary": 3.5,
+   "n": 288
+  },
+  "kakkonen_c": {
+   "over_rates": {
+    "1.5": 0.8295454545454546,
+    "2.5": 0.571969696969697,
+    "3.5": 0.3484848484848485
+   },
+   "primary": 2.5,
+   "n": 264
+  }
+ },
+ "home_win_rate_dev_scored": 0.47128712871287126,
+ "draw_rate_dev_scored": 0.19801980198019803,
+ "goals_pm_dev_scored": 3.400990099009901,
+ "dev_scored_n": 1010,
+ "dev_n": 1406,
+ "virgin_n": 162,
+ "reserve_n": 162
+}

@@ -1,0 +1,110 @@
+{
+  "protocol": {
+    "league": "UA-PremierLeague",
+    "virgin_season": "2025/2026",
+    "n": 240,
+    "scored_arms": [
+      "gate_zero"
+    ],
+    "primary_line": 4.5,
+    "sign_convention": "actual_minus_predicted",
+    "r_handling": "fixed estimate_r from pre-virgin predictions; Online state continues through virgin"
+  },
+  "arms": {
+    "gate_zero": {
+      "r": {
+        "model": 51.42780426698184,
+        "base": 51.93215202925796,
+        "naive": 32.03421046958618
+      },
+      "metrics": {
+        "model": {
+          "3.5": {
+            "n": 240,
+            "ll": 0.7042282381494676,
+            "mean_p": 0.5451168287332032,
+            "actual_rate": 0.4708333333333333
+          },
+          "4.5": {
+            "n": 240,
+            "ll": 0.6396314441222771,
+            "mean_p": 0.36169467308025544,
+            "actual_rate": 0.32083333333333336
+          }
+        },
+        "base": {
+          "3.5": {
+            "n": 240,
+            "ll": 0.7069584652252007,
+            "mean_p": 0.5523983157072861,
+            "actual_rate": 0.4708333333333333
+          },
+          "4.5": {
+            "n": 240,
+            "ll": 0.6347768838802784,
+            "mean_p": 0.36451289835661604,
+            "actual_rate": 0.32083333333333336
+          }
+        },
+        "naive": {
+          "3.5": {
+            "n": 240,
+            "ll": 0.6990139895100433,
+            "mean_p": 0.4878657469524967,
+            "actual_rate": 0.4708333333333333
+          },
+          "4.5": {
+            "n": 240,
+            "ll": 0.6384410207166751,
+            "mean_p": 0.3133364798436892,
+            "actual_rate": 0.32083333333333336
+          }
+        }
+      },
+      "calibration": {
+        "diff": -0.040861339746922104,
+        "se": 0.03045907586168308,
+        "status": "fail"
+      },
+      "legs": {
+        "i_ll": false,
+        "ii_calibration": false
+      }
+    }
+  },
+  "baselines": {
+    "base": {
+      "3.5": {
+        "n": 240,
+        "ll": 0.7069584652252007,
+        "mean_p": 0.5523983157072861,
+        "actual_rate": 0.4708333333333333
+      },
+      "4.5": {
+        "n": 240,
+        "ll": 0.6347768838802784,
+        "mean_p": 0.36451289835661604,
+        "actual_rate": 0.32083333333333336
+      }
+    },
+    "naive": {
+      "3.5": {
+        "n": 240,
+        "ll": 0.6990139895100433,
+        "mean_p": 0.4878657469524967,
+        "actual_rate": 0.4708333333333333
+      },
+      "4.5": {
+        "n": 240,
+        "ll": 0.6384410207166751,
+        "mean_p": 0.3133364798436892,
+        "actual_rate": 0.32083333333333336
+      }
+    }
+  },
+  "sensitivity_event_target": {
+    "metrics_model": null,
+    "calibration": null
+  },
+  "shipped_arm": null
+}

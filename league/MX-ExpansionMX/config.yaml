@@ -1,0 +1,42 @@
+league: MX-ExpansionMX
+country: Mexico
+fotmob_id: 8976
+tier: 2
+warehouse_root: ~/workspace/footballprediction
+data:
+  matches: league/MX-ExpansionMX/data/mxe_matches.csv
+  team_matches: league/MX-ExpansionMX/data/mxe_team_matches.csv
+seasons: ["2021/2022 - Apertura", "2021/2022 - Clausura", "2022/2023 - Apertura", "2022/2023 - Clausura", "2023/2024 - Apertura", "2023/2024 - Clausura", "2024/2025 - Apertura", "2024/2025 - Clausura", "2025/2026 - Apertura", "2025/2026 - Clausura"]
+in_progress_season: "2026/2027 - Apertura"
+goals:
+  warmup: "2021/2022 - Apertura"
+  dev_period: ["2021/2022 - Clausura", "2022/2023 - Apertura", "2022/2023 - Clausura", "2023/2024 - Apertura", "2023/2024 - Clausura", "2024/2025 - Apertura", "2024/2025 - Clausura", "2025/2026 - Apertura"]
+  virgin_primary: "2025/2026 - Clausura"
+  virgin_confirmatory: "2026/2027 - Apertura"
+cards:
+  warmup: "2023/2024 - Apertura"
+  dev_period: ["2023/2024 - Clausura", "2024/2025 - Apertura", "2024/2025 - Clausura", "2025/2026 - Apertura"]
+  virgin_primary: "2025/2026 - Clausura"
+  excluded_block: "2022/2023 - Clausura (partial yellow capture: 45/153 zero-yellow matches)"
+halves_constants:
+  goals_1h_share: 0.448
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+  yellow_cards_1h_share: 0.402
+markets:
+  goals: G-MXE
+  sot: S-MXE (NOT BUILDABLE)
+  corners: C-MXE (NOT BUILDABLE)
+  cards: K-MXE
+  total_shots: T-MXE (NOT BUILDABLE)
+notes:
+  - "FORMAT: two tournaments per football year (Apertura late Jun-Dec, Clausura Jan-early Jun), single round-robin (17 rounds at 17-18 teams 2021-2023; 15 rounds at 15 teams from 2023/2024) PLUS a liguilla play-off every tournament. Phase rule frozen: play-offs excluded from every fit and score; only phase=regular, finished=1 rows enter any window. Tournament rule frozen: Apertura = date 15 Jun-31 Dec of first calendar year, Clausura = 1 Jan-14 Jun of second."
+  - "STATS ERA DOES NOT EXIST in any complete season: content.stats is None in all 1,380 payloads before 2026/2027 and real (with period splits + shotmap/xG) only in the 128 in-progress 2026/2027 rows. SOT/corners/total_shots have no dev window and no complete virgin: S/C/T NOT BUILDABLE."
+  - "CARDS ERA: plain Yellow events absent before 2022/2023 Clausura; that block's capture is partial (45/153 zero-yellow matches, 3.86/match vs 4.89-5.84 clean) and is EXCLUDED from the cards corpus entirely. Clean era = 2023/2024 Apertura onward (630 matches). Target = unified event yellows (Yellow + YellowRed)."
+  - "DEFECT: 1 of 1,208 regular matches (4070356) has goal events not matching the header score; excluded from halves computations only, header score remains its FT target."
+  - "No xG and no shotmap in the modelling corpus: goals model is goals-only; X1/X3/X4/X6 dropped."
+  - "X2 mover arm DROPPED with reasons: no promotion to Liga MX and no relegation from it exists in the window (closed development league); same-block team-id overlap with the Liga MX corpus = 0 in all 10 blocks; the 3 entrant team-blocks are franchise entries, not parent-corpus movers."
+  - "ALTITUDE measured and REJECTED (R7): >=2000 m home edge +0.207 (n=150) vs +0.513 rest (n=1,058) with the corrected home-city map (Atlante = Zacatepec 1,160 m in this era) - no positive altitude effect in this league; no arm registered."
+  - "Referee text present on 0% of dev matches (12.4% in virgin block, 84.2% in the excluded in-progress season): X8 dropped."
+  - "Calibration convention: actual minus predicted."

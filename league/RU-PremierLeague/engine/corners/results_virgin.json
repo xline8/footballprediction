@@ -1,0 +1,101 @@
+{
+  "protocol": {
+    "league": "RU-PremierLeague",
+    "virgin_season": "2025/2026",
+    "n": 240,
+    "scored_arms": [
+      "gate_zero",
+      "x7"
+    ],
+    "primary_line": 9.5,
+    "sign_convention": "actual_minus_predicted"
+  },
+  "gate_zero": {
+    "n": 240,
+    "season": "2025/2026",
+    "ll_8.5": 0.6934489939764504,
+    "mean_p_8.5": 0.5891474064331619,
+    "actual_over_8.5": 0.575,
+    "ll_9.5": 0.7008263319206129,
+    "mean_p_9.5": 0.4702034574857651,
+    "actual_over_9.5": 0.45,
+    "ll_10.5": 0.6505187273236785,
+    "mean_p_10.5": 0.35837332799553173,
+    "actual_over_10.5": 0.3333333333333333,
+    "both_teams_active_share": 1.0,
+    "active_with_nonzero_beta_share": 1.0,
+    "calibration_diff": -0.020203457485765075,
+    "calibration_se": 0.03255496528914863,
+    "arm": "gate_zero",
+    "params": {
+      "gamma": 0.15,
+      "r": 1.1895876766717148,
+      "beta": [
+        0.0,
+        0.025
+      ],
+      "fit_n": 950
+    }
+  },
+  "x7": {
+    "n": 240,
+    "season": "2025/2026",
+    "ll_8.5": 0.684030934805627,
+    "mean_p_8.5": 0.5899949063134989,
+    "actual_over_8.5": 0.575,
+    "ll_9.5": 0.6898042400168855,
+    "mean_p_9.5": 0.47035332227138216,
+    "actual_over_9.5": 0.45,
+    "ll_10.5": 0.6396760750310595,
+    "mean_p_10.5": 0.35783655714309004,
+    "actual_over_10.5": 0.3333333333333333,
+    "both_teams_active_share": 1.0,
+    "active_with_nonzero_beta_share": 0.0,
+    "calibration_diff": -0.020353322271382146,
+    "calibration_se": 0.032207052992975445,
+    "arm": "x7",
+    "params": {
+      "gamma": 0.15,
+      "r": 1.1895876766717148,
+      "beta": [
+        0.0
+      ],
+      "fit_n": 950
+    }
+  },
+  "league_base_rate": {
+    "n": 240,
+    "season": "2025/2026",
+    "ll_8.5": 0.7323455052389534,
+    "mean_p_8.5": 0.41685488734714526,
+    "actual_over_8.5": 0.575,
+    "ll_9.5": 0.6988247303327736,
+    "mean_p_9.5": 0.37836381599076546,
+    "actual_over_9.5": 0.45,
+    "ll_10.5": 0.6367393020057032,
+    "mean_p_10.5": 0.3433852637302944,
+    "actual_over_10.5": 0.3333333333333333,
+    "both_teams_active_share": 0.0,
+    "active_with_nonzero_beta_share": 0.0,
+    "calibration_diff": 0.07163618400923459,
+    "calibration_se": 0.03218019349780988
+  },
+  "naive_trailing_10": {
+    "n": 240,
+    "season": "2025/2026",
+    "ll_8.5": 0.7492253974992548,
+    "mean_p_8.5": 0.38942417048485756,
+    "actual_over_8.5": 0.575,
+    "ll_9.5": 0.7055210111760398,
+    "mean_p_9.5": 0.3522998445483922,
+    "actual_over_9.5": 0.45,
+    "ll_10.5": 0.6340909958144303,
+    "mean_p_10.5": 0.3187577833593596,
+    "actual_over_10.5": 0.3333333333333333,
+    "both_teams_active_share": 0.0,
+    "active_with_nonzero_beta_share": 0.0,
+    "calibration_diff": 0.09770015545160783,
+    "calibration_se": 0.03208640037524384
+  },
+  "shipped_arm": null
+}

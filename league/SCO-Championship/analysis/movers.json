@@ -1,0 +1,38 @@
+{
+ "2022/2023": {
+  "down_from_premiership": [
+   8284
+  ],
+  "up_from_league_one": [
+   6002,
+   8235
+  ]
+ },
+ "2023/2024": {
+  "down_from_premiership": [
+   9938
+  ],
+  "up_from_league_one": [
+   8176,
+   8457
+  ]
+ },
+ "2024/2025": {
+  "down_from_premiership": [
+   8282
+  ],
+  "up_from_league_one": [
+   8429,
+   8596
+  ]
+ },
+ "2025/2026": {
+  "down_from_premiership": [
+   8467,
+   8649
+  ],
+  "up_from_league_one": [
+   8280
+  ]
+ }
+}

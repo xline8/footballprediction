@@ -1,0 +1,34 @@
+# SK-1Liga (Slovakia 1. liga) — league config
+league: SK-1Liga
+country: Slovakia
+fotmob_id: 176
+tier: 1
+warehouse: data_enrichment/fotmob_world_index.csv (league_id=176)
+data:
+  matches: league/SK-1Liga/data/sk_matches.csv
+  team_matches: league/SK-1Liga/data/sk_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.4448
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+  yellow_cards_1h_share: 0.3357
+markets:
+  goals: G-SK
+  sot: S-SK
+  corners: C-SK
+  cards: K-SK
+  total_shots: T-SK (not buildable — total_shots definition break at 2025/2026)
+notes:
+  - Split-year seasons; 12 teams; regular phase + championship/relegation split groups are ordinary included rows with a phase flag; ECL play-off ties (3, in 2021/2022, 2022/2023, 2024/2025) are excluded as a different population.
+  - Cards target is event yellows by construction: the stats feed has no cards key in the dev era (1 of 768 matches); virgin-era audit vs stats yellows agrees 159/192, means 4.016 vs 4.005 — no artefact.
+  - No xG and no shotmap in any payload; goals model is goals-only.
+  - Referee names absent from the entire dev era (0/768); X8 dropped, K-SK is Gate Zero only.
+  - Total shots level breaks at the rich-feed boundary (dev ~19.3 -> virgin 27.1); T-SK not buildable, S-SK carries the declared risk on its shots input.
+  - Stats feed starts 2021-10-17 (first 61 matches of 2021/2022 have no stats); one 2023/2024 round (5 matches) also missing stats.
+  - One dev-era match (3606259, 2021-10-17) has an empty events list; its event-derived fields are feed zeros, flagged not repaired.
+  - 2026/2027 is in progress (84 regular-phase matches) and is not read in this build.

@@ -1,0 +1,27 @@
+{
+  "n": 322,
+  "arms": {
+    "GZ": {
+      "ll_6.5": 0.6776903941685702,
+      "calibration_diff": 0.05467885831173943,
+      "calibration_se": 0.02731201697516243,
+      "n": 322
+    }
+  },
+  "read_arms": [
+    "GZ"
+  ],
+  "baselines": {
+    "league_base_rate": {
+      "ll_6.5": 0.6822266829295762,
+      "calibration_diff": 0.024147267025827722,
+      "n": 322
+    },
+    "naive": {
+      "ll_6.5": 0.6908802835860193,
+      "calibration_diff": 0.07342372956426194,
+      "n": 322
+    }
+  },
+  "shipped_arm": null
+}

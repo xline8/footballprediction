@@ -1,0 +1,280 @@
+{
+ "n": 1215,
+ "seasons": [
+  "2021/2022",
+  "2022/2023",
+  "2023/2024",
+  "2024/2025",
+  "2025/2026",
+  "2026/2027"
+ ],
+ "per_season": {
+  "2021/2022": {
+   "n": 228,
+   "goals": 2.469,
+   "home_goals": 1.404,
+   "away_goals": 1.066,
+   "sot": 8.088,
+   "corners": 10.741,
+   "shots": 24.439,
+   "yellows_stats": 3.886,
+   "yellows_events": 3.987,
+   "reds": 0.206,
+   "xg": 2.432,
+   "cov_stats": 100,
+   "cov_half": 0,
+   "cov_shotmap": 100,
+   "cov_ref": 47.4,
+   "cov_touches": 82.0,
+   "cov_xg": 100.0,
+   "phases": {
+    "regular": 198,
+    "split": 30,
+    "final": 0
+   }
+  },
+  "2022/2023": {
+   "n": 228,
+   "goals": 2.939,
+   "home_goals": 1.702,
+   "away_goals": 1.237,
+   "sot": 8.311,
+   "corners": 10.254,
+   "shots": 25.202,
+   "yellows_stats": 3.899,
+   "yellows_events": 4.004,
+   "reds": 0.294,
+   "xg": 2.657,
+   "cov_stats": 100,
+   "cov_half": 30.7,
+   "cov_shotmap": 100,
+   "cov_ref": 100.0,
+   "cov_touches": 73.7,
+   "cov_xg": 100.0,
+   "phases": {
+    "regular": 198,
+    "split": 30,
+    "final": 0
+   }
+  },
+  "2023/2024": {
+   "n": 228,
+   "goals": 2.759,
+   "home_goals": 1.518,
+   "away_goals": 1.241,
+   "sot": 8.658,
+   "corners": 10.925,
+   "shots": 25.732,
+   "yellows_stats": 3.592,
+   "yellows_events": 3.632,
+   "reds": 0.14,
+   "xg": 2.79,
+   "cov_stats": 100,
+   "cov_half": 100,
+   "cov_shotmap": 100,
+   "cov_ref": 100.0,
+   "cov_touches": 88.6,
+   "cov_xg": 100.0,
+   "phases": {
+    "regular": 198,
+    "split": 30,
+    "final": 0
+   }
+  },
+  "2024/2025": {
+   "n": 228,
+   "goals": 2.961,
+   "home_goals": 1.693,
+   "away_goals": 1.268,
+   "sot": 8.583,
+   "corners": 11.035,
+   "shots": 25.338,
+   "yellows_stats": 3.658,
+   "yellows_events": 3.732,
+   "reds": 0.184,
+   "xg": 2.779,
+   "cov_stats": 100,
+   "cov_half": 100,
+   "cov_shotmap": 100,
+   "cov_ref": 100.0,
+   "cov_touches": 100.0,
+   "cov_xg": 100.0,
+   "phases": {
+    "regular": 198,
+    "split": 30,
+    "final": 0
+   }
+  },
+  "2025/2026": {
+   "n": 228,
+   "goals": 2.781,
+   "home_goals": 1.588,
+   "away_goals": 1.193,
+   "sot": 8.627,
+   "corners": 10.018,
+   "shots": 25.316,
+   "yellows_stats": 3.991,
+   "yellows_events": 3.991,
+   "reds": 0.184,
+   "xg": 2.788,
+   "cov_stats": 100,
+   "cov_half": 100,
+   "cov_shotmap": 100,
+   "cov_ref": 98.7,
+   "cov_touches": 100.0,
+   "cov_xg": 100.0,
+   "phases": {
+    "regular": 198,
+    "split": 30,
+    "final": 0
+   }
+  },
+  "2026/2027": {
+   "n": 75,
+   "goals": 2.853,
+   "home_goals": 1.48,
+   "away_goals": 1.373,
+   "sot": 9.6,
+   "corners": 11.427,
+   "shots": 29.213,
+   "yellows_stats": 3.827,
+   "yellows_events": 3.827,
+   "reds": 0.133,
+   "xg": 3.293,
+   "cov_stats": 100,
+   "cov_half": 100,
+   "cov_shotmap": 100,
+   "cov_ref": 100.0,
+   "cov_touches": 100.0,
+   "cov_xg": 100.0,
+   "phases": {
+    "regular": 75,
+    "split": 0,
+    "final": 0
+   }
+  }
+ },
+ "yellows_stats_vs_events_exact": 90.6,
+ "goals_per_xg": {
+  "2021/2022": 1.015,
+  "2022/2023": 1.106,
+  "2023/2024": 0.989,
+  "2024/2025": 1.065,
+  "2025/2026": 0.997,
+  "2026/2027": 0.867
+ },
+ "reliability": {
+  "goals_for": [
+   0.901,
+   14
+  ],
+  "sot_for": [
+   0.972,
+   14
+  ],
+  "corners_for": [
+   0.963,
+   14
+  ],
+  "shots_for": [
+   0.969,
+   14
+  ],
+  "yellows_for": [
+   0.639,
+   14
+  ],
+  "xg_for": [
+   0.97,
+   14
+  ],
+  "touches_for": [
+   0.966,
+   14
+  ],
+  "bigchance_for": [
+   0.953,
+   14
+  ],
+  "possession": [
+   0.985,
+   14
+  ]
+ },
+ "sp_share_rel": [
+  0.676,
+  14
+ ],
+ "xg_per_shot_rel": [
+  0.74,
+  14
+ ],
+ "xgot_rel_era": [
+  0.49,
+  13
+ ],
+ "xgot_coverage": {
+  "2021/2022": 0.7,
+  "2022/2023": 0.4,
+  "2023/2024": 0.4,
+  "2024/2025": 94.1,
+  "2025/2026": 95.2,
+  "2026/2027": 95.3
+ },
+ "half_shares": {
+  "goals_events": {
+   "n": 1145,
+   "share": 0.4517,
+   "obs_sd": 0.3223
+  },
+  "sot": {
+   "n": 829,
+   "share": 0.4517,
+   "obs_sd": 0.1824,
+   "true_sd": 0.0189
+  },
+  "corners": {
+   "n": 829,
+   "share": 0.4696,
+   "obs_sd": 0.1676,
+   "true_sd": 0.0392
+  },
+  "shots": {
+   "n": 829,
+   "share": 0.4575,
+   "obs_sd": 0.1023,
+   "true_sd": 0.0155
+  },
+  "yellows": {
+   "n": 800,
+   "share": 0.3083,
+   "obs_sd": 0.2886,
+   "true_sd": 0.1003
+  }
+ },
+ "ref_rel": [
+  0.15833704950362829,
+  23
+ ],
+ "n_refs_ge10": 23,
+ "team_gd_means": {
+  "Celtic": 1.729,
+  "Rangers": 1.208,
+  "Heart of Midlothian": 0.347,
+  "Hibernian": 0.054,
+  "Motherwell": -0.099,
+  "Falkirk": -0.118,
+  "Aberdeen": -0.233,
+  "Dundee United": -0.348,
+  "St. Mirren": -0.409,
+  "Kilmarnock": -0.461,
+  "Dundee FC": -0.518,
+  "Ross County": -0.618,
+  "St. Johnstone": -0.624,
+  "Livingston": -0.691
+ },
+ "team_gd_spread_sd": 0.714,
+ "home_edge_complete": 0.38,
+ "ou25_rate_complete": 53.7,
+ "home_win_rate_complete": 46.0
+}

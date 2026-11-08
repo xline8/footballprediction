@@ -1,0 +1,419 @@
+{
+ "goals_levels": {
+  "2021": {
+   "n": 112,
+   "goals_per_match": 3.0179,
+   "home_goals": 1.6161,
+   "away_goals": 1.4018,
+   "over25_rate": 0.6429,
+   "home_win_rate": 0.4732
+  },
+  "2022": {
+   "n": 180,
+   "goals_per_match": 2.9778,
+   "home_goals": 1.5667,
+   "away_goals": 1.4111,
+   "over25_rate": 0.5611,
+   "home_win_rate": 0.4278
+  },
+  "2023": {
+   "n": 180,
+   "goals_per_match": 2.9056,
+   "home_goals": 1.4889,
+   "away_goals": 1.4167,
+   "over25_rate": 0.5,
+   "home_win_rate": 0.4333
+  },
+  "2024": {
+   "n": 180,
+   "goals_per_match": 3.0778,
+   "home_goals": 1.7,
+   "away_goals": 1.3778,
+   "over25_rate": 0.6056,
+   "home_win_rate": 0.4278
+  },
+  "2025": {
+   "n": 180,
+   "goals_per_match": 2.9667,
+   "home_goals": 1.6778,
+   "away_goals": 1.2889,
+   "over25_rate": 0.5333,
+   "home_win_rate": 0.4611
+  }
+ },
+ "stats_2025": {
+  "n_matches": 180,
+  "sot": {
+   "mean": 9.0222,
+   "over_rates": {
+    "5.5": 0.85,
+    "6.5": 0.7444,
+    "7.5": 0.6389,
+    "8.5": 0.5722,
+    "9.5": 0.4444,
+    "10.5": 0.3222,
+    "11.5": 0.1944,
+    "24.5": 0.0,
+    "25.5": 0.0,
+    "26.5": 0.0,
+    "27.5": 0.0,
+    "28.5": 0.0,
+    "29.5": 0.0
+   }
+  },
+  "corners": {
+   "mean": 9.9778,
+   "over_rates": {
+    "5.5": 0.9278,
+    "6.5": 0.8333,
+    "7.5": 0.7667,
+    "8.5": 0.6667,
+    "9.5": 0.5389,
+    "10.5": 0.4111,
+    "11.5": 0.2889,
+    "24.5": 0.0,
+    "25.5": 0.0,
+    "26.5": 0.0,
+    "27.5": 0.0,
+    "28.5": 0.0,
+    "29.5": 0.0
+   }
+  },
+  "total_shots": {
+   "mean": 27.3222,
+   "over_rates": {
+    "5.5": 1.0,
+    "6.5": 1.0,
+    "7.5": 1.0,
+    "8.5": 1.0,
+    "9.5": 1.0,
+    "10.5": 1.0,
+    "11.5": 1.0,
+    "24.5": 0.6278,
+    "25.5": 0.5667,
+    "26.5": 0.5167,
+    "27.5": 0.4556,
+    "28.5": 0.4167,
+    "29.5": 0.35
+   }
+  },
+  "yellows_events": {
+   "mean": 4.7889,
+   "over_rates": {
+    "2.5": 0.8111,
+    "3.5": 0.6556,
+    "4.5": 0.5222,
+    "5.5": 0.35,
+    "6.5": 0.2056
+   }
+  },
+  "yellows_stats_broken": {
+   "mean": 3.4556,
+   "zero_matches": 43
+  },
+  "possession_home_mean": 50.106,
+  "big_chance": {
+   "mean": 0.0
+  }
+ },
+ "count_dev_window": {
+  "warmup_n": 47,
+  "scored_n": 133,
+  "warmup_dates": [
+   "2025-03-05",
+   "2025-04-30"
+  ],
+  "scored_dates": [
+   "2025-05-01",
+   "2025-11-09"
+  ],
+  "sot": {
+   "mean": 9.0526,
+   "over_rates": {
+    "7.5": 0.6316,
+    "8.5": 0.5564,
+    "9.5": 0.4436,
+    "10.5": 0.3383,
+    "25.5": 0.0,
+    "26.5": 0.0,
+    "27.5": 0.0,
+    "28.5": 0.0
+   }
+  },
+  "corners": {
+   "mean": 10.1128,
+   "over_rates": {
+    "7.5": 0.7594,
+    "8.5": 0.6767,
+    "9.5": 0.5714,
+    "10.5": 0.4286,
+    "25.5": 0.0,
+    "26.5": 0.0,
+    "27.5": 0.0,
+    "28.5": 0.0
+   }
+  },
+  "total_shots": {
+   "mean": 27.6617,
+   "over_rates": {
+    "7.5": 1.0,
+    "8.5": 1.0,
+    "9.5": 1.0,
+    "10.5": 1.0,
+    "25.5": 0.6165,
+    "26.5": 0.5564,
+    "27.5": 0.4812,
+    "28.5": 0.4286
+   }
+  },
+  "yellows": {
+   "mean": 4.7744,
+   "over_rates": {
+    "3.5": 0.6241,
+    "4.5": 0.5113,
+    "5.5": 0.3609
+   }
+  }
+ },
+ "halves_constants_2025": {
+  "sot": {
+   "share_1h": 0.4637,
+   "n_total": 1624.0,
+   "n_1h": 753.0,
+   "p_1h": 0.4637,
+   "observed_var": 0.0312,
+   "binomial_noise_var": 0.03283,
+   "true_var": 0.0
+  },
+  "corners": {
+   "share_1h": 0.4816,
+   "n_total": 1796.0,
+   "n_1h": 865.0,
+   "p_1h": 0.4816,
+   "observed_var": 0.02729,
+   "binomial_noise_var": 0.02888,
+   "true_var": 0.0
+  },
+  "total_shots": {
+   "share_1h": 0.4685,
+   "n_total": 4918.0,
+   "n_1h": 2304.0,
+   "p_1h": 0.4685,
+   "observed_var": 0.00822,
+   "binomial_noise_var": 0.00971,
+   "true_var": 0.0
+  },
+  "goals": {
+   "share_1h": 0.4569,
+   "n_total": 534,
+   "n_1h": 244,
+   "p_1h": 0.4569,
+   "observed_var": 0.10237,
+   "binomial_noise_var": 0.11294,
+   "true_var": 0.0
+  },
+  "yellow_cards": {
+   "share_1h": 0.3306,
+   "n_total": 862,
+   "n_1h": 285,
+   "p_1h": 0.3306,
+   "observed_var": 0.06248,
+   "binomial_noise_var": 0.06561,
+   "true_var": 0.0
+  }
+ },
+ "goals_event_check_2025": {
+  "goal_events": 534,
+  "score_goals": 534
+ },
+ "split_half_reliability": {
+  "goals_for": {
+   "n_teams": 13,
+   "r": 0.946
+  },
+  "goals_against": {
+   "n_teams": 13,
+   "r": 0.942
+  },
+  "ShotsOnTarget_for": {
+   "n_teams": 10,
+   "r": 0.887
+  },
+  "ShotsOnTarget_against": {
+   "n_teams": 10,
+   "r": 0.882
+  },
+  "corners_for": {
+   "n_teams": 10,
+   "r": 0.689
+  },
+  "corners_against": {
+   "n_teams": 10,
+   "r": 0.621
+  },
+  "total_shots_for": {
+   "n_teams": 10,
+   "r": 0.895
+  },
+  "total_shots_against": {
+   "n_teams": 10,
+   "r": 0.869
+  },
+  "yellow_for": {
+   "n_teams": 10,
+   "r": 0.598
+  },
+  "yellow_against": {
+   "n_teams": 10,
+   "r": 0.582
+  },
+  "BallPossesion_for": {
+   "n_teams": 10,
+   "r": 0.906
+  },
+  "big_chance_for": {
+   "n_teams": 10,
+   "r": null,
+   "note": "zero variance in a half"
+  },
+  "fouls_for": {
+   "n_teams": 10,
+   "r": 0.728
+  }
+ },
+ "entrants": [
+  {
+   "season": "2022",
+   "team_id": "197870",
+   "team": "FK Tukums 2000",
+   "n_matches": 36,
+   "gf_pm": 1.056,
+   "ga_pm": 1.917,
+   "league_gf_pm": 1.489,
+   "league_ga_pm": 1.489
+  },
+  {
+   "season": "2022",
+   "team_id": "2106",
+   "team": "Auda",
+   "n_matches": 36,
+   "gf_pm": 1.167,
+   "ga_pm": 1,
+   "league_gf_pm": 1.489,
+   "league_ga_pm": 1.489
+  },
+  {
+   "season": "2022",
+   "team_id": "981193",
+   "team": "SK Super Nova",
+   "n_matches": 36,
+   "gf_pm": 0.667,
+   "ga_pm": 2.25,
+   "league_gf_pm": 1.489,
+   "league_ga_pm": 1.489
+  },
+  {
+   "season": "2023",
+   "team_id": "192962",
+   "team": "FK Jelgava",
+   "n_matches": 36,
+   "gf_pm": 1.167,
+   "ga_pm": 1.583,
+   "league_gf_pm": 1.453,
+   "league_ga_pm": 1.453
+  },
+  {
+   "season": "2024",
+   "team_id": "662738",
+   "team": "Grobina",
+   "n_matches": 36,
+   "gf_pm": 0.944,
+   "ga_pm": 2.167,
+   "league_gf_pm": 1.539,
+   "league_ga_pm": 1.539
+  },
+  {
+   "season": "2025",
+   "team_id": "981193",
+   "team": "SK Super Nova",
+   "n_matches": 36,
+   "gf_pm": 1.222,
+   "ga_pm": 1.556,
+   "league_gf_pm": 1.483,
+   "league_ga_pm": 1.483
+  }
+ ],
+ "entrant_gaps": {
+  "dGF": -0.4532,
+  "dGA": 0.2552,
+  "n": 6
+ },
+ "referee_2025": {
+  "n_matches_with_ref": 40,
+  "n_referees": 15,
+  "per_referee": {
+   "Aleksandrs Anufrijevs": {
+    "n": 4,
+    "yellows_pm": 4.25
+   },
+   "Aleksandrs Golubevs": {
+    "n": 4,
+    "yellows_pm": 5.75
+   },
+   "Aleksejs Gri\u0161\u010denko": {
+    "n": 2,
+    "yellows_pm": 5.5
+   },
+   "Andrejs Gluhovs": {
+    "n": 1,
+    "yellows_pm": 4.0
+   },
+   "Andris Treimanis": {
+    "n": 2,
+    "yellows_pm": 3.5
+   },
+   "Artis Kenins": {
+    "n": 2,
+    "yellows_pm": 5.5
+   },
+   "Artis \u0136\u0113ni\u0146\u0161": {
+    "n": 1,
+    "yellows_pm": 4.0
+   },
+   "Deniss Kozlovs": {
+    "n": 2,
+    "yellows_pm": 5.0
+   },
+   "Edgars Malcevs": {
+    "n": 4,
+    "yellows_pm": 4.0
+   },
+   "Edgars Ma\u013ccevs": {
+    "n": 1,
+    "yellows_pm": 1.0
+   },
+   "Kristaps Ratnieks": {
+    "n": 4,
+    "yellows_pm": 4.5
+   },
+   "Sergejs Vasjkovs": {
+    "n": 4,
+    "yellows_pm": 2.5
+   },
+   "Vasilijs Mordatenko": {
+    "n": 5,
+    "yellows_pm": 2.8
+   },
+   "Vitalijs Spasjonnikovs": {
+    "n": 3,
+    "yellows_pm": 3.67
+   },
+   "Vit\u0101lijs Spasjo\u0146\u0146ikovs": {
+    "n": 1,
+    "yellows_pm": 5.0
+   }
+  }
+ },
+ "period_splits_any": 359,
+ "shotmap_any": 0
+}

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="430" font-family="sans-serif">
+<rect width="640" height="430" fill="white"/>
+<text x="20" y="24" font-size="15" font-weight="bold">SA-FirstDivision team-trait reliabilities (dev seasons)</text>
+<text x="20" y="42" font-size="11" fill="#555">split-half r, odd/even per team, min 10 matches. Dashed line r=0.30. Red = noise.</text>
+<line x1="190" y1="52" x2="190" y2="412" stroke="#ddd"/>
+<line x1="600" y1="52" x2="600" y2="412" stroke="#ddd"/>
+<text x="190" y="424" font-size="10" fill="#555">0</text>
+<text x="595" y="424" font-size="10" fill="#555">1.0</text>
+<line x1="313" y1="52" x2="313" y2="412" stroke="#999" stroke-dasharray="4 3"/>
+<g font-size="12">
+<text x="185" y="72" text-anchor="end">Goals for (24/25)</text><rect x="190" y="60" width="221.0" height="16" fill="#2a7f62"/><text x="417" y="72">0.539</text>
+<text x="185" y="98" text-anchor="end">Goals against (24/25)</text><rect x="190" y="86" width="244.0" height="16" fill="#2a7f62"/><text x="440" y="98">0.595</text>
+<text x="185" y="124" text-anchor="end">SOT for (25/26)</text><rect x="190" y="112" width="282.1" height="16" fill="#2a7f62"/><text x="478" y="124">0.688</text>
+<text x="185" y="150" text-anchor="end">SOT against</text><rect x="190" y="138" width="246.4" height="16" fill="#2a7f62"/><text x="442" y="150">0.601</text>
+<text x="185" y="176" text-anchor="end">Corners for</text><rect x="190" y="164" width="301.4" height="16" fill="#2a7f62"/><text x="497" y="176">0.735</text>
+<text x="185" y="202" text-anchor="end">Corners against</text><rect x="190" y="190" width="177.1" height="16" fill="#2a7f62"/><text x="373" y="202">0.432</text>
+<text x="185" y="228" text-anchor="end">Total shots for</text><rect x="190" y="216" width="331.3" height="16" fill="#2a7f62"/><text x="527" y="228">0.808</text>
+<text x="185" y="254" text-anchor="end">Total shots against</text><rect x="190" y="242" width="316.9" height="16" fill="#2a7f62"/><text x="513" y="254">0.773</text>
+<text x="185" y="280" text-anchor="end">Touches opp box for</text><rect x="190" y="268" width="323.9" height="16" fill="#2a7f62"/><text x="520" y="280">0.790</text>
+<text x="185" y="306" text-anchor="end">Touches opp box against</text><rect x="190" y="294" width="301.4" height="16" fill="#2a7f62"/><text x="497" y="306">0.735</text>
+<text x="185" y="332" text-anchor="end">Big chances for</text><rect x="190" y="320" width="255.8" height="16" fill="#2a7f62"/><text x="452" y="332">0.624</text>
+<text x="185" y="358" text-anchor="end">Possession</text><rect x="190" y="346" width="320.2" height="16" fill="#2a7f62"/><text x="516" y="358">0.781</text>
+<text x="185" y="384" text-anchor="end">Fouls for</text><rect x="190" y="372" width="202.5" height="16" fill="#2a7f62"/><text x="398" y="384">0.494</text>
+<text x="185" y="410" text-anchor="end">Event yellows for</text><rect x="190" y="398" width="64.0" height="16" fill="#b3402e"/><text x="260" y="410">0.156</text>
+</g>
+</svg>

@@ -1,0 +1,32 @@
+league: UA-PremierLeague
+country: Ukraine
+fotmob_id: 441
+tier: 1
+data:
+  matches: league/UA-PremierLeague/data/ua_matches.csv
+  team_matches: league/UA-PremierLeague/data/ua_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2023/2024", "2024/2025"]
+seed_season: "2022/2023"
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+era_restriction: "all fits use 2022/2023+ only; 2021/2022 excluded (terminated war season)"
+phase_rule: "single double round-robin, 16 teams, rounds 1-30; phase=regular for all rows"
+halves_constants:
+  goals_1h_share: 0.4441
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+  yellow_cards_1h_share: 0.3290
+markets:
+  goals: G-UA
+  sot: S-UA
+  corners: C-UA
+  cards: K-UA
+  total_shots: T-UA
+notes:
+  - "STATS FEED: only BallPossesion, total_shots, ShotsOnTarget, corners; no xG, big_chance, touches, stats cards, period splits, shotmap or referee anywhere in 1,191 payloads."
+  - "CARDS: event-unified yellow target frozen pre-fitting (stats key absent entirely)."
+  - "STUB RULE: stats rows with shots+SOT+corners all zero (22) are stats-missing."
+  - "TEAM IDENTITY: keyed on ids; 3 ids carry 2 names (6072, 8666, 949030 rename)."
+  - "HALVES: goals/cards via event-time frozen constants; SOT/corners/total shots FT-only (no source)."

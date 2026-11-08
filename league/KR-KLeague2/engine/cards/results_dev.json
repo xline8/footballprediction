@@ -1,0 +1,78 @@
+{
+  "protocol": {
+    "market": "cards",
+    "primary_line": 2.5,
+    "seed": "2023",
+    "scored": [
+      "2024"
+    ]
+  },
+  "arms": {
+    "gate_zero": {
+      "pooled": {
+        "n": 229,
+        "ll_primary": 0.7145025628821075,
+        "mean_p": 0.573177639960414,
+        "actual_rate": 0.6200873362445415,
+        "calibration_diff": -0.04690969628412743,
+        "calibration_se": 0.033545535134505915
+      },
+      "seasons": {
+        "2024": {
+          "n": 229,
+          "ll_primary": 0.7145025628821075,
+          "mean_p": 0.573177639960414,
+          "actual_rate": 0.6200873362445415,
+          "calibration_diff": -0.04690969628412743,
+          "calibration_se": 0.033545535134505915
+        }
+      },
+      "sign_check": null,
+      "dev_pass": false
+    }
+  },
+  "baselines": {
+    "base_rate": {
+      "pooled": {
+        "n": 229,
+        "ll_primary": 0.6664086099535539,
+        "mean_p": 0.5862068965517241,
+        "actual_rate": 0.6200873362445415,
+        "calibration_diff": -0.0338804396928174,
+        "calibration_se": 0.032144072034978245
+      },
+      "seasons": {
+        "2024": {
+          "n": 229,
+          "ll_primary": 0.6664086099535539,
+          "mean_p": 0.5862068965517241,
+          "actual_rate": 0.6200873362445415,
+          "calibration_diff": -0.0338804396928174,
+          "calibration_se": 0.032144072034978245
+        }
+      }
+    },
+    "naive": {
+      "pooled": {
+        "n": 229,
+        "ll_primary": 0.6971920771908448,
+        "mean_p": 0.6435560320200165,
+        "actual_rate": 0.6200873362445415,
+        "calibration_diff": 0.023468695775474977,
+        "calibration_se": 0.033074009343676915
+      },
+      "seasons": {
+        "2024": {
+          "n": 229,
+          "ll_primary": 0.6971920771908448,
+          "mean_p": 0.6435560320200165,
+          "actual_rate": 0.6200873362445415,
+          "calibration_diff": 0.023468695775474977,
+          "calibration_se": 0.033074009343676915
+        }
+      }
+    }
+  },
+  "dev_passing_arms": [],
+  "gate_zero_dev_pass": false
+}

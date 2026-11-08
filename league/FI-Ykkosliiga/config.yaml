@@ -1,0 +1,31 @@
+league: FI-Ykkosliiga
+country: Finland
+fotmob_id: 251
+tier: 2
+warehouse: data_enrichment/fotmob_world/Finland/Ykkosliiga
+data:
+  matches: league/FI-Ykkosliiga/data/yk_matches.csv
+  team_matches: league/FI-Ykkosliiga/data/yk_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period:
+  goals: ["2022", "2023", "2024", "2025"]
+virgin_primary: "2026"  # complete, 135 matches, last match 2026-10-17
+virgin_confirmatory: null
+halves_constants:
+  goals_1h_share: 0.4462  # dev inventory 2021-2025, n=718 matches with goals
+  sot_1h_share: null      # stats empty in all 895 payloads
+  corners_1h_share: null  # stats empty in all 895 payloads
+  cards_1h_share: null    # incomplete pre-2026 Card event feed
+  total_shots_1h_share: null
+markets:
+  goals: G-YK
+  sot: null  # stats non-null 0/895; no dev or virgin target
+  corners: null  # stats non-null 0/895; no dev or virgin target
+  cards: null  # Card events cover only 2021-2025 at 11.6%-19.3% of matches
+  total_shots: null  # stats non-null 0/895; shotmap empty 895/895
+notes:
+  - Calendar-year format: 12 teams in 2021-2023 (132 regular + 15 Championship + 15 Relegation; 2 Promotion Playoff matches in 2022-2023), then 10 teams and 27 rounds x 5 in 2024-2026.
+  - All phases in league_id 251 are ordinary rows with a phase flag; no cross-tier playoff rows are present in this feed.
+  - The stats key is empty in every payload; 2026 index has_stats=True is a key-presence false positive, not non-null stats.
+  - Shotmap shots and xG are absent in all 895 payloads. Card events are incomplete through 2025 and become near-complete in 2026.
+  - Goals levels are recorded pre-fitting; 2026 is complete and is virgin-only.

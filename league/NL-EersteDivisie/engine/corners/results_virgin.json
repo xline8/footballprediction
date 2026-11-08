@@ -1,0 +1,76 @@
+{
+  "gate_zero": {
+    "n": 380,
+    "season": "2025/2026",
+    "ll_8.5": 0.57588076018227,
+    "mean_p_8.5": 0.7131650231876593,
+    "actual_over_8.5": 0.7394736842105263,
+    "ll_9.5": 0.6552710776850644,
+    "mean_p_9.5": 0.5999887293163474,
+    "actual_over_9.5": 0.6447368421052632,
+    "ll_10.5": 0.6933709973452707,
+    "mean_p_10.5": 0.4822295736165894,
+    "actual_over_10.5": 0.5263157894736842,
+    "both_teams_active_share": 0.9789473684210527,
+    "active_with_nonzero_beta_share": 0.0,
+    "arm": "gate_zero",
+    "calibration_diff": 0.04474811278891577,
+    "calibration_se": 0.02459773472864253,
+    "params": {
+      "gamma": 0.15,
+      "r": 1.0974276303478572,
+      "beta": [
+        0.0,
+        0.0
+      ],
+      "fit_n": 1510
+    }
+  },
+  "league_base_rate": {
+    "n": 380,
+    "season": "2025/2026",
+    "ll_8.5": 0.775056418966642,
+    "mean_p_8.5": 0.42644747004586897,
+    "actual_over_8.5": 0.7394736842105263,
+    "ll_9.5": 0.7850983094950605,
+    "mean_p_9.5": 0.387767644910088,
+    "actual_over_9.5": 0.6447368421052632,
+    "ll_10.5": 0.754646582509755,
+    "mean_p_10.5": 0.35253386001916387,
+    "actual_over_10.5": 0.5263157894736842,
+    "both_teams_active_share": 0.0,
+    "active_with_nonzero_beta_share": 0.0
+  },
+  "naive_trailing_10": {
+    "n": 380,
+    "season": "2025/2026",
+    "ll_8.5": 0.7481403926785495,
+    "mean_p_8.5": 0.45087044865161524,
+    "actual_over_8.5": 0.7394736842105263,
+    "ll_9.5": 0.7611040339132183,
+    "mean_p_9.5": 0.4115009330866857,
+    "actual_over_9.5": 0.6447368421052632,
+    "ll_10.5": 0.7343087231389389,
+    "mean_p_10.5": 0.37542222559722194,
+    "actual_over_10.5": 0.5263157894736842,
+    "both_teams_active_share": 0.0,
+    "active_with_nonzero_beta_share": 0.0
+  },
+  "league_base_rate_constant": {
+    "n": 380,
+    "season": "2025/2026",
+    "ll_8.5": 0.5767782103226602,
+    "mean_p_8.5": 0.7176708907371804,
+    "actual_over_8.5": 0.7394736842105263,
+    "ll_9.5": 0.6691279057224373,
+    "mean_p_9.5": 0.55,
+    "actual_over_9.5": 0.6447368421052632,
+    "ll_10.5": 0.6979304126544332,
+    "mean_p_10.5": 0.47580913403896097,
+    "actual_over_10.5": 0.5263157894736842,
+    "both_teams_active_share": 0.9789473684210527,
+    "active_with_nonzero_beta_share": 0.0
+  },
+  "calibration_sign_convention": "actual_over_rate - mean_predicted_over_probability",
+  "league_base_rate_constant_definition": "pooled 2021/2022-2024/2025 over-9.5 rate, constant across 2025/2026"
+}

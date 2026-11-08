@@ -1,0 +1,738 @@
+{
+  "league": "ZA-PSL",
+  "league_id": "537",
+  "rows": 1243,
+  "team_rows": 2486,
+  "seasons": {
+    "2021/2022": {
+      "matches": 240,
+      "goals_per_match": 1.996,
+      "home_win_rate": 0.371,
+      "draw_rate": 0.383,
+      "away_win_rate": 0.246,
+      "ou2_5_over_rate": 0.342,
+      "home_advantage": {
+        "goals": 0.196
+      },
+      "coverage": {
+        "stats_all": 0.0,
+        "period_splits": 0.0,
+        "shotmap": 0.0,
+        "referee": 0.0,
+        "sot": 0.0,
+        "corners": 0.0,
+        "cards": 0.0,
+        "total_shots": 0.0
+      },
+      "sot": {
+        "mean": null,
+        "n": 0,
+        "over_rates": {
+          "8.5": {
+            "over_rate": null,
+            "n": 0
+          },
+          "9.5": {
+            "over_rate": null,
+            "n": 0
+          },
+          "10.5": {
+            "over_rate": null,
+            "n": 0
+          }
+        },
+        "home_advantage": null
+      },
+      "corners": {
+        "mean": null,
+        "n": 0,
+        "over_rates": {
+          "8.5": {
+            "over_rate": null,
+            "n": 0
+          },
+          "9.5": {
+            "over_rate": null,
+            "n": 0
+          },
+          "10.5": {
+            "over_rate": null,
+            "n": 0
+          }
+        },
+        "home_advantage": null
+      },
+      "cards": {
+        "mean": null,
+        "n": 0,
+        "over_rates": {
+          "3.5": {
+            "over_rate": null,
+            "n": 0
+          },
+          "4.5": {
+            "over_rate": null,
+            "n": 0
+          },
+          "5.5": {
+            "over_rate": null,
+            "n": 0
+          }
+        },
+        "home_advantage": null
+      },
+      "total_shots": {
+        "mean": null,
+        "n": 0,
+        "over_rates": {
+          "24.5": {
+            "over_rate": null,
+            "n": 0
+          },
+          "25.5": {
+            "over_rate": null,
+            "n": 0
+          },
+          "26.5": {
+            "over_rate": null,
+            "n": 0
+          },
+          "27.5": {
+            "over_rate": null,
+            "n": 0
+          },
+          "28.5": {
+            "over_rate": null,
+            "n": 0
+          }
+        },
+        "home_advantage": null
+      },
+      "distinct_team_ids": 16,
+      "matches_per_team": {
+        "min": 30,
+        "max": 30
+      },
+      "referee_coverage": 0.0,
+      "date_range": [
+        "2021-08-20",
+        "2022-05-30"
+      ]
+    },
+    "2022/2023": {
+      "matches": 240,
+      "goals_per_match": 2.096,
+      "home_win_rate": 0.412,
+      "draw_rate": 0.304,
+      "away_win_rate": 0.283,
+      "ou2_5_over_rate": 0.342,
+      "home_advantage": {
+        "goals": 0.287
+      },
+      "coverage": {
+        "stats_all": 99.6,
+        "period_splits": 25.0,
+        "shotmap": 0.0,
+        "referee": 34.2,
+        "sot": 99.6,
+        "corners": 99.6,
+        "cards": 99.6,
+        "total_shots": 99.6
+      },
+      "sot": {
+        "mean": 7.188,
+        "n": 239,
+        "over_rates": {
+          "8.5": {
+            "over_rate": 0.322,
+            "n": 239
+          },
+          "9.5": {
+            "over_rate": 0.234,
+            "n": 239
+          },
+          "10.5": {
+            "over_rate": 0.142,
+            "n": 239
+          }
+        },
+        "home_advantage": 0.477
+      },
+      "corners": {
+        "mean": 9.033,
+        "n": 239,
+        "over_rates": {
+          "8.5": {
+            "over_rate": 0.582,
+            "n": 239
+          },
+          "9.5": {
+            "over_rate": 0.439,
+            "n": 239
+          },
+          "10.5": {
+            "over_rate": 0.318,
+            "n": 239
+          }
+        },
+        "home_advantage": 0.088
+      },
+      "cards": {
+        "mean": 2.23,
+        "n": 239,
+        "over_rates": {
+          "3.5": {
+            "over_rate": 0.305,
+            "n": 239
+          },
+          "4.5": {
+            "over_rate": 0.134,
+            "n": 239
+          },
+          "5.5": {
+            "over_rate": 0.059,
+            "n": 239
+          }
+        },
+        "home_advantage": -0.079
+      },
+      "total_shots": {
+        "mean": 22.791,
+        "n": 239,
+        "over_rates": {
+          "24.5": {
+            "over_rate": 0.393,
+            "n": 239
+          },
+          "25.5": {
+            "over_rate": 0.322,
+            "n": 239
+          },
+          "26.5": {
+            "over_rate": 0.259,
+            "n": 239
+          },
+          "27.5": {
+            "over_rate": 0.197,
+            "n": 239
+          },
+          "28.5": {
+            "over_rate": 0.142,
+            "n": 239
+          }
+        },
+        "home_advantage": 1.577
+      },
+      "distinct_team_ids": 16,
+      "matches_per_team": {
+        "min": 30,
+        "max": 30
+      },
+      "referee_coverage": 34.2,
+      "date_range": [
+        "2022-08-05",
+        "2023-05-20"
+      ]
+    },
+    "2023/2024": {
+      "matches": 240,
+      "goals_per_match": 2.033,
+      "home_win_rate": 0.412,
+      "draw_rate": 0.283,
+      "away_win_rate": 0.304,
+      "ou2_5_over_rate": 0.342,
+      "home_advantage": {
+        "goals": 0.267
+      },
+      "coverage": {
+        "stats_all": 99.2,
+        "period_splits": 98.8,
+        "shotmap": 0.0,
+        "referee": 28.8,
+        "sot": 99.2,
+        "corners": 99.2,
+        "cards": 98.8,
+        "total_shots": 99.2
+      },
+      "sot": {
+        "mean": 6.874,
+        "n": 238,
+        "over_rates": {
+          "8.5": {
+            "over_rate": 0.269,
+            "n": 238
+          },
+          "9.5": {
+            "over_rate": 0.134,
+            "n": 238
+          },
+          "10.5": {
+            "over_rate": 0.076,
+            "n": 238
+          }
+        },
+        "home_advantage": 0.529
+      },
+      "corners": {
+        "mean": 8.761,
+        "n": 238,
+        "over_rates": {
+          "8.5": {
+            "over_rate": 0.534,
+            "n": 238
+          },
+          "9.5": {
+            "over_rate": 0.361,
+            "n": 238
+          },
+          "10.5": {
+            "over_rate": 0.269,
+            "n": 238
+          }
+        },
+        "home_advantage": 0.256
+      },
+      "cards": {
+        "mean": 3.747,
+        "n": 237,
+        "over_rates": {
+          "3.5": {
+            "over_rate": 0.506,
+            "n": 237
+          },
+          "4.5": {
+            "over_rate": 0.312,
+            "n": 237
+          },
+          "5.5": {
+            "over_rate": 0.211,
+            "n": 237
+          }
+        },
+        "home_advantage": -0.186
+      },
+      "total_shots": {
+        "mean": 21.702,
+        "n": 238,
+        "over_rates": {
+          "24.5": {
+            "over_rate": 0.319,
+            "n": 238
+          },
+          "25.5": {
+            "over_rate": 0.239,
+            "n": 238
+          },
+          "26.5": {
+            "over_rate": 0.181,
+            "n": 238
+          },
+          "27.5": {
+            "over_rate": 0.143,
+            "n": 238
+          },
+          "28.5": {
+            "over_rate": 0.118,
+            "n": 238
+          }
+        },
+        "home_advantage": 0.996
+      },
+      "distinct_team_ids": 16,
+      "matches_per_team": {
+        "min": 30,
+        "max": 30
+      },
+      "referee_coverage": 28.8,
+      "date_range": [
+        "2023-08-04",
+        "2024-05-25"
+      ]
+    },
+    "2024/2025": {
+      "matches": 210,
+      "goals_per_match": 2.014,
+      "home_win_rate": 0.452,
+      "draw_rate": 0.257,
+      "away_win_rate": 0.29,
+      "ou2_5_over_rate": 0.31,
+      "home_advantage": {
+        "goals": 0.3
+      },
+      "coverage": {
+        "stats_all": 100.0,
+        "period_splits": 100.0,
+        "shotmap": 0.0,
+        "referee": 29.5,
+        "sot": 100.0,
+        "corners": 100.0,
+        "cards": 100.0,
+        "total_shots": 100.0
+      },
+      "sot": {
+        "mean": 7.005,
+        "n": 210,
+        "over_rates": {
+          "8.5": {
+            "over_rate": 0.286,
+            "n": 210
+          },
+          "9.5": {
+            "over_rate": 0.181,
+            "n": 210
+          },
+          "10.5": {
+            "over_rate": 0.1,
+            "n": 210
+          }
+        },
+        "home_advantage": 0.405
+      },
+      "corners": {
+        "mean": 8.914,
+        "n": 210,
+        "over_rates": {
+          "8.5": {
+            "over_rate": 0.552,
+            "n": 210
+          },
+          "9.5": {
+            "over_rate": 0.419,
+            "n": 210
+          },
+          "10.5": {
+            "over_rate": 0.314,
+            "n": 210
+          }
+        },
+        "home_advantage": 0.0
+      },
+      "cards": {
+        "mean": 3.748,
+        "n": 210,
+        "over_rates": {
+          "3.5": {
+            "over_rate": 0.548,
+            "n": 210
+          },
+          "4.5": {
+            "over_rate": 0.329,
+            "n": 210
+          },
+          "5.5": {
+            "over_rate": 0.19,
+            "n": 210
+          }
+        },
+        "home_advantage": -0.167
+      },
+      "total_shots": {
+        "mean": 21.89,
+        "n": 210,
+        "over_rates": {
+          "24.5": {
+            "over_rate": 0.314,
+            "n": 210
+          },
+          "25.5": {
+            "over_rate": 0.238,
+            "n": 210
+          },
+          "26.5": {
+            "over_rate": 0.19,
+            "n": 210
+          },
+          "27.5": {
+            "over_rate": 0.157,
+            "n": 210
+          },
+          "28.5": {
+            "over_rate": 0.114,
+            "n": 210
+          }
+        },
+        "home_advantage": 0.805
+      },
+      "distinct_team_ids": 15,
+      "matches_per_team": {
+        "min": 28,
+        "max": 28
+      },
+      "referee_coverage": 29.5,
+      "date_range": [
+        "2024-09-14",
+        "2025-05-29"
+      ]
+    },
+    "2025/2026": {
+      "matches": 240,
+      "goals_per_match": 2.013,
+      "home_win_rate": 0.408,
+      "draw_rate": 0.321,
+      "away_win_rate": 0.271,
+      "ou2_5_over_rate": 0.304,
+      "home_advantage": {
+        "goals": 0.229
+      },
+      "coverage": {
+        "stats_all": 100.0,
+        "period_splits": 100.0,
+        "shotmap": 100.0,
+        "referee": 5.4,
+        "sot": 100.0,
+        "corners": 100.0,
+        "cards": 100.0,
+        "total_shots": 100.0
+      },
+      "sot": {
+        "mean": 7.346,
+        "n": 240,
+        "over_rates": {
+          "8.5": {
+            "over_rate": 0.308,
+            "n": 240
+          },
+          "9.5": {
+            "over_rate": 0.183,
+            "n": 240
+          },
+          "10.5": {
+            "over_rate": 0.104,
+            "n": 240
+          }
+        },
+        "home_advantage": 0.746
+      },
+      "corners": {
+        "mean": 8.708,
+        "n": 240,
+        "over_rates": {
+          "8.5": {
+            "over_rate": 0.467,
+            "n": 240
+          },
+          "9.5": {
+            "over_rate": 0.346,
+            "n": 240
+          },
+          "10.5": {
+            "over_rate": 0.258,
+            "n": 240
+          }
+        },
+        "home_advantage": 0.475
+      },
+      "cards": {
+        "mean": 3.3,
+        "n": 240,
+        "over_rates": {
+          "3.5": {
+            "over_rate": 0.458,
+            "n": 240
+          },
+          "4.5": {
+            "over_rate": 0.237,
+            "n": 240
+          },
+          "5.5": {
+            "over_rate": 0.125,
+            "n": 240
+          }
+        },
+        "home_advantage": -0.15
+      },
+      "total_shots": {
+        "mean": 22.579,
+        "n": 240,
+        "over_rates": {
+          "24.5": {
+            "over_rate": 0.308,
+            "n": 240
+          },
+          "25.5": {
+            "over_rate": 0.258,
+            "n": 240
+          },
+          "26.5": {
+            "over_rate": 0.2,
+            "n": 240
+          },
+          "27.5": {
+            "over_rate": 0.154,
+            "n": 240
+          },
+          "28.5": {
+            "over_rate": 0.129,
+            "n": 240
+          }
+        },
+        "home_advantage": 1.312
+      },
+      "distinct_team_ids": 16,
+      "matches_per_team": {
+        "min": 30,
+        "max": 30
+      },
+      "referee_coverage": 5.4,
+      "date_range": [
+        "2025-08-09",
+        "2026-05-23"
+      ]
+    },
+    "2026/2027": {
+      "matches": 73,
+      "goals_per_match": 2.329,
+      "home_win_rate": 0.37,
+      "draw_rate": 0.342,
+      "away_win_rate": 0.288,
+      "ou2_5_over_rate": 0.37,
+      "home_advantage": {
+        "goals": 0.219
+      },
+      "coverage": {
+        "stats_all": 100.0,
+        "period_splits": 100.0,
+        "shotmap": 100.0,
+        "referee": 72.6,
+        "sot": 100.0,
+        "corners": 100.0,
+        "cards": 100.0,
+        "total_shots": 100.0
+      },
+      "sot": {
+        "mean": 7.562,
+        "n": 73,
+        "over_rates": {
+          "8.5": {
+            "over_rate": 0.452,
+            "n": 73
+          },
+          "9.5": {
+            "over_rate": 0.233,
+            "n": 73
+          },
+          "10.5": {
+            "over_rate": 0.11,
+            "n": 73
+          }
+        },
+        "home_advantage": 0.438
+      },
+      "corners": {
+        "mean": 9.164,
+        "n": 73,
+        "over_rates": {
+          "8.5": {
+            "over_rate": 0.548,
+            "n": 73
+          },
+          "9.5": {
+            "over_rate": 0.466,
+            "n": 73
+          },
+          "10.5": {
+            "over_rate": 0.315,
+            "n": 73
+          }
+        },
+        "home_advantage": 0.973
+      },
+      "cards": {
+        "mean": 3.205,
+        "n": 73,
+        "over_rates": {
+          "3.5": {
+            "over_rate": 0.397,
+            "n": 73
+          },
+          "4.5": {
+            "over_rate": 0.288,
+            "n": 73
+          },
+          "5.5": {
+            "over_rate": 0.11,
+            "n": 73
+          }
+        },
+        "home_advantage": 0.247
+      },
+      "total_shots": {
+        "mean": 23.644,
+        "n": 73,
+        "over_rates": {
+          "24.5": {
+            "over_rate": 0.452,
+            "n": 73
+          },
+          "25.5": {
+            "over_rate": 0.397,
+            "n": 73
+          },
+          "26.5": {
+            "over_rate": 0.301,
+            "n": 73
+          },
+          "27.5": {
+            "over_rate": 0.219,
+            "n": 73
+          },
+          "28.5": {
+            "over_rate": 0.151,
+            "n": 73
+          }
+        },
+        "home_advantage": 1.562
+      },
+      "distinct_team_ids": 16,
+      "matches_per_team": {
+        "min": 9,
+        "max": 10
+      },
+      "referee_coverage": 72.6,
+      "date_range": [
+        "2026-08-01",
+        "2026-10-31"
+      ]
+    }
+  },
+  "distinct_team_ids": 23,
+  "multi_name_team_ids": {
+    "102100": [
+      "AmaZulu",
+      "AmaZulu FC"
+    ],
+    "149599": [
+      "Durban City",
+      "Maritzburg United"
+    ],
+    "102099": [
+      "Siwelele",
+      "SuperSport United"
+    ]
+  },
+  "phase_values": [
+    "regular"
+  ],
+  "cards_source_counts": {
+    "stats": 999,
+    "none": 244
+  },
+  "dev_definitions": {
+    "goals": [
+      "2022/2023",
+      "2023/2024",
+      "2024/2025"
+    ],
+    "stats_markets": [
+      "2023/2024",
+      "2024/2025"
+    ],
+    "split_halves": [
+      "2022/2023",
+      "2023/2024",
+      "2024/2025"
+    ]
+  },
+  "virgin": "2025/2026",
+  "confirmatory": "2026/2027"
+}

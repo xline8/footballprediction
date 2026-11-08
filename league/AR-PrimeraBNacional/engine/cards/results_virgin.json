@@ -1,0 +1,171 @@
+{
+  "protocol": {
+    "loaded_seasons": [
+      "2023",
+      "2024",
+      "2025",
+      "2026"
+    ],
+    "loaded_n": 2630,
+    "virgin_season": "2026",
+    "virgin_n": 648,
+    "read_arms": [
+      "gate_zero",
+      "x8"
+    ],
+    "dead_arms_not_read": [],
+    "rows_2021_2022_seen": 0,
+    "dev_reproduction": "exact"
+  },
+  "baselines": {
+    "league_base_rate": {
+      "p_over_4_5": 0.5237134207870837,
+      "n_prior": 1982,
+      "ll_4_5": 0.6922222534016044
+    },
+    "naive_trailing10": {
+      "ll_4_5": 0.6879107364613183,
+      "r": 112.39
+    }
+  },
+  "arms": {
+    "gate_zero": {
+      "metrics": {
+        "model": {
+          "4.5": {
+            "n": 648,
+            "ll": 0.676939339947922,
+            "mean_p": 0.5089519695898537,
+            "actual_rate": 0.5216049382716049
+          },
+          "5.5": {
+            "n": 648,
+            "ll": 0.6294023856800542,
+            "mean_p": 0.34200077900290243,
+            "actual_rate": 0.33487654320987653
+          }
+        },
+        "base": {
+          "4.5": {
+            "n": 648,
+            "ll": 0.6921947137824903,
+            "mean_p": 0.5057179052594579,
+            "actual_rate": 0.5216049382716049
+          },
+          "5.5": {
+            "n": 648,
+            "ll": 0.6370524509706527,
+            "mean_p": 0.3354450225449071,
+            "actual_rate": 0.33487654320987653
+          }
+        },
+        "naive": {
+          "4.5": {
+            "n": 648,
+            "ll": 0.6879107364613183,
+            "mean_p": 0.48868284425389197,
+            "actual_rate": 0.5216049382716049
+          },
+          "5.5": {
+            "n": 648,
+            "ll": 0.6361600359014753,
+            "mean_p": 0.32476011548625155,
+            "actual_rate": 0.33487654320987653
+          }
+        }
+      },
+      "calibration": {
+        "mean_p": 0.5089519695898537,
+        "actual_rate": 0.5216049382716049,
+        "diff": -0.012652968681751284,
+        "se": 0.01933420760723668,
+        "abs_diff_pp": 1.2652968681751284,
+        "breach_pp": 0.26529686817512843
+      },
+      "x8_fallbacks": {
+        "unknown_identity": 2,
+        "thin_history": 87
+      },
+      "gate_legs": {
+        "dev_gate_pass": true,
+        "virgin_ll_le_gate_zero": true,
+        "virgin_ll_le_best_baseline": true,
+        "calibration_pass": false,
+        "calibration_provisional": true,
+        "calibration_diff": -0.012652968681751284,
+        "calibration_se": 0.01933420760723668,
+        "dev_sign_pass": true
+      }
+    },
+    "x8": {
+      "metrics": {
+        "model": {
+          "4.5": {
+            "n": 648,
+            "ll": 0.6692908080292375,
+            "mean_p": 0.5109941233891433,
+            "actual_rate": 0.5216049382716049
+          },
+          "5.5": {
+            "n": 648,
+            "ll": 0.624246795973373,
+            "mean_p": 0.3465949441095628,
+            "actual_rate": 0.33487654320987653
+          }
+        },
+        "base": {
+          "4.5": {
+            "n": 648,
+            "ll": 0.6921947137824903,
+            "mean_p": 0.5057179052594579,
+            "actual_rate": 0.5216049382716049
+          },
+          "5.5": {
+            "n": 648,
+            "ll": 0.6370524509706527,
+            "mean_p": 0.3354450225449071,
+            "actual_rate": 0.33487654320987653
+          }
+        },
+        "naive": {
+          "4.5": {
+            "n": 648,
+            "ll": 0.6879107364613183,
+            "mean_p": 0.48868284425389197,
+            "actual_rate": 0.5216049382716049
+          },
+          "5.5": {
+            "n": 648,
+            "ll": 0.6361600359014753,
+            "mean_p": 0.32476011548625155,
+            "actual_rate": 0.33487654320987653
+          }
+        }
+      },
+      "calibration": {
+        "mean_p": 0.5109941233891433,
+        "actual_rate": 0.5216049382716049,
+        "diff": -0.010610814882461662,
+        "se": 0.019191454945070296,
+        "abs_diff_pp": 1.0610814882461663,
+        "breach_pp": 0.06108148824616622
+      },
+      "x8_fallbacks": {
+        "unknown_identity": 2,
+        "thin_history": 87
+      },
+      "gate_legs": {
+        "dev_gate_pass": true,
+        "virgin_ll_le_gate_zero": true,
+        "virgin_ll_le_best_baseline": true,
+        "calibration_pass": false,
+        "calibration_provisional": true,
+        "calibration_diff": -0.010610814882461662,
+        "calibration_se": 0.019191454945070296,
+        "dev_sign_pass": true
+      }
+    }
+  },
+  "shipped_arm": "x8",
+  "nothing_ships": false
+}

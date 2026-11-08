@@ -1,0 +1,519 @@
+{
+  "seasons": {
+    "2021/2022": {
+      "n_matches": 306,
+      "goals_per_match": 2.8594771241830066,
+      "home_goals": 1.5686274509803921,
+      "away_goals": 1.2908496732026145,
+      "home_draw_away_pct": [
+        43.13725490196079,
+        20.915032679738562,
+        35.947712418300654
+      ],
+      "btts_pct": 54.90196078431373,
+      "over2_5_pct": 55.22875816993464,
+      "total_shots": 26.026143790849673,
+      "sot": 9.261437908496733,
+      "corners": 9.715686274509803,
+      "yellows": 2.869281045751634,
+      "reds": 0.14705882352941177,
+      "team_xg": 2.6619607843137256,
+      "dispersion_var_mean": {
+        "goals": 0.9894707259953159,
+        "SOT": 1.0645533741337623,
+        "corners": 1.1447651817174243,
+        "cards": 1.3561073975876619,
+        "shots": 1.1715572535425811
+      }
+    },
+    "2022/2023": {
+      "n_matches": 306,
+      "goals_per_match": 3.0555555555555554,
+      "home_goals": 1.7287581699346406,
+      "away_goals": 1.326797385620915,
+      "home_draw_away_pct": [
+        44.77124183006536,
+        23.856209150326798,
+        31.372549019607842
+      ],
+      "btts_pct": 52.614379084967325,
+      "over2_5_pct": 59.47712418300654,
+      "total_shots": 27.61111111111111,
+      "sot": 9.718954248366012,
+      "corners": 10.601307189542483,
+      "yellows": 2.843137254901961,
+      "reds": 0.13398692810457516,
+      "team_xg": 2.9329738562091503,
+      "dispersion_var_mean": {
+        "goals": 1.1288822652757078,
+        "SOT": 1.1685228262427378,
+        "corners": 1.2597764346789029,
+        "cards": 1.022272470322216,
+        "shots": 1.220549526668206
+      }
+    },
+    "2023/2024": {
+      "n_matches": 306,
+      "goals_per_match": 3.241830065359477,
+      "home_goals": 1.7679738562091503,
+      "away_goals": 1.473856209150327,
+      "home_draw_away_pct": [
+        43.13725490196079,
+        24.836601307189543,
+        32.02614379084967
+      ],
+      "btts_pct": 56.5359477124183,
+      "over2_5_pct": 63.725490196078425,
+      "total_shots": 28.143790849673202,
+      "sot": 10.323529411764707,
+      "corners": 10.542483660130719,
+      "yellows": 2.895424836601307,
+      "reds": 0.16666666666666666,
+      "team_xg": 3.1069607843137255,
+      "dispersion_var_mean": {
+        "goals": 0.9062929666842942,
+        "SOT": 1.1226846013731258,
+        "corners": 1.1450773937170329,
+        "cards": 1.0991377715279578,
+        "shots": 1.4822793966482146
+      }
+    },
+    "2024/2025": {
+      "n_matches": 306,
+      "goals_per_match": 2.9869281045751634,
+      "home_goals": 1.696078431372549,
+      "away_goals": 1.2908496732026145,
+      "home_draw_away_pct": [
+        45.42483660130719,
+        25.163398692810457,
+        29.41176470588235
+      ],
+      "btts_pct": 55.55555555555556,
+      "over2_5_pct": 55.22875816993464,
+      "total_shots": 26.245098039215687,
+      "sot": 9.15032679738562,
+      "corners": 9.941176470588236,
+      "yellows": 2.954248366013072,
+      "reds": 0.16993464052287582,
+      "team_xg": 2.827908496732026,
+      "dispersion_var_mean": {
+        "goals": 1.0054166517200562,
+        "SOT": 1.2415878220140517,
+        "corners": 1.0583373751091278,
+        "cards": 1.0780356883795157,
+        "shots": 1.494438967035524
+      }
+    },
+    "2025/2026": {
+      "n_matches": 306,
+      "goals_per_match": 3.176470588235294,
+      "home_goals": 1.8006535947712419,
+      "away_goals": 1.3758169934640523,
+      "home_draw_away_pct": [
+        44.44444444444444,
+        26.143790849673202,
+        29.41176470588235
+      ],
+      "btts_pct": 62.745098039215684,
+      "over2_5_pct": 61.76470588235294,
+      "total_shots": 28.22222222222222,
+      "sot": 10.379084967320262,
+      "corners": 10.46078431372549,
+      "yellows": 3.1176470588235294,
+      "reds": 0.17320261437908496,
+      "team_xg": 3.158692810457516,
+      "dispersion_var_mean": {
+        "goals": 0.8778384942319369,
+        "SOT": 1.014659123756039,
+        "corners": 1.0368245578994266,
+        "cards": 0.9546551190844418,
+        "shots": 1.159055118110236
+      }
+    },
+    "2026/2027": {
+      "n_matches": 108,
+      "goals_per_match": 3.888888888888889,
+      "home_goals": 1.8518518518518519,
+      "away_goals": 2.037037037037037,
+      "home_draw_away_pct": [
+        34.25925925925926,
+        27.77777777777778,
+        37.96296296296296
+      ],
+      "btts_pct": 70.37037037037037,
+      "over2_5_pct": 72.22222222222221,
+      "total_shots": 29.555555555555557,
+      "sot": 10.398148148148149,
+      "corners": 10.12037037037037,
+      "yellows": 2.9444444444444446,
+      "reds": 0.09259259259259259,
+      "team_xg": 3.455740740740741,
+      "dispersion_var_mean": {
+        "goals": 0.9052069425901201,
+        "SOT": 1.0065412238579907,
+        "corners": 1.1224102401860607,
+        "cards": 1.3574325515782046,
+        "shots": 1.0873445295481692
+      }
+    }
+  },
+  "pooled": {
+    "n_matches": 1638,
+    "goals_per_match": 3.1184371184371185,
+    "home_goals": 1.7216117216117217,
+    "away_goals": 1.3968253968253967,
+    "home_draw_away_pct": [
+      43.52869352869353,
+      24.42002442002442,
+      32.05128205128205
+    ],
+    "btts_pct": 57.38705738705738,
+    "over2_5_pct": 59.95115995115995,
+    "total_shots": 27.4017094017094,
+    "sot": 9.808302808302809,
+    "corners": 10.243589743589743,
+    "yellows": 2.9365079365079363,
+    "reds": 0.15384615384615385,
+    "team_xg": 2.9718559218559224,
+    "dispersion_var_mean": {
+      "goals": 0.9894496349827238,
+      "SOT": 1.1364965881043079,
+      "corners": 1.1375803443981216,
+      "cards": 1.1161485248229293,
+      "shots": 1.3277349929176017
+    }
+  },
+  "home_advantage_goals": 0.3247863247863248,
+  "reliability": {
+    "goals_for": {
+      "r": 0.9091361873330315,
+      "n_splits": 60,
+      "odd_even_r": 0.9208515114295545
+    },
+    "goals_against": {
+      "r": 0.7115331410474538,
+      "n_splits": 60,
+      "odd_even_r": 0.8096407431169134
+    },
+    "shots_for": {
+      "r": 0.9270004578599924,
+      "n_splits": 60,
+      "odd_even_r": 0.8715523344377235
+    },
+    "shots_against": {
+      "r": 0.9050213198178354,
+      "n_splits": 60,
+      "odd_even_r": 0.9689928065369285
+    },
+    "SOT_for": {
+      "r": 0.9240685817421633,
+      "n_splits": 60,
+      "odd_even_r": 0.8749892891604392
+    },
+    "SOT_against": {
+      "r": 0.8667936618961243,
+      "n_splits": 60,
+      "odd_even_r": 0.9469356256329169
+    },
+    "corners_for": {
+      "r": 0.8487623761539254,
+      "n_splits": 60,
+      "odd_even_r": 0.8084721406220564
+    },
+    "corners_against": {
+      "r": 0.8506484446310068,
+      "n_splits": 60,
+      "odd_even_r": 0.8444216304678968
+    },
+    "yellows_for": {
+      "r": 0.5022511192731782,
+      "n_splits": 60,
+      "odd_even_r": 0.6571199360149454
+    },
+    "yellows_against": {
+      "r": 0.4874774200131247,
+      "n_splits": 60,
+      "odd_even_r": 0.2086232738565433
+    },
+    "xG_for": {
+      "r": 0.938149686269913,
+      "n_splits": 60,
+      "odd_even_r": 0.9084087856703675
+    },
+    "xG_against": {
+      "r": 0.8551211318701175,
+      "n_splits": 60,
+      "odd_even_r": 0.9225327295177291
+    },
+    "big_chance_for": {
+      "r": 0.9121901820189132,
+      "n_splits": 60,
+      "odd_even_r": 0.9016033548053651
+    },
+    "big_chance_against": {
+      "r": 0.794488830024378,
+      "n_splits": 60,
+      "odd_even_r": 0.9246679289208578
+    },
+    "possession_for": {
+      "r": 0.9440241059579186,
+      "n_splits": 60,
+      "odd_even_r": 0.9671680217217379
+    },
+    "possession_against": {
+      "r": 0.9440241059579186,
+      "n_splits": 60,
+      "odd_even_r": 0.9671680217217379
+    },
+    "box_touches_for": {
+      "r": 0.9593063530098396,
+      "n_splits": 60,
+      "odd_even_r": 0.9393401525619619
+    },
+    "box_touches_against": {
+      "r": 0.875974769864699,
+      "n_splits": 60,
+      "odd_even_r": 0.9361505582727929
+    },
+    "ratio_traits": {
+      "set_play_xg_share": {
+        "r": 0.6101334237097535,
+        "n_splits": 60,
+        "method": "ratio_of_sums"
+      },
+      "xg_per_shot": {
+        "r": 0.7586664500842453,
+        "n_splits": 60,
+        "method": "ratio_of_sums"
+      },
+      "finishing_goals_minus_xg": {
+        "r": 0.4065790292370082,
+        "n_splits": 60,
+        "odd_even_r": 0.4710002594072295
+      },
+      "on_target_rate": {
+        "r": 0.5806293963957487,
+        "n_splits": 60,
+        "method": "ratio_of_sums"
+      },
+      "xgot_per_shot_attacking": {
+        "r": 0.8578873578743879,
+        "n_splits": 60,
+        "method": "ratio_of_sums"
+      },
+      "xgot_per_shot_restricted_2025": {
+        "r": 0.46361620262113384,
+        "n_splits": 60,
+        "method": "ratio_of_sums"
+      }
+    }
+  },
+  "halves": {
+    "goals": {
+      "n_matches": 1066,
+      "share_1h": 0.436399217221135,
+      "observed_variance": 0.09242268068576152,
+      "noise_floor_permatch": 0.09798085918142771,
+      "true_variance": -0.005558178495666186,
+      "events_all_matches_goals_share": 0.44440093970242756,
+      "team_share_split_half": {
+        "r": -0.19042700722871606,
+        "n_splits": 60,
+        "odd_even_r": -0.12109910851489716
+      }
+    },
+    "SOT": {
+      "n_matches": 1113,
+      "share_1h": 0.44599711503786515,
+      "observed_variance": 0.026660736386597855,
+      "noise_floor_permatch": 0.028495497868338885,
+      "true_variance": -0.0018347614817410297,
+      "events_all_matches_goals_share": null,
+      "team_share_split_half": {
+        "r": -0.25830244724283113,
+        "n_splits": 60,
+        "odd_even_r": -0.03421511258718435
+      }
+    },
+    "corners": {
+      "n_matches": 1113,
+      "share_1h": 0.46227482377512835,
+      "observed_variance": 0.031881742450706074,
+      "noise_floor_permatch": 0.027772423748042164,
+      "true_variance": 0.00410931870266391,
+      "events_all_matches_goals_share": null,
+      "team_share_split_half": {
+        "r": 0.058084727201847305,
+        "n_splits": 60,
+        "odd_even_r": 0.13330187359710297
+      }
+    },
+    "total_shots": {
+      "n_matches": 1113,
+      "share_1h": 0.44898619150793906,
+      "observed_variance": 0.008810189580409817,
+      "noise_floor_permatch": 0.009385916495134549,
+      "true_variance": -0.0005757269147247321,
+      "events_all_matches_goals_share": null,
+      "team_share_split_half": {
+        "r": 0.08947080744158263,
+        "n_splits": 60,
+        "odd_even_r": 0.3974164591060429
+      }
+    },
+    "yellows": {
+      "n_matches": 1031,
+      "share_1h": 0.3333333333333333,
+      "observed_variance": 0.10747108993010694,
+      "noise_floor_permatch": 0.09512852883366948,
+      "true_variance": 0.012342561096437457,
+      "events_all_matches_goals_share": null,
+      "team_share_split_half": {
+        "r": 0.08664158160521025,
+        "n_splits": 60,
+        "odd_even_r": -0.13317372653304538
+      }
+    }
+  },
+  "referees": {
+    "coverage_pct": 100.0,
+    "coverage_by_season": {
+      "2021/2022": 100.0,
+      "2022/2023": 100.0,
+      "2023/2024": 100.0,
+      "2024/2025": 100.0,
+      "2025/2026": 100.0,
+      "2026/2027": 100.0
+    },
+    "eligible_referees": 23,
+    "card_rate_split_half": {
+      "r": 0.5115774209044179,
+      "n_splits": 60,
+      "odd_even_r": 0.381472185924881
+    }
+  },
+  "newcomers": {
+    "2022/2023": {
+      "teams": [
+        "Excelsior",
+        "FC Emmen",
+        "FC Volendam"
+      ],
+      "n_teams": 3,
+      "gf_per_match": 1.0625,
+      "ga_per_match": 2.0208333333333335,
+      "league_goal_mean_per_match": 3.0555555555555554,
+      "league_team_goal_mean": 1.5277777777777777,
+      "gf_gap": -0.4652777777777777,
+      "ga_gap": 0.4930555555555558
+    },
+    "2023/2024": {
+      "teams": [
+        "Almere City FC",
+        "Heracles",
+        "PEC Zwolle"
+      ],
+      "n_teams": 3,
+      "gf_per_match": 1.1145833333333333,
+      "ga_per_match": 2.0,
+      "league_goal_mean_per_match": 3.241830065359477,
+      "league_team_goal_mean": 1.6209150326797386,
+      "gf_gap": -0.5063316993464053,
+      "ga_gap": 0.3790849673202614
+    },
+    "2024/2025": {
+      "teams": [
+        "FC Groningen",
+        "NAC Breda",
+        "Willem II"
+      ],
+      "n_teams": 3,
+      "gf_per_match": 1.0416666666666667,
+      "ga_per_match": 1.625,
+      "league_goal_mean_per_match": 2.9869281045751634,
+      "league_team_goal_mean": 1.4934640522875817,
+      "gf_gap": -0.451797385620915,
+      "ga_gap": 0.13153594771241828
+    },
+    "2025/2026": {
+      "teams": [
+        "Excelsior",
+        "FC Volendam",
+        "Telstar"
+      ],
+      "n_teams": 3,
+      "gf_per_match": 1.2083333333333333,
+      "ga_per_match": 1.6354166666666667,
+      "league_goal_mean_per_match": 3.176470588235294,
+      "league_team_goal_mean": 1.588235294117647,
+      "gf_gap": -0.3799019607843137,
+      "ga_gap": 0.04718137254901977
+    },
+    "2026/2027": {
+      "teams": [
+        "ADO Den Haag",
+        "Cambuur",
+        "Willem II"
+      ],
+      "n_teams": 3,
+      "gf_per_match": 1.3235294117647058,
+      "ga_per_match": 2.6470588235294117,
+      "league_goal_mean_per_match": 3.888888888888889,
+      "league_team_goal_mean": 1.9444444444444444,
+      "gf_gap": -0.6209150326797386,
+      "ga_gap": 0.7026143790849673
+    }
+  },
+  "reverse_movers": {
+    "2022/2023": {
+      "absent_next_season": [
+        "Heracles",
+        "PEC Zwolle",
+        "Willem II"
+      ],
+      "n_teams": 3
+    },
+    "2023/2024": {
+      "absent_next_season": [
+        "Cambuur",
+        "FC Emmen",
+        "FC Groningen"
+      ],
+      "n_teams": 3
+    },
+    "2024/2025": {
+      "absent_next_season": [
+        "Excelsior",
+        "FC Volendam",
+        "Vitesse"
+      ],
+      "n_teams": 3
+    },
+    "2025/2026": {
+      "absent_next_season": [
+        "Almere City FC",
+        "RKC Waalwijk",
+        "Willem II"
+      ],
+      "n_teams": 3
+    },
+    "2026/2027": {
+      "absent_next_season": [
+        "FC Volendam",
+        "Heracles",
+        "NAC Breda"
+      ],
+      "n_teams": 3
+    }
+  },
+  "xg_calibration_goals_over_xg": {
+    "2021/2022": 1.0741995678648595,
+    "2022/2023": 1.0417943375413654,
+    "2023/2024": 1.0434087490665067,
+    "2024/2025": 1.0562322324173157,
+    "2025/2026": 1.0056282072504552,
+    "2026/2027": 1.1253416215636889
+  },
+  "touches_opp_box_key_present": true,
+  "star_absence": "Skipped: closed program-wide, as requested."
+}

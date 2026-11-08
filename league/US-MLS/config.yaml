@@ -1,0 +1,33 @@
+# USA MLS — Stage A2 league config
+league: US-MLS
+country: USA
+fotmob_id: 130
+tier: 1
+warehouse: data_enrichment/fotmob_world_index.csv (league_id=130)
+data:
+  matches: league/US-MLS/data/us_matches.csv
+  team_matches: league/US-MLS/data/us_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period: ["2022", "2023", "2024"]
+virgin_primary: "2025"
+virgin_confirmatory: "2026"
+halves_constants:
+  goals_1h_share: 0.445
+  sot_1h_share: 0.450
+  corners_1h_share: 0.464
+  total_shots_1h_share: 0.456
+  yellow_cards_1h_share: 0.341
+markets:
+  goals: G-US        # DC reference; arms: Gate Zero, SHR, X3 set-play tilt
+  sot: S-US          # v5 reference; arms: Gate Zero, RS, X4 xG/shot, X6 xGOT/shot
+  corners: C-US      # corners_v3 reference; arms: Gate Zero (X9), X7 box touches
+  cards: K-US        # cards reference; arms: Gate Zero, X8 referee covariate
+  total_shots: T-US  # shots family; arms: v1 pattern, E9 trailing-r
+notes:
+  - Calendar-year seasons; regular and playoff matches are retained and phase-flagged. No phase filter is used.
+  - MLS has no relegation; expansion/no-mover risk is handled by the pre-registered SHR arm. Expansion clubs are Charlotte 2022, St. Louis City 2023, and San Diego FC 2025.
+  - MLS conferences exist, but the conference field is absent from the warehouse; no conference feature is built.
+  - xG, stats, and shotmap are 100% in modelled seasons except xG 99.2% in 2021; box touches ramp from approximately 39–45% in 2021–2023 to 100% in 2024–2025.
+  - Referee coverage is 0% in 2021 (warm-up only) and approximately 96–99% in dev/virgin seasons. X7 uses the min-8 trailing rule with Gate Zero fallback; X8 never imputes a referee.
+  - 2025 is the virgin primary, n=540, read once and only for dev-passing arms. 2026 is reserved: regular slate only in the warehouse, playoffs absent, never read in this build.
+  - Predictions-only: no MLS odds/settlement source is in-system.

@@ -1,0 +1,23 @@
+league: AR-TorneoFederalA
+country: Argentina
+fotmob_id: 9213
+tier: 3
+warehouse: /home/hatch/workspace/footballprediction/data_enrichment
+data:
+  matches: league/AR-TorneoFederalA/data/feda_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period: ["2021", "2022", "2023", "2024", "2025"]
+virgin_primary: "2026"
+halves_constants:
+  goals_1h_share: 0.463826
+markets:
+  goals: G-FEDA
+  sot: "NOT BUILDABLE — no SOT target in any payload"
+  corners: "NOT BUILDABLE — no corners target in any payload"
+  cards: "NOT BUILDABLE — no Yellow target; only Red/YellowRed events"
+  total_shots: "NOT BUILDABLE — no shotmap/total-shots target"
+notes:
+  - "Federal A is split from the other parent-9213 competition by general.leagueName; team sets are disjoint apart from documented movers."
+  - "Group rows include first-phase and second-phase ordinary league rows; playoff, tiebreak, and Tercer Ascenso rows are excluded, following the DK-Superligaen split-round precedent."
+  - "2023 Zona A is merged by leagueId despite the Latin/Cyrillic-A spelling glitch."
+  - "Header goals are authoritative; mismatched event feeds are unavailable for halves."

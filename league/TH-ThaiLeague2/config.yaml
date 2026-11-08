@@ -1,0 +1,33 @@
+# TH-ThaiLeague2 (Thailand) — league config
+league: TH-ThaiLeague2
+country: Thailand
+fotmob_id: 9498
+tier: 2
+warehouse_root: ~/workspace/footballprediction
+data:
+  matches: league/TH-ThaiLeague2/data/th2_matches.csv
+  team_matches: league/TH-ThaiLeague2/data/th2_team_matches.csv
+seasons: ["2024/2025", "2025/2026", "2026/2027"]
+dev_protocol: "within-season walk-forward over the single pre-virgin season: warm-up first 90 regular matches of 2024/2025, scored remaining 183 (cards 182)"
+virgin_primary: "2025/2026"   # last COMPLETE season, regular phase n=306; read ONCE per candidate
+virgin_confirmatory: "2026/2027"  # in progress (90 matches); reserved, NOT read in this build
+halves_constants:
+  goals_1h_share: 0.4249
+  yellow_cards_1h_share: 0.3322
+  sot_1h_share: null        # no period splits and no SOT target: FT-only (not buildable)
+  corners_1h_share: null    # no period splits and no corners target: FT-only (not buildable)
+  total_shots_1h_share: null  # no period splits and no total-shots target: FT-only (not buildable)
+markets:
+  goals: G-TH2       # DC reference, goals-only; arms: Gate Zero, SHRINK
+  cards: K-TH2       # cards reference, Gate Zero only; target = EVENT-UNIFIED yellows
+  sot: S-TH2         # NOT BUILDABLE: no SOT target in any payload
+  corners: C-TH2     # NOT BUILDABLE: no corners target in any payload
+  total_shots: T-TH2 # NOT BUILDABLE: no total-shots target in any payload
+notes:
+  - "FORMAT: 18 teams, double round-robin regular phase (34 rounds) + promotion play-offs (6 matches/season, EXCLUDED from every fit and scored window by the frozen phase rule). Split-year Aug-May calendar."
+  - "2024/2025 quirk: Samut Prakan City withdrew after 1 regular match; the other 17 clubs played 32-33 regular matches (regular total 273)."
+  - "STATS FEED: null in all 681 payloads (Periods.All is a null-valued key; the warehouse index has_stats flag tests key presence only and is a false positive for this league). No SOT/corners/total-shots target, no xG, no shotmap, no period splits anywhere."
+  - "CARDS: event feed publishes plain Yellow events in every era (unlike parent TH-ThaiLeague's dev era); target frozen as event-unified yellows (direct Yellow + YellowRed) in dev and virgin. No stats target exists to compare against."
+  - "REFEREE: 0% coverage in both complete seasons (72/90 only in the in-progress 2026/2027); X8 dropped as not measurable."
+  - "THIN CORPUS: only two complete seasons exist. Dev scored n=183 (cards 182), virgin n=306. No window widened and no gate loosened for pool size."
+  - "Calibration convention: actual minus predicted."

@@ -1,0 +1,27 @@
+league: RO-LigaII
+country: Romania
+fotmob_id: 9113
+tier: 2
+warehouse: data_enrichment/fotmob_world/Romania/Liga II
+data:
+  matches: league/RO-LigaII/data/rl2_matches.csv
+  team_matches: league/RO-LigaII/data/rl2_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"  # complete, n=317; read once only for arms passing dev
+virgin_confirmatory: "2026/2027"  # in progress, n=140; reserved, not read
+halves_constants:
+  goals_1h_share: 0.457419
+markets:
+  goals: G-RL2  # Dixon-Coles goals-only; arms Gate Zero and SHRINK
+  sot: NOT_BUILDABLE  # no SOT source in any season
+  corners: NOT_BUILDABLE  # no corners source in any season
+  cards: NOT_BUILDABLE  # no yellow source; Red/YellowRed are non-target audit events
+  total_shots: NOT_BUILDABLE  # no shots source in any season
+notes:
+  - Regular format changes from 20 teams / 190 matches in 2021/2022-2024/2025 to 22 teams / 231 matches in 2025/2026; 2026/2027 has 140 regular matches so far.
+  - Phases are regular, promotion, relegation_a, relegation_b and two-legged relegation_playoff; playoff is excluded from modelling.
+  - Stats is None, shotmap is empty, referee text is blank, and no xG exists in all 1,513 payloads.
+  - There are zero straight-Yellow events; Red=148 and YellowRed=106 are audit counts only.
+  - Event feed has 1,400 non-empty matches, 3,844 goal events versus 3,841 score goals, and substitutions only in 2021/2022 (606).
+  - X2 is dropped because no Liga I to Liga II inter-league matches calibrate an offset; SHRINK covers promoted-team risk and may be numerically identical under season-blocked fitting because prior counts are 0 or >=25.

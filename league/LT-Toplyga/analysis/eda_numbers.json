@@ -1,0 +1,930 @@
+{
+  "league": "LT-Toplyga",
+  "league_id": "228",
+  "seasons": [
+    "2021",
+    "2022",
+    "2023",
+    "2024",
+    "2025",
+    "2026"
+  ],
+  "per_season": {
+    "2021": {
+      "matches": 180,
+      "goals_per_match": 2.7389,
+      "home_goals_per_match": 1.4611,
+      "away_goals_per_match": 1.2778,
+      "home_win_rate": 0.4,
+      "draw_rate": 0.2722,
+      "away_win_rate": 0.3278,
+      "btts_rate": 0.5389,
+      "ou1_5_over_rate": 0.8167,
+      "ou2_5_over_rate": 0.5,
+      "ou3_5_over_rate": 0.2833,
+      "home_advantage_goals": 0.1833,
+      "goals_variance": 2.2834,
+      "goals_dispersion_variance_mean": 0.8337,
+      "coverage": {
+        "events": 95.0,
+        "ht_derivable": 95.0,
+        "stats_content": 0.0,
+        "shotmap": 0.0,
+        "lineup": 0.0,
+        "referee_nonempty": 0.0
+      }
+    },
+    "2022": {
+      "matches": 180,
+      "goals_per_match": 2.6167,
+      "home_goals_per_match": 1.4056,
+      "away_goals_per_match": 1.2111,
+      "home_win_rate": 0.4167,
+      "draw_rate": 0.2556,
+      "away_win_rate": 0.3278,
+      "btts_rate": 0.45,
+      "ou1_5_over_rate": 0.7444,
+      "ou2_5_over_rate": 0.5,
+      "ou3_5_over_rate": 0.2667,
+      "home_advantage_goals": 0.1944,
+      "goals_variance": 2.517,
+      "goals_dispersion_variance_mean": 0.9619,
+      "coverage": {
+        "events": 91.67,
+        "ht_derivable": 91.67,
+        "stats_content": 0.0,
+        "shotmap": 0.0,
+        "lineup": 0.0,
+        "referee_nonempty": 0.0
+      }
+    },
+    "2023": {
+      "matches": 180,
+      "goals_per_match": 2.3944,
+      "home_goals_per_match": 1.2889,
+      "away_goals_per_match": 1.1056,
+      "home_win_rate": 0.4111,
+      "draw_rate": 0.2556,
+      "away_win_rate": 0.3333,
+      "btts_rate": 0.3833,
+      "ou1_5_over_rate": 0.6833,
+      "ou2_5_over_rate": 0.4056,
+      "ou3_5_over_rate": 0.2389,
+      "home_advantage_goals": 0.1833,
+      "goals_variance": 2.7877,
+      "goals_dispersion_variance_mean": 1.1642,
+      "coverage": {
+        "events": 89.44,
+        "ht_derivable": 88.89,
+        "stats_content": 0.0,
+        "shotmap": 0.0,
+        "lineup": 0.0,
+        "referee_nonempty": 0.0
+      }
+    },
+    "2024": {
+      "matches": 180,
+      "goals_per_match": 2.35,
+      "home_goals_per_match": 1.1889,
+      "away_goals_per_match": 1.1611,
+      "home_win_rate": 0.3667,
+      "draw_rate": 0.2778,
+      "away_win_rate": 0.3556,
+      "btts_rate": 0.4333,
+      "ou1_5_over_rate": 0.6333,
+      "ou2_5_over_rate": 0.4444,
+      "ou3_5_over_rate": 0.25,
+      "home_advantage_goals": 0.0278,
+      "goals_variance": 2.6645,
+      "goals_dispersion_variance_mean": 1.1338,
+      "coverage": {
+        "events": 89.44,
+        "ht_derivable": 88.89,
+        "stats_content": 0.0,
+        "shotmap": 0.0,
+        "lineup": 0.0,
+        "referee_nonempty": 0.0
+      }
+    },
+    "2025": {
+      "matches": 180,
+      "goals_per_match": 2.6611,
+      "home_goals_per_match": 1.4222,
+      "away_goals_per_match": 1.2389,
+      "home_win_rate": 0.4,
+      "draw_rate": 0.2444,
+      "away_win_rate": 0.3556,
+      "btts_rate": 0.5111,
+      "ou1_5_over_rate": 0.7444,
+      "ou2_5_over_rate": 0.5222,
+      "ou3_5_over_rate": 0.2889,
+      "home_advantage_goals": 0.1833,
+      "goals_variance": 2.4935,
+      "goals_dispersion_variance_mean": 0.937,
+      "coverage": {
+        "events": 92.78,
+        "ht_derivable": 92.78,
+        "stats_content": 0.0,
+        "shotmap": 0.0,
+        "lineup": 0.0,
+        "referee_nonempty": 0.0
+      }
+    },
+    "2026": {
+      "matches": 144,
+      "goals_per_match": 2.6458,
+      "home_goals_per_match": 1.4583,
+      "away_goals_per_match": 1.1875,
+      "home_win_rate": 0.4097,
+      "draw_rate": 0.2778,
+      "away_win_rate": 0.3125,
+      "btts_rate": 0.5208,
+      "ou1_5_over_rate": 0.75,
+      "ou2_5_over_rate": 0.5347,
+      "ou3_5_over_rate": 0.2847,
+      "home_advantage_goals": 0.2708,
+      "goals_variance": 2.6359,
+      "goals_dispersion_variance_mean": 0.9963,
+      "coverage": {
+        "events": 89.58,
+        "ht_derivable": 89.58,
+        "stats_content": 0.0,
+        "shotmap": 0.0,
+        "lineup": 0.0,
+        "referee_nonempty": 0.0
+      }
+    }
+  },
+  "pooled_levels": {
+    "matches": 1044,
+    "goals_per_match": 2.5651,
+    "home_goals_per_match": 1.3678,
+    "away_goals_per_match": 1.1973,
+    "home_win_rate": 0.4004,
+    "draw_rate": 0.2634,
+    "away_win_rate": 0.3362,
+    "btts_rate": 0.4713,
+    "ou1_5_over_rate": 0.728,
+    "ou2_5_over_rate": 0.4828,
+    "ou3_5_over_rate": 0.2682,
+    "home_advantage_goals": 0.1705,
+    "goals_variance": 2.5701,
+    "goals_dispersion_variance_mean": 1.0019,
+    "coverage": {
+      "events": 91.38,
+      "ht_derivable": 91.19,
+      "stats_content": 0.0,
+      "shotmap": 0.0,
+      "lineup": 0.0,
+      "referee_nonempty": 0.0
+    }
+  },
+  "pooled_dev_levels": {
+    "matches": 720,
+    "goals_per_match": 2.5056,
+    "home_goals_per_match": 1.3264,
+    "away_goals_per_match": 1.1792,
+    "home_win_rate": 0.3986,
+    "draw_rate": 0.2583,
+    "away_win_rate": 0.3431,
+    "btts_rate": 0.4444,
+    "ou1_5_over_rate": 0.7014,
+    "ou2_5_over_rate": 0.4681,
+    "ou3_5_over_rate": 0.2611,
+    "home_advantage_goals": 0.1472,
+    "goals_variance": 2.6231,
+    "goals_dispersion_variance_mean": 1.0469,
+    "coverage": {
+      "events": 90.83,
+      "ht_derivable": 90.56,
+      "stats_content": 0.0,
+      "shotmap": 0.0,
+      "lineup": 0.0,
+      "referee_nonempty": 0.0
+    }
+  },
+  "reliability": {
+    "goals_for": {
+      "r": 0.796,
+      "n_teams": 13,
+      "method": "career chronological first-half vs second-half; teams with >=24 matches"
+    },
+    "goals_against": {
+      "r": 0.6918,
+      "n_teams": 13,
+      "method": "career chronological first-half vs second-half; teams with >=24 matches"
+    }
+  },
+  "halves": {
+    "pre_virgin": {
+      "n": 816,
+      "share_1h": 0.43038,
+      "observed_variance": 0.11649,
+      "noise_expectation": 0.118132,
+      "true_variance": -0.001641,
+      "noise_ratio": 0.986105,
+      "noise_model": "binomial"
+    },
+    "virgin_2026_descriptive": {
+      "n": 128,
+      "share_1h": 0.446194,
+      "observed_variance": 0.099254,
+      "noise_expectation": 0.109143,
+      "true_variance": -0.009888,
+      "noise_ratio": 0.909401,
+      "noise_model": "binomial"
+    },
+    "constant_frozen": 0.43038
+  },
+  "turnover": {
+    "2021": {
+      "team_count": 10,
+      "in_ids": [
+        "169157",
+        "254228",
+        "257518",
+        "4173",
+        "439132",
+        "4616",
+        "479143",
+        "624858",
+        "736555",
+        "8337"
+      ],
+      "out_ids": [],
+      "in_count": 10,
+      "out_count": 0
+    },
+    "2022": {
+      "team_count": 10,
+      "in_ids": [
+        "1099941",
+        "199532"
+      ],
+      "out_ids": [
+        "254228",
+        "4173"
+      ],
+      "in_count": 2,
+      "out_count": 2
+    },
+    "2023": {
+      "team_count": 10,
+      "in_ids": [
+        "254228"
+      ],
+      "out_ids": [
+        "199532"
+      ],
+      "in_count": 1,
+      "out_count": 1
+    },
+    "2024": {
+      "team_count": 10,
+      "in_ids": [
+        "1447232"
+      ],
+      "out_ids": [
+        "257518"
+      ],
+      "in_count": 1,
+      "out_count": 1
+    },
+    "2025": {
+      "team_count": 10,
+      "in_ids": [
+        "257518"
+      ],
+      "out_ids": [
+        "1447232"
+      ],
+      "in_count": 1,
+      "out_count": 1
+    },
+    "2026": {
+      "team_count": 9,
+      "in_ids": [
+        "1447232"
+      ],
+      "out_ids": [
+        "254228",
+        "257518"
+      ],
+      "in_count": 1,
+      "out_count": 2
+    }
+  },
+  "arrival_metrics": [
+    {
+      "season": "2022",
+      "team_id": "1099941",
+      "matches": 36,
+      "gf": 1.0833,
+      "ga": 1.0833,
+      "ppg": 1.3889,
+      "league_gf": 1.3083,
+      "league_ppg": 1.2444
+    },
+    {
+      "season": "2022",
+      "team_id": "199532",
+      "matches": 36,
+      "gf": 0.3333,
+      "ga": 2.8611,
+      "ppg": 0.0833,
+      "league_gf": 1.3083,
+      "league_ppg": 1.2444
+    },
+    {
+      "season": "2023",
+      "team_id": "254228",
+      "matches": 36,
+      "gf": 0.6944,
+      "ga": 1.1111,
+      "ppg": 0.8611,
+      "league_gf": 1.1972,
+      "league_ppg": 1.2444
+    },
+    {
+      "season": "2024",
+      "team_id": "1447232",
+      "matches": 36,
+      "gf": 0.9722,
+      "ga": 1.3889,
+      "ppg": 1.0556,
+      "league_gf": 1.175,
+      "league_ppg": 1.2222
+    },
+    {
+      "season": "2025",
+      "team_id": "257518",
+      "matches": 36,
+      "gf": 1.0278,
+      "ga": 2.0556,
+      "ppg": 0.7222,
+      "league_gf": 1.3306,
+      "league_ppg": 1.2556
+    }
+  ],
+  "sibling_league_available": false,
+  "thin_data": {
+    "2022": {
+      "team_count_lt6": 2,
+      "counts": {
+        "1099941": 0,
+        "169157": 36,
+        "199532": 0,
+        "257518": 36,
+        "439132": 36,
+        "4616": 36,
+        "479143": 36,
+        "624858": 36,
+        "736555": 36,
+        "8337": 36
+      }
+    },
+    "2023": {
+      "team_count_lt6": 0,
+      "counts": {
+        "1099941": 36,
+        "169157": 72,
+        "254228": 36,
+        "257518": 72,
+        "439132": 72,
+        "4616": 72,
+        "479143": 72,
+        "624858": 72,
+        "736555": 72,
+        "8337": 72
+      }
+    },
+    "2024": {
+      "team_count_lt6": 1,
+      "counts": {
+        "1099941": 72,
+        "1447232": 0,
+        "169157": 108,
+        "254228": 72,
+        "439132": 108,
+        "4616": 108,
+        "479143": 108,
+        "624858": 108,
+        "736555": 108,
+        "8337": 108
+      }
+    },
+    "2025": {
+      "team_count_lt6": 0,
+      "counts": {
+        "1099941": 108,
+        "169157": 144,
+        "254228": 108,
+        "257518": 108,
+        "439132": 144,
+        "4616": 144,
+        "479143": 144,
+        "624858": 144,
+        "736555": 144,
+        "8337": 144
+      }
+    },
+    "2026": {
+      "team_count_lt6": 0,
+      "counts": {
+        "1099941": 144,
+        "1447232": 36,
+        "169157": 180,
+        "439132": 180,
+        "4616": 180,
+        "479143": 180,
+        "624858": 180,
+        "736555": 180,
+        "8337": 180
+      }
+    }
+  },
+  "dev_line_tables": {
+    "lines": {
+      "1.5": {
+        "over_rate": 0.7014,
+        "n": 720
+      },
+      "2.5": {
+        "over_rate": 0.4681,
+        "n": 720
+      },
+      "3.5": {
+        "over_rate": 0.2611,
+        "n": 720
+      }
+    },
+    "primary_line": 2.5,
+    "n": 720
+  },
+  "windows": {
+    "seed": "2021",
+    "eval_seasons": [
+      "2022",
+      "2023",
+      "2024",
+      "2025"
+    ],
+    "dev_n": 720,
+    "virgin": "2026",
+    "virgin_n": 144,
+    "confirmatory_reserved": "2027"
+  },
+  "inventory": {
+    "league": "LT-Toplyga",
+    "league_id": "228",
+    "rows": 1044,
+    "team_rows": 2088,
+    "seasons": {
+      "2021": {
+        "matches": 180,
+        "goals_per_match": 2.7389,
+        "home_goals_per_match": 1.4611,
+        "away_goals_per_match": 1.2778,
+        "home_win_rate": 0.4,
+        "draw_rate": 0.2722,
+        "away_win_rate": 0.3278,
+        "btts_rate": 0.5389,
+        "ou1_5_over_rate": 0.8167,
+        "ou2_5_over_rate": 0.5,
+        "ou3_5_over_rate": 0.2833,
+        "home_advantage_goals": 0.1833,
+        "goals_variance": 2.2834,
+        "goals_dispersion_variance_mean": 0.8337,
+        "coverage": {
+          "events": 95.0,
+          "ht_derivable": 95.0,
+          "stats_content": 0.0,
+          "shotmap": 0.0,
+          "lineup": 0.0,
+          "referee_nonempty": 0.0
+        }
+      },
+      "2022": {
+        "matches": 180,
+        "goals_per_match": 2.6167,
+        "home_goals_per_match": 1.4056,
+        "away_goals_per_match": 1.2111,
+        "home_win_rate": 0.4167,
+        "draw_rate": 0.2556,
+        "away_win_rate": 0.3278,
+        "btts_rate": 0.45,
+        "ou1_5_over_rate": 0.7444,
+        "ou2_5_over_rate": 0.5,
+        "ou3_5_over_rate": 0.2667,
+        "home_advantage_goals": 0.1944,
+        "goals_variance": 2.517,
+        "goals_dispersion_variance_mean": 0.9619,
+        "coverage": {
+          "events": 91.67,
+          "ht_derivable": 91.67,
+          "stats_content": 0.0,
+          "shotmap": 0.0,
+          "lineup": 0.0,
+          "referee_nonempty": 0.0
+        }
+      },
+      "2023": {
+        "matches": 180,
+        "goals_per_match": 2.3944,
+        "home_goals_per_match": 1.2889,
+        "away_goals_per_match": 1.1056,
+        "home_win_rate": 0.4111,
+        "draw_rate": 0.2556,
+        "away_win_rate": 0.3333,
+        "btts_rate": 0.3833,
+        "ou1_5_over_rate": 0.6833,
+        "ou2_5_over_rate": 0.4056,
+        "ou3_5_over_rate": 0.2389,
+        "home_advantage_goals": 0.1833,
+        "goals_variance": 2.7877,
+        "goals_dispersion_variance_mean": 1.1642,
+        "coverage": {
+          "events": 89.44,
+          "ht_derivable": 88.89,
+          "stats_content": 0.0,
+          "shotmap": 0.0,
+          "lineup": 0.0,
+          "referee_nonempty": 0.0
+        }
+      },
+      "2024": {
+        "matches": 180,
+        "goals_per_match": 2.35,
+        "home_goals_per_match": 1.1889,
+        "away_goals_per_match": 1.1611,
+        "home_win_rate": 0.3667,
+        "draw_rate": 0.2778,
+        "away_win_rate": 0.3556,
+        "btts_rate": 0.4333,
+        "ou1_5_over_rate": 0.6333,
+        "ou2_5_over_rate": 0.4444,
+        "ou3_5_over_rate": 0.25,
+        "home_advantage_goals": 0.0278,
+        "goals_variance": 2.6645,
+        "goals_dispersion_variance_mean": 1.1338,
+        "coverage": {
+          "events": 89.44,
+          "ht_derivable": 88.89,
+          "stats_content": 0.0,
+          "shotmap": 0.0,
+          "lineup": 0.0,
+          "referee_nonempty": 0.0
+        }
+      },
+      "2025": {
+        "matches": 180,
+        "goals_per_match": 2.6611,
+        "home_goals_per_match": 1.4222,
+        "away_goals_per_match": 1.2389,
+        "home_win_rate": 0.4,
+        "draw_rate": 0.2444,
+        "away_win_rate": 0.3556,
+        "btts_rate": 0.5111,
+        "ou1_5_over_rate": 0.7444,
+        "ou2_5_over_rate": 0.5222,
+        "ou3_5_over_rate": 0.2889,
+        "home_advantage_goals": 0.1833,
+        "goals_variance": 2.4935,
+        "goals_dispersion_variance_mean": 0.937,
+        "coverage": {
+          "events": 92.78,
+          "ht_derivable": 92.78,
+          "stats_content": 0.0,
+          "shotmap": 0.0,
+          "lineup": 0.0,
+          "referee_nonempty": 0.0
+        }
+      },
+      "2026": {
+        "matches": 144,
+        "goals_per_match": 2.6458,
+        "home_goals_per_match": 1.4583,
+        "away_goals_per_match": 1.1875,
+        "home_win_rate": 0.4097,
+        "draw_rate": 0.2778,
+        "away_win_rate": 0.3125,
+        "btts_rate": 0.5208,
+        "ou1_5_over_rate": 0.75,
+        "ou2_5_over_rate": 0.5347,
+        "ou3_5_over_rate": 0.2847,
+        "home_advantage_goals": 0.2708,
+        "goals_variance": 2.6359,
+        "goals_dispersion_variance_mean": 0.9963,
+        "coverage": {
+          "events": 89.58,
+          "ht_derivable": 89.58,
+          "stats_content": 0.0,
+          "shotmap": 0.0,
+          "lineup": 0.0,
+          "referee_nonempty": 0.0
+        }
+      }
+    },
+    "distinct_team_ids": 13,
+    "team_id_name_map": {
+      "1099941": [
+        "FA Siauliai",
+        "FA Šiauliai"
+      ],
+      "1447232": [
+        "FK TransINVEST"
+      ],
+      "169157": [
+        "Banga Gargzdai"
+      ],
+      "199532": [
+        "Lietava Jonava"
+      ],
+      "254228": [
+        "Dainava Alytus"
+      ],
+      "257518": [
+        "Riteriai"
+      ],
+      "4173": [
+        "Nevezis"
+      ],
+      "439132": [
+        "FK Kauno Zalgiris",
+        "FK Kauno Žalgiris"
+      ],
+      "4616": [
+        "Zalgiris Vilnius",
+        "Žalgiris Vilnius"
+      ],
+      "479143": [
+        "FK Panevezys",
+        "FK Panevėžys"
+      ],
+      "624858": [
+        "Dziugas Telsiai",
+        "Džiugas Telšiai"
+      ],
+      "736555": [
+        "Hegelmann",
+        "Hegelmann Litauen"
+      ],
+      "8337": [
+        "Suduva",
+        "Sūduva"
+      ]
+    },
+    "multi_name_team_ids": {
+      "439132": [
+        "FK Kauno Zalgiris",
+        "FK Kauno Žalgiris"
+      ],
+      "624858": [
+        "Dziugas Telsiai",
+        "Džiugas Telšiai"
+      ],
+      "736555": [
+        "Hegelmann",
+        "Hegelmann Litauen"
+      ],
+      "8337": [
+        "Suduva",
+        "Sūduva"
+      ],
+      "479143": [
+        "FK Panevezys",
+        "FK Panevėžys"
+      ],
+      "4616": [
+        "Zalgiris Vilnius",
+        "Žalgiris Vilnius"
+      ],
+      "1099941": [
+        "FA Siauliai",
+        "FA Šiauliai"
+      ]
+    },
+    "turnover": {
+      "2021": {
+        "team_count": 10,
+        "in_ids": [
+          "169157",
+          "254228",
+          "257518",
+          "4173",
+          "439132",
+          "4616",
+          "479143",
+          "624858",
+          "736555",
+          "8337"
+        ],
+        "out_ids": [],
+        "in_count": 10,
+        "out_count": 0
+      },
+      "2022": {
+        "team_count": 10,
+        "in_ids": [
+          "1099941",
+          "199532"
+        ],
+        "out_ids": [
+          "254228",
+          "4173"
+        ],
+        "in_count": 2,
+        "out_count": 2
+      },
+      "2023": {
+        "team_count": 10,
+        "in_ids": [
+          "254228"
+        ],
+        "out_ids": [
+          "199532"
+        ],
+        "in_count": 1,
+        "out_count": 1
+      },
+      "2024": {
+        "team_count": 10,
+        "in_ids": [
+          "1447232"
+        ],
+        "out_ids": [
+          "257518"
+        ],
+        "in_count": 1,
+        "out_count": 1
+      },
+      "2025": {
+        "team_count": 10,
+        "in_ids": [
+          "257518"
+        ],
+        "out_ids": [
+          "1447232"
+        ],
+        "in_count": 1,
+        "out_count": 1
+      },
+      "2026": {
+        "team_count": 9,
+        "in_ids": [
+          "1447232"
+        ],
+        "out_ids": [
+          "254228",
+          "257518"
+        ],
+        "in_count": 1,
+        "out_count": 2
+      }
+    },
+    "coverage_by_season": {
+      "2021": {
+        "events": 95.0,
+        "ht_derivable": 95.0,
+        "stats_content": 0.0,
+        "shotmap": 0.0,
+        "lineup": 0.0,
+        "referee_nonempty": 0.0
+      },
+      "2022": {
+        "events": 91.67,
+        "ht_derivable": 91.67,
+        "stats_content": 0.0,
+        "shotmap": 0.0,
+        "lineup": 0.0,
+        "referee_nonempty": 0.0
+      },
+      "2023": {
+        "events": 89.44,
+        "ht_derivable": 88.89,
+        "stats_content": 0.0,
+        "shotmap": 0.0,
+        "lineup": 0.0,
+        "referee_nonempty": 0.0
+      },
+      "2024": {
+        "events": 89.44,
+        "ht_derivable": 88.89,
+        "stats_content": 0.0,
+        "shotmap": 0.0,
+        "lineup": 0.0,
+        "referee_nonempty": 0.0
+      },
+      "2025": {
+        "events": 92.78,
+        "ht_derivable": 92.78,
+        "stats_content": 0.0,
+        "shotmap": 0.0,
+        "lineup": 0.0,
+        "referee_nonempty": 0.0
+      },
+      "2026": {
+        "events": 89.58,
+        "ht_derivable": 89.58,
+        "stats_content": 0.0,
+        "shotmap": 0.0,
+        "lineup": 0.0,
+        "referee_nonempty": 0.0
+      }
+    },
+    "stats_null_rows": 1044,
+    "shot_count_zero_rows": 1044,
+    "lineup_null_rows": 1044,
+    "referee_nonempty_rows": 0,
+    "coverage_levels": [
+      "lower"
+    ],
+    "events_present_rows": 954,
+    "empty_event_rows": 90,
+    "goal_score_mismatch_rows": [
+      "4172018",
+      "4475286"
+    ],
+    "awarded_matches": [
+      "4172018",
+      "4475286"
+    ],
+    "card_event_counts": {
+      "yellow": 0,
+      "yellowred": 69,
+      "red": 101
+    },
+    "has_playoff_values": {
+      "null": 720,
+      "false": 324
+    },
+    "format": {
+      "2021": {
+        "rounds": 36,
+        "round_match_count_distribution": {
+          "5": 36
+        },
+        "teams": 10,
+        "date_range": [
+          "2021-03-05",
+          "2021-11-28"
+        ]
+      },
+      "2022": {
+        "rounds": 36,
+        "round_match_count_distribution": {
+          "5": 36
+        },
+        "teams": 10,
+        "date_range": [
+          "2022-03-04",
+          "2022-11-23"
+        ]
+      },
+      "2023": {
+        "rounds": 36,
+        "round_match_count_distribution": {
+          "5": 36
+        },
+        "teams": 10,
+        "date_range": [
+          "2023-03-03",
+          "2023-11-12"
+        ]
+      },
+      "2024": {
+        "rounds": 36,
+        "round_match_count_distribution": {
+          "5": 36
+        },
+        "teams": 10,
+        "date_range": [
+          "2024-03-01",
+          "2024-11-09"
+        ]
+      },
+      "2025": {
+        "rounds": 36,
+        "round_match_count_distribution": {
+          "5": 36
+        },
+        "teams": 10,
+        "date_range": [
+          "2025-02-28",
+          "2025-11-08"
+        ]
+      },
+      "2026": {
+        "rounds": 36,
+        "round_match_count_distribution": {
+          "4": 36
+        },
+        "teams": 9,
+        "date_range": [
+          "2026-02-21",
+          "2026-11-08"
+        ]
+      }
+    }
+  }
+}

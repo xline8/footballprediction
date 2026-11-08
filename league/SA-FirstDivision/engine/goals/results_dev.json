@@ -1,0 +1,48 @@
+{
+  "protocol": {
+    "league": "SA-FirstDivision",
+    "dev_season": "2024/2025",
+    "warmup_matches": 90,
+    "scored_n": 216,
+    "primary_line": "OU2.5",
+    "sign_convention": "actual_minus_predicted"
+  },
+  "rows": [
+    {
+      "n": 216,
+      "ll_1x2": 1.0346238131046694,
+      "rps": 0.20857331502336762,
+      "oull_2_5": 0.7224474089590358,
+      "arm": "gate_zero",
+      "season": "pooled",
+      "kind": "model"
+    },
+    {
+      "n": 216,
+      "ll_1x2": 1.0955700645239355,
+      "rps": 0.22987486386670342,
+      "oull_2_5": 0.696269517955106,
+      "arm": "gate_zero",
+      "season": "pooled",
+      "kind": "climatology"
+    },
+    {
+      "n": 216,
+      "ll_1x2": 1.0346238131046694,
+      "rps": 0.20857331502336762,
+      "oull_2_5": 0.7224474089590358,
+      "arm": "shrink",
+      "season": "pooled",
+      "kind": "model"
+    },
+    {
+      "n": 216,
+      "ll_1x2": 1.0955700645239355,
+      "rps": 0.22987486386670342,
+      "oull_2_5": 0.696269517955106,
+      "arm": "shrink",
+      "season": "pooled",
+      "kind": "climatology"
+    }
+  ]
+}

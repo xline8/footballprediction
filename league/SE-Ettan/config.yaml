@@ -1,0 +1,42 @@
+# SE-Ettan (Sweden Ettan, tier 3) — league config (Phase 2 freeze; completed Phase 6)
+league: SE-Ettan
+country: Sweden
+fotmob_id: 169
+tier: 3
+warehouse: data_enrichment/Sweden/Ettan
+data:
+  matches: league/SE-Ettan/data/se_matches.csv
+  team_matches: league/SE-Ettan/data/se_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period:
+  goals: ["2022", "2023", "2024"]   # scored; warm-up 2021 partial (262 played of 480 fixtures)
+  stats_markets: []                  # NOT-BUILDABLE: no stats season exists in any season (stats feed 0% in 2021-2025); the stats era never starts
+  cards: []                          # NOT-BUILDABLE: no canonical cards target in any season (stats yellows 0% everywhere); event yellows exist 2022-2024 but need a Jarvis decision (see reports/K_SE_VERDICT.md)
+virgin_primary: "2025"               # COMPLETE season (480 matches) — NOT READ: no arm passed dev, so no virgin was scored
+virgin_confirmatory: null           # 2026 is the untouched confirmatory reserve
+halves_constants:                   # frozen from DEV-era data only (EDA F3)
+  goals_1h_share: 0.4385            # event times, dev era 2022-2024, n=4299 goals, 1439 matches (awarded match 4398485 excluded)
+  yellow_cards_1h_share: null       # no period splits in dev (0 matches) — event-time share 0.2841 is descriptive only, not frozen
+  sot_1h_share: null                # no period splits in dev — no constant
+  corners_1h_share: null            # no period splits in dev — no constant
+  total_shots_1h_share: null        # no period splits in dev — no constant
+markets:
+  goals: G-SE        # DC goals-only (no xG in feed); arms: Gate Zero, SHRINK (X2 ENTRANT rejected: dev entrant tilt GF -0.013 / GA +0.081, signs random 13/27 and 15/27)
+  sot: S-SE          # NOT-BUILDABLE — no dev scored window (stats feed 0% in every season; shotmap 0/2880)
+  corners: C-SE      # NOT-BUILDABLE — no dev scored window (stats feed 0% in every season)
+  cards: K-SE        # NOT-BUILDABLE — no canonical cards target (stats yellows 0% everywhere); event yellows exist 2022-2024 (trait r 0.549, 1H share 0.2841) but 2021 has no events and referee 0% — Jarvis decision needed to revisit
+  total_shots: T-SE  # NOT-BUILDABLE — no dev scored window (stats feed 0% in every season; shotmap 0/2880)
+shipping:
+  arm: NONE
+  no_ship: true      # no arm passed the dev gate; nothing ships from SE-Ettan
+notes:
+  - Split seasons, 32 teams, 480 matches/season (two independent groups, Ettan Norra / Ettan Södra, 16 teams each, 30 rounds; no cross-group matches in the feed, no group term fitted).
+  - Index 2880 rows, but only 2662 played: 218 fixtures in 2021 were never played (finished=false, no scoreStr; index carries placeholder score "0-0" — Norra 95, Södra 123; rounds 1-12 heaviest, 136/192 unplayed). CSV-vs-raw played-match counts agree in every season (2021 262, 2022-2025 480 each).
+  - No xG and no shotmap in ANY season -> X1 blend falls back goals-only; X3/X4/X6 impossible by data absence. Stats feed 0% in every season — the stats era never starts (unlike QA, where it starts in the virgin season).
+  - One score-vs-events mismatch: match 4398485 (awarded 0-3, events 3-1), excluded from the halves-goals share only.
+  - Dev scored OU 2.5 over-rate 0.5833 (1.5: 0.791, 3.5: 0.340), home win rate 0.4313, draw rate 0.2097, home goals 1.6104 / away goals 1.3771 per match. Norra outscores Södra by ~0.3-0.5 goals/match in every season (format fact, not acted on).
+  - Goals trait reliable: split-half r goals-for 0.562 (dev 2021-2024, n=57 teams) / 0.703 (scored window, n=49), goals-against 0.742 / 0.604.
+  - 0 group switches between seasons; 5 team-name variants canonicalised by team id; all logic keyed by team id.
+  - Referees: named in 0 matches in every season — X8 dropped on dev absence.
+  - Predictions-only: no SE odds/settlement source in-system.
+  - Outcome (Phase 6): G-SE FAIL at the dev gate — Gate Zero 1X2 LL 1.0625 / RPS 0.2354 / OU2.5 LL 0.7126 vs climatology 1.0596 / 0.2380 / 0.6834 and naive trailing-10 1.1268 / 0.2333 / 0.7426 (passes 3/6 legs; OU2.5 loses to climatology in all three dev seasons; mean predicted OU2.5 over-rate 0.5065 vs actual 0.5833). SHRINK identical (no team with 1-5 prior in-league matches in any scored season's training data; entrants n=0 at league-mean fallback in both arms). Virgin 2025 was NOT read; 2026 untouched; nothing ships. S/C/K/T not-buildable (see reports/*_SE_VERDICT.md).

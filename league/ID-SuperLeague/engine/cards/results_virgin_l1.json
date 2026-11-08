@@ -1,0 +1,61 @@
+{
+  "protocol": {
+    "candidate": "L1-K-ID",
+    "virgin_read": true,
+    "virgin": "2025/2026",
+    "virgin_rows_loaded": 306,
+    "r_virgin": {
+      "model": 500.0,
+      "base": 495.84427727819,
+      "naive": 500.0
+    }
+  },
+  "arms": {
+    "gate_zero": {
+      "n": 306,
+      "ll": 0.685853877976103,
+      "mean_pred": 0.4547883146937048,
+      "actual_rate": 0.4673202614379085,
+      "calibration_pp": -1.2531946744203695,
+      "calibration_se_pp": 2.839984310934898
+    },
+    "x5": {
+      "n": 306,
+      "ll": 0.6845684253074198,
+      "mean_pred": 0.45818456112350014,
+      "actual_rate": 0.4673202614379085,
+      "calibration_pp": -0.9135700314408367,
+      "calibration_se_pp": 2.8377101276617127
+    }
+  },
+  "baselines": {
+    "__base": {
+      "n": 306,
+      "ll": 0.6922577170448355,
+      "mean_pred": 0.4559408417099107,
+      "actual_rate": 0.4673202614379085,
+      "calibration_pp": -1.1379419727997757,
+      "calibration_se_pp": 2.8596685490342235
+    },
+    "__naive": {
+      "n": 306,
+      "ll": 0.6932749040714746,
+      "mean_pred": 0.4599607161427235,
+      "actual_rate": 0.4673202614379085,
+      "calibration_pp": -0.7359545295184968,
+      "calibration_se_pp": 2.8623171192745493
+    }
+  },
+  "legs": {
+    "dev_gate_x5": true,
+    "leg_i_ll": true,
+    "leg_ii_calibration_band": "PASS",
+    "leg_iii_sign_check": {
+      "wins": 3,
+      "n": 3,
+      "pass": true
+    }
+  },
+  "verdict": "CLEAN PASS",
+  "shipped_arm": "x5"
+}

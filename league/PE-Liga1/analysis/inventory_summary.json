@@ -1,0 +1,191 @@
+{
+ "n_total": 1860,
+ "by_season": {
+  "2021": 239,
+  "2022": 346,
+  "2023": 344,
+  "2024": 306,
+  "2025": 328,
+  "2026": 297
+ },
+ "by_block": {
+  "2021 - Fase 1": 82,
+  "2021 - Fase 2": 157,
+  "2022 - Apertura": 171,
+  "2022 - Clausura": 175,
+  "2023 - Apertura": 171,
+  "2023 - Clausura": 173,
+  "2024 - Apertura": 153,
+  "2024 - Clausura": 153,
+  "2025 - Apertura": 171,
+  "2025 - Clausura": 157,
+  "2026 - Apertura": 153,
+  "2026 - Clausura": 144
+ },
+ "playoff_n": 15,
+ "awarded_n": 9,
+ "awarded_list": [
+  [
+   "2023",
+   "2023-02-03",
+   "Cusco FC",
+   "Sport Huancayo",
+   "0",
+   "3"
+  ],
+  [
+   "2023",
+   "2023-02-04",
+   "Atletico Grau",
+   "FBC Melgar",
+   "3",
+   "0"
+  ],
+  [
+   "2023",
+   "2023-02-04",
+   "CD UT Cajamarca",
+   "Cienciano",
+   "3",
+   "0"
+  ],
+  [
+   "2023",
+   "2023-02-05",
+   "Sporting Cristal",
+   "Alianza Lima",
+   "3",
+   "0"
+  ],
+  [
+   "2023",
+   "2023-02-05",
+   "Deportivo Garcilaso",
+   "Binacional",
+   "3",
+   "0"
+  ],
+  [
+   "2023",
+   "2023-02-07",
+   "Deportivo Municipal",
+   "Carlos A. Mannucci",
+   "0",
+   "3"
+  ],
+  [
+   "2023",
+   "2023-07-09",
+   "Carlos A. Mannucci",
+   "Deportivo Municipal",
+   "0",
+   "0"
+  ],
+  [
+   "2023",
+   "2023-08-14",
+   "Deportivo Municipal",
+   "Atletico Grau",
+   "0",
+   "3"
+  ],
+  [
+   "2025",
+   "2025-11-08",
+   "Ayacucho FC",
+   "Comerciantes Unidos",
+   "0",
+   "3"
+  ]
+ ],
+ "coverage": {
+  "2021": {
+   "n": 239,
+   "has_stats": 224,
+   "has_rich_stats": 41,
+   "has_period_splits": 0,
+   "has_xg": 0,
+   "shotmap_rows": 0,
+   "referee_named": 0,
+   "ht_source": {
+    "half_event": 226,
+    "events": 13
+   },
+   "events_exact": 239
+  },
+  "2022": {
+   "n": 346,
+   "has_stats": 298,
+   "has_rich_stats": 156,
+   "has_period_splits": 1,
+   "has_xg": 0,
+   "shotmap_rows": 0,
+   "referee_named": 239,
+   "ht_source": {
+    "half_event": 330,
+    "events": 16
+   },
+   "events_exact": 346
+  },
+  "2023": {
+   "n": 344,
+   "has_stats": 328,
+   "has_rich_stats": 159,
+   "has_period_splits": 5,
+   "has_xg": 0,
+   "shotmap_rows": 0,
+   "referee_named": 336,
+   "ht_source": {
+    "half_event": 336,
+    "none": 7,
+    "events": 1
+   },
+   "events_exact": 337
+  },
+  "2024": {
+   "n": 306,
+   "has_stats": 270,
+   "has_rich_stats": 152,
+   "has_period_splits": 2,
+   "has_xg": 0,
+   "shotmap_rows": 0,
+   "referee_named": 259,
+   "ht_source": {
+    "half_event": 306
+   },
+   "events_exact": 306
+  },
+  "2025": {
+   "n": 328,
+   "has_stats": 285,
+   "has_rich_stats": 199,
+   "has_period_splits": 199,
+   "has_xg": 0,
+   "shotmap_rows": 0,
+   "referee_named": 262,
+   "ht_source": {
+    "half_event": 328
+   },
+   "events_exact": 326
+  },
+  "2026": {
+   "n": 297,
+   "has_stats": 297,
+   "has_rich_stats": 297,
+   "has_period_splits": 297,
+   "has_xg": 0,
+   "shotmap_rows": 0,
+   "referee_named": 141,
+   "ht_source": {
+    "half_event": 297
+   },
+   "events_exact": 297
+  }
+ },
+ "modelling_corpus": {
+  "regular_nonawarded": 1836,
+  "dev_2021_2024": 1216,
+  "virgin_2025": 323,
+  "reserved_2026": 297
+ }
+}

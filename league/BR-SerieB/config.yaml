@@ -1,0 +1,27 @@
+league: BR-SerieB
+country: Brazil
+fotmob_id: 8814
+tier: 2
+data:
+  matches: league/BR-SerieB/data/brb_matches.csv
+  team_matches: league/BR-SerieB/data/brb_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period: ["2021", "2022", "2023", "2024"]  # warm-up 2021; scored 2022-2024, n=1140
+virgin_primary: "2025"
+virgin_confirmatory: "2026"
+halves_constants:
+  goals_1h_share: 0.455
+  sot_1h_share: 0.467
+  corners_1h_share: 0.472
+  total_shots_1h_share: 0.473
+  yellow_cards_1h_share: 0.352
+markets:
+  goals: G-BRB
+  sot: S-BRB
+  corners: C-BRB
+  cards: K-BRB
+  total_shots: T-BRB
+notes:
+  - Calendar-year, 20 teams, double round-robin, rounds 1-38, no playoff rounds.
+  - Cards target is stats-feed yellows from 2023 onward; 2021-2022 are explicitly unusable.
+  - xG and shotmap are a 2025+ era; they do not support a scored dev arm.

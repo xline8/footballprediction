@@ -1,0 +1,31 @@
+# DK-Superligaen (Denmark) — league config
+league: DK-Superligaen
+country: Denmark
+fotmob_id: 46
+tier: 1
+warehouse: data_enrichment/fotmob_world/Denmark/Superligaen
+data:
+  matches: league/DK-Superligaen/data/dk_matches.csv
+  team_matches: league/DK-Superligaen/data/dk_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]  # walk-forward, season-blocked
+virgin_primary: "2025/2026"        # complete season, n=193 — read ONCE per candidate
+virgin_confirmatory: "2026/2027"   # partial (84 played at pull); reserved, NOT read in this build
+halves_constants:                  # frozen, measured on the complete-splits era 2023/2024–2025/2026 (n=579)
+  goals_1h_share: 0.463
+  sot_1h_share: 0.462
+  corners_1h_share: 0.488
+  total_shots_1h_share: 0.470
+  yellow_cards_1h_share: 0.319
+markets:
+  goals: G-DK        # DC reference; arms: Gate Zero, SHRINK (thin-data prior), X3 set-play
+  sot: S-DK          # v5 reference; arms: Gate Zero, RS ratio-shrink, X4 xG/shot
+  corners: C-DK      # corners_v3 reference; arms: Gate Zero (X9), X7 box touches
+  cards: K-DK        # cards reference; arms: Gate Zero, X8 referee
+  total_shots: T-DK  # shots family; arms: A v1 pattern, B v2 level layer, C E9 trailing-r
+notes:
+  - 12-team league: rounds 1-22 regular season, rounds 23-32 championship/relegation split, plus 1 European-playoff final per season (193 matches/season). Split rounds are modelled as ordinary league matches (points carry over; same teams); the final is flagged has_extra_time where applicable.
+  - Per-half stats are complete only from 2023/2024 (9.8% in 2021/2022, 33.2% in 2022/2023 — partial-era splits are artefact-suspect and never used for constants).
+  - xGOT population rule breaks at 2024/2025 (only on-target shots populated before; ~100% from 2024/2025).
+  - touches_opp_box coverage: 60-74% in 2021/2022-2023/2024, 100% from 2024/2025.
+  - Predictions-only: no DK odds/settlement source in-system.

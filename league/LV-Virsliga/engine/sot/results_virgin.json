@@ -1,0 +1,40 @@
+{
+  "protocol": {
+    "league": "LV-Virsliga",
+    "virgin_season": "2026",
+    "scored_n": 179,
+    "primary_line": 9.5,
+    "sign_convention": "actual_minus_predicted",
+    "arms_requested": [
+      "GZ"
+    ]
+  },
+  "arms": {
+    "GZ": {
+      "n": 179,
+      "ll_9.5": 0.6799104540729692,
+      "mean_p_over_9.5": 0.4168948011184209,
+      "actual_over_rate_9.5": 0.41899441340782123,
+      "calibration": 0.002099612289400114,
+      "calibration_se": 0.03696637306579099
+    }
+  },
+  "baselines": {
+    "league_base_rate": {
+      "n": 179,
+      "ll_9.5": 0.6799943183822805,
+      "mean_p_over_9.5": 0.4152419089628231,
+      "actual_over_rate_9.5": 0.41899441340782123,
+      "calibration": 0.003752504444998137,
+      "calibration_se": 0.0369814784298674
+    },
+    "naive": {
+      "n": 179,
+      "ll_9.5": 0.6808976142129836,
+      "mean_p_over_9.5": 0.4238752290382624,
+      "actual_over_rate_9.5": 0.41899441340782123,
+      "calibration": -0.004880815630441426,
+      "calibration_se": 0.03698248772607934
+    }
+  }
+}

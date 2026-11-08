@@ -1,0 +1,29 @@
+league: AZ-PremierLeague
+country: Azerbaijan
+fotmob_id: 262
+tier: 1
+warehouse: data_enrichment/fotmob_world/Azerbaijan/Premier League
+data:
+  matches: league/AZ-PremierLeague/data/az_premierleague_matches.csv
+  team_matches: league/AZ-PremierLeague/data/az_premierleague_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.4344
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+  yellow_cards_1h_share: null
+markets:
+  goals: G-AZ
+  sot: "NOT BUILDABLE — stats None in 914/914 and shotmap shots empty in 914/914"
+  corners: "NOT BUILDABLE — stats None in 914/914 and shotmap shots empty in 914/914"
+  cards: "NOT BUILDABLE — plain-Yellow events are 0 in every season; only Red/YellowRed events exist"
+  total_shots: "NOT BUILDABLE — stats None in 914/914 and shotmap shots empty in 914/914"
+notes:
+  - "All 914 payloads are finished; 2026/2027 is in progress through 2026-11-08 (64 matches)."
+  - "No split group or playoff fixture exists. The 2025/2026 format expands from 10 to 12 teams."
+  - "Official FT score is retained for match 4946647 and score_events_mismatch is true."
+  - "HT is sourced from Half markers only; 844/844 checked markers agree with goal times."

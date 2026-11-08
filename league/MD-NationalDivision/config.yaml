@@ -1,0 +1,43 @@
+# MD-NationalDivision (Moldova) — league config (Phase 2 freeze; completed Phase 6)
+league: MD-NationalDivision
+country: Moldova
+fotmob_id: 231
+tier: 1
+warehouse: data_enrichment/fotmob_world/Moldova/National Division
+data:
+  matches: league/MD-NationalDivision/data/md_matches.csv
+  team_matches: league/MD-NationalDivision/data/md_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period:
+  goals: ["2022/2023", "2023/2024", "2024/2025"]   # scored; warm-up 2021/2022
+  stats_markets: []                  # NOT-BUILDABLE: no stats feed in any season (0/556)
+  cards: []                          # NOT-BUILDABLE: no yellows target in any season (stats absent; event plain Yellows 0 in every season); referee 0% all seasons
+virgin_primary: "2025/2026"          # COMPLETE season (114 matches) — READ ONCE (G-MD passed the dev gate; virgin_read: true, all arms failed virgin legs i+ii)
+virgin_confirmatory: "2026/2027"     # in progress (72 matches) — untouched, never read by any harness
+halves_constants:                   # frozen from DEV-era data only (EDA F3)
+  goals_1h_share: 0.4388            # event times, dev era 2021/2022-2024/2025, n=1005 goals, 336 matches with events, awarded excluded
+  yellow_cards_1h_share: null       # no yellows target in dev — no constant; no K market
+  sot_1h_share: null                # no period splits in dev — no constant
+  corners_1h_share: null            # no period splits in dev — no constant
+  total_shots_1h_share: null        # no period splits in dev — no constant
+markets:
+  goals: G-MD        # DC goals-only (no xG in feed); arms: Gate Zero, SHRINK, X2 (KEPT: EDA F4, 3 dev transitions, mean GF -0.363 / GA +0.780, clamped -0.223/+0.223; inert on dev, live on virgin)
+  sot: S-MD          # NOT-BUILDABLE — no stats feed in any season; shotmap 0/556
+  corners: C-MD      # NOT-BUILDABLE — no stats feed in any season
+  cards: K-MD        # NOT-BUILDABLE — no stats yellows in any season; event plain Yellows 0 in EVERY season (no target at all); referee 0% (no X8)
+  total_shots: T-MD  # NOT-BUILDABLE — no stats feed in any season; shotmap empty in every season
+shipping:
+  arm: NONE          # G-MD FAIL on virgin legs (i)+(ii); no predictions shipped
+notes:
+  - Split seasons, 8 teams every season. Format: 2021/2022 single phase (112 matches); 2022/2023-2024/2025 two phases (56 main + 30 championship = 86); 2025/2026 main phase expanded (84 + 30 = 114); 2026/2027 in progress (72, all main so far). Phase is a flag on ordinary rows, never filtered.
+  - Naming: general.leagueName is "National Division" in 2021/2022 and "Super Liga" / "Super Liga Championship Group" from 2022/2023 — the league was renamed (Super Liga), same league_id 231 and same clubs. Not a different competition.
+  - Stats feed absent in EVERY season: 0/556 matches carry any stats Periods key; shotmap 0/556; lineup 0/556; referee 0/556. Scores-only league, measured not assumed.
+  - No xG and no shotmap in ANY season -> X1 blend falls back goals-only; X3/X4/X6/X7/X9 impossible by data absence.
+  - Event feed present in 504/556 matches; the 52 event-less matches are NOT all scoreless (10 contain 30 goals) — their events-derived fields are missing, never zero. Score-vs-event mismatches: 0 in the whole corpus; header scoreStr is authoritative.
+  - Cards exist only as YellowRed + Red events (plain Yellow = 0 in every season; YellowRed corpus total 25) — no yellows target exists at all.
+  - Team ids: 12 over the corpus; two ids carry two spellings each (diacritic variants: FC Balti / FC Bălți; Real Sireți / Real Sireti). All logic keyed by team id.
+  - Ten awarded matches (9 in 2021/2022, 1 in 2024/2025), kept as ordinary rows with awarded=true; none in the virgin season.
+  - Goals level is volatile: 3.063 / 2.128 / 2.953 / 2.965 goals/match in dev (2022/2023 is a deep dip), 2.947 in the virgin (inventory), 2.986 in the reserve. Dev scored OU2.5 over-rate 0.4884; virgin over-rate 0.5877.
+  - Trait reliability strong: split-half r 0.885 (GF) / 0.877 (GA), n=10 teams; season-to-season correlations positive (GF 0.80/0.81/0.47, GA 0.91/0.48/0.65).
+  - Predictions-only: no MD odds/settlement source in-system.
+  - Outcome (Phase 6): G-MD FAIL on the virgin legs. Dev gate PASSED (pooled n=258: Gate Zero = SHRINK = X2 at 1X2 LL 0.9538 / RPS 0.1869 / OU2.5 LL 0.7040 vs climatology 1.0856 / 0.2342 / 0.7163 and naive 1.1618 / 0.1947 / 0.8078), so the virgin 2025/2026 was read ONCE. Virgin: Gate Zero 1X2 LL 0.8400 / OU 0.7048, X2 0.8097 / 0.6948 vs climatology OU 0.6880 — every arm loses the OU leg of leg (i) to the constant base rate, and every arm fails leg (ii) on OU calibration (-11.69pp / -11.30pp, SE ~4.6; home-win component provisional-band at -2.26pp). S/C/K/T not-buildable (see reports/*_MD_VERDICT.md). Nothing ships; 2026/2027 untouched.

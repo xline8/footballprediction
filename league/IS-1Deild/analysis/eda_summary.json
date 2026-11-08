@@ -1,0 +1,560 @@
+{
+  "n_matches": 812,
+  "seasons": [
+    "2021",
+    "2022",
+    "2023",
+    "2024",
+    "2025",
+    "2026"
+  ],
+  "levels": {
+    "2021": {
+      "n": 132,
+      "score_n": 132,
+      "stats_n": 0.0,
+      "period_splits_n": 0.0,
+      "events_n": 130.0,
+      "referee_named": 0,
+      "shotmap_n": 0,
+      "xg_n": 0,
+      "plain_yellow_events_n": 0,
+      "has_extra_time_n": 0.0,
+      "goals_per_match": 3.6212,
+      "home_goals_per_match": 1.8561,
+      "away_goals_per_match": 1.7652,
+      "home_win_rate": 0.4621,
+      "draw_rate": 0.1591,
+      "away_win_rate": 0.3788,
+      "event_red_home": 19.0,
+      "event_red_away": 14.0,
+      "event_red_total": 33.0
+    },
+    "2022": {
+      "n": 132,
+      "score_n": 132,
+      "stats_n": 0.0,
+      "period_splits_n": 0.0,
+      "events_n": 130.0,
+      "referee_named": 0,
+      "shotmap_n": 0,
+      "xg_n": 0,
+      "plain_yellow_events_n": 0,
+      "has_extra_time_n": 0.0,
+      "goals_per_match": 3.4697,
+      "home_goals_per_match": 2.0606,
+      "away_goals_per_match": 1.4091,
+      "home_win_rate": 0.5227,
+      "draw_rate": 0.1742,
+      "away_win_rate": 0.303,
+      "event_red_home": 15.0,
+      "event_red_away": 22.0,
+      "event_red_total": 37.0
+    },
+    "2023": {
+      "n": 137,
+      "score_n": 137,
+      "stats_n": 0.0,
+      "period_splits_n": 0.0,
+      "events_n": 136.0,
+      "referee_named": 0,
+      "shotmap_n": 0,
+      "xg_n": 0,
+      "plain_yellow_events_n": 0,
+      "has_extra_time_n": 0.0,
+      "goals_per_match": 3.5912,
+      "home_goals_per_match": 2.0146,
+      "away_goals_per_match": 1.5766,
+      "home_win_rate": 0.4672,
+      "draw_rate": 0.1971,
+      "away_win_rate": 0.3358,
+      "event_red_home": 15.0,
+      "event_red_away": 12.0,
+      "event_red_total": 27.0
+    },
+    "2024": {
+      "n": 137,
+      "score_n": 137,
+      "stats_n": 0.0,
+      "period_splits_n": 0.0,
+      "events_n": 128.0,
+      "referee_named": 0,
+      "shotmap_n": 0,
+      "xg_n": 0,
+      "plain_yellow_events_n": 0,
+      "has_extra_time_n": 0.0,
+      "goals_per_match": 3.1752,
+      "home_goals_per_match": 1.8029,
+      "away_goals_per_match": 1.3723,
+      "home_win_rate": 0.438,
+      "draw_rate": 0.292,
+      "away_win_rate": 0.2701,
+      "event_red_home": 12.0,
+      "event_red_away": 19.0,
+      "event_red_total": 31.0
+    },
+    "2025": {
+      "n": 137,
+      "score_n": 137,
+      "stats_n": 0.0,
+      "period_splits_n": 0.0,
+      "events_n": 137.0,
+      "referee_named": 0,
+      "shotmap_n": 0,
+      "xg_n": 0,
+      "plain_yellow_events_n": 0,
+      "has_extra_time_n": 0.0,
+      "goals_per_match": 3.5912,
+      "home_goals_per_match": 1.8248,
+      "away_goals_per_match": 1.7664,
+      "home_win_rate": 0.3869,
+      "draw_rate": 0.1971,
+      "away_win_rate": 0.4161,
+      "event_red_home": 15.0,
+      "event_red_away": 16.0,
+      "event_red_total": 31.0
+    },
+    "2026": {
+      "n": 137,
+      "score_n": 137,
+      "stats_n": 0.0,
+      "period_splits_n": 0.0,
+      "events_n": 129.0,
+      "referee_named": 0,
+      "shotmap_n": 0,
+      "xg_n": 0,
+      "plain_yellow_events_n": 0,
+      "has_extra_time_n": 0.0,
+      "goals_per_match": 3.5766,
+      "home_goals_per_match": 2.0876,
+      "away_goals_per_match": 1.4891,
+      "home_win_rate": 0.5547,
+      "draw_rate": 0.1679,
+      "away_win_rate": 0.2774,
+      "event_red_home": 8.0,
+      "event_red_away": 15.0,
+      "event_red_total": 23.0
+    }
+  },
+  "pooled_outcomes": {
+    "home_win_rate": 0.4717,
+    "draw_rate": 0.1983,
+    "away_win_rate": 0.33
+  },
+  "dev_over_rate_ou2_5": 0.6814,
+  "dev_over_rate_ou2_5_by_season": {
+    "2022": 0.6742,
+    "2023": 0.708,
+    "2024": 0.6277,
+    "2025": 0.7153
+  },
+  "phase_levels": {
+    "regular": {
+      "n": 792,
+      "goals_per_match": 3.5152
+    },
+    "playoff": {
+      "n": 20,
+      "goals_per_match": 3.05
+    }
+  },
+  "f2": {
+    "goals_for": {
+      "r": 0.7987,
+      "n_teams": 24
+    },
+    "goals_against": {
+      "r": 0.8196,
+      "n_teams": 24
+    },
+    "by_season": {
+      "2021": {
+        "goals_for": {
+          "r": 0.2248,
+          "n_teams": 12
+        },
+        "goals_against": {
+          "r": 0.7115,
+          "n_teams": 12
+        }
+      },
+      "2022": {
+        "goals_for": {
+          "r": 0.6067,
+          "n_teams": 12
+        },
+        "goals_against": {
+          "r": 0.0294,
+          "n_teams": 12
+        }
+      },
+      "2023": {
+        "goals_for": {
+          "r": 0.4926,
+          "n_teams": 12
+        },
+        "goals_against": {
+          "r": 0.6181,
+          "n_teams": 12
+        }
+      },
+      "2024": {
+        "goals_for": {
+          "r": 0.1785,
+          "n_teams": 12
+        },
+        "goals_against": {
+          "r": 0.2077,
+          "n_teams": 12
+        }
+      },
+      "2025": {
+        "goals_for": {
+          "r": 0.5521,
+          "n_teams": 12
+        },
+        "goals_against": {
+          "r": 0.5177,
+          "n_teams": 12
+        }
+      },
+      "2026": {
+        "goals_for": {
+          "r": 0.2766,
+          "n_teams": 12
+        },
+        "goals_against": {
+          "r": 0.362,
+          "n_teams": 12
+        }
+      }
+    },
+    "not_testable": [
+      "sot",
+      "corners",
+      "shots",
+      "cards"
+    ]
+  },
+  "f3": {
+    "n_matches_with_events_and_goals": 788,
+    "total_ft_goals": 2845.0,
+    "total_1h_goals": 1257.0,
+    "goals_1h_share": 0.4418,
+    "by_season": {
+      "2021": {
+        "n": 130,
+        "share": 0.4477
+      },
+      "2022": {
+        "n": 130,
+        "share": 0.4127
+      },
+      "2023": {
+        "n": 136,
+        "share": 0.4573
+      },
+      "2024": {
+        "n": 127,
+        "share": 0.4276
+      },
+      "2025": {
+        "n": 136,
+        "share": 0.4451
+      },
+      "2026": {
+        "n": 129,
+        "share": 0.4571
+      }
+    },
+    "observed_variance": 0.089655,
+    "binomial_noise_floor_mean": 0.094241,
+    "team_split_half": {
+      "r": -0.0324,
+      "n_teams": 20
+    }
+  },
+  "f4": {
+    "entrants": [
+      {
+        "season": "2022",
+        "team_id": 4516,
+        "team": "HK Kopavogs",
+        "origin": "Besta deildin",
+        "matches": 22,
+        "gf_per_match": 2.0909,
+        "ga_per_match": 1.3636,
+        "gf_deviation": 0.356,
+        "ga_deviation": -0.3713
+      },
+      {
+        "season": "2022",
+        "team_id": 6434,
+        "team": "Fylkir",
+        "origin": "Besta deildin",
+        "matches": 22,
+        "gf_per_match": 2.8636,
+        "ga_per_match": 1.0455,
+        "gf_deviation": 1.1287,
+        "ga_deviation": -0.6893
+      },
+      {
+        "season": "2022",
+        "team_id": 175110,
+        "team": "KV Reykjavik",
+        "origin": "2. Deild",
+        "matches": 22,
+        "gf_per_match": 1.2273,
+        "ga_per_match": 2.3636,
+        "gf_deviation": -0.5075,
+        "ga_deviation": 0.6287
+      },
+      {
+        "season": "2022",
+        "team_id": 319923,
+        "team": "Throttur Vogar",
+        "origin": "2. Deild",
+        "matches": 22,
+        "gf_per_match": 0.3636,
+        "ga_per_match": 2.5455,
+        "gf_deviation": -1.3713,
+        "ga_deviation": 0.8107
+      },
+      {
+        "season": "2023",
+        "team_id": 4495,
+        "team": "Njardvik",
+        "origin": "2. Deild",
+        "matches": 22,
+        "gf_per_match": 1.6364,
+        "ga_per_match": 2.1364,
+        "gf_deviation": -0.1592,
+        "ga_deviation": 0.3408
+      },
+      {
+        "season": "2023",
+        "team_id": 4661,
+        "team": "Throttur Reykjavik",
+        "origin": "2. Deild",
+        "matches": 22,
+        "gf_per_match": 2.0455,
+        "ga_per_match": 2.0909,
+        "gf_deviation": 0.2499,
+        "ga_deviation": 0.2953
+      },
+      {
+        "season": "2023",
+        "team_id": 6683,
+        "team": "Leiknir Reykjavik",
+        "origin": "Besta deildin",
+        "matches": 24,
+        "gf_per_match": 2.0,
+        "ga_per_match": 1.75,
+        "gf_deviation": 0.2044,
+        "ga_deviation": -0.0456
+      },
+      {
+        "season": "2023",
+        "team_id": 8004,
+        "team": "IA Akranes",
+        "origin": "Besta deildin",
+        "matches": 22,
+        "gf_per_match": 2.4545,
+        "ga_per_match": 1.4091,
+        "gf_deviation": 0.6589,
+        "ga_deviation": -0.3865
+      },
+      {
+        "season": "2023",
+        "team_id": 559291,
+        "team": "\u00c6gir",
+        "origin": "2. Deild",
+        "matches": 22,
+        "gf_per_match": 1.0455,
+        "ga_per_match": 3.0455,
+        "gf_deviation": -0.7501,
+        "ga_deviation": 1.2499
+      },
+      {
+        "season": "2024",
+        "team_id": 4472,
+        "team": "Keflavik",
+        "origin": "Besta deildin",
+        "matches": 25,
+        "gf_per_match": 1.72,
+        "ga_per_match": 1.16,
+        "gf_deviation": 0.1324,
+        "ga_deviation": -0.4276
+      },
+      {
+        "season": "2024",
+        "team_id": 8299,
+        "team": "IBV Vestmannaeyjar",
+        "origin": "Besta deildin",
+        "matches": 22,
+        "gf_per_match": 2.2727,
+        "ga_per_match": 1.2273,
+        "gf_deviation": 0.6851,
+        "ga_deviation": -0.3603
+      },
+      {
+        "season": "2024",
+        "team_id": 163250,
+        "team": "IR Reykjavik",
+        "origin": "2. Deild",
+        "matches": 24,
+        "gf_per_match": 1.4167,
+        "ga_per_match": 1.4167,
+        "gf_deviation": -0.1709,
+        "ga_deviation": -0.1709
+      },
+      {
+        "season": "2024",
+        "team_id": 319922,
+        "team": "Dalvik/Reynir",
+        "origin": "2. Deild",
+        "matches": 22,
+        "gf_per_match": 1.0455,
+        "ga_per_match": 2.2273,
+        "gf_deviation": -0.5421,
+        "ga_deviation": 0.6397
+      },
+      {
+        "season": "2025",
+        "team_id": 4514,
+        "team": "V\u00f6lsungur",
+        "origin": "2. Deild",
+        "matches": 22,
+        "gf_per_match": 1.6364,
+        "ga_per_match": 2.3636,
+        "gf_deviation": -0.1592,
+        "ga_deviation": 0.568
+      },
+      {
+        "season": "2025",
+        "team_id": 4516,
+        "team": "HK Kopavogs",
+        "origin": "Besta deildin",
+        "matches": 25,
+        "gf_per_match": 2.12,
+        "ga_per_match": 1.52,
+        "gf_deviation": 0.3244,
+        "ga_deviation": -0.2756
+      },
+      {
+        "season": "2025",
+        "team_id": 6434,
+        "team": "Fylkir",
+        "origin": "Besta deildin",
+        "matches": 22,
+        "gf_per_match": 1.5455,
+        "ga_per_match": 1.4545,
+        "gf_deviation": -0.2501,
+        "ga_deviation": -0.3411
+      },
+      {
+        "season": "2025",
+        "team_id": 114130,
+        "team": "Selfoss",
+        "origin": "2. Deild",
+        "matches": 22,
+        "gf_per_match": 1.1364,
+        "ga_per_match": 2.0,
+        "gf_deviation": -0.6592,
+        "ga_deviation": 0.2044
+      },
+      {
+        "season": "2026",
+        "team_id": 163251,
+        "team": "Afturelding",
+        "origin": "Besta deildin",
+        "matches": 22,
+        "gf_per_match": 2.9545,
+        "ga_per_match": 1.5,
+        "gf_deviation": 1.1662,
+        "ga_deviation": -0.2883
+      },
+      {
+        "season": "2026",
+        "team_id": 175111,
+        "team": "Grotta",
+        "origin": "2. Deild",
+        "matches": 22,
+        "gf_per_match": 1.6364,
+        "ga_per_match": 1.9545,
+        "gf_deviation": -0.1519,
+        "ga_deviation": 0.1662
+      },
+      {
+        "season": "2026",
+        "team_id": 559291,
+        "team": "\u00c6gir",
+        "origin": "2. Deild",
+        "matches": 22,
+        "gf_per_match": 1.1364,
+        "ga_per_match": 3.1364,
+        "gf_deviation": -0.6519,
+        "ga_deviation": 1.3481
+      },
+      {
+        "season": "2026",
+        "team_id": 750462,
+        "team": "Vestri",
+        "origin": "Besta deildin",
+        "matches": 22,
+        "gf_per_match": 1.3636,
+        "ga_per_match": 1.9545,
+        "gf_deviation": -0.4247,
+        "ga_deviation": 0.1662
+      }
+    ],
+    "pooled_by_origin": {
+      "Besta deildin": {
+        "n": 10,
+        "mean_gf_deviation": 0.3981,
+        "mean_ga_deviation": -0.3019
+      },
+      "2. Deild": {
+        "n": 11,
+        "mean_gf_deviation": -0.443,
+        "mean_ga_deviation": 0.5528
+      }
+    }
+  },
+  "f5_event_red_total_by_season": {
+    "2021": 33.0,
+    "2022": 37.0,
+    "2023": 27.0,
+    "2024": 31.0,
+    "2025": 31.0,
+    "2026": 23.0
+  },
+  "f6_referees_named": 0,
+  "team_id_count": 24,
+  "eventless_match_ids": [
+    "3537487",
+    "3537545",
+    "3794954",
+    "3795015",
+    "4084243",
+    "4389633",
+    "4389639",
+    "4389652",
+    "4389642",
+    "4389707",
+    "4389718",
+    "4389719",
+    "4389697",
+    "4635817",
+    "5225739",
+    "5225740",
+    "5225759",
+    "5225761",
+    "5225796",
+    "5225804",
+    "5225813",
+    "5225842"
+  ],
+  "mismatch_match_id": "3794991",
+  "mover_source_10226_malformed_payloads": 16
+}

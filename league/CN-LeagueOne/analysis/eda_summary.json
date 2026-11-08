@@ -1,0 +1,376 @@
+{
+ "seasons": {
+  "2021": {
+   "n": 306,
+   "stats": 0,
+   "splits": 0,
+   "events": 283,
+   "shotmap": 0,
+   "lineup": 0,
+   "goals_pm": 2.712418300653595,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.0176678445229682,
+   "yell_plain_pm": 0.0,
+   "yell_stats_pm": null,
+   "teams": 18,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "awarded": 0,
+   "home_win_rate": 0.39215686274509803,
+   "draw_rate": 0.238562091503268,
+   "over25_rate": 0.5032679738562091,
+   "single_n": 306
+  },
+  "2022": {
+   "n": 306,
+   "stats": 0,
+   "splits": 0,
+   "events": 281,
+   "shotmap": 0,
+   "lineup": 0,
+   "goals_pm": 2.6143790849673203,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.07473309608540925,
+   "yell_plain_pm": 0.0,
+   "yell_stats_pm": null,
+   "teams": 18,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "awarded": 3,
+   "home_win_rate": 0.42810457516339867,
+   "draw_rate": 0.20261437908496732,
+   "over25_rate": 0.5065359477124183,
+   "single_n": 306
+  },
+  "2023": {
+   "n": 240,
+   "stats": 0,
+   "splits": 0,
+   "events": 220,
+   "shotmap": 0,
+   "lineup": 0,
+   "goals_pm": 2.2625,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.11363636363636363,
+   "yell_plain_pm": 0.0,
+   "yell_stats_pm": null,
+   "teams": 16,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "awarded": 0,
+   "home_win_rate": 0.42916666666666664,
+   "draw_rate": 0.30416666666666664,
+   "over25_rate": 0.37916666666666665,
+   "single_n": 240
+  },
+  "2024": {
+   "n": 240,
+   "stats": 0,
+   "splits": 0,
+   "events": 216,
+   "shotmap": 0,
+   "lineup": 0,
+   "goals_pm": 2.4833333333333334,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.06481481481481481,
+   "yell_plain_pm": 0.0,
+   "yell_stats_pm": null,
+   "teams": 16,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "awarded": 0,
+   "home_win_rate": 0.4083333333333333,
+   "draw_rate": 0.3333333333333333,
+   "over25_rate": 0.43333333333333335,
+   "single_n": 240
+  },
+  "2025": {
+   "n": 240,
+   "stats": 0,
+   "splits": 0,
+   "events": 225,
+   "shotmap": 0,
+   "lineup": 0,
+   "goals_pm": 2.6125,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.0,
+   "yell_plain_pm": 0.0,
+   "yell_stats_pm": null,
+   "teams": 16,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "awarded": 0,
+   "home_win_rate": 0.4583333333333333,
+   "draw_rate": 0.2625,
+   "over25_rate": 0.475,
+   "single_n": 240
+  },
+  "2026": {
+   "n": 240,
+   "stats": 0,
+   "splits": 0,
+   "events": 222,
+   "shotmap": 0,
+   "lineup": 3,
+   "goals_pm": 2.691666666666667,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.009009009009009009,
+   "yell_plain_pm": 0.0,
+   "yell_stats_pm": null,
+   "teams": 16,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "awarded": 0,
+   "home_win_rate": 0.42083333333333334,
+   "draw_rate": 0.2833333333333333,
+   "over25_rate": 0.5083333333333333,
+   "single_n": 240
+  }
+ },
+ "event_cards_by_season": {
+  "2021": {
+   "n_events_matches": 283,
+   "yellow_plain_total": 0,
+   "yellowred_total": 5,
+   "red_total": 55
+  },
+  "2022": {
+   "n_events_matches": 281,
+   "yellow_plain_total": 0,
+   "yellowred_total": 21,
+   "red_total": 51
+  },
+  "2023": {
+   "n_events_matches": 220,
+   "yellow_plain_total": 0,
+   "yellowred_total": 25,
+   "red_total": 46
+  },
+  "2024": {
+   "n_events_matches": 216,
+   "yellow_plain_total": 0,
+   "yellowred_total": 14,
+   "red_total": 41
+  },
+  "2025": {
+   "n_events_matches": 225,
+   "yellow_plain_total": 0,
+   "yellowred_total": 0,
+   "red_total": 28
+  },
+  "2026": {
+   "n_events_matches": 222,
+   "yellow_plain_total": 0,
+   "yellowred_total": 2,
+   "red_total": 23
+  }
+ },
+ "empty_events": {
+  "n_total": 125,
+  "n_with_goals": 3,
+  "goals_in_them": 9,
+  "all_scoreless": false
+ },
+ "halves_dev": {
+  "goals_events": {
+   "share_1h": 0.4492753623188406,
+   "n_goals": 2760,
+   "n_matches": 1000,
+   "note": "event times, dev era, awarded excluded"
+  },
+  "yellows_events": {
+   "share_1h": 0.12307692307692308,
+   "n_yellows": 65,
+   "n_matches": 1000,
+   "note": "plain Yellow events NEVER occur in any season (0 in 1,572 matches); event yellows are YellowRed only \u2014 NOT a frozen constant (no K market)"
+  },
+  "sot": null,
+  "corners": null,
+  "total_shots": null,
+  "yellows_stats": null
+ },
+ "trait_reliability_dev": {
+  "goals_for": {
+   "split_half_r": 0.7296240274565094,
+   "n_teams": 33
+  },
+  "goals_against": {
+   "split_half_r": 0.8112309971791772,
+   "n_teams": 33
+  }
+ },
+ "season_to_season": {
+  "2021-2022": {
+   "n_teams_common": 13,
+   "gf_corr": 0.8205939870300907,
+   "ga_corr": 0.8926127854964179
+  },
+  "2022-2023": {
+   "n_teams_common": 10,
+   "gf_corr": 0.40149903095079226,
+   "ga_corr": 0.5946555764399668
+  },
+  "2023-2024": {
+   "n_teams_common": 12,
+   "gf_corr": 0.1294504844641951,
+   "ga_corr": 0.33895680015152757
+  }
+ },
+ "entrant_transitions_dev": [
+  {
+   "season": "2022",
+   "team_id": 1029697,
+   "team": "Guangxi Pingguo Haliao",
+   "n_matches": 34,
+   "gf_diff": -0.36601307189542487,
+   "ga_diff": -0.1895424836601307
+  },
+  {
+   "season": "2022",
+   "team_id": 585867,
+   "team": "Shanghai Jiading",
+   "n_matches": 34,
+   "gf_diff": -0.1895424836601307,
+   "ga_diff": 0.6045751633986929
+  },
+  {
+   "season": "2022",
+   "team_id": 1282924,
+   "team": "Shijiazhuang Gongfu",
+   "n_matches": 34,
+   "gf_diff": 0.1633986928104576,
+   "ga_diff": -0.39542483660130723
+  },
+  {
+   "season": "2022",
+   "team_id": 1283248,
+   "team": "Qingdao Youth Island FC",
+   "n_matches": 34,
+   "gf_diff": 0.07516339869281041,
+   "ga_diff": -0.013071895424836555
+  },
+  {
+   "season": "2022",
+   "team_id": 4183,
+   "team": "Qingdao Hainiu",
+   "n_matches": 34,
+   "gf_diff": 0.957516339869281,
+   "ga_diff": -0.6013071895424836
+  },
+  {
+   "season": "2023",
+   "team_id": 92646,
+   "team": "Guangzhou FC",
+   "n_matches": 30,
+   "gf_diff": -0.09791666666666665,
+   "ga_diff": 0.30208333333333326
+  },
+  {
+   "season": "2023",
+   "team_id": 1420329,
+   "team": "Jinan Xingzhou",
+   "n_matches": 30,
+   "gf_diff": 0.002083333333333215,
+   "ga_diff": -0.09791666666666665
+  },
+  {
+   "season": "2023",
+   "team_id": 1282988,
+   "team": "Yanbian Longding",
+   "n_matches": 30,
+   "gf_diff": -0.09791666666666665,
+   "ga_diff": -0.06458333333333344
+  },
+  {
+   "season": "2023",
+   "team_id": 1282989,
+   "team": "Foshan Nanshi",
+   "n_matches": 30,
+   "gf_diff": -0.09791666666666665,
+   "ga_diff": 0.002083333333333215
+  },
+  {
+   "season": "2023",
+   "team_id": 1283246,
+   "team": "Wuxi Wugo",
+   "n_matches": 30,
+   "gf_diff": -0.16458333333333341,
+   "ga_diff": 0.66875
+  },
+  {
+   "season": "2023",
+   "team_id": 1283278,
+   "team": "Dandong Tengyue",
+   "n_matches": 30,
+   "gf_diff": -0.19791666666666674,
+   "ga_diff": 0.13541666666666652
+  },
+  {
+   "season": "2024",
+   "team_id": 1477056,
+   "team": "Yunnan Yukun",
+   "n_matches": 30,
+   "gf_diff": 1.0916666666666668,
+   "ga_diff": -0.5750000000000001
+  },
+  {
+   "season": "2024",
+   "team_id": 1477050,
+   "team": "Chongqing Tongliang Long",
+   "n_matches": 30,
+   "gf_diff": 0.15833333333333321,
+   "ga_diff": -0.4083333333333333
+  },
+  {
+   "season": "2024",
+   "team_id": 1477043,
+   "team": "Dalian Young Boy",
+   "n_matches": 30,
+   "gf_diff": 0.22499999999999987,
+   "ga_diff": -0.275
+  },
+  {
+   "season": "2024",
+   "team_id": 1029701,
+   "team": "Qingdao Red Lions",
+   "n_matches": 30,
+   "gf_diff": -0.04166666666666674,
+   "ga_diff": 0.3916666666666666
+  }
+ ],
+ "x2_offset_dev": {
+  "n_transitions": 15,
+  "g_log": 0.09464596949891065,
+  "c_log": -0.03437363834422661,
+  "gf_diff_mean": 0.09464596949891065,
+  "ga_diff_mean": -0.03437363834422661
+ },
+ "lines": {
+  "goals_ou": {
+   "over_rates": {
+    "1.5": 0.727735368956743,
+    "2.5": 0.44529262086513993,
+    "3.5": 0.227735368956743
+   },
+   "primary": 2.5,
+   "n": 786
+  }
+ },
+ "home_win_rate_dev_scored": 0.4223918575063613,
+ "draw_rate_dev_scored": 0.27353689567430023,
+ "dev_scored_n": 786,
+ "virgin_n": 240,
+ "reserve_n": 240
+}

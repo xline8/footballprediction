@@ -1,0 +1,133 @@
+{
+ "seasons": {
+  "2021": {
+   "n": 242,
+   "stats": 0,
+   "splits": 0,
+   "events": 229,
+   "lineup": 0,
+   "referee": 0,
+   "goals_pm": 2.71900826446281,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.2052401746724891,
+   "yell_stats_pm": null,
+   "teams": 16,
+   "xg_rows": 0,
+   "score_mismatch": 1,
+   "phases": {
+    "first_stage": 120,
+    "second_stage": 120,
+    "final_stage": 2
+   }
+  },
+  "2022": {
+   "n": 242,
+   "stats": 0,
+   "splits": 0,
+   "events": 225,
+   "lineup": 0,
+   "referee": 0,
+   "goals_pm": 2.425619834710744,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.2311111111111111,
+   "yell_stats_pm": null,
+   "teams": 16,
+   "xg_rows": 0,
+   "score_mismatch": 1,
+   "phases": {
+    "first_stage": 120,
+    "second_stage": 120,
+    "final_stage": 2
+   }
+  },
+  "2023": {
+   "n": 242,
+   "stats": 0,
+   "splits": 0,
+   "events": 220,
+   "lineup": 0,
+   "referee": 0,
+   "goals_pm": 2.4710743801652892,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.20454545454545456,
+   "yell_stats_pm": null,
+   "teams": 16,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "phases": {
+    "first_stage": 120,
+    "second_stage": 120,
+    "final_stage": 2
+   }
+  },
+  "2024": {
+   "n": 242,
+   "stats": 1,
+   "splits": 0,
+   "events": 228,
+   "lineup": 1,
+   "referee": 0,
+   "goals_pm": 2.628099173553719,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.11403508771929824,
+   "yell_stats_pm": null,
+   "teams": 16,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "phases": {
+    "first_stage": 120,
+    "second_stage": 120,
+    "final_stage": 2
+   }
+  },
+  "2025": {
+   "n": 312,
+   "stats": 311,
+   "splits": 311,
+   "events": 311,
+   "lineup": 311,
+   "referee": 73,
+   "goals_pm": 2.5544871794871793,
+   "sot_pm": 8.495176848874598,
+   "corners_pm": 9.620578778135048,
+   "shots_pm": 25.575562700964632,
+   "yell_ev_pm": 4.421221864951768,
+   "yell_stats_pm": 4.057877813504823,
+   "teams": 16,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "phases": {
+    "other": 312
+   }
+  },
+  "2026": {
+   "n": 285,
+   "stats": 285,
+   "splits": 285,
+   "events": 285,
+   "lineup": 285,
+   "referee": 87,
+   "goals_pm": 2.336842105263158,
+   "sot_pm": 8.27017543859649,
+   "corners_pm": 9.333333333333334,
+   "shots_pm": 26.4140350877193,
+   "yell_ev_pm": 4.582456140350877,
+   "yell_stats_pm": 4.252631578947368,
+   "teams": 16,
+   "xg_rows": 0,
+   "score_mismatch": 0,
+   "phases": {
+    "other": 285
+   }
+  }
+ },
+ "total_matches": 1565
+}

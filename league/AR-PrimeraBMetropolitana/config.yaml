@@ -1,0 +1,26 @@
+league: AR-PrimeraBMetropolitana
+country: Argentina
+fotmob_id: 9213
+tier: 3
+warehouse: /home/hatch/workspace/footballprediction/data_enrichment
+data:
+  matches: league/AR-PrimeraBMetropolitana/data/pbm_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period: ["2021", "2022", "2023", "2024", "2025"]
+virgin_primary: "2026"
+halves_constants:               # frozen league constant (EDA F3) — presentation only
+  goals_1h_share: 0.439932
+markets:
+  goals: G-PBM  # buildable; production Dixon-Coles goals-only reference
+  sot: null     # not buildable: no SOT target exists
+  corners: null # not buildable: no corners target exists
+  cards: null   # not buildable: no yellow-card target exists
+  total_shots: null # not buildable: no total-shots target exists
+notes:
+  - Parent 9213 is split into disjoint Metropolitana and Federal A competitions; this directory keeps only Metropolitana payloads.
+  - Group phase only: 2,160 rows; playoffs, Complemento rounds, and the 2024 Tercer Ascenso final are excluded.
+  - The 2026 virgin definition is inventory-only: one table, 22 teams, rounds 1–42, 462 group matches.
+  - No stats, shotmap, referee, or yellow-card target is available; goals are the only buildable candidate.
+  - Event goal times are used for first-half goals; the frozen goals
+    constant is 0.439932 (true per-match share variance ≤ 0, no team
+    half tendency) — presentation only, FT + 1H/2H via the constant.

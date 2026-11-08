@@ -1,0 +1,136 @@
+{
+  "protocol": {
+    "league": "HU-NBI",
+    "candidate": "L1-T-HU-NBI",
+    "dev_seasons_loaded": [
+      "2021/2022",
+      "2022/2023",
+      "2023/2024",
+      "2024/2025"
+    ],
+    "scored": [
+      "2022/2023",
+      "2023/2024",
+      "2024/2025"
+    ],
+    "M_BAR": 19.042517006802722,
+    "M_BAR_derivation": "derive_level_prior over scored dev seasons 2022/2023-2024/2025, n=588, sum=11197.0",
+    "shipped_M_BAR": 24.9,
+    "primary_line": 19.5,
+    "naive_definition": "nb_over(naive_trailing_10_total, 40.0, 19.5) alone"
+  },
+  "arms": {
+    "A": {
+      "n": 588,
+      "ll_19.5": 0.7067296621732257,
+      "per_season": {
+        "2022/2023": {
+          "n": 198,
+          "ll_19.5": 0.6994118872495892
+        },
+        "2023/2024": {
+          "n": 193,
+          "ll_19.5": 0.6991502808978474
+        },
+        "2024/2025": {
+          "n": 197,
+          "ll_19.5": 0.7215100683713376
+        }
+      }
+    },
+    "B": {
+      "n": 588,
+      "ll_19.5": 0.7056543472461435,
+      "per_season": {
+        "2022/2023": {
+          "n": 198,
+          "ll_19.5": 0.6983671749879015
+        },
+        "2023/2024": {
+          "n": 193,
+          "ll_19.5": 0.6982681802958904
+        },
+        "2024/2025": {
+          "n": 197,
+          "ll_19.5": 0.7202147042437618
+        }
+      }
+    },
+    "C": {
+      "n": 588,
+      "ll_19.5": 0.7042236107025533,
+      "per_season": {
+        "2022/2023": {
+          "n": 198,
+          "ll_19.5": 0.6967406400461096
+        },
+        "2023/2024": {
+          "n": 193,
+          "ll_19.5": 0.6986766522611836
+        },
+        "2024/2025": {
+          "n": 197,
+          "ll_19.5": 0.7171788958251942
+        }
+      }
+    }
+  },
+  "baselines": {
+    "base_rate": {
+      "n": 588,
+      "ll_19.5": 0.695587112315535,
+      "per_season": {
+        "2022/2023": {
+          "n": 198,
+          "ll_19.5": 0.6862548068073222
+        },
+        "2023/2024": {
+          "n": 193,
+          "ll_19.5": 0.70487120536934
+        },
+        "2024/2025": {
+          "n": 197,
+          "ll_19.5": 0.6958712063827525
+        }
+      }
+    },
+    "naive_trailing_10_true": {
+      "n": 588,
+      "ll_19.5": 0.7166941288818175,
+      "per_season": {
+        "2022/2023": {
+          "n": 198,
+          "ll_19.5": 0.7079465833760104
+        },
+        "2023/2024": {
+          "n": 193,
+          "ll_19.5": 0.7200095078301265
+        },
+        "2024/2025": {
+          "n": 197,
+          "ll_19.5": 0.7222380165626612
+        }
+      }
+    }
+  },
+  "gate": {
+    "A": {
+      "pooled_beats_base_rate": false,
+      "pooled_beats_naive_true": true,
+      "per_season_sign_all_seasons_both_baselines": false,
+      "dev_pass": false
+    },
+    "B": {
+      "pooled_beats_base_rate": false,
+      "pooled_beats_naive_true": true,
+      "per_season_sign_all_seasons_both_baselines": false,
+      "dev_pass": false
+    },
+    "C": {
+      "pooled_beats_base_rate": false,
+      "pooled_beats_naive_true": true,
+      "per_season_sign_all_seasons_both_baselines": false,
+      "dev_pass": false
+    }
+  }
+}

@@ -1,0 +1,3 @@
+# S-EG shots-on-target engine
+Reads `data/eg_matches.csv`, target `ShotsOnTarget_home + ShotsOnTarget_away`. Production model_sot.py v5 port (ridge 100, HL 365, BB prior P=200; RS arm P=20,000; NB r=79.94). Per-match walk-forward, date-grouped; warm-up 2021/2022 unscored; scored 2022/2023–2024/2025 (n=826 with target). Primary line 6.5, ladder 5.5/6.5/7.5. Arms GZ, RS only (X4/X6 dropped: shotmap is virgin-era only). Virgin 2025/2026 (n=322) read once for dev-passers; halves via frozen 0.4445.
+Run: `python3 league/EG-PremierLeague/engine/sot/run_s_eg.py dev` then `virgin-metrics` / `virgin-predict --arm <shipped>`.

@@ -1,0 +1,41 @@
+# BY-PremierLeague (Belarus) — league config (Phase 2 freeze; completed Phase 6)
+league: BY-PremierLeague
+country: Belarus
+fotmob_id: 263
+tier: 1
+warehouse: data_enrichment/fotmob_world/Belarus/Premier League
+data:
+  matches: league/BY-PremierLeague/data/by_matches.csv
+  team_matches: league/BY-PremierLeague/data/by_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period:
+  goals: ["2022", "2023", "2024"]   # scored; warm-up 2021
+  stats_markets: []                  # NOT-BUILDABLE: no stats feed in any season (0/1394)
+  cards: []                          # NOT-BUILDABLE: no yellows target in any season (stats absent; event plain Yellows 0 in every season); referee 0% all seasons
+virgin_primary: "2025"               # COMPLETE season (240 matches) — NOT READ (G-BY failed the dev gate; virgin_read: false)
+virgin_confirmatory: null            # 2026 is in progress (224) and stays untouched
+halves_constants:                   # frozen from DEV-era data only (EDA F3)
+  goals_1h_share: 0.4314            # event times, dev era 2021-2024, n=2348 goals, 845 matches with events, awarded excluded
+  yellow_cards_1h_share: null       # no yellows target in dev — no constant; no K market
+  sot_1h_share: null                # no period splits in dev — no constant
+  corners_1h_share: null            # no period splits in dev — no constant
+  total_shots_1h_share: null        # no period splits in dev — no constant
+markets:
+  goals: G-BY        # DC goals-only (no xG in feed); arms: Gate Zero, SHRINK, X2 (KEPT: EDA F4, 8 dev transitions, mean GF -0.325 / GA +0.426, consistent signs)
+  sot: S-BY          # NOT-BUILDABLE — no stats feed in any season
+  corners: C-BY      # NOT-BUILDABLE — no stats feed in any season
+  cards: K-BY        # NOT-BUILDABLE — no stats yellows in any season; event plain Yellows 0 in EVERY season (no target at all); referee 0% (no X8)
+  total_shots: T-BY  # NOT-BUILDABLE — no stats feed in any season; shotmap empty in every season
+notes:
+  - Calendar-year seasons, single group (16 teams, 240 matches in 2021-2022 and 2024-2025; 15 teams, 210 matches in 2023; 16 teams, 224 matches in 2026, in progress).
+  - Naming: general.leagueName is "Premier League" for all 1,394 matches; coverageLevel "lower" for all 1,394. Same competition throughout — no split, no merge, no rebrand.
+  - Stats feed absent in EVERY season: 0/1394 matches carry any stats Periods key; shotmap 0/1394; xG rows 0. Scores-only league.
+  - No xG and no shotmap in ANY season -> X1 blend falls back goals-only; X3/X4/X6/X7/X9 impossible by data absence.
+  - Event feed carries goals reliably (1 score mismatch in 1394 matches, header wins: 3832371 Shakhtyor-Belshina 2022, header 0-0 vs event 4-1 — official result 0-0 used) and cards only as YellowRed + Red (plain Yellow 0 in every season). 114 matches have a wholly empty events payload (16 of them with goals, 48 goals in them); their events-derived fields are missing, never zero.
+  - Team-name stability: 23 FotMob team ids over the corpus; 0 spelling variants. All logic keyed by team id.
+  - Referees: named in 0 matches in every season — X8 dropped on absence.
+  - Seventeen awarded matches: 15 in 2021 (all involving Sputnik Rechitsa's mid-season withdrawal — remaining fixtures awarded 3-0/0-3 with no events), 3832254 Gomel 3-0 Neman (2022, no events), 4127429 Naftan 3-0 Smorgon (2023, played 2-2 per events, awarded 3-0) — kept as ordinary rows with awarded=true; none sits in the virgin season.
+  - Scoring level swings ~0.4 goals/match between seasons: goals/match 2.713 / 2.542 / 2.738 / 2.346 in dev, 2.546 in the virgin (inventory only), 2.603 in the reserve 2026. OU2.5 over-rate 0.40-0.52 every season; dev scored 0.4551.
+  - Trait reliability is the strongest in the scores-only programme so far: split-half r 0.855 (GF) / 0.947 (GA), n=20 teams — yet the fitted model still fails the dev gate (see outcome).
+  - Predictions-only: no BY odds/settlement source in-system.
+  - Outcome (Phase 6): G-BY FAIL at the dev gate — Gate Zero pooled dev (n=690) 1X2 LL 1.0679 / RPS 0.2223 / OU2.5 LL 0.7143 vs climatology 1.0886 / 0.2327 / 0.6934 (beats climatology on 1X2 and RPS, loses the OU leg in every dev season) and vs naive trailing-10 1.0534 / 0.2181 / 0.7455 (loses the 1X2 and RPS legs). SHRINK numerically identical to Gate Zero (n<6 never binds under season-blocked prediction). X2 worse pooled (1.0867 / 0.2257 / 0.7200): identical in 2022 (offset 0, <3 prior transitions), worse in 2023 and much worse in 2024 (1.1319 vs 1.0789) — the largest entrant tilt in the programme backfired in its first live season. Virgin 2025 NOT read; 2026 untouched; nothing ships. S/C/K/T not-buildable (see reports/*_BY_VERDICT.md).

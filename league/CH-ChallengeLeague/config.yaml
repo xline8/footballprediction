@@ -1,0 +1,37 @@
+# CH-ChallengeLeague (Switzerland) — league config
+league: CH-ChallengeLeague
+country: Switzerland
+fotmob_id: 163
+tier: 2
+warehouse: data_enrichment/fotmob_world/Switzerland/Challenge League
+data:
+  matches: league/CH-ChallengeLeague/data/ch_matches.csv
+  team_matches: league/CH-ChallengeLeague/data/ch_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period:
+  goals: ["2022/2023", "2023/2024", "2024/2025"]   # scored; warm-up 2021/2022
+  stats_markets: ["2024/2025"]                     # scored; warm-up 2023/2024 (stats feed starts 2023/2024)
+  cards: ["2024/2025"]                             # scored; warm-up 2023/2024 (target = stats yellows)
+virgin_primary: "2025/2026"         # COMPLETE season (181 matches) — read ONCE per candidate
+virgin_confirmatory: null           # 2026/2027 is in progress (65) and stays untouched
+halves_constants:                   # frozen from DEV-era data only (EDA F3)
+  goals_1h_share: 0.4409            # event times, dev era 2021/2022-2024/2025, n=2207 goals
+  yellow_cards_1h_share: 0.3399     # period splits, dev stats era 2023/2024-2024/2025, n=360
+  sot_1h_share: 0.4512              # period splits, dev stats era, n=360
+  corners_1h_share: 0.4800          # period splits, dev stats era, n=360
+  total_shots_1h_share: 0.4467      # period splits, dev stats era, n=360
+markets:
+  goals: G-CH        # DC goals-only (no xG in feed); arms: Gate Zero, SHRINK (X2 dropped: no entrant tilt in EDA F4)
+  sot: S-CH          # trait-rate NB; arm: Gate Zero only
+  corners: C-CH      # trait-rate NB; arm: Gate Zero only
+  cards: K-CH        # trait-rate NB on STATS yellows (event feed carries ~no cards in this league); arm: Gate Zero only
+  total_shots: T-CH  # trait-rate NB; arm: Gate Zero only; levels consistent within the single rich stats era (no FI-style break)
+notes:
+  - Winter-break season (Jul-May), 10 teams, quadruple round robin = 180 matches per full season; 2025/2026 has 181 rows as found in the feed, used complete as-is for the virgin.
+  - Stats feed era break at 2023/2024: 0% in 2021/2022-2022/2023, 100% from 2023/2024 onward (62.7% overall). Period splits ride with the stats feed.
+  - No xG and no shotmap in ANY season -> X1 blend falls back goals-only; X3/X4/X6 impossible by data absence.
+  - Event feed carries goals reliably (2 score mismatches in 919 matches, header wins) but almost NO card events in 2021/2022-2025/2026 (0.01-0.16/match vs stats 4.6-5.0); cards target is stats yellows. Event feed starts carrying cards only in 2026/2027.
+  - 47 matches have a wholly empty events payload (all 0-0); their events-derived fields are missing, never zero (stats-era members average 4.4 stats yellows).
+  - Team-name stability: 17 FotMob team ids over the corpus, 10 per season. All logic keyed by team id.
+  - Corners level dropped from 9.99/match (2023/2024) to 8.49 (2024/2025); recorded pre-fitting in EDA F1; the gates decide.
+  - Predictions-only: no CH odds/settlement source in-system.

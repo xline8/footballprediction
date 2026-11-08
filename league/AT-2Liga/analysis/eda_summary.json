@@ -1,0 +1,408 @@
+{
+ "levels": {
+  "2021/2022": {
+   "n": 240,
+   "teams": 16,
+   "goals": 3.05,
+   "home_goals": 1.675,
+   "away_goals": 1.375,
+   "hw": 0.45,
+   "dr": 0.23333333333333334,
+   "btts": 0.5583333333333333,
+   "over25": 0.6,
+   "sot": 8.708333333333334,
+   "corners": 10.429166666666667,
+   "shots": 17.5875,
+   "yellows": 4.725,
+   "reds_ev": 0.26666666666666666,
+   "stats_n": 240,
+   "events_n": 240
+  },
+  "2022/2023": {
+   "n": 240,
+   "teams": 16,
+   "goals": 2.9,
+   "home_goals": 1.525,
+   "away_goals": 1.375,
+   "hw": 0.4375,
+   "dr": 0.225,
+   "btts": 0.5291666666666667,
+   "over25": 0.5583333333333333,
+   "sot": 8.733333333333333,
+   "corners": 10.008333333333333,
+   "shots": 17.733333333333334,
+   "yellows": 4.7,
+   "reds_ev": 0.22083333333333333,
+   "stats_n": 240,
+   "events_n": 240
+  },
+  "2023/2024": {
+   "n": 240,
+   "teams": 16,
+   "goals": 2.9833333333333334,
+   "home_goals": 1.5666666666666667,
+   "away_goals": 1.4166666666666667,
+   "hw": 0.4375,
+   "dr": 0.2,
+   "btts": 0.5458333333333333,
+   "over25": 0.575,
+   "sot": 8.482456140350877,
+   "corners": 10.052631578947368,
+   "shots": 16.92982456140351,
+   "yellows": 5.1,
+   "reds_ev": 0.275,
+   "stats_n": 228,
+   "events_n": 240
+  },
+  "2024/2025": {
+   "n": 240,
+   "teams": 16,
+   "goals": 2.9541666666666666,
+   "home_goals": 1.5833333333333333,
+   "away_goals": 1.3708333333333333,
+   "hw": 0.42916666666666664,
+   "dr": 0.21666666666666667,
+   "btts": 0.5666666666666667,
+   "over25": 0.5833333333333334,
+   "sot": 14.929166666666667,
+   "corners": 9.4625,
+   "shots": 24.254166666666666,
+   "yellows": 5.529166666666667,
+   "reds_ev": 0.23333333333333334,
+   "stats_n": 240,
+   "events_n": 240
+  },
+  "2025/2026": {
+   "n": 210,
+   "teams": 15,
+   "goals": 2.6523809523809523,
+   "home_goals": 1.4095238095238096,
+   "away_goals": 1.2428571428571429,
+   "hw": 0.41904761904761906,
+   "dr": 0.2571428571428571,
+   "btts": 0.5095238095238095,
+   "over25": 0.5047619047619047,
+   "sot": 7.847619047619047,
+   "corners": 8.99047619047619,
+   "shots": 15.885714285714286,
+   "yellows": 4.390476190476191,
+   "reds_ev": 0.22857142857142856,
+   "stats_n": 210,
+   "events_n": 210
+  },
+  "2026/2027": {
+   "n": 96,
+   "teams": 16,
+   "goals": 3.15625,
+   "home_goals": 1.78125,
+   "away_goals": 1.375,
+   "hw": 0.4791666666666667,
+   "dr": 0.1875,
+   "btts": 0.5625,
+   "over25": 0.6145833333333334,
+   "sot": 9.614583333333334,
+   "corners": 10.364583333333334,
+   "shots": 23.114583333333332,
+   "yellows": 4.34375,
+   "reds_ev": 0.23958333333333334,
+   "stats_n": 96,
+   "events_n": 96
+  }
+ },
+ "pooled": {
+  "goals": 2.9145299145299144,
+  "sot": 9.80224525043178,
+  "corn": 9.806563039723661,
+  "shots": 18.561312607944732,
+  "yell": 4.901709401709402
+ },
+ "dispersion": {
+  "goals": 0.9801494622819716,
+  "sot": 3.609999141863384,
+  "corn": 1.1590380680501826,
+  "shots": 2.6777169790061817,
+  "yell": 1.0034202363736842
+ },
+ "reliability": {
+  "goals": {
+   "for": {
+    "r": 0.47227473399979186,
+    "teams": 27
+   },
+   "against": {
+    "r": 0.7525218652734421,
+    "teams": 27
+   }
+  },
+  "sot": {
+   "for": {
+    "r": 0.7456470924141544,
+    "teams": 27
+   },
+   "against": {
+    "r": 0.7771464631961634,
+    "teams": 27
+   }
+  },
+  "corners": {
+   "for": {
+    "r": 0.617211839089079,
+    "teams": 27
+   },
+   "against": {
+    "r": 0.7657182108292564,
+    "teams": 27
+   }
+  },
+  "shots": {
+   "for": {
+    "r": 0.8163600409402096,
+    "teams": 27
+   },
+   "against": {
+    "r": 0.8143053147958234,
+    "teams": 27
+   }
+  },
+  "yellows_ev": {
+   "for": {
+    "r": 0.44480119272506097,
+    "teams": 27
+   },
+   "against": {
+    "r": 0.5738015170538251,
+    "teams": 27
+   }
+  },
+  "possession": {
+   "for": {
+    "r": 0.8165913235102796,
+    "teams": 27
+   },
+   "against": {
+    "r": 0.8042117617658511,
+    "teams": 27
+   }
+  }
+ },
+ "corn_corr_poss_home": 0.30524554976781293,
+ "halves_goals": {
+  "const_ratio_of_sums": 0.454349582547805,
+  "n_matches": 1190,
+  "obs_var": 0.10665406764262747,
+  "noise_floor": 0.107747164546105,
+  "true_var": -0.0010930969034775306
+ },
+ "halves_yellows": {
+  "const_ratio_of_sums": 0.3429778933680104,
+  "n_matches": 1255,
+  "obs_var": 0.06360455370674724,
+  "noise_floor": 0.060341931038496104,
+  "true_var": 0.0032626226682511347
+ },
+ "halves_goals_team_share_r": 0.17673581863316634,
+ "entrants": [
+  {
+   "season": "2022/2023",
+   "team_id": 1921,
+   "class": "from_below_or_returning",
+   "is_bteam": true
+  },
+  {
+   "season": "2022/2023",
+   "team_id": 10053,
+   "class": "relegated_from_bundesliga",
+   "is_bteam": false
+  },
+  {
+   "season": "2022/2023",
+   "team_id": 2030,
+   "class": "from_below_or_returning",
+   "is_bteam": false
+  },
+  {
+   "season": "2023/2024",
+   "team_id": 10241,
+   "class": "from_below_or_returning",
+   "is_bteam": false
+  },
+  {
+   "season": "2023/2024",
+   "team_id": 80619,
+   "class": "from_below_or_returning",
+   "is_bteam": false
+  },
+  {
+   "season": "2023/2024",
+   "team_id": 611179,
+   "class": "from_below_or_returning",
+   "is_bteam": false
+  },
+  {
+   "season": "2023/2024",
+   "team_id": 10017,
+   "class": "relegated_from_bundesliga",
+   "is_bteam": false
+  },
+  {
+   "season": "2024/2025",
+   "team_id": 1952,
+   "class": "from_below_or_returning",
+   "is_bteam": true
+  },
+  {
+   "season": "2024/2025",
+   "team_id": 9982,
+   "class": "relegated_from_bundesliga",
+   "is_bteam": false
+  },
+  {
+   "season": "2024/2025",
+   "team_id": 4015,
+   "class": "from_below_or_returning",
+   "is_bteam": false
+  },
+  {
+   "season": "2025/2026",
+   "team_id": 10248,
+   "class": "from_below_or_returning",
+   "is_bteam": true
+  },
+  {
+   "season": "2025/2026",
+   "team_id": 10009,
+   "class": "relegated_from_bundesliga",
+   "is_bteam": false
+  },
+  {
+   "season": "2025/2026",
+   "team_id": 206091,
+   "class": "from_below_or_returning",
+   "is_bteam": false
+  },
+  {
+   "season": "2025/2026",
+   "team_id": 946908,
+   "class": "from_below_or_returning",
+   "is_bteam": false
+  },
+  {
+   "season": "2026/2027",
+   "team_id": 2433,
+   "class": "relegated_from_bundesliga",
+   "is_bteam": false
+  },
+  {
+   "season": "2026/2027",
+   "team_id": 10010,
+   "class": "from_below_or_returning",
+   "is_bteam": false
+  },
+  {
+   "season": "2026/2027",
+   "team_id": 4015,
+   "class": "from_below_or_returning",
+   "is_bteam": false
+  }
+ ],
+ "mover_gaps": {
+  "relegated_from_bundesliga": {
+   "n_entrants": 4,
+   "gf_gap": -0.0582589285714285,
+   "ga_gap": -0.29337797619047623
+  },
+  "from_below_or_returning": {
+   "n_entrants": 10,
+   "gf_gap": -0.11910714285714283,
+   "ga_gap": 0.04636904761904766
+  }
+ },
+ "bteam_seasons": {
+  "1915": [
+   "2021/2022",
+   "2022/2023",
+   "2023/2024",
+   "2024/2025",
+   "2025/2026",
+   "2026/2027"
+  ],
+  "1921": [
+   "2022/2023",
+   "2023/2024",
+   "2024/2025",
+   "2025/2026",
+   "2026/2027"
+  ],
+  "1952": [
+   "2021/2022",
+   "2022/2023",
+   "2024/2025",
+   "2025/2026",
+   "2026/2027"
+  ],
+  "10248": [
+   "2021/2022",
+   "2022/2023",
+   "2025/2026",
+   "2026/2027"
+  ],
+  "292054": [
+   "2021/2022"
+  ]
+ },
+ "dev_over_rates": {
+  "goals_2.5": 0.5722222222222222,
+  "sot": {
+   "7.5": 0.6440677966101694,
+   "8.5": 0.5508474576271186,
+   "9.5": 0.4350282485875706
+  },
+  "corners": {
+   "8.5": 0.6313559322033898,
+   "9.5": 0.5282485875706214,
+   "10.5": 0.3968926553672316
+  },
+  "cards": {
+   "3.5": 0.7375,
+   "4.5": 0.5833333333333334,
+   "5.5": 0.4125
+  },
+  "shots": {
+   "17.5": 0.556497175141243,
+   "18.5": 0.4731638418079096,
+   "19.5": 0.4152542372881356
+  },
+  "dev_n_stats": 708,
+  "dev_n_total": 720,
+  "virgin_n_stats": 210,
+  "virgin_n_total": 210
+ },
+ "referee_named": 0,
+ "name_variants": {
+  "1907": [
+   "SKN St. Poelten",
+   "SKN St. P\u00f6lten"
+  ],
+  "10053": [
+   "Admira Moedling",
+   "Admira M\u00f6dling",
+   "Admira Wacker"
+  ],
+  "206091": [
+   "Austria Salzburg",
+   "SV Austria Salzburg"
+  ],
+  "212825": [
+   "Vorwaerts Steyr",
+   "Vorw\u00e4rts Steyr"
+  ],
+  "292054": [
+   "FC Juniors OOe",
+   "LASK Juniors O\u00d6"
+  ],
+  "946908": [
+   "FC Hertha Wels",
+   "SPG HOGO Wels"
+  ]
+ }
+}

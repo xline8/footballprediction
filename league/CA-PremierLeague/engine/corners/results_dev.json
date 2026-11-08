@@ -1,0 +1,101 @@
+{
+  "protocol": {
+    "warmup": "2021",
+    "scored": [
+      "2022",
+      "2023",
+      "2024"
+    ],
+    "rows_loaded": 448,
+    "covariates": [
+      "BallPossesion",
+      "big_chance"
+    ]
+  },
+  "results": [
+    {
+      "arm": "gate_zero",
+      "season": "2022",
+      "kind": "model",
+      "n": 112,
+      "ll_9.5": 0.703198718405752
+    },
+    {
+      "arm": "gate_zero",
+      "season": "2022",
+      "kind": "league_base_rate",
+      "n": 112,
+      "ll_9.5": 0.6972978363859414
+    },
+    {
+      "arm": "gate_zero",
+      "season": "2022",
+      "kind": "naive_trailing_10",
+      "n": 112,
+      "ll_9.5": 0.7017690424430916
+    },
+    {
+      "arm": "gate_zero",
+      "season": "2023",
+      "kind": "model",
+      "n": 112,
+      "ll_9.5": 0.698763097368827
+    },
+    {
+      "arm": "gate_zero",
+      "season": "2023",
+      "kind": "league_base_rate",
+      "n": 112,
+      "ll_9.5": 0.7124031847502315
+    },
+    {
+      "arm": "gate_zero",
+      "season": "2023",
+      "kind": "naive_trailing_10",
+      "n": 112,
+      "ll_9.5": 0.7048008764216122
+    },
+    {
+      "arm": "gate_zero",
+      "season": "2024",
+      "kind": "model",
+      "n": 112,
+      "ll_9.5": 0.7039529935121702
+    },
+    {
+      "arm": "gate_zero",
+      "season": "2024",
+      "kind": "league_base_rate",
+      "n": 112,
+      "ll_9.5": 0.7616395326383962
+    },
+    {
+      "arm": "gate_zero",
+      "season": "2024",
+      "kind": "naive_trailing_10",
+      "n": 112,
+      "ll_9.5": 0.7646545993811855
+    },
+    {
+      "arm": "gate_zero",
+      "season": "pooled",
+      "kind": "model",
+      "n": 336,
+      "ll_9.5": 0.701971603095583
+    },
+    {
+      "arm": "gate_zero",
+      "season": "pooled",
+      "kind": "league_base_rate",
+      "n": 336,
+      "ll_9.5": 0.723780184591523
+    },
+    {
+      "arm": "gate_zero",
+      "season": "pooled",
+      "kind": "naive_trailing_10",
+      "n": 336,
+      "ll_9.5": 0.7237415060819631
+    }
+  ]
+}

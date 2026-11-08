@@ -1,0 +1,9 @@
+# Data understanding
+
+The warehouse contains 1,219 Segunda payloads in seasons 2021–2026. The inventory is payload-derived in [inventory_summary.json](inventory_summary.json). The builder includes only `header.status.finished == true`, removing 53 2021 unfinished placeholders; those rows have index scores 0-0 but no completed match score in the payload. Finished counts are 85, 169, 231, 233, 230, and 218. Header team scores match the index score after whitespace normalisation in all 1,219 payloads. Goal events total 2,422, matching the 2022–2026 index-goal total; the finished CSV total is 2,601 including 2021.
+
+`content.stats` is absent, shotmaps are empty, period splits are absent, and lineup coverage is zero in every season. Events are absent in 2021 and present for 156/169, 214/231, 212/233, 210/230, and 202/218 payloads in 2022–2026. The only event types are Goal, Half, and Card. Cards are Red and YellowRed only; plain Yellow is zero. Referee text is not populated in these payloads, despite the sample-level expectation that it might exist; this is a recomputed disagreement with that expectation.
+
+Seasons are calendar-year labels. Payload league metadata does not provide a stable phase label for Segunda, so phases are not asserted here. The date/team distribution shows the ordinary league schedule plus late-season playoff/final-stage rows where present; those phases are not consistently labelled in the payload and are retained as ordinary matches. 2023 includes January 2024 spillover in the calendar dates. 2026 has 14 teams and 218 finished matches, ending 2026-11-01, versus 230 in 2025; it is transitional/incomplete for modelling and is used only in inventory/levels displays.
+
+FotMob IDs are the team key. The variants Fenix/Fénix (7808) and Paysandu/Paysandú (4660) are canonicalised to one ID each; they are not separate clubs.

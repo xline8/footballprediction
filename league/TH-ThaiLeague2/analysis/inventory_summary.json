@@ -1,0 +1,191 @@
+{
+  "per_season": {
+    "2024/2025": {
+      "all": {
+        "matches": 279,
+        "teams": 18,
+        "date_range": [
+          "2024-08-09",
+          "2025-05-24"
+        ],
+        "goals_per_match": 2.753,
+        "home_win_rate": 0.48,
+        "draw_rate": 0.269,
+        "ou2_5_over_rate": 0.523,
+        "home_goal_advantage": 0.466,
+        "event_yellows_per_match": 4.412,
+        "cards_over_rates": {
+          "3.5": 0.624,
+          "4.5": 0.444,
+          "5.5": 0.276
+        },
+        "coverage": {
+          "stats_all_pct": 0.0,
+          "period_splits_pct": 0.0,
+          "shotmap_pct": 0.0,
+          "events_pct": 99.3,
+          "referee_pct": 0.0
+        }
+      },
+      "regular": {
+        "matches": 273,
+        "teams": 18,
+        "date_range": [
+          "2024-08-09",
+          "2025-04-26"
+        ],
+        "goals_per_match": 2.707,
+        "home_win_rate": 0.48,
+        "draw_rate": 0.264,
+        "ou2_5_over_rate": 0.513,
+        "home_goal_advantage": 0.443,
+        "event_yellows_per_match": 4.388,
+        "cards_over_rates": {
+          "3.5": 0.615,
+          "4.5": 0.44,
+          "5.5": 0.271
+        },
+        "coverage": {
+          "stats_all_pct": 0.0,
+          "period_splits_pct": 0.0,
+          "shotmap_pct": 0.0,
+          "events_pct": 99.3,
+          "referee_pct": 0.0
+        }
+      },
+      "playoff_matches": 6
+    },
+    "2025/2026": {
+      "all": {
+        "matches": 312,
+        "teams": 18,
+        "date_range": [
+          "2025-08-15",
+          "2026-05-23"
+        ],
+        "goals_per_match": 2.772,
+        "home_win_rate": 0.468,
+        "draw_rate": 0.272,
+        "ou2_5_over_rate": 0.538,
+        "home_goal_advantage": 0.42,
+        "event_yellows_per_match": 4.266,
+        "cards_over_rates": {
+          "3.5": 0.647,
+          "4.5": 0.449,
+          "5.5": 0.244
+        },
+        "coverage": {
+          "stats_all_pct": 0.0,
+          "period_splits_pct": 0.0,
+          "shotmap_pct": 0.0,
+          "events_pct": 100.0,
+          "referee_pct": 0.0
+        }
+      },
+      "regular": {
+        "matches": 306,
+        "teams": 18,
+        "date_range": [
+          "2025-08-15",
+          "2026-04-25"
+        ],
+        "goals_per_match": 2.761,
+        "home_win_rate": 0.461,
+        "draw_rate": 0.278,
+        "ou2_5_over_rate": 0.529,
+        "home_goal_advantage": 0.415,
+        "event_yellows_per_match": 4.229,
+        "cards_over_rates": {
+          "3.5": 0.641,
+          "4.5": 0.444,
+          "5.5": 0.239
+        },
+        "coverage": {
+          "stats_all_pct": 0.0,
+          "period_splits_pct": 0.0,
+          "shotmap_pct": 0.0,
+          "events_pct": 100.0,
+          "referee_pct": 0.0
+        }
+      },
+      "playoff_matches": 6
+    },
+    "2026/2027": {
+      "all": {
+        "matches": 90,
+        "teams": 18,
+        "date_range": [
+          "2026-09-04",
+          "2026-11-08"
+        ],
+        "goals_per_match": 2.856,
+        "home_win_rate": 0.456,
+        "draw_rate": 0.311,
+        "ou2_5_over_rate": 0.5,
+        "home_goal_advantage": 0.389,
+        "event_yellows_per_match": 4.778,
+        "cards_over_rates": {
+          "3.5": 0.744,
+          "4.5": 0.556,
+          "5.5": 0.322
+        },
+        "coverage": {
+          "stats_all_pct": 0.0,
+          "period_splits_pct": 0.0,
+          "shotmap_pct": 0.0,
+          "events_pct": 100.0,
+          "referee_pct": 80.0
+        }
+      },
+      "regular": {
+        "matches": 90,
+        "teams": 18,
+        "date_range": [
+          "2026-09-04",
+          "2026-11-08"
+        ],
+        "goals_per_match": 2.856,
+        "home_win_rate": 0.456,
+        "draw_rate": 0.311,
+        "ou2_5_over_rate": 0.5,
+        "home_goal_advantage": 0.389,
+        "event_yellows_per_match": 4.778,
+        "cards_over_rates": {
+          "3.5": 0.744,
+          "4.5": 0.556,
+          "5.5": 0.322
+        },
+        "coverage": {
+          "stats_all_pct": 0.0,
+          "period_splits_pct": 0.0,
+          "shotmap_pct": 0.0,
+          "events_pct": 100.0,
+          "referee_pct": 80.0
+        }
+      },
+      "playoff_matches": 0
+    }
+  },
+  "cards_artefact": {
+    "2024/2025": {
+      "stats_rows": 0,
+      "event_yellow_mean": 4.412,
+      "plain_yellow_events": 1204,
+      "yellowred_events": 27
+    },
+    "2025/2026": {
+      "stats_rows": 0,
+      "event_yellow_mean": 4.266,
+      "plain_yellow_events": 1309,
+      "yellowred_events": 22
+    },
+    "2026/2027": {
+      "stats_rows": 0,
+      "event_yellow_mean": 4.778,
+      "plain_yellow_events": 424,
+      "yellowred_events": 6
+    }
+  },
+  "team_ids": 29,
+  "team_id_multi_name": {}
+}

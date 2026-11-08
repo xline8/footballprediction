@@ -1,0 +1,304 @@
+{
+  "card_feed_note": "Yellow event feed is absent in 2021-2024; yellow levels are descriptive only for 2025-2026.",
+  "entrants": {
+    "2022": {
+      "clubs": [
+        {
+          "dGA": 1.030556,
+          "dGF": -0.358333,
+          "ga_per_match": 2.555556,
+          "gf_per_match": 1.166667,
+          "matches": 36,
+          "team_id": 49578
+        }
+      ],
+      "league_mean_goals_per_team_match": 1.525
+    },
+    "2023": {
+      "clubs": [
+        {
+          "dGA": 0.422222,
+          "dGF": -0.522222,
+          "ga_per_match": 1.694444,
+          "gf_per_match": 0.75,
+          "matches": 36,
+          "team_id": 673053
+        }
+      ],
+      "league_mean_goals_per_team_match": 1.272222
+    },
+    "2024": {
+      "clubs": [
+        {
+          "dGA": 0.697222,
+          "dGF": -0.886111,
+          "ga_per_match": 2.194444,
+          "gf_per_match": 0.611111,
+          "matches": 36,
+          "team_id": 584714
+        }
+      ],
+      "league_mean_goals_per_team_match": 1.497222
+    },
+    "2025": {
+      "clubs": [
+        {
+          "dGA": 0.355556,
+          "dGF": -0.227778,
+          "ga_per_match": 1.944444,
+          "gf_per_match": 1.361111,
+          "matches": 36,
+          "team_id": 673053
+        }
+      ],
+      "league_mean_goals_per_team_match": 1.588889
+    },
+    "2026": {
+      "clubs": [
+        {
+          "dGA": 0.7,
+          "dGF": 0.088889,
+          "ga_per_match": 2.25,
+          "gf_per_match": 1.638889,
+          "matches": 36,
+          "team_id": 584714
+        }
+      ],
+      "league_mean_goals_per_team_match": 1.55
+    },
+    "offsets_by_target_season": {
+      "2021": null,
+      "2022": null,
+      "2023": {
+        "dGA": 1.030556,
+        "dGF": -0.358333,
+        "entrant_team_matches": 36
+      },
+      "2024": {
+        "dGA": 0.726389,
+        "dGF": -0.440277,
+        "entrant_team_matches": 72
+      },
+      "2025": {
+        "dGA": 0.716667,
+        "dGF": -0.588889,
+        "entrant_team_matches": 108
+      },
+      "2026": {
+        "dGA": 0.626389,
+        "dGF": -0.498611,
+        "entrant_team_matches": 144
+      }
+    },
+    "pooled": {
+      "dGA": 0.641111,
+      "dGF": -0.381111,
+      "entrant_team_matches": 180
+    }
+  },
+  "halves": {
+    "available": false,
+    "reason": "content.stats.Periods is null in every payload; FT-only presentation."
+  },
+  "levels": {
+    "2021": {
+      "away_goals": 1.570513,
+      "away_win": 0.397436,
+      "btts": 0.538462,
+      "draw": 0.173077,
+      "goals_per_match": 3.320513,
+      "home_advantage": 0.179487,
+      "home_goals": 1.75,
+      "home_win": 0.429487,
+      "n": 156,
+      "ou15_over": 0.814103,
+      "ou25_over": 0.660256,
+      "ou35_over": 0.423077,
+      "red_per_match": 0.217949,
+      "yellow_per_match": 0.0
+    },
+    "2022": {
+      "away_goals": 1.344444,
+      "away_win": 0.35,
+      "btts": 0.505556,
+      "draw": 0.194444,
+      "goals_per_match": 3.05,
+      "home_advantage": 0.361111,
+      "home_goals": 1.705556,
+      "home_win": 0.455556,
+      "n": 180,
+      "ou15_over": 0.766667,
+      "ou25_over": 0.544444,
+      "ou35_over": 0.327778,
+      "red_per_match": 0.227778,
+      "yellow_per_match": 0.0
+    },
+    "2023": {
+      "away_goals": 1.188889,
+      "away_win": 0.35,
+      "btts": 0.466667,
+      "draw": 0.277778,
+      "goals_per_match": 2.544444,
+      "home_advantage": 0.166667,
+      "home_goals": 1.355556,
+      "home_win": 0.372222,
+      "n": 180,
+      "ou15_over": 0.755556,
+      "ou25_over": 0.466667,
+      "ou35_over": 0.227778,
+      "red_per_match": 0.272222,
+      "yellow_per_match": 0.0
+    },
+    "2024": {
+      "away_goals": 1.466667,
+      "away_win": 0.361111,
+      "btts": 0.5,
+      "draw": 0.222222,
+      "goals_per_match": 2.994444,
+      "home_advantage": 0.061111,
+      "home_goals": 1.527778,
+      "home_win": 0.416667,
+      "n": 180,
+      "ou15_over": 0.805556,
+      "ou25_over": 0.577778,
+      "ou35_over": 0.366667,
+      "red_per_match": 0.244444,
+      "yellow_per_match": 0.0
+    },
+    "2025": {
+      "away_goals": 1.438889,
+      "away_win": 0.4,
+      "btts": 0.55,
+      "draw": 0.133333,
+      "goals_per_match": 3.177778,
+      "home_advantage": 0.3,
+      "home_goals": 1.738889,
+      "home_win": 0.466667,
+      "n": 180,
+      "ou15_over": 0.833333,
+      "ou25_over": 0.683333,
+      "ou35_over": 0.383333,
+      "red_per_match": 0.277778,
+      "yellow_per_match": 3.95
+    },
+    "2026": {
+      "away_goals": 1.327778,
+      "away_win": 0.388889,
+      "btts": 0.572222,
+      "draw": 0.133333,
+      "goals_per_match": 3.1,
+      "home_advantage": 0.444444,
+      "home_goals": 1.772222,
+      "home_win": 0.477778,
+      "n": 180,
+      "ou15_over": 0.811111,
+      "ou25_over": 0.633333,
+      "ou35_over": 0.383333,
+      "red_per_match": 0.211111,
+      "yellow_per_match": 4.233333
+    }
+  },
+  "referee": {
+    "2021": {
+      "coverage": 0.0,
+      "matches": 156,
+      "referee_present": 0,
+      "yellow_per_referee_covered_match": null
+    },
+    "2022": {
+      "coverage": 0.0,
+      "matches": 180,
+      "referee_present": 0,
+      "yellow_per_referee_covered_match": null
+    },
+    "2023": {
+      "coverage": 0.0,
+      "matches": 180,
+      "referee_present": 0,
+      "yellow_per_referee_covered_match": null
+    },
+    "2024": {
+      "coverage": 0.0,
+      "matches": 180,
+      "referee_present": 0,
+      "yellow_per_referee_covered_match": null
+    },
+    "2025": {
+      "coverage": 0.338889,
+      "matches": 180,
+      "referee_present": 61,
+      "yellow_per_referee_covered_match": 3.590164
+    },
+    "2026": {
+      "coverage": 0.4,
+      "matches": 180,
+      "referee_present": 72,
+      "yellow_per_referee_covered_match": 4.347222
+    }
+  },
+  "trait_reliability": {
+    "goals_against_r": 0.8741,
+    "goals_against_sd": 0.0551,
+    "goals_for_r": 0.8758,
+    "goals_for_sd": 0.0605,
+    "min_matches_per_team": 24,
+    "random_halves": 60,
+    "teams": 13
+  },
+  "trait_reliability_by_season": {
+    "2021": {
+      "goals_against_r": 0.7722,
+      "goals_against_sd": 0.0887,
+      "goals_for_r": 0.7873,
+      "goals_for_sd": 0.0959,
+      "min_matches_per_team": 24,
+      "random_halves": 60,
+      "teams": 10
+    },
+    "2022": {
+      "goals_against_r": 0.842,
+      "goals_against_sd": 0.082,
+      "goals_for_r": 0.7457,
+      "goals_for_sd": 0.1271,
+      "min_matches_per_team": 24,
+      "random_halves": 60,
+      "teams": 10
+    },
+    "2023": {
+      "goals_against_r": 0.6964,
+      "goals_against_sd": 0.1405,
+      "goals_for_r": 0.6752,
+      "goals_for_sd": 0.1525,
+      "min_matches_per_team": 24,
+      "random_halves": 60,
+      "teams": 10
+    },
+    "2024": {
+      "goals_against_r": 0.7101,
+      "goals_against_sd": 0.1237,
+      "goals_for_r": 0.7753,
+      "goals_for_sd": 0.0972,
+      "min_matches_per_team": 24,
+      "random_halves": 60,
+      "teams": 10
+    },
+    "2025": {
+      "goals_against_r": 0.8619,
+      "goals_against_sd": 0.0672,
+      "goals_for_r": 0.73,
+      "goals_for_sd": 0.0922,
+      "min_matches_per_team": 24,
+      "random_halves": 60,
+      "teams": 10
+    },
+    "2026": {
+      "goals_against_r": 0.676,
+      "goals_against_sd": 0.1335,
+      "goals_for_r": 0.7371,
+      "goals_for_sd": 0.1307,
+      "min_matches_per_team": 24,
+      "random_halves": 60,
+      "teams": 10
+    }
+  }
+}

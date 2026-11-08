@@ -1,0 +1,34 @@
+# IT-SerieB (Italy Serie B) — league config
+league: IT-SerieB
+country: Italy
+fotmob_id: 86
+tier: 2
+warehouse: data_enrichment/fotmob_world/Italy/Serie B
+data:
+  matches: league/IT-SerieB/data/itserieb_matches.csv
+  team_matches: league/IT-SerieB/data/itserieb_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]  # seed + walk-forward
+virgin_primary: "2025/2026"        # complete season, n=390 — read ONCE per candidate
+virgin_confirmatory: "2026/2027"   # partial (110 played at pull); reserved, NOT read
+halves_constants:                  # frozen, complete seasons 2023/2024-2025/2026
+  goals_1h_share: 0.4501
+  sot_1h_share: 0.4598
+  corners_1h_share: 0.4734
+  total_shots_1h_share: 0.4650
+  yellow_cards_1h_share: 0.3733
+markets:
+  goals: G-ITB      # DC reference, GOALS-ONLY (xG era starts inside the virgin); arms: Gate Zero, SHRINK, X2 mover tier offset (Serie A/Serie C both in warehouse)
+  sot: S-ITB        # v5 reference; arms: Gate Zero, RS ratio-shrink (X4/X6 era-dead — shotmap/xG exist only from 2025/2026)
+  corners: C-ITB    # corners_v3 reference; arms: Gate Zero (X9) only (X7 box touches DROPPED: for r=0.320 n=16, against r=-0.129)
+  cards: K-ITB      # cards reference; arms: Gate Zero only (X8 referee DROPPED, dev r=0.061); target = EVENT-feed yellows (stats feed undercounts, measured)
+  total_shots: T-ITB # shots family; arms: A v1 pattern, B v2 level layer, C E9 trailing-r; tuning season 2022/2023, gate pool 2023/2024-2024/2025
+notes:
+  - 20 teams, 38 rounds, double round-robin = 380 regular matches/season + 8 promotion play-off + 2 relegation play-out matches (phase recorded via leagueName, included as ordinary rows, no phase feature). 2024/2025 holds 389: the Salernitana-Sampdoria play-out return leg is absent from the warehouse (abandoned/awarded off-pitch).
+  - Heavy churn: exactly 7 of 20 clubs change every season (3 relegated from Serie A, 4 promoted from Serie C, mirrored exits; verified by team_id). 46 distinct clubs across the corpus. Movers measured: ex-Serie A clubs enter at GD +0.29/match, ex-Serie C at -0.19 — the X2 mover offset is a first-class feature here.
+  - Team identity is keyed on FotMob team_id everywhere, with one documented alias: Reggiana id 959006 (Aug-Nov 2023) -> canonical 6500 (complementary 15+23=38 matches in 2023/2024, never co-occur). 53 name spellings across 46 ids (Parma, Reggina, FeralpiSalo/Union Brescia renamings on stable ids).
+  - Stats feed is 100% in every season (the mirror image of IT-SerieC, where it existed only in the in-progress season). xG/shotmap era starts 2025/2026 (the virgin): expected_goals in 4/390, 5/390, 1/390, 3/389 dev-season matches vs 390/390 in 2025/2026. No xG arm is honestly dev-testable — goals runs goals-only and S-ITB runs without X4/X6.
+  - Cards: stats-feed yellow_cards undercounts the event feed in every dev season (-3.2% to -1.6%; exact agreement 79.7-89.7%). Unified target = event-feed Yellow events (YellowRed/Red are reds), cards_source='events' for all rows — the ES/AR precedent.
+  - Per-half stats: 1.0% in 2021/2022, 28.7% in 2022/2023, ~100% from 2023/2024. Referee coverage 47.4% in 2021/2022, 97.2% in 2022/2023, 74-80% after; strictness reliability r=0.061 = noise, weakest in the program.
+  - Calibration in this league is defined as actual - predicted (stated in every prereg/verdict).
+  - Predictions-only: no IT-SerieB odds/settlement source in-system.

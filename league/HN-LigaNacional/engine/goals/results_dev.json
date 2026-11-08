@@ -1,0 +1,419 @@
+{
+  "results": [
+    {
+      "arm": "gate_zero",
+      "kind": "model",
+      "ll_1x2": 0.9815632763449881,
+      "n": 90,
+      "oull_2_5": 0.7024519907378526,
+      "rps": 0.1915975706333319,
+      "season": "2022/2023 - Apertura"
+    },
+    {
+      "arm": "shrink",
+      "kind": "model",
+      "ll_1x2": 0.9815632763449881,
+      "n": 90,
+      "oull_2_5": 0.7024519907378526,
+      "rps": 0.1915975706333319,
+      "season": "2022/2023 - Apertura"
+    },
+    {
+      "arm": "gate_zero",
+      "kind": "climatology",
+      "ll_1x2": 1.084728271687138,
+      "n": 90,
+      "oull_2_5": 0.6815647923402962,
+      "rps": 0.22756172839506195,
+      "season": "2022/2023 - Apertura"
+    },
+    {
+      "arm": "gate_zero",
+      "kind": "naive_trailing10",
+      "ll_1x2": 1.007804544335223,
+      "n": 90,
+      "oull_2_5": 0.6899796176334532,
+      "rps": 0.20166218349718984,
+      "season": "2022/2023 - Apertura"
+    },
+    {
+      "arm": "shrink",
+      "kind": "climatology",
+      "ll_1x2": 1.084728271687138,
+      "n": 90,
+      "oull_2_5": 0.6815647923402962,
+      "rps": 0.22756172839506195,
+      "season": "2022/2023 - Apertura"
+    },
+    {
+      "arm": "shrink",
+      "kind": "naive_trailing10",
+      "ll_1x2": 1.007804544335223,
+      "n": 90,
+      "oull_2_5": 0.6899796176334532,
+      "rps": 0.20166218349718984,
+      "season": "2022/2023 - Apertura"
+    },
+    {
+      "arm": "gate_zero",
+      "kind": "model",
+      "ll_1x2": 1.015790539194707,
+      "n": 90,
+      "oull_2_5": 0.7231809332928872,
+      "rps": 0.19102213735899928,
+      "season": "2022/2023 - Clausura"
+    },
+    {
+      "arm": "shrink",
+      "kind": "model",
+      "ll_1x2": 1.015790539194707,
+      "n": 90,
+      "oull_2_5": 0.7231809332928872,
+      "rps": 0.19102213735899928,
+      "season": "2022/2023 - Clausura"
+    },
+    {
+      "arm": "gate_zero",
+      "kind": "climatology",
+      "ll_1x2": 1.0938450620313844,
+      "n": 90,
+      "oull_2_5": 0.7080774528276055,
+      "rps": 0.2156790123456792,
+      "season": "2022/2023 - Clausura"
+    },
+    {
+      "arm": "gate_zero",
+      "kind": "naive_trailing10",
+      "ll_1x2": 1.0388763775764562,
+      "n": 90,
+      "oull_2_5": 0.6912725433186557,
+      "rps": 0.19943115176454965,
+      "season": "2022/2023 - Clausura"
+    },
+    {
+      "arm": "shrink",
+      "kind": "climatology",
+      "ll_1x2": 1.0938450620313844,
+      "n": 90,
+      "oull_2_5": 0.7080774528276055,
+      "rps": 0.2156790123456792,
+      "season": "2022/2023 - Clausura"
+    },
+    {
+      "arm": "shrink",
+      "kind": "naive_trailing10",
+      "ll_1x2": 1.0388763775764562,
+      "n": 90,
+      "oull_2_5": 0.6912725433186557,
+      "rps": 0.19943115176454965,
+      "season": "2022/2023 - Clausura"
+    },
+    {
+      "arm": "gate_zero",
+      "kind": "model",
+      "ll_1x2": 0.9900732374344704,
+      "n": 90,
+      "oull_2_5": 0.7023310395858389,
+      "rps": 0.20163922939040385,
+      "season": "2023/2024 - Apertura"
+    },
+    {
+      "arm": "shrink",
+      "kind": "model",
+      "ll_1x2": 0.9900732374344704,
+      "n": 90,
+      "oull_2_5": 0.7023310395858389,
+      "rps": 0.20163922939040385,
+      "season": "2023/2024 - Apertura"
+    },
+    {
+      "arm": "gate_zero",
+      "kind": "climatology",
+      "ll_1x2": 1.0476052413441024,
+      "n": 90,
+      "oull_2_5": 0.6891913443047396,
+      "rps": 0.22304398148148133,
+      "season": "2023/2024 - Apertura"
+    },
+    {
+      "arm": "gate_zero",
+      "kind": "naive_trailing10",
+      "ll_1x2": 1.0233947386482973,
+      "n": 90,
+      "oull_2_5": 0.6965705034830381,
+      "rps": 0.21395608778300634,
+      "season": "2023/2024 - Apertura"
+    },
+    {
+      "arm": "shrink",
+      "kind": "climatology",
+      "ll_1x2": 1.0476052413441024,
+      "n": 90,
+      "oull_2_5": 0.6891913443047396,
+      "rps": 0.22304398148148133,
+      "season": "2023/2024 - Apertura"
+    },
+    {
+      "arm": "shrink",
+      "kind": "naive_trailing10",
+      "ll_1x2": 1.0233947386482973,
+      "n": 90,
+      "oull_2_5": 0.6965705034830381,
+      "rps": 0.21395608778300634,
+      "season": "2023/2024 - Apertura"
+    },
+    {
+      "arm": "gate_zero",
+      "kind": "model",
+      "ll_1x2": 0.9592894277963354,
+      "n": 90,
+      "oull_2_5": 0.70624285655586,
+      "rps": 0.19367786544194013,
+      "season": "2023/2024 - Clausura"
+    },
+    {
+      "arm": "shrink",
+      "kind": "model",
+      "ll_1x2": 0.9592894277963354,
+      "n": 90,
+      "oull_2_5": 0.70624285655586,
+      "rps": 0.19367786544194013,
+      "season": "2023/2024 - Clausura"
+    },
+    {
+      "arm": "gate_zero",
+      "kind": "climatology",
+      "ll_1x2": 1.0356108493817269,
+      "n": 90,
+      "oull_2_5": 0.7050356315408567,
+      "rps": 0.21862962962962945,
+      "season": "2023/2024 - Clausura"
+    },
+    {
+      "arm": "gate_zero",
+      "kind": "naive_trailing10",
+      "ll_1x2": 1.0153769329106492,
+      "n": 90,
+      "oull_2_5": 0.6886438522964198,
+      "rps": 0.2139457838517969,
+      "season": "2023/2024 - Clausura"
+    },
+    {
+      "arm": "shrink",
+      "kind": "climatology",
+      "ll_1x2": 1.0356108493817269,
+      "n": 90,
+      "oull_2_5": 0.7050356315408567,
+      "rps": 0.21862962962962945,
+      "season": "2023/2024 - Clausura"
+    },
+    {
+      "arm": "shrink",
+      "kind": "naive_trailing10",
+      "ll_1x2": 1.0153769329106492,
+      "n": 90,
+      "oull_2_5": 0.6886438522964198,
+      "rps": 0.2139457838517969,
+      "season": "2023/2024 - Clausura"
+    },
+    {
+      "arm": "gate_zero",
+      "kind": "model",
+      "ll_1x2": 1.014027674825677,
+      "n": 90,
+      "oull_2_5": 0.753634916855681,
+      "rps": 0.20128509857193272,
+      "season": "2024/2025 - Apertura"
+    },
+    {
+      "arm": "shrink",
+      "kind": "model",
+      "ll_1x2": 1.014027674825677,
+      "n": 90,
+      "oull_2_5": 0.753634916855681,
+      "rps": 0.20128509857193272,
+      "season": "2024/2025 - Apertura"
+    },
+    {
+      "arm": "gate_zero",
+      "kind": "climatology",
+      "ll_1x2": 1.083915634684897,
+      "n": 90,
+      "oull_2_5": 0.6909508491790823,
+      "rps": 0.22165466392318248,
+      "season": "2024/2025 - Apertura"
+    },
+    {
+      "arm": "gate_zero",
+      "kind": "naive_trailing10",
+      "ll_1x2": 1.0822811331682407,
+      "n": 90,
+      "oull_2_5": 0.7378274660766813,
+      "rps": 0.22080320493566835,
+      "season": "2024/2025 - Apertura"
+    },
+    {
+      "arm": "shrink",
+      "kind": "climatology",
+      "ll_1x2": 1.083915634684897,
+      "n": 90,
+      "oull_2_5": 0.6909508491790823,
+      "rps": 0.22165466392318248,
+      "season": "2024/2025 - Apertura"
+    },
+    {
+      "arm": "shrink",
+      "kind": "naive_trailing10",
+      "ll_1x2": 1.0822811331682407,
+      "n": 90,
+      "oull_2_5": 0.7378274660766813,
+      "rps": 0.22080320493566835,
+      "season": "2024/2025 - Apertura"
+    },
+    {
+      "arm": "gate_zero",
+      "kind": "model",
+      "ll_1x2": 1.020684797998624,
+      "n": 90,
+      "oull_2_5": 0.6595738603523678,
+      "rps": 0.1845247174304076,
+      "season": "2024/2025 - Clausura"
+    },
+    {
+      "arm": "shrink",
+      "kind": "model",
+      "ll_1x2": 1.020684797998624,
+      "n": 90,
+      "oull_2_5": 0.6595738603523678,
+      "rps": 0.1845247174304076,
+      "season": "2024/2025 - Clausura"
+    },
+    {
+      "arm": "gate_zero",
+      "kind": "climatology",
+      "ll_1x2": 1.111813533177558,
+      "n": 90,
+      "oull_2_5": 0.7110738008888835,
+      "rps": 0.21259763164525067,
+      "season": "2024/2025 - Clausura"
+    },
+    {
+      "arm": "gate_zero",
+      "kind": "naive_trailing10",
+      "ll_1x2": 1.0531255547449025,
+      "n": 90,
+      "oull_2_5": 0.7125551353576308,
+      "rps": 0.1920416194403472,
+      "season": "2024/2025 - Clausura"
+    },
+    {
+      "arm": "shrink",
+      "kind": "climatology",
+      "ll_1x2": 1.111813533177558,
+      "n": 90,
+      "oull_2_5": 0.7110738008888835,
+      "rps": 0.21259763164525067,
+      "season": "2024/2025 - Clausura"
+    },
+    {
+      "arm": "shrink",
+      "kind": "naive_trailing10",
+      "ll_1x2": 1.0531255547449025,
+      "n": 90,
+      "oull_2_5": 0.7125551353576308,
+      "rps": 0.1920416194403472,
+      "season": "2024/2025 - Clausura"
+    },
+    {
+      "arm": "gate_zero",
+      "kind": "model",
+      "ll_1x2": 0.9969048255991344,
+      "n": 540,
+      "oull_2_5": 0.7079025995634142,
+      "rps": 0.1939577698045028,
+      "season": "pooled"
+    },
+    {
+      "arm": "gate_zero",
+      "kind": "climatology",
+      "ll_1x2": 1.0762530987177952,
+      "n": 540,
+      "oull_2_5": 0.6976489785135715,
+      "rps": 0.21986110790338037,
+      "season": "pooled"
+    },
+    {
+      "arm": "gate_zero",
+      "kind": "naive_trailing10",
+      "ll_1x2": 1.0368098802306287,
+      "n": 540,
+      "oull_2_5": 0.7028081863609797,
+      "rps": 0.20697333854542624,
+      "season": "pooled"
+    },
+    {
+      "arm": "shrink",
+      "kind": "model",
+      "ll_1x2": 0.9969048255991344,
+      "n": 540,
+      "oull_2_5": 0.7079025995634142,
+      "rps": 0.1939577698045028,
+      "season": "pooled"
+    },
+    {
+      "arm": "shrink",
+      "kind": "climatology",
+      "ll_1x2": 1.0762530987177952,
+      "n": 540,
+      "oull_2_5": 0.6976489785135715,
+      "rps": 0.21986110790338037,
+      "season": "pooled"
+    },
+    {
+      "arm": "shrink",
+      "kind": "naive_trailing10",
+      "ll_1x2": 1.0368098802306287,
+      "n": 540,
+      "oull_2_5": 0.7028081863609797,
+      "rps": 0.20697333854542624,
+      "season": "pooled"
+    }
+  ],
+  "shrink_audit": {
+    "2022/2023 - Apertura": {
+      "changed_predictions": 0,
+      "max_abs_delta_lambda": 0.0,
+      "n_target": 90
+    },
+    "2022/2023 - Clausura": {
+      "changed_predictions": 0,
+      "max_abs_delta_lambda": 0.0,
+      "n_target": 90
+    },
+    "2023/2024 - Apertura": {
+      "changed_predictions": 0,
+      "max_abs_delta_lambda": 0.0,
+      "n_target": 90
+    },
+    "2023/2024 - Clausura": {
+      "changed_predictions": 0,
+      "max_abs_delta_lambda": 0.0,
+      "n_target": 90
+    },
+    "2024/2025 - Apertura": {
+      "changed_predictions": 0,
+      "max_abs_delta_lambda": 0.0,
+      "n_target": 90
+    },
+    "2024/2025 - Clausura": {
+      "changed_predictions": 0,
+      "max_abs_delta_lambda": 0.0,
+      "n_target": 90
+    },
+    "pooled": {
+      "changed_predictions": 0,
+      "max_abs_delta_lambda": 0.0,
+      "n_target": 540
+    }
+  }
+}

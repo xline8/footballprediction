@@ -1,0 +1,30 @@
+# France Ligue 2 — league config
+league: FR-Ligue2
+country: France
+fotmob_id: 110
+tier: 2
+warehouse: data_enrichment/fotmob_world/France/Ligue 2
+data:
+  matches: league/FR-Ligue2/data/fr_matches.csv
+  team_matches: league/FR-Ligue2/data/fr_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]  # walk-forward, season-blocked
+virgin_primary: "2025/2026"        # complete season, n=306 — read ONCE per candidate
+virgin_confirmatory: "2026/2027"   # partial; reserved, NOT read in this build
+halves_constants:                  # frozen, measured on the complete-splits era 2023/2024–2025/2026
+  goals_1h_share: 0.4457
+  sot_1h_share: 0.4738
+  corners_1h_share: 0.4803
+  total_shots_1h_share: 0.4702
+  yellow_cards_1h_share: 0.3736
+markets:
+  goals: G-FR
+  sot: S-FR
+  corners: C-FR
+  cards: K-FR
+  total_shots: T-FR
+notes:
+  - 20 teams through 2023/2024 and 18 from 2024/2025; regular rounds in the observed feed are 1–38.
+  - Movers are measured from Ligue 1 parent id 53 and Ligue 3 id 8970; see EDA for generated deltas.
+  - xG and shotmap coverage is sparse before 2025/2026 and complete in the virgin; xG variants are therefore development-dead.
+  - Cards retain both stats and event feeds; event yellows are the candidate target after the generated audit.

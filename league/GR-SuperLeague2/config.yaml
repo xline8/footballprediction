@@ -1,0 +1,30 @@
+# GR-SuperLeague2 (Greece) — Stage 1 league configuration
+league: GR-SuperLeague2
+country: Greece
+fotmob_id: 8815
+tier: 2
+warehouse: data_enrichment/fotmob_world/Greece/Super League 2
+data:
+  matches: league/GR-SuperLeague2/data/gr2_matches.csv
+  team_matches: league/GR-SuperLeague2/data/gr2_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.4596
+markets:
+  goals: G-GR2
+  sot: null
+  corners: null
+  cards: null
+  total_shots: null
+notes:
+  - SCORES-ONLY LEAGUE: content.stats is null and the shotmap is empty in all 1,935 payloads (builder-asserted). Only goals is buildable; SOT/corners/cards/total shots are NOT candidates.
+  - FORMAT: two groups (North/South, then Grp. A/B) through 2025/2026, promotion/relegation groups from 2023/2024; 2026/2027 is a single 16-team group (in progress, confirmatory only). Per-season phase counts asserted in build_data.py.
+  - PHASE RULE (frozen): phase flagged from general.leagueName (regular / playoff_promotion / playoff_relegation / playoff / supercup); all phases are ordinary rows in every fit; no phase feature anywhere.
+  - B-TEAM RULE (frozen): B teams (Olympiacos B, PAOK B, AEK B, Panathinaikos B, Asteras B) are ordinary teams — all 528 B-involved matches are ordinary rows, no B-team feature. B teams score 1.222 / concede 1.231 vs league mean 1.152; B teams play in promotion groups (AEK B 2023/2024; Asteras B + Olympiacos B 2025/2026).
+  - X2 measured, not consumed: SL1-relegated newcomers (FotMob 135) GF gap +0.314 / GA gap -0.288 (n=8; dev n=5); Gamma/other newcomers -0.198 / +0.108 (n=25). SHRINK is the goals thin-data arm.
+  - HT goals from event times (time <= 45) on validated matches only (1,730/1,736 event matches validate against the FT score); 35 awarded 3-0/0-3 results carry no event feed. Frozen goals 1H share 0.4596 (validated subset, complete seasons, true variance ~0).
+  - Team identity is the FotMob team id (same-id renames: Kallithea/Athens Kallithea FC 7975, Iraklis/Iraklis Saloniki 8675, PAOK Thessaloniki B/FC B 1303118).
+  - Calibration is defined everywhere as actual minus predicted.

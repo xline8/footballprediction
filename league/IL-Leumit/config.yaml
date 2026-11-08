@@ -1,0 +1,34 @@
+# IL-Leumit (Israel Leumit League) — league config
+# Identity + inventory only (Step 1, 2026-11-09). Dev/virgin windows and
+# markets are frozen later in the prereg, before any fitting.
+league: IL-Leumit
+country: Israel
+fotmob_id: 128
+tier: 2
+warehouse: data_enrichment/fotmob_world/Israel/Leumit League
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+coverage:
+  matches: 1581
+  stats_pct: 0.0        # index has_stats: 0/1581
+  shotmap_pct: 0.0      # index has_shotmap: 0/1581
+format:
+  teams: 16
+  regular_rounds: [1, 30]
+  split_rounds: [31, 37]   # promotion/relegation split after round 30, phase-flagged
+feasibility:
+  goals: candidate       # G-IL, Dixon-Coles goals-only (no xG exists)
+  sot: not-buildable     # 0% stats coverage
+  corners: not-buildable # 0% stats coverage
+  cards: not-buildable   # 0% stats coverage
+  total_shots: not-buildable # 0% stats / 0% shotmap coverage
+windows:
+  dev_seed: "2021/2022"
+  dev_eval: ["2022/2023", "2023/2024", "2024/2025"]   # pooled n=888
+  virgin: "2025/2026"                                 # n=296, read once, dev-passing arms only
+  confirmatory_reserved: "2026/2027"                  # in progress, untouched
+markets:
+  goals: candidate   # G-IL only; FT presentation only (no period splits, no halves constants)
+notes:
+  - Build resumed 2026-11-09 evening (tonight wave, after Bulgaria) from the Step-1 hold checkpoint.
+  - Team identity by FotMob team ID: 2023/2024 name quirk resolved — 16 IDs; team 752833 'SC Kfar Kasem' is a spelling variant of 'SC Kafr Qasim'.
+  - EDA movers (entry seasons 2022/23–2025/26): down from Ligat ha'Al GF +0.291 / GA -0.239 vs mu (n=8); up from tier 3 GF -0.080 / GA +0.109 (n=8). X2 + SHRINK arms pre-registered from these.

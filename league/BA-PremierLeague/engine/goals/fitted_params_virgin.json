@@ -1,0 +1,136 @@
+{
+  "arm": "gate_zero",
+  "h": 0.320397931405571,
+  "rho": 0.0,
+  "mu": 1.1810813285047055,
+  "cutoff_date": "2026-08-07",
+  "training_n": 968,
+  "teams": [
+    {
+      "team_id": 10105,
+      "team_name": "FK Sarajevo",
+      "a": 0.28459073573227195,
+      "d": -0.19470853767626717,
+      "training_n": 167
+    },
+    {
+      "team_id": 10107,
+      "team_name": "Zrinjski Mostar",
+      "a": 0.3209124272265322,
+      "d": -0.5194350870898654,
+      "training_n": 167
+    },
+    {
+      "team_id": 10108,
+      "team_name": "Zeljeznicar",
+      "a": -0.03630211433232004,
+      "d": -0.10784502383962163,
+      "training_n": 168
+    },
+    {
+      "team_id": 10109,
+      "team_name": "\u010celik Zenica",
+      "a": 0.0,
+      "d": 0.0,
+      "training_n": 0
+    },
+    {
+      "team_id": 10110,
+      "team_name": "Sloboda Tuzla",
+      "a": -0.4524674333201886,
+      "d": 0.5150080990744992,
+      "training_n": 98
+    },
+    {
+      "team_id": 10111,
+      "team_name": "Posusje",
+      "a": -0.3610251475124046,
+      "d": -0.06647527046387611,
+      "training_n": 166
+    },
+    {
+      "team_id": 10112,
+      "team_name": "Siroki Brijeg",
+      "a": -0.03042891546875299,
+      "d": 0.12884859304676766,
+      "training_n": 167
+    },
+    {
+      "team_id": 10116,
+      "team_name": "Borac Banja Luka",
+      "a": 0.4336536107417065,
+      "d": -0.7509587469638844,
+      "training_n": 167
+    },
+    {
+      "team_id": 10120,
+      "team_name": "FK Leotar",
+      "a": -0.4012792270980333,
+      "d": 0.14040859591931454,
+      "training_n": 66
+    },
+    {
+      "team_id": 10122,
+      "team_name": "FK Velez Mostar",
+      "a": -0.024428603949078417,
+      "d": -0.1616751798366042,
+      "training_n": 167
+    },
+    {
+      "team_id": 10124,
+      "team_name": "Radnik Bijeljina",
+      "a": -0.2773946918989947,
+      "d": 0.07805033326691103,
+      "training_n": 102
+    },
+    {
+      "team_id": 175797,
+      "team_name": "Rudar Prijedor",
+      "a": -0.11907704608298983,
+      "d": 0.24120726475992335,
+      "training_n": 69
+    },
+    {
+      "team_id": 187917,
+      "team_name": "GOSK Gabela",
+      "a": -0.23111054354917066,
+      "d": 0.6273753360504637,
+      "training_n": 66
+    },
+    {
+      "team_id": 187923,
+      "team_name": "Igman Konjic",
+      "a": -0.19284225909619498,
+      "d": 0.4780405440583007,
+      "training_n": 99
+    },
+    {
+      "team_id": 187927,
+      "team_name": "BSK Banja Luka",
+      "a": 0.0,
+      "d": 0.0,
+      "training_n": 0
+    },
+    {
+      "team_id": 187928,
+      "team_name": "Sloga Doboj",
+      "a": -0.4496189460668341,
+      "d": 0.1089199895716912,
+      "training_n": 135
+    },
+    {
+      "team_id": 659193,
+      "team_name": "FK Zvijezda 09",
+      "a": -0.27880934731175255,
+      "d": 0.5934331516971985,
+      "training_n": 33
+    },
+    {
+      "team_id": 767370,
+      "team_name": "FK Tuzla City",
+      "a": 0.030855440596677462,
+      "d": 0.47786923264298503,
+      "training_n": 99
+    }
+  ]
+}

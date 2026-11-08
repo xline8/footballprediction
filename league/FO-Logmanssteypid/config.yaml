@@ -1,0 +1,28 @@
+# FO-Logmanssteypid (Faroe Islands Løgmanssteypið) — league config
+league: FO-Logmanssteypid
+country: Faroe Islands
+fotmob_id: 9523
+tier: cup  # NOT a league: one single-match Cup Final per year
+warehouse: data_enrichment/fotmob_world/Faroe Islands/Løgmanssteypið
+data:
+  matches: league/FO-Logmanssteypid/data/fo_logmanssteypid_matches.csv  # gitignored; regenerate via data/build_data.py
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+# Format (frozen, from payloads): ONE single-match Final per season
+# (general.leagueRoundName / matchRound "final", leagueName "Cup");
+# draw at 90' -> straight to penalties (2021 Pen 3-4, 2023 Pen 3-5,
+# 2024 Pen 3-4; no extra-time halves in any payload).
+# Phase rule: n/a — a single final per season, no phases.
+dev_period: []       # NO dev window: 1 match/season cannot support season-blocked walk-forward
+seed_period: []
+virgin: "2026"       # NOT READ for any candidate: n=1, gate arithmetic meaningless (see prereg)
+excluded: []
+# Feasibility verdict (2026-11-10): 0 PASS / 0 FAIL / 5 NOT BUILDABLE.
+# All five candidates not buildable on thinness — see prereg/PREREG_FO_LOGMANSSTEYPID.md
+# and reports/LEAGUE_VERDICT.md. No engine built, no predictions issued.
+halves_constants: {}  # none frozen: no 1H splits exist anywhere (no stats, no goal-minute events)
+markets:
+  goals: G-FOL        # NOT BUILDABLE — 6 matches total, 1/season; scores only
+  sot: S-FOL          # NOT BUILDABLE — no SOT source in any payload (stats 0/6, shotmap 0/6)
+  corners: C-FOL      # NOT BUILDABLE — no corners source in any payload (stats 0/6)
+  cards: K-FOL        # NOT BUILDABLE — no card data of any kind; no referee 0/6
+  total_shots: T-FOL  # NOT BUILDABLE — no shots source in any payload (stats 0/6, shotmap empty)

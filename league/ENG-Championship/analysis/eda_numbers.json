@@ -1,0 +1,458 @@
+{
+ "n": 2963,
+ "seasons": [
+  "2021/2022",
+  "2022/2023",
+  "2023/2024",
+  "2024/2025",
+  "2025/2026",
+  "2026/2027"
+ ],
+ "per_season": {
+  "2021/2022": {
+   "n": 557,
+   "goals": 2.504,
+   "home_goals": 1.409,
+   "away_goals": 1.095,
+   "sot": 7.903,
+   "corners": 9.738,
+   "shots": 23.104,
+   "yellows_stats": 3.695,
+   "yellows_events": 3.718,
+   "reds": 0.126,
+   "xg": 2.417,
+   "cov_stats": 100,
+   "cov_half": 3.1,
+   "cov_shotmap": 100,
+   "cov_ref": 48.3,
+   "cov_touches": 79.2,
+   "cov_xg": 100.0,
+   "phases": {
+    "regular": 552,
+    "playoff": 5
+   }
+  },
+  "2022/2023": {
+   "n": 557,
+   "goals": 2.424,
+   "home_goals": 1.321,
+   "away_goals": 1.102,
+   "sot": 7.546,
+   "corners": 9.986,
+   "shots": 23.221,
+   "yellows_stats": 3.862,
+   "yellows_events": 3.885,
+   "reds": 0.117,
+   "xg": 2.411,
+   "cov_stats": 100,
+   "cov_half": 19.6,
+   "cov_shotmap": 99.8,
+   "cov_ref": 99.8,
+   "cov_touches": 78.5,
+   "cov_xg": 100.0,
+   "phases": {
+    "regular": 552,
+    "playoff": 5
+   }
+  },
+  "2023/2024": {
+   "n": 557,
+   "goals": 2.673,
+   "home_goals": 1.481,
+   "away_goals": 1.192,
+   "sot": 8.393,
+   "corners": 10.614,
+   "shots": 25.02,
+   "yellows_stats": 4.025,
+   "yellows_events": 4.038,
+   "reds": 0.102,
+   "xg": 2.526,
+   "cov_stats": 100,
+   "cov_half": 100,
+   "cov_shotmap": 100,
+   "cov_ref": 100.0,
+   "cov_touches": 100.0,
+   "cov_xg": 100.0,
+   "phases": {
+    "regular": 552,
+    "playoff": 5
+   }
+  },
+  "2024/2025": {
+   "n": 557,
+   "goals": 2.454,
+   "home_goals": 1.433,
+   "away_goals": 1.022,
+   "sot": 7.7,
+   "corners": 10.153,
+   "shots": 23.718,
+   "yellows_stats": 3.783,
+   "yellows_events": 3.817,
+   "reds": 0.117,
+   "xg": 2.469,
+   "cov_stats": 100,
+   "cov_half": 100,
+   "cov_shotmap": 100,
+   "cov_ref": 100.0,
+   "cov_touches": 100.0,
+   "cov_xg": 100.0,
+   "phases": {
+    "regular": 552,
+    "playoff": 5
+   }
+  },
+  "2025/2026": {
+   "n": 555,
+   "goals": 2.596,
+   "home_goals": 1.395,
+   "away_goals": 1.202,
+   "sot": 8.142,
+   "corners": 10.308,
+   "shots": 25.22,
+   "yellows_stats": 3.759,
+   "yellows_events": 3.741,
+   "reds": 0.101,
+   "xg": 2.599,
+   "cov_stats": 100,
+   "cov_half": 99.5,
+   "cov_shotmap": 99.5,
+   "cov_ref": 97.3,
+   "cov_touches": 100.0,
+   "cov_xg": 100.0,
+   "phases": {
+    "regular": 552,
+    "playoff": 3
+   }
+  },
+  "2026/2027": {
+   "n": 180,
+   "goals": 2.956,
+   "home_goals": 1.656,
+   "away_goals": 1.3,
+   "sot": 8.633,
+   "corners": 10.361,
+   "shots": 27.2,
+   "yellows_stats": 3.744,
+   "yellows_events": 3.922,
+   "reds": 0.117,
+   "xg": 2.93,
+   "cov_stats": 100,
+   "cov_half": 100,
+   "cov_shotmap": 100,
+   "cov_ref": 100.0,
+   "cov_touches": 100.0,
+   "cov_xg": 100.0,
+   "phases": {
+    "regular": 180,
+    "playoff": 0
+   }
+  }
+ },
+ "yellows_stats_vs_events_exact": 91.3,
+ "goals_per_xg": {
+  "2021/2022": 1.036,
+  "2022/2023": 1.005,
+  "2023/2024": 1.058,
+  "2024/2025": 0.994,
+  "2025/2026": 0.999,
+  "2026/2027": 1.009
+ },
+ "reliability": {
+  "goals_for": [
+   0.737,
+   44
+  ],
+  "sot_for": [
+   0.688,
+   44
+  ],
+  "corners_for": [
+   0.517,
+   44
+  ],
+  "shots_for": [
+   0.712,
+   44
+  ],
+  "yellows_for": [
+   -0.01,
+   44
+  ],
+  "xg_for": [
+   0.821,
+   44
+  ],
+  "touches_for": [
+   0.841,
+   44
+  ],
+  "bigchance_for": [
+   0.811,
+   44
+  ],
+  "possession": [
+   0.868,
+   44
+  ]
+ },
+ "sp_share_rel": [
+  0.721,
+  44
+ ],
+ "xg_per_shot_rel": [
+  0.529,
+  44
+ ],
+ "xgot_rel_era": [
+  0.344,
+  30
+ ],
+ "xgot_coverage": {
+  "2021/2022": 0.4,
+  "2022/2023": 0.4,
+  "2023/2024": 0.4,
+  "2024/2025": 93.7,
+  "2025/2026": 95.0,
+  "2026/2027": 95.3
+ },
+ "half_shares": {
+  "goals_events": {
+   "n": 2743,
+   "share": 0.4453,
+   "obs_sd": 0.3457
+  },
+  "sot": {
+   "n": 1972,
+   "share": 0.4548,
+   "obs_sd": 0.1905,
+   "true_sd": 0.0
+  },
+  "corners": {
+   "n": 1971,
+   "share": 0.4638,
+   "obs_sd": 0.1729,
+   "true_sd": 0.0498
+  },
+  "shots": {
+   "n": 1972,
+   "share": 0.4573,
+   "obs_sd": 0.1064,
+   "true_sd": 0.0264
+  },
+  "yellows": {
+   "n": 1908,
+   "share": 0.3109,
+   "obs_sd": 0.282,
+   "true_sd": 0.0799
+  }
+ },
+ "ref_rel": [
+  0.25949604702129014,
+  53
+ ],
+ "n_refs_ge10": 53,
+ "team_gd_means": {
+  "Leeds United": 1.116,
+  "Burnley": 0.897,
+  "Ipswich Town": 0.739,
+  "Southampton": 0.609,
+  "Sheffield United": 0.422,
+  "Leicester City": 0.413,
+  "Middlesbrough": 0.355,
+  "Coventry City": 0.349,
+  "Sunderland": 0.182,
+  "West Bromwich Albion": 0.17,
+  "Norwich City": 0.159,
+  "Millwall": 0.049,
+  "Wrexham": 0.033,
+  "Luton Town": 0.014,
+  "Swansea City": -0.061,
+  "Blackburn Rovers": -0.069,
+  "Hull City": -0.077,
+  "Stoke City": -0.086,
+  "Bristol City": -0.097,
+  "Watford": -0.136,
+  "Derby County": -0.157,
+  "Birmingham City": -0.181,
+  "Huddersfield Town": -0.191,
+  "Queens Park Rangers": -0.216,
+  "Portsmouth": -0.243,
+  "Preston North End": -0.261,
+  "Blackpool": -0.304,
+  "Oxford United": -0.326,
+  "Cardiff City": -0.387,
+  "Charlton Athletic": -0.393,
+  "Plymouth Argyle": -0.522,
+  "Reading": -0.598,
+  "Sheffield Wednesday": -0.674,
+  "Rotherham United": -0.685
+ },
+ "team_gd_spread_sd": 0.427,
+ "home_edge_complete": 0.285,
+ "ou25_rate_complete": 47.5,
+ "home_win_rate_complete": 43.4,
+ "movers": {
+  "2022/2023": {
+   "from_PL": [
+    "Burnley",
+    "Norwich City",
+    "Watford"
+   ],
+   "from_L1": [
+    "Rotherham United",
+    "Sunderland",
+    "Wigan Athletic"
+   ],
+   "other": [],
+   "perf": {
+    "from_PL": {
+     "teams": 3,
+     "team_matches": 138,
+     "gd_per_match": 0.42,
+     "gf_per_match": 1.449
+    },
+    "from_L1": {
+     "teams": 3,
+     "team_matches": 140,
+     "gd_per_match": -0.186,
+     "gf_per_match": 1.121
+    }
+   }
+  },
+  "2023/2024": {
+   "from_PL": [
+    "Leeds United",
+    "Leicester City",
+    "Southampton"
+   ],
+   "from_L1": [
+    "Ipswich Town",
+    "Plymouth Argyle",
+    "Sheffield Wednesday"
+   ],
+   "other": [],
+   "perf": {
+    "from_PL": {
+     "teams": 3,
+     "team_matches": 144,
+     "gd_per_match": 0.806,
+     "gf_per_match": 1.84
+    },
+    "from_L1": {
+     "teams": 3,
+     "team_matches": 138,
+     "gd_per_match": 0,
+     "gf_per_match": 1.413
+    }
+   }
+  },
+  "2024/2025": {
+   "from_PL": [
+    "Burnley",
+    "Luton Town",
+    "Sheffield United"
+   ],
+   "from_L1": [
+    "Derby County",
+    "Oxford United",
+    "Portsmouth"
+   ],
+   "other": [],
+   "perf": {
+    "from_PL": {
+     "teams": 3,
+     "team_matches": 141,
+     "gd_per_match": 0.433,
+     "gf_per_match": 1.305
+    },
+    "from_L1": {
+     "teams": 3,
+     "team_matches": 138,
+     "gd_per_match": -0.268,
+     "gf_per_match": 1.123
+    }
+   }
+  },
+  "2025/2026": {
+   "from_PL": [
+    "Ipswich Town",
+    "Leicester City",
+    "Southampton"
+   ],
+   "from_L1": [
+    "Birmingham City",
+    "Charlton Athletic",
+    "Wrexham"
+   ],
+   "other": [],
+   "perf": {
+    "from_PL": {
+     "teams": 3,
+     "team_matches": 138,
+     "gd_per_match": 0.355,
+     "gf_per_match": 1.594
+    },
+    "from_L1": {
+     "teams": 3,
+     "team_matches": 138,
+     "gd_per_match": -0.065,
+     "gf_per_match": 1.232
+    }
+   }
+  },
+  "2026/2027": {
+   "from_PL": [
+    "Burnley",
+    "West Ham United",
+    "Wolverhampton Wanderers"
+   ],
+   "from_L1": [
+    "Bolton Wanderers",
+    "Cardiff City",
+    "Lincoln City"
+   ],
+   "other": [],
+   "perf": {
+    "from_PL": {
+     "teams": 3,
+     "team_matches": 45,
+     "gd_per_match": 0.289,
+     "gf_per_match": 1.889
+    },
+    "from_L1": {
+     "teams": 3,
+     "team_matches": 45,
+     "gd_per_match": -0.444,
+     "gf_per_match": 1.378
+    }
+   }
+  }
+ },
+ "mover_perf_from_PL": {
+  "team_matches": 606,
+  "gd_per_match": 0.49,
+  "gf_per_match": 1.574
+ },
+ "mover_perf_from_L1": {
+  "team_matches": 599,
+  "gd_per_match": -0.154,
+  "gf_per_match": 1.234
+ },
+ "league_mu_complete": 1.265,
+ "mover_deltas": {
+  "from_PL": {
+   "n_team_matches": 606,
+   "gf": 1.574,
+   "ga": 1.084,
+   "gf_delta_vs_mu": 0.309,
+   "ga_delta_vs_mu": -0.181
+  },
+  "from_L1": {
+   "n_team_matches": 599,
+   "gf": 1.234,
+   "ga": 1.387,
+   "gf_delta_vs_mu": -0.031,
+   "ga_delta_vs_mu": 0.122
+  }
+ }
+}

@@ -1,0 +1,33 @@
+# RO-LigaI (Romania) — league config
+league: RO-LigaI
+country: Romania
+fotmob_id: 189
+tier: 1
+warehouse: data_enrichment/fotmob_world/Romania/Liga I
+data:
+  matches: league/RO-LigaI/data/ro_matches.csv
+  team_matches: league/RO-LigaI/data/ro_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]  # walk-forward, season-blocked
+virgin_primary: "2025/2026"        # complete season, n=315 — read ONCE per candidate
+virgin_confirmatory: "2026/2027"   # in progress (119 played at pull); reserved, NOT read in this build
+halves_constants:                  # frozen, split era pooled 2025/2026+2026/2027 (n=434), presentation only
+  goals_1h_share: 0.453
+  sot_1h_share: 0.455
+  corners_1h_share: 0.477
+  total_shots_1h_share: 0.459
+  yellow_cards_1h_share: 0.330
+markets:
+  goals: G-RO        # DC goals-only; arms: Gate Zero, SHRINK
+  sot: S-RO          # v5 pattern; arms: Gate Zero, RS; primary line 8.5
+  corners: C-RO      # corners pattern, possession-only Gate Zero; primary line 8.5
+  cards: K-RO        # event-unified yellows; arms: Gate Zero, X8 referee; primary line 4.5
+  total_shots: NOT_BUILDABLE  # definition break at the virgin boundary (MODEL_DESIGN)
+notes:
+  - FORMAT: every season = regular 240 (16 teams, 30 rounds) + championship group 30 (top 6) + relegation group 45 (bottom 10); ECL playoff (1-2 one-legged knockout ties) EXCLUDED from modelling (7 matches; the only extra-time matches).
+  - No xG and no shotmap shots in any season (0/1701) — goals are goals-only; X3/X4/X6 dropped on data absence.
+  - Stats feed is minimal (possession, total_shots, SOT, corners) until 2024/2025 and rich from 2025/2026; period splits exist only from 2025/2026.
+  - Cards target is event-unified yellows for all eras: stats feed exists only 2025/2026+ and undercounts events by ~0.21/match where both exist (artefact measured, EDA F12).
+  - Total shots raw series breaks +44% at 2025/2026 (blocked shots enter the count); T-RO not buildable across the boundary.
+  - Team identity keyed by FotMob team id (26 ids); names vary cosmetically (diacritics from 2026/2027; id 9723 FC FCSB -> FCSB).
+  - Predictions-only: no RO odds/settlement source in-system.

@@ -1,0 +1,34 @@
+# GR-SuperLeague (Greece) — Stage 1 league configuration
+league: GR-SuperLeague
+country: Greece
+fotmob_id: 135
+tier: 1
+warehouse: data_enrichment/fotmob_world/Greece/Super League 1
+data:
+  matches: league/GR-SuperLeague/data/gr_matches.csv
+  team_matches: league/GR-SuperLeague/data/gr_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.4528
+  sot_1h_share: 0.4530
+  corners_1h_share: 0.4862
+  total_shots_1h_share: 0.4611
+  yellow_cards_1h_share: 0.3522
+markets:
+  goals: G-GR
+  sot: S-GR
+  corners: C-GR
+  cards: K-GR
+  total_shots: T-GR
+notes:
+  - FORMAT: 14 teams every season; regular season 182 matches (26 rounds, double RR), then play-off groups. Old format (2021/2022-2023/2024): championship 30 (6 teams double RR) + relegation 28 (8 teams single RR) = 240. New format (2024/2025 onward): championship 12 (4 teams) + conference 12 (places 5-8) + relegation 30 (6 teams double RR) = 236. 2026/2027 partial (69, regular only so far).
+  - PHASE RULE (frozen): phase flagged from general.leagueName (regular / playoff_championship / playoff_conference / playoff_relegation); all phases are ordinary rows in every fit; no phase feature anywhere.
+  - Super League 2 (league_id 8815, 1,935 rows) IS present in the warehouse but contains non-promotable B teams; no SL2 corpus is built. X2 measured in-corpus (9 newcomers, GF gap -0.157, GA gap +0.283), not consumed; SHRINK is the goals thin-data arm.
+  - xG era: stats-feed xG and shotmap are full only from 2025/2026 (the virgin season) with 18 stray matches before; X3 dropped on reliability (0.193) + era, X4 dropped on era despite reliability 0.665, X6 dropped (0.264). Gate Zero's X1 blend runs effectively goals-only in dev and the virgin fit.
+  - Referee X8 DROPPED at design: split-half reliability 0.262 over 15 qualifying referees (117 distinct named; random re-split -0.07), coverage 0.0% in the seed season. K-GR is Gate Zero only.
+  - Feed artefact: 2021/2022 total_shots is a different measurement (mean 16.89, on-target rate 0.510 vs 21.96-24.16 / 0.315-0.362 later); the shots primary line (22.5) is selected on the scored dev seasons 2022/2023-2024/2025.
+  - Cards: stats-vs-events artefact present (exact agreement 81.4%, mean stats-events -0.250); unified target = stats feed, events fallback (in 2021/2022 the stats card is absent in 239/240 matches).
+  - Calibration is defined everywhere as actual minus predicted.

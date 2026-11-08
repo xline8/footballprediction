@@ -1,0 +1,78 @@
+{
+  "protocol": "C-IS frozen virgin",
+  "virgin_season": "2026",
+  "n": 162,
+  "read_arms": [
+    "gate_zero",
+    "x7"
+  ],
+  "dev_pass": {
+    "gate_zero": true,
+    "x7": true
+  },
+  "arms": {
+    "gate_zero": {
+      "n": 162,
+      "logloss": {
+        "10.5": 0.6370208128100225,
+        "11.5": 0.6985162575896285,
+        "12.5": 0.7166895690623664
+      },
+      "calibration_pp": -2.598412734759013,
+      "calibration_se_pp": 3.9516549206968685,
+      "actual_over_rate_pp": 59.876543209876544,
+      "mean_pred_over_pp": 57.27813047511753
+    },
+    "x7": {
+      "n": 162,
+      "logloss": {
+        "10.5": 0.6069733054591606,
+        "11.5": 0.6744219534014059,
+        "12.5": 0.6879325184474882
+      },
+      "calibration_pp": -2.3525222883239847,
+      "calibration_se_pp": 3.8633098860564834,
+      "actual_over_rate_pp": 59.876543209876544,
+      "mean_pred_over_pp": 57.524020921552555
+    }
+  },
+  "baselines": {
+    "league_base_rate": {
+      "n": 162,
+      "logloss": {
+        "10.5": 0.6211871489622502,
+        "11.5": 0.6892939191680918,
+        "12.5": 0.6977009711746047
+      },
+      "calibration_pp": -8.847736625514402,
+      "calibration_se_pp": 3.8629100270604586,
+      "actual_over_rate_pp": 59.876543209876544,
+      "mean_pred_over_pp": 51.028806584362144
+    },
+    "naive_trailing_10": {
+      "n": 162,
+      "logloss": {
+        "10.5": 0.776263342386365,
+        "11.5": 0.7620110673968011,
+        "12.5": 0.7125836337864875
+      },
+      "calibration_pp": -21.805377980295482,
+      "calibration_se_pp": 3.830145320653721,
+      "actual_over_rate_pp": 59.876543209876544,
+      "mean_pred_over_pp": 38.07116522958106
+    }
+  },
+  "legs": {
+    "gate_zero": {
+      "ll": false,
+      "calibration": true,
+      "dev_sign": true
+    },
+    "x7": {
+      "ll": true,
+      "calibration": true,
+      "dev_sign": true
+    }
+  },
+  "shipped_arm": "x7"
+}

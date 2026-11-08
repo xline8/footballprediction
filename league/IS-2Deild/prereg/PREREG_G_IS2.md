@@ -1,0 +1,5 @@
+# Pre-registration — G-IS2
+
+Frozen before fitting. Candidate G-IS2 uses Gate Zero, SHRINK, and X2 under the DC architecture in `analysis/MODEL_DESIGN.md`; seed 2021, dev seasons 2022–2025 (n=528), virgin 2026 (n=132). The pooled dev OU2.5 over-rate from the CSV is **69.51%**; the virgin fit uses every match before the first 2026 match, and virgin climatology pools 2021–2025.
+
+Dev gate — pooled dev 1X2 LL and RPS must beat climatology AND OU2.5 LL must beat the base-rate baseline, else the arm is dead. Virgin legs — (i) LL: arm virgin 1X2 LL ≤ Gate Zero's AND ≤ climatology's; (ii) calibration: |mean predicted − actual| ≤ 1.0pp pooled for home-win rate and OU2.5 over-rate, SEs reported, breach within 1 SE = PROVISIONAL PASS, beyond = FAIL; (iii) per-season sign check on dev (arm LL ≤ Gate Zero LL in at least half the dev seasons) for variants. Both-pass rule: lowest pooled virgin 1X2 LL among passing arms ships; ties go Gate Zero, then SHRINK, then X2. If Gate Zero fails dev, variants are moot, verdict FAIL, and virgin is not read. Gate Zero is exempt from the variant sign check.

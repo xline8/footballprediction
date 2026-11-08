@@ -1,0 +1,32 @@
+league: CL-LigaDePrimera
+country: Chile
+fotmob_id: 273
+tier: 1
+warehouse_root: ~/workspace/footballprediction
+data:
+  matches: league/CL-LigaDePrimera/data/cl_matches.csv
+  team_matches: league/CL-LigaDePrimera/data/cl_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period: ["2022", "2023", "2024"]
+warmup: "2021"
+virgin_primary: "2025"
+virgin_confirmatory: "2026"
+halves_constants:
+  goals_1h_share: 0.4400
+  sot_1h_share: 0.4456
+  corners_1h_share: 0.4644
+  total_shots_1h_share: 0.4535
+  yellow_cards_1h_share: 0.3818
+markets:
+  goals: G-CL
+  sot: S-CL
+  corners: C-CL
+  cards: K-CL
+  total_shots: T-CL
+notes:
+  - "FORMAT: calendar-year single tournament, double round-robin (17 teams/272 matches in 2021; 16 teams/240 from 2022); no Apertura/Clausura or play-off phase exists in the warehouse era; phase=regular for all rows."
+  - "No xG and no shotmap in any season: goals model is goals-only; X1/X3/X4/X6 dropped."
+  - "CARDS: stats yellow_cards undercounts event yellows in every season (-1.20 to -0.16 per match); target frozen as event-unified yellows. Event feed carries plain yellows in all seasons."
+  - "Period splits exist only from 2023; halves are frozen constants only (goals constant from goal-event times, all seasons)."
+  - "Team ids stable; four ids carry multiple name spellings, canonicalised by id in the builder."
+  - "Calibration convention: actual minus predicted."

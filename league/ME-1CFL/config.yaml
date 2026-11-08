@@ -1,0 +1,27 @@
+league: ME-1CFL
+country: Montenegro
+fotmob_id: 232
+tier: 1
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period:
+  seed: 2021/2022
+  eval: [2022/2023, 2023/2024, 2024/2025]
+  n: 539
+virgin_primary: 2025/2026
+virgin_n: 180
+confirmatory_reserved: 2026/2027
+markets:
+  goals: G-ME
+halves:
+  constant_1h_goal_share: 0.426643
+  presentation_only: true
+notes:
+  - Scores-only scope; stats, shotmap, lineups and referee are absent.
+  - 2021/2022 played n=179: one round-36 fixture (Sutjeska vs Mornar)
+    never started and is excluded, not counted as 0-0.
+  - 2024/2025 n=179: round 36 carries 4 matches; the Buducnost vs
+    Decic fixture is absent from the warehouse index entirely.
+  - Single round-robin phase, 10 teams x 36 rounds; no split group,
+    championship/relegation round, or playoff phase exists.
+  - 2026/2027 is in progress (73 rows, rounds 1-15, round 10 short
+    two fixtures, presumably postponed); reserved as confirmatory.

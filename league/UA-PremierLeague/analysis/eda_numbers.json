@@ -1,0 +1,561 @@
+{
+ "seasons": {
+  "2021/2022": {
+   "n": 143,
+   "dates": [
+    "2021-07-23",
+    "2021-12-12"
+   ],
+   "teams_by_id": 16,
+   "teams_by_name": 18,
+   "rounds": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18"
+   ],
+   "has_stats": 137,
+   "has_events": 143,
+   "has_splits": 0,
+   "referee_nonempty": 0,
+   "cancelled": 0,
+   "not_finished": 0,
+   "xg_rows": 0,
+   "touches_rows": 0,
+   "stats_cards_rows": 0,
+   "zero_stub_rows": 0,
+   "goals_pg": 2.664335664335664,
+   "home_win_rate": 0.4405594405594406,
+   "ou25_rate": 0.4755244755244755,
+   "sot_pg": 7.868613138686132,
+   "corners_pg": 9.124087591240876,
+   "shots_pg": 16.62043795620438,
+   "ev_yellow_pg": 5.146853146853147,
+   "goals_1h_share_events": 0.4461942257217848
+  },
+  "2022/2023": {
+   "n": 240,
+   "dates": [
+    "2022-08-23",
+    "2023-06-04"
+   ],
+   "teams_by_id": 16,
+   "teams_by_name": 18,
+   "rounds": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+    "21",
+    "22",
+    "23",
+    "24",
+    "25",
+    "26",
+    "27",
+    "28",
+    "29",
+    "30"
+   ],
+   "has_stats": 240,
+   "has_events": 240,
+   "has_splits": 0,
+   "referee_nonempty": 0,
+   "cancelled": 0,
+   "not_finished": 0,
+   "xg_rows": 0,
+   "touches_rows": 0,
+   "stats_cards_rows": 0,
+   "zero_stub_rows": 9,
+   "goals_pg": 2.4458333333333333,
+   "home_win_rate": 0.3958333333333333,
+   "ou25_rate": 0.4625,
+   "sot_pg": 6.325,
+   "corners_pg": 9.291666666666666,
+   "shots_pg": 14.429166666666667,
+   "ev_yellow_pg": 4.691666666666666,
+   "goals_1h_share_events": 0.4293015332197615
+  },
+  "2023/2024": {
+   "n": 240,
+   "dates": [
+    "2023-07-28",
+    "2024-05-25"
+   ],
+   "teams_by_id": 16,
+   "teams_by_name": 17,
+   "rounds": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+    "21",
+    "22",
+    "23",
+    "24",
+    "25",
+    "26",
+    "27",
+    "28",
+    "29",
+    "30"
+   ],
+   "has_stats": 236,
+   "has_events": 240,
+   "has_splits": 0,
+   "referee_nonempty": 0,
+   "cancelled": 0,
+   "not_finished": 0,
+   "xg_rows": 0,
+   "touches_rows": 0,
+   "stats_cards_rows": 0,
+   "zero_stub_rows": 6,
+   "goals_pg": 2.4875,
+   "home_win_rate": 0.3875,
+   "ou25_rate": 0.44583333333333336,
+   "sot_pg": 7.088983050847458,
+   "corners_pg": 9.088983050847459,
+   "shots_pg": 15.165254237288135,
+   "ev_yellow_pg": 4.641666666666667,
+   "goals_1h_share_events": 0.45226130653266333
+  },
+  "2024/2025": {
+   "n": 240,
+   "dates": [
+    "2024-08-03",
+    "2025-05-25"
+   ],
+   "teams_by_id": 16,
+   "teams_by_name": 17,
+   "rounds": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+    "21",
+    "22",
+    "23",
+    "24",
+    "25",
+    "26",
+    "27",
+    "28",
+    "29",
+    "30"
+   ],
+   "has_stats": 238,
+   "has_events": 240,
+   "has_splits": 0,
+   "referee_nonempty": 0,
+   "cancelled": 0,
+   "not_finished": 0,
+   "xg_rows": 0,
+   "touches_rows": 0,
+   "stats_cards_rows": 0,
+   "zero_stub_rows": 6,
+   "goals_pg": 2.254166666666667,
+   "home_win_rate": 0.4,
+   "ou25_rate": 0.4041666666666667,
+   "sot_pg": 5.773109243697479,
+   "corners_pg": 8.214285714285714,
+   "shots_pg": 12.38655462184874,
+   "ev_yellow_pg": 3.95,
+   "goals_1h_share_events": 0.4510166358595194
+  },
+  "2025/2026": {
+   "n": 240,
+   "dates": [
+    "2025-08-01",
+    "2026-05-24"
+   ],
+   "teams_by_id": 16,
+   "teams_by_name": 16,
+   "rounds": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+    "21",
+    "22",
+    "23",
+    "24",
+    "25",
+    "26",
+    "27",
+    "28",
+    "29",
+    "30"
+   ],
+   "has_stats": 224,
+   "has_events": 239,
+   "has_splits": 0,
+   "referee_nonempty": 0,
+   "cancelled": 0,
+   "not_finished": 0,
+   "xg_rows": 0,
+   "touches_rows": 0,
+   "stats_cards_rows": 0,
+   "zero_stub_rows": 1,
+   "goals_pg": 2.5708333333333333,
+   "home_win_rate": 0.375,
+   "ou25_rate": 0.4708333333333333,
+   "sot_pg": 7.214285714285714,
+   "corners_pg": 9.433035714285714,
+   "shots_pg": 15.267857142857142,
+   "ev_yellow_pg": 3.6527196652719667,
+   "goals_1h_share_events": 0.44408427876823336
+  },
+  "2026/2027": {
+   "n": 88,
+   "dates": [
+    "2026-07-31",
+    "2026-11-08"
+   ],
+   "teams_by_id": 16,
+   "teams_by_name": 16,
+   "rounds": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12"
+   ],
+   "has_stats": 86,
+   "has_events": 88,
+   "has_splits": 0,
+   "referee_nonempty": 0,
+   "cancelled": 0,
+   "not_finished": 0,
+   "xg_rows": 0,
+   "touches_rows": 0,
+   "stats_cards_rows": 0,
+   "zero_stub_rows": 0,
+   "goals_pg": 2.3636363636363638,
+   "home_win_rate": 0.42045454545454547,
+   "ou25_rate": 0.4772727272727273,
+   "sot_pg": 6.616279069767442,
+   "corners_pg": 8.686046511627907,
+   "shots_pg": 16.22093023255814,
+   "ev_yellow_pg": 4.136363636363637,
+   "goals_1h_share_events": 0.42788461538461536
+  }
+ },
+ "ids_with_multiple_names": {
+  "6072": [
+   "FC Oleksandriya",
+   "FC Olexandriya"
+  ],
+  "8666": [
+   "Chornomorets Odesa",
+   "Chornomorets Odessa"
+  ],
+  "949030": [
+   "FC Kharkiv",
+   "Metalist 1925"
+  ]
+ },
+ "names_with_multiple_ids": {},
+ "n_team_ids": 27,
+ "reliability": {
+  "all": {
+   "goals": {
+    "for_r": 0.9190253933338197,
+    "for_n_teams": 24,
+    "against_r": 0.6412730552436826,
+    "against_n_teams": 24
+   },
+   "sot": {
+    "for_r": 0.8535198714816562,
+    "for_n_teams": 24,
+    "against_r": 0.8269693687961029,
+    "against_n_teams": 24
+   },
+   "corners": {
+    "for_r": 0.8783352196333553,
+    "for_n_teams": 24,
+    "against_r": 0.649642615186372,
+    "against_n_teams": 24
+   },
+   "shots": {
+    "for_r": 0.8703760215175385,
+    "for_n_teams": 24,
+    "against_r": 0.874146013601041,
+    "against_n_teams": 24
+   },
+   "yellow_stats": {
+    "for_r": null,
+    "for_n_teams": 0,
+    "against_r": null,
+    "against_n_teams": 0
+   },
+   "yellow_events": {
+    "for_r": 0.7017042880453618,
+    "for_n_teams": 24,
+    "against_r": 0.6778578072423107,
+    "against_n_teams": 24
+   },
+   "touches": {
+    "for_r": null,
+    "for_n_teams": 0,
+    "against_r": null,
+    "against_n_teams": 0
+   },
+   "big_chance": {
+    "for_r": null,
+    "for_n_teams": 0,
+    "against_r": null,
+    "against_n_teams": 0
+   },
+   "possession": {
+    "for_r": 0.9096958297253573,
+    "for_n_teams": 24,
+    "against_r": null,
+    "against_n_teams": 0
+   },
+   "xg": {
+    "for_r": null,
+    "for_n_teams": 0,
+    "against_r": null,
+    "against_n_teams": 0
+   }
+  },
+  "fit_era_2022plus": {
+   "goals": {
+    "for_r": 0.8582971786479411,
+    "for_n_teams": 24,
+    "against_r": 0.7209768361795472,
+    "against_n_teams": 24
+   },
+   "sot": {
+    "for_r": 0.8065866004157248,
+    "for_n_teams": 24,
+    "against_r": 0.772594298766612,
+    "against_n_teams": 24
+   },
+   "corners": {
+    "for_r": 0.7171103712626306,
+    "for_n_teams": 24,
+    "against_r": 0.5855498873295736,
+    "against_n_teams": 24
+   },
+   "shots": {
+    "for_r": 0.808461034122539,
+    "for_n_teams": 24,
+    "against_r": 0.869341627940537,
+    "against_n_teams": 24
+   },
+   "yellow_stats": {
+    "for_r": null,
+    "for_n_teams": 0,
+    "against_r": null,
+    "against_n_teams": 0
+   },
+   "yellow_events": {
+    "for_r": 0.4260093370923326,
+    "for_n_teams": 24,
+    "against_r": 0.6017060565837542,
+    "against_n_teams": 24
+   },
+   "touches": {
+    "for_r": null,
+    "for_n_teams": 0,
+    "against_r": null,
+    "against_n_teams": 0
+   },
+   "big_chance": {
+    "for_r": null,
+    "for_n_teams": 0,
+    "against_r": null,
+    "against_n_teams": 0
+   },
+   "possession": {
+    "for_r": 0.8651852589144092,
+    "for_n_teams": 24,
+    "against_r": null,
+    "against_n_teams": 0
+   },
+   "xg": {
+    "for_r": null,
+    "for_n_teams": 0,
+    "against_r": null,
+    "against_n_teams": 0
+   }
+  },
+  "dev_block_2022_2025": {
+   "goals": {
+    "for_r": 0.7731394567719763,
+    "for_n_teams": 21,
+    "against_r": 0.5123465765999343,
+    "against_n_teams": 21
+   },
+   "sot": {
+    "for_r": 0.9481638915540318,
+    "for_n_teams": 21,
+    "against_r": 0.7447285356956715,
+    "against_n_teams": 21
+   },
+   "corners": {
+    "for_r": 0.8670011871553956,
+    "for_n_teams": 21,
+    "against_r": 0.6325263742538222,
+    "against_n_teams": 21
+   },
+   "shots": {
+    "for_r": 0.8795927388518702,
+    "for_n_teams": 21,
+    "against_r": 0.7268380050119415,
+    "against_n_teams": 21
+   },
+   "yellow_stats": {
+    "for_r": null,
+    "for_n_teams": 0,
+    "against_r": null,
+    "against_n_teams": 0
+   },
+   "yellow_events": {
+    "for_r": 0.19777524995229992,
+    "for_n_teams": 21,
+    "against_r": 0.09465229750364094,
+    "against_n_teams": 21
+   },
+   "touches": {
+    "for_r": null,
+    "for_n_teams": 0,
+    "against_r": null,
+    "against_n_teams": 0
+   },
+   "big_chance": {
+    "for_r": null,
+    "for_n_teams": 0,
+    "against_r": null,
+    "against_n_teams": 0
+   },
+   "possession": {
+    "for_r": 0.8730752969456941,
+    "for_n_teams": 21,
+    "against_r": null,
+    "against_n_teams": 0
+   },
+   "xg": {
+    "for_r": null,
+    "for_n_teams": 0,
+    "against_r": null,
+    "against_n_teams": 0
+   }
+  }
+ },
+ "referee_distinct": 0,
+ "referee_top": [],
+ "dev_lines": {
+  "n_stats": 474,
+  "sot": {
+   "7.5": 0.3670886075949367,
+   "8.5": 0.25316455696202533,
+   "9.5": 0.16666666666666666
+  },
+  "corners": {
+   "8.5": 0.5168776371308017,
+   "9.5": 0.41139240506329117,
+   "10.5": 0.31223628691983124
+  },
+  "shots": {
+   "23.5": 0.06329113924050633,
+   "24.5": 0.05063291139240506,
+   "25.5": 0.04430379746835443,
+   "26.5": 0.0379746835443038
+  },
+  "cards_ev": {
+   "3.5": 0.6075949367088608,
+   "4.5": 0.42616033755274263,
+   "5.5": 0.27637130801687765
+  },
+  "cards_stats_n": 0
+ },
+ "virgin_n": 240,
+ "virgin_stats_n": 224
+}

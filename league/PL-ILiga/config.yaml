@@ -1,0 +1,27 @@
+# PL-ILiga (Poland) — Stage 1 league configuration
+league: PL-ILiga
+country: Poland
+fotmob_id: 197
+tier: 2
+warehouse: data_enrichment/fotmob_world/Poland/I Liga
+data:
+  matches: league/PL-ILiga/data/iliga_matches.csv
+  team_matches: league/PL-ILiga/data/iliga_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.457
+markets:
+  goals: G-PL-ILiga
+  sot: NOT_BUILDABLE — stats 0/1,671 and shotmap 0/1,671
+  corners: NOT_BUILDABLE — stats 0/1,671
+  cards: NOT_BUILDABLE — no Yellow source; stats absent and events only Red/YellowRed
+  total_shots: NOT_BUILDABLE — stats and shotmap absent
+notes:
+  - FORMAT: 18 teams, 34 regular rounds, 306 regular matches plus 3 promotion-playoff matches in complete seasons.
+  - PHASE RULE: rounds 1–34 are regular; 1/2 and final are playoff; playoff rows are retained but excluded from goals fits and gates.
+  - CARDS: no plain Yellow source exists; target card columns remain None with cards_source=none.
+  - xG: absent in all seasons; G-PL-ILiga is goals-only X1.
+

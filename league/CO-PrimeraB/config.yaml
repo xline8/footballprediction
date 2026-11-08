@@ -1,0 +1,11 @@
+league: CO-PrimeraB
+fotmob_id: 9125
+country: Colombia
+slug: CO-PrimeraB
+markets_built: [goals]
+markets_not_buildable: [sot, corners, cards, total_shots]
+virgin_season: "2025"
+dev_seasons: ["2021", "2022", "2023", "2024"]
+excluded_seasons: ["2026"]  # in progress at build time
+halves_constant_goals: 0.4875
+data_csv: data/co_primerab_matches.csv

@@ -1,0 +1,26 @@
+# Albania Kategoria Superiore — league config
+league: AL-KategoriaSuperiore
+country: Albania
+fotmob_id: 260
+tier: 1
+warehouse: data_enrichment/fotmob_world/Albania/Kategoria Superiore
+data:
+  matches: league/AL-KategoriaSuperiore/data/al_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026"]   # walk-forward, season-blocked; 2021/2022 seed, scored 2022/23-2025/26
+virgin_primary: "2026/2027"          # transitional season, in progress, n=55 as of 2026-11-08 — read ONCE per candidate
+virgin_confirmatory: "2026/2027"  # reserved; evaluated once when complete
+halves_constants:               # frozen league constants (EDA F3) — the ONLY halves mechanism
+  goals_1h_share: 0.4267
+markets:
+  goals: G-AL        # DC reference, goals-only; arms: Gate Zero, SHRINK (thin-history)
+  sot: S-AL          # NOT BUILDABLE — no SOT data (stats null, shotmap empty, all seasons)
+  corners: C-AL      # NOT BUILDABLE — no corners data
+  cards: K-AL        # NOT BUILDABLE — 0 Yellow events, no stats, referee empty
+  total_shots: T-AL  # NOT BUILDABLE — no shot data
+notes:
+  - Scores + events only: stats null 969/969; shotmap empty 969/969; lineups 0/969; playerStats 0/969; referee empty 969/969.
+  - Format: 10 teams x 36 rounds every season. Final Four playoff from 2023/2024 (14 matches: semis+bronze+final 2023/24, 2024/25; 6-match round-robin mislabelled rounds 1-3 in 2025/26) — flagged playoff=True, excluded from every fit and evaluation.
+  - No awarded matches in this league (0/969).
+  - Team traits WEAK (split-half GF 0.27 / GA 0.14, 5-season means) and tiers flat (top +0.32 to bottom -0.65 GD/match) — dev gate is the real test; a FAIL is a live possibility.
+  - Predictions-only: no AL-KategoriaSuperiore odds/settlement source in-system.

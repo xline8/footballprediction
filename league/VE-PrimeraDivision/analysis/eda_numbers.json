@@ -1,0 +1,835 @@
+{
+  "levels": {
+    "2021": {
+      "n": 303,
+      "regular_n": 252,
+      "playoff_n": 51,
+      "teams": 21,
+      "rounds": [
+        "1",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "2",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "final"
+      ],
+      "home_advantage": {
+        "home_goals": 1.4563492063492063,
+        "away_goals": 1.2341269841269842
+      },
+      "goals_total": {
+        "n": 252,
+        "mean": 2.6904761904761907,
+        "sd": 1.6769555307224129
+      },
+      "ShotsOnTarget": {
+        "n": 0,
+        "mean": null,
+        "sd": null
+      },
+      "corners": {
+        "n": 0,
+        "mean": null,
+        "sd": null
+      },
+      "stats_yellows": {
+        "n": 0,
+        "mean": null,
+        "sd": null
+      },
+      "total_shots": {
+        "n": 0,
+        "mean": null,
+        "sd": null
+      }
+    },
+    "2022": {
+      "n": 277,
+      "regular_n": 240,
+      "playoff_n": 37,
+      "teams": 16,
+      "rounds": [
+        "1",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "2",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "3",
+        "30",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "final"
+      ],
+      "home_advantage": {
+        "home_goals": 1.3875,
+        "away_goals": 1.0458333333333334
+      },
+      "goals_total": {
+        "n": 240,
+        "mean": 2.433333333333333,
+        "sd": 1.6350416592050867
+      },
+      "ShotsOnTarget": {
+        "n": 0,
+        "mean": null,
+        "sd": null
+      },
+      "corners": {
+        "n": 0,
+        "mean": null,
+        "sd": null
+      },
+      "stats_yellows": {
+        "n": 0,
+        "mean": null,
+        "sd": null
+      },
+      "total_shots": {
+        "n": 0,
+        "mean": null,
+        "sd": null
+      }
+    },
+    "2023": {
+      "n": 223,
+      "regular_n": 210,
+      "playoff_n": 13,
+      "teams": 15,
+      "rounds": [
+        "1",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "2",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "3",
+        "30",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "final"
+      ],
+      "home_advantage": {
+        "home_goals": 1.4238095238095239,
+        "away_goals": 1.061904761904762
+      },
+      "goals_total": {
+        "n": 210,
+        "mean": 2.4857142857142858,
+        "sd": 1.525629751306802
+      },
+      "ShotsOnTarget": {
+        "n": 0,
+        "mean": null,
+        "sd": null
+      },
+      "corners": {
+        "n": 0,
+        "mean": null,
+        "sd": null
+      },
+      "stats_yellows": {
+        "n": 0,
+        "mean": null,
+        "sd": null
+      },
+      "total_shots": {
+        "n": 0,
+        "mean": null,
+        "sd": null
+      }
+    },
+    "2024": {
+      "n": 234,
+      "regular_n": 182,
+      "playoff_n": 52,
+      "teams": 14,
+      "rounds": [
+        "1",
+        "10",
+        "11",
+        "12",
+        "13",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "final"
+      ],
+      "home_advantage": {
+        "home_goals": 1.2857142857142858,
+        "away_goals": 1.021978021978022
+      },
+      "goals_total": {
+        "n": 182,
+        "mean": 2.3076923076923075,
+        "sd": 1.585098478508618
+      },
+      "ShotsOnTarget": {
+        "n": 0,
+        "mean": null,
+        "sd": null
+      },
+      "corners": {
+        "n": 0,
+        "mean": null,
+        "sd": null
+      },
+      "stats_yellows": {
+        "n": 0,
+        "mean": null,
+        "sd": null
+      },
+      "total_shots": {
+        "n": 0,
+        "mean": null,
+        "sd": null
+      }
+    },
+    "2025": {
+      "n": 233,
+      "regular_n": 182,
+      "playoff_n": 51,
+      "teams": 14,
+      "rounds": [
+        "1",
+        "10",
+        "11",
+        "12",
+        "13",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "final"
+      ],
+      "home_advantage": {
+        "home_goals": 1.3571428571428572,
+        "away_goals": 0.978021978021978
+      },
+      "goals_total": {
+        "n": 182,
+        "mean": 2.3351648351648353,
+        "sd": 1.581234822485097
+      },
+      "ShotsOnTarget": {
+        "n": 91,
+        "mean": 8.285714285714286,
+        "sd": 2.4823184247603614
+      },
+      "corners": {
+        "n": 91,
+        "mean": 8.802197802197803,
+        "sd": 3.5659493989672812
+      },
+      "stats_yellows": {
+        "n": 62,
+        "mean": 5.967741935483871,
+        "sd": 1.9749890386538222
+      },
+      "total_shots": {
+        "n": 91,
+        "mean": 23.714285714285715,
+        "sd": 5.439129248705806
+      }
+    },
+    "2026": {
+      "n": 227,
+      "regular_n": 182,
+      "playoff_n": 45,
+      "teams": 14,
+      "rounds": [
+        "1",
+        "10",
+        "11",
+        "12",
+        "13",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "Apertura - Final",
+        "Apertura - Quadrangular - Round 1",
+        "Apertura - Quadrangular - Round 2",
+        "Apertura - Quadrangular - Round 3",
+        "Apertura - Quadrangular - Round 4",
+        "Apertura - Quadrangular - Round 5",
+        "Apertura - Quadrangular - Round 6",
+        "Clausura - Quadrangular - Round 1",
+        "Clausura - Quadrangular - Round 2",
+        "Clausura - Quadrangular - Round 3",
+        "Clausura - Quadrangular - Round 4",
+        "Clausura - Quadrangular - Round 5",
+        "Clausura - Round 1",
+        "Clausura - Round 10",
+        "Clausura - Round 11",
+        "Clausura - Round 12",
+        "Clausura - Round 13",
+        "Clausura - Round 2",
+        "Clausura - Round 3",
+        "Clausura - Round 4",
+        "Clausura - Round 5",
+        "Clausura - Round 6",
+        "Clausura - Round 7",
+        "Clausura - Round 8",
+        "Clausura - Round 9"
+      ],
+      "home_advantage": {
+        "home_goals": 1.456043956043956,
+        "away_goals": 1.1538461538461537
+      },
+      "goals_total": {
+        "n": 182,
+        "mean": 2.60989010989011,
+        "sd": 1.7229394736456638
+      },
+      "ShotsOnTarget": {
+        "n": 181,
+        "mean": 8.740331491712707,
+        "sd": 3.1098370626400076
+      },
+      "corners": {
+        "n": 181,
+        "mean": 9.049723756906078,
+        "sd": 3.780470639563167
+      },
+      "stats_yellows": {
+        "n": 181,
+        "mean": 5.5911602209944755,
+        "sd": 2.2506120850826226
+      },
+      "total_shots": {
+        "n": 181,
+        "mean": 26.50828729281768,
+        "sd": 6.045768754105255
+      }
+    }
+  },
+  "reliability": {
+    "2025": {
+      "goals_for": {
+        "n_teams": 14,
+        "r": 0.4543694673976518
+      },
+      "goals_against": {
+        "n_teams": 14,
+        "r": 0.2085987550742769
+      },
+      "sot_for": {
+        "n_teams": 14,
+        "r": 0.19981535620188884
+      },
+      "sot_against": {
+        "n_teams": 14,
+        "r": 0.3117817684398553
+      },
+      "corners_for": {
+        "n_teams": 14,
+        "r": 0.714076221916764
+      },
+      "corners_against": {
+        "n_teams": 14,
+        "r": 0.2344194225386245
+      },
+      "yellow_for": {
+        "n_teams": 14,
+        "r": 0.2456412556344675
+      },
+      "yellow_against": {
+        "n_teams": 14,
+        "r": 0.5370295921658236
+      },
+      "total_shots_for": {
+        "n_teams": 14,
+        "r": 0.4354807689058875
+      },
+      "total_shots_against": {
+        "n_teams": 14,
+        "r": 0.22295587400767974
+      },
+      "possession_for": {
+        "n_teams": 14,
+        "r": 0.591762072116739
+      },
+      "big_chances_for": {
+        "n_teams": 14,
+        "r": null
+      },
+      "on_target_rate": {
+        "n_teams": 14,
+        "r": -0.5192569195708936
+      }
+    },
+    "2026": {
+      "goals_for": {
+        "n_teams": 14,
+        "r": 0.543171722632398
+      },
+      "goals_against": {
+        "n_teams": 14,
+        "r": 0.5127484199428217
+      },
+      "sot_for": {
+        "n_teams": 14,
+        "r": 0.41705645314111356
+      },
+      "sot_against": {
+        "n_teams": 14,
+        "r": 0.43910064544025085
+      },
+      "corners_for": {
+        "n_teams": 14,
+        "r": 0.4567555457485891
+      },
+      "corners_against": {
+        "n_teams": 14,
+        "r": 0.3135891420546021
+      },
+      "yellow_for": {
+        "n_teams": 14,
+        "r": -0.24670952718882755
+      },
+      "yellow_against": {
+        "n_teams": 14,
+        "r": 0.6662511264260328
+      },
+      "total_shots_for": {
+        "n_teams": 14,
+        "r": 0.6452408028908734
+      },
+      "total_shots_against": {
+        "n_teams": 14,
+        "r": 0.4749430482193567
+      },
+      "possession_for": {
+        "n_teams": 14,
+        "r": 0.7214868508560651
+      },
+      "big_chances_for": {
+        "n_teams": 14,
+        "r": null
+      },
+      "on_target_rate": {
+        "n_teams": 14,
+        "r": 0.014675469964500433
+      }
+    },
+    "pooled_stats_era": {
+      "goals_for": {
+        "n_teams": 28,
+        "r": 0.46063145287899143
+      },
+      "goals_against": {
+        "n_teams": 28,
+        "r": 0.33550860172189967
+      },
+      "sot_for": {
+        "n_teams": 28,
+        "r": 0.2740757118464287
+      },
+      "sot_against": {
+        "n_teams": 28,
+        "r": 0.3594730317659935
+      },
+      "corners_for": {
+        "n_teams": 28,
+        "r": 0.6154772756803217
+      },
+      "corners_against": {
+        "n_teams": 28,
+        "r": 0.26351779572214507
+      },
+      "yellow_for": {
+        "n_teams": 28,
+        "r": 0.15642129850791842
+      },
+      "yellow_against": {
+        "n_teams": 28,
+        "r": 0.5869588716857136
+      },
+      "total_shots_for": {
+        "n_teams": 28,
+        "r": 0.5575803691592423
+      },
+      "total_shots_against": {
+        "n_teams": 28,
+        "r": 0.3949788201834272
+      },
+      "possession_for": {
+        "n_teams": 28,
+        "r": 0.6546006758221361
+      },
+      "big_chances_for": {
+        "n_teams": 28,
+        "r": null
+      },
+      "on_target_rate": {
+        "n_teams": 28,
+        "r": -0.30009800185021573
+      }
+    }
+  },
+  "halves": {
+    "goals": {
+      "share": 0.44782939832444785,
+      "n": 947,
+      "observed_variance": 0.11954935106686618,
+      "noise_floor": 0.11999372799919691,
+      "true_variance": -0.0004443769323307367
+    },
+    "ShotsOnTarget": {
+      "share": 0.46513849092645654,
+      "n": 243,
+      "observed_variance": 0.032500677657108436,
+      "noise_floor": 0.03273497902485698,
+      "true_variance": -0.00023430136774854615
+    },
+    "corners": {
+      "share": 0.4669067987393066,
+      "n": 242,
+      "observed_variance": 0.03860083639218461,
+      "noise_floor": 0.03441772934052112,
+      "true_variance": 0.004183107051663491
+    },
+    "total_shots": {
+      "share": 0.46617485481086174,
+      "n": 243,
+      "observed_variance": 0.010285926560574334,
+      "noise_floor": 0.01001415236739716,
+      "true_variance": 0.0002717741931771746
+    },
+    "stats_yellow": {
+      "share": 0.39001447178002896,
+      "n": 241,
+      "observed_variance": 0.05639673050378046,
+      "noise_floor": 0.050760385487795746,
+      "true_variance": 0.0056363450159847145
+    },
+    "cards_events_2026_audit": {
+      "share": 0.3783287419651056,
+      "n": 179,
+      "observed_variance": 0.05622102457170855,
+      "noise_floor": 0.048522684855950925,
+      "true_variance": 0.007698339715757625
+    },
+    "cards_stats_2025_26_audit": {
+      "share": 0.39001447178002896,
+      "n": 241,
+      "observed_variance": 0.05639673050378046,
+      "noise_floor": 0.050760385487795746,
+      "true_variance": 0.0056363450159847145
+    }
+  },
+  "dev_goals": {
+    "n": 392,
+    "mean": 2.4030612244897958,
+    "ou2_5_over_rate": 0.4387755102040816,
+    "home_win_rate": 0.42857142857142855
+  },
+  "count_windows": {
+    "counts_dev_2026_apertura": {
+      "n": 91,
+      "S": {
+        "mean": 8.252747252747254,
+        "sd": 2.9799083005779687,
+        "line": 8.5,
+        "over_rate": 0.34065934065934067
+      },
+      "C": {
+        "mean": 8.736263736263735,
+        "sd": 3.523997618977518,
+        "line": 8.5,
+        "over_rate": 0.5054945054945055
+      },
+      "K": {
+        "mean": 6.164835164835165,
+        "sd": 2.10430107828776,
+        "line": 6.5,
+        "over_rate": 0.42857142857142855
+      },
+      "T": {
+        "mean": 24.63736263736264,
+        "sd": 6.129195132073457,
+        "line": 24.5,
+        "over_rate": 0.5054945054945055
+      }
+    },
+    "counts_seed_2025_clausura": {
+      "n": 91,
+      "S": {
+        "mean": 8.285714285714286,
+        "sd": 2.4823184247603614,
+        "line": 8.5,
+        "over_rate": 0.42857142857142855
+      },
+      "C": {
+        "mean": 8.802197802197803,
+        "sd": 3.5659493989672812,
+        "line": 8.5,
+        "over_rate": 0.4945054945054945
+      },
+      "K": {
+        "mean": 5.967741935483871,
+        "sd": 1.9749890386538225,
+        "line": 5.5,
+        "over_rate": 0.4175824175824176
+      },
+      "T": {
+        "mean": 23.714285714285715,
+        "sd": 5.439129248705806,
+        "line": 23.5,
+        "over_rate": 0.5274725274725275
+      }
+    },
+    "counts_virgin_2026_clausura": {
+      "n": 91,
+      "S": {
+        "mean": 9.233333333333333,
+        "sd": 3.1766352066227332,
+        "line": 9.5,
+        "over_rate": 0.4065934065934066
+      },
+      "C": {
+        "mean": 9.366666666666667,
+        "sd": 4.018077129700813,
+        "line": 9.5,
+        "over_rate": 0.4725274725274725
+      },
+      "K": {
+        "mean": 5.011111111111111,
+        "sd": 2.2560502646227474,
+        "line": 5.5,
+        "over_rate": 0.38461538461538464
+      },
+      "T": {
+        "mean": 28.4,
+        "sd": 5.360697590023652,
+        "line": 28.5,
+        "over_rate": 0.4835164835164835
+      }
+    }
+  },
+  "artifacts": {
+    "stats_vs_events_yellows": {
+      "matches": 343,
+      "stats_total": 1646,
+      "events_unified_total": 1391,
+      "exact_agreement_matches": 155,
+      "diff_distribution_events_minus_stats": {
+        "-10.0": 1,
+        "-9.0": 6,
+        "-8.0": 6,
+        "-7.0": 12,
+        "-6.0": 13,
+        "-5.0": 10,
+        "-4.0": 6,
+        "-3.0": 5,
+        "-2.0": 3,
+        "0.0": 155,
+        "1.0": 43,
+        "2.0": 19,
+        "3.0": 6,
+        "4.0": 2,
+        "5.0": 1
+      },
+      "by_season": {
+        "2025": {
+          "matches": 117,
+          "stats_total": 370,
+          "events_unified_total": 3,
+          "exact_agreement_matches": 0,
+          "diff_distribution_events_minus_stats": {
+            "-10.0": 1,
+            "-9.0": 6,
+            "-8.0": 6,
+            "-7.0": 12,
+            "-6.0": 13,
+            "-5.0": 10,
+            "-4.0": 6,
+            "-3.0": 5,
+            "-2.0": 3
+          }
+        },
+        "2026": {
+          "matches": 226,
+          "stats_total": 1276,
+          "events_unified_total": 1388,
+          "exact_agreement_matches": 155,
+          "diff_distribution_events_minus_stats": {
+            "0.0": 155,
+            "1.0": 43,
+            "2.0": 19,
+            "3.0": 6,
+            "4.0": 2,
+            "5.0": 1
+          }
+        }
+      }
+    },
+    "event_card_coverage_by_season": {
+      "2021": 88,
+      "2022": 85,
+      "2023": 83,
+      "2024": 62,
+      "2025": 71,
+      "2026": 224
+    },
+    "referee_named_by_season": {
+      "2021": 0,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 87,
+      "2026": 145
+    },
+    "zero_filled_stat_keys": {
+      "shots_inside_box": {
+        "present": true,
+        "nonzero_matches": 0,
+        "stats_era_matches": 343
+      },
+      "shots_outside_box": {
+        "present": true,
+        "nonzero_matches": 0,
+        "stats_era_matches": 343
+      },
+      "accurate_passes": {
+        "present": true,
+        "nonzero_matches": 226,
+        "stats_era_matches": 343
+      },
+      "accurate_crosses": {
+        "present": false,
+        "nonzero_matches": 0,
+        "stats_era_matches": 343
+      },
+      "accurate_long_balls": {
+        "present": false,
+        "nonzero_matches": 0,
+        "stats_era_matches": 343
+      },
+      "interceptions": {
+        "present": false,
+        "nonzero_matches": 0,
+        "stats_era_matches": 343
+      },
+      "blocked_shots": {
+        "present": true,
+        "nonzero_matches": 284,
+        "stats_era_matches": 343
+      },
+      "blocks": {
+        "present": false,
+        "nonzero_matches": 0,
+        "stats_era_matches": 343
+      },
+      "clearances": {
+        "present": false,
+        "nonzero_matches": 0,
+        "stats_era_matches": 343
+      },
+      "duel_won": {
+        "present": false,
+        "nonzero_matches": 0,
+        "stats_era_matches": 343
+      },
+      "duels_won": {
+        "present": false,
+        "nonzero_matches": 0,
+        "stats_era_matches": 343
+      },
+      "dribbles_succeeded": {
+        "present": false,
+        "nonzero_matches": 0,
+        "stats_era_matches": 343
+      },
+      "successful_dribbles": {
+        "present": false,
+        "nonzero_matches": 0,
+        "stats_era_matches": 343
+      },
+      "touches_opp_box": {
+        "present": false,
+        "nonzero_matches": 0,
+        "stats_era_matches": 343
+      }
+    },
+    "shotmap_nonempty": 0,
+    "expected_goals_keys": 0
+  }
+}

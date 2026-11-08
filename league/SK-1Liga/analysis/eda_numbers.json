@@ -1,0 +1,331 @@
+{
+  "counts": {
+    "all_matches": 1053,
+    "included": 1044,
+    "excluded_playoff": 9,
+    "included_by_season": {
+      "2021/2022": 192,
+      "2022/2023": 192,
+      "2023/2024": 192,
+      "2024/2025": 192,
+      "2025/2026": 192,
+      "2026/2027": 84
+    },
+    "team_ids": 18
+  },
+  "levels": {
+    "2021/2022": {
+      "n": 192,
+      "goals": 2.614583,
+      "home_goals": 1.453125,
+      "away_goals": 1.161458,
+      "sot": 8.374046,
+      "corners": 10.114504,
+      "total_shots": 19.816794,
+      "yellows": 3.661458,
+      "stats_n": 131
+    },
+    "2022/2023": {
+      "n": 192,
+      "goals": 2.765625,
+      "home_goals": 1.546875,
+      "away_goals": 1.21875,
+      "sot": 9.203125,
+      "corners": 10.453125,
+      "total_shots": 20.223958,
+      "yellows": 4.182292,
+      "stats_n": 192
+    },
+    "2023/2024": {
+      "n": 192,
+      "goals": 2.723958,
+      "home_goals": 1.473958,
+      "away_goals": 1.25,
+      "sot": 8.497326,
+      "corners": 9.475936,
+      "total_shots": 17.802139,
+      "yellows": 3.817708,
+      "stats_n": 187
+    },
+    "2024/2025": {
+      "n": 192,
+      "goals": 2.786458,
+      "home_goals": 1.46875,
+      "away_goals": 1.317708,
+      "sot": 8.920635,
+      "corners": 10.100529,
+      "total_shots": 19.243386,
+      "yellows": 4.364583,
+      "stats_n": 189
+    },
+    "2025/2026": {
+      "n": 192,
+      "goals": 2.822917,
+      "home_goals": 1.510417,
+      "away_goals": 1.3125,
+      "sot": 8.828125,
+      "corners": 9.890625,
+      "total_shots": 27.098958,
+      "yellows": 4.005208,
+      "stats_n": 192
+    },
+    "2026/2027": {
+      "n": 84,
+      "goals": 3.27381,
+      "home_goals": 1.619048,
+      "away_goals": 1.654762,
+      "sot": 9.964286,
+      "corners": 10.059524,
+      "total_shots": 29.119048,
+      "yellows": 3.821429,
+      "stats_n": 84
+    }
+  },
+  "reliabilities": {
+    "goals_for": {
+      "r": 0.591174,
+      "n_units": 48
+    },
+    "goals_against": {
+      "r": 0.292974,
+      "n_units": 48
+    },
+    "sot_for": {
+      "r": 0.548546,
+      "n_units": 48
+    },
+    "sot_against": {
+      "r": 0.552284,
+      "n_units": 48
+    },
+    "corners_for": {
+      "r": 0.394714,
+      "n_units": 48
+    },
+    "corners_against": {
+      "r": 0.434976,
+      "n_units": 48
+    },
+    "yellows_for": {
+      "r": 0.19369,
+      "n_units": 48
+    },
+    "yellows_against": {
+      "r": 0.474022,
+      "n_units": 48
+    },
+    "possession_for": {
+      "r": 0.783688,
+      "n_units": 48
+    },
+    "possession_against": {
+      "r": 0.783688,
+      "n_units": 48
+    },
+    "total_shots_for": {
+      "r": 0.729461,
+      "n_units": 48
+    },
+    "total_shots_against": {
+      "r": 0.622755,
+      "n_units": 48
+    }
+  },
+  "referee": {
+    "coverage_by_season": {
+      "2021/2022": {
+        "named": 0,
+        "n": 195
+      },
+      "2022/2023": {
+        "named": 0,
+        "n": 195
+      },
+      "2023/2024": {
+        "named": 0,
+        "n": 192
+      },
+      "2024/2025": {
+        "named": 0,
+        "n": 195
+      },
+      "2025/2026": {
+        "named": 174,
+        "n": 192
+      },
+      "2026/2027": {
+        "named": 84,
+        "n": 84
+      }
+    },
+    "dev_coverage": 0.0,
+    "reliability": null
+  },
+  "halves": {
+    "goals_1h_share": 0.444763,
+    "yellow_cards_1h_share": 0.335717,
+    "goals_total": 2091.0,
+    "yellow_total": 3077.0,
+    "goals_variance": {
+      "observed_variance": 0.112316,
+      "noise_floor": 0.114112,
+      "true_variance": -0.001797,
+      "n_matches": 699
+    },
+    "yellows_variance": {
+      "observed_variance": 0.077326,
+      "noise_floor": 0.075772,
+      "true_variance": 0.001553,
+      "n_matches": 739
+    },
+    "goals_share_team_r": {
+      "r": 0.034786,
+      "n_units": 48
+    },
+    "yellows_share_team_r": {
+      "r": 0.10264,
+      "n_units": 48
+    },
+    "sot_1h_share": null,
+    "corners_1h_share": null,
+    "total_shots_1h_share": null
+  },
+  "movers_x2": {
+    "2022/2023": {
+      "league_mean_per_team_match": 1.382812,
+      "clubs": [
+        {
+          "club": "Dukla Bansk\u00e1 Bystrica",
+          "team_id": "2169",
+          "matches": 32,
+          "gf_per_match": 1.5625,
+          "ga_per_match": 1.75,
+          "delta_gf": 0.179688,
+          "delta_ga": 0.367188
+        },
+        {
+          "club": "Zeleziarne Podbrezov\u00e1",
+          "team_id": "2437",
+          "matches": 32,
+          "gf_per_match": 1.375,
+          "ga_per_match": 1.375,
+          "delta_gf": -0.007812,
+          "delta_ga": -0.007812
+        },
+        {
+          "club": "Skalica",
+          "team_id": "555292",
+          "matches": 32,
+          "gf_per_match": 1.1875,
+          "ga_per_match": 1.1875,
+          "delta_gf": -0.195312,
+          "delta_ga": -0.195312
+        }
+      ],
+      "cumulative_prior": {
+        "delta_gf": null,
+        "delta_ga": null,
+        "n_transitions": 0
+      }
+    },
+    "2023/2024": {
+      "league_mean_per_team_match": 1.361979,
+      "clubs": [
+        {
+          "club": "FC Ko\u0161ice",
+          "team_id": "969268",
+          "matches": 32,
+          "gf_per_match": 0.84375,
+          "ga_per_match": 1.75,
+          "delta_gf": -0.518229,
+          "delta_ga": 0.388021
+        }
+      ],
+      "cumulative_prior": {
+        "delta_gf": -0.007812,
+        "delta_ga": 0.054688,
+        "n_transitions": 3
+      }
+    },
+    "2024/2025": {
+      "league_mean_per_team_match": 1.393229,
+      "clubs": [
+        {
+          "club": "Kom\u00e1rno",
+          "team_id": "611956",
+          "matches": 32,
+          "gf_per_match": 1.125,
+          "ga_per_match": 1.5,
+          "delta_gf": -0.268229,
+          "delta_ga": 0.106771
+        }
+      ],
+      "cumulative_prior": {
+        "delta_gf": -0.135416,
+        "delta_ga": 0.138021,
+        "n_transitions": 4
+      }
+    },
+    "2025/2026": {
+      "league_mean_per_team_match": 1.411458,
+      "clubs": [
+        {
+          "club": "Tatran Presov",
+          "team_id": "8010",
+          "matches": 32,
+          "gf_per_match": 0.90625,
+          "ga_per_match": 1.34375,
+          "delta_gf": -0.505208,
+          "delta_ga": -0.067708
+        }
+      ],
+      "cumulative_prior": {
+        "delta_gf": -0.161979,
+        "delta_ga": 0.131771,
+        "n_transitions": 5
+      }
+    }
+  },
+  "cards_audit": {
+    "virgin_n": 192,
+    "stats_yellows_present": 192,
+    "exact_total_agreement": 159,
+    "stats_mean": 4.015625,
+    "event_mean_on_same_rows": 4.005208,
+    "dev_stats_key_matches": 1,
+    "target": "event yellows (card == Yellow); YellowRed/Red excluded"
+  },
+  "primary_lines": {
+    "sot": {
+      "n": 699,
+      "rates": {
+        "7.5": 0.599428,
+        "8.5": 0.480687,
+        "9.5": 0.400572
+      },
+      "primary": 8.5
+    },
+    "corners": {
+      "n": 699,
+      "rates": {
+        "9.5": 0.543634,
+        "10.5": 0.407725,
+        "11.5": 0.317597
+      },
+      "primary": 9.5
+    },
+    "cards": {
+      "n": 768,
+      "rates": {
+        "3.5": 0.579427,
+        "4.5": 0.386719,
+        "5.5": 0.24349
+      },
+      "primary": 3.5
+    },
+    "goals": {
+      "primary": "OU2.5",
+      "over_rate": 0.509115
+    }
+  }
+}

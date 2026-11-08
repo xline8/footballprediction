@@ -1,0 +1,104 @@
+{
+  "2021": {
+    "n": 240,
+    "date_range": [
+      "2021-04-10",
+      "2021-12-04"
+    ],
+    "teams": 16,
+    "has_stats_all_pct": 100.0,
+    "has_stats_half_pct": 11.666666666666666,
+    "has_shotmap_pct": 100.0,
+    "has_events_pct": 100.0,
+    "referee_pct": 0.0,
+    "xg_pct": 100.0,
+    "touches_pct": 50.833333333333336,
+    "yellow_stats_pct": 100.0,
+    "xgot_share_all": 0.3216419053453821
+  },
+  "2022": {
+    "n": 240,
+    "date_range": [
+      "2022-04-02",
+      "2022-11-06"
+    ],
+    "teams": 16,
+    "has_stats_all_pct": 100.0,
+    "has_stats_half_pct": 0.0,
+    "has_shotmap_pct": 100.0,
+    "has_events_pct": 100.0,
+    "referee_pct": 87.5,
+    "xg_pct": 100.0,
+    "touches_pct": 51.25,
+    "yellow_stats_pct": 100.0,
+    "xgot_share_all": 0.33006435795280414
+  },
+  "2023": {
+    "n": 240,
+    "date_range": [
+      "2023-04-01",
+      "2023-11-12"
+    ],
+    "teams": 16,
+    "has_stats_all_pct": 100.0,
+    "has_stats_half_pct": 100.0,
+    "has_shotmap_pct": 100.0,
+    "has_events_pct": 100.0,
+    "referee_pct": 85.0,
+    "xg_pct": 100.0,
+    "touches_pct": 38.75,
+    "yellow_stats_pct": 100.0,
+    "xgot_share_all": 0.3287735849056604
+  },
+  "2024": {
+    "n": 240,
+    "date_range": [
+      "2024-03-30",
+      "2024-11-10"
+    ],
+    "teams": 16,
+    "has_stats_all_pct": 100.0,
+    "has_stats_half_pct": 100.0,
+    "has_shotmap_pct": 99.16666666666667,
+    "has_events_pct": 100.0,
+    "referee_pct": 70.83333333333333,
+    "xg_pct": 100.0,
+    "touches_pct": 100.0,
+    "yellow_stats_pct": 100.0,
+    "xgot_share_all": 0.6473668001231906
+  },
+  "2025": {
+    "n": 240,
+    "date_range": [
+      "2025-03-29",
+      "2025-11-09"
+    ],
+    "teams": 16,
+    "has_stats_all_pct": 100.0,
+    "has_stats_half_pct": 100.0,
+    "has_shotmap_pct": 100.0,
+    "has_events_pct": 100.0,
+    "referee_pct": 84.58333333333333,
+    "xg_pct": 100.0,
+    "touches_pct": 100.0,
+    "yellow_stats_pct": 100.0,
+    "xgot_share_all": 0.9965024330900243
+  },
+  "2026": {
+    "n": 224,
+    "date_range": [
+      "2026-04-04",
+      "2026-11-08"
+    ],
+    "teams": 16,
+    "has_stats_all_pct": 100.0,
+    "has_stats_half_pct": 100.0,
+    "has_shotmap_pct": 100.0,
+    "has_events_pct": 100.0,
+    "referee_pct": 88.39285714285714,
+    "xg_pct": 100.0,
+    "touches_pct": 100.0,
+    "yellow_stats_pct": 100.0,
+    "xgot_share_all": 0.9969609724888036
+  }
+}

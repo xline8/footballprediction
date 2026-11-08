@@ -1,0 +1,10 @@
+{
+  "HL": 270.0,
+  "K_PRIOR": 8.0,
+  "K_REF": 8.0,
+  "NB_r": 82.32462498447919,
+  "final_league_mu_a": 1.270535832936722,
+  "final_league_mu_h": 1.108373456510372,
+  "min_ref_history": 8,
+  "training_n": 1775
+}

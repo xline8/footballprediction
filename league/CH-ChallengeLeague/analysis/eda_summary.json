@@ -1,0 +1,251 @@
+{
+ "seasons": {
+  "2021/2022": {
+   "n": 180,
+   "stats": 0,
+   "splits": 0,
+   "events": 170,
+   "goals_pm": 3.25,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.1588235294117647,
+   "yell_stats_pm": null,
+   "teams": 10,
+   "xg_rows": 0,
+   "score_mismatch": 0
+  },
+  "2022/2023": {
+   "n": 180,
+   "stats": 0,
+   "splits": 0,
+   "events": 173,
+   "goals_pm": 3.1333333333333333,
+   "sot_pm": null,
+   "corners_pm": null,
+   "shots_pm": null,
+   "yell_ev_pm": 0.16184971098265896,
+   "yell_stats_pm": null,
+   "teams": 10,
+   "xg_rows": 0,
+   "score_mismatch": 0
+  },
+  "2023/2024": {
+   "n": 180,
+   "stats": 180,
+   "splits": 180,
+   "events": 170,
+   "goals_pm": 2.8722222222222222,
+   "sot_pm": 8.672222222222222,
+   "corners_pm": 9.994444444444444,
+   "shots_pm": 25.605555555555554,
+   "yell_ev_pm": 0.12352941176470589,
+   "yell_stats_pm": 4.5777777777777775,
+   "teams": 10,
+   "xg_rows": 0,
+   "score_mismatch": 0
+  },
+  "2024/2025": {
+   "n": 180,
+   "stats": 180,
+   "splits": 180,
+   "events": 170,
+   "goals_pm": 3.0,
+   "sot_pm": 8.911111111111111,
+   "corners_pm": 8.488888888888889,
+   "shots_pm": 25.3,
+   "yell_ev_pm": 0.052941176470588235,
+   "yell_stats_pm": 5.011111111111111,
+   "teams": 10,
+   "xg_rows": 0,
+   "score_mismatch": 2
+  },
+  "2025/2026": {
+   "n": 181,
+   "stats": 181,
+   "splits": 179,
+   "events": 171,
+   "goals_pm": 3.0497237569060776,
+   "sot_pm": 9.359116022099448,
+   "corners_pm": 8.87292817679558,
+   "shots_pm": 27.011049723756905,
+   "yell_ev_pm": 0.005847953216374269,
+   "yell_stats_pm": 4.588888888888889,
+   "teams": 10,
+   "xg_rows": 0,
+   "score_mismatch": 0
+  },
+  "2026/2027": {
+   "n": 65,
+   "stats": 65,
+   "splits": 65,
+   "events": 65,
+   "goals_pm": 3.1076923076923078,
+   "sot_pm": 9.538461538461538,
+   "corners_pm": 9.384615384615385,
+   "shots_pm": 29.661538461538463,
+   "yell_ev_pm": 4.476923076923077,
+   "yell_stats_pm": 4.153846153846154,
+   "teams": 10,
+   "xg_rows": 0,
+   "score_mismatch": 0
+  }
+ },
+ "yell_agreement": {
+  "n": 575,
+  "exact": 0.10608695652173913,
+  "mean_stats_minus_events": 4.118260869565217
+ },
+ "empty_events": {
+  "n_total": 47,
+  "n_rich_with_stats_yellows": 30,
+  "their_stats_yellows_mean": 4.4,
+  "all_scoreless": true
+ },
+ "halves_dev": {
+  "sot": {
+   "share_1h": 0.45118483412322274,
+   "n_matches_with_total_gt0": 360
+  },
+  "corners": {
+   "share_1h": 0.48001202284340244,
+   "n_matches_with_total_gt0": 360
+  },
+  "total_shots": {
+   "share_1h": 0.4466877660154971,
+   "n_matches_with_total_gt0": 360
+  },
+  "yellows_stats": {
+   "share_1h": 0.3398843930635838,
+   "n_matches_with_total_gt0": 355
+  },
+  "goals_events": {
+   "share_1h": 0.4408699592206615,
+   "n_goals": 2207,
+   "n_matches": 683
+  }
+ },
+ "event_yellows_dev_total": 85,
+ "trait_reliability_dev": {
+  "goals_for": {
+   "split_half_r": 0.8029911990728076,
+   "n_teams": 16
+  },
+  "sot_for": {
+   "split_half_r": 0.7115114257208766,
+   "n_teams": 12
+  },
+  "corners_for": {
+   "split_half_r": 0.6171669410643099,
+   "n_teams": 12
+  },
+  "shots_for": {
+   "split_half_r": 0.6263302979464755,
+   "n_teams": 12
+  },
+  "yellow_for": {
+   "split_half_r": 0.6726164068776126,
+   "n_teams": 12
+  },
+  "possession": {
+   "split_half_r": 0.7121757776529506,
+   "n_teams": 12
+  }
+ },
+ "entrant_transitions_dev": [
+  {
+   "season": "2022/2023",
+   "team_id": 7730,
+   "gf_diff": 0.04444444444444451,
+   "ga_diff": -0.37222222222222223
+  },
+  {
+   "season": "2022/2023",
+   "team_id": 6493,
+   "gf_diff": -0.5111111111111111,
+   "ga_diff": 0.40555555555555567
+  },
+  {
+   "season": "2023/2024",
+   "team_id": 10176,
+   "gf_diff": -0.575,
+   "ga_diff": 0.8416666666666666
+  },
+  {
+   "season": "2023/2024",
+   "team_id": 2442,
+   "gf_diff": -0.18611111111111112,
+   "ga_diff": 0.17500000000000004
+  },
+  {
+   "season": "2023/2024",
+   "team_id": 10179,
+   "gf_diff": 0.5638888888888889,
+   "ga_diff": -0.7972222222222223
+  },
+  {
+   "season": "2024/2025",
+   "team_id": 1594,
+   "gf_diff": 0.11111111111111116,
+   "ga_diff": -0.19444444444444442
+  },
+  {
+   "season": "2024/2025",
+   "team_id": 289334,
+   "gf_diff": 0.0,
+   "ga_diff": -0.3055555555555556
+  }
+ ],
+ "lines": {
+  "goals_ou": {
+   "over_rates": {
+    "1.5": 0.8166666666666667,
+    "2.5": 0.5777777777777777,
+    "3.5": 0.362962962962963
+   },
+   "primary": 2.5,
+   "n": 540
+  },
+  "sot": {
+   "over_rates": {
+    "7.5": 0.7,
+    "8.5": 0.5333333333333333,
+    "9.5": 0.4111111111111111,
+    "10.5": 0.2777777777777778
+   },
+   "primary": 8.5,
+   "n": 180
+  },
+  "corners": {
+   "over_rates": {
+    "8.5": 0.4666666666666667,
+    "9.5": 0.34444444444444444,
+    "10.5": 0.25,
+    "11.5": 0.17777777777777778
+   },
+   "primary": 8.5,
+   "n": 180
+  },
+  "shots": {
+   "over_rates": {
+    "22.5": 0.7222222222222222,
+    "24.5": 0.5833333333333334,
+    "26.5": 0.4388888888888889,
+    "28.5": 0.2833333333333333
+   },
+   "primary": 26.5,
+   "n": 180
+  },
+  "yellows": {
+   "over_rates": {
+    "3.5": 0.7611111111111111,
+    "4.5": 0.6055555555555555,
+    "5.5": 0.38333333333333336
+   },
+   "primary": 4.5,
+   "n": 180
+  }
+ },
+ "home_win_rate_dev": 0.40925925925925927,
+ "draw_rate_dev": 0.2722222222222222
+}

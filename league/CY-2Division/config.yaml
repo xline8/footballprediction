@@ -1,0 +1,29 @@
+# CY-2Division (Cyprus) — league config
+league: CY-2Division
+country: Cyprus
+fotmob_id: 9100
+tier: 2
+warehouse_root: ~/workspace/footballprediction
+data:
+  matches: league/CY-2Division/data/cy2_matches.csv
+  team_matches: league/CY-2Division/data/cy2_team_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+virgin_confirmatory: "2026/2027"
+halves_constants:
+  goals_1h_share: 0.4351
+  sot_1h_share: null
+  corners_1h_share: null
+  total_shots_1h_share: null
+  yellow_cards_1h_share: null
+markets:
+  goals: G-CY2
+notes:
+  - "FORMAT: 16 teams every season. 2021/2022 single double round-robin (240). From 2022/2023: 15-round single round-robin (120) then Promotion Group (top 8, double RR, 56) and Relegation Group (bottom 8, double RR, 56) — except 2022/2023 Relegation Group (42, 7 teams: Alki Oroklinis played the regular season but no group matches). All phases modelled as ordinary matches, phase flagged, no phase feature."
+  - "STATS: no stats feed in any of the 1,210 payloads (no SOT, corners, total shots, xG, possession, period splits). No shotmap, no lineups. Referee empty in all payloads. Index has_stats flag False for all rows (verified against payload content)."
+  - "EVENTS: absent for all of 2021/2022 (240 matches) + 66 scattered later matches; present in 904. Event feed carries goals + Half markers + red-family cards only: plain Yellow NEVER occurs (0/1,210), YellowRed 51, straight Red 86. Cards are NOT a buildable target."
+  - "CANDIDATES: goals ONLY (G-CY2). SOT/corners/total shots/cards not buildable — no target exists in the data."
+  - "HALVES: goals 0.4351 constant from pre-virgin event times (n=630, true variance -0.0049, noise). SOT, corners, total shots, cards have no halves source and are FT-only / not built."
+  - "MOVERS: 2-3 teams/season relegated in from CY-1Division (FotMob 136), 3-4 promoted out, 3-4 brand-new ids/season. X2 offset measured on pre-virgin transitions: attack +0.08, defence -0.21 goals/match (n=8 team-seasons)."
+  - "Calibration convention: actual minus predicted."

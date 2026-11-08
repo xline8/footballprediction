@@ -1,0 +1,13 @@
+{
+  "league": "FO-PremierLeague",
+  "fotmob_id": 250,
+  "index_rows": 810,
+  "seasons": {"2021": 135, "2022": 135, "2023": 135, "2024": 135, "2025": 135, "2026": 135},
+  "date_min": "2021-03-06",
+  "date_max": "2026-10-31",
+  "content_coverage": {"stats_present": 0, "stats_usable": 0, "shotmap_shots": 0, "period_splits": 0, "events": 810, "lineup": 810, "referee_text_nonempty": 0, "half_event": 810},
+  "event_counts": {"Goal": 2673, "Half": 1620, "Card": 3265, "Yellow": 3116, "YellowRed": 75, "Red": 74, "Substitution": 5437, "MissedPenalty": 21},
+  "team_ids": 13,
+  "format": "10 teams, rounds 1-27, triple round robin, 135 matches per season",
+  "awarded_match": {"match_id": 3822183, "official_score": "0-3", "played_event_score": "3-1", "excluded": true}
+}

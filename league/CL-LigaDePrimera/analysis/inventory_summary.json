@@ -1,0 +1,269 @@
+{
+ "seasons": {
+  "2021": {
+   "n": 272,
+   "teams": 17,
+   "goals": 2.511,
+   "home_goals": 1.3419,
+   "away_goals": 1.1691,
+   "sot": 8.5882,
+   "corners": 9.2978,
+   "total_shots_stat": 25.0625,
+   "yellow_stats": 3.3419,
+   "yellow_events": 4.5404,
+   "fouls": 24.6838,
+   "stats_cov": 1.0,
+   "half_cov": 0.0,
+   "ref_cov": 0.0,
+   "xg_present": 0,
+   "shotmap": 0
+  },
+  "2022": {
+   "n": 240,
+   "teams": 16,
+   "goals": 2.5667,
+   "home_goals": 1.4875,
+   "away_goals": 1.0792,
+   "sot": 8.431,
+   "corners": 9.3933,
+   "total_shots_stat": 25.9414,
+   "yellow_stats": 3.9707,
+   "yellow_events": 5.2292,
+   "fouls": 23.7824,
+   "stats_cov": 0.9958,
+   "half_cov": 0.0,
+   "ref_cov": 0.9208,
+   "xg_present": 0,
+   "shotmap": 0
+  },
+  "2023": {
+   "n": 240,
+   "teams": 16,
+   "goals": 2.725,
+   "home_goals": 1.425,
+   "away_goals": 1.3,
+   "sot": 8.9208,
+   "corners": 9.8708,
+   "total_shots_stat": 26.575,
+   "yellow_stats": 4.8083,
+   "yellow_events": 5.2958,
+   "fouls": 21.5208,
+   "stats_cov": 1.0,
+   "half_cov": 0.75,
+   "ref_cov": 0.9583,
+   "xg_present": 0,
+   "shotmap": 0
+  },
+  "2024": {
+   "n": 240,
+   "teams": 16,
+   "goals": 2.7667,
+   "home_goals": 1.5375,
+   "away_goals": 1.2292,
+   "sot": 9.4458,
+   "corners": 9.75,
+   "total_shots_stat": 26.5542,
+   "yellow_stats": 5.1381,
+   "yellow_events": 5.5667,
+   "fouls": 22.6276,
+   "stats_cov": 1.0,
+   "half_cov": 0.9958,
+   "ref_cov": 0.85,
+   "xg_present": 0,
+   "shotmap": 0
+  },
+  "2025": {
+   "n": 240,
+   "teams": 16,
+   "goals": 2.6458,
+   "home_goals": 1.55,
+   "away_goals": 1.0958,
+   "sot": 8.7042,
+   "corners": 9.65,
+   "total_shots_stat": 26.6417,
+   "yellow_stats": 5.25,
+   "yellow_events": 5.4125,
+   "fouls": 22.6708,
+   "stats_cov": 1.0,
+   "half_cov": 1.0,
+   "ref_cov": 0.8292,
+   "xg_present": 0,
+   "shotmap": 0
+  },
+  "2026": {
+   "n": 216,
+   "teams": 16,
+   "goals": 2.8333,
+   "home_goals": 1.6574,
+   "away_goals": 1.1759,
+   "sot": 9.1028,
+   "corners": 9.9299,
+   "total_shots_stat": 27.0187,
+   "yellow_stats": 4.6682,
+   "yellow_events": 5.0046,
+   "fouls": 21.2243,
+   "stats_cov": 0.9907,
+   "half_cov": 0.9907,
+   "ref_cov": 0.7361,
+   "xg_present": 0,
+   "shotmap": 0
+  }
+ },
+ "cards_check": {
+  "2021": {
+   "n_stats": 272,
+   "exact_agree": 177,
+   "mean_stats_minus_events": -1.1985,
+   "event_plain_yellows_total": 1203.0
+  },
+  "2022": {
+   "n_stats": 239,
+   "exact_agree": 155,
+   "mean_stats_minus_events": -1.2803,
+   "event_plain_yellows_total": 1221.0
+  },
+  "2023": {
+   "n_stats": 240,
+   "exact_agree": 182,
+   "mean_stats_minus_events": -0.4875,
+   "event_plain_yellows_total": 1230.0
+  },
+  "2024": {
+   "n_stats": 239,
+   "exact_agree": 179,
+   "mean_stats_minus_events": -0.4351,
+   "event_plain_yellows_total": 1285.0
+  },
+  "2025": {
+   "n_stats": 240,
+   "exact_agree": 185,
+   "mean_stats_minus_events": -0.1625,
+   "event_plain_yellows_total": 1270.0
+  },
+  "2026": {
+   "n_stats": 214,
+   "exact_agree": 172,
+   "mean_stats_minus_events": -0.3832,
+   "event_plain_yellows_total": 1049.0
+  }
+ },
+ "total_shots_identity": {
+  "n": 1444,
+  "eq_sot_off_blocked": 1444,
+  "eq_sot_off_only": 93
+ },
+ "halves": {
+  "goals_events_all": {
+   "n": 1356,
+   "share_mean_of_ratios": 0.4302,
+   "pooled_share": 0.44,
+   "var_obs": 0.11465,
+   "binom_sampling_var": 0.11849,
+   "true_var_est": 0.0
+  },
+  "sot": {
+   "n": 872,
+   "share_mean_of_ratios": 0.4452,
+   "pooled_share": 0.4456,
+   "var_obs": 0.03025,
+   "binom_sampling_var": 0.03198,
+   "true_var_est": 0.0
+  },
+  "corners": {
+   "n": 873,
+   "share_mean_of_ratios": 0.4627,
+   "pooled_share": 0.4644,
+   "var_obs": 0.02973,
+   "binom_sampling_var": 0.02935,
+   "true_var_est": 0.00038
+  },
+  "total_shots": {
+   "n": 873,
+   "share_mean_of_ratios": 0.4538,
+   "pooled_share": 0.4535,
+   "var_obs": 0.01006,
+   "binom_sampling_var": 0.00982,
+   "true_var_est": 0.00024
+  },
+  "cards": {
+   "n": 865,
+   "share_mean_of_ratios": 0.3841,
+   "pooled_share": 0.3818,
+   "var_obs": 0.06065,
+   "binom_sampling_var": 0.05938,
+   "true_var_est": 0.00127
+  }
+ },
+ "reliability": {
+  "goals_for": {
+   "n": 97,
+   "r": 0.283
+  },
+  "goals_against": {
+   "n": 97,
+   "r": 0.35
+  },
+  "sot_for": {
+   "n": 97,
+   "r": 0.315
+  },
+  "sot_against": {
+   "n": 97,
+   "r": 0.357
+  },
+  "corners_for": {
+   "n": 97,
+   "r": 0.333
+  },
+  "corners_against": {
+   "n": 97,
+   "r": 0.32
+  },
+  "shots_for": {
+   "n": 97,
+   "r": 0.407
+  },
+  "shots_against": {
+   "n": 97,
+   "r": 0.523
+  },
+  "yellows_for_stats": {
+   "n": 97,
+   "r": 0.475
+  },
+  "yellows_events": {
+   "n": 97,
+   "r": 0.315
+  },
+  "box_touches_for": {
+   "n": 97,
+   "r": 0.432
+  }
+ },
+ "referee": {
+  "n_refs_split": 33,
+  "r": 0.357,
+  "n_refs_total": 57,
+  "matches_with_ref": 1013
+ },
+ "multi_name_ids": {
+  "192435": [
+   "Union La Calera",
+   "Unión La Calera"
+  ],
+  "162905": [
+   "Curico Unido",
+   "Curicó Unido"
+  ],
+  "49559": [
+   "Atletico Nublense",
+   "CD Nublense",
+   "Ñublense"
+  ],
+  "6458": [
+   "Universidad Catolica",
+   "Universidad Católica"
+  ]
+ },
+ "n_team_ids": 25
+}

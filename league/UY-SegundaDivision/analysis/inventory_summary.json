@@ -1,0 +1,194 @@
+{
+ "total_payloads": 1219,
+ "total_matches": 1166,
+ "finished_only_rule": "header.status.finished == true; 53 unfinished 2021 0-0 placeholders dropped",
+ "seasons": {
+  "2021": {
+   "payloads": 138,
+   "finished": 85,
+   "unfinished": 53,
+   "unfinished_score_0_0": 53,
+   "score_present": 85,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 0,
+   "referee": 0,
+   "lineup": 0,
+   "event_type_counts": {},
+   "card_type_counts": {},
+   "card_match_distribution": {
+    "0": 138
+   },
+   "teams_finished": 12,
+   "goals_finished": 179,
+   "goals_per_match_finished": 2.1058823529411765
+  },
+  "2022": {
+   "payloads": 169,
+   "finished": 169,
+   "unfinished": 0,
+   "unfinished_score_0_0": 0,
+   "score_present": 169,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 156,
+   "referee": 0,
+   "lineup": 0,
+   "event_type_counts": {
+    "Goal": 365,
+    "Half": 312,
+    "Card": 88
+   },
+   "card_type_counts": {
+    "Red": 68,
+    "YellowRed": 20
+   },
+   "card_match_distribution": {
+    "0": 106,
+    "1": 44,
+    "2": 15,
+    "3": 3,
+    "5": 1
+   },
+   "teams_finished": 12,
+   "goals_finished": 365,
+   "goals_per_match_finished": 2.1597633136094676
+  },
+  "2023": {
+   "payloads": 231,
+   "finished": 231,
+   "unfinished": 0,
+   "unfinished_score_0_0": 0,
+   "score_present": 231,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 214,
+   "referee": 0,
+   "lineup": 0,
+   "event_type_counts": {
+    "Half": 428,
+    "Goal": 557,
+    "Card": 113
+   },
+   "card_type_counts": {
+    "YellowRed": 31,
+    "Red": 82
+   },
+   "card_match_distribution": {
+    "0": 151,
+    "1": 58,
+    "2": 14,
+    "3": 5,
+    "4": 3
+   },
+   "teams_finished": 14,
+   "goals_finished": 557,
+   "goals_per_match_finished": 2.411255411255411
+  },
+  "2024": {
+   "payloads": 233,
+   "finished": 233,
+   "unfinished": 0,
+   "unfinished_score_0_0": 0,
+   "score_present": 233,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 212,
+   "referee": 0,
+   "lineup": 0,
+   "event_type_counts": {
+    "Goal": 495,
+    "Half": 425,
+    "Card": 85
+   },
+   "card_type_counts": {
+    "Red": 76,
+    "YellowRed": 9
+   },
+   "card_match_distribution": {
+    "0": 173,
+    "2": 15,
+    "1": 40,
+    "3": 5
+   },
+   "teams_finished": 14,
+   "goals_finished": 495,
+   "goals_per_match_finished": 2.124463519313305
+  },
+  "2025": {
+   "payloads": 230,
+   "finished": 230,
+   "unfinished": 0,
+   "unfinished_score_0_0": 0,
+   "score_present": 230,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 210,
+   "referee": 0,
+   "lineup": 0,
+   "event_type_counts": {
+    "Goal": 498,
+    "Half": 420,
+    "Card": 92
+   },
+   "card_type_counts": {
+    "Red": 92
+   },
+   "card_match_distribution": {
+    "2": 14,
+    "0": 156,
+    "1": 58,
+    "3": 2
+   },
+   "teams_finished": 14,
+   "goals_finished": 498,
+   "goals_per_match_finished": 2.1652173913043478
+  },
+  "2026": {
+   "payloads": 218,
+   "finished": 218,
+   "unfinished": 0,
+   "unfinished_score_0_0": 0,
+   "score_present": 218,
+   "stats": 0,
+   "shotmap": 0,
+   "period_splits": 0,
+   "events": 202,
+   "referee": 0,
+   "lineup": 0,
+   "event_type_counts": {
+    "Goal": 507,
+    "Card": 99,
+    "Half": 404
+   },
+   "card_type_counts": {
+    "Red": 97,
+    "YellowRed": 2
+   },
+   "card_match_distribution": {
+    "1": 52,
+    "0": 144,
+    "2": 19,
+    "3": 3
+   },
+   "teams_finished": 14,
+   "goals_finished": 507,
+   "goals_per_match_finished": 2.3256880733944953
+  }
+ },
+ "name_variants": {
+  "7808": [
+   "Fenix",
+   "F\u00e9nix"
+  ],
+  "4660": [
+   "Paysandu",
+   "Paysand\u00fa"
+  ]
+ }
+}

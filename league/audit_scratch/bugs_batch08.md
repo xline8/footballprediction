@@ -1,0 +1,134 @@
+# Batch 08 clear bug scan
+
+Static inspection only. No gate was run or rerun, and no source file was changed. Findings about callable sealed paths are latent defects, not evidence that those paths were used in the recorded build. Classifications follow the authoritative verdicts, including their independently corrected arithmetic.
+
+- LU-NationalDivision — `league/LU-NationalDivision/engine/goals/dc.py:31` — Dev load_dev_data() materializes the entire CSV, including sealed/reserve targets, with pd.read_csv before filtering at line 34; violates the prereg no-read rule, although the later dev frame is filtered and no fit contamination is established.
+- NI-Premiership — `league/NI-Premiership/engine/goals/dc.py:31` — Dev load_dev_data() materializes sealed/reserve targets with unfiltered pd.read_csv before selecting dev rows at line 40; the guard checks the filtered frame, not the prereg prohibition on reading those targets (no claim they enter fitting).
+- LV-Virsliga — `league/LV-Virsliga/engine/goals/harness.py:134` — The exposed virgin-metrics/virgin-predict CLI loads 2026 and scores requested arms without consulting frozen dev results; G-LV failed dev, so this callable path bypasses the mandatory no-virgin gate (not executed in this audit).
+- LV-Virsliga — `league/LV-Virsliga/engine/corners/harness.py:31` — run_virgin() directly loads/scores 2026 despite C-LV dev failure; its UNTESTED/must-NOT-run docstring is not an executable gate and the CLI exposes it.
+- LV-Virsliga — `league/LV-Virsliga/engine/cards/harness.py:51` — run_virgin() directly loads 2025+2026 with no dev-pass check despite K-LV dev failure; the prohibition exists only in the docstring and the CLI exposes the path.
+- LV-Virsliga — `league/LV-Virsliga/engine/sot/harness.py:38` — run_virgin() checks requested arm membership only (line 42), not recorded dev eligibility; CLI --arm RS can therefore score the dev-failed RS arm, forbidden by PREREG_S_LV.
+- MA-BotolaPro — `league/MA-BotolaPro/engine/corners/harness.py:7` — FeatureBuilder/attach_naive run before the date>=2024-11-01 filter, so excluded sporadic pre-era rows update dev state; virgin pre fit at lines 50–57 also retains all 172 rows, including eight excluded pre-era rows (latter defect disclosed in verdict).
+- MA-BotolaPro — `league/MA-BotolaPro/engine/total_shots/run_t_ma.py:77` — Sealed pre-fit selects all 172 stats-bearing 2024/2025 rows without the prereg >=2024-11-01 boundary, so eight excluded rows train/update state; explicitly disclosed in T_MA_VERDICT, no rerun.
+- MA-BotolaPro — `league/MA-BotolaPro/engine/total_shots/run_t_ma.py:33` — Dev updates naive/base/level states after each individual match rather than after the whole date group; lines 81–84 do the same for virgin naive state, contrary to PREREG_T_MA date-grouped predict-then-update.
+- ME-1CFL — `league/ME-1CFL/engine/goals/harness.py:232` — run_virgin() loads and fits sealed rows before reading dev results (line 243), with no dev-pass refusal in it or the CLI; unlike the prereg it can read the sealed season after dev failure (latent; actual recorded dev passed).
+- MX-LigaMX — `league/MX-LigaMX/engine/goals/harness.py:88` — virgin() loads sealed rows and uses passed or ["gate_zero"] at line 89; with the recorded no-dev-pass outcome it still evaluates Gate Zero instead of refusing the read (verdict says fallback was never executed).
+- MX-LigaMX — `league/MX-LigaMX/engine/cards/harness.py:61` — virgin_metrics() uses arms or ["gate_zero"] and then loads sealed rows, so the recorded failure of both dev arms does not stop sealed evaluation; latent fallback was not used in the authoritative verdict.
+- MX-LigaMX — `league/MX-LigaMX/engine/cards/harness.py:102` — Sealed best_base considers only metrics["base"], ignoring the scored naive baseline; prereg leg (i) requires the better of BOTH baselines.
+- MX-LigaMX — `league/MX-LigaMX/engine/cards/harness.py:104` — X8 sign check accepts >=2 winning blocks, copied from a three-season harness, but PREREG_K_MX requires at least 4 of 8 scored blocks.
+- MX-LigaMX — `league/MX-LigaMX/engine/cards/harness.py:107` — Calibration acceptance uses |diff|<=0.01 OR |diff|<=SE instead of excess |diff|-0.01<=SE; it drops the 1pp boundary from the provisional band.
+- MX-LigaMX — `league/MX-LigaMX/engine/cards/harness.py:110` — The verdict writer still writes reports/K_AR_VERDICT.md with a K-AR headline (line 109), carrying the Argentina candidate/output identity into the Liga MX engine instead of K_MX_VERDICT.md.
+- MX-LigaMX — `league/MX-LigaMX/engine/cards/harness.py:31` — Gate scoring estimates a separate NB size from warm-up via estimate_r, rather than prereg K-MX fixed r=112.39 for model and baseline scoring; the recorded model r is 14.31, so this is a numerical protocol mismatch.
+- MX-LigaMX — `league/MX-LigaMX/engine/total_shots/run_t_mx.py:86` — Calibration accumulates p-y and reports it unchanged at line 93 although PREREG_T_MX freezes actual-minus-predicted; sealed underprediction is therefore reported negative (the verdict repeats that sign).
+- NL-EersteDivisie — `league/NL-EersteDivisie/engine/corners/harness.py:90` — Dev gate compares the core NB league_base_rate from make_prediction()/baseline_prediction(), not PREREG_C_NLE constant prior-seasons over-9.5 rate; verdict independently corrected the baseline and found outcome invariant.
+- NL-EersteDivisie — `league/NL-EersteDivisie/engine/corners/harness.py:62` — fit_params() receives all prior seasons rather than the prereg rolling previous-season-only fit window for gamma/betas; core.py:179 only filters prior_n>=10 and does not restore that season restriction.
+- NL-EersteDivisie — `league/NL-EersteDivisie/engine/cards/harness.py:43` — Dev gate uses warm-up-estimated per-method NB sizes (19.33/17.24/15.51) and an NB mean baseline instead of prereg fixed r112.39 plus constant prior-seasons over-rate baseline; verdict explicitly calls fixed-r sentence erroneous and verifies FAIL survives both baseline definitions.
+- NL-EersteDivisie — `league/NL-EersteDivisie/engine/sot/harness.py:94` — The eligibility/sign-check block is dead (for a in []); requested arms are accepted without validating dev eligibility, and choose() at line 147 omits prereg leg (iii), so an otherwise qualifying RS can ship without winning >=2/3 dev seasons; recorded verdict manually rejects RS.
+- NL-EersteDivisie — `league/NL-EersteDivisie/engine/total_shots/run_t_nl.py:151` — Dev gate scores baseline_league as a decayed-mean Poisson and baseline_naive as Poisson (rr=None, line 164), whereas PREREG_T_NLE freezes a constant prior-season over-rate and naive through the same NB as A; constant baseline is added only to virgin output at line 248.
+
+Engine files opened (all 104 Python files under the 13 requested engine trees; loaders, constants, gate paths and shared model mechanics skimmed):
+
+- `league/LT-Toplyga/engine/goals/arms.py`
+- `league/LT-Toplyga/engine/goals/dc.py`
+- `league/LT-Toplyga/engine/goals/harness.py`
+- `league/LT-Toplyga/engine/goals/run_g_lt.py`
+- `league/LU-NationalDivision/engine/goals/arms.py`
+- `league/LU-NationalDivision/engine/goals/dc.py`
+- `league/LU-NationalDivision/engine/goals/harness.py`
+- `league/LU-NationalDivision/engine/goals/model.py`
+- `league/LU-NationalDivision/engine/goals/run_g_lu.py`
+- `league/LV-Virsliga/engine/cards/harness.py`
+- `league/LV-Virsliga/engine/cards/model.py`
+- `league/LV-Virsliga/engine/cards/run_k_lv.py`
+- `league/LV-Virsliga/engine/corners/core.py`
+- `league/LV-Virsliga/engine/corners/harness.py`
+- `league/LV-Virsliga/engine/corners/run_c_lv.py`
+- `league/LV-Virsliga/engine/goals/arms.py`
+- `league/LV-Virsliga/engine/goals/dc.py`
+- `league/LV-Virsliga/engine/goals/harness.py`
+- `league/LV-Virsliga/engine/goals/run_g_lv.py`
+- `league/LV-Virsliga/engine/sot/harness.py`
+- `league/LV-Virsliga/engine/sot/model.py`
+- `league/LV-Virsliga/engine/sot/run_s_lv.py`
+- `league/LV-Virsliga/engine/total_shots/model.py`
+- `league/LV-Virsliga/engine/total_shots/run_t_lv.py`
+- `league/MA-BotolaPro/engine/cards/harness.py`
+- `league/MA-BotolaPro/engine/cards/model.py`
+- `league/MA-BotolaPro/engine/cards/run_k_ma.py`
+- `league/MA-BotolaPro/engine/corners/core.py`
+- `league/MA-BotolaPro/engine/corners/harness.py`
+- `league/MA-BotolaPro/engine/corners/run_c_ma.py`
+- `league/MA-BotolaPro/engine/goals/arms.py`
+- `league/MA-BotolaPro/engine/goals/dc.py`
+- `league/MA-BotolaPro/engine/goals/harness.py`
+- `league/MA-BotolaPro/engine/goals/run_g_ma.py`
+- `league/MA-BotolaPro/engine/sot/harness.py`
+- `league/MA-BotolaPro/engine/sot/model.py`
+- `league/MA-BotolaPro/engine/sot/run_s_ma.py`
+- `league/MA-BotolaPro/engine/total_shots/harness.py`
+- `league/MA-BotolaPro/engine/total_shots/model.py`
+- `league/MA-BotolaPro/engine/total_shots/run_t_ma.py`
+- `league/MD-NationalDivision/engine/goals/arms.py`
+- `league/MD-NationalDivision/engine/goals/dc.py`
+- `league/MD-NationalDivision/engine/goals/harness.py`
+- `league/MD-NationalDivision/engine/goals/run_g_md.py`
+- `league/ME-1CFL/engine/goals/arms.py`
+- `league/ME-1CFL/engine/goals/dc.py`
+- `league/ME-1CFL/engine/goals/harness.py`
+- `league/ME-1CFL/engine/goals/run_g_me.py`
+- `league/MK-PrvaLiga/engine/goals/arms.py`
+- `league/MK-PrvaLiga/engine/goals/dc.py`
+- `league/MK-PrvaLiga/engine/goals/harness.py`
+- `league/MK-PrvaLiga/engine/goals/model.py`
+- `league/MK-PrvaLiga/engine/goals/run_g_mk.py`
+- `league/MX-ExpansionMX/engine/cards/model.py`
+- `league/MX-ExpansionMX/engine/cards/run_k_mxe.py`
+- `league/MX-ExpansionMX/engine/common_mxe.py`
+- `league/MX-ExpansionMX/engine/goals/arms.py`
+- `league/MX-ExpansionMX/engine/goals/dc.py`
+- `league/MX-ExpansionMX/engine/goals/run_g_mxe.py`
+- `league/MX-LigaMX/engine/cards/harness.py`
+- `league/MX-LigaMX/engine/cards/model.py`
+- `league/MX-LigaMX/engine/cards/run_k_mx.py`
+- `league/MX-LigaMX/engine/corners/core.py`
+- `league/MX-LigaMX/engine/corners/harness.py`
+- `league/MX-LigaMX/engine/corners/run_c_mx.py`
+- `league/MX-LigaMX/engine/goals/arms.py`
+- `league/MX-LigaMX/engine/goals/dc.py`
+- `league/MX-LigaMX/engine/goals/harness.py`
+- `league/MX-LigaMX/engine/goals/run_g_mx.py`
+- `league/MX-LigaMX/engine/sot/harness.py`
+- `league/MX-LigaMX/engine/sot/model.py`
+- `league/MX-LigaMX/engine/sot/run_s_mx.py`
+- `league/MX-LigaMX/engine/total_shots/model.py`
+- `league/MX-LigaMX/engine/total_shots/run_t_mx.py`
+- `league/MY-LigaSuper/engine/goals/arms.py`
+- `league/MY-LigaSuper/engine/goals/dc.py`
+- `league/MY-LigaSuper/engine/goals/harness.py`
+- `league/MY-LigaSuper/engine/goals/model.py`
+- `league/MY-LigaSuper/engine/goals/run_g_my.py`
+- `league/NG-ProfessionalLeague/engine/goals/arms.py`
+- `league/NG-ProfessionalLeague/engine/goals/dc.py`
+- `league/NG-ProfessionalLeague/engine/goals/harness.py`
+- `league/NG-ProfessionalLeague/engine/goals/run_g_ng.py`
+- `league/NI-Premiership/engine/goals/arms.py`
+- `league/NI-Premiership/engine/goals/dc.py`
+- `league/NI-Premiership/engine/goals/harness.py`
+- `league/NI-Premiership/engine/goals/model.py`
+- `league/NI-Premiership/engine/goals/run_g_ni.py`
+- `league/NL-EersteDivisie/engine/cards/harness.py`
+- `league/NL-EersteDivisie/engine/cards/model.py`
+- `league/NL-EersteDivisie/engine/cards/run_k_nl.py`
+- `league/NL-EersteDivisie/engine/corners/core.py`
+- `league/NL-EersteDivisie/engine/corners/harness.py`
+- `league/NL-EersteDivisie/engine/corners/run_c_nl.py`
+- `league/NL-EersteDivisie/engine/goals/arms.py`
+- `league/NL-EersteDivisie/engine/goals/arms_de3.py`
+- `league/NL-EersteDivisie/engine/goals/dc.py`
+- `league/NL-EersteDivisie/engine/goals/harness.py`
+- `league/NL-EersteDivisie/engine/goals/run_g_nl.py`
+- `league/NL-EersteDivisie/engine/sot/harness.py`
+- `league/NL-EersteDivisie/engine/sot/model.py`
+- `league/NL-EersteDivisie/engine/sot/run_s_nl.py`
+- `league/NL-EersteDivisie/engine/total_shots/model.py`
+- `league/NL-EersteDivisie/engine/total_shots/run_t_nl.py`

@@ -1,0 +1,61 @@
+{
+  "protocol": {
+    "virgin_season": [
+      "2025 - Apertura",
+      "2025 - Clausura"
+    ],
+    "transitional": false
+  },
+  "read_arms": [
+    "GZ",
+    "RS"
+  ],
+  "arms": {
+    "GZ": {
+      "ll_8.5": 0.685802994475611,
+      "calibration_diff": -0.03586794165503786,
+      "calibration_se": 0.02963887663050438,
+      "n": 280,
+      "leg_i": true,
+      "leg_ii": true,
+      "leg_iii": true,
+      "virgin_(i)": true,
+      "virgin_(ii)": true,
+      "virgin_(iii)": true
+    },
+    "RS": {
+      "ll_8.5": 0.6855540413660909,
+      "calibration_diff": -0.035782040704509306,
+      "calibration_se": 0.029632529588561045,
+      "n": 280,
+      "leg_i": true,
+      "leg_ii": true,
+      "leg_iii": true,
+      "virgin_(i)": true,
+      "virgin_(ii)": true,
+      "virgin_(iii)": true
+    }
+  },
+  "baselines": {
+    "league_base_rate": {
+      "ll_8.5": 0.6927396024885066,
+      "rate": 0.48514851485148514
+    },
+    "naive": {
+      "ll_8.5": 0.7055076888662016,
+      "calibration_diff": -0.042813973185319,
+      "calibration_se": 0.030165640417294866,
+      "n": 280
+    }
+  },
+  "dev_gate": {
+    "GZ": true,
+    "RS": true
+  },
+  "shipped_arm": "RS",
+  "verdict": "PASS",
+  "calibration_breach_plus_se_pp": {
+    "GZ": -0.37709349754665233,
+    "RS": -0.38504888840517404
+  }
+}

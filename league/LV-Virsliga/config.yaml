@@ -1,0 +1,33 @@
+# Latvia Virsliga — league config
+league: LV-Virsliga
+country: Latvia
+fotmob_id: 226
+tier: 1
+data:
+  matches: league/LV-Virsliga/data/lv_virsliga_matches.csv
+  team_matches: league/LV-Virsliga/data/lv_virsliga_team_matches.csv
+seasons: ["2021", "2022", "2023", "2024", "2025", "2026"]
+dev_period: ["2021", "2022", "2023", "2024", "2025"]
+virgin_primary: "2026"
+halves_constants:
+  goals_1h_share: 0.4569
+  sot_1h_share: 0.4637
+  corners_1h_share: 0.4816
+  total_shots_1h_share: 0.4685
+  yellow_cards_1h_share: 0.3306
+markets:
+  goals: G-LV
+  sot: S-LV
+  corners: C-LV
+  cards: K-LV
+  total_shots: T-LV
+notes:
+  - 10 teams 2025/2026, straight quadruple round-robin, 36 rounds, 180 matches per complete season; no play-offs in the feed. 2026 holds 179 played matches (RFS-Riga FC round 36 absent from the warehouse).
+  - 2022-2024: 180 league matches + a 2-legged relegation final (excluded from all tables; 6 matches total). 2021: 8 teams, 112 matches, truncated season.
+  - STATS ERA from 2025-03-05: before it no stats block and the events feed carries almost no plain yellows (11/19/23/24 per season). From 2025 every match is rich, incl. FirstHalf/SecondHalf period splits.
+  - Stats feed carries 29 keys (BallPossesion, total_shots, ShotsOnTarget, big_chance, yellow_cards, corners, fouls, ...). No expected_goals, no touches_opp_box, no shotmap in any of the 1,017 payloads.
+  - big_chance is identically 0 in all 359 stats-era matches (dead key); corners X9 is possession-only.
+  - Cards target is event-unified yellows (Yellow + YellowRed): the stats yellow_cards key reads 0/0 in 43/180 2025 matches while events record 187 yellows there (hole Mar-Aug 2025).
+  - Referee populated in only 40/180 (2025) and 55/179 (2026) matches; ~12 referees with 1-5 matches each in 2025. X8 dropped.
+  - Halves: all five markets via frozen 2025 constants (true per-match share variance = 0 everywhere).
+  - Calibration convention: actual minus predicted.

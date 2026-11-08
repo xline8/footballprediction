@@ -1,0 +1,20 @@
+{
+  "arms": [
+    "A",
+    "B",
+    "C"
+  ],
+  "lambda": 30.0,
+  "r_A": 91.23598019080228,
+  "level_cell": [
+    30.0,
+    0.5,
+    50.0
+  ],
+  "half_split": [
+    0.4602,
+    0.5398
+  ],
+  "trailing_r_window": 200,
+  "primary_line": 25.5
+}

@@ -1,0 +1,59 @@
+{
+  "virgin_read": true,
+  "arms": {
+    "gate_zero": {
+      "n": 192,
+      "ll": 0.6901948511086724,
+      "mean_pred": 0.4435633183809738,
+      "actual_rate": 0.4583333333333333,
+      "calibration_pp": -1.4770014952359711,
+      "calibration_se_pp": 3.6047577121879977
+    },
+    "x5": {
+      "n": 192,
+      "ll": 0.6903761653808201,
+      "mean_pred": 0.44367368441687355,
+      "actual_rate": 0.4583333333333333,
+      "calibration_pp": -1.4659648916459962,
+      "calibration_se_pp": 3.605359556605608
+    }
+  },
+  "baselines": {
+    "__base": {
+      "n": 192,
+      "ll": 0.6908722080767431,
+      "mean_pred": 0.4696029415094358,
+      "actual_rate": 0.4583333333333333,
+      "calibration_pp": 1.1269608176102508,
+      "calibration_se_pp": 3.608709784602325
+    },
+    "__naive": {
+      "n": 192,
+      "ll": 0.7056495721335204,
+      "mean_pred": 0.4332952189118556,
+      "actual_rate": 0.4583333333333333,
+      "calibration_pp": -2.5038114421477182,
+      "calibration_se_pp": 3.6520760075259653
+    }
+  },
+  "legs": {
+    "gate_zero": {
+      "dev_pass": true,
+      "virgin_ll": 0.6901948511086724,
+      "ll_leg": true,
+      "calibration": "PROVISIONAL",
+      "sign_leg": true,
+      "pass": true
+    },
+    "x5": {
+      "dev_pass": true,
+      "virgin_ll": 0.6903761653808201,
+      "ll_leg": false,
+      "calibration": "PROVISIONAL",
+      "sign_leg": true,
+      "pass": false
+    }
+  },
+  "shipped_arm": "gate_zero",
+  "verdict": "PROVISIONAL"
+}

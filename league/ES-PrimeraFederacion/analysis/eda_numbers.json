@@ -1,0 +1,560 @@
+{
+ "seasons": [
+  "2021/2022",
+  "2022/2023",
+  "2023/2024",
+  "2024/2025",
+  "2025/2026",
+  "2026/2027"
+ ],
+ "n": 4081,
+ "per_season": {
+  "2021/2022": {
+   "n": 767,
+   "goals_per_match": 2.4068,
+   "home_goals_per_match": 1.3846,
+   "away_goals_per_match": 1.0222,
+   "H_rate": 0.4681,
+   "D_rate": 0.2464,
+   "A_rate": 0.2855,
+   "OU2.5_over_rate": 0.4459,
+   "phase_counts": {
+    "regular": 760,
+    "playoff": 7
+   },
+   "awarded_count": 16,
+   "extra_time_count": 1,
+   "coverage": {
+    "stats": 0.0,
+    "half": 0.0,
+    "shotmap": 0.0,
+    "events": 90.2,
+    "referee": 0.0,
+    "matches_with_any_card_event": 19.2,
+    "goal_events_complete": 97.9
+   }
+  },
+  "2022/2023": {
+   "n": 774,
+   "goals_per_match": 2.2171,
+   "home_goals_per_match": 1.2713,
+   "away_goals_per_match": 0.9457,
+   "H_rate": 0.438,
+   "D_rate": 0.3049,
+   "A_rate": 0.2571,
+   "OU2.5_over_rate": 0.3786,
+   "phase_counts": {
+    "regular": 760,
+    "playoff": 14
+   },
+   "awarded_count": 0,
+   "extra_time_count": 2,
+   "coverage": {
+    "stats": 0.0,
+    "half": 0.0,
+    "shotmap": 0.0,
+    "events": 90.8,
+    "referee": 0.0,
+    "matches_with_any_card_event": 22.7,
+    "goal_events_complete": 100.0
+   }
+  },
+  "2023/2024": {
+   "n": 774,
+   "goals_per_match": 2.2313,
+   "home_goals_per_match": 1.2959,
+   "away_goals_per_match": 0.9354,
+   "H_rate": 0.4406,
+   "D_rate": 0.2868,
+   "A_rate": 0.2726,
+   "OU2.5_over_rate": 0.4044,
+   "phase_counts": {
+    "regular": 760,
+    "playoff": 14
+   },
+   "awarded_count": 1,
+   "extra_time_count": 1,
+   "coverage": {
+    "stats": 0.0,
+    "half": 0.0,
+    "shotmap": 0.0,
+    "events": 90.8,
+    "referee": 0.0,
+    "matches_with_any_card_event": 18.1,
+    "goal_events_complete": 100.0
+   }
+  },
+  "2024/2025": {
+   "n": 774,
+   "goals_per_match": 2.4109,
+   "home_goals_per_match": 1.3773,
+   "away_goals_per_match": 1.0336,
+   "H_rate": 0.4276,
+   "D_rate": 0.3191,
+   "A_rate": 0.2532,
+   "OU2.5_over_rate": 0.4251,
+   "phase_counts": {
+    "regular": 760,
+    "playoff": 14
+   },
+   "awarded_count": 0,
+   "extra_time_count": 3,
+   "coverage": {
+    "stats": 0.0,
+    "half": 0.0,
+    "shotmap": 0.0,
+    "events": 92.4,
+    "referee": 0.0,
+    "matches_with_any_card_event": 19.1,
+    "goal_events_complete": 100.0
+   }
+  },
+  "2025/2026": {
+   "n": 772,
+   "goals_per_match": 2.3368,
+   "home_goals_per_match": 1.3484,
+   "away_goals_per_match": 0.9883,
+   "H_rate": 0.4547,
+   "D_rate": 0.2927,
+   "A_rate": 0.2526,
+   "OU2.5_over_rate": 0.4119,
+   "phase_counts": {
+    "regular": 760,
+    "playoff": 12
+   },
+   "awarded_count": 0,
+   "extra_time_count": 2,
+   "coverage": {
+    "stats": 0.0,
+    "half": 0.0,
+    "shotmap": 0.0,
+    "events": 90.9,
+    "referee": 0.0,
+    "matches_with_any_card_event": 24.7,
+    "goal_events_complete": 100.0
+   }
+  },
+  "2026/2027": {
+   "n": 220,
+   "goals_per_match": 2.6182,
+   "home_goals_per_match": 1.5364,
+   "away_goals_per_match": 1.0818,
+   "H_rate": 0.4818,
+   "D_rate": 0.2864,
+   "A_rate": 0.2318,
+   "OU2.5_over_rate": 0.4591,
+   "phase_counts": {
+    "regular": 220,
+    "playoff": 0
+   },
+   "awarded_count": 0,
+   "extra_time_count": 0,
+   "coverage": {
+    "stats": 0.0,
+    "half": 0.0,
+    "shotmap": 0.0,
+    "events": 94.5,
+    "referee": 0.0,
+    "matches_with_any_card_event": 26.4,
+    "goal_events_complete": 100.0
+   }
+  }
+ },
+ "reliability": {
+  "chronological_halves": {
+   "gf_r": 0.296,
+   "ga_r": 0.376,
+   "n_team_seasons": 160
+  },
+  "rounds_1_19_vs_20_38_regular": {
+   "gf_r": 0.278,
+   "ga_r": 0.415,
+   "n_team_seasons": 160
+  }
+ },
+ "half_shares_goals_events": {
+  "dev_pooled": {
+   "n": 2756,
+   "share": 0.4301,
+   "observed_sd": 0.3558,
+   "binomial_noise_sd": 0.3586,
+   "true_sd": 0.0,
+   "ht_goals": 3062,
+   "goals": 7120
+  },
+  "per_season": {
+   "2021/2022": {
+    "n": 683,
+    "share": 0.4522,
+    "observed_sd": 0.3542,
+    "binomial_noise_sd": 0.3566,
+    "true_sd": 0.0,
+    "ht_goals": 819,
+    "goals": 1811
+   },
+   "2022/2023": {
+    "n": 686,
+    "share": 0.4347,
+    "observed_sd": 0.3615,
+    "binomial_noise_sd": 0.3639,
+    "true_sd": 0.0,
+    "ht_goals": 746,
+    "goals": 1716
+   },
+   "2023/2024": {
+    "n": 681,
+    "share": 0.4233,
+    "observed_sd": 0.3578,
+    "binomial_noise_sd": 0.3618,
+    "true_sd": 0.0,
+    "ht_goals": 731,
+    "goals": 1727
+   },
+   "2024/2025": {
+    "n": 706,
+    "share": 0.4105,
+    "observed_sd": 0.3488,
+    "binomial_noise_sd": 0.3515,
+    "true_sd": 0.0,
+    "ht_goals": 766,
+    "goals": 1866
+   },
+   "2025/2026": {
+    "n": 686,
+    "share": 0.4473,
+    "observed_sd": 0.3594,
+    "binomial_noise_sd": 0.3573,
+    "true_sd": 0.0385,
+    "ht_goals": 807,
+    "goals": 1804
+   },
+   "2026/2027": {
+    "n": 205,
+    "share": 0.4167,
+    "observed_sd": 0.3382,
+    "binomial_noise_sd": 0.3462,
+    "true_sd": 0.0,
+    "ht_goals": 240,
+    "goals": 576
+   }
+  }
+ },
+ "movers": {
+  "2022/2023": {
+   "from_LaLiga2": [
+    "Alcorcon",
+    "Fuenlabrada",
+    "Real Sociedad B",
+    "SD Amorebieta"
+   ],
+   "from_below": [
+    "AD Ceuta FC",
+    "CF Intercity",
+    "Cordoba",
+    "Eldense",
+    "La Nucia",
+    "Merida",
+    "Numancia",
+    "Osasuna B",
+    "Pontevedra",
+    "Real Murcia"
+   ]
+  },
+  "2023/2024": {
+   "from_LaLiga2": [
+    "Lugo",
+    "Malaga",
+    "Ponferradina",
+    "UD Ibiza"
+   ],
+   "from_below": [
+    "Antequera",
+    "Atletico Madrid B",
+    "Atletico Sanluqueno CF",
+    "CD Arenteiro",
+    "CD Teruel",
+    "Granada B",
+    "Melilla",
+    "Recreativo Huelva",
+    "SD Tarazona",
+    "Sestao"
+   ]
+  },
+  "2024/2025": {
+   "from_LaLiga2": [
+    "Alcorcon",
+    "FC Andorra",
+    "SD Amorebieta",
+    "Villarreal B"
+   ],
+   "from_below": [
+    "Athletic Club B",
+    "Barakaldo",
+    "Betis Deportivo Balompie",
+    "Gimnastica Segoviana",
+    "Hercules",
+    "Marbella FC",
+    "Ourense",
+    "Sevilla Atletico",
+    "Yeclano",
+    "Zamora"
+   ]
+  },
+  "2025/2026": {
+   "from_LaLiga2": [
+    "Cartagena",
+    "Eldense",
+    "Racing de Ferrol",
+    "Tenerife"
+   ],
+   "from_below": [
+    "Arenas Getxo",
+    "CD Guadalajara",
+    "CD Teruel",
+    "CE Europa",
+    "CF Talavera de la Reina",
+    "Cacereno",
+    "Juventud Torremolinos CF",
+    "Pontevedra",
+    "Real Aviles CF",
+    "Sabadell"
+   ]
+  },
+  "2026/2027": {
+   "from_LaLiga2": [
+    "CD Mirand\u00e9s",
+    "Cultural Leonesa",
+    "Real Zaragoza",
+    "SD Huesca"
+   ],
+   "from_below": [
+    "CD Coria",
+    "CD Extremadura",
+    "CDA \u00c1guilas FC",
+    "Logrones",
+    "RC Deportivo Fabril",
+    "Rayo Majadahonda",
+    "Real Ja\u00e9n",
+    "Real Union",
+    "Sant Andreu",
+    "UD Ourense"
+   ]
+  }
+ },
+ "mover_perf_dev": {
+  "mu": 1.1581,
+  "n_matches": 3089,
+  "from_LaLiga2": {
+   "team_matches": 476,
+   "gf_per_match": 1.2395,
+   "ga_per_match": 1.0084,
+   "gd_per_match": 0.2311,
+   "delta_gf_vs_mu": 0.0814,
+   "delta_ga_vs_mu": -0.1497
+  },
+  "from_below": {
+   "team_matches": 1144,
+   "gf_per_match": 1.104,
+   "ga_per_match": 1.1687,
+   "gd_per_match": -0.0647,
+   "delta_gf_vs_mu": -0.0541,
+   "delta_ga_vs_mu": 0.0106
+  }
+ },
+ "mover_perf_pooled_incl_virgin": {
+  "mu": 1.1495,
+  "n_matches": 3094,
+  "from_LaLiga2": {
+   "team_matches": 628,
+   "gf_per_match": 1.2532,
+   "ga_per_match": 1,
+   "gd_per_match": 0.2532,
+   "delta_gf_vs_mu": 0.1037,
+   "delta_ga_vs_mu": -0.1495
+  },
+  "from_below": {
+   "team_matches": 1530,
+   "gf_per_match": 1.1288,
+   "ga_per_match": 1.1843,
+   "gd_per_match": -0.0556,
+   "delta_gf_vs_mu": -0.0207,
+   "delta_ga_vs_mu": 0.0348
+  }
+ },
+ "churn": {
+  "distinct_teams_per_season": {
+   "2021/2022": 40,
+   "2022/2023": 40,
+   "2023/2024": 40,
+   "2024/2025": 40,
+   "2025/2026": 40,
+   "2026/2027": 40
+  },
+  "entries": {
+   "2022/2023": {
+    "count": 14,
+    "teams": [
+     "AD Ceuta FC",
+     "Alcorcon",
+     "CF Intercity",
+     "Cordoba",
+     "Eldense",
+     "Fuenlabrada",
+     "La Nucia",
+     "Merida",
+     "Numancia",
+     "Osasuna B",
+     "Pontevedra",
+     "Real Murcia",
+     "Real Sociedad B",
+     "SD Amorebieta"
+    ]
+   },
+   "2023/2024": {
+    "count": 14,
+    "teams": [
+     "Antequera",
+     "Atletico Madrid B",
+     "Atletico Sanluqueno CF",
+     "CD Arenteiro",
+     "CD Teruel",
+     "Granada B",
+     "Lugo",
+     "Malaga",
+     "Melilla",
+     "Ponferradina",
+     "Recreativo Huelva",
+     "SD Tarazona",
+     "Sestao",
+     "UD Ibiza"
+    ]
+   },
+   "2024/2025": {
+    "count": 14,
+    "teams": [
+     "Alcorcon",
+     "Athletic Club B",
+     "Barakaldo",
+     "Betis Deportivo Balompie",
+     "FC Andorra",
+     "Gimnastica Segoviana",
+     "Hercules",
+     "Marbella FC",
+     "Ourense",
+     "SD Amorebieta",
+     "Sevilla Atletico",
+     "Villarreal B",
+     "Yeclano",
+     "Zamora"
+    ]
+   },
+   "2025/2026": {
+    "count": 14,
+    "teams": [
+     "Arenas Getxo",
+     "CD Guadalajara",
+     "CD Teruel",
+     "CE Europa",
+     "CF Talavera de la Reina",
+     "Cacereno",
+     "Cartagena",
+     "Eldense",
+     "Juventud Torremolinos CF",
+     "Pontevedra",
+     "Racing de Ferrol",
+     "Real Aviles CF",
+     "Sabadell",
+     "Tenerife"
+    ]
+   },
+   "2026/2027": {
+    "count": 14,
+    "teams": [
+     "CD Coria",
+     "CD Extremadura",
+     "CD Mirand\u00e9s",
+     "CDA \u00c1guilas FC",
+     "Cultural Leonesa",
+     "Logrones",
+     "RC Deportivo Fabril",
+     "Rayo Majadahonda",
+     "Real Ja\u00e9n",
+     "Real Union",
+     "Real Zaragoza",
+     "SD Huesca",
+     "Sant Andreu",
+     "UD Ourense"
+    ]
+   }
+  },
+  "distinct_teams_overall": 91
+ },
+ "cards_evidence": {
+  "2021/2022": {
+   "matches_with_any_card_event": 147,
+   "total_card_events": 168,
+   "card_events_per_match": 0.219
+  },
+  "2022/2023": {
+   "matches_with_any_card_event": 176,
+   "total_card_events": 205,
+   "card_events_per_match": 0.2649
+  },
+  "2023/2024": {
+   "matches_with_any_card_event": 140,
+   "total_card_events": 160,
+   "card_events_per_match": 0.2067
+  },
+  "2024/2025": {
+   "matches_with_any_card_event": 148,
+   "total_card_events": 172,
+   "card_events_per_match": 0.2222
+  },
+  "2025/2026": {
+   "matches_with_any_card_event": 191,
+   "total_card_events": 220,
+   "card_events_per_match": 0.285
+  },
+  "2026/2027": {
+   "matches_with_any_card_event": 58,
+   "total_card_events": 70,
+   "card_events_per_match": 0.3182
+  }
+ },
+ "over_rates": {
+  "EVAL": 0.4027,
+  "VIRGIN": 0.4119
+ },
+ "home_advantage_dev": {
+  "home_win_rate_pct": 44.35,
+  "home_goals_per_match": 1.3321,
+  "away_goals_per_match": 0.9841,
+  "home_goals_share": 0.5751
+ },
+ "groups": {
+  "2021/2022": {
+   "1": 20,
+   "2": 20
+  },
+  "2022/2023": {
+   "1": 20,
+   "2": 20
+  },
+  "2023/2024": {
+   "1": 20,
+   "2": 20
+  },
+  "2024/2025": {
+   "1": 20,
+   "2": 20
+  },
+  "2025/2026": {
+   "1": 20,
+   "2": 20
+  },
+  "2026/2027": {
+   "1": 20,
+   "2": 20
+  }
+ }
+}

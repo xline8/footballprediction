@@ -1,0 +1,24 @@
+# Portugal Liga 3 — Phase A descriptive configuration
+league: PT-Liga3
+country: Portugal
+fotmob_id: 9112
+tier: 3
+warehouse: data_enrichment/fotmob_world (index filter league_id=9112)
+data:
+  matches: league/PT-Liga3/data/pt3_matches.csv
+seasons: ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", "2026/2027"]
+dev_period: ["2022/2023", "2023/2024", "2024/2025"]
+virgin_primary: "2025/2026"
+confirmatory_reserved: "2026/2027"
+halves_constants: {} # descriptive event-derived 1H share only; FT-only
+markets:
+  goals: G-PT3 # buildable; header goals present in all 1,647 finished matches
+  sot: NOT_BUILDABLE # stats is None in all payloads; shotmaps have zero shots
+  corners: NOT_BUILDABLE # stats is None in all payloads
+  cards: NOT_BUILDABLE # event coverage is unstable and stats-vs-events validation n=0
+  total_shots: NOT_BUILDABLE # shotmaps have zero shots and stats is None
+notes:
+  - Index coverage flags are not trusted; payload content is measured.
+  - No named referee, xG, SOT, corners, total shots, or stats yellow_cards key exists in the finished corpus.
+  - All played phases enter the one match table; format changes by season are documented in DATA_UNDERSTANDING.md.
+  - Five index rows have score 0-0 but header.status.finished=false and are excluded by the finished-match rule.

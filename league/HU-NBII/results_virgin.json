@@ -1,0 +1,9 @@
+{
+  "virgin_read": false,
+  "reason": "no arm passed (or could pass) a dev gate — no gateable dev/virgin window exists",
+  "league": "HU-NBII",
+  "fotmob_id": 9117,
+  "candidates": ["G", "S", "C", "K", "T"],
+  "genuine_matches": 200,
+  "revisit": "dev on 2025/26+2026/27 once complete and re-fetched; virgin 2027/28; fresh prereg required"
+}

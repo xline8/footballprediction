@@ -1,0 +1,102 @@
+{
+  "protocol": {
+    "state_pass": [
+      "2021/2022",
+      "2022/2023",
+      "2023/2024",
+      "2024/2025",
+      "2025/2026"
+    ],
+    "virgin_season": "2025/2026",
+    "n": 380,
+    "scored_arms": [
+      "A",
+      "B",
+      "C"
+    ],
+    "runtime_seconds": 2.5328571796417236
+  },
+  "metrics": {
+    "A": {
+      "n": 380,
+      "logloss": {
+        "24.5": 0.5744374020682244,
+        "25.5": 0.6218668158228533,
+        "26.5": 0.6654371529154227
+      },
+      "calibration_pp": 3.2017505810768245,
+      "calibration_se_pp": 2.3801686282102326,
+      "actual_over_rate_pp": 66.05263157894737,
+      "mean_pred_over_pp": 62.85088099787054,
+      "mae": 4.8032713051222915
+    },
+    "B": {
+      "n": 380,
+      "logloss": {
+        "24.5": 0.571301147632427,
+        "25.5": 0.6195018303662709,
+        "26.5": 0.6642310918746133
+      },
+      "calibration_pp": 1.7322708489611667,
+      "calibration_se_pp": 2.3785993328912602,
+      "actual_over_rate_pp": 66.05263157894737,
+      "mean_pred_over_pp": 64.3203607299862,
+      "mae": 4.8044945544773965
+    },
+    "C": {
+      "n": 380,
+      "logloss": {
+        "24.5": 0.5760227237101596,
+        "25.5": 0.6233431199378078,
+        "26.5": 0.6658281609169031
+      },
+      "calibration_pp": 3.9680704171653987,
+      "calibration_se_pp": 2.3802688195285073,
+      "actual_over_rate_pp": 66.05263157894737,
+      "mean_pred_over_pp": 62.08456116178197,
+      "mae": 4.8032713051222915
+    },
+    "baseline_league": {
+      "n": 380,
+      "logloss": {
+        "24.5": 0.5949301414720092,
+        "25.5": 0.6499196800147309,
+        "26.5": 0.6891710090368431
+      },
+      "calibration_pp": -5.831724277230279,
+      "calibration_se_pp": 2.4344599234328435,
+      "actual_over_rate_pp": 66.05263157894737,
+      "mean_pred_over_pp": 60.220907301717084,
+      "mae": 5.0180737648925104
+    },
+    "baseline_naive": {
+      "n": 380,
+      "logloss": {
+        "24.5": 0.5771536337976056,
+        "25.5": 0.6249582414176904,
+        "26.5": 0.6739458576439405
+      },
+      "calibration_pp": 2.8262173251059153,
+      "calibration_se_pp": 2.390970782173058,
+      "actual_over_rate_pp": 66.05263157894737,
+      "mean_pred_over_pp": 68.87884890405329,
+      "mae": 4.849962633933483
+    },
+    "baseline_league_constant": {
+      "n": 380,
+      "logloss": {
+        "24.5": 0.6860413320291795,
+        "25.5": 0.688202176432621,
+        "26.5": 0.6904461302361949
+      },
+      "calibration_pp": 15.263157894736846,
+      "calibration_se_pp": 0.0,
+      "actual_over_rate_pp": 66.05263157894737,
+      "mean_pred_over_pp": 50.78947368421053,
+      "mae": 0.0
+    }
+  },
+  "export_arm": null,
+  "calibration_sign_convention": "actual_over_rate - mean_predicted_over_probability",
+  "league_base_rate_constant_definition": "pooled 2021/2022-2024/2025 over-25.5 rate, constant across 2025/2026"
+}
