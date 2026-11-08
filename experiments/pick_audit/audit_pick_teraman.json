@@ -1,0 +1,143 @@
+{
+  "candidate_pool": {
+    "by_market": {
+      "1X2": {
+        "brier": 0.17356566620943953,
+        "gap_pp": 0.0002507374631255388,
+        "hit_rate": 0.3333333333333333,
+        "log_loss": 0.5251220540322388,
+        "mean_predicted": 0.33333082595870206,
+        "n": 678
+      },
+      "BTS": {
+        "brier": 0.2577956434070796,
+        "gap_pp": 0.0,
+        "hit_rate": 0.5,
+        "log_loss": 0.7099000625787799,
+        "mean_predicted": 0.5,
+        "n": 452
+      },
+      "DC": {
+        "brier": 0.17356566702064896,
+        "gap_pp": 0.0005014749262510776,
+        "hit_rate": 0.6666666666666666,
+        "log_loss": 0.5251208959678639,
+        "mean_predicted": 0.6666616519174041,
+        "n": 678
+      },
+      "DNB": {
+        "brier": 0.18100880539497363,
+        "gap_pp": 0.00048228537845584896,
+        "hit_rate": 0.5,
+        "log_loss": 0.5389701939351172,
+        "mean_predicted": 0.49999517714621544,
+        "n": 382
+      },
+      "OU": {
+        "brier": 0.21529215591445428,
+        "gap_pp": 0.0,
+        "hit_rate": 0.5,
+        "log_loss": 0.6215633962351242,
+        "mean_predicted": 0.5,
+        "n": 1356
+      }
+    },
+    "overall": {
+      "brier": 0.20106040660769314,
+      "gap_pp": 0.00019577919192492743,
+      "hit_rate": 0.5,
+      "log_loss": 0.5870462853253585,
+      "mean_predicted": 0.49999804220808075,
+      "n": 3546
+    }
+  },
+  "candidate_probability_basis": "archived prediction snapshots; DNB conditional on no push",
+  "counts": {
+    "candidate_pushes": 70,
+    "candidate_rows_settled_or_push": 3616,
+    "excluded": {
+      "missing_result": 1152
+    },
+    "pool_max_matches": 226,
+    "selected_rows": 70
+  },
+  "ledger_selection_basis": "product=pick_teraman, level=leg, status in {hit, lose}; p_model from ledger",
+  "pool_maximum": {
+    "by_market": {
+      "DC": {
+        "brier": 0.0852933,
+        "gap_pp": 5.694782608695648,
+        "hit_rate": 0.9130434782608695,
+        "log_loss": 0.31163914287068,
+        "mean_predicted": 0.856095652173913,
+        "n": 46
+      },
+      "OU": {
+        "brier": 0.1649756777222222,
+        "gap_pp": -1.1493888888889026,
+        "hit_rate": 0.7944444444444444,
+        "log_loss": 0.5142195584450967,
+        "mean_predicted": 0.8059383333333334,
+        "n": 180
+      }
+    },
+    "overall": {
+      "brier": 0.1487571406637168,
+      "gap_pp": 0.24367256637168877,
+      "hit_rate": 0.8185840707964602,
+      "log_loss": 0.47298637651402076,
+      "mean_predicted": 0.8161473451327433,
+      "n": 226
+    }
+  },
+  "selected": {
+    "by_market": {
+      "DC": {
+        "brier": 0.07081492571428571,
+        "gap_pp": 6.417142857142865,
+        "hit_rate": 0.9285714285714286,
+        "log_loss": 0.27060508582352344,
+        "mean_predicted": 0.8644,
+        "n": 14
+      },
+      "OU": {
+        "brier": 0.17600634017857142,
+        "gap_pp": -4.160535714285718,
+        "hit_rate": 0.7678571428571429,
+        "log_loss": 0.5366366927454119,
+        "mean_predicted": 0.8094625000000001,
+        "n": 56
+      }
+    },
+    "by_tier": {
+      "best": {
+        "brier": 0.10326830777777779,
+        "gap_pp": 4.334444444444441,
+        "hit_rate": 0.8888888888888888,
+        "log_loss": 0.36065664353526267,
+        "mean_predicted": 0.8455444444444444,
+        "n": 9
+      },
+      "fallback": {
+        "brier": 0.16259588918032786,
+        "gap_pp": -2.986229508196714,
+        "hit_rate": 0.7868852459016393,
+        "log_loss": 0.5015445279254923,
+        "mean_predicted": 0.8167475409836065,
+        "n": 61
+      }
+    },
+    "overall": {
+      "brier": 0.1549680572857143,
+      "gap_pp": -2.044999999999997,
+      "hit_rate": 0.8,
+      "log_loss": 0.48343037136103423,
+      "mean_predicted": 0.82045,
+      "n": 70
+    }
+  },
+  "window": [
+    "2026-10-29",
+    "2026-11-08"
+  ]
+}
