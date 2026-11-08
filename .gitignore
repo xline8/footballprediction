@@ -36,6 +36,10 @@ venv/
 # record of what the store holds (see FOTMOB_FULL_COVERAGE.md).
 data_enrichment/fotmob_full/
 !data_enrichment/fotmob_full_index.csv
+data_enrichment/fotmob_jleague/
+!data_enrichment/fotmob_jleague_index.csv
+data_enrichment/fotmob_jleague_checkpoint.json
+data_enrichment/fotmob_jleague.lock
 # Exception: shot-detail/lineup features materialised from the store —
 # the next experiment rounds' starting dataset (regenerating it needs
 # the full local store).
