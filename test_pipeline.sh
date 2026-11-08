@@ -2,21 +2,22 @@
 # Full pipeline end-to-end test
 # Jalankan: bash test_pipeline.sh
 set -e
+PY=.venv/bin/python
 
 echo "=== 1. Corner Model (--predict) ==="
-python model_corners_v3.py --predict
+$PY model_corners_v3.py --predict
 
 echo "=== 2. DC/BTTS Model ==="
-python predict_upcoming.py
+$PY predict_upcoming_refactored.py
 
 echo "=== 3. TA Model ==="
-python ta_model.py --run
+$PY ta_model.py --run
 
 echo "=== 4. Best Picks ==="
-python best_picks.py
+$PY best_picks.py
 
 echo "=== 5. Validation ==="
-python -c "
+$PY -c "
 import csv
 bp = list(csv.DictReader(open('best_picks.csv')))
 bpd = [r for r in bp if not r.get('ev_model')]

@@ -36,6 +36,8 @@ from model_state import ModelState
 
 app = FastAPI(title="Football Prediction API", version="1.0.0")
 loader = get_loader()
+# File prediksi lebih tua dari ini dianggap basi dan tidak dilayani.
+MAX_PREDICTIONS_AGE_HOURS = 48.0
 
 # /api/status memakai MatchCache bersama dengan TTL: konstruksi penuh
 # memakan ~2 detik (pickle ~105 MB), jadi instans segar per panggilan
@@ -104,7 +106,16 @@ def load_predictions() -> List[Dict]:
     """Load predictions from CSV."""
     pred_file = os.path.join(BASE_DIR, "predictions_upcoming.csv")
     if not os.path.exists(pred_file):
-        return []
+        raise HTTPException(
+            status_code=503,
+            detail=f"file prediksi tidak ada: {pred_file}")
+
+    age_hours = (time.time() - os.path.getmtime(pred_file)) / 3600.0
+    if age_hours > MAX_PREDICTIONS_AGE_HOURS:
+        raise HTTPException(
+            status_code=503,
+            detail=(f"file prediksi basi: umur {age_hours:.1f} jam > batas "
+                    f"{MAX_PREDICTIONS_AGE_HOURS:.1f} jam"))
 
     with open(pred_file, 'r', encoding='utf-8') as f:
         return list(csv.DictReader(f))

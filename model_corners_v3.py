@@ -80,6 +80,8 @@ LINES = [6.5, 7.5, 8.5, 9.5, 10.5, 11.5]
 GAMMA_GRID = [0.0, 0.15, 0.3, 0.45, 0.6, 0.8]
 R_MIN = 1.02
 REL_LO, REL_HI = 0.6, 1.7
+# Kadens refit mingguan; dua kali kadens menjadi batas keras kesegaran.
+MAX_PARAMS_AGE_DAYS = 14
 
 
 def num(x):
@@ -91,6 +93,24 @@ def num(x):
 
 def clamp(v, lo, hi):
     return max(lo, min(hi, v))
+
+
+def _params_age_days(path):
+    """Kembalikan umur file parameter dalam hari, atau None bila hilang."""
+    try:
+        return (time.time() - os.path.getmtime(path)) / 86400.0
+    except OSError:
+        return None
+
+
+def _check_params_fresh(path):
+    """Tolak parameter corner yang melewati batas umur keras."""
+    age_days = _params_age_days(path)
+    if age_days is not None and age_days > MAX_PARAMS_AGE_DAYS:
+        raise RuntimeError(
+            f"corner params basi: umur {age_days:.1f} hari > batas "
+            f"{MAX_PARAMS_AGE_DAYS} hari — jalankan refit model_corners_v3")
+    return age_days
 
 
 matches = []
@@ -445,18 +465,15 @@ def predict_upcoming():
     if not os.path.exists(PARAMS_OUT):
         print("  ! params tidak ada — jalankan dulu model_corners_v3.py (tanpa --predict)")
         return 0
+    params_age_days = _check_params_fresh(PARAMS_OUT)
     _ensure_loaded()
     with open(PARAMS_OUT) as f:
         params = json.load(f)
     gamma, r_star = params["gamma"], params["r"]
     # Kesegaran parameter terlihat, bukan diam-diam basi selamanya:
     # file ini hanya ditulis refit manual model_corners_v3.
-    try:
-        age = (datetime.now() - datetime.fromtimestamp(
-            os.path.getmtime(PARAMS_OUT))).days
-        print(f"  corner params: {PARAMS_OUT} (umur {age} hari)")
-    except OSError:
-        pass
+    if params_age_days is not None:
+        print(f"  corner params: {PARAMS_OUT} (umur {params_age_days:.0f} hari)")
 
     # Load historical matches for training window + rolling shots
     hist = sorted(matches, key=lambda m: m["date"])

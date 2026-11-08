@@ -289,8 +289,7 @@ def _get_or_fit_model(loader, div: str, games: list, cutoff: date,
 
     if was_loaded and state.last_fit_date and not needs_fit:
         # Check if new games since last fit
-        days_since_fit = abs((cutoff - state.last_fit_date).days)
-        needs_fit = days_since_fit > 7
+        needs_fit = _state_needs_fit(cutoff, state.last_fit_date)
 
         # Check for unknown teams (only check teams in recent fixtures, not all)
         known = state.get_known_teams()
@@ -312,6 +311,15 @@ def _get_or_fit_model(loader, div: str, games: list, cutoff: date,
         print(f"    Using cached model for {div} (fit: {state.last_fit_date})")
 
     return model, state
+
+
+def _state_needs_fit(cutoff: date, last_fit_date: date) -> bool:
+    """Tentukan apakah umur state memaksa fit ulang."""
+    fit_age_days = (cutoff - last_fit_date).days
+    # State dengan last_fit_date sesudah cutoff tidak pernah boleh dipakai
+    # ulang karena hasil laga masa depan akan bocor; state lebih tua dari
+    # 7 hari tetap fit ulang seperti sebelumnya.
+    return fit_age_days < 0 or fit_age_days > 7
 
 
 def _model_from_state(state: ModelState) -> DC:

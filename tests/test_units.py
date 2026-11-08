@@ -2399,6 +2399,88 @@ def test_corner_probs_freshness_gate():
             ta_model.HERE = old_here
 
 
+def test_corner_params_freshness_hard_gate():
+    import tempfile
+    import time as _time
+
+    import model_corners_v3 as mc
+
+    assert mc.MAX_PARAMS_AGE_DAYS == 14
+    with tempfile.TemporaryDirectory() as td:
+        path = os.path.join(td, "corner_params.json")
+        with open(path, "w") as f:
+            f.write("{}")
+        old = _time.time() - 20 * 86400
+        os.utime(path, (old, old))
+        try:
+            mc._check_params_fresh(path)
+            raise AssertionError("parameter basi harus ditolak")
+        except RuntimeError as exc:
+            assert "20." in str(exc) and "14" in str(exc), str(exc)
+
+        fresh = _time.time() - 1 * 86400
+        os.utime(path, (fresh, fresh))
+        assert mc._check_params_fresh(path) is not None
+
+
+def test_model_state_fit_age_rejects_future_state():
+    from datetime import date, timedelta
+
+    from predict_upcoming_refactored import _state_needs_fit
+
+    cutoff = date(2026, 11, 8)
+    assert _state_needs_fit(cutoff, cutoff + timedelta(days=2)) is True
+
+
+def test_model_state_fit_age_accepts_recent_past_state():
+    from datetime import date, timedelta
+
+    from predict_upcoming_refactored import _state_needs_fit
+
+    cutoff = date(2026, 11, 8)
+    assert _state_needs_fit(cutoff, cutoff - timedelta(days=3)) is False
+
+
+def test_model_state_future_fit_refits_integration():
+    from datetime import date, timedelta
+    from unittest.mock import patch
+
+    import predict_upcoming_refactored as pur
+
+    cutoff = date(2026, 11, 8)
+
+    class State:
+        half_life = None
+        last_fit_date = cutoff + timedelta(days=2)
+        _initialized = True
+
+        def load(self):
+            return True
+
+        def mode_mismatch(self):
+            return False
+
+        def data_stale(self):
+            return False
+
+        def update_from_model(self, model, fit_date, hl):
+            self.updated = True
+
+        def get_known_teams(self):
+            return {"A", "B"}
+
+    class Model:
+        def fit(self, games, fit_date, hl):
+            self.fitted = True
+
+    state = State()
+    with patch.object(pur, "ModelState", return_value=state), \
+            patch.object(pur, "DC", return_value=Model()) as dc:
+        pur._get_or_fit_model(None, "E0", [("A", "B")], cutoff, 270.0)
+    assert dc.return_value.fitted is True
+    assert state.updated is True
+
+
 def test_ta_model_step_warns_when_corners_not_refreshed():
     # Ronde 17 (M-1 lanjutan): peringatan kesegaran corner di
     # step_ta_model orchestrator. ta_model distub total supaya tes
@@ -2552,6 +2634,41 @@ def test_api_prediction_missing_columns_and_corner_floats():
             assert body, "corner kosong"
             po = body[0]["prob_over"]["9.5"]
             assert isinstance(po, float) and po == 0.61, body[0]
+        finally:
+            api.BASE_DIR = old_base
+
+
+def test_api_predictions_freshness_gate():
+    import tempfile
+    import time as _time
+
+    import api_server as api
+
+    old_base = api.BASE_DIR
+    with tempfile.TemporaryDirectory() as td:
+        api.BASE_DIR = td
+        path = os.path.join(td, "predictions_upcoming.csv")
+        try:
+            try:
+                api.load_predictions()
+                raise AssertionError("file prediksi hilang harus 503")
+            except api.HTTPException as exc:
+                assert exc.status_code == 503 and "tidak ada" in exc.detail
+
+            with open(path, "w", newline="") as f:
+                f.write("div,date,home,away\nD1,2027-01-10,alpha,beta\n")
+            old = _time.time() - 72 * 3600
+            os.utime(path, (old, old))
+            try:
+                api.load_predictions()
+                raise AssertionError("file prediksi 72 jam harus 503")
+            except api.HTTPException as exc:
+                assert exc.status_code == 503 and "72." in exc.detail
+
+            fresh = _time.time() - 1 * 3600
+            os.utime(path, (fresh, fresh))
+            rows = api.load_predictions()
+            assert len(rows) == 1 and rows[0]["home"] == "alpha", rows
         finally:
             api.BASE_DIR = old_base
 
