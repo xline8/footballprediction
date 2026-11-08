@@ -40,6 +40,11 @@ data_enrichment/fotmob_jleague/
 !data_enrichment/fotmob_jleague_index.csv
 data_enrichment/fotmob_jleague_checkpoint.json
 data_enrichment/fotmob_jleague.lock
+data_enrichment/fotmob_world/
+!data_enrichment/fotmob_world_index.csv
+!data_enrichment/fotmob_world_catalog.csv
+data_enrichment/fotmob_world_checkpoint.json
+data_enrichment/fotmob_world.lock
 # Exception: shot-detail/lineup features materialised from the store —
 # the next experiment rounds' starting dataset (regenerating it needs
 # the full local store).

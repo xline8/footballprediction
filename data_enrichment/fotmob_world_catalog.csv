@@ -1,0 +1,431 @@
+country,ccode,league,league_id,gender,named,tier_rank,selected,reason,seasons_2021plus,n_seasons
+Albania,ALB,Superiore Qualification,9173,,,,no,qualification/playoff,,0
+Albania,ALB,Superkupa e Shqipërisë,10175,,,,no,cup-like name,,0
+Albania,ALB,Kategoria Superiore,260,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Algeria,ALG,Ligue 1,516,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Argentina,ARG,Copa Argentina,9305,,,,no,cup-like name,,0
+Argentina,ARG,Supercopa Argentina,9381,,,,no,cup-like name,,0
+Argentina,ARG,Copa de la Liga Profesional,10007,,,,no,cup-like name,,0
+Argentina,ARG,Primera B Nacional Qualification,9170,,,,no,qualification/playoff,,0
+Argentina,ARG,Supercopa Internacional,10832,,,,no,cup-like name,,0
+Argentina,ARG,Trofeo de Campeones,10053,,,,no,cup-like name,,0
+Argentina,ARG,Liga Profesional,112,male,yes,1,yes,named by user,2026 - Clausura;2026 - Apertura;2025 - Clausura;2025 - Apertura;2024;2023;2022;2021,8
+Argentina,ARG,Primera B Nacional,8965,male,yes,2,yes,named by user,2026;2025;2024;2023;2022;2021,6
+Argentina,ARG,Primera B Metropolitana & Torneo Federal A,9213,male,yes,3,yes,named by user,2026;2025;2024;2023;2022;2021,6
+Argentina,ARG,Torneo de Verano,10075,,,,no,beyond top-3,,0
+Armenia,ARM,Super Cup,490,,,,no,cup-like name,,0
+Armenia,ARM,Premier League,118,male,yes,1,yes,named by user,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Australia,AUS,Australia Cup,9471,,,,no,cup-like name,,0
+Australia,AUS,A-League,113,male,yes,1,yes,named by user,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Australia,AUS,A-League Women,9495,female,yes,2,yes,named by user,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Australia,AUS,Australia Championship,8938,male,,3,yes,tier 3 by FotMob order,2026;2025,2
+Austria,AUT,Austrian Cup,278,,,,no,cup-like name,,0
+Austria,AUT,Bundesliga,38,male,yes,1,yes,named by user,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Austria,AUT,2. Liga,119,male,yes,2,yes,named by user,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Austria,AUT,Landesliga,285,,,,no,fotmob payload empty (dead entry),,0
+Azerbaijan,AZE,Premier League Qualification,11925,,,,no,qualification/playoff,,0
+Azerbaijan,AZE,Premier League,262,male,yes,1,yes,named by user,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Bangladesh,BAN,Bangladesh Football League,10443,male,yes,1,yes,named by user,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023,5
+Belarus,BLR,Premier League Qualification,9255,,,,no,qualification/playoff,,0
+Belarus,BLR,Belarusian Cup,9521,,,,no,cup-like name,,0
+Belarus,BLR,Super Cup,9658,,,,no,cup-like name,,0
+Belarus,BLR,Premier League,263,male,,1,yes,tier 1 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Belgium,BEL,Belgian Cup,149,,,,no,cup-like name,,0
+Belgium,BEL,First Division A Qualification,41,,,,no,qualification/playoff,,0
+Belgium,BEL,Super Cup,266,,,,no,cup-like name,,0
+Belgium,BEL,First Division A,40,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Belgium,BEL,First Division B,264,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Bolivia,BOL,Primera Division Qualification,9334,,,,no,qualification/playoff,,0
+Bolivia,BOL,Primera Division,144,male,,1,yes,tier 1 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Bosnia-Herzegovina,BIH,Premier League,267,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Brazil,BRA,Copa do Brasil,9067,,,,no,cup-like name,,0
+Brazil,BRA,Copa do Nordeste,9429,,,,no,cup-like name,,0
+Brazil,BRA,Supercopa do Brasil,10077,,,,no,cup-like name,,0
+Brazil,BRA,Copa Paulista,11646,,,,no,cup-like name,,0
+Brazil,BRA,Recopa Gaúcha,10078,,,,no,cup-like name,,0
+Brazil,BRA,Série A,268,male,,1,yes,tier 1 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Brazil,BRA,Série B,8814,male,,2,yes,tier 2 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Brazil,BRA,Série C,8971,male,,3,yes,tier 3 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Brazil,BRA,Baiano,10290,,,,no,beyond top-3,,0
+Brazil,BRA,Carioca,10272,,,,no,beyond top-3,,0
+Brazil,BRA,Gaúcho,10274,,,,no,beyond top-3,,0
+Brazil,BRA,Goiano,10291,,,,no,beyond top-3,,0
+Brazil,BRA,Mineiro,10273,,,,no,beyond top-3,,0
+Brazil,BRA,Paulista A1,10244,,,,no,beyond top-3,,0
+Brazil,BRA,Paulista A2,9483,,,,no,beyond top-3,,0
+Brazil,BRA,Serie D,9464,,,,no,beyond top-3,,0
+Bulgaria,BUL,Bulgarian Cup,271,,,,no,cup-like name,,0
+Bulgaria,BUL,First Professional League Qualification,9584,,,,no,qualification/playoff,,0
+Bulgaria,BUL,Super Cup,272,,,,no,cup-like name,,0
+Bulgaria,BUL,First Professional League,270,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Bulgaria,BUL,Second Professional League,9096,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Canada,CAN,Canadian Championship,9837,,,,no,cup-like name (hardcoded),,0
+Canada,CAN,Premier League,9986,male,,1,yes,tier 1 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Canada,CAN,Northern Super League,10872,female,,,no,women's league (general rule: men's tiers),,0
+Chile,CHI,Copa Chile,9091,,,,no,cup-like name,,0
+Chile,CHI,Copa de la Liga,11697,,,,no,cup-like name,,0
+Chile,CHI,Super Cup,9407,,,,no,cup-like name,,0
+Chile,CHI,Liga de Primera,273,male,,1,yes,tier 1 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Chile,CHI,Liga de Ascenso,9126,male,,2,yes,tier 2 by FotMob order,2026;2025;2024;2023;2022;2021,6
+China,CHN,Chinese FA Cup,9550,,,,no,cup-like name,,0
+China,CHN,Super Cup,9491,,,,no,cup-like name,,0
+China,CHN,Super League,120,male,,1,yes,tier 1 by FotMob order,2026;2025;2024;2023;2022;2021,6
+China,CHN,China League One,9137,male,,2,yes,tier 2 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Colombia,COL,Copa Colombia,9490,,,,no,cup-like name,,0
+Colombia,COL,Primera A,274,male,,1,yes,tier 1 by FotMob order,2026 - Clausura;2026 - Apertura;2025 - Clausura;2025 - Apertura;2024 - Clausura;2024 - Apertura;2023 - Clausura;2023 - Apertura;2022 - Clausura;2022 - Apertura;2021 - Clausura;2021 - Apertura,12
+Colombia,COL,Primera B,9125,male,,2,yes,tier 2 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Colombia,COL,Superliga,11536,male,,3,yes,tier 3 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Costa Rica,CRC,Primera Division Qualification,12888,,,,no,qualification/playoff,,0
+Costa Rica,CRC,Super Cup,10223,,,,no,cup-like name,,0
+Costa Rica,CRC,Primera Division,121,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Croatia,CRO,Croatian Cup,275,,,,no,cup-like name,,0
+Croatia,CRO,Super Cup,276,,,,no,cup-like name,,0
+Croatia,CRO,HNL,252,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Cyprus,CYP,Cyprus Cup,330,,,,no,cup-like name,,0
+Cyprus,CYP,Super Cup,521,,,,no,cup-like name,,0
+Cyprus,CYP,1. Division,136,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Cyprus,CYP,2. Division,9100,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Czechia,CZE,1. Liga Qualification,10025,,,,no,qualification/playoff,,0
+Czechia,CZE,Czech Cup,254,,,,no,cup-like name,,0
+Czechia,CZE,1. Liga,122,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Czechia,CZE,FNL,253,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Denmark,DEN,DBU Pokalen,242,,,,no,cup-like name,,0
+Denmark,DEN,Superligaen,46,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Denmark,DEN,1. Division,85,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Denmark,DEN,2. Division,239,male,,3,yes,tier 3 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Denmark,DEN,3. Division,240,,,,no,beyond top-3,,0
+Denmark,DEN,A-Liga,256,,,,no,beyond top-3,,0
+Denmark,DEN,Danmarksserien,241,,,,no,beyond top-3,,0
+Ecuador,ECU,Copa Ecuador,10046,,,,no,cup-like name,,0
+Ecuador,ECU,Supercopa de Ecuador,11035,,,,no,cup-like name,,0
+Ecuador,ECU,Serie A,246,male,,1,yes,tier 1 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Egypt,EGY,Egypt Cup,9941,,,,no,cup-like name,,0
+Egypt,EGY,League Cup,10270,,,,no,cup-like name,,0
+Egypt,EGY,Super Cup,10314,,,,no,cup-like name,,0
+Egypt,EGY,Premier League,519,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+El Salvador,SLV,Primera Division,335,male,,1,yes,tier 1 by FotMob order,2026/2027 - Apertura;2025/2026 - Clausura;2025/2026 - Apertura;2024/2025 - Clausura;2024/2025 - Apertura;2023/2024 - Clausura;2023/2024 - Apertura;2022/2023 - Clausura;2022/2023 - Apertura;2021/2022 - Clausura;2021/2022 - Apertura,11
+England,ENG,Premier League 2,9084,,,,no,youth league,,0
+England,ENG,Community Shield,247,,,,no,cup-like name,,0
+England,ENG,FA Cup,132,,,,no,cup-like name,,0
+England,ENG,EFL Cup,133,,,,no,cup-like name,,0
+England,ENG,FA Cup Qualification,10626,,,,no,cup-like name,,0
+England,ENG,EFL Trophy,142,,,,no,cup-like name,,0
+England,ENG,FA Trophy,9253,,,,no,cup-like name,,0
+England,ENG,Premier League U18,10068,,,,no,youth league,,0
+England,ENG,FA Cup (Women),10082,,,,no,cup-like name,,0
+England,ENG,Women's League Cup,9717,,,,no,cup-like name,,0
+England,ENG,Baller League,10844,,,,no,novelty league,,0
+England,ENG,EFL Cup Qualification,12889,,,,no,cup-like name,,0
+England,ENG,National League Cup,10705,,,,no,cup-like name,,0
+England,ENG,Premier League,47,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+England,ENG,Championship,48,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+England,ENG,League One,108,male,,3,yes,tier 3 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+England,ENG,League Two,109,,,,no,beyond top-3,,0
+England,ENG,National League,117,,,,no,beyond top-3,,0
+England,ENG,National North & South,8944,,,,no,beyond top-3,,0
+England,ENG,Premier Division,8947,,,,no,beyond top-3,,0
+England,ENG,WSL,9227,,,,no,beyond top-3,,0
+England,ENG,WSL 2,9294,,,,no,beyond top-3,,0
+England,ENG,WSL Promotion/Relegation,11839,,,,no,beyond top-3,,0
+Estonia,EST,Meistriliiga Qualification,10034,,,,no,qualification/playoff,,0
+Estonia,EST,Super Cup,9069,,,,no,cup-like name,,0
+Estonia,EST,Regular Season,248,male,,1,yes,tier 1 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Faroe Islands,FRO,Premier League,250,male,,1,yes,tier 1 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Faroe Islands,FRO,Løgmanssteypið,9523,male,,2,yes,tier 2 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Finland,FIN,Veikkausliiga Qualification,52,,,,no,qualification/playoff,,0
+Finland,FIN,Suomen Cup,143,,,,no,cup-like name,,0
+Finland,FIN,Kansallinen (Women) Qualification,10186,,,,no,qualification/playoff,,0
+Finland,FIN,Finland Cup,342,,,,no,cup-like name,,0
+Finland,FIN,Ykkosliiga Qualification,10713,,,,no,qualification/playoff,,0
+Finland,FIN,Veikkausliiga,51,male,,1,yes,tier 1 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Finland,FIN,Ykkosliiga,251,male,,2,yes,tier 2 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Finland,FIN,Ykkonen,8969,male,,3,yes,tier 3 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Finland,FIN,Kansallinen (Women),10174,,,,no,beyond top-3,,0
+France,FRA,Coupe de France,134,,,,no,cup-like name,,0
+France,FRA,Coupe de France Féminine,11028,,,,no,cup-like name,,0
+France,FRA,Ligue 1 Qualification,9666,,,,no,qualification/playoff,,0
+France,FRA,Ligue 2 Qualification,9667,,,,no,qualification/playoff,,0
+France,FRA,Ligue 1,53,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+France,FRA,Ligue 2,110,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+France,FRA,Ligue 3,8970,male,,3,yes,tier 3 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+France,FRA,Première Ligue Féminine,9677,,,,no,beyond top-3,,0
+France,FRA,Trophée des champions,207,,,,no,beyond top-3,,0
+Georgia,GEO,Erovnuli Qualification,9310,,,,no,qualification/playoff,,0
+Georgia,GEO,Erovnuli Liga,439,male,,1,yes,tier 1 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Germany,GER,DFB Pokal,209,,,,no,cup-like name,,0
+Germany,GER,Bundesliga Qualification,9081,,,,no,qualification/playoff,,0
+Germany,GER,2. Bundesliga Qualification,9734,,,,no,qualification/playoff,,0
+Germany,GER,Regionalliga Qualification,10022,,,,no,qualification/playoff,,0
+Germany,GER,Super Cup,8924,,,,no,cup-like name,,0
+Germany,GER,Baller League,10840,,,,no,novelty league,,0
+Germany,GER,DFB Pokal Frauen,10650,,,,no,cup-like name,,0
+Germany,GER,Supercup der Frauen,11034,,,,no,super cup,,0
+Germany,GER,Bundesliga,54,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Germany,GER,2. Bundesliga,146,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Germany,GER,3. Liga,208,male,,3,yes,tier 3 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Germany,GER,Regionalliga,512,,,,no,beyond top-3,,0
+Germany,GER,Frauen-Bundesliga,9676,,,,no,beyond top-3,,0
+Ghana,GHA,Premier League,522,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Greece,GRE,Greece Cup,145,,,,no,cup-like name,,0
+Greece,GRE,Super Cup,8816,,,,no,cup-like name,,0
+Greece,GRE,Super League 1,135,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Greece,GRE,Super League 2,8815,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Guatemala,GUA,Liga Nacional,336,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Honduras,HON,Liga Nacional,337,male,,1,yes,tier 1 by FotMob order,2026/2027 - Apertura;2025/2026 - Clausura;2025/2026 - Apertura;2024/2025 - Clausura;2024/2025 - Apertura;2023/2024 - Clausura;2023/2024 - Apertura;2022/2023 - Clausura;2022/2023 - Apertura;2021/2022 - Clausura;2021/2022 - Apertura,11
+Hungary,HUN,Magyar Kupa,213,,,,no,cup-like name,,0
+Hungary,HUN,Nemzeti Bajnokság I,212,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Hungary,HUN,NB II,9117,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026,2
+Iceland,ISL,Icelandic Cup,217,,,,no,cup-like name,,0
+Iceland,ISL,Super Cup,10009,,,,no,cup-like name,,0
+Iceland,ISL,League Cup,10076,,,,no,cup-like name,,0
+Iceland,ISL,Besta deildin,215,male,,1,yes,tier 1 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Iceland,ISL,1. Deild,216,male,,2,yes,tier 2 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Iceland,ISL,2. Deild,10226,male,,3,yes,tier 3 by FotMob order,2026;2025;2024;2023;2022;2021,6
+India,IND,Durand Cup,10309,,,,no,cup-like name,,0
+India,IND,Super Cup,10366,,,,no,cup-like name,,0
+India,IND,Indian Super League,9478,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+India,IND,Indian Football League,8982,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Indonesia,IDN,President's Cup,10059,,,,no,cup-like name,,0
+Indonesia,IDN,Super League,8983,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2021/2023;2022/2023;2021/2022,7
+Indonesia,IDN,Liga 2,10056,male,,2,yes,tier 2 by FotMob order,2026/2027,1
+Iran,IRN,Hazfi Cup,9487,,,,no,cup-like name,,0
+Iran,IRN,Persian Gulf Pro League Qualification,9409,,,,no,qualification/playoff,,0
+Iran,IRN,Super Cup,10288,,,,no,cup-like name,,0
+Iran,IRN,Persian Gulf,523,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Iran,IRN,Azadegan League,9372,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Iraq,IRQ,Stars League Relegation Playoff,10310,,,,no,qualification/playoff,,0
+Iraq,IRQ,Stars League,524,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Ireland,IRL,Premier Division Qualification,221,,,,no,qualification/playoff,,0
+Ireland,IRL,FAI Cup,219,,,,no,cup-like name,,0
+Ireland,IRL,FAI Women's Cup,10307,,,,no,cup-like name,,0
+Ireland,IRL,Super Cup,9431,,,,no,cup-like name,,0
+Ireland,IRL,Premier Division,126,male,,1,yes,tier 1 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Ireland,IRL,First Division,218,male,,2,yes,tier 2 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Ireland,IRL,Women's Premier Division,10210,female,,,no,women's league (general rule: men's tiers),,0
+Israel,ISR,Leumit League Qualification,9735,,,,no,qualification/playoff,,0
+Israel,ISR,State Cup,9097,,,,no,cup-like name,,0
+Israel,ISR,Super Cup,9862,,,,no,cup-like name,,0
+Israel,ISR,Toto Cup Leumit,9098,,,,no,cup-like name,,0
+Israel,ISR,Ligat ha'Al,127,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Israel,ISR,Leumit League,128,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Italy,ITA,Coppa Italia,141,,,,no,cup-like name,,0
+Italy,ITA,Supercoppa,222,,,,no,cup-like name,,0
+Italy,ITA,Coppa Italia Women,11014,,,,no,cup-like name,,0
+Italy,ITA,Serie A Femminile Qualification,10434,,,,no,qualification/playoff,,0
+Italy,ITA,Supercoppa Italiana,11015,,,,no,cup-like name,,0
+Italy,ITA,Serie A,55,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Italy,ITA,Serie B,86,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Italy,ITA,Serie C,147,male,,3,yes,tier 3 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Italy,ITA,Serie A Femminile,10178,,,,no,beyond top-3,,0
+Japan,JPN,J. League,223,,,,already_pulled,pulled earlier into fotmob_jleague/,,0
+Japan,JPN,J. League 2,8974,,,,already_pulled,pulled earlier into fotmob_jleague/,,0
+Japan,JPN,J. League 3,9136,,,,already_pulled,pulled earlier into fotmob_jleague/,,0
+Japan,JPN,Emperor's Cup,9011,,,,no,cup-like name,,0
+Japan,JPN,J. League 3 Qualification,10716,,,,no,qualification/playoff,,0
+Japan,JPN,J. League Cup,224,,,,no,cup-like name,,0
+Japan,JPN,Super Cup,440,,,,no,cup-like name,,0
+Japan,JPN,WE League,9500,,,,no,beyond top-3,,0
+Japan,JPN,Japan 2/3,11499,,,,no,beyond top-3,,0
+Kazakhstan,KAZ,Super Cup,9504,,,,no,cup-like name,,0
+Kazakhstan,KAZ,Premier League,225,male,,1,yes,tier 1 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Kuwait,KUW,Premier League,529,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022;2021,7
+Latvia,LVA,Super Cup,9486,,,,no,cup-like name,,0
+Latvia,LVA,Virsliga,226,male,,1,yes,tier 1 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Lithuania,LTU,A Lyga Qualification,9632,,,,no,qualification/playoff,,0
+Lithuania,LTU,Super Cup,9493,,,,no,cup-like name,,0
+Lithuania,LTU,Toplyga,228,male,,1,yes,tier 1 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Luxembourg,LUX,Coupe de Luxembourg,9527,,,,no,cup-like name,,0
+Luxembourg,LUX,National Division Qualification,9174,,,,no,qualification/playoff,,0
+Luxembourg,LUX,National Division,229,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+North Macedonia,MKD,Macedonian Cup,9528,,,,no,cup-like name,,0
+North Macedonia,MKD,Prva Liga,249,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Malaysia,MAS,Liga Super,8985,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023;2022;2021,6
+Mexico,MEX,Campeón de Campeones,11039,,,,no,cup-like name,,0
+Mexico,MEX,Liga MX,230,male,,1,yes,tier 1 by FotMob order,2026/2027 - Apertura;2025/2026 - Clausura;2025/2026 - Apertura;2024/2025 - Clausura;2024/2025 - Apertura;2023/2024 - Clausura;2023/2024 - Apertura;2022/2023 - Clausura;2022/2023 - Apertura;2021/2022 - Clausura;2021/2022 - Apertura,11
+Mexico,MEX,Liga MX Femenil,9906,female,,,no,women's league (general rule: men's tiers),,0
+Mexico,MEX,Liga de Expansión MX,8976,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Moldova,MDA,Cupa Moldova,9530,,,,no,cup-like name,,0
+Moldova,MDA,National Division Qualification,10065,,,,no,qualification/playoff,,0
+Moldova,MDA,National Division,231,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Montenegro,MNE,1. CFL Qualification,9178,,,,no,qualification/playoff,,0
+Montenegro,MNE,1. CFL,232,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Morocco,MAR,Botola Pro Qualification,10917,,,,no,qualification/playoff,,0
+Morocco,MAR,Throne Cup,11840,,,,no,cup-like name,,0
+Morocco,MAR,Botola Pro,530,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Netherlands,NED,Eredivisie Qualification,58,,,,no,qualification/playoff,,0
+Netherlands,NED,KNVB Beker Women,10668,,,,no,cup-like name,,0
+Netherlands,NED,KNVB Cup,235,,,,no,cup-like name,,0
+Netherlands,NED,Super Cup,237,,,,no,cup-like name,,0
+Netherlands,NED,Super Cup,11029,,,,no,cup-like name,,0
+Netherlands,NED,Tweede Divisie Qualification,9851,,,,no,qualification/playoff,,0
+Netherlands,NED,Eredivisie,57,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Netherlands,NED,Eerste Divisie,111,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Netherlands,NED,Tweede Divisie,9195,male,,3,yes,tier 3 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Netherlands,NED,Eredivisie Vrouwen,10289,,,,no,beyond top-3,,0
+New Zealand,NZL,Championship,8870,male,,1,yes,tier 1 by FotMob order,2026;2025;2024;2023;2022,5
+Nigeria,NGA,Professional Football League,533,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2023;2021/2022,6
+Northern Ireland,NIR,Irish Cup,9389,,,,no,cup-like name,,0
+Northern Ireland,NIR,League Cup,8978,,,,no,cup-like name,,0
+Northern Ireland,NIR,Premiership Qualification,8979,,,,no,qualification/playoff,,0
+Northern Ireland,NIR,Premiership,129,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Norway,NOR,1. Division Kvinner Qualification,10714,,,,no,qualification/playoff,,0
+Norway,NOR,Eliteserien Qualification,60,,,,no,qualification/playoff,,0
+Norway,NOR,OBOS-ligaen Qualification,9754,,,,no,qualification/playoff,,0
+Norway,NOR,Toppserien Qualification (W),9382,,,,no,qualification/playoff,,0
+Norway,NOR,Eliteserien,59,male,,1,yes,tier 1 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Norway,NOR,OBOS-ligaen,203,male,,2,yes,tier 2 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Norway,NOR,2. divisjon,204,male,,3,yes,tier 3 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Norway,NOR,Toppserien,331,,,,no,beyond top-3,,0
+Norway,NOR,Norsk Tipping-ligaen,205,,,,no,beyond top-3,,0
+Norway,NOR,1. Division Kvinner,332,,,,no,beyond top-3,,0
+Norway,NOR,Norgesmesterskapet,206,,,,no,beyond top-3,,0
+Norway,NOR,Norgesmesterskapet Kvalifisering,10628,,,,no,beyond top-3,,0
+Norway,NOR,Norgesmesterskapet Kvinner,333,,,,no,beyond top-3,,0
+Panama,PAN,LPF,9039,male,,1,yes,tier 1 by FotMob order,2026;2025;2024;2023,4
+Paraguay,PAR,Copa Paraguay,10230,,,,no,cup-like name,,0
+Paraguay,PAR,Supercopa,10259,,,,no,cup-like name,,0
+Paraguay,PAR,Division Profesional,199,male,,1,yes,tier 1 by FotMob order,2026 - Clausura;2026 - Apertura;2025 - Clausura;2025 - Apertura;2024 - Clausura;2024 - Apertura;2023 - Clausura;2023 - Apertura;2022 - Clausura;2022 - Apertura;2021 - Clausura;2021 - Apertura,12
+Peru,PER,Liga 1,131,male,,1,yes,tier 1 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Poland,POL,Puchar Polski,198,,,,no,cup-like name,,0
+Poland,POL,Superpuchar Polski,200,,,,no,cup-like name,,0
+Poland,POL,II Liga Qualification,10967,,,,no,qualification/playoff,,0
+Poland,POL,Ekstraklasa,196,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Poland,POL,I Liga,197,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Poland,POL,II Liga,8935,male,,3,yes,tier 3 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Portugal,POR,League Cup,187,,,,no,cup-like name,,0
+Portugal,POR,Liga Portugal 2 Qualification,9668,,,,no,qualification/playoff,,0
+Portugal,POR,Liga Portugal Qualification,10215,,,,no,qualification/playoff,,0
+Portugal,POR,Super Cup,188,,,,no,cup-like name,,0
+Portugal,POR,Taça de Portugal,186,,,,no,cup-like name,,0
+Portugal,POR,Liga Portugal,61,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Portugal,POR,Liga Portugal 2,185,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Portugal,POR,Liga 3,9112,male,,3,yes,tier 3 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Portugal,POR,Liga Revelação,10448,,,,no,beyond top-3,,0
+Qatar,QAT,Amir of Qatar Cup,11018,,,,no,cup-like name,,0
+Qatar,QAT,Qatar Cup,11016,,,,no,cup-like name,,0
+Qatar,QAT,Qatar Stars League Qualification,9661,,,,no,qualification/playoff,,0
+Qatar,QAT,QSL Cup,11017,,,,no,cup-like name,,0
+Qatar,QAT,Qatar Stars League,535,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Qatar,QAT,Second Division,11030,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026;2024/2025,3
+Romania,ROU,Cupa României,190,,,,no,cup-like name,,0
+Romania,ROU,Supercupa,192,,,,no,cup-like name,,0
+Romania,ROU,Liga I Qualification,9587,,,,no,qualification/playoff,,0
+Romania,ROU,Liga I,189,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Romania,ROU,Liga II,9113,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Russia,RUS,Russian Cup,193,,,,no,cup-like name,,0
+Russia,RUS,Premier League Qualification,9333,,,,no,qualification/playoff,,0
+Russia,RUS,Super Cup,195,,,,no,cup-like name,,0
+Russia,RUS,Premier League,63,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Russia,RUS,1. Division,338,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Russia,RUS,Second League,9123,male,,3,yes,tier 3 by FotMob order,2026/2027;2026;2025/2026;2025;2024/2025;2024;2023/2024;2023;2022/2023;2021/2022,10
+Saudi Arabia,KSA,King's Cup,9942,,,,no,cup-like name,,0
+Saudi Arabia,KSA,Super Cup,10074,,,,no,cup-like name,,0
+Saudi Arabia,KSA,Saudi Pro League,536,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Saudi Arabia,KSA,Saudi First Division,10721,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026;2024/2025,3
+Scotland,SCO,Premiership playoff,181,,,,no,qualification/playoff,,0
+Scotland,SCO,Challenge Cup,179,,,,no,cup-like name,,0
+Scotland,SCO,Championship Qualification,9737,,,,no,qualification/playoff,,0
+Scotland,SCO,League Cup,180,,,,no,cup-like name,,0
+Scotland,SCO,League One Qualification,9738,,,,no,qualification/playoff,,0
+Scotland,SCO,League Two Qualification,9739,,,,no,qualification/playoff,,0
+Scotland,SCO,Scottish Cup,137,,,,no,cup-like name,,0
+Scotland,SCO,SWF Scottish Cup,11020,,,,no,cup-like name,,0
+Scotland,SCO,SWPL Cup,11019,,,,no,cup-like name,,0
+Scotland,SCO,Premiership,64,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Scotland,SCO,Championship,123,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Scotland,SCO,League One,124,male,,3,yes,tier 3 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Scotland,SCO,League Two,125,,,,no,beyond top-3,,0
+Scotland,SCO,Highland / Lowland,9545,,,,no,beyond top-3,,0
+Scotland,SCO,SWPL 1,10791,,,,no,beyond top-3,,0
+Serbia,SRB,Kup Srbije,183,,,,no,cup-like name,,0
+Serbia,SRB,Super Liga Qualification,10583,,,,no,qualification/playoff,,0
+Serbia,SRB,Super Liga,182,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Singapore,SIN,Singapore Cup,9143,,,,no,cup-like name,,0
+Singapore,SIN,Premier League,461,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023;2022;2021,6
+Slovakia,SVK,1. liga Qualification,9845,,,,no,qualification/playoff,,0
+Slovakia,SVK,Slovak Cup,177,,,,no,cup-like name,,0
+Slovakia,SVK,1. liga,176,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Slovakia,SVK,2. Liga,8973,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Slovenia,SVN,Prva Liga Qualification,492,,,,no,qualification/playoff,,0
+Slovenia,SVN,Slovenia Cup,174,,,,no,cup-like name,,0
+Slovenia,SVN,Prva Liga,173,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+South Africa,RSA,League Cup,10708,,,,no,cup-like name,,0
+South Africa,RSA,Nedbank Cup,9473,,,,no,cup-like name,,0
+South Africa,RSA,South Africa 8 Cup,9474,,,,no,cup-like name,,0
+South Africa,RSA,South Africa League Qualification,10584,,,,no,qualification/playoff,,0
+South Africa,RSA,Premier Soccer League,537,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+South Korea,KOR,K League Qualification,9422,,,,no,qualification/playoff,,0
+South Korea,KOR,Cup,9551,,,,no,cup-like name,,0
+South Korea,KOR,K League 3 Qualification,10188,,,,no,qualification/playoff,,0
+South Korea,KOR,K League 1,9080,male,,1,yes,tier 1 by FotMob order,2026;2025;2024;2023;2022;2021,6
+South Korea,KOR,K League 2,9116,male,,2,yes,tier 2 by FotMob order,2026;2025;2024;2023;2022;2021,6
+South Korea,KOR,K League 3,9537,male,,3,yes,tier 3 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Spain,ESP,Copa del Rey,138,,,,no,cup-like name,,0
+Spain,ESP,Supercopa de España,139,,,,no,cup-like name,,0
+Spain,ESP,Copa de la Reina,10651,,,,no,cup-like name,,0
+Spain,ESP,Supercopa Femenina,10776,,,,no,cup-like name,,0
+Spain,ESP,LaLiga,87,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Spain,ESP,LaLiga2,140,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Spain,ESP,Primera Federación,8968,male,,3,yes,tier 3 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Spain,ESP,Segunda Federación,9138,,,,no,beyond top-3,,0
+Spain,ESP,Liga F,9907,,,,no,beyond top-3,,0
+Sweden,SWE,Allsvenskan Qualification,68,,,,no,qualification/playoff,,0
+Sweden,SWE,Superettan Qualification,172,,,,no,qualification/playoff,,0
+Sweden,SWE,Damallsvenskan Qualification (W),10316,,,,no,qualification/playoff,,0
+Sweden,SWE,Ettan Qualification,9634,,,,no,qualification/playoff,,0
+Sweden,SWE,Women Cup,11194,,,,no,cup-like name,,0
+Sweden,SWE,Allsvenskan,67,male,,1,yes,tier 1 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Sweden,SWE,Superettan,168,male,,2,yes,tier 2 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Sweden,SWE,Damallsvenskan (W),9089,female,,,no,women's league (general rule: men's tiers),,0
+Sweden,SWE,Ettan,169,male,,3,yes,tier 3 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Sweden,SWE,Svenska Cupen,171,,,,no,beyond top-3,,0
+Sweden,SWE,Elitettan (W),10308,,,,no,beyond top-3,,0
+Switzerland,SUI,Challenge League Qualification,10433,,,,no,qualification/playoff,,0
+Switzerland,SUI,Super League Qualification,70,,,,no,qualification/playoff,,0
+Switzerland,SUI,Swiss Cup,164,,,,no,cup-like name,,0
+Switzerland,SUI,Super League,69,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Switzerland,SUI,Challenge League,163,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Tanzania,TAN,Premier League Qualification,10028,,,,no,qualification/playoff,,0
+Tanzania,TAN,Premier League,9066,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Thailand,THA,FA Cup,11023,,,,no,cup-like name,,0
+Thailand,THA,League Cup,11024,,,,no,cup-like name,,0
+Thailand,THA,Thai League,8984,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Thailand,THA,Thai League 2,9498,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026;2024/2025,3
+Tunisia,TUN,Ligue I Qualification,9669,,,,no,qualification/playoff,,0
+Tunisia,TUN,Ligue I,544,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Turkiye,TUR,Super Cup,166,,,,no,cup-like name,,0
+Turkiye,TUR,Turkish Cup,151,,,,no,cup-like name,,0
+Turkiye,TUR,Süper Lig,71,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Turkiye,TUR,1. Lig,165,male,,2,yes,tier 2 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+Ukraine,UKR,Premier League Qualification,9829,,,,no,qualification/playoff,,0
+Ukraine,UKR,1. Division Qualification,10023,,,,no,qualification/playoff,,0
+Ukraine,UKR,Ukraine Cup,442,,,,no,cup-like name,,0
+Ukraine,UKR,Premier League,441,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+United Arab Emirates,UAE,League Cup,11027,,,,no,cup-like name,,0
+United Arab Emirates,UAE,President's Cup,9943,,,,no,cup-like name,,0
+United Arab Emirates,UAE,Super Cup,11026,,,,no,cup-like name,,0
+United Arab Emirates,UAE,Pro League,538,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
+United States,USA,Open Cup,9441,,,,no,cup-like name,,0
+United States,USA,Baller League,11157,,,,no,novelty league,,0
+United States,USA,NWSL Challenge Cup,10167,,,,no,cup-like name,,0
+United States,USA,USL Cup,10654,,,,no,cup-like name,,0
+United States,USA,MLS,130,male,,1,yes,tier 1 by FotMob order,2026;2025;2024;2023;2022;2021,6
+United States,USA,USL Championship,8972,male,,2,yes,tier 2 by FotMob order,2026;2025;2024;2023;2022;2021,6
+United States,USA,USL League One,9296,male,,3,yes,tier 3 by FotMob order,2026;2025;2024;2023;2022;2021,6
+United States,USA,MLS Next Pro,10282,,,,no,beyond top-3,,0
+United States,USA,NWSL,9134,,,,no,beyond top-3,,0
+United States,USA,USL Super League Women,10699,,,,no,beyond top-3,,0
+United States,USA,NISA,10084,,,,no,beyond top-3,,0
+Uruguay,URU,Copa Uruguay,10342,,,,no,cup-like name,,0
+Uruguay,URU,Supercopa,10343,,,,no,cup-like name,,0
+Uruguay,URU,Liga AUF Uruguaya,161,male,,1,yes,tier 1 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Uruguay,URU,Segunda Division,9122,male,,2,yes,tier 2 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Uzbekistan,UZB,Superliga,540,male,,1,yes,tier 1 by FotMob order,2026,1
+Venezuela,VEN,Supercopa,11031,,,,no,cup-like name,,0
+Venezuela,VEN,Primera Division,339,male,,1,yes,tier 1 by FotMob order,2026;2025;2024;2023;2022;2021,6
+Vietnam,VIE,Cúp Quốc gia,10161,,,,no,cup-like name,,0
+Vietnam,VIE,Super Cup,10737,,,,no,cup-like name,,0
+Vietnam,VIE,V-League Qualification,9628,,,,no,qualification/playoff,,0
+Vietnam,VIE,V-League,9088,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2023;2022;2021,7
+Wales,WAL,Welsh Cup,9166,,,,no,cup-like name,,0
+Wales,WAL,Cymru Premier,116,male,,1,yes,tier 1 by FotMob order,2026/2027;2025/2026;2024/2025;2023/2024;2022/2023;2021/2022,6
