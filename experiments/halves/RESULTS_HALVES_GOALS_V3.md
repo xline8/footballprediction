@@ -102,3 +102,41 @@ noise stated. Weekly (rather than monthly) refits would match
 production even more closely and are computationally cheap.
 
 Production untouched. No predictions_goals_halves_upcoming.csv built.
+
+## Addendum — 2026-11-08: user decision to ship the null product
+
+After the verdict above was reported, the user decided (2026-11-08):
+**jalan 1 — ship the uncorrected baseline (a) as a production
+presentation product**, with honest labelling, instead of waiting
+for the V4 fresh-holdout experiment. The reasoning placed on record
+so the gate is not silently moved:
+
+- The gate and its selection procedure are NOT retroactively
+  changed, and this experiment's verdict stands: the candidate
+  selected by the pre-registered rule (b) failed validation, and no
+  corrected/modelled variant ships.
+- What ships is the pre-existing NULL design — constant-share
+  thinning of the production FT lambdas, pure Poisson, no
+  correction — the same design family as the SOT halves split that
+  shipped under the V9 precedent (modelled share lost, constant
+  share shipped). The null's parameters (frozen shares 1H home
+  0.4419 / away 0.4440) were fitted on data up to 2022/23 and were
+  never fitted on the 2023/24–2025/26 validation window; its
+  validation numbers on that window (Over-1.5 calibration +0.22pp
+  1H / −0.71pp 2H, inside the ±1pp gate) are therefore an honest
+  out-of-sample reading of the null itself, not a fitted result.
+  Its one blemish is on record: on the tuning window its 1H
+  calibration was −1.10pp, a hair outside the gate — the evidence
+  across windows is mixed, and the product is labelled accordingly
+  (constant-share split, indicative halves) wherever it is shown.
+- Confirmation on the untouched 2026/27 season remains pending and
+  is the standing check on this decision: the shipped product will
+  be re-judged against that holdout once it is meaningful
+  (≈ n = 1,500 labelled top-5 matches, roughly February 2027), and
+  withdrawn if it degrades there.
+
+Implementation: `model_goals_halves.py` (production step, non-critical
+shadow step), writing `predictions_goals_halves_upcoming.csv`
+(per-team + total expected goals per half; O/U 0.5/1.5/2.5 ladders
+per half), shown in the daily report as "Over/Under Babak 1/2" with
+the constant-share footnote.

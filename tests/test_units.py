@@ -3119,7 +3119,7 @@ def test_shadow_ta_build_rc_failure_marks_run_failed():
     finally:
         restore()
     assert code == 1, code
-    assert "[15/22] FAILED ta_model build" in out, out
+    assert "[16/23] FAILED ta_model build" in out, out
     assert "py:best_picks.py" in calls, calls
 
 
@@ -3353,6 +3353,50 @@ def test_grade_new_markets_settles_synthetic():
                         "HST", "AST", "HY", "AY"])
             w.writerow(["E0", "2026-11-07", "Arsenal", "Chelsea",
                         "6", "4", "2", "1"])
+            w.writerow(["SP1", "2026-11-06", "Ath Bilbao", "Osasuna",
+                        "5", "5", "3", "2"])
+        # Snapshot pasca-tanggal-laga tidak boleh dipakai: baris SOT
+        # yang sama dengan prob berbeda di arsip 2026-11-08 (laga
+        # 2026-11-07) harus diabaikan, dan laga yang HANYA muncul di
+        # arsip pasca-tanggal (Liverpool-Everton) tidak dinilai.
+        arch2 = os.path.join(td, "archive", "2026-11-08")
+        os.makedirs(arch2)
+        with open(os.path.join(arch2, "predictions_sot_upcoming.csv"),
+                  "w", newline="") as f:
+            w = csv.writer(f)
+            w.writerow(["div", "date", "home", "away", "rec_line",
+                        "rec_side", "rec_prob"])
+            w.writerow(["E0", "2026-11-07", "Arsenal", "Chelsea",
+                        "8.5", "Over", "0.99"])
+        with open(os.path.join(arch2, "predictions_cards_upcoming.csv"),
+                  "w", newline="") as f:
+            w = csv.writer(f)
+            w.writerow(["div", "date", "home", "away", "rec_line",
+                        "rec_side", "rec_prob"])
+            w.writerow(["E0", "2026-11-07", "Liverpool", "Everton",
+                        "3.5", "Over", "0.50"])
+        # Dedup alias: laga SP1 yang sama muncul sebagai "Ath Bilbao"
+        # di arsip 2026-11-05 dan "Athletic Bilbao" di arsip
+        # 2026-11-06 (keduanya <= tanggal laga) -> satu baris nilai,
+        # snapshot terakhir menang.
+        arch0 = os.path.join(td, "archive", "2026-11-05")
+        os.makedirs(arch0)
+        with open(os.path.join(arch0, "predictions_cards_upcoming.csv"),
+                  "w", newline="") as f:
+            w = csv.writer(f)
+            w.writerow(["div", "date", "home", "away", "rec_line",
+                        "rec_side", "rec_prob"])
+            w.writerow(["SP1", "2026-11-06", "Ath Bilbao", "Osasuna",
+                        "3.5", "Over", "0.40"])
+        arch1 = os.path.join(td, "archive", "2026-11-06")
+        os.makedirs(arch1)
+        with open(os.path.join(arch1, "predictions_cards_upcoming.csv"),
+                  "w", newline="") as f:
+            w = csv.writer(f)
+            w.writerow(["div", "date", "home", "away", "rec_line",
+                        "rec_side", "rec_prob"])
+            w.writerow(["SP1", "2026-11-06", "Athletic Bilbao",
+                        "Osasuna", "3.5", "Over", "0.50"])
         labels = os.path.join(td, "labels.csv")
         with open(labels, "w", newline="") as f:
             w = csv.writer(f)
@@ -3382,14 +3426,92 @@ def test_grade_new_markets_settles_synthetic():
         # Under -> hit; corner 1H total 4 < 4.5 Over -> lose.
         assert by[("sot", "2026-11-07")]["status"] == "hit"
         assert by[("sot", "2026-11-07")]["actual"] == 10.0
+        # Snapshot pasca-laga (prob 0.99) diabaikan: prob tetap 0.60.
+        assert by[("sot", "2026-11-07")]["prob"] == 0.60
         assert by[("cards", "2026-11-07")]["status"] == "hit"
         assert by[("corners_1h", "2026-11-07")]["status"] == "lose"
         assert by[("sot", "2999-01-01")]["status"] == "pending"
+        # Laga yang hanya ada di snapshot pasca-tanggal tidak dinilai.
+        assert not any(r["home"] == "Liverpool" for r in rows)
+        # Dedup alias: satu baris SP1, snapshot 2026-11-06 menang,
+        # total kartu aktual 5 > 3.5 Over -> hit.
+        sp1 = [r for r in rows if r["div"] == "SP1"]
+        assert len(sp1) == 1 and sp1[0]["prob"] == 0.50
+        assert sp1[0]["status"] == "hit"
         summary = json.load(open(os.path.join(
             ledger, "new_market_summary.json")))["products"]
         assert summary["sot"]["settled"] == 1
         assert summary["sot"]["pending"] == 1
+        assert summary["cards"]["predictions"] == 2
+        assert summary["cards"]["settled"] == 2
         assert summary["corners_1h"]["lose"] == 1
+
+
+def test_goals_halves_poisson_and_shares():
+    # model_goals_halves: Poisson murni pada total babak + porsi
+    # konstan beku per sisi. Probabilitas Over cocok dengan rumus
+    # Poisson tertutup; ekspektasi babak menjumlah kembali ke
+    # lambda FT; baris tanpa lambda terbaca dilewati.
+    import csv
+    import math
+    import tempfile
+
+    import model_goals_halves as gh
+
+    assert abs(gh.pois_over(1.0, 0.5) - (1 - math.exp(-1.0))) < 1e-12
+    assert abs(gh.pois_over(2.0, 1.5) -
+               (1 - math.exp(-2.0) * (1 + 2.0))) < 1e-12
+    assert abs(gh.pois_over(3.0, 2.5) -
+               (1 - math.exp(-3.0) * (1 + 3.0 + 4.5))) < 1e-12
+
+    with tempfile.TemporaryDirectory() as td:
+        src = os.path.join(td, "predictions_upcoming.csv")
+        with open(src, "w", newline="", encoding="utf-8") as f:
+            w = csv.writer(f)
+            w.writerow(["div", "date", "time", "home", "away",
+                        "lam_h", "lam_a"])
+            w.writerow(["E0", "2026-11-09", "20:00", "Arsenal",
+                        "Chelsea", 2.0, 1.0])
+            w.writerow(["E0", "2026-11-09", "20:00", "Rusak",
+                        "Baris", "", ""])
+        old = gh.GOALS_IN
+        gh.GOALS_IN = src
+        try:
+            rows, skipped = gh.build_rows()
+        finally:
+            gh.GOALS_IN = old
+    assert skipped == 1 and len(rows) == 1, (rows, skipped)
+    r = rows[0]
+    assert abs(r["exp_goals_1h_home"] - 2.0 * 0.4419) < 0.001
+    assert abs(r["exp_goals_1h_away"] - 1.0 * 0.4440) < 0.001
+    assert abs(r["exp_goals_1h_total"] +
+               r["exp_goals_2h_total"] - 3.0) < 0.002
+    ps = [r[f"p_over_1h_{L}"] for L in (0.5, 1.5, 2.5)]
+    assert ps[0] > ps[1] > ps[2], ps
+    assert abs(ps[0] -
+               (1 - math.exp(-r["exp_goals_1h_total"]))) < 0.001
+
+
+def test_shadow_goal_halves_wiring():
+    # Langkah [9/23] goal halves adalah konsumen prediksi murni:
+    # jalan pada run sukses, dilewati (DILEWATI) saat prediksi liga
+    # gagal — tidak boleh menulis pecahan dari lambda basi.
+    sh, calls, restore = _shadow_env("success")
+    try:
+        code, _out = _run_shadow(sh)
+    finally:
+        restore()
+    assert code is None, code
+    assert "py:model_goals_halves.py" in calls, calls
+
+    sh, calls, restore = _shadow_env("error")
+    try:
+        code, out = _run_shadow(sh)
+    finally:
+        restore()
+    assert code == 1, code
+    assert "py:model_goals_halves.py" not in calls, calls
+    assert "[9/23] DILEWATI goal halves" in out, out
 
 
 if __name__ == "__main__":
