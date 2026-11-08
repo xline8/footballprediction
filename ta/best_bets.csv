@@ -1,0 +1,129 @@
+bet_id,created_at,game_id,kickoff_utc,league,home,away,market,line,selection,bookmaker,price,p_model,p_market,ev,tier,status,score,result,profit,graded_at
+952642|1X2||1,2026-10-28T00:26:59+0700,952642,2026-10-30T19:30,Germany - Bundesliga,elversberg,mainz 05,1X2,,1,market,3.24,0.6179,0.295,0.479,seimbang,SETTLED,4-1,win,+2.240,2026-10-31T01:53:24+0000
+952539|1X2||2,2026-10-28T00:26:59+0700,952539,2026-10-29T19:45,Italy - Serie A,fiorentina,atalanta,1X2,,2,market,3.08,0.4767,0.3089,0.2098,agresif,SETTLED,2-2,lose,-1.000,2026-10-30T09:22:36+0700
+952366|1X2||2,2026-10-28T00:26:59+0700,952366,2026-10-28T17:30,Italy - Serie A,milan,bologna,1X2,,2,market,5.46,0.2437,0.1748,0.1424,agresif,SETTLED,2-4,win,+4.460,2026-10-30T09:22:36+0700
+952370|1X2||2,2026-10-28T00:26:59+0700,952370,2026-10-28T19:45,Italy - Serie A,monza,napoli,1X2,,2,market,1.77,0.6749,0.5395,0.0747,seimbang,SETTLED,1-4,win,+0.770,2026-10-30T09:22:36+0700
+952245|1X2||X,2026-10-28T00:26:59+0700,952245,2026-10-27T19:45,Italy - Serie A,roma,cagliari,1X2,,X,market,5.2,0.2183,0.1836,0.0449,agresif,SETTLED,4-2,lose,-1.000,2026-10-30T09:22:36+0700
+952643|OU|2.5|Under,2026-10-28T00:33:10+0700,952643,2026-10-30T18:00,France - Ligue 1,le havre,paris saint germain,OU,2.5,Under,bet-at-home,3.4,0.4446,0.2797,0.2312,agresif,SETTLED,1-5,lose,-1.000,2026-10-31T03:03:59+0700
+952538|OU|1.5|Under,2026-10-28T00:33:10+0700,952538,2026-10-29T17:30,Italy - Serie A,frosinone,lecce,OU,1.5,Under,bet-at-home,6.0,0.2372,0.1585,0.187,agresif,SETTLED,5-1,lose,-1.000,2026-10-30T09:22:36+0700
+952644|OU|2.5|Under,2026-10-28T00:33:10+0700,952644,2026-10-30T20:05,France - Ligue 1,lille,lens,OU,2.5,Under,1xbet,2.25,0.5451,0.4375,0.1054,seimbang,SETTLED,1-0,win,+1.250,2026-10-31T01:53:24+0000
+952641|OU|3.5|Over,2026-10-28T00:33:10+0700,952641,2026-10-30T20:00,Spain - Primera Division,villarreal,espanyol,OU,3.5,Over,1xbet,2.38,0.4755,0.4138,0.0583,agresif,SETTLED,0-1,lose,-1.000,2026-10-31T01:53:24+0000
+952830|1X2||2,2026-10-28T11:36:38+0700,952830,2026-10-31T19:45,France - Ligue 1,troyes,le mans,1X2,,2,1xbet,3.41,0.4512,0.2919,0.267,agresif,SETTLED,2-0,lose,-1.000,2026-11-01T01:53:34+0000
+952815|1X2||2,2026-10-28T11:36:38+0700,952815,2026-10-31T17:30,England - Premier League,tottenham,crystal palace,1X2,,2,bwin,5.75,0.278,0.1736,0.2984,agresif,SETTLED,2-0,lose,-1.000,2026-11-01T01:53:34+0000
+952813|1X2||1,2026-10-28T11:36:38+0700,952813,2026-10-31T15:00,England - Premier League,hull city,ipswich town,1X2,,1,1xbet,2.73,0.5018,0.3615,0.1784,seimbang,SETTLED,2-2,lose,-1.000,2026-10-31T18:50:04+0000
+952370|OU|3.5|Over,2026-10-28T11:36:38+0700,952370,2026-10-28T19:45,Italy - Serie A,monza,napoli,OU,3.5,Over,unibet,2.85,0.475,0.3418,0.1639,agresif,SETTLED,1-4,win,+1.850,2026-10-30T09:22:36+0700
+952824|1X2||X,2026-10-28T11:36:38+0700,952824,2026-10-31T14:30,Germany - Bundesliga,schalke 04,rb leipzig,1X2,,X,market,4.04,0.326,0.2361,0.1354,agresif,SETTLED,0-2,lose,-1.000,2026-10-31T18:50:04+0000
+952644|OU|1.5|Under,2026-10-28T11:36:38+0700,952644,2026-10-30T20:05,France - Ligue 1,lille,lens,OU,1.5,Under,betfair,4.5,0.291,0.2119,0.1316,agresif,SETTLED,1-0,win,+3.500,2026-10-31T01:53:24+0000
+952819|1X2||X,2026-10-28T11:36:38+0700,952819,2026-10-31T17:30,Spain - Primera Division,real betis,malaga,1X2,,X,market,5.3,0.2437,0.1823,0.129,agresif,SETTLED,2-1,lose,-1.000,2026-11-01T01:53:34+0000
+952817|1X2||1,2026-10-28T11:36:38+0700,952817,2026-10-31T13:00,Spain - Primera Division,levante,atletico madrid,1X2,,1,1xbet,5.56,0.2846,0.179,0.2886,agresif,SETTLED,0-2,lose,-1.000,2026-10-31T18:50:04+0000
+952823|1X2||X,2026-10-28T11:36:38+0700,952823,2026-10-31T14:30,Germany - Bundesliga,monchengladbach,paderborn,1X2,,X,market,4.07,0.307,0.2344,0.1017,agresif,SETTLED,0-0,win,+3.070,2026-10-31T18:50:04+0000
+952809|1X2||2,2026-10-28T11:36:38+0700,952809,2026-10-31T12:30,England - Premier League,chelsea,man united,1X2,,2,bwin,4.0,0.3055,0.2527,0.1163,agresif,SETTLED,2-0,lose,-1.000,2026-10-31T18:50:04+0000
+952538|1X2||1,2026-10-28T11:36:38+0700,952538,2026-10-29T17:30,Italy - Serie A,frosinone,lecce,1X2,,1,1xbet,1.78,0.6396,0.5543,0.0625,seimbang,SETTLED,5-1,win,+0.780,2026-10-30T09:22:36+0700
+952821|1X2||1,2026-10-28T11:36:38+0700,952821,2026-10-31T14:30,Germany - Bundesliga,augsburg,freiburg,1X2,,1,bet-at-home,3.1,0.3828,0.3185,0.0871,agresif,SETTLED,1-2,lose,-1.000,2026-10-31T18:50:04+0000
+952826|1X2||X,2026-10-28T11:36:38+0700,952826,2026-10-31T17:30,Germany - Bundesliga,bayern munchen,borussia dortmund,1X2,,X,market,5.85,0.1966,0.1631,0.052,agresif,SETTLED,2-2,win,+4.850,2026-11-01T01:53:34+0000
+952825|1X2||1,2026-10-28T11:36:38+0700,952825,2026-10-31T14:30,Germany - Bundesliga,werder bremen,hoffenheim,1X2,,1,bwin,2.9,0.3781,0.351,0.0572,agresif,SETTLED,2-0,win,+1.900,2026-10-31T18:50:04+0000
+952812|1X2||X,2026-10-28T11:36:38+0700,952812,2026-10-31T15:00,England - Premier League,coventry,sunderland,1X2,,X,market,3.44,0.3256,0.281,0.0433,agresif,SETTLED,3-1,lose,-1.000,2026-10-31T18:50:04+0000
+952820|OU|2.5|Under,2026-10-28T11:44:45+0700,952820,2026-10-31T20:00,Spain - Primera Division,barcelona,alaves,OU,2.5,Under,unibet,4.35,0.6127,0.226,0.8241,seimbang,SETTLED,6-1,lose,-1.000,2026-11-01T01:53:34+0000
+952819|OU|1.5|Under,2026-10-28T11:44:45+0700,952819,2026-10-31T17:30,Spain - Primera Division,real betis,malaga,OU,1.5,Under,unibet,5.75,0.4294,0.1667,0.7137,agresif,SETTLED,2-1,lose,-1.000,2026-11-01T01:53:34+0000
+952824|OU|2.5|Under,2026-10-28T11:44:45+0700,952824,2026-10-31T14:30,Germany - Bundesliga,schalke 04,rb leipzig,OU,2.5,Under,betfair,2.88,0.5816,0.3333,0.3175,seimbang,SETTLED,0-2,win,+1.880,2026-10-31T18:50:04+0000
+952823|OU|2.5|Under,2026-10-28T11:44:45+0700,952823,2026-10-31T14:30,Germany - Bundesliga,monchengladbach,paderborn,OU,2.5,Under,unibet,2.8,0.6386,0.3443,0.376,seimbang,SETTLED,0-0,win,+1.800,2026-10-31T18:50:04+0000
+952812|OU|1.5|Under,2026-10-28T11:44:45+0700,952812,2026-10-31T15:00,England - Premier League,coventry,sunderland,OU,1.5,Under,unibet,3.65,0.364,0.2626,0.1436,agresif,SETTLED,3-1,lose,-1.000,2026-10-31T18:50:04+0000
+952827|OU|3.5|Over,2026-10-28T11:44:45+0700,952827,2026-10-31T14:00,Italy - Serie A,bologna,monza,OU,3.5,Over,unibet,3.1,0.4293,0.3111,0.1476,agresif,SETTLED,2-1,lose,-1.000,2026-10-31T18:50:04+0000
+952826|OU|2.5|Under,2026-10-28T11:44:45+0700,952826,2026-10-31T17:30,Germany - Bundesliga,bayern munchen,borussia dortmund,OU,2.5,Under,unibet,3.9,0.2908,0.2486,0.0517,agresif,SETTLED,2-2,lose,-1.000,2026-11-01T01:53:34+0000
+952816|OU|2.5|Under,2026-10-28T11:44:45+0700,952816,2026-10-31T20:00,England - Premier League,aston villa,fulham,OU,2.5,Under,1xbet,2.23,0.525,0.4425,0.0788,seimbang,SETTLED,1-1,win,+1.230,2026-11-01T01:53:34+0000
+952811|OU|2.5|Under,2026-10-28T11:44:45+0700,952811,2026-10-31T15:00,England - Premier League,brentford,nott m forest,OU,2.5,Under,1xbet,2.21,0.4891,0.4461,0.0334,agresif,SETTLED,2-0,win,+1.210,2026-10-31T18:50:04+0000
+952810|OU|1.5|Under,2026-10-28T11:44:45+0700,952810,2026-10-31T15:00,England - Premier League,bournemouth,leeds united,OU,1.5,Under,betfair,4.0,0.2924,0.2424,0.0697,agresif,SETTLED,2-0,lose,-1.000,2026-10-31T18:50:04+0000
+952814|BTS||No,2026-10-28T11:44:45+0700,952814,2026-10-31T15:00,England - Premier League,man city,brighton and hove albion,BTS,,No,betfair,2.55,0.4394,0.378,0.0423,agresif,SETTLED,0-1,win,+1.550,2026-10-31T18:50:04+0000
+952818|OU|2.5|Under,2026-10-28T11:44:45+0700,952818,2026-10-31T15:15,Spain - Primera Division,rayo vallecano,celta vigo,OU,2.5,Under,1xbet,1.81,0.6055,0.5452,0.0414,seimbang,SETTLED,3-0,lose,-1.000,2026-10-31T18:50:04+0000
+952822|OU|3.5|Under,2026-10-28T11:44:45+0700,952822,2026-10-31T14:30,Germany - Bundesliga,bayer leverkusen,stuttgart,OU,3.5,Under,1xbet,2.08,0.5247,0.4734,0.0381,seimbang,SETTLED,2-4,lose,-1.000,2026-10-31T18:50:04+0000
+952820|BTS||Yes,2026-10-28T14:22:34+0700,952820,2026-10-31T20:00,Spain - Primera Division,barcelona,alaves,BTS,,Yes,bwin,1.93,0.8968,0.5211,0.3682,aman,SETTLED,6-1,win,+0.930,2026-11-01T01:53:34+0000
+952642|OU|3.5|Over,2026-10-28T14:22:34+0700,952642,2026-10-30T19:30,Germany - Bundesliga,elversberg,mainz 05,OU,3.5,Over,unibet,2.3,0.5586,0.4321,0.1393,seimbang,SETTLED,4-1,win,+1.300,2026-10-31T01:53:24+0000
+952538|OU|3.5|Over,2026-10-28T14:22:34+0700,952538,2026-10-29T17:30,Italy - Serie A,frosinone,lecce,OU,3.5,Over,1xbet,2.24,0.5636,0.44,0.124,seimbang,SETTLED,5-1,win,+1.240,2026-10-30T09:22:36+0700
+952367|1X2||2,2026-10-28T14:22:34+0700,952367,2026-10-28T17:30,Italy - Serie A,parma,udinese,1X2,,2,1xbet,2.74,0.3939,0.3715,0.0487,agresif,SETTLED,0-0,lose,-1.000,2026-10-30T09:22:36+0700
+952823|OU|1.5|Under,2026-10-31T02:03:08+0700,952823,2026-10-31T14:30,Germany - Bundesliga,monchengladbach,paderborn,OU,1.5,Under,betfair,6.0,0.2798,0.1597,0.3185,agresif,SETTLED,0-0,win,+5.000,2026-10-31T18:50:04+0000
+953335|OU|3.5|Over,2026-10-31T02:03:08+0700,953335,2026-11-01T14:00,Italy - Serie A,frosinone,torino,OU,3.5,Over,1xbet,2.15,0.6027,0.4584,0.1407,seimbang,SETTLED,2-0,lose,-1.000,2026-11-02T00:05:13+0000
+953334|OU|2.5|Under,2026-10-31T02:03:08+0700,953334,2026-11-01T11:30,Italy - Serie A,como,venezia,OU,2.5,Under,unibet,3.1,0.393,0.3126,0.0938,agresif,SETTLED,1-0,win,+2.100,2026-11-02T00:05:13+0000
+953333|OU|2.5|Under,2026-10-31T02:03:08+0700,953333,2026-11-01T16:30,Germany - Bundesliga,eintracht frankfurt,hamburg,OU,2.5,Under,unibet,3.05,0.3883,0.3177,0.0766,agresif,SETTLED,3-1,lose,-1.000,2026-11-02T00:05:13+0000
+952820|OU|3.5|Under,2026-10-31T02:03:08+0700,952820,2026-10-31T20:00,Spain - Primera Division,barcelona,alaves,OU,3.5,Under,betfair,2.55,0.4855,0.3972,0.1254,agresif,SETTLED,6-1,lose,-1.000,2026-11-01T01:53:34+0000
+952814|OU|2.5|Under,2026-10-31T02:03:08+0700,952814,2026-10-31T15:00,England - Premier League,man city,brighton and hove albion,OU,2.5,Under,betfair,3.0,0.407,0.3213,0.0924,agresif,SETTLED,0-1,win,+2.000,2026-10-31T18:50:04+0000
+953687|BTS||No,2026-10-31T02:03:08+0700,953687,2026-11-02T20:00,England - Premier League,newcastle,everton,BTS,,No,betfair,2.55,0.4662,0.3811,0.0802,agresif,SETTLED,0-1,win,+1.550,2026-11-03T01:53:22+0000
+953332|OU|2.5|Under,2026-10-31T02:03:08+0700,953332,2026-11-01T14:30,Germany - Bundesliga,union berlin,koln,OU,2.5,Under,1xbet,2.36,0.4794,0.4173,0.0581,agresif,SETTLED,1-1,win,+1.360,2026-11-02T00:05:13+0000
+953330|1X2||1,2026-10-31T02:03:08+0700,953330,2026-11-01T17:30,Spain - Primera Division,elche,valencia,1X2,,1,1xbet,2.48,0.4422,0.4046,0.0501,agresif,SETTLED,0-1,lose,-1.000,2026-11-02T00:05:13+0000
+953328|1X2||1,2026-10-31T02:03:08+0700,953328,2026-11-01T13:00,Spain - Primera Division,getafe,sevilla,1X2,,1,bet-at-home,3.3,0.3507,0.2991,0.0722,agresif,SETTLED,3-1,win,+2.300,2026-11-02T00:05:13+0000
+953331|1X2||1,2026-10-31T02:03:08+0700,953331,2026-11-01T20:00,Spain - Primera Division,athletic bilbao,real sociedad,1X2,,1,unibet,2.18,0.5057,0.4543,0.0463,seimbang,SETTLED,2-1,win,+1.180,2026-11-02T00:05:13+0000
+953689|1X2||1,2026-10-31T02:03:08+0700,953689,2026-11-02T17:30,Italy - Serie A,sassuolo,fiorentina,1X2,,1,1xbet,2.94,0.3862,0.3349,0.0601,agresif,SETTLED,2-4,lose,-1.000,2026-11-03T01:53:22+0000
+952644|1X2||1,2026-10-31T02:03:08+0700,952644,2026-10-30T20:05,France - Ligue 1,lille,lens,1X2,,1,1xbet,2.76,0.3903,0.3661,0.0438,agresif,SETTLED,1-0,win,+1.760,2026-10-31T01:53:24+0000
+953340|OU|1.5|Under,2026-10-31T02:03:08+0700,953340,2026-11-01T16:15,France - Ligue 1,olympique lyonnais,angers,OU,1.5,Under,betfair,5.5,0.2081,0.1754,0.0547,agresif,SETTLED,2-0,lose,-1.000,2026-11-02T00:05:13+0000
+953336|1X2||X,2026-10-31T02:03:08+0700,953336,2026-11-01T14:00,Italy - Serie A,lazio,cagliari,1X2,,X,1xbet,4.69,0.2347,0.2102,0.0435,agresif,SETTLED,2-1,lose,-1.000,2026-11-02T00:05:13+0000
+952825|BTS||No,2026-10-31T02:03:08+0700,952825,2026-10-31T14:30,Germany - Bundesliga,werder bremen,hoffenheim,BTS,,No,betfair,3.3,0.3443,0.2918,0.0496,agresif,SETTLED,2-0,win,+2.300,2026-10-31T18:50:04+0000
+953327|OU|2.5|Under,2026-10-31T02:03:08+0700,953327,2026-11-01T16:30,England - Premier League,liverpool,arsenal,OU,2.5,Under,1xbet,1.99,0.548,0.4962,0.039,seimbang,SETTLED,0-1,win,+0.990,2026-11-02T00:05:13+0000
+953337|1X2||1,2026-10-31T02:03:08+0700,953337,2026-11-01T17:00,Italy - Serie A,lecce,genoa,1X2,,1,1xbet,3.4,0.3158,0.2936,0.0361,agresif,SETTLED,1-2,lose,-1.000,2026-11-02T00:05:13+0000
+953690|OU|2.5|Over,2026-10-31T02:03:08+0700,953690,2026-11-02T19:45,Italy - Serie A,atalanta,parma,OU,2.5,Over,1xbet,1.73,0.6259,0.5697,0.0341,seimbang,SETTLED,0-3,win,+0.730,2026-11-03T01:53:22+0000
+953341|1X2||2,2026-10-31T02:03:08+0700,953341,2026-11-01T16:15,France - Ligue 1,paris,monaco,1X2,,2,1xbet,3.06,0.3523,0.323,0.0331,agresif,SETTLED,3-1,lose,-1.000,2026-11-02T00:05:13+0000
+952819|1X2||1,2026-10-31T02:03:08+0700,952819,2026-10-31T17:30,Spain - Primera Division,real betis,malaga,1X2,,1,bwin,1.4,0.7617,0.7211,0.038,aman,SETTLED,2-1,win,+0.400,2026-11-01T01:53:34+0000
+952817|DNB||Dnb1,2026-10-31T02:58:41+0700,952817,2026-10-31T13:00,Spain - Primera Division,levante,atletico madrid,DNB,,Dnb1,betfair,4.5,0.2846,0.2133,0.3231,agresif,SETTLED,0-2,lose,-1.000,2026-10-31T18:50:04+0000
+953327|OU|1.5|Under,2026-10-31T02:58:41+0700,953327,2026-11-01T16:30,England - Premier League,liverpool,arsenal,OU,1.5,Under,betfair,4.0,0.2869,0.2424,0.0587,agresif,SETTLED,0-1,win,+3.000,2026-11-02T00:05:13+0000
+953691|1X2||1,2026-10-31T02:58:41+0700,953691,2026-11-02T19:45,France - Ligue 1,lorient,brest,1X2,,1,1xbet,2.56,0.4214,0.3846,0.0317,agresif,SETTLED,0-2,lose,-1.000,2026-11-03T01:53:22+0000
+953341|OU|3.5|Over,2026-10-31T02:58:41+0700,953341,2026-11-01T16:15,France - Ligue 1,paris,monaco,OU,3.5,Over,betfair,3.1,0.3512,0.3142,0.0314,agresif,SETTLED,3-1,win,+2.100,2026-11-02T00:05:13+0000
+952825|OU|3.5|Under,2026-10-31T11:21:49+0700,952825,2026-10-31T14:30,Germany - Bundesliga,werder bremen,hoffenheim,OU,3.5,Under,1xbet,1.9,0.5862,0.519,0.0499,seimbang,SETTLED,2-0,win,+0.900,2026-10-31T18:50:04+0000
+953327|BTS||No,2026-10-31T14:21:58+0700,953327,2026-11-01T16:30,England - Premier League,liverpool,arsenal,BTS,,No,betfair,2.3,0.4967,0.4207,0.055,agresif,SETTLED,0-1,win,+1.300,2026-11-02T00:05:13+0000
+953341|OU|2.5|Over,2026-10-31T23:02:37+0700,953341,2026-11-01T16:15,France - Ligue 1,paris,monaco,OU,2.5,Over,1xbet,1.88,0.5753,0.5241,0.0334,seimbang,SETTLED,3-1,win,+0.880,2026-11-02T00:05:13+0000
+953688|OU|2.5|Over,2026-10-31T18:50:02+0000,953688,2026-11-02T20:00,Spain - Primera Division,la coruna,osasuna,OU,2.5,Over,1xbet,2.28,0.49,0.4314,0.0505,agresif,SETTLED,2-1,win,+1.280,2026-11-03T01:53:22+0000
+953337|OU|2.5|Over,2026-10-31T18:50:02+0000,953337,2026-11-01T17:00,Italy - Serie A,lecce,genoa,OU,2.5,Over,1xbet,2.48,0.4477,0.3966,0.0469,agresif,SETTLED,1-2,win,+1.480,2026-11-02T00:05:13+0000
+953691|OU|2.5|Over,2026-10-31T18:50:02+0000,953691,2026-11-02T19:45,France - Ligue 1,lorient,brest,OU,2.5,Over,1xbet,2.14,0.5174,0.461,0.0468,seimbang,SETTLED,0-2,lose,-1.000,2026-11-03T01:53:22+0000
+953333|OU|3.5|Under,2026-11-01T01:55:21+0000,953333,2026-11-01T16:30,Germany - Bundesliga,eintracht frankfurt,hamburg,OU,3.5,Under,1xbet,1.85,0.6114,0.5328,0.0584,seimbang,SETTLED,3-1,lose,-1.000,2026-11-02T00:05:13+0000
+953332|1X2||1,2026-11-01T13:58:55+0700,953332,2026-11-01T14:30,Germany - Bundesliga,union berlin,koln,1X2,,1,1xbet,2.78,0.4084,0.3565,0.0633,agresif,SETTLED,1-1,lose,-1.000,2026-11-02T00:05:13+0000
+953688|OU|3.5|Over,2026-11-02T00:05:12+0000,953688,2026-11-02T20:00,Spain - Primera Division,la coruna,osasuna,OU,3.5,Over,betfair,4.33,0.2714,0.2212,0.0665,agresif,SETTLED,2-1,lose,-1.000,2026-11-03T01:53:22+0000
+953687|OU|2.5|Under,2026-11-02T00:05:12+0000,953687,2026-11-02T20:00,England - Premier League,newcastle,everton,OU,2.5,Under,1xbet,2.22,0.5078,0.4436,0.0561,seimbang,SETTLED,0-1,win,+1.220,2026-11-03T01:53:22+0000
+954080|OU|1.5|Under,2026-11-03T14:46:33+0700,954080,2026-11-06T20:00,England - Premier League,everton,coventry,OU,1.5,Under,unibet,4.35,0.2889,0.219,0.1047,agresif,SETTLED,3-1,lose,-1.000,2026-11-07T01:53:29+0000
+954082|OU|2.5|Under,2026-11-03T14:46:33+0700,954082,2026-11-06T19:30,Germany - Bundesliga,hamburg,monchengladbach,OU,2.5,Under,betfair,2.38,0.4616,0.4152,0.0434,agresif,SETTLED,3-1,lose,-1.000,2026-11-07T01:53:29+0000
+954084|OU|2.5|Under,2026-11-03T14:46:33+0700,954084,2026-11-06T19:45,France - Ligue 1,toulouse,strasbourg,OU,2.5,Under,1xbet,2.42,0.4451,0.4069,0.0308,agresif,SETTLED,3-1,lose,-1.000,2026-11-07T01:53:29+0000
+954081|1X2||2,2026-11-03T22:33:39+0700,954081,2026-11-06T20:00,Spain - Primera Division,sevilla,alaves,1X2,,2,bet-at-home,4.2,0.3011,0.2348,0.1254,agresif,SETTLED,0-0,lose,-1.000,2026-11-07T01:53:29+0000
+954083|1X2||2,2026-11-03T22:33:39+0700,954083,2026-11-06T19:45,Italy - Serie A,venezia,udinese,1X2,,2,1xbet,3.25,0.3849,0.3031,0.1179,agresif,SETTLED,2-1,lose,-1.000,2026-11-07T01:53:29+0000
+954080|OU|2.5|Under,2026-11-03T22:47:09+0700,954080,2026-11-06T20:00,England - Premier League,everton,coventry,OU,2.5,Under,1xbet,2.16,0.5563,0.4559,0.0932,seimbang,SETTLED,3-1,lose,-1.000,2026-11-07T01:53:29+0000
+954228|1X2||X,2026-11-05T01:57:06+0000,954228,2026-11-07T20:00,Spain - Primera Division,valencia,real madrid,1X2,,X,market,5.91,0.2403,0.1617,0.188,agresif,SETTLED,0-3,lose,-1.000,2026-11-08T01:53:49+0000
+954227|1X2||1,2026-11-05T01:57:06+0000,954227,2026-11-07T17:30,Spain - Primera Division,osasuna,athletic bilbao,1X2,,1,betfair,3.9,0.34,0.257,0.1643,agresif,SETTLED,1-1,lose,-1.000,2026-11-08T01:53:49+0000
+954238|1X2||1,2026-11-05T01:57:06+0000,954238,2026-11-07T18:00,France - Ligue 1,auxerre,paris,1X2,,1,1xbet,4.88,0.2832,0.2034,0.1872,agresif,SETTLED,0-1,lose,-1.000,2026-11-08T01:53:49+0000
+954223|1X2||2,2026-11-05T01:57:06+0000,954223,2026-11-07T15:00,England - Premier League,fulham,newcastle,1X2,,2,unibet,3.7,0.3492,0.2689,0.1435,agresif,SETTLED,1-1,lose,-1.000,2026-11-08T01:53:49+0000
+954221|1X2||1,2026-11-05T01:57:06+0000,954221,2026-11-07T12:30,England - Premier League,leeds united,tottenham,1X2,,1,bet-at-home,2.8,0.4443,0.3525,0.1155,agresif,SETTLED,1-0,win,+1.800,2026-11-08T01:53:49+0000
+954234|1X2||2,2026-11-05T01:57:06+0000,954234,2026-11-07T14:00,Italy - Serie A,cagliari,frosinone,1X2,,2,market,2.42,0.4781,0.3941,0.0553,agresif,SETTLED,1-0,lose,-1.000,2026-11-08T01:53:49+0000
+954231|1X2||X,2026-11-05T01:57:06+0000,954231,2026-11-07T14:30,Germany - Bundesliga,paderborn,eintracht frankfurt,1X2,,X,market,3.93,0.291,0.2435,0.0505,agresif,SETTLED,2-2,win,+2.930,2026-11-08T01:53:49+0000
+954231|OU|2.5|Under,2026-11-06T01:57:09+0000,954231,2026-11-07T14:30,Germany - Bundesliga,paderborn,eintracht frankfurt,OU,2.5,Under,betfair,2.88,0.5639,0.3333,0.2921,seimbang,SETTLED,2-2,lose,-1.000,2026-11-08T01:53:49+0000
+954222|OU|1.5|Under,2026-11-06T01:57:09+0000,954222,2026-11-07T15:00,England - Premier League,arsenal,hull city,OU,1.5,Under,betfair,6.0,0.2678,0.1608,0.2858,agresif,SETTLED,1-0,win,+5.000,2026-11-08T01:53:49+0000
+954678|1X2||1,2026-11-06T01:57:09+0000,954678,2026-11-08T14:00,England - Premier League,crystal palace,liverpool,1X2,,1,unibet,5.75,0.2587,0.1727,0.2402,agresif,OPEN,,,,
+954689|OU|2.5|Under,2026-11-06T01:57:09+0000,954689,2026-11-08T18:30,Germany - Bundesliga,hoffenheim,schalke 04,OU,2.5,Under,unibet,2.75,0.5165,0.3529,0.1954,seimbang,OPEN,,,,
+954234|OU|3.5|Over,2026-11-06T01:57:09+0000,954234,2026-11-07T14:00,Italy - Serie A,cagliari,frosinone,OU,3.5,Over,unibet,2.25,0.5603,0.4431,0.1288,seimbang,SETTLED,1-0,lose,-1.000,2026-11-08T01:53:49+0000
+954683|1X2||2,2026-11-06T01:57:09+0000,954683,2026-11-08T15:15,Spain - Primera Division,real sociedad,rayo vallecano,1X2,,2,1xbet,4.67,0.2656,0.2112,0.1133,agresif,OPEN,,,,
+954695|1X2||2,2026-11-06T01:57:09+0000,954695,2026-11-08T14:00,France - Ligue 1,stade rennais,lille,1X2,,2,unibet,3.3,0.3911,0.3007,0.1414,agresif,OPEN,,,,
+954228|OU|2.5|Under,2026-11-06T01:57:09+0000,954228,2026-11-07T20:00,Spain - Primera Division,valencia,real madrid,OU,2.5,Under,betfair,2.88,0.4568,0.3349,0.1401,agresif,SETTLED,0-3,lose,-1.000,2026-11-08T01:53:49+0000
+954679|OU|3.5|Over,2026-11-06T01:57:09+0000,954679,2026-11-08T14:00,England - Premier League,ipswich town,bournemouth,OU,3.5,Over,betfair,2.8,0.4659,0.3443,0.1342,agresif,OPEN,,,,
+954692|OU|3.5|Over,2026-11-06T01:57:09+0000,954692,2026-11-08T14:00,Italy - Serie A,monza,atalanta,OU,3.5,Over,1xbet,2.45,0.5277,0.3951,0.1303,seimbang,OPEN,,,,
+954686|1X2||1,2026-11-06T01:57:09+0000,954686,2026-11-08T20:00,Spain - Primera Division,atletico madrid,barcelona,1X2,,1,1xbet,4.01,0.3284,0.2459,0.1515,agresif,OPEN,,,,
+954688|1X2||X,2026-11-06T01:57:09+0000,954688,2026-11-08T16:30,Germany - Bundesliga,freiburg,union berlin,1X2,,X,1xbet,4.73,0.2473,0.2101,0.0817,agresif,OPEN,,,,
+954239|OU|3.5|Under,2026-11-06T01:57:09+0000,954239,2026-11-07T20:05,France - Ligue 1,paris saint germain,troyes,OU,3.5,Under,1xbet,2.25,0.5239,0.4375,0.0815,seimbang,SETTLED,1-0,win,+1.250,2026-11-08T01:53:49+0000
+954691|1X2||1,2026-11-06T01:57:09+0000,954691,2026-11-08T14:00,Italy - Serie A,genoa,milan,1X2,,1,1xbet,4.84,0.2432,0.2035,0.081,agresif,OPEN,,,,
+954684|1X2||2,2026-11-06T01:57:09+0000,954684,2026-11-08T17:30,Spain - Primera Division,celta vigo,levante,1X2,,2,1xbet,4.52,0.2523,0.221,0.0696,agresif,OPEN,,,,
+954682|1X2||1,2026-11-06T01:57:09+0000,954682,2026-11-08T13:00,Spain - Primera Division,elche,real betis,1X2,,1,1xbet,3.56,0.3397,0.2784,0.1002,agresif,OPEN,,,,
+954226|1X2||2,2026-11-06T01:57:09+0000,954226,2026-11-07T15:15,Spain - Primera Division,espanyol,la coruna,1X2,,2,1xbet,3.21,0.3342,0.3081,0.0308,agresif,SETTLED,0-0,lose,-1.000,2026-11-08T01:53:49+0000
+954700|1X2||1,2026-11-06T01:57:09+0000,954700,2026-11-08T19:45,France - Ligue 1,lens,olympique marseille,1X2,,1,bet-at-home,2.3,0.5164,0.4303,0.0888,seimbang,OPEN,,,,
+954696|OU|2.5|Under,2026-11-06T01:57:09+0000,954696,2026-11-08T16:15,France - Ligue 1,angers,nice,OU,2.5,Under,1xbet,2.21,0.5114,0.4461,0.0581,seimbang,OPEN,,,,
+954687|1X2||1,2026-11-06T01:57:09+0000,954687,2026-11-08T14:30,Germany - Bundesliga,koln,bayer leverkusen,1X2,,1,1xbet,4.21,0.2674,0.2341,0.0556,agresif,OPEN,,,,
+954685|1X2||X,2026-11-06T01:57:09+0000,954685,2026-11-08T17:30,Spain - Primera Division,villarreal,getafe,1X2,,X,bet-at-home,4.7,0.2394,0.2101,0.0563,agresif,OPEN,,,,
+954232|OU|2.5|Under,2026-11-06T01:57:09+0000,954232,2026-11-07T14:30,Germany - Bundesliga,rb leipzig,augsburg,OU,2.5,Under,betfair,4.1,0.2771,0.2351,0.0499,agresif,SETTLED,5-2,lose,-1.000,2026-11-08T01:53:49+0000
+954699|OU|2.5|Over,2026-11-06T01:57:09+0000,954699,2026-11-08T16:15,France - Ligue 1,le mans,monaco,OU,2.5,Over,1xbet,1.64,0.6792,0.601,0.0497,seimbang,OPEN,,,,
+954235|1X2||2,2026-11-06T01:57:09+0000,954235,2026-11-07T14:00,Italy - Serie A,torino,lecce,1X2,,2,betfair,4.6,0.2454,0.2148,0.0585,agresif,SETTLED,1-1,lose,-1.000,2026-11-08T01:53:49+0000
+954229|OU|3.5|Over,2026-11-06T01:57:09+0000,954229,2026-11-07T14:30,Germany - Bundesliga,borussia dortmund,elversberg,OU,3.5,Over,1xbet,2.02,0.5527,0.4873,0.0504,seimbang,SETTLED,2-1,lose,-1.000,2026-11-08T01:53:49+0000
+954697|OU|2.5|Over,2026-11-06T01:57:09+0000,954697,2026-11-08T16:15,France - Ligue 1,brest,olympique lyonnais,OU,2.5,Over,1xbet,1.9,0.5757,0.519,0.04,seimbang,OPEN,,,,
+954680|1X2||1,2026-11-06T01:57:09+0000,954680,2026-11-08T14:00,England - Premier League,sunderland,chelsea,1X2,,1,betfair,3.9,0.2868,0.2543,0.055,agresif,OPEN,,,,
+954236|1X2||1,2026-11-06T01:57:09+0000,954236,2026-11-07T17:00,Italy - Serie A,parma,bologna,1X2,,1,betfair,5.0,0.2353,0.1973,0.0816,agresif,SETTLED,1-2,lose,-1.000,2026-11-08T01:53:49+0000
+954225|OU|2.5|Over,2026-11-06T01:57:09+0000,954225,2026-11-07T13:00,Spain - Primera Division,malaga,racing santander,OU,2.5,Over,1xbet,1.73,0.6258,0.5686,0.0331,seimbang,SETTLED,1-2,win,+0.730,2026-11-08T01:53:49+0000
+954689|OU|1.5|Under,2026-11-07T01:57:00+0000,954689,2026-11-08T18:30,Germany - Bundesliga,hoffenheim,schalke 04,OU,1.5,Under,betfair,6.0,0.2589,0.1597,0.2557,agresif,OPEN,,,,
+954684|OU|2.5|Over,2026-11-07T01:57:00+0000,954684,2026-11-08T17:30,Spain - Primera Division,celta vigo,levante,OU,2.5,Over,1xbet,1.97,0.57,0.5,0.054,seimbang,OPEN,,,,
+954690|1X2||1,2026-11-07T01:57:00+0000,954690,2026-11-08T11:30,Italy - Serie A,napoli,lazio,1X2,,1,1xbet,2.33,0.4706,0.4229,0.041,agresif,OPEN,,,,
+954687|OU|3.5|Under,2026-11-07T01:57:00+0000,954687,2026-11-08T14:30,Germany - Bundesliga,koln,bayer leverkusen,OU,3.5,Under,1xbet,1.86,0.5801,0.5303,0.0327,seimbang,OPEN,,,,
+954231|OU|1.5|Under,2026-11-07T09:01:09+0000,954231,2026-11-07T14:30,Germany - Bundesliga,paderborn,eintracht frankfurt,OU,1.5,Under,betfair,6.0,0.2946,0.1585,0.3593,agresif,SETTLED,2-2,lose,-1.000,2026-11-08T01:53:49+0000
+954239|OU|2.5|Under,2026-11-07T09:01:09+0000,954239,2026-11-07T20:05,France - Ligue 1,paris saint germain,troyes,OU,2.5,Under,betfair,3.8,0.31,0.2534,0.0705,agresif,SETTLED,1-0,win,+2.800,2026-11-08T01:53:49+0000
+954694|1X2||2,2026-11-07T09:01:09+0000,954694,2026-11-08T19:45,Italy - Serie A,fiorentina,juventus,1X2,,2,betfair,2.15,0.5066,0.4628,0.0421,seimbang,OPEN,,,,
+954233|1X2||1,2026-11-07T12:35:05+0000,954233,2026-11-07T17:30,Germany - Bundesliga,stuttgart,werder bremen,1X2,,1,bet-at-home,1.88,0.6168,0.5269,0.075,seimbang,SETTLED,1-0,win,+0.880,2026-11-08T01:53:49+0000
+954699|OU|3.5|Over,2026-11-07T12:35:05+0000,954699,2026-11-08T16:15,France - Ligue 1,le mans,monaco,OU,3.5,Over,betfair,2.55,0.4634,0.3796,0.0748,agresif,OPEN,,,,
+954690|BTS||No,2026-11-07T12:35:05+0000,954690,2026-11-08T11:30,Italy - Serie A,napoli,lazio,BTS,,No,betfair,2.5,0.4499,0.3947,0.0557,agresif,OPEN,,,,
