@@ -1,0 +1,4 @@
+div,season,date,home,away,fotmob_match_id,csv_sot_ft,delta_sot_ft,shot_count,sot_1h,sot_2h,sot_ft,blocked_on_target,shotmap_complete,label_source,quality
+D1,2026/27,2026-08-28,Bayern Munich,Stuttgart,5881143,13,0,33,5,8,13,10,True,shotmap,reconciled
+D1,2026/27,2026-08-29,FC Koln,Hoffenheim,5881147,10,0,33,2,8,10,9,True,shotmap,reconciled
+D1,2026/27,2026-08-29,Mainz,Paderborn,5881149,4,0,31,0,4,4,10,True,shotmap,reconciled
