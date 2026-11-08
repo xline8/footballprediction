@@ -3119,7 +3119,7 @@ def test_shadow_ta_build_rc_failure_marks_run_failed():
     finally:
         restore()
     assert code == 1, code
-    assert "[15/21] FAILED ta_model build" in out, out
+    assert "[15/22] FAILED ta_model build" in out, out
     assert "py:best_picks.py" in calls, calls
 
 
@@ -3300,6 +3300,96 @@ def test_fitmodel_stats_come_from_train_only():
     assert np.array_equal(m.mu, mu0)
     assert np.array_equal(m.med, med0)
     assert np.array_equal(m.sd, sd0)
+
+
+def test_new_market_name_matching():
+    import grade_new_markets as gnm
+
+    assert gnm._names_match("Athletic Bilbao", "Ath Bilbao")
+    assert gnm._names_match("Paris SG", "Paris Saint Germain")
+    assert gnm._names_match("FC Koln", "1. FC Köln")
+    assert gnm._names_match("Arsenal", "Arsenal")
+    assert not gnm._names_match("Sheffield United", "Sheffield Wednesday")
+    assert not gnm._names_match("Arsenal", "Chelsea")
+
+
+def test_grade_new_markets_settles_synthetic():
+    import csv
+    import json
+    import tempfile
+
+    import grade_new_markets as gnm
+
+    with tempfile.TemporaryDirectory() as td:
+        arch = os.path.join(td, "archive", "2026-11-07")
+        os.makedirs(arch)
+        with open(os.path.join(arch, "predictions_sot_upcoming.csv"),
+                  "w", newline="") as f:
+            w = csv.writer(f)
+            w.writerow(["div", "date", "home", "away", "rec_line",
+                        "rec_side", "rec_prob"])
+            w.writerow(["E0", "2026-11-07", "Arsenal", "Chelsea",
+                        "8.5", "Over", "0.60"])
+            w.writerow(["E0", "2999-01-01", "Arsenal", "Chelsea",
+                        "8.5", "Over", "0.60"])
+        with open(os.path.join(arch, "predictions_cards_upcoming.csv"),
+                  "w", newline="") as f:
+            w = csv.writer(f)
+            w.writerow(["div", "date", "home", "away", "rec_line",
+                        "rec_side", "rec_prob"])
+            w.writerow(["E0", "2026-11-07", "Arsenal", "Chelsea",
+                        "3.5", "Under", "0.55"])
+        with open(os.path.join(arch, "predictions_corners_1h_upcoming.csv"),
+                  "w", newline="") as f:
+            w = csv.writer(f)
+            w.writerow(["div", "date", "home", "away", "rec_line",
+                        "rec_side", "rec_prob"])
+            w.writerow(["E0", "2026-11-07", "Arsenal", "Chelsea",
+                        "4.5", "Over", "0.52"])
+        spine = os.path.join(td, "spine.csv")
+        with open(spine, "w", newline="") as f:
+            w = csv.writer(f)
+            w.writerow(["Div", "Date", "HomeTeam", "AwayTeam",
+                        "HST", "AST", "HY", "AY"])
+            w.writerow(["E0", "2026-11-07", "Arsenal", "Chelsea",
+                        "6", "4", "2", "1"])
+        labels = os.path.join(td, "labels.csv")
+        with open(labels, "w", newline="") as f:
+            w = csv.writer(f)
+            w.writerow(["div", "season", "date", "home", "away",
+                        "fotmob_match_id", "corners_1h_h", "corners_1h_a",
+                        "corners_1h_total", "has_1h_corners"])
+            w.writerow(["E0", "2026/27", "2026-11-07", "Arsenal",
+                        "Chelsea", "1", "2", "2", "4", "1"])
+        ledger = os.path.join(td, "ledger")
+        old = (gnm.ARCHIVE_DIR, gnm.SPINE_CSV, gnm.LABELS_1H_CSV,
+               gnm.LEDGER_DIR, gnm.GRADES_OUT, gnm.SUMMARY_OUT)
+        gnm.ARCHIVE_DIR = os.path.join(td, "archive")
+        gnm.SPINE_CSV = spine
+        gnm.LABELS_1H_CSV = labels
+        gnm.LEDGER_DIR = ledger
+        gnm.GRADES_OUT = os.path.join(ledger, "new_market_grades.jsonl")
+        gnm.SUMMARY_OUT = os.path.join(ledger, "new_market_summary.json")
+        try:
+            assert gnm.main() == 0
+        finally:
+            (gnm.ARCHIVE_DIR, gnm.SPINE_CSV, gnm.LABELS_1H_CSV,
+             gnm.LEDGER_DIR, gnm.GRADES_OUT, gnm.SUMMARY_OUT) = old
+        rows = [json.loads(l) for l in open(
+            os.path.join(ledger, "new_market_grades.jsonl"))]
+        by = {(r["product"], r["date"]): r for r in rows}
+        # SOT total aktual 10 > 8.5 Over -> hit; kartu total 3 < 3.5
+        # Under -> hit; corner 1H total 4 < 4.5 Over -> lose.
+        assert by[("sot", "2026-11-07")]["status"] == "hit"
+        assert by[("sot", "2026-11-07")]["actual"] == 10.0
+        assert by[("cards", "2026-11-07")]["status"] == "hit"
+        assert by[("corners_1h", "2026-11-07")]["status"] == "lose"
+        assert by[("sot", "2999-01-01")]["status"] == "pending"
+        summary = json.load(open(os.path.join(
+            ledger, "new_market_summary.json")))["products"]
+        assert summary["sot"]["settled"] == 1
+        assert summary["sot"]["pending"] == 1
+        assert summary["corners_1h"]["lose"] == 1
 
 
 if __name__ == "__main__":

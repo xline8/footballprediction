@@ -132,7 +132,7 @@ flowchart LR
 
 ## Live shadow tracker
 
-`run_daily_shadow.py` is the daily production chain: sixteen numbered
+`run_daily_shadow.py` is the daily production chain: twenty-two numbered
 steps, each isolated with try/except. Two of them gate the rest. The
 fixture step checks freshness itself: it refreshes from Understat when
 the stalest league fixture file is over 12 hours old, marks the run
@@ -247,7 +247,7 @@ history.
 `slip_recommender.py` builds three deterministic recommendation files per
 report date from real 1xBet odds in `market_compare.csv` joined to model
 probabilities (markets 1X2 / DC / OU / BTS; one leg per match). All three are
-produced in the daily shadow run (step 12) and archived daily.
+produced in the daily shadow run (step 17) and archived daily.
 
 - **`recommended_single.csv`** — the day's single bet: highest EV
   (`p_model * o_1xbet - 1`) among legs with `p_model >= 0.45` and

@@ -406,7 +406,14 @@ ARCHIVE_FILES = ["predictions_upcoming.csv", "predictions_corners_upcoming.csv",
                  "predictions_cups_upcoming.csv", "predictions_corners_cups.csv",
                  "best_picks_today.csv", "market_compare.csv",
                  "recommended_single.csv", "recommended_slip.csv",
-                 "recommended_slip10.csv"]
+                 "recommended_slip10.csv",
+                 # Pasar baru (audit Codex 2026-11-08, Minor 6): snapshot
+                 # produk ini dulu tidak pernah diarsipkan, jadi grading
+                 # produksinya (grade_new_markets.py) tidak punya bahan.
+                 # Mulai sekarang ikut write-once seperti file lain.
+                 "predictions_sot_upcoming.csv",
+                 "predictions_cards_upcoming.csv",
+                 "predictions_corners_1h_upcoming.csv"]
 
 
 def _has_data_rows(path):
