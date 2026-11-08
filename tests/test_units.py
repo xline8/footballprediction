@@ -3123,6 +3123,50 @@ def test_shadow_ta_build_rc_failure_marks_run_failed():
     assert "py:best_picks.py" in calls, calls
 
 
+def test_shadow_product_status_stacked_failure():
+    # Status per produk corners/cups/ta_sync dulu dihitung dari delta
+    # `failed == _f0`: bila run SUDAH gagal di langkah lebih awal,
+    # kegagalan langkah-langkah itu tercatat OK di run_status JSON
+    # (baris FAILED tercetak dan exit code tetap benar — hanya JSON
+    # yang salah). Kini flag lokal per langkah. Tes ini menumpuk
+    # kegagalan: prediksi gagal lebih dulu, lalu corner (rc 1), piala
+    # (status failed), dan ta_sync (rc 1) ikut gagal — status JSON
+    # ketiganya harus FAILED.
+    sh, calls, restore = _shadow_env("error")
+    try:
+        class _R1:
+            returncode = 1
+            stdout = ""
+            stderr = "boom"
+
+        class _R0:
+            returncode = 0
+            stdout = "ok"
+            stderr = ""
+
+        def fake_run_py(script, *args):
+            calls.append(f"py:{script}")
+            if script in ("model_corners_v3.py", "ta_scrape.py"):
+                return _R1()
+            return _R0()
+
+        sh._run_py = fake_run_py
+        sys.modules["predict_cups"].main = lambda: {
+            "n_gol": 0, "n_corner": 0, "status": "failed"}
+        code, out = _run_shadow(sh)
+    finally:
+        restore()
+    assert code == 1, code
+    for name in ("corners", "cups", "ta_sync"):
+        st = sh.PRODUCT_STATUS[name]["status"]
+        assert st == "FAILED", (name, sh.PRODUCT_STATUS)
+    banner = [ln for ln in out.splitlines()
+              if ln.startswith("# PRODUK GAGAL:")]
+    assert banner, out[-2000:]
+    for name in ("corners", "cups", "ta_sync"):
+        assert name in banner[0], banner
+
+
 def test_shadow_prints_archive_skipped():
     # D16-4: cabang cetak file ter-skip di langkah [14/16] tidak
     # dicakup tes mana pun (semua stub gerbang mengembalikan hasil

@@ -249,13 +249,17 @@ def main():
     _prod("predictions", pred_ok,
           None if pred_ok else "prediksi liga tidak sukses pada run ini")
 
-    _f0 = failed
+    # Status produk memakai flag lokal _ok (pola langkah 4-8), BUKAN
+    # delta terhadap `failed` global: dengan delta, kegagalan langkah
+    # ini tercatat OK di run_status bila run sudah gagal lebih dulu.
+    _ok = True
     try:
         _t_corner = time.time()
         r = _run_py("model_corners_v3.py", "--predict")
         print(f"[3/23] corner predictions: rc={r.returncode} | {r.stdout.strip()[-300:]}")
         if r.returncode != 0:
             failed = True
+            _ok = False
         else:
             # rc=0 dengan file corner KOSONG padahal ada prediksi liga
             # adalah kegagalan diam (lolos terus di versi lama).
@@ -268,6 +272,7 @@ def main():
             if _nrows("predictions_upcoming.csv") > 0 and \
                     _nrows("predictions_corners_upcoming.csv") == 0:
                 failed = True
+                _ok = False
                 print("[3/23] FAILED corner predictions: file corner "
                       "kosong padahal prediksi liga ada")
             else:
@@ -278,13 +283,15 @@ def main():
                 if os.path.exists(_cf) and \
                         os.path.getmtime(_cf) < _t_corner - 5:
                     failed = True
+                    _ok = False
                     print("[3/23] FAILED corner predictions: file corner "
                           "basi (tidak ditulis ulang oleh run ini)")
     except Exception as e:
         failed = True
+        _ok = False
         print(f"[3/23] FAILED corner predictions: {e!r}")
-    _prod("corners", failed == _f0,
-          None if failed == _f0 else "langkah corner gagal (detail di log [3/23])")
+    _prod("corners", _ok,
+          None if _ok else "langkah corner gagal (detail di log [3/23])")
 
     # [4/23] Prediksi tembakan ke gawang (SOT) untuk fixture mendatang
     # (model_sot.py, resep v5 regresi+NB+BB dari experiments/sot_model).
@@ -468,7 +475,9 @@ def main():
         print(f"[9/23] WARNING goal halves gagal: {e!r} "
               f"(lanjut pipeline; run tidak ditandai gagal)")
 
-    _f0 = failed
+    # Flag lokal _ok, bukan delta `failed` global — lihat catatan
+    # di langkah corner [3/23].
+    _ok = True
     try:
         import predict_cups
         rc = predict_cups.main()
@@ -476,13 +485,15 @@ def main():
               f"{rc.get('n_corner', 0)} corner")
         if rc.get('status') == 'failed':
             failed = True
+            _ok = False
             print("[10/23] FAILED cup predictions: fixture piala ada "
                   "tapi nol prediksi gol terpetakan")
     except Exception as e:
         failed = True
+        _ok = False
         print(f"[10/23] FAILED cup predictions: {e!r}")
-    _prod("cups", failed == _f0,
-          None if failed == _f0 else "langkah piala gagal (detail di log [10/23])")
+    _prod("cups", _ok,
+          None if _ok else "langkah piala gagal (detail di log [10/23])")
 
     try:
         if not pred_ok:
@@ -507,7 +518,9 @@ def main():
     # (sebelum grading). --fresh memaksa fetch jaring (cache halaman tanggal
     # 20 menit dilewati) agar laga yang selesai larut ikut masuk. Kegagalan
     # jaringan tidak menggagalkan pipeline — catat warning, lanjutkan.
-    _f0 = failed
+    # Flag lokal _ok, bukan delta `failed` global — lihat catatan
+    # di langkah corner [3/23].
+    _ok = True
     try:
         y = _today() - timedelta(days=1)
         y2 = _today() - timedelta(days=2)
@@ -530,14 +543,16 @@ def main():
         print(f"[12/23] tipsterarea hasil sync: rc={r.returncode} | {shown}")
         if r.returncode != 0:
             failed = True
+            _ok = False
             print(f"[12/23] FAILED ta sync rc={r.returncode} "
                   f"(lanjut pipeline, tapi run ditandai gagal)")
     except Exception as e:
         failed = True
+        _ok = False
         print(f"[12/23] FAILED ta sync: {e!r} "
               f"(lanjut pipeline, tapi run ditandai gagal)")
-    _prod("ta_sync", failed == _f0,
-          None if failed == _f0 else "sinkronisasi hasil TA gagal (detail di log [12/23])")
+    _prod("ta_sync", _ok,
+          None if _ok else "sinkronisasi hasil TA gagal (detail di log [12/23])")
 
     # [13/23] Grading bet TA (ta/best_bets.csv) dari results.csv yang
     # baru tersinkron di [12/23]. grade() ada sejak lama tapi tidak
