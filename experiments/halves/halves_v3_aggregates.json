@@ -1,0 +1,419 @@
+{
+  "experiment": "halves_goals_v3",
+  "harness": {
+    "description": "Production-faithful monthly-refit harness: model_v2.DC exactly as predict_upcoming_refactored.py (7-tuples with xG from features._load_xg_map() keyed by model_v2.xg_key, None when absent), HL from v2_config.json, fit on games[-4000:], DC_FIT_MODE at production default. Monthly refits at every month-start cutoff 2020-08-01..2026-06-01 per division on games with date < cutoff; a match is predicted by the fit at the first day of its month. Monthly month-start fits exclude same-month earlier matches, a slight conservatism vs production weekly refits.",
+    "data": "all_matches_clean.csv, divisions E0/SP1/I1/D1/F1, dropna HTHG/HTAG; 2H = FT - HT",
+    "divisions": [
+      "E0",
+      "SP1",
+      "I1",
+      "D1",
+      "F1"
+    ],
+    "hl": 270,
+    "dc_fit_mode": "blend",
+    "monthly_cutoffs": [
+      "2020-08-01",
+      "2020-09-01",
+      "2020-10-01",
+      "2020-11-01",
+      "2020-12-01",
+      "2021-01-01",
+      "2021-02-01",
+      "2021-03-01",
+      "2021-04-01",
+      "2021-05-01",
+      "2021-06-01",
+      "2021-07-01",
+      "2021-08-01",
+      "2021-09-01",
+      "2021-10-01",
+      "2021-11-01",
+      "2021-12-01",
+      "2022-01-01",
+      "2022-02-01",
+      "2022-03-01",
+      "2022-04-01",
+      "2022-05-01",
+      "2022-06-01",
+      "2022-07-01",
+      "2022-08-01",
+      "2022-09-01",
+      "2022-10-01",
+      "2022-11-01",
+      "2022-12-01",
+      "2023-01-01",
+      "2023-02-01",
+      "2023-03-01",
+      "2023-04-01",
+      "2023-05-01",
+      "2023-06-01",
+      "2023-07-01",
+      "2023-08-01",
+      "2023-09-01",
+      "2023-10-01",
+      "2023-11-01",
+      "2023-12-01",
+      "2024-01-01",
+      "2024-02-01",
+      "2024-03-01",
+      "2024-04-01",
+      "2024-05-01",
+      "2024-06-01",
+      "2024-07-01",
+      "2024-08-01",
+      "2024-09-01",
+      "2024-10-01",
+      "2024-11-01",
+      "2024-12-01",
+      "2025-01-01",
+      "2025-02-01",
+      "2025-03-01",
+      "2025-04-01",
+      "2025-05-01",
+      "2025-06-01",
+      "2025-07-01",
+      "2025-08-01",
+      "2025-09-01",
+      "2025-10-01",
+      "2025-11-01",
+      "2025-12-01",
+      "2026-01-01",
+      "2026-02-01",
+      "2026-03-01",
+      "2026-04-01",
+      "2026-05-01",
+      "2026-06-01"
+    ],
+    "n_monthly_fits": 355,
+    "frozen_shares": {
+      "1H": [
+        0.4419,
+        0.444
+      ],
+      "2H": [
+        0.5581,
+        0.556
+      ]
+    },
+    "baseline": "thinned lambdas (lh*share_h, la*share_a) with the predicting fit's rho applied at thinned scale; over-probs via V2 helpers",
+    "lines": [
+      0.5,
+      1.5,
+      2.5
+    ]
+  },
+  "tuning_window": {
+    "start": "2020-08-01",
+    "end": "2023-07-31",
+    "n": 5488
+  },
+  "validation_window": {
+    "start": "2023-08-01",
+    "end": "2026-06-30",
+    "n": 5255
+  },
+  "ft_level_check": {
+    "static_fit_games_before": "2023-08-01",
+    "static_cutoff_for_fit": "2023-08-01",
+    "static": {
+      "n": 5255,
+      "mean_pred_over25": 0.49997360389285406,
+      "actual_over25_rate": 0.5377735490009514,
+      "calib_pp": -3.7799945108097366
+    },
+    "refit_harness": {
+      "n": 5255,
+      "mean_pred_over25": 0.525972872272533,
+      "actual_over25_rate": 0.5377735490009514,
+      "calib_pp": -1.1800676728418447
+    }
+  },
+  "half_mean_residuals_refit_test": {
+    "1H": -0.004664976715083432,
+    "2H": -0.012203362456170215,
+    "definition": "mean predicted half total - mean actual half goals, test window, refit harness",
+    "v2_static_comparison": {
+      "1H": -0.072,
+      "2H": -0.097
+    }
+  },
+  "half_mean_residuals_refit_tuning": {
+    "1H": -0.05574053448650146,
+    "2H": 0.001243663390900961
+  },
+  "tuning_table": {
+    "a": {
+      "label": "none (baseline)",
+      "params": {
+        "1H": {},
+        "2H": {}
+      },
+      "per_half": {
+        "1H": {
+          "n": 5488,
+          "pooled_ou_ll": 0.5495923327935163,
+          "over15_calib_pp": -1.1000526635552288,
+          "over15_mean_pred": 0.34814670368514744,
+          "over15_actual_rate": 0.35914723032069973
+        },
+        "2H": {
+          "n": 5488,
+          "pooled_ou_ll": 0.5596387009837612,
+          "over15_calib_pp": 0.08862244709748057,
+          "over15_mean_pred": 0.4560611515846774,
+          "over15_actual_rate": 0.4551749271137026
+        }
+      },
+      "gate_legs_vs_baseline": {
+        "1H": {
+          "ll_delta_vs_baseline": 0.0,
+          "ll_ok": true,
+          "over15_calib_pp": -1.1000526635552288,
+          "calib_ok": false,
+          "passes": false
+        },
+        "2H": {
+          "ll_delta_vs_baseline": 0.0,
+          "ll_ok": true,
+          "over15_calib_pp": 0.08862244709748057,
+          "calib_ok": true,
+          "passes": true
+        }
+      },
+      "passes_tuning_gate": false,
+      "summed_pooled_ou_ll": 1.1092310337772775,
+      "max_abs_calib_pp": 1.1000526635552288
+    },
+    "b": {
+      "label": "per-half multiplicative scale",
+      "params": {
+        "1H": {
+          "scale": 1.0459584801225459
+        },
+        "2H": {
+          "scale": 0.9991849334675459
+        }
+      },
+      "per_half": {
+        "1H": {
+          "n": 5488,
+          "pooled_ou_ll": 0.5487601310126456,
+          "over15_calib_pp": 0.8918484146881178,
+          "over15_mean_pred": 0.3680657144675809,
+          "over15_actual_rate": 0.35914723032069973
+        },
+        "2H": {
+          "n": 5488,
+          "pooled_ou_ll": 0.5596458309768028,
+          "over15_calib_pp": 0.04786189242173,
+          "over15_mean_pred": 0.4556535460379199,
+          "over15_actual_rate": 0.4551749271137026
+        }
+      },
+      "gate_legs_vs_baseline": {
+        "1H": {
+          "ll_delta_vs_baseline": -0.0008322017808706228,
+          "ll_ok": true,
+          "over15_calib_pp": 0.8918484146881178,
+          "calib_ok": true,
+          "passes": true
+        },
+        "2H": {
+          "ll_delta_vs_baseline": 7.129993041532501e-06,
+          "ll_ok": true,
+          "over15_calib_pp": 0.04786189242173,
+          "calib_ok": true,
+          "passes": true
+        }
+      },
+      "passes_tuning_gate": true,
+      "summed_pooled_ou_ll": 1.1084059619894484,
+      "max_abs_calib_pp": 0.8918484146881178
+    },
+    "c": {
+      "label": "per-half rho",
+      "params": {
+        "1H": {
+          "rho": 0.0
+        },
+        "2H": {
+          "rho": 0.02
+        }
+      },
+      "per_half": {
+        "1H": {
+          "n": 5488,
+          "pooled_ou_ll": 0.5495100151429245,
+          "over15_calib_pp": -1.824282601787458,
+          "over15_mean_pred": 0.34090440430282515,
+          "over15_actual_rate": 0.35914723032069973
+        },
+        "2H": {
+          "n": 5488,
+          "pooled_ou_ll": 0.5593030564981283,
+          "over15_calib_pp": -0.9694056796809791,
+          "over15_mean_pred": 0.4454808703168928,
+          "over15_actual_rate": 0.4551749271137026
+        }
+      },
+      "gate_legs_vs_baseline": {
+        "1H": {
+          "ll_delta_vs_baseline": -8.231765059174556e-05,
+          "ll_ok": true,
+          "over15_calib_pp": -1.824282601787458,
+          "calib_ok": false,
+          "passes": false
+        },
+        "2H": {
+          "ll_delta_vs_baseline": -0.0003356444856329466,
+          "ll_ok": true,
+          "over15_calib_pp": -0.9694056796809791,
+          "calib_ok": true,
+          "passes": true
+        }
+      },
+      "passes_tuning_gate": false,
+      "summed_pooled_ou_ll": 1.1088130716410527,
+      "max_abs_calib_pp": 1.824282601787458
+    },
+    "d": {
+      "label": "per-half NB size",
+      "params": {
+        "1H": {
+          "r": 1200.0
+        },
+        "2H": {
+          "r": 1200.0
+        }
+      },
+      "per_half": {
+        "1H": {
+          "n": 5488,
+          "pooled_ou_ll": 0.5495101814643718,
+          "over15_calib_pp": -1.8284688162256535,
+          "over15_mean_pred": 0.3408625421584432,
+          "over15_actual_rate": 0.35914723032069973
+        },
+        "2H": {
+          "n": 5488,
+          "pooled_ou_ll": 0.5593302669967383,
+          "over15_calib_pp": -0.7533318774095077,
+          "over15_mean_pred": 0.44764160833960753,
+          "over15_actual_rate": 0.4551749271137026
+        }
+      },
+      "gate_legs_vs_baseline": {
+        "1H": {
+          "ll_delta_vs_baseline": -8.215132914446421e-05,
+          "ll_ok": true,
+          "over15_calib_pp": -1.8284688162256535,
+          "calib_ok": false,
+          "passes": false
+        },
+        "2H": {
+          "ll_delta_vs_baseline": -0.0003084339870229602,
+          "ll_ok": true,
+          "over15_calib_pp": -0.7533318774095077,
+          "calib_ok": true,
+          "passes": true
+        }
+      },
+      "passes_tuning_gate": false,
+      "summed_pooled_ou_ll": 1.10884044846111,
+      "max_abs_calib_pp": 1.8284688162256535
+    }
+  },
+  "winner": {
+    "candidate": "b",
+    "label": "per-half multiplicative scale",
+    "params": {
+      "1H": {
+        "scale": 1.0459584801225459
+      },
+      "2H": {
+        "scale": 0.9991849334675459
+      }
+    },
+    "selection_reason": "Among tuning passers ['b'], lowest summed pooled OU LL (1.1084); tie-break simplicity order a,b,c,d.",
+    "no_tuning_passer": false,
+    "flag": null
+  },
+  "validation_table": [
+    {
+      "candidate": "a",
+      "label": "none (baseline)",
+      "params": {
+        "1H": {},
+        "2H": {}
+      },
+      "per_half": {
+        "1H": {
+          "n": 5255,
+          "pooled_ou_ll": 0.5332693281059534,
+          "over15_calib_pp": 0.22162438651495697,
+          "over15_mean_pred": 0.35730663396981177,
+          "over15_actual_rate": 0.3550903901046622
+        },
+        "2H": {
+          "n": 5255,
+          "pooled_ou_ll": 0.5598802609959963,
+          "over15_calib_pp": -0.7091357047372848,
+          "over15_mean_pred": 0.46636249642551014,
+          "over15_actual_rate": 0.473453853472883
+        }
+      }
+    },
+    {
+      "candidate": "b",
+      "label": "per-half multiplicative scale",
+      "params": {
+        "1H": {
+          "scale": 1.0459584801225459
+        },
+        "2H": {
+          "scale": 0.9991849334675459
+        }
+      },
+      "per_half": {
+        "1H": {
+          "n": 5255,
+          "pooled_ou_ll": 0.5338104543170771,
+          "over15_calib_pp": 2.2398497895774474,
+          "over15_mean_pred": 0.3774888880004367,
+          "over15_actual_rate": 0.3550903901046622
+        },
+        "2H": {
+          "n": 5255,
+          "pooled_ou_ll": 0.5598975254549353,
+          "over15_calib_pp": -0.7501700834188663,
+          "over15_mean_pred": 0.46595215263869433,
+          "over15_actual_rate": 0.473453853472883
+        }
+      }
+    }
+  ],
+  "gate_verdict": {
+    "pass": false,
+    "verdict": "FAIL",
+    "winner_candidate": "b",
+    "per_half_legs": {
+      "1H": {
+        "ll_delta_vs_baseline": 0.000541126211123677,
+        "ll_ok": false,
+        "over15_calib_pp": 2.2398497895774474,
+        "calib_ok": false,
+        "passes": false
+      },
+      "2H": {
+        "ll_delta_vs_baseline": 1.7264458939014737e-05,
+        "ll_ok": true,
+        "over15_calib_pp": -0.7501700834188663,
+        "calib_ok": true,
+        "passes": true
+      }
+    },
+    "gate_text": "pooled per-half O/U log loss (lines 0.5/1.5/2.5) must NOT worsen vs the uncorrected thinned baseline by more than 0.0005 in either half, AND per-half Over-1.5 calibration error must be within ~1pp (|err| <= 1.0pp) in BOTH halves, evaluated on the validation window 2023/24-2025/26 (top-5)."
+  },
+  "runtime_seconds": 23.8999605178833
+}
