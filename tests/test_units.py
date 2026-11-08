@@ -20,7 +20,7 @@ from model_v2 import DC
 from predict_cups import p_adv
 from score_ledger import settle as ledger_settle, _result_label
 from slip_recommender import _search
-from ta_model import fair_odds
+from ta_model import fair_odds, shrunk_ev
 
 TOL = 1e-6
 
@@ -138,6 +138,20 @@ def test_fair_odds_with_push():
     # (1 - p_push) / p_win; a push refunds the stake.
     assert abs(fair_odds(0.6, 0.1) - 1.5) < 1e-12
     assert fair_odds(0.0, 0.5) == 999.0
+
+
+def test_shrunk_ev_accounts_for_push_probability():
+    p_shrunk, odds, p_push = 0.72, 2.10, 0.10
+    corrected = shrunk_ev(p_shrunk, odds, p_push)
+    expected = (1.0 - p_push) * (p_shrunk * odds - 1.0)
+    old = p_shrunk * odds - 1.0
+    assert abs(corrected - expected) < TOL
+    assert abs(corrected - old) > TOL
+
+
+def test_shrunk_ev_without_push_matches_old_formula():
+    p_shrunk, odds = 0.72, 2.10
+    assert shrunk_ev(p_shrunk, odds, 0.0) == p_shrunk * odds - 1.0
 
 
 # ------------------------------------------------------------ settlement (grade)

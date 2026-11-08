@@ -154,6 +154,10 @@ def fair_odds(p_win, p_push):
     return (1 - p_push) / denom
 
 
+def shrunk_ev(p_shrunk, odds, p_push):
+    return (1.0 - p_push) * (p_shrunk * odds - 1.0)
+
+
 # ------------------------------------------------------------ nama tim
 ALIAS = {
     "man city": "manchester city", "man united": "manchester united",
@@ -672,7 +676,7 @@ def build():
                     continue
                 # pasar berpasangan: p_mkt dinormalkan, samakan basisnya
                 p_shrunk = (1 - SHRINK) * p_cond + SHRINK * p_mkt
-                ev_sh = p_shrunk * o - 1.0
+                ev_sh = shrunk_ev(p_shrunk, o, p_push)
                 mk_rows.append({
                     "game_id": gid, "date": p["date"], "home": p["home"],
                     "away": p["away"], "market": market, "line": line,
