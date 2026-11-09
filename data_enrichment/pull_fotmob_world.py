@@ -162,13 +162,31 @@ def load_index() -> dict:
 
 
 def write_index(rows: dict) -> None:
-    ordered = sorted(rows.values(),
+    """Rewrite the index ATOMICALLY and MERGE-ON-WRITE.
+
+    Two failure modes bit the 2026-11-09 world pull: (1) the old
+    open("w") truncated the file in place, so a run killed mid-write
+    (a SIGTERM'd relaunch did exactly this) left a truncated index
+    whose lost rows were then never re-recorded, because the
+    atomically-written checkpoint's done_ids made later runs skip
+    those matches; (2) a process rewrites the whole file from its
+    in-memory dict, so any row it never loaded is dropped. Guard:
+    re-read the on-disk index and merge (in-memory rows win per
+    match_id, disk-only rows are preserved), then write to a temp
+    file in the same directory and os.replace() it over the index,
+    so readers only ever see a complete file."""
+    import os
+    merged = load_index()
+    merged.update(rows)
+    ordered = sorted(merged.values(),
                      key=lambda r: (r["country"], r["league"], r["season"],
                                     r["date"], r["home"]))
-    with INDEX.open("w", encoding="utf-8", newline="") as handle:
+    tmp = INDEX.with_suffix(".csv.tmp")
+    with tmp.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=INDEX_FIELDS)
         writer.writeheader()
         writer.writerows(ordered)
+    os.replace(tmp, INDEX)
 
 
 def write_failed(errors: list[dict]) -> None:
