@@ -91,7 +91,15 @@ worldwide and runs the markets that pass its gates in a daily runner
 
 ## Quick start
 
-Run the end-to-end pipeline:
+The interactive launcher is the easy entry point. On Windows,
+double-click `start.bat`. On Linux or macOS, clone the repository and
+run `python football_cli.py`. The launcher creates its own Python
+environment, installs the required packages, bootstraps the training
+data on a first run, and opens a Control Center menu (update data and
+generate predictions, run the API, check status) so the individual
+scripts below do not need to be run by hand.
+
+Run the end-to-end pipeline directly:
 
 ```
 python setup_cache.py

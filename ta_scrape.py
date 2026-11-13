@@ -287,7 +287,7 @@ def market_needs_refresh(game_id, refresh_hours=1.5):
 
 
 # ---------------------------------------------------------------- async batch
-async def async_fetch_pages(urls_with_cache, ttl_map=None):
+async def async_fetch_pages(urls_with_cache, ttl_map=None, report_failures=True):
     """Fetch multiple pages concurrently.
     urls_with_cache: list of (url, cache_name, ttl) tuples.
     Returns list of (text, from_cache) aligned to input order.
@@ -313,7 +313,8 @@ async def async_fetch_pages(urls_with_cache, ttl_map=None):
                 text, cached = await _async_fetch(client, url, cache_name, ttl)
             except Exception as e:  # noqa: BLE001
                 # satu URL gagal tidak boleh membatalkan seluruh batch
-                print(f"  ! fetch gagal {url}: {e!r}", file=sys.stderr)
+                if report_failures:
+                    print(f"  ! fetch failed {url}: {e!r}", file=sys.stderr)
                 results[idx] = (None, True)
                 return
             # Delay sopan setelah request asli (bukan cache)
@@ -661,7 +662,9 @@ def sync_dates(days, with_markets=False, market_ids=None, verbose=True, fresh=Fa
                  for d in days]
 
     if _HAS_HTTPX:
-        results = asyncio.run(async_fetch_pages(date_urls))
+        # Date pages are classified below. A future stub is expected, so do
+        # not print a low-level fetch error before that classification.
+        results = asyncio.run(async_fetch_pages(date_urls, report_failures=False))
     else:
         # Fallback sync: kegagalan per-tanggal ditelan menjadi
         # (None, True) — sama seperti fetch_one di jalur async.
@@ -672,12 +675,12 @@ def sync_dates(days, with_markets=False, market_ids=None, verbose=True, fresh=Fa
             try:
                 results.append(_sync_fetch(u, c, ttl))
             except Exception as e:  # noqa: BLE001
-                print(f"  ! fetch gagal {u}: {e!r}", file=sys.stderr)
                 results.append((None, True))
 
     date_htmls = {}  # iso_date -> (html, cached)
     empty_dates = []
     failed_dates = []
+    future_stubs = []
     today_iso = datetime.now(timezone.utc).date().isoformat()
     for d, (html, cached) in zip(days, results):
         iso_d = iso(d)
@@ -698,8 +701,7 @@ def sync_dates(days, with_markets=False, market_ids=None, verbose=True, fresh=Fa
             if iso_d > today_iso:
                 empty_dates.append(iso_d)
                 date_htmls[iso_d] = (None, True)
-                print(f"  ! {iso_d}: belum terbit di TipsterArea "
-                      f"(stub masa depan)", file=sys.stderr)
+                future_stubs.append(iso_d)
                 continue
             failed_dates.append(iso_d)
             date_htmls[iso_d] = (None, True)
@@ -716,8 +718,11 @@ def sync_dates(days, with_markets=False, market_ids=None, verbose=True, fresh=Fa
                 # lampau/hari ini, ini sinyal markup berubah / blokir.
                 # Versi lama melaporkan sukses diam-diam (audit 2026-10-29).
                 empty_dates.append(iso_d)
-                print(f"  ! {iso_d}: 0 laga terparse (stub masa depan "
-                      f"atau markup berubah/blokir)", file=sys.stderr)
+                if iso_d > today_iso:
+                    future_stubs.append(iso_d)
+                else:
+                    print(f"  ! {iso_d}: 0 matches parsed "
+                          "(markup changed or access blocked)", file=sys.stderr)
             snap, res = save_date_page(games, captured)
             tot_snap += snap
             tot_res += res
@@ -730,6 +735,11 @@ def sync_dates(days, with_markets=False, market_ids=None, verbose=True, fresh=Fa
             print(f"  ! {iso_d}: {e}", file=sys.stderr)
             failed_dates.append(iso_d)
             date_htmls[iso_d] = (None, True)
+
+    if future_stubs and not with_markets:
+        dates = ", ".join(sorted(set(future_stubs)))
+        print(f"  TipsterArea has not published date pages for {dates}; skipped.",
+              file=sys.stderr)
 
     # --- Phase 2: market pages (hanya yang perlu, async) ---
     if with_markets:
