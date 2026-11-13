@@ -60,7 +60,9 @@ def _cup_fixture_ids(days):
                 if lo.isoformat() <= d <= hi.isoformat():
                     ids.append(r["game_id"])
         return ids
-    except Exception:
+    except Exception as exc:
+        print(f"WARNING: fixture piala tidak dapat dibaca: "
+              f"{type(exc).__name__}: {exc}")
         return []
 
 
