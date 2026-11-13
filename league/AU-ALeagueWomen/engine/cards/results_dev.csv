@@ -1,0 +1,1477 @@
+match_id,season,date,home,away,arm,p_over_primary,actual_total,actual_over_primary,referee_fallback
+4026758,2022/2023,2022-11-19,Canberra United FC,Perth Glory,gate_zero,0.3452786953459621,1,0,gate_zero_only
+4026773,2022/2023,2022-11-19,Western United FC,Melbourne Victory,gate_zero,0.3838291441286491,1,0,gate_zero_only
+4026774,2022/2023,2022-11-19,Brisbane Roar FC,Newcastle Jets,gate_zero,0.3712351256203855,6,1,gate_zero_only
+4026772,2022/2023,2022-11-20,Adelaide United,Sydney FC,gate_zero,0.44788237786525886,2,0,gate_zero_only
+4026821,2022/2023,2022-11-20,Wellington Phoenix,Melbourne City FC,gate_zero,0.3859124455932844,0,0,gate_zero_only
+4026769,2022/2023,2022-11-26,Sydney FC,Melbourne Victory,gate_zero,0.29707821469419504,2,0,gate_zero_only
+4026770,2022/2023,2022-11-26,Brisbane Roar FC,Canberra United FC,gate_zero,0.42811168890171714,1,0,gate_zero_only
+4026771,2022/2023,2022-11-26,Newcastle Jets,Western Sydney Wanderers FC,gate_zero,0.5863180027607964,1,0,gate_zero_only
+4026820,2022/2023,2022-11-26,Wellington Phoenix,Western United FC,gate_zero,0.35265707870234575,4,1,gate_zero_only
+4026768,2022/2023,2022-11-27,Perth Glory,Adelaide United,gate_zero,0.3784648064725309,3,1,gate_zero_only
+4026765,2022/2023,2022-12-03,Newcastle Jets,Perth Glory,gate_zero,0.3822602213716817,0,0,gate_zero_only
+4026766,2022/2023,2022-12-03,Melbourne City FC,Brisbane Roar FC,gate_zero,0.4030949205396759,0,0,gate_zero_only
+4026767,2022/2023,2022-12-03,Western Sydney Wanderers FC,Sydney FC,gate_zero,0.4460039718739044,2,0,gate_zero_only
+4026764,2022/2023,2022-12-04,Adelaide United,Western United FC,gate_zero,0.3963095216184218,5,1,gate_zero_only
+4026819,2022/2023,2022-12-04,Melbourne Victory,Wellington Phoenix,gate_zero,0.3416604288118722,3,1,gate_zero_only
+4026762,2022/2023,2022-12-10,Sydney FC,Brisbane Roar FC,gate_zero,0.28950941064520697,1,0,gate_zero_only
+4026763,2022/2023,2022-12-10,Melbourne City FC,Newcastle Jets,gate_zero,0.41741489112363706,3,1,gate_zero_only
+4026818,2022/2023,2022-12-10,Canberra United FC,Wellington Phoenix,gate_zero,0.32810893166177146,2,0,gate_zero_only
+4026760,2022/2023,2022-12-11,Perth Glory,Melbourne Victory,gate_zero,0.390766189875409,2,0,gate_zero_only
+4026761,2022/2023,2022-12-11,Western Sydney Wanderers FC,Adelaide United,gate_zero,0.37379440897269567,5,1,gate_zero_only
+4026759,2022/2023,2022-12-17,Brisbane Roar FC,Western Sydney Wanderers FC,gate_zero,0.5036109711251999,2,0,gate_zero_only
+4026775,2022/2023,2022-12-17,Melbourne City FC,Western United FC,gate_zero,0.467418558774807,7,1,gate_zero_only
+4026817,2022/2023,2022-12-17,Wellington Phoenix,Adelaide United,gate_zero,0.42001051883782414,4,1,gate_zero_only
+4026776,2022/2023,2022-12-18,Melbourne Victory,Newcastle Jets,gate_zero,0.47011419499942375,7,1,gate_zero_only
+4026793,2022/2023,2022-12-18,Perth Glory,Canberra United FC,gate_zero,0.3956358549986866,2,0,gate_zero_only
+4026794,2022/2023,2022-12-23,Canberra United FC,Melbourne City FC,gate_zero,0.29511278262247154,3,1,gate_zero_only
+4026795,2022/2023,2022-12-23,Newcastle Jets,Brisbane Roar FC,gate_zero,0.3391523545074262,3,1,gate_zero_only
+4026796,2022/2023,2022-12-24,Sydney FC,Western Sydney Wanderers FC,gate_zero,0.3929943480790068,2,0,gate_zero_only
+4026797,2022/2023,2022-12-27,Melbourne City FC,Perth Glory,gate_zero,0.3734494397850412,3,1,gate_zero_only
+4026799,2022/2023,2022-12-31,Brisbane Roar FC,Sydney FC,gate_zero,0.4552266744075447,3,1,gate_zero_only
+4026800,2022/2023,2022-12-31,Melbourne Victory,Canberra United FC,gate_zero,0.4472945852058321,0,0,gate_zero_only
+4026801,2022/2023,2022-12-31,Newcastle Jets,Adelaide United,gate_zero,0.44443947498258074,3,1,gate_zero_only
+4026802,2022/2023,2023-01-01,Perth Glory,Western United FC,gate_zero,0.5700810149776082,5,1,gate_zero_only
+4026824,2022/2023,2023-01-01,Wellington Phoenix,Western Sydney Wanderers FC,gate_zero,0.4865905373559485,2,0,gate_zero_only
+4026803,2022/2023,2023-01-06,Melbourne Victory,Perth Glory,gate_zero,0.37426788951424883,1,0,gate_zero_only
+4026804,2022/2023,2023-01-07,Newcastle Jets,Sydney FC,gate_zero,0.4544135579417349,1,0,gate_zero_only
+4026805,2022/2023,2023-01-07,Adelaide United,Canberra United FC,gate_zero,0.3645708287847349,1,0,gate_zero_only
+4026825,2022/2023,2023-01-07,Western United FC,Wellington Phoenix,gate_zero,0.35233008457689685,2,0,gate_zero_only
+4026806,2022/2023,2023-01-08,Western Sydney Wanderers FC,Melbourne City FC,gate_zero,0.4012732179943469,2,0,gate_zero_only
+4026791,2022/2023,2023-01-11,Western United FC,Sydney FC,gate_zero,0.3891487932186293,2,0,gate_zero_only
+4026792,2022/2023,2023-01-11,Adelaide United,Melbourne City FC,gate_zero,0.3619124088441872,3,1,gate_zero_only
+4026777,2022/2023,2023-01-14,Canberra United FC,Newcastle Jets,gate_zero,0.4803110191777299,1,0,gate_zero_only
+4026778,2022/2023,2023-01-14,Western Sydney Wanderers FC,Western United FC,gate_zero,0.6059974146104585,1,0,gate_zero_only
+4026779,2022/2023,2023-01-15,Melbourne City FC,Melbourne Victory,gate_zero,0.41385603246638714,0,0,gate_zero_only
+4026780,2022/2023,2023-01-15,Brisbane Roar FC,Adelaide United,gate_zero,0.4688784470555021,4,1,gate_zero_only
+4026826,2022/2023,2023-01-15,Perth Glory,Wellington Phoenix,gate_zero,0.41797669675665106,3,1,gate_zero_only
+4026781,2022/2023,2023-01-18,Western Sydney Wanderers FC,Melbourne Victory,gate_zero,0.3436461832471509,3,1,gate_zero_only
+4026782,2022/2023,2023-01-21,Western United FC,Brisbane Roar FC,gate_zero,0.3235403311654872,3,1,gate_zero_only
+4026783,2022/2023,2023-01-21,Melbourne City FC,Western Sydney Wanderers FC,gate_zero,0.48269905629904053,1,0,gate_zero_only
+4026785,2022/2023,2023-01-21,Adelaide United,Melbourne Victory,gate_zero,0.3601991935855898,1,0,gate_zero_only
+4026834,2022/2023,2023-01-21,Wellington Phoenix,Canberra United FC,gate_zero,0.3305215164513522,0,0,gate_zero_only
+4026786,2022/2023,2023-01-26,Melbourne Victory,Sydney FC,gate_zero,0.42654020850589713,4,1,gate_zero_only
+4026787,2022/2023,2023-01-28,Western Sydney Wanderers FC,Newcastle Jets,gate_zero,0.5093608041183297,5,1,gate_zero_only
+4026788,2022/2023,2023-01-28,Canberra United FC,Western United FC,gate_zero,0.49055701574204824,1,0,gate_zero_only
+4026789,2022/2023,2023-01-29,Melbourne City FC,Adelaide United,gate_zero,0.4572242674001321,2,0,gate_zero_only
+4026833,2022/2023,2023-01-29,Brisbane Roar FC,Wellington Phoenix,gate_zero,0.4180194706674316,4,1,gate_zero_only
+4026790,2022/2023,2023-02-04,Sydney FC,Melbourne City FC,gate_zero,0.2935017857902338,2,0,gate_zero_only
+4026807,2022/2023,2023-02-04,Melbourne Victory,Western Sydney Wanderers FC,gate_zero,0.4632955175701573,7,1,gate_zero_only
+4026809,2022/2023,2023-02-04,Western United FC,Perth Glory,gate_zero,0.30606739870337174,4,1,gate_zero_only
+4026808,2022/2023,2023-02-05,Newcastle Jets,Canberra United FC,gate_zero,0.2789924392832148,3,1,gate_zero_only
+4026810,2022/2023,2023-02-05,Adelaide United,Brisbane Roar FC,gate_zero,0.3695771429403969,5,1,gate_zero_only
+4026798,2022/2023,2023-02-08,Western United FC,Newcastle Jets,gate_zero,0.5193280553764875,2,0,gate_zero_only
+4026811,2022/2023,2023-02-11,Western United FC,Melbourne City FC,gate_zero,0.3694314516571211,3,1,gate_zero_only
+4026812,2022/2023,2023-02-11,Brisbane Roar FC,Melbourne Victory,gate_zero,0.3856246917382191,1,0,gate_zero_only
+4026813,2022/2023,2023-02-11,Canberra United FC,Sydney FC,gate_zero,0.36728309256136027,2,0,gate_zero_only
+4026814,2022/2023,2023-02-12,Perth Glory,Newcastle Jets,gate_zero,0.5530823120381633,3,1,gate_zero_only
+4026832,2022/2023,2023-02-12,Western Sydney Wanderers FC,Wellington Phoenix,gate_zero,0.4562225141983316,2,0,gate_zero_only
+4026844,2022/2023,2023-02-25,Perth Glory,Brisbane Roar FC,gate_zero,0.4668591958284889,3,1,gate_zero_only
+4026856,2022/2023,2023-02-25,Canberra United FC,Western Sydney Wanderers FC,gate_zero,0.4238428971539371,3,1,gate_zero_only
+4026831,2022/2023,2023-02-26,Wellington Phoenix,Sydney FC,gate_zero,0.4065395839006636,3,1,gate_zero_only
+4026842,2022/2023,2023-02-26,Melbourne Victory,Adelaide United,gate_zero,0.5485559822449297,1,0,gate_zero_only
+4026843,2022/2023,2023-02-26,Newcastle Jets,Western United FC,gate_zero,0.5150446896015297,4,1,gate_zero_only
+4026830,2022/2023,2023-03-04,Wellington Phoenix,Brisbane Roar FC,gate_zero,0.4104326677751249,2,0,gate_zero_only
+4026840,2022/2023,2023-03-04,Canberra United FC,Adelaide United,gate_zero,0.36431275629321613,1,0,gate_zero_only
+4026841,2022/2023,2023-03-04,Newcastle Jets,Melbourne City FC,gate_zero,0.39481116652056125,0,0,gate_zero_only
+4026838,2022/2023,2023-03-05,Perth Glory,Western Sydney Wanderers FC,gate_zero,0.5421831664592909,4,1,gate_zero_only
+4026839,2022/2023,2023-03-05,Sydney FC,Western United FC,gate_zero,0.4427234773543227,4,1,gate_zero_only
+4026829,2022/2023,2023-03-11,Sydney FC,Wellington Phoenix,gate_zero,0.35900329338125336,3,1,gate_zero_only
+4026837,2022/2023,2023-03-11,Adelaide United,Perth Glory,gate_zero,0.37955417788415136,3,1,gate_zero_only
+4026845,2022/2023,2023-03-11,Brisbane Roar FC,Western United FC,gate_zero,0.5618362274665021,3,1,gate_zero_only
+4026846,2022/2023,2023-03-12,Western Sydney Wanderers FC,Canberra United FC,gate_zero,0.34600671712003717,4,1,gate_zero_only
+4026847,2022/2023,2023-03-13,Melbourne Victory,Melbourne City FC,gate_zero,0.4083761702683294,5,1,gate_zero_only
+4026855,2022/2023,2023-03-17,Adelaide United,Newcastle Jets,gate_zero,0.5291308170509663,3,1,gate_zero_only
+4026828,2022/2023,2023-03-18,Wellington Phoenix,Perth Glory,gate_zero,0.35559350988381877,2,0,gate_zero_only
+4026853,2022/2023,2023-03-18,Canberra United FC,Melbourne Victory,gate_zero,0.2621036216682274,3,1,gate_zero_only
+4026854,2022/2023,2023-03-18,Melbourne City FC,Sydney FC,gate_zero,0.4275111067406272,3,1,gate_zero_only
+4026852,2022/2023,2023-03-19,Western Sydney Wanderers FC,Brisbane Roar FC,gate_zero,0.4664003890803997,1,0,gate_zero_only
+4026827,2022/2023,2023-03-25,Newcastle Jets,Wellington Phoenix,gate_zero,0.3996079798344798,2,0,gate_zero_only
+4026850,2022/2023,2023-03-25,Western United FC,Canberra United FC,gate_zero,0.351090809308392,2,0,gate_zero_only
+4026851,2022/2023,2023-03-25,Sydney FC,Adelaide United,gate_zero,0.3923623857300994,1,0,gate_zero_only
+4026848,2022/2023,2023-03-26,Perth Glory,Melbourne City FC,gate_zero,0.45262252727814645,4,1,gate_zero_only
+4026849,2022/2023,2023-03-26,Melbourne Victory,Brisbane Roar FC,gate_zero,0.4782853594725144,4,1,gate_zero_only
+4026816,2022/2023,2023-03-28,Adelaide United,Wellington Phoenix,gate_zero,0.4374616370402048,3,1,gate_zero_only
+4026784,2022/2023,2023-03-29,Sydney FC,Perth Glory,gate_zero,0.3181629911003798,2,0,gate_zero_only
+4026815,2022/2023,2023-03-31,Wellington Phoenix,Melbourne Victory,gate_zero,0.3214606232299785,2,0,gate_zero_only
+4026823,2022/2023,2023-04-01,Sydney FC,Newcastle Jets,gate_zero,0.44164442307458696,4,1,gate_zero_only
+4026835,2022/2023,2023-04-01,Western United FC,Western Sydney Wanderers FC,gate_zero,0.4969415275441721,2,0,gate_zero_only
+4026836,2022/2023,2023-04-01,Brisbane Roar FC,Perth Glory,gate_zero,0.3930937785446045,2,0,gate_zero_only
+4026822,2022/2023,2023-04-02,Melbourne City FC,Canberra United FC,gate_zero,0.3420093505601254,0,0,gate_zero_only
+4026758,2022/2023,2022-11-19,Canberra United FC,Perth Glory,x8,0.3286141655940762,1,0,referee_arm
+4026773,2022/2023,2022-11-19,Western United FC,Melbourne Victory,x8,0.4601915685538087,1,0,referee_arm
+4026774,2022/2023,2022-11-19,Brisbane Roar FC,Newcastle Jets,x8,0.3712351256203855,6,1,referee_base_fallback
+4026772,2022/2023,2022-11-20,Adelaide United,Sydney FC,x8,0.43813750803791607,2,0,referee_arm
+4026821,2022/2023,2022-11-20,Wellington Phoenix,Melbourne City FC,x8,0.3859124455932844,0,0,referee_base_fallback
+4026769,2022/2023,2022-11-26,Sydney FC,Melbourne Victory,x8,0.2895773508768268,2,0,referee_arm
+4026770,2022/2023,2022-11-26,Brisbane Roar FC,Canberra United FC,x8,0.4293228896712151,1,0,referee_arm
+4026771,2022/2023,2022-11-26,Newcastle Jets,Western Sydney Wanderers FC,x8,0.6044993646395764,1,0,referee_arm
+4026820,2022/2023,2022-11-26,Wellington Phoenix,Western United FC,x8,0.35265707870234575,4,1,referee_base_fallback
+4026768,2022/2023,2022-11-27,Perth Glory,Adelaide United,x8,0.3784648064725309,3,1,referee_base_fallback
+4026765,2022/2023,2022-12-03,Newcastle Jets,Perth Glory,x8,0.36294950029225015,0,0,referee_arm
+4026766,2022/2023,2022-12-03,Melbourne City FC,Brisbane Roar FC,x8,0.3409932106195861,0,0,referee_arm
+4026767,2022/2023,2022-12-03,Western Sydney Wanderers FC,Sydney FC,x8,0.4247129698715655,2,0,referee_arm
+4026764,2022/2023,2022-12-04,Adelaide United,Western United FC,x8,0.4557376577822583,5,1,referee_arm
+4026819,2022/2023,2022-12-04,Melbourne Victory,Wellington Phoenix,x8,0.42859971384041473,3,1,referee_arm
+4026762,2022/2023,2022-12-10,Sydney FC,Brisbane Roar FC,x8,0.2374741349255387,1,0,referee_arm
+4026763,2022/2023,2022-12-10,Melbourne City FC,Newcastle Jets,x8,0.4360329247514868,3,1,referee_arm
+4026818,2022/2023,2022-12-10,Canberra United FC,Wellington Phoenix,x8,0.32810893166177146,2,0,referee_base_fallback
+4026760,2022/2023,2022-12-11,Perth Glory,Melbourne Victory,x8,0.4500798633097636,2,0,referee_arm
+4026761,2022/2023,2022-12-11,Western Sydney Wanderers FC,Adelaide United,x8,0.36631209728544833,5,1,referee_arm
+4026759,2022/2023,2022-12-17,Brisbane Roar FC,Western Sydney Wanderers FC,x8,0.5474072020891103,2,0,referee_arm
+4026775,2022/2023,2022-12-17,Melbourne City FC,Western United FC,x8,0.5235851071059154,7,1,referee_arm
+4026817,2022/2023,2022-12-17,Wellington Phoenix,Adelaide United,x8,0.3568543364210379,4,1,referee_arm
+4026776,2022/2023,2022-12-18,Melbourne Victory,Newcastle Jets,x8,0.44913591268752384,7,1,referee_arm
+4026793,2022/2023,2022-12-18,Perth Glory,Canberra United FC,x8,0.40243356585706525,2,0,referee_arm
+4026794,2022/2023,2022-12-23,Canberra United FC,Melbourne City FC,x8,0.2916981279777322,3,1,referee_arm
+4026795,2022/2023,2022-12-23,Newcastle Jets,Brisbane Roar FC,x8,0.32905238762802513,3,1,referee_arm
+4026796,2022/2023,2022-12-24,Sydney FC,Western Sydney Wanderers FC,x8,0.4064784683554422,2,0,referee_arm
+4026797,2022/2023,2022-12-27,Melbourne City FC,Perth Glory,x8,0.4403137147573357,3,1,referee_arm
+4026799,2022/2023,2022-12-31,Brisbane Roar FC,Sydney FC,x8,0.4523917376738261,3,1,referee_arm
+4026800,2022/2023,2022-12-31,Melbourne Victory,Canberra United FC,x8,0.40433787036930025,0,0,referee_arm
+4026801,2022/2023,2022-12-31,Newcastle Jets,Adelaide United,x8,0.49030111113267616,3,1,referee_arm
+4026802,2022/2023,2023-01-01,Perth Glory,Western United FC,x8,0.5419634235431031,5,1,referee_arm
+4026824,2022/2023,2023-01-01,Wellington Phoenix,Western Sydney Wanderers FC,x8,0.43440714059476937,2,0,referee_arm
+4026803,2022/2023,2023-01-06,Melbourne Victory,Perth Glory,x8,0.378390801557412,1,0,referee_arm
+4026804,2022/2023,2023-01-07,Newcastle Jets,Sydney FC,x8,0.41675203786363657,1,0,referee_arm
+4026805,2022/2023,2023-01-07,Adelaide United,Canberra United FC,x8,0.3663716202970877,1,0,referee_arm
+4026825,2022/2023,2023-01-07,Western United FC,Wellington Phoenix,x8,0.3583584621088387,2,0,referee_arm
+4026806,2022/2023,2023-01-08,Western Sydney Wanderers FC,Melbourne City FC,x8,0.4430440227807684,2,0,referee_arm
+4026791,2022/2023,2023-01-11,Western United FC,Sydney FC,x8,0.44524674696516076,2,0,referee_arm
+4026792,2022/2023,2023-01-11,Adelaide United,Melbourne City FC,x8,0.3195045758553188,3,1,referee_arm
+4026777,2022/2023,2023-01-14,Canberra United FC,Newcastle Jets,x8,0.5178451175133556,1,0,referee_arm
+4026778,2022/2023,2023-01-14,Western Sydney Wanderers FC,Western United FC,x8,0.6073275325243338,1,0,referee_arm
+4026779,2022/2023,2023-01-15,Melbourne City FC,Melbourne Victory,x8,0.4139601444972276,0,0,referee_arm
+4026780,2022/2023,2023-01-15,Brisbane Roar FC,Adelaide United,x8,0.48564194278394235,4,1,referee_arm
+4026826,2022/2023,2023-01-15,Perth Glory,Wellington Phoenix,x8,0.4157119800904505,3,1,referee_arm
+4026781,2022/2023,2023-01-18,Western Sydney Wanderers FC,Melbourne Victory,x8,0.3465041971129139,3,1,referee_arm
+4026782,2022/2023,2023-01-21,Western United FC,Brisbane Roar FC,x8,0.3196211306719976,3,1,referee_arm
+4026783,2022/2023,2023-01-21,Melbourne City FC,Western Sydney Wanderers FC,x8,0.5070198581270415,1,0,referee_arm
+4026785,2022/2023,2023-01-21,Adelaide United,Melbourne Victory,x8,0.3631466458463817,1,0,referee_arm
+4026834,2022/2023,2023-01-21,Wellington Phoenix,Canberra United FC,x8,0.29821875557396216,0,0,referee_arm
+4026786,2022/2023,2023-01-26,Melbourne Victory,Sydney FC,x8,0.4272675909751684,4,1,referee_arm
+4026787,2022/2023,2023-01-28,Western Sydney Wanderers FC,Newcastle Jets,x8,0.47174400598335375,5,1,referee_arm
+4026788,2022/2023,2023-01-28,Canberra United FC,Western United FC,x8,0.48572085701839474,1,0,referee_arm
+4026789,2022/2023,2023-01-29,Melbourne City FC,Adelaide United,x8,0.48874068207119203,2,0,referee_arm
+4026833,2022/2023,2023-01-29,Brisbane Roar FC,Wellington Phoenix,x8,0.4162695457291583,4,1,referee_arm
+4026790,2022/2023,2023-02-04,Sydney FC,Melbourne City FC,x8,0.2851555971196973,2,0,referee_arm
+4026807,2022/2023,2023-02-04,Melbourne Victory,Western Sydney Wanderers FC,x8,0.46036597373985777,7,1,referee_arm
+4026809,2022/2023,2023-02-04,Western United FC,Perth Glory,x8,0.29198003475383116,4,1,referee_arm
+4026808,2022/2023,2023-02-05,Newcastle Jets,Canberra United FC,x8,0.27473123936021926,3,1,referee_arm
+4026810,2022/2023,2023-02-05,Adelaide United,Brisbane Roar FC,x8,0.37719608055945053,5,1,referee_arm
+4026798,2022/2023,2023-02-08,Western United FC,Newcastle Jets,x8,0.5248808816580823,2,0,referee_arm
+4026811,2022/2023,2023-02-11,Western United FC,Melbourne City FC,x8,0.32956710218232854,3,1,referee_arm
+4026812,2022/2023,2023-02-11,Brisbane Roar FC,Melbourne Victory,x8,0.3819669071771009,1,0,referee_arm
+4026813,2022/2023,2023-02-11,Canberra United FC,Sydney FC,x8,0.3676221109074286,2,0,referee_arm
+4026814,2022/2023,2023-02-12,Perth Glory,Newcastle Jets,x8,0.5563180424810674,3,1,referee_arm
+4026832,2022/2023,2023-02-12,Western Sydney Wanderers FC,Wellington Phoenix,x8,0.47530148562430163,2,0,referee_arm
+4026844,2022/2023,2023-02-25,Perth Glory,Brisbane Roar FC,x8,0.4684490748001213,3,1,referee_arm
+4026856,2022/2023,2023-02-25,Canberra United FC,Western Sydney Wanderers FC,x8,0.4274939251776638,3,1,referee_arm
+4026831,2022/2023,2023-02-26,Wellington Phoenix,Sydney FC,x8,0.3999974292462338,3,1,referee_arm
+4026842,2022/2023,2023-02-26,Melbourne Victory,Adelaide United,x8,0.5368236775833419,1,0,referee_arm
+4026843,2022/2023,2023-02-26,Newcastle Jets,Western United FC,x8,0.5293712804599355,4,1,referee_arm
+4026830,2022/2023,2023-03-04,Wellington Phoenix,Brisbane Roar FC,x8,0.37813899560198205,2,0,referee_arm
+4026840,2022/2023,2023-03-04,Canberra United FC,Adelaide United,x8,0.3679119372878863,1,0,referee_arm
+4026841,2022/2023,2023-03-04,Newcastle Jets,Melbourne City FC,x8,0.39430052862682063,0,0,referee_arm
+4026838,2022/2023,2023-03-05,Perth Glory,Western Sydney Wanderers FC,x8,0.517569275507501,4,1,referee_arm
+4026839,2022/2023,2023-03-05,Sydney FC,Western United FC,x8,0.46826912764050765,4,1,referee_arm
+4026829,2022/2023,2023-03-11,Sydney FC,Wellington Phoenix,x8,0.3485418412192156,3,1,referee_arm
+4026837,2022/2023,2023-03-11,Adelaide United,Perth Glory,x8,0.39617774645617854,3,1,referee_arm
+4026845,2022/2023,2023-03-11,Brisbane Roar FC,Western United FC,x8,0.5659658661360091,3,1,referee_arm
+4026846,2022/2023,2023-03-12,Western Sydney Wanderers FC,Canberra United FC,x8,0.36990277917994585,4,1,referee_arm
+4026847,2022/2023,2023-03-13,Melbourne Victory,Melbourne City FC,x8,0.39139082847491513,5,1,referee_arm
+4026855,2022/2023,2023-03-17,Adelaide United,Newcastle Jets,x8,0.5329745558399827,3,1,referee_arm
+4026828,2022/2023,2023-03-18,Wellington Phoenix,Perth Glory,x8,0.3521213270238752,2,0,referee_arm
+4026853,2022/2023,2023-03-18,Canberra United FC,Melbourne Victory,x8,0.25018080725648695,3,1,referee_arm
+4026854,2022/2023,2023-03-18,Melbourne City FC,Sydney FC,x8,0.39739893883766897,3,1,referee_arm
+4026852,2022/2023,2023-03-19,Western Sydney Wanderers FC,Brisbane Roar FC,x8,0.46040955676195194,1,0,referee_arm
+4026827,2022/2023,2023-03-25,Newcastle Jets,Wellington Phoenix,x8,0.38796844532538977,2,0,referee_arm
+4026850,2022/2023,2023-03-25,Western United FC,Canberra United FC,x8,0.3424363603107723,2,0,referee_arm
+4026851,2022/2023,2023-03-25,Sydney FC,Adelaide United,x8,0.38466715083062053,1,0,referee_arm
+4026848,2022/2023,2023-03-26,Perth Glory,Melbourne City FC,x8,0.4467480551339609,4,1,referee_arm
+4026849,2022/2023,2023-03-26,Melbourne Victory,Brisbane Roar FC,x8,0.4946512640925008,4,1,referee_arm
+4026816,2022/2023,2023-03-28,Adelaide United,Wellington Phoenix,x8,0.42769333425147904,3,1,referee_arm
+4026784,2022/2023,2023-03-29,Sydney FC,Perth Glory,x8,0.31971270042718514,2,0,referee_arm
+4026815,2022/2023,2023-03-31,Wellington Phoenix,Melbourne Victory,x8,0.3251603968878455,2,0,referee_arm
+4026823,2022/2023,2023-04-01,Sydney FC,Newcastle Jets,x8,0.4338201549127596,4,1,referee_arm
+4026835,2022/2023,2023-04-01,Western United FC,Western Sydney Wanderers FC,x8,0.4844372334876236,2,0,referee_arm
+4026836,2022/2023,2023-04-01,Brisbane Roar FC,Perth Glory,x8,0.36915911217676434,2,0,referee_arm
+4026822,2022/2023,2023-04-02,Melbourne City FC,Canberra United FC,x8,0.3326634447733944,0,0,referee_arm
+4026758,2022/2023,2022-11-19,Canberra United FC,Perth Glory,baseline_league,0.4142857142857143,1,0,
+4026773,2022/2023,2022-11-19,Western United FC,Melbourne Victory,baseline_league,0.4142857142857143,1,0,
+4026774,2022/2023,2022-11-19,Brisbane Roar FC,Newcastle Jets,baseline_league,0.4142857142857143,6,1,
+4026772,2022/2023,2022-11-20,Adelaide United,Sydney FC,baseline_league,0.4142857142857143,2,0,
+4026821,2022/2023,2022-11-20,Wellington Phoenix,Melbourne City FC,baseline_league,0.4142857142857143,0,0,
+4026769,2022/2023,2022-11-26,Sydney FC,Melbourne Victory,baseline_league,0.4142857142857143,2,0,
+4026770,2022/2023,2022-11-26,Brisbane Roar FC,Canberra United FC,baseline_league,0.4142857142857143,1,0,
+4026771,2022/2023,2022-11-26,Newcastle Jets,Western Sydney Wanderers FC,baseline_league,0.4142857142857143,1,0,
+4026820,2022/2023,2022-11-26,Wellington Phoenix,Western United FC,baseline_league,0.4142857142857143,4,1,
+4026768,2022/2023,2022-11-27,Perth Glory,Adelaide United,baseline_league,0.4142857142857143,3,1,
+4026765,2022/2023,2022-12-03,Newcastle Jets,Perth Glory,baseline_league,0.4142857142857143,0,0,
+4026766,2022/2023,2022-12-03,Melbourne City FC,Brisbane Roar FC,baseline_league,0.4142857142857143,0,0,
+4026767,2022/2023,2022-12-03,Western Sydney Wanderers FC,Sydney FC,baseline_league,0.4142857142857143,2,0,
+4026764,2022/2023,2022-12-04,Adelaide United,Western United FC,baseline_league,0.4142857142857143,5,1,
+4026819,2022/2023,2022-12-04,Melbourne Victory,Wellington Phoenix,baseline_league,0.4142857142857143,3,1,
+4026762,2022/2023,2022-12-10,Sydney FC,Brisbane Roar FC,baseline_league,0.4142857142857143,1,0,
+4026763,2022/2023,2022-12-10,Melbourne City FC,Newcastle Jets,baseline_league,0.4142857142857143,3,1,
+4026818,2022/2023,2022-12-10,Canberra United FC,Wellington Phoenix,baseline_league,0.4142857142857143,2,0,
+4026760,2022/2023,2022-12-11,Perth Glory,Melbourne Victory,baseline_league,0.4142857142857143,2,0,
+4026761,2022/2023,2022-12-11,Western Sydney Wanderers FC,Adelaide United,baseline_league,0.4142857142857143,5,1,
+4026759,2022/2023,2022-12-17,Brisbane Roar FC,Western Sydney Wanderers FC,baseline_league,0.4142857142857143,2,0,
+4026775,2022/2023,2022-12-17,Melbourne City FC,Western United FC,baseline_league,0.4142857142857143,7,1,
+4026817,2022/2023,2022-12-17,Wellington Phoenix,Adelaide United,baseline_league,0.4142857142857143,4,1,
+4026776,2022/2023,2022-12-18,Melbourne Victory,Newcastle Jets,baseline_league,0.4142857142857143,7,1,
+4026793,2022/2023,2022-12-18,Perth Glory,Canberra United FC,baseline_league,0.4142857142857143,2,0,
+4026794,2022/2023,2022-12-23,Canberra United FC,Melbourne City FC,baseline_league,0.4142857142857143,3,1,
+4026795,2022/2023,2022-12-23,Newcastle Jets,Brisbane Roar FC,baseline_league,0.4142857142857143,3,1,
+4026796,2022/2023,2022-12-24,Sydney FC,Western Sydney Wanderers FC,baseline_league,0.4142857142857143,2,0,
+4026797,2022/2023,2022-12-27,Melbourne City FC,Perth Glory,baseline_league,0.4142857142857143,3,1,
+4026799,2022/2023,2022-12-31,Brisbane Roar FC,Sydney FC,baseline_league,0.4142857142857143,3,1,
+4026800,2022/2023,2022-12-31,Melbourne Victory,Canberra United FC,baseline_league,0.4142857142857143,0,0,
+4026801,2022/2023,2022-12-31,Newcastle Jets,Adelaide United,baseline_league,0.4142857142857143,3,1,
+4026802,2022/2023,2023-01-01,Perth Glory,Western United FC,baseline_league,0.4142857142857143,5,1,
+4026824,2022/2023,2023-01-01,Wellington Phoenix,Western Sydney Wanderers FC,baseline_league,0.4142857142857143,2,0,
+4026803,2022/2023,2023-01-06,Melbourne Victory,Perth Glory,baseline_league,0.4142857142857143,1,0,
+4026804,2022/2023,2023-01-07,Newcastle Jets,Sydney FC,baseline_league,0.4142857142857143,1,0,
+4026805,2022/2023,2023-01-07,Adelaide United,Canberra United FC,baseline_league,0.4142857142857143,1,0,
+4026825,2022/2023,2023-01-07,Western United FC,Wellington Phoenix,baseline_league,0.4142857142857143,2,0,
+4026806,2022/2023,2023-01-08,Western Sydney Wanderers FC,Melbourne City FC,baseline_league,0.4142857142857143,2,0,
+4026791,2022/2023,2023-01-11,Western United FC,Sydney FC,baseline_league,0.4142857142857143,2,0,
+4026792,2022/2023,2023-01-11,Adelaide United,Melbourne City FC,baseline_league,0.4142857142857143,3,1,
+4026777,2022/2023,2023-01-14,Canberra United FC,Newcastle Jets,baseline_league,0.4142857142857143,1,0,
+4026778,2022/2023,2023-01-14,Western Sydney Wanderers FC,Western United FC,baseline_league,0.4142857142857143,1,0,
+4026779,2022/2023,2023-01-15,Melbourne City FC,Melbourne Victory,baseline_league,0.4142857142857143,0,0,
+4026780,2022/2023,2023-01-15,Brisbane Roar FC,Adelaide United,baseline_league,0.4142857142857143,4,1,
+4026826,2022/2023,2023-01-15,Perth Glory,Wellington Phoenix,baseline_league,0.4142857142857143,3,1,
+4026781,2022/2023,2023-01-18,Western Sydney Wanderers FC,Melbourne Victory,baseline_league,0.4142857142857143,3,1,
+4026782,2022/2023,2023-01-21,Western United FC,Brisbane Roar FC,baseline_league,0.4142857142857143,3,1,
+4026783,2022/2023,2023-01-21,Melbourne City FC,Western Sydney Wanderers FC,baseline_league,0.4142857142857143,1,0,
+4026785,2022/2023,2023-01-21,Adelaide United,Melbourne Victory,baseline_league,0.4142857142857143,1,0,
+4026834,2022/2023,2023-01-21,Wellington Phoenix,Canberra United FC,baseline_league,0.4142857142857143,0,0,
+4026786,2022/2023,2023-01-26,Melbourne Victory,Sydney FC,baseline_league,0.4142857142857143,4,1,
+4026787,2022/2023,2023-01-28,Western Sydney Wanderers FC,Newcastle Jets,baseline_league,0.4142857142857143,5,1,
+4026788,2022/2023,2023-01-28,Canberra United FC,Western United FC,baseline_league,0.4142857142857143,1,0,
+4026789,2022/2023,2023-01-29,Melbourne City FC,Adelaide United,baseline_league,0.4142857142857143,2,0,
+4026833,2022/2023,2023-01-29,Brisbane Roar FC,Wellington Phoenix,baseline_league,0.4142857142857143,4,1,
+4026790,2022/2023,2023-02-04,Sydney FC,Melbourne City FC,baseline_league,0.4142857142857143,2,0,
+4026807,2022/2023,2023-02-04,Melbourne Victory,Western Sydney Wanderers FC,baseline_league,0.4142857142857143,7,1,
+4026809,2022/2023,2023-02-04,Western United FC,Perth Glory,baseline_league,0.4142857142857143,4,1,
+4026808,2022/2023,2023-02-05,Newcastle Jets,Canberra United FC,baseline_league,0.4142857142857143,3,1,
+4026810,2022/2023,2023-02-05,Adelaide United,Brisbane Roar FC,baseline_league,0.4142857142857143,5,1,
+4026798,2022/2023,2023-02-08,Western United FC,Newcastle Jets,baseline_league,0.4142857142857143,2,0,
+4026811,2022/2023,2023-02-11,Western United FC,Melbourne City FC,baseline_league,0.4142857142857143,3,1,
+4026812,2022/2023,2023-02-11,Brisbane Roar FC,Melbourne Victory,baseline_league,0.4142857142857143,1,0,
+4026813,2022/2023,2023-02-11,Canberra United FC,Sydney FC,baseline_league,0.4142857142857143,2,0,
+4026814,2022/2023,2023-02-12,Perth Glory,Newcastle Jets,baseline_league,0.4142857142857143,3,1,
+4026832,2022/2023,2023-02-12,Western Sydney Wanderers FC,Wellington Phoenix,baseline_league,0.4142857142857143,2,0,
+4026844,2022/2023,2023-02-25,Perth Glory,Brisbane Roar FC,baseline_league,0.4142857142857143,3,1,
+4026856,2022/2023,2023-02-25,Canberra United FC,Western Sydney Wanderers FC,baseline_league,0.4142857142857143,3,1,
+4026831,2022/2023,2023-02-26,Wellington Phoenix,Sydney FC,baseline_league,0.4142857142857143,3,1,
+4026842,2022/2023,2023-02-26,Melbourne Victory,Adelaide United,baseline_league,0.4142857142857143,1,0,
+4026843,2022/2023,2023-02-26,Newcastle Jets,Western United FC,baseline_league,0.4142857142857143,4,1,
+4026830,2022/2023,2023-03-04,Wellington Phoenix,Brisbane Roar FC,baseline_league,0.4142857142857143,2,0,
+4026840,2022/2023,2023-03-04,Canberra United FC,Adelaide United,baseline_league,0.4142857142857143,1,0,
+4026841,2022/2023,2023-03-04,Newcastle Jets,Melbourne City FC,baseline_league,0.4142857142857143,0,0,
+4026838,2022/2023,2023-03-05,Perth Glory,Western Sydney Wanderers FC,baseline_league,0.4142857142857143,4,1,
+4026839,2022/2023,2023-03-05,Sydney FC,Western United FC,baseline_league,0.4142857142857143,4,1,
+4026829,2022/2023,2023-03-11,Sydney FC,Wellington Phoenix,baseline_league,0.4142857142857143,3,1,
+4026837,2022/2023,2023-03-11,Adelaide United,Perth Glory,baseline_league,0.4142857142857143,3,1,
+4026845,2022/2023,2023-03-11,Brisbane Roar FC,Western United FC,baseline_league,0.4142857142857143,3,1,
+4026846,2022/2023,2023-03-12,Western Sydney Wanderers FC,Canberra United FC,baseline_league,0.4142857142857143,4,1,
+4026847,2022/2023,2023-03-13,Melbourne Victory,Melbourne City FC,baseline_league,0.4142857142857143,5,1,
+4026855,2022/2023,2023-03-17,Adelaide United,Newcastle Jets,baseline_league,0.4142857142857143,3,1,
+4026828,2022/2023,2023-03-18,Wellington Phoenix,Perth Glory,baseline_league,0.4142857142857143,2,0,
+4026853,2022/2023,2023-03-18,Canberra United FC,Melbourne Victory,baseline_league,0.4142857142857143,3,1,
+4026854,2022/2023,2023-03-18,Melbourne City FC,Sydney FC,baseline_league,0.4142857142857143,3,1,
+4026852,2022/2023,2023-03-19,Western Sydney Wanderers FC,Brisbane Roar FC,baseline_league,0.4142857142857143,1,0,
+4026827,2022/2023,2023-03-25,Newcastle Jets,Wellington Phoenix,baseline_league,0.4142857142857143,2,0,
+4026850,2022/2023,2023-03-25,Western United FC,Canberra United FC,baseline_league,0.4142857142857143,2,0,
+4026851,2022/2023,2023-03-25,Sydney FC,Adelaide United,baseline_league,0.4142857142857143,1,0,
+4026848,2022/2023,2023-03-26,Perth Glory,Melbourne City FC,baseline_league,0.4142857142857143,4,1,
+4026849,2022/2023,2023-03-26,Melbourne Victory,Brisbane Roar FC,baseline_league,0.4142857142857143,4,1,
+4026816,2022/2023,2023-03-28,Adelaide United,Wellington Phoenix,baseline_league,0.4142857142857143,3,1,
+4026784,2022/2023,2023-03-29,Sydney FC,Perth Glory,baseline_league,0.4142857142857143,2,0,
+4026815,2022/2023,2023-03-31,Wellington Phoenix,Melbourne Victory,baseline_league,0.4142857142857143,2,0,
+4026823,2022/2023,2023-04-01,Sydney FC,Newcastle Jets,baseline_league,0.4142857142857143,4,1,
+4026835,2022/2023,2023-04-01,Western United FC,Western Sydney Wanderers FC,baseline_league,0.4142857142857143,2,0,
+4026836,2022/2023,2023-04-01,Brisbane Roar FC,Perth Glory,baseline_league,0.4142857142857143,2,0,
+4026822,2022/2023,2023-04-02,Melbourne City FC,Canberra United FC,baseline_league,0.4142857142857143,0,0,
+4026758,2022/2023,2022-11-19,Canberra United FC,Perth Glory,baseline_naive,0.36545396261993024,1,0,
+4026773,2022/2023,2022-11-19,Western United FC,Melbourne Victory,baseline_naive,0.39481494503995074,1,0,
+4026774,2022/2023,2022-11-19,Brisbane Roar FC,Newcastle Jets,baseline_naive,0.4689078107151601,6,1,
+4026772,2022/2023,2022-11-20,Adelaide United,Sydney FC,baseline_naive,0.2863020416548704,2,0,
+4026821,2022/2023,2022-11-20,Wellington Phoenix,Melbourne City FC,baseline_naive,0.3763741216502018,0,0,
+4026769,2022/2023,2022-11-26,Sydney FC,Melbourne Victory,baseline_naive,0.35442256685642315,2,0,
+4026770,2022/2023,2022-11-26,Brisbane Roar FC,Canberra United FC,baseline_naive,0.3978588451816558,1,0,
+4026771,2022/2023,2022-11-26,Newcastle Jets,Western Sydney Wanderers FC,baseline_naive,0.6121813621201944,1,0,
+4026820,2022/2023,2022-11-26,Wellington Phoenix,Western United FC,baseline_naive,0.19331264750251997,4,1,
+4026768,2022/2023,2022-11-27,Perth Glory,Adelaide United,baseline_naive,0.30932115085838485,3,1,
+4026765,2022/2023,2022-12-03,Newcastle Jets,Perth Glory,baseline_naive,0.5063856078823458,0,0,
+4026766,2022/2023,2022-12-03,Melbourne City FC,Brisbane Roar FC,baseline_naive,0.38717741843229025,0,0,
+4026767,2022/2023,2022-12-03,Western Sydney Wanderers FC,Sydney FC,baseline_naive,0.4784957003218737,2,0,
+4026764,2022/2023,2022-12-04,Adelaide United,Western United FC,baseline_naive,0.33205190986468935,5,1,
+4026819,2022/2023,2022-12-04,Melbourne Victory,Wellington Phoenix,baseline_naive,0.3763741216502018,3,1,
+4026762,2022/2023,2022-12-10,Sydney FC,Brisbane Roar FC,baseline_naive,0.3763741216502018,1,0,
+4026763,2022/2023,2022-12-10,Melbourne City FC,Newcastle Jets,baseline_naive,0.43928511627921374,3,1,
+4026818,2022/2023,2022-12-10,Canberra United FC,Wellington Phoenix,baseline_naive,0.34328621964526995,2,0,
+4026760,2022/2023,2022-12-11,Perth Glory,Melbourne Victory,baseline_naive,0.3763741216502018,2,0,
+4026761,2022/2023,2022-12-11,Western Sydney Wanderers FC,Adelaide United,baseline_naive,0.4784957003218737,5,1,
+4026759,2022/2023,2022-12-17,Brisbane Roar FC,Western Sydney Wanderers FC,baseline_naive,0.48793841389127424,2,0,
+4026775,2022/2023,2022-12-17,Melbourne City FC,Western United FC,baseline_naive,0.48165944480146927,7,1,
+4026817,2022/2023,2022-12-17,Wellington Phoenix,Adelaide United,baseline_naive,0.42913026173058866,4,1,
+4026776,2022/2023,2022-12-18,Melbourne Victory,Newcastle Jets,baseline_naive,0.48793841389127424,7,1,
+4026793,2022/2023,2022-12-18,Perth Glory,Canberra United FC,baseline_naive,0.32072737551658603,2,0,
+4026794,2022/2023,2022-12-23,Canberra United FC,Melbourne City FC,baseline_naive,0.42913026173058866,3,1,
+4026795,2022/2023,2022-12-23,Newcastle Jets,Brisbane Roar FC,baseline_naive,0.5153893955800433,3,1,
+4026796,2022/2023,2022-12-24,Sydney FC,Western Sydney Wanderers FC,baseline_naive,0.532957380739868,2,0,
+4026797,2022/2023,2022-12-27,Melbourne City FC,Perth Glory,baseline_naive,0.408413971628908,3,1,
+4026799,2022/2023,2022-12-31,Brisbane Roar FC,Sydney FC,baseline_naive,0.3978588451816558,3,1,
+4026800,2022/2023,2022-12-31,Melbourne Victory,Canberra United FC,baseline_naive,0.4493009847071555,0,0,
+4026801,2022/2023,2022-12-31,Newcastle Jets,Adelaide United,baseline_naive,0.49723520700825585,3,1,
+4026802,2022/2023,2023-01-01,Perth Glory,Western United FC,baseline_naive,0.554097107099032,5,1,
+4026824,2022/2023,2023-01-01,Wellington Phoenix,Western Sydney Wanderers FC,baseline_naive,0.5329573807398681,2,0,
+4026803,2022/2023,2023-01-06,Melbourne Victory,Perth Glory,baseline_naive,0.38717741843229025,1,0,
+4026804,2022/2023,2023-01-07,Newcastle Jets,Sydney FC,baseline_naive,0.4689078107151603,1,0,
+4026805,2022/2023,2023-01-07,Adelaide United,Canberra United FC,baseline_naive,0.3978588451816558,1,0,
+4026825,2022/2023,2023-01-07,Western United FC,Wellington Phoenix,baseline_naive,0.6048871924909573,2,0,
+4026806,2022/2023,2023-01-08,Western Sydney Wanderers FC,Melbourne City FC,baseline_naive,0.5499416675959432,2,0,
+4026791,2022/2023,2023-01-11,Western United FC,Sydney FC,baseline_naive,0.5329573807398681,2,0,
+4026792,2022/2023,2023-01-11,Adelaide United,Melbourne City FC,baseline_naive,0.4591757852876336,3,1,
+4026777,2022/2023,2023-01-14,Canberra United FC,Newcastle Jets,baseline_naive,0.38717741843229025,1,0,
+4026778,2022/2023,2023-01-14,Western Sydney Wanderers FC,Western United FC,baseline_naive,0.6132123783963648,1,0,
+4026779,2022/2023,2023-01-15,Melbourne City FC,Melbourne Victory,baseline_naive,0.3978588451816558,0,0,
+4026780,2022/2023,2023-01-15,Brisbane Roar FC,Adelaide United,baseline_naive,0.43928511627921374,4,1,
+4026826,2022/2023,2023-01-15,Perth Glory,Wellington Phoenix,baseline_naive,0.40841397162890813,3,1,
+4026781,2022/2023,2023-01-18,Western Sydney Wanderers FC,Melbourne Victory,baseline_naive,0.36545396261993024,3,1,
+4026782,2022/2023,2023-01-21,Western United FC,Brisbane Roar FC,baseline_naive,0.49492471902213064,3,1,
+4026783,2022/2023,2023-01-21,Melbourne City FC,Western Sydney Wanderers FC,baseline_naive,0.3763741216502018,1,0,
+4026785,2022/2023,2023-01-21,Adelaide United,Melbourne Victory,baseline_naive,0.43928511627921374,1,0,
+4026834,2022/2023,2023-01-21,Wellington Phoenix,Canberra United FC,baseline_naive,0.33205190986468935,0,0,
+4026786,2022/2023,2023-01-26,Melbourne Victory,Sydney FC,baseline_naive,0.30932115085838463,4,1,
+4026787,2022/2023,2023-01-28,Western Sydney Wanderers FC,Newcastle Jets,baseline_naive,0.3978588451816558,5,1,
+4026788,2022/2023,2023-01-28,Canberra United FC,Western United FC,baseline_naive,0.39075166541558903,1,0,
+4026789,2022/2023,2023-01-29,Melbourne City FC,Adelaide United,baseline_naive,0.4591757852876336,2,0,
+4026833,2022/2023,2023-01-29,Brisbane Roar FC,Wellington Phoenix,baseline_naive,0.3978588451816558,4,1,
+4026790,2022/2023,2023-02-04,Sydney FC,Melbourne City FC,baseline_naive,0.35442256685642315,2,0,
+4026807,2022/2023,2023-02-04,Melbourne Victory,Western Sydney Wanderers FC,baseline_naive,0.40841397162890813,7,1,
+4026809,2022/2023,2023-02-04,Western United FC,Perth Glory,baseline_naive,0.4591757852876336,4,1,
+4026808,2022/2023,2023-02-05,Newcastle Jets,Canberra United FC,baseline_naive,0.34328621964526973,3,1,
+4026810,2022/2023,2023-02-05,Adelaide United,Brisbane Roar FC,baseline_naive,0.5063856078823457,5,1,
+4026798,2022/2023,2023-02-08,Western United FC,Newcastle Jets,baseline_naive,0.5329573807398681,2,0,
+4026811,2022/2023,2023-02-11,Western United FC,Melbourne City FC,baseline_naive,0.5063856078823458,3,1,
+4026812,2022/2023,2023-02-11,Brisbane Roar FC,Melbourne Victory,baseline_naive,0.4689078107151603,1,0,
+4026813,2022/2023,2023-02-11,Canberra United FC,Sydney FC,baseline_naive,0.2630806565145605,2,0,
+4026814,2022/2023,2023-02-12,Perth Glory,Newcastle Jets,baseline_naive,0.4493009847071556,3,1,
+4026832,2022/2023,2023-02-12,Western Sydney Wanderers FC,Wellington Phoenix,baseline_naive,0.4689078107151603,2,0,
+4026844,2022/2023,2023-02-25,Perth Glory,Brisbane Roar FC,baseline_naive,0.4493009847071555,3,1,
+4026856,2022/2023,2023-02-25,Canberra United FC,Western Sydney Wanderers FC,baseline_naive,0.34328621964526995,3,1,
+4026831,2022/2023,2023-02-26,Wellington Phoenix,Sydney FC,baseline_naive,0.3978588451816558,3,1,
+4026842,2022/2023,2023-02-26,Melbourne Victory,Adelaide United,baseline_naive,0.5153893955800433,1,0,
+4026843,2022/2023,2023-02-26,Newcastle Jets,Western United FC,baseline_naive,0.5329573807398681,4,1,
+4026830,2022/2023,2023-03-04,Wellington Phoenix,Brisbane Roar FC,baseline_naive,0.4689078107151603,2,0,
+4026840,2022/2023,2023-03-04,Canberra United FC,Adelaide United,baseline_naive,0.3763741216502018,1,0,
+4026841,2022/2023,2023-03-04,Newcastle Jets,Melbourne City FC,baseline_naive,0.5063856078823458,0,0,
+4026838,2022/2023,2023-03-05,Perth Glory,Western Sydney Wanderers FC,baseline_naive,0.4689078107151603,4,1,
+4026839,2022/2023,2023-03-05,Sydney FC,Western United FC,baseline_naive,0.41883890664850043,4,1,
+4026829,2022/2023,2023-03-11,Sydney FC,Wellington Phoenix,baseline_naive,0.408413971628908,3,1,
+4026837,2022/2023,2023-03-11,Adelaide United,Perth Glory,baseline_naive,0.4784957003218737,3,1,
+4026845,2022/2023,2023-03-11,Brisbane Roar FC,Western United FC,baseline_naive,0.48793841389127424,3,1,
+4026846,2022/2023,2023-03-12,Western Sydney Wanderers FC,Canberra United FC,baseline_naive,0.3763741216502018,4,1,
+4026847,2022/2023,2023-03-13,Melbourne Victory,Melbourne City FC,baseline_naive,0.36545396261993024,5,1,
+4026855,2022/2023,2023-03-17,Adelaide United,Newcastle Jets,baseline_naive,0.41883890664850043,3,1,
+4026828,2022/2023,2023-03-18,Wellington Phoenix,Perth Glory,baseline_naive,0.48793841389127457,2,0,
+4026853,2022/2023,2023-03-18,Canberra United FC,Melbourne Victory,baseline_naive,0.30932115085838485,3,1,
+4026854,2022/2023,2023-03-18,Melbourne City FC,Sydney FC,baseline_naive,0.3978588451816558,3,1,
+4026852,2022/2023,2023-03-19,Western Sydney Wanderers FC,Brisbane Roar FC,baseline_naive,0.5499416675959433,1,0,
+4026827,2022/2023,2023-03-25,Newcastle Jets,Wellington Phoenix,baseline_naive,0.40841397162890813,2,0,
+4026850,2022/2023,2023-03-25,Western United FC,Canberra United FC,baseline_naive,0.38717741843229025,2,0,
+4026851,2022/2023,2023-03-25,Sydney FC,Adelaide United,baseline_naive,0.43928511627921374,1,0,
+4026848,2022/2023,2023-03-26,Perth Glory,Melbourne City FC,baseline_naive,0.4493009847071555,4,1,
+4026849,2022/2023,2023-03-26,Melbourne Victory,Brisbane Roar FC,baseline_naive,0.4784957003218737,4,1,
+4026816,2022/2023,2023-03-28,Adelaide United,Wellington Phoenix,baseline_naive,0.39785884518165593,3,1,
+4026784,2022/2023,2023-03-29,Sydney FC,Perth Glory,baseline_naive,0.49723520700825574,2,0,
+4026815,2022/2023,2023-03-31,Wellington Phoenix,Melbourne Victory,baseline_naive,0.4591757852876336,2,0,
+4026823,2022/2023,2023-04-01,Sydney FC,Newcastle Jets,baseline_naive,0.42913026173058866,4,1,
+4026835,2022/2023,2023-04-01,Western United FC,Western Sydney Wanderers FC,baseline_naive,0.5063856078823458,2,0,
+4026836,2022/2023,2023-04-01,Brisbane Roar FC,Perth Glory,baseline_naive,0.5153893955800433,2,0,
+4026822,2022/2023,2023-04-02,Melbourne City FC,Canberra United FC,baseline_naive,0.35442256685642326,0,0,
+4309539,2023/2024,2023-10-14,Central Coast Mariners,Newcastle Jets,gate_zero,0.5312309846858796,6,1,gate_zero_only
+4309571,2023/2024,2023-10-14,Perth Glory,Western United FC,gate_zero,0.6084601798123526,5,1,gate_zero_only
+4309583,2023/2024,2023-10-14,Sydney FC,Western Sydney Wanderers FC,gate_zero,0.47315660144798655,3,1,gate_zero_only
+4309569,2023/2024,2023-10-15,Melbourne Victory,Brisbane Roar FC,gate_zero,0.5205454150881765,2,0,gate_zero_only
+4309570,2023/2024,2023-10-15,Adelaide United,Canberra United FC,gate_zero,0.3764823871486951,2,0,gate_zero_only
+4309637,2023/2024,2023-10-15,Wellington Phoenix,Melbourne City FC,gate_zero,0.40640456413041504,0,0,gate_zero_only
+4309568,2023/2024,2023-10-20,Adelaide United,Central Coast Mariners,gate_zero,0.46721590359567444,4,1,gate_zero_only
+4309566,2023/2024,2023-10-21,Brisbane Roar FC,Sydney FC,gate_zero,0.481951657405739,2,0,gate_zero_only
+4309567,2023/2024,2023-10-21,Melbourne City FC,Canberra United FC,gate_zero,0.32564505518554043,2,0,gate_zero_only
+4309564,2023/2024,2023-10-22,Perth Glory,Newcastle Jets,gate_zero,0.6611467815434525,2,0,gate_zero_only
+4309565,2023/2024,2023-10-22,Western United FC,Melbourne Victory,gate_zero,0.3665169586798894,0,0,gate_zero_only
+4309638,2023/2024,2023-10-22,Western Sydney Wanderers FC,Wellington Phoenix,gate_zero,0.461809112742231,1,0,gate_zero_only
+4309572,2023/2024,2023-11-04,Canberra United FC,Perth Glory,gate_zero,0.34228179188016505,2,0,gate_zero_only
+4309582,2023/2024,2023-11-04,Melbourne Victory,Adelaide United,gate_zero,0.4962994452320293,2,0,gate_zero_only
+4309651,2023/2024,2023-11-04,Wellington Phoenix,Brisbane Roar FC,gate_zero,0.36866305072733807,1,0,gate_zero_only
+4309573,2023/2024,2023-11-05,Newcastle Jets,Western Sydney Wanderers FC,gate_zero,0.4869869193238584,2,0,gate_zero_only
+4309581,2023/2024,2023-11-05,Western United FC,Melbourne City FC,gate_zero,0.340555779571424,3,1,gate_zero_only
+4309578,2023/2024,2023-11-11,Perth Glory,Adelaide United,gate_zero,0.5062010874057068,2,0,gate_zero_only
+4309577,2023/2024,2023-11-12,Central Coast Mariners,Brisbane Roar FC,gate_zero,0.49041771872629303,3,1,gate_zero_only
+4309579,2023/2024,2023-11-12,Melbourne Victory,Newcastle Jets,gate_zero,0.608107887685543,3,1,gate_zero_only
+4309580,2023/2024,2023-11-12,Melbourne City FC,Western Sydney Wanderers FC,gate_zero,0.4620257874576861,0,0,gate_zero_only
+4309665,2023/2024,2023-11-12,Wellington Phoenix,Western United FC,gate_zero,0.47516403251913286,2,0,gate_zero_only
+4309574,2023/2024,2023-11-18,Perth Glory,Melbourne Victory,gate_zero,0.40292784958235406,3,1,gate_zero_only
+4309666,2023/2024,2023-11-18,Central Coast Mariners,Wellington Phoenix,gate_zero,0.4964334358418405,3,1,gate_zero_only
+4309549,2023/2024,2023-11-19,Newcastle Jets,Melbourne City FC,gate_zero,0.3768631204651127,4,1,gate_zero_only
+4309561,2023/2024,2023-11-19,Brisbane Roar FC,Western United FC,gate_zero,0.5580721311900021,2,0,gate_zero_only
+4309562,2023/2024,2023-11-19,Adelaide United,Sydney FC,gate_zero,0.48561901156557774,4,1,gate_zero_only
+4309547,2023/2024,2023-11-25,Western United FC,Western Sydney Wanderers FC,gate_zero,0.4178105151236482,3,1,gate_zero_only
+4309667,2023/2024,2023-11-25,Wellington Phoenix,Perth Glory,gate_zero,0.3161036639425847,2,0,gate_zero_only
+4309544,2023/2024,2023-11-26,Canberra United FC,Newcastle Jets,gate_zero,0.4903972166634958,3,1,gate_zero_only
+4309545,2023/2024,2023-11-26,Sydney FC,Melbourne City FC,gate_zero,0.40895849251639016,3,1,gate_zero_only
+4309546,2023/2024,2023-11-26,Melbourne Victory,Central Coast Mariners,gate_zero,0.5352339273021148,2,0,gate_zero_only
+4309548,2023/2024,2023-11-26,Brisbane Roar FC,Adelaide United,gate_zero,0.42122704020125423,3,1,gate_zero_only
+4309543,2023/2024,2023-12-08,Western Sydney Wanderers FC,Central Coast Mariners,gate_zero,0.460747262829701,2,0,gate_zero_only
+4309541,2023/2024,2023-12-09,Adelaide United,Western United FC,gate_zero,0.592407999519425,4,1,gate_zero_only
+4309542,2023/2024,2023-12-09,Melbourne City FC,Perth Glory,gate_zero,0.3240806680313393,4,1,gate_zero_only
+4309550,2023/2024,2023-12-10,Canberra United FC,Brisbane Roar FC,gate_zero,0.3802592238735938,2,0,gate_zero_only
+4309551,2023/2024,2023-12-10,Newcastle Jets,Sydney FC,gate_zero,0.47013528620154466,3,1,gate_zero_only
+4309668,2023/2024,2023-12-10,Wellington Phoenix,Melbourne Victory,gate_zero,0.28310585732951477,2,0,gate_zero_only
+4309560,2023/2024,2023-12-15,Central Coast Mariners,Melbourne City FC,gate_zero,0.5275281901620693,1,0,gate_zero_only
+4309559,2023/2024,2023-12-16,Melbourne Victory,Canberra United FC,gate_zero,0.3984851306317976,2,0,gate_zero_only
+4309652,2023/2024,2023-12-16,Adelaide United,Wellington Phoenix,gate_zero,0.49072147638163344,3,1,gate_zero_only
+4309556,2023/2024,2023-12-17,Perth Glory,Sydney FC,gate_zero,0.5450170747524318,5,1,gate_zero_only
+4309557,2023/2024,2023-12-17,Brisbane Roar FC,Western Sydney Wanderers FC,gate_zero,0.4687018218618617,2,0,gate_zero_only
+4309558,2023/2024,2023-12-17,Newcastle Jets,Western United FC,gate_zero,0.554281488066325,0,0,gate_zero_only
+4309554,2023/2024,2023-12-22,Western United FC,Perth Glory,gate_zero,0.3867838853655461,1,0,gate_zero_only
+4309555,2023/2024,2023-12-22,Sydney FC,Brisbane Roar FC,gate_zero,0.4035110934645202,1,0,gate_zero_only
+4309540,2023/2024,2023-12-23,Western Sydney Wanderers FC,Adelaide United,gate_zero,0.4185769675016875,3,1,gate_zero_only
+4309552,2023/2024,2023-12-23,Melbourne City FC,Melbourne Victory,gate_zero,0.3197684074798075,4,1,gate_zero_only
+4309553,2023/2024,2023-12-23,Canberra United FC,Central Coast Mariners,gate_zero,0.4047304081600407,2,0,gate_zero_only
+4309669,2023/2024,2023-12-23,Wellington Phoenix,Newcastle Jets,gate_zero,0.4576741969161885,3,1,gate_zero_only
+4309584,2023/2024,2023-12-28,Melbourne City FC,Brisbane Roar FC,gate_zero,0.3821185788745447,1,0,gate_zero_only
+4309670,2023/2024,2023-12-29,Sydney FC,Wellington Phoenix,gate_zero,0.4002595475402688,5,1,gate_zero_only
+4309594,2023/2024,2023-12-30,Western Sydney Wanderers FC,Melbourne Victory,gate_zero,0.38282886806850325,1,0,gate_zero_only
+4309595,2023/2024,2023-12-30,Canberra United FC,Western United FC,gate_zero,0.45264262061513283,4,1,gate_zero_only
+4309592,2023/2024,2023-12-31,Newcastle Jets,Adelaide United,gate_zero,0.4019863083543259,1,0,gate_zero_only
+4309593,2023/2024,2023-12-31,Central Coast Mariners,Perth Glory,gate_zero,0.4356138964040718,3,1,gate_zero_only
+4309576,2023/2024,2024-01-03,Sydney FC,Canberra United FC,gate_zero,0.36277336508879177,2,0,gate_zero_only
+4309589,2023/2024,2024-01-06,Melbourne Victory,Western United FC,gate_zero,0.5617491236010865,3,1,gate_zero_only
+4309590,2023/2024,2024-01-06,Newcastle Jets,Canberra United FC,gate_zero,0.3106271844877373,3,1,gate_zero_only
+4309591,2023/2024,2024-01-06,Adelaide United,Melbourne City FC,gate_zero,0.47989911665849405,1,0,gate_zero_only
+4309587,2023/2024,2024-01-07,Perth Glory,Western Sydney Wanderers FC,gate_zero,0.5520981563553554,2,0,gate_zero_only
+4309588,2023/2024,2024-01-07,Central Coast Mariners,Sydney FC,gate_zero,0.5501581520244982,3,1,gate_zero_only
+4309664,2023/2024,2024-01-07,Brisbane Roar FC,Wellington Phoenix,gate_zero,0.4735444384990525,0,0,gate_zero_only
+4309596,2023/2024,2024-01-12,Melbourne Victory,Perth Glory,gate_zero,0.44428831452057893,2,0,gate_zero_only
+4309663,2023/2024,2024-01-12,Wellington Phoenix,Central Coast Mariners,gate_zero,0.36786353138525696,5,1,gate_zero_only
+4309586,2023/2024,2024-01-13,Canberra United FC,Adelaide United,gate_zero,0.3781190797199858,2,0,gate_zero_only
+4309615,2023/2024,2024-01-13,Brisbane Roar FC,Newcastle Jets,gate_zero,0.5041268910222514,4,1,gate_zero_only
+4309585,2023/2024,2024-01-14,Western United FC,Sydney FC,gate_zero,0.4588764085622211,2,0,gate_zero_only
+4309616,2023/2024,2024-01-14,Western Sydney Wanderers FC,Melbourne City FC,gate_zero,0.38100114063043156,0,0,gate_zero_only
+4309563,2023/2024,2024-01-17,Sydney FC,Central Coast Mariners,gate_zero,0.4826421465571469,5,1,gate_zero_only
+4309618,2023/2024,2024-01-20,Perth Glory,Brisbane Roar FC,gate_zero,0.4609393726149831,3,1,gate_zero_only
+4309619,2023/2024,2024-01-20,Canberra United FC,Melbourne Victory,gate_zero,0.34235448983023153,3,1,gate_zero_only
+4309662,2023/2024,2024-01-20,Melbourne City FC,Wellington Phoenix,gate_zero,0.3985984677671126,3,1,gate_zero_only
+4309617,2023/2024,2024-01-21,Central Coast Mariners,Western Sydney Wanderers FC,gate_zero,0.5073927187855471,2,0,gate_zero_only
+4309620,2023/2024,2024-01-21,Western United FC,Adelaide United,gate_zero,0.357983944158221,2,0,gate_zero_only
+4309621,2023/2024,2024-01-21,Sydney FC,Newcastle Jets,gate_zero,0.5870112270544136,2,0,gate_zero_only
+4309626,2023/2024,2024-01-25,Melbourne City FC,Western United FC,gate_zero,0.4921289106435275,1,0,gate_zero_only
+4309622,2023/2024,2024-01-26,Melbourne Victory,Sydney FC,gate_zero,0.5293461744921732,4,1,gate_zero_only
+4309623,2023/2024,2024-01-27,Western Sydney Wanderers FC,Brisbane Roar FC,gate_zero,0.3404615642164015,1,0,gate_zero_only
+4309624,2023/2024,2024-01-27,Adelaide United,Perth Glory,gate_zero,0.45248561740348525,2,0,gate_zero_only
+4309625,2023/2024,2024-01-28,Newcastle Jets,Central Coast Mariners,gate_zero,0.4832716881197673,2,0,gate_zero_only
+4309653,2023/2024,2024-01-28,Wellington Phoenix,Canberra United FC,gate_zero,0.3379630741648729,0,0,gate_zero_only
+4309614,2023/2024,2024-02-03,Sydney FC,Perth Glory,gate_zero,0.41957447323847263,2,0,gate_zero_only
+4309627,2023/2024,2024-02-03,Adelaide United,Western Sydney Wanderers FC,gate_zero,0.48004402100740196,2,0,gate_zero_only
+4309628,2023/2024,2024-02-03,Brisbane Roar FC,Melbourne Victory,gate_zero,0.3627740946474055,4,1,gate_zero_only
+4309632,2023/2024,2024-02-03,Western United FC,Central Coast Mariners,gate_zero,0.45232184671730047,1,0,gate_zero_only
+4309613,2023/2024,2024-02-04,Canberra United FC,Melbourne City FC,gate_zero,0.3458839705179947,1,0,gate_zero_only
+4309654,2023/2024,2024-02-04,Newcastle Jets,Wellington Phoenix,gate_zero,0.40439957121601444,3,1,gate_zero_only
+4309598,2023/2024,2024-02-09,Western Sydney Wanderers FC,Newcastle Jets,gate_zero,0.4691772262629115,3,1,gate_zero_only
+4309599,2023/2024,2024-02-10,Central Coast Mariners,Melbourne Victory,gate_zero,0.4448964800871227,4,1,gate_zero_only
+4309601,2023/2024,2024-02-10,Perth Glory,Canberra United FC,gate_zero,0.41801948947626344,2,0,gate_zero_only
+4309602,2023/2024,2024-02-10,Melbourne City FC,Sydney FC,gate_zero,0.48161760491869576,2,0,gate_zero_only
+4309600,2023/2024,2024-02-11,Western United FC,Brisbane Roar FC,gate_zero,0.31168058808962806,0,0,gate_zero_only
+4309603,2023/2024,2024-02-16,Melbourne Victory,Western Sydney Wanderers FC,gate_zero,0.4882908304484018,1,0,gate_zero_only
+4309604,2023/2024,2024-02-17,Newcastle Jets,Brisbane Roar FC,gate_zero,0.3237111775465543,3,1,gate_zero_only
+4309606,2023/2024,2024-02-18,Melbourne City FC,Adelaide United,gate_zero,0.3494039574335497,0,0,gate_zero_only
+4309607,2023/2024,2024-02-18,Perth Glory,Central Coast Mariners,gate_zero,0.5596192768738218,3,1,gate_zero_only
+4309656,2023/2024,2024-02-18,Western United FC,Wellington Phoenix,gate_zero,0.34894796329987976,0,0,gate_zero_only
+4309608,2023/2024,2024-03-01,Western United FC,Canberra United FC,gate_zero,0.23265925745643434,1,0,gate_zero_only
+4309610,2023/2024,2024-03-02,Brisbane Roar FC,Melbourne City FC,gate_zero,0.38192593928462093,2,0,gate_zero_only
+4309611,2023/2024,2024-03-02,Western Sydney Wanderers FC,Sydney FC,gate_zero,0.44611225466136595,2,0,gate_zero_only
+4309597,2023/2024,2024-03-03,Newcastle Jets,Perth Glory,gate_zero,0.3781306430969916,3,1,gate_zero_only
+4309609,2023/2024,2024-03-03,Central Coast Mariners,Adelaide United,gate_zero,0.4441780474761363,5,1,gate_zero_only
+4309657,2023/2024,2024-03-03,Melbourne Victory,Wellington Phoenix,gate_zero,0.4497480360815561,2,0,gate_zero_only
+4309658,2023/2024,2024-03-08,Perth Glory,Wellington Phoenix,gate_zero,0.49389674513216475,3,1,gate_zero_only
+4309629,2023/2024,2024-03-09,Sydney FC,Western United FC,gate_zero,0.517845170052129,3,1,gate_zero_only
+4309642,2023/2024,2024-03-09,Canberra United FC,Western Sydney Wanderers FC,gate_zero,0.38152577517827946,3,1,gate_zero_only
+4309643,2023/2024,2024-03-09,Brisbane Roar FC,Central Coast Mariners,gate_zero,0.49317454111207626,5,1,gate_zero_only
+4309644,2023/2024,2024-03-10,Adelaide United,Melbourne Victory,gate_zero,0.46380918695481954,3,1,gate_zero_only
+4309645,2023/2024,2024-03-10,Melbourne City FC,Newcastle Jets,gate_zero,0.47523800512929704,2,0,gate_zero_only
+4309575,2023/2024,2024-03-13,Western Sydney Wanderers FC,Canberra United FC,gate_zero,0.27746757311449377,1,0,gate_zero_only
+4309646,2023/2024,2024-03-16,Adelaide United,Brisbane Roar FC,gate_zero,0.40100612127706003,4,1,gate_zero_only
+4309647,2023/2024,2024-03-16,Western Sydney Wanderers FC,Perth Glory,gate_zero,0.32930894501879593,0,0,gate_zero_only
+4309648,2023/2024,2024-03-17,Melbourne Victory,Melbourne City FC,gate_zero,0.38317467621693657,4,1,gate_zero_only
+4309649,2023/2024,2024-03-17,Central Coast Mariners,Canberra United FC,gate_zero,0.39996842647315733,2,0,gate_zero_only
+4309650,2023/2024,2024-03-17,Western United FC,Newcastle Jets,gate_zero,0.38756270030384965,5,1,gate_zero_only
+4309659,2023/2024,2024-03-17,Wellington Phoenix,Sydney FC,gate_zero,0.4303465130031062,2,0,gate_zero_only
+4309655,2023/2024,2024-03-20,Wellington Phoenix,Adelaide United,gate_zero,0.3557926395163362,1,0,gate_zero_only
+4309639,2023/2024,2024-03-23,Western Sydney Wanderers FC,Western United FC,gate_zero,0.40041559966524387,3,1,gate_zero_only
+4309640,2023/2024,2024-03-23,Melbourne City FC,Central Coast Mariners,gate_zero,0.4331464798761483,3,1,gate_zero_only
+4309641,2023/2024,2024-03-23,Newcastle Jets,Melbourne Victory,gate_zero,0.42156434306967494,5,1,gate_zero_only
+4309630,2023/2024,2024-03-24,Sydney FC,Adelaide United,gate_zero,0.42012133029591026,2,0,gate_zero_only
+4309631,2023/2024,2024-03-24,Brisbane Roar FC,Perth Glory,gate_zero,0.3927673824061386,2,0,gate_zero_only
+4309660,2023/2024,2024-03-24,Canberra United FC,Wellington Phoenix,gate_zero,0.39005520191242904,2,0,gate_zero_only
+4445657,2023/2024,2024-03-27,Canberra United FC,Sydney FC,gate_zero,0.45442145945682355,0,0,gate_zero_only
+4309612,2023/2024,2024-03-28,Central Coast Mariners,Western United FC,gate_zero,0.5895524900302682,2,0,gate_zero_only
+4309634,2023/2024,2024-03-29,Adelaide United,Newcastle Jets,gate_zero,0.6180234310255776,3,1,gate_zero_only
+4309633,2023/2024,2024-03-30,Brisbane Roar FC,Canberra United FC,gate_zero,0.34194693294464973,2,0,gate_zero_only
+4309661,2023/2024,2024-03-30,Wellington Phoenix,Western Sydney Wanderers FC,gate_zero,0.3535090611057201,1,0,gate_zero_only
+4309635,2023/2024,2024-03-31,Sydney FC,Melbourne Victory,gate_zero,0.48008438276222576,3,1,gate_zero_only
+4309636,2023/2024,2024-03-31,Perth Glory,Melbourne City FC,gate_zero,0.46008766952028113,2,0,gate_zero_only
+4309539,2023/2024,2023-10-14,Central Coast Mariners,Newcastle Jets,x8,0.5807035622490709,6,1,referee_arm
+4309571,2023/2024,2023-10-14,Perth Glory,Western United FC,x8,0.6031532902404493,5,1,referee_arm
+4309583,2023/2024,2023-10-14,Sydney FC,Western Sydney Wanderers FC,x8,0.47315660144798655,3,1,referee_base_fallback
+4309569,2023/2024,2023-10-15,Melbourne Victory,Brisbane Roar FC,x8,0.49227991442489727,2,0,referee_arm
+4309570,2023/2024,2023-10-15,Adelaide United,Canberra United FC,x8,0.3795395272998725,2,0,referee_arm
+4309637,2023/2024,2023-10-15,Wellington Phoenix,Melbourne City FC,x8,0.40640456413041504,0,0,referee_base_fallback
+4309568,2023/2024,2023-10-20,Adelaide United,Central Coast Mariners,x8,0.4818995619059627,4,1,referee_arm
+4309566,2023/2024,2023-10-21,Brisbane Roar FC,Sydney FC,x8,0.4821159335187253,2,0,referee_arm
+4309567,2023/2024,2023-10-21,Melbourne City FC,Canberra United FC,x8,0.3037007796032004,2,0,referee_arm
+4309564,2023/2024,2023-10-22,Perth Glory,Newcastle Jets,x8,0.6814258484641338,2,0,referee_arm
+4309565,2023/2024,2023-10-22,Western United FC,Melbourne Victory,x8,0.36926096106855644,0,0,referee_arm
+4309638,2023/2024,2023-10-22,Western Sydney Wanderers FC,Wellington Phoenix,x8,0.45641282719788556,1,0,referee_arm
+4309572,2023/2024,2023-11-04,Canberra United FC,Perth Glory,x8,0.33361757313460727,2,0,referee_arm
+4309582,2023/2024,2023-11-04,Melbourne Victory,Adelaide United,x8,0.49645063724364413,2,0,referee_arm
+4309651,2023/2024,2023-11-04,Wellington Phoenix,Brisbane Roar FC,x8,0.36917384154572974,1,0,referee_arm
+4309573,2023/2024,2023-11-05,Newcastle Jets,Western Sydney Wanderers FC,x8,0.47629594804398145,2,0,referee_arm
+4309581,2023/2024,2023-11-05,Western United FC,Melbourne City FC,x8,0.35718019349293817,3,1,referee_arm
+4309578,2023/2024,2023-11-11,Perth Glory,Adelaide United,x8,0.505162121742562,2,0,referee_arm
+4309577,2023/2024,2023-11-12,Central Coast Mariners,Brisbane Roar FC,x8,0.5091642720843232,3,1,referee_arm
+4309579,2023/2024,2023-11-12,Melbourne Victory,Newcastle Jets,x8,0.5833130183820425,3,1,referee_arm
+4309580,2023/2024,2023-11-12,Melbourne City FC,Western Sydney Wanderers FC,x8,0.45198000236226943,0,0,referee_arm
+4309665,2023/2024,2023-11-12,Wellington Phoenix,Western United FC,x8,0.4005770569336641,2,0,referee_arm
+4309574,2023/2024,2023-11-18,Perth Glory,Melbourne Victory,x8,0.39296521428299,3,1,referee_arm
+4309666,2023/2024,2023-11-18,Central Coast Mariners,Wellington Phoenix,x8,0.4964334358418405,3,1,referee_base_fallback
+4309549,2023/2024,2023-11-19,Newcastle Jets,Melbourne City FC,x8,0.3768631204651127,4,1,referee_base_fallback
+4309561,2023/2024,2023-11-19,Brisbane Roar FC,Western United FC,x8,0.5443446646000848,2,0,referee_arm
+4309562,2023/2024,2023-11-19,Adelaide United,Sydney FC,x8,0.48561901156557774,4,1,referee_base_fallback
+4309547,2023/2024,2023-11-25,Western United FC,Western Sydney Wanderers FC,x8,0.4328774343024364,3,1,referee_arm
+4309667,2023/2024,2023-11-25,Wellington Phoenix,Perth Glory,x8,0.3312661230360038,2,0,referee_arm
+4309544,2023/2024,2023-11-26,Canberra United FC,Newcastle Jets,x8,0.4813474528159418,3,1,referee_arm
+4309545,2023/2024,2023-11-26,Sydney FC,Melbourne City FC,x8,0.40895849251639016,3,1,gate_zero_only
+4309546,2023/2024,2023-11-26,Melbourne Victory,Central Coast Mariners,x8,0.5793119035652337,2,0,referee_arm
+4309548,2023/2024,2023-11-26,Brisbane Roar FC,Adelaide United,x8,0.4053228744129649,3,1,referee_arm
+4309543,2023/2024,2023-12-08,Western Sydney Wanderers FC,Central Coast Mariners,x8,0.49017441799891903,2,0,referee_arm
+4309541,2023/2024,2023-12-09,Adelaide United,Western United FC,x8,0.5916489420400929,4,1,referee_arm
+4309542,2023/2024,2023-12-09,Melbourne City FC,Perth Glory,x8,0.3737721041742621,4,1,referee_arm
+4309550,2023/2024,2023-12-10,Canberra United FC,Brisbane Roar FC,x8,0.36743394299392407,2,0,referee_arm
+4309551,2023/2024,2023-12-10,Newcastle Jets,Sydney FC,x8,0.48518453922131766,3,1,referee_arm
+4309668,2023/2024,2023-12-10,Wellington Phoenix,Melbourne Victory,x8,0.26656222206615,2,0,referee_arm
+4309560,2023/2024,2023-12-15,Central Coast Mariners,Melbourne City FC,x8,0.5197445828731044,1,0,referee_arm
+4309559,2023/2024,2023-12-16,Melbourne Victory,Canberra United FC,x8,0.3965964835658228,2,0,referee_arm
+4309652,2023/2024,2023-12-16,Adelaide United,Wellington Phoenix,x8,0.47690750402250126,3,1,referee_arm
+4309556,2023/2024,2023-12-17,Perth Glory,Sydney FC,x8,0.5450170747524318,5,1,referee_base_fallback
+4309557,2023/2024,2023-12-17,Brisbane Roar FC,Western Sydney Wanderers FC,x8,0.5230901821253601,2,0,referee_arm
+4309558,2023/2024,2023-12-17,Newcastle Jets,Western United FC,x8,0.5399326266963569,0,0,referee_arm
+4309554,2023/2024,2023-12-22,Western United FC,Perth Glory,x8,0.3760381650573599,1,0,referee_arm
+4309555,2023/2024,2023-12-22,Sydney FC,Brisbane Roar FC,x8,0.4035110934645202,1,0,referee_base_fallback
+4309540,2023/2024,2023-12-23,Western Sydney Wanderers FC,Adelaide United,x8,0.4338395357712066,3,1,referee_arm
+4309552,2023/2024,2023-12-23,Melbourne City FC,Melbourne Victory,x8,0.3606632578119793,4,1,referee_arm
+4309553,2023/2024,2023-12-23,Canberra United FC,Central Coast Mariners,x8,0.3872128046145701,2,0,referee_arm
+4309669,2023/2024,2023-12-23,Wellington Phoenix,Newcastle Jets,x8,0.4576741969161885,3,1,gate_zero_only
+4309584,2023/2024,2023-12-28,Melbourne City FC,Brisbane Roar FC,x8,0.36957919783505155,1,0,referee_arm
+4309670,2023/2024,2023-12-29,Sydney FC,Wellington Phoenix,x8,0.4151514182207525,5,1,referee_arm
+4309594,2023/2024,2023-12-30,Western Sydney Wanderers FC,Melbourne Victory,x8,0.3659961523585167,1,0,referee_arm
+4309595,2023/2024,2023-12-30,Canberra United FC,Western United FC,x8,0.4545855361270963,4,1,referee_arm
+4309592,2023/2024,2023-12-31,Newcastle Jets,Adelaide United,x8,0.392733277713302,1,0,referee_arm
+4309593,2023/2024,2023-12-31,Central Coast Mariners,Perth Glory,x8,0.48143352512951565,3,1,referee_arm
+4309576,2023/2024,2024-01-03,Sydney FC,Canberra United FC,x8,0.36277336508879177,2,0,referee_base_fallback
+4309589,2023/2024,2024-01-06,Melbourne Victory,Western United FC,x8,0.5165701658530754,3,1,referee_arm
+4309590,2023/2024,2024-01-06,Newcastle Jets,Canberra United FC,x8,0.32655641020291293,3,1,referee_arm
+4309591,2023/2024,2024-01-06,Adelaide United,Melbourne City FC,x8,0.4597693130116586,1,0,referee_arm
+4309587,2023/2024,2024-01-07,Perth Glory,Western Sydney Wanderers FC,x8,0.5070031696054424,2,0,referee_arm
+4309588,2023/2024,2024-01-07,Central Coast Mariners,Sydney FC,x8,0.5546877729544898,3,1,referee_arm
+4309664,2023/2024,2024-01-07,Brisbane Roar FC,Wellington Phoenix,x8,0.46183524192064096,0,0,referee_arm
+4309596,2023/2024,2024-01-12,Melbourne Victory,Perth Glory,x8,0.4295339677542255,2,0,referee_arm
+4309663,2023/2024,2024-01-12,Wellington Phoenix,Central Coast Mariners,x8,0.38558870003226287,5,1,referee_arm
+4309586,2023/2024,2024-01-13,Canberra United FC,Adelaide United,x8,0.3640408207208756,2,0,referee_arm
+4309615,2023/2024,2024-01-13,Brisbane Roar FC,Newcastle Jets,x8,0.48237899695764863,4,1,referee_arm
+4309585,2023/2024,2024-01-14,Western United FC,Sydney FC,x8,0.474231414639142,2,0,referee_arm
+4309616,2023/2024,2024-01-14,Western Sydney Wanderers FC,Melbourne City FC,x8,0.38555601789865324,0,0,referee_arm
+4309563,2023/2024,2024-01-17,Sydney FC,Central Coast Mariners,x8,0.5050006328084489,5,1,referee_arm
+4309618,2023/2024,2024-01-20,Perth Glory,Brisbane Roar FC,x8,0.4474568105255178,3,1,referee_arm
+4309619,2023/2024,2024-01-20,Canberra United FC,Melbourne Victory,x8,0.3176501730063017,3,1,referee_arm
+4309662,2023/2024,2024-01-20,Melbourne City FC,Wellington Phoenix,x8,0.38227899997884485,3,1,referee_arm
+4309617,2023/2024,2024-01-21,Central Coast Mariners,Western Sydney Wanderers FC,x8,0.49165280298174885,2,0,referee_arm
+4309620,2023/2024,2024-01-21,Western United FC,Adelaide United,x8,0.37998909723257857,2,0,referee_arm
+4309621,2023/2024,2024-01-21,Sydney FC,Newcastle Jets,x8,0.5713249635956681,2,0,referee_arm
+4309626,2023/2024,2024-01-25,Melbourne City FC,Western United FC,x8,0.4767219262588832,1,0,referee_arm
+4309622,2023/2024,2024-01-26,Melbourne Victory,Sydney FC,x8,0.5306123108696269,4,1,referee_arm
+4309623,2023/2024,2024-01-27,Western Sydney Wanderers FC,Brisbane Roar FC,x8,0.327295159098246,1,0,referee_arm
+4309624,2023/2024,2024-01-27,Adelaide United,Perth Glory,x8,0.4391929796400298,2,0,referee_arm
+4309625,2023/2024,2024-01-28,Newcastle Jets,Central Coast Mariners,x8,0.506274759496138,2,0,referee_arm
+4309653,2023/2024,2024-01-28,Wellington Phoenix,Canberra United FC,x8,0.3379630741648729,0,0,referee_base_fallback
+4309614,2023/2024,2024-02-03,Sydney FC,Perth Glory,x8,0.40527492693139644,2,0,referee_arm
+4309627,2023/2024,2024-02-03,Adelaide United,Western Sydney Wanderers FC,x8,0.4890610520030909,2,0,referee_arm
+4309628,2023/2024,2024-02-03,Brisbane Roar FC,Melbourne Victory,x8,0.3482328726767725,4,1,referee_arm
+4309632,2023/2024,2024-02-03,Western United FC,Central Coast Mariners,x8,0.455918056124313,1,0,referee_arm
+4309613,2023/2024,2024-02-04,Canberra United FC,Melbourne City FC,x8,0.36519932171860003,1,0,referee_arm
+4309654,2023/2024,2024-02-04,Newcastle Jets,Wellington Phoenix,x8,0.3893502455137767,3,1,referee_arm
+4309598,2023/2024,2024-02-09,Western Sydney Wanderers FC,Newcastle Jets,x8,0.45621679033051554,3,1,referee_arm
+4309599,2023/2024,2024-02-10,Central Coast Mariners,Melbourne Victory,x8,0.43070660475633704,4,1,referee_arm
+4309601,2023/2024,2024-02-10,Perth Glory,Canberra United FC,x8,0.40537849767021084,2,0,referee_arm
+4309602,2023/2024,2024-02-10,Melbourne City FC,Sydney FC,x8,0.4861941444669019,2,0,referee_arm
+4309600,2023/2024,2024-02-11,Western United FC,Brisbane Roar FC,x8,0.3274941407145918,0,0,referee_arm
+4309603,2023/2024,2024-02-16,Melbourne Victory,Western Sydney Wanderers FC,x8,0.4129941317558974,1,0,referee_arm
+4309604,2023/2024,2024-02-17,Newcastle Jets,Brisbane Roar FC,x8,0.3045511046959577,3,1,referee_arm
+4309606,2023/2024,2024-02-18,Melbourne City FC,Adelaide United,x8,0.3381303756494092,0,0,referee_arm
+4309607,2023/2024,2024-02-18,Perth Glory,Central Coast Mariners,x8,0.5756412237494785,3,1,referee_arm
+4309656,2023/2024,2024-02-18,Western United FC,Wellington Phoenix,x8,0.35095926369458197,0,0,referee_arm
+4309608,2023/2024,2024-03-01,Western United FC,Canberra United FC,x8,0.22304467461521305,1,0,referee_arm
+4309610,2023/2024,2024-03-02,Brisbane Roar FC,Melbourne City FC,x8,0.39699123817058013,2,0,referee_arm
+4309611,2023/2024,2024-03-02,Western Sydney Wanderers FC,Sydney FC,x8,0.438327450844626,2,0,referee_arm
+4309597,2023/2024,2024-03-03,Newcastle Jets,Perth Glory,x8,0.3724672866618425,3,1,referee_arm
+4309609,2023/2024,2024-03-03,Central Coast Mariners,Adelaide United,x8,0.44349083748782103,5,1,referee_arm
+4309657,2023/2024,2024-03-03,Melbourne Victory,Wellington Phoenix,x8,0.4347567201425433,2,0,referee_arm
+4309658,2023/2024,2024-03-08,Perth Glory,Wellington Phoenix,x8,0.49585778082842036,3,1,referee_arm
+4309629,2023/2024,2024-03-09,Sydney FC,Western United FC,x8,0.5024180439597277,3,1,referee_arm
+4309642,2023/2024,2024-03-09,Canberra United FC,Western Sydney Wanderers FC,x8,0.3951639859262376,3,1,referee_arm
+4309643,2023/2024,2024-03-09,Brisbane Roar FC,Central Coast Mariners,x8,0.48422665857694114,5,1,referee_arm
+4309644,2023/2024,2024-03-10,Adelaide United,Melbourne Victory,x8,0.44790941103464177,3,1,referee_arm
+4309645,2023/2024,2024-03-10,Melbourne City FC,Newcastle Jets,x8,0.4636973275248979,2,0,referee_arm
+4309575,2023/2024,2024-03-13,Western Sydney Wanderers FC,Canberra United FC,x8,0.27575184093463556,1,0,referee_arm
+4309646,2023/2024,2024-03-16,Adelaide United,Brisbane Roar FC,x8,0.3878502574940026,4,1,referee_arm
+4309647,2023/2024,2024-03-16,Western Sydney Wanderers FC,Perth Glory,x8,0.3267950173417373,0,0,referee_arm
+4309648,2023/2024,2024-03-17,Melbourne Victory,Melbourne City FC,x8,0.38373443051837053,4,1,referee_arm
+4309649,2023/2024,2024-03-17,Central Coast Mariners,Canberra United FC,x8,0.3891633860032506,2,0,referee_arm
+4309650,2023/2024,2024-03-17,Western United FC,Newcastle Jets,x8,0.38954077421149813,5,1,referee_arm
+4309659,2023/2024,2024-03-17,Wellington Phoenix,Sydney FC,x8,0.44416203542297716,2,0,referee_arm
+4309655,2023/2024,2024-03-20,Wellington Phoenix,Adelaide United,x8,0.35748952199215367,1,0,referee_arm
+4309639,2023/2024,2024-03-23,Western Sydney Wanderers FC,Western United FC,x8,0.40513212989415637,3,1,referee_arm
+4309640,2023/2024,2024-03-23,Melbourne City FC,Central Coast Mariners,x8,0.4772038059295358,3,1,referee_arm
+4309641,2023/2024,2024-03-23,Newcastle Jets,Melbourne Victory,x8,0.41030211315476184,5,1,referee_arm
+4309630,2023/2024,2024-03-24,Sydney FC,Adelaide United,x8,0.4151160446006148,2,0,referee_arm
+4309631,2023/2024,2024-03-24,Brisbane Roar FC,Perth Glory,x8,0.38171459667167895,2,0,referee_arm
+4309660,2023/2024,2024-03-24,Canberra United FC,Wellington Phoenix,x8,0.3779197045191356,2,0,referee_arm
+4445657,2023/2024,2024-03-27,Canberra United FC,Sydney FC,x8,0.45870345063668894,0,0,referee_arm
+4309612,2023/2024,2024-03-28,Central Coast Mariners,Western United FC,x8,0.5811601008536453,2,0,referee_arm
+4309634,2023/2024,2024-03-29,Adelaide United,Newcastle Jets,x8,0.6315473320300743,3,1,referee_arm
+4309633,2023/2024,2024-03-30,Brisbane Roar FC,Canberra United FC,x8,0.37983404865316683,2,0,referee_arm
+4309661,2023/2024,2024-03-30,Wellington Phoenix,Western Sydney Wanderers FC,x8,0.34323730613724956,1,0,referee_arm
+4309635,2023/2024,2024-03-31,Sydney FC,Melbourne Victory,x8,0.4863498701883824,3,1,referee_arm
+4309636,2023/2024,2024-03-31,Perth Glory,Melbourne City FC,x8,0.4474787151543078,2,0,referee_arm
+4309539,2023/2024,2023-10-14,Central Coast Mariners,Newcastle Jets,baseline_league,0.4556213017751479,6,1,
+4309571,2023/2024,2023-10-14,Perth Glory,Western United FC,baseline_league,0.4556213017751479,5,1,
+4309583,2023/2024,2023-10-14,Sydney FC,Western Sydney Wanderers FC,baseline_league,0.4556213017751479,3,1,
+4309569,2023/2024,2023-10-15,Melbourne Victory,Brisbane Roar FC,baseline_league,0.4556213017751479,2,0,
+4309570,2023/2024,2023-10-15,Adelaide United,Canberra United FC,baseline_league,0.4556213017751479,2,0,
+4309637,2023/2024,2023-10-15,Wellington Phoenix,Melbourne City FC,baseline_league,0.4556213017751479,0,0,
+4309568,2023/2024,2023-10-20,Adelaide United,Central Coast Mariners,baseline_league,0.4556213017751479,4,1,
+4309566,2023/2024,2023-10-21,Brisbane Roar FC,Sydney FC,baseline_league,0.4556213017751479,2,0,
+4309567,2023/2024,2023-10-21,Melbourne City FC,Canberra United FC,baseline_league,0.4556213017751479,2,0,
+4309564,2023/2024,2023-10-22,Perth Glory,Newcastle Jets,baseline_league,0.4556213017751479,2,0,
+4309565,2023/2024,2023-10-22,Western United FC,Melbourne Victory,baseline_league,0.4556213017751479,0,0,
+4309638,2023/2024,2023-10-22,Western Sydney Wanderers FC,Wellington Phoenix,baseline_league,0.4556213017751479,1,0,
+4309572,2023/2024,2023-11-04,Canberra United FC,Perth Glory,baseline_league,0.4556213017751479,2,0,
+4309582,2023/2024,2023-11-04,Melbourne Victory,Adelaide United,baseline_league,0.4556213017751479,2,0,
+4309651,2023/2024,2023-11-04,Wellington Phoenix,Brisbane Roar FC,baseline_league,0.4556213017751479,1,0,
+4309573,2023/2024,2023-11-05,Newcastle Jets,Western Sydney Wanderers FC,baseline_league,0.4556213017751479,2,0,
+4309581,2023/2024,2023-11-05,Western United FC,Melbourne City FC,baseline_league,0.4556213017751479,3,1,
+4309578,2023/2024,2023-11-11,Perth Glory,Adelaide United,baseline_league,0.4556213017751479,2,0,
+4309577,2023/2024,2023-11-12,Central Coast Mariners,Brisbane Roar FC,baseline_league,0.4556213017751479,3,1,
+4309579,2023/2024,2023-11-12,Melbourne Victory,Newcastle Jets,baseline_league,0.4556213017751479,3,1,
+4309580,2023/2024,2023-11-12,Melbourne City FC,Western Sydney Wanderers FC,baseline_league,0.4556213017751479,0,0,
+4309665,2023/2024,2023-11-12,Wellington Phoenix,Western United FC,baseline_league,0.4556213017751479,2,0,
+4309574,2023/2024,2023-11-18,Perth Glory,Melbourne Victory,baseline_league,0.4556213017751479,3,1,
+4309666,2023/2024,2023-11-18,Central Coast Mariners,Wellington Phoenix,baseline_league,0.4556213017751479,3,1,
+4309549,2023/2024,2023-11-19,Newcastle Jets,Melbourne City FC,baseline_league,0.4556213017751479,4,1,
+4309561,2023/2024,2023-11-19,Brisbane Roar FC,Western United FC,baseline_league,0.4556213017751479,2,0,
+4309562,2023/2024,2023-11-19,Adelaide United,Sydney FC,baseline_league,0.4556213017751479,4,1,
+4309547,2023/2024,2023-11-25,Western United FC,Western Sydney Wanderers FC,baseline_league,0.4556213017751479,3,1,
+4309667,2023/2024,2023-11-25,Wellington Phoenix,Perth Glory,baseline_league,0.4556213017751479,2,0,
+4309544,2023/2024,2023-11-26,Canberra United FC,Newcastle Jets,baseline_league,0.4556213017751479,3,1,
+4309545,2023/2024,2023-11-26,Sydney FC,Melbourne City FC,baseline_league,0.4556213017751479,3,1,
+4309546,2023/2024,2023-11-26,Melbourne Victory,Central Coast Mariners,baseline_league,0.4556213017751479,2,0,
+4309548,2023/2024,2023-11-26,Brisbane Roar FC,Adelaide United,baseline_league,0.4556213017751479,3,1,
+4309543,2023/2024,2023-12-08,Western Sydney Wanderers FC,Central Coast Mariners,baseline_league,0.4556213017751479,2,0,
+4309541,2023/2024,2023-12-09,Adelaide United,Western United FC,baseline_league,0.4556213017751479,4,1,
+4309542,2023/2024,2023-12-09,Melbourne City FC,Perth Glory,baseline_league,0.4556213017751479,4,1,
+4309550,2023/2024,2023-12-10,Canberra United FC,Brisbane Roar FC,baseline_league,0.4556213017751479,2,0,
+4309551,2023/2024,2023-12-10,Newcastle Jets,Sydney FC,baseline_league,0.4556213017751479,3,1,
+4309668,2023/2024,2023-12-10,Wellington Phoenix,Melbourne Victory,baseline_league,0.4556213017751479,2,0,
+4309560,2023/2024,2023-12-15,Central Coast Mariners,Melbourne City FC,baseline_league,0.4556213017751479,1,0,
+4309559,2023/2024,2023-12-16,Melbourne Victory,Canberra United FC,baseline_league,0.4556213017751479,2,0,
+4309652,2023/2024,2023-12-16,Adelaide United,Wellington Phoenix,baseline_league,0.4556213017751479,3,1,
+4309556,2023/2024,2023-12-17,Perth Glory,Sydney FC,baseline_league,0.4556213017751479,5,1,
+4309557,2023/2024,2023-12-17,Brisbane Roar FC,Western Sydney Wanderers FC,baseline_league,0.4556213017751479,2,0,
+4309558,2023/2024,2023-12-17,Newcastle Jets,Western United FC,baseline_league,0.4556213017751479,0,0,
+4309554,2023/2024,2023-12-22,Western United FC,Perth Glory,baseline_league,0.4556213017751479,1,0,
+4309555,2023/2024,2023-12-22,Sydney FC,Brisbane Roar FC,baseline_league,0.4556213017751479,1,0,
+4309540,2023/2024,2023-12-23,Western Sydney Wanderers FC,Adelaide United,baseline_league,0.4556213017751479,3,1,
+4309552,2023/2024,2023-12-23,Melbourne City FC,Melbourne Victory,baseline_league,0.4556213017751479,4,1,
+4309553,2023/2024,2023-12-23,Canberra United FC,Central Coast Mariners,baseline_league,0.4556213017751479,2,0,
+4309669,2023/2024,2023-12-23,Wellington Phoenix,Newcastle Jets,baseline_league,0.4556213017751479,3,1,
+4309584,2023/2024,2023-12-28,Melbourne City FC,Brisbane Roar FC,baseline_league,0.4556213017751479,1,0,
+4309670,2023/2024,2023-12-29,Sydney FC,Wellington Phoenix,baseline_league,0.4556213017751479,5,1,
+4309594,2023/2024,2023-12-30,Western Sydney Wanderers FC,Melbourne Victory,baseline_league,0.4556213017751479,1,0,
+4309595,2023/2024,2023-12-30,Canberra United FC,Western United FC,baseline_league,0.4556213017751479,4,1,
+4309592,2023/2024,2023-12-31,Newcastle Jets,Adelaide United,baseline_league,0.4556213017751479,1,0,
+4309593,2023/2024,2023-12-31,Central Coast Mariners,Perth Glory,baseline_league,0.4556213017751479,3,1,
+4309576,2023/2024,2024-01-03,Sydney FC,Canberra United FC,baseline_league,0.4556213017751479,2,0,
+4309589,2023/2024,2024-01-06,Melbourne Victory,Western United FC,baseline_league,0.4556213017751479,3,1,
+4309590,2023/2024,2024-01-06,Newcastle Jets,Canberra United FC,baseline_league,0.4556213017751479,3,1,
+4309591,2023/2024,2024-01-06,Adelaide United,Melbourne City FC,baseline_league,0.4556213017751479,1,0,
+4309587,2023/2024,2024-01-07,Perth Glory,Western Sydney Wanderers FC,baseline_league,0.4556213017751479,2,0,
+4309588,2023/2024,2024-01-07,Central Coast Mariners,Sydney FC,baseline_league,0.4556213017751479,3,1,
+4309664,2023/2024,2024-01-07,Brisbane Roar FC,Wellington Phoenix,baseline_league,0.4556213017751479,0,0,
+4309596,2023/2024,2024-01-12,Melbourne Victory,Perth Glory,baseline_league,0.4556213017751479,2,0,
+4309663,2023/2024,2024-01-12,Wellington Phoenix,Central Coast Mariners,baseline_league,0.4556213017751479,5,1,
+4309586,2023/2024,2024-01-13,Canberra United FC,Adelaide United,baseline_league,0.4556213017751479,2,0,
+4309615,2023/2024,2024-01-13,Brisbane Roar FC,Newcastle Jets,baseline_league,0.4556213017751479,4,1,
+4309585,2023/2024,2024-01-14,Western United FC,Sydney FC,baseline_league,0.4556213017751479,2,0,
+4309616,2023/2024,2024-01-14,Western Sydney Wanderers FC,Melbourne City FC,baseline_league,0.4556213017751479,0,0,
+4309563,2023/2024,2024-01-17,Sydney FC,Central Coast Mariners,baseline_league,0.4556213017751479,5,1,
+4309618,2023/2024,2024-01-20,Perth Glory,Brisbane Roar FC,baseline_league,0.4556213017751479,3,1,
+4309619,2023/2024,2024-01-20,Canberra United FC,Melbourne Victory,baseline_league,0.4556213017751479,3,1,
+4309662,2023/2024,2024-01-20,Melbourne City FC,Wellington Phoenix,baseline_league,0.4556213017751479,3,1,
+4309617,2023/2024,2024-01-21,Central Coast Mariners,Western Sydney Wanderers FC,baseline_league,0.4556213017751479,2,0,
+4309620,2023/2024,2024-01-21,Western United FC,Adelaide United,baseline_league,0.4556213017751479,2,0,
+4309621,2023/2024,2024-01-21,Sydney FC,Newcastle Jets,baseline_league,0.4556213017751479,2,0,
+4309626,2023/2024,2024-01-25,Melbourne City FC,Western United FC,baseline_league,0.4556213017751479,1,0,
+4309622,2023/2024,2024-01-26,Melbourne Victory,Sydney FC,baseline_league,0.4556213017751479,4,1,
+4309623,2023/2024,2024-01-27,Western Sydney Wanderers FC,Brisbane Roar FC,baseline_league,0.4556213017751479,1,0,
+4309624,2023/2024,2024-01-27,Adelaide United,Perth Glory,baseline_league,0.4556213017751479,2,0,
+4309625,2023/2024,2024-01-28,Newcastle Jets,Central Coast Mariners,baseline_league,0.4556213017751479,2,0,
+4309653,2023/2024,2024-01-28,Wellington Phoenix,Canberra United FC,baseline_league,0.4556213017751479,0,0,
+4309614,2023/2024,2024-02-03,Sydney FC,Perth Glory,baseline_league,0.4556213017751479,2,0,
+4309627,2023/2024,2024-02-03,Adelaide United,Western Sydney Wanderers FC,baseline_league,0.4556213017751479,2,0,
+4309628,2023/2024,2024-02-03,Brisbane Roar FC,Melbourne Victory,baseline_league,0.4556213017751479,4,1,
+4309632,2023/2024,2024-02-03,Western United FC,Central Coast Mariners,baseline_league,0.4556213017751479,1,0,
+4309613,2023/2024,2024-02-04,Canberra United FC,Melbourne City FC,baseline_league,0.4556213017751479,1,0,
+4309654,2023/2024,2024-02-04,Newcastle Jets,Wellington Phoenix,baseline_league,0.4556213017751479,3,1,
+4309598,2023/2024,2024-02-09,Western Sydney Wanderers FC,Newcastle Jets,baseline_league,0.4556213017751479,3,1,
+4309599,2023/2024,2024-02-10,Central Coast Mariners,Melbourne Victory,baseline_league,0.4556213017751479,4,1,
+4309601,2023/2024,2024-02-10,Perth Glory,Canberra United FC,baseline_league,0.4556213017751479,2,0,
+4309602,2023/2024,2024-02-10,Melbourne City FC,Sydney FC,baseline_league,0.4556213017751479,2,0,
+4309600,2023/2024,2024-02-11,Western United FC,Brisbane Roar FC,baseline_league,0.4556213017751479,0,0,
+4309603,2023/2024,2024-02-16,Melbourne Victory,Western Sydney Wanderers FC,baseline_league,0.4556213017751479,1,0,
+4309604,2023/2024,2024-02-17,Newcastle Jets,Brisbane Roar FC,baseline_league,0.4556213017751479,3,1,
+4309606,2023/2024,2024-02-18,Melbourne City FC,Adelaide United,baseline_league,0.4556213017751479,0,0,
+4309607,2023/2024,2024-02-18,Perth Glory,Central Coast Mariners,baseline_league,0.4556213017751479,3,1,
+4309656,2023/2024,2024-02-18,Western United FC,Wellington Phoenix,baseline_league,0.4556213017751479,0,0,
+4309608,2023/2024,2024-03-01,Western United FC,Canberra United FC,baseline_league,0.4556213017751479,1,0,
+4309610,2023/2024,2024-03-02,Brisbane Roar FC,Melbourne City FC,baseline_league,0.4556213017751479,2,0,
+4309611,2023/2024,2024-03-02,Western Sydney Wanderers FC,Sydney FC,baseline_league,0.4556213017751479,2,0,
+4309597,2023/2024,2024-03-03,Newcastle Jets,Perth Glory,baseline_league,0.4556213017751479,3,1,
+4309609,2023/2024,2024-03-03,Central Coast Mariners,Adelaide United,baseline_league,0.4556213017751479,5,1,
+4309657,2023/2024,2024-03-03,Melbourne Victory,Wellington Phoenix,baseline_league,0.4556213017751479,2,0,
+4309658,2023/2024,2024-03-08,Perth Glory,Wellington Phoenix,baseline_league,0.4556213017751479,3,1,
+4309629,2023/2024,2024-03-09,Sydney FC,Western United FC,baseline_league,0.4556213017751479,3,1,
+4309642,2023/2024,2024-03-09,Canberra United FC,Western Sydney Wanderers FC,baseline_league,0.4556213017751479,3,1,
+4309643,2023/2024,2024-03-09,Brisbane Roar FC,Central Coast Mariners,baseline_league,0.4556213017751479,5,1,
+4309644,2023/2024,2024-03-10,Adelaide United,Melbourne Victory,baseline_league,0.4556213017751479,3,1,
+4309645,2023/2024,2024-03-10,Melbourne City FC,Newcastle Jets,baseline_league,0.4556213017751479,2,0,
+4309575,2023/2024,2024-03-13,Western Sydney Wanderers FC,Canberra United FC,baseline_league,0.4556213017751479,1,0,
+4309646,2023/2024,2024-03-16,Adelaide United,Brisbane Roar FC,baseline_league,0.4556213017751479,4,1,
+4309647,2023/2024,2024-03-16,Western Sydney Wanderers FC,Perth Glory,baseline_league,0.4556213017751479,0,0,
+4309648,2023/2024,2024-03-17,Melbourne Victory,Melbourne City FC,baseline_league,0.4556213017751479,4,1,
+4309649,2023/2024,2024-03-17,Central Coast Mariners,Canberra United FC,baseline_league,0.4556213017751479,2,0,
+4309650,2023/2024,2024-03-17,Western United FC,Newcastle Jets,baseline_league,0.4556213017751479,5,1,
+4309659,2023/2024,2024-03-17,Wellington Phoenix,Sydney FC,baseline_league,0.4556213017751479,2,0,
+4309655,2023/2024,2024-03-20,Wellington Phoenix,Adelaide United,baseline_league,0.4556213017751479,1,0,
+4309639,2023/2024,2024-03-23,Western Sydney Wanderers FC,Western United FC,baseline_league,0.4556213017751479,3,1,
+4309640,2023/2024,2024-03-23,Melbourne City FC,Central Coast Mariners,baseline_league,0.4556213017751479,3,1,
+4309641,2023/2024,2024-03-23,Newcastle Jets,Melbourne Victory,baseline_league,0.4556213017751479,5,1,
+4309630,2023/2024,2024-03-24,Sydney FC,Adelaide United,baseline_league,0.4556213017751479,2,0,
+4309631,2023/2024,2024-03-24,Brisbane Roar FC,Perth Glory,baseline_league,0.4556213017751479,2,0,
+4309660,2023/2024,2024-03-24,Canberra United FC,Wellington Phoenix,baseline_league,0.4556213017751479,2,0,
+4445657,2023/2024,2024-03-27,Canberra United FC,Sydney FC,baseline_league,0.4556213017751479,0,0,
+4309612,2023/2024,2024-03-28,Central Coast Mariners,Western United FC,baseline_league,0.4556213017751479,2,0,
+4309634,2023/2024,2024-03-29,Adelaide United,Newcastle Jets,baseline_league,0.4556213017751479,3,1,
+4309633,2023/2024,2024-03-30,Brisbane Roar FC,Canberra United FC,baseline_league,0.4556213017751479,2,0,
+4309661,2023/2024,2024-03-30,Wellington Phoenix,Western Sydney Wanderers FC,baseline_league,0.4556213017751479,1,0,
+4309635,2023/2024,2024-03-31,Sydney FC,Melbourne Victory,baseline_league,0.4556213017751479,3,1,
+4309636,2023/2024,2024-03-31,Perth Glory,Melbourne City FC,baseline_league,0.4556213017751479,2,0,
+4309539,2023/2024,2023-10-14,Central Coast Mariners,Newcastle Jets,baseline_naive,0.44930524548631845,6,1,
+4309571,2023/2024,2023-10-14,Perth Glory,Western United FC,baseline_naive,0.5353768999248029,5,1,
+4309583,2023/2024,2023-10-14,Sydney FC,Western Sydney Wanderers FC,baseline_naive,0.5561136972364482,3,1,
+4309569,2023/2024,2023-10-15,Melbourne Victory,Brisbane Roar FC,baseline_naive,0.5458294939547573,2,0,
+4309570,2023/2024,2023-10-15,Adelaide United,Canberra United FC,baseline_naive,0.3607947915769786,2,0,
+4309637,2023/2024,2023-10-15,Wellington Phoenix,Melbourne City FC,baseline_naive,0.3607947915769786,0,0,
+4309568,2023/2024,2023-10-20,Adelaide United,Central Coast Mariners,baseline_naive,0.7394320309008963,4,1,
+4309566,2023/2024,2023-10-21,Brisbane Roar FC,Sydney FC,baseline_naive,0.491927426441661,2,0,
+4309567,2023/2024,2023-10-21,Melbourne City FC,Canberra United FC,baseline_naive,0.33562490498669484,2,0,
+4309564,2023/2024,2023-10-22,Perth Glory,Newcastle Jets,baseline_naive,0.5955402185730543,2,0,
+4309565,2023/2024,2023-10-22,Western United FC,Melbourne Victory,baseline_naive,0.5561136972364482,0,0,
+4309638,2023/2024,2023-10-22,Western Sydney Wanderers FC,Wellington Phoenix,baseline_naive,0.5030301494382647,1,0,
+4309572,2023/2024,2023-11-04,Canberra United FC,Perth Glory,baseline_naive,0.46926255434110486,2,0,
+4309582,2023/2024,2023-11-04,Melbourne Victory,Adelaide United,baseline_naive,0.491927426441661,2,0,
+4309651,2023/2024,2023-11-04,Wellington Phoenix,Brisbane Roar FC,baseline_naive,0.3856648942140021,1,0,
+4309573,2023/2024,2023-11-05,Newcastle Jets,Western Sydney Wanderers FC,baseline_naive,0.5662279383483763,2,0,
+4309581,2023/2024,2023-11-05,Western United FC,Melbourne City FC,baseline_naive,0.44601544744469646,3,1,
+4309578,2023/2024,2023-11-11,Perth Glory,Adelaide United,baseline_naive,0.491927426441661,2,0,
+4309577,2023/2024,2023-11-12,Central Coast Mariners,Brisbane Roar FC,baseline_naive,0.6578966506440148,3,1,
+4309579,2023/2024,2023-11-12,Melbourne Victory,Newcastle Jets,baseline_naive,0.5030301494382647,3,1,
+4309580,2023/2024,2023-11-12,Melbourne City FC,Western Sydney Wanderers FC,baseline_naive,0.4577092348705233,0,0,
+4309665,2023/2024,2023-11-12,Wellington Phoenix,Western United FC,baseline_naive,0.4101524687556328,2,0,
+4309574,2023/2024,2023-11-18,Perth Glory,Melbourne Victory,baseline_naive,0.4577092348705233,3,1,
+4309666,2023/2024,2023-11-18,Central Coast Mariners,Wellington Phoenix,baseline_naive,0.5695613611964002,3,1,
+4309549,2023/2024,2023-11-19,Newcastle Jets,Melbourne City FC,baseline_naive,0.4341870024304031,4,1,
+4309561,2023/2024,2023-11-19,Brisbane Roar FC,Western United FC,baseline_naive,0.4577092348705233,2,0,
+4309562,2023/2024,2023-11-19,Adelaide United,Sydney FC,baseline_naive,0.4341870024304031,4,1,
+4309547,2023/2024,2023-11-25,Western United FC,Western Sydney Wanderers FC,baseline_naive,0.4341870024304031,3,1,
+4309667,2023/2024,2023-11-25,Wellington Phoenix,Perth Glory,baseline_naive,0.3979611798170798,2,0,
+4309544,2023/2024,2023-11-26,Canberra United FC,Newcastle Jets,baseline_naive,0.4577092348705233,3,1,
+4309545,2023/2024,2023-11-26,Sydney FC,Melbourne City FC,baseline_naive,0.44601544744469646,3,1,
+4309546,2023/2024,2023-11-26,Melbourne Victory,Central Coast Mariners,baseline_naive,0.6049654726808729,2,0,
+4309548,2023/2024,2023-11-26,Brisbane Roar FC,Adelaide United,baseline_naive,0.4101524687556306,3,1,
+4309543,2023/2024,2023-12-08,Western Sydney Wanderers FC,Central Coast Mariners,baseline_naive,0.5458294939547573,2,0,
+4309541,2023/2024,2023-12-09,Adelaide United,Western United FC,baseline_naive,0.48067017705690074,4,1,
+4309542,2023/2024,2023-12-09,Melbourne City FC,Perth Glory,baseline_naive,0.44601544744469646,4,1,
+4309550,2023/2024,2023-12-10,Canberra United FC,Brisbane Roar FC,baseline_naive,0.3856648942140021,2,0,
+4309551,2023/2024,2023-12-10,Newcastle Jets,Sydney FC,baseline_naive,0.5353768999248009,3,1,
+4309668,2023/2024,2023-12-10,Wellington Phoenix,Melbourne Victory,baseline_naive,0.37327278541428577,2,0,
+4309560,2023/2024,2023-12-15,Central Coast Mariners,Melbourne City FC,baseline_naive,0.5175871520253003,1,0,
+4309559,2023/2024,2023-12-16,Melbourne Victory,Canberra United FC,baseline_naive,0.37327278541428577,2,0,
+4309652,2023/2024,2023-12-16,Adelaide United,Wellington Phoenix,baseline_naive,0.3979611798170799,3,1,
+4309556,2023/2024,2023-12-17,Perth Glory,Sydney FC,baseline_naive,0.5139746885168425,5,1,
+4309557,2023/2024,2023-12-17,Brisbane Roar FC,Western Sydney Wanderers FC,baseline_naive,0.37327278541428577,2,0,
+4309558,2023/2024,2023-12-17,Newcastle Jets,Western United FC,baseline_naive,0.5353768999248009,0,0,
+4309554,2023/2024,2023-12-22,Western United FC,Perth Glory,baseline_naive,0.46926255434110486,1,0,
+4309555,2023/2024,2023-12-22,Sydney FC,Brisbane Roar FC,baseline_naive,0.48067017705690296,1,0,
+4309540,2023/2024,2023-12-23,Western Sydney Wanderers FC,Adelaide United,baseline_naive,0.42223032165689756,3,1,
+4309552,2023/2024,2023-12-23,Melbourne City FC,Melbourne Victory,baseline_naive,0.36079479157697747,4,1,
+4309553,2023/2024,2023-12-23,Canberra United FC,Central Coast Mariners,baseline_naive,0.46926255434110486,2,0,
+4309669,2023/2024,2023-12-23,Wellington Phoenix,Newcastle Jets,baseline_naive,0.42223032165689756,3,1,
+4309584,2023/2024,2023-12-28,Melbourne City FC,Brisbane Roar FC,baseline_naive,0.33562490498669506,1,0,
+4309670,2023/2024,2023-12-29,Sydney FC,Wellington Phoenix,baseline_naive,0.4101524687556306,5,1,
+4309594,2023/2024,2023-12-30,Western Sydney Wanderers FC,Melbourne Victory,baseline_naive,0.33562490498669506,1,0,
+4309595,2023/2024,2023-12-30,Canberra United FC,Western United FC,baseline_naive,0.3482416456919827,4,1,
+4309592,2023/2024,2023-12-31,Newcastle Jets,Adelaide United,baseline_naive,0.5561136972364482,1,0,
+4309593,2023/2024,2023-12-31,Central Coast Mariners,Perth Glory,baseline_naive,0.5220773492543361,3,1,
+4309576,2023/2024,2024-01-03,Sydney FC,Canberra United FC,baseline_naive,0.48067017705690296,2,0,
+4309589,2023/2024,2024-01-06,Melbourne Victory,Western United FC,baseline_naive,0.3856648942140021,3,1,
+4309590,2023/2024,2024-01-06,Newcastle Jets,Canberra United FC,baseline_naive,0.42223032165689756,3,1,
+4309591,2023/2024,2024-01-06,Adelaide United,Melbourne City FC,baseline_naive,0.44601544744469646,1,0,
+4309587,2023/2024,2024-01-07,Perth Glory,Western Sydney Wanderers FC,baseline_naive,0.42223032165689756,2,0,
+4309588,2023/2024,2024-01-07,Central Coast Mariners,Sydney FC,baseline_naive,0.56511256797524,3,1,
+4309664,2023/2024,2024-01-07,Brisbane Roar FC,Wellington Phoenix,baseline_naive,0.33562490498669506,0,0,
+4309596,2023/2024,2024-01-12,Melbourne Victory,Perth Glory,baseline_naive,0.42223032165689856,2,0,
+4309663,2023/2024,2024-01-12,Wellington Phoenix,Central Coast Mariners,baseline_naive,0.4577092348705233,5,1,
+4309586,2023/2024,2024-01-13,Canberra United FC,Adelaide United,baseline_naive,0.4577092348705233,2,0,
+4309615,2023/2024,2024-01-13,Brisbane Roar FC,Newcastle Jets,baseline_naive,0.33562490498669506,4,1,
+4309585,2023/2024,2024-01-14,Western United FC,Sydney FC,baseline_naive,0.48067017705690074,2,0,
+4309616,2023/2024,2024-01-14,Western Sydney Wanderers FC,Melbourne City FC,baseline_naive,0.3482416456919827,0,0,
+4309563,2023/2024,2024-01-17,Sydney FC,Central Coast Mariners,baseline_naive,0.5353768999248009,5,1,
+4309618,2023/2024,2024-01-20,Perth Glory,Brisbane Roar FC,baseline_naive,0.3856648942140021,3,1,
+4309619,2023/2024,2024-01-20,Canberra United FC,Melbourne Victory,baseline_naive,0.42223032165689756,3,1,
+4309662,2023/2024,2024-01-20,Melbourne City FC,Wellington Phoenix,baseline_naive,0.4101524687556328,3,1,
+4309617,2023/2024,2024-01-21,Central Coast Mariners,Western Sydney Wanderers FC,baseline_naive,0.3856648942140021,2,0,
+4309620,2023/2024,2024-01-21,Western United FC,Adelaide United,baseline_naive,0.4341870024304031,2,0,
+4309621,2023/2024,2024-01-21,Sydney FC,Newcastle Jets,baseline_naive,0.5458294939547573,2,0,
+4309626,2023/2024,2024-01-25,Melbourne City FC,Western United FC,baseline_naive,0.37327278541428577,1,0,
+4309622,2023/2024,2024-01-26,Melbourne Victory,Sydney FC,baseline_naive,0.5139746885168425,4,1,
+4309623,2023/2024,2024-01-27,Western Sydney Wanderers FC,Brisbane Roar FC,baseline_naive,0.29752163490677375,1,0,
+4309624,2023/2024,2024-01-27,Adelaide United,Perth Glory,baseline_naive,0.46926255434110287,2,0,
+4309625,2023/2024,2024-01-28,Newcastle Jets,Central Coast Mariners,baseline_naive,0.491927426441661,2,0,
+4309653,2023/2024,2024-01-28,Wellington Phoenix,Canberra United FC,baseline_naive,0.48067017705690074,0,0,
+4309614,2023/2024,2024-02-03,Sydney FC,Perth Glory,baseline_naive,0.5458294939547573,2,0,
+4309627,2023/2024,2024-02-03,Adelaide United,Western Sydney Wanderers FC,baseline_naive,0.33562490498669506,2,0,
+4309628,2023/2024,2024-02-03,Brisbane Roar FC,Melbourne Victory,baseline_naive,0.3856648942140021,4,1,
+4309632,2023/2024,2024-02-03,Western United FC,Central Coast Mariners,baseline_naive,0.4341870024304031,1,0,
+4309613,2023/2024,2024-02-04,Canberra United FC,Melbourne City FC,baseline_naive,0.3856648942140021,1,0,
+4309654,2023/2024,2024-02-04,Newcastle Jets,Wellington Phoenix,baseline_naive,0.4577092348705232,3,1,
+4309598,2023/2024,2024-02-09,Western Sydney Wanderers FC,Newcastle Jets,baseline_naive,0.34824164569198035,3,1,
+4309599,2023/2024,2024-02-10,Central Coast Mariners,Melbourne Victory,baseline_naive,0.48067017705690074,4,1,
+4309601,2023/2024,2024-02-10,Perth Glory,Canberra United FC,baseline_naive,0.4101524687556328,2,0,
+4309602,2023/2024,2024-02-10,Melbourne City FC,Sydney FC,baseline_naive,0.44601544744469646,2,0,
+4309600,2023/2024,2024-02-11,Western United FC,Brisbane Roar FC,baseline_naive,0.34824164569198035,0,0,
+4309603,2023/2024,2024-02-16,Melbourne Victory,Western Sydney Wanderers FC,baseline_naive,0.4101524687556306,1,0,
+4309604,2023/2024,2024-02-17,Newcastle Jets,Brisbane Roar FC,baseline_naive,0.3482416456919827,3,1,
+4309606,2023/2024,2024-02-18,Melbourne City FC,Adelaide United,baseline_naive,0.33562490498669506,0,0,
+4309607,2023/2024,2024-02-18,Perth Glory,Central Coast Mariners,baseline_naive,0.491927426441661,3,1,
+4309656,2023/2024,2024-02-18,Western United FC,Wellington Phoenix,baseline_naive,0.37327278541428577,0,0,
+4309608,2023/2024,2024-03-01,Western United FC,Canberra United FC,baseline_naive,0.2593468233295543,1,0,
+4309610,2023/2024,2024-03-02,Brisbane Roar FC,Melbourne City FC,baseline_naive,0.23408121834560902,2,0,
+4309611,2023/2024,2024-03-02,Western Sydney Wanderers FC,Sydney FC,baseline_naive,0.3856648942140021,2,0,
+4309597,2023/2024,2024-03-03,Newcastle Jets,Perth Glory,baseline_naive,0.4341870024304031,3,1,
+4309609,2023/2024,2024-03-03,Central Coast Mariners,Adelaide United,baseline_naive,0.44601544744469646,5,1,
+4309657,2023/2024,2024-03-03,Melbourne Victory,Wellington Phoenix,baseline_naive,0.46926255434110287,2,0,
+4309658,2023/2024,2024-03-08,Perth Glory,Wellington Phoenix,baseline_naive,0.4101524687556328,3,1,
+4309629,2023/2024,2024-03-09,Sydney FC,Western United FC,baseline_naive,0.37327278541428577,3,1,
+4309642,2023/2024,2024-03-09,Canberra United FC,Western Sydney Wanderers FC,baseline_naive,0.2847835316375644,3,1,
+4309643,2023/2024,2024-03-09,Brisbane Roar FC,Central Coast Mariners,baseline_naive,0.46926255434110486,5,1,
+4309644,2023/2024,2024-03-10,Adelaide United,Melbourne Victory,baseline_naive,0.4341870024304031,3,1,
+4309645,2023/2024,2024-03-10,Melbourne City FC,Newcastle Jets,baseline_naive,0.3482416456919827,2,0,
+4309575,2023/2024,2024-03-13,Western Sydney Wanderers FC,Canberra United FC,baseline_naive,0.29752163490677364,1,0,
+4309646,2023/2024,2024-03-16,Adelaide United,Brisbane Roar FC,baseline_naive,0.37327278541428577,4,1,
+4309647,2023/2024,2024-03-16,Western Sydney Wanderers FC,Perth Glory,baseline_naive,0.34824164569198035,0,0,
+4309648,2023/2024,2024-03-17,Melbourne Victory,Melbourne City FC,baseline_naive,0.32295697928106937,4,1,
+4309649,2023/2024,2024-03-17,Central Coast Mariners,Canberra United FC,baseline_naive,0.48067017705690074,2,0,
+4309650,2023/2024,2024-03-17,Western United FC,Newcastle Jets,baseline_naive,0.3607947915769786,5,1,
+4309659,2023/2024,2024-03-17,Wellington Phoenix,Sydney FC,baseline_naive,0.4577092348705233,2,0,
+4309655,2023/2024,2024-03-20,Wellington Phoenix,Adelaide United,baseline_naive,0.3856648942140021,1,0,
+4309639,2023/2024,2024-03-23,Western Sydney Wanderers FC,Western United FC,baseline_naive,0.23408121834560902,3,1,
+4309640,2023/2024,2024-03-23,Melbourne City FC,Central Coast Mariners,baseline_naive,0.44601544744469646,3,1,
+4309641,2023/2024,2024-03-23,Newcastle Jets,Melbourne Victory,baseline_naive,0.5561136972364482,5,1,
+4309630,2023/2024,2024-03-24,Sydney FC,Adelaide United,baseline_naive,0.4341870024304031,2,0,
+4309631,2023/2024,2024-03-24,Brisbane Roar FC,Perth Glory,baseline_naive,0.42223032165689756,2,0,
+4309660,2023/2024,2024-03-24,Canberra United FC,Wellington Phoenix,baseline_naive,0.2847835316375644,2,0,
+4445657,2023/2024,2024-03-27,Canberra United FC,Sydney FC,baseline_naive,0.3607947915769786,0,0,
+4309612,2023/2024,2024-03-28,Central Coast Mariners,Western United FC,baseline_naive,0.44601544744469646,2,0,
+4309634,2023/2024,2024-03-29,Adelaide United,Newcastle Jets,baseline_naive,0.5030301494382647,3,1,
+4309633,2023/2024,2024-03-30,Brisbane Roar FC,Canberra United FC,baseline_naive,0.36079479157697747,2,0,
+4309661,2023/2024,2024-03-30,Wellington Phoenix,Western Sydney Wanderers FC,baseline_naive,0.3102511579259031,1,0,
+4309635,2023/2024,2024-03-31,Sydney FC,Melbourne Victory,baseline_naive,0.5139746885168425,3,1,
+4309636,2023/2024,2024-03-31,Perth Glory,Melbourne City FC,baseline_naive,0.32295697928106937,2,0,
+4634305,2024/2025,2024-11-01,Western United FC,Wellington Phoenix,gate_zero,0.34943985676900036,1,0,gate_zero_only
+4634199,2024/2025,2024-11-02,Central Coast Mariners,Sydney FC,gate_zero,0.5170026108677169,0,0,gate_zero_only
+4634210,2024/2025,2024-11-02,Adelaide United,Melbourne Victory,gate_zero,0.5217307323989318,1,0,gate_zero_only
+4634211,2024/2025,2024-11-02,Canberra United FC,Brisbane Roar FC,gate_zero,0.3517134837635254,3,1,gate_zero_only
+4634208,2024/2025,2024-11-03,Newcastle Jets,Western Sydney Wanderers FC,gate_zero,0.43490568203758295,2,0,gate_zero_only
+4634209,2024/2025,2024-11-03,Melbourne City FC,Perth Glory,gate_zero,0.352222650975895,0,0,gate_zero_only
+4634207,2024/2025,2024-11-08,Western United FC,Central Coast Mariners,gate_zero,0.4014295466638258,1,0,gate_zero_only
+4634205,2024/2025,2024-11-09,Brisbane Roar FC,Sydney FC,gate_zero,0.43555680604749814,2,0,gate_zero_only
+4634206,2024/2025,2024-11-09,Melbourne Victory,Melbourne City FC,gate_zero,0.428844821211103,6,1,gate_zero_only
+4634203,2024/2025,2024-11-10,Perth Glory,Newcastle Jets,gate_zero,0.6029431158089767,4,1,gate_zero_only
+4634204,2024/2025,2024-11-10,Western Sydney Wanderers FC,Adelaide United,gate_zero,0.3385265705267906,0,0,gate_zero_only
+4634304,2024/2025,2024-11-10,Wellington Phoenix,Canberra United FC,gate_zero,0.2776385001280064,2,0,gate_zero_only
+4634202,2024/2025,2024-11-15,Brisbane Roar FC,Perth Glory,gate_zero,0.35561974669517327,8,1,gate_zero_only
+4634186,2024/2025,2024-11-16,Canberra United FC,Adelaide United,gate_zero,0.3335747147709278,1,0,gate_zero_only
+4634200,2024/2025,2024-11-16,Melbourne City FC,Central Coast Mariners,gate_zero,0.38776402980722424,2,0,gate_zero_only
+4634201,2024/2025,2024-11-16,Sydney FC,Western Sydney Wanderers FC,gate_zero,0.4337441305738281,1,0,gate_zero_only
+4634198,2024/2025,2024-11-17,Melbourne Victory,Western United FC,gate_zero,0.5849705270165115,5,1,gate_zero_only
+4634290,2024/2025,2024-11-17,Newcastle Jets,Wellington Phoenix,gate_zero,0.41121871712388147,4,1,gate_zero_only
+4634197,2024/2025,2024-11-22,Western Sydney Wanderers FC,Brisbane Roar FC,gate_zero,0.3109832234856831,1,0,gate_zero_only
+4634302,2024/2025,2024-11-22,Adelaide United,Wellington Phoenix,gate_zero,0.4579205978222567,2,0,gate_zero_only
+4634195,2024/2025,2024-11-23,Newcastle Jets,Western United FC,gate_zero,0.5591999019990379,0,0,gate_zero_only
+4634196,2024/2025,2024-11-23,Central Coast Mariners,Melbourne Victory,gate_zero,0.45332169561687086,4,1,gate_zero_only
+4634193,2024/2025,2024-11-24,Sydney FC,Melbourne City FC,gate_zero,0.44764792415726284,1,0,gate_zero_only
+4634194,2024/2025,2024-11-24,Canberra United FC,Perth Glory,gate_zero,0.39312590928724855,0,0,gate_zero_only
+4634191,2024/2025,2024-11-30,Central Coast Mariners,Canberra United FC,gate_zero,0.375929292309366,4,1,gate_zero_only
+4634192,2024/2025,2024-11-30,Melbourne City FC,Western Sydney Wanderers FC,gate_zero,0.3153033204604738,1,0,gate_zero_only
+4634188,2024/2025,2024-12-08,Perth Glory,Melbourne Victory,gate_zero,0.5426808160085442,2,0,gate_zero_only
+4634189,2024/2025,2024-12-08,Adelaide United,Newcastle Jets,gate_zero,0.5745352914245314,5,1,gate_zero_only
+4634190,2024/2025,2024-12-08,Western United FC,Sydney FC,gate_zero,0.31143949872809606,4,1,gate_zero_only
+4634301,2024/2025,2024-12-08,Wellington Phoenix,Brisbane Roar FC,gate_zero,0.32395474133886837,1,0,gate_zero_only
+4634300,2024/2025,2024-12-13,Melbourne Victory,Wellington Phoenix,gate_zero,0.5394439023095902,1,0,gate_zero_only
+4634187,2024/2025,2024-12-14,Western Sydney Wanderers FC,Western United FC,gate_zero,0.3652706487517181,2,0,gate_zero_only
+4634228,2024/2025,2024-12-14,Sydney FC,Newcastle Jets,gate_zero,0.5570498080689124,3,1,gate_zero_only
+4634221,2024/2025,2024-12-15,Brisbane Roar FC,Central Coast Mariners,gate_zero,0.5556287851753982,0,0,gate_zero_only
+4634226,2024/2025,2024-12-15,Perth Glory,Adelaide United,gate_zero,0.4243510292396966,1,0,gate_zero_only
+4634227,2024/2025,2024-12-15,Melbourne City FC,Canberra United FC,gate_zero,0.28202698833664663,0,0,gate_zero_only
+4634224,2024/2025,2024-12-20,Western Sydney Wanderers FC,Perth Glory,gate_zero,0.29808789278984527,4,1,gate_zero_only
+4634225,2024/2025,2024-12-20,Adelaide United,Melbourne City FC,gate_zero,0.479476987237478,2,0,gate_zero_only
+4634222,2024/2025,2024-12-21,Canberra United FC,Melbourne Victory,gate_zero,0.37375781440792777,1,0,gate_zero_only
+4634223,2024/2025,2024-12-21,Newcastle Jets,Brisbane Roar FC,gate_zero,0.36793200817436467,6,1,gate_zero_only
+4634299,2024/2025,2024-12-21,Wellington Phoenix,Sydney FC,gate_zero,0.3474034920360787,0,0,gate_zero_only
+4634212,2024/2025,2024-12-22,Central Coast Mariners,Western United FC,gate_zero,0.5368498245416884,0,0,gate_zero_only
+4634218,2024/2025,2024-12-27,Perth Glory,Central Coast Mariners,gate_zero,0.46169713833944603,0,0,gate_zero_only
+4634220,2024/2025,2024-12-27,Adelaide United,Western Sydney Wanderers FC,gate_zero,0.42076097807585333,0,0,gate_zero_only
+4634219,2024/2025,2024-12-28,Sydney FC,Melbourne Victory,gate_zero,0.4247902807331453,4,1,gate_zero_only
+4634298,2024/2025,2024-12-28,Melbourne City FC,Wellington Phoenix,gate_zero,0.286580873067822,3,1,gate_zero_only
+4634216,2024/2025,2024-12-29,Western United FC,Brisbane Roar FC,gate_zero,0.3545006324088811,2,0,gate_zero_only
+4634217,2024/2025,2024-12-29,Canberra United FC,Newcastle Jets,gate_zero,0.47166556821689665,2,0,gate_zero_only
+4634215,2024/2025,2024-12-31,Central Coast Mariners,Melbourne City FC,gate_zero,0.44289637986561226,4,1,gate_zero_only
+4634214,2024/2025,2025-01-03,Western United FC,Newcastle Jets,gate_zero,0.48608245633123204,3,1,gate_zero_only
+4634213,2024/2025,2025-01-04,Central Coast Mariners,Adelaide United,gate_zero,0.3652723828488602,2,0,gate_zero_only
+4634229,2024/2025,2025-01-04,Brisbane Roar FC,Canberra United FC,gate_zero,0.3899433379398459,4,1,gate_zero_only
+4634297,2024/2025,2025-01-04,Wellington Phoenix,Perth Glory,gate_zero,0.3106439545678692,4,1,gate_zero_only
+4634230,2024/2025,2025-01-05,Sydney FC,Melbourne City FC,gate_zero,0.4659075355777982,0,0,gate_zero_only
+4634231,2024/2025,2025-01-05,Melbourne Victory,Western Sydney Wanderers FC,gate_zero,0.42308113554741555,0,0,gate_zero_only
+4634232,2024/2025,2025-01-08,Newcastle Jets,Adelaide United,gate_zero,0.3750951547088819,3,1,gate_zero_only
+4634233,2024/2025,2025-01-08,Brisbane Roar FC,Melbourne Victory,gate_zero,0.5339871571888197,1,0,gate_zero_only
+4634296,2024/2025,2025-01-09,Western Sydney Wanderers FC,Wellington Phoenix,gate_zero,0.3348876646865562,0,0,gate_zero_only
+4634234,2024/2025,2025-01-10,Perth Glory,Sydney FC,gate_zero,0.40756828938483214,2,0,gate_zero_only
+4634235,2024/2025,2025-01-11,Newcastle Jets,Melbourne Victory,gate_zero,0.49954314861690174,3,1,gate_zero_only
+4634236,2024/2025,2025-01-11,Canberra United FC,Western United FC,gate_zero,0.33902320592092783,1,0,gate_zero_only
+4634237,2024/2025,2025-01-11,Melbourne City FC,Brisbane Roar FC,gate_zero,0.3084363994564294,6,1,gate_zero_only
+4634251,2024/2025,2025-01-12,Western Sydney Wanderers FC,Central Coast Mariners,gate_zero,0.27842129609116606,1,0,gate_zero_only
+4634295,2024/2025,2025-01-12,Adelaide United,Wellington Phoenix,gate_zero,0.3988850781673914,0,0,gate_zero_only
+4634263,2024/2025,2025-01-15,Sydney FC,Canberra United FC,gate_zero,0.3547381875416984,0,0,gate_zero_only
+4634262,2024/2025,2025-01-17,Western United FC,Melbourne City FC,gate_zero,0.35598453518754714,3,1,gate_zero_only
+4634260,2024/2025,2025-01-18,Melbourne Victory,Perth Glory,gate_zero,0.5047421663416827,1,0,gate_zero_only
+4634261,2024/2025,2025-01-18,Canberra United FC,Western Sydney Wanderers FC,gate_zero,0.22526128095839648,1,0,gate_zero_only
+4634258,2024/2025,2025-01-19,Brisbane Roar FC,Adelaide United,gate_zero,0.39925431598064876,2,0,gate_zero_only
+4634259,2024/2025,2025-01-19,Sydney FC,Central Coast Mariners,gate_zero,0.31652214740479123,4,1,gate_zero_only
+4634294,2024/2025,2025-01-19,Wellington Phoenix,Newcastle Jets,gate_zero,0.476079197266417,3,1,gate_zero_only
+4634257,2024/2025,2025-01-21,Western United FC,Perth Glory,gate_zero,0.3936317809772216,1,0,gate_zero_only
+4634256,2024/2025,2025-01-24,Melbourne Victory,Sydney FC,gate_zero,0.42603174949720946,4,1,gate_zero_only
+4634253,2024/2025,2025-01-25,Newcastle Jets,Canberra United FC,gate_zero,0.3977757441294172,3,1,gate_zero_only
+4634254,2024/2025,2025-01-25,Adelaide United,Western United FC,gate_zero,0.3985607298047502,1,0,gate_zero_only
+4634255,2024/2025,2025-01-25,Western Sydney Wanderers FC,Melbourne City FC,gate_zero,0.3047985868645823,1,0,gate_zero_only
+4634252,2024/2025,2025-01-26,Perth Glory,Brisbane Roar FC,gate_zero,0.4844047527306703,0,0,gate_zero_only
+4634293,2024/2025,2025-01-26,Central Coast Mariners,Wellington Phoenix,gate_zero,0.39722248564718887,2,0,gate_zero_only
+4634238,2024/2025,2025-01-31,Western United FC,Western Sydney Wanderers FC,gate_zero,0.25318884623120663,1,0,gate_zero_only
+4634250,2024/2025,2025-01-31,Sydney FC,Adelaide United,gate_zero,0.33447049337009715,1,0,gate_zero_only
+4634247,2024/2025,2025-02-01,Canberra United FC,Perth Glory,gate_zero,0.3045602670741867,6,1,gate_zero_only
+4634248,2024/2025,2025-02-01,Melbourne City FC,Melbourne Victory,gate_zero,0.39696349749838644,1,0,gate_zero_only
+4634249,2024/2025,2025-02-01,Central Coast Mariners,Newcastle Jets,gate_zero,0.5998561439496515,2,0,gate_zero_only
+4634292,2024/2025,2025-02-02,Brisbane Roar FC,Wellington Phoenix,gate_zero,0.39959801207216294,2,0,gate_zero_only
+4634284,2024/2025,2025-02-05,Melbourne City FC,Western United FC,gate_zero,0.3232670873864616,1,0,gate_zero_only
+4634246,2024/2025,2025-02-07,Adelaide United,Perth Glory,gate_zero,0.43388467001540754,0,0,gate_zero_only
+4634244,2024/2025,2025-02-08,Newcastle Jets,Melbourne City FC,gate_zero,0.47267518535081243,2,0,gate_zero_only
+4634245,2024/2025,2025-02-08,Canberra United FC,Central Coast Mariners,gate_zero,0.33258832584586817,1,0,gate_zero_only
+4634291,2024/2025,2025-02-08,Wellington Phoenix,Melbourne Victory,gate_zero,0.3637410760952744,1,0,gate_zero_only
+4634242,2024/2025,2025-02-09,Sydney FC,Western United FC,gate_zero,0.35387015881720907,3,1,gate_zero_only
+4634243,2024/2025,2025-02-09,Western Sydney Wanderers FC,Brisbane Roar FC,gate_zero,0.3088532251458945,1,0,gate_zero_only
+4634241,2024/2025,2025-02-14,Western Sydney Wanderers FC,Newcastle Jets,gate_zero,0.39844926544106707,4,1,gate_zero_only
+4634239,2024/2025,2025-02-15,Melbourne City FC,Sydney FC,gate_zero,0.3638908247368444,2,0,gate_zero_only
+4634240,2024/2025,2025-02-15,Adelaide United,Canberra United FC,gate_zero,0.3023177053885038,0,0,gate_zero_only
+4634264,2024/2025,2025-02-16,Melbourne Victory,Central Coast Mariners,gate_zero,0.42847873870106956,0,0,gate_zero_only
+4634265,2024/2025,2025-02-16,Brisbane Roar FC,Western United FC,gate_zero,0.4309526789221646,2,0,gate_zero_only
+4634316,2024/2025,2025-02-16,Perth Glory,Wellington Phoenix,gate_zero,0.3267977149212997,1,0,gate_zero_only
+4634266,2024/2025,2025-02-28,Central Coast Mariners,Western Sydney Wanderers FC,gate_zero,0.3199003787288941,0,0,gate_zero_only
+4634267,2024/2025,2025-03-01,Canberra United FC,Melbourne City FC,gate_zero,0.3369383136819948,0,0,gate_zero_only
+4634268,2024/2025,2025-03-01,Newcastle Jets,Perth Glory,gate_zero,0.5067858211595475,1,0,gate_zero_only
+4634269,2024/2025,2025-03-01,Western United FC,Melbourne Victory,gate_zero,0.3483471347886935,4,1,gate_zero_only
+4634270,2024/2025,2025-03-02,Sydney FC,Brisbane Roar FC,gate_zero,0.40353368758348684,2,0,gate_zero_only
+4634317,2024/2025,2025-03-02,Wellington Phoenix,Adelaide United,gate_zero,0.27679201379165286,3,1,gate_zero_only
+4634271,2024/2025,2025-03-07,Perth Glory,Western United FC,gate_zero,0.36840698460554144,2,0,gate_zero_only
+4634272,2024/2025,2025-03-08,Newcastle Jets,Sydney FC,gate_zero,0.47125229906298416,1,0,gate_zero_only
+4634273,2024/2025,2025-03-08,Adelaide United,Central Coast Mariners,gate_zero,0.27137225060948045,0,0,gate_zero_only
+4634274,2024/2025,2025-03-09,Melbourne Victory,Canberra United FC,gate_zero,0.34800929441583905,0,0,gate_zero_only
+4634318,2024/2025,2025-03-09,Wellington Phoenix,Western Sydney Wanderers FC,gate_zero,0.21391588340117895,2,0,gate_zero_only
+4634276,2024/2025,2025-03-14,Western United FC,Canberra United FC,gate_zero,0.27141347572632135,4,1,gate_zero_only
+4634277,2024/2025,2025-03-14,Central Coast Mariners,Perth Glory,gate_zero,0.42148932352696844,5,1,gate_zero_only
+4634319,2024/2025,2025-03-15,Sydney FC,Wellington Phoenix,gate_zero,0.31352670489702317,0,0,gate_zero_only
+4634279,2024/2025,2025-03-16,Melbourne City FC,Adelaide United,gate_zero,0.27556186772608404,0,0,gate_zero_only
+4634280,2024/2025,2025-03-16,Brisbane Roar FC,Newcastle Jets,gate_zero,0.6133727415633436,1,0,gate_zero_only
+4634281,2024/2025,2025-03-21,Melbourne Victory,Newcastle Jets,gate_zero,0.5402533400453924,3,1,gate_zero_only
+4634282,2024/2025,2025-03-22,Canberra United FC,Sydney FC,gate_zero,0.3103382003803923,1,0,gate_zero_only
+4634283,2024/2025,2025-03-22,Perth Glory,Western Sydney Wanderers FC,gate_zero,0.24239252756484553,0,0,gate_zero_only
+4634320,2024/2025,2025-03-22,Wellington Phoenix,Central Coast Mariners,gate_zero,0.2651767186056977,5,1,gate_zero_only
+4634285,2024/2025,2025-03-23,Adelaide United,Brisbane Roar FC,gate_zero,0.31484032285353925,5,1,gate_zero_only
+4634275,2024/2025,2025-03-26,Brisbane Roar FC,Melbourne City FC,gate_zero,0.39526501541622217,2,0,gate_zero_only
+4634286,2024/2025,2025-03-28,Western Sydney Wanderers FC,Sydney FC,gate_zero,0.2908658453758921,1,0,gate_zero_only
+4634287,2024/2025,2025-03-29,Melbourne Victory,Adelaide United,gate_zero,0.33350140711233944,2,0,gate_zero_only
+4634288,2024/2025,2025-03-29,Perth Glory,Canberra United FC,gate_zero,0.27209967258061507,3,1,gate_zero_only
+4634289,2024/2025,2025-03-30,Newcastle Jets,Western United FC,gate_zero,0.41645816179514994,1,0,gate_zero_only
+4634303,2024/2025,2025-03-30,Central Coast Mariners,Brisbane Roar FC,gate_zero,0.4952807580687587,2,0,gate_zero_only
+4634321,2024/2025,2025-03-30,Wellington Phoenix,Melbourne City FC,gate_zero,0.3696628137701057,3,1,gate_zero_only
+4634278,2024/2025,2025-04-06,Western Sydney Wanderers FC,Melbourne Victory,gate_zero,0.31886204806251484,3,1,gate_zero_only
+4634314,2024/2025,2025-04-11,Central Coast Mariners,Melbourne Victory,gate_zero,0.47629383378920065,5,1,gate_zero_only
+4634315,2024/2025,2025-04-11,Melbourne City FC,Newcastle Jets,gate_zero,0.4467881211644923,0,0,gate_zero_only
+4634312,2024/2025,2025-04-12,Western United FC,Adelaide United,gate_zero,0.3106530794285668,2,0,gate_zero_only
+4634313,2024/2025,2025-04-12,Sydney FC,Perth Glory,gate_zero,0.3984297917924846,3,1,gate_zero_only
+4634311,2024/2025,2025-04-13,Brisbane Roar FC,Western Sydney Wanderers FC,gate_zero,0.264875270110552,1,0,gate_zero_only
+4634322,2024/2025,2025-04-13,Canberra United FC,Wellington Phoenix,gate_zero,0.2324105781107173,4,1,gate_zero_only
+4634309,2024/2025,2025-04-18,Perth Glory,Melbourne City FC,gate_zero,0.3474386010413334,3,1,gate_zero_only
+4634310,2024/2025,2025-04-18,Adelaide United,Sydney FC,gate_zero,0.3141988019820783,1,0,gate_zero_only
+4634306,2024/2025,2025-04-19,Western Sydney Wanderers FC,Canberra United FC,gate_zero,0.2572478301637069,0,0,gate_zero_only
+4634307,2024/2025,2025-04-19,Newcastle Jets,Central Coast Mariners,gate_zero,0.3730677938426924,1,0,gate_zero_only
+4634308,2024/2025,2025-04-19,Melbourne Victory,Brisbane Roar FC,gate_zero,0.44759376189893907,3,1,gate_zero_only
+4634323,2024/2025,2025-04-20,Wellington Phoenix,Western United FC,gate_zero,0.38923225772906345,3,1,gate_zero_only
+4634305,2024/2025,2024-11-01,Western United FC,Wellington Phoenix,x8,0.3515337223119388,1,0,referee_arm
+4634199,2024/2025,2024-11-02,Central Coast Mariners,Sydney FC,x8,0.5250722238359798,0,0,referee_arm
+4634210,2024/2025,2024-11-02,Adelaide United,Melbourne Victory,x8,0.51633312937246,1,0,referee_arm
+4634211,2024/2025,2024-11-02,Canberra United FC,Brisbane Roar FC,x8,0.3382603595551871,3,1,referee_arm
+4634208,2024/2025,2024-11-03,Newcastle Jets,Western Sydney Wanderers FC,x8,0.4499742859603457,2,0,referee_arm
+4634209,2024/2025,2024-11-03,Melbourne City FC,Perth Glory,x8,0.3448406211080428,0,0,referee_arm
+4634207,2024/2025,2024-11-08,Western United FC,Central Coast Mariners,x8,0.38921699115377983,1,0,referee_arm
+4634205,2024/2025,2024-11-09,Brisbane Roar FC,Sydney FC,x8,0.42527671181786575,2,0,referee_arm
+4634206,2024/2025,2024-11-09,Melbourne Victory,Melbourne City FC,x8,0.430625878328883,6,1,referee_arm
+4634203,2024/2025,2024-11-10,Perth Glory,Newcastle Jets,x8,0.589198263853282,4,1,referee_arm
+4634204,2024/2025,2024-11-10,Western Sydney Wanderers FC,Adelaide United,x8,0.32713255332341684,0,0,referee_arm
+4634304,2024/2025,2024-11-10,Wellington Phoenix,Canberra United FC,x8,0.26774245321839885,2,0,referee_arm
+4634202,2024/2025,2024-11-15,Brisbane Roar FC,Perth Glory,x8,0.36018447210727356,8,1,referee_arm
+4634186,2024/2025,2024-11-16,Canberra United FC,Adelaide United,x8,0.3239660023312988,1,0,referee_arm
+4634200,2024/2025,2024-11-16,Melbourne City FC,Central Coast Mariners,x8,0.3806416940499584,2,0,referee_arm
+4634201,2024/2025,2024-11-16,Sydney FC,Western Sydney Wanderers FC,x8,0.4270210984752554,1,0,referee_arm
+4634198,2024/2025,2024-11-17,Melbourne Victory,Western United FC,x8,0.5711051824085525,5,1,referee_arm
+4634290,2024/2025,2024-11-17,Newcastle Jets,Wellington Phoenix,x8,0.4247104348809927,4,1,referee_arm
+4634197,2024/2025,2024-11-22,Western Sydney Wanderers FC,Brisbane Roar FC,x8,0.30426831602481497,1,0,referee_arm
+4634302,2024/2025,2024-11-22,Adelaide United,Wellington Phoenix,x8,0.4474339079659235,2,0,referee_arm
+4634195,2024/2025,2024-11-23,Newcastle Jets,Western United FC,x8,0.5462860025131996,0,0,referee_arm
+4634196,2024/2025,2024-11-23,Central Coast Mariners,Melbourne Victory,x8,0.4633919834365954,4,1,referee_arm
+4634193,2024/2025,2024-11-24,Sydney FC,Melbourne City FC,x8,0.4400827871188069,1,0,referee_arm
+4634194,2024/2025,2024-11-24,Canberra United FC,Perth Glory,x8,0.38079067217698936,0,0,referee_arm
+4634191,2024/2025,2024-11-30,Central Coast Mariners,Canberra United FC,x8,0.3566722050488964,4,1,referee_arm
+4634192,2024/2025,2024-11-30,Melbourne City FC,Western Sydney Wanderers FC,x8,0.30250166012722357,1,0,referee_arm
+4634188,2024/2025,2024-12-08,Perth Glory,Melbourne Victory,x8,0.5590947512118574,2,0,referee_arm
+4634189,2024/2025,2024-12-08,Adelaide United,Newcastle Jets,x8,0.5493913199870609,5,1,referee_arm
+4634190,2024/2025,2024-12-08,Western United FC,Sydney FC,x8,0.26137297564681927,4,1,referee_arm
+4634301,2024/2025,2024-12-08,Wellington Phoenix,Brisbane Roar FC,x8,0.3157675618881849,1,0,referee_arm
+4634300,2024/2025,2024-12-13,Melbourne Victory,Wellington Phoenix,x8,0.5142834895609406,1,0,referee_arm
+4634187,2024/2025,2024-12-14,Western Sydney Wanderers FC,Western United FC,x8,0.3668589218758429,2,0,referee_arm
+4634228,2024/2025,2024-12-14,Sydney FC,Newcastle Jets,x8,0.5396876865151219,3,1,referee_arm
+4634221,2024/2025,2024-12-15,Brisbane Roar FC,Central Coast Mariners,x8,0.5447147850685329,0,0,referee_arm
+4634226,2024/2025,2024-12-15,Perth Glory,Adelaide United,x8,0.41810538887993975,1,0,referee_arm
+4634227,2024/2025,2024-12-15,Melbourne City FC,Canberra United FC,x8,0.2938712530423867,0,0,referee_arm
+4634224,2024/2025,2024-12-20,Western Sydney Wanderers FC,Perth Glory,x8,0.28940172253294805,4,1,referee_arm
+4634225,2024/2025,2024-12-20,Adelaide United,Melbourne City FC,x8,0.46654364460673714,2,0,referee_arm
+4634222,2024/2025,2024-12-21,Canberra United FC,Melbourne Victory,x8,0.3612321665590513,1,0,referee_arm
+4634223,2024/2025,2024-12-21,Newcastle Jets,Brisbane Roar FC,x8,0.37892761925495155,6,1,referee_arm
+4634299,2024/2025,2024-12-21,Wellington Phoenix,Sydney FC,x8,0.34017338293081734,0,0,referee_arm
+4634212,2024/2025,2024-12-22,Central Coast Mariners,Western United FC,x8,0.5271806531884322,0,0,referee_arm
+4634218,2024/2025,2024-12-27,Perth Glory,Central Coast Mariners,x8,0.4471183339820133,0,0,referee_arm
+4634220,2024/2025,2024-12-27,Adelaide United,Western Sydney Wanderers FC,x8,0.40644678737695883,0,0,referee_arm
+4634219,2024/2025,2024-12-28,Sydney FC,Melbourne Victory,x8,0.4376867332588963,4,1,referee_arm
+4634298,2024/2025,2024-12-28,Melbourne City FC,Wellington Phoenix,x8,0.2770649606386437,3,1,referee_arm
+4634216,2024/2025,2024-12-29,Western United FC,Brisbane Roar FC,x8,0.34162462889969336,2,0,referee_arm
+4634217,2024/2025,2024-12-29,Canberra United FC,Newcastle Jets,x8,0.4426231446097457,2,0,referee_arm
+4634215,2024/2025,2024-12-31,Central Coast Mariners,Melbourne City FC,x8,0.458247974780559,4,1,referee_arm
+4634214,2024/2025,2025-01-03,Western United FC,Newcastle Jets,x8,0.46928942688089204,3,1,referee_arm
+4634213,2024/2025,2025-01-04,Central Coast Mariners,Adelaide United,x8,0.3652723828488602,2,0,referee_base_fallback
+4634229,2024/2025,2025-01-04,Brisbane Roar FC,Canberra United FC,x8,0.374726876896743,4,1,referee_arm
+4634297,2024/2025,2025-01-04,Wellington Phoenix,Perth Glory,x8,0.30040946882200914,4,1,referee_arm
+4634230,2024/2025,2025-01-05,Sydney FC,Melbourne City FC,x8,0.4581036806446366,0,0,referee_arm
+4634231,2024/2025,2025-01-05,Melbourne Victory,Western Sydney Wanderers FC,x8,0.40892325066980906,0,0,referee_arm
+4634232,2024/2025,2025-01-08,Newcastle Jets,Adelaide United,x8,0.36531565565968616,3,1,referee_arm
+4634233,2024/2025,2025-01-08,Brisbane Roar FC,Melbourne Victory,x8,0.5486860961259449,1,0,referee_arm
+4634296,2024/2025,2025-01-09,Western Sydney Wanderers FC,Wellington Phoenix,x8,0.31844216449227436,0,0,referee_arm
+4634234,2024/2025,2025-01-10,Perth Glory,Sydney FC,x8,0.39760942641309505,2,0,referee_arm
+4634235,2024/2025,2025-01-11,Newcastle Jets,Melbourne Victory,x8,0.49563587275958665,3,1,referee_arm
+4634236,2024/2025,2025-01-11,Canberra United FC,Western United FC,x8,0.326969161925613,1,0,referee_arm
+4634237,2024/2025,2025-01-11,Melbourne City FC,Brisbane Roar FC,x8,0.3224387691231003,6,1,referee_arm
+4634251,2024/2025,2025-01-12,Western Sydney Wanderers FC,Central Coast Mariners,x8,0.27842129609116606,1,0,referee_base_fallback
+4634295,2024/2025,2025-01-12,Adelaide United,Wellington Phoenix,x8,0.3874745692789934,0,0,referee_arm
+4634263,2024/2025,2025-01-15,Sydney FC,Canberra United FC,x8,0.3468080252878829,0,0,referee_arm
+4634262,2024/2025,2025-01-17,Western United FC,Melbourne City FC,x8,0.3417895437377536,3,1,referee_arm
+4634260,2024/2025,2025-01-18,Melbourne Victory,Perth Glory,x8,0.4941233104815157,1,0,referee_arm
+4634261,2024/2025,2025-01-18,Canberra United FC,Western Sydney Wanderers FC,x8,0.2247705739304391,1,0,referee_arm
+4634258,2024/2025,2025-01-19,Brisbane Roar FC,Adelaide United,x8,0.3883259675210924,2,0,referee_arm
+4634259,2024/2025,2025-01-19,Sydney FC,Central Coast Mariners,x8,0.30694142344449626,4,1,referee_arm
+4634294,2024/2025,2025-01-19,Wellington Phoenix,Newcastle Jets,x8,0.43032421379283603,3,1,referee_arm
+4634257,2024/2025,2025-01-21,Western United FC,Perth Glory,x8,0.3702950033175547,1,0,referee_arm
+4634256,2024/2025,2025-01-24,Melbourne Victory,Sydney FC,x8,0.44561469626967476,4,1,referee_arm
+4634253,2024/2025,2025-01-25,Newcastle Jets,Canberra United FC,x8,0.38380597620363865,3,1,referee_arm
+4634254,2024/2025,2025-01-25,Adelaide United,Western United FC,x8,0.3985607298047502,1,0,referee_base_fallback
+4634255,2024/2025,2025-01-25,Western Sydney Wanderers FC,Melbourne City FC,x8,0.31566345956857833,1,0,referee_arm
+4634252,2024/2025,2025-01-26,Perth Glory,Brisbane Roar FC,x8,0.4612870855388569,0,0,referee_arm
+4634293,2024/2025,2025-01-26,Central Coast Mariners,Wellington Phoenix,x8,0.38647346867304244,2,0,referee_arm
+4634238,2024/2025,2025-01-31,Western United FC,Western Sydney Wanderers FC,x8,0.22171273076449494,1,0,referee_arm
+4634250,2024/2025,2025-01-31,Sydney FC,Adelaide United,x8,0.32478803546624524,1,0,referee_arm
+4634247,2024/2025,2025-02-01,Canberra United FC,Perth Glory,x8,0.32228813464496886,6,1,referee_arm
+4634248,2024/2025,2025-02-01,Melbourne City FC,Melbourne Victory,x8,0.3842921578216416,1,0,referee_arm
+4634249,2024/2025,2025-02-01,Central Coast Mariners,Newcastle Jets,x8,0.6124155835307128,2,0,referee_arm
+4634292,2024/2025,2025-02-02,Brisbane Roar FC,Wellington Phoenix,x8,0.37323814674621436,2,0,referee_arm
+4634284,2024/2025,2025-02-05,Melbourne City FC,Western United FC,x8,0.3113869061030371,1,0,referee_arm
+4634246,2024/2025,2025-02-07,Adelaide United,Perth Glory,x8,0.44529974656992,0,0,referee_arm
+4634244,2024/2025,2025-02-08,Newcastle Jets,Melbourne City FC,x8,0.44697518260642555,2,0,referee_arm
+4634245,2024/2025,2025-02-08,Canberra United FC,Central Coast Mariners,x8,0.3206723367387604,1,0,referee_arm
+4634291,2024/2025,2025-02-08,Wellington Phoenix,Melbourne Victory,x8,0.356408224372869,1,0,referee_arm
+4634242,2024/2025,2025-02-09,Sydney FC,Western United FC,x8,0.3442819949959546,3,1,referee_arm
+4634243,2024/2025,2025-02-09,Western Sydney Wanderers FC,Brisbane Roar FC,x8,0.3292117588019623,1,0,referee_arm
+4634241,2024/2025,2025-02-14,Western Sydney Wanderers FC,Newcastle Jets,x8,0.3895452682442013,4,1,referee_arm
+4634239,2024/2025,2025-02-15,Melbourne City FC,Sydney FC,x8,0.3409883637710518,2,0,referee_arm
+4634240,2024/2025,2025-02-15,Adelaide United,Canberra United FC,x8,0.29890652241380855,0,0,referee_arm
+4634264,2024/2025,2025-02-16,Melbourne Victory,Central Coast Mariners,x8,0.4143178779611838,0,0,referee_arm
+4634265,2024/2025,2025-02-16,Brisbane Roar FC,Western United FC,x8,0.45383699183740633,2,0,referee_arm
+4634316,2024/2025,2025-02-16,Perth Glory,Wellington Phoenix,x8,0.30731894392666137,1,0,referee_arm
+4634266,2024/2025,2025-02-28,Central Coast Mariners,Western Sydney Wanderers FC,x8,0.2997166378935183,0,0,referee_arm
+4634267,2024/2025,2025-03-01,Canberra United FC,Melbourne City FC,x8,0.32926510466097025,0,0,referee_arm
+4634268,2024/2025,2025-03-01,Newcastle Jets,Perth Glory,x8,0.49249138021431405,1,0,referee_arm
+4634269,2024/2025,2025-03-01,Western United FC,Melbourne Victory,x8,0.3099941527108788,4,1,referee_arm
+4634270,2024/2025,2025-03-02,Sydney FC,Brisbane Roar FC,x8,0.3886140289312936,2,0,referee_arm
+4634317,2024/2025,2025-03-02,Wellington Phoenix,Adelaide United,x8,0.26401511216440654,3,1,referee_arm
+4634271,2024/2025,2025-03-07,Perth Glory,Western United FC,x8,0.3895353913385937,2,0,referee_arm
+4634272,2024/2025,2025-03-08,Newcastle Jets,Sydney FC,x8,0.44577760719162396,1,0,referee_arm
+4634273,2024/2025,2025-03-08,Adelaide United,Central Coast Mariners,x8,0.2638456732797835,0,0,referee_arm
+4634274,2024/2025,2025-03-09,Melbourne Victory,Canberra United FC,x8,0.3577362621738871,0,0,referee_arm
+4634318,2024/2025,2025-03-09,Wellington Phoenix,Western Sydney Wanderers FC,x8,0.1971543200378072,2,0,referee_arm
+4634276,2024/2025,2025-03-14,Western United FC,Canberra United FC,x8,0.26004321211826764,4,1,referee_arm
+4634277,2024/2025,2025-03-14,Central Coast Mariners,Perth Glory,x8,0.3955693825762373,5,1,referee_arm
+4634319,2024/2025,2025-03-15,Sydney FC,Wellington Phoenix,x8,0.3052887172539347,0,0,referee_arm
+4634279,2024/2025,2025-03-16,Melbourne City FC,Adelaide United,x8,0.25536816039689314,0,0,referee_arm
+4634280,2024/2025,2025-03-16,Brisbane Roar FC,Newcastle Jets,x8,0.5860814979391085,1,0,referee_arm
+4634281,2024/2025,2025-03-21,Melbourne Victory,Newcastle Jets,x8,0.5237486567704481,3,1,referee_arm
+4634282,2024/2025,2025-03-22,Canberra United FC,Sydney FC,x8,0.3013881011176123,1,0,referee_arm
+4634283,2024/2025,2025-03-22,Perth Glory,Western Sydney Wanderers FC,x8,0.24880477013285263,0,0,referee_arm
+4634320,2024/2025,2025-03-22,Wellington Phoenix,Central Coast Mariners,x8,0.28285337544999156,5,1,referee_arm
+4634285,2024/2025,2025-03-23,Adelaide United,Brisbane Roar FC,x8,0.3022719349202967,5,1,referee_arm
+4634275,2024/2025,2025-03-26,Brisbane Roar FC,Melbourne City FC,x8,0.3837522510470881,2,0,referee_arm
+4634286,2024/2025,2025-03-28,Western Sydney Wanderers FC,Sydney FC,x8,0.2832141271225641,1,0,referee_arm
+4634287,2024/2025,2025-03-29,Melbourne Victory,Adelaide United,x8,0.3020874499200473,2,0,referee_arm
+4634288,2024/2025,2025-03-29,Perth Glory,Canberra United FC,x8,0.2627450333176138,3,1,referee_arm
+4634289,2024/2025,2025-03-30,Newcastle Jets,Western United FC,x8,0.40481786734102587,1,0,referee_arm
+4634303,2024/2025,2025-03-30,Central Coast Mariners,Brisbane Roar FC,x8,0.4678545546165034,2,0,referee_arm
+4634321,2024/2025,2025-03-30,Wellington Phoenix,Melbourne City FC,x8,0.37594321080959237,3,1,referee_arm
+4634278,2024/2025,2025-04-06,Western Sydney Wanderers FC,Melbourne Victory,x8,0.31085191997600936,3,1,referee_arm
+4634314,2024/2025,2025-04-11,Central Coast Mariners,Melbourne Victory,x8,0.4549585349740506,5,1,referee_arm
+4634315,2024/2025,2025-04-11,Melbourne City FC,Newcastle Jets,x8,0.43348778771070307,0,0,referee_arm
+4634312,2024/2025,2025-04-12,Western United FC,Adelaide United,x8,0.33108379403327715,2,0,referee_arm
+4634313,2024/2025,2025-04-12,Sydney FC,Perth Glory,x8,0.37864455505510586,3,1,referee_arm
+4634311,2024/2025,2025-04-13,Brisbane Roar FC,Western Sydney Wanderers FC,x8,0.2594757605226117,1,0,referee_arm
+4634322,2024/2025,2025-04-13,Canberra United FC,Wellington Phoenix,x8,0.2235716920927846,4,1,referee_arm
+4634309,2024/2025,2025-04-18,Perth Glory,Melbourne City FC,x8,0.3536885802221519,3,1,referee_arm
+4634310,2024/2025,2025-04-18,Adelaide United,Sydney FC,x8,0.32004503747152113,1,0,referee_arm
+4634306,2024/2025,2025-04-19,Western Sydney Wanderers FC,Canberra United FC,x8,0.2530382678578751,0,0,referee_arm
+4634307,2024/2025,2025-04-19,Newcastle Jets,Central Coast Mariners,x8,0.36673429617863706,1,0,referee_arm
+4634308,2024/2025,2025-04-19,Melbourne Victory,Brisbane Roar FC,x8,0.41553512871798415,3,1,referee_arm
+4634323,2024/2025,2025-04-20,Wellington Phoenix,Western United FC,x8,0.37748698392410773,3,1,referee_arm
+4634305,2024/2025,2024-11-01,Western United FC,Wellington Phoenix,baseline_league,0.44518272425249167,1,0,
+4634199,2024/2025,2024-11-02,Central Coast Mariners,Sydney FC,baseline_league,0.44518272425249167,0,0,
+4634210,2024/2025,2024-11-02,Adelaide United,Melbourne Victory,baseline_league,0.44518272425249167,1,0,
+4634211,2024/2025,2024-11-02,Canberra United FC,Brisbane Roar FC,baseline_league,0.44518272425249167,3,1,
+4634208,2024/2025,2024-11-03,Newcastle Jets,Western Sydney Wanderers FC,baseline_league,0.44518272425249167,2,0,
+4634209,2024/2025,2024-11-03,Melbourne City FC,Perth Glory,baseline_league,0.44518272425249167,0,0,
+4634207,2024/2025,2024-11-08,Western United FC,Central Coast Mariners,baseline_league,0.44518272425249167,1,0,
+4634205,2024/2025,2024-11-09,Brisbane Roar FC,Sydney FC,baseline_league,0.44518272425249167,2,0,
+4634206,2024/2025,2024-11-09,Melbourne Victory,Melbourne City FC,baseline_league,0.44518272425249167,6,1,
+4634203,2024/2025,2024-11-10,Perth Glory,Newcastle Jets,baseline_league,0.44518272425249167,4,1,
+4634204,2024/2025,2024-11-10,Western Sydney Wanderers FC,Adelaide United,baseline_league,0.44518272425249167,0,0,
+4634304,2024/2025,2024-11-10,Wellington Phoenix,Canberra United FC,baseline_league,0.44518272425249167,2,0,
+4634202,2024/2025,2024-11-15,Brisbane Roar FC,Perth Glory,baseline_league,0.44518272425249167,8,1,
+4634186,2024/2025,2024-11-16,Canberra United FC,Adelaide United,baseline_league,0.44518272425249167,1,0,
+4634200,2024/2025,2024-11-16,Melbourne City FC,Central Coast Mariners,baseline_league,0.44518272425249167,2,0,
+4634201,2024/2025,2024-11-16,Sydney FC,Western Sydney Wanderers FC,baseline_league,0.44518272425249167,1,0,
+4634198,2024/2025,2024-11-17,Melbourne Victory,Western United FC,baseline_league,0.44518272425249167,5,1,
+4634290,2024/2025,2024-11-17,Newcastle Jets,Wellington Phoenix,baseline_league,0.44518272425249167,4,1,
+4634197,2024/2025,2024-11-22,Western Sydney Wanderers FC,Brisbane Roar FC,baseline_league,0.44518272425249167,1,0,
+4634302,2024/2025,2024-11-22,Adelaide United,Wellington Phoenix,baseline_league,0.44518272425249167,2,0,
+4634195,2024/2025,2024-11-23,Newcastle Jets,Western United FC,baseline_league,0.44518272425249167,0,0,
+4634196,2024/2025,2024-11-23,Central Coast Mariners,Melbourne Victory,baseline_league,0.44518272425249167,4,1,
+4634193,2024/2025,2024-11-24,Sydney FC,Melbourne City FC,baseline_league,0.44518272425249167,1,0,
+4634194,2024/2025,2024-11-24,Canberra United FC,Perth Glory,baseline_league,0.44518272425249167,0,0,
+4634191,2024/2025,2024-11-30,Central Coast Mariners,Canberra United FC,baseline_league,0.44518272425249167,4,1,
+4634192,2024/2025,2024-11-30,Melbourne City FC,Western Sydney Wanderers FC,baseline_league,0.44518272425249167,1,0,
+4634188,2024/2025,2024-12-08,Perth Glory,Melbourne Victory,baseline_league,0.44518272425249167,2,0,
+4634189,2024/2025,2024-12-08,Adelaide United,Newcastle Jets,baseline_league,0.44518272425249167,5,1,
+4634190,2024/2025,2024-12-08,Western United FC,Sydney FC,baseline_league,0.44518272425249167,4,1,
+4634301,2024/2025,2024-12-08,Wellington Phoenix,Brisbane Roar FC,baseline_league,0.44518272425249167,1,0,
+4634300,2024/2025,2024-12-13,Melbourne Victory,Wellington Phoenix,baseline_league,0.44518272425249167,1,0,
+4634187,2024/2025,2024-12-14,Western Sydney Wanderers FC,Western United FC,baseline_league,0.44518272425249167,2,0,
+4634228,2024/2025,2024-12-14,Sydney FC,Newcastle Jets,baseline_league,0.44518272425249167,3,1,
+4634221,2024/2025,2024-12-15,Brisbane Roar FC,Central Coast Mariners,baseline_league,0.44518272425249167,0,0,
+4634226,2024/2025,2024-12-15,Perth Glory,Adelaide United,baseline_league,0.44518272425249167,1,0,
+4634227,2024/2025,2024-12-15,Melbourne City FC,Canberra United FC,baseline_league,0.44518272425249167,0,0,
+4634224,2024/2025,2024-12-20,Western Sydney Wanderers FC,Perth Glory,baseline_league,0.44518272425249167,4,1,
+4634225,2024/2025,2024-12-20,Adelaide United,Melbourne City FC,baseline_league,0.44518272425249167,2,0,
+4634222,2024/2025,2024-12-21,Canberra United FC,Melbourne Victory,baseline_league,0.44518272425249167,1,0,
+4634223,2024/2025,2024-12-21,Newcastle Jets,Brisbane Roar FC,baseline_league,0.44518272425249167,6,1,
+4634299,2024/2025,2024-12-21,Wellington Phoenix,Sydney FC,baseline_league,0.44518272425249167,0,0,
+4634212,2024/2025,2024-12-22,Central Coast Mariners,Western United FC,baseline_league,0.44518272425249167,0,0,
+4634218,2024/2025,2024-12-27,Perth Glory,Central Coast Mariners,baseline_league,0.44518272425249167,0,0,
+4634220,2024/2025,2024-12-27,Adelaide United,Western Sydney Wanderers FC,baseline_league,0.44518272425249167,0,0,
+4634219,2024/2025,2024-12-28,Sydney FC,Melbourne Victory,baseline_league,0.44518272425249167,4,1,
+4634298,2024/2025,2024-12-28,Melbourne City FC,Wellington Phoenix,baseline_league,0.44518272425249167,3,1,
+4634216,2024/2025,2024-12-29,Western United FC,Brisbane Roar FC,baseline_league,0.44518272425249167,2,0,
+4634217,2024/2025,2024-12-29,Canberra United FC,Newcastle Jets,baseline_league,0.44518272425249167,2,0,
+4634215,2024/2025,2024-12-31,Central Coast Mariners,Melbourne City FC,baseline_league,0.44518272425249167,4,1,
+4634214,2024/2025,2025-01-03,Western United FC,Newcastle Jets,baseline_league,0.44518272425249167,3,1,
+4634213,2024/2025,2025-01-04,Central Coast Mariners,Adelaide United,baseline_league,0.44518272425249167,2,0,
+4634229,2024/2025,2025-01-04,Brisbane Roar FC,Canberra United FC,baseline_league,0.44518272425249167,4,1,
+4634297,2024/2025,2025-01-04,Wellington Phoenix,Perth Glory,baseline_league,0.44518272425249167,4,1,
+4634230,2024/2025,2025-01-05,Sydney FC,Melbourne City FC,baseline_league,0.44518272425249167,0,0,
+4634231,2024/2025,2025-01-05,Melbourne Victory,Western Sydney Wanderers FC,baseline_league,0.44518272425249167,0,0,
+4634232,2024/2025,2025-01-08,Newcastle Jets,Adelaide United,baseline_league,0.44518272425249167,3,1,
+4634233,2024/2025,2025-01-08,Brisbane Roar FC,Melbourne Victory,baseline_league,0.44518272425249167,1,0,
+4634296,2024/2025,2025-01-09,Western Sydney Wanderers FC,Wellington Phoenix,baseline_league,0.44518272425249167,0,0,
+4634234,2024/2025,2025-01-10,Perth Glory,Sydney FC,baseline_league,0.44518272425249167,2,0,
+4634235,2024/2025,2025-01-11,Newcastle Jets,Melbourne Victory,baseline_league,0.44518272425249167,3,1,
+4634236,2024/2025,2025-01-11,Canberra United FC,Western United FC,baseline_league,0.44518272425249167,1,0,
+4634237,2024/2025,2025-01-11,Melbourne City FC,Brisbane Roar FC,baseline_league,0.44518272425249167,6,1,
+4634251,2024/2025,2025-01-12,Western Sydney Wanderers FC,Central Coast Mariners,baseline_league,0.44518272425249167,1,0,
+4634295,2024/2025,2025-01-12,Adelaide United,Wellington Phoenix,baseline_league,0.44518272425249167,0,0,
+4634263,2024/2025,2025-01-15,Sydney FC,Canberra United FC,baseline_league,0.44518272425249167,0,0,
+4634262,2024/2025,2025-01-17,Western United FC,Melbourne City FC,baseline_league,0.44518272425249167,3,1,
+4634260,2024/2025,2025-01-18,Melbourne Victory,Perth Glory,baseline_league,0.44518272425249167,1,0,
+4634261,2024/2025,2025-01-18,Canberra United FC,Western Sydney Wanderers FC,baseline_league,0.44518272425249167,1,0,
+4634258,2024/2025,2025-01-19,Brisbane Roar FC,Adelaide United,baseline_league,0.44518272425249167,2,0,
+4634259,2024/2025,2025-01-19,Sydney FC,Central Coast Mariners,baseline_league,0.44518272425249167,4,1,
+4634294,2024/2025,2025-01-19,Wellington Phoenix,Newcastle Jets,baseline_league,0.44518272425249167,3,1,
+4634257,2024/2025,2025-01-21,Western United FC,Perth Glory,baseline_league,0.44518272425249167,1,0,
+4634256,2024/2025,2025-01-24,Melbourne Victory,Sydney FC,baseline_league,0.44518272425249167,4,1,
+4634253,2024/2025,2025-01-25,Newcastle Jets,Canberra United FC,baseline_league,0.44518272425249167,3,1,
+4634254,2024/2025,2025-01-25,Adelaide United,Western United FC,baseline_league,0.44518272425249167,1,0,
+4634255,2024/2025,2025-01-25,Western Sydney Wanderers FC,Melbourne City FC,baseline_league,0.44518272425249167,1,0,
+4634252,2024/2025,2025-01-26,Perth Glory,Brisbane Roar FC,baseline_league,0.44518272425249167,0,0,
+4634293,2024/2025,2025-01-26,Central Coast Mariners,Wellington Phoenix,baseline_league,0.44518272425249167,2,0,
+4634238,2024/2025,2025-01-31,Western United FC,Western Sydney Wanderers FC,baseline_league,0.44518272425249167,1,0,
+4634250,2024/2025,2025-01-31,Sydney FC,Adelaide United,baseline_league,0.44518272425249167,1,0,
+4634247,2024/2025,2025-02-01,Canberra United FC,Perth Glory,baseline_league,0.44518272425249167,6,1,
+4634248,2024/2025,2025-02-01,Melbourne City FC,Melbourne Victory,baseline_league,0.44518272425249167,1,0,
+4634249,2024/2025,2025-02-01,Central Coast Mariners,Newcastle Jets,baseline_league,0.44518272425249167,2,0,
+4634292,2024/2025,2025-02-02,Brisbane Roar FC,Wellington Phoenix,baseline_league,0.44518272425249167,2,0,
+4634284,2024/2025,2025-02-05,Melbourne City FC,Western United FC,baseline_league,0.44518272425249167,1,0,
+4634246,2024/2025,2025-02-07,Adelaide United,Perth Glory,baseline_league,0.44518272425249167,0,0,
+4634244,2024/2025,2025-02-08,Newcastle Jets,Melbourne City FC,baseline_league,0.44518272425249167,2,0,
+4634245,2024/2025,2025-02-08,Canberra United FC,Central Coast Mariners,baseline_league,0.44518272425249167,1,0,
+4634291,2024/2025,2025-02-08,Wellington Phoenix,Melbourne Victory,baseline_league,0.44518272425249167,1,0,
+4634242,2024/2025,2025-02-09,Sydney FC,Western United FC,baseline_league,0.44518272425249167,3,1,
+4634243,2024/2025,2025-02-09,Western Sydney Wanderers FC,Brisbane Roar FC,baseline_league,0.44518272425249167,1,0,
+4634241,2024/2025,2025-02-14,Western Sydney Wanderers FC,Newcastle Jets,baseline_league,0.44518272425249167,4,1,
+4634239,2024/2025,2025-02-15,Melbourne City FC,Sydney FC,baseline_league,0.44518272425249167,2,0,
+4634240,2024/2025,2025-02-15,Adelaide United,Canberra United FC,baseline_league,0.44518272425249167,0,0,
+4634264,2024/2025,2025-02-16,Melbourne Victory,Central Coast Mariners,baseline_league,0.44518272425249167,0,0,
+4634265,2024/2025,2025-02-16,Brisbane Roar FC,Western United FC,baseline_league,0.44518272425249167,2,0,
+4634316,2024/2025,2025-02-16,Perth Glory,Wellington Phoenix,baseline_league,0.44518272425249167,1,0,
+4634266,2024/2025,2025-02-28,Central Coast Mariners,Western Sydney Wanderers FC,baseline_league,0.44518272425249167,0,0,
+4634267,2024/2025,2025-03-01,Canberra United FC,Melbourne City FC,baseline_league,0.44518272425249167,0,0,
+4634268,2024/2025,2025-03-01,Newcastle Jets,Perth Glory,baseline_league,0.44518272425249167,1,0,
+4634269,2024/2025,2025-03-01,Western United FC,Melbourne Victory,baseline_league,0.44518272425249167,4,1,
+4634270,2024/2025,2025-03-02,Sydney FC,Brisbane Roar FC,baseline_league,0.44518272425249167,2,0,
+4634317,2024/2025,2025-03-02,Wellington Phoenix,Adelaide United,baseline_league,0.44518272425249167,3,1,
+4634271,2024/2025,2025-03-07,Perth Glory,Western United FC,baseline_league,0.44518272425249167,2,0,
+4634272,2024/2025,2025-03-08,Newcastle Jets,Sydney FC,baseline_league,0.44518272425249167,1,0,
+4634273,2024/2025,2025-03-08,Adelaide United,Central Coast Mariners,baseline_league,0.44518272425249167,0,0,
+4634274,2024/2025,2025-03-09,Melbourne Victory,Canberra United FC,baseline_league,0.44518272425249167,0,0,
+4634318,2024/2025,2025-03-09,Wellington Phoenix,Western Sydney Wanderers FC,baseline_league,0.44518272425249167,2,0,
+4634276,2024/2025,2025-03-14,Western United FC,Canberra United FC,baseline_league,0.44518272425249167,4,1,
+4634277,2024/2025,2025-03-14,Central Coast Mariners,Perth Glory,baseline_league,0.44518272425249167,5,1,
+4634319,2024/2025,2025-03-15,Sydney FC,Wellington Phoenix,baseline_league,0.44518272425249167,0,0,
+4634279,2024/2025,2025-03-16,Melbourne City FC,Adelaide United,baseline_league,0.44518272425249167,0,0,
+4634280,2024/2025,2025-03-16,Brisbane Roar FC,Newcastle Jets,baseline_league,0.44518272425249167,1,0,
+4634281,2024/2025,2025-03-21,Melbourne Victory,Newcastle Jets,baseline_league,0.44518272425249167,3,1,
+4634282,2024/2025,2025-03-22,Canberra United FC,Sydney FC,baseline_league,0.44518272425249167,1,0,
+4634283,2024/2025,2025-03-22,Perth Glory,Western Sydney Wanderers FC,baseline_league,0.44518272425249167,0,0,
+4634320,2024/2025,2025-03-22,Wellington Phoenix,Central Coast Mariners,baseline_league,0.44518272425249167,5,1,
+4634285,2024/2025,2025-03-23,Adelaide United,Brisbane Roar FC,baseline_league,0.44518272425249167,5,1,
+4634275,2024/2025,2025-03-26,Brisbane Roar FC,Melbourne City FC,baseline_league,0.44518272425249167,2,0,
+4634286,2024/2025,2025-03-28,Western Sydney Wanderers FC,Sydney FC,baseline_league,0.44518272425249167,1,0,
+4634287,2024/2025,2025-03-29,Melbourne Victory,Adelaide United,baseline_league,0.44518272425249167,2,0,
+4634288,2024/2025,2025-03-29,Perth Glory,Canberra United FC,baseline_league,0.44518272425249167,3,1,
+4634289,2024/2025,2025-03-30,Newcastle Jets,Western United FC,baseline_league,0.44518272425249167,1,0,
+4634303,2024/2025,2025-03-30,Central Coast Mariners,Brisbane Roar FC,baseline_league,0.44518272425249167,2,0,
+4634321,2024/2025,2025-03-30,Wellington Phoenix,Melbourne City FC,baseline_league,0.44518272425249167,3,1,
+4634278,2024/2025,2025-04-06,Western Sydney Wanderers FC,Melbourne Victory,baseline_league,0.44518272425249167,3,1,
+4634314,2024/2025,2025-04-11,Central Coast Mariners,Melbourne Victory,baseline_league,0.44518272425249167,5,1,
+4634315,2024/2025,2025-04-11,Melbourne City FC,Newcastle Jets,baseline_league,0.44518272425249167,0,0,
+4634312,2024/2025,2025-04-12,Western United FC,Adelaide United,baseline_league,0.44518272425249167,2,0,
+4634313,2024/2025,2025-04-12,Sydney FC,Perth Glory,baseline_league,0.44518272425249167,3,1,
+4634311,2024/2025,2025-04-13,Brisbane Roar FC,Western Sydney Wanderers FC,baseline_league,0.44518272425249167,1,0,
+4634322,2024/2025,2025-04-13,Canberra United FC,Wellington Phoenix,baseline_league,0.44518272425249167,4,1,
+4634309,2024/2025,2025-04-18,Perth Glory,Melbourne City FC,baseline_league,0.44518272425249167,3,1,
+4634310,2024/2025,2025-04-18,Adelaide United,Sydney FC,baseline_league,0.44518272425249167,1,0,
+4634306,2024/2025,2025-04-19,Western Sydney Wanderers FC,Canberra United FC,baseline_league,0.44518272425249167,0,0,
+4634307,2024/2025,2025-04-19,Newcastle Jets,Central Coast Mariners,baseline_league,0.44518272425249167,1,0,
+4634308,2024/2025,2025-04-19,Melbourne Victory,Brisbane Roar FC,baseline_league,0.44518272425249167,3,1,
+4634323,2024/2025,2025-04-20,Wellington Phoenix,Western United FC,baseline_league,0.44518272425249167,3,1,
+4634305,2024/2025,2024-11-01,Western United FC,Wellington Phoenix,baseline_naive,0.2560301060414599,1,0,
+4634199,2024/2025,2024-11-02,Central Coast Mariners,Sydney FC,baseline_naive,0.46894717978601386,0,0,
+4634210,2024/2025,2024-11-02,Adelaide United,Melbourne Victory,baseline_naive,0.5423792934326139,1,0,
+4634211,2024/2025,2024-11-02,Canberra United FC,Brisbane Roar FC,baseline_naive,0.3233235037142379,3,1,
+4634208,2024/2025,2024-11-03,Newcastle Jets,Western Sydney Wanderers FC,baseline_naive,0.4302909492688969,2,0,
+4634209,2024/2025,2024-11-03,Melbourne City FC,Perth Glory,baseline_naive,0.3503690340306469,0,0,
+4634207,2024/2025,2024-11-08,Western United FC,Central Coast Mariners,baseline_naive,0.3772862502822327,1,0,
+4634205,2024/2025,2024-11-09,Brisbane Roar FC,Sydney FC,baseline_naive,0.40396120974828453,2,0,
+4634206,2024/2025,2024-11-09,Melbourne Victory,Melbourne City FC,baseline_naive,0.4302909492688969,6,1,
+4634203,2024/2025,2024-11-10,Perth Glory,Newcastle Jets,baseline_naive,0.4561869812954795,4,1,
+4634204,2024/2025,2024-11-10,Western Sydney Wanderers FC,Adelaide United,baseline_naive,0.33685426909121996,0,0,
+4634304,2024/2025,2024-11-10,Wellington Phoenix,Canberra United FC,baseline_naive,0.2166417428512024,2,0,
+4634202,2024/2025,2024-11-15,Brisbane Roar FC,Perth Glory,baseline_naive,0.4302909492688969,8,1,
+4634186,2024/2025,2024-11-16,Canberra United FC,Adelaide United,baseline_naive,0.30979280800915054,1,0,
+4634200,2024/2025,2024-11-16,Melbourne City FC,Central Coast Mariners,baseline_naive,0.4302909492688969,2,0,
+4634201,2024/2025,2024-11-16,Sydney FC,Western Sydney Wanderers FC,baseline_naive,0.24277656821188187,1,0,
+4634198,2024/2025,2024-11-17,Melbourne Victory,Western United FC,baseline_naive,0.4561869812954795,5,1,
+4634290,2024/2025,2024-11-17,Newcastle Jets,Wellington Phoenix,baseline_naive,0.4561869812954795,4,1,
+4634197,2024/2025,2024-11-22,Western Sydney Wanderers FC,Brisbane Roar FC,baseline_naive,0.3906607513761219,1,0,
+4634302,2024/2025,2024-11-22,Adelaide United,Wellington Phoenix,baseline_naive,0.29627952144628367,2,0,
+4634195,2024/2025,2024-11-23,Newcastle Jets,Western United FC,baseline_naive,0.5185431384481252,0,0,
+4634196,2024/2025,2024-11-23,Central Coast Mariners,Melbourne Victory,baseline_naive,0.5879183674653778,4,1,
+4634193,2024/2025,2024-11-24,Sydney FC,Melbourne City FC,baseline_naive,0.32332350371423757,1,0,
+4634194,2024/2025,2024-11-24,Canberra United FC,Perth Glory,baseline_naive,0.3772862502822327,0,0,
+4634191,2024/2025,2024-11-30,Central Coast Mariners,Canberra United FC,baseline_naive,0.3638504593312324,4,1,
+4634192,2024/2025,2024-11-30,Melbourne City FC,Western Sydney Wanderers FC,baseline_naive,0.2693792178694142,1,0,
+4634188,2024/2025,2024-12-08,Perth Glory,Melbourne Victory,baseline_naive,0.5655149260985739,2,0,
+4634189,2024/2025,2024-12-08,Adelaide United,Newcastle Jets,baseline_naive,0.49404880558715436,5,1,
+4634190,2024/2025,2024-12-08,Western United FC,Sydney FC,baseline_naive,0.28280229468208784,4,1,
+4634301,2024/2025,2024-12-08,Wellington Phoenix,Brisbane Roar FC,baseline_naive,0.48157054751247386,1,0,
+4634300,2024/2025,2024-12-13,Melbourne Victory,Wellington Phoenix,baseline_naive,0.5063753334571652,1,0,
+4634187,2024/2025,2024-12-14,Western Sydney Wanderers FC,Western United FC,baseline_naive,0.29627952144628367,2,0,
+4634228,2024/2025,2024-12-14,Sydney FC,Newcastle Jets,baseline_naive,0.46894717978601386,3,1,
+4634221,2024/2025,2024-12-15,Brisbane Roar FC,Central Coast Mariners,baseline_naive,0.5540366959194419,0,0,
+4634226,2024/2025,2024-12-15,Perth Glory,Adelaide United,baseline_naive,0.40396120974828453,1,0,
+4634227,2024/2025,2024-12-15,Melbourne City FC,Canberra United FC,baseline_naive,0.32332350371423757,0,0,
+4634224,2024/2025,2024-12-20,Western Sydney Wanderers FC,Perth Glory,baseline_naive,0.24277656821188187,4,1,
+4634225,2024/2025,2024-12-20,Adelaide United,Melbourne City FC,baseline_naive,0.33685426909121996,2,0,
+4634222,2024/2025,2024-12-21,Canberra United FC,Melbourne Victory,baseline_naive,0.4561869812954795,1,0,
+4634223,2024/2025,2024-12-21,Newcastle Jets,Brisbane Roar FC,baseline_naive,0.5879183674653778,6,1,
+4634299,2024/2025,2024-12-21,Wellington Phoenix,Sydney FC,baseline_naive,0.2560301060414599,0,0,
+4634212,2024/2025,2024-12-22,Central Coast Mariners,Western United FC,baseline_naive,0.4432982195040277,0,0,
+4634218,2024/2025,2024-12-27,Perth Glory,Central Coast Mariners,baseline_naive,0.33685426909121996,0,0,
+4634220,2024/2025,2024-12-27,Adelaide United,Western Sydney Wanderers FC,baseline_naive,0.22963955267841907,0,0,
+4634219,2024/2025,2024-12-28,Sydney FC,Melbourne Victory,baseline_naive,0.4302909492688969,4,1,
+4634298,2024/2025,2024-12-28,Melbourne City FC,Wellington Phoenix,baseline_naive,0.2693792178694142,3,1,
+4634216,2024/2025,2024-12-29,Western United FC,Brisbane Roar FC,baseline_naive,0.48157054751247386,2,0,
+4634217,2024/2025,2024-12-29,Canberra United FC,Newcastle Jets,baseline_naive,0.48157054751247386,2,0,
+4634215,2024/2025,2024-12-31,Central Coast Mariners,Melbourne City FC,baseline_naive,0.2693792178694142,4,1,
+4634214,2024/2025,2025-01-03,Western United FC,Newcastle Jets,baseline_naive,0.5063753334571652,3,1,
+4634213,2024/2025,2025-01-04,Central Coast Mariners,Adelaide United,baseline_naive,0.24277656821188187,2,0,
+4634229,2024/2025,2025-01-04,Brisbane Roar FC,Canberra United FC,baseline_naive,0.3503690340306468,4,1,
+4634297,2024/2025,2025-01-04,Wellington Phoenix,Perth Glory,baseline_naive,0.32332350371423757,4,1,
+4634230,2024/2025,2025-01-05,Sydney FC,Melbourne City FC,baseline_naive,0.30979280800915077,0,0,
+4634231,2024/2025,2025-01-05,Melbourne Victory,Western Sydney Wanderers FC,baseline_naive,0.41717525961431245,0,0,
+4634232,2024/2025,2025-01-08,Newcastle Jets,Adelaide United,baseline_naive,0.4432982195040277,3,1,
+4634233,2024/2025,2025-01-08,Brisbane Roar FC,Melbourne Victory,baseline_naive,0.5305464841135035,1,0,
+4634296,2024/2025,2025-01-09,Western Sydney Wanderers FC,Wellington Phoenix,baseline_naive,0.20380500101857968,0,0,
+4634234,2024/2025,2025-01-10,Perth Glory,Sydney FC,baseline_naive,0.3638504593312324,2,0,
+4634235,2024/2025,2025-01-11,Newcastle Jets,Melbourne Victory,baseline_naive,0.5423792934326139,3,1,
+4634236,2024/2025,2025-01-11,Canberra United FC,Western United FC,baseline_naive,0.30979280800915043,1,0,
+4634237,2024/2025,2025-01-11,Melbourne City FC,Brisbane Roar FC,baseline_naive,0.41717525961431245,6,1,
+4634251,2024/2025,2025-01-12,Western Sydney Wanderers FC,Central Coast Mariners,baseline_naive,0.16650186613705742,1,0,
+4634295,2024/2025,2025-01-12,Adelaide United,Wellington Phoenix,baseline_naive,0.2560301060414599,0,0,
+4634263,2024/2025,2025-01-15,Sydney FC,Canberra United FC,baseline_naive,0.2560301060414599,0,0,
+4634262,2024/2025,2025-01-17,Western United FC,Melbourne City FC,baseline_naive,0.3772862502822327,3,1,
+4634260,2024/2025,2025-01-18,Melbourne Victory,Perth Glory,baseline_naive,0.48157054751247386,1,0,
+4634261,2024/2025,2025-01-18,Canberra United FC,Western Sydney Wanderers FC,baseline_naive,0.13153241192355902,1,0,
+4634258,2024/2025,2025-01-19,Brisbane Roar FC,Adelaide United,baseline_naive,0.41717525961431245,2,0,
+4634259,2024/2025,2025-01-19,Sydney FC,Central Coast Mariners,baseline_naive,0.2560301060414599,4,1,
+4634294,2024/2025,2025-01-19,Wellington Phoenix,Newcastle Jets,baseline_naive,0.4561869812954795,3,1,
+4634257,2024/2025,2025-01-21,Western United FC,Perth Glory,baseline_naive,0.41717525961431234,1,0,
+4634256,2024/2025,2025-01-24,Melbourne Victory,Sydney FC,baseline_naive,0.33685426909121974,4,1,
+4634253,2024/2025,2025-01-25,Newcastle Jets,Canberra United FC,baseline_naive,0.40396120974828453,3,1,
+4634254,2024/2025,2025-01-25,Adelaide United,Western United FC,baseline_naive,0.30979280800915043,1,0,
+4634255,2024/2025,2025-01-25,Western Sydney Wanderers FC,Melbourne City FC,baseline_naive,0.22963955267841907,1,0,
+4634252,2024/2025,2025-01-26,Perth Glory,Brisbane Roar FC,baseline_naive,0.5063753334571652,0,0,
+4634293,2024/2025,2025-01-26,Central Coast Mariners,Wellington Phoenix,baseline_naive,0.30979280800915043,2,0,
+4634238,2024/2025,2025-01-31,Western United FC,Western Sydney Wanderers FC,baseline_naive,0.16650186613705742,1,0,
+4634250,2024/2025,2025-01-31,Sydney FC,Adelaide United,baseline_naive,0.32332350371423757,1,0,
+4634247,2024/2025,2025-02-01,Canberra United FC,Perth Glory,baseline_naive,0.20380500101857968,6,1,
+4634248,2024/2025,2025-02-01,Melbourne City FC,Melbourne Victory,baseline_naive,0.3503690340306468,1,0,
+4634249,2024/2025,2025-02-01,Central Coast Mariners,Newcastle Jets,baseline_naive,0.48157054751247386,2,0,
+4634292,2024/2025,2025-02-02,Brisbane Roar FC,Wellington Phoenix,baseline_naive,0.30979280800915043,2,0,
+4634284,2024/2025,2025-02-05,Melbourne City FC,Western United FC,baseline_naive,0.30979280800915054,1,0,
+4634246,2024/2025,2025-02-07,Adelaide United,Perth Glory,baseline_naive,0.29627952144628367,0,0,
+4634244,2024/2025,2025-02-08,Newcastle Jets,Melbourne City FC,baseline_naive,0.5063753334571652,2,0,
+4634245,2024/2025,2025-02-08,Canberra United FC,Central Coast Mariners,baseline_naive,0.33685426909121996,1,0,
+4634291,2024/2025,2025-02-08,Wellington Phoenix,Melbourne Victory,baseline_naive,0.24277656821188187,1,0,
+4634242,2024/2025,2025-02-09,Sydney FC,Western United FC,baseline_naive,0.28280229468208773,3,1,
+4634243,2024/2025,2025-02-09,Western Sydney Wanderers FC,Brisbane Roar FC,baseline_naive,0.25603010604146004,1,0,
+4634241,2024/2025,2025-02-14,Western Sydney Wanderers FC,Newcastle Jets,baseline_naive,0.33685426909121996,4,1,
+4634239,2024/2025,2025-02-15,Melbourne City FC,Sydney FC,baseline_naive,0.3772862502822327,2,0,
+4634240,2024/2025,2025-02-15,Adelaide United,Canberra United FC,baseline_naive,0.20380500101857968,0,0,
+4634264,2024/2025,2025-02-16,Melbourne Victory,Central Coast Mariners,baseline_naive,0.22963955267841896,0,0,
+4634265,2024/2025,2025-02-16,Brisbane Roar FC,Western United FC,baseline_naive,0.32332350371423757,2,0,
+4634316,2024/2025,2025-02-16,Perth Glory,Wellington Phoenix,baseline_naive,0.2560301060414599,1,0,
+4634266,2024/2025,2025-02-28,Central Coast Mariners,Western Sydney Wanderers FC,baseline_naive,0.17871041325863657,0,0,
+4634267,2024/2025,2025-03-01,Canberra United FC,Melbourne City FC,baseline_naive,0.3503690340306468,0,0,
+4634268,2024/2025,2025-03-01,Newcastle Jets,Perth Glory,baseline_naive,0.4561869812954795,1,0,
+4634269,2024/2025,2025-03-01,Western United FC,Melbourne Victory,baseline_naive,0.24277656821188165,4,1,
+4634270,2024/2025,2025-03-02,Sydney FC,Brisbane Roar FC,baseline_naive,0.40396120974828453,2,0,
+4634317,2024/2025,2025-03-02,Wellington Phoenix,Adelaide United,baseline_naive,0.15455282553657002,3,1,
+4634271,2024/2025,2025-03-07,Perth Glory,Western United FC,baseline_naive,0.2693792178694142,2,0,
+4634272,2024/2025,2025-03-08,Newcastle Jets,Sydney FC,baseline_naive,0.4302909492688969,1,0,
+4634273,2024/2025,2025-03-08,Adelaide United,Central Coast Mariners,baseline_naive,0.16650186613705742,0,0,
+4634274,2024/2025,2025-03-09,Melbourne Victory,Canberra United FC,baseline_naive,0.28280229468208784,0,0,
+4634318,2024/2025,2025-03-09,Wellington Phoenix,Western Sydney Wanderers FC,baseline_naive,0.16650186613705742,2,0,
+4634276,2024/2025,2025-03-14,Western United FC,Canberra United FC,baseline_naive,0.2560301060414599,4,1,
+4634277,2024/2025,2025-03-14,Central Coast Mariners,Perth Glory,baseline_naive,0.24277656821188165,5,1,
+4634319,2024/2025,2025-03-15,Sydney FC,Wellington Phoenix,baseline_naive,0.28280229468208773,0,0,
+4634279,2024/2025,2025-03-16,Melbourne City FC,Adelaide United,baseline_naive,0.2166417428512024,0,0,
+4634280,2024/2025,2025-03-16,Brisbane Roar FC,Newcastle Jets,baseline_naive,0.41717525961431234,1,0,
+4634281,2024/2025,2025-03-21,Melbourne Victory,Newcastle Jets,baseline_naive,0.29627952144628367,3,1,
+4634282,2024/2025,2025-03-22,Canberra United FC,Sydney FC,baseline_naive,0.2560301060414599,1,0,
+4634283,2024/2025,2025-03-22,Perth Glory,Western Sydney Wanderers FC,baseline_naive,0.19115336165778207,0,0,
+4634320,2024/2025,2025-03-22,Wellington Phoenix,Central Coast Mariners,baseline_naive,0.20380500101857968,5,1,
+4634285,2024/2025,2025-03-23,Adelaide United,Brisbane Roar FC,baseline_naive,0.20380500101857968,5,1,
+4634275,2024/2025,2025-03-26,Brisbane Roar FC,Melbourne City FC,baseline_naive,0.29627952144628367,2,0,
+4634286,2024/2025,2025-03-28,Western Sydney Wanderers FC,Sydney FC,baseline_naive,0.17871041325863657,1,0,
+4634287,2024/2025,2025-03-29,Melbourne Victory,Adelaide United,baseline_naive,0.19115336165778207,2,0,
+4634288,2024/2025,2025-03-29,Perth Glory,Canberra United FC,baseline_naive,0.22963955267841907,3,1,
+4634289,2024/2025,2025-03-30,Newcastle Jets,Western United FC,baseline_naive,0.3906607513761219,1,0,
+4634303,2024/2025,2025-03-30,Central Coast Mariners,Brisbane Roar FC,baseline_naive,0.3638504593312326,2,0,
+4634321,2024/2025,2025-03-30,Wellington Phoenix,Melbourne City FC,baseline_naive,0.28280229468208773,3,1,
+4634278,2024/2025,2025-04-06,Western Sydney Wanderers FC,Melbourne Victory,baseline_naive,0.20380500101857968,3,1,
+4634314,2024/2025,2025-04-11,Central Coast Mariners,Melbourne Victory,baseline_naive,0.32332350371423757,5,1,
+4634315,2024/2025,2025-04-11,Melbourne City FC,Newcastle Jets,baseline_naive,0.2693792178694143,0,0,
+4634312,2024/2025,2025-04-12,Western United FC,Adelaide United,baseline_naive,0.24277656821188187,2,0,
+4634313,2024/2025,2025-04-12,Sydney FC,Perth Glory,baseline_naive,0.29627952144628367,3,1,
+4634311,2024/2025,2025-04-13,Brisbane Roar FC,Western Sydney Wanderers FC,baseline_naive,0.22963955267841907,1,0,
+4634322,2024/2025,2025-04-13,Canberra United FC,Wellington Phoenix,baseline_naive,0.33685426909121996,4,1,
+4634309,2024/2025,2025-04-18,Perth Glory,Melbourne City FC,baseline_naive,0.22963955267841907,3,1,
+4634310,2024/2025,2025-04-18,Adelaide United,Sydney FC,baseline_naive,0.2166417428512024,1,0,
+4634306,2024/2025,2025-04-19,Western Sydney Wanderers FC,Canberra United FC,baseline_naive,0.2693792178694143,0,0,
+4634307,2024/2025,2025-04-19,Newcastle Jets,Central Coast Mariners,baseline_naive,0.3233235037142379,1,0,
+4634308,2024/2025,2025-04-19,Melbourne Victory,Brisbane Roar FC,baseline_naive,0.33685426909121996,3,1,
+4634323,2024/2025,2025-04-20,Wellington Phoenix,Western United FC,baseline_naive,0.3772862502822327,3,1,

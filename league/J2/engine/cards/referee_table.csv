@@ -1,0 +1,2319 @@
+match_id,season,date,home_team,away_team,referee,referee_present
+3512031,2021,2021-02-27,Giravanz Kitakyushu,Albirex Niigata,,0
+3512039,2021,2021-02-27,V-Varen Nagasaki,Zweigen Kanazawa,,0
+3512032,2021,2021-02-28,Renofa Yamaguchi,Matsumoto Yamaga,,0
+3512033,2021,2021-02-28,SC Sagamihara,Kyoto Sanga FC,,0
+3512034,2021,2021-02-28,Machida Zelvia,Montedio Yamagata,,0
+3512035,2021,2021-02-28,Tokyo Verdy,Ehime FC,,0
+3512036,2021,2021-02-28,JEF United Chiba,Ventforet Kofu,,0
+3512037,2021,2021-02-28,Thespakusatsu Gunma,Blaublitz Akita,,0
+3512038,2021,2021-02-28,Tochigi SC,Fagiano Okayama FC,,0
+3512040,2021,2021-02-28,FC Ryukyu,Jubilo Iwata,,0
+3512052,2021,2021-02-28,Mito Hollyhock,Omiya Ardija,,0
+3512041,2021,2021-03-06,Omiya Ardija,Ventforet Kofu,,0
+3512048,2021,2021-03-06,Jubilo Iwata,Machida Zelvia,,0
+3512049,2021,2021-03-06,Albirex Niigata,V-Varen Nagasaki,,0
+3521012,2021,2021-03-06,Giravanz Kitakyushu,Mito Hollyhock,,0
+3521022,2021,2021-03-06,FC Ryukyu,Renofa Yamaguchi,,0
+3512045,2021,2021-03-07,Ehime FC,JEF United Chiba,,0
+3512046,2021,2021-03-07,Fagiano Okayama FC,Zweigen Kanazawa,,0
+3512047,2021,2021-03-07,Kyoto Sanga FC,Matsumoto Yamaga,,0
+3521019,2021,2021-03-07,Tokyo Verdy,Montedio Yamagata,,0
+3521020,2021,2021-03-07,Tochigi SC,Blaublitz Akita,,0
+3521021,2021,2021-03-07,SC Sagamihara,Thespakusatsu Gunma,,0
+3521015,2021,2021-03-13,V-Varen Nagasaki,Ehime FC,,0
+3521016,2021,2021-03-13,Renofa Yamaguchi,Albirex Niigata,,0
+3521017,2021,2021-03-13,Jubilo Iwata,Mito Hollyhock,,0
+3512042,2021,2021-03-14,Zweigen Kanazawa,Giravanz Kitakyushu,,0
+3512043,2021,2021-03-14,Matsumoto Yamaga,Montedio Yamagata,,0
+3512044,2021,2021-03-14,Ventforet Kofu,Tochigi SC,,0
+3521013,2021,2021-03-14,JEF United Chiba,Blaublitz Akita,,0
+3521014,2021,2021-03-14,Thespakusatsu Gunma,FC Ryukyu,,0
+3521023,2021,2021-03-14,Machida Zelvia,Tokyo Verdy,,0
+3521024,2021,2021-03-14,Fagiano Okayama FC,SC Sagamihara,,0
+3521032,2021,2021-03-20,FC Ryukyu,V-Varen Nagasaki,,0
+3521033,2021,2021-03-20,Tokyo Verdy,Zweigen Kanazawa,,0
+3521034,2021,2021-03-20,Albirex Niigata,Thespakusatsu Gunma,,0
+3512050,2021,2021-03-21,Montedio Yamagata,Tochigi SC,,0
+3521025,2021,2021-03-21,SC Sagamihara,Omiya Ardija,,0
+3521026,2021,2021-03-21,Renofa Yamaguchi,Fagiano Okayama FC,,0
+3521027,2021,2021-03-21,Mito Hollyhock,Machida Zelvia,,0
+3521028,2021,2021-03-21,Giravanz Kitakyushu,Blaublitz Akita,,0
+3521029,2021,2021-03-21,Ehime FC,Ventforet Kofu,,0
+3521030,2021,2021-03-21,Kyoto Sanga FC,Jubilo Iwata,,0
+3521031,2021,2021-03-21,Matsumoto Yamaga,JEF United Chiba,,0
+3521018,2021,2021-03-24,Omiya Ardija,Kyoto Sanga FC,,0
+3521035,2021,2021-03-27,Omiya Ardija,V-Varen Nagasaki,,0
+3521036,2021,2021-03-27,Ventforet Kofu,Machida Zelvia,,0
+3521044,2021,2021-03-27,JEF United Chiba,FC Ryukyu,,0
+3521045,2021,2021-03-27,Jubilo Iwata,Renofa Yamaguchi,,0
+3521046,2021,2021-03-27,Albirex Niigata,Tokyo Verdy,,0
+3512051,2021,2021-03-28,Blaublitz Akita,Kyoto Sanga FC,,0
+3521039,2021,2021-03-28,Zweigen Kanazawa,SC Sagamihara,,0
+3521040,2021,2021-03-28,Thespakusatsu Gunma,Giravanz Kitakyushu,,0
+3521041,2021,2021-03-28,Tochigi SC,Ehime FC,,0
+3521042,2021,2021-03-28,Mito Hollyhock,Matsumoto Yamaga,,0
+3521043,2021,2021-03-28,Montedio Yamagata,Fagiano Okayama FC,,0
+3521037,2021,2021-04-03,V-Varen Nagasaki,Ventforet Kofu,,0
+3521038,2021,2021-04-03,Giravanz Kitakyushu,Montedio Yamagata,,0
+3521047,2021,2021-04-03,FC Ryukyu,Omiya Ardija,,0
+3521048,2021,2021-04-04,SC Sagamihara,Albirex Niigata,,0
+3521052,2021,2021-04-04,Tokyo Verdy,Mito Hollyhock,,0
+3521053,2021,2021-04-04,Ehime FC,Thespakusatsu Gunma,,0
+3521054,2021,2021-04-04,Renofa Yamaguchi,Tochigi SC,,0
+3521055,2021,2021-04-04,Kyoto Sanga FC,JEF United Chiba,,0
+3521056,2021,2021-04-04,Matsumoto Yamaga,Blaublitz Akita,,0
+3521057,2021,2021-04-04,Machida Zelvia,Zweigen Kanazawa,,0
+3521058,2021,2021-04-04,Fagiano Okayama FC,Jubilo Iwata,,0
+3521049,2021,2021-04-10,Ventforet Kofu,Giravanz Kitakyushu,,0
+3521050,2021,2021-04-10,Thespakusatsu Gunma,V-Varen Nagasaki,,0
+3521051,2021,2021-04-10,Blaublitz Akita,Omiya Ardija,,0
+3521059,2021,2021-04-10,Jubilo Iwata,Matsumoto Yamaga,,0
+3521060,2021,2021-04-10,Tokyo Verdy,Renofa Yamaguchi,,0
+3521065,2021,2021-04-11,Ehime FC,Fagiano Okayama FC,,0
+3521066,2021,2021-04-11,Zweigen Kanazawa,JEF United Chiba,,0
+3521067,2021,2021-04-11,Machida Zelvia,Kyoto Sanga FC,,0
+3521068,2021,2021-04-11,Tochigi SC,SC Sagamihara,,0
+3521069,2021,2021-04-11,Mito Hollyhock,FC Ryukyu,,0
+3521070,2021,2021-04-11,Montedio Yamagata,Albirex Niigata,,0
+3521061,2021,2021-04-17,Matsumoto Yamaga,Ventforet Kofu,,0
+3521062,2021,2021-04-17,JEF United Chiba,Tochigi SC,,0
+3521063,2021,2021-04-17,Omiya Ardija,Ehime FC,,0
+3521064,2021,2021-04-17,Blaublitz Akita,Montedio Yamagata,,0
+3521071,2021,2021-04-17,Albirex Niigata,Zweigen Kanazawa,,0
+3521072,2021,2021-04-17,Kyoto Sanga FC,Giravanz Kitakyushu,,0
+3521079,2021,2021-04-17,FC Ryukyu,Tokyo Verdy,,0
+3521080,2021,2021-04-17,Fagiano Okayama FC,Mito Hollyhock,,0
+3521081,2021,2021-04-17,V-Varen Nagasaki,Machida Zelvia,,0
+3521082,2021,2021-04-17,Renofa Yamaguchi,Thespakusatsu Gunma,,0
+3521078,2021,2021-04-18,SC Sagamihara,Jubilo Iwata,,0
+3521073,2021,2021-04-21,Thespakusatsu Gunma,Fagiano Okayama FC,,0
+3521074,2021,2021-04-21,Tochigi SC,Albirex Niigata,,0
+3521075,2021,2021-04-21,Mito Hollyhock,JEF United Chiba,,0
+3521076,2021,2021-04-21,Montedio Yamagata,V-Varen Nagasaki,,0
+3521077,2021,2021-04-21,Tokyo Verdy,Kyoto Sanga FC,,0
+3521083,2021,2021-04-21,Machida Zelvia,FC Ryukyu,,0
+3521084,2021,2021-04-21,Ventforet Kofu,SC Sagamihara,,0
+3521085,2021,2021-04-21,Zweigen Kanazawa,Blaublitz Akita,,0
+3521086,2021,2021-04-21,Jubilo Iwata,RB Omiya Ardija,,0
+3521087,2021,2021-04-21,Ehime FC,Matsumoto Yamaga,,0
+3521088,2021,2021-04-21,Giravanz Kitakyushu,Renofa Yamaguchi,,0
+3521089,2021,2021-04-24,Ehime FC,Albirex Niigata,,0
+3521090,2021,2021-04-25,Blaublitz Akita,Mito Hollyhock,,0
+3521091,2021,2021-04-25,Montedio Yamagata,Jubilo Iwata,,0
+3521092,2021,2021-04-25,Omiya Ardija,Machida Zelvia,,0
+3521093,2021,2021-04-25,JEF United Chiba,SC Sagamihara,,0
+3521094,2021,2021-04-25,Matsumoto Yamaga,Thespakusatsu Gunma,,0
+3521095,2021,2021-04-25,Zweigen Kanazawa,Tochigi SC,,0
+3521096,2021,2021-04-25,Fagiano Okayama FC,Giravanz Kitakyushu,,0
+3521104,2021,2021-04-25,FC Ryukyu,Ventforet Kofu,,0
+3521105,2021,2021-04-25,V-Varen Nagasaki,Tokyo Verdy,,0
+3521106,2021,2021-04-25,Renofa Yamaguchi,Kyoto Sanga FC,,0
+3521097,2021,2021-05-01,Giravanz Kitakyushu,Matsumoto Yamaga,,0
+3521098,2021,2021-05-01,Kyoto Sanga FC,Ehime FC,,0
+3521099,2021,2021-05-01,Jubilo Iwata,Tochigi SC,,0
+3521100,2021,2021-05-01,Albirex Niigata,JEF United Chiba,,0
+3521101,2021,2021-05-01,Ventforet Kofu,Zweigen Kanazawa,,0
+3521102,2021,2021-05-01,Thespakusatsu Gunma,Montedio Yamagata,,0
+3521103,2021,2021-05-01,Blaublitz Akita,Fagiano Okayama FC,,0
+3521107,2021,2021-05-01,SC Sagamihara,FC Ryukyu,,0
+3521108,2021,2021-05-02,Mito Hollyhock,V-Varen Nagasaki,,0
+3521117,2021,2021-05-02,Machida Zelvia,Renofa Yamaguchi,,0
+3521118,2021,2021-05-02,Tokyo Verdy,Omiya Ardija,,0
+3521109,2021,2021-05-05,Tokyo Verdy,Thespakusatsu Gunma,,0
+3521110,2021,2021-05-05,V-Varen Nagasaki,Blaublitz Akita,,0
+3521111,2021,2021-05-05,Ehime FC,Jubilo Iwata,,0
+3521112,2021,2021-05-05,Renofa Yamaguchi,JEF United Chiba,,0
+3521113,2021,2021-05-05,Fagiano Okayama FC,Machida Zelvia,,0
+3521114,2021,2021-05-05,Zweigen Kanazawa,Mito Hollyhock,,0
+3521115,2021,2021-05-05,Omiya Ardija,Albirex Niigata,,0
+3521116,2021,2021-05-05,Montedio Yamagata,Ventforet Kofu,,0
+3521119,2021,2021-05-05,Matsumoto Yamaga,SC Sagamihara,,0
+3521120,2021,2021-05-05,Tochigi SC,Giravanz Kitakyushu,,0
+3521130,2021,2021-05-05,FC Ryukyu,Kyoto Sanga FC,,0
+3521129,2021,2021-05-08,Ehime FC,FC Ryukyu,,0
+3521121,2021,2021-05-09,Kyoto Sanga FC,Montedio Yamagata,,0
+3521122,2021,2021-05-09,Zweigen Kanazawa,Renofa Yamaguchi,,0
+3521123,2021,2021-05-09,Albirex Niigata,Matsumoto Yamaga,,0
+3521124,2021,2021-05-09,Ventforet Kofu,Tokyo Verdy,,0
+3521125,2021,2021-05-09,JEF United Chiba,Fagiano Okayama FC,,0
+3521126,2021,2021-05-09,Mito Hollyhock,Tochigi SC,,0
+3521127,2021,2021-05-09,SC Sagamihara,Machida Zelvia,,0
+3521128,2021,2021-05-09,Blaublitz Akita,Jubilo Iwata,,0
+3521131,2021,2021-05-09,Thespakusatsu Gunma,Omiya Ardija,,0
+3521133,2021,2021-05-09,Giravanz Kitakyushu,V-Varen Nagasaki,,0
+3521134,2021,2021-05-15,Ventforet Kofu,Blaublitz Akita,,0
+3521135,2021,2021-05-15,Matsumoto Yamaga,Zweigen Kanazawa,,0
+3521136,2021,2021-05-15,Jubilo Iwata,Thespa Gunma,,0
+3521137,2021,2021-05-15,Renofa Yamaguchi,SC Sagamihara,,0
+3521138,2021,2021-05-15,V-Varen Nagasaki,JEF United Chiba,,0
+3521148,2021,2021-05-15,FC Ryukyu,Tochigi SC,,0
+3521143,2021,2021-05-16,Machida Zelvia,Albirex Niigata,,0
+3521144,2021,2021-05-16,Tokyo Verdy,Giravanz Kitakyushu,,0
+3521145,2021,2021-05-16,Kyoto Sanga FC,Mito Hollyhock,,0
+3521146,2021,2021-05-16,Omiya Ardija,Fagiano Okayama FC,,0
+3521147,2021,2021-05-16,Montedio Yamagata,Ehime FC,,0
+3521142,2021,2021-05-19,Blaublitz Akita,Renofa Yamaguchi,,0
+3521141,2021,2021-05-22,FC Ryukyu,Montedio Yamagata,,0
+3521139,2021,2021-05-23,Tochigi SC,Matsumoto Yamaga,,0
+3521140,2021,2021-05-23,Mito Hollyhock,Ventforet Kofu,,0
+3521149,2021,2021-05-23,JEF United Chiba,Machida Zelvia,,0
+3521150,2021,2021-05-23,Albirex Niigata,Kyoto Sanga FC,,0
+3521155,2021,2021-05-23,Tokyo Verdy,Jubilo Iwata,,0
+3521156,2021,2021-05-23,Giravanz Kitakyushu,Omiya Ardija,,0
+3521157,2021,2021-05-23,Fagiano Okayama FC,V-Varen Nagasaki,,0
+3521158,2021,2021-05-23,Zweigen Kanazawa,Thespakusatsu Gunma,,0
+3521154,2021,2021-05-27,SC Sagamihara,Ehime FC,,0
+3521151,2021,2021-05-29,V-Varen Nagasaki,Renofa Yamaguchi,,0
+3521152,2021,2021-05-29,Omiya Ardija,JEF United Chiba,,0
+3521153,2021,2021-05-29,Thespakusatsu Gunma,Tochigi SC,,0
+3521159,2021,2021-05-29,Tokyo Verdy,Blaublitz Akita,,0
+3521160,2021,2021-05-29,Jubilo Iwata,Zweigen Kanazawa,,0
+3521161,2021,2021-05-30,Matsumoto Yamaga,Fagiano Okayama FC,,0
+3521162,2021,2021-05-30,Montedio Yamagata,SC Sagamihara,,0
+3521169,2021,2021-05-30,Ehime FC,Mito Hollyhock,,0
+3521170,2021,2021-05-30,Machida Zelvia,Giravanz Kitakyushu,,0
+3521171,2021,2021-05-30,Kyoto Sanga FC,Ventforet Kofu,,0
+3521172,2021,2021-05-30,Albirex Niigata,FC Ryukyu,,0
+3521168,2021,2021-06-04,Thespakusatsu Gunma,Mito Hollyhock,,0
+3521163,2021,2021-06-05,Blaublitz Akita,FC Ryukyu,,0
+3521164,2021,2021-06-05,Giravanz Kitakyushu,Jubilo Iwata,,0
+3521165,2021,2021-06-05,Matsumoto Yamaga,Machida Zelvia,,0
+3521166,2021,2021-06-05,Ventforet Kofu,Albirex Niigata,,0
+3521167,2021,2021-06-05,Renofa Yamaguchi,Ehime FC,,0
+3521173,2021,2021-06-05,SC Sagamihara,V-Varen Nagasaki,,0
+3521174,2021,2021-06-05,Fagiano Okayama FC,Tokyo Verdy,,0
+3521182,2021,2021-06-06,Zweigen Kanazawa,Omiya Ardija,,0
+3521183,2021,2021-06-06,JEF United Chiba,Montedio Yamagata,,0
+3521184,2021,2021-06-06,Tochigi SC,Kyoto Sanga FC,,0
+3521175,2021,2021-06-13,Machida Zelvia,Blaublitz Akita,,0
+3521176,2021,2021-06-13,V-Varen Nagasaki,Matsumoto Yamaga,,0
+3521177,2021,2021-06-13,Kyoto Sanga FC,Thespakusatsu Gunma,,0
+3521178,2021,2021-06-13,Albirex Niigata,Fagiano Okayama FC,,0
+3521179,2021,2021-06-13,JEF United Chiba,Tokyo Verdy,,0
+3521180,2021,2021-06-13,Mito Hollyhock,SC Sagamihara,,0
+3521181,2021,2021-06-13,Montedio Yamagata,Renofa Yamaguchi,,0
+3521185,2021,2021-06-13,Jubilo Iwata,Ventforet Kofu,,0
+3521186,2021,2021-06-13,Ehime FC,Zweigen Kanazawa,,0
+3521195,2021,2021-06-13,FC Ryukyu,Giravanz Kitakyushu,,0
+3521196,2021,2021-06-13,Omiya Ardija,Tochigi SC,,0
+3521189,2021,2021-06-19,Fagiano Okayama FC,FC Ryukyu,,0
+3521190,2021,2021-06-19,Jubilo Iwata,JEF United Chiba,,0
+3521191,2021,2021-06-19,Zweigen Kanazawa,Kyoto Sanga FC,,0
+3521192,2021,2021-06-19,Matsumoto Yamaga,Omiya Ardija,,0
+3521193,2021,2021-06-19,Ventforet Kofu,Renofa Yamaguchi,,0
+3521194,2021,2021-06-19,Tochigi SC,V-Varen Nagasaki,,0
+3521187,2021,2021-06-20,Mito Hollyhock,Montedio Yamagata,,0
+3521188,2021,2021-06-20,SC Sagamihara,Tokyo Verdy,,0
+3521197,2021,2021-06-20,Thespakusatsu Gunma,Machida Zelvia,,0
+3521198,2021,2021-06-20,Giravanz Kitakyushu,Ehime FC,,0
+3521208,2021,2021-06-21,Blaublitz Akita,Albirex Niigata,,0
+3521201,2021,2021-06-26,Giravanz Kitakyushu,JEF United Chiba,,0
+3521202,2021,2021-06-26,Montedio Yamagata,Zweigen Kanazawa,,0
+3521203,2021,2021-06-26,FC Ryukyu,Matsumoto Yamaga,,0
+3521204,2021,2021-06-26,Kyoto Sanga FC,Fagiano Okayama FC,,0
+3521205,2021,2021-06-26,Tokyo Verdy,Tochigi SC,,0
+3521206,2021,2021-06-26,Blaublitz Akita,SC Sagamihara,,0
+3521207,2021,2021-06-26,V-Varen Nagasaki,Jubilo Iwata,,0
+3521210,2021,2021-06-26,Albirex Niigata,Mito Hollyhock,,0
+3521199,2021,2021-06-27,Machida Zelvia,Ehime FC,,0
+3521200,2021,2021-06-27,Ventforet Kofu,Thespakusatsu Gunma,,0
+3521209,2021,2021-06-27,Renofa Yamaguchi,Omiya Ardija,,0
+3521211,2021,2021-07-03,Fagiano Okayama FC,Ventforet Kofu,,0
+3521212,2021,2021-07-03,Jubilo Iwata,Albirex Niigata,,0
+3521213,2021,2021-07-03,Zweigen Kanazawa,FC Ryukyu,,0
+3521214,2021,2021-07-03,Omiya Ardija,Montedio Yamagata,,0
+3521215,2021,2021-07-03,Kyoto Sanga FC,V-Varen Nagasaki,,0
+3521216,2021,2021-07-03,Matsumoto Yamaga,Tokyo Verdy,,0
+3521217,2021,2021-07-03,SC Sagamihara,Giravanz Kitakyushu,,0
+3521218,2021,2021-07-03,JEF United Chiba,Thespakusatsu Gunma,,0
+3521219,2021,2021-07-03,Tochigi SC,Machida Zelvia,,0
+3521220,2021,2021-07-03,Mito Hollyhock,Renofa Yamaguchi,,0
+3521221,2021,2021-07-04,Ehime FC,Blaublitz Akita,,0
+3521222,2021,2021-07-11,Blaublitz Akita,JEF United Chiba,,0
+3521223,2021,2021-07-11,Giravanz Kitakyushu,Kyoto Sanga FC,,0
+3521224,2021,2021-07-11,Renofa Yamaguchi,Jubilo Iwata,,0
+3521225,2021,2021-07-11,Zweigen Kanazawa,Fagiano Okayama FC,,0
+3521226,2021,2021-07-11,Machida Zelvia,Mito Hollyhock,,0
+3521227,2021,2021-07-11,Thespakusatsu Gunma,Tokyo Verdy,,0
+3521228,2021,2021-07-11,FC Ryukyu,SC Sagamihara,,0
+3521229,2021,2021-07-11,V-Varen Nagasaki,Omiya Ardija,,0
+3521230,2021,2021-07-11,Albirex Niigata,Tochigi SC,,0
+3521231,2021,2021-07-11,Ventforet Kofu,Ehime FC,,0
+3521232,2021,2021-07-11,Montedio Yamagata,Matsumoto Yamaga,,0
+3521233,2021,2021-07-17,Tochigi SC,Ventforet Kofu,,0
+3521234,2021,2021-07-17,JEF United Chiba,Zweigen Kanazawa,,0
+3521235,2021,2021-07-17,Matsumoto Yamaga,Mito Hollyhock,,0
+3521236,2021,2021-07-17,Kyoto Sanga FC,Albirex Niigata,,0
+3521237,2021,2021-07-17,Jubilo Iwata,Montedio Yamagata,,0
+3521238,2021,2021-07-17,Renofa Yamaguchi,Blaublitz Akita,,0
+3521239,2021,2021-07-17,V-Varen Nagasaki,Giravanz Kitakyushu,,0
+3521240,2021,2021-07-18,Fagiano Okayama FC,Thespakusatsu Gunma,,0
+3521241,2021,2021-07-18,Omiya Ardija,FC Ryukyu,,0
+3521242,2021,2021-07-18,Machida Zelvia,SC Sagamihara,,0
+3521243,2021,2021-07-18,Ehime FC,Tokyo Verdy,,0
+3521244,2021,2021-08-09,SC Sagamihara,Tochigi SC,,0
+3521245,2021,2021-08-09,Ventforet Kofu,Jubilo Iwata,,0
+3521246,2021,2021-08-09,Albirex Niigata,Omiya Ardija,,0
+3521249,2021,2021-08-09,Giravanz Kitakyushu,FC Ryukyu,,0
+3521250,2021,2021-08-09,Fagiano Okayama FC,Renofa Yamaguchi,,0
+3521252,2021,2021-08-09,Thespakusatsu Gunma,Ehime FC,,0
+3521253,2021,2021-08-09,Mito Hollyhock,Tokyo Verdy,,0
+3521254,2021,2021-08-09,Montedio Yamagata,JEF United Chiba,,0
+3521255,2021,2021-08-09,Kyoto Sanga FC,Machida Zelvia,,0
+3521256,2021,2021-08-09,Blaublitz Akita,Matsumoto Yamaga,,0
+3521247,2021,2021-08-14,JEF United Chiba,Albirex Niigata,,0
+3521257,2021,2021-08-14,SC Sagamihara,Ventforet Kofu,,0
+3521259,2021,2021-08-14,FC Ryukyu,Mito Hollyhock,,0
+3521260,2021,2021-08-14,Omiya Ardija,Blaublitz Akita,,0
+3521261,2021,2021-08-14,Machida Zelvia,Fagiano Okayama FC,,0
+3521262,2021,2021-08-14,Jubilo Iwata,Tokyo Verdy,,0
+3521265,2021,2021-08-15,Ehime FC,Giravanz Kitakyushu,,0
+3521266,2021,2021-08-21,Tochigi SC,Tokyo Verdy,,0
+3521267,2021,2021-08-21,Ventforet Kofu,JEF United Chiba,,0
+3521268,2021,2021-08-21,Zweigen Kanazawa,Jubilo Iwata,,0
+3521269,2021,2021-08-21,Fagiano Okayama FC,Omiya Ardija,,0
+3521270,2021,2021-08-22,Matsumoto Yamaga,Ehime FC,,0
+3521275,2021,2021-08-22,Giravanz Kitakyushu,Machida Zelvia,,0
+3521276,2021,2021-08-22,Thespakusatsu Gunma,Renofa Yamaguchi,,0
+3521277,2021,2021-08-22,Mito Hollyhock,Kyoto Sanga FC,,0
+3521278,2021,2021-08-22,Montedio Yamagata,FC Ryukyu,,0
+3521279,2021,2021-08-22,Blaublitz Akita,V-Varen Nagasaki,,0
+3521280,2021,2021-08-22,Albirex Niigata,SC Sagamihara,,0
+3521248,2021,2021-08-25,Tochigi SC,Thespakusatsu Gunma,,0
+3521251,2021,2021-08-25,Zweigen Kanazawa,V-Varen Nagasaki,,0
+3521271,2021,2021-08-28,Mito Hollyhock,Albirex Niigata,,0
+3521272,2021,2021-08-28,FC Ryukyu,Blaublitz Akita,,0
+3521273,2021,2021-08-28,Kyoto Sanga FC,Tokyo Verdy,,0
+3521274,2021,2021-08-28,JEF United Chiba,V-Varen Nagasaki,,0
+3521281,2021,2021-08-28,Jubilo Iwata,SC Sagamihara,,0
+3521282,2021,2021-08-28,Renofa Yamaguchi,Montedio Yamagata,,0
+3521292,2021,2021-08-28,Giravanz Kitakyushu,Fagiano Okayama FC,,0
+3521288,2021,2021-08-29,Thespakusatsu Gunma,Zweigen Kanazawa,,0
+3521289,2021,2021-08-29,Ehime FC,Tochigi SC,,0
+3521290,2021,2021-08-29,Machida Zelvia,Ventforet Kofu,,0
+3521291,2021,2021-08-29,Omiya Ardija,Matsumoto Yamaga,,0
+3521283,2021,2021-09-04,Matsumoto Yamaga,Jubilo Iwata,,0
+3521284,2021,2021-09-04,Ventforet Kofu,Kyoto Sanga FC,,0
+3521285,2021,2021-09-04,SC Sagamihara,JEF United Chiba,,0
+3521286,2021,2021-09-04,Montedio Yamagata,Mito Hollyhock,,0
+3521287,2021,2021-09-04,Blaublitz Akita,Thespakusatsu Gunma,,0
+3521293,2021,2021-09-04,Albirex Niigata,Giravanz Kitakyushu,,0
+3521294,2021,2021-09-04,Zweigen Kanazawa,Machida Zelvia,,0
+3521304,2021,2021-09-04,V-Varen Nagasaki,FC Ryukyu,,0
+3521301,2021,2021-09-05,Fagiano Okayama FC,Ehime FC,,0
+3521302,2021,2021-09-05,Omiya Ardija,Tokyo Verdy,,0
+3521303,2021,2021-09-05,Tochigi SC,Renofa Yamaguchi,,0
+3521258,2021,2021-09-07,Matsumoto Yamaga,Kyoto Sanga FC,,0
+3521295,2021,2021-09-11,Fagiano Okayama FC,Tochigi SC,,0
+3521296,2021,2021-09-11,Kyoto Sanga FC,FC Ryukyu,,0
+3521297,2021,2021-09-11,Albirex Niigata,Montedio Yamagata,,0
+3521298,2021,2021-09-11,Tokyo Verdy,Matsumoto Yamaga,,0
+3521299,2021,2021-09-11,JEF United Chiba,Jubilo Iwata,,0
+3521300,2021,2021-09-11,Mito Hollyhock,Blaublitz Akita,,0
+3521305,2021,2021-09-11,Renofa Yamaguchi,Machida Zelvia,,0
+3521306,2021,2021-09-11,Giravanz Kitakyushu,Zweigen Kanazawa,,0
+3521316,2021,2021-09-11,V-Varen Nagasaki,SC Sagamihara,,0
+3521314,2021,2021-09-12,Ehime FC,Omiya Ardija,,0
+3521315,2021,2021-09-12,Thespakusatsu Gunma,Ventforet Kofu,,0
+3521263,2021,2021-09-14,Renofa Yamaguchi,Zweigen Kanazawa,,0
+3521264,2021,2021-09-14,V-Varen Nagasaki,Montedio Yamagata,,0
+3521307,2021,2021-09-18,FC Ryukyu,Thespakusatsu Gunma,,0
+3521308,2021,2021-09-18,Jubilo Iwata,Fagiano Okayama FC,,0
+3521309,2021,2021-09-18,Ventforet Kofu,Omiya Ardija,,0
+3521310,2021,2021-09-18,Machida Zelvia,V-Varen Nagasaki,,0
+3521311,2021,2021-09-18,JEF United Chiba,Ehime FC,,0
+3521312,2021,2021-09-18,Tochigi SC,Mito Hollyhock,,0
+3521313,2021,2021-09-18,Montedio Yamagata,Kyoto Sanga FC,,0
+3521317,2021,2021-09-19,Blaublitz Akita,Giravanz Kitakyushu,,0
+3521318,2021,2021-09-19,Tokyo Verdy,Albirex Niigata,,0
+3521327,2021,2021-09-19,Zweigen Kanazawa,Matsumoto Yamaga,,0
+3521328,2021,2021-09-19,SC Sagamihara,Renofa Yamaguchi,,0
+3521320,2021,2021-09-25,Ehime FC,Montedio Yamagata,,0
+3521321,2021,2021-09-25,Renofa Yamaguchi,V-Varen Nagasaki,,0
+3521322,2021,2021-09-25,Kyoto Sanga FC,Tochigi SC,,0
+3521323,2021,2021-09-25,Jubilo Iwata,FC Ryukyu,,0
+3521324,2021,2021-09-25,Albirex Niigata,Ventforet Kofu,,0
+3521325,2021,2021-09-25,Omiya Ardija,SC Sagamihara,,0
+3521326,2021,2021-09-25,Thespakusatsu Gunma,JEF United Chiba,,0
+3521319,2021,2021-09-26,Mito Hollyhock,Zweigen Kanazawa,,0
+3521329,2021,2021-09-26,Tokyo Verdy,Machida Zelvia,,0
+3521330,2021,2021-09-26,Matsumoto Yamaga,Giravanz Kitakyushu,,0
+3521340,2021,2021-09-26,Fagiano Okayama FC,Blaublitz Akita,,0
+3521336,2021,2021-10-02,FC Ryukyu,Fagiano Okayama FC,,0
+3521337,2021,2021-10-02,V-Varen Nagasaki,Kyoto Sanga FC,,0
+3521338,2021,2021-10-02,Ventforet Kofu,Montedio Yamagata,,0
+3521339,2021,2021-10-02,Blaublitz Akita,Ehime FC,,0
+3521331,2021,2021-10-03,Zweigen Kanazawa,Albirex Niigata,,0
+3521332,2021,2021-10-03,SC Sagamihara,Mito Hollyhock,,0
+3521333,2021,2021-10-03,Machida Zelvia,Jubilo Iwata,,0
+3521334,2021,2021-10-03,JEF United Chiba,Matsumoto Yamaga,,0
+3521335,2021,2021-10-03,Tochigi SC,Omiya Ardija,,0
+3521341,2021,2021-10-03,Renofa Yamaguchi,Tokyo Verdy,,0
+3521342,2021,2021-10-03,Giravanz Kitakyushu,Thespakusatsu Gunma,,0
+3521343,2021,2021-10-09,Omiya Ardija,Zweigen Kanazawa,,0
+3521344,2021,2021-10-09,Tokyo Verdy,Fagiano Okayama FC,,0
+3521345,2021,2021-10-09,Ventforet Kofu,FC Ryukyu,,0
+3521346,2021,2021-10-09,Albirex Niigata,Renofa Yamaguchi,,0
+3521347,2021,2021-10-09,Jubilo Iwata,Giravanz Kitakyushu,,0
+3521348,2021,2021-10-10,Montedio Yamagata,Blaublitz Akita,,0
+3521349,2021,2021-10-10,Mito Hollyhock,Thespakusatsu Gunma,,0
+3521350,2021,2021-10-10,Machida Zelvia,JEF United Chiba,,0
+3521351,2021,2021-10-10,Matsumoto Yamaga,Tochigi SC,,0
+3521352,2021,2021-10-10,Kyoto Sanga FC,SC Sagamihara,,0
+3521353,2021,2021-10-10,Ehime FC,V-Varen Nagasaki,,0
+3521354,2021,2021-10-16,Blaublitz Akita,Machida Zelvia,,0
+3521361,2021,2021-10-16,FC Ryukyu,Ehime FC,,0
+3521362,2021,2021-10-16,V-Varen Nagasaki,Albirex Niigata,,0
+3521363,2021,2021-10-16,Giravanz Kitakyushu,Tokyo Verdy,,0
+3521364,2021,2021-10-16,SC Sagamihara,Montedio Yamagata,,0
+3521355,2021,2021-10-17,Renofa Yamaguchi,Mito Hollyhock,,0
+3521356,2021,2021-10-17,Fagiano Okayama FC,Matsumoto Yamaga,,0
+3521357,2021,2021-10-17,Zweigen Kanazawa,Ventforet Kofu,,0
+3521358,2021,2021-10-17,JEF United Chiba,Omiya Ardija,,0
+3521359,2021,2021-10-17,Thespakusatsu Gunma,Kyoto Sanga FC,,0
+3521360,2021,2021-10-17,Tochigi SC,Jubilo Iwata,,0
+3521365,2021,2021-10-23,Montedio Yamagata,Thespakusatsu Gunma,,0
+3521366,2021,2021-10-23,Omiya Ardija,Giravanz Kitakyushu,,0
+3521374,2021,2021-10-23,Jubilo Iwata,Ehime FC,,0
+3521375,2021,2021-10-23,Albirex Niigata,Blaublitz Akita,,0
+3521376,2021,2021-10-23,Ventforet Kofu,V-Varen Nagasaki,,0
+3521368,2021,2021-10-24,Kyoto Sanga FC,Renofa Yamaguchi,,0
+3521369,2021,2021-10-24,Matsumoto Yamaga,FC Ryukyu,,0
+3521370,2021,2021-10-24,SC Sagamihara,Zweigen Kanazawa,,0
+3521371,2021,2021-10-24,Machida Zelvia,Tochigi SC,,0
+3521372,2021,2021-10-24,Tokyo Verdy,JEF United Chiba,,0
+3521373,2021,2021-10-24,Mito Hollyhock,Fagiano Okayama FC,,0
+3521367,2021,2021-10-30,Blaublitz Akita,Zweigen Kanazawa,,0
+3521377,2021,2021-10-30,Thespakusatsu Gunma,Matsumoto Yamaga,,0
+3521378,2021,2021-10-30,RB Omiya Ardija,Jubilo Iwata,,0
+3521383,2021,2021-10-30,FC Ryukyu,Machida Zelvia,,0
+3521384,2021,2021-10-30,V-Varen Nagasaki,Mito Hollyhock,,0
+3521385,2021,2021-10-30,Giravanz Kitakyushu,SC Sagamihara,,0
+3521386,2021,2021-10-30,Ehime FC,Kyoto Sanga FC,,0
+3521387,2021,2021-10-30,Tokyo Verdy,Ventforet Kofu,,0
+3521388,2021,2021-10-30,JEF United Chiba,Renofa Yamaguchi,,0
+3521381,2021,2021-10-31,Fagiano Okayama FC,Albirex Niigata,,0
+3521382,2021,2021-10-31,Tochigi SC,Montedio Yamagata,,0
+3521379,2021,2021-11-03,Mito Hollyhock,Giravanz Kitakyushu,,0
+3521380,2021,2021-11-03,Montedio Yamagata,Tokyo Verdy,,0
+3521389,2021,2021-11-03,Tochigi SC,JEF United Chiba,,0
+3521390,2021,2021-11-03,Machida Zelvia,Matsumoto Yamaga,,0
+3521394,2021,2021-11-03,V-Varen Nagasaki,Thespakusatsu Gunma,,0
+3521395,2021,2021-11-03,Renofa Yamaguchi,FC Ryukyu,,0
+3521396,2021,2021-11-03,Kyoto Sanga FC,Omiya Ardija,,0
+3521397,2021,2021-11-03,Zweigen Kanazawa,Ehime FC,,0
+3521398,2021,2021-11-03,Albirex Niigata,Jubilo Iwata,,0
+3521399,2021,2021-11-03,Ventforet Kofu,Fagiano Okayama FC,,0
+3521400,2021,2021-11-03,SC Sagamihara,Blaublitz Akita,,0
+3521391,2021,2021-11-07,Omiya Ardija,Renofa Yamaguchi,,0
+3521392,2021,2021-11-07,Thespakusatsu Gunma,SC Sagamihara,,0
+3521393,2021,2021-11-07,Blaublitz Akita,Tochigi SC,,0
+3521401,2021,2021-11-07,JEF United Chiba,Mito Hollyhock,,0
+3521402,2021,2021-11-07,Tokyo Verdy,V-Varen Nagasaki,,0
+3521407,2021,2021-11-07,FC Ryukyu,Zweigen Kanazawa,,0
+3521408,2021,2021-11-07,Giravanz Kitakyushu,Ventforet Kofu,,0
+3521409,2021,2021-11-07,Ehime FC,Machida Zelvia,,0
+3521410,2021,2021-11-07,Fagiano Okayama FC,Montedio Yamagata,,0
+3521411,2021,2021-11-07,Jubilo Iwata,Kyoto Sanga FC,,0
+3521412,2021,2021-11-07,Matsumoto Yamaga,Albirex Niigata,,0
+3521403,2021,2021-11-13,FC Ryukyu,JEF United Chiba,,0
+3521404,2021,2021-11-13,V-Varen Nagasaki,Tochigi SC,,0
+3521405,2021,2021-11-13,Renofa Yamaguchi,Giravanz Kitakyushu,,0
+3521406,2021,2021-11-13,Albirex Niigata,Ehime FC,,0
+3521413,2021,2021-11-14,Montedio Yamagata,Omiya Ardija,,0
+3521414,2021,2021-11-14,Mito Hollyhock,Jubilo Iwata,,0
+3521420,2021,2021-11-14,Kyoto Sanga FC,Blaublitz Akita,,0
+3521421,2021,2021-11-14,Zweigen Kanazawa,Tokyo Verdy,,0
+3521422,2021,2021-11-14,Ventforet Kofu,Matsumoto Yamaga,,0
+3521423,2021,2021-11-14,SC Sagamihara,Fagiano Okayama FC,,0
+3521424,2021,2021-11-14,Machida Zelvia,Thespakusatsu Gunma,,0
+3521418,2021,2021-11-20,Fagiano Okayama FC,Kyoto Sanga FC,,0
+3521419,2021,2021-11-20,Jubilo Iwata,V-Varen Nagasaki,,0
+3521415,2021,2021-11-21,Tochigi SC,Zweigen Kanazawa,,0
+3521416,2021,2021-11-21,Montedio Yamagata,Machida Zelvia,,0
+3521417,2021,2021-11-21,Blaublitz Akita,Ventforet Kofu,,0
+3521425,2021,2021-11-21,Thespakusatsu Gunma,Albirex Niigata,,0
+3521426,2021,2021-11-21,Omiya Ardija,Mito Hollyhock,,0
+3521427,2021,2021-11-21,JEF United Chiba,Giravanz Kitakyushu,,0
+3521428,2021,2021-11-21,Tokyo Verdy,FC Ryukyu,,0
+3521429,2021,2021-11-21,Matsumoto Yamaga,Renofa Yamaguchi,,0
+3521430,2021,2021-11-21,Ehime FC,SC Sagamihara,,0
+3521431,2021,2021-11-28,Blaublitz Akita,Tokyo Verdy,,0
+3521432,2021,2021-11-28,Mito Hollyhock,Ehime FC,,0
+3521433,2021,2021-11-28,Thespa Gunma,Jubilo Iwata,,0
+3521434,2021,2021-11-28,JEF United Chiba,Kyoto Sanga FC,,0
+3521435,2021,2021-11-28,Machida Zelvia,Omiya Ardija,,0
+3521436,2021,2021-11-28,SC Sagamihara,Matsumoto Yamaga,,0
+3521437,2021,2021-11-28,Zweigen Kanazawa,Montedio Yamagata,,0
+3521438,2021,2021-11-28,Renofa Yamaguchi,Ventforet Kofu,,0
+3521446,2021,2021-11-28,FC Ryukyu,Albirex Niigata,,0
+3521447,2021,2021-11-28,V-Varen Nagasaki,Fagiano Okayama FC,,0
+3521448,2021,2021-11-28,Giravanz Kitakyushu,Tochigi SC,,0
+3521439,2021,2021-12-05,Albirex Niigata,Machida Zelvia,,0
+3521440,2021,2021-12-05,Matsumoto Yamaga,V-Varen Nagasaki,,0
+3521441,2021,2021-12-05,Ventforet Kofu,Mito Hollyhock,,0
+3521442,2021,2021-12-05,Tokyo Verdy,SC Sagamihara,,0
+3521443,2021,2021-12-05,Omiya Ardija,Thespakusatsu Gunma,,0
+3521444,2021,2021-12-05,Tochigi SC,FC Ryukyu,,0
+3521445,2021,2021-12-05,Montedio Yamagata,Giravanz Kitakyushu,,0
+3521449,2021,2021-12-05,Jubilo Iwata,Blaublitz Akita,,0
+3521450,2021,2021-12-05,Kyoto Sanga FC,Zweigen Kanazawa,,0
+3521458,2021,2021-12-05,Ehime FC,Renofa Yamaguchi,,0
+3521459,2021,2021-12-05,Fagiano Okayama FC,JEF United Chiba,,0
+3791194,2022,2022-02-19,Tochigi SC,Blaublitz Akita,,0
+3791195,2022,2022-02-19,Thespakusatsu Gunma,Montedio Yamagata,,0
+3791196,2022,2022-02-19,JEF United Chiba,Grulla Morioka,,0
+3791198,2022,2022-02-19,Yokohama FC,Omiya Ardija,,0
+3791211,2022,2022-02-19,V-Varen Nagasaki,Tokyo Verdy,,0
+3791212,2022,2022-02-19,Tokushima Vortis,Zweigen Kanazawa,,0
+3791193,2022,2022-02-20,Vegalta Sendai,Albirex Niigata,,0
+3791197,2022,2022-02-20,Machida Zelvia,FC Ryukyu,,0
+3791199,2022,2022-02-20,Fagiano Okayama FC,Ventforet Kofu,,0
+3791213,2022,2022-02-20,Renofa Yamaguchi,Roasso Kumamoto,,0
+3791204,2022,2022-02-26,FC Ryukyu,JEF United Chiba,,0
+3791208,2022,2022-02-26,Omiya Ardija,Albirex Niigata,,0
+3791205,2022,2022-02-27,Roasso Kumamoto,Montedio Yamagata,,0
+3791206,2022,2022-02-27,Ventforet Kofu,Oita Trinita,,0
+3791207,2022,2022-02-27,Tokyo Verdy,Tochigi SC,,0
+3791209,2022,2022-02-27,Mito Hollyhock,Vegalta Sendai,,0
+3810169,2022,2022-02-27,Renofa Yamaguchi,Blaublitz Akita,,0
+3810170,2022,2022-02-27,Fagiano Okayama FC,Tokushima Vortis,,0
+3810171,2022,2022-02-27,Yokohama FC,V-Varen Nagasaki,,0
+3810172,2022,2022-02-27,Machida Zelvia,Grulla Morioka,,0
+3810184,2022,2022-02-27,Thespakusatsu Gunma,Zweigen Kanazawa,,0
+3791203,2022,2022-03-05,Albirex Niigata,Renofa Yamaguchi,,0
+3810165,2022,2022-03-05,FC Ryukyu,Grulla Morioka,,0
+3810166,2022,2022-03-05,V-Varen Nagasaki,Ventforet Kofu,,0
+3810167,2022,2022-03-05,Tochigi SC,Fagiano Okayama FC,,0
+3810168,2022,2022-03-05,Omiya Ardija,Roasso Kumamoto,,0
+3791202,2022,2022-03-06,Zweigen Kanazawa,Machida Zelvia,,0
+3810173,2022,2022-03-06,Vegalta Sendai,Thespakusatsu Gunma,,0
+3810174,2022,2022-03-06,Mito Hollyhock,Blaublitz Akita,,0
+3810175,2022,2022-03-06,JEF United Chiba,Montedio Yamagata,,0
+3810182,2022,2022-03-06,Oita Trinita,Yokohama FC,,0
+3810183,2022,2022-03-06,Tokushima Vortis,Tokyo Verdy,,0
+3791210,2022,2022-03-09,Oita Trinita,Mito Hollyhock,,0
+3810177,2022,2022-03-12,V-Varen Nagasaki,Oita Trinita,,0
+3810178,2022,2022-03-12,Tokushima Vortis,Roasso Kumamoto,,0
+3810179,2022,2022-03-12,Renofa Yamaguchi,FC Ryukyu,,0
+3810180,2022,2022-03-12,Ventforet Kofu,Montedio Yamagata,,0
+3810181,2022,2022-03-12,Vegalta Sendai,Grulla Morioka,,0
+3791201,2022,2022-03-13,Blaublitz Akita,Albirex Niigata,,0
+3810150,2022,2022-03-13,Zweigen Kanazawa,JEF United Chiba,,0
+3810151,2022,2022-03-13,Yokohama FC,Mito Hollyhock,,0
+3810163,2022,2022-03-13,Machida Zelvia,Fagiano Okayama FC,,0
+3810164,2022,2022-03-13,Thespakusatsu Gunma,Tokyo Verdy,,0
+3810176,2022,2022-03-13,Tochigi SC,Omiya Ardija,,0
+3810145,2022,2022-03-19,FC Ryukyu,Mito Hollyhock,,0
+3810146,2022,2022-03-19,Oita Trinita,Renofa Yamaguchi,,0
+3810147,2022,2022-03-19,Albirex Niigata,Ventforet Kofu,,0
+3810148,2022,2022-03-19,RB Omiya Ardija,Tokushima Vortis,,0
+3810149,2022,2022-03-19,Blaublitz Akita,Zweigen Kanazawa,,0
+3791200,2022,2022-03-20,Grulla Morioka,Tochigi SC,,0
+3791214,2022,2022-03-20,Montedio Yamagata,Vegalta Sendai,,0
+3810144,2022,2022-03-20,JEF United Chiba,Thespakusatsu Gunma,,0
+3810152,2022,2022-03-20,Tokyo Verdy,Machida Zelvia,,0
+3810153,2022,2022-03-20,Fagiano Okayama FC,Yokohama FC,,0
+3810154,2022,2022-03-21,Roasso Kumamoto,V-Varen Nagasaki,,0
+3810161,2022,2022-03-23,Oita Trinita,FC Ryukyu,,0
+3810162,2022,2022-03-23,Tokushima Vortis,Blaublitz Akita,,0
+3810143,2022,2022-03-26,Ventforet Kofu,Yokohama FC,,0
+3810155,2022,2022-03-26,Tochigi SC,JEF United Chiba,,0
+3810156,2022,2022-03-26,Mito Hollyhock,Roasso Kumamoto,,0
+3810157,2022,2022-03-26,Montedio Yamagata,Tokyo Verdy,,0
+3810158,2022,2022-03-26,Vegalta Sendai,Machida Zelvia,,0
+3810159,2022,2022-03-26,Omiya Ardija,Fagiano Okayama FC,,0
+3810160,2022,2022-03-26,Grulla Morioka,Renofa Yamaguchi,,0
+3810185,2022,2022-03-26,Albirex Niigata,Thespakusatsu Gunma,,0
+3810193,2022,2022-03-26,V-Varen Nagasaki,Zweigen Kanazawa,,0
+3810186,2022,2022-03-30,Yokohama FC,Montedio Yamagata,,0
+3810187,2022,2022-03-30,Machida Zelvia,Omiya Ardija,,0
+3810188,2022,2022-03-30,JEF United Chiba,Albirex Niigata,,0
+3810189,2022,2022-03-30,Thespakusatsu Gunma,V-Varen Nagasaki,,0
+3810190,2022,2022-03-30,Mito Hollyhock,Tochigi SC,,0
+3810191,2022,2022-03-30,Vegalta Sendai,Oita Trinita,,0
+3810192,2022,2022-03-30,Blaublitz Akita,Ventforet Kofu,,0
+3810194,2022,2022-03-30,Zweigen Kanazawa,Roasso Kumamoto,,0
+3810195,2022,2022-03-30,Fagiano Okayama FC,Grulla Morioka,,0
+3810210,2022,2022-03-30,Renofa Yamaguchi,Tokushima Vortis,,0
+3810211,2022,2022-03-30,FC Ryukyu,Tokyo Verdy,,0
+3810209,2022,2022-04-03,Tokyo Verdy,Oita Trinita,,0
+3810212,2022,2022-04-03,Blaublitz Akita,Grulla Morioka,,0
+3810213,2022,2022-04-03,Roasso Kumamoto,Albirex Niigata,,0
+3810215,2022,2022-04-03,Tochigi SC,Zweigen Kanazawa,,0
+3810216,2022,2022-04-03,Thespakusatsu Gunma,Mito Hollyhock,,0
+3810217,2022,2022-04-03,Machida Zelvia,JEF United Chiba,,0
+3810218,2022,2022-04-03,Yokohama FC,FC Ryukyu,,0
+3810219,2022,2022-04-03,Ventforet Kofu,Vegalta Sendai,,0
+3810220,2022,2022-04-03,Renofa Yamaguchi,Omiya Ardija,,0
+3810221,2022,2022-04-03,Tokushima Vortis,V-Varen Nagasaki,,0
+3810196,2022,2022-04-09,Omiya Ardija,Ventforet Kofu,,0
+3810197,2022,2022-04-09,V-Varen Nagasaki,Machida Zelvia,,0
+3810198,2022,2022-04-09,Tokyo Verdy,Roasso Kumamoto,,0
+3810199,2022,2022-04-09,FC Ryukyu,Fagiano Okayama FC,,0
+3810208,2022,2022-04-09,Grulla Morioka,Thespakusatsu Gunma,,0
+3810200,2022,2022-04-10,Vegalta Sendai,Renofa Yamaguchi,,0
+3810201,2022,2022-04-10,Montedio Yamagata,Blaublitz Akita,,0
+3810202,2022,2022-04-10,JEF United Chiba,Yokohama FC,,0
+3810203,2022,2022-04-10,Albirex Niigata,Tochigi SC,,0
+3810204,2022,2022-04-10,Zweigen Kanazawa,Mito Hollyhock,,0
+3810205,2022,2022-04-10,Oita Trinita,Tokushima Vortis,,0
+3810206,2022,2022-04-16,Grulla Morioka,Oita Trinita,,0
+3810207,2022,2022-04-16,Omiya Ardija,JEF United Chiba,,0
+3810222,2022,2022-04-16,Zweigen Kanazawa,Ventforet Kofu,,0
+3810223,2022,2022-04-16,FC Ryukyu,Thespakusatsu Gunma,,0
+3810237,2022,2022-04-17,Blaublitz Akita,V-Varen Nagasaki,,0
+3810238,2022,2022-04-17,Mito Hollyhock,Tokushima Vortis,,0
+3810239,2022,2022-04-17,Tochigi SC,Roasso Kumamoto,,0
+3810240,2022,2022-04-17,Machida Zelvia,Montedio Yamagata,,0
+3810241,2022,2022-04-17,Yokohama FC,Vegalta Sendai,,0
+3810242,2022,2022-04-17,Fagiano Okayama FC,Albirex Niigata,,0
+3810243,2022,2022-04-17,Renofa Yamaguchi,Tokyo Verdy,,0
+3810244,2022,2022-04-20,Tokushima Vortis,Grulla Morioka,,0
+3810245,2022,2022-04-20,Oita Trinita,Zweigen Kanazawa,,0
+3810246,2022,2022-04-22,Roasso Kumamoto,Fagiano Okayama FC,,0
+3810224,2022,2022-04-23,Ventforet Kofu,Machida Zelvia,,0
+3810225,2022,2022-04-23,Albirex Niigata,V-Varen Nagasaki,,0
+3810226,2022,2022-04-23,Mito Hollyhock,Renofa Yamaguchi,,0
+3810227,2022,2022-04-23,Tochigi SC,Yokohama FC,,0
+3810234,2022,2022-04-23,Tokyo Verdy,JEF United Chiba,,0
+3810235,2022,2022-04-23,Montedio Yamagata,Omiya Ardija,,0
+3810236,2022,2022-04-23,Vegalta Sendai,FC Ryukyu,,0
+3810228,2022,2022-04-24,Thespakusatsu Gunma,Blaublitz Akita,,0
+3810229,2022,2022-04-27,Blaublitz Akita,Fagiano Okayama FC,,0
+3810230,2022,2022-04-27,Omiya Ardija,Thespakusatsu Gunma,,0
+3810231,2022,2022-04-27,JEF United Chiba,Renofa Yamaguchi,,0
+3810232,2022,2022-04-27,Yokohama FC,Machida Zelvia,,0
+3810233,2022,2022-04-27,Albirex Niigata,Grulla Morioka,,0
+3810247,2022,2022-04-27,Tokushima Vortis,Montedio Yamagata,,0
+3810252,2022,2022-04-27,Ventforet Kofu,Tokyo Verdy,,0
+3810253,2022,2022-04-27,FC Ryukyu,Zweigen Kanazawa,,0
+3810254,2022,2022-04-27,Oita Trinita,Tochigi SC,,0
+3810255,2022,2022-04-27,Roasso Kumamoto,Vegalta Sendai,,0
+3810256,2022,2022-04-27,V-Varen Nagasaki,Mito Hollyhock,,0
+3810248,2022,2022-04-30,FC Ryukyu,Albirex Niigata,,0
+3810249,2022,2022-04-30,Mito Hollyhock,Ventforet Kofu,,0
+3810250,2022,2022-04-30,Renofa Yamaguchi,Tochigi SC,,0
+3810251,2022,2022-04-30,JEF United Chiba,Oita Trinita,,0
+3810257,2022,2022-05-01,Grulla Morioka,Roasso Kumamoto,,0
+3810284,2022,2022-05-01,Vegalta Sendai,Blaublitz Akita,,0
+3810285,2022,2022-05-01,Zweigen Kanazawa,Omiya Ardija,,0
+3810286,2022,2022-05-01,Machida Zelvia,Tokushima Vortis,,0
+3810287,2022,2022-05-01,Thespakusatsu Gunma,Yokohama FC,,0
+3810288,2022,2022-05-01,Montedio Yamagata,V-Varen Nagasaki,,0
+3810300,2022,2022-05-01,Fagiano Okayama FC,Tokyo Verdy,,0
+3810281,2022,2022-05-04,Tokyo Verdy,Vegalta Sendai,,0
+3810282,2022,2022-05-04,Blaublitz Akita,FC Ryukyu,,0
+3810283,2022,2022-05-04,Grulla Morioka,V-Varen Nagasaki,,0
+3810289,2022,2022-05-04,Yokohama FC,Roasso Kumamoto,,0
+3810290,2022,2022-05-04,Ventforet Kofu,Thespakusatsu Gunma,,0
+3810291,2022,2022-05-04,Albirex Niigata,Zweigen Kanazawa,,0
+3810295,2022,2022-05-04,Tochigi SC,Montedio Yamagata,,0
+3810296,2022,2022-05-04,Oita Trinita,Omiya Ardija,,0
+3810297,2022,2022-05-04,Tokushima Vortis,JEF United Chiba,,0
+3810298,2022,2022-05-04,Renofa Yamaguchi,Machida Zelvia,,0
+3810299,2022,2022-05-04,Fagiano Okayama FC,Mito Hollyhock,,0
+3810262,2022,2022-05-08,Tochigi SC,Ventforet Kofu,,0
+3810263,2022,2022-05-08,JEF United Chiba,Fagiano Okayama FC,,0
+3810264,2022,2022-05-08,V-Varen Nagasaki,Vegalta Sendai,,0
+3810265,2022,2022-05-08,Zweigen Kanazawa,Renofa Yamaguchi,,0
+3810266,2022,2022-05-08,Albirex Niigata,Tokyo Verdy,,0
+3810278,2022,2022-05-08,Thespakusatsu Gunma,Tokushima Vortis,,0
+3810279,2022,2022-05-08,Mito Hollyhock,Machida Zelvia,,0
+3810280,2022,2022-05-08,Montedio Yamagata,Oita Trinita,,0
+3810292,2022,2022-05-08,Roasso Kumamoto,FC Ryukyu,,0
+3810294,2022,2022-05-08,Blaublitz Akita,Yokohama FC,,0
+3810259,2022,2022-05-14,V-Varen Nagasaki,Omiya Ardija,,0
+3810260,2022,2022-05-14,Ventforet Kofu,Renofa Yamaguchi,,0
+3810267,2022,2022-05-14,Oita Trinita,Roasso Kumamoto,,0
+3810268,2022,2022-05-14,Tokyo Verdy,Mito Hollyhock,,0
+3810269,2022,2022-05-14,FC Ryukyu,Tochigi SC,,0
+3810273,2022,2022-05-15,JEF United Chiba,Blaublitz Akita,,0
+3810274,2022,2022-05-15,Fagiano Okayama FC,Thespakusatsu Gunma,,0
+3810275,2022,2022-05-15,Yokohama FC,Tokushima Vortis,,0
+3810276,2022,2022-05-15,Machida Zelvia,Albirex Niigata,,0
+3810277,2022,2022-05-15,Vegalta Sendai,Zweigen Kanazawa,,0
+3810293,2022,2022-05-18,Omiya Ardija,Grulla Morioka,,0
+3810258,2022,2022-05-21,Albirex Niigata,Yokohama FC,,0
+3810270,2022,2022-05-21,Omiya Ardija,Vegalta Sendai,,0
+3810271,2022,2022-05-21,Blaublitz Akita,Tokyo Verdy,,0
+3810272,2022,2022-05-21,Roasso Kumamoto,JEF United Chiba,,0
+3810330,2022,2022-05-21,FC Ryukyu,Ventforet Kofu,,0
+3810331,2022,2022-05-21,Fagiano Okayama FC,Oita Trinita,,0
+3810332,2022,2022-05-21,Mito Hollyhock,Grulla Morioka,,0
+3810333,2022,2022-05-21,Tokushima Vortis,Tochigi SC,,0
+3810334,2022,2022-05-21,Zweigen Kanazawa,Montedio Yamagata,,0
+3810313,2022,2022-05-22,Renofa Yamaguchi,V-Varen Nagasaki,,0
+3810314,2022,2022-05-22,Machida Zelvia,Thespakusatsu Gunma,,0
+3810302,2022,2022-05-25,Ventforet Kofu,Tokushima Vortis,,0
+3810303,2022,2022-05-25,Oita Trinita,Blaublitz Akita,,0
+3810304,2022,2022-05-25,V-Varen Nagasaki,JEF United Chiba,,0
+3810305,2022,2022-05-25,Tokyo Verdy,Zweigen Kanazawa,,0
+3810306,2022,2022-05-25,Omiya Ardija,FC Ryukyu,,0
+3810307,2022,2022-05-25,Thespakusatsu Gunma,Roasso Kumamoto,,0
+3810308,2022,2022-05-25,Tochigi SC,Machida Zelvia,,0
+3810309,2022,2022-05-25,Mito Hollyhock,Albirex Niigata,,0
+3810310,2022,2022-05-25,Montedio Yamagata,Renofa Yamaguchi,,0
+3810311,2022,2022-05-25,Vegalta Sendai,Fagiano Okayama FC,,0
+3810312,2022,2022-05-25,Grulla Morioka,Yokohama FC,,0
+3810315,2022,2022-05-28,Roasso Kumamoto,Ventforet Kofu,,0
+3810316,2022,2022-05-28,Tokyo Verdy,Omiya Ardija,,0
+3810321,2022,2022-05-29,Zweigen Kanazawa,Grulla Morioka,,0
+3810322,2022,2022-05-29,FC Ryukyu,Tokushima Vortis,,0
+3810323,2022,2022-05-29,Thespakusatsu Gunma,Oita Trinita,,0
+3810324,2022,2022-05-29,JEF United Chiba,Mito Hollyhock,,0
+3810325,2022,2022-05-29,V-Varen Nagasaki,Fagiano Okayama FC,,0
+3810326,2022,2022-05-29,Albirex Niigata,Montedio Yamagata,,0
+3810327,2022,2022-05-29,Yokohama FC,Renofa Yamaguchi,,0
+3810328,2022,2022-05-29,Machida Zelvia,Blaublitz Akita,,0
+3810329,2022,2022-05-29,Vegalta Sendai,Tochigi SC,,0
+3810320,2022,2022-06-04,Fagiano Okayama FC,Zweigen Kanazawa,,0
+3810336,2022,2022-06-04,Tokushima Vortis,Albirex Niigata,,0
+3810301,2022,2022-06-05,JEF United Chiba,Vegalta Sendai,,0
+3810317,2022,2022-06-05,Omiya Ardija,Mito Hollyhock,,0
+3810318,2022,2022-06-05,Montedio Yamagata,FC Ryukyu,,0
+3810319,2022,2022-06-05,Blaublitz Akita,Roasso Kumamoto,,0
+3810335,2022,2022-06-05,Tochigi SC,V-Varen Nagasaki,,0
+3810337,2022,2022-06-05,Oita Trinita,Machida Zelvia,,0
+3810350,2022,2022-06-05,Grulla Morioka,Ventforet Kofu,,0
+3810351,2022,2022-06-05,Renofa Yamaguchi,Thespakusatsu Gunma,,0
+3810352,2022,2022-06-05,Yokohama FC,Tokyo Verdy,,0
+3810338,2022,2022-06-11,Ventforet Kofu,JEF United Chiba,,0
+3810339,2022,2022-06-11,Zweigen Kanazawa,Yokohama FC,,0
+3810340,2022,2022-06-11,FC Ryukyu,V-Varen Nagasaki,,0
+3810347,2022,2022-06-11,Tokushima Vortis,Vegalta Sendai,,0
+3810348,2022,2022-06-11,Oita Trinita,Albirex Niigata,,0
+3810341,2022,2022-06-12,Renofa Yamaguchi,Fagiano Okayama FC,,0
+3810342,2022,2022-06-12,Blaublitz Akita,Omiya Ardija,,0
+3810343,2022,2022-06-12,Mito Hollyhock,Montedio Yamagata,,0
+3810344,2022,2022-06-12,Machida Zelvia,Roasso Kumamoto,,0
+3810345,2022,2022-06-12,Thespakusatsu Gunma,Tochigi SC,,0
+3810346,2022,2022-06-12,Tokyo Verdy,Grulla Morioka,,0
+3810261,2022,2022-06-15,Grulla Morioka,Montedio Yamagata,,0
+3810349,2022,2022-06-18,JEF United Chiba,Omiya Ardija,,0
+3810353,2022,2022-06-18,Grulla Morioka,Tokushima Vortis,,0
+3810354,2022,2022-06-18,Vegalta Sendai,Yokohama FC,,0
+3810366,2022,2022-06-18,V-Varen Nagasaki,Thespakusatsu Gunma,,0
+3810367,2022,2022-06-18,Fagiano Okayama FC,FC Ryukyu,,0
+3810368,2022,2022-06-18,Montedio Yamagata,Ventforet Kofu,,0
+3810369,2022,2022-06-18,Roasso Kumamoto,Mito Hollyhock,,0
+3810370,2022,2022-06-18,Tokyo Verdy,Renofa Yamaguchi,,0
+3810371,2022,2022-06-18,Tochigi SC,Oita Trinita,,0
+3810364,2022,2022-06-19,Machida Zelvia,Zweigen Kanazawa,,0
+3810365,2022,2022-06-19,Albirex Niigata,Blaublitz Akita,,0
+3810360,2022,2022-06-25,Roasso Kumamoto,Oita Trinita,,0
+3810361,2022,2022-06-25,V-Varen Nagasaki,Blaublitz Akita,,0
+3810362,2022,2022-06-25,Mito Hollyhock,Fagiano Okayama FC,,0
+3810363,2022,2022-06-25,Vegalta Sendai,Montedio Yamagata,,0
+3810355,2022,2022-06-26,FC Ryukyu,Machida Zelvia,,0
+3810356,2022,2022-06-26,Tokushima Vortis,Thespakusatsu Gunma,,0
+3810357,2022,2022-06-26,Yokohama FC,Albirex Niigata,,0
+3810358,2022,2022-06-26,Tochigi SC,Grulla Morioka,,0
+3810359,2022,2022-06-26,JEF United Chiba,Tokyo Verdy,,0
+3810372,2022,2022-06-26,Omiya Ardija,Zweigen Kanazawa,,0
+3810373,2022,2022-06-26,Renofa Yamaguchi,Ventforet Kofu,,0
+3810391,2022,2022-07-02,Blaublitz Akita,Renofa Yamaguchi,,0
+3810392,2022,2022-07-02,Grulla Morioka,Omiya Ardija,,0
+3810393,2022,2022-07-02,Mito Hollyhock,Yokohama FC,,0
+3810394,2022,2022-07-02,Machida Zelvia,Vegalta Sendai,,0
+3810395,2022,2022-07-02,Ventforet Kofu,V-Varen Nagasaki,,0
+3810396,2022,2022-07-02,Montedio Yamagata,Tochigi SC,,0
+3810397,2022,2022-07-02,Zweigen Kanazawa,Tokushima Vortis,,0
+3810398,2022,2022-07-02,Fagiano Okayama FC,Roasso Kumamoto,,0
+3810399,2022,2022-07-02,Oita Trinita,JEF United Chiba,,0
+3810400,2022,2022-07-02,Thespakusatsu Gunma,Albirex Niigata,,0
+3810401,2022,2022-07-03,Tokyo Verdy,FC Ryukyu,,0
+3810374,2022,2022-07-06,Zweigen Kanazawa,Thespakusatsu Gunma,,0
+3810375,2022,2022-07-06,Fagiano Okayama FC,Omiya Ardija,,0
+3810376,2022,2022-07-06,Renofa Yamaguchi,Oita Trinita,,0
+3810377,2022,2022-07-06,V-Varen Nagasaki,Montedio Yamagata,,0
+3810378,2022,2022-07-06,Roasso Kumamoto,Tokushima Vortis,,0
+3810389,2022,2022-07-06,Albirex Niigata,JEF United Chiba,,0
+3810390,2022,2022-07-06,Yokohama FC,Blaublitz Akita,,0
+3810402,2022,2022-07-06,Grulla Morioka,FC Ryukyu,,0
+3810403,2022,2022-07-06,Vegalta Sendai,Ventforet Kofu,,0
+3810404,2022,2022-07-06,Tochigi SC,Tokyo Verdy,,0
+3810405,2022,2022-07-06,Machida Zelvia,Mito Hollyhock,,0
+3810379,2022,2022-07-10,Mito Hollyhock,Zweigen Kanazawa,,0
+3810380,2022,2022-07-10,JEF United Chiba,Tochigi SC,,0
+3810381,2022,2022-07-10,Ventforet Kofu,Blaublitz Akita,,0
+3810382,2022,2022-07-10,Tokushima Vortis,Yokohama FC,,0
+3810383,2022,2022-07-10,V-Varen Nagasaki,Grulla Morioka,,0
+3810384,2022,2022-07-10,Montedio Yamagata,Roasso Kumamoto,,0
+3810385,2022,2022-07-10,Thespakusatsu Gunma,Machida Zelvia,,0
+3810386,2022,2022-07-10,Omiya Ardija,Tokyo Verdy,,0
+3810387,2022,2022-07-10,Renofa Yamaguchi,Albirex Niigata,,0
+3810388,2022,2022-07-10,Oita Trinita,Fagiano Okayama FC,,0
+3810406,2022,2022-07-10,FC Ryukyu,Vegalta Sendai,,0
+3810407,2022,2022-07-16,Grulla Morioka,Vegalta Sendai,,0
+3810442,2022,2022-07-16,Oita Trinita,Thespakusatsu Gunma,,0
+3810443,2022,2022-07-16,Zweigen Kanazawa,Albirex Niigata,,0
+3810456,2022,2022-07-16,Ventforet Kofu,Mito Hollyhock,,0
+3810437,2022,2022-07-17,FC Ryukyu,Omiya Ardija,,0
+3810438,2022,2022-07-17,Fagiano Okayama FC,Tochigi SC,,0
+3810439,2022,2022-07-17,Yokohama FC,JEF United Chiba,,0
+3810440,2022,2022-07-17,Machida Zelvia,V-Varen Nagasaki,,0
+3810441,2022,2022-07-17,Blaublitz Akita,Montedio Yamagata,,0
+3810436,2022,2022-07-18,Roasso Kumamoto,Renofa Yamaguchi,,0
+3810435,2022,2022-07-23,Grulla Morioka,Machida Zelvia,,0
+3810445,2022,2022-07-23,Albirex Niigata,Fagiano Okayama FC,,0
+3810451,2022,2022-07-23,Omiya Ardija,Blaublitz Akita,,0
+3810452,2022,2022-07-23,Tochigi SC,Renofa Yamaguchi,,0
+3810453,2022,2022-07-23,Montedio Yamagata,Thespakusatsu Gunma,,0
+3810454,2022,2022-07-23,Vegalta Sendai,V-Varen Nagasaki,,0
+3810455,2022,2022-07-23,Tokushima Vortis,FC Ryukyu,,0
+3810449,2022,2022-07-24,Roasso Kumamoto,Zweigen Kanazawa,,0
+3810450,2022,2022-07-24,Tokyo Verdy,Yokohama FC,,0
+3810415,2022,2022-07-30,Oita Trinita,Tokyo Verdy,,0
+3810416,2022,2022-07-30,V-Varen Nagasaki,Albirex Niigata,,0
+3810417,2022,2022-07-30,Renofa Yamaguchi,Vegalta Sendai,,0
+3810418,2022,2022-07-30,Fagiano Okayama FC,JEF United Chiba,,0
+3810419,2022,2022-07-30,Thespakusatsu Gunma,Ventforet Kofu,,0
+3810432,2022,2022-07-30,Montedio Yamagata,Machida Zelvia,,0
+3810433,2022,2022-07-30,FC Ryukyu,Roasso Kumamoto,,0
+3810446,2022,2022-07-30,Yokohama FC,Grulla Morioka,,0
+3810447,2022,2022-07-30,Tochigi SC,Tokushima Vortis,,0
+3810448,2022,2022-07-30,Mito Hollyhock,Omiya Ardija,,0
+3810414,2022,2022-07-31,Zweigen Kanazawa,Blaublitz Akita,,0
+3810410,2022,2022-08-06,Albirex Niigata,Tokushima Vortis,,0
+3810411,2022,2022-08-06,Ventforet Kofu,FC Ryukyu,,0
+3810412,2022,2022-08-06,Tokyo Verdy,V-Varen Nagasaki,,0
+3810413,2022,2022-08-06,Grulla Morioka,Fagiano Okayama FC,,0
+3810420,2022,2022-08-06,Omiya Ardija,Yokohama FC,,0
+3810421,2022,2022-08-06,Machida Zelvia,Oita Trinita,,0
+3810430,2022,2022-08-06,Renofa Yamaguchi,Montedio Yamagata,,0
+3810431,2022,2022-08-06,Zweigen Kanazawa,Vegalta Sendai,,0
+3810427,2022,2022-08-07,Roasso Kumamoto,Tochigi SC,,0
+3810428,2022,2022-08-07,Thespakusatsu Gunma,JEF United Chiba,,0
+3810429,2022,2022-08-07,Blaublitz Akita,Mito Hollyhock,,0
+3810409,2022,2022-08-13,Montedio Yamagata,Zweigen Kanazawa,,0
+3810422,2022,2022-08-13,Vegalta Sendai,Omiya Ardija,,0
+3810423,2022,2022-08-13,Ventforet Kofu,Roasso Kumamoto,,0
+3810426,2022,2022-08-13,Grulla Morioka,Blaublitz Akita,,0
+3810458,2022,2022-08-13,V-Varen Nagasaki,FC Ryukyu,,0
+3810459,2022,2022-08-13,Fagiano Okayama FC,Renofa Yamaguchi,,0
+3810457,2022,2022-08-14,Tochigi SC,Albirex Niigata,,0
+3810460,2022,2022-08-14,JEF United Chiba,Machida Zelvia,,0
+3810478,2022,2022-08-14,Tokushima Vortis,Oita Trinita,,0
+3810424,2022,2022-08-16,Yokohama FC,Thespakusatsu Gunma,,0
+3810444,2022,2022-08-17,JEF United Chiba,Ventforet Kofu,,0
+3810479,2022,2022-08-20,JEF United Chiba,Tokushima Vortis,,0
+3810480,2022,2022-08-20,Yokohama FC,Fagiano Okayama FC,,0
+3810481,2022,2022-08-20,Albirex Niigata,Roasso Kumamoto,,0
+3810482,2022,2022-08-20,FC Ryukyu,Montedio Yamagata,,0
+3810483,2022,2022-08-20,Blaublitz Akita,Tochigi SC,,0
+3810484,2022,2022-08-20,Thespakusatsu Gunma,Vegalta Sendai,,0
+3810485,2022,2022-08-20,Omiya Ardija,Machida Zelvia,,0
+3810487,2022,2022-08-20,Renofa Yamaguchi,Mito Hollyhock,,0
+3810488,2022,2022-08-20,Oita Trinita,Grulla Morioka,,0
+3810489,2022,2022-08-21,Tokyo Verdy,Ventforet Kofu,,0
+3810434,2022,2022-08-23,Mito Hollyhock,Oita Trinita,,0
+3810408,2022,2022-08-24,Tokyo Verdy,Tokushima Vortis,,0
+3810461,2022,2022-08-27,Machida Zelvia,Yokohama FC,,0
+3810462,2022,2022-08-27,Tokushima Vortis,Renofa Yamaguchi,,0
+3810477,2022,2022-08-27,Vegalta Sendai,JEF United Chiba,,0
+3810490,2022,2022-08-27,Grulla Morioka,Albirex Niigata,,0
+3810491,2022,2022-08-27,Mito Hollyhock,FC Ryukyu,,0
+3810492,2022,2022-08-27,Ventforet Kofu,Zweigen Kanazawa,,0
+3810464,2022,2022-08-28,Blaublitz Akita,Oita Trinita,,0
+3810465,2022,2022-08-28,Roasso Kumamoto,Tokyo Verdy,,0
+3810466,2022,2022-08-28,Thespakusatsu Gunma,Fagiano Okayama FC,,0
+3934604,2022,2022-08-31,Montedio Yamagata,Fagiano Okayama FC,,0
+3810467,2022,2022-09-03,Vegalta Sendai,Mito Hollyhock,,0
+3810468,2022,2022-09-03,Montedio Yamagata,Grulla Morioka,,0
+3810469,2022,2022-09-03,JEF United Chiba,V-Varen Nagasaki,,0
+3810470,2022,2022-09-03,Albirex Niigata,Oita Trinita,,0
+3810471,2022,2022-09-03,Zweigen Kanazawa,Tokyo Verdy,,0
+3810472,2022,2022-09-03,Renofa Yamaguchi,Yokohama FC,,0
+3810473,2022,2022-09-03,Tokushima Vortis,Ventforet Kofu,,0
+3810474,2022,2022-09-03,FC Ryukyu,Blaublitz Akita,,0
+3810475,2022,2022-09-04,Tochigi SC,Thespakusatsu Gunma,,0
+3810493,2022,2022-09-04,Fagiano Okayama FC,Machida Zelvia,,0
+3810494,2022,2022-09-04,Roasso Kumamoto,Omiya Ardija,,0
+3810486,2022,2022-09-06,Zweigen Kanazawa,V-Varen Nagasaki,,0
+3810501,2022,2022-09-10,Oita Trinita,Vegalta Sendai,,0
+3810502,2022,2022-09-10,V-Varen Nagasaki,Roasso Kumamoto,,0
+3810503,2022,2022-09-10,Fagiano Okayama FC,Montedio Yamagata,,0
+3810504,2022,2022-09-10,Albirex Niigata,FC Ryukyu,,0
+3810505,2022,2022-09-10,Ventforet Kofu,Omiya Ardija,,0
+3810506,2022,2022-09-10,Yokohama FC,Tochigi SC,,0
+3810507,2022,2022-09-10,Machida Zelvia,Renofa Yamaguchi,,0
+3810508,2022,2022-09-10,Tokyo Verdy,Thespakusatsu Gunma,,0
+3810509,2022,2022-09-10,JEF United Chiba,Zweigen Kanazawa,,0
+3810510,2022,2022-09-10,Blaublitz Akita,Tokushima Vortis,,0
+3810511,2022,2022-09-10,Grulla Morioka,Mito Hollyhock,,0
+3810495,2022,2022-09-14,Omiya Ardija,Oita Trinita,,0
+3810496,2022,2022-09-14,Thespakusatsu Gunma,FC Ryukyu,,0
+3810497,2022,2022-09-14,Tochigi SC,Vegalta Sendai,,0
+3810498,2022,2022-09-14,Mito Hollyhock,V-Varen Nagasaki,,0
+3810499,2022,2022-09-14,Montedio Yamagata,Yokohama FC,,0
+3810500,2022,2022-09-14,Grulla Morioka,JEF United Chiba,,0
+3810512,2022,2022-09-14,Tokyo Verdy,Blaublitz Akita,,0
+3810513,2022,2022-09-14,Ventforet Kofu,Albirex Niigata,,0
+3810523,2022,2022-09-14,Renofa Yamaguchi,Zweigen Kanazawa,,0
+3810524,2022,2022-09-14,Tokushima Vortis,Fagiano Okayama FC,,0
+3810525,2022,2022-09-14,Roasso Kumamoto,Machida Zelvia,,0
+3810526,2022,2022-09-17,Fagiano Okayama FC,V-Varen Nagasaki,,0
+3810516,2022,2022-09-18,FC Ryukyu,Renofa Yamaguchi,,0
+3810517,2022,2022-09-18,Zweigen Kanazawa,Oita Trinita,,0
+3810518,2022,2022-09-18,Albirex Niigata,Mito Hollyhock,,0
+3810519,2022,2022-09-18,Yokohama FC,Ventforet Kofu,,0
+3810520,2022,2022-09-18,Machida Zelvia,Tokyo Verdy,,0
+3810521,2022,2022-09-18,Omiya Ardija,Tochigi SC,,0
+3810522,2022,2022-09-18,Montedio Yamagata,JEF United Chiba,,0
+3810527,2022,2022-09-18,Vegalta Sendai,Tokushima Vortis,,0
+3810528,2022,2022-09-18,Blaublitz Akita,Thespakusatsu Gunma,,0
+3810515,2022,2022-09-20,Roasso Kumamoto,Grulla Morioka,,0
+3810425,2022,2022-09-21,Mito Hollyhock,Tokyo Verdy,,0
+3810463,2022,2022-09-21,V-Varen Nagasaki,Tochigi SC,,0
+3810514,2022,2022-09-24,Thespakusatsu Gunma,Renofa Yamaguchi,,0
+3810549,2022,2022-09-24,V-Varen Nagasaki,Yokohama FC,,0
+3810557,2022,2022-09-24,Oita Trinita,Ventforet Kofu,,0
+3810565,2022,2022-09-24,Tokyo Verdy,Montedio Yamagata,,0
+3810550,2022,2022-09-25,Grulla Morioka,Zweigen Kanazawa,,0
+3810551,2022,2022-09-25,Blaublitz Akita,Machida Zelvia,,0
+3810552,2022,2022-09-25,Tochigi SC,FC Ryukyu,,0
+3810553,2022,2022-09-25,JEF United Chiba,Roasso Kumamoto,,0
+3810554,2022,2022-09-25,Albirex Niigata,Omiya Ardija,,0
+3810555,2022,2022-09-25,Fagiano Okayama FC,Vegalta Sendai,,0
+3810556,2022,2022-09-25,Tokushima Vortis,Mito Hollyhock,,0
+3810558,2022,2022-10-01,Montedio Yamagata,Albirex Niigata,,0
+3810559,2022,2022-10-01,Thespakusatsu Gunma,Omiya Ardija,,0
+3810560,2022,2022-10-01,Ventforet Kofu,Tochigi SC,,0
+3810561,2022,2022-10-01,Tokushima Vortis,Machida Zelvia,,0
+3810562,2022,2022-10-01,Oita Trinita,V-Varen Nagasaki,,0
+3810563,2022,2022-10-01,FC Ryukyu,Yokohama FC,,0
+3810535,2022,2022-10-02,Roasso Kumamoto,Blaublitz Akita,,0
+3810546,2022,2022-10-02,Renofa Yamaguchi,Grulla Morioka,,0
+3810547,2022,2022-10-02,Zweigen Kanazawa,Fagiano Okayama FC,,0
+3810548,2022,2022-10-02,Mito Hollyhock,JEF United Chiba,,0
+3810564,2022,2022-10-02,Vegalta Sendai,Tokyo Verdy,,0
+3810476,2022,2022-10-05,Omiya Ardija,Montedio Yamagata,,0
+3810530,2022,2022-10-08,Roasso Kumamoto,Thespakusatsu Gunma,,0
+3810531,2022,2022-10-08,V-Varen Nagasaki,Tokushima Vortis,,0
+3810532,2022,2022-10-08,Albirex Niigata,Vegalta Sendai,,0
+3810533,2022,2022-10-08,Blaublitz Akita,JEF United Chiba,,0
+3810534,2022,2022-10-08,Grulla Morioka,Tokyo Verdy,,0
+3810529,2022,2022-10-09,Montedio Yamagata,Mito Hollyhock,,0
+3810536,2022,2022-10-09,Omiya Ardija,Renofa Yamaguchi,,0
+3810537,2022,2022-10-09,Machida Zelvia,Tochigi SC,,0
+3810538,2022,2022-10-09,Yokohama FC,Oita Trinita,,0
+3810539,2022,2022-10-09,Ventforet Kofu,Fagiano Okayama FC,,0
+3810540,2022,2022-10-09,Zweigen Kanazawa,FC Ryukyu,,0
+3810541,2022,2022-10-15,Tokyo Verdy,Albirex Niigata,,0
+3810542,2022,2022-10-15,V-Varen Nagasaki,Renofa Yamaguchi,,0
+3810543,2022,2022-10-16,Vegalta Sendai,Roasso Kumamoto,,0
+3810544,2022,2022-10-16,Tochigi SC,Mito Hollyhock,,0
+3810545,2022,2022-10-16,Thespakusatsu Gunma,Grulla Morioka,,0
+3810589,2022,2022-10-16,Oita Trinita,Montedio Yamagata,,0
+3810590,2022,2022-10-16,Tokushima Vortis,Omiya Ardija,,0
+3810591,2022,2022-10-16,Fagiano Okayama FC,Blaublitz Akita,,0
+3810592,2022,2022-10-16,Yokohama FC,Zweigen Kanazawa,,0
+3810594,2022,2022-10-16,JEF United Chiba,FC Ryukyu,,0
+3810593,2022,2022-10-19,Machida Zelvia,Ventforet Kofu,,0
+3810587,2022,2022-10-23,Montedio Yamagata,Tokushima Vortis,,0
+3810588,2022,2022-10-23,Blaublitz Akita,Vegalta Sendai,,0
+3810595,2022,2022-10-23,Mito Hollyhock,Thespakusatsu Gunma,,0
+3810596,2022,2022-10-23,Omiya Ardija,V-Varen Nagasaki,,0
+3810598,2022,2022-10-23,FC Ryukyu,Oita Trinita,,0
+3810599,2022,2022-10-23,Roasso Kumamoto,Yokohama FC,,0
+3810600,2022,2022-10-23,Renofa Yamaguchi,JEF United Chiba,,0
+3810601,2022,2022-10-23,Zweigen Kanazawa,Tochigi SC,,0
+3810602,2022,2022-10-23,Albirex Niigata,Machida Zelvia,,0
+3810603,2022,2022-10-23,Ventforet Kofu,Grulla Morioka,,0
+3810604,2022,2022-10-23,Tokyo Verdy,Fagiano Okayama FC,,0
+4053615,2022,2022-10-30,Roasso Kumamoto,Oita Trinita,,0
+4053616,2022,2022-10-30,Fagiano Okayama FC,Montedio Yamagata,,0
+4053697,2022,2022-11-06,Roasso Kumamoto,Montedio Yamagata,,0
+4087486,2023,2023-02-18,Iwaki FC,Fujieda MYFC,,0
+4087488,2023,2023-02-18,Thespakusatsu Gunma,Blaublitz Akita,,0
+4087491,2023,2023-02-18,Ventforet Kofu,Montedio Yamagata,,0
+4087492,2023,2023-02-18,Shimizu S-Pulse,Mito Hollyhock,,0
+4087503,2023,2023-02-18,V-Varen Nagasaki,JEF United Chiba,,0
+4087505,2023,2023-02-18,Renofa Yamaguchi,Omiya Ardija,,0
+4087506,2023,2023-02-18,Jubilo Iwata,Fagiano Okayama FC,,0
+4087487,2023,2023-02-19,Tochigi SC,Roasso Kumamoto,,0
+4087489,2023,2023-02-19,Tokyo Verdy,Zweigen Kanazawa,,0
+4087490,2023,2023-02-19,Machida Zelvia,Vegalta Sendai,,0
+4087504,2023,2023-02-19,Tokushima Vortis,Oita Trinita,,0
+4087498,2023,2023-02-25,Fujieda MYFC,V-Varen Nagasaki,,0
+4087499,2023,2023-02-25,JEF United Chiba,Montedio Yamagata,,0
+4087500,2023,2023-02-25,Omiya Ardija,Zweigen Kanazawa,,0
+4106685,2023,2023-02-25,Ventforet Kofu,Tokushima Vortis,,0
+4087495,2023,2023-02-26,Oita Trinita,Tokyo Verdy,,0
+4087496,2023,2023-02-26,Roasso Kumamoto,Blaublitz Akita,,0
+4087497,2023,2023-02-26,Fagiano Okayama FC,Shimizu S-Pulse,,0
+4087501,2023,2023-02-26,Mito Hollyhock,Iwaki FC,,0
+4087502,2023,2023-02-26,Vegalta Sendai,Tochigi SC,,0
+4106686,2023,2023-02-26,Renofa Yamaguchi,Jubilo Iwata,,0
+4106687,2023,2023-02-26,Machida Zelvia,Thespakusatsu Gunma,,0
+4106688,2023,2023-03-04,Jubilo Iwata,Montedio Yamagata,,0
+4106704,2023,2023-03-04,Fujieda MYFC,Blaublitz Akita,,0
+4106705,2023,2023-03-04,Tokushima Vortis,Vegalta Sendai,,0
+4106706,2023,2023-03-04,V-Varen Nagasaki,Shimizu S-Pulse,,0
+4087494,2023,2023-03-05,Zweigen Kanazawa,Machida Zelvia,,0
+4106707,2023,2023-03-05,Iwaki FC,Renofa Yamaguchi,,0
+4106708,2023,2023-03-05,Roasso Kumamoto,Omiya Ardija,,0
+4106709,2023,2023-03-05,JEF United Chiba,Thespakusatsu Gunma,,0
+4106710,2023,2023-03-05,Tokyo Verdy,Ventforet Kofu,,0
+4106711,2023,2023-03-05,Mito Hollyhock,Fagiano Okayama FC,,0
+4106712,2023,2023-03-05,Oita Trinita,Tochigi SC,,0
+4106713,2023,2023-03-11,Ventforet Kofu,Fujieda MYFC,,0
+4106714,2023,2023-03-11,RB Omiya Ardija,Jubilo Iwata,,0
+4106715,2023,2023-03-11,Renofa Yamaguchi,Roasso Kumamoto,,0
+4087493,2023,2023-03-12,Blaublitz Akita,JEF United Chiba,,0
+4106689,2023,2023-03-12,Shimizu S-Pulse,Oita Trinita,,0
+4106690,2023,2023-03-12,Fagiano Okayama FC,Zweigen Kanazawa,,0
+4106691,2023,2023-03-12,Tokushima Vortis,Tokyo Verdy,,0
+4106692,2023,2023-03-12,Thespakusatsu Gunma,Montedio Yamagata,,0
+4106701,2023,2023-03-12,Machida Zelvia,Mito Hollyhock,,0
+4106702,2023,2023-03-12,Tochigi SC,V-Varen Nagasaki,,0
+4106703,2023,2023-03-12,Vegalta Sendai,Iwaki FC,,0
+4106867,2023,2023-03-18,Jubilo Iwata,Shimizu S-Pulse,,0
+4087507,2023,2023-03-19,Montedio Yamagata,Machida Zelvia,,0
+4106871,2023,2023-03-19,Oita Trinita,JEF United Chiba,,0
+4106872,2023,2023-03-19,Roasso Kumamoto,V-Varen Nagasaki,,0
+4106873,2023,2023-03-19,Fagiano Okayama FC,Ventforet Kofu,,0
+4106874,2023,2023-03-19,Fujieda MYFC,Tokyo Verdy,,0
+4106875,2023,2023-03-19,Zweigen Kanazawa,Renofa Yamaguchi,,0
+4106876,2023,2023-03-19,Thespakusatsu Gunma,Vegalta Sendai,,0
+4106877,2023,2023-03-19,Tochigi SC,Omiya Ardija,,0
+4106878,2023,2023-03-19,Iwaki FC,Tokushima Vortis,,0
+4106879,2023,2023-03-19,Blaublitz Akita,Mito Hollyhock,,0
+4106868,2023,2023-03-25,JEF United Chiba,Fagiano Okayama FC,,0
+4106869,2023,2023-03-25,Omiya Ardija,Oita Trinita,,0
+4106870,2023,2023-03-25,Vegalta Sendai,Zweigen Kanazawa,,0
+4106884,2023,2023-03-25,Tokyo Verdy,Roasso Kumamoto,,0
+4106885,2023,2023-03-25,V-Varen Nagasaki,Montedio Yamagata,,0
+4106886,2023,2023-03-25,Tokushima Vortis,Blaublitz Akita,,0
+4106881,2023,2023-03-26,Mito Hollyhock,Ventforet Kofu,,0
+4106882,2023,2023-03-26,Renofa Yamaguchi,Fujieda MYFC,,0
+4106883,2023,2023-03-26,Iwaki FC,Machida Zelvia,,0
+4106880,2023,2023-03-29,Shimizu S-Pulse,Thespakusatsu Gunma,,0
+4106887,2023,2023-03-29,Jubilo Iwata,Tochigi SC,,0
+4107447,2023,2023-04-01,Ventforet Kofu,Shimizu S-Pulse,,0
+4107448,2023,2023-04-01,Vegalta Sendai,V-Varen Nagasaki,,0
+4107449,2023,2023-04-01,Blaublitz Akita,Renofa Yamaguchi,,0
+4107450,2023,2023-04-01,Oita Trinita,Jubilo Iwata,,0
+4107451,2023,2023-04-01,Tokyo Verdy,Omiya Ardija,,0
+4107452,2023,2023-04-02,Roasso Kumamoto,Tokushima Vortis,,0
+4107453,2023,2023-04-02,Montedio Yamagata,Mito Hollyhock,,0
+4107454,2023,2023-04-02,Tochigi SC,Thespakusatsu Gunma,,0
+4107455,2023,2023-04-02,Machida Zelvia,Fujieda MYFC,,0
+4107474,2023,2023-04-02,Zweigen Kanazawa,JEF United Chiba,,0
+4107475,2023,2023-04-02,Fagiano Okayama FC,Iwaki FC,,0
+4107476,2023,2023-04-08,Ventforet Kofu,Vegalta Sendai,,0
+4107477,2023,2023-04-08,Iwaki FC,Oita Trinita,,0
+4107478,2023,2023-04-08,Thespakusatsu Gunma,V-Varen Nagasaki,,0
+4107479,2023,2023-04-08,Omiya Ardija,Montedio Yamagata,,0
+4107480,2023,2023-04-08,JEF United Chiba,Tokushima Vortis,,0
+4107481,2023,2023-04-08,Machida Zelvia,Blaublitz Akita,,0
+4107482,2023,2023-04-08,Shimizu S-Pulse,Tokyo Verdy,,0
+4107483,2023,2023-04-08,Fujieda MYFC,Fagiano Okayama FC,,0
+4107484,2023,2023-04-08,Renofa Yamaguchi,Tochigi SC,,0
+4107485,2023,2023-04-08,Mito Hollyhock,Jubilo Iwata,,0
+4107486,2023,2023-04-09,Roasso Kumamoto,Zweigen Kanazawa,,0
+4107456,2023,2023-04-12,Jubilo Iwata,Machida Zelvia,,0
+4107457,2023,2023-04-12,Fujieda MYFC,JEF United Chiba,,0
+4107458,2023,2023-04-12,Fagiano Okayama FC,Roasso Kumamoto,,0
+4107459,2023,2023-04-12,Tokushima Vortis,Mito Hollyhock,,0
+4107460,2023,2023-04-12,V-Varen Nagasaki,Ventforet Kofu,,0
+4107461,2023,2023-04-12,Oita Trinita,Renofa Yamaguchi,,0
+4107472,2023,2023-04-12,Shimizu S-Pulse,Vegalta Sendai,,0
+4107473,2023,2023-04-12,Zweigen Kanazawa,Iwaki FC,,0
+4107487,2023,2023-04-12,Tochigi SC,Montedio Yamagata,,0
+4107488,2023,2023-04-12,RB Omiya Ardija,Thespakusatsu Gunma,,0
+4107489,2023,2023-04-12,Tokyo Verdy,Blaublitz Akita,,0
+4107462,2023,2023-04-16,Ventforet Kofu,Tochigi SC,,0
+4107463,2023,2023-04-16,Vegalta Sendai,Fagiano Okayama FC,,0
+4107464,2023,2023-04-16,Blaublitz Akita,Omiya Ardija,,0
+4107465,2023,2023-04-16,Montedio Yamagata,Zweigen Kanazawa,,0
+4107466,2023,2023-04-16,Iwaki FC,Thespakusatsu Gunma,,0
+4107467,2023,2023-04-16,JEF United Chiba,Tokyo Verdy,,0
+4107468,2023,2023-04-16,Machida Zelvia,Oita Trinita,,0
+4107469,2023,2023-04-16,Renofa Yamaguchi,Shimizu S-Pulse,,0
+4107470,2023,2023-04-16,Tokushima Vortis,V-Varen Nagasaki,,0
+4107471,2023,2023-04-16,Mito Hollyhock,Fujieda MYFC,,0
+4107490,2023,2023-04-16,Jubilo Iwata,Roasso Kumamoto,,0
+4107535,2023,2023-04-21,Roasso Kumamoto,JEF United Chiba,,0
+4107519,2023,2023-04-22,Tokyo Verdy,Montedio Yamagata,,0
+4107520,2023,2023-04-22,V-Varen Nagasaki,Blaublitz Akita,,0
+4107521,2023,2023-04-22,Fagiano Okayama FC,Renofa Yamaguchi,,0
+4107522,2023,2023-04-22,Ventforet Kofu,Machida Zelvia,,0
+4107523,2023,2023-04-22,Omiya Ardija,Shimizu S-Pulse,,0
+4107515,2023,2023-04-23,Fujieda MYFC,Vegalta Sendai,,0
+4107516,2023,2023-04-23,Zweigen Kanazawa,Jubilo Iwata,,0
+4107517,2023,2023-04-23,Thespakusatsu Gunma,Tokushima Vortis,,0
+4107518,2023,2023-04-23,Tochigi SC,Iwaki FC,,0
+4107524,2023,2023-04-23,Oita Trinita,Mito Hollyhock,,0
+4107525,2023,2023-04-29,Vegalta Sendai,Oita Trinita,,0
+4107526,2023,2023-04-29,Mito Hollyhock,Tokyo Verdy,,0
+4107527,2023,2023-04-29,JEF United Chiba,Omiya Ardija,,0
+4107528,2023,2023-04-29,Jubilo Iwata,Tokushima Vortis,,0
+4107529,2023,2023-04-29,Shimizu S-Pulse,Tochigi SC,,0
+4107530,2023,2023-04-29,Machida Zelvia,Roasso Kumamoto,,0
+4107531,2023,2023-04-29,Thespakusatsu Gunma,Ventforet Kofu,,0
+4107532,2023,2023-04-29,Iwaki FC,V-Varen Nagasaki,,0
+4107533,2023,2023-04-29,Montedio Yamagata,Renofa Yamaguchi,,0
+4107534,2023,2023-04-29,Blaublitz Akita,Fagiano Okayama FC,,0
+4107514,2023,2023-04-30,Zweigen Kanazawa,Fujieda MYFC,,0
+4107492,2023,2023-05-03,Tochigi SC,Zweigen Kanazawa,,0
+4107493,2023,2023-05-03,V-Varen Nagasaki,Mito Hollyhock,,0
+4107494,2023,2023-05-03,Tokushima Vortis,Shimizu S-Pulse,,0
+4107495,2023,2023-05-03,Renofa Yamaguchi,JEF United Chiba,,0
+4107496,2023,2023-05-03,Fagiano Okayama FC,Montedio Yamagata,,0
+4107497,2023,2023-05-03,Fujieda MYFC,Oita Trinita,,0
+4107498,2023,2023-05-03,Ventforet Kofu,Iwaki FC,,0
+4107499,2023,2023-05-03,Omiya Ardija,Machida Zelvia,,0
+4107500,2023,2023-05-03,Vegalta Sendai,Blaublitz Akita,,0
+4107501,2023,2023-05-03,Tokyo Verdy,Jubilo Iwata,,0
+4107513,2023,2023-05-03,Roasso Kumamoto,Thespakusatsu Gunma,,0
+4107491,2023,2023-05-07,JEF United Chiba,Jubilo Iwata,,0
+4107502,2023,2023-05-07,Roasso Kumamoto,Ventforet Kofu,,0
+4107503,2023,2023-05-07,Mito Hollyhock,Vegalta Sendai,,0
+4107504,2023,2023-05-07,Oita Trinita,Zweigen Kanazawa,,0
+4107506,2023,2023-05-07,V-Varen Nagasaki,Tokyo Verdy,,0
+4107507,2023,2023-05-07,Shimizu S-Pulse,Iwaki FC,,0
+4107508,2023,2023-05-07,Machida Zelvia,Fagiano Okayama FC,,0
+4107509,2023,2023-05-07,Omiya Ardija,Tokushima Vortis,,0
+4107510,2023,2023-05-07,Thespakusatsu Gunma,Renofa Yamaguchi,,0
+4107511,2023,2023-05-07,Montedio Yamagata,Fujieda MYFC,,0
+4107512,2023,2023-05-07,Blaublitz Akita,Tochigi SC,,0
+4107536,2023,2023-05-13,Fagiano Okayama FC,Omiya Ardija,,0
+4107556,2023,2023-05-13,Renofa Yamaguchi,Tokushima Vortis,,0
+4107557,2023,2023-05-13,Vegalta Sendai,Montedio Yamagata,,0
+4107558,2023,2023-05-13,Ventforet Kofu,JEF United Chiba,,0
+4107559,2023,2023-05-13,Zweigen Kanazawa,V-Varen Nagasaki,,0
+4107560,2023,2023-05-13,Shimizu S-Pulse,Fujieda MYFC,,0
+4107561,2023,2023-05-13,Jubilo Iwata,Thespa Gunma,,0
+4107562,2023,2023-05-13,Tokyo Verdy,Machida Zelvia,,0
+4107563,2023,2023-05-13,Oita Trinita,Roasso Kumamoto,,0
+4107564,2023,2023-05-13,Mito Hollyhock,Tochigi SC,,0
+4107565,2023,2023-05-14,Iwaki FC,Blaublitz Akita,,0
+4107537,2023,2023-05-17,V-Varen Nagasaki,Fagiano Okayama FC,,0
+4107538,2023,2023-05-17,Roasso Kumamoto,Vegalta Sendai,,0
+4107554,2023,2023-05-17,Tokushima Vortis,Zweigen Kanazawa,,0
+4107555,2023,2023-05-17,Fujieda MYFC,Jubilo Iwata,,0
+4107566,2023,2023-05-17,Montedio Yamagata,Oita Trinita,,0
+4107567,2023,2023-05-17,Blaublitz Akita,Ventforet Kofu,,0
+4107568,2023,2023-05-17,Iwaki FC,Omiya Ardija,,0
+4107569,2023,2023-05-17,Tochigi SC,Tokyo Verdy,,0
+4107570,2023,2023-05-17,Thespakusatsu Gunma,Mito Hollyhock,,0
+4107571,2023,2023-05-17,JEF United Chiba,Shimizu S-Pulse,,0
+4107572,2023,2023-05-17,Machida Zelvia,Renofa Yamaguchi,,0
+4107539,2023,2023-05-21,Montedio Yamagata,Blaublitz Akita,,0
+4107540,2023,2023-05-21,Omiya Ardija,Vegalta Sendai,,0
+4107541,2023,2023-05-21,JEF United Chiba,Tochigi SC,,0
+4107542,2023,2023-05-21,Machida Zelvia,Shimizu S-Pulse,,0
+4107543,2023,2023-05-21,Zweigen Kanazawa,Ventforet Kofu,,0
+4107544,2023,2023-05-21,Fujieda MYFC,Tokushima Vortis,,0
+4107545,2023,2023-05-21,Renofa Yamaguchi,Tokyo Verdy,,0
+4107546,2023,2023-05-21,Oita Trinita,V-Varen Nagasaki,,0
+4107547,2023,2023-05-21,Mito Hollyhock,Roasso Kumamoto,,0
+4107548,2023,2023-05-21,Jubilo Iwata,Iwaki FC,,0
+4107549,2023,2023-05-21,Fagiano Okayama FC,Thespakusatsu Gunma,,0
+4107550,2023,2023-05-27,Ventforet Kofu,Omiya Ardija,,0
+4107551,2023,2023-05-27,V-Varen Nagasaki,Jubilo Iwata,,0
+4107552,2023,2023-05-28,Vegalta Sendai,JEF United Chiba,,0
+4107553,2023,2023-05-28,Blaublitz Akita,Oita Trinita,,0
+4107573,2023,2023-05-28,Tochigi SC,Fagiano Okayama FC,,0
+4107574,2023,2023-05-28,Thespakusatsu Gunma,Fujieda MYFC,,0
+4107575,2023,2023-05-28,Tokyo Verdy,Iwaki FC,,0
+4107576,2023,2023-05-28,Shimizu S-Pulse,Zweigen Kanazawa,,0
+4107577,2023,2023-05-28,Tokushima Vortis,Machida Zelvia,,0
+4107578,2023,2023-05-28,Roasso Kumamoto,Montedio Yamagata,,0
+4107579,2023,2023-05-28,Mito Hollyhock,Renofa Yamaguchi,,0
+4107580,2023,2023-06-03,Iwaki FC,Roasso Kumamoto,,0
+4107593,2023,2023-06-03,Montedio Yamagata,Shimizu S-Pulse,,0
+4107594,2023,2023-06-03,Omiya Ardija,Mito Hollyhock,,0
+4107595,2023,2023-06-03,Zweigen Kanazawa,Thespakusatsu Gunma,,0
+4107596,2023,2023-06-03,Fujieda MYFC,Tochigi SC,,0
+4107597,2023,2023-06-03,Renofa Yamaguchi,V-Varen Nagasaki,,0
+4107598,2023,2023-06-03,Jubilo Iwata,Blaublitz Akita,,0
+4107599,2023,2023-06-03,JEF United Chiba,Machida Zelvia,,0
+4107600,2023,2023-06-03,Fagiano Okayama FC,Tokushima Vortis,,0
+4107601,2023,2023-06-04,Tokyo Verdy,Vegalta Sendai,,0
+4107602,2023,2023-06-04,Oita Trinita,Ventforet Kofu,,0
+4107581,2023,2023-06-11,Montedio Yamagata,Iwaki FC,,0
+4107582,2023,2023-06-11,Machida Zelvia,V-Varen Nagasaki,,0
+4107583,2023,2023-06-11,Mito Hollyhock,JEF United Chiba,,0
+4107584,2023,2023-06-11,Ventforet Kofu,Renofa Yamaguchi,,0
+4107585,2023,2023-06-11,Tokushima Vortis,Tochigi SC,,0
+4107586,2023,2023-06-11,Thespakusatsu Gunma,Oita Trinita,,0
+4107587,2023,2023-06-11,Omiya Ardija,Fujieda MYFC,,0
+4107588,2023,2023-06-11,Fagiano Okayama FC,Tokyo Verdy,,0
+4107589,2023,2023-06-11,Roasso Kumamoto,Shimizu S-Pulse,,0
+4107591,2023,2023-06-11,Blaublitz Akita,Zweigen Kanazawa,,0
+4107592,2023,2023-06-11,Vegalta Sendai,Jubilo Iwata,,0
+4107590,2023,2023-06-17,Fujieda MYFC,Roasso Kumamoto,,0
+4107603,2023,2023-06-17,Zweigen Kanazawa,Mito Hollyhock,,0
+4107604,2023,2023-06-17,Tokushima Vortis,Montedio Yamagata,,0
+4107615,2023,2023-06-17,V-Varen Nagasaki,Omiya Ardija,,0
+4107616,2023,2023-06-17,Oita Trinita,Fagiano Okayama FC,,0
+4107617,2023,2023-06-18,Renofa Yamaguchi,Vegalta Sendai,,0
+4107618,2023,2023-06-18,Iwaki FC,JEF United Chiba,,0
+4107619,2023,2023-06-18,Tochigi SC,Machida Zelvia,,0
+4107620,2023,2023-06-18,Tokyo Verdy,Thespakusatsu Gunma,,0
+4107605,2023,2023-06-24,Tochigi SC,Renofa Yamaguchi,,0
+4107606,2023,2023-06-24,Omiya Ardija,Iwaki FC,,0
+4107607,2023,2023-06-24,Ventforet Kofu,Fagiano Okayama FC,,0
+4107608,2023,2023-06-24,Montedio Yamagata,Tokyo Verdy,,0
+4107609,2023,2023-06-24,JEF United Chiba,Oita Trinita,,0
+4107610,2023,2023-06-24,V-Varen Nagasaki,Zweigen Kanazawa,,0
+4107613,2023,2023-06-24,Mito Hollyhock,Machida Zelvia,,0
+4107614,2023,2023-06-24,Blaublitz Akita,Fujieda MYFC,,0
+4107611,2023,2023-06-25,Vegalta Sendai,Tokushima Vortis,,0
+4107612,2023,2023-06-25,Roasso Kumamoto,Jubilo Iwata,,0
+4107623,2023,2023-06-25,Thespakusatsu Gunma,Shimizu S-Pulse,,0
+4107621,2023,2023-06-28,Shimizu S-Pulse,Blaublitz Akita,,0
+4107622,2023,2023-06-28,Jubilo Iwata,Ventforet Kofu,,0
+4107624,2023,2023-07-01,Machida Zelvia,Omiya Ardija,,0
+4107629,2023,2023-07-01,Montedio Yamagata,Vegalta Sendai,,0
+4107630,2023,2023-07-01,Tokushima Vortis,Thespakusatsu Gunma,,0
+4107631,2023,2023-07-01,Fagiano Okayama FC,Mito Hollyhock,,0
+4107632,2023,2023-07-01,Fujieda MYFC,Renofa Yamaguchi,,0
+4107633,2023,2023-07-01,Jubilo Iwata,Oita Trinita,,0
+4107634,2023,2023-07-01,Zweigen Kanazawa,Tochigi SC,,0
+4107635,2023,2023-07-01,JEF United Chiba,Ventforet Kofu,,0
+4107636,2023,2023-07-01,Shimizu S-Pulse,V-Varen Nagasaki,,0
+4107627,2023,2023-07-02,Roasso Kumamoto,Tokyo Verdy,,0
+4107628,2023,2023-07-02,Blaublitz Akita,Iwaki FC,,0
+4107625,2023,2023-07-05,Iwaki FC,Tochigi SC,,0
+4107626,2023,2023-07-05,Vegalta Sendai,Shimizu S-Pulse,,0
+4107654,2023,2023-07-05,Thespakusatsu Gunma,Roasso Kumamoto,,0
+4107655,2023,2023-07-05,Omiya Ardija,JEF United Chiba,,0
+4107656,2023,2023-07-05,Tokyo Verdy,V-Varen Nagasaki,,0
+4107657,2023,2023-07-05,Ventforet Kofu,Blaublitz Akita,,0
+4107658,2023,2023-07-05,Jubilo Iwata,Zweigen Kanazawa,,0
+4107659,2023,2023-07-05,Fagiano Okayama FC,Fujieda MYFC,,0
+4107660,2023,2023-07-05,Renofa Yamaguchi,Montedio Yamagata,,0
+4107661,2023,2023-07-05,Oita Trinita,Machida Zelvia,,0
+4107667,2023,2023-07-05,Mito Hollyhock,Tokushima Vortis,,0
+4107640,2023,2023-07-09,Oita Trinita,Shimizu S-Pulse,,0
+4107641,2023,2023-07-09,Tokushima Vortis,Fagiano Okayama FC,,0
+4107642,2023,2023-07-09,JEF United Chiba,Zweigen Kanazawa,,0
+4107651,2023,2023-07-09,Thespakusatsu Gunma,RB Omiya Ardija,,0
+4107652,2023,2023-07-09,Montedio Yamagata,Jubilo Iwata,,0
+4107653,2023,2023-07-09,V-Varen Nagasaki,Renofa Yamaguchi,,0
+4107662,2023,2023-07-09,Blaublitz Akita,Roasso Kumamoto,,0
+4107663,2023,2023-07-09,Iwaki FC,Mito Hollyhock,,0
+4107664,2023,2023-07-09,Tochigi SC,Vegalta Sendai,,0
+4107665,2023,2023-07-09,Machida Zelvia,Tokyo Verdy,,0
+4107666,2023,2023-07-09,Fujieda MYFC,Ventforet Kofu,,0
+4107638,2023,2023-07-15,Renofa Yamaguchi,Iwaki FC,,0
+4107639,2023,2023-07-15,Tokyo Verdy,Tokushima Vortis,,0
+4107643,2023,2023-07-16,Mito Hollyhock,Montedio Yamagata,,0
+4107644,2023,2023-07-16,Ventforet Kofu,Thespakusatsu Gunma,,0
+4107645,2023,2023-07-16,Shimizu S-Pulse,JEF United Chiba,,0
+4107646,2023,2023-07-16,Fagiano Okayama FC,V-Varen Nagasaki,,0
+4107647,2023,2023-07-16,Omiya Ardija,Tochigi SC,,0
+4107648,2023,2023-07-16,Zweigen Kanazawa,Vegalta Sendai,,0
+4107649,2023,2023-07-16,Jubilo Iwata,Fujieda MYFC,,0
+4107650,2023,2023-07-16,Roasso Kumamoto,Oita Trinita,,0
+4107668,2023,2023-07-22,Tochigi SC,Shimizu S-Pulse,,0
+4107669,2023,2023-07-22,Machida Zelvia,JEF United Chiba,,0
+4107696,2023,2023-07-22,Oita Trinita,Iwaki FC,,0
+4107697,2023,2023-07-22,Tokushima Vortis,Ventforet Kofu,,0
+4107698,2023,2023-07-22,Renofa Yamaguchi,Blaublitz Akita,,0
+4107699,2023,2023-07-22,Fujieda MYFC,Zweigen Kanazawa,,0
+4107711,2023,2023-07-22,Montedio Yamagata,V-Varen Nagasaki,,0
+4107693,2023,2023-07-23,Thespa Gunma,Jubilo Iwata,,0
+4107694,2023,2023-07-23,Vegalta Sendai,Tokyo Verdy,,0
+4107695,2023,2023-07-23,Mito Hollyhock,Omiya Ardija,,0
+4107692,2023,2023-07-24,Roasso Kumamoto,Fagiano Okayama FC,,0
+4107700,2023,2023-07-29,Blaublitz Akita,Thespakusatsu Gunma,,0
+4107701,2023,2023-07-29,Iwaki FC,Jubilo Iwata,,0
+4107702,2023,2023-07-29,Tochigi SC,Ventforet Kofu,,0
+4107704,2023,2023-07-29,Oita Trinita,Montedio Yamagata,,0
+4107705,2023,2023-07-29,V-Varen Nagasaki,Roasso Kumamoto,,0
+4107706,2023,2023-07-29,JEF United Chiba,Renofa Yamaguchi,,0
+4107707,2023,2023-07-29,Vegalta Sendai,Fujieda MYFC,,0
+4107708,2023,2023-07-29,Shimizu S-Pulse,Fagiano Okayama FC,,0
+4107709,2023,2023-07-29,Machida Zelvia,Tokushima Vortis,,0
+4107710,2023,2023-07-29,Tokyo Verdy,Mito Hollyhock,,0
+4107703,2023,2023-07-30,Zweigen Kanazawa,Omiya Ardija,,0
+4107690,2023,2023-08-05,Fagiano Okayama FC,Machida Zelvia,,0
+4107691,2023,2023-08-05,Fujieda MYFC,Montedio Yamagata,,0
+4107671,2023,2023-08-06,Tokushima Vortis,JEF United Chiba,,0
+4107672,2023,2023-08-06,Renofa Yamaguchi,Oita Trinita,,0
+4107673,2023,2023-08-06,Jubilo Iwata,Vegalta Sendai,,0
+4107674,2023,2023-08-06,Omiya Ardija,Blaublitz Akita,,0
+4107675,2023,2023-08-06,Thespakusatsu Gunma,Tochigi SC,,0
+4107676,2023,2023-08-06,V-Varen Nagasaki,Iwaki FC,,0
+4107677,2023,2023-08-06,Ventforet Kofu,Zweigen Kanazawa,,0
+4107678,2023,2023-08-06,Tokyo Verdy,Shimizu S-Pulse,,0
+4107679,2023,2023-08-06,Roasso Kumamoto,Mito Hollyhock,,0
+4107680,2023,2023-08-12,Mito Hollyhock,V-Varen Nagasaki,,0
+4107681,2023,2023-08-12,Machida Zelvia,Jubilo Iwata,,0
+4107686,2023,2023-08-12,Oita Trinita,Fujieda MYFC,,0
+4107687,2023,2023-08-12,Zweigen Kanazawa,Roasso Kumamoto,,0
+4107688,2023,2023-08-12,Montedio Yamagata,JEF United Chiba,,0
+4107689,2023,2023-08-12,Shimizu S-Pulse,Renofa Yamaguchi,,0
+4107670,2023,2023-08-13,Omiya Ardija,Fagiano Okayama FC,,0
+4107682,2023,2023-08-13,Vegalta Sendai,Thespakusatsu Gunma,,0
+4107683,2023,2023-08-13,Tochigi SC,Tokushima Vortis,,0
+4107684,2023,2023-08-13,Iwaki FC,Ventforet Kofu,,0
+4107685,2023,2023-08-13,Blaublitz Akita,Tokyo Verdy,,0
+4107729,2023,2023-08-19,Iwaki FC,Tokyo Verdy,,0
+4107730,2023,2023-08-19,Mito Hollyhock,Blaublitz Akita,,0
+4107731,2023,2023-08-19,Ventforet Kofu,Jubilo Iwata,,0
+4107732,2023,2023-08-19,Shimizu S-Pulse,Machida Zelvia,,0
+4107733,2023,2023-08-19,Vegalta Sendai,Omiya Ardija,,0
+4107734,2023,2023-08-19,Montedio Yamagata,Roasso Kumamoto,,0
+4107735,2023,2023-08-19,JEF United Chiba,Fujieda MYFC,,0
+4107736,2023,2023-08-19,Fagiano Okayama FC,Oita Trinita,,0
+4107742,2023,2023-08-19,V-Varen Nagasaki,Tochigi SC,,0
+4107740,2023,2023-08-20,Tokushima Vortis,Renofa Yamaguchi,,0
+4107713,2023,2023-08-26,Renofa Yamaguchi,Ventforet Kofu,,0
+4107714,2023,2023-08-26,Oita Trinita,Vegalta Sendai,,0
+4107726,2023,2023-08-26,Jubilo Iwata,JEF United Chiba,,0
+4107727,2023,2023-08-26,Zweigen Kanazawa,Tokushima Vortis,,0
+4107728,2023,2023-08-26,Omiya Ardija,V-Varen Nagasaki,,0
+4107737,2023,2023-08-26,Machida Zelvia,Montedio Yamagata,,0
+4107738,2023,2023-08-26,Tokyo Verdy,Fagiano Okayama FC,,0
+4107739,2023,2023-08-26,Tochigi SC,Mito Hollyhock,,0
+4107715,2023,2023-08-27,Blaublitz Akita,Shimizu S-Pulse,,0
+4107716,2023,2023-08-27,Roasso Kumamoto,Iwaki FC,,0
+4107717,2023,2023-09-02,Blaublitz Akita,Jubilo Iwata,,0
+4107718,2023,2023-09-02,Zweigen Kanazawa,Tokyo Verdy,,0
+4107719,2023,2023-09-03,Vegalta Sendai,Ventforet Kofu,,0
+4107720,2023,2023-09-03,Montedio Yamagata,Omiya Ardija,,0
+4107721,2023,2023-09-03,Iwaki FC,Fagiano Okayama FC,,0
+4107722,2023,2023-09-03,Tochigi SC,Fujieda MYFC,,0
+4107723,2023,2023-09-03,Thespakusatsu Gunma,Machida Zelvia,,0
+4107724,2023,2023-09-03,JEF United Chiba,Roasso Kumamoto,,0
+4107725,2023,2023-09-03,Shimizu S-Pulse,Tokushima Vortis,,0
+4107753,2023,2023-09-03,V-Varen Nagasaki,Oita Trinita,,0
+4107754,2023,2023-09-03,Renofa Yamaguchi,Mito Hollyhock,,0
+4107743,2023,2023-09-09,Shimizu S-Pulse,Montedio Yamagata,,0
+4107746,2023,2023-09-09,V-Varen Nagasaki,Thespakusatsu Gunma,,0
+4107747,2023,2023-09-09,Fagiano Okayama FC,Vegalta Sendai,,0
+4107748,2023,2023-09-09,Ventforet Kofu,Oita Trinita,,0
+4107749,2023,2023-09-09,Machida Zelvia,Tochigi SC,,0
+4107750,2023,2023-09-09,Tokyo Verdy,Renofa Yamaguchi,,0
+4107751,2023,2023-09-09,JEF United Chiba,Blaublitz Akita,,0
+4107752,2023,2023-09-09,Mito Hollyhock,Zweigen Kanazawa,,0
+4107755,2023,2023-09-09,Jubilo Iwata,RB Omiya Ardija,,0
+4107744,2023,2023-09-10,Roasso Kumamoto,Fujieda MYFC,,0
+4107745,2023,2023-09-10,Tokushima Vortis,Iwaki FC,,0
+4107761,2023,2023-09-15,Ventforet Kofu,Tokyo Verdy,,0
+4107756,2023,2023-09-16,Blaublitz Akita,V-Varen Nagasaki,,0
+4107762,2023,2023-09-16,Vegalta Sendai,Mito Hollyhock,,0
+4107766,2023,2023-09-16,Oita Trinita,Tokushima Vortis,,0
+4107767,2023,2023-09-16,Jubilo Iwata,Renofa Yamaguchi,,0
+4107768,2023,2023-09-16,Omiya Ardija,Roasso Kumamoto,,0
+4107769,2023,2023-09-16,Tochigi SC,JEF United Chiba,,0
+4107770,2023,2023-09-16,Montedio Yamagata,Fagiano Okayama FC,,0
+4107763,2023,2023-09-17,Fujieda MYFC,Machida Zelvia,,0
+4107764,2023,2023-09-17,Zweigen Kanazawa,Shimizu S-Pulse,,0
+4107765,2023,2023-09-17,Thespakusatsu Gunma,Iwaki FC,,0
+4107757,2023,2023-09-23,JEF United Chiba,Vegalta Sendai,,0
+4107758,2023,2023-09-23,Mito Hollyhock,Oita Trinita,,0
+4107759,2023,2023-09-23,Iwaki FC,Zweigen Kanazawa,,0
+4107760,2023,2023-09-23,Blaublitz Akita,Montedio Yamagata,,0
+4107771,2023,2023-09-23,Renofa Yamaguchi,Thespakusatsu Gunma,,0
+4107789,2023,2023-09-23,V-Varen Nagasaki,Machida Zelvia,,0
+4107790,2023,2023-09-24,Tokyo Verdy,Fujieda MYFC,,0
+4107791,2023,2023-09-24,Fagiano Okayama FC,Jubilo Iwata,,0
+4107792,2023,2023-09-24,Tokushima Vortis,Omiya Ardija,,0
+4107793,2023,2023-09-24,Roasso Kumamoto,Tochigi SC,,0
+4107794,2023,2023-09-24,Shimizu S-Pulse,Ventforet Kofu,,0
+4107741,2023,2023-09-27,Thespakusatsu Gunma,Zweigen Kanazawa,,0
+4107799,2023,2023-09-27,Tokushima Vortis,Roasso Kumamoto,,0
+4107775,2023,2023-09-30,Vegalta Sendai,Roasso Kumamoto,,0
+4107776,2023,2023-09-30,Ventforet Kofu,Mito Hollyhock,,0
+4107795,2023,2023-09-30,Fujieda MYFC,Shimizu S-Pulse,,0
+4107796,2023,2023-09-30,Oita Trinita,Omiya Ardija,,0
+4107772,2023,2023-10-01,Jubilo Iwata,V-Varen Nagasaki,,0
+4107773,2023,2023-10-01,Fagiano Okayama FC,JEF United Chiba,,0
+4107774,2023,2023-10-01,Renofa Yamaguchi,Zweigen Kanazawa,,0
+4107787,2023,2023-10-01,Machida Zelvia,Iwaki FC,,0
+4107788,2023,2023-10-01,Thespakusatsu Gunma,Tokyo Verdy,,0
+4107797,2023,2023-10-01,Montedio Yamagata,Tokushima Vortis,,0
+4107798,2023,2023-10-01,Tochigi SC,Blaublitz Akita,,0
+4107777,2023,2023-10-07,Omiya Ardija,Renofa Yamaguchi,,0
+4107778,2023,2023-10-07,Tokyo Verdy,Oita Trinita,,0
+4107779,2023,2023-10-07,Shimizu S-Pulse,Jubilo Iwata,,0
+4107780,2023,2023-10-07,V-Varen Nagasaki,Fujieda MYFC,,0
+4107781,2023,2023-10-08,Montedio Yamagata,Tochigi SC,,0
+4107782,2023,2023-10-08,Iwaki FC,Vegalta Sendai,,0
+4107783,2023,2023-10-08,Thespakusatsu Gunma,Fagiano Okayama FC,,0
+4107784,2023,2023-10-08,JEF United Chiba,Mito Hollyhock,,0
+4107785,2023,2023-10-08,Machida Zelvia,Ventforet Kofu,,0
+4107786,2023,2023-10-08,Zweigen Kanazawa,Blaublitz Akita,,0
+4107637,2023,2023-10-14,Blaublitz Akita,Machida Zelvia,,0
+4107712,2023,2023-10-14,Fujieda MYFC,Thespakusatsu Gunma,,0
+4107832,2023,2023-10-20,Ventforet Kofu,V-Varen Nagasaki,,0
+4107831,2023,2023-10-21,Iwaki FC,Shimizu S-Pulse,,0
+4107824,2023,2023-10-22,Renofa Yamaguchi,Fagiano Okayama FC,,0
+4107825,2023,2023-10-22,Fujieda MYFC,Omiya Ardija,,0
+4107826,2023,2023-10-22,Zweigen Kanazawa,Montedio Yamagata,,0
+4107827,2023,2023-10-22,Tokyo Verdy,JEF United Chiba,,0
+4107828,2023,2023-10-22,Tochigi SC,Oita Trinita,,0
+4107829,2023,2023-10-22,Mito Hollyhock,Thespakusatsu Gunma,,0
+4107830,2023,2023-10-22,Blaublitz Akita,Vegalta Sendai,,0
+4107833,2023,2023-10-22,Tokushima Vortis,Jubilo Iwata,,0
+4107834,2023,2023-10-22,Roasso Kumamoto,Machida Zelvia,,0
+4107822,2023,2023-10-28,Vegalta Sendai,Renofa Yamaguchi,,0
+4107840,2023,2023-10-28,V-Varen Nagasaki,Tokushima Vortis,,0
+4107841,2023,2023-10-28,Fujieda MYFC,Mito Hollyhock,,0
+4107842,2023,2023-10-28,Jubilo Iwata,Tokyo Verdy,,0
+4107843,2023,2023-10-28,Shimizu S-Pulse,Roasso Kumamoto,,0
+4107823,2023,2023-10-29,Oita Trinita,Blaublitz Akita,,0
+4107835,2023,2023-10-29,Fagiano Okayama FC,Tochigi SC,,0
+4107836,2023,2023-10-29,Machida Zelvia,Zweigen Kanazawa,,0
+4107837,2023,2023-10-29,JEF United Chiba,Iwaki FC,,0
+4107838,2023,2023-10-29,Omiya Ardija,Ventforet Kofu,,0
+4107839,2023,2023-10-29,Montedio Yamagata,Thespakusatsu Gunma,,0
+4107810,2023,2023-11-03,Ventforet Kofu,Roasso Kumamoto,,0
+4107806,2023,2023-11-04,V-Varen Nagasaki,Vegalta Sendai,,0
+4107807,2023,2023-11-04,Tokushima Vortis,Fujieda MYFC,,0
+4107808,2023,2023-11-04,Zweigen Kanazawa,Oita Trinita,,0
+4107809,2023,2023-11-04,Iwaki FC,Montedio Yamagata,,0
+4107812,2023,2023-11-04,Shimizu S-Pulse,Omiya Ardija,,0
+4107813,2023,2023-11-04,Jubilo Iwata,Mito Hollyhock,,0
+4107803,2023,2023-11-05,Fagiano Okayama FC,Blaublitz Akita,,0
+4107804,2023,2023-11-05,Tokyo Verdy,Tochigi SC,,0
+4107805,2023,2023-11-05,Thespakusatsu Gunma,JEF United Chiba,,0
+4107811,2023,2023-11-05,Renofa Yamaguchi,Machida Zelvia,,0
+4107802,2023,2023-11-12,Fujieda MYFC,Iwaki FC,,0
+4107814,2023,2023-11-12,Zweigen Kanazawa,Fagiano Okayama FC,,0
+4107815,2023,2023-11-12,JEF United Chiba,V-Varen Nagasaki,,0
+4107816,2023,2023-11-12,Omiya Ardija,Tokyo Verdy,,0
+4107817,2023,2023-11-12,Tochigi SC,Jubilo Iwata,,0
+4107818,2023,2023-11-12,Mito Hollyhock,Shimizu S-Pulse,,0
+4107819,2023,2023-11-12,Montedio Yamagata,Ventforet Kofu,,0
+4107820,2023,2023-11-12,Blaublitz Akita,Tokushima Vortis,,0
+4107821,2023,2023-11-12,Vegalta Sendai,Machida Zelvia,,0
+4107844,2023,2023-11-12,Roasso Kumamoto,Renofa Yamaguchi,,0
+4107845,2023,2023-11-12,Oita Trinita,Thespakusatsu Gunma,,0
+4362723,2023,2023-11-25,Shimizu S-Pulse,Montedio Yamagata,,0
+4362722,2023,2023-11-26,Tokyo Verdy,JEF United Chiba,,0
+4371013,2023,2023-12-02,Tokyo Verdy,Shimizu S-Pulse,,0
+4389429,2024,2024-02-24,Mito Hollyhock,Iwaki FC,,0
+4389432,2024,2024-02-24,Yokohama FC,Renofa Yamaguchi,,0
+4389433,2024,2024-02-24,Fujieda MYFC,V-Varen Nagasaki,,0
+4389430,2024,2024-02-25,Thespakusatsu Gunma,Kagoshima United,,0
+4389431,2024,2024-02-25,JEF United Chiba,Montedio Yamagata,,0
+4389434,2024,2024-02-25,Fagiano Okayama FC,Tochigi SC,,0
+4389435,2024,2024-02-25,Tokushima Vortis,Ventforet Kofu,,0
+4389436,2024,2024-02-25,Ehime FC,Blaublitz Akita,,0
+4389437,2024,2024-02-25,Roasso Kumamoto,Shimizu S-Pulse,,0
+4389438,2024,2024-02-25,Oita Trinita,Vegalta Sendai,,0
+4390606,2024,2024-03-02,Kagoshima United,Tokushima Vortis,,0
+4390622,2024,2024-03-02,V-Varen Nagasaki,Vegalta Sendai,,0
+4390624,2024,2024-03-02,Shimizu S-Pulse,Ehime FC,,0
+4410549,2024,2024-03-02,Oita Trinita,Yokohama FC,,0
+4410550,2024,2024-03-02,JEF United Chiba,Fujieda MYFC,,0
+4410551,2024,2024-03-02,Mito Hollyhock,Ventforet Kofu,,0
+4390623,2024,2024-03-03,Renofa Yamaguchi,Blaublitz Akita,,0
+4390625,2024,2024-03-03,Tochigi SC,Montedio Yamagata,,0
+4390626,2024,2024-03-03,Iwaki FC,Fagiano Okayama FC,,0
+4410548,2024,2024-03-03,Roasso Kumamoto,Thespakusatsu Gunma,,0
+4390619,2024,2024-03-09,Ventforet Kofu,Tochigi SC,,0
+4410579,2024,2024-03-09,Iwaki FC,Kagoshima United,,0
+4410589,2024,2024-03-09,Tokushima Vortis,Blaublitz Akita,,0
+4410590,2024,2024-03-09,Yokohama FC,Montedio Yamagata,,0
+4390620,2024,2024-03-10,Vegalta Sendai,Mito Hollyhock,,0
+4410584,2024,2024-03-10,Thespakusatsu Gunma,JEF United Chiba,,0
+4410585,2024,2024-03-10,Ehime FC,Roasso Kumamoto,,0
+4410586,2024,2024-03-10,V-Varen Nagasaki,Shimizu S-Pulse,,0
+4410587,2024,2024-03-10,Fagiano Okayama FC,Renofa Yamaguchi,,0
+4410588,2024,2024-03-10,Fujieda MYFC,Oita Trinita,,0
+4390617,2024,2024-03-16,Montedio Yamagata,Ventforet Kofu,,0
+4390618,2024,2024-03-16,Blaublitz Akita,Vegalta Sendai,,0
+4410567,2024,2024-03-16,Fujieda MYFC,Fagiano Okayama FC,,0
+4410578,2024,2024-03-16,Kagoshima United,JEF United Chiba,,0
+4410580,2024,2024-03-16,Shimizu S-Pulse,Oita Trinita,,0
+4410581,2024,2024-03-16,Thespakusatsu Gunma,Ehime FC,,0
+4410582,2024,2024-03-16,Tochigi SC,Yokohama FC,,0
+4410583,2024,2024-03-16,Mito Hollyhock,Tokushima Vortis,,0
+4410576,2024,2024-03-17,Renofa Yamaguchi,V-Varen Nagasaki,,0
+4410577,2024,2024-03-17,Roasso Kumamoto,Iwaki FC,,0
+4410568,2024,2024-03-20,Oita Trinita,Kagoshima United,,0
+4410569,2024,2024-03-20,Fagiano Okayama FC,Mito Hollyhock,,0
+4410570,2024,2024-03-20,Ventforet Kofu,Iwaki FC,,0
+4410571,2024,2024-03-20,Yokohama FC,Thespakusatsu Gunma,,0
+4410572,2024,2024-03-20,JEF United Chiba,Shimizu S-Pulse,,0
+4410573,2024,2024-03-20,Montedio Yamagata,Fujieda MYFC,,0
+4410574,2024,2024-03-20,Blaublitz Akita,Tochigi SC,,0
+4410575,2024,2024-03-20,Vegalta Sendai,Roasso Kumamoto,,0
+4410613,2024,2024-03-20,Tokushima Vortis,Renofa Yamaguchi,,0
+4410623,2024,2024-03-20,Ehime FC,V-Varen Nagasaki,,0
+4410612,2024,2024-03-24,Thespakusatsu Gunma,Fagiano Okayama FC,,0
+4410614,2024,2024-03-24,Vegalta Sendai,Tokushima Vortis,,0
+4410615,2024,2024-03-24,Iwaki FC,Montedio Yamagata,,0
+4410616,2024,2024-03-24,Mito Hollyhock,JEF United Chiba,,0
+4410617,2024,2024-03-24,Tochigi SC,Oita Trinita,,0
+4410618,2024,2024-03-24,Shimizu S-Pulse,Blaublitz Akita,,0
+4410619,2024,2024-03-24,Fujieda MYFC,Roasso Kumamoto,,0
+4410620,2024,2024-03-24,Renofa Yamaguchi,Ehime FC,,0
+4410621,2024,2024-03-24,V-Varen Nagasaki,Ventforet Kofu,,0
+4410622,2024,2024-03-24,Kagoshima United,Yokohama FC,,0
+4410602,2024,2024-03-30,Tochigi SC,V-Varen Nagasaki,,0
+4410624,2024,2024-03-30,Ventforet Kofu,Renofa Yamaguchi,,0
+4410625,2024,2024-03-30,Blaublitz Akita,Iwaki FC,,0
+4410626,2024,2024-03-30,Montedio Yamagata,Shimizu S-Pulse,,0
+4410627,2024,2024-03-30,Mito Hollyhock,Kagoshima United,,0
+4410628,2024,2024-03-30,Yokohama FC,Vegalta Sendai,,0
+4410629,2024,2024-03-30,Tokushima Vortis,Thespakusatsu Gunma,,0
+4410630,2024,2024-03-30,Oita Trinita,Fagiano Okayama FC,,0
+4410631,2024,2024-03-30,Roasso Kumamoto,JEF United Chiba,,0
+4410632,2024,2024-03-30,Ehime FC,Fujieda MYFC,,0
+4410592,2024,2024-04-03,Vegalta Sendai,Ehime FC,,0
+4410593,2024,2024-04-03,Blaublitz Akita,Mito Hollyhock,,0
+4410594,2024,2024-04-03,Iwaki FC,Fujieda MYFC,,0
+4410595,2024,2024-04-03,Thespakusatsu Gunma,Oita Trinita,,0
+4410596,2024,2024-04-03,JEF United Chiba,Tochigi SC,,0
+4410597,2024,2024-04-03,Shimizu S-Pulse,Tokushima Vortis,,0
+4410598,2024,2024-04-03,Fagiano Okayama FC,Yokohama FC,,0
+4410599,2024,2024-04-03,Renofa Yamaguchi,Roasso Kumamoto,,0
+4410600,2024,2024-04-03,V-Varen Nagasaki,Montedio Yamagata,,0
+4410601,2024,2024-04-03,Kagoshima United,Ventforet Kofu,,0
+4410591,2024,2024-04-07,Roasso Kumamoto,V-Varen Nagasaki,,0
+4410603,2024,2024-04-07,Montedio Yamagata,Kagoshima United,,0
+4410604,2024,2024-04-07,Tochigi SC,Renofa Yamaguchi,,0
+4410605,2024,2024-04-07,Thespakusatsu Gunma,Mito Hollyhock,,0
+4410606,2024,2024-04-07,Yokohama FC,Iwaki FC,,0
+4410607,2024,2024-04-07,Ventforet Kofu,Shimizu S-Pulse,,0
+4410608,2024,2024-04-07,Fujieda MYFC,Vegalta Sendai,,0
+4410609,2024,2024-04-07,Tokushima Vortis,JEF United Chiba,,0
+4410610,2024,2024-04-07,Oita Trinita,Blaublitz Akita,,0
+4410611,2024,2024-04-07,Ehime FC,Fagiano Okayama FC,,0
+4410633,2024,2024-04-13,Vegalta Sendai,Montedio Yamagata,,0
+4410634,2024,2024-04-13,Mito Hollyhock,Tochigi SC,,0
+4410658,2024,2024-04-13,V-Varen Nagasaki,Tokushima Vortis,,0
+4410659,2024,2024-04-13,Iwaki FC,Shimizu S-Pulse,,0
+4410660,2024,2024-04-13,Ehime FC,Kagoshima United,,0
+4410668,2024,2024-04-13,JEF United Chiba,Oita Trinita,,0
+4410661,2024,2024-04-14,Blaublitz Akita,Fagiano Okayama FC,,0
+4410662,2024,2024-04-14,Yokohama FC,Fujieda MYFC,,0
+4410663,2024,2024-04-14,Renofa Yamaguchi,Thespakusatsu Gunma,,0
+4410664,2024,2024-04-14,Roasso Kumamoto,Ventforet Kofu,,0
+4410657,2024,2024-04-20,Fujieda MYFC,Tokushima Vortis,,0
+4410665,2024,2024-04-20,Montedio Yamagata,Ehime FC,,0
+4410666,2024,2024-04-20,Ventforet Kofu,Thespakusatsu Gunma,,0
+4410667,2024,2024-04-20,Shimizu S-Pulse,Vegalta Sendai,,0
+4410669,2024,2024-04-20,Fagiano Okayama FC,Roasso Kumamoto,,0
+4410670,2024,2024-04-21,JEF United Chiba,Blaublitz Akita,,0
+4410671,2024,2024-04-21,Renofa Yamaguchi,Mito Hollyhock,,0
+4410672,2024,2024-04-21,V-Varen Nagasaki,Yokohama FC,,0
+4410673,2024,2024-04-21,Oita Trinita,Iwaki FC,,0
+4410674,2024,2024-04-21,Kagoshima United,Tochigi SC,,0
+4410675,2024,2024-04-27,Vegalta Sendai,JEF United Chiba,,0
+4410676,2024,2024-04-27,Mito Hollyhock,Fujieda MYFC,,0
+4410677,2024,2024-04-27,Thespakusatsu Gunma,V-Varen Nagasaki,,0
+4410678,2024,2024-04-27,Ehime FC,Ventforet Kofu,,0
+4410636,2024,2024-04-28,Roasso Kumamoto,Oita Trinita,,0
+4410637,2024,2024-04-28,Blaublitz Akita,Yokohama FC,,0
+4410638,2024,2024-04-28,Tochigi SC,Iwaki FC,,0
+4410639,2024,2024-04-28,Tokushima Vortis,Montedio Yamagata,,0
+4410640,2024,2024-04-28,Kagoshima United,Renofa Yamaguchi,,0
+4410646,2024,2024-04-28,Fagiano Okayama FC,Shimizu S-Pulse,,0
+4410635,2024,2024-05-03,Shimizu S-Pulse,Tochigi SC,,0
+4410641,2024,2024-05-03,Tokushima Vortis,Ehime FC,,0
+4410642,2024,2024-05-03,Vegalta Sendai,Renofa Yamaguchi,,0
+4410643,2024,2024-05-03,Montedio Yamagata,Fagiano Okayama FC,,0
+4410644,2024,2024-05-03,Yokohama FC,Mito Hollyhock,,0
+4410645,2024,2024-05-03,Ventforet Kofu,Oita Trinita,,0
+4410647,2024,2024-05-03,Fujieda MYFC,Thespakusatsu Gunma,,0
+4410648,2024,2024-05-03,V-Varen Nagasaki,Blaublitz Akita,,0
+4410649,2024,2024-05-03,Roasso Kumamoto,Kagoshima United,,0
+4410650,2024,2024-05-03,Iwaki FC,JEF United Chiba,,0
+4410651,2024,2024-05-06,Blaublitz Akita,Ventforet Kofu,,0
+4410652,2024,2024-05-06,Mito Hollyhock,Roasso Kumamoto,,0
+4410653,2024,2024-05-06,Tochigi SC,Fujieda MYFC,,0
+4410654,2024,2024-05-06,Thespakusatsu Gunma,Shimizu S-Pulse,,0
+4410655,2024,2024-05-06,Fagiano Okayama FC,Tokushima Vortis,,0
+4410656,2024,2024-05-06,Renofa Yamaguchi,Montedio Yamagata,,0
+4410679,2024,2024-05-06,Kagoshima United,Vegalta Sendai,,0
+4410680,2024,2024-05-06,Oita Trinita,V-Varen Nagasaki,,0
+4410685,2024,2024-05-06,JEF United Chiba,Yokohama FC,,0
+4410686,2024,2024-05-06,Ehime FC,Iwaki FC,,0
+4410683,2024,2024-05-11,Shimizu S-Pulse,Kagoshima United,,0
+4410684,2024,2024-05-11,Vegalta Sendai,Thespakusatsu Gunma,,0
+4410681,2024,2024-05-12,Roasso Kumamoto,Yokohama FC,,0
+4410682,2024,2024-05-12,Iwaki FC,Renofa Yamaguchi,,0
+4410706,2024,2024-05-12,Montedio Yamagata,Mito Hollyhock,,0
+4410707,2024,2024-05-12,Fujieda MYFC,Blaublitz Akita,,0
+4410708,2024,2024-05-12,Tokushima Vortis,Tochigi SC,,0
+4410709,2024,2024-05-12,V-Varen Nagasaki,Fagiano Okayama FC,,0
+4410710,2024,2024-05-12,Oita Trinita,Ehime FC,,0
+4410711,2024,2024-05-12,Ventforet Kofu,JEF United Chiba,,0
+4410705,2024,2024-05-18,Thespakusatsu Gunma,Iwaki FC,,0
+4410712,2024,2024-05-18,Montedio Yamagata,Blaublitz Akita,,0
+4410713,2024,2024-05-18,Mito Hollyhock,Oita Trinita,,0
+4410715,2024,2024-05-18,JEF United Chiba,Ehime FC,,0
+4410716,2024,2024-05-18,Yokohama FC,Shimizu S-Pulse,,0
+4410717,2024,2024-05-18,Tokushima Vortis,Roasso Kumamoto,,0
+4410718,2024,2024-05-18,Kagoshima United,V-Varen Nagasaki,,0
+4410719,2024,2024-05-19,Fagiano Okayama FC,Ventforet Kofu,,0
+4410720,2024,2024-05-19,Renofa Yamaguchi,Fujieda MYFC,,0
+4410721,2024,2024-05-19,Tochigi SC,Vegalta Sendai,,0
+4410687,2024,2024-05-25,V-Varen Nagasaki,JEF United Chiba,,0
+4410689,2024,2024-05-25,Ventforet Kofu,Yokohama FC,,0
+4410714,2024,2024-05-25,Fujieda MYFC,Kagoshima United,,0
+4410722,2024,2024-05-25,Ehime FC,Tochigi SC,,0
+4410690,2024,2024-05-26,Vegalta Sendai,Fagiano Okayama FC,,0
+4410691,2024,2024-05-26,Blaublitz Akita,Thespakusatsu Gunma,,0
+4410692,2024,2024-05-26,Iwaki FC,Tokushima Vortis,,0
+4410693,2024,2024-05-26,Shimizu S-Pulse,Mito Hollyhock,,0
+4410694,2024,2024-05-26,Roasso Kumamoto,Montedio Yamagata,,0
+4410695,2024,2024-05-26,Oita Trinita,Renofa Yamaguchi,,0
+4410696,2024,2024-06-01,Fujieda MYFC,Ventforet Kofu,,0
+4410697,2024,2024-06-01,Oita Trinita,Tokushima Vortis,,0
+4410698,2024,2024-06-01,JEF United Chiba,Fagiano Okayama FC,,0
+4410699,2024,2024-06-01,Yokohama FC,Ehime FC,,0
+4410688,2024,2024-06-02,Tochigi SC,Roasso Kumamoto,,0
+4410700,2024,2024-06-02,Iwaki FC,Vegalta Sendai,,0
+4410701,2024,2024-06-02,Mito Hollyhock,V-Varen Nagasaki,,0
+4410702,2024,2024-06-02,Thespakusatsu Gunma,Montedio Yamagata,,0
+4410703,2024,2024-06-02,Renofa Yamaguchi,Shimizu S-Pulse,,0
+4410704,2024,2024-06-02,Kagoshima United,Blaublitz Akita,,0
+4410734,2024,2024-06-08,Blaublitz Akita,Roasso Kumamoto,,0
+4410739,2024,2024-06-08,Renofa Yamaguchi,JEF United Chiba,,0
+4410740,2024,2024-06-08,Tochigi SC,Thespakusatsu Gunma,,0
+4410741,2024,2024-06-08,Ehime FC,Mito Hollyhock,,0
+4410742,2024,2024-06-08,Tokushima Vortis,Yokohama FC,,0
+4410743,2024,2024-06-08,Shimizu S-Pulse,Fujieda MYFC,,0
+4410744,2024,2024-06-08,Ventforet Kofu,Vegalta Sendai,,0
+4410736,2024,2024-06-09,Fagiano Okayama FC,Kagoshima United,,0
+4410738,2024,2024-06-09,Montedio Yamagata,Oita Trinita,,0
+4410723,2024,2024-06-15,Kagoshima United,Montedio Yamagata,,0
+4410735,2024,2024-06-15,Fujieda MYFC,Yokohama FC,,0
+4410726,2024,2024-06-16,JEF United Chiba,Tokushima Vortis,,0
+4410727,2024,2024-06-16,Thespakusatsu Gunma,Renofa Yamaguchi,,0
+4410728,2024,2024-06-16,Oita Trinita,Tochigi SC,,0
+4410729,2024,2024-06-16,Roasso Kumamoto,Fagiano Okayama FC,,0
+4410730,2024,2024-06-16,Ehime FC,Shimizu S-Pulse,,0
+4410731,2024,2024-06-16,Vegalta Sendai,V-Varen Nagasaki,,0
+4410732,2024,2024-06-16,Mito Hollyhock,Blaublitz Akita,,0
+4410733,2024,2024-06-16,Iwaki FC,Ventforet Kofu,,0
+4410724,2024,2024-06-22,Yokohama FC,Roasso Kumamoto,,0
+4410725,2024,2024-06-22,Montedio Yamagata,Vegalta Sendai,,0
+4410756,2024,2024-06-22,Ventforet Kofu,Ehime FC,,0
+4410762,2024,2024-06-22,Kagoshima United,Oita Trinita,,0
+4410763,2024,2024-06-22,V-Varen Nagasaki,Fujieda MYFC,,0
+4410764,2024,2024-06-22,Renofa Yamaguchi,Iwaki FC,,0
+4410765,2024,2024-06-22,Fagiano Okayama FC,Thespakusatsu Gunma,,0
+4410766,2024,2024-06-22,Tochigi SC,JEF United Chiba,,0
+4410760,2024,2024-06-23,Tokushima Vortis,Mito Hollyhock,,0
+4410761,2024,2024-06-23,Blaublitz Akita,Shimizu S-Pulse,,0
+4410737,2024,2024-06-26,V-Varen Nagasaki,Iwaki FC,,0
+4410745,2024,2024-06-29,Vegalta Sendai,Tochigi SC,,0
+4410753,2024,2024-06-29,Oita Trinita,Ventforet Kofu,,0
+4410754,2024,2024-06-29,Tokushima Vortis,V-Varen Nagasaki,,0
+4410755,2024,2024-06-29,Thespakusatsu Gunma,Fujieda MYFC,,0
+4410757,2024,2024-06-29,Roasso Kumamoto,Ehime FC,,0
+4410758,2024,2024-06-29,Mito Hollyhock,Renofa Yamaguchi,,0
+4410759,2024,2024-06-29,Iwaki FC,Yokohama FC,,0
+4410750,2024,2024-06-30,JEF United Chiba,Kagoshima United,,0
+4410751,2024,2024-06-30,Shimizu S-Pulse,Fagiano Okayama FC,,0
+4410752,2024,2024-06-30,Blaublitz Akita,Montedio Yamagata,,0
+4410746,2024,2024-07-06,Fujieda MYFC,Mito Hollyhock,,0
+4410747,2024,2024-07-06,Ventforet Kofu,Tokushima Vortis,,0
+4410748,2024,2024-07-06,Yokohama FC,Blaublitz Akita,,0
+4410749,2024,2024-07-06,Iwaki FC,Oita Trinita,,0
+4410780,2024,2024-07-06,Shimizu S-Pulse,JEF United Chiba,,0
+4410789,2024,2024-07-06,V-Varen Nagasaki,Roasso Kumamoto,,0
+4410790,2024,2024-07-06,Renofa Yamaguchi,Kagoshima United,,0
+4410791,2024,2024-07-06,Fagiano Okayama FC,Vegalta Sendai,,0
+4410792,2024,2024-07-06,Montedio Yamagata,Tochigi SC,,0
+4410788,2024,2024-07-07,Ehime FC,Thespakusatsu Gunma,,0
+4410786,2024,2024-07-13,Kagoshima United,Thespakusatsu Gunma,,0
+4410787,2024,2024-07-13,Fujieda MYFC,Ehime FC,,0
+4410767,2024,2024-07-14,JEF United Chiba,Roasso Kumamoto,,0
+4410778,2024,2024-07-14,Oita Trinita,Shimizu S-Pulse,,0
+4410779,2024,2024-07-14,Tokushima Vortis,Vegalta Sendai,,0
+4410781,2024,2024-07-14,Tochigi SC,Fagiano Okayama FC,,0
+4410782,2024,2024-07-14,Montedio Yamagata,Iwaki FC,,0
+4410783,2024,2024-07-14,Ventforet Kofu,V-Varen Nagasaki,,0
+4410784,2024,2024-07-14,Mito Hollyhock,Yokohama FC,,0
+4410785,2024,2024-07-14,Blaublitz Akita,Renofa Yamaguchi,,0
+4410769,2024,2024-08-03,Kagoshima United,Fujieda MYFC,,0
+4410770,2024,2024-08-03,Roasso Kumamoto,Tochigi SC,,0
+4410771,2024,2024-08-03,V-Varen Nagasaki,Mito Hollyhock,,0
+4410772,2024,2024-08-03,Ehime FC,Tokushima Vortis,,0
+4410773,2024,2024-08-03,Renofa Yamaguchi,Oita Trinita,,0
+4410774,2024,2024-08-03,Fagiano Okayama FC,Montedio Yamagata,,0
+4410775,2024,2024-08-03,Thespakusatsu Gunma,Ventforet Kofu,,0
+4410776,2024,2024-08-03,Vegalta Sendai,Shimizu S-Pulse,,0
+4410777,2024,2024-08-03,Yokohama FC,JEF United Chiba,,0
+4410768,2024,2024-08-04,Iwaki FC,Blaublitz Akita,,0
+4410793,2024,2024-08-10,Iwaki FC,Ehime FC,,0
+4410794,2024,2024-08-10,Mito Hollyhock,Vegalta Sendai,,0
+4410795,2024,2024-08-10,Yokohama FC,V-Varen Nagasaki,,0
+4410796,2024,2024-08-10,Ventforet Kofu,Fujieda MYFC,,0
+4410797,2024,2024-08-10,Shimizu S-Pulse,Thespakusatsu Gunma,,0
+4410798,2024,2024-08-10,Fagiano Okayama FC,JEF United Chiba,,0
+4410799,2024,2024-08-10,Renofa Yamaguchi,Tochigi SC,,0
+4410800,2024,2024-08-11,Blaublitz Akita,Kagoshima United,,0
+4410801,2024,2024-08-11,Montedio Yamagata,Tokushima Vortis,,0
+4410802,2024,2024-08-11,Oita Trinita,Roasso Kumamoto,,0
+4410803,2024,2024-08-17,Shimizu S-Pulse,Ventforet Kofu,,0
+4410804,2024,2024-08-17,Vegalta Sendai,Kagoshima United,,0
+4410805,2024,2024-08-17,Montedio Yamagata,V-Varen Nagasaki,,0
+4410806,2024,2024-08-17,Tochigi SC,Blaublitz Akita,,0
+4410807,2024,2024-08-17,Thespakusatsu Gunma,Yokohama FC,,0
+4410808,2024,2024-08-17,JEF United Chiba,Iwaki FC,,0
+4410809,2024,2024-08-17,Fujieda MYFC,Renofa Yamaguchi,,0
+4410810,2024,2024-08-17,Tokushima Vortis,Fagiano Okayama FC,,0
+4410811,2024,2024-08-17,Roasso Kumamoto,Mito Hollyhock,,0
+4410812,2024,2024-08-18,Ehime FC,Oita Trinita,,0
+4410813,2024,2024-08-24,Yokohama FC,Tokushima Vortis,,0
+4410814,2024,2024-08-24,Fujieda MYFC,Montedio Yamagata,,0
+4410838,2024,2024-08-24,V-Varen Nagasaki,Renofa Yamaguchi,,0
+4410839,2024,2024-08-24,Kagoshima United,Shimizu S-Pulse,,0
+4410848,2024,2024-08-24,Fagiano Okayama FC,Oita Trinita,,0
+4410840,2024,2024-08-25,Blaublitz Akita,Ehime FC,,0
+4410841,2024,2024-08-25,Iwaki FC,Roasso Kumamoto,,0
+4410842,2024,2024-08-25,Mito Hollyhock,Thespakusatsu Gunma,,0
+4410843,2024,2024-08-25,Tochigi SC,Ventforet Kofu,,0
+4410844,2024,2024-08-25,JEF United Chiba,Vegalta Sendai,,0
+4410837,2024,2024-08-31,Montedio Yamagata,Yokohama FC,,0
+4410845,2024,2024-08-31,Mito Hollyhock,Ehime FC,,0
+4410846,2024,2024-08-31,Ventforet Kofu,Kagoshima United,,0
+4410847,2024,2024-08-31,Vegalta Sendai,Iwaki FC,,0
+4410849,2024,2024-08-31,Renofa Yamaguchi,Fagiano Okayama FC,,0
+4410851,2024,2024-08-31,V-Varen Nagasaki,Tochigi SC,,0
+4410852,2024,2024-09-01,Thespakusatsu Gunma,Blaublitz Akita,,0
+4410853,2024,2024-09-01,Roasso Kumamoto,Fujieda MYFC,,0
+4410854,2024,2024-09-01,Oita Trinita,JEF United Chiba,,0
+4410816,2024,2024-09-07,Ehime FC,Yokohama FC,,0
+4410817,2024,2024-09-07,Oita Trinita,Montedio Yamagata,,0
+4410818,2024,2024-09-07,Kagoshima United,Iwaki FC,,0
+4410826,2024,2024-09-07,Renofa Yamaguchi,Tokushima Vortis,,0
+4410855,2024,2024-09-07,Thespakusatsu Gunma,Vegalta Sendai,,0
+4410856,2024,2024-09-07,JEF United Chiba,Mito Hollyhock,,0
+4410857,2024,2024-09-07,Shimizu S-Pulse,V-Varen Nagasaki,,0
+4410858,2024,2024-09-07,Fujieda MYFC,Tochigi SC,,0
+4410819,2024,2024-09-08,Fagiano Okayama FC,Blaublitz Akita,,0
+4410815,2024,2024-09-14,Tokushima Vortis,Oita Trinita,,0
+4410820,2024,2024-09-14,Vegalta Sendai,Fujieda MYFC,,0
+4410821,2024,2024-09-14,Blaublitz Akita,JEF United Chiba,,0
+4410822,2024,2024-09-14,Montedio Yamagata,Thespakusatsu Gunma,,0
+4410824,2024,2024-09-14,Shimizu S-Pulse,Renofa Yamaguchi,,0
+4410825,2024,2024-09-14,Fagiano Okayama FC,Ehime FC,,0
+4410823,2024,2024-09-15,Yokohama FC,Ventforet Kofu,,0
+4410827,2024,2024-09-15,Iwaki FC,V-Varen Nagasaki,,0
+4410828,2024,2024-09-15,Tochigi SC,Mito Hollyhock,,0
+4410829,2024,2024-09-15,Kagoshima United,Roasso Kumamoto,,0
+4410850,2024,2024-09-18,Tokushima Vortis,Shimizu S-Pulse,,0
+4410830,2024,2024-09-21,Vegalta Sendai,Ventforet Kofu,,0
+4410831,2024,2024-09-21,JEF United Chiba,Renofa Yamaguchi,,0
+4410832,2024,2024-09-21,Yokohama FC,Oita Trinita,,0
+4410833,2024,2024-09-21,Ehime FC,Montedio Yamagata,,0
+4410834,2024,2024-09-21,Roasso Kumamoto,Blaublitz Akita,,0
+4410835,2024,2024-09-22,Mito Hollyhock,Fagiano Okayama FC,,0
+4410836,2024,2024-09-22,Tochigi SC,Kagoshima United,,0
+4410859,2024,2024-09-22,Fujieda MYFC,Shimizu S-Pulse,,0
+4410883,2024,2024-09-22,Tokushima Vortis,Iwaki FC,,0
+4410884,2024,2024-09-22,V-Varen Nagasaki,Thespakusatsu Gunma,,0
+4410904,2024,2024-09-25,Ventforet Kofu,Roasso Kumamoto,,0
+4410885,2024,2024-09-28,Ventforet Kofu,Montedio Yamagata,,0
+4410886,2024,2024-09-28,Shimizu S-Pulse,Yokohama FC,,0
+4410887,2024,2024-09-28,Oita Trinita,Fujieda MYFC,,0
+4410888,2024,2024-09-28,Kagoshima United,Mito Hollyhock,,0
+4410882,2024,2024-09-29,Renofa Yamaguchi,Vegalta Sendai,,0
+4410889,2024,2024-09-29,Blaublitz Akita,Tokushima Vortis,,0
+4410890,2024,2024-09-29,Iwaki FC,Tochigi SC,,0
+4410891,2024,2024-09-29,Thespakusatsu Gunma,Roasso Kumamoto,,0
+4410892,2024,2024-09-29,Fagiano Okayama FC,V-Varen Nagasaki,,0
+4410894,2024,2024-09-29,Ehime FC,JEF United Chiba,,0
+4410896,2024,2024-10-05,JEF United Chiba,Thespakusatsu Gunma,,0
+4410897,2024,2024-10-05,Ventforet Kofu,Fagiano Okayama FC,,0
+4410898,2024,2024-10-05,Fujieda MYFC,Iwaki FC,,0
+4410871,2024,2024-10-06,Roasso Kumamoto,Tokushima Vortis,,0
+4410893,2024,2024-10-06,V-Varen Nagasaki,Oita Trinita,,0
+4410895,2024,2024-10-06,Vegalta Sendai,Blaublitz Akita,,0
+4410899,2024,2024-10-06,Montedio Yamagata,Renofa Yamaguchi,,0
+4410900,2024,2024-10-06,Mito Hollyhock,Shimizu S-Pulse,,0
+4410901,2024,2024-10-06,Tochigi SC,Ehime FC,,0
+4410902,2024,2024-10-06,Yokohama FC,Kagoshima United,,0
+4410861,2024,2024-10-19,Vegalta Sendai,Yokohama FC,,0
+4410862,2024,2024-10-19,JEF United Chiba,Ventforet Kofu,,0
+4410863,2024,2024-10-19,Kagoshima United,Ehime FC,,0
+4410864,2024,2024-10-20,Blaublitz Akita,V-Varen Nagasaki,,0
+4410865,2024,2024-10-20,Thespakusatsu Gunma,Tochigi SC,,0
+4410866,2024,2024-10-20,Shimizu S-Pulse,Montedio Yamagata,,0
+4410867,2024,2024-10-20,Fagiano Okayama FC,Iwaki FC,,0
+4410868,2024,2024-10-20,Tokushima Vortis,Fujieda MYFC,,0
+4410869,2024,2024-10-20,Roasso Kumamoto,Renofa Yamaguchi,,0
+4410870,2024,2024-10-20,Oita Trinita,Mito Hollyhock,,0
+4410860,2024,2024-10-26,Iwaki FC,Mito Hollyhock,,0
+4410872,2024,2024-10-26,Fujieda MYFC,JEF United Chiba,,0
+4410873,2024,2024-10-27,Blaublitz Akita,Oita Trinita,,0
+4410874,2024,2024-10-27,Montedio Yamagata,Roasso Kumamoto,,0
+4410875,2024,2024-10-27,Tochigi SC,Shimizu S-Pulse,,0
+4410876,2024,2024-10-27,Thespakusatsu Gunma,Tokushima Vortis,,0
+4410877,2024,2024-10-27,Yokohama FC,Fagiano Okayama FC,,0
+4410878,2024,2024-10-27,Renofa Yamaguchi,Ventforet Kofu,,0
+4410879,2024,2024-10-27,Ehime FC,Vegalta Sendai,,0
+4410880,2024,2024-10-27,V-Varen Nagasaki,Kagoshima United,,0
+4410881,2024,2024-11-03,Mito Hollyhock,Montedio Yamagata,,0
+4410913,2024,2024-11-03,JEF United Chiba,V-Varen Nagasaki,,0
+4410916,2024,2024-11-03,Oita Trinita,Thespakusatsu Gunma,,0
+4410917,2024,2024-11-03,Ehime FC,Renofa Yamaguchi,,0
+4410918,2024,2024-11-03,Tokushima Vortis,Kagoshima United,,0
+4410919,2024,2024-11-03,Fagiano Okayama FC,Fujieda MYFC,,0
+4410920,2024,2024-11-03,Shimizu S-Pulse,Iwaki FC,,0
+4410921,2024,2024-11-03,Ventforet Kofu,Blaublitz Akita,,0
+4410922,2024,2024-11-03,Yokohama FC,Tochigi SC,,0
+4410915,2024,2024-11-04,Roasso Kumamoto,Vegalta Sendai,,0
+4410903,2024,2024-11-10,Blaublitz Akita,Fujieda MYFC,,0
+4410905,2024,2024-11-10,Kagoshima United,Fagiano Okayama FC,,0
+4410906,2024,2024-11-10,V-Varen Nagasaki,Ehime FC,,0
+4410907,2024,2024-11-10,Renofa Yamaguchi,Yokohama FC,,0
+4410908,2024,2024-11-10,Shimizu S-Pulse,Roasso Kumamoto,,0
+4410909,2024,2024-11-10,Ventforet Kofu,Mito Hollyhock,,0
+4410910,2024,2024-11-10,Tochigi SC,Tokushima Vortis,,0
+4410911,2024,2024-11-10,Iwaki FC,Thespakusatsu Gunma,,0
+4410912,2024,2024-11-10,Montedio Yamagata,JEF United Chiba,,0
+4410914,2024,2024-11-10,Vegalta Sendai,Oita Trinita,,0
+4674201,2024,2024-12-01,Montedio Yamagata,Fagiano Okayama FC,,0
+4674202,2024,2024-12-01,V-Varen Nagasaki,Vegalta Sendai,,0
+4683442,2024,2024-12-07,Fagiano Okayama FC,Vegalta Sendai,,0
+4691349,2025,2025-02-15,RB Omiya Ardija,Montedio Yamagata,,0
+4691350,2025,2025-02-15,Ventforet Kofu,Renofa Yamaguchi,,0
+4691351,2025,2025-02-15,Jubilo Iwata,Mito Hollyhock,,0
+4691352,2025,2025-02-15,Fujieda MYFC,Tokushima Vortis,,0
+4691355,2025,2025-02-15,Sagan Tosu,Vegalta Sendai,,0
+4691356,2025,2025-02-15,V-Varen Nagasaki,Roasso Kumamoto,,0
+4691357,2025,2025-02-15,Iwaki FC,JEF United Chiba,,0
+4691348,2025,2025-02-16,Oita Trinita,Hokkaido Consadole Sapporo,,0
+4691353,2025,2025-02-16,Ehime FC,Kataller Toyama,,0
+4691354,2025,2025-02-16,FC Imabari,Blaublitz Akita,,0
+4691359,2025,2025-02-22,RB Omiya Ardija,Ventforet Kofu,,0
+4691360,2025,2025-02-22,JEF United Chiba,Kataller Toyama,,0
+4691361,2025,2025-02-22,Jubilo Iwata,Sagan Tosu,,0
+4691331,2025,2025-02-23,Oita Trinita,Iwaki FC,,0
+4691339,2025,2025-02-23,Roasso Kumamoto,Hokkaido Consadole Sapporo,,0
+4691358,2025,2025-02-23,Mito Hollyhock,Montedio Yamagata,,0
+4691362,2025,2025-02-23,Renofa Yamaguchi,V-Varen Nagasaki,,0
+4691363,2025,2025-02-23,Tokushima Vortis,Vegalta Sendai,,0
+4691364,2025,2025-02-23,Ehime FC,Blaublitz Akita,,0
+4691365,2025,2025-02-23,FC Imabari,Fujieda MYFC,,0
+4691330,2025,2025-03-01,Sagan Tosu,FC Imabari,,0
+4691332,2025,2025-03-01,Vegalta Sendai,Oita Trinita,,0
+4691335,2025,2025-03-01,JEF United Chiba,Montedio Yamagata,,0
+4691337,2025,2025-03-01,Fujieda MYFC,Blaublitz Akita,,0
+4691340,2025,2025-03-01,V-Varen Nagasaki,Jubilo Iwata,,0
+4691333,2025,2025-03-02,Iwaki FC,Tokushima Vortis,,0
+4691334,2025,2025-03-02,Mito Hollyhock,Ehime FC,,0
+4691336,2025,2025-03-02,Kataller Toyama,Ventforet Kofu,,0
+4691338,2025,2025-03-02,Renofa Yamaguchi,Hokkaido Consadole Sapporo,,0
+4691341,2025,2025-03-02,Roasso Kumamoto,RB Omiya Ardija,,0
+4691343,2025,2025-03-08,Vegalta Sendai,V-Varen Nagasaki,,0
+4691346,2025,2025-03-08,RB Omiya Ardija,Renofa Yamaguchi,,0
+4691386,2025,2025-03-08,Ehime FC,FC Imabari,,0
+4691342,2025,2025-03-09,Hokkaido Consadole Sapporo,JEF United Chiba,,0
+4691344,2025,2025-03-09,Montedio Yamagata,Blaublitz Akita,,0
+4691345,2025,2025-03-09,Iwaki FC,Sagan Tosu,,0
+4691347,2025,2025-03-09,Ventforet Kofu,Fujieda MYFC,,0
+4691385,2025,2025-03-09,Tokushima Vortis,Roasso Kumamoto,,0
+4691387,2025,2025-03-09,Oita Trinita,Mito Hollyhock,,0
+4691393,2025,2025-03-09,Kataller Toyama,Jubilo Iwata,,0
+4691388,2025,2025-03-15,Blaublitz Akita,Hokkaido Consadole Sapporo,,0
+4691391,2025,2025-03-15,Jubilo Iwata,Ventforet Kofu,,0
+4691392,2025,2025-03-15,Fujieda MYFC,Iwaki FC,,0
+4691395,2025,2025-03-15,Sagan Tosu,RB Omiya Ardija,,0
+4691396,2025,2025-03-15,V-Varen Nagasaki,Tokushima Vortis,,0
+4691384,2025,2025-03-16,Renofa Yamaguchi,Oita Trinita,,0
+4691389,2025,2025-03-16,Mito Hollyhock,Vegalta Sendai,,0
+4691390,2025,2025-03-16,JEF United Chiba,Ehime FC,,0
+4691394,2025,2025-03-16,FC Imabari,Kataller Toyama,,0
+4691397,2025,2025-03-16,Roasso Kumamoto,Montedio Yamagata,,0
+4691367,2025,2025-03-23,Renofa Yamaguchi,Roasso Kumamoto,,0
+4691368,2025,2025-03-23,Ehime FC,Hokkaido Consadole Sapporo,,0
+4691369,2025,2025-03-23,Sagan Tosu,Kataller Toyama,,0
+4691370,2025,2025-03-23,V-Varen Nagasaki,Blaublitz Akita,,0
+4691371,2025,2025-03-23,Oita Trinita,Fujieda MYFC,,0
+4691375,2025,2025-03-23,Ventforet Kofu,JEF United Chiba,,0
+4691398,2025,2025-03-23,Vegalta Sendai,Jubilo Iwata,,0
+4691399,2025,2025-03-23,Montedio Yamagata,Tokushima Vortis,,0
+4691400,2025,2025-03-23,Iwaki FC,FC Imabari,,0
+4691401,2025,2025-03-23,RB Omiya Ardija,Mito Hollyhock,,0
+4691372,2025,2025-03-29,Hokkaido Consadole Sapporo,Ventforet Kofu,,0
+4691366,2025,2025-03-30,Kataller Toyama,Vegalta Sendai,,0
+4691373,2025,2025-03-30,Blaublitz Akita,Renofa Yamaguchi,,0
+4691374,2025,2025-03-30,Mito Hollyhock,Iwaki FC,,0
+4691376,2025,2025-03-30,Jubilo Iwata,JEF United Chiba,,0
+4691377,2025,2025-03-30,Fujieda MYFC,V-Varen Nagasaki,,0
+4691378,2025,2025-03-30,Tokushima Vortis,RB Omiya Ardija,,0
+4691379,2025,2025-03-30,Ehime FC,Oita Trinita,,0
+4691380,2025,2025-03-30,FC Imabari,Montedio Yamagata,,0
+4691381,2025,2025-03-30,Roasso Kumamoto,Sagan Tosu,,0
+4691382,2025,2025-04-05,Hokkaido Consadole Sapporo,Tokushima Vortis,,0
+4691383,2025,2025-04-05,Vegalta Sendai,Blaublitz Akita,,0
+4691413,2025,2025-04-05,Montedio Yamagata,Jubilo Iwata,,0
+4691417,2025,2025-04-05,Sagan Tosu,Fujieda MYFC,,0
+4691419,2025,2025-04-05,Renofa Yamaguchi,Ehime FC,,0
+4691420,2025,2025-04-05,Ventforet Kofu,Iwaki FC,,0
+4691421,2025,2025-04-05,JEF United Chiba,Mito Hollyhock,,0
+4691422,2025,2025-04-05,RB Omiya Ardija,Oita Trinita,,0
+4691416,2025,2025-04-06,Roasso Kumamoto,Kataller Toyama,,0
+4691418,2025,2025-04-06,FC Imabari,V-Varen Nagasaki,,0
+4691402,2025,2025-04-12,Iwaki FC,Montedio Yamagata,,0
+4691412,2025,2025-04-12,Mito Hollyhock,Hokkaido Consadole Sapporo,,0
+4691415,2025,2025-04-12,Vegalta Sendai,FC Imabari,,0
+4691406,2025,2025-04-13,Oita Trinita,Tokushima Vortis,,0
+4691407,2025,2025-04-13,V-Varen Nagasaki,Sagan Tosu,,0
+4691408,2025,2025-04-13,Ehime FC,Ventforet Kofu,,0
+4691409,2025,2025-04-13,Fujieda MYFC,JEF United Chiba,,0
+4691410,2025,2025-04-13,Jubilo Iwata,Roasso Kumamoto,,0
+4691411,2025,2025-04-13,Kataller Toyama,Renofa Yamaguchi,,0
+4691414,2025,2025-04-13,Blaublitz Akita,RB Omiya Ardija,,0
+4691403,2025,2025-04-19,Montedio Yamagata,Ehime FC,,0
+4691424,2025,2025-04-19,Ventforet Kofu,V-Varen Nagasaki,,0
+4691428,2025,2025-04-19,Sagan Tosu,Renofa Yamaguchi,,0
+4691404,2025,2025-04-20,Blaublitz Akita,Jubilo Iwata,,0
+4691405,2025,2025-04-20,Hokkaido Consadole Sapporo,Fujieda MYFC,,0
+4691423,2025,2025-04-20,JEF United Chiba,Oita Trinita,,0
+4691425,2025,2025-04-20,Kataller Toyama,Iwaki FC,,0
+4691426,2025,2025-04-20,Tokushima Vortis,Mito Hollyhock,,0
+4691427,2025,2025-04-20,FC Imabari,RB Omiya Ardija,,0
+4691429,2025,2025-04-20,Roasso Kumamoto,Vegalta Sendai,,0
+4691430,2025,2025-04-25,Vegalta Sendai,Ehime FC,,0
+4691431,2025,2025-04-25,Mito Hollyhock,Ventforet Kofu,,0
+4691432,2025,2025-04-25,RB Omiya Ardija,Hokkaido Consadole Sapporo,,0
+4691433,2025,2025-04-25,JEF United Chiba,Blaublitz Akita,,0
+4691434,2025,2025-04-25,Jubilo Iwata,Oita Trinita,,0
+4691435,2025,2025-04-25,Fujieda MYFC,Roasso Kumamoto,,0
+4691457,2025,2025-04-25,V-Varen Nagasaki,Iwaki FC,,0
+4691465,2025,2025-04-25,Sagan Tosu,Montedio Yamagata,,0
+4691436,2025,2025-04-26,Renofa Yamaguchi,FC Imabari,,0
+4691437,2025,2025-04-26,Tokushima Vortis,Kataller Toyama,,0
+4691456,2025,2025-04-29,Ehime FC,Fujieda MYFC,,0
+4691458,2025,2025-04-29,Hokkaido Consadole Sapporo,V-Varen Nagasaki,,0
+4691459,2025,2025-04-29,Blaublitz Akita,Tokushima Vortis,,0
+4691460,2025,2025-04-29,Iwaki FC,RB Omiya Ardija,,0
+4691461,2025,2025-04-29,Mito Hollyhock,FC Imabari,,0
+4691462,2025,2025-04-29,Ventforet Kofu,Vegalta Sendai,,0
+4691463,2025,2025-04-29,Kataller Toyama,Montedio Yamagata,,0
+4691464,2025,2025-04-29,Jubilo Iwata,Renofa Yamaguchi,,0
+4691466,2025,2025-04-29,Roasso Kumamoto,JEF United Chiba,,0
+4691467,2025,2025-04-29,Oita Trinita,Sagan Tosu,,0
+4691439,2025,2025-05-03,Sagan Tosu,JEF United Chiba,,0
+4691440,2025,2025-05-03,V-Varen Nagasaki,Ehime FC,,0
+4691441,2025,2025-05-03,Oita Trinita,Roasso Kumamoto,,0
+4691447,2025,2025-05-03,FC Imabari,Jubilo Iwata,,0
+4691468,2025,2025-05-03,Vegalta Sendai,Renofa Yamaguchi,,0
+4691469,2025,2025-05-03,Montedio Yamagata,Hokkaido Consadole Sapporo,,0
+4691470,2025,2025-05-03,Iwaki FC,Blaublitz Akita,,0
+4691471,2025,2025-05-03,RB Omiya Ardija,Kataller Toyama,,0
+4691472,2025,2025-05-03,Ventforet Kofu,Tokushima Vortis,,0
+4691473,2025,2025-05-03,Fujieda MYFC,Mito Hollyhock,,0
+4691438,2025,2025-05-06,Kataller Toyama,V-Varen Nagasaki,,0
+4691442,2025,2025-05-06,Hokkaido Consadole Sapporo,Jubilo Iwata,,0
+4691443,2025,2025-05-06,Vegalta Sendai,Fujieda MYFC,,0
+4691444,2025,2025-05-06,Blaublitz Akita,Ventforet Kofu,,0
+4691445,2025,2025-05-06,Montedio Yamagata,Oita Trinita,,0
+4691446,2025,2025-05-06,JEF United Chiba,RB Omiya Ardija,,0
+4691448,2025,2025-05-06,Renofa Yamaguchi,Mito Hollyhock,,0
+4691449,2025,2025-05-06,Tokushima Vortis,Sagan Tosu,,0
+4691450,2025,2025-05-06,Ehime FC,Iwaki FC,,0
+4691451,2025,2025-05-06,Roasso Kumamoto,Imabari FC,,0
+4691454,2025,2025-05-10,RB Omiya Ardija,Vegalta Sendai,,0
+4691452,2025,2025-05-11,Iwaki FC,Hokkaido Consadole Sapporo,,0
+4691453,2025,2025-05-11,Mito Hollyhock,Blaublitz Akita,,0
+4691455,2025,2025-05-11,Kataller Toyama,Oita Trinita,,0
+4691474,2025,2025-05-11,Jubilo Iwata,Fujieda MYFC,,0
+4691475,2025,2025-05-11,Tokushima Vortis,Renofa Yamaguchi,,0
+4691476,2025,2025-05-11,Imabari FC,JEF United Chiba,,0
+4691494,2025,2025-05-11,Sagan Tosu,Ventforet Kofu,,0
+4691508,2025,2025-05-11,Roasso Kumamoto,Ehime FC,,0
+4691509,2025,2025-05-11,V-Varen Nagasaki,Montedio Yamagata,,0
+4691501,2025,2025-05-17,Fujieda MYFC,RB Omiya Ardija,,0
+4691502,2025,2025-05-17,Jubilo Iwata,Iwaki FC,,0
+4691503,2025,2025-05-17,Ventforet Kofu,Imabari FC,,0
+4691504,2025,2025-05-17,JEF United Chiba,Vegalta Sendai,,0
+4691505,2025,2025-05-17,Mito Hollyhock,Roasso Kumamoto,,0
+4691506,2025,2025-05-17,Blaublitz Akita,Sagan Tosu,,0
+4691507,2025,2025-05-17,Hokkaido Consadole Sapporo,Kataller Toyama,,0
+4691498,2025,2025-05-18,Oita Trinita,V-Varen Nagasaki,,0
+4691499,2025,2025-05-18,Ehime FC,Tokushima Vortis,,0
+4691500,2025,2025-05-18,Renofa Yamaguchi,Montedio Yamagata,,0
+4691478,2025,2025-05-25,Sagan Tosu,Hokkaido Consadole Sapporo,,0
+4691479,2025,2025-05-25,V-Varen Nagasaki,JEF United Chiba,,0
+4691480,2025,2025-05-25,Roasso Kumamoto,Blaublitz Akita,,0
+4691486,2025,2025-05-25,Tokushima Vortis,Jubilo Iwata,,0
+4691495,2025,2025-05-25,Renofa Yamaguchi,Fujieda MYFC,,0
+4691496,2025,2025-05-25,Iwaki FC,Vegalta Sendai,,0
+4691497,2025,2025-05-25,Montedio Yamagata,Ventforet Kofu,,0
+4691484,2025,2025-05-31,Vegalta Sendai,Hokkaido Consadole Sapporo,,0
+4691485,2025,2025-05-31,Blaublitz Akita,Kataller Toyama,,0
+4691487,2025,2025-05-31,Mito Hollyhock,V-Varen Nagasaki,,0
+4691488,2025,2025-05-31,RB Omiya Ardija,Jubilo Iwata,,0
+4691489,2025,2025-05-31,JEF United Chiba,Renofa Yamaguchi,,0
+4691490,2025,2025-05-31,Fujieda MYFC,Montedio Yamagata,,0
+4691491,2025,2025-05-31,FC Imabari,Tokushima Vortis,,0
+4691492,2025,2025-05-31,Sagan Tosu,Ehime FC,,0
+4691493,2025,2025-05-31,Oita Trinita,Ventforet Kofu,,0
+4691477,2025,2025-06-01,Iwaki FC,Roasso Kumamoto,,0
+4691483,2025,2025-06-07,FC Imabari,Oita Trinita,,0
+4691481,2025,2025-06-08,RB Omiya Ardija,Ehime FC,,0
+4691482,2025,2025-06-08,Kataller Toyama,Mito Hollyhock,,0
+4691528,2025,2025-06-14,Mito Hollyhock,Sagan Tosu,,0
+4691510,2025,2025-06-15,Montedio Yamagata,Vegalta Sendai,,0
+4691527,2025,2025-06-15,Hokkaido Consadole Sapporo,FC Imabari,,0
+4691529,2025,2025-06-15,Ventforet Kofu,Roasso Kumamoto,,0
+4691530,2025,2025-06-15,Kataller Toyama,Fujieda MYFC,,0
+4691531,2025,2025-06-15,Júbilo Iwata,Ehime FC,,0
+4691532,2025,2025-06-15,Renofa Yamaguchi,Iwaki FC,,0
+4691533,2025,2025-06-15,Tokushima Vortis,JEF United Chiba,,0
+4691534,2025,2025-06-15,V-Varen Nagasaki,RB Omiya Ardija,,0
+4691535,2025,2025-06-15,Oita Trinita,Blaublitz Akita,,0
+4691524,2025,2025-06-21,FC Imabari,Mito Hollyhock,,0
+4691525,2025,2025-06-21,Ehime FC,Renofa Yamaguchi,,0
+4691526,2025,2025-06-21,Fujieda MYFC,Hokkaido Consadole Sapporo,,0
+4691538,2025,2025-06-21,Iwaki FC,Kataller Toyama,,0
+4691539,2025,2025-06-21,RB Omiya Ardija,Sagan Tosu,,0
+4691540,2025,2025-06-21,JEF United Chiba,Jubilo Iwata,,0
+4691541,2025,2025-06-21,Tokushima Vortis,Oita Trinita,,0
+4691523,2025,2025-06-22,Roasso Kumamoto,V-Varen Nagasaki,,0
+4691536,2025,2025-06-22,Vegalta Sendai,Ventforet Kofu,,0
+4691537,2025,2025-06-22,Blaublitz Akita,Montedio Yamagata,,0
+4691513,2025,2025-06-28,Oita Trinita,RB Omiya Ardija,,0
+4691514,2025,2025-06-28,Sagan Tosu,Iwaki FC,,0
+4691515,2025,2025-06-28,Renofa Yamaguchi,Blaublitz Akita,,0
+4691516,2025,2025-06-28,Fujieda MYFC,FC Imabari,,0
+4691517,2025,2025-06-28,Jubilo Iwata,Vegalta Sendai,,0
+4691518,2025,2025-06-28,Kataller Toyama,JEF United Chiba,,0
+4691519,2025,2025-06-28,Ventforet Kofu,Ehime FC,,0
+4691520,2025,2025-06-28,Mito Hollyhock,Tokushima Vortis,,0
+4691521,2025,2025-06-28,Montedio Yamagata,V-Varen Nagasaki,,0
+4691522,2025,2025-06-28,Hokkaido Consadole Sapporo,Roasso Kumamoto,,0
+4691511,2025,2025-07-05,Vegalta Sendai,Kataller Toyama,,0
+4691512,2025,2025-07-05,Hokkaido Consadole Sapporo,Renofa Yamaguchi,,0
+4691542,2025,2025-07-05,Blaublitz Akita,Mito Hollyhock,,0
+4691543,2025,2025-07-05,RB Omiya Ardija,Iwaki FC,,0
+4691544,2025,2025-07-05,JEF United Chiba,Sagan Tosu,,0
+4691545,2025,2025-07-05,Tokushima Vortis,Fujieda MYFC,,0
+4691565,2025,2025-07-05,FC Imabari,Ventforet Kofu,,0
+4691566,2025,2025-07-05,V-Varen Nagasaki,Oita Trinita,,0
+4691567,2025,2025-07-06,Roasso Kumamoto,Jubilo Iwata,,0
+4691573,2025,2025-07-06,Ehime FC,Montedio Yamagata,,0
+4691564,2025,2025-07-12,Jubilo Iwata,Hokkaido Consadole Sapporo,,0
+4691568,2025,2025-07-12,Blaublitz Akita,Roasso Kumamoto,,0
+4691569,2025,2025-07-12,Montedio Yamagata,JEF United Chiba,,0
+4691570,2025,2025-07-12,Iwaki FC,V-Varen Nagasaki,,0
+4691571,2025,2025-07-12,Mito Hollyhock,Kataller Toyama,,0
+4691572,2025,2025-07-12,Ventforet Kofu,RB Omiya Ardija,,0
+4691574,2025,2025-07-12,Fujieda MYFC,Vegalta Sendai,,0
+4691575,2025,2025-07-12,Renofa Yamaguchi,Tokushima Vortis,,0
+4691576,2025,2025-07-12,FC Imabari,Ehime FC,,0
+4691577,2025,2025-07-12,Sagan Tosu,Oita Trinita,,0
+4691547,2025,2025-08-02,Fujieda MYFC,Renofa Yamaguchi,,0
+4691548,2025,2025-08-02,Tokushima Vortis,Ehime FC,,0
+4691549,2025,2025-08-02,V-Varen Nagasaki,Vegalta Sendai,,0
+4691551,2025,2025-08-02,Oita Trinita,Imabari FC,,0
+4691555,2025,2025-08-02,Jubilo Iwata,Blaublitz Akita,,0
+4691578,2025,2025-08-02,Hokkaido Consadole Sapporo,Sagan Tosu,,0
+4691579,2025,2025-08-02,JEF United Chiba,Iwaki FC,,0
+4691580,2025,2025-08-02,Ventforet Kofu,Montedio Yamagata,,0
+4691581,2025,2025-08-02,Kataller Toyama,RB Omiya Ardija,,0
+4691550,2025,2025-08-03,Roasso Kumamoto,Mito Hollyhock,,0
+4691553,2025,2025-08-09,Blaublitz Akita,Fujieda MYFC,,0
+4691556,2025,2025-08-09,RB Omiya Ardija,JEF United Chiba,,0
+4691559,2025,2025-08-09,Imabari FC,Roasso Kumamoto,,0
+4691560,2025,2025-08-09,V-Varen Nagasaki,Hokkaido Consadole Sapporo,,0
+4691561,2025,2025-08-09,Oita Trinita,Kataller Toyama,,0
+4691546,2025,2025-08-10,Iwaki FC,Jubilo Iwata,,0
+4691552,2025,2025-08-10,Vegalta Sendai,Tokushima Vortis,,0
+4691554,2025,2025-08-10,Montedio Yamagata,Mito Hollyhock,,0
+4691558,2025,2025-08-10,Ehime FC,Sagan Tosu,,0
+4691557,2025,2025-08-11,Renofa Yamaguchi,Ventforet Kofu,,0
+4691562,2025,2025-08-16,Hokkaido Consadole Sapporo,Blaublitz Akita,,0
+4691563,2025,2025-08-16,Montedio Yamagata,Iwaki FC,,0
+4691591,2025,2025-08-16,Mito Hollyhock,Jubilo Iwata,,0
+4691593,2025,2025-08-16,Roasso Kumamoto,Fujieda MYFC,,0
+4691596,2025,2025-08-16,Renofa Yamaguchi,Vegalta Sendai,,0
+4691597,2025,2025-08-16,Kataller Toyama,FC Imabari,,0
+4691599,2025,2025-08-16,JEF United Chiba,Tokushima Vortis,,0
+4691594,2025,2025-08-17,Sagan Tosu,V-Varen Nagasaki,,0
+4691595,2025,2025-08-17,Ehime FC,RB Omiya Ardija,,0
+4691598,2025,2025-08-17,Ventforet Kofu,Oita Trinita,,0
+4691582,2025,2025-08-23,Blaublitz Akita,FC Imabari,,0
+4691584,2025,2025-08-23,Sagan Tosu,Mito Hollyhock,,0
+4691585,2025,2025-08-23,Tokushima Vortis,Montedio Yamagata,,0
+4691586,2025,2025-08-23,Fujieda MYFC,Ehime FC,,0
+4691587,2025,2025-08-23,Jubilo Iwata,Kataller Toyama,,0
+4691588,2025,2025-08-23,Ventforet Kofu,Hokkaido Consadole Sapporo,,0
+4691589,2025,2025-08-23,RB Omiya Ardija,Roasso Kumamoto,,0
+4691590,2025,2025-08-23,Iwaki FC,Oita Trinita,,0
+4691583,2025,2025-08-24,V-Varen Nagasaki,Renofa Yamaguchi,,0
+4691592,2025,2025-08-24,Vegalta Sendai,JEF United Chiba,,0
+4691609,2025,2025-08-30,Hokkaido Consadole Sapporo,RB Omiya Ardija,,0
+4691611,2025,2025-08-30,FC Imabari,Iwaki FC,,0
+4691613,2025,2025-08-30,Tokushima Vortis,Blaublitz Akita,,0
+4691614,2025,2025-08-30,Kataller Toyama,Roasso Kumamoto,,0
+4691615,2025,2025-08-30,JEF United Chiba,Ventforet Kofu,,0
+4691616,2025,2025-08-30,Mito Hollyhock,Renofa Yamaguchi,,0
+4691617,2025,2025-08-30,Montedio Yamagata,Sagan Tosu,,0
+4691600,2025,2025-08-31,Oita Trinita,Jubilo Iwata,,0
+4691610,2025,2025-08-31,V-Varen Nagasaki,Fujieda MYFC,,0
+4691612,2025,2025-08-31,Ehime FC,Vegalta Sendai,,0
+4691601,2025,2025-09-13,Fujieda MYFC,Oita Trinita,,0
+4691602,2025,2025-09-13,Jubilo Iwata,FC Imabari,,0
+4691603,2025,2025-09-13,Ventforet Kofu,Sagan Tosu,,0
+4691604,2025,2025-09-13,RB Omiya Ardija,V-Varen Nagasaki,,0
+4691607,2025,2025-09-13,Vegalta Sendai,Mito Hollyhock,,0
+4691608,2025,2025-09-13,Hokkaido Consadole Sapporo,Iwaki FC,,0
+4691605,2025,2025-09-14,Montedio Yamagata,Kataller Toyama,,0
+4691606,2025,2025-09-14,Blaublitz Akita,Ehime FC,,0
+4691645,2025,2025-09-14,Renofa Yamaguchi,JEF United Chiba,,0
+4691637,2025,2025-09-15,Roasso Kumamoto,Tokushima Vortis,,0
+4691636,2025,2025-09-20,Sagan Tosu,Roasso Kumamoto,,0
+4691638,2025,2025-09-20,Vegalta Sendai,Montedio Yamagata,,0
+4691639,2025,2025-09-20,Iwaki FC,Mito Hollyhock,,0
+4691640,2025,2025-09-20,RB Omiya Ardija,FC Imabari,,0
+4691641,2025,2025-09-20,Ventforet Kofu,Blaublitz Akita,,0
+4691642,2025,2025-09-20,Fujieda MYFC,Jubilo Iwata,,0
+4691643,2025,2025-09-20,Tokushima Vortis,Hokkaido Consadole Sapporo,,0
+4691644,2025,2025-09-20,Ehime FC,JEF United Chiba,,0
+4691646,2025,2025-09-20,V-Varen Nagasaki,Kataller Toyama,,0
+4691647,2025,2025-09-20,Oita Trinita,Renofa Yamaguchi,,0
+4691619,2025,2025-09-27,Jubilo Iwata,RB Omiya Ardija,,0
+4691620,2025,2025-09-27,FC Imabari,Sagan Tosu,,0
+4691621,2025,2025-09-27,Oita Trinita,Ehime FC,,0
+4691648,2025,2025-09-27,Hokkaido Consadole Sapporo,Vegalta Sendai,,0
+4691650,2025,2025-09-27,Montedio Yamagata,Renofa Yamaguchi,,0
+4691651,2025,2025-09-27,Iwaki FC,Ventforet Kofu,,0
+4691653,2025,2025-09-27,JEF United Chiba,Roasso Kumamoto,,0
+4691627,2025,2025-09-28,Kataller Toyama,Tokushima Vortis,,0
+4691649,2025,2025-09-28,Blaublitz Akita,V-Varen Nagasaki,,0
+4691652,2025,2025-09-28,Mito Hollyhock,Fujieda MYFC,,0
+4691618,2025,2025-10-04,Fujieda MYFC,Kataller Toyama,,0
+4691622,2025,2025-10-04,Hokkaido Consadole Sapporo,Montedio Yamagata,,0
+4691623,2025,2025-10-04,Vegalta Sendai,RB Omiya Ardija,,0
+4691625,2025,2025-10-04,JEF United Chiba,V-Varen Nagasaki,,0
+4691626,2025,2025-10-04,Ventforet Kofu,Jubilo Iwata,,0
+4691624,2025,2025-10-05,Blaublitz Akita,Oita Trinita,,0
+4691628,2025,2025-10-05,Renofa Yamaguchi,Sagan Tosu,,0
+4691629,2025,2025-10-05,Tokushima Vortis,FC Imabari,,0
+4691630,2025,2025-10-05,Ehime FC,Mito Hollyhock,,0
+4691631,2025,2025-10-05,Roasso Kumamoto,Iwaki FC,,0
+4691633,2025,2025-10-18,Iwaki FC,Ehime FC,,0
+4691635,2025,2025-10-18,RB Omiya Ardija,Fujieda MYFC,,0
+4691655,2025,2025-10-18,Jubilo Iwata,Tokushima Vortis,,0
+4691674,2025,2025-10-18,Sagan Tosu,Blaublitz Akita,,0
+4691675,2025,2025-10-18,V-Varen Nagasaki,Ventforet Kofu,,0
+4691632,2025,2025-10-19,Montedio Yamagata,Roasso Kumamoto,,0
+4691634,2025,2025-10-19,Mito Hollyhock,JEF United Chiba,,0
+4691654,2025,2025-10-19,Kataller Toyama,Hokkaido Consadole Sapporo,,0
+4691676,2025,2025-10-19,Oita Trinita,Vegalta Sendai,,0
+4691682,2025,2025-10-19,Imabari FC,Renofa Yamaguchi,,0
+4691681,2025,2025-10-25,Fujieda MYFC,Ventforet Kofu,,0
+4691685,2025,2025-10-25,V-Varen Nagasaki,FC Imabari,,0
+4691673,2025,2025-10-26,Renofa Yamaguchi,Kataller Toyama,,0
+4691677,2025,2025-10-26,Hokkaido Consadole Sapporo,Mito Hollyhock,,0
+4691678,2025,2025-10-26,Vegalta Sendai,Sagan Tosu,,0
+4691679,2025,2025-10-26,Blaublitz Akita,JEF United Chiba,,0
+4691680,2025,2025-10-26,Montedio Yamagata,RB Omiya Ardija,,0
+4691683,2025,2025-10-26,Tokushima Vortis,Iwaki FC,,0
+4691684,2025,2025-10-26,Ehime FC,Jubilo Iwata,,0
+4691686,2025,2025-10-26,Roasso Kumamoto,Oita Trinita,,0
+4691657,2025,2025-11-02,Kataller Toyama,Ehime FC,,0
+4691658,2025,2025-11-02,Jubilo Iwata,V-Varen Nagasaki,,0
+4691659,2025,2025-11-02,Imabari FC,Vegalta Sendai,,0
+4691660,2025,2025-11-02,Sagan Tosu,Tokushima Vortis,,0
+4691661,2025,2025-11-02,Roasso Kumamoto,Renofa Yamaguchi,,0
+4691662,2025,2025-11-02,Oita Trinita,Montedio Yamagata,,0
+4691665,2025,2025-11-02,Ventforet Kofu,Mito Hollyhock,,0
+4691687,2025,2025-11-02,Iwaki FC,Fujieda MYFC,,0
+4691688,2025,2025-11-02,RB Omiya Ardija,Blaublitz Akita,,0
+4691689,2025,2025-11-02,JEF United Chiba,Hokkaido Consadole Sapporo,,0
+4691663,2025,2025-11-08,Hokkaido Consadole Sapporo,Oita Trinita,,0
+4691672,2025,2025-11-08,Ehime FC,V-Varen Nagasaki,,0
+4691656,2025,2025-11-09,Blaublitz Akita,Iwaki FC,,0
+4691664,2025,2025-11-09,Vegalta Sendai,Roasso Kumamoto,,0
+4691666,2025,2025-11-09,Montedio Yamagata,FC Imabari,,0
+4691667,2025,2025-11-09,Mito Hollyhock,RB Omiya Ardija,,0
+4691668,2025,2025-11-09,JEF United Chiba,Fujieda MYFC,,0
+4691669,2025,2025-11-09,Kataller Toyama,Sagan Tosu,,0
+4691670,2025,2025-11-09,Renofa Yamaguchi,Jubilo Iwata,,0
+4691671,2025,2025-11-09,Tokushima Vortis,Ventforet Kofu,,0
+4691700,2025,2025-11-23,Blaublitz Akita,Vegalta Sendai,,0
+4691701,2025,2025-11-23,Oita Trinita,JEF United Chiba,,0
+4691702,2025,2025-11-23,V-Varen Nagasaki,Mito Hollyhock,,0
+4691703,2025,2025-11-23,FC Imabari,Hokkaido Consadole Sapporo,,0
+4691704,2025,2025-11-23,Ehime FC,Roasso Kumamoto,,0
+4691705,2025,2025-11-23,Fujieda MYFC,Sagan Tosu,,0
+4691706,2025,2025-11-23,Jubilo Iwata,Montedio Yamagata,,0
+4691707,2025,2025-11-23,Ventforet Kofu,Kataller Toyama,,0
+4691708,2025,2025-11-23,RB Omiya Ardija,Tokushima Vortis,,0
+4691709,2025,2025-11-23,Iwaki FC,Renofa Yamaguchi,,0
+4691690,2025,2025-11-29,Hokkaido Consadole Sapporo,Ehime FC,,0
+4691691,2025,2025-11-29,Roasso Kumamoto,Ventforet Kofu,,0
+4691692,2025,2025-11-29,Sagan Tosu,Jubilo Iwata,,0
+4691693,2025,2025-11-29,Tokushima Vortis,V-Varen Nagasaki,,0
+4691694,2025,2025-11-29,Renofa Yamaguchi,RB Omiya Ardija,,0
+4691695,2025,2025-11-29,Kataller Toyama,Blaublitz Akita,,0
+4691696,2025,2025-11-29,JEF United Chiba,FC Imabari,,0
+4691697,2025,2025-11-29,Mito Hollyhock,Oita Trinita,,0
+4691698,2025,2025-11-29,Montedio Yamagata,Fujieda MYFC,,0
+4691699,2025,2025-11-29,Vegalta Sendai,Iwaki FC,,0
+5078740,2025,2025-12-07,JEF United Chiba,RB Omiya Ardija,,0
+5078741,2025,2025-12-07,Tokushima Vortis,Jubilo Iwata,,0
+5087015,2025,2025-12-13,JEF United Chiba,Tokushima Vortis,,0
+5836207,2026-2027,2026-08-08,Fujieda MYFC,Vegalta Sendai,,0
+5836208,2026-2027,2026-08-08,Hokkaido Consadole Sapporo,Tokushima Vortis,,0
+5836210,2026-2027,2026-08-08,Jubilo Iwata,Blaublitz Akita,,0
+5836212,2026-2027,2026-08-08,Oita Trinita,Shonan Bellmare,,0
+5836213,2026-2027,2026-08-08,RB Omiya Ardija,Albirex Niigata,,0
+5836214,2026-2027,2026-08-08,Sagan Tosu,Ventforet Kofu,,0
+5836215,2026-2027,2026-08-08,Tegevajaro Miyazaki,Yokohama FC,,0
+5836216,2026-2027,2026-08-08,Vanraure Hachinohe,Kataller Toyama,,0
+5836209,2026-2027,2026-08-09,Iwaki FC,FC Imabari,,0
+5836211,2026-2027,2026-08-09,Montedio Yamagata,Tochigi City FC,,0
+5836217,2026-2027,2026-08-15,Albirex Niigata,Hokkaido Consadole Sapporo,,0
+5836218,2026-2027,2026-08-15,Blaublitz Akita,Kataller Toyama,,0
+5836219,2026-2027,2026-08-15,Fujieda MYFC,Iwaki FC,,0
+5836220,2026-2027,2026-08-15,FC Imabari,RB Omiya Ardija,,0
+5836221,2026-2027,2026-08-15,Ventforet Kofu,Tegevajaro Miyazaki,,0
+5836222,2026-2027,2026-08-15,Shonan Bellmare,Montedio Yamagata,,0
+5836223,2026-2027,2026-08-15,Tochigi City FC,Vanraure Hachinohe,,0
+5836225,2026-2027,2026-08-15,Vegalta Sendai,Oita Trinita,,0
+5836224,2026-2027,2026-08-16,Tokushima Vortis,Sagan Tosu,,0
+5836226,2026-2027,2026-08-16,Yokohama FC,Jubilo Iwata,,0
+5836227,2026-2027,2026-08-22,Albirex Niigata,Fujieda MYFC,,0
+5836228,2026-2027,2026-08-22,Blaublitz Akita,Ventforet Kofu,,0
+5836229,2026-2027,2026-08-22,Hokkaido Consadole Sapporo,RB Omiya Ardija,,0
+5836230,2026-2027,2026-08-22,Jubilo Iwata,Tokushima Vortis,,0
+5836231,2026-2027,2026-08-22,Montedio Yamagata,Yokohama FC,,0
+5836232,2026-2027,2026-08-22,Oita Trinita,Iwaki FC,,0
+5836233,2026-2027,2026-08-22,Sagan Tosu,Tochigi City FC,,0
+5836234,2026-2027,2026-08-22,Tegevajaro Miyazaki,Shonan Bellmare,,0
+5836235,2026-2027,2026-08-22,Kataller Toyama,FC Imabari,,0
+5836236,2026-2027,2026-08-22,Vanraure Hachinohe,Vegalta Sendai,,0
+5836237,2026-2027,2026-08-29,FC Imabari,Montedio Yamagata,,0
+5836238,2026-2027,2026-08-29,Iwaki FC,Albirex Niigata,,0
+5836239,2026-2027,2026-08-29,Ventforet Kofu,Hokkaido Consadole Sapporo,,0
+5836240,2026-2027,2026-08-29,RB Omiya Ardija,Shonan Bellmare,,0
+5836241,2026-2027,2026-08-29,Tochigi City FC,Júbilo Iwata,,0
+5836242,2026-2027,2026-08-29,Tokushima Vortis,Oita Trinita,,0
+5836243,2026-2027,2026-08-29,Kataller Toyama,Fujieda MYFC,,0
+5836244,2026-2027,2026-08-29,Vanraure Hachinohe,Blaublitz Akita,,0
+5836245,2026-2027,2026-08-29,Vegalta Sendai,Tegevajaro Miyazaki,,0
+5836246,2026-2027,2026-08-29,Yokohama FC,Sagan Tosu,,0
+5836248,2026-2027,2026-09-05,Fujieda MYFC,Vanraure Hachinohe,,0
+5836251,2026-2027,2026-09-05,Montedio Yamagata,Ventforet Kofu,,0
+5836253,2026-2027,2026-09-05,Sagan Tosu,Tegevajaro Miyazaki,,0
+5836254,2026-2027,2026-09-05,Shonan Bellmare,Vegalta Sendai,,0
+5836255,2026-2027,2026-09-05,Tokushima Vortis,Iwaki FC,,0
+5836247,2026-2027,2026-09-06,Blaublitz Akita,RB Omiya Ardija,,0
+5836249,2026-2027,2026-09-06,Hokkaido Consadole Sapporo,Tochigi City FC,,0
+5836250,2026-2027,2026-09-06,Júbilo Iwata,Kataller Toyama,,0
+5836252,2026-2027,2026-09-06,Oita Trinita,FC Imabari,,0
+5836256,2026-2027,2026-09-06,Yokohama FC,Albirex Niigata,,0
+5836258,2026-2027,2026-09-12,Blaublitz Akita,Tokushima Vortis,,0
+5836259,2026-2027,2026-09-12,FC Imabari,Sagan Tosu,,0
+5836260,2026-2027,2026-09-12,Iwaki FC,Yokohama FC,,0
+5836261,2026-2027,2026-09-12,Ventforet Kofu,Júbilo Iwata,,0
+5836262,2026-2027,2026-09-12,RB Omiya Ardija,Oita Trinita,,0
+5836263,2026-2027,2026-09-12,Tegevajaro Miyazaki,Fujieda MYFC,,0
+5836264,2026-2027,2026-09-12,Kataller Toyama,Tochigi City FC,,0
+5836265,2026-2027,2026-09-12,Vanraure Hachinohe,Shonan Bellmare,,0
+5836257,2026-2027,2026-09-13,Albirex Niigata,Montedio Yamagata,,0
+5836266,2026-2027,2026-09-13,Vegalta Sendai,Hokkaido Consadole Sapporo,,0
+5836275,2026-2027,2026-09-18,Vanraure Hachinohe,Tegevajaro Miyazaki,,0
+5836267,2026-2027,2026-09-19,Albirex Niigata,Júbilo Iwata,,0
+5836268,2026-2027,2026-09-19,Fujieda MYFC,RB Omiya Ardija,,0
+5836269,2026-2027,2026-09-19,Hokkaido Consadole Sapporo,Oita Trinita,,0
+5836270,2026-2027,2026-09-19,Ventforet Kofu,Tokushima Vortis,,0
+5836271,2026-2027,2026-09-19,Montedio Yamagata,Kataller Toyama,,0
+5836272,2026-2027,2026-09-19,Sagan Tosu,Iwaki FC,,0
+5836273,2026-2027,2026-09-19,Shonan Bellmare,Blaublitz Akita,,0
+5836276,2026-2027,2026-09-19,Yokohama FC,FC Imabari,,0
+5836274,2026-2027,2026-09-20,Tochigi City FC,Vegalta Sendai,,0
+5836277,2026-2027,2026-09-26,Blaublitz Akita,Albirex Niigata,,0
+5836278,2026-2027,2026-09-26,FC Imabari,Shonan Bellmare,,0
+5836279,2026-2027,2026-09-26,Iwaki FC,Vegalta Sendai,,0
+5836280,2026-2027,2026-09-26,Júbilo Iwata,Vanraure Hachinohe,,0
+5836281,2026-2027,2026-09-26,Montedio Yamagata,Sagan Tosu,,0
+5836282,2026-2027,2026-09-26,Oita Trinita,Fujieda MYFC,,0
+5836283,2026-2027,2026-09-26,RB Omiya Ardija,Ventforet Kofu,,0
+5836284,2026-2027,2026-09-26,Tegevajaro Miyazaki,Hokkaido Consadole Sapporo,,0
+5836285,2026-2027,2026-09-26,Tokushima Vortis,Tochigi City FC,,0
+5836286,2026-2027,2026-09-26,Kataller Toyama,Yokohama FC,,0
+5836287,2026-2027,2026-10-03,Albirex Niigata,Tokushima Vortis,,0
+5836289,2026-2027,2026-10-03,Fujieda MYFC,Shonan Bellmare,,0
+5836291,2026-2027,2026-10-03,Ventforet Kofu,Kataller Toyama,,0
+5836292,2026-2027,2026-10-03,Oita Trinita,Montedio Yamagata,,0
+5836294,2026-2027,2026-10-03,Tochigi City FC,FC Imabari,,0
+5836288,2026-2027,2026-10-04,Blaublitz Akita,Sagan Tosu,,0
+5836290,2026-2027,2026-10-04,Hokkaido Consadole Sapporo,Iwaki FC,,0
+5836293,2026-2027,2026-10-04,Tegevajaro Miyazaki,RB Omiya Ardija,,0
+5836295,2026-2027,2026-10-04,Vanraure Hachinohe,Yokohama FC,,0
+5836296,2026-2027,2026-10-04,Vegalta Sendai,Júbilo Iwata,,0
+5836298,2026-2027,2026-10-10,Júbilo Iwata,Hokkaido Consadole Sapporo,,0
+5836299,2026-2027,2026-10-10,Ventforet Kofu,Tochigi City FC,,0
+5836301,2026-2027,2026-10-10,RB Omiya Ardija,Vanraure Hachinohe,,0
+5836302,2026-2027,2026-10-10,Sagan Tosu,Fujieda MYFC,,0
+5836304,2026-2027,2026-10-10,Tokushima Vortis,FC Imabari,,0
+5836306,2026-2027,2026-10-10,Yokohama FC,Oita Trinita,,0
+5836297,2026-2027,2026-10-11,Iwaki FC,Blaublitz Akita,,0
+5836300,2026-2027,2026-10-11,Montedio Yamagata,Vegalta Sendai,,0
+5836303,2026-2027,2026-10-11,Shonan Bellmare,Albirex Niigata,,0
+5836305,2026-2027,2026-10-11,Kataller Toyama,Tegevajaro Miyazaki,,0
+5836307,2026-2027,2026-10-17,Fujieda MYFC,Montedio Yamagata,,0
+5836308,2026-2027,2026-10-17,Hokkaido Consadole Sapporo,Blaublitz Akita,,0
+5836309,2026-2027,2026-10-17,FC Imabari,Vanraure Hachinohe,,0
+5836311,2026-2027,2026-10-17,Oita Trinita,Albirex Niigata,,0
+5836312,2026-2027,2026-10-17,Sagan Tosu,RB Omiya Ardija,,0
+5836313,2026-2027,2026-10-17,Tegevajaro Miyazaki,Júbilo Iwata,,0
+5836314,2026-2027,2026-10-17,Tochigi City FC,Yokohama FC,,0
+5836315,2026-2027,2026-10-17,Kataller Toyama,Shonan Bellmare,,0
+5836316,2026-2027,2026-10-17,Vegalta Sendai,Tokushima Vortis,,0
+5836310,2026-2027,2026-10-18,Iwaki FC,Ventforet Kofu,,0
+5836317,2026-2027,2026-10-21,Albirex Niigata,Sagan Tosu,,0
+5836318,2026-2027,2026-10-21,Júbilo Iwata,Oita Trinita,,0
+5836319,2026-2027,2026-10-21,Ventforet Kofu,Yokohama FC,,0
+5836320,2026-2027,2026-10-21,Montedio Yamagata,Hokkaido Consadole Sapporo,,0
+5836321,2026-2027,2026-10-21,RB Omiya Ardija,Kataller Toyama,,0
+5836322,2026-2027,2026-10-21,Shonan Bellmare,Iwaki FC,,0
+5836323,2026-2027,2026-10-21,Tegevajaro Miyazaki,Blaublitz Akita,,0
+5836324,2026-2027,2026-10-21,Tochigi City FC,Fujieda MYFC,,0
+5836325,2026-2027,2026-10-21,Tokushima Vortis,Vanraure Hachinohe,,0
+5836326,2026-2027,2026-10-21,Vegalta Sendai,FC Imabari,,0
+5836329,2026-2027,2026-10-24,Fujieda MYFC,Tokushima Vortis,,0
+5836333,2026-2027,2026-10-24,RB Omiya Ardija,Yokohama FC,,0
+5836327,2026-2027,2026-10-25,Albirex Niigata,Vegalta Sendai,,0
+5836328,2026-2027,2026-10-25,Blaublitz Akita,FC Imabari,,0
+5836330,2026-2027,2026-10-25,Iwaki FC,Júbilo Iwata,,0
+5836331,2026-2027,2026-10-25,Montedio Yamagata,Tegevajaro Miyazaki,,0
+5836332,2026-2027,2026-10-25,Oita Trinita,Ventforet Kofu,,0
+5836334,2026-2027,2026-10-25,Sagan Tosu,Vanraure Hachinohe,,0
+5836335,2026-2027,2026-10-25,Shonan Bellmare,Tochigi City FC,,0
+5836336,2026-2027,2026-10-25,Kataller Toyama,Hokkaido Consadole Sapporo,,0
+5836337,2026-2027,2026-10-31,Albirex Niigata,Kataller Toyama,,0
+5836338,2026-2027,2026-10-31,Blaublitz Akita,Fujieda MYFC,,0
+5836339,2026-2027,2026-10-31,Hokkaido Consadole Sapporo,Shonan Bellmare,,0
+5836340,2026-2027,2026-10-31,FC Imabari,Ventforet Kofu,,0
+5836341,2026-2027,2026-10-31,Júbilo Iwata,Sagan Tosu,,0
+5836342,2026-2027,2026-10-31,Tegevajaro Miyazaki,Oita Trinita,,0
+5836343,2026-2027,2026-10-31,Tochigi City FC,Iwaki FC,,0
+5836344,2026-2027,2026-10-31,Tokushima Vortis,Yokohama FC,,0
+5836345,2026-2027,2026-10-31,Vanraure Hachinohe,Montedio Yamagata,,0
+5836346,2026-2027,2026-10-31,Vegalta Sendai,RB Omiya Ardija,,0
+5836347,2026-2027,2026-11-03,Fujieda MYFC,Júbilo Iwata,,0
+5836348,2026-2027,2026-11-03,FC Imabari,Hokkaido Consadole Sapporo,,0
+5836349,2026-2027,2026-11-03,Ventforet Kofu,Albirex Niigata,,0
+5836350,2026-2027,2026-11-03,Montedio Yamagata,Tokushima Vortis,,0
+5836351,2026-2027,2026-11-03,Oita Trinita,Vanraure Hachinohe,,0
+5836352,2026-2027,2026-11-03,RB Omiya Ardija,Iwaki FC,,0
+5836353,2026-2027,2026-11-03,Shonan Bellmare,Sagan Tosu,,0
+5836354,2026-2027,2026-11-03,Tegevajaro Miyazaki,Tochigi City FC,,0
+5836355,2026-2027,2026-11-03,Kataller Toyama,Vegalta Sendai,,0
+5836356,2026-2027,2026-11-03,Yokohama FC,Blaublitz Akita,,0
+5836357,2026-2027,2026-11-07,Albirex Niigata,FC Imabari,,0
+5836358,2026-2027,2026-11-07,Blaublitz Akita,Oita Trinita,,0
+5836359,2026-2027,2026-11-07,Iwaki FC,Montedio Yamagata,,0
+5836361,2026-2027,2026-11-07,Sagan Tosu,Kataller Toyama,,0
+5836363,2026-2027,2026-11-07,Tokushima Vortis,Tegevajaro Miyazaki,,0
+5836366,2026-2027,2026-11-07,Yokohama FC,Fujieda MYFC,,0
+5836360,2026-2027,2026-11-08,Júbilo Iwata,Shonan Bellmare,,0
+5836362,2026-2027,2026-11-08,Tochigi City FC,RB Omiya Ardija,,0
+5836364,2026-2027,2026-11-08,Vanraure Hachinohe,Hokkaido Consadole Sapporo,,0
+5836365,2026-2027,2026-11-08,Vegalta Sendai,Ventforet Kofu,,0
