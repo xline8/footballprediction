@@ -6,30 +6,28 @@
 [![License](https://img.shields.io/github/license/xline8/footballprediction)](https://github.com/xline8/footballprediction/blob/main/LICENSE)
 [![Release](https://img.shields.io/github/v/release/xline8/footballprediction)](https://github.com/xline8/footballprediction/releases)
 
-Football Prediction is a quantitative research system that prices pre-match
-football markets from team ratings and publishes the probabilities every day.
-One pipeline covers league football, domestic cups, and a world programme of
-156 leagues. Every market the system publishes has passed a walk-forward
-gate on its own numbers; a market that fails its gate does not run.
+This repository runs my pre-match football models. It fits Dixon-Coles and a
+meta model for the top five European leagues, prices domestic cups, and runs
+separate gated engines for 156 leagues. The daily job publishes probabilities
+before kickoff, joins them to 1xBet prices scraped from TipsterArea, and grades
+the results.
 
-The project exists to test a plain question: do bookmaker markets hide
-exploitable value? So far the graded evidence says they do not. The system
-still runs daily, because the point is the measurement: predictions are
-published before kickoff, compared with live 1xBet prices, graded after the
-matches, and accumulated into a calibration ledger that shows whether the
-printed probabilities match how often the picks land.
+The research question is whether those prices leave an exploitable edge. The
+graded evidence so far says no. I keep the system running because a prediction
+made before kickoff and graded afterwards is more useful than another
+backtest. Markets that fail their walk-forward gate do not run.
 
 ## Coverage
 
-Competitions and markets are one system. The same daily chain produces all
-of it, and the world league runner extends the same approach to one engine
-per league.
+The top-five chain and the world runner use different executors, but they are
+one research system and follow the same rule: each published market must pass
+its own gate.
 
 | Scope | Competitions | Markets |
 |---|---|---|
 | Top five European leagues | Premier League, La Liga, Bundesliga, Serie A, Ligue 1 | 1X2, double chance, over/under goals, BTTS; corners (full time, first half, by half); shots on target (full time, first half, by half); cards; goals by half |
 | Domestic cups | EFL Cup, DFB Pokal | 1X2 with advance probabilities for single-leg ties; corners |
-| World league programme | 156 leagues built and gated individually; 62 leagues and 123 markets in the daily runner | Goals, corners, shots on target, total shots, cards — only the markets that passed each league's gate |
+| World league programme | 156 leagues built and gated individually; 62 leagues and 123 markets in the daily runner | Goals, corners, shots on target, total shots, cards; only the markets that passed each league's gate |
 
 Fixtures, results, and shotmap xG come from FotMob. TipsterArea supplies
 the market odds snapshots behind the price comparison and a results
@@ -39,44 +37,44 @@ switch. Section [Data sources](#data-sources) lists what each source feeds.
 
 ## Measured results
 
-- **Calibration.** On the stored walk-forward probabilities (records schema
+- Calibration. On the stored walk-forward probabilities (records schema
   v2), the meta stack scores a pooled Brier of 0.5766 and RPS of 0.1956
   across the top five leagues, level with the opening market (0.5764 /
   0.1955). On 9,946 matches shared with FiveThirtyEight's SPI (January 2018
   to June 2023), it scores log loss 0.9740 against SPI's 0.9821.
-- **xG blend fit.** Fitting Dixon-Coles on a 0.5 goals + 0.5 xG target beat
+- xG blend fit. Fitting Dixon-Coles on a 0.5 goals + 0.5 xG target beat
   goals-only out of sample (log loss 0.98624 vs 0.99304, walk-forward
   2021/22–2025/26, n = 8,889) and passed all three go-live gates, so `blend`
   is the production default. See EXPERIMENT_XG_DC.md.
-- **Graded ledger.** 358 historical league picks are graded in
+- Graded ledger. 358 historical league picks are graded in
   `ledger/ledger_summary.json`: ROI −5.79% at opening odds, mean CLV EV
   −0.0773 against closing odds (Pinnacle, then AvgC, then B365C), beat-close
   rate 53.6%, CLV coverage 100%. The model often takes a better price than
   the close and still loses money. CLV, not settlement ROI, is the headline
   metric.
-- **The live-pick edge band does not exist.** The policy engine only fires
+- The live-pick edge band does not exist. The policy engine only fires
   at an edge of 0.20–0.22 over the market. An experiment over the full
   2017/18–2025/26 walk-forward history (EXPERIMENT_EDGE_BAND.md) found that
   band fires zero times: the meta model's edge over the Shin-fair market
   maxes at about +0.08. Live picks are therefore 0, as a measured property
   of this model against this market, not as a configuration choice.
-- **Corners.** A walk-forward calibration check against actual corner
+- Corners. A walk-forward calibration check against actual corner
   counts (HC/AC, pooled n = 12,457) found per-division bias between −0.06
   and +0.23 corners and a ladder deviation of −0.0015 at the 9.5 line
   (Brier 0.2470). Both correction gates failed, so the corner model ships
   unchanged.
-- **Shots on target and cards.** The SOT model (pooled Poisson regression
+- Shots on target and cards. The SOT model (pooled Poisson regression
   ratings, negative binomial dispersion r = 79.94, Beta-Binomial on-target
   ratio) passed its walk-forward gate at the 9.5 line: log loss 0.6304,
   calibration within 0.2 points, no top-five division worse than the pooled
   model by more than 0.0003. The cards model passed its gate the same week
   (log loss 0.6555 at the 4.5 line against a 0.6634 base rate).
-- **World league programme.** 785 market candidates across 156 leagues were
+- World league programme. 785 market candidates across 156 leagues were
   built and gated one by one: 122 passed (28 clean, 94 provisional), 309
   failed, 353 could not be built for lack of data. Goals passed about 3%
   of built candidates; corners 58%, shots on target 48%, total shots 51%.
   The full audit is `league/AUDIT.md`.
-- **Discipline.** Every experiment runs leak-free walk-forward validation
+- Validation. Every experiment runs leak-free walk-forward validation
   with proper scoring rules (log loss, Brier, per-class) and a dual gate:
   a log-loss safety check plus a fixed-threshold yield check with a
   bootstrap significance test. A de-vigging bug that inflated a false
@@ -85,13 +83,10 @@ switch. Section [Data sources](#data-sources) lists what each source feeds.
 
 ## Quick start
 
-The interactive launcher is the entry point for a new machine. On Windows,
-double-click `start.bat`. On Linux or macOS, clone the repository and run
-`python football_cli.py`. The launcher creates its own Python environment,
-installs the required packages, downloads and builds the training data on
-a first run, and opens a Control Center menu: daily update, full pipeline,
-local API, project status, and credits. Its actions call the same entry
-points described below, so the launcher always runs the current system.
+On Windows, `start.bat` creates `.venv`, installs `requirements.txt`, and opens
+the Control Center. On Linux or macOS, create the environment yourself, install
+the same requirements, then run `python football_cli.py`. The menu exposes the
+daily update, full pipeline, local API, project status, and credits.
 
 Run the end-to-end pipeline directly:
 
@@ -153,7 +148,7 @@ flowchart LR
 | Cups | `predict_cups.py` | Predicts EFL Cup and DFB Pokal ties from league fits: each team maps to its division, goal lambdas come from the two divisions' fits, and the tie total is rescaled to the competition's own measured scoring rate. Single-leg ties also get advance probabilities (`p_adv_h`, `p_adv_a`) from extra-time lambdas and penalties weighted by the 90-minute win probabilities. Cup results never enter league training data, and cup rows never mix into the league prediction files |
 | League runner | `league/runner/run_daily.py` | Runs every gated league market in `league/runner/active.yaml`: incremental FotMob pull, predictions, settlement. Per-league failures stay inside their league |
 
-**World league programme.** `league/` holds one self-contained engine per
+`league/` holds one self-contained engine per
 league for 156 leagues. Each league was built through the same six stages
 (data, EDA, design, fit, gate, report), and each market was gated on its
 own walk-forward and sealed-window numbers. A market that fails does not
@@ -191,28 +186,28 @@ edge-band reason given there. The daily recommendations below are a
 separate deterministic product built from model probabilities and real
 1xBet prices; they are not policy-engine picks and carry no edge claim.
 
-**Daily recommendations.** `slip_recommender.py` builds three files per
+`slip_recommender.py` builds three recommendation files per
 report date from real 1xBet odds in `market_compare.csv` joined to model
 probabilities (markets 1X2 / DC / OU / BTTS; one leg per match), produced
 in the daily chain and archived daily:
 
-- `recommended_single.csv` — the day's single bet: highest EV
+- `recommended_single.csv`: the day's single bet, chosen by highest EV
   (`p_model * o_1xbet - 1`) among legs with `p_model >= 0.45` and
   `o_1xbet >= 1.40` (tie-break: probability, then odds). The `below_floor`
   column is true only when the relaxed 0.40 / 1.30 floor had to be used.
-- `recommended_slip.csv` — slip with total odds in the 1.85–2.15 band
+- `recommended_slip.csv`: a slip with total odds in the 1.85–2.15 band
   (target 2.0): 2–4 legs from the report date only, `p_model >= 0.50`,
   `o_1xbet >= 1.20`, highest joint probability (tie-break total EV).
   Without an in-band combination, the closest-to-2.0 combination is
   emitted with `in_band=false`.
-- `recommended_slip10.csv` — slip with total odds in the 9.0–11.0 band
+- `recommended_slip10.csv`: a slip with total odds in the 9.0–11.0 band
   (target 10.0): 3–6 legs, `p_model >= 0.35`, `o_1xbet >= 1.30`, highest
   joint probability. The pool starts at the report date and expands day
   by day (max +4) only until an in-band combination exists; every leg row
   carries its own match date and `pool_expanded_to` records how far the
   pool reached.
 
-**Grading.** `grade_recommendations.py` settles every issued selection on
+`grade_recommendations.py` settles every issued selection on
 the 90-minute score in `ta/results.csv`. League corner picks settle on the
 HC/AC counts in `all_matches_clean.csv` once those are published. A slip
 is graded as a unit: one losing leg loses it, a push leg drops out, and a
@@ -229,7 +224,7 @@ state. This is the project's calibration history.
 
 ## Automation
 
-- **Weekly refit.** Every Monday at 07:00 WIB (00:00 UTC), `weekly_refit.sh`
+- Weekly refit. Every Monday at 07:00 WIB (00:00 UTC), `weekly_refit.sh`
   runs the full `--run-all` pipeline. The 07:00 start leaves a buffer after
   the last Sunday matches finish, at about 05:00 WIB. Before refitting, the
   training-data refresh re-downloads current-season football-data.co.uk
@@ -240,15 +235,15 @@ state. This is the project's calibration history.
   checks that total rows, current-season rows, and per-division rows never
   decrease; a decrease caused by a legitimate football-data correction can
   be accepted once with `REFRESH_ACCEPT_SHRINK=1`.
-- **Watchdog.** A check every 10 minutes curls `/api/health`; if the API
+- Watchdog. A check every 10 minutes curls `/api/health`; if the API
   is down it restarts the systemd service, reinstalling the unit first
   when the machine itself was replaced. It stays silent unless it had to
   act.
-- **League runner.** A separate daily job runs the gated world leagues
+- League runner. A separate daily job runs the gated world leagues
   (62 leagues, 123 markets). It shares no execution path with the top-five
   chain, so a broken league engine cannot delay the morning report, and a
   top-five failure cannot stop the leagues.
-- **Health summary.** `health_summary.py` prints one digest of both
+- Health summary. `health_summary.py` prints one digest of both
   pipelines: API status, the top-five per-product run status, league
   runner counts, and the ages of the predictions file and the corner
   parameters (which fail their freshness gate at 14 days). It is scheduled
@@ -285,7 +280,7 @@ The repository carries code, documentation, and the gathered datasets
 listed in `MUSE_SNAPSHOT.md`: the FotMob full-response store for the top
 five (7,532 matches), the SOT backfill raw responses, TipsterArea
 fixtures, results and odds snapshots, the tracked Understat season dumps
-(`xg_raw/`), the FotMob world index (233,618 matches), and the league
+(`xg_raw/`), the FotMob world index (233,619 matches), and the league
 programme's gate evidence files. What the pipeline generates each day
 stays per-machine runtime state and is gitignored: the ledger (`ledger/`,
 including the daily calibration grades and summary), the daily archive
@@ -301,19 +296,19 @@ another, check which machine produced it before treating either as wrong.
 
 ## Data sources
 
-- **FotMob** — fixtures, full-time results, and shotmap xG for the top
+- **FotMob:** fixtures, full-time results, and shotmap xG for the top
   five since 2026-11, and the world warehouse behind the league
-  programme: 233,618 matches across 158 leagues, pulled through its
+  programme: 233,619 matches across 158 FotMob league IDs, pulled through its
   public match endpoints.
-- **football-data.co.uk** — historical league results and odds for all 21
+- **football-data.co.uk:** historical league results and odds for all 21
   divisions, including the Pinnacle, market-average, and Bet365 closing
   prices behind the CLV numbers. Its CSVs also carry the HC/AC corner
   counts used to grade the corner model. The weekly refresh rebuilds them
   into `all_matches_clean.csv`.
-- **Understat** — expected-goals data for the pre-FotMob seasons, kept as
+- **Understat:** expected-goals data for the pre-FotMob seasons, kept as
   season dumps in `xg_raw/` and rebuilt into the xG match cache that the
   `blend` Dixon-Coles fit consumes.
-- **TipsterArea** — full-time results for grading and a fixtures
+- **TipsterArea:** full-time results for grading and a fixtures
   cross-check, scraped by `ta_scrape.py`. Its match pages carry the
   multi-bookmaker odds snapshots behind `market_compare.csv`. The 1xBet
   prices in the daily recommendations come from those pages; the project
@@ -322,9 +317,7 @@ another, check which machine produced it before treating either as wrong.
 
 ## Environment & dependencies
 
-The public data sources need no API keys. The live deployment also uses
-an optional API-Football key for just-in-time odds capture shortly before
-kickoff; the pipeline runs without it. Optional overrides:
+The current data sources need no API keys. Optional overrides:
 `FOOTBALL_DC_FIT_MODE` (`goals`|`blend`, default `blend`) and
 `FOOTBALL_REFRESH_SEASON` (default `2627`).
 
