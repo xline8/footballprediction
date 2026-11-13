@@ -11,6 +11,8 @@ import os
 import sys
 import subprocess
 import time
+import csv
+import json
 from datetime import datetime, timedelta, timezone
 
 BASE = os.path.dirname(os.path.abspath(__file__))
@@ -38,18 +40,84 @@ class _SkipStep(Exception):
 # namanya di ringkasan akhir, juga saat run tetap exit 0.
 PRODUCT_STATUS = {}
 
+# Satu file kanonik bila langkah memang menghasilkan satu artefak. Langkah
+# agregat (mis. cups/recommendations/archive) sengaja None karena mempunyai
+# beberapa output atau tidak menerbitkan produk file tunggal.
+PRODUCT_FILES = {
+    "predictions": "predictions_upcoming.csv",
+    "corners": "predictions_corners_upcoming.csv",
+    "sot": "predictions_sot_upcoming.csv",
+    "sot_halves": "predictions_sot_halves_upcoming.csv",
+    "cards": "predictions_cards_upcoming.csv",
+    "corners_1h": "predictions_corners_1h_upcoming.csv",
+    "corner_halves": "predictions_corners_halves_upcoming.csv",
+    "goals_halves": "predictions_goals_halves_upcoming.csv",
+    "live_picks": "ledger/picks.jsonl",
+    "ta_sync": "ta/results.csv",
+    "market_compare": "market_compare.csv",
+    "ta_model": "ta/model_markets.csv",
+    "best_picks": "best_picks_today.csv",
+}
+
 
 def _prod(name, ok, error=None):
     PRODUCT_STATUS[name] = {
         "status": "OK" if ok else "FAILED",
         "error": None if ok else (str(error) if error else "gagal"),
+        "detail": str(error) if error else ("ok" if ok else "gagal"),
     }
+
+
+def _manifest_product(name, state):
+    relpath = PRODUCT_FILES.get(name)
+    path = os.path.join(BASE, relpath) if relpath else None
+    generated_at = None
+    rows = None
+    if path and os.path.exists(path):
+        generated_at = datetime.fromtimestamp(
+            os.path.getmtime(path), timezone.utc).isoformat()
+        if path.lower().endswith(".csv"):
+            try:
+                with open(path, newline="", encoding="utf-8") as f:
+                    rows = sum(1 for _ in csv.DictReader(f))
+            except Exception as exc:
+                print(f"# WARNING: baris manifest gagal dihitung untuk "
+                      f"{path}: {type(exc).__name__}: {exc}")
+    return {
+        "name": name,
+        "status": state["status"],
+        "detail": state.get("detail") or state.get("error") or "ok",
+        "file": relpath,
+        "generated_at": generated_at,
+        "rows": rows,
+    }
+
+
+def _write_run_manifest(run_finished_at=None):
+    """Write latest and dated manifests atomically from real product state."""
+    finished = run_finished_at or datetime.now(timezone.utc)
+    payload = {
+        "schema_version": 1,
+        "report_date": _today().isoformat(),
+        "run_finished_at": finished.isoformat(),
+        "products": [_manifest_product(name, state)
+                     for name, state in PRODUCT_STATUS.items()],
+    }
+    logs = os.path.join(BASE, "logs")
+    os.makedirs(logs, exist_ok=True)
+    for filename in ("run_manifest.json",
+                     f"run_manifest_{_today().isoformat()}.json"):
+        path = os.path.join(logs, filename)
+        tmp = path + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(payload, f, ensure_ascii=False, indent=2)
+        os.replace(tmp, path)
+    return payload
 
 
 def _write_run_status(run_failed):
     """Tulis status per produk ke logs/run_status_<tanggal>.json
     (atomik) dan kembalikan daftar nama produk yang FAILED."""
-    import json
     failed_products = [n for n, s in PRODUCT_STATUS.items()
                        if s["status"] != "OK"]
     payload = {
@@ -68,6 +136,10 @@ def _write_run_status(run_failed):
         os.replace(tmp, path)
     except Exception as e:
         print(f"# WARNING: status per produk gagal ditulis: {e!r}")
+    try:
+        _write_run_manifest()
+    except Exception as e:
+        print(f"# WARNING: run manifest gagal ditulis: {e!r}")
     return failed_products
 
 
@@ -592,14 +664,28 @@ def main():
               f"{r.get('empty_dates') or []}, tanggal gagal: "
               f"{r.get('failed_dates') or []}")
         failed_dates = r.get("failed_dates") or []
+        markets = r.get("markets", 0)
+        unresolved = r.get("unresolved_market_ids") or 0
         if failed_dates:
             failed = True
             _prod("market_sync", False,
-                  f"tanggal gagal: {', '.join(failed_dates)}")
+                  f"tanggal gagal: {', '.join(failed_dates)}; "
+                  f"unresolved_market_ids={unresolved}")
             print("[14/23] FAILED market sync: satu atau lebih halaman "
                   "tanggal gagal; run ditandai gagal")
+        elif markets == 0 and unresolved > 0:
+            failed = True
+            _prod("market_sync", False,
+                  f"markets=0; unresolved_market_ids={unresolved}")
+            print("[14/23] FAILED market sync: tidak ada market yang "
+                  "dihasilkan sementara fixture tidak terpetakan; run "
+                  "ditandai gagal")
         else:
-            _prod("market_sync", True)
+            detail = (f"markets={markets}; "
+                      f"unresolved_market_ids={unresolved}")
+            if markets == 0:
+                detail += "; jendela pasar benar-benar kosong"
+            _prod("market_sync", True, detail)
     except _SkipStep as e:
         _prod("market_sync", False, f"dilewati: {e}")
         print(f"[14/23] DILEWATI market sync: {e}")
