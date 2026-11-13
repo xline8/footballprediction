@@ -543,6 +543,29 @@ Keep a Changelog, and the project uses semantic versioning.
   orchestrator's `--predict-only`/`--update-data` modes exit
   non-zero on failure like the other modes.
 
+### Changed
+
+- Slip selection, high-probability logic (user decision, 2026-11-01;
+  LOCAL ONLY — PR #41 was closed unmerged at the user's request, so
+  this change lives on this machine and is not in the GitHub history):
+  every slip leg must now carry a model probability of at least 0.65
+  and each odds band is reached with more matches instead of a few
+  coin-flip legs. Slip-10's floor rises from 0.35 to 0.65 (leg cap
+  6 → 8); slip-2's floor rises from 0.50 to the same 0.65. Two new
+  products join slip-2/slip-10: slip-5 (band 4.5-5.5, 3-8 legs) and
+  slip-100 (band 90.0-110.0, 6-16 legs), both with the same floor
+  and the same day-by-day pool expansion as slip-10; all four slips
+  are archived and graded like the existing products. No EV or
+  fair-price condition is added anywhere — the user explicitly
+  accepts below-fair prices. Background: the first four graded
+  slip-10s under the old floor went 0-for-4 with a 58% leg hit rate;
+  their legs included model probabilities of 0.39 and 0.45.
+  Backtest on the archived 2026-10-29..11-01 slates: slip-10 is
+  still produced every day (5-6 legs, weakest leg 0.68-0.76), joint
+  probability is no worse than the old logic (0.30/0.28/0.28/0.16 vs
+  0.18/0.30/0.30/0.17), and the search no longer truncates because
+  the candidate pool is narrower.
+
 ### Removed
 
 - The legacy exogenous-enrichment cluster (`enrich_pipeline.py`,

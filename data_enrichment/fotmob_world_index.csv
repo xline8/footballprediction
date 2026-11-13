@@ -166230,6 +166230,7 @@ match_id,country,ccode,league,league_id,season,date,home,away,score,has_shotmap,
 5853546,Romania,ROU,Liga I,189,2026/2027,2026-11-07,FCV Farul Constanța,Rapid București,1-1,False,True,True,True,data_enrichment/fotmob_world/Romania/Liga I/2026-2027/5853546.json
 5853544,Romania,ROU,Liga I,189,2026/2027,2026-11-08,CFR Cluj,Universitatea Craiova,0-0,False,True,True,True,data_enrichment/fotmob_world/Romania/Liga I/2026-2027/5853544.json
 5853550,Romania,ROU,Liga I,189,2026/2027,2026-11-08,Sepsi OSK,FC Voluntari,2-1,False,True,True,True,data_enrichment/fotmob_world/Romania/Liga I/2026-2027/5853550.json
+5853548,Romania,ROU,Liga I,189,2026/2027,2026-11-09,Botoșani,Oțelul Galați,1-1,False,True,True,True,data_enrichment/fotmob_world/Romania/Liga I/2026-2027/5853548.json
 3666107,Romania,ROU,Liga II,9113,2021/2022,2021-07-31,Astra Giurgiu,FC Metaloglobus Bucuresti,1-2,False,False,True,False,data_enrichment/fotmob_world/Romania/Liga II/2021-2022/3666107.json
 3666104,Romania,ROU,Liga II,9113,2021/2022,2021-07-31,Comunal Selimbar,Dacia Unirea Braila,3-1,False,False,True,False,data_enrichment/fotmob_world/Romania/Liga II/2021-2022/3666104.json
 3666109,Romania,ROU,Liga II,9113,2021/2022,2021-07-31,Concordia Chiajna,Unirea Constanta,2-0,False,False,True,False,data_enrichment/fotmob_world/Romania/Liga II/2021-2022/3666109.json

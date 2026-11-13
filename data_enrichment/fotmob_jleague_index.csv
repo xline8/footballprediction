@@ -2088,6 +2088,7 @@ match_id,league,season,date,home,away,score,has_shotmap,has_stats,has_lineup,has
 5803655,J1,2026/2027,2026-11-07,Shimizu S-Pulse,Tokyo Verdy,0-1,True,True,True,True,data_enrichment/fotmob_jleague/J1/2026-2027/5803655.json
 5803656,J1,2026/2027,2026-11-07,Yokohama F.Marinos,Fagiano Okayama FC,1-1,True,True,True,True,data_enrichment/fotmob_jleague/J1/2026-2027/5803656.json
 5803651,J1,2026/2027,2026-11-08,Gamba Osaka,Cerezo Osaka,2-3,True,True,True,True,data_enrichment/fotmob_jleague/J1/2026-2027/5803651.json
+5803649,J1,2026/2027,2026-11-08,JEF United Chiba,Mito Hollyhock,1-0,True,True,True,True,data_enrichment/fotmob_jleague/J1/2026-2027/5803649.json
 5803653,J1,2026/2027,2026-11-08,Machida Zelvia,Sanfrecce Hiroshima,0-0,True,True,True,True,data_enrichment/fotmob_jleague/J1/2026-2027/5803653.json
 5803657,J1,2026/2027,2026-11-08,Vissel Kobe,Urawa Red Diamonds,2-2,True,True,True,True,data_enrichment/fotmob_jleague/J1/2026-2027/5803657.json
 3512031,J2,2021,2021-02-27,Giravanz Kitakyushu,Albirex Niigata,1-4,False,False,True,False,data_enrichment/fotmob_jleague/J2/2021/3512031.json
