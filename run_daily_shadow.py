@@ -674,7 +674,7 @@ def main():
         _prod("best_picks", False, repr(e))
         print(f"[17/23] FAILED best_picks: {e!r}")
 
-    # [16/20] Rekomendasi harian deterministik (dari market_compare.csv):
+    # [18/23] Rekomendasi harian deterministik (dari market_compare.csv):
     # single bet + slip odds ±2 + slip odds ±10, semua untuk tanggal laporan.
     # Kegagalan tidak menggagalkan pipeline; file diarsipkan di langkah 18.
     try:
@@ -704,7 +704,7 @@ def main():
         print(f"[18/23] FAILED rekomendasi: {e!r} "
               f"(lanjut pipeline, tapi run ditandai gagal)")
 
-    # [17/20] Grading harian produk rekomendasi (pick teraman/single/slip2/
+    # [19/23] Grading harian produk rekomendasi (pick teraman/single/slip2/
     # slip10) dari arsip <= kemarin -> histori kalibrasi. Bisa hasil-nya belum
     # tersedia -> pending, dinilai run berikutnya. Gagal tidak menggagalkan.
     try:
