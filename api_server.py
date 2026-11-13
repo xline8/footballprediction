@@ -39,6 +39,12 @@ loader = get_loader()
 # File prediksi lebih tua dari ini dianggap basi dan tidak dilayani.
 MAX_PREDICTIONS_AGE_HOURS = 48.0
 
+# These are the fields the endpoint treats as row identity and indexes
+# directly. Probability/recommendation fields are deliberately optional:
+# the response code already represents unavailable model outputs as null.
+PREDICTION_REQUIRED_COLUMNS = {"div", "date", "home", "away"}
+CORNER_REQUIRED_COLUMNS = {"div", "date", "home", "away"}
+
 # /api/status memakai MatchCache bersama dengan TTL: konstruksi penuh
 # memakan ~2 detik (pickle ~105 MB), jadi instans segar per panggilan
 # (fix ronde 3 untuk singleton yang membeku) memblok event loop di
@@ -102,23 +108,45 @@ class ModelStatus(BaseModel):
 
 
 # --- Helper Functions ---
-def load_predictions() -> List[Dict]:
-    """Load predictions from CSV."""
-    pred_file = os.path.join(BASE_DIR, "predictions_upcoming.csv")
-    if not os.path.exists(pred_file):
+def _require_fresh_product(path: str, product: str) -> None:
+    """Reject a missing or stale generated product using one API contract."""
+    if not os.path.exists(path):
         raise HTTPException(
             status_code=503,
-            detail=f"file prediksi tidak ada: {pred_file}")
-
-    age_hours = (time.time() - os.path.getmtime(pred_file)) / 3600.0
+            detail=f"file {product} tidak ada: {path}")
+    age_hours = (time.time() - os.path.getmtime(path)) / 3600.0
     if age_hours > MAX_PREDICTIONS_AGE_HOURS:
         raise HTTPException(
             status_code=503,
-            detail=(f"file prediksi basi: umur {age_hours:.1f} jam > batas "
-                    f"{MAX_PREDICTIONS_AGE_HOURS:.1f} jam"))
+            detail=(f"file {product} basi: umur {age_hours:.1f} jam > batas "
+                    f"{MAX_PREDICTIONS_AGE_HOURS:.1f} jam ({path})"))
 
-    with open(pred_file, 'r', encoding='utf-8') as f:
-        return list(csv.DictReader(f))
+
+def _load_csv_product(path: str, product: str,
+                      required_columns=None) -> List[Dict]:
+    _require_fresh_product(path, product)
+    with open(path, 'r', encoding='utf-8', newline='') as f:
+        reader = csv.DictReader(f)
+        columns = set(reader.fieldnames or [])
+        missing = sorted(set(required_columns or ()) - columns)
+        if missing:
+            raise HTTPException(
+                status_code=503,
+                detail=(f"file {product} kehilangan kolom wajib: "
+                        f"{', '.join(missing)} ({path})"))
+        rows = list(reader)
+    if not rows:
+        raise HTTPException(
+            status_code=503,
+            detail=f"file {product} kosong (tidak ada baris data): {path}")
+    return rows
+
+
+def load_predictions() -> List[Dict]:
+    """Load predictions from CSV."""
+    pred_file = os.path.join(BASE_DIR, "predictions_upcoming.csv")
+    return _load_csv_product(pred_file, "prediksi",
+                             PREDICTION_REQUIRED_COLUMNS)
 
 
 def load_picks(status: str = None) -> List[Dict]:
@@ -130,8 +158,7 @@ def load_picks(status: str = None) -> List[Dict]:
     punya grade, statusnya = hasil grade (win/loss/push).
     """
     picks_file = os.path.join(BASE_DIR, "ledger", "picks.jsonl")
-    if not os.path.exists(picks_file):
-        return []
+    _require_fresh_product(picks_file, "picks")
 
     with open(picks_file, 'r', encoding='utf-8') as f:
         picks = [json.loads(line) for line in f if line.strip()]
@@ -164,11 +191,34 @@ def load_corner_predictions() -> List[Dict]:
     corner_file = os.path.join(BASE_DIR, "predictions_corners_upcoming.csv")
     if not os.path.exists(corner_file):
         corner_file = os.path.join(BASE_DIR, "predictions_corners.csv")
-    if not os.path.exists(corner_file):
-        return []
+    return _load_csv_product(corner_file, "prediksi corner",
+                             CORNER_REQUIRED_COLUMNS)
 
-    with open(corner_file, 'r', encoding='utf-8') as f:
-        return list(csv.DictReader(f))
+
+def _manifest_summary():
+    path = os.path.join(BASE_DIR, "logs", "run_manifest.json")
+    if not os.path.exists(path):
+        return None
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            manifest = json.load(f)
+        products = manifest.get("products") or []
+        counts = {"OK": 0, "FAILED": 0}
+        for product in products:
+            state = product.get("status")
+            if state in counts:
+                counts[state] += 1
+        return {
+            "report_date": manifest.get("report_date"),
+            "ok_products": counts["OK"],
+            "failed_products": counts["FAILED"],
+            "age_hours": round(
+                (time.time() - os.path.getmtime(path)) / 3600.0, 2),
+        }
+    except Exception as exc:
+        print(f"# WARNING: run_manifest.json tidak terbaca: "
+              f"{type(exc).__name__}: {exc}")
+        return {"status": "unreadable"}
 
 
 def _sort_and_filter_upcoming(rows: List[Dict], day_key: str = "date") -> List[Dict]:
@@ -270,6 +320,10 @@ async def get_pipeline_status():
         'cache': {'status_ttl_s': _STATUS_TTL}
     }
 
+    manifest = _manifest_summary()
+    if manifest is not None:
+        status['manifest'] = manifest
+
     # Jejak run --run-all terakhir (ditulis pipeline_orchestrator):
     # keberhasilan refit mingguan terbaca di sini. is_stale per model
     # tidak bisa menunjukkan itu — fit harian menulis ulang updated_at
@@ -279,8 +333,10 @@ async def get_pipeline_status():
         try:
             with open(lfp, 'r') as f:
                 status['last_full_pipeline'] = json.load(f)
-        except Exception:
-            status['last_full_pipeline'] = None
+        except Exception as exc:
+            print(f"# WARNING: last_full_pipeline.json tidak terbaca: "
+                  f"{type(exc).__name__}: {exc}")
+            status['last_full_pipeline'] = {'status': 'unreadable'}
     else:
         status['last_full_pipeline'] = None
 
