@@ -2846,7 +2846,10 @@ def test_api_product_schema_and_corner_fallback_freshness():
             api.BASE_DIR = old_base
 
 
-def test_api_picks_uses_shared_freshness_contract():
+def test_api_picks_ledger_semantics():
+    # picks.jsonl adalah ledger append-only: file hilang berarti belum
+    # ada pick ([]), dan umur file tidak digerbang — mtime hanya bergerak
+    # saat pick baru terbit, jadi ledger lama tetap ledger yang sah.
     import tempfile
     import time as _time
 
@@ -2858,22 +2861,13 @@ def test_api_picks_uses_shared_freshness_contract():
         os.makedirs(os.path.join(td, "ledger"))
         path = os.path.join(td, "ledger", "picks.jsonl")
         try:
-            try:
-                api.load_picks()
-            except api.HTTPException as exc:
-                assert exc.status_code == 503 and "tidak ada" in exc.detail
-            else:
-                raise AssertionError("Missing picks product must return 503")
+            assert api.load_picks() == []
             with open(path, "w") as f:
                 f.write('{"pick_id":"p1","status":"pending"}\n')
             old = _time.time() - 72 * 3600
             os.utime(path, (old, old))
-            try:
-                api.load_picks()
-            except api.HTTPException as exc:
-                assert exc.status_code == 503 and "basi" in exc.detail
-            else:
-                raise AssertionError("Stale picks product must return 503")
+            rows = api.load_picks()
+            assert len(rows) == 1 and rows[0]["pick_id"] == "p1", rows
         finally:
             api.BASE_DIR = old_base
 

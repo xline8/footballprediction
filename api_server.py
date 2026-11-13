@@ -158,7 +158,13 @@ def load_picks(status: str = None) -> List[Dict]:
     punya grade, statusnya = hasil grade (win/loss/push).
     """
     picks_file = os.path.join(BASE_DIR, "ledger", "picks.jsonl")
-    _require_fresh_product(picks_file, "picks")
+    # picks.jsonl adalah ledger append-only, bukan produk snapshot harian:
+    # mtime-nya hanya bergerak saat pick baru terbit (di produksi terakhir
+    # 2026-10-29, karena live pick memang 0 hasil pengukuran), jadi gerbang
+    # umur 48 jam akan mematikan endpoint yang sehat. File hilang = belum
+    # ada pick, bukan produk rusak.
+    if not os.path.exists(picks_file):
+        return []
 
     with open(picks_file, 'r', encoding='utf-8') as f:
         picks = [json.loads(line) for line in f if line.strip()]
