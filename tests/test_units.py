@@ -3251,6 +3251,25 @@ def test_shadow_ta_build_rc_failure_marks_run_failed():
     assert "py:best_picks.py" in calls, calls
 
 
+def test_shadow_market_sync_failed_date_marks_product_failed():
+    """A failed current date must not be reported as a healthy odds sync."""
+    sh, calls, restore = _shadow_env("success")
+    try:
+        sys.modules["ta_scrape"].sync_dates = lambda *a, **k: {
+            "markets": 0,
+            "failed_dates": [sh._today().isoformat()],
+            "empty_dates": [],
+            "unresolved_market_ids": 0,
+        }
+        code, out = _run_shadow(sh)
+    finally:
+        restore()
+    assert code == 1, (code, out)
+    assert sh.PRODUCT_STATUS["market_sync"]["status"] == "FAILED", (
+        sh.PRODUCT_STATUS
+    )
+
+
 def test_shadow_product_status_stacked_failure():
     # Status per produk corners/cups/ta_sync dulu dihitung dari delta
     # `failed == _f0`: bila run SUDAH gagal di langkah lebih awal,

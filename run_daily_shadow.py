@@ -591,7 +591,15 @@ def main():
               f"terpetakan, tanggal kosong: "
               f"{r.get('empty_dates') or []}, tanggal gagal: "
               f"{r.get('failed_dates') or []}")
-        _prod("market_sync", True)
+        failed_dates = r.get("failed_dates") or []
+        if failed_dates:
+            failed = True
+            _prod("market_sync", False,
+                  f"tanggal gagal: {', '.join(failed_dates)}")
+            print("[14/23] FAILED market sync: satu atau lebih halaman "
+                  "tanggal gagal; run ditandai gagal")
+        else:
+            _prod("market_sync", True)
     except _SkipStep as e:
         _prod("market_sync", False, f"dilewati: {e}")
         print(f"[14/23] DILEWATI market sync: {e}")
