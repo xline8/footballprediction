@@ -2787,18 +2787,95 @@ def test_api_predictions_missing_file_returns_503():
             else:
                 raise AssertionError("Missing predictions file must return 503")
 
-        # A present file with no rows still means no matches.
+        # A present product with no data rows is unhealthy, not a valid 200.
         with open(os.path.join(td, "predictions_upcoming.csv"), "w") as f:
             f.write("div,date,home,away\n")
-        resp = asyncio.run(api.get_predictions())
-        assert resp.status_code == 200 and json.loads(resp.body) == []
         try:
-            asyncio.run(api.get_prediction_for_match(
-                "D1", "2027-01-10", "alpha", "beta"))
+            asyncio.run(api.get_predictions())
         except api.HTTPException as exc:
-            assert exc.status_code == 404, exc
+            assert exc.status_code == 503 and "kosong" in exc.detail, exc
         else:
-            raise AssertionError("Absent match in a present file must return 404")
+            raise AssertionError("Empty predictions product must return 503")
+
+
+def test_api_product_schema_and_corner_fallback_freshness():
+    import tempfile
+    import time as _time
+
+    import api_server as api
+
+    old_base = api.BASE_DIR
+    with tempfile.TemporaryDirectory() as td:
+        api.BASE_DIR = td
+        try:
+            pred = os.path.join(td, "predictions_upcoming.csv")
+            with open(pred, "w") as f:
+                f.write("div,date,home\nD1,2027-01-10,alpha\n")
+            try:
+                api.load_predictions()
+            except api.HTTPException as exc:
+                assert exc.status_code == 503
+                assert "kolom wajib" in exc.detail and "away" in exc.detail
+            else:
+                raise AssertionError("Malformed predictions must return 503")
+
+            fallback = os.path.join(td, "predictions_corners.csv")
+            with open(fallback, "w") as f:
+                f.write("div,date,home,away\nD1,2027-01-10,a,b\n")
+            old = _time.time() - 72 * 3600
+            os.utime(fallback, (old, old))
+            try:
+                api.load_corner_predictions()
+            except api.HTTPException as exc:
+                assert exc.status_code == 503 and "basi" in exc.detail
+                assert "predictions_corners.csv" in exc.detail
+            else:
+                raise AssertionError("Stale corner fallback must return 503")
+
+            os.utime(fallback, None)
+            assert len(api.load_corner_predictions()) == 1
+            open(fallback, "w").close()
+            try:
+                api.load_corner_predictions()
+            except api.HTTPException as exc:
+                assert exc.status_code == 503
+                assert "kolom wajib" in exc.detail or "kosong" in exc.detail
+            else:
+                raise AssertionError("Malformed corner product must return 503")
+        finally:
+            api.BASE_DIR = old_base
+
+
+def test_api_picks_uses_shared_freshness_contract():
+    import tempfile
+    import time as _time
+
+    import api_server as api
+
+    old_base = api.BASE_DIR
+    with tempfile.TemporaryDirectory() as td:
+        api.BASE_DIR = td
+        os.makedirs(os.path.join(td, "ledger"))
+        path = os.path.join(td, "ledger", "picks.jsonl")
+        try:
+            try:
+                api.load_picks()
+            except api.HTTPException as exc:
+                assert exc.status_code == 503 and "tidak ada" in exc.detail
+            else:
+                raise AssertionError("Missing picks product must return 503")
+            with open(path, "w") as f:
+                f.write('{"pick_id":"p1","status":"pending"}\n')
+            old = _time.time() - 72 * 3600
+            os.utime(path, (old, old))
+            try:
+                api.load_picks()
+            except api.HTTPException as exc:
+                assert exc.status_code == 503 and "basi" in exc.detail
+            else:
+                raise AssertionError("Stale picks product must return 503")
+        finally:
+            api.BASE_DIR = old_base
 
 
 def test_data_summary_teams_per_division():
@@ -3268,6 +3345,83 @@ def test_shadow_market_sync_failed_date_marks_product_failed():
     assert sh.PRODUCT_STATUS["market_sync"]["status"] == "FAILED", (
         sh.PRODUCT_STATUS
     )
+
+
+def test_shadow_market_sync_zero_rows_with_unresolved_fails():
+    sh, calls, restore = _shadow_env("success")
+    try:
+        sys.modules["ta_scrape"].sync_dates = lambda *a, **k: {
+            "markets": 0,
+            "failed_dates": [],
+            "empty_dates": [],
+            "unresolved_market_ids": 3,
+        }
+        code, out = _run_shadow(sh)
+    finally:
+        restore()
+    assert code == 1, (code, out)
+    product = sh.PRODUCT_STATUS["market_sync"]
+    assert product["status"] == "FAILED", product
+    assert "unresolved_market_ids=3" in product["detail"], product
+
+
+def test_shadow_market_sync_genuine_empty_window_is_ok():
+    sh, calls, restore = _shadow_env("success")
+    try:
+        sys.modules["ta_scrape"].sync_dates = lambda *a, **k: {
+            "markets": 0,
+            "failed_dates": [],
+            "empty_dates": [],
+            "unresolved_market_ids": 0,
+        }
+        code, out = _run_shadow(sh)
+    finally:
+        restore()
+    assert code is None, (code, out)
+    product = sh.PRODUCT_STATUS["market_sync"]
+    assert product["status"] == "OK", product
+    assert "unresolved_market_ids=0" in product["detail"], product
+    assert "benar-benar kosong" in product["detail"], product
+
+
+def test_shadow_manifest_writer_records_file_metadata():
+    import csv
+    import json
+    import tempfile
+
+    import run_daily_shadow as sh
+
+    old_base = sh.BASE
+    old_status = dict(sh.PRODUCT_STATUS)
+    with tempfile.TemporaryDirectory() as td:
+        sh.BASE = td
+        try:
+            with open(os.path.join(td, "predictions_upcoming.csv"),
+                      "w", newline="") as f:
+                writer = csv.writer(f)
+                writer.writerow(["div", "date", "home", "away"])
+                writer.writerow(["D1", "2027-01-10", "a", "b"])
+                writer.writerow(["D1", "2027-01-11", "c", "d"])
+            sh.PRODUCT_STATUS.clear()
+            sh._prod("predictions", True, "generated")
+            sh._prod("market_sync", False,
+                     "markets=0; unresolved_market_ids=2")
+            payload = sh._write_run_manifest()
+            assert payload["schema_version"] == 1
+            entries = {p["name"]: p for p in payload["products"]}
+            assert entries["predictions"]["rows"] == 2, entries
+            assert entries["predictions"]["generated_at"].endswith("+00:00")
+            assert entries["market_sync"]["file"] is None
+            assert entries["market_sync"]["rows"] is None
+            assert "unresolved_market_ids=2" in entries["market_sync"]["detail"]
+            for name in ("run_manifest.json",
+                         f"run_manifest_{sh._today().isoformat()}.json"):
+                with open(os.path.join(td, "logs", name)) as f:
+                    assert json.load(f) == payload
+        finally:
+            sh.BASE = old_base
+            sh.PRODUCT_STATUS.clear()
+            sh.PRODUCT_STATUS.update(old_status)
 
 
 def test_shadow_product_status_stacked_failure():
