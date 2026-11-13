@@ -24,6 +24,14 @@ TRAINING_DATA = BASE_DIR / "all_matches_clean.csv"
 PREDICTIONS = BASE_DIR / "predictions_upcoming.csv"
 OUTPUT_FILES = (
     ("Match predictions", "predictions_upcoming.csv"),
+    ("Corner predictions", "predictions_corners_upcoming.csv"),
+    ("Shots on target predictions", "predictions_sot_upcoming.csv"),
+    ("Card predictions", "predictions_cards_upcoming.csv"),
+    ("Goals by half", "predictions_goals_halves_upcoming.csv"),
+    ("Corners by half", "predictions_corners_halves_upcoming.csv"),
+    ("Shots on target by half", "predictions_sot_halves_upcoming.csv"),
+    ("Cup predictions", "predictions_cups_upcoming.csv"),
+    ("Cup corner predictions", "predictions_corners_cups.csv"),
     ("Best picks", "best_picks.csv"),
     ("Single recommendation", "recommended_single.csv"),
     ("Slip recommendation", "recommended_slip.csv"),
@@ -40,9 +48,10 @@ Created by: Arif Wicaksono Komarudin (@xline8)
 Repository: https://github.com/xline8/footballprediction
 
 Data sources:
+  - FotMob: fixtures, results, and shotmap xG (current source).
   - football-data.co.uk: historical league results, odds, and corner data.
-  - Understat: expected-goals (xG) data by season.
-  - TipsterArea: fixtures, results, and market-odds snapshots.
+  - Understat: expected-goals (xG) data for the pre-FotMob seasons.
+  - TipsterArea: results cross-check and market-odds snapshots.
 
 Each source has its own terms of use. Check the original source when you need
 details about its data or usage terms.
